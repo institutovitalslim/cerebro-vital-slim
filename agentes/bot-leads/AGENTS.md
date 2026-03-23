@@ -18,10 +18,7 @@
   "mode": "ask-on-sensitive",
   "context": {
     "read": [
-      "empresa/contexto/empresa.md",
-      "areas/vendas/contexto/geral.md",
-      "areas/vendas/skills/qualificacao-lead/SKILL.md",
-      "areas/vendas/skills/agendamento-call/SKILL.md"
+      "areas/vendas/bot/conhecimento.md"
     ],
     "write": [
       "dados/leads.csv"
