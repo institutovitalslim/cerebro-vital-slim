@@ -1,4 +1,4 @@
-# 🧠 Repositório Empresa Exemplo — Cérebro da Operação
+# 🧠 Empresa Exemplo — Second Brain
 
 > Este repositório é o **cérebro da Empresa Exemplo**. O agente de IA lê esses arquivos automaticamente para entender o contexto da empresa, tomar decisões e executar tarefas com autonomia.
 
@@ -17,73 +17,119 @@ Este repo centraliza todo o conhecimento operacional da **Empresa Exemplo** — 
 
 ---
 
-## Estrutura de Pastas
+## Estrutura Geral
 
 ```
-imersao-openclaw-negocios/
+empresa-exemplo-second-brain/
 │
-├── README.md                   ← Você está aqui
-├── TEMPLATE-SKILL.md           ← Esqueleto para criar novas skills
+├── README.md                          ← Você está aqui
 │
-├── contexto/
-│   ├── empresa.md              ← O que é a Empresa Exemplo, produtos, métricas
-│   └── equipe.md               ← Quem é quem, papéis e responsabilidades
+├── empresa/                           ← Contexto geral (cross-area)
+│   ├── contexto/
+│   │   ├── empresa.md                 ← O que é a empresa, produtos, público, ferramentas
+│   │   ├── equipe.md                  ← Quem é quem, papéis e responsabilidades
+│   │   └── metricas.md               ← Métricas-chave consolidadas
+│   ├── gestao/
+│   │   ├── projetos.md               ← Projetos ativos e status
+│   │   ├── pendencias.md             ← Itens aguardando ação
+│   │   └── licoes.md                 ← Lições aprendidas
+│   ├── decisoes/
+│   │   ├── COMO-REGISTRAR.md         ← Como registrar decisões
+│   │   └── 2026-03.md                ← Decisões de março/2026
+│   ├── rotinas/
+│   │   └── README.md                 ← O que são crons, como configurar, exemplos
+│   └── skills/
+│       ├── _index.md                  ← Índice de skills cross-area
+│       ├── _templates/
+│       │   └── SKILL-TEMPLATE.md      ← Esqueleto para criar novas skills
+│       └── relatorio-rotinas/
+│           └── SKILL.md               ← Monitora status de todas as rotinas
 │
-├── areas/
+├── areas/                             ← Uma pasta por área da empresa
 │   ├── vendas/
-│   │   └── contexto.md         ← Objetivos, KPIs e ferramentas de vendas
+│   │   ├── MAPA.md                    ← Visão geral da área
+│   │   ├── contexto/
+│   │   │   └── geral.md              ← Objetivo, KPIs, funil, ferramentas
+│   │   ├── rotinas/                   ← Rotinas automáticas da área
+│   │   └── skills/
+│   │       ├── _index.md              ← Índice de skills de vendas
+│   │       ├── relatorio-vendas/
+│   │       │   └── SKILL.md           ← Relatório semanal de vendas via Sheets
+│   │       └── follow-up-leads/
+│   │           └── SKILL.md           ← Identifica leads frios, sugere ações
 │   ├── marketing/
-│   │   └── contexto.md         ← Objetivos, KPIs e ferramentas de marketing
+│   │   ├── MAPA.md
+│   │   ├── contexto/
+│   │   │   └── geral.md              ← Canais, KPIs, calendário, responsáveis
+│   │   ├── rotinas/
+│   │   └── skills/
+│   │       └── _index.md
 │   ├── atendimento/
-│   │   └── contexto.md         ← Objetivos, KPIs e ferramentas de atendimento
+│   │   ├── MAPA.md
+│   │   ├── contexto/
+│   │   │   └── geral.md              ← SLA, FAQ, fluxo de escalação
+│   │   ├── rotinas/
+│   │   └── skills/
+│   │       └── _index.md
 │   └── operacoes/
-│       └── contexto.md         ← Objetivos, KPIs e ferramentas de operações
+│       ├── MAPA.md
+│       ├── contexto/
+│       │   └── geral.md              ← Processos, projetos, reuniões
+│       ├── rotinas/
+│       └── skills/
+│           └── _index.md
 │
-├── skills/
-│   ├── relatorio-vendas/
-│   │   └── SKILL.md            ← Gera relatório semanal de vendas
-│   ├── follow-up-leads/
-│   │   └── SKILL.md            ← Identifica leads sem contato há 3+ dias
-│   └── relatorio-rotinas/
-│       └── SKILL.md            ← Monitora status de todas as rotinas ativas
-│
-├── dados/
-│   ├── vendas.csv              ← Histórico de vendas (março 2026)
-│   └── leads.csv               ← Pipeline de leads atual
-│
-├── rotinas/
-│   └── README.md               ← O que são crons, como configurar, exemplos
+├── dados/                             ← Dados operacionais
+│   ├── vendas.csv                     ← Histórico de vendas (março 2026)
+│   └── leads.csv                      ← Pipeline de leads atual
 │
 └── seguranca/
-    └── permissoes.md           ← Modelo de segurança, quem pode o quê
+    └── permissoes.md                  ← Modelo de segurança e permissionamento
 ```
+
+---
+
+## Estrutura Base — Regra Obrigatória
+
+Toda **área** sempre tem 3 pastas base:
+
+| Pasta | O que é | Exemplo |
+|-------|---------|---------|
+| `contexto/` | O que é a área, KPIs, equipe, ferramentas | `contexto/geral.md` |
+| `rotinas/` | O que o agente **está fazendo** — crons ativos, automações | `rotinas/relatorio-diario.md` |
+| `skills/` | O que o agente **sabe fazer** — habilidades disponíveis | `skills/relatorio-vendas/SKILL.md` |
+
+### Diferença entre Skills e Rotinas
+
+- **Skill** = capacidade. "Sei gerar relatório de vendas."
+- **Rotina** = execução ativa. "Gero relatório de vendas todo dia às 8h."
+- Uma skill pode existir sem rotina (executada sob demanda).
+- Toda rotina referencia uma skill ou processo.
 
 ---
 
 ## Como o Agente Usa Esse Repositório
 
-1. **Ao iniciar qualquer tarefa**, o agente lê este README para entender a estrutura
-2. **Para contexto da empresa**, lê `contexto/empresa.md` e `contexto/equipe.md`
-3. **Para executar uma automação**, lê o `SKILL.md` correspondente em `skills/`
-4. **Para acessar dados**, lê os arquivos em `dados/`
-5. **Para rotinas agendadas**, segue as instruções em `rotinas/README.md`
+1. **Ao iniciar qualquer tarefa**, lê este README para entender a estrutura
+2. **Para contexto da empresa**, lê `empresa/contexto/`
+3. **Para contexto de uma área**, lê `areas/[área]/contexto/geral.md`
+4. **Para executar uma automação**, lê o `SKILL.md` em `areas/[área]/skills/` ou `empresa/skills/`
+5. **Para acessar dados**, lê os arquivos em `dados/`
+6. **Para rotinas agendadas**, segue `empresa/rotinas/README.md`
+7. **Para decisões e histórico**, consulta `empresa/gestao/` e `empresa/decisoes/`
 
 > 💡 **Dica:** Sempre que atualizar um arquivo aqui, faça um commit com uma mensagem clara. O histórico de versões é o log de evolução da inteligência da empresa.
 
 ---
 
-## Começando
+## Áreas Ativas
 
-### Para a equipe:
-- Edite `contexto/empresa.md` para manter métricas atualizadas
-- Edite `contexto/equipe.md` quando alguém entrar ou sair
-- Crie novas skills usando o `TEMPLATE-SKILL.md` como base
-
-### Para o agente:
-- Leia este README primeiro
-- Consulte `contexto/` para entender o negócio
-- Use as skills em `skills/` para executar tarefas recorrentes
-- Respeite as permissões definidas em `seguranca/permissoes.md`
+| Área | Responsável | Skills ativas |
+|------|-------------|---------------|
+| Vendas | André Costa / Juliana | `relatorio-vendas`, `follow-up-leads` |
+| Marketing | Camila, Lucas/Patrícia | (em implementação) |
+| Atendimento | Juliana | (em implementação) |
+| Operações | André Costa | (cross-area em `empresa/skills/`) |
 
 ---
 
