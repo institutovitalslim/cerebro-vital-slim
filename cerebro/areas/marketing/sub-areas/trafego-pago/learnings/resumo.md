@@ -1,51 +1,52 @@
-# Learnings — Resumo Executivo
+# Learnings — Resumo Executivo (OpenClaw)
 
 Os aprendizados mais importantes da operação de criativos, consolidados em bullets acionáveis.
 
 ---
 
-## Top 5 aprendizados
+## Top 5 Aprendizados
 
-1. **Hook funcional específico > hook emocional/vago**
-   - "Esse sistema organiza 7 tarefas" bate "Você precisa conhecer isso"
-   - ~3x mais ROAS em testes diretos
+1. **Hook com número concreto > hook com pergunta**
+   - "7 agentes trabalhando por mim" bate "Você quer automatizar seu negócio?"
+   - ~40% mais ROAS em testes diretos (A01 vs variação pergunta)
 
-2. **Hook overlay em vídeo é obrigatório**
-   - +89% ROAS no mesmo vídeo com vs sem overlay
-   - Texto nos primeiros 3 segundos, sempre
+2. **Ângulo não-técnico ressoando mais do que o esperado**
+   - A05 superou A01 nos últimos 3 dias (9,45x vs 8,86x ROAS)
+   - Público-alvo tem mais medo de "IA é difícil" do que de "operação pesada"
 
 3. **CTR alto + ROAS baixo = audiência errada**
-   - Não comemore CTR isolado
-   - O criativo está atraindo curiosos, não compradores
+   - A04 tinha CTR de 2,25% mas ROAS inconsistente
+   - O criativo atraía curiosos, não compradores prontos
 
-4. **Padrão de hook vencedor: Número + Scope + Temporal**
-   - "7 tarefas rodando sem parar" → 4.8x ROAS
-   - Filtra audiência antes do clique, qualidade > volume
+4. **Estático bate vídeo em custo por resultado no estágio inicial**
+   - A01 (estático) entrou em escala 2x mais rápido que A02 (vídeo mesmo ângulo)
+   - Hipótese: vídeo precisa de mais tempo de aprendizado no algoritmo
 
-5. **Preço como hook derruba percepção de valor**
-   - "R$ 39/mês" como hook → ROAS 1.2x
-   - Preço funciona no MEIO do criativo, não na abertura
-
----
-
-## Regras operacionais derivadas
-
-- Sempre testar hook overlay em vídeos novos
-- Não subir vídeo sem texto nos primeiros 3s
-- Priorizar hooks que descrevem ação concreta
-- Testar ângulo novo em formato completo antes de cortes
-- Não usar preço como abertura de criativo
+5. **Novos ângulos precisam de teste isolado — só trocar o hook**
+   - A03 e A04 foram lançados com visual diferente E copy diferente
+   - Impossível isolar qual variável causou performance baixa
+   - Próxima leva: manter visual de A01, só trocar copy (ângulo)
 
 ---
 
-## O que ainda não sabemos
+## Regras Operacionais Derivadas
 
-- Screen recording vs talking head: qual formato converte mais?
-- CTA explícito vs implícito: "Comece agora" ajuda ou atrapalha?
-- Ângulo resultado-rapido em vídeo (só testado em estático)
+- Sempre lançar novo ângulo em formato estático primeiro
+- Nunca mudar mais de uma variável por teste
+- Aguardar mínimo R$150 de gasto por criativo antes de julgar
+- Criativos com ROAS > 3x por 7 dias consecutivos → candidatos a campanha Escala
+- Não pausar criativo com < R$150 gasto apenas por ROAS baixo (pode ser aprendizado)
+
+---
+
+## O Que Ainda Não Sabemos
+
+- A05 vs A01 em 30 dias: qual sustenta melhor ROAS com frequência mais alta?
+- Ângulo resultado: funciona melhor com case específico (número de horas/semana)?
+- A06 (vídeo não-técnico): se confirmar acima de 6x, justifica orçamento de A05?
 
 Ver `testes/abertos/` para hipóteses em andamento.
 
 ---
 
-*Última atualização: março 2026*
+*Última atualização: 24/03/2026*

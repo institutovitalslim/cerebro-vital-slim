@@ -1,42 +1,44 @@
-# Teste — Delegação · Qual Hook Converte Mais
+# Teste — Delegação · Hook Número vs Hook Checkpoint
 
 **Status:** 🟢 Em andamento
-**Data de criação:** 18/03/2026
+**Data de criação:** 10/03/2026
 
 ---
 
 ## Hipótese
 
-O ângulo delegação é o mais forte da conta (C1 = winner). Mas qual enquadramento do hook gera maior conversão?
+O ângulo Delegação é sólido (A01 = winner estabelecido). Mas qual formulação de hook gera maior ROAS?
 
-Testamos 3 formas diferentes de apresentar o mesmo benefício, usando o mesmo visual e mesmo CTA.
+Testamos A01 (hook numérico — "7 agentes") contra uma variação com hook de processo ("Configurei uma vez. Agora rodam sozinhos.") — que é o A02 em vídeo.
 
-**Variável isolada:** apenas o hook (texto de topo).
+Próximo teste: criar A07 (estático, hook checkpoint) para isolar formato vs copy.
+
+**Variável a isolar:** formulação do hook, mantendo visual e CTA idênticos.
 
 ---
 
 ## Criativos
 
-| ID | Hook | Ângulo interno |
-|---|---|---|
-| C5-H1 | "7 tarefas do meu negócio rodando agora. Sem eu acompanhar nada." | Números concretos |
-| C5-H2 | "Meu trabalho é criar as tarefas. Meu time executa." | Divisão de papel |
-| C5-H3 | "Tenho 7 agentes trabalhando por mim 24/7. Todos me atualizam pelo WhatsApp." | Canal WhatsApp |
-
----
-
-## Resultado parcial (R$ 320 gastos)
-
-| ID | ROAS 7d | CTR | Spend |
+| ID | Hook | Ângulo interno | Formato |
 |---|---|---|---|
-| C5-H1 | 4.8x | 3.2% | R$ 120 |
-| C5-H2 | 3.1x | 2.8% | R$ 110 |
-| C5-H3 | 2.4x | 3.5% | R$ 90 |
+| A01 | "Tenho 7 agentes trabalhando por mim 24h. Todos me atualizam pelo Telegram." | Número concreto | Estático |
+| A02 | "Configurei uma vez. Agora eles rodam sozinhos." | Checkpoint / processo | Vídeo |
 
-**Observação:** H1 (números concretos) lidera em ROAS. H3 (WhatsApp) lidera em CTR mas ROAS mais baixo — pode estar atraindo curiosos.
-
-**Threshold:** R$ 150/criativo → H1 e H2 prontos, H3 precisa mais R$ 60.
+*(Nota: A01 e A02 não são comparação perfeita pois o formato difere. Teste isolado a criar: A07 = estático com hook de A02)*
 
 ---
 
-*Última atualização: março 2026*
+## Resultado Parcial
+
+| ID | ROAS 7d | CTR | Spend total |
+|---|---|---|---|
+| A01 | 8,86x | 3,63% | R$ 2.886 |
+| A02 | 7,50x | 2,88% | R$ 1.946 |
+
+**Observação:** A01 lidera, mas a diferença de formato impede conclusão definitiva. A07 vai isolar a variável.
+
+**Threshold:** Criar A07 com budget R$200 para comparação limpa.
+
+---
+
+*Última atualização: 24/03/2026*

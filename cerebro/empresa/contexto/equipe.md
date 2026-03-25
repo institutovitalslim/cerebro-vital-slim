@@ -1,87 +1,49 @@
-# Equipe — Empresa Exemplo
+# OpenClaw — Equipe
 
-> Quem é quem, papéis, responsabilidades e contatos internos.
-
----
-
-## Liderança
-
-### Ricardo Mendes — Fundador / Líder de Conteúdo
-- **Papel:** Visão de negócio, estratégia de conteúdo, face da marca
-- **Foco:** Produto, conteúdo para YouTube e Instagram, mentorias
-- **Não perturbar para:** Operacional do dia a dia — filtrar pelo COO
-
-### Felipe Santos — CEO
-- **Papel:** Gestão executiva, parcerias estratégicas, crescimento
-- **Foco:** Métricas de negócio, alianças, expansão de produto
-- **Decisões:** Estratégia comercial e financeira
-
-### André Costa — COO / Co-fundador
-- **Papel:** Operações, processos, gestão de equipe
-- **Foco:** Garantir que a máquina funcione — tarefas, SLAs, eficiência
-- **Responsável por:** Rotinas, sistemas, contratações
+> Quem trabalha aqui, seus papéis e como se comunicar.
 
 ---
 
-## Equipe Interna
+## Time Principal
 
-### Camila — Social Media
-- **Área:** Marketing
-- **Responsabilidades:**
-  - Gestão e publicação no Instagram
-  - Agendamento de conteúdo
-  - Métricas de engajamento
-  - Organização de conteúdos para a Comunidade Marketing PRO
-- **Ferramentas:** Meta Business Suite, Later, Canva
-
-### Juliana — Suporte ao Cliente
-- **Área:** Atendimento
-- **Responsabilidades:**
-  - Atendimento via WhatsApp e e-mail
-  - Resolução de problemas técnicos na plataforma
-  - Gestão de reembolsos e cancelamentos
-  - Manutenção da base de perguntas frequentes (FAQ)
-- **SLA:** Resposta em até 4h (horário comercial)
-- **Ferramentas:** WhatsApp Business, Hotmart (suporte), FAQ interno
+| Pessoa | Cargo | Foco | Contato |
+|--------|-------|------|---------|
+| **Bruno** | Co-fundador / Apresentador | Produto, conteúdo, demos ao vivo | @bruno (Telegram) |
+| **Carlos** | Gestor de Tráfego | Meta Ads, criativos, ROAS | @carlos (Telegram) |
+| **Marina** | Conteúdo & Comunidade | Instagram, YouTube, newsletter | @marina (Telegram) |
+| **Fernanda** | Sucesso do Cliente | Atendimento, onboarding, churn | @fernanda (Telegram) |
+| **Diego** | Ops & Infra | Servidores, crons, integrações | @diego (Telegram) |
 
 ---
 
-## Equipe Externa / Freelancers
+## Estrutura de Decisão
 
-### Diego — Editor de Vídeo
-- **Escopo:** Edição de vídeos para YouTube
-- **Entrega:** 2-3 vídeos por semana
-- **Formato:** Recebe gravação bruta, entrega editado com thumbnails
-
-### Marcos — Designer
-- **Escopo:** Thumbnails do YouTube, artes para Instagram, materiais de lançamento
-- **Entrega:** Sob demanda (briefing por WhatsApp)
-
-### Lucas e Patrícia — Gestores de Tráfego
-- **Escopo:** Gestão das campanhas no Meta Ads e Google Ads
-- **Reunião:** Semanal às terças, 10h
-- **Acesso:** Meta Business Manager (viewer + gestor)
+| Tipo de decisão | Quem decide |
+|-----------------|-------------|
+| Produto e pricing | Bruno |
+| Budget Meta Ads | Carlos (até R$5k) / Bruno (acima) |
+| Criativos novos | Carlos + Marina |
+| Suporte ao cliente | Fernanda |
+| Infra e deploy | Diego |
+| Contratações | Bruno |
 
 ---
 
-## Canais de Comunicação Interna
+## Como nos comunicar
 
-| Canal | Uso |
-|-------|-----|
-| WhatsApp (grupo geral) | Comunicados rápidos, urgências |
-| WhatsApp (por área) | Discussões específicas de marketing, vendas, suporte |
-| Trello | Tarefas e projetos com prazo |
-| Google Sheets | Dados, pipelines, financeiro |
-| E-mail | Comunicações formais com clientes e parceiros |
+- **Canal principal:** Telegram (grupos por área)
+- **Suporte ao cliente:** @openclawsuporte (bot → Fernanda)
+- **Urgências técnicas:** @diego direto
 
 ---
 
-## Regras de Escalation
+## Reuniões Recorrentes
 
-1. **Dúvida operacional** → André Costa (COO)
-2. **Decisão estratégica** → Felipe Santos (CEO) + Ricardo Mendes
-3. **Urgência de suporte** → Juliana (e avisar André se não resolver em 4h)
-4. **Conteúdo aprovado** → Ricardo Mendes revisa antes de publicar qualquer material novo
+| Reunião | Frequência | Participantes |
+|---------|-----------|---------------|
+| Weekly ops | Segunda 9h | Bruno + Carlos + Diego |
+| Review de criativos | Quarta 10h | Carlos + Marina |
+| Check de atendimento | Sexta 14h | Fernanda + Bruno |
 
 ---
 

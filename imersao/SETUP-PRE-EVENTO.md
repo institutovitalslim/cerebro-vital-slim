@@ -20,9 +20,10 @@
 - [ ] Confirmar que repo `imersao-openclaw-negocios` está público e atualizado no GitHub
 - [ ] Verificar que a URL pública do repo está correta para mostrar ao vivo
 - [ ] Confirmar que `cerebro/dados/leads.csv` e `cerebro/dados/vendas.csv` têm dados fake realistas
-- [ ] Criar planilha Google Sheets de demo (baseada nos CSVs) — tornar pública (link)
-- [ ] Anotar ID e gid das abas da planilha Google Sheets de demo
-- [ ] Criar relatório pre-gerado fake em `cerebro/areas/marketing/sub-areas/trafego-pago/` como backup para se API falhar
+- [ ] Verificar que `imersao/dados-demo/meta-ads-campanhas.csv` está presente e com dados válidos
+- [ ] Verificar que `imersao/dados-demo/relatorio-meta-ads-exemplo.md` está presente (relatório pré-gerado para mostrar como output)
+- [ ] Verificar que `imersao/dados-demo/vendas.csv` e `leads.csv` estão presentes
+- [ ] Confirmar que skill `relatorio-ads` detecta modo demo (sem META_ADS_TOKEN → lê CSV local)
 
 ### Comunicação
 - [ ] Enviar lembrete para participantes inscritos com: horário, link de acesso, o que vão ver
@@ -51,10 +52,10 @@
 - [ ] Testar `cerebro/areas/atendimento/skills/escalar-duvida/SKILL.md` com pergunta nova
 
 ### Dados e Planilhas
-- [ ] Confirmar que planilha Google Sheets de demo está pública e acessível (abrir em aba anônima)
-- [ ] Confirmar URL de export CSV da planilha funciona: `https://docs.google.com/spreadsheets/d/{ID}/export?format=csv`
-- [ ] Preparar CSV de vendas com dados fake mas realistas (10-20 linhas)
-- [ ] Preparar CSV de leads com pipeline fake (5-10 leads em estágios diferentes)
+- [ ] Testar skill `relatorio-ads` ao vivo: pedir "gera relatório dos últimos 7 dias" e confirmar que lê o CSV e retorna relatório formatado
+- [ ] Abrir `imersao/dados-demo/relatorio-meta-ads-exemplo.md` — confirmar que está legível e completo para mostrar durante o bloco
+- [ ] Verificar `imersao/dados-demo/vendas.csv` — 52 linhas, dados de vendas OpenClaw fictícios
+- [ ] Verificar `imersao/dados-demo/leads.csv` — 31 linhas, pipeline de leads com status variados
 
 ### Visual / Apresentação
 - [ ] Abrir `imersao/apresentacao-imersao-v3.html` no browser e testar todas as seções
@@ -66,7 +67,7 @@
 - [ ] Testar `tree` instalado e funcionando: `tree cerebro/ -L 2`
 - [ ] Configurar OBS/StreamYard com 3 cenas:
   - **Cena 1:** Terminal (80% tela)
-  - **Cena 2:** Browser (planilha / GitHub)
+  - **Cena 2:** Browser (GitHub / editor de arquivos)
   - **Cena 3:** Tela cheia do apresentador (para pitch)
 - [ ] Testar transição entre cenas sem glitch
 - [ ] Preparar segundo monitor: Telegram + chat do streaming + este run-of-show aberto
@@ -89,7 +90,7 @@
 ### Browser
 - [ ] Aba 1: `imersao/apresentacao-imersao-v3.html` (capa abertura)
 - [ ] Aba 2: GitHub público do repo demo
-- [ ] Aba 3: Google Sheets de demo
+- [ ] Aba 3: `imersao/dados-demo/relatorio-meta-ads-exemplo.md` aberto no editor
 - [ ] Aba 4: `cerebro/agentes/assistente/SOUL.md` aberto no GitHub
 
 ### Agentes / Comunicação
@@ -132,7 +133,7 @@
 | Agente principal trava | Abrir Claude Code apontando para o mesmo `cerebro/` como substituto imediato |
 | API Meta Ads falhar (Bloco 9) | Abrir relatório pré-gerado salvo em `cerebro/areas/marketing/sub-areas/trafego-pago/` |
 | Bot de suporte não responde | Mostrar screenshot de conversa preparada; explicar o fluxo verbalmente |
-| Planilha Google Sheets inacessível | Usar `cerebro/dados/vendas.csv` e `leads.csv` direto no terminal |
+| Skill não retorna relatório | Abrir `imersao/dados-demo/relatorio-meta-ads-exemplo.md` direto no terminal — "esse foi gerado às 8h" |
 | Streaming cai (Zoom/StreamYard) | Backup: reiniciar streaming em 3min; Cayo avisa no chat com horário de retorno |
 | Internet cai | Hotspot celular pré-configurado — testar antes. Cayo assume comunicação com participantes |
 | Cayo precisa sair | Bruno continua sozinho — moderar chat e apresentar simultaneamente |

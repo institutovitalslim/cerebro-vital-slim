@@ -1,65 +1,104 @@
 # SKILL — Relatório de Ads
 
 ## O Que Faz
-Puxa dados da Meta Ads API, analisa performance de criativos e campanhas, e gera relatório formatado com métricas, alertas e recomendações.
+Analisa performance de criativos e campanhas do Meta Ads e gera relatório formatado com métricas, alertas e recomendações. Funciona em dois modos: **Demo** (lê CSV local) e **Produção** (conecta na Meta Ads API).
+
+---
+
+## Modo de Operação
+
+### 🟡 MODO DEMO (padrão para imersão)
+Lê os dados do arquivo CSV local. Não precisa de credenciais.
+
+**Fonte de dados:** `imersao/dados-demo/meta-ads-campanhas.csv`
+
+**Para ativar:** não configurar `META_ADS_TOKEN` no ambiente. O agente detecta automaticamente a ausência da variável e usa o CSV.
+
+---
+
+### 🟢 MODO PRODUÇÃO (para o participante configurar)
+Conecta na Meta Ads API com as credenciais do participante.
+
+**Para ativar:**
+1. Criar app no Facebook Developers (developers.facebook.com)
+2. Gerar token de acesso: Marketing API → Permissões: `ads_read`, `ads_management`
+3. Configurar no OpenClaw:
+   ```
+   openclaw config set META_ADS_TOKEN="seu_token_aqui"
+   openclaw config set META_ADS_ACCOUNT_ID="act_seu_id_aqui"
+   ```
+4. Testar: `openclaw run skill relatorio-ads --periodo ontem`
 
 ---
 
 ## Input
-- Período desejado (padrão: últimas 24h ou última semana)
-- Nível de análise: campanha, conjunto de anúncios ou criativo
-- Opcional: CPL alvo e ROAS mínimo da empresa
+- Período desejado (padrão: últimas 24h)
+- Nível de análise: criativo (padrão), conjunto ou campanha
+- Opcional: ROAS mínimo alvo da empresa (padrão: 2.0x)
 
 ## Processo
 
-### 1. Autenticação e Coleta
+### 1. Verificar modo de operação
+```python
+if META_ADS_TOKEN exists:
+    modo = "producao"
+    dados = fetch_meta_ads_api(token, account_id, periodo)
+else:
+    modo = "demo"
+    dados = ler_csv("imersao/dados-demo/meta-ads-campanhas.csv")
 ```
-META_ADS_TOKEN e META_ADS_ACCOUNT_ID do ambiente
-Endpoint: https://graph.facebook.com/v21.0/{account_id}/insights
-Parâmetros: date_preset, level, fields
-```
 
-### 2. Campos Coletados
-- `spend` — investimento
-- `impressions` — impressões
-- `clicks` — cliques no link
-- `ctr` — CTR
-- `cpc` — custo por clique
-- `actions` (leads) — conversões
-- `cost_per_action_type` (CPL)
-- `frequency` — frequência média
-- `reach` — alcance único
+### 2. Filtrar período solicitado
+- Filtrar coluna `data` pelo período
+- Agregar por `criativo_id` se múltiplos dias
 
-### 3. Cálculos
-- **CPL** = spend ÷ leads
-- **ROAS** = receita atribuída ÷ spend (se conversão de venda configurada)
-- **CPA** = spend ÷ conversões totais
-- **Taxa de conversão** = leads ÷ cliques × 100
+### 3. Calcular métricas
+- **ROAS** = receita ÷ gasto
+- **CPA** = gasto ÷ compras
+- **CTR** = cliques ÷ impressões × 100
+- **CPC** = gasto ÷ cliques
 
-### 4. Análise de Criativos
-- Ranquear por CTR (decrescente)
-- Identificar frequência > 4 (saturação)
-- Comparar CPL atual vs média histórica
+### 4. Ranquear criativos
+- Ordenar por ROAS (decrescente)
+- Identificar: top performers (ROAS > 3x), monitorar (1.5–3x), avaliar pausar (< 1.5x)
 
-### 5. Geração do Relatório
-- Formatar conforme template em `rotinas/meta-ads-report.md`
-- Aplicar alertas automáticos (CPL > R$60, zero leads, freq > 4)
-- Incluir top 3 criativos e candidatos a pausar
+### 5. Gerar recomendações
+- Criativos com ROAS > 3x nos últimos 7 dias → recomendar escala
+- Criativos novos (< R$150 gasto) → aguardar aprendizado
+- Criativos com ROAS caindo > 20% semana a semana → alertar
+
+### 6. Comparar com testes abertos
+- Ler `trafego-pago/testes/abertos/` — checar se algum teste atingiu limiar de decisão
+- Se sim: notificar que o teste pode ser consolidado
+
+### 7. Gerar relatório
+- Seguir template em `rotinas/meta-ads-report.md`
 
 ## Output
 
-Relatório em markdown formatado:
+Relatório markdown formatado:
+
 ```
-📊 Report Meta Ads — {DATA/PERÍODO}
-💰 Investimento: R$ X
-🎯 Leads: N | CPL: R$ X | ROAS: Xx
-🏆 Top criativo: [nome] CTR X%, CPL R$ X
-⚠️ [Alertas se houver]
+📊 Report Meta Ads — OpenClaw
+Período: {DATA} | Gerado às 08:00 BRT
+
+💰 Resumo: Gasto R$X | Compras N | Receita R$X | ROAS Xx
+
+🏆 Top criativos: [tabela ranqueada]
+
+🚀 Recomendações: [escalar / monitorar / pausar]
+
+🧪 Testes: [status dos testes em aberto]
+
+💡 Insight do dia: [observação mais relevante]
 ```
 
 ---
 
 ## Referências
-- Contexto de tráfego: `areas/marketing/sub-areas/trafego-pago/MAPA.md`
-- Learnings: `areas/marketing/sub-areas/trafego-pago/learnings/resumo.md`
-- Template de relatório: `areas/marketing/sub-areas/trafego-pago/rotinas/meta-ads-report.md`
+- Dados demo: `imersao/dados-demo/meta-ads-campanhas.csv`
+- Exemplo de relatório gerado: `imersao/dados-demo/relatorio-meta-ads-exemplo.md`
+- Ângulos documentados: `trafego-pago/angulos/`
+- Learnings: `trafego-pago/learnings/resumo.md`
+- Testes em aberto: `trafego-pago/testes/abertos/`
+- Template: `trafego-pago/rotinas/meta-ads-report.md`

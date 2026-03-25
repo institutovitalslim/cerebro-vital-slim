@@ -1,75 +1,84 @@
-# FAQ — Base de Conhecimento TechFlow Solutions
+# FAQ — Base de Conhecimento OpenClaw
 
 > Base de respostas para o bot de suporte. Atualizada semanalmente.
-> Última atualização: 2026-03-20
+> Última atualização: 2026-03-24
 
 ---
 
-## 📁 CONTA E ACESSO
+## 🚀 PRIMEIROS PASSOS
 
-**P: Como acesso o portal do cliente?**
-R: Você acessa em notion.techflow.com.br com o email cadastrado no contrato. Se não recebeu o convite, fale com suporte@techflow.com.br e enviamos em até 2h.
+**P: Como acesso o OpenClaw depois de comprar?**
+R: Após a confirmação do pagamento, você recebe um email com o link de instalação e o token de acesso. O processo leva menos de 10 minutos. Se não recebeu em até 15 minutos, verifique spam ou fale com a gente pelo Telegram: @openclawsuporte.
 
-**P: Esqueci minha senha do portal. O que fazer?**
-R: Clique em "Esqueci minha senha" na tela de login do Notion. O email de recuperação chega em até 5 minutos. Se não chegar, verifique spam ou nos avise pelo WhatsApp.
+**P: O OpenClaw funciona no Windows, Mac e Linux?**
+R: Sim, funciona nos três sistemas operacionais. Precisa do Node.js instalado (versão 18 ou superior). O guia completo de instalação está em docs.openclaw.ai.
 
-**P: Posso adicionar mais usuários da minha equipe ao portal?**
-R: Sim. Envie o nome e email dos usuários para suporte@techflow.com.br. Adicionamos em até 1 dia útil. Plano Basic permite até 3 usuários; Growth até 10.
+**P: Precisa saber programar para usar o OpenClaw?**
+R: Não. O OpenClaw foi desenhado para empreendedores não-técnicos. Você configura tudo em linguagem natural — descreve o que quer, o agente faz. Não precisa escrever código.
 
----
-
-## 💳 PAGAMENTO E FINANCEIRO
-
-**P: Quando o boleto vence?**
-R: Boletos vencem todo dia 10 de cada mês. Se o dia 10 cair em fim de semana ou feriado, o vencimento é deslocado para o próximo dia útil.
-
-**P: Não recebi o boleto deste mês. O que fazer?**
-R: Verifique spam com remetente financeiro@techflow.com.br. Se não encontrar, solicite reenvio pelo WhatsApp ou email — enviamos em até 1h em dias úteis.
-
-**P: Vocês emitem nota fiscal?**
-R: Sim. A NF é emitida automaticamente em até 2 dias úteis após a confirmação do pagamento e enviada para o email do responsável financeiro cadastrado.
-
-**P: Posso parcelar o pagamento anual?**
-R: Planos anuais podem ser pagados em até 6x no cartão de crédito ou à vista com 15% de desconto. Fale com nossa equipe comercial pelo WhatsApp para gerar o link.
+**P: Quanto tempo leva para ter o primeiro agente funcionando?**
+R: Em média 30 minutos do zero ao primeiro agente respondendo. Se seguir o tutorial do Minicurso, você tem o assistente básico configurado em menos de 1 tarde.
 
 ---
 
-## 🤖 PRODUTO — AUTOMAÇÃO
+## 💳 PLANOS E PAGAMENTO
 
-**P: Quanto tempo leva para a automação entrar em produção?**
-R: O prazo padrão é 30 dias corridos após o kickoff. Projetos mais complexos (integrações múltiplas) podem levar até 45 dias. Seu cronograma detalhado está no portal do cliente.
+**P: Quais são os planos disponíveis?**
+R: Temos três opções: **Minicurso** (R$97 — curso de instalação e configuração), **OpenClaw Pro** (R$297 — plataforma completa + comunidade + suporte), **Pixel IA** (R$197/mês — mentorias semanais + formações + comunidade). Veja detalhes em openclaw.ai/planos.
 
-**P: Posso solicitar mudanças no fluxo após a entrega?**
-R: Sim. Clientes em plano Growth ou Enterprise têm 2 revisões incluídas no contrato. Ajustes adicionais são orçados separadamente. Abra um ticket pelo WhatsApp descrevendo a mudança desejada.
+**P: Tem garantia?**
+R: Sim. 7 dias de garantia incondicional em todos os produtos. Se não gostar por qualquer motivo, devolvemos 100% do valor. Basta enviar email para financeiro@openclaw.ai.
 
-**P: A automação funciona integrada com meu sistema atual (ERP/CRM)?**
-R: Depende do sistema. Integramos nativamente com Pipedrive, HubSpot, Notion, Google Workspace, Totvs e SAP. Para outros sistemas, avaliamos caso a caso. Liste seus sistemas no ticket para análise.
+**P: Posso parcelar?**
+R: Sim. Aceitamos parcelamento em até 12x no cartão de crédito. No PIX tem 10% de desconto. O link de pagamento já mostra as opções.
 
-**P: O que acontece se a automação parar de funcionar?**
-R: Monitoramos automaticamente 24/7. Se detectarmos falha, nossa equipe técnica é acionada. Você também pode nos notificar pelo WhatsApp marcando como URGENTE. SLA de retomada: 4h em dias úteis.
+**P: Preciso pagar todo mês para continuar usando o OpenClaw Pro?**
+R: O OpenClaw Pro é uma compra única (R$297). Você acessa a plataforma e as atualizações sem mensalidade. O Pixel IA sim é assinatura mensal.
+
+---
+
+## 🤖 USO DA PLATAFORMA
+
+**P: O que é uma skill?**
+R: Uma skill é uma receita de automação — você descreve o processo em linguagem natural (o que fazer, com quais dados, qual o formato de saída) e o agente executa sempre que você chamar. É como uma função, mas escrita em português.
+
+**P: O que é o Cérebro?**
+R: O Cérebro é o repositório GitHub que serve como memória persistente do seu agente. Enquanto o agente "pensa" em tempo real, o Cérebro guarda tudo que importa: contexto da empresa, skills, rotinas, learnings. Sem o Cérebro, o agente esquece tudo ao fechar a sessão.
+
+**P: Como conecto o OpenClaw ao Telegram?**
+R: Crie um bot no BotFather do Telegram, copie o token, e configure no OpenClaw com o comando `openclaw channels add telegram --token SEU_TOKEN`. Em 2 minutos seu agente está respondendo no Telegram.
+
+**P: Posso ter mais de um agente?**
+R: Sim. O OpenClaw suporta múltiplos agentes, cada um com personalidade, escopo e canal diferentes. Um assistente geral, um agente de marketing, um bot de suporte — cada um configurado separadamente.
+
+**P: O que é um cron?**
+R: Cron é um agendamento. Você define que uma skill roda em horário específico — por exemplo, todo dia às 9h gera e envia o relatório de vendas. O agente executa sozinho, sem você precisar pedir.
 
 ---
 
 ## 🔧 TÉCNICO
 
-**P: Como faço para testar a automação antes de ir ao ar?**
-R: Todo projeto tem um ambiente de homologação separado do produtivo. As credenciais de acesso são enviadas 1 semana antes do go-live. Faça os testes e nos dê o aceite formal pelo portal.
+**P: O OpenClaw funciona com o Claude, GPT e outros modelos?**
+R: Sim. O OpenClaw é compatível com os principais modelos de IA: Claude (Anthropic), GPT-4 (OpenAI), Gemini (Google) e modelos locais via Ollama. Você escolhe qual usar em cada agente.
 
-**P: Minha integração com o Google Sheets parou de atualizar. O que pode ser?**
-R: As causas mais comuns são: (1) token de acesso expirado — renove em configurações da integração; (2) planilha movida ou renomeada; (3) permissão revogada. Envie print do erro pelo WhatsApp para agilizar.
+**P: Meus dados ficam seguros? O modelo de IA vê meus dados?**
+R: O OpenClaw roda localmente na sua máquina ou servidor. Seus arquivos ficam no seu repositório GitHub (privado). O modelo processa os dados durante a execução, mas não armazena. Nenhum dado fica em servidor da OpenClaw.
 
-**P: Posso acessar os logs das automações?**
-R: Sim. No portal do cliente, aba "Logs & Monitoramento", você vê execuções dos últimos 30 dias. Precisa de histórico maior? Solicite exportação pelo email.
+**P: Meu agente parou de responder. O que fazer?**
+R: Verifique: (1) serviço rodando — execute `openclaw status`; (2) chave de API do modelo configurada e com crédito; (3) token do Telegram válido. Se o problema persistir, mande print do erro pelo Telegram @openclawsuporte.
+
+**P: Como faço backup do meu Cérebro?**
+R: O Cérebro é um repositório GitHub — o backup é automático a cada `git push`. Se o agente faz commits automaticamente (configuração padrão), você já tem histórico completo de toda evolução.
 
 ---
 
-## 📦 CONTRATOS E PLANOS
+## 📦 COMUNIDADE E SUPORTE
 
-**P: Quais são os planos disponíveis?**
-R: Temos três planos: **Basic** (1 automação, até 3 usuários, suporte por email), **Growth** (até 5 automações, 10 usuários, suporte prioritário WhatsApp), **Enterprise** (ilimitado, SLA customizado, CSM dedicado). Detalhes em techflow.com.br/planos.
+**P: Como acesso a comunidade?**
+R: A comunidade está no Telegram. Após a compra, você recebe o link de acesso por email. Grupo principal + canais por área (marketing, produto, atendimento, etc.).
 
-**P: Posso cancelar meu contrato antes do vencimento?**
-R: Contratos anuais têm multa rescisória de 20% do valor restante. Contratos mensais podem ser cancelados com 30 dias de antecedência sem multa. Solicite cancelamento formal pelo email contrato@techflow.com.br.
+**P: Com que frequência têm as mentorias em grupo?**
+R: No Pixel IA, as mentorias em grupo acontecem toda semana, às quartas 20h BRT. As gravações ficam disponíveis para quem não puder ao vivo.
 
-**P: Vocês oferecem período de teste gratuito?**
-R: Não oferecemos trial, mas temos uma consultoria diagnóstica gratuita de 1h onde mapeamos seus processos e mostramos o potencial de automação. Agende em techflow.com.br/diagnostico.
+**P: Posso pedir suporte para configurar meu Cérebro?**
+R: Sim. No OpenClaw Pro tem suporte via Telegram em horário comercial. No Pixel IA tem suporte prioritário + as mentorias semanais para tirar dúvidas de implementação.

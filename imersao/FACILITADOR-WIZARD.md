@@ -440,21 +440,30 @@ Enquanto o slide está na tela, abre `cerebro/areas/marketing/sub-areas/trafego-
 
 *"Todo dia às 8h, antes de qualquer pessoa da equipe acordar, o agente já gerou esse relatório. O gestor de tráfego abre o Telegram — relatório já está lá. Com alertas, destaques, sugestões."*
 
-🎬 **Demo — as 3 skills e 3 rotinas:**
+🎬 **Demo — dados mockados, zero risco de expor API:**
 
-Mostra as skills uma a uma — abre o arquivo e descreve em uma frase:
-- `relatorio-ads/SKILL.md` → coleta dados do Meta Ads e gera relatório diário
-- `analise-criativos/SKILL.md` → identifica padrões de performance entre criativos
-- `criacao-criativos/SKILL.md` → sugere próximos criativos baseado em learnings
+A skill `relatorio-ads` detecta automaticamente que não há `META_ADS_TOKEN` configurado e lê o CSV local. O participante vê o sistema funcionando sem precisar de credencial ao vivo.
+
+Abre `cerebro/areas/marketing/skills/relatorio-ads/SKILL.md` — mostra o trecho:
+*"Se META_ADS_TOKEN não configurado → lê de `imersao/dados-demo/meta-ads-campanhas.csv`"*
+
+*"Em produção você configura a chave da sua conta Meta Ads. Para o demo, os dados já estão aqui."*
+
+Executa ao vivo:
+*"Gera o relatório de Meta Ads dos últimos 7 dias"*
+— Agente lê o CSV → processa → gera relatório formatado. —
+
+Mostra `imersao/dados-demo/relatorio-meta-ads-exemplo.md`:
+*"É exatamente isso que chegou no Telegram às 8h desta manhã. A01 em escala, A05 crescendo, A06 em aprendizado. Sem alguém olhando planilha."*
 
 📊 → `slides/12-pipeline-criativos.html`
 
-*"Cada criativo passa por essas fases. O agente move e documenta automaticamente: Backlog → Em teste → Aprendizado → Escalando → Morto."*
+*"Cada criativo passa por essas fases. O agente acompanha e documenta: em teste → aprendizado → escalando."*
 
-Pergunta pro agente de marketing: *"Qual próximo criativo faz sentido produzir essa semana?"*
-— Agente analisa learnings e formatos → sugere criativo específico com justificativa. —
+Pergunta pro agente de marketing: *"Com base nos learnings atuais, qual próximo criativo faz sentido criar essa semana?"*
+— Agente lê `learnings/resumo.md` + testes abertos → sugere criativo com justificativa baseada em dados. —
 
-*"Ele não chutou. Leu os dados, leu os learnings, sugeriu com base em evidência."*
+*"Ele não chutou. Leu os learnings, os testes, os dados — e sugeriu com evidência."*
 
 ---
 
