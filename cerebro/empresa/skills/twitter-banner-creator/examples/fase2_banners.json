@@ -1,0 +1,103 @@
+{
+  "_doc": "Exemplo real: 10 banners da Fase 2 da campanha OpenClaw. Use como referência de formato, nomenclatura e ranges de prova social.",
+
+  "context": {
+    "projeto": "OpenClaw",
+    "fase": 2,
+    "avatar_path": "criativos/Assets/bruno-okamoto.jpg",
+    "output_dir": "criativos/fase2/banners/"
+  },
+
+  "banners": [
+    {
+      "_angle": "A01 — Founder Livre (variação N1)",
+      "filename": "problema-A01-N1-founder-livre.png",
+      "tweet": "Parece ficção científica, mas DELEGUEI a operação dos meus negócios em 13 dias.\n\nRelatórios, métricas, atualizações de projeto, conteúdo — tudo isso era eu fazendo sozinho.\n\nEm 13 dias montei 6 agentes de IA que assumiram tudo isso.\n\nHoje eu acordo e a operação já tá rodando. Sem eu tocar.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "102.4K",
+      "likes1": "3.2K",
+      "retweets": "481",
+      "likes2": "187"
+    },
+    {
+      "_angle": "A01 — Founder Livre (variação N2)",
+      "filename": "problema-A01-N2-founder-livre.png",
+      "tweet": "Você ainda faz o que sua IA devia estar fazendo por você?\n\nRelatórios, planilhas, atualizações, análise de métricas.\n\nSe você ainda toca nisso, você não está aproveitando 1% do potencial da IA hoje.\n\nMontei 6 agentes que assumiram isso por mim. Hoje só cuido do estratégico.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "78.6K",
+      "likes1": "1.8K",
+      "retweets": "312",
+      "likes2": "156"
+    },
+    {
+      "_angle": "A01 — Founder Livre (variação N6)",
+      "filename": "problema-A01-N6-founder-livre.png",
+      "tweet": "Empresário que não usa IA como time fica preso no operacional.\n\nVocê pode ser bom no que faz e ainda assim passar o dia inteiro apagando incêndio, fazendo relatório e respondendo o que já foi respondido antes.\n\nEu fui esse empresário. Até montar 6 agentes que assumiram isso por mim.\n\nAgora o operacional roda. Eu foco no que move o negócio.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "91.3K",
+      "likes1": "2.4K",
+      "retweets": "398",
+      "likes2": "173"
+    },
+    {
+      "_angle": "A10 — Proatividade (variação N1)",
+      "filename": "solucao-A10-N1-proatividade.png",
+      "tweet": "Todo dia de manhã eu recebo um relatório sobre tudo o que preciso saber dos meus projetos e negócios.\n\nMétricas, o que aconteceu ontem, onde estão os gargalos, onde focar hoje.\n\nEu não precisei pedir. A IA já sabe o que é importante pra mim.\n\nNão é chatbot. É um agente proativo que trabalha enquanto eu durmo.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "67.8K",
+      "likes1": "1.5K",
+      "retweets": "267",
+      "likes2": "98"
+    },
+    {
+      "_angle": "A10 — Proatividade (variação N2)",
+      "filename": "solucao-A10-N2-proatividade.png",
+      "tweet": "Pare de ficar digitando prompt, tenha uma IA que trabalhe por você sem precisar pedir.\n\nToda vez que você abre o chat e digita uma pergunta, você tá usando IA passiva.\n\nIA agêntica não espera você pedir. Ela executa, monitora e te entrega o resultado.\n\nMontei agentes que fazem isso nos meus negócios. Todo dia. Sem interrupção.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "85.1K",
+      "likes1": "2.0K",
+      "retweets": "356",
+      "likes2": "134"
+    },
+    {
+      "_angle": "A10 — Proatividade (variação N3)",
+      "filename": "solucao-A10-N3-proatividade.png",
+      "tweet": "Enquanto eu dormia, minha IA trabalhava por mim.\n\nMonitorava as métricas dos meus negócios. Processava meus leads. Gerava meus relatórios do dia.\n\nQuando eu acordei, tudo estava feito.\n\nNão é automação. São agentes que entendem o contexto do meu negócio e agem sem eu pedir.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "113.7K",
+      "likes1": "3.5K",
+      "retweets": "492",
+      "likes2": "198"
+    },
+    {
+      "_angle": "A10 — Proatividade (variação N4)",
+      "filename": "solucao-A10-N4-proatividade.png",
+      "tweet": "Você sabe o que já te custou não ter isso até agora?\n\nCada hora que você passou fazendo relatório, analisando planilha ou respondendo emails, ou qualquer outra tarefa operacional ou tática no computador, foi uma hora perdida.\n\nNo meu caso eram 4 horas por dia. Por semana, 20 horas. Por mês, 80 horas.\n\nHoje tenho um time de agentes de IA faz tudo isso por mim.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "72.4K",
+      "likes1": "1.7K",
+      "retweets": "289",
+      "likes2": "121"
+    },
+    {
+      "_angle": "A12 — Antes vs. Depois (variação N1)",
+      "filename": "solucao-A12-N1-antes-vs-depois.png",
+      "tweet": "Antes: 4 horas por dia com tarefas operacionais.\nDepois: ZERO. Um time de IAs fazendo tudo por mim.\n\nRelatórios, conteúdo, suporte, métricas — tudo eu fazia.\n\nEm 13 dias montei 6 agentes que assumiram cada uma dessas tarefas. Sem código.\n\nHoje essas 4 horas são minhas de volta.\n\nMontei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "95.8K",
+      "likes1": "2.7K",
+      "retweets": "423",
+      "likes2": "165"
+    },
+    {
+      "_angle": "A12 — Antes vs. Depois (variação N2)",
+      "filename": "solucao-A12-N2-antes-vs-depois.png",
+      "tweet": "Antes: relatório, planilha, e-mail, suporte — tudo eu.\nDepois: 6 agentes cuidando de tudo isso por mim.\n\nEu passava o dia inteiro alternando entre essas tarefas.\n\nEm 13 dias montei um agente pra cada função. Hoje eles resolvem. Eu só recebo o resumo.\n\nSem código. Montei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "58.3K",
+      "likes1": "1.3K",
+      "retweets": "213",
+      "likes2": "87"
+    },
+    {
+      "_angle": "A12 — Antes vs. Depois (variação N3)",
+      "filename": "solucao-A12-N3-antes-vs-depois.png",
+      "tweet": "Antes: o único responsável por tudo na operação.\nDepois: 6 agentes assumiram isso. Eu só cuido do que importa.\n\nQuando tudo depende de você, nada escala. Cada tarefa operacional é um gargalo com o seu nome.\n\nEm 13 dias saí dessa posição. Montei 6 agentes que assumiram a operação inteira.\n\nSem código. Montei um passo a passo (copia e cola) pra quem quer fazer o mesmo.",
+      "views": "81.9K",
+      "likes1": "2.2K",
+      "retweets": "371",
+      "likes2": "149"
+    }
+  ]
+}

@@ -4,20 +4,22 @@
 
 ```
 marketing/
-├── MAPA.md              ← Você está aqui
+├── MAPA.md
 ├── contexto/
-│   └── geral.md         ← Objetivo, KPIs, canais, calendário, ferramentas
+│   └── geral.md
 ├── rotinas/
-│   └── (rotinas futuras: relatório de performance, monitoramento de ads)
-└── skills/
-    └── (skills futuras: relatório de campanha, geração de copy)
+│   └── relatorio-campanha-semanal.md
+├── skills/
+│   └── _index.md
+└── sub-areas/
+    └── trafego-pago/
 ```
 
-## Responsáveis
-- **Camila** — Social media (Instagram)
-- **Lucas / Patrícia** — Tráfego pago (Meta Ads, Google Ads)
-- **Ricardo Mendes** — Conteúdo YouTube
-- **Marcos** — Design
+## O que tem em cada lugar
 
-## Skills ativas
-(nenhuma ainda — a ser criada durante implementação)
+| Caminho | O que o agente encontra |
+|---------|------------------------|
+| `contexto/` | Objetivo da área, KPIs, canais, calendário, ferramentas |
+| `rotinas/` | Crons configurados (relatório de campanha semanal) |
+| `skills/` | Skills da área de marketing (ver `_index.md` dentro da pasta) |
+| `sub-areas/trafego-pago/` | Processos, criativos, testes, learnings e rotinas de tráfego pago |

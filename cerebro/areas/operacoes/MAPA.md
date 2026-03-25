@@ -4,17 +4,20 @@
 
 ```
 operacoes/
-├── MAPA.md              ← Você está aqui
+├── MAPA.md
 ├── contexto/
-│   └── geral.md         ← Objetivo, KPIs, processos, projetos, reuniões
+│   └── geral.md
 ├── rotinas/
-│   └── (rotinas futuras: backup, sync, heartbeat)
+│   ├── heartbeat.md
+│   └── sync-github.md
 └── skills/
-    └── (skills futuras: checklist de processos, onboarding)
+    └── _index.md
 ```
 
-## Responsável
-- **André Costa** (COO) — gestão geral de operações
+## O que tem em cada lugar
 
-## Skills ativas
-(nenhuma ainda — skills cross-area ficam em `empresa/skills/`)
+| Caminho | O que o agente encontra |
+|---------|------------------------|
+| `contexto/` | Objetivo da área, KPIs, processos, projetos |
+| `rotinas/` | Crons configurados (heartbeat a cada 6h, sync GitHub 00h) |
+| `skills/` | Skills da área de operações (ver `_index.md` dentro da pasta) |

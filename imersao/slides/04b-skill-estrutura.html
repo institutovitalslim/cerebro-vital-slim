@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estrutura de uma Skill</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308; --purple: #a78bfa;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 32px 24px; }
+
+  h2 { font-size: clamp(24px, 2.8vw, 38px); font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .subtitle { font-size: 17px; color: var(--text2); text-align: center; margin-bottom: 36px; max-width: 700px; line-height: 1.5; }
+  .subtitle span { color: var(--accent2); font-weight: 700; }
+
+  .comparison { display: flex; gap: 32px; width: 100%; max-width: 1100px; align-items: stretch; }
+
+  .card {
+    flex: 1;
+    background: var(--bg2);
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .card-badge {
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 100px;
+  }
+  .card.simple { border: 2px solid var(--blue); }
+  .card.simple .card-badge { background: rgba(96,165,250,0.15); color: var(--blue); }
+  .card.advanced { border: 2px solid var(--accent); }
+  .card.advanced .card-badge { background: rgba(254,80,0,0.15); color: var(--accent2); }
+
+  .card-title { font-size: 20px; font-weight: 800; }
+  .card-example { font-size: 13px; color: var(--text2); margin-bottom: 20px; padding-left: 2px; }
+
+  .tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    line-height: 2;
+    flex: 1;
+  }
+  .tree-folder { color: var(--blue); font-weight: 600; }
+  .tree-file { color: var(--text); }
+  .tree-required { color: var(--accent2); font-weight: 700; }
+  .tree-comment { color: var(--text2); font-size: 13px; font-style: italic; }
+  .tree-line { color: var(--border); }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+  }
+  .tag-required { background: rgba(254,80,0,0.2); color: var(--accent2); }
+  .tag-optional { background: rgba(96,165,250,0.15); color: var(--blue); }
+
+  .card-footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .card-footer strong { color: var(--text); }
+
+  .bottom-note {
+    margin-top: 28px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text2);
+    text-align: center;
+    max-width: 1100px;
+  }
+  .bottom-note span { color: var(--accent2); }
+</style>
+</head>
+<body>
+  <h2>Estrutura de uma Skill</h2>
+  <p class="subtitle">O mínimo é o <span>SKILL.md</span>. O resto você adiciona conforme a complexidade cresce.</p>
+
+  <div class="comparison">
+
+    <div class="card simple">
+      <div class="card-header">
+        <div class="card-badge">Skill Simples</div>
+      </div>
+      <div class="card-title">relatorio-vendas/</div>
+      <div class="card-example">Relatório semanal de vendas</div>
+
+      <div class="tree">
+        <span class="tree-folder">relatorio-vendas/</span><br>
+        <span class="tree-line">└── </span><span class="tree-required">SKILL.md</span><span class="tag tag-required">OBRIGATÓRIO</span><br>
+        <span class="tree-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A receita completa:</span><br>
+        <span class="tree-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o que faz, quando usar,</span><br>
+        <span class="tree-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;passo a passo e output</span>
+      </div>
+
+      <div class="card-footer">
+        <strong>Quando usar:</strong> automações que dependem só de leitura de dados e geração de texto. O SKILL.md descreve tudo — o agente segue a receita.
+      </div>
+    </div>
+
+    <div class="card advanced">
+      <div class="card-header">
+        <div class="card-badge">Skill Avançada</div>
+      </div>
+      <div class="card-title">twitter-banner-creator/</div>
+      <div class="card-example">Geração de banners para Meta Ads</div>
+
+      <div class="tree">
+        <span class="tree-folder">twitter-banner-creator/</span><br>
+        <span class="tree-line">├── </span><span class="tree-required">SKILL.md</span><span class="tag tag-required">OBRIGATÓRIO</span><br>
+        <span class="tree-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A receita principal</span><br>
+        <span class="tree-line">├── </span><span class="tree-file">schema.json</span><span class="tag tag-optional">OPCIONAL</span><br>
+        <span class="tree-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input/output tipados e validados</span><br>
+        <span class="tree-line">├── </span><span class="tree-folder">examples/</span><span class="tag tag-optional">OPCIONAL</span><br>
+        <span class="tree-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exemplos reais de uso</span><br>
+        <span class="tree-line">└── </span><span class="tree-folder">scripts/</span><span class="tag tag-optional">OPCIONAL</span><br>
+        <span class="tree-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripts de automação (Python, etc.)</span>
+      </div>
+
+      <div class="card-footer">
+        <strong>Quando usar:</strong> automações que envolvem geração de arquivos, APIs externas, múltiplos passos ou lógica complexa. Scripts executam, examples ensinam, schema valida.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-note">
+    Começa com o <span>SKILL.md</span>. Adiciona o resto conforme a skill evolui.
+  </div>
+</body>
+</html>

@@ -4,20 +4,23 @@
 
 ```
 vendas/
-├── MAPA.md              ← Você está aqui
+├── MAPA.md
 ├── contexto/
-│   └── geral.md         ← Objetivo, KPIs, ferramentas, responsáveis
+│   └── geral.md
+├── bot/
+│   └── conhecimento.md
 ├── rotinas/
-│   └── (rotinas futuras)
+│   ├── relatorio-vendas-diario.md
+│   └── follow-up-leads-diario.md
 └── skills/
-    ├── relatorio-vendas/ ← Relatório semanal de vendas via Sheets
-    └── follow-up-leads/  ← Identifica leads frios e sugere follow-up
+    └── _index.md
 ```
 
-## Responsável
-- **André Costa** (COO) — supervisão
-- **Juliana** — pipeline e follow-up
+## O que tem em cada lugar
 
-## Skills ativas
-- `relatorio-vendas` — Gera relatório de vendas a partir da planilha
-- `follow-up-leads` — Identifica leads sem contato há 3+ dias
+| Caminho | O que o agente encontra |
+|---------|------------------------|
+| `contexto/` | Objetivo da área, KPIs, ferramentas e responsáveis |
+| `bot/` | Base de conhecimento do bot de vendas |
+| `rotinas/` | Crons configurados (relatório diário 8h, follow-up 9h) |
+| `skills/` | Skills da área de vendas (ver `_index.md` dentro da pasta) |

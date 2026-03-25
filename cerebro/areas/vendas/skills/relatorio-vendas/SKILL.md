@@ -67,7 +67,7 @@ Lê os dados de vendas (arquivo CSV ou Google Sheets), filtra pelo período soli
 
 ```
 📊 RELATÓRIO DE VENDAS SEMANAL
-Empresa Exemplo | Semana: 10/03 a 16/03/2026
+TechFlow Solutions | Semana: 10/03 a 16/03/2026
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💰 FATURAMENTO
@@ -93,11 +93,6 @@ Empresa Exemplo | Semana: 10/03 a 16/03/2026
    Instagram:  3 vendas (10,7%)
    Google:     1 venda  (3,6%)
 
-💳 PAGAMENTOS
-   Cartão de crédito: 20 (71,4%)
-   PIX:                7 (25,0%)
-   Boleto:             1 (3,6%)
-
 🎯 META MENSAL
    Meta:      R$ 40.000
    Realizado: R$ 22.180 (55,5%)
@@ -105,7 +100,42 @@ Empresa Exemplo | Semana: 10/03 a 16/03/2026
    Projeção:  R$ 36.800 ⚠️ (abaixo da meta)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Gerado automaticamente | Empresa Exemplo
+Gerado automaticamente | TechFlow Solutions
+```
+
+---
+
+## Script de geração (output visual)
+
+Para gerar o relatório em formato dashboard HTML visual (com gráficos de barra, KPIs coloridos, alertas e barra de progresso da meta), usar o script:
+
+```python
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path("cerebro/areas/vendas/skills/relatorio-vendas/scripts")))
+from generate_report import run
+
+run(
+    csv_path="imersao/dados-demo/vendas.csv",
+    output_path="relatorio-vendas-semanal.html"
+)
+```
+
+O script gera um HTML completo com:
+- KPIs no topo (faturamento, vendas, ticket médio, meta)
+- Gráficos de barra por produto
+- Breakdown por canal de aquisição
+- Métodos de pagamento
+- Barra de progresso da meta mensal
+- Alertas automáticos (queda > 20%, produto sem venda, projeção abaixo da meta)
+
+### Estrutura da skill
+
+```
+relatorio-vendas/
+├── SKILL.md                     ← esta documentação
+└── scripts/
+    └── generate_report.py       ← gerador de dashboard HTML
 ```
 
 ---
@@ -116,4 +146,3 @@ Gerado automaticamente | Empresa Exemplo
 - Vendas `pendente` são contadas separadamente como "em processamento"
 - Reembolsos são deduzidos do faturamento se estiverem no período
 - Se o arquivo CSV tiver dados do mês inteiro, o relatório calcula a projeção mensal automaticamente
-- Para integrar com o Google Sheets real, substituir a leitura do CSV pela chamada à API do Sheets usando o ID configurado em `contexto/empresa.md`

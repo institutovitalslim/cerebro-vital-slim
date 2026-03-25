@@ -4,18 +4,24 @@
 
 ```
 atendimento/
-├── MAPA.md              ← Você está aqui
+├── MAPA.md
 ├── contexto/
-│   └── geral.md         ← Objetivo, KPIs, canais, FAQ, fluxo de escalação
+│   └── geral.md
+├── bot/
+│   ├── faq.md
+│   └── duvidas.md
 ├── rotinas/
-│   └── (rotinas futuras: checagem de tickets abertos)
+│   ├── checagem-tickets-diaria.md
+│   └── consolidar-faq.md
 └── skills/
-    └── (skills futuras: resposta automática FAQ, relatório de tickets)
+    └── _index.md
 ```
 
-## Responsável
-- **Juliana** — atendimento direto
-- **André Costa** — escalação e reembolsos
+## O que tem em cada lugar
 
-## Skills ativas
-(nenhuma ainda — a ser criada durante implementação)
+| Caminho | O que o agente encontra |
+|---------|------------------------|
+| `contexto/` | Objetivo da área, KPIs, canais de atendimento, fluxo de escalação |
+| `bot/` | FAQ do bot de suporte e registro de dúvidas pendentes |
+| `rotinas/` | Crons configurados (checagem de tickets diária, consolidação do FAQ 18h) |
+| `skills/` | Skills da área de atendimento (ver `_index.md` dentro da pasta) |

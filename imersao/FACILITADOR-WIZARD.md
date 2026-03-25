@@ -36,11 +36,43 @@ Regra principal de navegação: **um slide por vez**.
 
 Formato de cada passo:
 1. Mensagem de texto — pontos-chave em bullets, informal, direto
-2. **Envie o arquivo HTML imediatamente após a mensagem** usando a ferramenta de envio de arquivo para o canal atual desta conversa. Não use chat ID fixo — o canal é inferido automaticamente pelo contexto. Exemplo de caminho: `imersao/slides/00-abertura.html`
-
-O repositório precisa estar configurado como workspace do agente para que os caminhos funcionem.
+2. Envie o slide conforme o ambiente detectado (veja abaixo)
 
 Demos: descreva o que está sendo feito na tela em tempo real, como narração, não como instrução.
+
+### Configuração por ambiente
+
+Detecte automaticamente em qual ambiente você está rodando e use a regra correspondente para enviar slides:
+
+#### Ambiente: Cowork (Claude Desktop)
+
+**Como detectar:** você tem acesso a ferramentas como `Read`, `Write`, `Edit`, `Bash`, e o workspace está montado em um caminho como `/sessions/.../mnt/...`.
+
+**Como enviar slides:** use um link `computer://` apontando para o caminho absoluto do arquivo HTML dentro do workspace. Exemplo:
+
+```
+[📊 Abrir slide](computer:///sessions/NOME-DA-SESSAO/mnt/imersao-openclaw-negocios/imersao/slides/00-abertura.html)
+```
+
+O participante clica no link e o slide renderiza direto na conversa.
+
+> **Importante:** o trecho `/sessions/NOME-DA-SESSAO/mnt/` varia por sessão. Use o caminho real do workspace que você detectar ao ler arquivos. Você pode descobrir rodando `pwd` ou verificando o path de qualquer arquivo que já leu.
+
+#### Ambiente: Telegram via OpenClaw
+
+**Como detectar:** você tem acesso a ferramentas de envio de mensagem/arquivo para Telegram (ex: `send_file`, `send_document`, ou equivalente do OpenClaw). O contexto inclui um chat ID ou conversa do Telegram.
+
+**Como enviar slides:** use a ferramenta de envio de arquivo do OpenClaw para mandar o HTML diretamente no chat. Não use chat ID fixo — o canal é inferido automaticamente pelo contexto. Exemplo de caminho relativo:
+
+```
+imersao/slides/00-abertura.html
+```
+
+O repositório precisa estar configurado como workspace do agente para que os caminhos relativos funcionem.
+
+#### Ambiente não identificado
+
+Se não conseguir detectar o ambiente, envie apenas a referência textual do slide (`📎 slides/XX-nome.html`) e pergunte ao apresentador como ele prefere receber os arquivos.
 
 ---
 
@@ -143,19 +175,37 @@ Cada pasta tem um papel específico:
 
 📤 **Mensagem:**
 
-🎬 *Terminal: `tree cerebro/ -L 2` → abre `cerebro/empresa/contexto/empresa.md` → `cerebro/empresa/contexto/equipe.md` → `cerebro/empresa/contexto/metricas.md`*
+**O MAPA — como o agente se localiza**
 
-Perguntando pro agente agora: *"Qual o MRR atual da empresa?"*
+O agente não adivinha onde as coisas estão. Ele lê o `MAPA.md`.
 
-*(agente responde com o número do arquivo)*
+O `MAPA.md` da empresa é o ponto de entrada — mostra a estrutura completa do Cérebro: todas as pastas, o que cada uma contém, quais áreas existem, quais skills estão ativas, quem é responsável por cada área.
 
-Abrindo o Claude Code — mesma pergunta.
+🎬 Abrindo ao vivo:
 
-*(mesma resposta)*
+📎 `cerebro/empresa/MAPA.md`
 
-Dois agentes. Um Cérebro. Mesma resposta.
+Cada área também tem o seu próprio `MAPA.md`:
 
-*Mostrando também `imersao/dados-demo/vendas.csv` — os dados já estão aqui, CSV local, sem integração.*
+📎 `cerebro/areas/vendas/MAPA.md`
+
+O agente chega → lê o MAPA da empresa → entende a estrutura → vai pro MAPA da área → encontra as skills e rotinas. É assim que ele navega sem se perder, mesmo quando o Cérebro tem dezenas de arquivos.
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
+Agora o momento que importa — a mesma pergunta em duas ferramentas diferentes.
+
+🎬 **OpenClaw no Telegram:** *"Qual o MRR atual da empresa?"*
+→ Responde com o número exato do `metricas.md`.
+
+🎬 **Claude Cowork:** mesma pergunta, palavra por palavra.
+→ Mesma resposta. Mesmo número.
+
+Duas ferramentas diferentes. Mesma resposta. Porque o Cérebro é um só — e é seu, não da ferramenta.
 
 ---
 
@@ -183,15 +233,88 @@ Input → processo → output. Igual uma função de código, mas em linguagem n
 
 📤 **Mensagem:**
 
-🎬 *Abrindo `cerebro/empresa/skills/_templates/SKILL-TEMPLATE.md` → depois `cerebro/areas/vendas/skills/relatorio-vendas/SKILL.md`*
+**Anatomia de uma skill**
 
-Executando ao vivo: *"Gera o relatório de vendas baseado no vendas.csv"*
+O único arquivo obrigatório é o `SKILL.md` — a receita. Mas quanto mais complexa a automação, mais estrutura você pode adicionar.
 
-*(agente lê a SKILL.md → lê o CSV → gera análise completa)*
+📎 `slides/04b-skill-estrutura.html`
 
-O agente leu a receita, pegou os dados, gerou a análise.
+No lado esquerdo: skill simples. Só o `SKILL.md` — a receita. Já funciona.
 
-Nenhuma linha de código. Essa skill roda hoje. Amanhã. Todo dia. Sem você estar presente.
+No lado direito: skill avançada. Além do `SKILL.md`, tem `schema.json` pra definir input e output com tipos e validações, `examples/` com exemplos reais de uso pra o agente aprender o padrão, e `scripts/` com scripts de automação que o agente executa.
+
+Não precisa ter tudo desde o início. Começa com o `SKILL.md`. Conforme a skill fica mais complexa, você adiciona o resto.
+
+🎬 Abrindo as duas ao vivo pra comparar:
+
+📎 `cerebro/areas/vendas/skills/relatorio-vendas/SKILL.md` — skill simples, só a receita, já funciona.
+
+📎 `cerebro/empresa/skills/twitter-banner-creator/SKILL.md` — skill avançada, com script Python que gera banners de Meta Ads automaticamente via Playwright.
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
+**O mapa de skills — `_index.md`**
+
+Quando você tem 5, 10, 20 skills, o agente precisa saber onde cada uma está. É aí que entra o `_index.md` — o mapa de skills.
+
+Cada pasta de skills tem o seu. O agente lê esse arquivo primeiro e já sabe quais skills existem, o que cada uma faz e quando usar.
+
+🎬 Abrindo ao vivo:
+
+📎 `cerebro/empresa/skills/_index.md`
+
+Olha: as duas skills que acabamos de ver estão mapeadas aqui — `relatorio-rotinas` e `twitter-banner-creator`. O agente bate o olho nesse arquivo e sabe exatamente o que tem disponível. Sem ele, fica perdido procurando pasta por pasta.
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
+**Como acionar uma skill**
+
+Você não precisa de comando especial. Fala em linguagem natural — o agente identifica qual skill usar.
+
+Exemplos:
+- *"Gera o relatório de vendas da semana"* → aciona `relatorio-vendas`
+- *"Cria um banner de Meta Ads com o seguinte texto: 'Eu demiti meu time de marketing e contratei 3 agentes de IA...'"* → aciona `twitter-banner-creator`
+- *"Quais leads estão esfriando?"* → aciona `follow-up-leads`
+
+O agente lê o `_index.md` da área, encontra a skill certa, lê o `SKILL.md`, e executa.
+
+🎬 Executando ao vivo: *"Gera o relatório de vendas baseado no vendas.csv"*
+
+*(agente lê o _index → encontra a skill → lê o SKILL.md → lê o CSV → gera relatório em texto)*
+
+O agente leu a receita, pegou os dados, gerou a análise. Nenhuma linha de código. Essa skill roda hoje, amanhã, todo dia.
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
+**Evoluindo uma skill — de simples pra avançada**
+
+O relatório em texto funciona. Mas e se a gente quisesse algo mais visual? Vamos evoluir essa skill agora, ao vivo.
+
+A `relatorio-vendas` hoje só tem o `SKILL.md`. Vamos adicionar um `scripts/` com um gerador de HTML — pra ela entregar um dashboard visual com gráficos, barras de progresso e alertas coloridos.
+
+🎬 Evoluindo ao vivo: *"Evolui a skill relatorio-vendas pra gerar o output em HTML visual, com gráficos de barra, KPIs coloridos, alertas e barra de progresso da meta mensal. Cria um script Python em scripts/generate_report.py"*
+
+*(agente lê o SKILL.md atual → cria a pasta scripts/ → gera o script generate_report.py → atualiza o SKILL.md pra referenciar o script)*
+
+📎 Abre o HTML gerado ao vivo.
+
+Mesmos dados. Mesmo CSV. Mas agora o output é um dashboard profissional. A skill evoluiu — de uma receita simples pra uma automação completa com script.
+
+Vocês viram: começa com o `SKILL.md`. Quando precisar de mais, adiciona `scripts/`, `examples/`, `schema.json`. A skill cresce junto com a necessidade.
+
+⏸ *Aguarda "próximo"*
 
 ---
 
@@ -243,6 +366,55 @@ Testando imediatamente: *"Roda a skill de leads esfriando no arquivo leads.csv"*
 
 Linguagem natural virou automação funcional em 30 segundos. Sem código.
 
+⏸ *Aguarda "próximo"*
+
+---
+
+> 🗒️ **Nota para o Bruno:**
+> Aqui é o momento de plugar o seu gerador de skills e mostrar pro pessoal como funciona na prática — o fluxo completo de descrever → gerar → testar. Revisar esse trecho e adaptar com a ferramenta que vai usar na demo.
+
+---
+
+📤 **Mensagem:**
+
+**Agente proativo — ele sugere skills sozinho**
+
+Não precisa ser sempre você pedindo. O agente pode identificar tarefas repetitivas e sugerir: *"Percebi que você pediu esse relatório 3 vezes essa semana. Quer que eu crie uma skill pra isso?"*
+
+Isso fica configurado nas instruções do agente — no `SOUL.md`. Ele monitora o que você pede, identifica padrões e propõe empacotar em skill automaticamente.
+
+🎬 Abrindo ao vivo a instrução:
+
+📎 `cerebro/agentes/assistente/SOUL.md` — seção de proatividade.
+
+> O agente não só executa. Ele evolui o sistema junto com você.
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
+**Testando no Telegram — e por que lá?**
+
+Até agora, tudo que fizemos foi aqui no Cowork. O Cowork é ótimo pra construir, visualizar e testar. Mas o dia a dia da operação acontece no Telegram — é lá que a equipe tá, é lá que o agente precisa funcionar.
+
+E tem um detalhe técnico importante: o `SOUL.md` — aquela personalidade que a gente acabou de ver — funciona nativamente no OpenClaw. Quando você configura um agente no OpenClaw, ele carrega o `SOUL.md` automaticamente. O agente já acorda sabendo quem ele é, como fala, o que pode e o que não pode fazer. No Cowork, você precisaria instruir manualmente a cada sessão.
+
+Por isso o fluxo é: **constrói no Cowork, opera no Telegram.**
+
+Vamos testar agora.
+
+🎬 *Abrindo o Telegram → chat com o OpenClaw → pedindo:*
+
+*"Cria uma skill que me avise quando um cliente não compra há mais de 30 dias"*
+
+*(agente no Telegram gera a skill → salva no Cérebro → commit no GitHub)*
+
+Mesma lógica. Ferramenta diferente. Cérebro único. Mas agora com personalidade ativa — o agente no Telegram já tá operando com o `SOUL.md` dele.
+
+⏸ *Aguarda "próximo"*
+
 ---
 
 ### Bloco 5: Rotinas e Crons — 11h15 (20 min)
@@ -271,14 +443,55 @@ Você dorme. O sistema trabalha.
 
 🎬 *Abrindo `cerebro/areas/vendas/rotinas/relatorio-vendas-diario.md` — horário, skill, canal, destinatário.*
 
-Criando o cron ao vivo:
-```
-openclaw cron create --name "relatorio-vendas-diario" --schedule "0 9 * * *" --skill relatorio-vendas
-```
+Olha a estrutura: qual skill rodar, quando, pra onde entregar. É um arquivo simples no Cérebro — o agente lê e sabe o que fazer.
 
-Amanhã às 9h roda sozinho.
+*Abrindo `cerebro/areas/operacoes/rotinas/heartbeat.md` — esse agente monitora a si mesmo. A cada 1h verifica se todos os crons rodaram, se houve erro. Detectou problema → notifica no Telegram.*
 
-*Abrindo `cerebro/areas/operacoes/rotinas/heartbeat.md` — esse agente monitora a si mesmo. A cada 6h verifica se todos os crons rodaram, se houve erro. Detectou problema → notifica no Telegram.*
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
+**O mapa de rotinas — `_index.md`**
+
+Assim como as skills têm um `_index.md`, as rotinas também. O agente precisa saber quais rotinas existem, com que frequência rodam e o que cada uma faz.
+
+🎬 Abrindo ao vivo:
+
+📎 `cerebro/areas/vendas/rotinas/_index.md`
+
+Hoje só tem uma rotina mapeada: o relatório de vendas diário. Mas a gente acabou de criar uma skill de leads esfriando no bloco anterior. Faz sentido ela rodar sozinha todo dia?
+
+Faz. Vamos criar essa rotina agora — ao vivo, no Telegram.
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
+**Criando uma rotina ao vivo — no Telegram**
+
+Cron é operação. É o agente rodando todo dia, entregando no canal da equipe. Isso acontece no Telegram via OpenClaw — não no Cowork.
+
+O Cowork é onde a gente constrói (os arquivos `.md`). O OpenClaw é quem executa no horário certo e entrega o resultado.
+
+🎬 *Abrindo o Telegram → chat com o OpenClaw:*
+
+*"Cria uma rotina diária de follow-up de leads. Todo dia às 9h, roda a skill leads-esfriando, identifica os leads sem contato há mais de 7 dias e envia o alerta no tópico de Vendas. Documenta a rotina no Cérebro e atualiza o _index.md de rotinas da área de vendas."*
+
+*(agente no Telegram cria `cerebro/areas/vendas/rotinas/follow-up-leads-diario.md` → atualiza `cerebro/areas/vendas/rotinas/_index.md` com a nova rotina → configura o cron → commit no GitHub)*
+
+🎬 Abrindo o `_index.md` de novo pra confirmar:
+
+📎 `cerebro/areas/vendas/rotinas/_index.md`
+
+Duas rotinas agora. O agente criou a rotina, documentou no Cérebro e atualizou o mapa — tudo com uma frase no Telegram.
+
+Amanhã às 9h, sem ninguém pedir: relatório de vendas + alerta de leads esfriando. O sistema trabalha enquanto você dorme.
+
+⏸ *Aguarda "próximo"*
 
 ---
 
@@ -302,15 +515,17 @@ Amanhã às 9h roda sozinho.
 
 📤 **Mensagem:**
 
-🎬 *Pedindo pro agente: "Deleta o arquivo teste.md"*
+🎬 *Testando no Telegram — pedindo pro agente via OpenClaw:*
+
+*"Deleta o arquivo teste.md"*
 
 *(agente: "Confirma que quer deletar teste.md? (sim/não)")*
 
-Ele não age sozinho em coisas que importam.
+Ele não age sozinho em coisas que importam. Isso é o modo ask — funciona no OpenClaw nativamente.
 
-*Abrindo `cerebro/agentes/assistente/AGENTS.md` → seção `allow` e `deny`.*
+🎬 *Ainda no Telegram — abrindo `cerebro/agentes/assistente/AGENTS.md` → seção "O Que Pode vs O Que Precisa Pedir".*
 
-Esse agente pode ler tudo de `empresa/` e `areas/`. Mas não toca em `seguranca/` nem faz push pro GitHub sem aprovação.
+Esse agente pode ler tudo de `empresa/` e `areas/`. Mas não toca em `seguranca/` nem faz push pro GitHub sem aprovação. Tudo que sai da máquina, ele para e confirma.
 
 ---
 

@@ -1,0 +1,86 @@
+{
+  "name": "twitter-banner-creator",
+  "version": "1.0",
+  "description": "Gera banners de Meta Ads no formato screenshot de tweet do X (Twitter). Formato padrão de criativo estático para campanhas da Pixel Ventures.",
+  "when_to_use": [
+    "Usuário pede para criar criativo/banner de Meta Ads",
+    "Menção a 'formato tweet', 'estilo Twitter', 'screenshot de post'",
+    "Pedido para gerar imagem de ad estático para campanha",
+    "Referência a 'montar o banner do criativo'",
+    "Novo batch de criativos para uma fase de campanha"
+  ],
+  "when_NOT_to_use": [
+    "Criativos em vídeo ou motion",
+    "Stories (formato 9:16)",
+    "Banners que não são formato tweet/post",
+    "Edição de imagem genérica",
+    "Criativos para Google Ads ou outras plataformas que não Meta"
+  ],
+  "parameters": {
+    "banners": {
+      "type": "array",
+      "required": true,
+      "description": "Lista de banners para gerar. Cada item é um objeto com os campos abaixo.",
+      "items": {
+        "filename": {
+          "type": "string",
+          "required": true,
+          "description": "Nome do arquivo PNG. Padrão: {tipo}-{código}-{variação}-{nome-do-ângulo}.png",
+          "examples": [
+            "problema-A01-N1-founder-livre.png",
+            "solucao-A10-N2-proatividade.png"
+          ]
+        },
+        "tweet": {
+          "type": "string",
+          "required": true,
+          "description": "Texto do tweet. Usar \\n\\n para separar parágrafos e \\n para quebra de linha dentro do mesmo parágrafo."
+        },
+        "views": {
+          "type": "string",
+          "required": true,
+          "description": "Número de visualizações formatado. Range: 40K–120K.",
+          "examples": ["89.2K", "102.4K", "67.8K"]
+        },
+        "likes1": {
+          "type": "string",
+          "required": true,
+          "description": "Likes (primeiro ícone de coração). Range: 800–3.5K.",
+          "examples": ["2.1K", "1.5K", "3.2K"]
+        },
+        "retweets": {
+          "type": "string",
+          "required": true,
+          "description": "Número de retweets. Range: 150–500.",
+          "examples": ["347", "267", "481"]
+        },
+        "likes2": {
+          "type": "string",
+          "required": true,
+          "description": "Likes (segundo ícone de coração). Range: 50–200.",
+          "examples": ["142", "98", "187"]
+        }
+      }
+    },
+    "avatar_path": {
+      "type": "string",
+      "required": true,
+      "description": "Caminho para a foto do autor. Padrão Pixel Ventures: criativos/Assets/bruno-okamoto.jpg"
+    },
+    "output_dir": {
+      "type": "string",
+      "required": true,
+      "description": "Pasta de saída dos PNGs. Padrão: criativos/fase{N}/banners/"
+    }
+  },
+  "output": {
+    "type": "files",
+    "format": "PNG",
+    "dimensions": "1080x1350px",
+    "aspect_ratio": "4:5"
+  },
+  "dependencies": {
+    "python": ["playwright"],
+    "system": ["chromium"]
+  }
+}
