@@ -126,6 +126,8 @@ cd cerebro && tree -L 2
 ```
 Mostra a estrutura completa. Abre na sequência: `empresa/contexto/empresa.md` → `equipe.md` → `metricas.md`. Vai lendo os campos em voz alta — nome da empresa, MRR, conversão. Deixa claro: *"O agente lê isso antes de responder qualquer coisa."*
 
+Mostra também `imersao/dados-demo/vendas.csv` rapidamente: *"Os dados já estão aqui — CSV local, sem integração. O agente já consegue analisar."*
+
 Agora o momento que vai impactar:
 
 Digita no OpenClaw (Telegram): *"Qual o MRR atual da empresa?"*
@@ -164,7 +166,7 @@ A metáfora que funciona: skill é uma **receita de cozinha**. Você escreve uma
    - Processo: análise por vendedor, ticket médio, comparativo com mês anterior
    - Output: relatório formatado com destaques e alertas
 
-3. Mostra `cerebro/dados/vendas.csv` no editor — dados reais, nomes fictícios. *"Começamos com CSV. É o suficiente pra o sistema funcionar hoje."*
+3. Mostra `imersao/dados-demo/vendas.csv` no editor — dados reais, nomes fictícios. *"Começamos com CSV. É o suficiente pra o sistema funcionar hoje."*
 
 4. Agora o AHA:
 
@@ -633,7 +635,7 @@ Encerramento: *"Agora é hora de construir. O wizard está esperando."*
 | Skill-creator falhou | Abrir skill já criada em `cerebro/areas/vendas/skills/relatorio-vendas/SKILL.md` — *"Isso é o que ele gera"* |
 | Bot de suporte não responde | Mostrar `faq.md` e `duvidas.md` no terminal — explicar o loop verbalmente |
 | Internet caiu | Hotspot celular. Cayo avisa o chat com horário de retorno. |
-| API Meta Ads falhar | Abrir relatório pré-gerado salvo em `cerebro/areas/marketing/sub-areas/trafego-pago/` |
+| API Meta Ads falhar | Abrir `imersao/dados-demo/relatorio-meta-ads-exemplo.md` no terminal — *"esse foi gerado às 8h, é exatamente o output da skill"* |
 
 ---
 
