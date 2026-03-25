@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline de Criativos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 28px 24px; }
+  h2 { font-size: clamp(22px, 2.5vw, 36px); font-weight: 800; text-align: center; margin-bottom: 8px; }
+  .sub { color: var(--text2); font-size: 15px; text-align: center; margin-bottom: 32px; }
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 900px;
+  }
+  /* Top row: 3 horizontal boxes */
+  .row-h { display: flex; align-items: center; justify-content: center; gap: 0; }
+  .flow-box {
+    border-radius: 14px;
+    padding: 18px 22px;
+    text-align: center;
+    min-width: 200px;
+    border: 2px solid var(--border);
+    background: var(--bg2);
+    position: relative;
+  }
+  .flow-box.report { border-color: var(--blue); }
+  .flow-box.analise { border-color: var(--accent); }
+  .flow-box.sugestao { border-color: var(--yellow); }
+  .flow-box.aprovacao { border-color: var(--green); background: rgba(34,197,94,0.08); }
+  .flow-box.criacao { border-color: #a78bfa; }
+  .flow-box.subskills { border-color: var(--text2); }
+  .flow-icon { font-size: 32px; margin-bottom: 8px; }
+  .flow-title { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+  .flow-desc { font-size: 13px; color: var(--text2); }
+  .flow-tag {
+    position: absolute;
+    top: -10px; left: 50%; transform: translateX(-50%);
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    padding: 2px 10px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .report .flow-tag { background: rgba(96,165,250,0.2); color: var(--blue); }
+  .aprovacao .flow-tag { background: rgba(34,197,94,0.2); color: var(--green); }
+  .arrow-h { font-size: 24px; color: var(--text2); padding: 0 10px; flex-shrink: 0; }
+  .arrow-v { font-size: 24px; color: var(--text2); text-align: center; margin: 6px 0; }
+  .row-v { display: flex; flex-direction: column; align-items: center; }
+  /* Second section */
+  .section-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; width: 100%; max-width: 900px; }
+  .side-note {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    font-size: 14px;
+  }
+  .side-note .note-title { font-size: 14px; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .side-note.human .note-title { color: var(--green); }
+  .side-note.ai .note-title { color: var(--accent2); }
+  .side-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 6px; font-size: 13px; color: var(--text2); }
+  .side-item .bullet { flex-shrink: 0; }
+</style>
+</head>
+<body>
+  <h2>🎬 Pipeline de Criativos</h2>
+  <p class="sub">IA analisa e sugere — humano decide — IA executa</p>
+
+  <div class="pipeline">
+    <!-- Top horizontal flow -->
+    <div class="row-h">
+      <div class="flow-box report">
+        <div class="flow-tag">Daily Automático</div>
+        <div class="flow-icon">📊</div>
+        <div class="flow-title">REPORT</div>
+        <div class="flow-desc">Dados do Meta Ads<br>ROAS, CPL, criativos</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="flow-box analise">
+        <div class="flow-icon">🔍</div>
+        <div class="flow-title">ANÁLISE</div>
+        <div class="flow-desc">Identifica ângulos<br>e padrões de performance</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="flow-box sugestao">
+        <div class="flow-icon">💡</div>
+        <div class="flow-title">SUGESTÃO</div>
+        <div class="flow-desc">Novos criativos<br>com base nos dados</div>
+      </div>
+    </div>
+
+    <!-- Down arrow -->
+    <div class="arrow-v" style="text-align:right; padding-right: 20px;">↓</div>
+
+    <!-- Second row -->
+    <div class="row-h" style="justify-content:flex-end;">
+      <div class="flow-box aprovacao" style="min-width:260px;">
+        <div class="flow-tag">✋ Ponto de controle humano</div>
+        <div class="flow-icon">👩‍💼</div>
+        <div class="flow-title">APROVAÇÃO HUMANA</div>
+        <div class="flow-desc">O gestor revisa e decide<br>quais criativos avançam</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="flow-box criacao">
+        <div class="flow-icon">✍️</div>
+        <div class="flow-title">CRIAÇÃO</div>
+        <div class="flow-desc">Roteiro VSL<br>Carrossel / Estático</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="flow-box subskills">
+        <div class="flow-icon">🧩</div>
+        <div class="flow-title">SUB-SKILLS</div>
+        <div class="flow-desc">skill-vsl<br>skill-carrossel<br>skill-estatico</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-2">
+    <div class="side-note human">
+      <div class="note-title">👩‍💼 O que o humano faz</div>
+      <div class="side-item"><span class="bullet">✅</span> Aprova ou recusa sugestões da IA</div>
+      <div class="side-item"><span class="bullet">✅</span> Ajusta o tom e direcionamento estratégico</div>
+      <div class="side-item"><span class="bullet">✅</span> Dá o OK final antes de ir para produção</div>
+    </div>
+    <div class="side-note ai">
+      <div class="note-title">🤖 O que a IA faz</div>
+      <div class="side-item"><span class="bullet">⚡</span> Coleta dados, analisa padrões automaticamente</div>
+      <div class="side-item"><span class="bullet">⚡</span> Gera roteiros e briefings em segundos</div>
+      <div class="side-item"><span class="bullet">⚡</span> Entrega no formato certo para cada criativo</div>
+    </div>
+  </div>
+</body>
+</html>

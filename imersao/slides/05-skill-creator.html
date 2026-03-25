@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Creator em Ação</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 28px 24px; }
+  .aha-badge {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    animation: glow 2s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(254,80,0,0.4); }
+    50% { box-shadow: 0 0 40px rgba(254,80,0,0.8); }
+  }
+  h2 { font-size: clamp(22px, 2.5vw, 34px); font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .tagline { color: var(--accent2); font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 28px; }
+  .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 1050px; }
+  .chat-panel {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .chat-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin-bottom: 4px; }
+  .msg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .msg.user { flex-direction: row-reverse; }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .avatar.user-av { background: var(--blue); }
+  .avatar.agent-av { background: var(--accent); }
+  .bubble {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .msg.user .bubble { background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.3); color: var(--text); border-radius: 12px 12px 2px 12px; }
+  .msg.agent .bubble { background: rgba(254,80,0,0.1); border: 1px solid rgba(254,80,0,0.3); color: var(--text); border-radius: 12px 12px 12px 2px; }
+  .typing { color: var(--text2); font-style: italic; }
+  .skill-panel {
+    background: var(--bg3);
+    border: 1px solid var(--green);
+    border-radius: 16px;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .skill-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 12px; font-family: 'Inter', sans-serif; }
+  .skill-filename { color: var(--yellow); font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .sk-h1 { color: var(--accent2); font-weight: 700; }
+  .sk-h2 { color: var(--blue); font-weight: 700; }
+  .sk-text { color: var(--text2); }
+  .sk-bold { color: var(--text); font-weight: 600; }
+  .bottom-strip {
+    margin-top: 20px;
+    background: rgba(254,80,0,0.08);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent2);
+    width: 100%;
+    max-width: 1050px;
+  }
+  .arrow-big { font-size: 24px; color: var(--text2); }
+</style>
+</head>
+<body>
+  <div class="aha-badge">🔥 2º AHA MOMENT</div>
+  <h2>Skill Creator em Ação</h2>
+  <p class="tagline">Linguagem natural → Skill funcional em 30 segundos</p>
+
+  <div class="layout">
+    <div class="chat-panel">
+      <div class="chat-label">💬 Conversa com o agente</div>
+      <div class="msg user">
+        <div class="avatar user-av">👤</div>
+        <div class="bubble">Crie uma skill que analise minha planilha de leads e me diga quais estão esfriando</div>
+      </div>
+      <div class="msg agent">
+        <div class="avatar agent-av">🤖</div>
+        <div class="bubble typing">Entendido. Criando skill de análise de leads frios...<br><br>📁 Salvando em <strong>areas/vendas/skills/</strong><br>✅ SKILL.md gerado com sucesso!</div>
+      </div>
+      <div class="msg user">
+        <div class="avatar user-av">👤</div>
+        <div class="bubble">Quero que ela rode todo dia às 9h e me avise no Telegram</div>
+      </div>
+      <div class="msg agent">
+        <div class="avatar agent-av">🤖</div>
+        <div class="bubble">✅ Cron configurado: <strong>daily às 09:00</strong><br>📱 Notificação via Telegram ativada<br>🎯 Leads sem contato há +7 dias = "esfriando"</div>
+      </div>
+    </div>
+
+    <div class="skill-panel">
+      <div class="skill-label">📄 SKILL.md gerado automaticamente</div>
+      <div class="skill-filename"># skill: analise-leads-frios</div>
+      <br>
+      <span class="sk-h2">## Objetivo</span><br>
+      <span class="sk-text">Analisar planilha de leads e identificar<br>quais estão sem contato há +7 dias.</span><br>
+      <br>
+      <span class="sk-h2">## Input</span><br>
+      <span class="sk-text">- <span class="sk-bold">leads.csv</span> ou Google Sheets<br>- Coluna: último_contato, status, nome</span><br>
+      <br>
+      <span class="sk-h2">## Processo</span><br>
+      <span class="sk-text">1. Ler dados da planilha<br>
+      2. Calcular dias desde último contato<br>
+      3. Filtrar: último_contato &gt; 7 dias<br>
+      4. Ordenar por prioridade (valor do lead)<br>
+      5. Gerar lista de ação</span><br>
+      <br>
+      <span class="sk-h2">## Output</span><br>
+      <span class="sk-text">📱 Mensagem Telegram com:<br>
+      - Lista de leads esfriando<br>
+      - Último contato de cada um<br>
+      - Sugestão de abordagem</span>
+    </div>
+  </div>
+
+  <div class="bottom-strip">
+    <span>✍️ Você descreveu em linguagem natural</span>
+    <span class="arrow-big">→</span>
+    <span>🤖 O agente criou a receita completa</span>
+    <span class="arrow-big">→</span>
+    <span>⚡ Rodando automaticamente todo dia</span>
+  </div>
+</body>
+</html>

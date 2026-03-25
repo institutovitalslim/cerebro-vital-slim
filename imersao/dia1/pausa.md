@@ -22,7 +22,8 @@ Cayo posta no chat:
 ## Checklist antes de voltar
 
 - [ ] Ambiente do Bloco 4 preparado (skill-creator pronto para rodar)
-- [ ] Planilha de leads de exemplo acessível
+- [ ] `cerebro/dados/leads.csv` acessível no terminal
+- [ ] `cerebro/empresa/skills/_templates/SKILL-TEMPLATE.md` aberto como referência
 - [ ] Top 3 perguntas do chat em mãos
 
 → Retomar em `dia1/04-skill-creator.md`

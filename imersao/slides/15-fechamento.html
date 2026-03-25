@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fechamento</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 28px 24px; position: relative; }
+  .bg-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(254,80,0,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; width: 100%; max-width: 1000px; z-index: 1; }
+  .recap-col { display: flex; flex-direction: column; gap: 12px; }
+  .recap-title { font-size: 14px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin-bottom: 8px; }
+  .recap-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 17px;
+    font-weight: 600;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .recap-item:hover { transform: translateX(4px); border-color: var(--green); }
+  .recap-item .check { color: var(--green); font-size: 20px; flex-shrink: 0; }
+  .pitch-col { display: flex; flex-direction: column; gap: 16px; }
+  .pitch-card {
+    background: linear-gradient(135deg, rgba(254,80,0,0.15), rgba(254,80,0,0.05));
+    border: 2px solid var(--accent);
+    border-radius: 20px;
+    padding: 28px 28px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(254,80,0,0.2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .pitch-icon { font-size: 52px; margin-bottom: 16px; }
+  .pitch-product {
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .pitch-price {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 900;
+    color: var(--accent2);
+    margin-bottom: 12px;
+  }
+  .pitch-desc { font-size: 15px; color: var(--text2); margin-bottom: 20px; }
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 14px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    box-shadow: 0 8px 32px rgba(254,80,0,0.4);
+    animation: pulse-btn 2s ease-in-out infinite;
+    cursor: pointer;
+  }
+  @keyframes pulse-btn {
+    0%, 100% { box-shadow: 0 8px 32px rgba(254,80,0,0.4); transform: scale(1); }
+    50% { box-shadow: 0 8px 48px rgba(254,80,0,0.7); transform: scale(1.03); }
+  }
+  .urgency {
+    font-size: 13px;
+    color: var(--text2);
+    margin-top: 10px;
+  }
+  .urgency strong { color: var(--yellow); }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <div class="layout">
+    <div class="recap-col">
+      <div class="recap-title">📋 O que você aprendeu hoje</div>
+      <div class="recap-item"><span class="check">✅</span> Cérebro que não esquece (GitHub como fonte de verdade)</div>
+      <div class="recap-item"><span class="check">✅</span> Skills que executam qualquer processo</div>
+      <div class="recap-item"><span class="check">✅</span> Crons que rodam sozinhos 24/7</div>
+      <div class="recap-item"><span class="check">✅</span> Multi-agente com segurança e escopo</div>
+      <div class="recap-item"><span class="check">✅</span> Bot de suporte que aprende sozinho</div>
+      <div class="recap-item"><span class="check">✅</span> Pipeline de criativos automatizado</div>
+    </div>
+
+    <div class="pitch-col">
+      <div class="pitch-card">
+        <div class="pitch-icon">🧠</div>
+        <div class="pitch-product">[PRODUTO]</div>
+        <div class="pitch-price">[PREÇO]</div>
+        <div class="pitch-desc">Implementação guiada passo a passo<br>com suporte até funcionar na sua empresa</div>
+        <div class="cta-btn">🚀 Quero Implementar</div>
+        <div class="urgency">⏳ Condição especial apenas para <strong>participantes ao vivo</strong></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -2,6 +2,8 @@
 
 **Timing:** 9h00–9h15 (15 minutos)
 
+**Projetar:** `apresentacao-imersao-v3.html` → seção de capa/abertura
+
 ---
 
 ## O que cobrir
@@ -33,6 +35,15 @@ Leia 5-6 respostas em voz alta. Isso cria engajamento e dá contexto para o dia.
 
 **Passo 5 — Sinal para Cayo (1 min)**
 Cayo: confirmar que transmissão está estável, chat ativo, contagem de participantes.
+
+---
+
+## Arquivos usados neste bloco
+
+| Arquivo | Path |
+|---------|------|
+| Apresentação visual | `imersao/apresentacao-imersao-v3.html` |
+| — | — |
 
 ---
 

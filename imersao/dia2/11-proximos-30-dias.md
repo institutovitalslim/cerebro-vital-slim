@@ -2,6 +2,8 @@
 
 **Timing:** 11h25–11h50 (25 minutos)
 
+**Projetar:** Terminal com tabela de roadmap → `cerebro/guias/roadmap-90-dias.md`
+
 ---
 
 ## O que cobrir
@@ -25,7 +27,8 @@
 
 **Passo 2 — Roadmap (15 min)**
 
-Mostre a tabela ao vivo (pode ser no terminal, abrindo um arquivo markdown):
+Abra `cerebro/guias/roadmap-90-dias.md` para mostrar o plano completo.
+Mostre a tabela ao vivo — abra no terminal:
 
 | Semana | Foco | Entregáveis |
 |--------|------|-------------|
@@ -50,9 +53,13 @@ Para cada semana, explique:
 
 **Passo 4 — Onde continuar (2 min)**
 
-> "Qualquer dúvida na implementação: [canal de suporte / comunidade]. Não fique travado sozinho."
+> "Qualquer dúvida na implementação: [canal de suporte / comunidade — definir antes do evento]. Não fique travado sozinho."
 
-Mencionar recursos disponíveis (comunidade, material de apoio, etc.).
+Mostrar `cerebro/guias/` — todos os guias de referência disponíveis:
+- `cerebro/guias/use-cases.md` — casos de uso por área
+- `cerebro/guias/checklist-pre-imersao.md` — checklist de implementação
+- `cerebro/guias/implementacao-dia2.md` — guia passo a passo
+- `cerebro/guias/roadmap-90-dias.md` — plano completo de 90 dias
 
 ---
 

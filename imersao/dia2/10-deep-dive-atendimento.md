@@ -2,6 +2,8 @@
 
 **Timing:** 10h50–11h25 (35 minutos)
 
+**Projetar:** Terminal com os 3 arquivos abertos → depois Telegram com bot respondendo ao vivo
+
 ---
 
 ## O que cobrir
@@ -18,10 +20,14 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| FAQ atual | `areas/atendimento/contexto/faq.md` |
-| Dúvidas novas | `areas/atendimento/contexto/duvidas.md` |
-| Skill de consolidação | `areas/atendimento/skills/consolidar-faq.md` |
-| Bot ao vivo | Telegram (grupo/conversa de demo) |
+| FAQ atual | `cerebro/areas/atendimento/bot/faq.md` |
+| Dúvidas novas / escaladas | `cerebro/areas/atendimento/bot/duvidas.md` |
+| Rotina de consolidação | `cerebro/areas/atendimento/rotinas/consolidar-faq.md` |
+| Skill de responder cliente | `cerebro/areas/atendimento/skills/responder-cliente/SKILL.md` |
+| Skill de escalar dúvida | `cerebro/areas/atendimento/skills/escalar-duvida/SKILL.md` |
+| Contexto geral de atendimento | `cerebro/areas/atendimento/contexto/geral.md` |
+| SOUL.md do bot-suporte | `cerebro/agentes/bot-suporte/SOUL.md` |
+| Bot ao vivo | Telegram (grupo/conversa de demo do bot-suporte) |
 
 ---
 
@@ -50,11 +56,13 @@ Fim                                          Humano responde
 
 **Passo 2 — Estrutura de arquivos (5 min)**
 
-Abra os 3 arquivos:
+Abra os 3 arquivos no terminal:
 
-`faq.md` → "Aqui ficam as perguntas que o bot já sabe responder"  
-`duvidas.md` → "Aqui caem as dúvidas que ele ainda não conhece"  
-`consolidar-faq.md` → "Essa skill move as dúvidas respondidas para o FAQ"
+`cerebro/areas/atendimento/bot/faq.md` → "Aqui ficam as perguntas que o bot já sabe responder"  
+`cerebro/areas/atendimento/bot/duvidas.md` → "Aqui caem as dúvidas que ele ainda não conhece"  
+`cerebro/areas/atendimento/rotinas/consolidar-faq.md` → "Essa rotina move as dúvidas respondidas para o FAQ"
+
+Mostre também `cerebro/agentes/bot-suporte/SOUL.md` — o agente que executa esse loop.
 
 **Passo 3 — Demo ao vivo: bot responde (8 min)**
 
@@ -69,21 +77,22 @@ Faça uma pergunta que NÃO está no FAQ:
 Bot reconhece que não sabe, escala:
 > "Boa pergunta! Não tenho essa informação no momento. Vou registrar e um humano vai te responder em breve."
 
-Mostre que a dúvida foi registrada em `duvidas.md` automaticamente.
+Mostre que a dúvida foi registrada em `cerebro/areas/atendimento/bot/duvidas.md` automaticamente.
 
 **Passo 4 — Humano responde e consolida (10 min)**
 
-No terminal, "responda" a dúvida — adicione a resposta em `duvidas.md`:
+No terminal, "responda" a dúvida — adicione a resposta em `cerebro/areas/atendimento/bot/duvidas.md`:
 ```markdown
 ## Dúvida: Vocês aceitam permuta?
 Resposta: Sim, aceitamos permuta para contratos acima de R$5.000. Falar com comercial.
 Status: respondida
 ```
 
-Agora execute a skill de consolidação:
-> "Execute a skill consolidar-faq"
+Agora execute a rotina de consolidação:
+> "Execute a rotina consolidar-faq"
 
-Mostre o agente movendo a dúvida para `faq.md`.
+A rotina está em `cerebro/areas/atendimento/rotinas/consolidar-faq.md`.
+Mostre o agente movendo a dúvida para `cerebro/areas/atendimento/bot/faq.md`.
 
 Faça a mesma pergunta de novo no Telegram:
 > "Vocês aceitam permuta?"

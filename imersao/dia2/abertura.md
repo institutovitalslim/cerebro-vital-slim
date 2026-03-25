@@ -2,6 +2,8 @@
 
 **Timing:** 9h00–9h15 (15 minutos)
 
+**Projetar:** `apresentacao-imersao-v3.html` → seção Dia 2 / recap
+
 ---
 
 ## O que cobrir

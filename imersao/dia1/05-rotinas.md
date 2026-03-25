@@ -2,6 +2,8 @@
 
 **Timing:** 11h15–11h35 (20 minutos)
 
+**Projetar:** Terminal com `openclaw.json` aberto → depois Telegram com heartbeat chegando
+
 ---
 
 ## O que cobrir
@@ -17,9 +19,11 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| Arquivo de rotina | `areas/vendas/rotinas/relatorio-semanal.md` |
-| Configuração de cron | `openclaw.json` (seção crons) |
-| Heartbeat | `rotinas/heartbeat.md` |
+| Rotina de relatório de vendas | `cerebro/areas/vendas/rotinas/relatorio-vendas-diario.md` |
+| Rotina de follow-up | `cerebro/areas/vendas/rotinas/follow-up-leads-diario.md` |
+| Configuração de cron | `openclaw.json` (seção crons — na raiz do agente) |
+| Heartbeat | `cerebro/areas/operacoes/rotinas/heartbeat.md` |
+| Sync GitHub | `cerebro/areas/operacoes/rotinas/sync-github.md` |
 
 ---
 
@@ -34,11 +38,12 @@ Analogia: "É como programar o agente para entrar no trabalho todo dia às 8h, c
 **Passo 2 — Criar rotina ao vivo (8 min)**
 
 No terminal:
-1. Abra `areas/vendas/rotinas/` (pasta vazia)
-2. Crie `relatorio-semanal.md` com o agente:
-   > "Crie uma rotina para executar a skill de relatório toda segunda-feira às 8h e enviar o resultado no Telegram"
-3. Mostre o arquivo criado
-4. Adicione o cron ao `openclaw.json`
+1. Abra `cerebro/areas/vendas/rotinas/` — mostrar o que já existe
+2. Mostre `cerebro/areas/vendas/rotinas/relatorio-vendas-diario.md` como exemplo
+3. Peça ao agente para criar uma nova rotina baseada na skill do Bloco anterior:
+   > "Crie uma rotina para executar a skill de relatório de vendas toda segunda-feira às 8h e enviar o resultado no Telegram"
+4. Mostre o arquivo criado
+5. Adicione o cron ao `openclaw.json` do agente assistente
 
 Mostre o formato cron:
 ```
@@ -51,7 +56,8 @@ Mostre o formato cron:
 
 > "Tem um cron que recomendo pra todo mundo: o heartbeat. Todo dia de manhã, o agente acorda, checa se está tudo ok e manda uma mensagem confirmando que está vivo."
 
-Mostre `rotinas/heartbeat.md`. Se possível, acione manualmente para mostrar a mensagem no Telegram.
+Mostre `cerebro/areas/operacoes/rotinas/heartbeat.md`. Se possível, acione manualmente para mostrar a mensagem no Telegram.
+Mostre também `cerebro/agentes/assistente/HEARTBEAT.md` como referência de configuração.
 
 **Passo 4 — Fechar o ponto (2 min)**
 

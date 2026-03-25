@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap 30 Dias</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 28px 24px; }
+  h2 { font-size: clamp(22px, 2.5vw, 36px); font-weight: 800; text-align: center; margin-bottom: 8px; }
+  .sub { color: var(--text2); font-size: 15px; text-align: center; margin-bottom: 32px; }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%; max-width: 1060px; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--green), var(--yellow), var(--accent));
+    z-index: 0;
+  }
+  .week {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 18px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .week:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .week.w1 { border-color: var(--blue); }
+  .week.w2 { border-color: var(--green); }
+  .week.w3 { border-color: var(--yellow); }
+  .week.w4 { border-color: var(--accent); }
+  .week-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    position: absolute;
+    top: -9px; left: 50%; transform: translateX(-50%);
+    border: 2px solid var(--bg);
+  }
+  .w1 .week-dot { background: var(--blue); }
+  .w2 .week-dot { background: var(--green); }
+  .w3 .week-dot { background: var(--yellow); }
+  .w4 .week-dot { background: var(--accent); }
+  .week-label { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .w1 .week-label { color: var(--blue); }
+  .w2 .week-label { color: var(--green); }
+  .w3 .week-label { color: var(--yellow); }
+  .w4 .week-label { color: var(--accent2); }
+  .week-icon { font-size: 32px; margin-bottom: 8px; }
+  .week-title { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
+  .deliverables { display: flex; flex-direction: column; gap: 6px; }
+  .del { display: flex; align-items: flex-start; gap: 7px; font-size: 13px; color: var(--text2); line-height: 1.4; }
+  .del-bullet { flex-shrink: 0; font-size: 14px; }
+  .progress-bar { height: 4px; border-radius: 2px; margin-top: 14px; }
+  .w1 .progress-bar { background: var(--blue); width: 100%; }
+  .w2 .progress-bar { background: var(--green); width: 100%; }
+  .w3 .progress-bar { background: var(--yellow); width: 100%; }
+  .w4 .progress-bar { background: var(--accent); width: 100%; }
+  .bottom-note {
+    margin-top: 24px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 16px;
+    color: var(--text2);
+    text-align: center;
+  }
+  .bottom-note strong { color: var(--accent2); }
+</style>
+</head>
+<body>
+  <h2>🗺️ Roadmap — Primeiros 30 Dias</h2>
+  <p class="sub">Do zero ao sistema multi-agente funcionando</p>
+
+  <div class="timeline">
+    <div class="week w1">
+      <div class="week-dot"></div>
+      <div class="week-label">Semana 1</div>
+      <div class="week-icon">🏗️</div>
+      <div class="week-title">Fundação</div>
+      <div class="deliverables">
+        <div class="del"><span class="del-bullet">📝</span>empresa.md com contexto da empresa</div>
+        <div class="del"><span class="del-bullet">👥</span>equipe.md com papéis e contatos</div>
+        <div class="del"><span class="del-bullet">📊</span>metricas.md com KPIs que importam</div>
+        <div class="del"><span class="del-bullet">🤖</span>Primeiro agente configurado</div>
+      </div>
+      <div class="progress-bar"></div>
+    </div>
+
+    <div class="week w2">
+      <div class="week-dot"></div>
+      <div class="week-label">Semana 2</div>
+      <div class="week-icon">⚡</div>
+      <div class="week-title">Primeira Área + Skills</div>
+      <div class="deliverables">
+        <div class="del"><span class="del-bullet">🗂️</span>Escolher área prioritária (ex: marketing)</div>
+        <div class="del"><span class="del-bullet">📄</span>3 skills básicas rodando</div>
+        <div class="del"><span class="del-bullet">📊</span>Primeiro relatório automático</div>
+        <div class="del"><span class="del-bullet">✅</span>Skill-creator testado e funcionando</div>
+      </div>
+      <div class="progress-bar"></div>
+    </div>
+
+    <div class="week w3">
+      <div class="week-dot"></div>
+      <div class="week-label">Semana 3</div>
+      <div class="week-icon">🔄</div>
+      <div class="week-title">Crons + Multi-Agente</div>
+      <div class="deliverables">
+        <div class="del"><span class="del-bullet">⏰</span>Daily report rodando sozinho</div>
+        <div class="del"><span class="del-bullet">🤖</span>2º agente com escopo diferente</div>
+        <div class="del"><span class="del-bullet">🔒</span>Permissionamentos configurados</div>
+        <div class="del"><span class="del-bullet">💓</span>Heartbeat monitorando o sistema</div>
+      </div>
+      <div class="progress-bar"></div>
+    </div>
+
+    <div class="week w4">
+      <div class="week-dot"></div>
+      <div class="week-label">Semana 4</div>
+      <div class="week-icon">🧠</div>
+      <div class="week-title">Bot + Refinamento</div>
+      <div class="deliverables">
+        <div class="del"><span class="del-bullet">💬</span>Bot de suporte com faq.md</div>
+        <div class="del"><span class="del-bullet">🔄</span>Loop de aprendizado ativo</div>
+        <div class="del"><span class="del-bullet">📈</span>Métricas de uso revisadas</div>
+        <div class="del"><span class="del-bullet">🗺️</span>Roadmap dos próximos 60 dias</div>
+      </div>
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    Em 30 dias: sistema rodando, agentes integrados, crons automáticos. Não é teoria — é <strong>operação real</strong>.
+  </div>
+</body>
+</html>

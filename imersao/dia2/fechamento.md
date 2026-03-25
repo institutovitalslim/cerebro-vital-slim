@@ -2,6 +2,8 @@
 
 **Timing:** 11h50–12h00 (10 minutos)
 
+**Projetar:** `apresentacao-imersao-v3.html` → seção de pitch/fechamento (tela cheia)
+
 ---
 
 ## O que cobrir
@@ -42,19 +44,19 @@
 
 **Passo 3 — Pitch + Oferta**
 
-> ⚠️ **[PLACEHOLDER — preencher com a oferta real antes do evento]**
+> ⚠️ **URGENTE — preencher antes do evento. Ver checklist em `imersao/SETUP-PRE-EVENTO.md` (seção "1 semana antes").**
 
 ```
 OFERTA:
-[Nome do produto]
-[O que inclui]
-[Preço / condições]
-[Bônus]
-[Garantia]
-[URL de compra]
+Nome: ___________________
+O que inclui: ___________________
+Preço: R$ _______  (ou X parcelas de R$ ___)
+Bônus: ___________________
+Garantia: ___ dias
+URL de compra: ___________________
 ```
 
-Cayo: ativar link de compra, monitorar vendas em tempo real.
+Cayo: ativar link de compra, monitorar vendas em tempo real. Postar link no chat imediatamente.
 
 **Passo 4 — Abertura de carrinho (2 min)**
 

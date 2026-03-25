@@ -2,6 +2,8 @@
 
 **Timing:** 11h35–11h50 (15 minutos)
 
+**Projetar:** Terminal com `cerebro/agentes/assistente/AGENTS.md` aberto
+
 ---
 
 ## O que cobrir
@@ -17,9 +19,11 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| Configuração de segurança | `openclaw.json` (seção security) |
+| Configuração de segurança | `openclaw.json` do agente (seção security/ask) |
+| Permissões por agente | `cerebro/seguranca/permissoes.md` |
 | Modo ask em ação | Demo ao vivo: comando que precisa de aprovação |
-| AGENTS.md com restrições | `AGENTS.md` |
+| AGENTS.md com restrições | `cerebro/agentes/assistente/AGENTS.md` |
+| AGENTS.md do bot-suporte (escopo limitado) | `cerebro/agentes/bot-suporte/AGENTS.md` |
 
 ---
 
@@ -29,7 +33,7 @@
 
 > "Primeiro ponto importante: seus dados ficam aqui, no seu repositório privado. O agente não manda nada para servidores de terceiros além do prompt que você envia para o modelo de IA."
 
-Mostre o repo local no terminal. Mostre que os arquivos de contexto são arquivos de texto simples.
+Mostre o repo local no terminal. Abra `cerebro/empresa/contexto/empresa.md` — mostre que é texto simples.
 
 > "Se você formatar o computador amanhã, clona o repo e o agente está de volta — com tudo que ele sabe sobre sua empresa."
 
@@ -44,10 +48,13 @@ Peça ao agente para criar um arquivo. Mostre a confirmação aparecendo antes d
 
 **Passo 3 — Controle granular via AGENTS.md (5 min)**
 
-Abra `AGENTS.md`. Mostre as seções:
+Abra `cerebro/agentes/assistente/AGENTS.md`. Mostre as seções:
 - O que o agente pode fazer
 - O que precisa de confirmação
 - O que nunca pode fazer
+
+Compare com `cerebro/agentes/bot-suporte/AGENTS.md` — escopo muito mais restrito.
+Mostre também `cerebro/seguranca/permissoes.md` como referência de configuração.
 
 > "Isso é diferente de confiar cegamente em uma ferramenta que faz o que quer. Você define as regras."
 

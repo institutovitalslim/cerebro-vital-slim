@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permissionamento no Telegram</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+  h2 { font-size: clamp(22px, 2.5vw, 34px); font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .sub { color: var(--text2); font-size: 15px; text-align: center; margin-bottom: 24px; }
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 980px; }
+  .scenario {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+  }
+  .scenario.a { border-color: var(--blue); }
+  .scenario.b { border-color: var(--green); }
+  .scenario-label {
+    font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .scenario.a .scenario-label { color: var(--blue); }
+  .scenario.b .scenario-label { color: var(--green); }
+  .scenario-title { font-size: 20px; font-weight: 800; margin-bottom: 14px; }
+  .tg-groups { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .tg-group {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg3); border-radius: 10px; padding: 10px 14px;
+    font-size: 14px; border: 1px solid var(--border);
+  }
+  .tg-group .icon { font-size: 20px; }
+  .tg-group .name { font-weight: 600; flex: 1; }
+  .tg-group .agent { font-size: 12px; color: var(--text2); }
+  .tg-topics { background: var(--bg3); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 14px; }
+  .tg-group-header { padding: 10px 14px; background: rgba(34,197,94,0.1); border-bottom: 1px solid var(--border); font-weight: 700; font-size: 14px; display: flex; gap: 8px; align-items: center; }
+  .tg-topic { display: flex; align-items: center; gap: 8px; padding: 8px 14px; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .tg-topic:last-child { border-bottom: none; }
+  .tg-topic .topic-icon { font-size: 16px; }
+  .pros-cons { display: flex; flex-direction: column; gap: 6px; }
+  .pro, .con { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; }
+  .pro { color: var(--green); }
+  .con { color: #f87171; }
+  .table-wrap { width: 100%; max-width: 980px; margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--bg3); color: var(--text2); font-weight: 700; padding: 10px 16px; text-align: left; border: 1px solid var(--border); }
+  td { padding: 9px 16px; border: 1px solid var(--border); color: var(--text2); background: var(--bg2); }
+  tr:hover td { background: var(--bg3); }
+  .highlight-row td { background: rgba(254,80,0,0.08); color: var(--text); font-weight: 600; border-color: var(--accent); }
+  .note-banner {
+    margin-top: 12px;
+    background: rgba(254,80,0,0.1);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent2);
+    text-align: center;
+    width: 100%;
+    max-width: 980px;
+  }
+</style>
+</head>
+<body>
+  <h2>🔐 Permissionamento no Telegram</h2>
+  <p class="sub">Duas estratégias válidas — escolha conforme seu contexto</p>
+
+  <div class="comparison">
+    <div class="scenario a">
+      <div class="scenario-label">Cenário A</div>
+      <div class="scenario-title">📱 Grupos Separados</div>
+      <div class="tg-groups">
+        <div class="tg-group">
+          <div class="icon">💼</div>
+          <div class="name">Grupo Vendas</div>
+          <div class="agent">🤖 Agente Vendas</div>
+        </div>
+        <div class="tg-group">
+          <div class="icon">🎨</div>
+          <div class="name">Grupo Marketing</div>
+          <div class="agent">🤖 Agente Marketing</div>
+        </div>
+        <div class="tg-group">
+          <div class="icon">💬</div>
+          <div class="name">Grupo Atendimento</div>
+          <div class="agent">🤖 Bot Suporte</div>
+        </div>
+      </div>
+      <div class="pros-cons">
+        <div class="pro">✅ Isolamento total de conversas</div>
+        <div class="pro">✅ Membros só veem o que é deles</div>
+        <div class="con">❌ Mais grupos para gerenciar</div>
+        <div class="con">❌ Difícil colaboração entre áreas</div>
+      </div>
+    </div>
+
+    <div class="scenario b">
+      <div class="scenario-label">Cenário B</div>
+      <div class="scenario-title">🗂️ Grupo com Tópicos</div>
+      <div class="tg-topics">
+        <div class="tg-group-header">
+          <span>💼</span> Empresa Central
+        </div>
+        <div class="tg-topic"><span class="topic-icon">💼</span> Tópico: Vendas</div>
+        <div class="tg-topic"><span class="topic-icon">🎨</span> Tópico: Marketing</div>
+        <div class="tg-topic"><span class="topic-icon">💬</span> Tópico: Atendimento</div>
+      </div>
+      <div class="pros-cons">
+        <div class="pro">✅ Mais prático — um lugar só</div>
+        <div class="pro">✅ Visibilidade cruzada entre áreas</div>
+        <div class="con">❌ Sem isolamento de conversas</div>
+        <div class="con">❌ Todos os membros veem tudo</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Critério</th>
+        <th>Grupos Separados</th>
+        <th>Tópicos</th>
+      </tr>
+      <tr>
+        <td>Isolamento</td>
+        <td style="color:var(--green)">✅ Total</td>
+        <td style="color:#f87171">❌ Nenhum</td>
+      </tr>
+      <tr>
+        <td>Praticidade</td>
+        <td style="color:#f87171">❌ Vários grupos</td>
+        <td style="color:var(--green)">✅ Um só lugar</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>2 camadas de segurança</td>
+        <td>Pertencer ao grupo + whitelist de IDs</td>
+        <td>Pertencer ao grupo + whitelist de IDs</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="note-banner">🔑 Em ambos: 2 camadas — estar no grupo/tópico + estar na whitelist de IDs do agente</div>
+</body>
+</html>

@@ -2,6 +2,8 @@
 
 **Timing:** 10h40–11h15 (35 minutos)
 
+**Projetar:** Terminal ao vivo — agente gerando o arquivo SKILL.md em tempo real
+
 ---
 
 ## O que cobrir
@@ -17,9 +19,11 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| Skill creator (OpenClaw built-in) | `openclaw skill-creator` |
-| Skill criada ao vivo | `areas/vendas/skills/[skill-gerada].md` |
-| Planilha de leads (para o exemplo) | Link no repo |
+| Skill creator (OpenClaw built-in) | Skill `skill-creator` nativa do OpenClaw |
+| Template de referência | `cerebro/empresa/skills/_templates/SKILL-TEMPLATE.md` |
+| Skill criada ao vivo | `cerebro/areas/vendas/skills/{nome-gerado-ao-vivo}/SKILL.md` |
+| Index de skills (para salvar) | `cerebro/areas/vendas/skills/_index.md` |
+| Dados de leads (para o exemplo) | `cerebro/dados/leads.csv` |
 
 ---
 
@@ -42,9 +46,9 @@ Explique o conceito:
 No terminal ao vivo, peça ao agente:
 > "Crie uma skill que analise minha planilha de leads e gere um relatório diário com: total de leads, leads novos hoje, taxa de conversão estimada e os 3 leads mais quentes."
 
-Mostre o agente gerando o arquivo `.md` da skill em tempo real.
+Mostre o agente gerando o arquivo `SKILL.md` em tempo real em `cerebro/areas/vendas/skills/`.
 
-Abra o arquivo criado. Leia o que foi gerado.
+Abra o arquivo criado. Leia o que foi gerado. Compare com o template em `cerebro/empresa/skills/_templates/SKILL-TEMPLATE.md`.
 
 > "Isso que eu acabei de fazer em 30 segundos levaria 30 minutos para escrever do zero."
 

@@ -2,6 +2,8 @@
 
 **Timing:** 11h50–12h00 (10 minutos)
 
+**Projetar:** Apresentação `apresentacao-imersao-v3.html` → seção de recap/teaser
+
 ---
 
 ## O que cobrir

@@ -24,8 +24,10 @@ Cayo posta:
 
 ## Checklist antes de voltar
 
-- [ ] Bot de suporte demo pronto para receber mensagens ao vivo
-- [ ] Arquivos `faq.md`, `duvidas.md` preparados com dados fake
-- [ ] Skill `consolidar-faq.md` pronta para executar
+- [ ] Bot de suporte demo pronto para receber mensagens ao vivo no Telegram
+- [ ] `cerebro/areas/atendimento/bot/faq.md` — verificar que tem 5+ perguntas respondidas
+- [ ] `cerebro/areas/atendimento/bot/duvidas.md` — verificar que está vazio (demo do zero)
+- [ ] `cerebro/areas/atendimento/rotinas/consolidar-faq.md` — pronta para executar
+- [ ] `cerebro/agentes/bot-suporte/SOUL.md` e `AGENTS.md` — confirmados
 
 → Retomar em `dia2/10-deep-dive-atendimento.md`

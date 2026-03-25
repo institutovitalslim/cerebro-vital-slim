@@ -2,6 +2,8 @@
 
 **Timing:** 10h00–10h30 (30 minutos)
 
+**Projetar:** Terminal com skill aberta → depois Telegram com resultado chegando ao vivo
+
 ---
 
 ## O que cobrir
@@ -18,9 +20,12 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| Template de skill | `areas/_template/skills/exemplo.md` |
-| Skill de vendas pronta | `areas/vendas/skills/relatorio-semanal.md` |
-| Planilha de leads (demo) | Google Sheets (link no repo) |
+| Template de skill | `cerebro/empresa/skills/_templates/SKILL-TEMPLATE.md` |
+| Skill de relatório de vendas | `cerebro/areas/vendas/skills/relatorio-vendas/SKILL.md` |
+| Skill de qualificação de lead | `cerebro/areas/vendas/skills/qualificacao-lead/SKILL.md` |
+| Index de skills da área | `cerebro/areas/vendas/skills/_index.md` |
+| Planilha de leads (demo) | `cerebro/dados/leads.csv` → ou Google Sheets público (link em `cerebro/dados/README.md`) |
+| Planilha de vendas (demo) | `cerebro/dados/vendas.csv` |
 | Resultado gerado | Mensagem no Telegram ao vivo |
 
 ---
@@ -38,24 +43,26 @@ Output: o que você recebe
 
 > "Uma skill é uma receita. Você escreve uma vez, o agente segue sempre do mesmo jeito."
 
-Abra `areas/vendas/skills/relatorio-semanal.md` e leia em voz alta os campos principais.
+Abra `cerebro/empresa/skills/_templates/SKILL-TEMPLATE.md` e leia em voz alta os campos principais.
+Depois abra `cerebro/areas/vendas/skills/relatorio-vendas/SKILL.md` como exemplo real.
 
 **Passo 2 — Conectar planilha (8 min)**
 
-Abra o terminal. Mostre como a skill aponta para a planilha:
+Abra o terminal. Mostre como a skill aponta para os dados:
 ```markdown
 ## Input necessário
-- Planilha de leads: [URL da planilha]
+- Dados de vendas: cerebro/dados/vendas.csv (ou Google Sheets público)
 - Período: semana atual
 ```
 
-Execute ao vivo: peça ao agente para ler a planilha e extrair os dados.
+Abra `cerebro/dados/README.md` para mostrar como conectar Google Sheets.
+Execute ao vivo: peça ao agente para ler o CSV e extrair os dados.
 > "O agente está lendo a planilha agora. Ao vivo."
 
 **Passo 3 — Gerar relatório (10 min)**
 
 Peça ao agente:
-> "Execute a skill relatorio-semanal"
+> "Execute a skill relatorio-vendas"
 
 Mostre o agente processando. Quando o relatório aparecer no Telegram, grite:
 > "Pronto. Relatório completo. Zero prompt. Zero formatação manual. Só pedir."

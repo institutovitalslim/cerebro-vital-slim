@@ -2,6 +2,8 @@
 
 **Timing:** 9h45–10h05 (20 minutos)
 
+**Projetar:** Terminal com `cerebro/agentes/bot-suporte/AGENTS.md` e `cerebro/seguranca/permissoes.md`
+
 ---
 
 ## O que cobrir
@@ -17,8 +19,11 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| AGENTS.md com escopo restrito | `AGENTS.md` |
-| Whitelist de IDs | `AGENTS.md` (seção acesso) |
+| AGENTS.md assistente (escopo amplo) | `cerebro/agentes/assistente/AGENTS.md` |
+| AGENTS.md bot-suporte (escopo restrito) | `cerebro/agentes/bot-suporte/AGENTS.md` |
+| AGENTS.md atendimento | `cerebro/agentes/atendimento/AGENTS.md` |
+| Permissões centralizadas | `cerebro/seguranca/permissoes.md` |
+| Whitelist de IDs | configuração no `openclaw.json` do agente |
 | Demo: acesso negado | Telegram ao vivo |
 
 ---
@@ -30,12 +35,14 @@
 **Camada 1 — Escopo de arquivos:**
 > "O agente de suporte só lê as pastas que você permitir. Se não está no escopo dele, ele não acessa — mesmo que alguém peça."
 
-Mostre no `AGENTS.md`:
+Mostre no `cerebro/agentes/bot-suporte/AGENTS.md`:
 ```markdown
-## Agente Suporte
-Acesso: areas/atendimento/ apenas
-NÃO acessa: empresa/financeiro/, areas/vendas/
+## Agente Bot Suporte
+Acesso: cerebro/areas/atendimento/ + cerebro/areas/atendimento/bot/
+NÃO acessa: cerebro/empresa/decisoes/, cerebro/dados/vendas.csv
 ```
+
+Compare com `cerebro/seguranca/permissoes.md` para visão centralizada de permissões.
 
 **Camada 2 — Whitelist de usuários:**
 > "Além do escopo, você define quem pode usar esse agente. Só os IDs do Telegram que você autorizar conseguem conversar com ele."

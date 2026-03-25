@@ -2,6 +2,8 @@
 
 **Timing:** 9h35–10h00 (25 minutos)
 
+**Projetar:** Terminal com `tree cerebro/ -L 2` → depois arquivos abertos no editor/terminal
+
 ---
 
 ## O que cobrir
@@ -17,11 +19,12 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| Estrutura do repo | `tree` no terminal |
-| Contexto da empresa | `empresa/contexto/empresa.md` |
-| Contexto de uma área | `areas/vendas/contexto/geral.md` |
-| Identidade do agente | `SOUL.md` |
-| Regras operacionais | `AGENTS.md` |
+| Estrutura do repo | `tree cerebro/ -L 2` no terminal |
+| Contexto da empresa | `cerebro/empresa/contexto/empresa.md` |
+| Equipe | `cerebro/empresa/contexto/equipe.md` |
+| Contexto de uma área | `cerebro/areas/vendas/contexto/geral.md` |
+| Identidade do agente | `cerebro/agentes/assistente/SOUL.md` |
+| Regras operacionais | `cerebro/agentes/assistente/AGENTS.md` |
 
 ---
 
@@ -29,22 +32,23 @@
 
 **Passo 1 — Tour estruturado (10 min)**
 
-Abra o terminal e rode `tree` (ou navegue pelo VS Code / editor). Explique cada pasta:
+Abra o terminal e rode `tree cerebro/ -L 2`. Explique cada pasta:
 
 ```
-empresa/          ← "Quem você é como empresa"
-  contexto/       ← empresa, equipe, métricas
-areas/            ← "Cada área do negócio"
-  vendas/
-  marketing/
-  atendimento/
-rotinas/          ← "O que o agente faz sozinho"
-skills/           ← "Como o agente executa tarefas"
-SOUL.md           ← "A personalidade do agente"
-AGENTS.md         ← "As regras de operação"
+cerebro/
+├── empresa/          ← "Quem você é como empresa"
+│   └── contexto/     ← empresa.md, equipe.md, metricas.md
+├── areas/            ← "Cada área do negócio"
+│   ├── vendas/
+│   ├── marketing/
+│   └── atendimento/
+├── agentes/          ← "Os agentes e suas regras"
+│   ├── assistente/   ← SOUL.md, AGENTS.md, TOOLS.md
+│   └── bot-suporte/
+└── dados/            ← "CSVs e referências de dados"
 ```
 
-Abra 2-3 arquivos ao vivo. Leia em voz alta uma parte do `SOUL.md`.
+Abra 2-3 arquivos ao vivo. Leia em voz alta uma parte do `cerebro/agentes/assistente/SOUL.md`.
 > "Esse arquivo define quem o agente é. Tom de voz, comportamento, o que pode e o que não pode fazer."
 
 **Passo 2 — Demo dupla (10 min)**

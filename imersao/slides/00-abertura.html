@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imersão OpenClaw nos Negócios</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A;
+    --bg2: #111630;
+    --bg3: #181e3a;
+    --border: #2a3260;
+    --accent: #FE5000;
+    --accent2: #ff7a35;
+    --green: #22c55e;
+    --blue: #60a5fa;
+    --yellow: #eab308;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+  }
+  .bg-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(254,80,0,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+  }
+  .bg-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 70%);
+    bottom: 10%; right: 10%;
+    pointer-events: none;
+  }
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+    animation: fadeIn 0.8s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .logo {
+    font-size: 100px;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 30px rgba(254,80,0,0.5));
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(254,80,0,0.5)); }
+    50% { filter: drop-shadow(0 0 60px rgba(254,80,0,0.8)); }
+  }
+  .badge {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #fff 30%, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 600;
+    color: var(--text2);
+    margin-bottom: 48px;
+  }
+  .pills {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .pill.accent {
+    border-color: var(--accent);
+    color: var(--accent2);
+    background: rgba(254,80,0,0.1);
+  }
+  .pill .emoji { font-size: 20px; }
+  .footer {
+    position: absolute;
+    bottom: 32px;
+    color: var(--text2);
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="bg-glow2"></div>
+  <div class="hero">
+    <div class="logo">🧠</div>
+    <div class="badge">✦ OpenClaw ✦</div>
+    <h1>Imersão OpenClaw<br>nos Negócios</h1>
+    <p class="subtitle">Agentes de IA que trabalham enquanto você dorme</p>
+    <div class="pills">
+      <div class="pill"><span class="emoji">📅</span> 28–29/03/2026</div>
+      <div class="pill"><span class="emoji">⏱️</span> 2 dias · 3h cada</div>
+      <div class="pill accent"><span class="emoji">🎯</span> 100% Demo ao Vivo</div>
+    </div>
+  </div>
+  <div class="footer">pixel educação — todos os direitos reservados</div>
+</body>
+</html>

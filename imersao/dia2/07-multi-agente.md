@@ -2,6 +2,8 @@
 
 **Timing:** 9h15–9h45 (30 minutos)
 
+**Projetar:** Terminal com `cerebro/agentes/` aberto → depois Telegram com dois grupos lado a lado
+
 ---
 
 ## O que cobrir
@@ -17,9 +19,12 @@
 
 | Demo | Arquivo/Path |
 |------|-------------|
-| SOUL.md do agente principal | `SOUL.md` |
-| SOUL.md do segundo agente | `agentes/suporte/SOUL.md` (criar ao vivo) |
-| AGENTS.md atualizado | `AGENTS.md` |
+| SOUL.md do agente principal | `cerebro/agentes/assistente/SOUL.md` |
+| AGENTS.md do agente principal | `cerebro/agentes/assistente/AGENTS.md` |
+| SOUL.md do agente de suporte (já existe) | `cerebro/agentes/bot-suporte/SOUL.md` |
+| AGENTS.md do agente de suporte | `cerebro/agentes/bot-suporte/AGENTS.md` |
+| Agente de marketing | `cerebro/agentes/marketing/SOUL.md` |
+| Agente de atendimento | `cerebro/agentes/atendimento/SOUL.md` |
 | Demo: mesma pergunta | Telegram: dois grupos lado a lado |
 
 ---
@@ -30,26 +35,32 @@
 
 > "Até agora, temos 1 agente que sabe tudo. Funciona para uma pessoa. Mas quando o time cresce, você precisa de especialização."
 
-Exemplos reais:
-- Agente do Bruno: estratégico, acesso total
-- Agente da equipe de suporte: foco em atendimento, sem acesso ao financeiro
-- Agente de vendas: foco no funil, scripts, CRM
+Exemplos reais (já no repo demo):
+- `cerebro/agentes/assistente/` → estratégico, acesso total ao cérebro
+- `cerebro/agentes/bot-suporte/` → foco em atendimento, escopo restrito
+- `cerebro/agentes/marketing/` → foco em criativos, ads e análise de performance
+- `cerebro/agentes/vendas/` → foco no funil, leads, scripts
 
 > "Todos compartilham o mesmo repositório. Mas cada um tem uma 'personalidade' e um escopo diferente."
 
-**Passo 2 — Criar segundo agente ao vivo (15 min)**
+**Passo 2 — Mostrar agentes já prontos + criar variação ao vivo (15 min)**
 
-No terminal, crie a estrutura:
+No terminal, mostre que a estrutura já existe:
 ```bash
-mkdir -p agentes/suporte
+ls cerebro/agentes/
+# assistente/  atendimento/  bot-leads/  bot-suporte/  marketing/  vendas/
 ```
 
-Peça ao agente:
-> "Crie um SOUL.md para um agente de suporte ao cliente da [empresa demo]. Ele deve ser empático, focado em resolver dúvidas, escalar quando necessário, e NÃO ter acesso a dados financeiros."
+Abra `cerebro/agentes/bot-suporte/SOUL.md` — mostre o SOUL.md focado em atendimento.
+Compare com `cerebro/agentes/assistente/SOUL.md` — muito mais amplo.
 
-Mostre o arquivo criado. Edite 1-2 pontos ao vivo para personalizar.
+Peça ao agente para criar um novo SOUL.md especializado ao vivo:
+> "Crie um SOUL.md para um agente de vendas da empresa demo. Ele deve ser focado em converter leads, usar os scripts de vendas disponíveis, e NÃO ter acesso a dados financeiros da empresa."
 
-Atualize `AGENTS.md` com o novo agente e seu escopo.
+Mostre o arquivo sendo criado em `cerebro/agentes/vendas/SOUL.md`.
+Edite 1-2 pontos ao vivo para personalizar com base em sugestões do chat.
+
+Atualize `cerebro/agentes/vendas/AGENTS.md` com o escopo correto.
 
 **Passo 3 — Demo lado a lado (8 min)**
 
