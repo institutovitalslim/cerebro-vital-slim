@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Operacional — Imersão OpenClaw nos Negócios (28-29/03/2026)</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0A0E2A;
+      --bg2:       #111630;
+      --bg3:       #181e3a;
+      --bg4:       #1e2545;
+      --border:    #2a3260;
+      --accent:    #FE5000;
+      --accent2:   #ff7a35;
+      --green:     #22c55e;
+      --green-bg:  #0d2b1a;
+      --red:       #ef4444;
+      --red-bg:    #2b0d0d;
+      --yellow:    #eab308;
+      --yellow-bg: #2b220d;
+      --blue:      #60a5fa;
+      --blue-bg:   #0d1a2b;
+      --text:      #e2e8f0;
+      --text2:     #94a3b8;
+      --text3:     #64748b;
+      --code-bg:   #0d1117;
+      --sidebar-w: 280px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    #sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #sidebar::-webkit-scrollbar { width: 4px; }
+    #sidebar::-webkit-scrollbar-track { background: transparent; }
+    #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .sidebar-logo {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-logo .logo-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .sidebar-logo h2 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .sidebar-logo .dates {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text3);
+    }
+
+    .sidebar-day {
+      padding: 12px 20px 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .sidebar-day.day2 { color: var(--blue); }
+
+    .sidebar-nav { flex: 1; padding-bottom: 20px; }
+
+    .nav-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 20px;
+      text-decoration: none;
+      color: var(--text2);
+      font-size: 12.5px;
+      transition: background 0.15s, color 0.15s;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+    }
+    .nav-item:hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+    .nav-item.active {
+      background: var(--bg3);
+      border-left-color: var(--accent);
+      color: var(--text);
+    }
+    .nav-item .nav-num {
+      min-width: 22px;
+      height: 22px;
+      background: var(--bg4);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .nav-item .nav-num.accent { background: rgba(254,80,0,0.2); color: var(--accent); }
+    .nav-item .nav-num.blue   { background: rgba(96,165,250,0.15); color: var(--blue); }
+    .nav-item .nav-num.green  { background: rgba(34,197,94,0.15); color: var(--green); }
+    .nav-item .nav-label { line-height: 1.35; }
+    .nav-item .nav-time { display: block; font-size: 10px; color: var(--text3); margin-top: 1px; }
+
+    .nav-divider {
+      margin: 8px 20px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    #main {
+      margin-left: var(--sidebar-w);
+      min-height: 100vh;
+      padding: 0 0 80px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #0d1230 0%, #1a0a3d 50%, #0a2010 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 48px 40px;
+    }
+    .hero-meta {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .badge-orange  { background: rgba(254,80,0,0.2); color: var(--accent); border: 1px solid rgba(254,80,0,0.3); }
+    .badge-green   { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+    .badge-blue    { background: rgba(96,165,250,0.15); color: var(--blue); border: 1px solid rgba(96,165,250,0.25); }
+    .badge-yellow  { background: var(--yellow-bg); color: var(--yellow); border: 1px solid rgba(234,179,8,0.3); }
+    .badge-red     { background: var(--red-bg); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+    .badge-gray    { background: var(--bg4); color: var(--text2); border: 1px solid var(--border); }
+
+    .hero h1 {
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero .subtitle {
+      font-size: 14px;
+      color: var(--text2);
+      max-width: 600px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 760px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .stat-card .stat-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-card .stat-label {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+
+    /* ===== TURMA INFO ===== */
+    .turma-section {
+      padding: 28px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .turma-section h3 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 16px;
+    }
+    .turma-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .turma-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .turma-pct {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+      min-width: 46px;
+    }
+    .turma-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.3;
+    }
+
+    /* ===== DAY SEPARATOR ===== */
+    .day-separator {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 48px 0;
+    }
+    .day-separator .day-badge {
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .day-badge.day1 { background: rgba(254,80,0,0.15); color: var(--accent); border: 2px solid rgba(254,80,0,0.4); }
+    .day-badge.day2 { background: rgba(96,165,250,0.12); color: var(--blue); border: 2px solid rgba(96,165,250,0.35); }
+    .day-separator .day-line { flex: 1; height: 2px; background: var(--border); border-radius: 1px; }
+    .day-separator .day-meta { font-size: 12px; color: var(--text3); white-space: nowrap; }
+
+    /* ===== BLOCK SECTION ===== */
+    .block-section {
+      padding: 32px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .block-section:last-child { border-bottom: none; }
+
+    .block-abertura { border-left: 4px solid var(--yellow); padding-left: 44px; }
+    .block-pausa    { background: var(--bg2); padding: 20px 48px; }
+    .block-fechamento { border-left: 4px solid var(--green); padding-left: 44px; }
+
+    .block-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .block-num {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      flex-shrink: 0;
+      background: rgba(254,80,0,0.15);
+      color: var(--accent);
+      border: 2px solid rgba(254,80,0,0.3);
+    }
+    .block-num.blue {
+      background: rgba(96,165,250,0.12);
+      color: var(--blue);
+      border-color: rgba(96,165,250,0.3);
+    }
+    .block-num.green {
+      background: rgba(34,197,94,0.12);
+      color: var(--green);
+      border-color: rgba(34,197,94,0.3);
+    }
+    .block-num.yellow {
+      background: var(--yellow-bg);
+      color: var(--yellow);
+      border-color: rgba(234,179,8,0.3);
+    }
+
+    .block-title-group { flex: 1; }
+    .block-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .block-subtitle { font-size: 13px; color: var(--text2); margin-top: 4px; }
+    .block-meta {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    }
+
+    /* ===== CONTENT CARDS ===== */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 900px) {
+      .content-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .card-full { grid-column: 1 / -1; }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title.green { color: var(--green); }
+    .card-title.orange { color: var(--accent); }
+    .card-title.blue  { color: var(--blue); }
+    .card-title.red   { color: var(--red); }
+    .card-title.yellow { color: var(--yellow); }
+    .card-title.white { color: var(--text); }
+
+    .card-title .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot.green  { background: var(--green); }
+    .dot.orange { background: var(--accent); }
+    .dot.blue   { background: var(--blue); }
+    .dot.red    { background: var(--red); }
+    .dot.yellow { background: var(--yellow); }
+
+    /* ===== LISTS ===== */
+    .item-list { list-style: none; }
+    .item-list li {
+      padding: 5px 0 5px 18px;
+      position: relative;
+      font-size: 13.5px;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.5;
+    }
+    .item-list li:last-child { border-bottom: none; }
+    .item-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 11px;
+      top: 6px;
+    }
+    .item-list.blue li::before { color: var(--blue); }
+    .item-list.green li::before { color: var(--green); }
+
+    /* ===== FILES ===== */
+    .file-list { list-style: none; }
+    .file-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 13px;
+      color: var(--text2);
+    }
+    .file-list li:last-child { border-bottom: none; }
+    .file-list .file-path {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 12px;
+      background: var(--code-bg);
+      color: #7dd3fc;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+    .file-list .file-desc {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+
+    /* ===== WARNING CARD ===== */
+    .warning-card {
+      background: var(--red-bg);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .warning-card .card-title { color: var(--red); }
+    .warning-card .item-list li { color: #fca5a5; }
+    .warning-card .item-list li::before { content: '✕'; color: var(--red); font-size: 10px; top: 7px; }
+
+    /* ===== STEPS ===== */
+    .steps-list { list-style: none; counter-reset: steps; }
+    .steps-list li {
+      counter-increment: steps;
+      padding: 8px 0 8px 40px;
+      position: relative;
+      font-size: 13.5px;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.5;
+    }
+    .steps-list li:last-child { border-bottom: none; }
+    .steps-list li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      width: 26px; height: 26px;
+      background: rgba(254,80,0,0.15);
+      border: 1px solid rgba(254,80,0,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent);
+      top: 9px;
+    }
+    .steps-list.blue li::before {
+      background: rgba(96,165,250,0.12);
+      border-color: rgba(96,165,250,0.3);
+      color: var(--blue);
+    }
+    .steps-list li strong { color: var(--text); }
+    code.inline {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 12px;
+      background: var(--code-bg);
+      color: #7dd3fc;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* ===== CHECKPOINT ===== */
+    .checkpoint {
+      background: var(--green-bg);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .checkpoint-icon {
+      width: 32px; height: 32px;
+      background: rgba(34,197,94,0.2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .checkpoint-body { flex: 1; }
+    .checkpoint-body strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+    .checkpoint-body p { font-size: 13px; color: #86efac; line-height: 1.5; }
+
+    /* ===== PAUSA ===== */
+    .pausa-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      background: var(--yellow-bg);
+      border: 1px solid rgba(234,179,8,0.3);
+      border-radius: 12px;
+    }
+    .pausa-inner .pausa-icon { font-size: 24px; }
+    .pausa-inner .pausa-text { font-size: 14px; font-weight: 700; color: var(--yellow); }
+    .pausa-inner .pausa-sub  { font-size: 12px; color: #a16207; margin-top: 2px; }
+
+    /* ===== DEMO HIGHLIGHT ===== */
+    .demo-card {
+      background: linear-gradient(135deg, rgba(254,80,0,0.08) 0%, rgba(96,165,250,0.06) 100%);
+      border: 1px solid rgba(254,80,0,0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .demo-card .card-title { color: var(--accent2); }
+    .demo-card .demo-cmd {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      background: var(--code-bg);
+      color: #a5f3fc;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin: 10px 0;
+      border-left: 3px solid var(--accent);
+      display: block;
+    }
+    .demo-card p { font-size: 13px; color: var(--text2); margin-top: 6px; }
+
+    /* ===== AHA MOMENT ===== */
+    .aha-card {
+      background: linear-gradient(135deg, rgba(254,80,0,0.12) 0%, rgba(234,179,8,0.08) 100%);
+      border: 2px solid rgba(254,80,0,0.35);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .aha-card .card-title { color: var(--accent); font-size: 12px; }
+    .aha-card p { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+
+    /* ===== TABLE ===== */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      margin-top: 8px;
+    }
+    .data-table th {
+      background: var(--bg4);
+      color: var(--text3);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      color: var(--text2);
+      vertical-align: top;
+    }
+    .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    .data-table td code.inline { font-size: 11px; }
+
+    /* ===== PLACEHOLDER ===== */
+    .placeholder-card {
+      background: var(--yellow-bg);
+      border: 2px dashed rgba(234,179,8,0.4);
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: center;
+    }
+    .placeholder-card .card-title { color: var(--yellow); justify-content: center; }
+    .placeholder-card p { font-size: 13px; color: var(--yellow); opacity: 0.8; }
+
+    /* ===== PRINT ===== */
+    @media print {
+      #sidebar { display: none; }
+      #main { margin-left: 0; }
+      .block-section { page-break-inside: avoid; }
+      .day-separator { page-break-before: always; }
+      .hero { background: #fff !important; }
+      body { background: #fff; color: #111; }
+      .card, .demo-card, .warning-card, .checkpoint, .aha-card { border-color: #ccc; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      #sidebar { display: none; }
+      #main { margin-left: 0; }
+      .hero { padding: 28px 20px; }
+      .block-section { padding: 24px 20px; }
+      .block-abertura, .block-fechamento { padding-left: 16px; }
+      .turma-section { padding: 20px; }
+      .day-separator { padding: 20px 20px 0; }
+      .hero h1 { font-size: 22px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .content-grid { grid-template-columns: 1fr; }
+      .block-pausa { padding: 20px; }
+    }
+
+    @media (max-width: 1100px) and (min-width: 769px) {
+      :root { --sidebar-w: 220px; }
+      .nav-item { font-size: 11.5px; padding: 7px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-tag">Guia Operacional</div>
+    <h2>Imersão OpenClaw<br>nos Negócios</h2>
+    <div class="dates">28–29 / 03 / 2026 · 9h–12h BRT</div>
+  </div>
+
+  <div class="sidebar-nav">
+    <!-- DIA 1 -->
+    <div class="sidebar-day">📅 Dia 1 — 28/03</div>
+
+    <a class="nav-item" href="#abertura-d1">
+      <span class="nav-num yellow">▶</span>
+      <span class="nav-label">Abertura
+        <span class="nav-time">9h00–9h15 · 15 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco1">
+      <span class="nav-num accent">1</span>
+      <span class="nav-label">O Problema e a Arquitetura
+        <span class="nav-time">9h15–9h35 · 20 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco2">
+      <span class="nav-num accent">2</span>
+      <span class="nav-label">Tour pelo Cérebro
+        <span class="nav-time">9h35–10h00 · 25 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco3">
+      <span class="nav-num accent">3</span>
+      <span class="nav-label">Skills — Como o Agente Aprende
+        <span class="nav-time">10h00–10h30 · 30 min</span>
+      </span>
+    </a>
+
+    <div class="nav-divider"></div>
+    <a class="nav-item" href="#pausa1">
+      <span class="nav-num" style="color:var(--yellow);">☕</span>
+      <span class="nav-label">Pausa
+        <span class="nav-time">10h30–10h40 · 10 min</span>
+      </span>
+    </a>
+    <div class="nav-divider"></div>
+
+    <a class="nav-item" href="#bloco4">
+      <span class="nav-num accent">4</span>
+      <span class="nav-label">Skill-Creator — Linguagem Natural
+        <span class="nav-time">10h40–11h15 · 35 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco5">
+      <span class="nav-num accent">5</span>
+      <span class="nav-label">Rotinas — Agente Autônomo
+        <span class="nav-time">11h15–11h35 · 20 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco6">
+      <span class="nav-num accent">6</span>
+      <span class="nav-label">Segurança
+        <span class="nav-time">11h35–11h50 · 15 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#fechamento-d1">
+      <span class="nav-num green">✓</span>
+      <span class="nav-label">Pitch + Fechamento Dia 1
+        <span class="nav-time">11h50–12h00 · 10 min</span>
+      </span>
+    </a>
+
+    <div class="nav-divider"></div>
+
+    <!-- DIA 2 -->
+    <div class="sidebar-day day2">📅 Dia 2 — 29/03</div>
+
+    <a class="nav-item" href="#abertura-d2">
+      <span class="nav-num blue">▶</span>
+      <span class="nav-label">Abertura + Recap
+        <span class="nav-time">9h00–9h15 · 15 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco7">
+      <span class="nav-num blue">7</span>
+      <span class="nav-label">Sistema Multi-agente
+        <span class="nav-time">9h15–9h45 · 30 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco8">
+      <span class="nav-num blue">8</span>
+      <span class="nav-label">Permissionamento
+        <span class="nav-time">9h45–10h05 · 20 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco9">
+      <span class="nav-num blue">9</span>
+      <span class="nav-label">Deep Dive Marketing
+        <span class="nav-time">10h05–10h40 · 35 min</span>
+      </span>
+    </a>
+
+    <div class="nav-divider"></div>
+    <a class="nav-item" href="#pausa2">
+      <span class="nav-num" style="color:var(--yellow);">☕</span>
+      <span class="nav-label">Pausa
+        <span class="nav-time">10h40–10h50 · 10 min</span>
+      </span>
+    </a>
+    <div class="nav-divider"></div>
+
+    <a class="nav-item" href="#bloco10">
+      <span class="nav-num blue">10</span>
+      <span class="nav-label">Deep Dive Atendimento — Bot Suporte
+        <span class="nav-time">10h50–11h25 · 35 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#bloco11">
+      <span class="nav-num blue">11</span>
+      <span class="nav-label">Próximos 30 Dias
+        <span class="nav-time">11h25–11h50 · 25 min</span>
+      </span>
+    </a>
+    <a class="nav-item" href="#fechamento-d2">
+      <span class="nav-num green">✓</span>
+      <span class="nav-label">Pitch + Carrinho + Fechamento
+        <span class="nav-time">11h50–12h00 · 10 min</span>
+      </span>
+    </a>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-meta">
+      <span class="badge badge-orange">Guia Operacional</span>
+      <span class="badge badge-blue">Bruno Okamoto · Cayo Syllos</span>
+      <span class="badge badge-green">300 Participantes</span>
+      <span class="badge badge-yellow">Online · Ao Vivo</span>
+      <span class="badge badge-red">100% Expositivo — Sem Hands-on</span>
+    </div>
+    <h1>Imersão <span>OpenClaw</span><br>nos Negócios</h1>
+    <p class="subtitle">
+      Documento operacional para o facilitador (Bruno) e o produtor (Cayo).
+      Contém o que mostrar, como demonstrar, quais arquivos abrir e o que NÃO mostrar — em cada bloco dos 2 dias.
+      Bruno demonstra ao vivo; quem quiser acompanha na própria máquina, mas o formato é DEMO.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-val">2</div>
+        <div class="stat-label">Dias de imersão<br>28–29/03/2026</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">6h</div>
+        <div class="stat-label">Total de conteúdo<br>3h por dia</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">11</div>
+        <div class="stat-label">Blocos de conteúdo<br>+ 2 pausas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">300</div>
+        <div class="stat-label">Participantes<br>online ao vivo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TURMA CONTEXT -->
+  <div class="turma-section">
+    <h3>📊 Contexto da Turma (pesquisa pré-imersão)</h3>
+    <div class="turma-grid">
+      <div class="turma-item">
+        <div class="turma-pct">50%</div>
+        <div class="turma-desc">Já têm crons, integrações ou multi-agentes</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">65%</div>
+        <div class="turma-desc">Têm time (2 a 50+ pessoas)</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">86%</div>
+        <div class="turma-desc">Usam WhatsApp como canal principal</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">71%</div>
+        <div class="turma-desc">Usam Google Planilhas</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">29%</div>
+        <div class="turma-desc">São agências</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">14%</div>
+        <div class="turma-desc">Ainda não instalaram OpenClaw</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">71%</div>
+        <div class="turma-desc">Expectativa: automatizar tarefas repetitivas</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">57%</div>
+        <div class="turma-desc">Expectativa: criar agentes por área</div>
+      </div>
+      <div class="turma-item">
+        <div class="turma-pct">43%</div>
+        <div class="turma-desc">Expectativa: escalar sem depender do dono</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ═══════════════  DIA 1 — 28/03/2026  ═══════════ -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="day-separator" id="dia1">
+    <div class="day-badge day1">📅 Dia 1 — 28/03/2026</div>
+    <div class="day-line"></div>
+    <div class="day-meta">9h00 – 12h00 BRT · Fundamentos + Primeiros Resultados</div>
+  </div>
+
+
+  <!-- ===== ABERTURA DIA 1 ===== -->
+  <div class="block-section block-abertura" id="abertura-d1">
+    <div class="block-header">
+      <div class="block-num yellow">▶</div>
+      <div class="block-title-group">
+        <div class="block-title">Abertura</div>
+        <div class="block-subtitle">Alinhamento de expectativas, formato e ativação da turma</div>
+        <div class="block-meta">
+          <span class="badge badge-yellow">9h00 – 9h15</span>
+          <span class="badge badge-gray">15 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li>O que vão sair com ao final dos 2 dias: entendimento completo de como funciona um sistema de agentes IA na empresa</li>
+          <li>Formato: <strong>100% demonstração ao vivo</strong> — Bruno mostra tudo na tela dele; quem quiser acompanha na própria máquina, mas o ritmo é do facilitador</li>
+          <li>Regras do chat: perguntas pelo chat coletivo, sem Q&A individual</li>
+          <li><strong>Ativação:</strong> pedir no chat — <em>"Qual processo depende de VOCÊ estar presente?"</em></li>
+          <li>Roteiro rápido dos 2 dias: Dia 1 = fundamentos + primeiros resultados; Dia 2 = multi-agente + deep dives</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list">
+          <li>Abrir com boas-vindas, apresentar o Bruno e o Cayo</li>
+          <li>Explicar o formato (demo ao vivo, 300 pessoas, sem Q&A individual)</li>
+          <li>Mostrar slide/tela com roteiro dos 2 dias</li>
+          <li>Disparar ativação no chat e ler 3-4 respostas para conectar</li>
+          <li>Transição: "Vamos começar pelo problema que todo mundo tem..."</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu o formato (demo ao vivo), sabe o roteiro dos 2 dias, e está engajado no chat.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 1 ===== -->
+  <div class="block-section" id="bloco1">
+    <div class="block-header">
+      <div class="block-num">1</div>
+      <div class="block-title-group">
+        <div class="block-title">O Problema e a Arquitetura</div>
+        <div class="block-subtitle">Por que agentes esquecem tudo — e como resolver com um repositório como cérebro permanente</div>
+        <div class="block-meta">
+          <span class="badge badge-orange">9h15 – 9h35</span>
+          <span class="badge badge-gray">20 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>O problema:</strong> agente de IA esquece tudo a cada sessão — sem memória, sem continuidade, sem evolução</li>
+          <li><strong>Os 3 níveis de memória:</strong>
+            <ol style="margin-top:6px; padding-left:18px;">
+              <li><strong>Nível 1 — Esquece tudo:</strong> uso padrão do ChatGPT. Cada sessão começa do zero, sem persistência real</li>
+              <li><strong>Nível 2 — Memória no agente:</strong> o agente persiste informações dentro dele (ex: memory do OpenClaw), mas a memória fica presa naquele agente</li>
+              <li><strong>Nível 3 — Cérebro compartilhado:</strong> repositório GitHub como cérebro permanente. Acessível por qualquer ferramenta — OpenClaw, Claude Code, outros agentes</li>
+            </ol>
+          </li>
+          <li><strong>A importância do cérebro compartilhado:</strong> a memória não vive só dentro do agente — você pode acessá-la de onde quiser</li>
+          <li>Diagrama do fluxo: como o agente se conecta ao cérebro</li>
+          <li>Mostrar o repo no GitHub: privado, versionado, organizado por pastas</li>
+          <li>Conceito: o repo é a "mente" da empresa — tudo que o agente sabe está documentado ali</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">agentes/COMO-CONECTAR.md</span>
+            <div class="file-desc">Diagrama do fluxo — como agentes se conectam ao cérebro</div>
+          </li>
+          <li>
+            <span class="file-path">README.md</span>
+            <div class="file-desc">Visão geral do repositório no GitHub</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list">
+          <li>Começar explicando o problema: "Você fala com o ChatGPT hoje, amanhã ele esqueceu tudo"</li>
+          <li><strong>Apresentar os 3 níveis de memória:</strong> Nível 1 (esquece tudo — ChatGPT), Nível 2 (memória dentro do agente — presa nele), Nível 3 (cérebro compartilhado — acessível de qualquer lugar)</li>
+          <li>Mostrar o diagrama em <code class="inline">agentes/COMO-CONECTAR.md</code> — fluxo visual</li>
+          <li>Abrir o repo no GitHub — mostrar que é privado, versionado, com pastas organizadas</li>
+          <li>Navegar rapidamente pela estrutura de pastas (sem entrar nos arquivos ainda)</li>
+          <li>Transição: "Agora vamos entrar no cérebro e ver o que tem dentro..."</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Como criar conta no GitHub</li>
+          <li>Como instalar o OpenClaw (tutorial já foi enviado)</li>
+          <li>Configuração técnica do git (clone, push, pull)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu os 3 níveis de memória (esquece tudo → memória no agente → cérebro compartilhado) e que a solução é um repositório GitHub como cérebro permanente. Viu o repo no GitHub.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 2 ===== -->
+  <div class="block-section" id="bloco2">
+    <div class="block-header">
+      <div class="block-num">2</div>
+      <div class="block-title-group">
+        <div class="block-title">Tour pelo Cérebro</div>
+        <div class="block-subtitle">Navegar pelo repositório camada por camada — empresa, áreas, rotinas, skills</div>
+        <div class="block-meta">
+          <span class="badge badge-orange">9h35 – 10h00</span>
+          <span class="badge badge-gray">25 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>Camada empresa:</strong> contexto geral, equipe, métricas — o que o agente sabe sobre a empresa</li>
+          <li><strong>Camada áreas:</strong> vendas como exemplo — contexto da área, rotinas, skills</li>
+          <li><strong>Hierarquia:</strong> empresa → área → sub-área → rotinas → skills</li>
+          <li><strong>Demo ao vivo (dupla):</strong> perguntar "O que você sabe sobre a empresa?" no OpenClaw (agente) E no Claude Code — mesma pergunta, dois lugares diferentes, mesma resposta rica</li>
+          <li><strong>Prova do cérebro compartilhado:</strong> o Claude Code acessa o mesmo repo e responde com os mesmos dados — mostra que o cérebro não está preso a uma ferramenta</li>
+          <li>Comparar com agente SEM contexto — resposta genérica e inútil. A diferença é gritante</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">empresa/contexto/empresa.md</span>
+            <div class="file-desc">Contexto geral da empresa — missão, produto, mercado</div>
+          </li>
+          <li>
+            <span class="file-path">empresa/contexto/equipe.md</span>
+            <div class="file-desc">Quem são as pessoas da empresa</div>
+          </li>
+          <li>
+            <span class="file-path">empresa/contexto/metricas.md</span>
+            <div class="file-desc">Métricas-chave do negócio</div>
+          </li>
+          <li>
+            <span class="file-path">areas/vendas/contexto/geral.md</span>
+            <div class="file-desc">Contexto da área de vendas</div>
+          </li>
+          <li>
+            <span class="file-path">areas/vendas/rotinas/relatorio-vendas-diario.md</span>
+            <div class="file-desc">Rotina de relatório diário de vendas</div>
+          </li>
+          <li>
+            <span class="file-path">areas/vendas/skills/relatorio-vendas/SKILL.md</span>
+            <div class="file-desc">Skill de relatório de vendas</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list">
+          <li>Abrir <code class="inline">empresa/contexto/empresa.md</code> — ler em voz alta as primeiras linhas, mostrar a riqueza do contexto</li>
+          <li>Abrir <code class="inline">empresa/contexto/equipe.md</code> e <code class="inline">metricas.md</code> — passar rápido, mostrar que tudo está documentado</li>
+          <li>Descer para <code class="inline">areas/vendas/contexto/geral.md</code> — mostrar que cada área tem seu próprio contexto</li>
+          <li>Abrir <code class="inline">areas/vendas/rotinas/relatorio-vendas-diario.md</code> — mostrar como uma rotina é definida</li>
+          <li>Abrir <code class="inline">areas/vendas/skills/relatorio-vendas/SKILL.md</code> — preview de skill (aprofunda no próximo bloco)</li>
+          <li><strong>Demo chave (parte 1 — OpenClaw):</strong> perguntar ao agente no OpenClaw "O que você sabe sobre a empresa?" — mostrar resposta rica com dados reais</li>
+          <li><strong>Demo chave (parte 2 — Claude Code):</strong> abrir o Claude Code conectado ao mesmo repo e fazer a mesma pergunta — mostrar que responde com os mesmos dados. "O cérebro é compartilhado — qualquer ferramenta que se conecta ao repo tem acesso"</li>
+          <li>Comparar com agente SEM contexto — resposta genérica e inútil</li>
+          <li>Transição: "Agora vamos entender como o agente aprende a FAZER coisas..."</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Todas as áreas — só vendas como exemplo (marketing e operações vêm no Dia 2)</li>
+          <li>Arquivos de decisões e gestão (complexidade desnecessária aqui)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="demo-card" style="margin-top:16px;">
+      <div class="card-title"><span class="dot orange"></span>🎤 Demo ao vivo — Parte 1 (OpenClaw)</div>
+      <span class="demo-cmd">"O que você sabe sobre a empresa?"</span>
+      <p><strong>Resultado esperado:</strong> Agente COM cérebro responde com dados reais (nome, produto, equipe, métricas). Agente SEM cérebro responde genérico.</p>
+    </div>
+
+    <div class="demo-card" style="margin-top:12px;">
+      <div class="card-title"><span class="dot blue"></span>🎤 Demo ao vivo — Parte 2 (Claude Code)</div>
+      <span class="demo-cmd">"O que você sabe sobre a empresa?" — mesma pergunta no Claude Code conectado ao repo</span>
+      <p><strong>Resultado esperado:</strong> Claude Code responde com os mesmos dados reais — mesma qualidade de resposta, ferramenta diferente. Prova que o cérebro é compartilhado e não depende de uma só ferramenta. Pode também usar uma skill do cérebro direto pelo Claude Code para reforçar.</p>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante viu a estrutura do cérebro (empresa → áreas → rotinas → skills), entendeu cada camada, viu a diferença entre agente COM e SEM contexto, e viu o cérebro compartilhado funcionando em duas ferramentas diferentes (OpenClaw + Claude Code).</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 3 ===== -->
+  <div class="block-section" id="bloco3">
+    <div class="block-header">
+      <div class="block-num">3</div>
+      <div class="block-title-group">
+        <div class="block-title">Skills — Como o Agente Aprende a Fazer Coisas</div>
+        <div class="block-subtitle">Anatomia de uma skill: input → processo → output. Conectando planilhas e gerando relatórios.</div>
+        <div class="block-meta">
+          <span class="badge badge-orange">10h00 – 10h30</span>
+          <span class="badge badge-gray">30 minutos</span>
+          <span class="badge badge-red">🔥 1º AHA MOMENT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>O que é uma skill:</strong> input → processo → output — uma receita que o agente segue</li>
+          <li>Template padrão de skill — como toda skill é estruturada</li>
+          <li>Skill real: relatório de vendas — como lê dados e gera análise</li>
+          <li><strong>Conexão com dados:</strong> como skills leem CSV ou Google Sheets</li>
+          <li>Dois métodos para Google Sheets: link público (30s) vs OAuth (completo)</li>
+          <li><strong>Demo ao vivo:</strong> conectar planilha e gerar relatório de vendas com dados reais</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">empresa/skills/_templates/SKILL-TEMPLATE.md</span>
+            <div class="file-desc">Template padrão para criação de skills</div>
+          </li>
+          <li>
+            <span class="file-path">areas/vendas/skills/relatorio-vendas/SKILL.md</span>
+            <div class="file-desc">Skill real — relatório de vendas (input, processo, output)</div>
+          </li>
+          <li>
+            <span class="file-path">dados/README.md</span>
+            <div class="file-desc">Dois métodos de Google Sheets — link público 30s vs OAuth</div>
+          </li>
+          <li>
+            <span class="file-path">dados/vendas.csv</span>
+            <div class="file-desc">Dados de vendas em CSV (alternativa local)</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list">
+          <li>Explicar o conceito: "Skill = receita. Input entra, processo roda, output sai."</li>
+          <li>Abrir <code class="inline">empresa/skills/_templates/SKILL-TEMPLATE.md</code> — mostrar a estrutura</li>
+          <li>Abrir <code class="inline">areas/vendas/skills/relatorio-vendas/SKILL.md</code> — comparar com o template, mostrar como é preenchida</li>
+          <li>Abrir <code class="inline">dados/README.md</code> — explicar os dois métodos de Google Sheets</li>
+          <li><strong>Demo principal:</strong> conectar planilha Google Sheets com link público (método 30s)</li>
+          <li>Pedir ao agente para executar a skill de relatório de vendas</li>
+          <li>Mostrar o relatório gerado: dados reais da planilha transformados em insight</li>
+          <li>Momento de pausa: "O agente acabou de puxar dados REAIS e gerar análise. Sem programação."</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Skill-creator aqui — vem no próximo bloco</li>
+          <li>Todas as skills disponíveis — só o relatório de vendas como exemplo profundo</li>
+          <li>Configuração técnica do OAuth do Google</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="aha-card" style="margin-top:16px;">
+      <div class="card-title">🔥 1º AHA MOMENT</div>
+      <p>O agente puxa dados reais da planilha Google Sheets e gera um relatório com insight de negócio. Sem código, sem programação. Só uma skill bem escrita + dados reais.</p>
+    </div>
+
+    <div class="demo-card" style="margin-top:12px;">
+      <div class="card-title"><span class="dot orange"></span>🎤 Demo ao vivo</div>
+      <span class="demo-cmd">"Gere o relatório de vendas com base na planilha conectada"</span>
+      <p><strong>Resultado esperado:</strong> Agente lê a planilha, processa os dados e entrega relatório formatado com métricas, tendências e sugestões.</p>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu o que é uma skill (input → processo → output), viu como conectar dados e viu o agente gerando relatório real a partir de uma planilha. Primeiro "wow".</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== PAUSA 1 ===== -->
+  <div class="block-section block-pausa" id="pausa1">
+    <div class="pausa-inner">
+      <span class="pausa-icon">☕</span>
+      <div>
+        <div class="pausa-text">Pausa — 10 minutos</div>
+        <div class="pausa-sub">10h30 – 10h40 · Retorno pontual</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 4 ===== -->
+  <div class="block-section" id="bloco4">
+    <div class="block-header">
+      <div class="block-num">4</div>
+      <div class="block-title-group">
+        <div class="block-title">Skill-Creator — Criando Skills com Linguagem Natural</div>
+        <div class="block-subtitle">Pedir para o agente criar uma skill nova, ao vivo, só falando o que precisa</div>
+        <div class="block-meta">
+          <span class="badge badge-orange">10h40 – 11h15</span>
+          <span class="badge badge-gray">35 minutos</span>
+          <span class="badge badge-red">🔥 2º AHA MOMENT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>Conceito:</strong> criar skills novas falando com o agente — sem template, sem código</li>
+          <li>O skill-creator é uma meta-skill: o agente cria skills para si mesmo</li>
+          <li>Demo ao vivo: pedir uma skill completamente nova</li>
+          <li>Mostrar o agente criando o SKILL.md e salvando no repo</li>
+          <li>Executar a skill recém-criada imediatamente</li>
+          <li>Implicação: qualquer pessoa pode criar automações falando português</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list">
+          <li>Explicar o conceito: "E se o agente pudesse criar skills pra ele mesmo?"</li>
+          <li><strong>Demo:</strong> pedir ao agente <em>"Crie uma skill que analise minha planilha de leads e me diga quais estão esfriando"</em></li>
+          <li>Mostrar na tela: o agente escrevendo o SKILL.md em tempo real</li>
+          <li>Mostrar o arquivo salvo no repo — estrutura completa, input/processo/output</li>
+          <li>Executar a skill recém-criada: agente analisa leads e entrega resultado</li>
+          <li>Dar 30s de silêncio para a ficha cair: "Ele criou uma automação do zero, em português"</li>
+          <li>Transição: "Agora imagina isso rodando SOZINHO, todo dia, sem você pedir..."</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Criar skills para todas as áreas — só 1 exemplo profundo</li>
+          <li>Configuração avançada do skill-creator</li>
+          <li>Edição manual do SKILL.md (o ponto é que NÃO precisa editar)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="aha-card" style="margin-top:16px;">
+      <div class="card-title">🔥 2º AHA MOMENT</div>
+      <p>O agente cria uma skill completa do zero, em português, sem código. E executa na hora. O participante vê que pode criar qualquer automação só falando o que precisa.</p>
+    </div>
+
+    <div class="demo-card" style="margin-top:12px;">
+      <div class="card-title"><span class="dot orange"></span>🎤 Demo ao vivo</div>
+      <span class="demo-cmd">"Crie uma skill que analise minha planilha de leads e me diga quais estão esfriando"</span>
+      <p><strong>Resultado esperado:</strong> Agente cria o SKILL.md com input (planilha), processo (análise de datas/status) e output (lista de leads esfriando + sugestão de ação). Depois executa e mostra o resultado.</p>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante viu o agente criando uma skill do zero com linguagem natural, salvando no repo e executando imediatamente. Entendeu que pode criar qualquer automação sem saber programar.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 5 ===== -->
+  <div class="block-section" id="bloco5">
+    <div class="block-header">
+      <div class="block-num">5</div>
+      <div class="block-title-group">
+        <div class="block-title">Rotinas — O Agente Trabalhando Sozinho</div>
+        <div class="block-subtitle">De skill manual para cron automático — relatórios chegando sem ninguém pedir</div>
+        <div class="block-meta">
+          <span class="badge badge-orange">11h15 – 11h35</span>
+          <span class="badge badge-gray">20 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>Evolução:</strong> skill rodada manualmente → cron que roda sozinho</li>
+          <li>Rotina de relatório de vendas diário — config e resultado</li>
+          <li>Rotina de follow-up de leads — o agente cobra follow-up sem ninguém pedir</li>
+          <li>Demo: configurar cron e mostrar relatório chegando no WhatsApp/Telegram</li>
+          <li>Heartbeat: o agente monitora a si mesmo — garante que está vivo e funcionando</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">areas/vendas/rotinas/relatorio-vendas-diario.md</span>
+            <div class="file-desc">Config do cron — relatório de vendas todo dia às 9h</div>
+          </li>
+          <li>
+            <span class="file-path">areas/vendas/rotinas/follow-up-leads-diario.md</span>
+            <div class="file-desc">Cron de follow-up — agente cobra leads pendentes</div>
+          </li>
+          <li>
+            <span class="file-path">areas/operacoes/rotinas/heartbeat.md</span>
+            <div class="file-desc">Heartbeat — agente monitora a si mesmo</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list">
+          <li>Explicar a evolução: "Até agora você pediu pro agente. E se ele fizesse SOZINHO?"</li>
+          <li>Abrir <code class="inline">areas/vendas/rotinas/relatorio-vendas-diario.md</code> — mostrar como um cron é configurado</li>
+          <li>Abrir <code class="inline">areas/vendas/rotinas/follow-up-leads-diario.md</code> — mostrar segundo exemplo</li>
+          <li><strong>Demo:</strong> configurar cron ao vivo — "todo dia às 9h manda relatório no Telegram"</li>
+          <li>Se possível, mostrar relatório chegando em tempo real no celular/Telegram</li>
+          <li>Abrir <code class="inline">areas/operacoes/rotinas/heartbeat.md</code> — "o agente até monitora a si mesmo"</li>
+          <li>Transição: "Com dados, skills e rotinas, o agente trabalha sozinho. Mas e a segurança?"</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Todos os crons possíveis — só 2-3 exemplos</li>
+          <li>Configuração técnica de cron no OpenClaw (crontab syntax, etc.)</li>
+          <li>Crons de marketing (vem no Deep Dive do Dia 2)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="demo-card" style="margin-top:16px;">
+      <div class="card-title"><span class="dot orange"></span>🎤 Demo ao vivo</div>
+      <span class="demo-cmd">Configurar cron: relatório de vendas todo dia às 9h BRT → enviar no Telegram</span>
+      <p><strong>Resultado esperado:</strong> Mostrar a configuração e, idealmente, mostrar o relatório chegando no celular/Telegram. O participante vê que o agente trabalha sozinho, sem ninguém precisar pedir.</p>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu a evolução skill → cron, viu exemplos de rotinas automáticas e viu (ou entendeu) como relatórios chegam no WhatsApp/Telegram sem intervenção humana.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 6 ===== -->
+  <div class="block-section" id="bloco6">
+    <div class="block-header">
+      <div class="block-num">6</div>
+      <div class="block-title-group">
+        <div class="block-title">Segurança</div>
+        <div class="block-subtitle">Como o OpenClaw acessa dados com controle — e por que você pode confiar</div>
+        <div class="block-meta">
+          <span class="badge badge-orange">11h35 – 11h50</span>
+          <span class="badge badge-gray">15 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li>Como o OpenClaw acessa dados: tudo local, no servidor do usuário</li>
+          <li>Visão geral de permissões: o que liberar vs o que proteger</li>
+          <li><strong>Modo ask:</strong> ações sensíveis precisam de aprovação humana</li>
+          <li>Responder a objeção: <em>"Não quero dar acesso aos meus dados"</em> — o agente roda NA SUA MÁQUINA</li>
+          <li>Controle granular: o agente só acessa o que você permitir</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">seguranca/permissoes.md</span>
+            <div class="file-desc">Visão geral de permissões — quem acessa o quê</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list">
+          <li>Abrir <code class="inline">seguranca/permissoes.md</code> — mostrar a visão geral</li>
+          <li>Explicar o modelo: "O OpenClaw roda no SEU servidor — dados nunca saem da sua máquina"</li>
+          <li>Demonstrar o modo ask: ação sensível → agente pede aprovação → você aceita ou rejeita</li>
+          <li>Endereçar a objeção: "Não quero dar acesso aos meus dados" → explicar o modelo local</li>
+          <li>Preview: "Amanhã vamos ver como controlar o que CADA agente acessa"</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Configuração técnica detalhada de allowFrom/allowList — fica pro Dia 2 com multi-agente</li>
+          <li>Detalhes de criptografia ou infraestrutura</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu que dados ficam locais, viu o modo ask em ação e teve a objeção de segurança respondida. Confortável para continuar.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== FECHAMENTO DIA 1 ===== -->
+  <div class="block-section block-fechamento" id="fechamento-d1">
+    <div class="block-header">
+      <div class="block-num green">✓</div>
+      <div class="block-title-group">
+        <div class="block-title">Pitch + Fechamento Dia 1</div>
+        <div class="block-subtitle">Recap do dia, pitch do produto e tarefa sugerida</div>
+        <div class="block-meta">
+          <span class="badge badge-green">11h50 – 12h00</span>
+          <span class="badge badge-gray">10 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title green"><span class="dot green"></span>Recap do Dia 1</div>
+        <ul class="item-list green">
+          <li><strong>Cérebro:</strong> repo GitHub como memória permanente do agente</li>
+          <li><strong>Estrutura:</strong> empresa → áreas → rotinas → skills</li>
+          <li><strong>Skills:</strong> input → processo → output — receitas que o agente segue</li>
+          <li><strong>Skill-creator:</strong> criar automações com linguagem natural</li>
+          <li><strong>Rotinas:</strong> crons que rodam sozinhos — relatórios, follow-ups</li>
+          <li><strong>Segurança:</strong> dados locais, modo ask, controle granular</li>
+        </ul>
+      </div>
+
+      <div class="placeholder-card">
+        <div class="card-title yellow"><span class="dot yellow"></span>PITCH DO PRODUTO</div>
+        <p><strong>[PRODUTO A DEFINIR]</strong></p>
+        <p>Seção reservada para o pitch. Produto, preço e condições ainda não definidos.</p>
+        <p style="margin-top:8px;">Placeholder — atualizar quando produto for decidido.</p>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Tarefa sugerida para amanhã</div>
+        <ul class="item-list">
+          <li><strong>"Abra sua planilha principal e organize os dados"</strong> — pra quem quiser acompanhar as demos do Dia 2</li>
+          <li>Não é obrigatório — Dia 2 continua sendo 100% demonstração</li>
+          <li>Lembrar: amanhã começa 9h BRT pontual, tópicos: multi-agente, permissionamento, marketing com daily report e bot de suporte</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante saiu do Dia 1 com visão clara do sistema (cérebro → skills → rotinas → segurança), viu resultados reais e está motivado pro Dia 2.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ═══════════════  DIA 2 — 29/03/2026  ═══════════ -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="day-separator" id="dia2">
+    <div class="day-badge day2">📅 Dia 2 — 29/03/2026</div>
+    <div class="day-line"></div>
+    <div class="day-meta">9h00 – 12h00 BRT · Multi-agente + Deep Dives</div>
+  </div>
+
+
+  <!-- ===== ABERTURA DIA 2 ===== -->
+  <div class="block-section block-abertura" id="abertura-d2">
+    <div class="block-header">
+      <div class="block-num yellow">▶</div>
+      <div class="block-title-group">
+        <div class="block-title">Abertura + Recap</div>
+        <div class="block-subtitle">Retomada do Dia 1, engajamento e roteiro do Dia 2</div>
+        <div class="block-meta">
+          <span class="badge badge-yellow">9h00 – 9h15</span>
+          <span class="badge badge-gray">15 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li>Ativação: <strong>"Quem mexeu no agente ontem? O que aconteceu?"</strong> — ler 3-4 respostas</li>
+          <li>Recap visual rápido do Dia 1: cérebro → skills → rotinas → segurança</li>
+          <li>Roteiro do Dia 2: multi-agente → permissões → deep dive marketing → deep dive vendas → roadmap 30 dias → pitch</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list blue">
+          <li>Abrir com a pergunta no chat: "Quem mexeu no agente ontem?"</li>
+          <li>Ler 3-4 respostas, comentar brevemente</li>
+          <li>Recap visual: slide/tela com os 6 blocos do Dia 1</li>
+          <li>Mostrar roteiro do Dia 2 — "Hoje é onde fica avançado"</li>
+          <li>Transição: "Ontem foi 1 agente. Hoje vamos para um SISTEMA..."</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante está reconectado com o conteúdo do Dia 1 e sabe o que esperar do Dia 2.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 7 ===== -->
+  <div class="block-section" id="bloco7">
+    <div class="block-header">
+      <div class="block-num blue">7</div>
+      <div class="block-title-group">
+        <div class="block-title">De 1 Agente para um Sistema Multi-agente</div>
+        <div class="block-subtitle">Por que 1 agente não escala — e como criar um sistema de agentes especializados</div>
+        <div class="block-meta">
+          <span class="badge badge-blue">9h15 – 9h45</span>
+          <span class="badge badge-gray">30 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>O problema:</strong> 1 agente vira gargalo — concorrência, contexto poluído, sem especialização</li>
+          <li>Demo: criar segundo agente ao vivo (agente de marketing com contexto específico)</li>
+          <li>Mentes de referência: cada agente tem seu SOUL.md — personalidade e foco diferentes</li>
+          <li>Escopo restrito: AGENTS.md define o que cada agente pode ver</li>
+          <li>Demo: mesma pergunta para 2 agentes → respostas contextualizadas diferentes</li>
+          <li>Acesso multi-pessoa: tópicos por área no Telegram/WhatsApp</li>
+          <li>Mapeamento tópico ↔ agente: cada conversa vai pro agente certo</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">agentes/assistente/SOUL.md</span>
+            <div class="file-desc">Mente do agente principal — generalista</div>
+          </li>
+          <li>
+            <span class="file-path">agentes/marketing/SOUL.md</span>
+            <div class="file-desc">Mente do agente de marketing — especialista</div>
+          </li>
+          <li>
+            <span class="file-path">agentes/marketing/AGENTS.md</span>
+            <div class="file-desc">Config do agente de marketing — escopo restrito (só vê marketing/)</div>
+          </li>
+          <li>
+            <span class="file-path">agentes/assistente/memory/channels.md</span>
+            <div class="file-desc">Mapeamento tópico ↔ agente no Telegram</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list blue">
+          <li>Explicar o problema: "1 agente com tudo = gargalo + contexto poluído"</li>
+          <li>Demo: criar agente de marketing ao vivo — mostrar SOUL.md específico</li>
+          <li>Abrir <code class="inline">agentes/assistente/SOUL.md</code> vs <code class="inline">agentes/marketing/SOUL.md</code> — lado a lado, mentes diferentes</li>
+          <li>Abrir <code class="inline">agentes/marketing/AGENTS.md</code> — mostrar escopo restrito</li>
+          <li><strong>Demo:</strong> mesma pergunta pros 2 agentes → respostas diferentes e especializadas</li>
+          <li>Abrir <code class="inline">agentes/assistente/memory/channels.md</code> — mostrar mapeamento de tópicos</li>
+          <li>Explicar: "Seu time de marketing fala com o agente de marketing. Vendas com o de vendas."</li>
+          <li>Transição: "Mas se tem vários agentes... quem controla quem vê o quê?"</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Como configurar multi-agente no OpenClaw (complexo demais — conteúdo pós-imersão)</li>
+          <li>Configuração técnica do Telegram/WhatsApp com múltiplos agentes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="demo-card" style="margin-top:16px;">
+      <div class="card-title"><span class="dot blue"></span>🎤 Demo ao vivo</div>
+      <span class="demo-cmd">Mesma pergunta para o Agente Assistente e o Agente de Marketing → respostas contextualizadas diferentes</span>
+      <p><strong>Resultado esperado:</strong> O assistente responde de forma geral; o de marketing responde com dados específicos de campanhas, criativos e métricas. Mesma pergunta, contextos diferentes.</p>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu por que 1 agente não escala, viu 2 agentes com contextos diferentes respondendo de forma especializada e entendeu como tópicos mapeiam para agentes.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 8 ===== -->
+  <div class="block-section" id="bloco8">
+    <div class="block-header">
+      <div class="block-num blue">8</div>
+      <div class="block-title-group">
+        <div class="block-title">Permissionamento — Quem Vê o Quê</div>
+        <div class="block-subtitle">Duas arquiteturas de segurança: grupos separados (isolamento) vs tópicos (transparência)</div>
+        <div class="block-meta">
+          <span class="badge badge-blue">9h45 – 10h05</span>
+          <span class="badge badge-gray">20 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>Duas camadas de segurança (ambos os cenários têm as duas):</strong>
+            <ol style="margin-top:6px; padding-left:18px;">
+              <li>Pertencer ao grupo/tópico correto</li>
+              <li>Whitelist de IDs no AGENTS.md — sem ID, sem interação com o agente</li>
+            </ol>
+          </li>
+          <li><strong>Cenário A — Grupos separados (mais seguro):</strong> cada área = 1 grupo Telegram/WhatsApp separado. Pessoa só acessa o agente do grupo onde está. Mais isolado — ninguém vê conversa de outra área</li>
+          <li><strong>Cenário B — Tópicos (mais prático):</strong> um grupo único, tópicos por área. Todo mundo vê todas as áreas (transparência). Só ativa o agente pelo tópico certo + whitelist. Ideal para times pequenos</li>
+          <li><strong>A diferença é visibilidade vs isolamento</strong> — não mais ou menos seguro em termos de acesso ao agente, mas sim quem vê as conversas</li>
+          <li><strong>Camada de pastas:</strong> Agentes ↔ Pastas — cada agente só vê as pastas que precisa (AGENTS.md define o escopo)</li>
+          <li>Demo visual: agente de vendas NÃO consegue ver pasta de marketing</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">seguranca/permissoes.md</span>
+            <div class="file-desc">Tabela completa — quem acessa qual agente e qual pasta</div>
+          </li>
+          <li>
+            <span class="file-path">agentes/marketing/AGENTS.md</span>
+            <div class="file-desc">Cenário A — whitelist de IDs do time de marketing (grupo separado)</div>
+          </li>
+          <li>
+            <span class="file-path">agentes/vendas/AGENTS.md</span>
+            <div class="file-desc">Cenário B — whitelist de IDs + tópico configurado</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title orange"><span class="dot orange"></span>Comparação dos Cenários</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Aspecto</th>
+              <th>Cenário A — Grupos Separados</th>
+              <th>Cenário B — Tópicos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Estrutura</strong></td>
+              <td>1 grupo por área</td>
+              <td>1 grupo + tópicos por área</td>
+            </tr>
+            <tr>
+              <td><strong>Visibilidade</strong></td>
+              <td>Isolado — ninguém vê outra área</td>
+              <td>Transparente — todo mundo vê tudo</td>
+            </tr>
+            <tr>
+              <td><strong>Controle de acesso</strong></td>
+              <td>Pertencer ao grupo + whitelist de IDs</td>
+              <td>Tópico correto + whitelist de IDs</td>
+            </tr>
+            <tr>
+              <td><strong>Camadas de segurança</strong></td>
+              <td>✅ Duas camadas</td>
+              <td>✅ Duas camadas</td>
+            </tr>
+            <tr>
+              <td><strong>Ideal para</strong></td>
+              <td>Times maiores, dados sensíveis por área</td>
+              <td>Times pequenos, cultura de transparência</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list blue">
+          <li>Explicar o princípio: "Toda arquitetura tem DUAS camadas de segurança — a diferença é o que as pessoas conseguem <em>ver</em>, não o que conseguem <em>acessar</em>"</li>
+          <li>Apresentar <strong>Cenário A (grupos separados):</strong> "Cada área = 1 grupo. Pra ativar o agente, você precisa estar no grupo E ter seu ID na whitelist do AGENTS.md"</li>
+          <li>Apresentar <strong>Cenário B (tópicos):</strong> "Um grupo único, tópicos por área. Todo mundo vê as conversas — transparência total. Mas só interage com o agente pelo tópico certo + whitelist"</li>
+          <li>Mostrar a tabela comparativa — "Isolamento vs Transparência: escolha baseada na cultura do time"</li>
+          <li>Abrir <code class="inline">seguranca/permissoes.md</code> — mostrar a tabela completa de permissões</li>
+          <li>Abrir <code class="inline">agentes/vendas/AGENTS.md</code> — mostrar a whitelist de IDs: "Sem o seu ID aqui, você não consegue interagir com o agente — mesmo estando no grupo"</li>
+          <li><strong>Demo visual:</strong> agente de vendas pedindo info de marketing → "acesso negado" — a camada de pastas funciona em ambos os cenários</li>
+          <li>Transição: "Agora vamos ver dois sistemas reais funcionando: marketing e suporte"</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Configuração técnica detalhada de allowFrom/allowList</li>
+          <li>Setup técnico de grupos no Telegram/WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu as duas arquiteturas (grupos separados vs tópicos), viu que ambas têm duas camadas de segurança, e entendeu que a diferença é visibilidade vs isolamento — não qual é "mais segura" em termos de acesso ao agente.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 9 ===== -->
+  <div class="block-section" id="bloco9">
+    <div class="block-header">
+      <div class="block-num blue">9</div>
+      <div class="block-title-group">
+        <div class="block-title">Deep Dive Marketing — Sistema de Criativos</div>
+        <div class="block-subtitle">O ciclo completo: hipótese → criativo → teste → dado → conclusão → nova hipótese. Com daily report automático e pipeline de criação.</div>
+        <div class="block-meta">
+          <span class="badge badge-blue">10h05 – 10h40</span>
+          <span class="badge badge-gray">35 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>O ciclo:</strong> HIPÓTESE → CRIATIVO → TESTE → DADO → CONCLUSÃO → NOVA HIPÓTESE</li>
+          <li>Processo documentado de tráfego pago — como o agente opera nesse ciclo</li>
+          <li>Mapa de criativos + ângulos documentados</li>
+          <li>Testes: abertos (em andamento) vs consolidados (com conclusão)</li>
+          <li>Learnings: aprendizados consolidados — o agente aprende com cada teste</li>
+          <li><strong>Novas pastas:</strong> <code class="inline">formatos/</code> (specs por tipo de criativo) e <code class="inline">criativos/</code> (ficha de cada criativo)</li>
+          <li><strong>3 Skills de Marketing:</strong> relatorio-ads, analise-criativos, criacao-criativos</li>
+          <li><strong>3 Crons de Marketing:</strong> daily-ads-report (diário 8h), creative-pipeline (semanal), weekly-funnel (semanal)</li>
+          <li><strong>Daily Report:</strong> mostrar exemplo visual — é isso que chega todo dia às 8h</li>
+          <li><strong>Pipeline de Criativos:</strong> Report → Análise → Sugestão → Aprovação humana → Criação → Sub-skills por formato</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">areas/marketing/sub-areas/trafego-pago/PROCESSO.md</span>
+            <div class="file-desc">Processo completo do ciclo de criativos</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/sub-areas/trafego-pago/MAPA.md</span>
+            <div class="file-desc">Mapa de criativos — todos os criativos mapeados</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/sub-areas/trafego-pago/formatos/</span>
+            <div class="file-desc">Specs por formato de criativo (estático, vídeo, carrossel) — regras e dimensões</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/sub-areas/trafego-pago/criativos/</span>
+            <div class="file-desc">Ficha de cada criativo subindo (ângulo, copy, formato, status, link)</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/sub-areas/trafego-pago/angulos/delegacao.md</span>
+            <div class="file-desc">Ângulo "delegação" documentado</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/sub-areas/trafego-pago/learnings/resumo.md</span>
+            <div class="file-desc">Learnings consolidados — aprendizados de todos os testes</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/skills/relatorio-ads/SKILL.md</span>
+            <div class="file-desc">Skill 1 — Gera daily report: lê Meta Ads API, analisa criativos, recomendações</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/skills/analise-criativos/SKILL.md</span>
+            <div class="file-desc">Skill 2 — Analisa campanhas, identifica ângulos vencedores, propõe novos criativos</div>
+          </li>
+          <li>
+            <span class="file-path">areas/marketing/skills/criacao-criativos/SKILL.md</span>
+            <div class="file-desc">Skill 3 — Cria criativos: chama sub-skills por formato (estático/vídeo), gera copies</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>As 3 Skills de Marketing</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Skill</th>
+              <th>O que faz</th>
+              <th>Quando usa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code class="inline">relatorio-ads</code></td>
+              <td>Lê Meta Ads API → gera relatório com métricas, análise de criativos e recomendações</td>
+              <td>Todo dia às 8h (cron daily-ads-report)</td>
+            </tr>
+            <tr>
+              <td><code class="inline">analise-criativos</code></td>
+              <td>Analisa resultados (teste/pré-escala/escala), identifica ângulos vencedores, propõe novos criativos e formatos</td>
+              <td>Semanalmente (cron creative-pipeline)</td>
+            </tr>
+            <tr>
+              <td><code class="inline">criacao-criativos</code></td>
+              <td>Cria criativos: para estáticos chama sub-skills de formato específico. Para vídeo gera roteiro. Gera copies para todos.</td>
+              <td>Após aprovação humana no pipeline</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list blue">
+          <li>Apresentar o ciclo: HIPÓTESE → CRIATIVO → TESTE → DADO → CONCLUSÃO → NOVA HIPÓTESE</li>
+          <li>Abrir <code class="inline">areas/marketing/sub-areas/trafego-pago/PROCESSO.md</code> — o processo documentado</li>
+          <li>Abrir <code class="inline">MAPA.md</code> — visão geral dos criativos</li>
+          <li>Mostrar <code class="inline">formatos/</code> — "cada formato tem suas specs e regras: estático, vídeo, carrossel"</li>
+          <li>Mostrar <code class="inline">criativos/</code> — "ficha de cada criativo que está subindo: ângulo, copy, formato, status, link"</li>
+          <li>Abrir <code class="inline">angulos/delegacao.md</code> — como um ângulo é documentado</li>
+          <li>Abrir <code class="inline">learnings/resumo.md</code> — "tudo que aprendemos está aqui"</li>
+          <li>Apresentar as <strong>3 Skills</strong>: relatorio-ads → analise-criativos → criacao-criativos</li>
+          <li>Apresentar o <strong>Pipeline de Criativos</strong> (card visual abaixo) — "esse é o ciclo completo com aprovação humana"</li>
+          <li>Mostrar o <strong>exemplo do Daily Report</strong> (card abaixo) — "é isso que chega no Telegram todo dia às 8h"</li>
+          <li>Mencionar os 3 crons: daily-ads-report (diário 8h), creative-pipeline (semanal), weekly-funnel (semanal)</li>
+          <li><strong>Demo:</strong> perguntar ao agente "Com base nos learnings, qual próximo criativo faz sentido?" — agente usa a skill analise-criativos</li>
+          <li>Transição: "Marketing é ciclo de teste automatizado. Agora vamos ver o bot de suporte..."</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Como subir criativo na Meta (manual por enquanto)</li>
+          <li>Configuração técnica da Meta Ads API</li>
+          <li>Todos os ângulos — só delegação como exemplo</li>
+          <li>Código interno das sub-skills de formato</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXEMPLO DAILY REPORT -->
+    <div class="card card-full" style="margin-top:16px; background: var(--code-bg); border-color: rgba(96,165,250,0.3);">
+      <div class="card-title blue"><span class="dot blue"></span>📊 Exemplo — Daily Ads Report (chega todo dia às 8h)</div>
+      <pre style="font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size:12.5px; color: #e2e8f0; line-height:1.7; white-space:pre-wrap; margin-top:8px;">📊 <strong style="color:#60a5fa;">Daily Ads Report — 24/03/2026</strong>
+
+💰 Investimento: R$ 1.247,00
+🛒 Vendas: 8 (R$ 7.976,00)
+📈 ROAS: 6.4x
+🎯 CPL: R$ 12,47  |  CPA: R$ 155,88
+
+🏆 <strong style="color:#22c55e;">Top Criativos:</strong>
+1. VSL Delegação v3 — ROAS 8.2x <span style="color:#22c55e;">(escala)</span>
+2. Carrossel Antes/Depois — ROAS 5.1x <span style="color:#eab308;">(pré-escala)</span>
+3. Static Overlay Urgência — ROAS 3.8x <span style="color:#94a3b8;">(teste)</span>
+
+⚠️ <strong style="color:#ef4444;">Atenção:</strong>
+- Hook "produtividade" com CPL alto (R$ 28,50) — pausar se não melhorar em 48h
+- 2 criativos sem impressão há 24h — verificar
+
+💡 <strong style="color:#fbbf24;">Recomendações:</strong>
+- Escalar VSL Delegação v3 (+30% budget)
+- Criar variação do Carrossel Antes/Depois com novo hook
+- Testar ângulo "economia de tempo" baseado nos learnings</pre>
+    </div>
+
+    <!-- PIPELINE DE CRIATIVOS -->
+    <div class="card card-full" style="margin-top:12px; background: linear-gradient(135deg, rgba(96,165,250,0.06) 0%, rgba(34,197,94,0.04) 100%); border-color: rgba(96,165,250,0.25);">
+      <div class="card-title blue"><span class="dot blue"></span>🔄 Pipeline de Criativos — Fluxo Completo</div>
+      <div style="font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size:12.5px; color: #94a3b8; line-height:2; margin-top:10px;">
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <span style="background:rgba(96,165,250,0.15); color:#60a5fa; padding:4px 12px; border-radius:20px; font-weight:700;">REPORT (dados)</span>
+          <span style="color:#64748b;">→</span>
+          <span style="background:rgba(234,179,8,0.15); color:#eab308; padding:4px 12px; border-radius:20px; font-weight:700;">ANÁLISE (ângulos vencedores)</span>
+          <span style="color:#64748b;">→</span>
+          <span style="background:rgba(254,80,0,0.15); color:#fe5000; padding:4px 12px; border-radius:20px; font-weight:700;">SUGESTÃO (novos criativos)</span>
+        </div>
+        <div style="margin:8px 0 4px; color:#64748b; font-size:11px; padding-left:4px;">↓ diário &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓ aprovação humana</div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:4px; padding-left:120px;">
+          <span style="background:rgba(34,197,94,0.15); color:#22c55e; padding:4px 12px; border-radius:20px; font-weight:700;">CRIAÇÃO (roteiro ou estático)</span>
+          <span style="color:#64748b;">↓</span>
+          <span style="background:rgba(96,165,250,0.10); color:#7dd3fc; padding:4px 12px; border-radius:20px; font-weight:700;">Sub-skills por formato</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card" style="margin-top:16px;">
+      <div class="card-title"><span class="dot blue"></span>🎤 Demo ao vivo</div>
+      <span class="demo-cmd">"Com base nos learnings, qual próximo criativo faz sentido?"</span>
+      <p><strong>Resultado esperado:</strong> Agente lê os learnings consolidados, analisa testes anteriores e sugere próximo criativo com justificativa baseada em dados reais. Mostrar o exemplo do daily report como referência visual do que chega todo dia.</p>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante entendeu o ciclo completo de criativos, viu as 3 skills (relatorio-ads, analise-criativos, criacao-criativos), o pipeline com aprovação humana, e o daily report que chega automaticamente às 8h com métricas, alertas e recomendações.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== PAUSA 2 ===== -->
+  <div class="block-section block-pausa" id="pausa2">
+    <div class="pausa-inner">
+      <span class="pausa-icon">☕</span>
+      <div>
+        <div class="pausa-text">Pausa — 10 minutos</div>
+        <div class="pausa-sub">10h40 – 10h50 · Retorno pontual</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 10 ===== -->
+  <div class="block-section" id="bloco10">
+    <div class="block-header">
+      <div class="block-num blue">10</div>
+      <div class="block-title-group">
+        <div class="block-title">Deep Dive Atendimento — Bot de Suporte Inteligente</div>
+        <div class="block-subtitle">Bot que aprende sozinho: FAQ → dúvida nova → humano responde → bot evolui</div>
+        <div class="block-meta">
+          <span class="badge badge-blue">10h50 – 11h25</span>
+          <span class="badge badge-gray">35 minutos</span>
+          <span class="badge badge-red">🔥 3º AHA MOMENT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title orange"><span class="dot orange"></span>O que cobrir</div>
+        <ul class="item-list">
+          <li><strong>Fluxo principal:</strong> cliente pergunta → bot consulta <code class="inline">areas/atendimento/bot/faq.md</code> → responde com base no FAQ</li>
+          <li><strong>Quando não sabe:</strong> bot marca como pendente → salva em <code class="inline">duvidas.md</code> → notifica equipe no tópico Atendimento</li>
+          <li><strong>Consolidação:</strong> cron <code class="inline">consolidar-faq.md</code> consolida duvidas.md → faq.md periodicamente</li>
+          <li><strong>Loop de aprendizado:</strong> bot fica mais inteligente a cada interação — sem ninguém reescrever código</li>
+          <li>Config do bot: SOUL.md empático, focado em resolver. AGENTS.md com escopo mínimo (só atendimento/)</li>
+          <li><strong>Distinção:</strong> Bot Suporte (externo, fala com cliente) vs Agente Atendimento (interno, fala com time)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Demos e Arquivos</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">agentes/bot-suporte/SOUL.md</span>
+            <div class="file-desc">Como o bot pensa — empático, focado em resolver</div>
+          </li>
+          <li>
+            <span class="file-path">agentes/bot-suporte/AGENTS.md</span>
+            <div class="file-desc">Config + escopo mínimo (só acessa atendimento/)</div>
+          </li>
+          <li>
+            <span class="file-path">areas/atendimento/bot/faq.md</span>
+            <div class="file-desc">Base de conhecimento do bot — "é isso que o bot sabe"</div>
+          </li>
+          <li>
+            <span class="file-path">areas/atendimento/bot/duvidas.md</span>
+            <div class="file-desc">Dúvidas pendentes — humano responde aqui, bot aprende depois</div>
+          </li>
+          <li>
+            <span class="file-path">areas/atendimento/rotinas/consolidar-faq.md</span>
+            <div class="file-desc">Cron que consolida duvidas.md → faq.md periodicamente</div>
+          </li>
+          <li>
+            <span class="file-path">areas/atendimento/skills/responder-cliente/SKILL.md</span>
+            <div class="file-desc">Skill de resposta ao cliente com base no FAQ</div>
+          </li>
+          <li>
+            <span class="file-path">areas/atendimento/skills/escalar-duvida/SKILL.md</span>
+            <div class="file-desc">Skill de escalar dúvida desconhecida pro humano</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- FLUXO VISUAL -->
+      <div class="card card-full" style="background: linear-gradient(135deg, rgba(96,165,250,0.06) 0%, rgba(34,197,94,0.04) 100%); border-color: rgba(96,165,250,0.25);">
+        <div class="card-title blue"><span class="dot blue"></span>🔄 Fluxo do Bot de Suporte — Loop de Aprendizado</div>
+        <div style="font-size:13px; color: #94a3b8; line-height:2; margin-top:10px;">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <span style="background:rgba(96,165,250,0.15); color:#60a5fa; padding:4px 12px; border-radius:20px; font-weight:700;">Cliente pergunta</span>
+            <span style="color:#64748b;">→</span>
+            <span style="background:rgba(234,179,8,0.15); color:#eab308; padding:4px 12px; border-radius:20px; font-weight:700;">Bot consulta faq.md</span>
+            <span style="color:#64748b;">→</span>
+            <span style="background:rgba(34,197,94,0.15); color:#22c55e; padding:4px 12px; border-radius:20px; font-weight:700;">✅ Responde</span>
+          </div>
+          <div style="margin:4px 0 4px; color:#64748b; font-size:11px; padding-left:200px;">↓ se não sabe</div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding-left:200px;">
+            <span style="background:rgba(239,68,68,0.15); color:#ef4444; padding:4px 12px; border-radius:20px; font-weight:700;">Salva em duvidas.md</span>
+            <span style="color:#64748b;">→</span>
+            <span style="background:rgba(234,179,8,0.15); color:#eab308; padding:4px 12px; border-radius:20px; font-weight:700;">Notifica equipe</span>
+            <span style="color:#64748b;">→</span>
+            <span style="background:rgba(96,165,250,0.15); color:#60a5fa; padding:4px 12px; border-radius:20px; font-weight:700;">Humano responde</span>
+          </div>
+          <div style="margin:4px 0 4px; color:#64748b; font-size:11px; padding-left:200px;">↓ cron consolidar-faq</div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding-left:200px;">
+            <span style="background:rgba(34,197,94,0.2); color:#22c55e; padding:4px 12px; border-radius:20px; font-weight:700; border: 1px solid rgba(34,197,94,0.4);">faq.md evolui 🔁 bot fica mais inteligente</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list blue">
+          <li>Apresentar o fluxo visual (card acima): cliente → FAQ → resposta (ou) → dúvida nova → humano → consolidação → FAQ evolui</li>
+          <li>Abrir <code class="inline">agentes/bot-suporte/SOUL.md</code> — mostrar tom empático, focado em resolver</li>
+          <li>Abrir <code class="inline">agentes/bot-suporte/AGENTS.md</code> — escopo mínimo: "só acessa a pasta atendimento/"</li>
+          <li>Abrir <code class="inline">areas/atendimento/bot/faq.md</code> — "é isso que o bot sabe. Tudo que está aqui, ele responde"</li>
+          <li>Abrir <code class="inline">areas/atendimento/bot/duvidas.md</code> — "quando não sabe, registra aqui. Humano responde nesse arquivo"</li>
+          <li>Abrir <code class="inline">areas/atendimento/rotinas/consolidar-faq.md</code> — "periodicamente, esse cron consolida tudo — duvidas.md vira faq.md"</li>
+          <li><strong>Demo ao vivo (parte 1):</strong> mandar mensagem pro bot como se fosse um cliente → ver resposta baseada no FAQ</li>
+          <li><strong>Demo ao vivo (parte 2):</strong> mandar dúvida que não está no FAQ → bot marca como pendente, notifica no tópico Atendimento</li>
+          <li>Explicar o loop: "A cada interação o bot fica mais inteligente — sem ninguém reescrever código, sem retreinar modelo"</li>
+          <li>Transição: "Vocês viram tudo funcionando. Agora: como começar?"</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Configuração técnica do WhatsApp/Telegram</li>
+          <li>Setup do webhook</li>
+          <li>Integração com Crisp ou outros sistemas de ticket</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="demo-card" style="margin-top:16px;">
+      <div class="card-title"><span class="dot blue"></span>🎤 Demo ao vivo — Bot de Suporte</div>
+      <span class="demo-cmd">Mandar mensagem pro bot de suporte como se fosse um cliente → ver conversa + escalação de dúvida nova</span>
+      <p><strong>Resultado esperado:</strong> Bot responde dúvida conhecida com base no FAQ. Bot marca dúvida desconhecida como pendente e notifica equipe. Ciclo de aprendizado visível — duvidas.md → consolidação → faq.md.</p>
+    </div>
+
+    <div class="aha-card" style="margin-top:12px;">
+      <div class="card-title orange"><span class="dot orange"></span>🔥 3º AHA MOMENT</div>
+      <p>"O bot aprende sozinho com a operação. Cada dúvida respondida pelo humano vira conhecimento permanente do bot — sem reescrever código, sem retreinar modelo."</p>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante viu o bot de suporte respondendo com base no FAQ, escalando dúvida nova pro humano, e entendeu o loop de aprendizado contínuo (duvidas.md → consolidação → faq.md). Entendeu a distinção: Bot Suporte (externo, cliente) vs Agente Atendimento (interno, time).</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== BLOCO 11 ===== -->
+  <div class="block-section" id="bloco11">
+    <div class="block-header">
+      <div class="block-num blue">11</div>
+      <div class="block-title-group">
+        <div class="block-title">Próximos 30 Dias — Como Preencher o Cérebro</div>
+        <div class="block-subtitle">Passo a passo prático de 30 dias para sair da imersão com tudo funcionando</div>
+        <div class="block-meta">
+          <span class="badge badge-blue">11h25 – 11h50</span>
+          <span class="badge badge-gray">25 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card card-full">
+        <div class="card-title orange"><span class="dot orange"></span>Roadmap de 30 dias</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Semana</th>
+              <th>Foco</th>
+              <th>Entregáveis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Semana 1</strong></td>
+              <td>Fundação</td>
+              <td>Criar repo, preencher <code class="inline">empresa.md</code>, conectar planilha principal, primeiro agente respondendo com contexto</td>
+            </tr>
+            <tr>
+              <td><strong>Semana 2</strong></td>
+              <td>Primeira área</td>
+              <td>Documentar a área principal (vendas ou marketing), criar 2-3 skills, testar execução manual</td>
+            </tr>
+            <tr>
+              <td><strong>Semana 3</strong></td>
+              <td>Automação</td>
+              <td>Configurar primeiros crons, trazer primeira pessoa do time, validar que relatórios chegam</td>
+            </tr>
+            <tr>
+              <td><strong>Semana 4</strong></td>
+              <td>Escala</td>
+              <td>Permissionamento, adicionar mais áreas, segundo agente (se fizer sentido)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Referência</div>
+        <ul class="file-list">
+          <li>
+            <span class="file-path">guias/roadmap-90-dias.md</span>
+            <div class="file-desc">Roadmap completo — adaptar para 30 dias (foco nas 4 primeiras semanas)</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title blue"><span class="dot blue"></span>Como fazer</div>
+        <ol class="steps-list blue">
+          <li>Mostrar a tabela de 30 dias — "4 semanas, 4 marcos claros"</li>
+          <li>Semana 1: "Repo criado, empresa.md preenchido, planilha conectada — agente já responde"</li>
+          <li>Semana 2: "Primeira área documentada, 2-3 skills funcionando"</li>
+          <li>Semana 3: "Crons rodando, primeira pessoa do time usando"</li>
+          <li>Semana 4: "Permissões configuradas, mais áreas adicionadas"</li>
+          <li>Transição: "Em 30 dias você sai de zero para um sistema funcionando."</li>
+        </ol>
+      </div>
+
+      <div class="warning-card">
+        <div class="card-title red"><span class="dot red"></span>NÃO mostrar</div>
+        <ul class="item-list">
+          <li>Roadmap de 90 dias — muito distante, ninguém planeja isso agora</li>
+          <li>Ângulo agência — irrelevante pro contexto da imersão</li>
+          <li>Detalhes técnicos de cada semana — manter alto nível</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint</strong>
+        <p>Participante tem um plano claro de 30 dias: sabe exatamente o que fazer em cada semana para sair de zero a um sistema funcionando.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== FECHAMENTO DIA 2 ===== -->
+  <div class="block-section block-fechamento" id="fechamento-d2">
+    <div class="block-header">
+      <div class="block-num green">✓</div>
+      <div class="block-title-group">
+        <div class="block-title">Retomada do Pitch + Abertura de Carrinho + Fechamento</div>
+        <div class="block-subtitle">Recap dos 2 dias, pitch do produto e abertura de carrinho</div>
+        <div class="block-meta">
+          <span class="badge badge-green">11h50 – 12h00</span>
+          <span class="badge badge-gray">10 minutos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-title green"><span class="dot green"></span>Recap dos 2 dias</div>
+        <ul class="item-list green">
+          <li><strong>Dia 1:</strong> Cérebro permanente, estrutura de pastas, skills, skill-creator, rotinas automáticas, segurança</li>
+          <li><strong>Dia 2:</strong> Sistema multi-agente, permissionamento (2 arquiteturas), sistema de criativos com daily report, bot de suporte aprendendo sozinho, roadmap 30 dias</li>
+          <li><strong>O que viram funcionando:</strong> agente com contexto, relatório de planilha, skill criada do zero, cron automático, 2 agentes com respostas diferentes, bot de suporte aprendendo sozinho com a operação</li>
+        </ul>
+      </div>
+
+      <div class="placeholder-card">
+        <div class="card-title yellow"><span class="dot yellow"></span>PITCH DO PRODUTO + ABERTURA DE CARRINHO</div>
+        <p><strong>[PRODUTO A DEFINIR]</strong></p>
+        <p>Seção reservada para retomada do pitch e abertura de carrinho.</p>
+        <p style="margin-top:8px;">Produto, preço, condições e mecânica de carrinho ainda não definidos.</p>
+        <p style="margin-top:4px;">Placeholder — atualizar quando produto for decidido.</p>
+      </div>
+
+      <div class="card card-full">
+        <div class="card-title blue"><span class="dot blue"></span>Próximos passos concretos</div>
+        <ul class="item-list">
+          <li><strong>Imediato:</strong> Começar o roadmap de 30 dias — Semana 1 começa HOJE</li>
+          <li><strong>Comunidade:</strong> Acesso ao grupo/comunidade para dúvidas e suporte</li>
+          <li><strong>Suporte:</strong> Como pedir ajuda se travar em alguma etapa</li>
+          <li><strong>Materiais:</strong> Todos os arquivos/referências disponíveis no repo template</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="checkpoint">
+      <div class="checkpoint-icon">✓</div>
+      <div class="checkpoint-body">
+        <strong>Checkpoint Final</strong>
+        <p>Participante saiu da imersão com: (1) entendimento completo do sistema, (2) roadmap de 30 dias, (3) motivação e clareza para implementar, (4) acesso a comunidade e suporte.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ===== SCROLL SPY ===== -->
+<script>
+(function() {
+  const navItems = document.querySelectorAll('.nav-item[href]');
+  const sections = [];
+  navItems.forEach(item => {
+    const id = item.getAttribute('href').replace('#', '');
+    const el = document.getElementById(id);
+    if (el) sections.push({ el, nav: item });
+  });
+
+  function updateActive() {
+    let current = sections[0];
+    const scrollY = window.scrollY + 120;
+    for (const s of sections) {
+      if (s.el.offsetTop <= scrollY) current = s;
+    }
+    navItems.forEach(n => n.classList.remove('active'));
+    if (current) current.nav.classList.add('active');
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
+</script>
+
+</body>
+</html>

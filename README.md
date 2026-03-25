@@ -1,184 +1,75 @@
-# 🧠 Empresa Exemplo — Second Brain
+# Imersão OpenClaw nos Negócios
 
-> Este repositório é o **cérebro da Empresa Exemplo**. O agente de IA lê esses arquivos automaticamente para entender o contexto da empresa, tomar decisões e executar tarefas com autonomia.
+**📅 28-29/03/2026 · 2 dias · 3h cada**
 
-## O que é isso?
-
-Este repo centraliza todo o conhecimento operacional da **Empresa Exemplo** — uma EdTech que vende cursos online de marketing digital. Aqui ficam:
-
-- Contexto da empresa e da equipe
-- Regras e objetivos por área
-- Skills (automações prontas para usar)
-- Dados operacionais (vendas, leads)
-- Rotinas automáticas (crons)
-- Configurações de segurança
-
-**Por que no GitHub?** Porque o agente de IA precisa de uma fonte de verdade versionada, auditável e acessível. Qualquer membro da equipe pode atualizar um arquivo aqui e o agente vai se comportar diferente na próxima execução — sem precisar reprogramar nada.
+Workshop intensivo para PMEs implementarem agentes de IA nos seus negócios usando OpenClaw. Em dois dias, os participantes saem com um Cérebro funcional — contexto, áreas, skills, rotinas e agentes configurados para a sua empresa.
 
 ---
 
-## Estrutura Geral
+## Estrutura do Repositório
 
 ```
-empresa-exemplo-second-brain/
+imersao-openclaw-negocios/
+├── cerebro/          ← Template do Cérebro (empresa fictícia TechFlow Solutions)
+│   ├── empresa/      ← Contexto geral, decisões, gestão, skills corporativas
+│   ├── areas/        ← Marketing, Vendas, Atendimento, Operações
+│   ├── agentes/      ← Configuração de cada agente (SOUL, AGENTS, TOOLS)
+│   ├── dados/        ← CSVs de exemplo (leads, vendas)
+│   ├── guias/        ← Roadmap 90 dias, use cases, checklists
+│   └── seguranca/    ← Permissões e políticas de acesso
 │
-├── README.md                          ← Você está aqui
+├── wizard/           ← Guia passo a passo para implementação (agente conduz)
+│   ├── README.md     ← Ponto de entrada — leia aqui primeiro
+│   ├── 01-fundacao.md
+│   ├── 02-areas.md
+│   ├── 03-skills.md
+│   ├── 04-rotinas.md
+│   ├── 05-multi-agente.md
+│   └── 06-validacao.md
 │
-├── agentes/                           ← Configuração dos agentes de IA
-│   ├── COMO-CONECTAR.md               ← Como o agente se conecta ao repo
-│   ├── assistente/                    ← Agente geral (acesso total)
-│   │   ├── SOUL.md                    ← Personalidade e tom
-│   │   ├── USER.md                    ← Quem é a equipe
-│   │   ├── IDENTITY.md               ← Nome, email, emoji
-│   │   ├── AGENTS.md                  ← Regras operacionais + memória
-│   │   ├── MEMORY.md                  ← Índice (aponta pro repo)
-│   │   ├── HEARTBEAT.md              ← Tarefas periódicas automáticas
-│   │   ├── TOOLS.md                   ← Ferramentas conectadas
-│   │   └── memory/
-│   │       └── channels.md            ← Mapeamento tópicos ↔ áreas
-│   ├── vendas/                        ← Agente de Vendas
-│   │   ├── SOUL.md                    ← Mentes: Hormozi, Belfort, Ziglar
-│   │   └── AGENTS.md                 ← Escopo: empresa/ + vendas/ + dados/
-│   ├── marketing/                     ← Agente de Marketing
-│   │   ├── SOUL.md                    ← Mentes: Brunson, Hormozi, Halbert
-│   │   └── AGENTS.md                 ← Escopo: empresa/ + marketing/
-│   ├── atendimento/                   ← Agente de Atendimento
-│   │   ├── SOUL.md                    ← Mentes: Hsieh (Zappos), Hyken
-│   │   └── AGENTS.md                 ← Escopo: empresa/ + atendimento/
-│   └── bot-leads/                     ← Bot externo (WhatsApp)
-│       ├── SOUL.md                    ← Mentes: Chet Holmes, Chris Voss
-│       └── AGENTS.md                 ← Escopo mínimo: produtos + qualificação
-│
-├── empresa/                           ← Contexto geral (cross-area)
-│   ├── contexto/
-│   │   ├── empresa.md                 ← O que é a empresa, produtos, público, ferramentas
-│   │   ├── equipe.md                  ← Quem é quem, papéis e responsabilidades
-│   │   └── metricas.md               ← Métricas-chave consolidadas
-│   ├── gestao/
-│   │   ├── projetos.md               ← Projetos ativos e status
-│   │   ├── pendencias.md             ← Itens aguardando ação
-│   │   └── licoes.md                 ← Lições aprendidas
-│   ├── decisoes/
-│   │   ├── COMO-REGISTRAR.md         ← Como registrar decisões
-│   │   └── 2026-03.md                ← Decisões de março/2026
-│   ├── rotinas/
-│   │   └── README.md                 ← O que são crons, como configurar, exemplos
-│   └── skills/
-│       ├── _index.md                  ← Índice de skills cross-area
-│       ├── _templates/
-│       │   └── SKILL-TEMPLATE.md      ← Esqueleto para criar novas skills
-│       └── relatorio-rotinas/
-│           └── SKILL.md               ← Monitora status de todas as rotinas
-│
-├── areas/                             ← Uma pasta por área da empresa
-│   ├── vendas/
-│   │   ├── MAPA.md                    ← Visão geral da área
-│   │   ├── contexto/
-│   │   │   └── geral.md              ← Objetivo, KPIs, funil, ferramentas
-│   │   ├── rotinas/                   ← Rotinas automáticas da área
-│   │   └── skills/
-│   │       ├── _index.md              ← Índice de skills de vendas
-│   │       ├── relatorio-vendas/
-│   │       │   └── SKILL.md           ← Relatório semanal de vendas via Sheets
-│   │       └── follow-up-leads/
-│   │           └── SKILL.md           ← Identifica leads frios, sugere ações
-│   ├── marketing/
-│   │   ├── MAPA.md
-│   │   ├── contexto/
-│   │   │   └── geral.md              ← Canais, KPIs, calendário, responsáveis
-│   │   ├── rotinas/
-│   │   └── skills/
-│   │       └── _index.md
-│   ├── atendimento/
-│   │   ├── MAPA.md
-│   │   ├── contexto/
-│   │   │   └── geral.md              ← SLA, FAQ, fluxo de escalação
-│   │   ├── rotinas/
-│   │   └── skills/
-│   │       └── _index.md
-│   └── operacoes/
-│       ├── MAPA.md
-│       ├── contexto/
-│       │   └── geral.md              ← Processos, projetos, reuniões
-│       ├── rotinas/
-│       └── skills/
-│           └── _index.md
-│
-├── dados/                             ← Dados operacionais
-│   ├── vendas.csv                     ← Histórico de vendas (março 2026)
-│   └── leads.csv                      ← Pipeline de leads atual
-│
-└── seguranca/
-    └── permissoes.md                  ← Modelo de segurança e permissionamento
+└── imersao/          ← Roteiro operacional do facilitador
+    ├── README.md
+    ├── dia1/         ← Problema, arquitetura, tour, skills, rotinas, segurança
+    ├── dia2/         ← Multi-agente, permissionamento, deep dives, próximos 30 dias
+    ├── apresentacao-imersao.html
+    └── apresentacao-imersao-v3.html
 ```
 
 ---
 
-## Estrutura Base — Regra Obrigatória
+## As 3 Pastas
 
-Toda **área** sempre tem 3 pastas base:
+### 🧠 `cerebro/`
+Template completo de um Cérebro empresarial. Baseado na empresa fictícia **TechFlow Solutions** — uma empresa de SaaS B2B com time de marketing, vendas e atendimento.
 
-| Pasta | O que é | Exemplo |
-|-------|---------|---------|
-| `contexto/` | O que é a área, KPIs, equipe, ferramentas | `contexto/geral.md` |
-| `rotinas/` | O que o agente **está fazendo** — crons ativos, automações | `rotinas/relatorio-diario.md` |
-| `skills/` | O que o agente **sabe fazer** — habilidades disponíveis | `skills/relatorio-vendas/SKILL.md` |
+Serve como ponto de partida para o participante adaptar à sua própria empresa durante a imersão. Contém:
+- Contexto da empresa, equipe e métricas
+- Áreas com MAPA.md, contexto, skills, rotinas e sub-áreas
+- Agentes configurados (assistente geral, marketing, vendas, atendimento, bot-suporte)
+- Dados de exemplo e guias de implementação
 
-### Diferença entre Skills e Rotinas
+### 🧙 `wizard/`
+6 steps guiados que o **agente conduz** com o participante para construir o Cérebro personalizado. O agente lê `wizard/README.md` e passa por cada etapa com perguntas e ações concretas.
 
-- **Skill** = capacidade. "Sei gerar relatório de vendas."
-- **Rotina** = execução ativa. "Gero relatório de vendas todo dia às 8h."
-- Uma skill pode existir sem rotina (executada sob demanda).
-- Toda rotina referencia uma skill ou processo.
+Sequência: Fundação → Áreas → Skills → Rotinas → Multi-agente → Validação
 
----
-
-## Como o Agente Usa Esse Repositório
-
-1. **Ao iniciar qualquer tarefa**, lê este README para entender a estrutura
-2. **Para contexto da empresa**, lê `empresa/contexto/`
-3. **Para contexto de uma área**, lê `areas/[área]/contexto/geral.md`
-4. **Para executar uma automação**, lê o `SKILL.md` em `areas/[área]/skills/` ou `empresa/skills/`
-5. **Para acessar dados**, lê os arquivos em `dados/`
-6. **Para rotinas agendadas**, segue `empresa/rotinas/README.md`
-7. **Para decisões e histórico**, consulta `empresa/gestao/` e `empresa/decisoes/`
-
-> 💡 **Dica:** Sempre que atualizar um arquivo aqui, faça um commit com uma mensagem clara. O histórico de versões é o log de evolução da inteligência da empresa.
+### 📋 `imersao/`
+Roteiro operacional para o **facilitador** conduzir os 2 dias ao vivo. Cada arquivo é um bloco da agenda com objetivo, script, demos e exercícios.
 
 ---
 
-## Agentes
+## Como Começar
 
-### Agentes internos (falam com o time via Telegram)
+### Para participantes
+1. Clone o repositório: `git clone https://github.com/pixel-educacao/imersao-openclaw-negocios`
+2. Conecte seu agente OpenClaw ao repositório
+3. Peça pro seu agente: **"Leia wizard/README.md e me guie pelo processo"**
 
-| Agente | Mentes de Referência | Área | Tópico Telegram |
-|--------|---------------------|------|-----------------|
-| Agente Geral | Generalista | Todas | General + todos |
-| Agente de Vendas | Hormozi, Belfort, Ziglar | Vendas | 💰 Vendas |
-| Agente de Marketing | Brunson, Hormozi, Halbert, Schwartz | Marketing | 📢 Marketing |
-| Agente de Atendimento | Hsieh (Zappos), Hyken, Disney | Atendimento | 🎧 Atendimento |
-
-### Agente externo (fala com clientes via WhatsApp)
-
-| Agente | Mentes de Referência | Canal | Objetivo |
-|--------|---------------------|-------|----------|
-| Bot Leads | Chet Holmes, Chris Voss, Ziglar | WhatsApp | Qualificar leads + agendar calls |
-
-O Bot Leads é **100% independente** — não participa de tópicos, não gera relatórios, não fala com o time. Quando qualifica um lead, registra no CRM e notifica o Agente de Vendas (que avisa o time).
-
-Cada agente tem nome funcional + mentes de especialistas no SOUL.md que moldam como ele raciocina. Ver `agentes/[área]/SOUL.md` para detalhes.
-
-Ver permissionamento completo (pessoas + agentes + cenários) em `seguranca/permissoes.md`.
-
-## Áreas Ativas
-
-| Área | Responsável | Agente | Skills ativas |
-|------|-------------|--------|---------------|
-| Vendas | André / Juliana | Agente de Vendas | `relatorio-vendas`, `follow-up-leads` |
-| Marketing | Camila, Lucas/Patrícia | Agente de Marketing | (em implementação) |
-| Atendimento | Juliana | Agente de Atendimento | (em implementação) |
-| Operações | André Costa | Agente Geral | (cross-area em `empresa/skills/`) |
+### Para o facilitador
+- Siga os arquivos em `imersao/dia1/` e `imersao/dia2/` em ordem
+- Abra a apresentação `imersao/apresentacao-imersao-v3.html` no navegador
+- O `cerebro/` é a demo ao vivo — use como exemplo antes de pedir aos participantes para criar o deles
 
 ---
 
-*Mantido pela equipe da Empresa Exemplo | Atualizado: março 2026*
+*Imersão OpenClaw nos Negócios · Pixel Educação · 2026*
