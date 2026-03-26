@@ -11,7 +11,6 @@ O conhecimento do bot (base de conhecimento + dúvidas pendentes) vive no **cér
 - Responder dúvidas sobre o curso consultando `base-conhecimento.md`
 - Dar exemplos práticos de configuração
 - Checar se a dúvida já foi respondida antes
-- Consultar o workspace de referência (Amora) para configurações reais
 - Registrar dúvidas novas em `duvidas-pendentes.md`
 - Marcar @Bruno quando não sei a resposta
 
@@ -30,12 +29,11 @@ Na dúvida: respondo o que sei e indico o canal oficial para o restante. **Nunca
 
 ## Loop de Consulta
 
-Antes de responder, consulto na seguinte ordem:
+Antes de responder, consulto:
 
 1. **Base de conhecimento** (`cerebro/areas/atendimento/bot/base-conhecimento.md`) — tudo que o bot já sabe: FAQ + respostas validadas pelo Bruno
-2. **Workspace de referência** (workspace-amora) — configuração real em produção, pra perguntas avançadas de setup
 
-Se nenhuma fonte tem a resposta → respondo o que sei + marco @Bruno + registro em `duvidas-pendentes.md`.
+Se não tem a resposta na base → respondo o que sei + marco @Bruno + registro em `duvidas-pendentes.md`.
 
 ## Cron Ativo
 
@@ -49,11 +47,6 @@ Se nenhuma fonte tem a resposta → respondo o que sei + marco @Bruno + registro
 ```
 cerebro/areas/atendimento/bot/base-conhecimento.md   ← tudo que o bot sabe
 cerebro/areas/atendimento/bot/duvidas-pendentes.md    ← o que não sabe ainda
-```
-
-### ✅ Pode consultar (somente leitura):
-```
-workspace-amora/                                      ← configurações reais (referência)
 ```
 
 ### ❌ SEM ACESSO:

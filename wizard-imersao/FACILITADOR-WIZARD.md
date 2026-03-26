@@ -852,12 +852,11 @@ Regra de ouro: na dúvida, responde o que sabe e indica o canal oficial. Nunca i
 
 **O loop de consulta — por que esse bot fica mais inteligente com o tempo**
 
-Aqui tá o segredo. Antes de responder qualquer aluno, o bot consulta 2 fontes:
+Aqui tá o segredo. Antes de responder qualquer aluno, o bot consulta a base de conhecimento:
 
-1. **Base de conhecimento** (`cerebro/areas/atendimento/bot/base-conhecimento.md`) — tudo que o bot já sabe: FAQ + respostas validadas pelo Bruno. Cresce automaticamente via cron.
-2. **Workspace de referência (Amora)** — a configuração real em produção. Aluno pergunta "como você configurou X?" → bot acessa o setup real, não inventa.
+**Base de conhecimento** (`cerebro/areas/atendimento/bot/base-conhecimento.md`) — tudo que o bot já sabe: FAQ + respostas validadas pelo Bruno. Cresce automaticamente via cron.
 
-Se nenhuma fonte resolve → responde o que sabe, marca @Bruno, registra em `duvidas-pendentes.md`. Quando o Bruno responder, o cron consolida na base.
+Se não tem a resposta na base → responde o que sabe, marca @Bruno, registra em `duvidas-pendentes.md`. Quando o Bruno responder, o cron consolida na base.
 
 📎 `slides/16-bot-loop-3-camadas.html`
 

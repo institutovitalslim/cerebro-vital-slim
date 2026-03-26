@@ -11,7 +11,6 @@
     --border: #2a3260; --accent: #7c3aed; --accent2: #a78bfa;
     --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
     --red: #ef4444; --text: #e2e8f0; --text2: #94a3b8;
-    --teal: #2dd4bf;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
@@ -21,77 +20,54 @@
   h2 span { color: var(--accent2); }
   .sub { color: var(--text2); font-size: 14px; text-align: center; max-width: 700px; }
 
-  .flow-top {
-    display: flex; align-items: center; gap: 12px;
+  /* Flow */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 700px; }
+
+  .flow-step {
+    display: flex; align-items: center; gap: 14px;
     background: var(--bg2);
     border: 2px solid var(--border);
     border-radius: 14px;
-    padding: 16px 24px;
-    max-width: 480px; width: 100%;
+    padding: 18px 24px;
+    width: 100%;
+    transition: border-color 0.2s;
   }
-  .flow-top-icon { font-size: 32px; flex-shrink: 0; }
-  .flow-top-text { font-size: 14px; font-weight: 700; }
-  .flow-top-text span { color: var(--text2); font-weight: 400; font-size: 12px; display: block; margin-top: 2px; }
+  .flow-step:hover { border-color: rgba(255,255,255,0.15); }
+  .flow-step-icon { font-size: 32px; flex-shrink: 0; }
+  .flow-step-text { font-size: 15px; font-weight: 700; }
+  .flow-step-text span { color: var(--text2); font-weight: 400; font-size: 13px; display: block; margin-top: 3px; }
 
-  .arrow-down { font-size: 20px; color: var(--accent2); }
-
-  .layers { display: flex; gap: 16px; width: 100%; max-width: 960px; }
-  .layer {
-    flex: 1;
-    background: var(--bg2);
-    border-radius: 14px;
-    padding: 20px;
-    display: flex; flex-direction: column; gap: 12px;
-  }
-  .layer.l1 { border: 2px solid rgba(124,58,237,0.4); }
-  .layer.l2 { border: 2px solid rgba(45,212,191,0.4); }
-
-  .layer-header { display: flex; align-items: center; gap: 10px; }
-  .layer-num {
-    font-size: 24px; font-weight: 900;
-    width: 40px; height: 40px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
-  .layer.l1 .layer-num { background: rgba(124,58,237,0.15); color: var(--accent2); }
-  .layer.l2 .layer-num { background: rgba(45,212,191,0.15); color: var(--teal); }
-  .layer-title { font-size: 16px; font-weight: 800; }
-
-  .layer-source {
+  .flow-step.source { border-color: rgba(124,58,237,0.5); }
+  .flow-step.source .flow-step-icon { font-size: 28px; }
+  .source-path {
     font-size: 12px; font-family: 'Courier New', monospace;
+    background: rgba(124,58,237,0.1); color: var(--accent2);
     padding: 4px 10px; border-radius: 8px;
-    display: inline-block;
+    display: inline-block; margin-top: 6px;
   }
-  .layer.l1 .layer-source { background: rgba(124,58,237,0.1); color: var(--accent2); }
-  .layer.l2 .layer-source { background: rgba(45,212,191,0.1); color: var(--teal); }
-  .layer-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
-
-  .layer-detail {
-    background: var(--bg3);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.5;
-    border: 1px solid var(--border);
+  .source-detail {
+    font-size: 12px; color: var(--text2); margin-top: 6px; line-height: 1.5;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px;
   }
-  .layer-detail strong { color: var(--text); }
+  .source-detail strong { color: var(--text); }
 
-  /* Fallback row */
-  .fallback {
-    display: flex; align-items: center; gap: 14px;
-    background: rgba(234,179,8,0.06);
-    border: 1.5px solid rgba(234,179,8,0.3);
-    border-radius: 14px;
-    padding: 16px 22px;
-    max-width: 960px; width: 100%;
+  .arrow { font-size: 20px; color: var(--accent2); }
+
+  .flow-step.fallback { border-color: rgba(234,179,8,0.4); }
+  .fallback-actions {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;
   }
-  .fallback-icon { font-size: 26px; flex-shrink: 0; }
-  .fallback-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
-  .fallback-text strong { color: var(--yellow); }
+  .fallback-tag {
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 100px;
+  }
+  .fallback-tag.respond { background: rgba(96,165,250,0.12); color: var(--blue); }
+  .fallback-tag.escalate { background: rgba(234,179,8,0.12); color: var(--yellow); }
+  .fallback-tag.register { background: rgba(239,68,68,0.12); color: var(--red); }
 
-  .bottom-row { display: flex; gap: 12px; width: 100%; max-width: 960px; }
+  /* Bottom */
+  .bottom-row { display: flex; gap: 12px; width: 100%; max-width: 700px; }
   .bottom-card {
     flex: 1;
     background: var(--bg2);
@@ -113,44 +89,43 @@
 <body>
 
   <h2>🔁 Loop de <span>Consulta</span> do Bot</h2>
-  <p class="sub">Antes de responder, o bot consulta duas fontes. Se nenhuma resolve, escala pro Bruno.</p>
+  <p class="sub">Antes de responder, o bot consulta a base de conhecimento. Se não resolve, escala pro Bruno.</p>
 
-  <div class="flow-top">
-    <div class="flow-top-icon">💬</div>
-    <div class="flow-top-text">Aluno manda uma pergunta<span>Bot busca a melhor resposta em 2 fontes</span></div>
-  </div>
+  <div class="flow">
 
-  <div class="arrow-down">↓</div>
+    <div class="flow-step">
+      <div class="flow-step-icon">💬</div>
+      <div class="flow-step-text">Aluno manda uma pergunta<span>Bot inicia o loop de consulta</span></div>
+    </div>
 
-  <div class="layers">
-    <div class="layer l1">
-      <div class="layer-header">
-        <div class="layer-num">1</div>
-        <div class="layer-title">Base de Conhecimento</div>
-      </div>
-      <div class="layer-source">cerebro/areas/atendimento/bot/base-conhecimento.md</div>
-      <div class="layer-desc">Tudo que o bot já sabe: FAQ + respostas validadas pelo Bruno. Cresce automaticamente via cron.</div>
-      <div class="layer-detail">
-        <strong>Achou?</strong> Responde seguindo o padrão: contexto → resposta → fonte → próximo passo.
+    <div class="arrow">↓</div>
+
+    <div class="flow-step source">
+      <div class="flow-step-icon">📚</div>
+      <div>
+        <div class="flow-step-text">Base de Conhecimento</div>
+        <div class="source-path">cerebro/areas/atendimento/bot/base-conhecimento.md</div>
+        <div class="source-detail">
+          Tudo que o bot já sabe: FAQ + respostas validadas pelo Bruno.<br>
+          <strong>Achou?</strong> Responde: contexto → resposta → fonte → próximo passo.
+        </div>
       </div>
     </div>
 
-    <div class="layer l2">
-      <div class="layer-header">
-        <div class="layer-num">2</div>
-        <div class="layer-title">Workspace de Referência</div>
-      </div>
-      <div class="layer-source">workspace-amora (somente leitura)</div>
-      <div class="layer-desc">Configuração real em produção. Aluno pergunta "como você configurou X?" → responde com o setup atual, não teórico.</div>
-      <div class="layer-detail">
-        <strong>Zero ficção.</strong> A resposta é baseada no que tá funcionando agora — não no que deveria funcionar.
+    <div class="arrow">↓ não achou</div>
+
+    <div class="flow-step fallback">
+      <div class="flow-step-icon">⚠️</div>
+      <div>
+        <div class="flow-step-text">Fallback — escala pro Bruno</div>
+        <div class="fallback-actions">
+          <span class="fallback-tag respond">Responde o que sabe</span>
+          <span class="fallback-tag escalate">Marca @Bruno</span>
+          <span class="fallback-tag register">Registra em duvidas-pendentes.md</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="fallback">
-    <div class="fallback-icon">⚠️</div>
-    <div class="fallback-text"><strong>Não achou em nenhuma fonte?</strong> Bot responde o que sabe + marca @Bruno no grupo + registra em <code>duvidas-pendentes.md</code>. Quando o Bruno responder, o cron consolida na base de conhecimento.</div>
   </div>
 
   <div class="bottom-row">
