@@ -860,13 +860,18 @@ Agora a gente testa. Criamos um grupo com 3: eu, o Bruno e o OpenClawzinho.
 
 🎬 *No Telegram — criando grupo e adicionando o bot.*
 
-**Bruno, manda uma pergunta que ele sabe responder:**
+**Bruno, manda uma pergunta que ele sabe responder.**
 
-*"Como configuro o binding de canal no Telegram?"*
+> 💡 **Sugestões de perguntas que estão na base de conhecimento:**
+> - *"Como conecto o OpenClaw ao Telegram?"* — tá no FAQ, seção Uso da Plataforma
+> - *"Precisa saber programar para usar o OpenClaw?"* — tá no FAQ, seção Primeiros Passos
+> - *"O que é uma skill?"* — tá no FAQ, seção Uso da Plataforma
+> - *"Meu agente parou de responder, o que faço?"* — tá no FAQ, seção Técnico
+> - *"Tem garantia?"* — tá no FAQ, seção Planos e Pagamento
 
 *(bot responde seguindo o padrão: contexto → resposta → fonte → próximo passo)*
 
-Repara: ele não jogou um link. Contextualizou, respondeu direto, apontou o módulo e deu o próximo passo.
+Repara: ele não jogou um link. Contextualizou, respondeu direto, apontou a seção e deu o próximo passo.
 
 ⏸ *Aguarda "próximo"*
 
@@ -874,11 +879,16 @@ Repara: ele não jogou um link. Contextualizou, respondeu direto, apontou o mód
 
 📤 **Mensagem:**
 
-**Agora manda uma que ele não sabe:**
+**Agora manda uma que ele NÃO sabe:**
 
-🎬 *Bruno manda:*
+> 💡 **Sugestões de perguntas que NÃO estão na base:**
+> - *"Vocês vão ter desconto pra grupos de empresa?"* — não tem na base, questão comercial
+> - *"Consigo rodar o OpenClaw num Raspberry Pi?"* — não tem na base, caso técnico específico
+> - *"Quando sai a próxima turma do Pixel IA?"* — não tem na base, questão de agenda
+> - *"Meu pagamento foi debitado duas vezes, como resolvo?"* — não tem na base, questão financeira que escala pro Bruno
+> - *"Dá pra integrar com o Notion?"* — não tem na base, feature request
 
-*"Vocês vão ter desconto pra grupos de empresa?"*
+🎬 *Bruno manda a pergunta escolhida.*
 
 *(bot responde que vai verificar → marca @Bruno no grupo → registra em `duvidas-pendentes.md`)*
 
@@ -886,7 +896,7 @@ Olha o que aconteceu: ele não inventou. Respondeu o que sabia, marcou o Bruno p
 
 🎬 *Abrindo `cerebro/areas/atendimento/bot/duvidas-pendentes.md` ao vivo — tá aqui a dúvida que acabou de chegar. Status: pendente.*
 
-Quando o Bruno responder, o cron das 18h consolida na `base-conhecimento.md`. Próxima vez que alguém perguntar sobre desconto — o bot já vai saber.
+Quando o Bruno responder, o cron das 18h consolida na `base-conhecimento.md`. Próxima vez que alguém perguntar a mesma coisa — o bot já vai saber.
 
 ⏸ *Aguarda "próximo"*
 
