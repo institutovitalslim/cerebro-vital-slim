@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fechamento</title>
+<title>Fechamento — O que você aprendeu</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
   :root {
@@ -26,213 +26,125 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 24px 32px;
-    position: relative;
-    gap: 0;
+    padding: 28px 32px;
+    gap: 24px;
   }
   .bg-glow {
     position: absolute;
     width: 700px; height: 700px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(254,80,0,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%);
     top: 50%; left: 50%; transform: translate(-50%, -50%);
     pointer-events: none;
   }
 
-  .layout {
+  h2 { font-size: clamp(22px, 2.5vw, 34px); font-weight: 800; text-align: center; z-index: 1; }
+  .sub { color: var(--text2); font-size: 15px; text-align: center; margin-top: -16px; z-index: 1; }
+
+  .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    gap: 12px;
     width: 100%;
-    max-width: 1040px;
+    max-width: 960px;
     z-index: 1;
   }
 
-  /* ── Recap col ── */
-  .recap-col { display: flex; flex-direction: column; gap: 10px; }
-  .col-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text2);
-    margin-bottom: 4px;
-  }
-  .recap-item {
+  .item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     background: var(--bg2);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 14px;
+    padding: 16px 18px;
     transition: transform 0.2s, border-color 0.2s;
   }
-  .recap-item:hover { transform: translateX(4px); border-color: var(--green); }
-  .recap-item .check { color: var(--green); font-size: 18px; flex-shrink: 0; }
+  .item:hover { transform: translateX(4px); border-color: var(--green); }
+  .item .check { color: var(--green); font-size: 20px; flex-shrink: 0; }
+  .item-text { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .item-sub { font-size: 12px; color: var(--text2); font-weight: 400; margin-top: 2px; }
 
-  /* ── Pitch col ── */
-  .pitch-col { display: flex; flex-direction: column; gap: 0; }
-  .pitch-card {
-    background: linear-gradient(145deg, rgba(254,80,0,0.12), rgba(254,80,0,0.04));
-    border: 2px solid var(--accent);
-    border-radius: 20px;
-    padding: 24px 26px;
-    box-shadow: 0 0 60px rgba(254,80,0,0.18);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  /* Product header */
-  .product-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .product-icon { font-size: 42px; flex-shrink: 0; }
-  .product-name {
-    font-size: clamp(22px, 2.8vw, 34px);
-    font-weight: 900;
-    background: linear-gradient(135deg, #fff 20%, var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.1;
-  }
-  .product-tagline {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.4;
-  }
-
-  /* Benefits */
-  .benefits { display: flex; flex-direction: column; gap: 8px; }
-  .benefit {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-  }
-  .benefit-icon { font-size: 20px; flex-shrink: 0; }
-  .benefit-text {}
-  .benefit-title { font-size: 14px; font-weight: 700; margin-bottom: 1px; }
-  .benefit-desc { font-size: 12px; color: var(--text2); line-height: 1.3; }
-
-  /* Price + CTA */
-  .price-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding-top: 4px;
-  }
-  .price {
-    font-size: clamp(24px, 3vw, 38px);
-    font-weight: 900;
-    color: var(--accent2);
-  }
-  .price-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
-  .cta-btn {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: white;
-    font-size: 16px;
-    font-weight: 800;
-    padding: 12px 28px;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 6px 28px rgba(254,80,0,0.4);
-    animation: pulse-btn 2s ease-in-out infinite;
-    white-space: nowrap;
-  }
-  @keyframes pulse-btn {
-    0%, 100% { box-shadow: 0 6px 28px rgba(254,80,0,0.4); transform: scale(1); }
-    50%       { box-shadow: 0 6px 44px rgba(254,80,0,0.65); transform: scale(1.03); }
-  }
-  .urgency {
-    font-size: 12px;
-    color: var(--text2);
+  .bottom {
+    background: rgba(254,80,0,0.07);
+    border: 2px solid rgba(254,80,0,0.3);
+    border-radius: 14px;
+    padding: 16px 24px;
     text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    z-index: 1;
+    max-width: 960px;
   }
-  .urgency strong { color: var(--yellow); }
+  .bottom span { color: var(--accent2); }
 </style>
 </head>
 <body>
   <div class="bg-glow"></div>
 
-  <div class="layout">
+  <h2>O que vocês aprenderam nesses 2 dias</h2>
+  <p class="sub">Tudo isso funciona. Vocês viram ao vivo.</p>
 
-    <!-- Recap -->
-    <div class="recap-col">
-      <div class="col-label">📋 O que você aprendeu nessa imersão</div>
-      <div class="recap-item"><span class="check">✅</span> Cérebro que não esquece — GitHub como fonte de verdade</div>
-      <div class="recap-item"><span class="check">✅</span> Skills que executam qualquer processo da empresa</div>
-      <div class="recap-item"><span class="check">✅</span> Crons que rodam sozinhos 24h por dia, 7 dias por semana</div>
-      <div class="recap-item"><span class="check">✅</span> Multi-agente com escopo e segurança por área</div>
-      <div class="recap-item"><span class="check">✅</span> Bot de suporte que aprende sozinho com a operação</div>
-      <div class="recap-item"><span class="check">✅</span> Ciclo de marketing automatizado do ângulo ao relatório</div>
-    </div>
-
-    <!-- Pitch -->
-    <div class="pitch-col">
-      <div class="pitch-card">
-
-        <div class="product-header">
-          <div class="product-icon">🧠</div>
-          <div>
-            <div class="product-name">Pixel IA</div>
-            <div class="product-tagline">Sua empresa e você sempre atualizados em<br>como implementar IA da melhor forma</div>
-          </div>
-        </div>
-
-        <div class="benefits">
-          <div class="benefit">
-            <div class="benefit-icon">🎓</div>
-            <div class="benefit-text">
-              <div class="benefit-title">Mentorias em grupo semanais</div>
-              <div class="benefit-desc">Tire dúvidas e avance com quem já implementou</div>
-            </div>
-          </div>
-          <div class="benefit">
-            <div class="benefit-icon">📚</div>
-            <div class="benefit-text">
-              <div class="benefit-title">Acesso às formações</div>
-              <div class="benefit-desc">Todo o conteúdo disponível para estudar no seu ritmo</div>
-            </div>
-          </div>
-          <div class="benefit">
-            <div class="benefit-icon">🤝</div>
-            <div class="benefit-text">
-              <div class="benefit-title">Comunidade com trocas</div>
-              <div class="benefit-desc">Aprenda com outros empresários implementando IA</div>
-            </div>
-          </div>
-          <div class="benefit">
-            <div class="benefit-icon">📬</div>
-            <div class="benefit-text">
-              <div class="benefit-title">Newsletter semanal</div>
-              <div class="benefit-desc">O que há de melhor na comunidade e no mundo de IA — resumido e direto</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="price-row">
-          <div>
-            <div class="price">[PREÇO]</div>
-            <div class="price-sub">⏳ Condição especial para <strong style="color:var(--yellow)">participantes ao vivo</strong></div>
-          </div>
-          <button class="cta-btn">🚀 Quero entrar</button>
-        </div>
-
+  <div class="grid">
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Cérebro da empresa</div>
+        <div class="item-sub">Repositório GitHub como fonte de verdade</div>
       </div>
     </div>
-
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Symlink</div>
+        <div class="item-sub">Workspace conectado ao cérebro</div>
+      </div>
+    </div>
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Skills e processos</div>
+        <div class="item-sub">Automações em linguagem natural</div>
+      </div>
+    </div>
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Crons autônomos</div>
+        <div class="item-sub">O sistema roda sozinho, 24/7</div>
+      </div>
+    </div>
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Multi-agente</div>
+        <div class="item-sub">Cada agente no seu papel, com escopo claro</div>
+      </div>
+    </div>
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Permissionamento</div>
+        <div class="item-sub">Cada agente só acessa o que pode</div>
+      </div>
+    </div>
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Marketing automatizado</div>
+        <div class="item-sub">Do ângulo ao criativo ao relatório</div>
+      </div>
+    </div>
+    <div class="item">
+      <span class="check">✅</span>
+      <div>
+        <div class="item-text">Bot de suporte</div>
+        <div class="item-sub">Aprende sozinho com a operação</div>
+      </div>
+    </div>
   </div>
+
+  <div class="bottom">Agora a pergunta é: <span>qual o próximo passo?</span></div>
+
 </body>
 </html>
