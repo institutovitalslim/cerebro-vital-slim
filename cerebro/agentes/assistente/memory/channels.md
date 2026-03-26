@@ -1,15 +1,12 @@
 # Canais — Mapeamento Tópicos Telegram ↔ Áreas
 
-> Grupo: Empresa Exemplo HQ (telegram:-100XXXXXXXXXX)
+> Grupo: Imersão OpenClaw nos Negócios (telegram:-1003617656481)
 
-| Tópico | ID | Área |
-|--------|----|------|
-| 📢 Marketing | 3 | Marketing — campanhas, tráfego, redes sociais |
-| 💰 Vendas | 4 | Vendas — pipeline, leads, conversões, follow-up |
-| 🎧 Atendimento | 5 | Atendimento — suporte, tickets, FAQ |
-| ⚙️ Operações | 6 | Operações — processos, ferramentas, automações |
-| 🤖 Assistente | 7 | Interno — comandos, debug, testes do agente |
-| General | 1 | Geral — conversas livres, alinhamentos rápidos |
+| Tópico | ID | Área | Agente responsável |
+|--------|----|------|--------------------|
+| General | 1 | Geral — conversas livres, alinhamentos rápidos | Assistente Operacional |
+| 📢 Marketing | 8 | Marketing — campanhas, tráfego, redes sociais | Assistente de Marketing |
+| ⚙️ Operações | a criar | Operações — processos, ferramentas, automações | Assistente Operacional |
 
 ## Como usar
 

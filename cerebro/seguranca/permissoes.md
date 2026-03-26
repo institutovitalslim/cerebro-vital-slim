@@ -172,11 +172,12 @@ Grupo: Imersão OpenClaw nos Negócios
 | Agente | Tópico | topic_id | Quem fala ali |
 |--------|--------|----------|---------------|
 | Assistente Operacional (Agente Geral) | General | 1 | Liderança, qualquer um |
-| Agente de Vendas | 💰 Vendas | 4 | Juliana, André, liderança |
-| Assistente de Marketing | 📢 Marketing | 3 | Camila, Lucas, liderança |
-| Agente de Atendimento | 🎧 Atendimento | 5 | Juliana, André, liderança |
-| Assistente Operacional (Agente Geral) | ⚙️ Operações | 6 | André, liderança |
-| Assistente de Marketing | topic_id 8 | 8 | Camila, Lucas, liderança |
+| Assistente de Marketing | 📢 Marketing (topic 8) | 8 | Camila, Lucas, liderança |
+| Agente de Vendas | 💰 Vendas | a criar | Juliana, André, liderança |
+| Agente de Atendimento | 🎧 Atendimento | a criar | Juliana, André, liderança |
+| Assistente Operacional (Agente Geral) | ⚙️ Operações | a criar* | André, liderança |
+
+> *Tópico ⚙️ Operações ainda não criado — bot precisa de permissão "Gerenciar tópicos" no grupo.
 
 ### ⚠️ Policy de Responsabilidade por Tópico
 
@@ -184,12 +185,12 @@ Grupo: Imersão OpenClaw nos Negócios
 
 | Agente | Responde em | NÃO responde em |
 |--------|-------------|-----------------|
-| Assistente Operacional | General (1), Operações (6) | Marketing (3, 8), Vendas (4), Atendimento (5) |
-| Assistente de Marketing | Marketing (3), topic 8 | General (1) e qualquer outro |
-| Agente de Vendas | Vendas (4) | Qualquer outro |
-| Agente de Atendimento | Atendimento (5) | Qualquer outro |
+| Assistente Operacional | General (1), ⚙️ Operações (a criar) | Marketing (8), Vendas, Atendimento |
+| Assistente de Marketing | 📢 Marketing (topic 8) | General e qualquer outro |
+| Agente de Vendas | 💰 Vendas | Qualquer outro |
+| Agente de Atendimento | 🎧 Atendimento | Qualquer outro |
 
-> **Decisão registrada (2026-03-26, Cayo Syllos):** O tópico 8 deste grupo é de responsabilidade exclusiva do Assistente de Marketing. O Assistente Operacional responde somente no General. Cada agente não deve responder fora do seu tópico.
+> **Decisão registrada (2026-03-26, Cayo Syllos):** O tópico 8 (Marketing) é de responsabilidade exclusiva do Assistente de Marketing. O Assistente Operacional responde somente no General e no tópico Operações (quando criado). Cada agente não deve responder fora do seu tópico.
 
 **Vantagem:** tudo num lugar só, fácil de gerenciar.
 **Desvantagem:** qualquer pessoa do grupo pode ver todos os tópicos (permissão é por agente, não por visualização).
