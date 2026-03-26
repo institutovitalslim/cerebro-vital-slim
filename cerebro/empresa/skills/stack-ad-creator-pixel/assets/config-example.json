@@ -1,0 +1,44 @@
+{
+  "product_badge": "Mini-Curso OpenClaw",
+  "h1": ["Tenha seu time de IAs", "<em>trabalhando por você.</em>"],
+  "pricing": {
+    "was": "R$297",
+    "value": "R$97",
+    "label": "Acesso vitalício",
+    "condition": "Condição de lançamento"
+  },
+  "output_dir": "./banners",
+  "formats": ["post", "story"],
+  "copies": [
+    {
+      "key": "a-original",
+      "label": "Copy A — Original",
+      "subtitle": "Tudo o que você precisa para ter <strong>agentes operando em menos de 3h.</strong>",
+      "cards": [
+        ["3h de conteúdo prático",           "Do zero ao primeiro agente rodando no seu negócio."],
+        ["Passo-a-passo para copiar e colar", "Guia completo para replicar tudo sem precisar improvisar."],
+        ["Grupo de WhatsApp para tirar dúvidas", "Suporte direto para não travar na implementação."]
+      ]
+    },
+    {
+      "key": "b-delegacao",
+      "label": "Copy B — Delegação",
+      "subtitle": "Como o Bruno montou <strong>6 agentes</strong> que rodam a operação <strong>24/7</strong> — e o passo a passo pra você fazer o mesmo.",
+      "cards": [
+        ["3h de conteúdo prático",           "O mesmo framework de 6 agentes que você viu no Mission Control, do zero."],
+        ["Passo-a-passo para copiar e colar", "Cada agente documentado. Copia, cola, funciona."],
+        ["Grupo de WhatsApp para tirar dúvidas", "Suporte direto pra não travar na implementação."]
+      ]
+    },
+    {
+      "key": "c-sistema",
+      "label": "Copy C — Sistema com Números",
+      "subtitle": "<strong>11 agentes de IA</strong> responsáveis por <strong>35 tarefas.</strong> Esse é o setup — aprenda a montar em <strong>3h.</strong>",
+      "cards": [
+        ["3h de conteúdo prático",           "Do zero ao painel com agentes rodando no seu negócio."],
+        ["Passo-a-passo para copiar e colar", "O mesmo método documentado. Sem código."],
+        ["Grupo de WhatsApp para tirar dúvidas", "Suporte direto de quem já implementou."]
+      ]
+    }
+  ]
+}
