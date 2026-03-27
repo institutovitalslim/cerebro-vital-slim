@@ -498,9 +498,9 @@ Vamos testar agora.
 
 🎬 *Abrindo o Telegram → chat com o OpenClaw → pedindo:*
 
-*"Cria uma skill que me avise quando um cliente não compra há mais de 30 dias"*
+*"Pega os nossos dados de tickets de suporte e compara com os dados de reembolso e vendas dos últimos 7 dias. Me traz insights sobre como nossos tickets de suporte podem estar afetando nossas vendas em um report HTML que vou querer ter acesso de tempos em tempos."*
 
-*(agente no Telegram gera a skill → salva no Cérebro → commit no GitHub)*
+*(agente no Telegram cruza os dados → gera relatório → sugere criar skill proativamente → salva no Cérebro → commit no GitHub)*
 
 Mesma lógica. Ferramenta diferente. Cérebro único. Mas agora com personalidade ativa — o agente no Telegram já tá operando com o `SOUL.md` dele.
 
