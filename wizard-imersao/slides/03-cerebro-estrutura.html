@@ -232,7 +232,7 @@
       <div class="tree">
         <div class="root">📁 cerebro/</div>
         <div>├── <span class="d-empresa">📁 empresa/</span></div>
-        <div style="padding-left:16px">└── <span class="sub">contexto, decisões, gestão</span></div>
+        <div style="padding-left:16px">└── <span class="sub">contexto, projetos, skills</span></div>
         <div>│</div>
         <div>├── <span class="d-areas">📁 areas/</span></div>
         <div style="padding-left:16px"><span class="sub">├── 📁 vendas/</span></div>
@@ -260,7 +260,7 @@
         <div class="area-row">
           <div class="area-item">
             <div class="area-key">contexto/</div>
-            <div class="area-val"><strong>O que o agente precisa saber.</strong> Processo de vendas, objeções comuns, scripts, metas do time.</div>
+            <div class="area-val"><strong>O que o agente precisa saber.</strong> geral.md · people.md · decisions.md · lessons.md — objetivo, KPIs, equipe, decisões e lições da área.</div>
           </div>
           <div class="area-item">
             <div class="area-key">skills/</div>
@@ -269,6 +269,10 @@
           <div class="area-item">
             <div class="area-key">rotinas/</div>
             <div class="area-val"><strong>O que roda sozinho e quando.</strong> Crons agendados: relatório diário às 9h, follow-up toda segunda, heartbeat a cada 6h.</div>
+          </div>
+          <div class="area-item">
+            <div class="area-key">projetos/</div>
+            <div class="area-val"><strong>O que está em andamento.</strong> Projetos ativos e concluídos da área, com prazos e responsáveis.</div>
           </div>
         </div>
       </div>
@@ -279,7 +283,7 @@
         <div class="area-chip">💬 atendimento/</div>
         <div class="area-chip">⚙️ operacoes/</div>
       </div>
-      <div style="font-size:11px; color:var(--text2); margin-top:8px;">Cada área tem sua própria tríade: contexto · skills · rotinas</div>
+      <div style="font-size:11px; color:var(--text2); margin-top:8px;">Cada área segue a mesma estrutura: contexto · skills · rotinas · projetos</div>
     </div>
 
     <div class="divider"></div>
@@ -303,8 +307,8 @@
 
         <div class="connection-box">
           🔗 Ao executar, o agente lê:<br>
-          <strong>empresa/contexto/</strong> → entende onde está<br>
-          <strong>areas/atendimento/contexto/</strong> → entende a área<br>
+          <strong>empresa/contexto/geral.md</strong> → entende a empresa<br>
+          <strong>areas/atendimento/contexto/</strong> → entende a área + equipe + decisões<br>
           <strong>areas/atendimento/skills/</strong> → sabe o que fazer
         </div>
       </div>
