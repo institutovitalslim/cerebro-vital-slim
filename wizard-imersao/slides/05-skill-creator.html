@@ -135,6 +135,25 @@
   .ft-key { color: var(--blue); }
   .ft-opt { color: var(--text2); font-style: italic; }
 
+  /* ─── WIZARD CTA ─── */
+  .wizard-cta {
+    background: linear-gradient(135deg, rgba(254,80,0,0.08), rgba(234,179,8,0.06));
+    border: 1px solid rgba(254,80,0,0.3); border-radius: 14px;
+    padding: 14px 16px; display: flex; align-items: center; gap: 14px;
+    cursor: pointer; text-decoration: none; transition: border-color 0.2s;
+  }
+  .wizard-cta:hover { border-color: var(--accent); }
+  .wizard-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(254,80,0,0.15); border: 1px solid rgba(254,80,0,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .wizard-text { flex: 1; }
+  .wizard-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; font-family: 'Inter', sans-serif; }
+  .wizard-desc { font-size: 11px; color: var(--text2); line-height: 1.4; font-family: 'Inter', sans-serif; }
+  .wizard-arrow { font-size: 20px; color: var(--accent2); flex-shrink: 0; }
+
   /* ─── BOTTOM ─── */
   .bottom {
     margin-top: 12px; width: 100%; max-width: 1120px;
@@ -269,6 +288,16 @@
         <span style="color:var(--border)">├── </span><span class="ft-dir">references/</span> <span class="ft-opt">← docs de apoio (opcional)</span><br>
         <span style="color:var(--border)">└── </span><span class="ft-dir">scripts/</span> <span class="ft-opt">← código executável (opcional)</span>
       </div>
+
+      <!-- Wizard CTA -->
+      <a class="wizard-cta" href="computer:///sessions/dreamy-modest-lamport/mnt/imersao-openclaw-negocios-main/cerebro/empresa/skills/criar-skill/wizard.html" target="_blank">
+        <div class="wizard-icon">🧙</div>
+        <div class="wizard-text">
+          <div class="wizard-title">Wizard Visual — Criar Skill Passo a Passo</div>
+          <div class="wizard-desc">Interface guiada com 4 etapas + biblioteca com 24 exemplos de skills prontas</div>
+        </div>
+        <div class="wizard-arrow">→</div>
+      </a>
 
     </div>
   </div>

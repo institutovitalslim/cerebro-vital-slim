@@ -412,6 +412,18 @@ Você tem uma ideia vaga: *"Quero algo que avise quando um lead esfria"*. O agen
 
 📤 **Mensagem:**
 
+🎬 **Wizard visual — criando skill sem digitar código**
+
+Além dos 3 modos via chat, existe o wizard visual. Uma interface guiada em 4 etapas que monta a skill pra você — e ainda tem uma biblioteca com 24 exemplos de skills prontas pra usar como base.
+
+📂 `cerebro/empresa/skills/criar-skill/wizard.html` *(abrir arquivo ao vivo — mostrar as 4 etapas e a biblioteca de exemplos)*
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
 🎬 **Demo ao vivo — criando uma skill do zero**
 
 Vamos usar o Modo 3. Pedindo pro agente:
