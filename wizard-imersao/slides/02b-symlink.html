@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symlink — Conexão Workspace ↔ Cérebro</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --red: #ef4444; --text: #e2e8f0; --text2: #94a3b8;
+    --purple: #a78bfa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 24px 28px; gap: 18px; }
+
+  h2 { font-size: clamp(18px, 2.2vw, 30px); font-weight: 800; text-align: center; }
+  h2 span { color: var(--accent2); }
+  .sub { color: var(--text2); font-size: 14px; text-align: center; max-width: 680px; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 960px; }
+
+  .compare-box {
+    background: var(--bg2);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .compare-box.bad { border: 2px solid rgba(239,68,68,0.3); }
+  .compare-box.good { border: 2px solid rgba(34,197,94,0.4); }
+
+  .compare-label {
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .compare-box.bad .compare-label { color: var(--red); }
+  .compare-box.good .compare-label { color: var(--green); }
+
+  .file-row {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .file-icon { font-size: 22px; flex-shrink: 0; }
+  .file-info { flex: 1; }
+  .file-name {
+    font-size: 13px; font-weight: 700;
+    font-family: 'Courier New', monospace;
+    color: var(--text);
+  }
+  .file-path { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .file-badge {
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+    flex-shrink: 0;
+  }
+  .badge-copy { background: rgba(239,68,68,0.12); color: var(--red); }
+  .badge-link { background: rgba(34,197,94,0.12); color: var(--green); }
+
+  .compare-arrow {
+    text-align: center; font-size: 16px; color: var(--text2);
+    padding: 2px 0;
+  }
+
+  .compare-result {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px; font-weight: 600;
+  }
+  .compare-box.bad .compare-result {
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: var(--red);
+  }
+  .compare-box.good .compare-result {
+    background: rgba(34,197,94,0.06);
+    border: 1px solid rgba(34,197,94,0.2);
+    color: var(--green);
+  }
+
+  .bottom-note {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg2);
+    border: 1.5px solid rgba(255,122,53,0.3);
+    border-radius: 14px;
+    padding: 16px 22px;
+    max-width: 960px; width: 100%;
+  }
+  .bottom-note-icon { font-size: 26px; flex-shrink: 0; }
+  .bottom-note-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .bottom-note-text strong { color: var(--accent2); }
+</style>
+</head>
+<body>
+
+  <h2>🔗 Symlink — como o agente se conecta ao <span>Cérebro</span></h2>
+  <p class="sub">Em vez de copiar arquivos, o workspace do agente aponta direto pro repositório. Mesmo arquivo, sempre sincronizado.</p>
+
+  <div class="compare">
+    <div class="compare-box bad">
+      <div class="compare-label">❌ Sem symlink (cópia)</div>
+
+      <div class="file-row">
+        <div class="file-icon">📄</div>
+        <div class="file-info">
+          <div class="file-name">SOUL.md</div>
+          <div class="file-path">workspace/SOUL.md</div>
+        </div>
+        <div class="file-badge badge-copy">cópia</div>
+      </div>
+
+      <div class="compare-arrow">≠</div>
+
+      <div class="file-row">
+        <div class="file-icon">📄</div>
+        <div class="file-info">
+          <div class="file-name">SOUL.md</div>
+          <div class="file-path">cerebro/agentes/marketing/SOUL.md</div>
+        </div>
+        <div class="file-badge badge-copy">cópia</div>
+      </div>
+
+      <div class="compare-result">⚠️ Atualiza um, o outro fica desatualizado</div>
+    </div>
+
+    <div class="compare-box good">
+      <div class="compare-label">✅ Com symlink (atalho)</div>
+
+      <div class="file-row">
+        <div class="file-icon">🔗</div>
+        <div class="file-info">
+          <div class="file-name">SOUL.md</div>
+          <div class="file-path">workspace/SOUL.md → aponta pro repo</div>
+        </div>
+        <div class="file-badge badge-link">symlink</div>
+      </div>
+
+      <div class="compare-arrow">═</div>
+
+      <div class="file-row">
+        <div class="file-icon">📄</div>
+        <div class="file-info">
+          <div class="file-name">SOUL.md</div>
+          <div class="file-path">cerebro/agentes/marketing/SOUL.md</div>
+        </div>
+        <div class="file-badge badge-link">original</div>
+      </div>
+
+      <div class="compare-result">✅ Mesmo arquivo. Atualizar um = atualizar o outro</div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    <div class="bottom-note-icon">🔄</div>
+    <div class="bottom-note-text">Quando o agente lê o <strong>SOUL.md</strong>, ele tá lendo direto do cérebro no repo. A cada alteração, o agente faz <strong>push pro GitHub</strong> — o cérebro é sempre a versão mais atual. Sem duplicação, sem risco de ficar fora de sync.</div>
+  </div>
+
+</body>
+</html>

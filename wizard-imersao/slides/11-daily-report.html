@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 28px 24px; }
+  h2 { font-size: clamp(20px, 2.2vw, 30px); font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .sub { color: var(--text2); font-size: 15px; text-align: center; margin-bottom: 24px; }
+  .report-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    width: 100%;
+    max-width: 840px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .report-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--blue));
+  }
+  .report-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .report-title { font-size: 20px; font-weight: 800; }
+  .report-date { font-size: 14px; color: var(--text2); background: var(--bg3); padding: 5px 12px; border-radius: 8px; }
+  .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .metric {
+    background: var(--bg3);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .metric .emoji { font-size: 22px; margin-bottom: 6px; }
+  .metric .value { font-size: 22px; font-weight: 800; margin-bottom: 2px; }
+  .metric .label { font-size: 12px; color: var(--text2); }
+  .metric.roas .value { color: var(--green); }
+  .metric.invest .value { color: var(--blue); }
+  .metric.vendas .value { color: var(--accent2); }
+  .metric.cpl .value { color: var(--yellow); }
+  .section { margin-bottom: 16px; }
+  .section-title { font-size: 14px; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .creative-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 14px;
+    border: 1px solid var(--border);
+  }
+  .creative-rank { font-size: 18px; font-weight: 800; width: 24px; text-align: center; flex-shrink: 0; }
+  .creative-name { flex: 1; font-weight: 600; }
+  .creative-roas { font-weight: 800; }
+  .creative-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .tag-scale { background: rgba(34,197,94,0.2); color: var(--green); }
+  .tag-pre { background: rgba(96,165,250,0.2); color: var(--blue); }
+  .tag-test { background: rgba(234,179,8,0.2); color: var(--yellow); }
+  .alerts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .alert-box, .rec-box {
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .alert-box { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); }
+  .alert-box .title { color: #f87171; font-weight: 700; margin-bottom: 4px; }
+  .rec-box { background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.3); }
+  .rec-box .title { color: var(--blue); font-weight: 700; margin-bottom: 4px; }
+  .item { color: var(--text2); margin-bottom: 3px; }
+</style>
+</head>
+<body>
+  <h2>📱 Exemplo de Daily Report</h2>
+  <p class="sub">Gerado automaticamente todo dia às 08:00 · Enviado via Telegram</p>
+
+  <div class="report-card">
+    <div class="report-header">
+      <div class="report-title">📊 Daily Ads Report</div>
+      <div class="report-date">24/03/2026 — gerado às 08:02</div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric invest">
+        <div class="emoji">💰</div>
+        <div class="value">R$ 1.247</div>
+        <div class="label">Investimento</div>
+      </div>
+      <div class="metric vendas">
+        <div class="emoji">🛒</div>
+        <div class="value">8 vendas</div>
+        <div class="label">R$ 7.976,00</div>
+      </div>
+      <div class="metric roas">
+        <div class="emoji">📈</div>
+        <div class="value">6.4x</div>
+        <div class="label">ROAS</div>
+      </div>
+      <div class="metric cpl">
+        <div class="emoji">🎯</div>
+        <div class="value">R$ 12,47</div>
+        <div class="label">CPL | CPA R$155</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🏆 Top Criativos</div>
+      <div class="creative-row">
+        <div class="creative-rank">1</div>
+        <div class="creative-name">VSL Delegação v3</div>
+        <div class="creative-roas" style="color:var(--green)">ROAS 8.2x</div>
+        <div class="creative-tag tag-scale">🚀 Escala</div>
+      </div>
+      <div class="creative-row">
+        <div class="creative-rank">2</div>
+        <div class="creative-name">Carrossel Antes/Depois</div>
+        <div class="creative-roas" style="color:var(--blue)">ROAS 5.1x</div>
+        <div class="creative-tag tag-pre">📈 Pré-escala</div>
+      </div>
+      <div class="creative-row">
+        <div class="creative-rank">3</div>
+        <div class="creative-name">Static Overlay Urgência</div>
+        <div class="creative-roas" style="color:var(--yellow)">ROAS 3.8x</div>
+        <div class="creative-tag tag-test">🧪 Teste</div>
+      </div>
+    </div>
+
+    <div class="alerts-row">
+      <div class="alert-box">
+        <div class="title">⚠️ Atenção</div>
+        <div class="item">Hook "produtividade" com CPL alto (R$28)</div>
+        <div class="item">→ Pausar se não melhorar em 48h</div>
+      </div>
+      <div class="rec-box">
+        <div class="title">💡 Recomendações</div>
+        <div class="item">→ Escalar VSL Delegação v3 (+30% budget)</div>
+        <div class="item">→ Criar variação do Carrossel com novo hook</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

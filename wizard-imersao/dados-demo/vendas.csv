@@ -1,0 +1,53 @@
+data,produto,valor,canal_aquisicao,metodo_pagamento,status
+2026-03-01,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,aprovado
+2026-03-01,Comunidade Marketing PRO,797.00,YouTube,pix,aprovado
+2026-03-01,Workshop Funil de Vendas,97.00,Instagram,pix,aprovado
+2026-03-02,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,aprovado
+2026-03-02,Mentoria Individual,2997.00,Indicação,cartao_credito,aprovado
+2026-03-02,Minicurso Tráfego Pago,197.00,YouTube,pix,aprovado
+2026-03-03,Comunidade Marketing PRO,797.00,Meta Ads,cartao_credito,aprovado
+2026-03-03,Workshop Funil de Vendas,97.00,Google,boleto,aprovado
+2026-03-03,Minicurso Tráfego Pago,197.00,Instagram,pix,aprovado
+2026-03-04,Comunidade Marketing PRO,797.00,YouTube,cartao_credito,aprovado
+2026-03-04,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,aprovado
+2026-03-04,Workshop Funil de Vendas,97.00,Meta Ads,pix,aprovado
+2026-03-05,Minicurso Tráfego Pago,197.00,Indicação,cartao_credito,aprovado
+2026-03-05,Comunidade Marketing PRO,797.00,Meta Ads,cartao_credito,aprovado
+2026-03-06,Minicurso Tráfego Pago,197.00,YouTube,pix,aprovado
+2026-03-06,Workshop Funil de Vendas,97.00,Instagram,pix,aprovado
+2026-03-07,Mentoria Individual,2997.00,Indicação,cartao_credito,aprovado
+2026-03-07,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,aprovado
+2026-03-08,Comunidade Marketing PRO,797.00,YouTube,cartao_credito,aprovado
+2026-03-08,Minicurso Tráfego Pago,197.00,Meta Ads,pix,aprovado
+2026-03-09,Workshop Funil de Vendas,97.00,Meta Ads,pix,aprovado
+2026-03-09,Comunidade Marketing PRO,797.00,Indicação,cartao_credito,aprovado
+2026-03-09,Minicurso Tráfego Pago,197.00,Instagram,cartao_credito,aprovado
+2026-03-10,Minicurso Tráfego Pago,197.00,YouTube,pix,aprovado
+2026-03-10,Comunidade Marketing PRO,797.00,Meta Ads,cartao_credito,aprovado
+2026-03-10,Workshop Funil de Vendas,97.00,Google,boleto,pendente
+2026-03-11,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,aprovado
+2026-03-11,Mentoria Individual,2997.00,YouTube,cartao_credito,aprovado
+2026-03-11,Comunidade Marketing PRO,797.00,Indicação,pix,aprovado
+2026-03-12,Minicurso Tráfego Pago,197.00,Instagram,pix,aprovado
+2026-03-12,Workshop Funil de Vendas,97.00,Meta Ads,pix,aprovado
+2026-03-13,Comunidade Marketing PRO,797.00,Meta Ads,cartao_credito,aprovado
+2026-03-13,Minicurso Tráfego Pago,197.00,YouTube,cartao_credito,aprovado
+2026-03-14,Minicurso Tráfego Pago,197.00,Meta Ads,pix,aprovado
+2026-03-14,Comunidade Marketing PRO,797.00,Indicação,cartao_credito,aprovado
+2026-03-15,Workshop Funil de Vendas,97.00,Instagram,pix,aprovado
+2026-03-15,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,reembolsado
+2026-03-16,Comunidade Marketing PRO,797.00,YouTube,cartao_credito,aprovado
+2026-03-16,Minicurso Tráfego Pago,197.00,Meta Ads,pix,aprovado
+2026-03-17,Mentoria Individual,2997.00,Indicação,cartao_credito,aprovado
+2026-03-17,Workshop Funil de Vendas,97.00,Meta Ads,pix,aprovado
+2026-03-17,Minicurso Tráfego Pago,197.00,Instagram,cartao_credito,aprovado
+2026-03-18,Comunidade Marketing PRO,797.00,Meta Ads,cartao_credito,aprovado
+2026-03-18,Minicurso Tráfego Pago,197.00,YouTube,pix,aprovado
+2026-03-19,Workshop Funil de Vendas,97.00,Google,boleto,pendente
+2026-03-19,Comunidade Marketing PRO,797.00,Indicação,pix,aprovado
+2026-03-20,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,aprovado
+2026-03-20,Comunidade Marketing PRO,797.00,Meta Ads,cartao_credito,aprovado
+2026-03-21,Minicurso Tráfego Pago,197.00,YouTube,pix,aprovado
+2026-03-21,Workshop Funil de Vendas,97.00,Instagram,pix,aprovado
+2026-03-22,Comunidade Marketing PRO,797.00,Indicação,cartao_credito,aprovado
+2026-03-22,Minicurso Tráfego Pago,197.00,Meta Ads,cartao_credito,aprovado

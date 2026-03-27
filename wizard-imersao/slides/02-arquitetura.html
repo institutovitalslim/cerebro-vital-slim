@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitetura do Sistema</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 32px 40px;
+    gap: 28px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 2.5vw, 34px);
+    font-weight: 800;
+    text-align: center;
+  }
+  .tagline {
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: var(--accent2);
+    font-weight: 600;
+    text-align: center;
+    margin-top: -16px;
+  }
+
+  /* ── Main diagram ── */
+  .diagram {
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr 56px 1fr;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 1060px;
+  }
+
+  /* Left column */
+  .col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-end;
+  }
+
+  /* Right column */
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  /* Node boxes */
+  .node {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 20px;
+    min-width: 200px;
+    max-width: 240px;
+    transition: border-color 0.2s;
+  }
+  .node:hover { border-color: var(--blue); }
+  .node .icon { font-size: 26px; flex-shrink: 0; }
+  .node .node-text {}
+  .node .node-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .node .node-sub {
+    font-size: 12px;
+    color: var(--text2);
+    margin-top: 2px;
+  }
+  .node.highlight-blue { border-color: rgba(96,165,250,0.5); }
+  .node.highlight-green { border-color: rgba(34,197,94,0.5); }
+
+  /* Arrow columns */
+  .arrow-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    height: 100%;
+  }
+  .arrow-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+  .arrow-svg {
+    width: 48px;
+    height: 32px;
+  }
+
+  /* Center — Cérebro */
+  .cerebro-wrap {
+    display: flex;
+    justify-content: center;
+  }
+  .cerebro {
+    background: var(--bg3);
+    border: 2px solid var(--accent);
+    border-radius: 20px;
+    padding: 24px 28px;
+    text-align: center;
+    box-shadow: 0 0 48px rgba(254,80,0,0.25);
+    min-width: 200px;
+  }
+  .cerebro-icon { font-size: 52px; margin-bottom: 6px; }
+  .cerebro-label {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .cerebro-sub {
+    font-size: 12px;
+    color: var(--text2);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 14px;
+  }
+  .cerebro-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .cerebro-pill {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent2);
+    background: rgba(254,80,0,0.1);
+    border: 1px solid rgba(254,80,0,0.25);
+    border-radius: 100px;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+
+  /* Bottom pills */
+  .bottom-pills {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: var(--text2);
+  }
+  .pill .pill-label { font-weight: 700; color: var(--text); }
+</style>
+</head>
+<body>
+
+  <h2>Como o Sistema se Conecta</h2>
+  <p class="tagline">O Cérebro é o hub. As ferramentas são os braços.</p>
+
+  <div class="diagram">
+
+    <!-- LEFT: OpenClaws -->
+    <div class="col-left">
+      <div class="node highlight-green">
+        <div class="icon">🦞</div>
+        <div class="node-text">
+          <div class="node-label">OpenClaw — Empresa</div>
+          <div class="node-sub">Agente central da operação</div>
+        </div>
+      </div>
+      <div class="node highlight-green">
+        <div class="icon">👤</div>
+        <div class="node-text">
+          <div class="node-label">OpenClaw — Pessoal</div>
+          <div class="node-sub">Agente do founder / gestor</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow LEFT → CENTER -->
+    <div class="arrow-col">
+      <div class="arrow-line">
+        <svg class="arrow-svg" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="4" y1="10" x2="44" y2="10" stroke="#FE5000" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polyline points="38,6 44,10 38,14" stroke="#FE5000" stroke-width="1.5" fill="none"/>
+          <polyline points="10,6 4,10 10,14" stroke="#FE5000" stroke-width="1.5" fill="none"/>
+          <line x1="4" y1="22" x2="44" y2="22" stroke="#FE5000" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polyline points="38,18 44,22 38,26" stroke="#FE5000" stroke-width="1.5" fill="none"/>
+          <polyline points="10,18 4,22 10,26" stroke="#FE5000" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- CENTER: Cérebro -->
+    <div class="cerebro-wrap">
+      <div class="cerebro">
+        <div class="cerebro-icon">🧠</div>
+        <div class="cerebro-label">Cérebro</div>
+        <div class="cerebro-sub">GitHub Repo</div>
+        <div class="cerebro-pills">
+          <div class="cerebro-pill">empresa/ · areas/</div>
+          <div class="cerebro-pill">agentes/ · seguranca/</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow CENTER → RIGHT -->
+    <div class="arrow-col">
+      <div class="arrow-line">
+        <svg class="arrow-svg" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="4" y1="10" x2="44" y2="10" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polyline points="38,6 44,10 38,14" stroke="#60a5fa" stroke-width="1.5" fill="none"/>
+          <polyline points="10,6 4,10 10,14" stroke="#60a5fa" stroke-width="1.5" fill="none"/>
+          <line x1="4" y1="22" x2="44" y2="22" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polyline points="38,18 44,22 38,26" stroke="#60a5fa" stroke-width="1.5" fill="none"/>
+          <polyline points="10,18 4,22 10,26" stroke="#60a5fa" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- RIGHT: Claude Code -->
+    <div class="col-right">
+      <div class="node highlight-blue">
+        <div class="icon">💻</div>
+        <div class="node-text">
+          <div class="node-label">Claude Code — Func. A</div>
+          <div class="node-sub">Dev ou gestor de conteúdo</div>
+        </div>
+      </div>
+      <div class="node highlight-blue">
+        <div class="icon">💻</div>
+        <div class="node-text">
+          <div class="node-label">Claude Code — Func. B</div>
+          <div class="node-sub">Gestor de tráfego ou ops</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-pills">
+    <div class="pill">🔄 <span><span class="pill-label">Sync automático</span> — todos recebem as mudanças do repo</span></div>
+    <div class="pill">📜 <span><span class="pill-label">Controle de versão</span> — histórico completo de toda evolução</span></div>
+    <div class="pill">🤝 <span><span class="pill-label">Colaboração</span> — humanos + IA no mesmo repositório</span></div>
+  </div>
+
+</body>
+</html>

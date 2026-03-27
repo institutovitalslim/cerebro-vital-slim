@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoria — Próximo Passo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8; --red: #ef4444;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px 32px;
+    gap: 18px;
+  }
+  .bg-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(254,80,0,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  h2 {
+    font-size: clamp(22px, 2.8vw, 36px); font-weight: 900; text-align: center; z-index: 1;
+    background: linear-gradient(135deg, #fff 20%, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sub { color: var(--text2); font-size: 15px; text-align: center; margin-top: -10px; z-index: 1; }
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    width: 100%;
+    max-width: 1060px;
+    z-index: 1;
+  }
+
+  /* Left: How it works */
+  .left { display: flex; flex-direction: column; gap: 10px; }
+  .section-label {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text2); margin-bottom: 2px;
+  }
+
+  .feature {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .feature:hover { border-color: rgba(255,255,255,0.15); transform: translateX(4px); }
+  .feature-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .feature-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .feature-desc { font-size: 12px; color: var(--text2); line-height: 1.4; }
+
+  /* Right: Pricing */
+  .right { display: flex; flex-direction: column; gap: 14px; }
+
+  .price-card {
+    background: linear-gradient(145deg, rgba(254,80,0,0.12), rgba(254,80,0,0.04));
+    border: 2px solid var(--accent);
+    border-radius: 20px;
+    padding: 24px 26px;
+    box-shadow: 0 0 60px rgba(254,80,0,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .badge-first {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.3);
+    border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 700;
+    color: var(--yellow); text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .price-old {
+    font-size: 22px; font-weight: 700; color: var(--text2);
+    text-decoration: line-through;
+  }
+  .price-new {
+    font-size: clamp(36px, 4vw, 52px); font-weight: 900;
+    color: var(--accent2);
+    line-height: 1;
+  }
+  .price-period { font-size: 13px; color: var(--text2); margin-top: -6px; }
+
+  .duration {
+    font-size: 14px; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .spots-box {
+    background: rgba(239,68,68,0.08);
+    border: 2px solid rgba(239,68,68,0.4);
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .spots-number {
+    font-size: clamp(28px, 3vw, 40px); font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+  }
+  .spots-text { font-size: 13px; color: var(--text2); margin-top: 4px; line-height: 1.4; }
+  .spots-text strong { color: var(--text); }
+
+  .cta-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 14px 32px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 28px rgba(254,80,0,0.4);
+    animation: pulse-btn 2s ease-in-out infinite;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 320px;
+  }
+  @keyframes pulse-btn {
+    0%, 100% { box-shadow: 0 6px 28px rgba(254,80,0,0.4); transform: scale(1); }
+    50%       { box-shadow: 0 6px 44px rgba(254,80,0,0.65); transform: scale(1.03); }
+  }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <h2>Mentoria IA nos Negócios</h2>
+  <p class="sub">Primeira turma — apenas 10 vagas</p>
+
+  <div class="main">
+
+    <!-- Left: Features -->
+    <div class="left">
+      <div class="section-label">Como funciona</div>
+
+      <div class="feature">
+        <div class="feature-icon">📅</div>
+        <div>
+          <div class="feature-title">Encontros quinzenais em grupo, de 2h</div>
+          <div class="feature-desc">Trabalhamos em cima dos problemas práticos do dia a dia de cada um. Discussão de casos reais com os 10 participantes.</div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔍</div>
+        <div>
+          <div class="feature-title">Diagnóstico antes de cada sessão</div>
+          <div class="feature-desc">A gente roda um diagnóstico pra capturar os desafios de cada um. Chegamos preparados.</div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <div>
+          <div class="feature-title">Acompanhamento assíncrono</div>
+          <div class="feature-desc">Cada empresário tem um grupo individual com a nossa equipe. Tire dúvidas quando precisar, sem esperar a próxima sessão.</div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">👥</div>
+        <div>
+          <div class="feature-title">Sua equipe dentro</div>
+          <div class="feature-desc">Quem está implementando na sua empresa entra no grupo individual e tira dúvidas direto com a gente.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Pricing -->
+    <div class="right">
+
+      <div class="price-card">
+        <div class="badge-first">⭐ Primeira turma</div>
+        <div class="duration">📆 3 meses de mentoria</div>
+        <div class="price-old">R$ 30.000</div>
+        <div class="price-new">R$ 20.000</div>
+        <div class="price-period">condição exclusiva da primeira turma</div>
+        <button class="cta-btn">Quero minha vaga</button>
+      </div>
+
+      <div class="spots-box">
+        <div class="spots-number">10 vagas</div>
+        <div class="spots-text">Apenas 10 pessoas por turma.<br><strong>Excedeu? Lista de espera</strong> pra próxima turma.</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
