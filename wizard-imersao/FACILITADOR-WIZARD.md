@@ -381,10 +381,7 @@ Toda empresa tem processos que vivem na cabeça de alguém. Um prompt que funcio
 
 Prompt é temporário. Morre quando a sessão fecha. Skill é permanente — fica salva no Cérebro, qualquer agente acessa, roda quando quiser.
 
-O skill-creator resolve isso: transforma qualquer processo em uma skill estruturada, com QA automático, pronta pra usar.
-
-📂 `slides/05-skill-creator.html` *(abrir arquivo ao vivo)*
-📂 `cerebro/empresa/skills/criar-skill/wizard.html` *(abrir wizard ao vivo — mostrar interface visual de criação de skills)*
+📂 `slides/05-skill-creator.html` *(abrir arquivo ao vivo — slide conceito Prompt vs Skill)*
 
 ⏸ *Aguarda "próximo"*
 
@@ -392,32 +389,13 @@ O skill-creator resolve isso: transforma qualquer processo em uma skill estrutur
 
 📤 **Mensagem:**
 
-**Os 3 modos de criar uma skill**
+**Como o skill-creator funciona por dentro**
 
-O skill-creator detecta automaticamente qual modo usar:
+O skill-creator é uma skill que cria outras skills. Ele tem 3 modos de detectar o que você quer — e escolhe sozinho qual usar.
 
-**Modo 1 — Captura de sessão**
-Você acabou de fazer algo com o agente. Diz: *"Transforma isso em skill"*. O agente lê o que vocês fizeram juntos e monta a skill automaticamente.
+Vamos abrir o arquivo real e ver como ele funciona:
 
-**Modo 2 — Colar um processo existente**
-Você tem um passo-a-passo anotado (Notion, doc, papel). Cola no chat. O agente identifica as etapas e gera.
-
-**Modo 3 — Descrever uma ideia**
-Você tem uma ideia vaga: *"Quero algo que avise quando um lead esfria"*. O agente faz as perguntas certas até entender input, output e regras — depois gera.
-
-📂 `cerebro/empresa/skills/criar-skill/SKILL.md` *(abrir arquivo ao vivo — mostrar a seção "Detecção de Modo")*
-
-⏸ *Aguarda "próximo"*
-
----
-
-📤 **Mensagem:**
-
-🎬 **Wizard visual — criando skill sem digitar código**
-
-Além dos 3 modos via chat, existe o wizard visual. Uma interface guiada em 4 etapas que monta a skill pra você — e ainda tem uma biblioteca com 24 exemplos de skills prontas pra usar como base.
-
-📂 `cerebro/empresa/skills/criar-skill/wizard.html` *(abrir arquivo ao vivo — mostrar as 4 etapas e a biblioteca de exemplos)*
+📂 `cerebro/empresa/skills/criar-skill/SKILL.md` *(abrir arquivo ao vivo — mostrar Detecção de Modo, QA automático, estrutura gerada)*
 
 ⏸ *Aguarda "próximo"*
 
@@ -427,16 +405,11 @@ Além dos 3 modos via chat, existe o wizard visual. Uma interface guiada em 4 et
 
 🎬 **Demo ao vivo — criando uma skill do zero**
 
-Vamos usar o Modo 3. Pedindo pro agente:
+Vamos testar. Pedindo pro agente:
 
 *"Cria uma skill que analise minha planilha de leads e me diga quais estão esfriando — leads sem follow-up há mais de 7 dias"*
 
-*(agente entra em modo entrevista → faz perguntas de esclarecimento → gera SKILL.md + evals)*
-
-Olha o que ele gerou:
-- **SKILL.md** com workflow completo, edge cases, exemplos
-- **evals/evals.json** com casos de teste automáticos
-- **QA automático** rodou 10 checks antes de salvar
+*(agente entra em modo entrevista → faz perguntas de esclarecimento → gera SKILL.md + evals → QA automático roda)*
 
 📂 `cerebro/areas/vendas/skills/leads-esfriando/SKILL.md` *(abrir arquivo gerado ao vivo)*
 
@@ -446,33 +419,12 @@ Olha o que ele gerou:
 
 📤 **Mensagem:**
 
-**O QA automático — por que isso importa**
+🎬 **Wizard visual — pra quem prefere interface guiada**
 
-Toda skill passa por 10 verificações antes de ser salva:
+Além do chat, tem o wizard visual. Interface com 4 etapas que monta a skill pra você — e uma biblioteca com 24 exemplos de skills prontas pra usar como base.
 
-Nome no formato certo? Descrição com triggers suficientes? Cada passo é uma ação clara? Tem exemplos reais? Edge cases cobertos? Sem credenciais expostas?
-
-Se o score for menor que 7/10, o agente corrige sozinho. Se for 7 ou mais, mostra pra você revisar.
-
-E se ele encontrar uma senha ou API key no meio da skill? Ele detecta, protege automaticamente (via variável de ambiente ou 1Password), e avisa você.
-
-Skills que não servem uma área específica ficam em `empresa/skills/`. Skills de área ficam dentro de cada área em `areas/*/skills/`.
-
-⏸ *Aguarda "próximo"*
-
----
-
-📤 **Mensagem:**
-
-**Skills não saem perfeitas na primeira vez — e tá tudo bem**
-
-Uma skill deployada não é uma skill pronta. É uma skill que precisa ser testada com dados reais.
-
-O fluxo é: gerar → testar → encontrar erro → corrigir o SKILL.md → testar de novo. Cada correção torna a skill mais robusta pra sempre.
-
-📂 `cerebro/empresa/skills/criar-skill/references/guia-refinamento.md` *(abrir arquivo ao vivo — mostrar exemplo real de refinamento em 3 ciclos)*
-
-> A skill é como uma receita: na primeira vez você descobre o que ajustar. Na segunda, já sabe. Na terceira, está no automático.
+📂 `cerebro/empresa/skills/criar-skill/wizard.html` *(abrir wizard ao vivo)*
+📂 `cerebro/empresa/skills/criar-skill/examples.html` *(abrir biblioteca de exemplos)*
 
 ⏸ *Aguarda "próximo"*
 

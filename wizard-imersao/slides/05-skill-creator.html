@@ -7,125 +7,68 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
   :root {
-    --bg: #0A0E2A; --bg2: #111630;
-    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --bg: #0A0E2A;
+    --accent: #FE5000; --accent2: #ff7a35;
     --green: #22c55e; --red: #ef4444;
-    --purple: #a78bfa; --teal: #14b8a6; --yellow: #eab308;
     --text: #e2e8f0; --text2: #94a3b8;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
-  body { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 60px; gap: 40px; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 80px; gap: 56px; }
 
-  /* ─── HEADER ─── */
-  .header { text-align: center; }
   h1 {
-    font-size: clamp(32px, 4vw, 52px); font-weight: 900;
+    font-size: clamp(36px, 5vw, 60px); font-weight: 900; text-align: center;
     background: linear-gradient(135deg, #fff 30%, var(--accent2) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; line-height: 1.1; margin-bottom: 12px;
+    background-clip: text; line-height: 1.1;
   }
-  .subtitle { color: var(--text2); font-size: 18px; font-weight: 500; }
 
-  /* ─── VS ROW ─── */
   .vs {
-    display: flex; align-items: center; gap: 32px;
-    width: 100%; max-width: 800px;
+    display: flex; align-items: stretch; gap: 40px;
+    width: 100%; max-width: 900px;
   }
   .vs-card {
-    flex: 1; border-radius: 16px; padding: 24px 28px;
+    flex: 1; border-radius: 20px; padding: 36px 40px;
     position: relative; overflow: hidden;
   }
-  .vs-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .vs-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
   .card-bad { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.2); }
   .card-bad::before { background: var(--red); }
   .card-good { background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.2); }
   .card-good::before { background: var(--green); }
-  .vs-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .vs-label { font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px; }
   .label-red { color: var(--red); }
   .label-green { color: var(--green); }
-  .vs-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
-  .vs-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
-  .vs-arrow { font-size: 28px; color: var(--accent2); flex-shrink: 0; }
+  .vs-title { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+  .vs-desc { font-size: 17px; color: var(--text2); line-height: 1.7; }
 
-  /* ─── 3 MODES ─── */
-  .modes {
-    display: flex; gap: 20px; width: 100%; max-width: 800px;
-  }
-  .mode {
-    flex: 1; background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 14px; padding: 20px 22px; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .mode::after {
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    border-radius: 14px 14px 0 0;
-  }
-  .m1::after { background: var(--purple); }
-  .m2::after { background: var(--teal); }
-  .m3::after { background: var(--yellow); }
-  .mode-icon { font-size: 28px; margin-bottom: 8px; }
-  .mode-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .mode-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .vs-arrow { font-size: 36px; color: var(--accent2); flex-shrink: 0; display: flex; align-items: center; }
 
-  /* ─── BOTTOM FLOW ─── */
-  .flow {
-    display: flex; align-items: center; gap: 12px;
-    background: rgba(254,80,0,0.06); border: 1px solid rgba(254,80,0,0.2);
-    border-radius: 12px; padding: 14px 28px;
+  .tagline {
+    text-align: center; font-size: 20px; color: var(--text2); font-weight: 500;
   }
-  .flow-step { font-size: 15px; font-weight: 600; color: var(--text); }
-  .flow-arrow { color: var(--accent2); font-size: 18px; }
+  .tagline strong { color: var(--accent2); font-weight: 700; }
 </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>Skill Creator</h1>
-    <p class="subtitle">Transforma qualquer processo em uma skill reutilizável</p>
-  </div>
+  <h1>Prompt vs Skill</h1>
 
   <div class="vs">
     <div class="vs-card card-bad">
       <div class="vs-label label-red">Prompt</div>
       <div class="vs-title">Temporário</div>
-      <div class="vs-desc">Morre quando a sessão fecha.<br>Explica tudo de novo toda vez.</div>
+      <div class="vs-desc">Morre quando a sessão fecha.<br>Vive na cabeça de alguém.<br>Explica tudo de novo toda vez.</div>
     </div>
     <div class="vs-arrow">→</div>
     <div class="vs-card card-good">
       <div class="vs-label label-green">Skill</div>
       <div class="vs-title">Permanente</div>
-      <div class="vs-desc">Salva no Cérebro. Qualquer agente acessa.<br>Roda quando quiser. Melhora a cada uso.</div>
+      <div class="vs-desc">Salva no Cérebro.<br>Qualquer agente acessa.<br>Melhora a cada uso.</div>
     </div>
   </div>
 
-  <div class="modes">
-    <div class="mode m1">
-      <div class="mode-icon">📸</div>
-      <div class="mode-name">Captura</div>
-      <div class="mode-desc">Acabou de fazer algo?<br>O agente transforma em skill.</div>
-    </div>
-    <div class="mode m2">
-      <div class="mode-icon">📋</div>
-      <div class="mode-name">Processo</div>
-      <div class="mode-desc">Cola seu passo-a-passo.<br>O agente estrutura pra você.</div>
-    </div>
-    <div class="mode m3">
-      <div class="mode-icon">💡</div>
-      <div class="mode-name">Ideia</div>
-      <div class="mode-desc">Descreva o que precisa.<br>O agente faz as perguntas certas.</div>
-    </div>
-  </div>
-
-  <div class="flow">
-    <span class="flow-step">Você descreve</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">Agente estrutura</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">QA automático</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">Skill pronta</span>
-  </div>
+  <p class="tagline">O <strong>skill-creator</strong> transforma qualquer processo em skill — com QA automático.</p>
 
 </body>
 </html>
