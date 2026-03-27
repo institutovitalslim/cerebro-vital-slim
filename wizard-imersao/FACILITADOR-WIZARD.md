@@ -413,7 +413,11 @@ Pedindo pro agente:
 
 📂 relatório HTML gerado *(abrir arquivo ao vivo)*
 
-⏸ *Aguarda "próximo"*
+Após mostrar o relatório, o agente sugere ao Bruno:
+
+> E se a gente transformasse isso que acabamos de fazer em uma skill? Assim qualquer agente roda esse relatório quando quiser — sem precisar explicar de novo.
+
+⏸ *Aguarda Bruno pedir: "Transforma isso em skill" ou similar*
 
 ---
 
@@ -421,7 +425,7 @@ Pedindo pro agente:
 
 🎬 **Transformando em skill — Modo 1: Captura de sessão**
 
-Agora o pulo do gato. Pedindo pro agente:
+O pulo do gato:
 
 *"Transforma isso que a gente fez em skill"*
 
@@ -431,17 +435,17 @@ O agente capturou o processo inteiro e empacotou em receita reutilizável. A par
 
 📂 `cerebro/areas/vendas/skills/leads-esfriando/SKILL.md` *(abrir arquivo gerado ao vivo)*
 
-⏸ *Aguarda "próximo"*
+Após mostrar a skill gerada, o agente sugere ao Bruno:
+
+> A skill tá criada e salva no Cérebro. Quer testar? Pede pra eu rodar ela agora.
+
+⏸ *Aguarda Bruno pedir: "Me mostra os leads esfriando" ou similar*
 
 ---
 
 📤 **Mensagem:**
 
 🎬 **Testando a skill — funciona sozinha?**
-
-Pedindo pro agente:
-
-*"Me mostra os leads que estão esfriando"*
 
 *(agente encontra a skill → executa → gera o mesmo relatório visual)*
 
