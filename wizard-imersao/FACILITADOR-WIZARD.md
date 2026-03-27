@@ -407,11 +407,11 @@ Vamos abrir o arquivo real e ver como ele funciona:
 
 Vamos testar. Pedindo pro agente:
 
-*"Cria uma skill que analise minha planilha de leads e me diga quais estão esfriando — leads sem follow-up há mais de 7 dias"*
+*"Me crie um relatório em HTML para que eu veja visualmente os meus leads sem follow-up há mais de 7 dias"*
 
-*(agente entra em modo entrevista → faz perguntas de esclarecimento → gera SKILL.md + evals → QA automático roda)*
+*(agente analisa a planilha de leads → gera relatório HTML visual com os leads esfriando)*
 
-📂 `cerebro/areas/vendas/skills/leads-esfriando/SKILL.md` *(abrir arquivo gerado ao vivo)*
+📂 relatório HTML gerado *(abrir arquivo ao vivo)*
 
 ⏸ *Aguarda "próximo"*
 
