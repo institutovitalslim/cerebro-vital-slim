@@ -51,7 +51,7 @@ Detecte automaticamente em qual ambiente você está rodando e use a regra corre
 **Como enviar slides:** use um link `computer://` apontando para o caminho absoluto do arquivo HTML dentro do workspace. Exemplo:
 
 ```
-[📊 Abrir slide](computer:///sessions/NOME-DA-SESSAO/mnt/imersao-openclaw-negocios/imersao/slides/00-abertura.html)
+[📊 Abrir slide](computer:///sessions/NOME-DA-SESSAO/mnt/imersao-openclaw-negocios/wizard-imersao/slides/00-abertura.html)
 ```
 
 O participante clica no link e o slide renderiza direto na conversa.
@@ -65,7 +65,7 @@ O participante clica no link e o slide renderiza direto na conversa.
 **Como enviar slides:** use a ferramenta de envio de arquivo do OpenClaw para mandar o HTML diretamente no chat. Não use chat ID fixo — o canal é inferido automaticamente pelo contexto. Exemplo de caminho relativo:
 
 ```
-imersao/slides/00-abertura.html
+wizard-imersao/slides/00-abertura.html
 ```
 
 O repositório precisa estar configurado como workspace do agente para que os caminhos relativos funcionem.
