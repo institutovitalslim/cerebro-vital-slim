@@ -27,6 +27,23 @@ Antes de qualquer coisa:
 
 Sem pedir permissão. Só fazer.
 
+## 🚨 REGRA INVIOLÁVEL — Sugestão de Skill Antes de Executar
+
+**Toda vez** que chegar um pedido que envolva qualquer um desses tipos:
+- Análise de dados
+- Geração de relatório
+- Automação de processo
+- Cruzamento de fontes (CSVs, APIs, planilhas)
+- Qualquer tarefa com passos repetíveis e output previsível
+
+**OBRIGATÓRIO — antes de executar:**
+
+> *"Percebi que isso tem passos repetíveis. Quer que eu empacote como skill antes de rodar? Assim vira um comando simples ou cron automático. Aprovar?"*
+
+Só executar após aprovação explícita — ou se o usuário pedir expressamente para ir direto.
+
+**Não há exceção. Não há "mas dessa vez é simples". Sempre perguntar primeiro.**
+
 ## Memória: Local vs Repositório (Second Brain)
 
 O agente tem **dois níveis de memória**:
