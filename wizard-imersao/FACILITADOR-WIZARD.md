@@ -655,15 +655,7 @@ Um aluno nosso, o Walter da Triângulo Laser — indústria de corte a laser com
 
 📎 `slides/07d-evolucao-agentes.html`
 
-⏸ *Aguarda "próximo"*
-
----
-
-📤 **Mensagem:**
-
-**Estágio 4 — o suprassumo: cada área com seu agente**
-
-Cada agente com personalidade, escopo e acesso próprios. Um agente master no topo coordena, audita e gera relatórios de evolução. Todos lendo do mesmo Cérebro.
+E o estágio 4 — o suprassumo — é cada área com seu próprio agente especializado. Um agente master no topo coordena, audita e gera relatórios de evolução. Todos lendo do mesmo Cérebro.
 
 📎 `slides/08-multi-agente.html`
 
@@ -673,13 +665,15 @@ Cada agente com personalidade, escopo e acesso próprios. Um agente master no to
 
 📤 **Mensagem:**
 
-🎬 Abrindo os dois SOULs ao vivo pra comparar:
+🎬 Comparando dois agentes — na prática
 
-📎 `cerebro/agentes/assistente/SOUL.md` — equilibrado, acesso amplo, responde de tudo.
+Vocês acabaram de ver a evolução: de 1 agente pessoal até um sistema com agente por área. Mas o que muda de verdade entre um agente e outro? Vamos abrir os dois ao vivo.
+
+📎 `cerebro/agentes/assistente/SOUL.md` — generalista, equilibrado, acesso amplo.
 
 📎 `cerebro/agentes/marketing/SOUL.md` — obcecado com métricas. Fala de ROAS, CTR, criativos.
 
-🎬 *Testando no Telegram — mesma pergunta pra dois agentes diferentes:*
+Mesmo Cérebro. Mesma estrutura. Dois comportamentos completamente diferentes. Vamos testar:
 
 **Pergunta 1:** *"Qual próximo criativo faz sentido produzir?"*
 
@@ -707,6 +701,28 @@ Isso é o `dmPolicy: allowlist` — o agente só responde pra IDs e grupos que v
 
 📤 **Mensagem:**
 
+**Permissionamento — o que cada agente pode acessar**
+
+Vocês viram a personalidade — o SOUL.md define quem o agente é. Agora vamos ver o outro lado: o que cada agente **pode tocar** no Cérebro.
+
+📎 `slides/07e-permissionamento.html`
+
+O Assistente Geral tem acesso total — empresa, marketing, vendas, atendimento, operações, dados, segurança. Ele enxerga tudo.
+
+O Agente de Marketing? Só `empresa/` (contexto geral) e `areas/marketing/`. O resto é bloqueado. Ele não lê vendas, não lê atendimento, não lê operações.
+
+📎 `cerebro/agentes/assistente/AGENTS.md` — acesso irrestrito ao repositório inteiro.
+
+📎 `cerebro/agentes/marketing/AGENTS.md` — escopo restrito: só empresa/ + marketing/.
+
+É o AGENTS.md que define essa fronteira. Personalidade no SOUL.md, permissão no AGENTS.md. Dois arquivos, dois papéis completamente diferentes.
+
+⏸ *Aguarda "próximo"*
+
+---
+
+📤 **Mensagem:**
+
 **Heartbeats — o que cada agente monitora sozinho**
 
 Acabamos de ver a personalidade (SOUL.md) e as permissões. Agora o outro lado: o que cada agente faz quando **ninguém tá perguntando nada**.
@@ -717,7 +733,19 @@ Acabamos de ver a personalidade (SOUL.md) e as permissões. Agora o outro lado: 
 
 Personalidade diferente. Escopo diferente. Heartbeat diferente. Cada agente é um funcionário especializado — não um clone genérico.
 
-Cada pasta dentro de `cerebro/agentes/` é um agente. Cada um com SOUL.md e HEARTBEAT.md próprio.
+Cada pasta dentro de `cerebro/agentes/` é um agente. Cada um com SOUL.md, AGENTS.md e HEARTBEAT.md próprio.
+
+🎬 Agora vamos testar ao vivo. Mesmo comando, dois agentes.
+
+**Prompt pro Assistente Geral:** *"Roda seu heartbeat"*
+
+→ Ele responde com visão 360°: pendências com nome e prazo, projetos vencendo, crons com erro e sugestão de fix, consolidação de memória. Todas as áreas.
+
+**Prompt pro Agente de Marketing:** *"Roda seu heartbeat"*
+
+→ Ele responde SÓ com: ROAS das campanhas, criativos cansando, calendário de conteúdo, pendências de marketing. Nada de vendas, nada de projetos cross-área.
+
+Mesmo comando. Respostas completamente diferentes. Cada agente monitora o que é dele.
 
 ⏸ *Aguarda "próximo"*
 
