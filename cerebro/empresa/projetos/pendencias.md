@@ -8,6 +8,7 @@
 | 2 | Gravar depoimentos de 3 alunos para ads | Camila | 18/03 | Em progresso |
 | 3 | Expandir FAQ de suporte (de 10 para 30) | Juliana | 20/03 | Planejado |
 | 4 | Review de ferramentas (redução de custo) | André Costa | 22/03 | Planejado |
+| 5 | Enviar proposta Mentoria Individual para Rodrigo Alves (clínica odontológica) | Felipe Santos | 27/03 | **URGENTE — prazo passou** |
 
 ## Resolvidas (março)
 
