@@ -1,0 +1,24 @@
+{
+  "product_badge": "OpenClaw",
+  "h1": ["Em 3 dias, sem escrever", "uma linha de código,", "<em>configurei 7 agentes trabalhando por mim 24h.</em>"],
+  "pricing": {
+    "was": "R$297",
+    "value": "R$97",
+    "label": "Acesso vitalício",
+    "condition": "Condição de lançamento"
+  },
+  "output_dir": "./banners/a07",
+  "formats": ["post", "story"],
+  "copies": [
+    {
+      "key": "a07-hibrido",
+      "label": "A07 — Híbrido (Número + Não-técnico)",
+      "subtitle": "Sem programar, sem contratar dev — <strong>7 agentes rodando</strong> em <strong>3 dias.</strong>",
+      "cards": [
+        ["Sem código", "Você configura tudo em linguagem natural, sem escrever uma linha de programação."],
+        ["Trabalha por você 24h", "Os agentes executam, reportam e te avisam pelo Telegram quando precisam de você."],
+        ["Em dias, não meses", "Do zero ao primeiro agente rodando em menos de 72 horas."]
+      ]
+    }
+  ]
+}

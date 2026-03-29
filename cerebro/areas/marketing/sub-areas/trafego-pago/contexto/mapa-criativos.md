@@ -36,9 +36,9 @@ Para vincular dados da API Meta a um criativo deste repo, use a coluna **Nome Me
 | A03 | nao-acordar-checando | Carrossel | — | — | Ativo |
 | A04 | gestor-sobrecarregado | Vídeo longo | — | — | Ativo |
 | A05 | emocional-liberdade | Vídeo curto | 11,51x | ~9,4x | **Prioridade de escala** |
-| A06 | prova-social-multipla | Carrossel | 4,5x–10x (volátil) | — | Monitorar 3 dias |
+| A06 | prova-social-multipla | Carrossel | 4,5x–10x (volátil) | — | ⏰ Prazo de monitoramento encerrado — decisão pendente (29/03) |
 | A07 | configurei-uma-vez (variante estático) | Estático | — | — | **A criar** |
 
 **Nota:** A07 — hook "Configurei uma vez. Agora eles rodam sozinhos." Budget inicial: R$ 200/dia. Objetivo: isolar variável copy vs. A01.
 
-*Última atualização: 2026-03-26*
+*Última atualização: 2026-03-29*

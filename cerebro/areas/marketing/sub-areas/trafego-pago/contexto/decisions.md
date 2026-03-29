@@ -13,7 +13,7 @@
 - **Decisão 2:** Criar A07 — estático, hook "Configurei uma vez. Agora eles rodam sozinhos." Budget inicial: R$ 200/dia. Objetivo: isolar variável copy vs. A01 (mesmo ângulo, formato diferente).
 - **Decisão 3:** Monitorar A06 por mais 3 dias antes de decisão de escala. ROAS volátil requer dados adicionais.
 - **Decidido por:** Agente + Cayo Syllos
-- **Status:** Em execução
+- **Status:** ⏰ Prazo de monitoramento de A06 encerrou em 29/03 — decisão de escala/pausa pendente
 
 ### 26/03 — Regras operacionais de criativos (formalizadas)
 
