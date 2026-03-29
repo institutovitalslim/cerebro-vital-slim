@@ -894,13 +894,44 @@ Resultado desse nível: **visibilidade**. Você para de perder tempo abrindo pai
 
 **Nível 2 — Inteligência sobre os criativos**
 
-Ter os dados é o começo. Mas dados sem contexto não servem pra nada. O próximo passo foi criar um MAPA de criativos: cada ad documentado com ângulo, formato, hook e performance.
+Ter os dados é o começo. Mas dados sem contexto não servem pra nada. O próximo passo foi documentar cada criativo — o agente precisa saber o que é cada um, qual ângulo usa, qual hipótese testava e o que aconteceu. Sem isso, ele tá cego.
 
-E um detalhe importante: janelas de análise corretas. O agente analisa em 24h, média móvel de 3 dias e 7 dias — não o acumulado da vida toda, que mascara tendências.
+São 4 camadas de documentação:
 
-Com isso, os primeiros padrões apareceram: ângulos que convertem, hooks que queimam rápido, formatos que performam melhor pra cada público.
+**Camada 1 — `MAPA.md` + Google Sheets.** O índice de tudo. Cada criativo tem uma linha com campanha, nome interno (ex: `A01-N2`), nome Meta Ads (chave de lookup com a API) e arquivo. Sincronizado com Google Sheets — a planilha é a fonte da verdade. Hoje: 138 criativos documentados.
 
-Resultado: **decisão por dados, não por intuição.**
+**Camada 2 — `criativos/` — 1 arquivo por criativo.** Cada arquivo `.md` com estrutura fixa: ângulo, formato, hook, status, copy completo (hook + primary text + headline + CTA), descrição visual, performance real e o racional do teste — por que foi criado e qual hipótese testava. O agente entende o criativo sem precisar ver a imagem.
+
+**Camada 3 — `angulos/` — 1 arquivo por ângulo.** Cada ângulo documentado: qual dor endereça, quando funciona, quando não funciona, quais criativos já usaram e o que aprendemos. 6+ ângulos: Founder Livre, Antes vs. Depois, Proatividade, Não-Técnico, Time de Agentes. O agente consulta antes de propor qualquer teste novo.
+
+**Camada 4 — `formatos/` — 1 arquivo por formato.** O container visual do criativo. Dimensões, quando funciona, skill associada e criativos que usaram. Formatos: Tweet Screenshot, Mission Control (melhor ROAS — 8x), Stack Offer, Testimonial, Vídeo Talking Head, Screen Share + PIP.
+
+📎 `slides/10b-marketing-documentacao.html`
+
+🎬 Abrindo um exemplo de cada camada ao vivo:
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/contexto/mapa-criativos.md` *(Camada 1 — o índice. Cada linha é um criativo com nome interno, nome Meta Ads e arquivo)*
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/criativos/A01-delegacao-estatico.md` *(Camada 2 — olha: ângulo, copy, visual, resultados, tudo num arquivo só. O agente lê isso e entende o criativo sem ver a imagem)*
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/angulos/delegacao.md` *(Camada 3 — o ângulo Delegação: qual dor endereça, quando funciona, copies testados, performance. O agente consulta isso antes de propor qualquer teste novo)*
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/formatos/estatico-feed.md` *(Camada 4 — formato Estático Feed: dimensões, elementos obrigatórios, layout, dicas de performance. É a receita visual)*
+
+🎬 Abrindo a planilha ao vivo — essa é a fonte da verdade:
+
+📎 `dados-demo/mapa-criativos-demo.xlsx`
+
+E quem alimenta essa planilha? O **time de tráfego pago**. E é importante entender: o time de tráfego hoje tem exatamente duas funções operacionais:
+
+1. **Subir os criativos** — pegar o PNG/vídeo que o agente gerou e fazer o upload no Meta Ads
+2. **Atualizar o mapa** — configurar o criativo na plataforma e registrar na planilha (nome Meta Ads, campanha, status)
+
+Só isso. Toda a parte de inteligência — o que testar, qual ângulo explorar, qual criativo criar, quando pausar, quando escalar — é feita pelo sistema. O agente gerencia as campanhas de ponta a ponta. O time de tráfego executa a parte operacional que a Meta ainda não permite automatizar via API.
+
+E o sync? Um cron roda todo dia às 06:00 — lê a planilha no Google Sheets e atualiza o `mapa-criativos.md` no Cérebro automaticamente. Roda antes do relatório de ads (08:00), então quando o agente gera o report, o mapa já está atualizado com o que o time subiu no dia anterior.
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/rotinas/sync-mapa-criativos.md` *(abrir ao vivo — mostrar a rotina documentada)*
 
 ⏸ *Aguarda "próximo"*
 
@@ -912,13 +943,27 @@ Resultado: **decisão por dados, não por intuição.**
 
 Aqui a coisa fica séria. Não é mais "vamos testar um criativo novo" — é um framework A/B: uma variável por vez. Ou testa o hook, ou o ângulo, ou o formato. Nunca os três juntos.
 
-Regras de decisão documentadas: quando pausar, quando manter, quando escalar. Tudo no Cérebro.
+Cada criativo que sobe gera um teste em aberto. O teste coleta dados. Quando atinge os critérios, consolida. O consolidado vira learning. E o learning direciona o próximo criativo. Loop perpétuo.
 
-E o mais valioso: `learnings/` — aprendizados acumulados por ângulo, formato e hook. Consultáveis a qualquer momento. O agente lê antes de propor qualquer teste novo.
+📎 `slides/10c-marketing-testes.html`
 
-E `descriptions/` — cada criativo tem seu briefing, hipótese e racional do teste. Nada é "achismo".
+🎬 Abrindo exemplos reais — um teste aberto e um consolidado:
 
-Resultado: **cada real investido gera aprendizado reutilizável**, não apenas venda.
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/testes/abertos/teste-hook-naotecnico-numero.md` *(Teste aberto — A07: combina número concreto + ângulo não-técnico. Hipótese clara, variável isolada, parâmetros definidos — budget R$200/dia, sucesso = ROAS > 11,51x. Tabela de resultado vazia — aguardando dados.)*
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/testes/abertos/teste-hook-delegacao.md` *(Outro teste em andamento — A01 vs A02. Resultado parcial: A01 lidera com 8,86x vs 7,50x, mas formato diferente impede conclusão. Por isso o A07 vai isolar a variável.)*
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/testes/consolidados/teste-hook-overlay.md` *(Teste fechado — hook overlay em vídeo. +89% ROAS com overlay. Conclusão: regra obrigatória. Movido para consolidados.)*
+
+E o consolidado não morre ali — ele vira **learning**:
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/learnings/resumo.md` *(5 aprendizados principais — todos vieram de testes consolidados. Hook numérico > pergunta, ângulo não-técnico surpreendendo, estático bate vídeo no início. Cada linha aqui é um teste que fechou e virou regra. E a seção "O que ainda não sabemos" direciona os próximos testes — o ciclo recomeça.)*
+
+Quem roda essa máquina? Um cron:
+
+📎 `cerebro/areas/marketing/sub-areas/trafego-pago/rotinas/consolidacao-testes-diaria.md` *(Todo dia às 20:00 — lê testes abertos, puxa dados da API Meta, avalia critérios: R$150+ gasto, 7+ dias, resultado conclusivo. Se passou, consolida, extrai learning, commita no GitHub.)*
+
+Resultado: **cada real testado se torna conhecimento documentado e reutilizável.**
 
 ⏸ *Aguarda "próximo"*
 
@@ -928,21 +973,25 @@ Resultado: **cada real investido gera aprendizado reutilizável**, não apenas v
 
 **Nível 4 — Produção automatizada de criativos**
 
-Agora o agente não só analisa — ele **cria**. Skills que geram banners (stories e posts) a partir de copy e screenshot. Múltiplas variações de hook com bottom idêntico — pronto pra subir.
+Agora o agente não só analisa — ele **cria**. O fluxo funciona em 3 passos:
+
+Primeiro, o agente faz a análise: lê o relatório de ads + learnings + testes abertos, cruza tudo, identifica quais hooks estão funcionando, quais estão cansando, e onde tem oportunidade.
+
+Segundo, ele sugere a direção: qual ângulo, qual formato, qual hook — com evidência. E pergunta: *"Quer que eu crie?"*
+
+Terceiro, com o OK, ele escolhe a skill de criação certa pro formato sugerido e entrega o PNG pronto. Tweet Screenshot? Roda `twitter-banner-creator`. Stack Offer? Roda `stack-ad-creator-pixel`. Testimonial? Roda `testimonial-banner-creator`. Múltiplas variações de hook com visual idêntico — pronto pra subir.
+
+📎 `slides/10d-marketing-producao.html`
 
 🎬 *Bruno, digita pro agente:*
 
 **"Com base nos resultados de hoje, faz uma análise dos ângulos e padrões de performance. Quais hooks estão funcionando, quais estão cansando, e o que faz sentido testar agora?"**
 
-*(Agente lê relatório + learnings + testes abertos → identifica padrões → sugere direção)*
-
-Ele não chutou. Leu os dados, cruzou com os learnings anteriores, e entregou a análise com evidência. A partir dessa análise, ele propõe o criativo, e com o OK roda a skill e entrega o PNG pronto.
+*(Agente lê, cruza, sugere, pergunta se pode criar, roda a skill, entrega o PNG)*
 
 E tem mais: novos ângulos descobertos por dados. O ângulo "Não-Técnico" surgiu de depoimentos analisados pelo agente — ninguém do time tinha pensado nele.
 
 95 criativos documentados, gerados e testados com o mesmo sistema. O agente propõe, o humano aprova.
-
-📎 `slides/12-pipeline-criativos.html`
 
 ⏸ *Aguarda "próximo"*
 

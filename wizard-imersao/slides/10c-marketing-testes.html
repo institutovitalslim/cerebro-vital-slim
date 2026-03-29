@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ciclo de Testes e Learnings</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg:#0A0E2A; --bg2:#111630; --bg3:#181e3a;
+    --border:#2a3260; --accent:#FE5000;
+    --green:#22c55e; --blue:#60a5fa; --yellow:#eab308;
+    --purple:#a78bfa;
+    --text:#e2e8f0; --text2:#94a3b8; --text3:#64748b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg);
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:32px 24px;
+  }
+  .container { width:100%; max-width:900px; }
+
+  h1 { font-size:clamp(22px,3.2vw,34px); font-weight:900; text-align:center; margin-bottom:4px; }
+  h1 span { color:var(--accent); }
+  .subtitle { font-size:clamp(12px,1.4vw,15px); color:var(--text2); text-align:center; margin-bottom:32px; }
+
+  /* ── CYCLE ── */
+  .cycle {
+    display:grid;
+    grid-template-columns:1fr 48px 1fr 48px 1fr;
+    grid-template-rows:auto 40px auto;
+    align-items:center;
+    gap:0;
+    margin-bottom:28px;
+  }
+
+  .node {
+    background:var(--bg2);
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    padding:20px 18px;
+    text-align:center;
+  }
+  .node-num {
+    width:38px; height:38px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:16px; font-weight:900; color:white; margin-bottom:10px;
+  }
+  .n1 { background:var(--blue); }
+  .n2 { background:var(--yellow); }
+  .n3 { background:var(--green); }
+  .n4 { background:var(--purple); }
+
+  .node-title { font-size:15px; font-weight:800; margin-bottom:4px; }
+  .node-path { font-size:11px; font-weight:700; color:var(--accent); margin-bottom:6px; font-family:monospace; }
+  .node-desc { font-size:12px; color:var(--text2); line-height:1.5; }
+
+  .arrow {
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; font-weight:900; color:var(--text3);
+  }
+
+  /* positions */
+  .pos-1 { grid-column:1; grid-row:1; }
+  .pos-a1 { grid-column:2; grid-row:1; }
+  .pos-2 { grid-column:3; grid-row:1; }
+  .pos-a2 { grid-column:4; grid-row:1; }
+  .pos-3 { grid-column:5; grid-row:1; }
+
+  /* return arrow row */
+  .return-row {
+    grid-column:1 / 6; grid-row:2;
+    display:flex; align-items:center; justify-content:center;
+    gap:8px; padding:8px 0;
+  }
+  .return-line {
+    flex:1; height:2px;
+    background:linear-gradient(to left, var(--purple), var(--accent));
+    border-radius:1px;
+  }
+  .return-label {
+    font-size:11px; font-weight:800; color:var(--accent);
+    white-space:nowrap;
+  }
+
+  /* learning node full width */
+  .pos-4 {
+    grid-column:1 / 6; grid-row:3;
+  }
+  .node-wide {
+    display:grid;
+    grid-template-columns:auto 1fr 1fr;
+    gap:0 24px;
+    text-align:left;
+    border-color:var(--purple);
+    box-shadow:0 0 20px rgba(167,139,250,0.08);
+  }
+  .node-wide .nw-badge {
+    grid-row:1 / 3;
+    display:flex; align-items:center; justify-content:center;
+    padding:0 12px;
+  }
+  .node-wide .nw-col { padding:4px 0; }
+  .nw-col-title {
+    font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+    margin-bottom:8px; padding-bottom:5px; border-bottom:1px solid var(--border);
+  }
+  .nw-col:first-of-type .nw-col-title { color:var(--accent); }
+  .nw-col:last-of-type .nw-col-title { color:var(--yellow); }
+
+  .nw-item {
+    font-size:11px; color:var(--text2); line-height:1.6;
+    padding-left:14px; position:relative; margin-bottom:2px;
+  }
+  .nw-item::before {
+    content:""; position:absolute; left:0; top:7px;
+    width:6px; height:6px; border-radius:50%;
+  }
+  .nw-col:first-of-type .nw-item::before { background:var(--accent); }
+  .nw-col:last-of-type .nw-item::before { background:var(--yellow); }
+  .nw-item strong { color:var(--text); }
+
+  /* ── EXAMPLE TRACE ── */
+  .trace {
+    display:flex; align-items:center; gap:0;
+    background:var(--bg2); border:1.5px solid var(--accent);
+    border-radius:12px; padding:14px 16px; margin-bottom:20px;
+    box-shadow:0 0 16px rgba(254,80,0,0.06);
+  }
+  .trace-step { flex:1; text-align:center; padding:0 6px; }
+  .trace-label {
+    font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    color:var(--text3); margin-bottom:2px;
+  }
+  .ts-1 .trace-label { color:var(--blue); }
+  .ts-2 .trace-label { color:var(--yellow); }
+  .ts-3 .trace-label { color:var(--green); }
+  .ts-4 .trace-label { color:var(--purple); }
+  .trace-val { font-size:12px; font-weight:700; line-height:1.3; }
+  .trace-arr {
+    font-size:16px; font-weight:900; color:var(--accent);
+    min-width:32px; text-align:center; flex-shrink:0;
+  }
+
+  /* ── CRON STRIP ── */
+  .cron {
+    display:flex; justify-content:center; flex-wrap:wrap; gap:18px;
+    font-size:12px; color:var(--text2);
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:12px; padding:12px 18px;
+  }
+  .cron span { display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .cron strong { color:var(--text); }
+  .cd { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Ciclo de Testes — <span>do criativo ao learning</span></h1>
+  <div class="subtitle">Cada criativo gera um teste. O teste consolida. O consolidado vira learning. O learning direciona o próximo criativo.</div>
+
+  <!-- ── CYCLE ── -->
+  <div class="cycle">
+
+    <div class="node pos-1">
+      <div class="node-num n1">1</div>
+      <div class="node-title">Criativo sobe</div>
+      <div class="node-path">criativos/A07.md</div>
+      <div class="node-desc">Cada criativo novo gera automaticamente um teste em aberto com hipótese e parâmetros</div>
+    </div>
+
+    <div class="arrow pos-a1">→</div>
+
+    <div class="node pos-2" style="border-color:var(--yellow);">
+      <div class="node-num n2">2</div>
+      <div class="node-title">Teste aberto</div>
+      <div class="node-path">testes/abertos/</div>
+      <div class="node-desc">Coleta dados da API Meta. Cron diário às 20h verifica: atingiu R$150+ e 7 dias?</div>
+    </div>
+
+    <div class="arrow pos-a2">→</div>
+
+    <div class="node pos-3" style="border-color:var(--green);">
+      <div class="node-num n3">3</div>
+      <div class="node-title">Teste consolidado</div>
+      <div class="node-path">testes/consolidados/</div>
+      <div class="node-desc">Resultado conclusivo. Arquivo movido com conclusão e ação documentadas</div>
+    </div>
+
+    <div class="return-row">
+      <div class="return-line"></div>
+      <div class="return-label">← learning direciona o próximo criativo</div>
+      <div class="return-line"></div>
+    </div>
+
+    <div class="node node-wide pos-4" style="border-color:var(--purple);">
+      <div class="nw-badge"><div class="node-num n4">4</div></div>
+      <div class="nw-col">
+        <div class="nw-col-title">learnings/resumo.md — regras</div>
+        <div class="nw-item"><strong>Hook numérico > pergunta</strong> — ~40% mais ROAS</div>
+        <div class="nw-item"><strong>Estático primeiro</strong> — novo ângulo começa estático</div>
+        <div class="nw-item"><strong>Overlay obrigatório</strong> — +89% ROAS em vídeo</div>
+        <div class="nw-item"><strong>Uma variável por teste</strong> — nunca mudar duas coisas</div>
+      </div>
+      <div class="nw-col">
+        <div class="nw-col-title">O que ainda não sabemos → próximos testes</div>
+        <div class="nw-item">A05 vs A01 em 30 dias: qual sustenta?</div>
+        <div class="nw-item">Ângulo resultado com case específico?</div>
+        <div class="nw-item">A06 vídeo não-técnico confirma > 6x?</div>
+        <div class="nw-item"><strong>→ Cada gap vira o próximo criativo</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── EXAMPLE TRACE ── -->
+  <div class="trace">
+    <div class="trace-step ts-1">
+      <div class="trace-label">Criativo</div>
+      <div class="trace-val">Vídeo sem overlay</div>
+    </div>
+    <div class="trace-arr">→</div>
+    <div class="trace-step ts-2">
+      <div class="trace-label">Teste aberto</div>
+      <div class="trace-val">Com vs sem overlay</div>
+    </div>
+    <div class="trace-arr">→</div>
+    <div class="trace-step ts-3">
+      <div class="trace-label">Consolidado</div>
+      <div class="trace-val">+89% ROAS com overlay</div>
+    </div>
+    <div class="trace-arr">→</div>
+    <div class="trace-step ts-4">
+      <div class="trace-label">Learning</div>
+      <div class="trace-val">"Overlay é obrigatório"</div>
+    </div>
+  </div>
+
+  <!-- ── CRON STRIP ── -->
+  <div class="cron">
+    <span><div class="cd" style="background:var(--yellow)"></div> <strong>20:00</strong> Cron verifica testes abertos</span>
+    <span><div class="cd" style="background:var(--green)"></div> Consolidou? Move + extrai learning</span>
+    <span><div class="cd" style="background:var(--purple)"></div> <strong>21:00</strong> Sugere próximos testes com base nos gaps</span>
+    <span style="color:var(--accent); font-weight:700;">Loop perpétuo.</span>
+  </div>
+
+</div>
+</body>
+</html>
