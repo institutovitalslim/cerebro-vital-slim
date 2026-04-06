@@ -16,4 +16,8 @@ Todas as fotos: fundo escuro (cinza/preto), estúdio profissional.
 
 Usar sempre este arquivo. Não gerar novo avatar a partir das fotos acima.
 
-_Atualizado: 2026-04-06_
+| `daniely-06-blazer-branco-sorrindo.png` | Blazer branco, braços cruzados, sorrindo (pose 2) | Capa carrossel desejo/conexão |
+| `daniely-07-vestido-branco-sorriso-aberto.png` | Vestido branco alças, sorriso aberto, mãos no cós | Reel de abertura, energia e leveza |
+| `daniely-08-blazer-branco-blazer-na-mao.png` | Blazer branco, segurando lapela, blusa preta | CTA, autoridade com elegância |
+
+_Atualizado: 2026-04-06 — 8 fotos no banco_
