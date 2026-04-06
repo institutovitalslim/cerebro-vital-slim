@@ -22,13 +22,30 @@ Sempre que Tiaro pedir um carrossel. Se mencionar "Modelo 01", seguir este playb
 ## Estrutura obrigatória (6 slides)
 
 ### Slide 1 — Capa
-- Foto real, forte e aspiracional (Dra. Daniely ou paciente com autorização)
-- Headline grande com promessa clara (hook do tipo correto para o objetivo do post)
-- Subtítulo curto com credencial científica ou contexto de autoridade
-- Nome/assinatura do especialista pequeno e discreto acima da headline
-- Contador do slide em círculo cinza no canto superior direito
+**Template validado por Tiaro (2026-04-06) — script: `/tmp/make_capa_lipedema.py`**
 
-### Slides 2, 3, 4 — Pilares de prova
+Proporções canônicas (1080×1350px):
+- **Foto:** ocupa 742px (55% da altura), largura total 1080px. Fade suave Y=620→742 para preto.
+- **Fundo:** pode ser gerado temático (ex: fundo neural dourado) + foto da Dra. sem fundo (rembg) composta em cima
+- **Círculo produto/imagem temática:** centro (920, 155), diâmetro 270px, borda dourada 8px
+- **Linha dourada divisória:** Y=742, espessura 3px, com gap central para o símbolo V
+- **Símbolo V Vital Slim:** `/cerebro/assets/identidade-visual/simbolo-v-negativo-transparente.png` recolorido em dourado (#C5A059), círculo borda dourada, tamanho 52px, centralizado em Y=742
+- **Texto:** fonte 88px bold, line-height 108px, começa em Y≈800, margens mínimas (~40px), quase largura total
+- **Cores:** branco (#FFFFFF) + dourado (#C5A059) alternando por linha
+- **CRM:** "Dra. Daniely Freitas  |  CRM-BA 27588", fonte 26px cinza, centralizado Y=H-38
+
+### Slide 2 — Gancho científico (tweet frame)
+**Referência canônica:** `cerebro/assets/carrosseis/REFERENCIA_SLIDE2_TWEET.jpg`
+
+Proporções validadas por Tiaro (2026-04-06):
+- Fundo preto total (#000000)
+- Avatar circular + "Dra Daniely Freitas ✓" (bold 34px) + "@dradaniely.freitas" (28px cinza) — topo esquerdo, margem 60px
+- Texto corrido do tweet: fonte 36px regular branco, margem 60px, line-height 52px — começa em Y≈170
+- Imagem do paper/estudo: centralizada, largura 82% do slide, borda fina dourada (2px) com padding 10px, abaixo do texto com gap de 30px
+- Referência bibliográfica: fonte 26px cinza centralizada, abaixo da imagem
+- Altura do slide: variável (1350–1600px) — expandir se necessário para não cortar conteúdo
+
+### Slides 3, 4 — Pilares de prova
 - Foto dominante ocupando todo o fundo
 - Overlay escuro na metade inferior
 - Título do conceito em branco, muito visível
