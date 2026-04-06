@@ -1,7 +1,7 @@
 ---
 name: instagram-api
 description: >
-  Busca posts, perfis e conteúdo do Instagram via RapidAPI (instagram120.p.rapidapi.com). Usar sempre que precisar acessar post por URL/shortcode, listar posts de um perfil, ou buscar metadados. REGRA: sempre ler este SKILL.md + rodar o script antes de qualquer chamada à API.
+  Busca posts, perfis e conteúdo do Instagram via RapidAPI (instagram120.p.rapidapi.com). Usar sempre que precisar acessar post por URL/shortcode, listar posts de um perfil, ou buscar metadados.
 ---
 
 # Instagram API via RapidAPI
@@ -14,6 +14,20 @@ description: >
 ## Perfil do IVS
 - **Username:** `institutovitalslim`
 - **UserID:** `60410930023`
+
+## Endpoint para buscar post por URL (principal)
+
+```bash
+curl --request GET \
+  --url 'https://instagram-scraper-stable-api.p.rapidapi.com/get_media_data.php?reel_post_code_or_url=<URL_ENCODED>&type=post' \
+  --header 'Content-Type: application/json' \
+  --header 'x-rapidapi-host: instagram-scraper-stable-api.p.rapidapi.com' \
+  --header 'x-rapidapi-key: cf7bd568f0msh846185e42b5253bp1d7915jsne0d2cb9e3b56'
+```
+- Funciona com qualquer URL pública do Instagram (post ou reel)
+- Retorna caption completa em `edge_media_to_caption.edges[0].node.text`
+- Retorna owner em `owner.username`
+- API: `instagram-scraper-stable-api.p.rapidapi.com`
 
 ## Endpoints disponíveis
 
