@@ -4,7 +4,12 @@ description: >
   Cria o roteiro completo de um carrossel no Modelo 01 para o Instagram do IVS/Dra. Daniely, seguindo o padrão visual e editorial validado. Trigger: "crie um carrossel sobre [tema]" ou "carrossel Modelo 01".
 ---
 
-# Criação de Carrossel — Modelo 01
+# Criação de Carrossel
+
+## Regras Operacionais
+- **Imagens:** sempre usar **NanoBanana2** (`google/gemini-3.1-flash-lite-preview`) para análise, extração de texto e descrição de imagens
+- **Avatar Dra. Daniely:** nunca modificar — usar sempre `/root/.openclaw/workspace/deliverables/tmp_modelo01_v4/avatar.png`
+- **Script:** `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_tweet_slides.py` — Modelo 01
 
 ## Quando usar
 Sempre que Tiaro pedir um carrossel. Se mencionar "Modelo 01", seguir este playbook com alta fidelidade.
