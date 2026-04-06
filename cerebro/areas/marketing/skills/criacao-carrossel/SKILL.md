@@ -22,17 +22,21 @@ Sempre que Tiaro pedir um carrossel. Se mencionar "Modelo 01", seguir este playb
 ## Estrutura obrigatória (6 slides)
 
 ### Slide 1 — Capa
-**Template validado por Tiaro (2026-04-06) — script: `/tmp/make_capa_lipedema.py`**
+**✅ TEMPLATE FINAL APROVADO por Tiaro (2026-04-06)**
+**Referência canônica:** `cerebro/assets/carrosseis/REFERENCIA_CAPA_APROVADA_FINAL.jpg`
+**Script base:** `/tmp/make_capa_lipedema.py`
 
 Proporções canônicas (1080×1350px):
-- **Foto:** ocupa 742px (55% da altura), largura total 1080px. Fade suave Y=620→742 para preto.
-- **Fundo:** pode ser gerado temático (ex: fundo neural dourado) + foto da Dra. sem fundo (rembg) composta em cima
-- **Círculo produto/imagem temática:** centro (920, 155), diâmetro 270px, borda dourada 8px
-- **Linha dourada divisória:** Y=742, espessura 3px, com gap central para o símbolo V
-- **Símbolo V Vital Slim:** `/cerebro/assets/identidade-visual/simbolo-v-negativo-transparente.png` recolorido em dourado (#C5A059), círculo borda dourada, tamanho 52px, centralizado em Y=742
-- **Texto:** fonte 88px bold, line-height 108px, começa em Y≈800, margens mínimas (~40px), quase largura total
-- **Cores:** branco (#FFFFFF) + dourado (#C5A059) alternando por linha
-- **CRM:** "Dra. Daniely Freitas  |  CRM-BA 27588", fonte 26px cinza, centralizado Y=H-38
+- **Foto da Dra.:** sem fundo (rembg), composta sobre fundo temático gerado. Ocupa 742px (55% da altura), largura total 1080px
+- **Fundo temático:** gerado via image_generate, temático ao assunto (ex: neural dourado para lipedema). Tons escuros com elementos brilhantes dourados
+- **Fade:** suave Y=620→742 para preto puro
+- **Círculo temático:** canto superior direito, centro (920, 155), diâmetro 270px, borda dourada 8px. Imagem circular recortada do tema do carrossel
+- **Linha dourada divisória:** Y=742, espessura 3px, cor #C5A059, gap central para o símbolo V (60px de gap em cada lado)
+- **Símbolo V Vital Slim:** `cerebro/assets/identidade-visual/simbolo-v-negativo-transparente.png` recolorido em dourado (#C5A059), borda dourada (sem fundo preto), tamanho 52px, centralizado em Y=742
+- **Texto:** fonte 88px bold DejaVuSans-Bold, line-height 108px, começa em Y≈800, margens ~40px (quase largura total). Linhas alternando branco/dourado conforme impacto
+- **Cor dourado:** #C5A059 (não amarelo puro — é o dourado IVS)
+- **Cor branco:** #FFFFFF
+- **CRM:** "Dra. Daniely Freitas  |  CRM-BA 27588", fonte 26px, cinza #6E6E6E, centralizado Y=H-38
 
 ### Slide 2 — Gancho científico (tweet frame)
 **Referência canônica:** `cerebro/assets/carrosseis/REFERENCIA_SLIDE2_TWEET.jpg`
