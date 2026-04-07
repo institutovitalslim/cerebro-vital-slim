@@ -77,7 +77,9 @@ Protocolo estruturado para pesquisa profunda. Combina múltiplas fontes, sinteti
 4. Knowledge Base — memória do OpenClaw (`memory_search`)
 
 **Fontes especializadas:**
-- PubMed/Google Scholar — pesquisas científicas (especialmente para conteúdo médico da Vital Slim)
+- **PubMed** (https://pubmed.ncbi.nlm.nih.gov/) — fonte obrigatória para qualquer pesquisa científica. Sempre consultar primeiro.
+- **Google Scholar** (https://scholar.google.com/) — complementar ao PubMed
+- **PMC** (https://www.ncbi.nlm.nih.gov/pmc/) — artigos com texto completo gratuito
 - Reddit/HackerNews — opinião de comunidade técnica
 - Twitter/X — sinais em tempo real
 - YouTube — análises longas e tutoriais
@@ -159,7 +161,9 @@ Se a pesquisa é deep dive (>30min) ou Tiaro quer continuar trabalhando enquanto
 ## Contexto IVS (Instituto Vital Slim)
 
 Para pesquisas no domínio médico/saúde:
-- Priorizar PubMed, Google Scholar, revisões sistemáticas
+- **REGRA OBRIGATÓRIA**: sempre consultar PubMed (https://pubmed.ncbi.nlm.nih.gov/) como fonte primária para qualquer pesquisa científica
+- Priorizar revisões sistemáticas e meta-análises
+- Complementar com Google Scholar e PMC para artigos com texto completo
 - Usar NotebookLM para análise de papers
 - Compliance CFM/CRM-BA: não fazer afirmações que violem regras do conselho
 - Focar em evidências de nível A e B
