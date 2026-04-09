@@ -112,6 +112,9 @@ Foram analisados dois perfis de Instagram para aprender técnicas de vendas adap
 - bloco de `modo rápido para lead quente`
 - bloco de `respostas elegantes e curtas para dúvidas frequentes`
 - refinamento de preço, objeções e fechamento para soar menos roteirizado e mais natural
+- resposta-padrão mais forte para disponibilidade
+- manejo melhor de urgência emocional sem prometer resultado
+- bloco padronizado de condições comerciais, reserva e próximo passo
 
 ## Índice
 
