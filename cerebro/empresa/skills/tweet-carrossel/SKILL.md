@@ -2,155 +2,207 @@
 name: tweet-carrossel
 description: >
   Gera carrosseis completos para o Instagram no formato tweet (estilo X/Twitter).
-  Inclui: capa (NanoBanana 2 + Pillow), slide 2 com paper cientifico, e slides 3+ em formato tweet via script Python.
-  Use quando: "carrossel", "criar carrossel", "formato tweet", "carrossel preto", "slides instagram",
-  "carrossel cientifico", "montar carrossel", "criar slides".
-  SEMPRE usar NanoBanana 2 (google/gemini-3.1-flash-lite-preview) para gerar imagens.
+  Fluxo: primeiro criar a COPY (texto), depois de aprovada, gerar as IMAGENS.
+  SEMPRE usar NanoBanana 2 para gerar fotos. Slides tweet via Python/Pillow ou HTML+Chromium.
+  Use quando: "carrossel", "criar carrossel", "formato tweet", "carrossel preto",
+  "slides instagram", "carrossel cientifico", "montar carrossel", "criar slides".
 metadata:
-  version: 2.0.0
+  version: 3.0.0
   domain: marketing
   owner: main
 ---
 
-# Tweet Carrossel - Geracao Completa de Carrosseis Instagram
+# Tweet Carrossel v3 - Geracao Completa de Carrosseis Instagram
 
-## Estrutura Obrigatoria do Carrossel
+## FLUXO DE TRABALHO OBRIGATORIO (2 ETAPAS)
 
-| Slide | Tipo | Como gerar | Modelo |
-|-------|------|-----------|--------|
-| 1 | **Capa** - foto da Dra. + headline impactante | Abordagem hibrida: NanoBanana 2 (foto) + Pillow (texto) | google/gemini-3.1-flash-lite-preview |
-| 2 | **Paper cientifico** - texto tweet + screenshot PubMed | Script Python (Chromium headless - screenshot HTML) | - |
-| 3+ | **Tweet format** - texto puro centralizado | Script Python (make_tweet_slides.py) | - |
+### ETAPA 1 - COPY (texto)
+1. Usuario envia tema, paper cientifico ou arquivo de referencia
+2. Clara cria a copy de TODOS os slides seguindo a estrutura AIDA/retenção
+3. Clara apresenta a copy para aprovacao do usuario
+4. Usuario aprova ou pede ajustes
+5. SO APOS APROVACAO da copy, seguir para etapa 2
 
-## REGRA FUNDAMENTAL: Geracao de Imagens
+### ETAPA 2 - IMAGENS
+1. Clara gera a capa via NanoBanana 2 + Pillow
+2. Clara gera o slide 2 (paper) via HTML + Chromium
+3. Clara gera slides 3+ via script Python (make_tweet_slides.py)
+4. Clara entrega todas as imagens
 
-**SEMPRE usar o NanoBanana 2** (google/gemini-3.1-flash-lite-preview) para qualquer geracao de imagem.
-**NUNCA usar GPT/DALL-E** para gerar imagens dos carrosseis.
-**NUNCA usar o modelo principal** (GPT-5.4 ou Claude) para gerar imagens.
+**NUNCA gerar imagens antes da copy ser aprovada.**
 
-A API key do Gemini esta em:
-- auth-profiles.json: profile google:manual
-- 1Password: item "Gemini API Key" no vault "openclaw"
+---
+
+## ESTRUTURA DO CARROSSEL
+
+| Slide | Tipo | Metodo de geracao |
+|-------|------|-------------------|
+| 1 | Capa (foto Dra. + headline) | NanoBanana 2 (foto) + Pillow (texto) |
+| 2 | Paper cientifico (texto tweet + PubMed) | HTML + Chromium headless |
+| 3-N | Tweet format (texto puro ou texto + imagem) | Python/Pillow (make_tweet_slides.py) |
+
+---
+
+## REGRA CRITICA: GERACAO DE IMAGENS
+
+- **SEMPRE** usar NanoBanana 2 (google/gemini-3.1-flash-lite-preview)
+- **NUNCA** usar GPT, DALL-E ou qualquer outro modelo para gerar imagens
+- API key Gemini em auth-profiles.json (profile google:manual) e 1Password
 
 ---
 
 ## SLIDE 1 - CAPA
 
-### Padrao visual obrigatorio
+### Especificacoes visuais EXATAS (ver imagem de referencia aprovada)
 
-- **Proporcao**: 4:5 (1080x1350)
-- **Foto da Dra. Daniely**: semblante SERIO, bracos cruzados, blazer escuro (NUNCA jaleco)
-- **Fundo**: laboratorio/clinica com frascos, iluminacao quente
-- **Capsulas douradas**: no canto superior direito, em circulo com borda gold
-- **Linha divisoria**: dourada, horizontal, com simbolo V da marca no centro
-- **Texto**: Montserrat Black, duas cores (branco + dourado #9F8844)
-- **Headline**: frase de IMPACTO que causa scroll-stop (NAO explicativa)
-- **Rodape**: "Dra. Daniely Freitas | CRM-BA 27588"
-
-### Abordagem hibrida (2 passos)
-
-**Passo 1 - Gerar foto via NanoBanana 2:**
-
-Prompt base para a foto:
-"Professional editorial portrait of a Brazilian female doctor, 43 years old, blonde wavy shoulder-length hair, round face, brown eyes, serious determined expression, closed lips, wearing dark navy blazer over black blouse, gold pendant necklace, arms crossed, waist-up framing, modern laboratory background with glass bottles and warm lighting, golden supplement capsules in top-right corner circle, premium editorial medical photography, 4:5 aspect ratio, photorealistic"
-
-Enviar junto 3-6 fotos de referencia da Dra. Daniely de:
-/root/.openclaw/workspace/fotos_dra/
-
-**Passo 2 - Adicionar texto via Pillow:**
-- Montserrat Black para headline
-- Branco (#FFFFFF) para texto principal
-- Dourado (#9F8844) para palavras de destaque
-- Linha dourada + V como divisor entre foto e texto
+- Proporcao: 4:5 (1080x1350)
+- METADE SUPERIOR (~60%): foto da Dra. Daniely
+  - Semblante SERIO, bracos cruzados
+  - Blazer escuro (NUNCA jaleco, NUNCA sorrindo)
+  - Fundo de laboratorio/clinica com frascos e iluminacao quente
+  - Capsulas douradas em circulo no canto superior direito
+- DIVISOR: linha dourada horizontal fina + simbolo V da marca no centro
+- METADE INFERIOR (~40%): headline
+  - Fonte: Montserrat Black
+  - Cores: branco + dourado #9F8844
+  - Texto centralizado
+  - Palavras-chave em dourado (ex: MAGNESIO, NORMAL, DISCORDA)
+- RODAPE: "Dra. Daniely Freitas | CRM-BA 27588" (pequeno, discreto)
 
 ### Regras da headline
-- Frase de IMPACTO, nao explicativa
-- Gerar curiosidade (scroll-stop)
-- Exemplo BOM: "SEU MAGNESIO ESTA 'NORMAL' MAS SEU CORPO DISCORDA."
-- Exemplo RUIM: "Magnesio serico representa apenas 1% do magnesio total"
-- Regra: "se comecar com explicacao, perde retencao. Se comecar com percepcao de valor, ganha atencao."
+- Frase de IMPACTO (scroll-stop), NUNCA explicativa
+- Regra: "se comecar com explicacao, perde retencao"
+- BOM: "SEU MAGNESIO ESTA 'NORMAL' MAS SEU CORPO DISCORDA."
+- BOM: "ESSA E A BEBIDA MAIS PREJUDICIAL QUE EXISTE."
+- RUIM: "O magnesio serico representa apenas 1% do total"
 
 ---
 
-## SLIDE 2 - PAPER CIENTIFICO (quando houver pesquisa)
+## SLIDE 2 - PAPER CIENTIFICO
 
-### Padrao visual
-
-- **Formato**: tweet (avatar + nome + handle + texto)
-- **Fundo**: preto #000
-- **Texto**: cor unica #c8c8c8, mesmo tamanho do nome do perfil (~28-32px)
-- **Imagem do paper**: screenshot do PubMed (capa do artigo com titulo)
-- **Imagem respeita margens** laterais do slide, com border-radius 10px
-- **Imagem centralizada** no espaco disponivel abaixo do texto
-
-### Como gerar
-
-Renderizar via HTML + Chromium headless na VPS:
-chromium --headless --disable-gpu --no-sandbox --screenshot=slide2.png --window-size=1080,1350 file:///root/slide2.html
-
-### Regras do screenshot PubMed
-- Incluir: header NIH + PubMed logo + barra de busca + referencia do journal + titulo completo do paper
-- Screenshot via Chromium headless da URL do PubMed do artigo
-- Redimensionar para 1080px de largura
-- Usar user-agent de Safari/Mac para evitar bloqueio
-- Acessar a URL direta do artigo (ex: https://pubmed.ncbi.nlm.nih.gov/PMID/)
+### Formato tweet + screenshot PubMed
+- Fundo preto #000
+- Avatar + nome + handle no topo (mesmo padrao dos slides tweet)
+- Texto em cor unica #c8c8c8
+- Screenshot do PubMed centralizado no espaco abaixo do texto
+- Screenshot deve incluir: header NIH, PubMed logo, titulo completo do paper
+- Imagem respeita margens laterais, com border-radius
 
 ---
 
 ## SLIDES 3+ - FORMATO TWEET
 
-### Padrao visual obrigatorio
+### DOIS TIPOS DE SLIDE TWEET:
 
-- **Tamanho**: 1080x1350 (4:5)
-- **Fundo**: preto #000000
-- **Texto**: cor UNICA #c8c8c8, MESMO tamanho, SEM bold, SEM destaques coloridos
-- **Fonte**: mesmo tamanho do nome do perfil (~28-34px)
-- **Avatar**: foto de perfil real da Dra. (circular, ~56-72px)
-- **Nome**: "Dra. Daniely Freitas" + selo verificado azul
-- **Handle**: @dradaniely.freitas em cinza
-- **Margens laterais**: 64px
+#### TIPO A - Tweet com foto/imagem
+Referencia: slides 1/15 e 4/15 do modelo Tallis Gomes
 
-### Regra de posicionamento
+Layout:
+```
++----------------------------------+
+|                                  |
+| (avatar) Nome Verificado         |  <- topo
+|          @handle                 |
+|                                  |
+| Texto do slide em branco.        |
+| Fonte ~38px, espacamento         |
+| generoso entre paragrafos.       |
+|                                  |
+| Gancho para o proximo ->         |
+|                                  |
+| +------------------------------+|
+| |                              ||  <- foto(s) na parte inferior
+| |    IMAGEM / SCREENSHOT       ||     colada nas laterais
+| |    border-radius 12px        ||     ~40-45% da altura do slide
+| |                              ||
+| +------------------------------+|
+|                                  |
++----------------------------------+
+```
 
-| Cenario | Posicionamento |
-|---------|---------------|
-| Texto curto SEM imagem | Centralizar verticalmente TODO o bloco (header + texto) |
-| Texto + imagem do paper | Texto no topo, imagem centralizada no espaco restante |
-| **NUNCA** | Texto colado no topo com area preta vazia embaixo |
+Regras:
+- Texto no TOPO com avatar
+- Imagem(s) na parte INFERIOR
+- Imagem ocupa toda a largura (respeitando margens laterais 48px)
+- Se 2 imagens lado a lado: gap de 8px entre elas
+- Border-radius: 12px nas imagens
+- Texto e imagem distribuidos proporcionalmente (sem area vazia grande)
 
-### Regras de conteudo
+#### TIPO B - Tweet sem foto (texto puro)
+Referencia: slide 3/15 do modelo Tallis Gomes
 
-1. **Texto conversacional**, NAO tecnico
-2. **Frases curtas** e impactantes (fator "uau, eu nao sabia disso")
-3. **Cada slide termina com frase de gancho** para reter no proximo
-4. **Um conceito por slide** - nao sobrecarregar
-5. **Apos ponto, letra maiuscula**
-6. **Ultimo slide**: CTA com botao dourado (#d4a84b para #b8922e gradient)
+Layout:
+```
++----------------------------------+
+|                                  |
+|                                  |
+|                                  |  <- respiro superior
+|                                  |
+| (avatar) Nome Verificado         |
+|          @handle                 |  <- CENTRALIZADO
+|                                  |     VERTICALMENTE
+| Texto do slide em branco.        |
+| Fonte ~38px, espacamento         |
+| generoso entre paragrafos.       |
+|                                  |
+|                                  |
+|                                  |  <- respiro inferior
+|                                  |
++----------------------------------+
+```
 
-### Exemplos de ganchos
+Regras:
+- TODO o bloco (avatar + texto) centralizado VERTICALMENTE
+- Respiro equilibrado em cima e embaixo
+- **NUNCA** texto colado no topo com area preta vazia embaixo
+
+### ESPECIFICACOES TECNICAS DOS SLIDES TWEET
+
+| Elemento | Valor |
+|----------|-------|
+| Tamanho | 1080 x 1350 px (4:5) |
+| Fundo | preto #000000 |
+| Margens laterais | 48-64 px |
+| Avatar | 72px circular |
+| Nome | bold, branco, ~32px |
+| Selo verificado | circulo azul #1D9BF0 com checkmark branco, 24px |
+| Handle | regular, cinza #71767B, ~20px |
+| Gap avatar-texto | 32px |
+| Texto corpo | regular, branco #c8c8c8, ~38px, line-height 1.45x |
+| Gap entre paragrafos | ~40px (linha em branco visual) |
+| Cor do texto | UMA COR SO (#c8c8c8) - sem bold, sem destaques, sem dourado |
+| Imagens | border-radius 12px, respeitam margens laterais |
+
+### REGRAS DE CONTEUDO
+
+1. Texto CONVERSACIONAL, nao tecnico
+2. Frases CURTAS e impactantes
+3. CADA slide termina com frase de gancho para o proximo
+4. UM conceito por slide
+5. Apos ponto, SEMPRE letra maiuscula
+6. Ultimo slide: CTA com botao dourado (gradient #d4a84b -> #b8922e)
+
+### EXEMPLOS DE GANCHOS
 - "E nao e so isso..."
 - "Mas o que isso causa no seu corpo? ->"
 - "E se existisse um jeito de investigar isso de verdade? ->"
 - "Resultado nao e sorte. E precisao clinica. ->"
-
-### Script de geracao
-
-python3 scripts/make_tweet_slides.py --config slides.json --avatar avatar.png --out ./output --name "Dra Daniely Freitas" --handle "@dradaniely.freitas"
+- "Quer saber o que realmente funciona? ->"
 
 ---
 
-## Perfil Configurado
+## PERFIL CONFIGURADO
 
 ### Dra. Daniely Freitas
-- **Nome**: Dra. Daniely Freitas
-- **Handle**: @dradaniely.freitas
-- **Verificado**: sim (selo azul)
-- **CRM**: BA 27588
-- **Idade**: 43 anos
-- **Visual**: blazer escuro, blusa preta, colar dourado, cabelo loiro ondulado
-- **NUNCA**: jaleco, sorriso exagerado
-- **Avatar**: foto de perfil do Instagram (blazer branco + blusa preta)
-- **Cor da marca**: dourado #9F8844
+- Nome: Dra. Daniely Freitas
+- Handle: @dradaniely.freitas
+- Verificado: sim (selo azul)
+- CRM: BA 27588
+- Idade: 43 anos
+- Visual na capa: blazer escuro, blusa preta, colar dourado, cabelo loiro ondulado
+- NUNCA: jaleco, sorriso exagerado
+- Avatar: foto de perfil do Instagram (blazer branco + blusa preta)
+- Cor da marca: dourado #9F8844
 
 ### Fotos de referencia
 - VPS: /root/.openclaw/workspace/fotos_dra/
@@ -159,26 +211,48 @@ python3 scripts/make_tweet_slides.py --config slides.json --avatar avatar.png --
 
 ---
 
-## Checklist de Qualidade (OBRIGATORIO antes de entregar)
+## SCRIPT DE GERACAO
 
+```bash
+python3 scripts/make_tweet_slides.py \
+  --config slides.json \
+  --avatar avatar.png \
+  --out ./output \
+  --name "Dra Daniely Freitas" \
+  --handle "@dradaniely.freitas"
+```
+
+---
+
+## CHECKLIST DE QUALIDADE (OBRIGATORIO antes de entregar)
+
+### Copy (etapa 1)
+- [ ] Headline da capa e de IMPACTO (scroll-stop)
+- [ ] Texto conversacional, nao tecnico
+- [ ] Frases curtas
+- [ ] Gancho no final de cada slide
+- [ ] Um conceito por slide
+- [ ] Apos ponto, letra maiuscula
+- [ ] CTA no ultimo slide
+
+### Imagens (etapa 2)
 - [ ] Proporcao 4:5 (1080x1350) em TODOS os slides
+- [ ] Capa: foto gerada pelo NanoBanana 2 (NAO GPT/DALL-E)
 - [ ] Capa: Dra. com semblante serio, blazer escuro, fundo contextual
-- [ ] Capa: headline de impacto (scroll-stop), nao explicativa
-- [ ] Capa: imagem gerada pelo NanoBanana 2 (NAO GPT/DALL-E)
-- [ ] Slide 2: screenshot PubMed com titulo completo do paper (se houver pesquisa)
-- [ ] Slides tweet: texto de cor unica, mesmo tamanho, centralizado
-- [ ] Slides tweet: gancho no final de cada slide
-- [ ] Slides tweet: texto curto sem imagem = centralizado verticalmente
-- [ ] CTA no ultimo slide com botao dourado
+- [ ] Capa: headline de impacto em Montserrat Black (branco + dourado)
+- [ ] Slide 2: screenshot PubMed com titulo completo (se houver pesquisa)
+- [ ] Slides tweet: texto de cor unica #c8c8c8, mesmo tamanho, sem destaques
+- [ ] Slides tweet sem foto: bloco centralizado verticalmente
+- [ ] Slides tweet com foto: texto no topo, foto na parte inferior
 - [ ] Nenhum slide com texto colado no topo e area vazia embaixo
-- [ ] Fontes corretas (Montserrat na capa, DejaVu nos tweets)
-- [ ] Margens respeitadas (64px laterais)
+- [ ] Margens laterais respeitadas (48-64px)
+- [ ] Imagens com border-radius 12px
 
-## Troubleshooting
+## TROUBLESHOOTING
 
-- **Imagem inconsistente na capa**: garantir que esta usando NanoBanana 2 (google/gemini-3.1-flash-lite-preview), nao GPT. Verificar auth-profiles.json.
-- **Rosto diferente da Dra.**: enviar 3-6 fotos de referencia junto com o prompt ao NanoBanana 2.
-- **Texto cortado**: verificar margens laterais (64px) e tamanho da fonte.
-- **PubMed bloqueando**: usar user-agent de Safari e acessar a URL direta do artigo.
-- **Espaco vazio**: centralizar texto OU adicionar imagem do paper para preencher.
-- **API key Gemini invalida**: verificar em 1Password item "Gemini API Key" e atualizar auth-profiles.json.
+- Imagem inconsistente na capa: verificar se usa NanoBanana 2 em auth-profiles.json
+- Rosto diferente da Dra.: enviar 3-6 fotos de referencia junto com o prompt
+- Texto cortado: verificar margens e tamanho da fonte
+- PubMed bloqueando: user-agent Safari, URL direta do artigo
+- Espaco vazio: centralizar (tipo B) ou adicionar imagem (tipo A)
+- API key Gemini invalida: verificar 1Password item "Gemini API Key"
