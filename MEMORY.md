@@ -115,6 +115,7 @@ Foram analisados dois perfis de Instagram para aprender técnicas de vendas adap
 - resposta-padrão mais forte para disponibilidade
 - manejo melhor de urgência emocional sem prometer resultado
 - bloco padronizado de condições comerciais, reserva e próximo passo
+- revisão final com corte de pequenas redundâncias para deixar o prompt mais estável para produção
 
 ## Índice
 
