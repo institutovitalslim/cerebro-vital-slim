@@ -18,10 +18,12 @@ metadata:
 
 ### ETAPA 1 - COPY (texto)
 1. Usuario envia tema, paper cientifico ou arquivo de referencia
-2. Clara cria a copy de TODOS os slides seguindo a estrutura AIDA/retenção
-3. Clara apresenta a copy para aprovacao do usuario
-4. Usuario aprova ou pede ajustes
-5. SO APOS APROVACAO da copy, seguir para etapa 2
+2. Clara cria um RASCUNHO da copy de todos os slides
+3. Clara aciona a skill llm-council (conselho) para avaliar e refinar a copy
+4. Clara incorpora o feedback do conselho e gera a COPY FINAL
+5. Clara apresenta a copy final para aprovacao do usuario
+6. Usuario aprova ou pede ajustes
+7. SO APOS APROVACAO da copy, seguir para etapa 2
 
 ### ETAPA 2 - IMAGENS
 1. Clara gera a capa via NanoBanana 2 + Pillow
