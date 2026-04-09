@@ -44,7 +44,7 @@ python3 scripts/omie_boletos.py --data 25/03/2026 --drive --local
 
 | Destino | Caminho |
 |---------|---------|
-| **Google Drive** | Pasta "Pacientes" dentro do Drive da clínica (ID: `1_on_1ABIODqcbpby-EwKHgciT0m4_P9f`) |
+| **Google Drive** | Pasta "Boletos de Programa de Acompanhamento" no Drive (ID: `1hbF8K-wil6NNyQ2PyXZK8PZ1jEZhccOr`). Subpastas por paciente direto, SEM pasta intermediária. |
 | **Disco local** | `C:\Users\tiaro\Documents\## Medical Contabilidade\#Instituto Vital Slim\Boletos de Programa de Acompanhamento\` |
 
 ### Estrutura de pastas

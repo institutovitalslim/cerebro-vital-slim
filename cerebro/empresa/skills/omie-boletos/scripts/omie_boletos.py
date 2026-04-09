@@ -11,7 +11,7 @@ sys.path.insert(0, "/root/.openclaw/workspace/skills/omie-api/scripts")
 from omie_api import resolve_credentials, api_call
 
 ACCOUNT = "medicalemagrecimento@gmail.com"
-DRIVE_ROOT = "1_on_1ABIODqcbpby-EwKHgciT0m4_P9f"
+DRIVE_ROOT = "1hbF8K-wil6NNyQ2PyXZK8PZ1jEZhccOr"
 LOCAL_ROOT = r"C:\Users\tiaro\Documents\## Medical Contabilidade\#Instituto Vital Slim\Boletos de Programa de Acompanhamento"
 
 
@@ -152,7 +152,7 @@ def main():
     drive_pacientes_id = ""
     if args.drive:
         print("\nPreparando Google Drive...")
-        drive_pacientes_id = find_or_create_drive_folder(DRIVE_ROOT, "Pacientes")
+        drive_pacientes_id = DRIVE_ROOT  # Salvar direto na pasta Boletos de Programa de Acompanhamento
         if not drive_pacientes_id:
             print("ERRO: não conseguiu criar/encontrar pasta Pacientes no Drive")
             args.drive = False
