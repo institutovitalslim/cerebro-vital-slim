@@ -108,6 +108,11 @@ Foram analisados dois perfis de Instagram para aprender técnicas de vendas adap
 
 **Mudança aplicada:** prompt da Clara na bridge foi atualizado para incorporar esses princípios com tom premium e seguro para contexto de saúde.
 
+**Lapidações adicionais aplicadas:**
+- bloco de `modo rápido para lead quente`
+- bloco de `respostas elegantes e curtas para dúvidas frequentes`
+- refinamento de preço, objeções e fechamento para soar menos roteirizado e mais natural
+
 ## Índice
 
 | Data | Evento |
