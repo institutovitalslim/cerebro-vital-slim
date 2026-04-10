@@ -23,7 +23,7 @@ Garantir que a Clara SEMPRE consulte o historico de conversas de um lead/pacient
 
 **Google Sheets central:**
 - **ID**: `1QXvRhElCx1t7mxMAwGkcvh5V7YyKLjP9zozSGH7LHnM`
-- **Conta de acesso**: `medicalemagrecimento@gmail.com`
+- **Conta de acesso**: `institutovitalslim@gmail.com`
 - **Link**: https://docs.google.com/spreadsheets/d/1QXvRhElCx1t7mxMAwGkcvh5V7YyKLjP9zozSGH7LHnM/
 
 **Abas (sheets) da planilha:**

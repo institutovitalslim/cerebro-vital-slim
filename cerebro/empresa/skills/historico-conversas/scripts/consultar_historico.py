@@ -17,7 +17,7 @@ import subprocess
 import sys
 
 SPREADSHEET_ID = "1QXvRhElCx1t7mxMAwGkcvh5V7YyKLjP9zozSGH7LHnM"
-ACCOUNT = "medicalemagrecimento@gmail.com"
+ACCOUNT = "institutovitalslim@gmail.com"
 RAW_SHEET = "Folha1"
 PATIENTS_SHEET = "pacientes"
 CONTEXT_SHEET = "contexto_paciente"
