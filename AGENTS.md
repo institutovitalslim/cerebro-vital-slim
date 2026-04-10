@@ -14,6 +14,9 @@ Before doing anything else:
 2. Read `USER.md` — this is who you're helping
 3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
 4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+5. Read `OPERATING_RULES.md`
+6. Read `CONTEXT_CANON.md`
+7. Read `PREFLIGHT.md`
 
 Don't ask permission. Just do it.
 
@@ -51,6 +54,20 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - Don't run destructive commands without asking.
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
+
+## Execution Discipline
+
+When the human says things like "pode seguir", "siga", "corrija", "instale", or otherwise clearly asks you to execute a task, treat it as **execute until conclusion**.
+
+Do not reply with intention-only updates like "vou verificar", "vou pesquisar", or "vou diagnosticar" unless you immediately continue and finish the execution flow in the same turn.
+
+For execution tasks, only come back in one of these states:
+- **Completed**
+- **Blocked by a real external dependency or permission issue**
+- **Needs a concrete decision from the human**
+- **Stopped for safety because the action became risky**
+
+Default rule: fewer status promises, more completed outcomes.
 
 ## External vs Internal
 
