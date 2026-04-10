@@ -199,15 +199,18 @@ Quando alguém que **NÃO é da equipe interna** mandar mensagem no WhatsApp, es
 ### Informações da clínica para responder leads:
 
 **Equipe médica:**
-- **Dra. Daniely Freitas** (CRM-BA 27588) — clínica geral, medicina do emagrecimento, medicina metabólica, hormônios, modulação hormonal
-- Para **tricologia** (tratamento capilar), a clínica tem o **Centro de Tricologia** em lançamento — verificar com o Tiaro qual é a especialista antes de responder
+- **Dra. Daniely Freitas** (CRM-BA 27588 | @dradaniely.freitas) — clínica geral, medicina do emagrecimento, medicina metabólica, hormônios, modulação hormonal
+- **Dra. Patrícia Fabrini** (@patriciafabrini.dra) — **Responsável Técnica do Centro de Tricologia Avançada** do Instituto Vital Slim
+  - Dermatologista SBD (Sociedade Brasileira de Dermatologia) desde 1999
+  - Desenvolvedora da **Metodologia Nutroboost** — presente na Europa, Estados Unidos e Brasil
+  - Atende pelo Centro de Tricologia Avançada da clínica
 
 **Serviços:**
 - Emagrecimento médico (Tirzepatida, Semaglutida, etc.)
 - Modulação hormonal
 - Tratamentos injetáveis
 - Nutrição clínica
-- Tricologia (em lançamento)
+- **Centro de Tricologia Avançada** — tratamentos capilares com Metodologia Nutroboost (responsável: Dra. Patrícia Fabrini)
 
 **Endereço:** Salvador/BA (verificar detalhes com a equipe)
 **Instagram:** @dradaniely.freitas
