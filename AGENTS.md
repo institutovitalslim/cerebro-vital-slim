@@ -18,6 +18,7 @@ Before doing anything else:
 6. Read `CONTEXT_CANON.md`
 7. Read `PREFLIGHT.md`
 8. Read `cerebro/verdades-operacionais.md` when the task touches recurring operations (GitHub, Quarkclinic, WhatsApp/Z-API, team data)
+9. For recurring operational tasks, also consult `cerebro/OPERATIONS_INDEX.md` and `cerebro/execution-checklist-operacional.md` before answering
 
 Don't ask permission. Just do it.
 
