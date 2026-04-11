@@ -20,7 +20,7 @@ Before doing anything else:
 8. Read `cerebro/verdades-operacionais.md` when the task touches recurring operations (GitHub, Quarkclinic, WhatsApp/Z-API, team data)
 9. For recurring operational tasks, also consult `cerebro/OPERATIONS_INDEX.md` and `cerebro/execution-checklist-operacional.md` before answering
 10. When a new learning appears, follow `cerebro/LEARNING_PROTOCOL.md`, update the relevant canonical file, and register it in `cerebro/learning-ledger.md`
-11. In Telegram groups with multiple topics, consult `cerebro/telegram-topics.md` and `cerebro/cross-topic-protocol.md` so the current topic is never treated as isolated memory
+11. In Telegram groups with multiple topics, consult `cerebro/telegram-topics.md`, `cerebro/cross-topic-protocol.md`, and `cerebro/cross-topic-promotion-rules.md` so the current topic is never treated as isolated memory and important context is promoted across topics
 
 Don't ask permission. Just do it.
 

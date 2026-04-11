@@ -27,6 +27,7 @@
 - `cerebro/telegram-topics.md`
 - `cerebro/cross-topic-memory.md`
 - `cerebro/cross-topic-protocol.md`
+- `cerebro/cross-topic-promotion-rules.md`
 
 ## Regras
 - Antes de responder ou executar uma tarefa operacional recorrente, consultar primeiro os arquivos do domínio correspondente.
