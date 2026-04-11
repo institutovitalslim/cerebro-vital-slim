@@ -31,5 +31,10 @@ Este arquivo concentra fatos operacionais canônicos que **não podem ser esquec
   - WhatsApp: `+55 71 99157-4827`
   - E-mail: `enfermagem.vitalslim@gmail.com`
 
+## Comercial / Leads
+- Nunca passar preço antes de o paciente entender o valor do atendimento.
+- Em leads, primeiro acolher, entender a necessidade, contextualizar o atendimento e explicar a proposta/avaliação; só depois entrar em preço.
+- Quando Tiaro pedir para "chamar o conselho", usar a skill/metodologia canônica de conselho (`llm-council`) quando ela for a referência definida, e não improvisar com subagente genérico.
+
 ## Regra de operação
 Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, WhatsApp/Z-API ou time da clínica, consultar os arquivos canônicos correspondentes em `cerebro/`.
