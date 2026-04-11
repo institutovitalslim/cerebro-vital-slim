@@ -17,6 +17,7 @@ Before doing anything else:
 5. Read `OPERATING_RULES.md`
 6. Read `CONTEXT_CANON.md`
 7. Read `PREFLIGHT.md`
+8. Read `cerebro/verdades-operacionais.md` when the task touches recurring operations (GitHub, Quarkclinic, WhatsApp/Z-API, team data)
 
 Don't ask permission. Just do it.
 
