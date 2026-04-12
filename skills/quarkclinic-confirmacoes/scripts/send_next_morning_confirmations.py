@@ -73,13 +73,12 @@ def main():
         if not phone:
             continue
         ag_id = appt.get('id') or appt.get('agendamentoId')
+        primeiro_nome = nome.split()[0].title()
         msg = (
-            f"Oi, {nome.split()[0]}! 😊 Passando para confirmar sua consulta de amanhã às {hhmm} no Instituto Vital Slim.\n\n"
-            "Pode me responder com uma destas opções:\n"
-            "1) Confirmo\n"
-            "2) Preciso remarcar\n"
-            "3) Não vou conseguir\n\n"
-            "Fico à disposição."
+            f"Oi, {primeiro_nome}! Tudo bem? 😊\n\n"
+            f"Estou passando para confirmar sua consulta de amanhã, às {hhmm}, aqui no Instituto Vital Slim.\n\n"
+            "Se estiver tudo certo, pode me responder com *Confirmo*.\n"
+            "Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*."
         )
         payload = json.dumps({'phone': phone, 'message': msg})
         cmd = [

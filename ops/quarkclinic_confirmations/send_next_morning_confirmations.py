@@ -43,9 +43,10 @@ def main():
     now = datetime.now(TZ)
     target = (now + timedelta(days=1)).date()
     target_str = target.strftime('%d-%m-%Y')
-    out = sh(['python3', QC, 'agendamentos', 'list', '--de', target_str, '--ate', target_str, '--json'])
+    out = sh(['python3', QC, 'GET', '/v1/agendamentos', '--query', f'data_agendamento_inicio={target_str}', '--query', f'data_agendamento_fim={target_str}'])
     data = json.loads(out)
-    items = data if isinstance(data, list) else data.get('items') or data.get('results') or []
+    resp = data.get('response') or {}
+    items = resp.get('response') if isinstance(resp, dict) else (data.get('items') or data.get('results') or [])
 
     env = load_env(ENV)
     base = env.get('ZAPI_BASE_URL') or f"https://api.z-api.io/instances/{env['ZAPI_INSTANCE_ID']}/token/{env['ZAPI_TOKEN']}"
@@ -54,10 +55,10 @@ def main():
     pending = {'generatedAt': now.isoformat(), 'date': target_str, 'items': []}
     sent = []
     for appt in items:
-        status = str(appt.get('status') or '').lower()
+        status = str(appt.get('status') or appt.get('statusMarcacao') or '').lower()
         if 'cancel' in status:
             continue
-        dt = appt.get('dataHoraInicio') or appt.get('data_inicio') or appt.get('dataHora') or ''
+        dt = appt.get('dataHoraInicio') or appt.get('data_inicio') or appt.get('dataHora') or (f"{appt.get('dataAgendamento','')}T{appt.get('horaAgendamento','')}" if appt.get('dataAgendamento') and appt.get('horaAgendamento') else '')
         if not dt:
             continue
         try:
@@ -67,18 +68,17 @@ def main():
         if hhmm >= '12:00':
             continue
         paciente = appt.get('paciente') or {}
-        nome = paciente.get('nome') or appt.get('pacienteNome') or 'paciente'
-        phone = normalize_phone((paciente.get('telefone') or paciente.get('celular') or appt.get('telefone') or appt.get('whatsapp') or ''))
+        nome = paciente.get('nome') or appt.get('pacienteNome') or appt.get('nomePaciente') or 'paciente'
+        phone = normalize_phone((paciente.get('telefone') or paciente.get('celular') or appt.get('telefoneComDDI') or appt.get('telefone') or appt.get('whatsapp') or ''))
         if not phone:
             continue
         ag_id = appt.get('id') or appt.get('agendamentoId')
+        primeiro_nome = nome.split()[0].title()
         msg = (
-            f"Oi, {nome.split()[0]}! 😊 Passando para confirmar sua consulta de amanhã às {hhmm} no Instituto Vital Slim.\n\n"
-            "Pode me responder com uma destas opções:\n"
-            "1) Confirmo\n"
-            "2) Preciso remarcar\n"
-            "3) Não vou conseguir\n\n"
-            "Fico à disposição."
+            f"Oi, {primeiro_nome}! Tudo bem? 😊\n\n"
+            f"Estou passando para confirmar sua consulta de amanhã, às {hhmm}, aqui no Instituto Vital Slim.\n\n"
+            "Se estiver tudo certo, pode me responder com *Confirmo*.\n"
+            "Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*."
         )
         payload = json.dumps({'phone': phone, 'message': msg})
         cmd = [
