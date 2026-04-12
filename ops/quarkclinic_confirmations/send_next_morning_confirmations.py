@@ -8,7 +8,7 @@ from urllib.parse import quote_plus
 ROOT = Path('/root/cerebro-vital-slim')
 STATE = ROOT / 'ops/quarkclinic_confirmations/state/pending_confirmations.json'
 LOGDIR = ROOT / 'ops/quarkclinic_confirmations/logs'
-QC = '/root/.openclaw/workspace/skills/quarkclinic-api/scripts/quarkclinic_api.py'
+QC = '/root/.openclaw/workspace/snapshot/openclaw-home/workspace/skills/quarkclinic-api/scripts/quarkclinic_api.py'
 ENV = '/root/.openclaw/workspace/ops/zapi_bridge/zapi_bridge.env'
 TZ = ZoneInfo('America/Bahia')
 

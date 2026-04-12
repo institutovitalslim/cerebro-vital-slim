@@ -60,15 +60,15 @@ def main():
     base = env.get('ZAPI_BASE_URL') or f"https://api.z-api.io/instances/{env['ZAPI_INSTANCE_ID']}/token/{env['ZAPI_TOKEN']}"
     client = env['ZAPI_CLIENT_TOKEN']
 
+    client = '/root/.openclaw/workspace/snapshot/openclaw-home/workspace/skills/quarkclinic-api/scripts/quarkclinic_api.py'
+
     if decision == 'confirm':
-        url = f'https://api.quark.tec.br/clinic/ext/v1/agendamentos/{ag_id}/confirmar'
-        cmd = ['curl','-sS','-X','PATCH',url,'-H',f"Authorization: {os.environ.get('QUARKCLINIC_TOKEN','')}"]
+        cmd = ['python3', client, 'PATCH', f'/v1/agendamentos/{ag_id}/confirmar', '--write-ok']
         raw = subprocess.check_output(cmd, text=True)
         item['status'] = 'confirmed'
         reply = 'Perfeito 😊 Sua consulta ficou confirmada. Qualquer coisa, estou por aqui.'
     elif decision == 'cancel':
-        url = f'https://api.quark.tec.br/clinic/ext/v1/agendamentos/{ag_id}/cancelar?motivo={quote_plus("Cancelado pelo paciente via WhatsApp")}'
-        cmd = ['curl','-sS','-X','PATCH',url,'-H',f"Authorization: {os.environ.get('QUARKCLINIC_TOKEN','')}"]
+        cmd = ['python3', client, 'PATCH', f'/v1/agendamentos/{ag_id}/cancelar', '--query', f'motivo={quote_plus("Cancelado pelo paciente via WhatsApp")}', '--write-ok']
         raw = subprocess.check_output(cmd, text=True)
         item['status'] = 'cancelled'
         reply = 'Tudo bem 😊 Seu atendimento foi cancelado por aqui. Se quiser, eu posso te ajudar a remarcar.'
