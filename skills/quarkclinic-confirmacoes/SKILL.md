@@ -1,6 +1,7 @@
 ---
 name: quarkclinic-confirmacoes
 description: Enviar confirmações de consulta por WhatsApp para pacientes agendados, registrar pendências por telefone/agendamento e processar respostas para confirmar, cancelar ou remarcar no Quarkclinic. Use quando o usuário pedir confirmação de pacientes, automação diária de confirmações, ou atualização do status de agendamentos a partir de respostas no WhatsApp.
+user-invocable: true
 ---
 
 # Quarkclinic Confirmações
@@ -15,8 +16,9 @@ Use esta skill para operar o fluxo de confirmação de pacientes entre **Quarkcl
 - depurar o fluxo de confirmação/cancelamento/remarcação
 
 ## Arquivos da skill
-- Script de envio: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/send_next_morning_confirmations.py`
-- Script de resposta: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/process_reply.py`
+- Script de envio: `scripts/send_next_morning_confirmations.py`
+- Script de resposta: `scripts/process_reply.py`
+- Referência operacional: `references/operacao.md`
 - Estado pendente: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/state/pending_confirmations.json`
 - Logs: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/logs/`
 - Bridge: `/root/.openclaw/workspace/ops/zapi_bridge/zapi_clara_bridge.py`
@@ -53,7 +55,7 @@ python3 /root/cerebro-vital-slim/ops/quarkclinic_confirmations/process_reply.py 
 Existe um cron diário às 16:00 (`America/Bahia`) para esse fluxo. Antes de alterar, verifique o job ativo e preserve o horário a menos que o usuário peça mudança.
 
 ## Diagnóstico rápido
-Se algo falhar, verifique nesta ordem:
+Se algo falhar, leia `references/operacao.md` e verifique nesta ordem:
 1. Z-API retornou `messageId`
 2. `pending_confirmations.json` foi atualizado
 3. bridge está ativa
