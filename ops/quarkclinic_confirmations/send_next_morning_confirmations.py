@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, os, subprocess, sys
+import argparse, json, os, subprocess, sys
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from pathlib import Path
@@ -40,8 +40,17 @@ def normalize_phone(raw):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--mode', choices=['next-morning', 'same-day-afternoon'], default='next-morning')
+    args = parser.parse_args()
+
     now = datetime.now(TZ)
-    target = (now + timedelta(days=1)).date()
+    if args.mode == 'same-day-afternoon':
+        target = now.date()
+        turno = 'afternoon'
+    else:
+        target = (now + timedelta(days=1)).date()
+        turno = 'morning'
     target_str = target.strftime('%d-%m-%Y')
     out = sh(['python3', QC, 'GET', '/v1/agendamentos', '--query', f'data_agendamento_inicio={target_str}', '--query', f'data_agendamento_fim={target_str}'])
     data = json.loads(out)
@@ -65,7 +74,9 @@ def main():
             hhmm = dt[11:16]
         except Exception:
             continue
-        if hhmm >= '12:00':
+        if turno == 'morning' and hhmm >= '12:00':
+            continue
+        if turno == 'afternoon' and hhmm < '12:00':
             continue
         paciente = appt.get('paciente') or {}
         nome = paciente.get('nome') or appt.get('pacienteNome') or appt.get('nomePaciente') or 'paciente'
@@ -99,13 +110,14 @@ def main():
             'messageId': resp.get('messageId'),
             'status': 'sent'
         }
+        item['turno'] = turno
         pending['items'].append(item)
         sent.append(item)
 
     STATE.write_text(json.dumps(pending, ensure_ascii=False, indent=2))
     LOGDIR.mkdir(parents=True, exist_ok=True)
     (LOGDIR / f'send_{target_str}.json').write_text(json.dumps({'sent': sent}, ensure_ascii=False, indent=2))
-    print(json.dumps({'date': target_str, 'sentCount': len(sent)}, ensure_ascii=False))
+    print(json.dumps({'date': target_str, 'mode': args.mode, 'sentCount': len(sent)}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

@@ -31,9 +31,14 @@ Use esta skill para operar o fluxo de confirmação de pacientes entre **Quarkcl
 5. O fluxo diário é apenas para pacientes da **manhã seguinte**.
 
 ## Execução padrão
-### Enviar confirmações
+### Enviar confirmações da manhã seguinte
 ```bash
-python3 /root/cerebro-vital-slim/ops/quarkclinic_confirmations/send_next_morning_confirmations.py
+python3 /root/cerebro-vital-slim/ops/quarkclinic_confirmations/send_next_morning_confirmations.py --mode next-morning
+```
+
+### Enviar confirmações da tarde do mesmo dia
+```bash
+python3 /root/cerebro-vital-slim/ops/quarkclinic_confirmations/send_next_morning_confirmations.py --mode same-day-afternoon
 ```
 
 ### Processar uma resposta manualmente
@@ -42,8 +47,9 @@ python3 /root/cerebro-vital-slim/ops/quarkclinic_confirmations/process_reply.py 
 ```
 
 ## Lógica esperada
-- Buscar agendamentos do dia seguinte no Quarkclinic
-- Filtrar atendimentos antes de 12:00
+- Buscar agendamentos conforme o modo escolhido no Quarkclinic
+- Filtrar atendimentos antes de 12:00 para manhã seguinte
+- Filtrar atendimentos a partir de 12:00 para tarde do mesmo dia
 - Enviar WhatsApp com opções curtas de resposta
 - Salvar vínculo `telefone -> agendamentoId`
 - Quando houver resposta:

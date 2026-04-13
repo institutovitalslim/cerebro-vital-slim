@@ -1,7 +1,7 @@
 # Operação
 
 ## Componentes
-- `scripts/send_next_morning_confirmations.py`: dispara confirmações reais por WhatsApp.
+- `scripts/send_next_morning_confirmations.py`: dispara confirmações reais por WhatsApp, com `--mode next-morning` ou `--mode same-day-afternoon`.
 - `scripts/process_reply.py`: classifica resposta e atualiza o Quarkclinic.
 - Estado operacional principal: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/state/pending_confirmations.json`
 - Logs: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/logs/`
@@ -19,8 +19,8 @@
 - ambíguo: não atualizar automaticamente
 
 ## Cron ativo
-- Nome: `whatsapp-confirmacoes-manha-seguinte`
-- Horário: `0 16 * * *`
+- Nome: `whatsapp-confirmacoes-manha-seguinte` → `0 16 * * *`
+- Nome: `whatsapp-confirmacoes-tarde-mesmo-dia` → `30 7 * * *`
 - Fuso: `America/Bahia`
 
 ## Checklist de validação
