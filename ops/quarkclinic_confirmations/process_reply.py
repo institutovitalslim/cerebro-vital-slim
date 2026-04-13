@@ -58,17 +58,17 @@ def main():
     ag_id = item['agendamentoId']
     env = load_env(ENV)
     base = env.get('ZAPI_BASE_URL') or f"https://api.z-api.io/instances/{env['ZAPI_INSTANCE_ID']}/token/{env['ZAPI_TOKEN']}"
-    client = env['ZAPI_CLIENT_TOKEN']
+    zapi_client_token = env['ZAPI_CLIENT_TOKEN']
 
-    client = '/root/.openclaw/workspace/snapshot/openclaw-home/workspace/skills/quarkclinic-api/scripts/quarkclinic_api.py'
+    qc_client = '/root/.openclaw/workspace/snapshot/openclaw-home/workspace/skills/quarkclinic-api/scripts/quarkclinic_api.py'
 
     if decision == 'confirm':
-        cmd = ['python3', client, 'PATCH', f'/v1/agendamentos/{ag_id}/confirmar', '--write-ok']
+        cmd = ['python3', qc_client, 'PATCH', f'/v1/agendamentos/{ag_id}/confirmar', '--write-ok']
         raw = subprocess.check_output(cmd, text=True)
         item['status'] = 'confirmed'
         reply = 'Perfeito 😊 Sua consulta ficou confirmada. Qualquer coisa, estou por aqui.'
     elif decision == 'cancel':
-        cmd = ['python3', client, 'PATCH', f'/v1/agendamentos/{ag_id}/cancelar', '--query', f'motivo={quote_plus("Cancelado pelo paciente via WhatsApp")}', '--write-ok']
+        cmd = ['python3', qc_client, 'PATCH', f'/v1/agendamentos/{ag_id}/cancelar', '--query', f'motivo={quote_plus("Cancelado pelo paciente via WhatsApp")}', '--write-ok']
         raw = subprocess.check_output(cmd, text=True)
         item['status'] = 'cancelled'
         reply = 'Tudo bem 😊 Seu atendimento foi cancelado por aqui. Se quiser, eu posso te ajudar a remarcar.'
@@ -82,7 +82,7 @@ def main():
 
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2))
     payload = json.dumps({'phone': phone, 'message': reply})
-    send = subprocess.check_output(['curl','-sS','-X','POST',f'{base}/send-text','-H',f'Client-Token: {client}','-H','Content-Type: application/json','-d',payload], text=True)
+    send = subprocess.check_output(['curl','-sS','-X','POST',f'{base}/send-text','-H',f'Client-Token: {zapi_client_token}','-H','Content-Type: application/json','-d',payload], text=True)
     print(json.dumps({'matched': True, 'decision': decision, 'agendamentoId': ag_id, 'quarkclinic': raw, 'reply': send}, ensure_ascii=False))
 
 if __name__ == '__main__':
