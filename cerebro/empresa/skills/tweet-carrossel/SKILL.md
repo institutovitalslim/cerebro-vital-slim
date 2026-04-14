@@ -226,6 +226,28 @@ python3 scripts/make_tweet_slides.py \
 
 ---
 
+
+
+## GERACAO DE IMAGENS — Provider Nativo do OpenClaw
+
+O OpenClaw v2026.4.11+ tem sistema nativo de image providers. Use a ferramenta  do agente:
+
+### Para gerar foto da Dra. (capa):
+Usar ferramenta  com provider  (NanoBanana 2):
+- Prompt: foto da Dra. Daniely SEM TEXTO, apenas foto com fundo contextual ao tema
+- Provider: google (gemini-3.1-flash-image-preview)
+- Aspect ratio: 4:5
+- Enviar fotos de referencia da Dra. como refs
+
+### Para gerar imagem do circulo (capa):
+Usar ferramenta  com provider :
+- Prompt: imagem contextual ao tema (capsulas, alimentos, etc.)
+- Aspect ratio: 1:1
+
+### Provider preferido: google (NanoBanana 2)
+### Fallback: openai (gpt-image-1)
+### NUNCA gerar capa completa com texto via image tool — SEMPRE usar make_cover.py para montar
+
 ## CHECKLIST DE QUALIDADE (OBRIGATORIO antes de entregar)
 
 ### Copy (etapa 1)
