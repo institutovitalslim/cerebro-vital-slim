@@ -23,6 +23,12 @@ Este arquivo concentra fatos operacionais canônicos que **não podem ser esquec
 - Ao marcar consulta, sempre consultar `/horarios-livres` da agenda padrão primeiro.
 - Quando o horário exato não existir, usar o início real do slot livre mais próximo e informar isso claramente.
 
+## Omie
+- Para cadastrar paciente no Omie a partir de um nome solto, usar o fluxo canônico da skill `skills/omie-cadastro-paciente/`.
+- Fluxo obrigatório: buscar no Quarkclinic, confirmar a identidade com o usuário, checar duplicidade no Omie e só depois criar.
+- `codigo_cliente_integracao` do cadastro vindo do Quarkclinic deve seguir o padrão `QC-<id do paciente>`.
+- Não inferir cidade, estado, CEP ou complemento quando esses dados não vierem preenchidos no Quarkclinic; pedir complemento ao usuário ou manter vazio.
+
 ## Time da clínica
 - **Dra. Daniely Alves Freitas**
   - WhatsApp: `+55 71 99696-2059`
