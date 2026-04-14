@@ -180,22 +180,22 @@ def render_headline(draw, headline_lines, highlight_words, start_y):
     for i, line in enumerate(headline_lines):
         y = y_offset + i * line_height
 
-        # Check if any highlight word is in this line
-        line_upper = line.upper()
-        is_gold = False
-        for hw in highlight_set:
-            if hw and hw in line_upper:
-                is_gold = True
-                break
+        # Render word-by-word with individual color highlighting
+        words = line.split(" ")
 
-        color = GOLD if is_gold else WHITE
+        # Calculate total line width first (for centering)
+        total_line_width = draw.textlength(line, font=font)
+        x_cursor = (W - total_line_width) // 2
 
-        # Center horizontally
-        bbox = draw.textbbox((0, 0), line, font=font)
-        text_width = bbox[2] - bbox[0]
-        x = (W - text_width) // 2
+        for j, word in enumerate(words):
+            # Check if this specific word should be gold
+            word_clean = word.strip().upper().strip('"').strip("'").strip(",").strip(".")
+            is_gold = word_clean in highlight_set
+            color = GOLD if is_gold else WHITE
 
-        draw.text((x, y), line, fill=color, font=font)
+            draw.text((x_cursor, y), word, fill=color, font=font)
+            word_width = draw.textlength(word + " ", font=font)
+            x_cursor += word_width
 
 
 def add_footer(draw):
