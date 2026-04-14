@@ -39,6 +39,14 @@ def normalize_phone(raw):
     return digits
 
 
+def describe_target_day(now_date, target_date):
+    if target_date == now_date:
+        return 'hoje'
+    if target_date == now_date + timedelta(days=1):
+        return 'amanhã'
+    return f"no dia {target_date.strftime('%d/%m')}"
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['next-morning', 'same-day-afternoon'], default='next-morning')
@@ -52,6 +60,7 @@ def main():
         target = (now + timedelta(days=1)).date()
         turno = 'morning'
     target_str = target.strftime('%d-%m-%Y')
+    target_day_text = describe_target_day(now.date(), target)
     out = sh(['python3', QC, 'GET', '/v1/agendamentos', '--query', f'data_agendamento_inicio={target_str}', '--query', f'data_agendamento_fim={target_str}'])
     data = json.loads(out)
     resp = data.get('response') or {}
@@ -87,7 +96,7 @@ def main():
         primeiro_nome = nome.split()[0].title()
         msg = (
             f"Oi, {primeiro_nome}! Tudo bem? 😊\n\n"
-            f"Estou passando para confirmar sua consulta de amanhã, às {hhmm}, aqui no Instituto Vital Slim.\n\n"
+            f"Estou passando para confirmar sua consulta de {target_day_text}, às {hhmm}, aqui no Instituto Vital Slim.\n\n"
             "Se estiver tudo certo, pode me responder com *Confirmo*.\n"
             "Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*."
         )

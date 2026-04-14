@@ -24,8 +24,9 @@
 - Fuso: `America/Bahia`
 
 ## Checklist de validação
-1. envio retornou `messageId`
-2. paciente entrou em `pending_confirmations.json`
-3. reply caiu no webhook
-4. `process_reply.py` encontrou telefone pendente
-5. PATCH do Quarkclinic executou com sucesso
+1. a data e hora do texto conferem com a agenda real do Quarkclinic para aquele disparo
+2. envio retornou `messageId`
+3. paciente entrou em `pending_confirmations.json`
+4. reply caiu no webhook
+5. `process_reply.py` encontrou telefone pendente
+6. PATCH do Quarkclinic executou com sucesso
