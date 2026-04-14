@@ -25,8 +25,9 @@
 
 ## Checklist de validação
 1. a data e hora do texto conferem com a agenda real do Quarkclinic para aquele disparo
-2. envio retornou `messageId`
-3. paciente entrou em `pending_confirmations.json`
-4. reply caiu no webhook
-5. `process_reply.py` encontrou telefone pendente
-6. PATCH do Quarkclinic executou com sucesso
+2. o procedimento citado no texto bate com o procedimento real do agendamento
+3. envio retornou `messageId`
+4. paciente entrou em `pending_confirmations.json`
+5. reply caiu no webhook
+6. `process_reply.py` encontrou telefone pendente
+7. PATCH do Quarkclinic executou com sucesso

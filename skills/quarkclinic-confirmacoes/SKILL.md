@@ -29,6 +29,7 @@ Use esta skill para operar o fluxo de confirmação de pacientes entre **Quarkcl
 3. Para respostas ambíguas do paciente, não atualizar status automaticamente.
 4. “Preciso remarcar” não é cancelamento automático, é estado `needs_reschedule`.
 5. Antes de cada envio, sempre buscar a agenda real no Quarkclinic e derivar o texto temporal a partir dela, usando `hoje`, `amanhã` ou a data exata quando necessário. Nunca fixar “amanhã” no template.
+6. Sempre verificar o procedimento real agendado e usar essa informação na mensagem. Nunca assumir que todo atendimento é “consulta”.
 
 ## Execução padrão
 ### Enviar confirmações da manhã seguinte
@@ -48,6 +49,7 @@ python3 /root/cerebro-vital-slim/ops/quarkclinic_confirmations/process_reply.py 
 
 ## Lógica esperada
 - Buscar agendamentos conforme o modo escolhido no Quarkclinic, antes de qualquer envio
+- Ler o procedimento real de cada agendamento e refletir isso no texto enviado
 - Filtrar atendimentos antes de 12:00 para manhã seguinte
 - Filtrar atendimentos a partir de 12:00 para tarde do mesmo dia
 - Enviar WhatsApp com opções curtas de resposta

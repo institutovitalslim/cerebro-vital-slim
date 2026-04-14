@@ -93,10 +93,12 @@ def main():
         if not phone:
             continue
         ag_id = appt.get('id') or appt.get('agendamentoId')
+        procedimento = appt.get('procedimento') or {}
+        procedimento_nome = (procedimento.get('nome') or appt.get('procedimentoNome') or 'atendimento').strip()
         primeiro_nome = nome.split()[0].title()
         msg = (
             f"Oi, {primeiro_nome}! Tudo bem? 😊\n\n"
-            f"Estou passando para confirmar sua consulta de {target_day_text}, às {hhmm}, aqui no Instituto Vital Slim.\n\n"
+            f"Estou passando para confirmar seu atendimento de {procedimento_nome} {target_day_text}, às {hhmm}, aqui no Instituto Vital Slim.\n\n"
             "Se estiver tudo certo, pode me responder com *Confirmo*.\n"
             "Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*."
         )
