@@ -42,5 +42,16 @@ Este arquivo concentra fatos operacionais canônicos que **não podem ser esquec
 - Em leads, primeiro acolher, entender a necessidade, contextualizar o atendimento e explicar a proposta/avaliação; só depois entrar em preço.
 - Quando Tiaro pedir para "chamar o conselho", usar a skill/metodologia canônica de conselho (`llm-council`) quando ela for a referência definida, e não improvisar com subagente genérico.
 
+## Tweet-carrossel
+- Para TODA capa de carrossel, usar obrigatoriamente o script `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py`.
+- Fluxo obrigatório da capa:
+  1. gerar a FOTO da Dra sem texto via NanoBanana 2 com fundo contextual ao tema;
+  2. gerar a IMAGEM DO CÍRCULO via NanoBanana 2 com contexto do tema;
+  3. montar a capa com `make_cover.py`.
+- Comando padrão:
+  `python3 scripts/make_cover.py --foto FOTO.png --circulo CIRCULO.png --headline "LINHA1|LINHA2" --destaques "PALAVRA1,PALAVRA2" --out capa.png`
+- NUNCA gerar a capa inteira via NanoBanana 2 com texto incluso.
+- SEMPRE usar `make_cover.py` para manter consistência de layout.
+
 ## Regra de operação
 Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, WhatsApp/Z-API ou time da clínica, consultar os arquivos canônicos correspondentes em `cerebro/`.

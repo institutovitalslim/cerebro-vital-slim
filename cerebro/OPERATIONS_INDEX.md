@@ -28,6 +28,11 @@
 - `cerebro/learning-ledger.md`
 - `cerebro/verdades-operacionais.md`
 
+### Tweet-carrossel
+- `cerebro/verdades-operacionais.md`
+- `MEMORY.md`
+- `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py`
+
 ### Contexto intertópicos (Telegram)
 - `cerebro/telegram-topics.md`
 - `cerebro/cross-topic-memory.md`
