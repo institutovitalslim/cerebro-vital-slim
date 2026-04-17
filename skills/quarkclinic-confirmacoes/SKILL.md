@@ -30,6 +30,7 @@ Use esta skill para operar o fluxo de confirmação de pacientes entre **Quarkcl
 4. “Preciso remarcar” não é cancelamento automático, é estado `needs_reschedule`.
 5. Antes de cada envio, sempre buscar a agenda real no Quarkclinic e derivar o texto temporal a partir dela, usando `hoje`, `amanhã` ou a data exata quando necessário. Nunca fixar “amanhã” no template.
 6. Sempre verificar o procedimento real agendado e usar essa informação na mensagem. Nunca assumir que todo atendimento é “consulta”.
+7. Quando a resposta vier de paciente já confirmado no fluxo operacional, o sistema deve apenas atualizar o Quarkclinic e registrar o status. Não deve responder o paciente automaticamente no WhatsApp.
 
 ## Execução padrão
 ### Enviar confirmações da manhã seguinte

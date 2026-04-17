@@ -84,25 +84,19 @@ def main():
         cmd = ['python3', qc_client, 'PATCH', f'/v1/agendamentos/{ag_id}/confirmar', '--write-ok']
         raw = subprocess.check_output(cmd, text=True)
         item['status'] = 'confirmed'
-        reply = 'Perfeito 😊 Sua consulta ficou confirmada. Qualquer coisa, estou por aqui.'
     elif decision == 'cancel':
         cmd = ['python3', qc_client, 'PATCH', f'/v1/agendamentos/{ag_id}/cancelar', '--query', f'motivo={quote_plus("Cancelado pelo paciente via WhatsApp")}', '--write-ok']
         raw = subprocess.check_output(cmd, text=True)
         item['status'] = 'cancelled'
-        reply = 'Tudo bem 😊 Seu atendimento foi cancelado por aqui. Se quiser, eu posso te ajudar a remarcar.'
     elif decision == 'reschedule':
         item['status'] = 'needs_reschedule'
         raw = '{}'
-        reply = 'Claro 😊 Eu posso te ajudar a remarcar. Me diz, por favor, qual período costuma ser melhor pra vc: manhã ou tarde?'
     else:
         print(json.dumps({'matched': True, 'decision': 'unknown', 'updated': False}))
         return
 
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2))
-    reply_phone = normalize_phone(item.get('phone') or phone)
-    payload = json.dumps({'phone': reply_phone, 'message': reply})
-    send = subprocess.check_output(['curl','-sS','-X','POST',f'{base}/send-text','-H',f'Client-Token: {zapi_client_token}','-H','Content-Type: application/json','-d',payload], text=True)
-    print(json.dumps({'matched': True, 'decision': decision, 'agendamentoId': ag_id, 'quarkclinic': raw, 'reply': send}, ensure_ascii=False))
+    print(json.dumps({'matched': True, 'decision': decision, 'agendamentoId': ag_id, 'quarkclinic': raw, 'replySent': False}, ensure_ascii=False))
 
 if __name__ == '__main__':
     main()

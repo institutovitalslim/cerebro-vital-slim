@@ -2,7 +2,7 @@
 
 ## Componentes
 - `scripts/send_next_morning_confirmations.py`: dispara confirmações reais por WhatsApp, com `--mode next-morning` ou `--mode same-day-afternoon`.
-- `scripts/process_reply.py`: classifica resposta e atualiza o Quarkclinic.
+- `scripts/process_reply.py`: classifica resposta e atualiza o Quarkclinic, sem responder automaticamente o paciente no WhatsApp.
 - Estado operacional principal: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/state/pending_confirmations.json` (cumulativo entre os disparos ativos, sem sobrescrever o turno anterior)
 - Logs: `/root/cerebro-vital-slim/ops/quarkclinic_confirmations/logs/`
 - Bridge Z-API: `/root/.openclaw/workspace/ops/zapi_bridge/zapi_clara_bridge.py`
