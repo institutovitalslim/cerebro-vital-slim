@@ -28,6 +28,20 @@ def normalize_phone(raw):
     return digits
 
 
+def phone_variants(raw):
+    phone = normalize_phone(raw)
+    variants = {phone}
+    if phone.startswith('55') and len(phone) >= 12:
+        ddi = phone[:2]
+        ddd = phone[2:4]
+        rest = phone[4:]
+        if len(rest) == 9 and rest.startswith('9'):
+            variants.add(ddi + ddd + rest[1:])
+        elif len(rest) == 8:
+            variants.add(ddi + ddd + '9' + rest)
+    return variants
+
+
 def classify(text):
     t = (text or '').strip().lower()
     if any(x in t for x in ['confirmo', 'confirmada', 'confirmado', 'ok', 'certo', 'estarei', 'vou sim', 'sim']):
@@ -43,13 +57,17 @@ def main():
     if len(sys.argv) < 3:
         raise SystemExit('uso: process_reply.py <phone> <text>')
     phone = normalize_phone(sys.argv[1])
+    phone_keys = phone_variants(phone)
     text = sys.argv[2]
     if not STATE.exists():
         print(json.dumps({'matched': False, 'reason': 'state_missing'}))
         return
     state = json.loads(STATE.read_text())
     items = state.get('items', [])
-    candidates = [x for x in items if x.get('phone') == phone and x.get('status') == 'sent']
+    candidates = [
+        x for x in items
+        if x.get('status') == 'sent' and normalize_phone(x.get('phone')) in phone_keys
+    ]
     if not candidates:
         print(json.dumps({'matched': False, 'reason': 'no_pending_for_phone'}))
         return
@@ -81,7 +99,8 @@ def main():
         return
 
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2))
-    payload = json.dumps({'phone': phone, 'message': reply})
+    reply_phone = normalize_phone(item.get('phone') or phone)
+    payload = json.dumps({'phone': reply_phone, 'message': reply})
     send = subprocess.check_output(['curl','-sS','-X','POST',f'{base}/send-text','-H',f'Client-Token: {zapi_client_token}','-H','Content-Type: application/json','-d',payload], text=True)
     print(json.dumps({'matched': True, 'decision': decision, 'agendamentoId': ag_id, 'quarkclinic': raw, 'reply': send}, ensure_ascii=False))
 

@@ -17,6 +17,7 @@
 - cancelamento: `não vou`, `cancelar`, `não consigo`
 - remarcação: `remarcar`, `reagendar`, `outro horário`
 - ambíguo: não atualizar automaticamente
+- variações de telefone entre Quarkclinic e webhook devem ser toleradas, inclusive com ou sem o 9 adicional no celular
 
 ## Cron ativo
 - Nome: `whatsapp-confirmacoes-manha-seguinte` → `0 16 * * *`
