@@ -47,6 +47,34 @@ def describe_target_day(now_date, target_date):
     return f"no dia {target_date.strftime('%d/%m')}"
 
 
+def parse_state_date(value):
+    for fmt in ('%d-%m-%YT%H:%M', '%Y-%m-%dT%H:%M', '%d-%m-%Y', '%Y-%m-%d'):
+        try:
+            return datetime.strptime(value, fmt).date()
+        except Exception:
+            pass
+    return None
+
+
+def load_existing_pending(now_date):
+    if not STATE.exists():
+        return {}
+    try:
+        data = json.loads(STATE.read_text())
+    except Exception:
+        return {}
+    keep = {}
+    for item in data.get('items', []):
+        status = item.get('status')
+        item_date = parse_state_date(item.get('dataHoraInicio', ''))
+        if status in {'confirmed', 'cancelled'}:
+            continue
+        if item_date and item_date < now_date - timedelta(days=1):
+            continue
+        keep[str(item.get('agendamentoId'))] = item
+    return keep
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['next-morning', 'same-day-afternoon'], default='next-morning')
@@ -70,7 +98,7 @@ def main():
     base = env.get('ZAPI_BASE_URL') or f"https://api.z-api.io/instances/{env['ZAPI_INSTANCE_ID']}/token/{env['ZAPI_TOKEN']}"
     client = env['ZAPI_CLIENT_TOKEN']
 
-    pending = {'generatedAt': now.isoformat(), 'date': target_str, 'items': []}
+    pending_by_id = load_existing_pending(now.date())
     sent = []
     for appt in items:
         status = str(appt.get('status') or appt.get('statusMarcacao') or '').lower()
@@ -122,9 +150,15 @@ def main():
             'status': 'sent'
         }
         item['turno'] = turno
-        pending['items'].append(item)
+        pending_by_id[str(ag_id)] = item
         sent.append(item)
 
+    pending = {
+        'generatedAt': now.isoformat(),
+        'lastRunMode': args.mode,
+        'lastRunDate': target_str,
+        'items': sorted(pending_by_id.values(), key=lambda x: x.get('dataHoraInicio', '')),
+    }
     STATE.write_text(json.dumps(pending, ensure_ascii=False, indent=2))
     LOGDIR.mkdir(parents=True, exist_ok=True)
     (LOGDIR / f'send_{target_str}.json').write_text(json.dumps({'sent': sent}, ensure_ascii=False, indent=2))
