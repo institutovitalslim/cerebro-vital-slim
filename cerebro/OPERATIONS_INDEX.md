@@ -14,6 +14,7 @@
 - `cerebro/omie.md`
 - `cerebro/verdades-operacionais.md`
 - `skills/omie-cadastro-paciente/SKILL.md`
+- Emissões de proposta/OS com boleto devem seguir os campos estruturados documentados em `cerebro/omie.md`
 
 ### WhatsApp / Z-API
 - `cerebro/whatsapp-zapi.md`
@@ -32,6 +33,9 @@
 - `cerebro/verdades-operacionais.md`
 - `MEMORY.md`
 - `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py`
+- `/root/.openclaw/workspace/fotos_dra/originais/`
+- `/root/.openclaw/workspace/fotos_dra/avatares/`
+- OpenClaw image providers nativos: preferir Google/NanoBanana 2, fallback OpenAI
 
 ### Contexto intertópicos (Telegram)
 - `cerebro/telegram-topics.md`

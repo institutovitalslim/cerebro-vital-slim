@@ -26,6 +26,23 @@
 - Para pessoa física, usar `pessoa_fisica = S`.
 - Tag padrão do cadastro: `Cliente`.
 
+## Emissão de proposta / OS com cobrança por boleto
+
+### Regra operacional do caso Francisco
+Ao emitir proposta/OS no Omie com cobrança por boleto bancário, os campos críticos precisam ser definidos explicitamente na criação para evitar ajuste manual posterior.
+
+### Campos que devem sair corretos
+- Categoria compatível com o serviço real do caso, por exemplo `Tricologia`.
+- Conta corrente correta, por exemplo `Bradesco` quando o boleto for do Bradesco.
+- `Gerar boleto = Sim`.
+- `Enviar também o boleto de cobrança = Sim`.
+- Tipo de pagamento/documento das parcelas = `Boleto`.
+- Meio de pagamento das parcelas = `Boleto Bancário`.
+- Quando o caso exigir, manter a observação comercial/fiscal: emitir `recibos` em vez de `nota fiscal`.
+
+### Armadilha já observada
+Não confiar apenas na observação textual da OS para registrar `boleto bancário Bradesco`. Esses dados precisam estar refletidos também nos campos estruturados da OS e das parcelas, senão a proposta pode nascer com configuração financeira incorreta.
+
 ### Comandos úteis
 ```bash
 python3 skills/omie-cadastro-paciente/scripts/cadastro_paciente_omie.py search "Suely"
