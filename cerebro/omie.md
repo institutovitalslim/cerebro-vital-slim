@@ -40,6 +40,9 @@ Ao emitir proposta/OS no Omie com cobrança por boleto bancário, os campos crí
 - Meio de pagamento das parcelas = `Boleto Bancário`.
 - Quando o caso exigir, manter a observação comercial/fiscal: emitir `recibos` em vez de `nota fiscal`.
 
+### Pergunta obrigatória antes de emitir
+Se a emissão depender de banco/conta corrente, perguntar explicitamente ao Tiaro qual banco deve ser usado antes de criar a OS ou faturar, sem assumir automaticamente o banco do caso anterior.
+
 ### Armadilha já observada
 Não confiar apenas na observação textual da OS para registrar `boleto bancário Bradesco`. Esses dados precisam estar refletidos também nos campos estruturados da OS e das parcelas, senão a proposta pode nascer com configuração financeira incorreta.
 
