@@ -43,6 +43,9 @@ Ao emitir proposta/OS no Omie com cobrança por boleto bancário, os campos crí
 ### Armadilha já observada
 Não confiar apenas na observação textual da OS para registrar `boleto bancário Bradesco`. Esses dados precisam estar refletidos também nos campos estruturados da OS e das parcelas, senão a proposta pode nascer com configuração financeira incorreta.
 
+### Regra de entrega dos boletos
+Depois que a OS for faturada e os boletos estiverem gerados, baixar todos os PDFs e enviar pelo próprio tópico do Telegram no mesmo fluxo operacional, sem depender de pedido adicional do usuário.
+
 ### Comandos úteis
 ```bash
 python3 skills/omie-cadastro-paciente/scripts/cadastro_paciente_omie.py search "Suely"
