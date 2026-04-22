@@ -64,9 +64,11 @@ Para isso, consultar:
 ## Buffer Social Media
 - Skill criada: `~/.openclaw/workspace/skills/buffer-social/`
 - Script: `scripts/post_buffer.py`
-- API key do Buffer salva em `/root/.openclaw/secure/buffer.env`
-- ⚠️ **Bloqueado**: A API key atual é um token OIDC, que não é aceito para acesso direto à API do Buffer (`401: OIDC tokens are not accepted for direct API access`).
-- Precisa de um Personal Access Token (PAT) clássico do Buffer ou configuração OAuth2 correta.
+- API key do Buffer (OIDC) salva em `/root/.openclaw/secure/buffer.env`
+- Endpoint GraphQL: `https://api.buffer.com/`
+- Organização: `69e90408151436756ee2629a` (Instituto Vital Slim)
+- Funcionalidade: criação de posts via mutation `CreateIdea` na GraphQL API
+- Testado e funcionando: criou post de teste com sucesso (`id: 69e9275415b2e6acbd361053`)
 
 ## Tweet-carrossel
 - OpenClaw `v2026.4.11` possui sistema nativo de image providers.
