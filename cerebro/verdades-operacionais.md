@@ -91,5 +91,22 @@ Para isso, consultar:
 - NUNCA gerar a capa inteira com texto via image tool.
 - Se a geração distorcer a fisionomia da Dra., refazer com referências mais fortes ou usar foto real original com fundo escuro.
 
+### Estrutura de conteúdo (10 slides — Viral Content Strategy)
+- Slide 1: HOOK (Pattern Interrupt) — headline ousada, max 5-10 palavras
+- Slide 2: REHOOK (Open Loop) — aumenta intriga sem dar resposta
+- Slide 3: Relatable Pain / Início da História — situacao identificavel
+- Slides 4-7: Valor (História + Insights) — 1 ideia-chave por slide, storytelling + valor acionavel
+- Slide 8: Turning Point (Momento AHA) — insight-chave, momento "salvavel"
+- Slide 9: Actionable Takeaway — passos claros e praticos
+- Slide 10: CTA (Engagement Trigger) — call-to-action direto no texto
+
+### Gatilhos psicológicos
+- Gap de curiosidade (curiosity gap)
+- Pattern interrupt (quebrar padrões)
+- Tom de prova social (social proof tone)
+- Medo de perder algo (FOMO)
+- Ideias contrarianas
+- Recompensas rápidas (quick wins)
+
 ## Regra de operação
 Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, WhatsApp/Z-API, Omie, time da clínica ou tweet-carrossel, consultar os arquivos canônicos correspondentes em `cerebro/`.

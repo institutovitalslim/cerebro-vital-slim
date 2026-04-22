@@ -319,13 +319,68 @@ p { font-size: 50px; line-height: 1.28; color: #c8c8c8; margin-bottom: 36px; fon
 | Cor do texto | UMA COR SO (#c8c8c8) - sem bold, sem destaques |
 | Saida | JPEG quality=85, ~50-120KB por slide |
 
-### REGRAS DE CONTEUDO
+### ESTRUTURA DE CONTEUDO (10 SLIDES — Viral Content Strategy)
+
+Cada carrossel deve contar uma historia, nao apenas transmitir informacao. Usar gaps de curiosidade, gatilhos emocionais e open loops para manter o leitor deslizando.
+
+**Slide 1 – HOOK (Pattern Interrupt):**
+- Headline ousada, controversa ou que desperta curiosidade
+- Fazer o leitor pensar: "Espera... o que?"
+- Usar tensao, surpresa ou afirmacao forte
+- Maximo 5-10 palavras
+
+**Slide 2 – REHOOK (Open Loop):**
+- Aumentar a intriga sem dar a resposta
+- Preparar o resultado, construir gap de curiosidade
+- Fazer com que PRECISEM do proximo slide
+
+**Slide 3 – RELATABLE PAIN / INICIO DA HISTORIA:**
+- Comecar uma historia curta ou situacao identificavel
+- "A maioria das pessoas pensa que..."
+- "Eu costumava..."
+- "Todo mundo faz isso errado..."
+
+**Slides 4-7 – VALOR (Historia + Insights):**
+- Entregar o conteudo principal atraves de um fluxo narrativo
+- Quebrar expectativas
+- Revelar insights passo a passo
+- Cada slide = 1 ideia-chave
+- Frases curtas e impactantes
+- Misturar storytelling + valor acionavel
+
+**Slide 8 – TURNING POINT (Momento AHA):**
+- Revelar o insight-chave ou mudanca de perspectiva
+- Deve parecer uma realizacao
+- Este e o momento "salvavel"
+
+**Slide 9 – ACTIONABLE TAKEAWAY:**
+- Dar passos claros e praticos
+- Facil de aplicar imediatamente
+
+**Slide 10 – CTA (Engagement Trigger):**
+- Call-to-action direto no texto
+- Ex: "Comenta 'QUERO' que eu te envio"
+- Ex: "Me segue para mais"
+- Ex: "Salva isso antes que suma"
+
+### REGRAS DE ESCRITA
 
 1. Texto CONVERSACIONAL, nao tecnico
 2. Frases CURTAS e impactantes
-3. CADA slide termina com frase de gancho para o proximo (ex: "E nao e so isso...", "->")
+3. CADA slide termina com frase de gancho para o proximo
 4. UM conceito por slide
 5. Apos ponto, SEMPRE letra maiuscula
+6. Escrever como se estivesse falando com uma pessoa so
+7. Cada linha deve criar momentum
+
+### GATILHOS PSICOLOGICOS A USAR
+
+- Gap de curiosidade (curiosity gap)
+- Pattern interrupt (quebrar padroes)
+- Tom de prova social (social proof tone)
+- Medo de perder algo (FOMO)
+- Ideias contrarianas
+- Recompensas rapidas (quick wins)
 ---
 
 ## PERFIL CONFIGURADO
