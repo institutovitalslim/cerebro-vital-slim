@@ -30,6 +30,7 @@
 ### WhatsApp / Z-API
 - `cerebro/whatsapp-zapi.md`
 - `cerebro/verdades-operacionais.md`
+- ElevenLabs TTS para respostas de áudio: `cerebro/verdades-operacionais.md`
 
 ### Time da clínica
 - `cerebro/time-clinica.md`
