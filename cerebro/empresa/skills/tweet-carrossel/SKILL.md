@@ -326,8 +326,6 @@ p { font-size: 50px; line-height: 1.28; color: #c8c8c8; margin-bottom: 36px; fon
 3. CADA slide termina com frase de gancho para o proximo (ex: "E nao e so isso...", "->")
 4. UM conceito por slide
 5. Apos ponto, SEMPRE letra maiuscula
-6. Ultimo slide: CTA claro
-
 ---
 
 ## PERFIL CONFIGURADO
@@ -389,7 +387,7 @@ p { font-size: 50px; line-height: 1.28; color: #c8c8c8; margin-bottom: 36px; fon
 - [ ] Gancho no final de cada slide
 - [ ] Um conceito por slide
 - [ ] Apos ponto, letra maiuscula
-- [ ] CTA no ultimo slide
+
 
 ### Imagens (etapa 2)
 - [ ] Proporcao 4:5 (1080x1350) em TODOS os slides
