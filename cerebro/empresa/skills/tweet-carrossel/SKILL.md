@@ -111,6 +111,9 @@ python3 /root/.openclaw/workspace/skills/tweet-carrossel/scripts/send_to_telegra
 
 ## SLIDE 1 - CAPA
 
+**Fundo: PRETO #000000** — A capa mantém fundo preto com foto da Dra. e headline em branco/dourado.
+**Slides 2+ (tweet): fundo BRANCO #FFFFFF** com texto preto.
+
 ### Pipeline OBRIGATORIO: compose_cover.py
 
 ```bash
