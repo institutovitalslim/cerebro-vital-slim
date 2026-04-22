@@ -61,6 +61,13 @@ Para isso, consultar:
 - Em leads, primeiro acolher, entender a necessidade, contextualizar o atendimento e explicar a proposta/avaliação; só depois entrar em preço.
 - Quando Tiaro pedir para "chamar o conselho", usar a skill/metodologia canônica de conselho (`llm-council`) quando ela for a referência definida, e não improvisar com subagente genérico.
 
+## Buffer Social Media
+- Skill criada: `~/.openclaw/workspace/skills/buffer-social/`
+- Script: `scripts/post_buffer.py`
+- API key do Buffer salva em `/root/.openclaw/secure/buffer.env`
+- ⚠️ **Bloqueado**: A API key atual é um token OIDC, que não é aceito para acesso direto à API do Buffer (`401: OIDC tokens are not accepted for direct API access`).
+- Precisa de um Personal Access Token (PAT) clássico do Buffer ou configuração OAuth2 correta.
+
 ## Tweet-carrossel
 - OpenClaw `v2026.4.11` possui sistema nativo de image providers.
 - Para gerar imagens de carrossel, preferir provider Google com NanoBanana 2 (`google/gemini-3.1-flash-image-preview` / NanoBanana 2).
