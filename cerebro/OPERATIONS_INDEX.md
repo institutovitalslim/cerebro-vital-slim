@@ -53,6 +53,7 @@
 - `/root/.openclaw/workspace/fotos_dra/originais/`
 - `/root/.openclaw/workspace/fotos_dra/avatares/`
 - OpenClaw image providers nativos: preferir Google/NanoBanana 2, fallback OpenAI
+- Para fotos da Dra. com NanoBanana 2 Pro e referência real, usar também a cláusula canônica de `strict facial consistency mode`
 
 ### Contexto intertópicos (Telegram)
 - `cerebro/telegram-topics.md`

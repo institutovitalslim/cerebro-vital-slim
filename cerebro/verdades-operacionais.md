@@ -67,6 +67,8 @@ Para isso, consultar:
 - Para TODA capa de carrossel, usar obrigatoriamente o script `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py`.
 - Selecionar sempre uma foto REAL da Dra. no repositório central.
 - Se necessário, editar apenas o FUNDO com NanoBanana 2, preservando rosto e corpo.
+- Ao gerar ou editar fotos da Dra. com referência real no NanoBanana 2 Pro, incluir no prompt a instrução canônica de consistência facial estrita: `Enable strict facial consistency mode. Prioritize the facial features from the provided reference image for all subsequent generations. Maintain the subject's identity accurately while only adapting the pose, lighting, and background. Do not alter the core facial structure.`
+- Essa instrução serve para reforçar preservação de identidade, mas não substitui validação visual do resultado final.
 - Gerar a IMAGEM DO CÍRCULO via NanoBanana 2 com contexto do tema.
 - NUNCA gerar rosto da Dra. via IA.
 - NUNCA gerar a capa inteira com texto via image tool.
