@@ -2,6 +2,17 @@
 
 Este arquivo concentra fatos operacionais canônicos que **não podem ser esquecidos**.
 
+Use este arquivo para:
+- fatos estáveis do negócio
+- IDs, contas, destinos e integrações reais
+- regras de domínio que dependem da operação da clínica
+
+Não usar este arquivo para princípios universais de execução.
+Para isso, consultar:
+- `cerebro/execution-principles.md`
+- `cerebro/success-criteria.md`
+- `OPERATING_RULES.md`
+
 ## GitHub / Cérebro
 - Repositório oficial do cérebro: `institutovitalslim/cerebro-vital-slim`
 - URL remota correta: `https://github.com/institutovitalslim/cerebro-vital-slim.git`
@@ -25,7 +36,6 @@ Este arquivo concentra fatos operacionais canônicos que **não podem ser esquec
 
 ## Omie
 - Para cadastrar paciente no Omie a partir de um nome solto, usar o fluxo canônico da skill `skills/omie-cadastro-paciente/`.
-- Fluxo obrigatório: buscar no Quarkclinic, confirmar a identidade com o usuário, checar duplicidade no Omie e só depois criar.
 - `codigo_cliente_integracao` do cadastro vindo do Quarkclinic deve seguir o padrão `QC-<id do paciente>`.
 - Não inferir cidade, estado, CEP ou complemento quando esses dados não vierem preenchidos no Quarkclinic; pedir complemento ao usuário ou manter vazio.
 - Ao emitir proposta/OS no Omie com cobrança por boleto, não basta escrever isso em observação: é obrigatório preencher corretamente os campos estruturados de categoria, conta corrente, `Gerar boleto = Sim`, `Enviar também o boleto de cobrança = Sim`, tipo de pagamento `Boleto` e meio de pagamento `Boleto Bancário`.
@@ -55,17 +65,12 @@ Este arquivo concentra fatos operacionais canônicos que **não podem ser esquec
   - avatares: `/root/.openclaw/workspace/fotos_dra/avatares/`
 - Acervo disponível inclui looks e poses em blazer branco, vestido branco longo, blazer branco com blusa preta e saia preta, macacão vermelho e composições com Bio Meds, seringa e modelos corporais.
 - Para TODA capa de carrossel, usar obrigatoriamente o script `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py`.
-- Fluxo obrigatório da capa:
-  1. selecionar uma foto REAL da Dra. no repositório central;
-  2. se necessário, editar apenas o FUNDO com NanoBanana 2, preservando rosto e corpo;
-  3. gerar a IMAGEM DO CÍRCULO via NanoBanana 2 com contexto do tema;
-  4. montar a capa com `make_cover.py`.
-- Comando padrão:
-  `python3 scripts/make_cover.py --foto FOTO.png --circulo CIRCULO.png --headline "LINHA1|LINHA2" --destaques "PALAVRA1,PALAVRA2" --out capa.png`
+- Selecionar sempre uma foto REAL da Dra. no repositório central.
+- Se necessário, editar apenas o FUNDO com NanoBanana 2, preservando rosto e corpo.
+- Gerar a IMAGEM DO CÍRCULO via NanoBanana 2 com contexto do tema.
 - NUNCA gerar rosto da Dra. via IA.
 - NUNCA gerar a capa inteira com texto via image tool.
 - Se a troca de fundo distorcer a Dra., usar a foto original com fundo escuro.
-- SEMPRE usar `make_cover.py` para manter consistência de layout.
 
 ## Regra de operação
-Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, WhatsApp/Z-API ou time da clínica, consultar os arquivos canônicos correspondentes em `cerebro/`.
+Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, WhatsApp/Z-API, Omie, time da clínica ou tweet-carrossel, consultar os arquivos canônicos correspondentes em `cerebro/`.
