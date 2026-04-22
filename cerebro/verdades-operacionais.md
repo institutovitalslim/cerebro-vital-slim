@@ -24,7 +24,11 @@ Para isso, consultar:
 ## WhatsApp
 - A comunicação operacional por WhatsApp deve usar a **bridge da Z-API**.
 - Não assumir que um fluxo criado a partir de contexto Telegram consegue disparar WhatsApp automaticamente sem estar amarrado ao contexto/caminho correto.
-- **ElevenLabs TTS**: existe API key do ElevenLabs para respostas em áudio a pacientes que enviarem áudio. Chave configurada em `/root/.openclaw/secure/elevenlabs.env` (ELEVENLABS_API_KEY).
+- **ElevenLabs TTS**: respostas em áudio para pacientes que enviarem áudio via WhatsApp.
+  - Chave: `/root/.openclaw/secure/elevenlabs.env` (ELEVENLABS_API_KEY)
+  - Voice ID padrão: `EXAVITQu4vr4xnSDxMaL` (Rachel)
+  - Modelo: `eleven_multilingual_v2`
+  - Fluxo: áudio do paciente → transcrição via Whisper (OpenAI) → resposta da Clara → TTS ElevenLabs → envio via Z-API `/send-audio` com `audioBase64`
 
 ## Quarkclinic
 - Agenda padrão para novos agendamentos via API: **AGENDA OPENCLAW**
