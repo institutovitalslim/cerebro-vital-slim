@@ -247,9 +247,9 @@ python3 /root/.openclaw/workspace/skills/tweet-carrossel/scripts/capture_pubmed.
 **A CLARA DEVE CONTINUAR ATE CONSEGUIR**. O script NUNCA para - roda ate ter uma imagem valida do paper, seja do PubMed, PMC, Archive ou sintetica.
 
 ### Formato do slide 2:
-- Fundo preto #000
+- Fundo branco #FFFFFF
 - Avatar + nome + handle no topo (mesmo padrao dos slides tweet)
-- Texto em cor unica #c8c8c8
+- Texto em cor unica #000000
 - Screenshot do PubMed centralizado no espaco abaixo do texto
 - Screenshot deve incluir: header NIH azul, PubMed logo, titulo completo, autores, PMID, DOI
 - Imagem respeita margens laterais, com border-radius
@@ -281,14 +281,14 @@ python3 /root/.openclaw/workspace/skills/tweet-carrossel/scripts/capture_pubmed.
 .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .user-info { display: flex; flex-direction: column; justify-content: center; gap: 4px; }
 .name-row { display: flex; align-items: center; line-height: 1.15; }
-.name { font-weight: 700; font-size: 48px; color: #fff; line-height: 1.15; }
+.name { font-weight: 700; font-size: 58px; color: #000000; line-height: 1.15; }
 .verified { 
   display: inline-block; width: 38px; height: 38px; 
   background: #1d9bf0; border-radius: 50%; 
   text-align: center; line-height: 38px; font-size: 20px;
   color: #fff; margin-left: 12px; font-weight: 700; 
 }
-.handle { color: #71767b; font-size: 34px; line-height: 1.15; }
+.handle { color: #71767b; font-size: 41px; line-height: 1.15; }
 ```
 
 **CRITICAL:** Avatar = 96px (altura que casa com nome+handle ~90px, evita desalinhamento visual)
@@ -299,7 +299,7 @@ python3 /root/.openclaw/workspace/skills/tweet-carrossel/scripts/capture_pubmed.
 body { padding: 60px 64px; display: flex; flex-direction: column; }
 .centered { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .content { flex-shrink: 0; }
-p { font-size: 50px; line-height: 1.28; color: #c8c8c8; margin-bottom: 36px; font-weight: 400; }
+p { font-size: 60px; line-height: 1.28; color: #000000; margin-bottom: 36px; font-weight: 400; }
 ```
 
 ### ESPECIFICACOES FINAIS DOS SLIDES
@@ -307,16 +307,16 @@ p { font-size: 50px; line-height: 1.28; color: #c8c8c8; margin-bottom: 36px; fon
 | Elemento | Valor |
 |----------|-------|
 | Tamanho | 1080 x 1350 px (4:5) |
-| Fundo | preto #000000 |
+| Fundo | branco #FFFFFF |
 | Padding | 60px 64px |
 | Avatar | 96px circular |
-| Nome | bold, branco #fff, 48px, line-height 1.15 |
-| Selo verificado | circulo azul #1D9BF0, 38px |
-| Handle | regular, cinza #71767B, 34px, line-height 1.15 |
+| Nome | bold, preto #000000, 58px, line-height 1.15 |
+| Selo verificado | circulo azul #1D9BF0, ~46px |
+| Handle | regular, cinza #71767B, 41px, line-height 1.15 |
 | Gap avatar-texto | 28px |
-| Texto corpo | regular, cinza #c8c8c8, 50px, line-height 1.28 |
+| Texto corpo | regular, preto #000000, 60px, line-height 1.28 |
 | Gap entre paragrafos | 36px margin-bottom |
-| Cor do texto | UMA COR SO (#c8c8c8) - sem bold, sem destaques |
+| Cor do texto | UMA COR SO (#000000) - sem bold, sem destaques |
 | Saida | JPEG quality=85, ~50-120KB por slide |
 
 ### ESTRUTURA DE CONTEUDO (10 SLIDES — Viral Content Strategy)
@@ -455,7 +455,7 @@ Cada carrossel deve contar uma historia, nao apenas transmitir informacao. Usar 
 - [ ] Slide 2: screenshot PubMed validado (header NIH azul, titulo, autores, PMID, DOI)
 - [ ] Slide 2: SEM captcha "Select all images" ou "403 Forbidden"
 - [ ] Slides tweet: avatar 96px (alinhado com nome 48px + handle 34px)
-- [ ] Slides tweet: texto de cor unica #c8c8c8, 50px
+- [ ] Slides tweet: texto de cor unica #000000, 60px
 - [ ] Slides tweet: avatar = "Foto Perfil Daniely.png" (com frame dourado, fundo transparente)
 - [ ] Todos os slides: JPEG quality=85, < 200KB
 

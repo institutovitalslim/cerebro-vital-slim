@@ -100,6 +100,15 @@ Para isso, consultar:
 - Slide 9: Actionable Takeaway — passos claros e praticos
 - Slide 10: CTA (Engagement Trigger) — call-to-action direto no texto
 
+### Especificações visuais dos slides
+- Fundo: **branco #FFFFFF**
+- Texto: **preto #000000** (cor única, sem bold, sem destaques)
+- Fontes aumentadas em **20%** em relação ao padrão anterior:
+  - Texto corpo: ~46px (v3) / 60px (v4)
+  - Nome: ~38px (v3) / 58px (v4)
+  - Handle: ~24px (v3) / 41px (v4)
+- Selo verificado: azul #1D9BF0 (mantido)
+
 ### Gatilhos psicológicos
 - Gap de curiosidade (curiosity gap)
 - Pattern interrupt (quebrar padrões)
