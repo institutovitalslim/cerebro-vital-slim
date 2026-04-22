@@ -178,7 +178,9 @@ O seletor:
   ```bash
   python3 /root/.openclaw/workspace/skills/tweet-carrossel/scripts/generate_variation.py     --base "<foto_base_do_top1>"     --variation "<descricao_do_cenario_ideal_para_o_tema>"     --out "/root/dra_variation_<tema>.png"
   ```
-- A variacao preserva identidade facial (rosto, cabelo) mas altera cenario/iluminacao
+- A variacao preserva identidade facial (rosto, cabelo) mas altera cenario/iluminacao/roupas
+- Incluir no prompt a instrucao canônica de consistencia facial estrita:
+  `Enable strict facial consistency mode. Prioritize the facial features from the provided reference image for all subsequent generations. Maintain the subject's identity accurately while only adapting the pose, lighting, and background. Do not alter the core facial structure.`
 - Variacao criada fica disponivel para futuro uso (adicionada ao catalogo via nova rodada de catalog_photos.py)
 
 **Regras gerais da foto:**

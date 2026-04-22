@@ -78,15 +78,18 @@ Para isso, consultar:
   - originais: `/root/.openclaw/workspace/fotos_dra/originais/`
   - avatares: `/root/.openclaw/workspace/fotos_dra/avatares/`
 - Acervo disponível inclui looks e poses em blazer branco, vestido branco longo, blazer branco com blusa preta e saia preta, macacão vermelho e composições com Bio Meds, seringa e modelos corporais.
-- Para TODA capa de carrossel, usar obrigatoriamente o script `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py`.
-- Selecionar sempre uma foto REAL da Dra. no repositório central.
-- Se necessário, editar apenas o FUNDO com NanoBanana 2, preservando rosto e corpo.
-- Ao gerar ou editar fotos da Dra. com referência real no NanoBanana 2 Pro, incluir no prompt a instrução canônica de consistência facial estrita: `Enable strict facial consistency mode. Prioritize the facial features from the provided reference image for all subsequent generations. Maintain the subject's identity accurately while only adapting the pose, lighting, and background. Do not alter the core facial structure.`
+- Para TODA capa de carrossel, usar obrigatoriamente o pipeline `compose_cover.py` (v4).
+- O sistema usa `photo_selector.py` para escolher a foto real mais adequada ao tema do acervo catalogado.
+- Se nenhuma foto for adequada (score < 0.55), gerar uma **VARIAÇÃO via NanoBanana 2** usando a foto mais próxima como base:
+  - Preserva identidade facial (rosto, cabelo)
+  - Altera cenário, iluminação e roupas conforme o tema
+  - Incluir no prompt a instrução canônica de consistência facial estrita:
+    `Enable strict facial consistency mode. Prioritize the facial features from the provided reference image for all subsequent generations. Maintain the subject's identity accurately while only adapting the pose, lighting, and background. Do not alter the core facial structure.`
 - Essa instrução serve para reforçar preservação de identidade, mas não substitui validação visual do resultado final.
 - Gerar a IMAGEM DO CÍRCULO via NanoBanana 2 com contexto do tema.
-- NUNCA gerar rosto da Dra. via IA.
+- NUNCA gerar rosto da Dra. via IA sem referência real.
 - NUNCA gerar a capa inteira com texto via image tool.
-- Se a troca de fundo distorcer a Dra., usar a foto original com fundo escuro.
+- Se a geração distorcer a fisionomia da Dra., refazer com referências mais fortes ou usar foto real original com fundo escuro.
 
 ## Regra de operação
 Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, WhatsApp/Z-API, Omie, time da clínica ou tweet-carrossel, consultar os arquivos canônicos correspondentes em `cerebro/`.
