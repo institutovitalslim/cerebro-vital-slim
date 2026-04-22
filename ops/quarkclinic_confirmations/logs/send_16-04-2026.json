@@ -1,0 +1,40 @@
+{
+  "sent": [
+    {
+      "phone": "5571995583056",
+      "nome": "DAVI CARVALHO RAMOS MELO",
+      "agendamentoId": 454494309,
+      "dataHoraInicio": "16-04-2026T15:00",
+      "messageId": "2B8DB5417133C98652E1",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988067626",
+      "nome": "LIGIA LIMA FONTANARI JACINTO",
+      "agendamentoId": 450452632,
+      "dataHoraInicio": "16-04-2026T17:00",
+      "messageId": "3EB016BCBFC2915E2A4B92",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571993652820",
+      "nome": "Tainara Selene Japiassu de França",
+      "agendamentoId": 449855763,
+      "dataHoraInicio": "16-04-2026T14:20",
+      "messageId": "3EB0041C3AD9F23A4B57D0",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988365569",
+      "nome": "Cíntia Souza Japiassu de Oliveira",
+      "agendamentoId": 449855615,
+      "dataHoraInicio": "16-04-2026T14:10",
+      "messageId": "3EB0BEB86FE7EF02736F8E",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "sent": [
+    {
+      "phone": "5571994181820",
+      "nome": "TATIANE ANITA ALMEIDA DE SOUZA LEÃO CRUZ",
+      "agendamentoId": 448371796,
+      "dataHoraInicio": "13-04-2026T10:00",
+      "messageId": "B77F43B1C9F0183AA1C0",
+      "status": "sent"
+    },
+    {
+      "phone": "5571988762126",
+      "nome": "IVANA SOUZA LOPES",
+      "agendamentoId": 447762510,
+      "dataHoraInicio": "13-04-2026T11:00",
+      "messageId": "3EB0381622AFA04B07833F",
+      "status": "sent"
+    },
+    {
+      "phone": "557193873221",
+      "nome": "Diogo de Jesus Melo",
+      "agendamentoId": 443641655,
+      "dataHoraInicio": "13-04-2026T09:00",
+      "messageId": "3EB03337FEE86A93DFA3CB",
+      "status": "sent"
+    },
+    {
+      "phone": "5571991175387",
+      "nome": "Roberta Franco de Carvalho Pinho",
+      "agendamentoId": 443641447,
+      "dataHoraInicio": "13-04-2026T08:00",
+      "messageId": "3EB000775823E8ADE22AE4",
+      "status": "sent"
+    }
+  ]
+}

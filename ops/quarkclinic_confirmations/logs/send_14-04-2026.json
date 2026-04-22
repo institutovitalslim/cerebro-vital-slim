@@ -1,0 +1,76 @@
+{
+  "sent": [
+    {
+      "phone": "5571988771009",
+      "nome": "Marcelo Rocha Santana",
+      "agendamentoId": 453775590,
+      "dataHoraInicio": "14-04-2026T18:30",
+      "messageId": "5F2EBC6F54B4EF12CCEF",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988771009",
+      "nome": "Cleany Braz Silva Santana",
+      "agendamentoId": 453774552,
+      "dataHoraInicio": "14-04-2026T18:00",
+      "messageId": "3EB05F4A3DA4DDE71EC48D",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988067626",
+      "nome": "LIGIA LIMA FONTANARI JACINTO",
+      "agendamentoId": 453718583,
+      "dataHoraInicio": "14-04-2026T17:30",
+      "messageId": "3EB01DD1BFE6F84D12F287",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571993122244",
+      "nome": "Sérgio Benjamim Júnior",
+      "agendamentoId": 450465641,
+      "dataHoraInicio": "14-04-2026T17:00",
+      "messageId": "3EB03A1203C3C0409426C8",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991749596",
+      "nome": "Cinthya Leoni Rodrigues",
+      "agendamentoId": 450369303,
+      "dataHoraInicio": "14-04-2026T14:04",
+      "messageId": "3EB05AA4C25B3ED5616B8A",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991749596",
+      "nome": "Cinthya Leoni Rodrigues",
+      "agendamentoId": 450360289,
+      "dataHoraInicio": "14-04-2026T14:00",
+      "messageId": "3EB03D9DF3EB6F8FB77C10",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991262370",
+      "nome": "Tainá Japiassu Teles",
+      "agendamentoId": 447109404,
+      "dataHoraInicio": "14-04-2026T16:00",
+      "messageId": "3EB058D0C02A03F2B07423",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988365569",
+      "nome": "Cíntia Souza Japiassu de Oliveira",
+      "agendamentoId": 447109298,
+      "dataHoraInicio": "14-04-2026T15:00",
+      "messageId": "3EB07D0B007B70CFB7740F",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

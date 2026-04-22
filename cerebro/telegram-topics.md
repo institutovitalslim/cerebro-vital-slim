@@ -7,6 +7,8 @@
 
 ## Regra de operação
 Em grupos com múltiplos tópicos, o tópico atual **não deve ser tratado como memória isolada**. Sempre que a pergunta tocar um domínio recorrente ou contexto já discutido em outro tópico, consultar a memória transversal e o protocolo intertópicos.
+Regra reforçada por Tiaro em 2026-04-14: compartilhar informações importantes para a memória geral, para que a execução não dependa do contexto do tópico.
+Regra reforçada novamente por Tiaro em 2026-04-21: **todos os tópicos devem estar interligados por um conhecimento único**. Logo, nenhuma área deve “desconhecer” uma integração, fluxo, decisão ou contexto canônico só porque ele surgiu em outro tópico.
 
 ## Mapa atual de tópicos conhecidos
 
@@ -44,7 +46,8 @@ Quando uma decisão, regra, contato, integração, ID, convenção ou fluxo reco
 1. identificar o domínio real do conteúdo;
 2. promover a informação para a memória canônica daquele domínio;
 3. registrar a origem no ledger de aprendizagem;
-4. manter este mapa como referência de origem, e não como único lugar da verdade.
+4. garantir que a próxima execução da tarefa não dependa de lembrar qual tópico originou a decisão;
+5. manter este mapa como referência de origem, e não como único lugar da verdade.
 
 ## Regra prática de resposta
 Antes de responder algo importante em qualquer tópico:

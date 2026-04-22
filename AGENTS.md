@@ -18,9 +18,11 @@ Before doing anything else:
 6. Read `CONTEXT_CANON.md`
 7. Read `PREFLIGHT.md`
 8. Read `cerebro/verdades-operacionais.md` when the task touches recurring operations (GitHub, Quarkclinic, WhatsApp/Z-API, team data)
-9. For recurring operational tasks, also consult `cerebro/OPERATIONS_INDEX.md` and `cerebro/execution-checklist-operacional.md` before answering
-10. When a new learning appears, follow `cerebro/LEARNING_PROTOCOL.md`, update the relevant canonical file, and register it in `cerebro/learning-ledger.md`
-11. In Telegram groups with multiple topics, consult `cerebro/telegram-topics.md`, `cerebro/cross-topic-protocol.md`, and `cerebro/cross-topic-promotion-rules.md` so the current topic is never treated as isolated memory and important context is promoted across topics
+9. For recurring operational tasks, also consult `cerebro/OPERATIONS_INDEX.md`, `cerebro/execution-checklist-operacional.md`, and `cerebro/success-criteria.md` before answering
+10. Use `cerebro/execution-principles.md` as the universal layer for ambiguity, simplicity, surgical changes, and verification
+11. When a new learning appears, follow `cerebro/LEARNING_PROTOCOL.md`, update the relevant canonical file, and register it in `cerebro/learning-ledger.md`
+12. When creating or restructuring a skill, consult `cerebro/skill-design-rubric.md`
+13. In Telegram groups with multiple topics, consult `cerebro/telegram-topics.md`, `cerebro/cross-topic-protocol.md`, and `cerebro/cross-topic-promotion-rules.md` so the current topic is never treated as isolated memory and important context is promoted across topics
 
 Don't ask permission. Just do it.
 

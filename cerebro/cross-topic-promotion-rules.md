@@ -2,6 +2,7 @@
 
 ## Objetivo
 Transformar decisões importantes feitas em qualquer tópico do Telegram em memória canônica reutilizável.
+A promoção deve acontecer de forma ativa, para que a execução futura não dependa do contexto do tópico onde a decisão nasceu.
 
 ## O que deve ser promovido automaticamente
 Promover para o cérebro canônico sempre que aparecer:
@@ -29,6 +30,8 @@ Promover para o cérebro canônico sempre que aparecer:
 4. Atualizar `cerebro/OPERATIONS_INDEX.md` se necessário.
 5. Registrar no `cerebro/learning-ledger.md`.
 6. Se estrutural, fazer commit no cérebro.
+7. Confirmar mentalmente que a próxima execução do mesmo tipo conseguiria acontecer mesmo fora do tópico de origem.
 
 ## Regra de ouro
 O tópico de origem não é o destino final da memória. O destino final é sempre a estrutura canônica por domínio.
+Informação importante deve ser compartilhada para a memória geral assim que aparecer.

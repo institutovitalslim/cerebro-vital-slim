@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-04-22T16:00:19.486360-03:00",
+  "lastRunMode": "next-morning",
+  "lastRunDate": "23-04-2026",
+  "items": [
+    {
+      "phone": "5571993245545",
+      "nome": "FRANCISCO DE ASSIS DE LIMA",
+      "agendamentoId": 455166737,
+      "dataHoraInicio": "22-04-2026T09:00",
+      "messageId": "29050B7BDE8963E51073",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571995583056",
+      "nome": "DAVI CARVALHO RAMOS MELO",
+      "agendamentoId": 455098104,
+      "dataHoraInicio": "22-04-2026T14:00",
+      "messageId": "33DA49B0669E3BBC8B7F",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "557193873221",
+      "nome": "Diogo de Jesus Melo",
+      "agendamentoId": 456034159,
+      "dataHoraInicio": "23-04-2026T09:00",
+      "messageId": "37687E85A27B11B4B2EB",
+      "status": "confirmed",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571993245545",
+      "nome": "FRANCISCO DE ASSIS DE LIMA",
+      "agendamentoId": 448548759,
+      "dataHoraInicio": "23-04-2026T10:00",
+      "messageId": "3EB0EF14D5CFC016F1BEA3",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571991896551",
+      "nome": "SILVANA MODESTO RODRIGUES",
+      "agendamentoId": 448548135,
+      "dataHoraInicio": "23-04-2026T11:00",
+      "messageId": "3EB05427B1F53EE008A07E",
+      "status": "sent",
+      "turno": "morning"
+    }
+  ]
+}

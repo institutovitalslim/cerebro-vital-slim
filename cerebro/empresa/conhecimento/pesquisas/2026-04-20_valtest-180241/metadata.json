@@ -1,0 +1,22 @@
+{
+  "id": "2026-04-20_valtest-180241",
+  "slug": "valtest-180241",
+  "topic": "teste-validacao",
+  "tags": [
+    "teste",
+    "validacao"
+  ],
+  "created_at": "2026-04-20T18:02:41.597771",
+  "source_urls": [],
+  "files": {
+    "original": "original.md",
+    "research": "research.md",
+    "clinical": "clinical.md",
+    "summary": "summary.md"
+  },
+  "stats": {
+    "original_chars": 55,
+    "research_chars": 800,
+    "clinical_chars": 480
+  }
+}

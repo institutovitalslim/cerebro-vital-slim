@@ -1,0 +1,40 @@
+{
+  "sent": [
+    {
+      "phone": "5571981934519",
+      "nome": "CATARINA CEDRAZ DE ALENCAR",
+      "agendamentoId": 455166696,
+      "dataHoraInicio": "20-04-2026T15:20",
+      "messageId": "FCFECF726A129B28CA19",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5575991067188",
+      "nome": "Maria Cedraz de Alencar ",
+      "agendamentoId": 455166678,
+      "dataHoraInicio": "20-04-2026T15:10",
+      "messageId": "3EB065EAC0530B1D92DBB9",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988043788",
+      "nome": "Ana Clara Cedraz de Alencar",
+      "agendamentoId": 455166667,
+      "dataHoraInicio": "20-04-2026T15:00",
+      "messageId": "3EB080B4A047B7F2A974B6",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988043788",
+      "nome": "Ana Clara Cedraz de Alencar",
+      "agendamentoId": 448546366,
+      "dataHoraInicio": "20-04-2026T16:00",
+      "messageId": "3EB097F6166068D0F4E1BF",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

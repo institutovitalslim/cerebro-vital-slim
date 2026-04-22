@@ -43,3 +43,11 @@ Ao concluir, informar:
 2. o que mudou
 3. o que ficou pendente (se houver)
 4. próximo passo recomendado (se útil)
+
+Em tarefas executivas, operacionais ou verificáveis, usar também o padrão:
+- Ação executada
+- Evidência
+- IDs / Arquivos
+- Pendências
+
+Fonte canônica: `cerebro/evidence-output-standard.md`

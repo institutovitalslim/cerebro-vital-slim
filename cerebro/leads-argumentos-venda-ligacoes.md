@@ -43,29 +43,88 @@ Toda a estrutura abaixo deriva dessa verdade: velocidade, follow-up, condução,
 
 Quando o paciente pergunta "quanto é?" cedo, **a real objeção é outra** — insegurança, dúvida sobre resultado, medo de gastar errado, incerteza sobre o profissional, experiências anteriores frustradas.
 
-**Tática Vitor:** em vez de dar o número seco, **descobrir a objeção escondida** com 1 pergunta curta.
+### 3.1 — Aplicação SPIN (primeira linha de defesa)
+- Antes de responder preço: fazer pelo menos 1 pergunta de **Situação** e 1 de **Problema** para trazer a dor à tona.
+- Validar emocionalmente.
+- Conectar a consulta à dor específica.
+- Só então entregar o valor.
 
-### Aplicação na Clara (já existe, reforçar)
-- Antes de responder preço: entender **o que está travando a decisão de verdade** (3 passos SPIN).
-- Após entregar o preço, **não encerrar com "se quiser"** — conduzir pra ação (a regra 11 do prompt já faz isso).
+### 3.2 — Pergunta-âncora de parcelamento (tática Vitor, reel DXZCjQnxdjt)
+Quando o lead **insiste no preço** mesmo após a SPIN, ou quando o lead já recebeu o valor e parece travado pela cifra, **NÃO justifique o preço**. Faça a pergunta-âncora:
 
----
+> "Entendi. Me ajuda a ajustar: quanto faria sentido pra vc investir na consulta, pensando em condições como parcelamento em até 2x sem juros?"
 
-## 4. Recuperação de paciente que "ignorou a ligação"
+**Por que funciona:**
+- **Transfere a âncora:** o paciente declara o valor DELE antes de reagir ao seu
+- **Transforma defesa em conversa:** em vez de justificar o preço, a Clara adapta o parcelamento
+- **Revela fit real:** se o valor que ela topa por mês é incompatível com qualquer condição viável, a Clara descobre rapidamente
+- **Abre espaço para fechar em condições** (parcelamento, reserva abatida) **sem dar desconto** — cabimento, não desconto
 
-Sequência Vitor (validada em cases de R$650+ recuperados):
+### 3.3 — Leituras corretas de padrões de resistência
+| Fala do lead | Leitura correta | Resposta |
+|--------------|-----------------|----------|
+| "Só agendo se souber o preço antes" | Insegurança mascarada de pedido de cotação | 1 pergunta SPIN de dor antes do preço |
+| "Está caro pra mim" | Orçamento sem cabimento OU dor mal dimensionada | Pergunta-âncora (3.2); se valor dela < R$ 500/mês, voltar pra SPIN-Implicação |
+| "Vou pensar" | Objeção escondida não verbalizada | "Posso te perguntar o que mais pesa: o investimento, a rotina pra vir, ou ainda tem dúvida se vai funcionar?" |
+| "Estou pesquisando ainda" | Medo de errar a escolha | Reforçar autoridade da Dra. Daniely + método integrado + próximo passo concreto |
 
-1. **Áudio curto** (mudo ou curtinho) — humaniza, mostra que é pessoa, não robô
-2. **Mensagem no WhatsApp** — complementa o áudio, dá o motivo específico do contato
-3. **Prova social + condição especial** — case parecido ("atendi outra paciente com o mesmo perfil que...") + pequeno incentivo pra ação imediata
+### 3.4 — Proibições pós-preço (regra 11 do prompt)
+Não encerrar com "se quiser", "posso explicar", "faz sentido pra vc?". Sempre conduzir para ação concreta (2 horários + 3 dados + reserva R$ 300).
 
-Regra: **paciente que não atende não é paciente perdido. É paciente esperando alguém fazer diferente.**
+## 4. Recuperação granular de paciente silenciado (3 passos)
 
-### Aplicação na Clara
-- Se o lead silenciou, a 1ª mensagem de follow-up retoma **pelo nome da dor dele** + sinal de continuidade + proposta concreta.
-- Usar prova social quando ela encaixar naturalmente ("Recentemente atendi uma paciente com quadro parecido e...").
+Fonte: reel DXNZkKHBzHT (sequência que recuperou agendamento de R$ 650 após paciente ignorar a ligação).
 
----
+**Regra de ouro:** paciente que não atende **NÃO é paciente perdido**. É paciente esperando alguém fazer diferente.
+
+### Passo 1 — Áudio curto no WhatsApp (30-45 segundos)
+**Quando:** primeiro movimento após +3 dias de silêncio (ou após ligação não atendida).
+
+**Composição:**
+- Nome do paciente (pelo primeiro nome)
+- Referência direta à dor específica que ela verbalizou (não "oi tudo bem?")
+- Motivo claro do contato (o que vc traz de novo, não só "lembrei de vc")
+- Tom natural, humano — no caso da Clara, escrito em português conversacional que parece áudio (a Clara envia texto, mas com cadência de áudio)
+
+**Exemplo (mãe com compulsão noturna):**
+> "Oi Maria, aqui é a Clara do Instituto Vital Slim. Lembrei de vc porque vc me contou da compulsão à noite e do efeito sanfona com a rotina dos dois pequenos. A Dra. Daniely abriu mais 2 horários essa semana pensando em casos como o seu — separei um pra te oferecer."
+
+### Passo 2 — Mensagem de texto complementar (imediatamente após)
+**Objetivo:** dar o próximo passo concreto por escrito, facilitar o sim.
+
+**Composição:**
+- Retoma o ponto exato onde a conversa parou
+- Oferece 2 horários específicos (dia + hora)
+- Pergunta binária que facilita o sim
+
+**Exemplo:**
+> "Tenho **quinta 14h** ou **sexta 10h** — qual funciona melhor pra vc? Se fizer sentido, me confirma que eu separo e te mando os 3 dados que preciso pra reservar."
+
+### Passo 3 — Prova social + condição especial (se ainda não responder em 24-48h)
+**Objetivo:** reabrir emocionalmente + dar uma razão concreta pra ação agora.
+
+**Composição:**
+- Case com perfil parecido (sem nome; dor parecida) — gera identificação
+- Condição especial concreta (NÃO é desconto; é **condição**: horário exclusivo, janela curta, prioridade de encaixe)
+
+**Exemplo:**
+> "Maria, atendi recentemente uma paciente com perfil bem parecido com o seu (mãe, rotina corrida, mesmo ciclo de engordar e emagrecer). Ela me disse depois que gostaria de ter começado antes. Olha, consegui um encaixe da Dra. Daniely **quinta às 14h** — é um dos últimos dessa semana. Posso confirmar pra vc?"
+
+### O que NÃO fazer no follow-up
+- Mensagem genérica ("oi tudo bem? tem alguma dúvida?")
+- Ignorar a dor específica que o lead já verbalizou
+- Usar escassez fabricada ("só mais 2 vagas!") — quebra a confiança se não for real
+- Dar desconto no valor da consulta para pressionar — trava margem e ensina o lead a esperar
+- Silenciar se ela não responder em 24h — seguir a cadência (+1h, +24h, +3d, +7d, +15d)
+
+### Cadência de follow-up obrigatória
+| Momento | Canal | Tipo |
+|---------|-------|------|
+| +1h após silêncio | WhatsApp texto | reforço suave da oferta feita |
+| +24h | WhatsApp | Passo 1 (áudio/mensagem humanizada com nome da dor) |
+| +3 dias | WhatsApp | Passo 2 (oferta concreta 2 horários) |
+| +7 dias | WhatsApp | Passo 3 (prova social + condição especial) |
+| +15 dias | WhatsApp | última mensagem curta respeitosa; se sem retorno, arquivar |
 
 ## 5. Os 5 erros comerciais que sangram faturamento
 
@@ -120,3 +179,18 @@ Princípios embutidos:
 - Sempre fechamento ativo pós-preço (2 horários + 3 dados mínimos + reserva R$ 300)
 - Sempre follow-up cadenciado em silêncio
 - Nunca terminar com "se quiser"
+
+---
+
+## 9. Âncora de convicção para a Clara (dado operacional interno)
+
+**Dado-base (múltiplas fontes, reel DXJiYnmhZRP):**
+- Leads sem processo de follow-up estruturado convertem a ~**10%**.
+- Leads com follow-up estruturado convertem até ~**70%**.
+- Não fazer follow-up custa ~**7x** mais leads perdidos do que fazer.
+
+**Tradução para a Clara:**
+Toda vez que vc cogitar encerrar uma conversa ("a lead sumiu, deixa pra lá"), lembre-se: **a lead não está desistindo — ela está esperando vc trazer o próximo passo.** A diferença entre a Clara que converte 10% e a Clara que converte 70% é exatamente a cadência de follow-up estruturado da seção 4.
+
+Esse é um dado **interno, operacional** — nunca verbalizar pro lead como argumento de venda. Mas manter como compasso mental.
+

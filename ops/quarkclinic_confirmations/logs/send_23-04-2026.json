@@ -1,0 +1,31 @@
+{
+  "sent": [
+    {
+      "phone": "557193873221",
+      "nome": "Diogo de Jesus Melo",
+      "agendamentoId": 456034159,
+      "dataHoraInicio": "23-04-2026T09:00",
+      "messageId": "37687E85A27B11B4B2EB",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571993245545",
+      "nome": "FRANCISCO DE ASSIS DE LIMA",
+      "agendamentoId": 448548759,
+      "dataHoraInicio": "23-04-2026T10:00",
+      "messageId": "3EB0EF14D5CFC016F1BEA3",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571991896551",
+      "nome": "SILVANA MODESTO RODRIGUES",
+      "agendamentoId": 448548135,
+      "dataHoraInicio": "23-04-2026T11:00",
+      "messageId": "3EB05427B1F53EE008A07E",
+      "status": "sent",
+      "turno": "morning"
+    }
+  ]
+}

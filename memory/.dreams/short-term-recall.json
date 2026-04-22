@@ -1,0 +1,447 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-15T18:08:10.849Z",
+  "entries": {
+    "memory:memory/2026-04-09.md:53:58": {
+      "key": "memory:memory/2026-04-09.md:53:58",
+      "path": "memory/2026-04-09.md",
+      "startLine": 53,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- Atualização da skill `tweet-carrossel` para v2.0 com regras obrigatórias novas. - Regra crítica da skill `tweet-carrossel`: SEMPRE usar NanoBanana 2 (`google/gemini-3.1-flash-lite-preview`) para gerar imagens; NUNCA usar GPT ou DALL-E para imagens de carrossel; API key Gemini atualizada em `auth-profiles.json` (`google:manual`). - Estrutura obrigatória do carrossel na skill `tweet-carrossel`: (1) CAPA com foto gerada por NanoBanana 2 + texto adicionado por Pillow usando Montserrat Black, branco + dourado `#9F8844`; (2) SLIDE 2 em formato tweet + screenshot PubMed do paper quando houver pesquisa; (3) SLIDES 3+ em formato tweet puro via script `make_tweet_slides.py`. - Regras visuais obrigat",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.4379378497600555,
+      "maxScore": 0.38675864338874816,
+      "firstRecalledAt": "2026-04-13T22:08:49.797Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "9f408e0874ed",
+        "4f5dcbd70e2a",
+        "37d044fccf35",
+        "8a9cafc432f4",
+        "fb68fd74b159",
+        "0df50c235d70",
+        "1649fb65c878",
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-13",
+        "2026-04-14",
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "gpt",
+        "tweet-carrossel",
+        "v2.0",
+        "dall-e",
+        "auth-profiles.json",
+        "make-tweet-slides.py",
+        "atualização",
+        "skill"
+      ]
+    },
+    "memory:memory/2026-04-09.md:57:62": {
+      "key": "memory:memory/2026-04-09.md:57:62",
+      "path": "memory/2026-04-09.md",
+      "startLine": 57,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "- Regras dos slides tweet na skill `tweet-carrossel`: texto em cor única `#c8c8c8`, mesmo tamanho, sem destaques; texto curto sem imagem deve ficar centralizado verticalmente; nunca deixar texto colado no topo com área vazia embaixo; colocar gancho no final de cada slide; CTA no último slide com botão dourado. - Atualização crítica da skill `tweet-carrossel` para v3.0: fluxo obrigatório passa a ser primeiro criar a COPY (texto), obter aprovação do usuário, e só depois gerar imagens; nunca gerar imagens antes da copy aprovada. - A skill `tweet-carrossel` agora tem dois tipos obrigatórios de slide tweet: TIPO A (com foto) = texto no topo + foto na parte inferior ocupando ~40-45% do slide com b",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.717928150296211,
+      "maxScore": 0.36174198687076564,
+      "firstRecalledAt": "2026-04-13T22:08:49.797Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "9f408e0874ed",
+        "33886c43459d",
+        "fb68fd74b159",
+        "0df50c235d70",
+        "1649fb65c878",
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-13",
+        "2026-04-14",
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "tweet-carrossel",
+        "v3.0",
+        "40-45",
+        "regras",
+        "dos",
+        "slides",
+        "tweet",
+        "skill"
+      ]
+    },
+    "memory:memory/2026-04-09.md:62:63": {
+      "key": "memory:memory/2026-04-09.md:62:63",
+      "path": "memory/2026-04-09.md",
+      "startLine": 62,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- Nova regra crítica no fluxo da skill `tweet-carrossel`: a etapa 1 agora tem 7 passos obrigatórios: (1) usuário envia tema, (2) Clara cria rascunho da copy, (3) Clara aciona a skill `llm-council` para avaliar e refinar a copy, (4) Clara incorpora o feedback do conselho e gera a copy final, (5) Clara apresenta a copy final para aprovação, (6) usuário aprova ou ajusta, (7) só após aprovação gerar imagens. - Regra mandatória da skill `tweet-carrossel`: a skill `llm-council` deve ser acionada antes de apresentar a copy ao usuário, para garantir qualidade máxima e reduzir retrabalho.",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4406368404626844,
+      "maxScore": 0.3605413168668747,
+      "firstRecalledAt": "2026-04-13T22:08:49.797Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "9f408e0874ed",
+        "fb68fd74b159",
+        "0df50c235d70",
+        "1649fb65c878",
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-13",
+        "2026-04-14",
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "tweet-carrossel",
+        "llm-council",
+        "nova",
+        "regra",
+        "crítica",
+        "fluxo",
+        "skill",
+        "tweet"
+      ]
+    },
+    "memory:memory/2026-04-12.md:33:62": {
+      "key": "memory:memory/2026-04-12.md:33:62",
+      "path": "memory/2026-04-12.md",
+      "startLine": 33,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "### Regra de honestidade operacional Se não executou, dizer explicitamente: “não executei”. Nunca responder como se tivesse feito. ### Regra de linguagem em execução Menos promessa, mais confirmação real. Responder só após executar ou constatar bloqueio verdadeiro. ## 2026-04-12 — Aprendizados adicionais desta sessão ### Skill `llm-council` — localização e contexto canônico - A skill existe no workspace em: `/root/cerebro-vital-slim/skills/llm-council/SKILL.md` - O fluxo canônico recuperado foi: 1. framing da questão com contexto 2. 5 advisors em paralelo (Contrarian, First Principles Thinker, Expansionist, Outsider, Executor) 3. peer review anônimo 4. síntese do chairman 5. ger",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9216513931751251,
+      "maxScore": 0.33153641819953916,
+      "firstRecalledAt": "2026-04-13T22:36:09.143Z",
+      "lastRecalledAt": "2026-04-14T13:25:57.744Z",
+      "queryHashes": [
+        "4f5dcbd70e2a",
+        "33886c43459d",
+        "ad29f8c50fa0"
+      ],
+      "recallDays": [
+        "2026-04-13",
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "llm-council",
+        "regra",
+        "honestidade",
+        "operacional",
+        "não",
+        "executou",
+        "dizer",
+        "explicitamente"
+      ]
+    },
+    "memory:memory/2026-04-13.md:1:20": {
+      "key": "memory:memory/2026-04-13.md:1:20",
+      "path": "memory/2026-04-13.md",
+      "startLine": 1,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "## 2026-04-13 — Tweet-carrossel: capa obrigatória com make_cover.py Aprendizado de prioridade máxima registrado por Tiaro. ### Regra canônica - Script obrigatório para TODA capa de carrossel: `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py` - Fluxo correto da capa: 1. gerar FOTO da Dra (sem texto) via NanoBanana 2 com fundo contextual ao tema 2. gerar IMAGEM DO CÍRCULO via NanoBanana 2 com contexto do tema 3. montar com: `python3 scripts/make_cover.py --foto FOTO.png --circulo CIRCULO.png --headline \"LINHA1|LINHA2\" --destaques \"PALAVRA1,PALAVRA2\" --out capa.png` - NUNCA gerar capa inteira via NanoBanana 2 com texto incluso - SEMPRE usar `make_cover.py` pa",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.3470719277858734,
+      "maxScore": 0.4010554701089859,
+      "firstRecalledAt": "2026-04-13T22:36:09.143Z",
+      "lastRecalledAt": "2026-04-14T17:17:18.687Z",
+      "queryHashes": [
+        "4f5dcbd70e2a",
+        "33886c43459d",
+        "37d044fccf35",
+        "8a9cafc432f4"
+      ],
+      "recallDays": [
+        "2026-04-13",
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "tweet-carrossel",
+        "make-cover.py",
+        "scripts/make-cover.py",
+        "foto.png",
+        "circulo.png",
+        "capa.png",
+        "tweet",
+        "carrossel"
+      ]
+    },
+    "memory:memory/2026-04-14.md:1:28": {
+      "key": "memory:memory/2026-04-14.md:1:28",
+      "path": "memory/2026-04-14.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "## 2026-04-14 — OpenClaw image providers para carrossel Aprendizado registrado por Tiaro. ### Regra canônica - OpenClaw `v2026.4.11` tem sistema nativo de image providers - Para gerar imagens de carrossel, preferir provider Google com NanoBanana 2 (`google/gemini-3.1-flash-image-preview` / NanoBanana 2) - Fallback permitido: OpenAI (`gpt-image-1`) - NUNCA gerar capa com texto via image tool - SEMPRE usar `make_cover.py` para montar a capa ### Banco de fotos reais da Dra. Daniely - Repositório central: - originais: `/root/.openclaw/workspace/fotos_dra/originais/` - avatares: `/root/.openclaw/workspace/fotos_dra/avatares/` - Regra canônica: - sempre usar foto real da Dra. desse reposi",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5094147384166717,
+      "maxScore": 0.2839450418949127,
+      "firstRecalledAt": "2026-04-14T21:54:28.255Z",
+      "lastRecalledAt": "2026-04-15T17:59:53.559Z",
+      "queryHashes": [
+        "fb68fd74b159",
+        "0df50c235d70"
+      ],
+      "recallDays": [
+        "2026-04-14",
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "v2026.4.11",
+        "gpt-image-1",
+        "make-cover.py",
+        "openclaw",
+        "image",
+        "providers"
+      ]
+    },
+    "memory:memory/2026-04-10.md:1:19": {
+      "key": "memory:memory/2026-04-10.md:1:19",
+      "path": "memory/2026-04-10.md",
+      "startLine": 1,
+      "endLine": 19,
+      "source": "memory",
+      "snippet": "## 2026-04-10 — Flush de memória - Tiaro iniciou planejamento operacional de lançamento do **Centro de Tricologia / Centro de Tricologia Avançada** do Instituto Vital Slim para conteúdos entre sexta, sábado, domingo, segunda e terça (inauguração em dois dias). - Estratégia sugerida e bem recebida: lançamento orquestrado com **Reels para alcance**, **carrosséis para autoridade/educação** e **Stories para conversão**, evitando depender só de cards estáticos. - Estrutura operacional proposta por dia: - sexta: Reel de dor/identificação sobre queda de cabelo - sábado: Carrossel educativo com sinais de que a queda precisa de investigação - domingo: Reel emocional/manifesto preparando a inau",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5291565537452698,
+      "maxScore": 0.2707608699798584,
+      "firstRecalledAt": "2026-04-14T21:54:28.255Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "fb68fd74b159",
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-14",
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "autoridade/educação",
+        "dor/identificação",
+        "emocional/manifesto",
+        "flush",
+        "memória",
+        "tiaro",
+        "iniciou",
+        "planejamento"
+      ]
+    },
+    "memory:memory/2026-04-11.md:1:7": {
+      "key": "memory:memory/2026-04-11.md:1:7",
+      "path": "memory/2026-04-11.md",
+      "startLine": 1,
+      "endLine": 7,
+      "source": "memory",
+      "snippet": "- Sistema anti-esquecimento implantado: criei arquivos canônicos em `cerebro/` para verdades operacionais, GitHub, Quarkclinic, WhatsApp/Z-API e time da clínica; também atualizei `AGENTS.md` para obrigar consulta a `cerebro/verdades-operacionais.md` em operações recorrentes. - Segunda camada do sistema anti-esquecimento implantada: criei `cerebro/OPERATIONS_INDEX.md` e `cerebro/execution-checklist-operacional.md`, e atualizei `AGENTS.md` para obrigar consulta ao índice e à checklist antes de responder tarefas operacionais recorrentes. - Terceira camada implantada: protocolo formal de aprendizagem criado em `cerebro/LEARNING_PROTOCOL.md`, ledger cumulativo em `cerebro/learning-ledger.md`, índ",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.2567711055278778,
+      "maxScore": 0.2567711055278778,
+      "firstRecalledAt": "2026-04-14T21:54:28.255Z",
+      "lastRecalledAt": "2026-04-14T21:54:28.255Z",
+      "queryHashes": [
+        "fb68fd74b159"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "anti-esquecimento",
+        "whatsapp/z-api",
+        "agents.md",
+        "cerebro/verdades-operacionais.md",
+        "cerebro/operations-index.md",
+        "cerebro/learning-protocol.md",
+        "cerebro/learning-ledger.md",
+        "sistema"
+      ]
+    },
+    "memory:memory/2026-04-10.md:50:56": {
+      "key": "memory:memory/2026-04-10.md:50:56",
+      "path": "memory/2026-04-10.md",
+      "startLine": 50,
+      "endLine": 56,
+      "source": "memory",
+      "snippet": "- Dra. Daniely Freitas: CRM-BA 27588, Instagram `@dradaniely.freitas`, atua com medicina do emagrecimento, medicina metabólica e modulação hormonal; é a médica fundadora e responsável pela clínica. - Dra. Patrícia Fabrini: Instagram `@patriciafabrini.dra`, Responsável Técnica do Centro de Tricologia Avançada, dermatologista SBD desde 1999, desenvolvedora da Metodologia Nutroboost, com metodologia presente na Europa, Estados Unidos e Brasil; atende tratamentos capilares no Instituto Vital Slim. - Centro de Tricologia Avançada: faz parte do Instituto Vital Slim, tem Dra. Patrícia Fabrini como Responsável Técnica e usa a Metodologia Nutroboost como principal. - Regra operacional de atendime",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7678524792194366,
+      "maxScore": 0.2732500374317169,
+      "firstRecalledAt": "2026-04-15T17:59:53.559Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "0df50c235d70",
+        "1649fb65c878",
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "crm-ba",
+        "dradaniely.freitas",
+        "patriciafabrini.dra",
+        "dra",
+        "daniely",
+        "freitas",
+        "crm",
+        "instagram"
+      ]
+    },
+    "memory:memory/2026-04-10.md:55:64": {
+      "key": "memory:memory/2026-04-10.md:55:64",
+      "path": "memory/2026-04-10.md",
+      "startLine": 55,
+      "endLine": 64,
+      "source": "memory",
+      "snippet": "- Regra crítica absoluta definida por Tiaro: Clara nunca pode mentir, inventar, supor ou fingir que fez algo. - Proibições explícitas: não dizer que recebeu mensagem que não recebeu; não dizer que vai atender/responder lead sem ter como executar; não afirmar ação sem confirmação real; não inventar resposta para parecer útil; não tratar contextos diferentes como se fossem o mesmo. - Regra específica de canal: se Tiaro disser no Telegram que entrou mensagem nova no WhatsApp, isso não dá acesso automático à conversa. A resposta correta passa a ser: “Não recebi essa mensagem pelo meu canal atual, pode me encaminhar o conteúdo exato?” - Frases corretas de limitação real: “Não recebi essa mensagem",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6950820803642273,
+      "maxScore": 0.24704595804214477,
+      "firstRecalledAt": "2026-04-15T17:59:53.559Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "0df50c235d70",
+        "1649fb65c878",
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "atender/responder",
+        "regra",
+        "crítica",
+        "absoluta",
+        "definida",
+        "tiaro",
+        "clara",
+        "nunca"
+      ]
+    },
+    "memory:memory/2026-04-09.md:45:54": {
+      "key": "memory:memory/2026-04-09.md:45:54",
+      "path": "memory/2026-04-09.md",
+      "startLine": 45,
+      "endLine": 54,
+      "source": "memory",
+      "snippet": "- Credenciais necessárias para boletos Omie: `OMIE_APP_KEY` e `OMIE_APP_SECRET` de `/root/.openclaw/secure/omie_api.env`, `GOG_KEYRING_PASSWORD` vindo do 1Password para acesso ao Drive, conta Drive `medicalemagrecimento@gmail.com`. - Skill criada: `agenda-diaria-whatsapp` (2026-04-07) para envio automático da agenda diária por WhatsApp via Z-API. - Localização da skill `agenda-diaria-whatsapp`: `/root/.openclaw/workspace/skills/agenda-diaria-whatsapp/`. - Cron da agenda diária por WhatsApp: ID `2ba465d4-3dd0-435b-bb12-1576ed6c0403`, horário 06:00 em `America/Sao_Paulo`, todos os dias. - Destinatários corretos da agenda diária por WhatsApp: Tiaro `5571986968887`, Dra. Daniely `5571996962059`,",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.22608849406242368,
+      "maxScore": 0.22608849406242368,
+      "firstRecalledAt": "2026-04-15T17:59:53.559Z",
+      "lastRecalledAt": "2026-04-15T17:59:53.559Z",
+      "queryHashes": [
+        "0df50c235d70"
+      ],
+      "recallDays": [
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "omie-app-key",
+        "omie-app-secret",
+        "openclaw/secure/omie-api.env",
+        "gog-keyring-password",
+        "gmail.com",
+        "agenda-diaria-whatsapp",
+        "z-api",
+        "america/sao-paulo"
+      ]
+    },
+    "memory:memory/2026-04-10.md:16:35": {
+      "key": "memory:memory/2026-04-10.md:16:35",
+      "path": "memory/2026-04-10.md",
+      "startLine": 16,
+      "endLine": 35,
+      "source": "memory",
+      "snippet": "- foto com **blazer preto** = mais premium, autoridade, sobriedade, ideal para anúncio institucional e liderança da implantação - foto com **blazer branco** = mais acolhedora/clínica, útil para conteúdos educativos e explicativos - Regra prática sugerida: - usar **blazer preto** em capa principal / anúncio oficial / implantação - usar **blazer branco** em conteúdos educativos e stories - Tiaro enviou uma **capa-exemplo de inauguração** com duas médicas. Feedback dado: - a peça funciona bem como **post oficial de inauguração** / convite institucional - visual preto + dourado e presença das duas médicas fortalecem autoridade - pontos de refinamento sugeridos: conferir datas, dar",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5103477954864502,
+      "maxScore": 0.28431846499443053,
+      "firstRecalledAt": "2026-04-15T18:00:00.997Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "1649fb65c878",
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "acolhedora/clínica",
+        "capa-exemplo",
+        "foto",
+        "com",
+        "blazer",
+        "preto",
+        "mais",
+        "premium"
+      ]
+    },
+    "memory:memory/2026-04-09.md:6:13": {
+      "key": "memory:memory/2026-04-09.md:6:13",
+      "path": "memory/2026-04-09.md",
+      "startLine": 6,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "- Concluída análise rápida do perfil `@oestevaosouza` por triangulação pragmática devido limitação pública do Instagram. Principais aprendizados: direção comercial, diagnóstico curto, foco em resultado/processo, microcompromissos claros, postura consultiva em vez de catálogo. - Atualizei o prompt da Clara na bridge incorporando aprendizados de Yuri Barbosa + Oestevão Souza: mais direção consultiva, rapport breve e útil, microcompromissos, clareza de objeção, valor antes de preço sem enrolação, fechamento como consequência de clareza e segurança. - Fiz uma segunda lapidação no prompt da Clara focada em naturalidade nas respostas de preço, objeção e fechamento, reduzindo tom defensivo e excess",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.26377510428428647,
+      "maxScore": 0.26377510428428647,
+      "firstRecalledAt": "2026-04-15T18:08:10.849Z",
+      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "queryHashes": [
+        "2afea6bd4014"
+      ],
+      "recallDays": [
+        "2026-04-15"
+      ],
+      "conceptTags": [
+        "resultado/processo",
+        "concluída",
+        "análise",
+        "rápida",
+        "perfil",
+        "oestevaosouza",
+        "triangulação",
+        "pragmática"
+      ]
+    }
+  }
+}

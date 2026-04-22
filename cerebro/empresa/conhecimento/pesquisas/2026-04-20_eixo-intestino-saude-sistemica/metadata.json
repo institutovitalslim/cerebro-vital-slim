@@ -1,0 +1,19 @@
+{
+  "id": "2026-04-20_eixo-intestino-saude-sistemica",
+  "slug": "eixo-intestino-saude-sistemica",
+  "topic": "intestino-saude-sistemica",
+  "tags": [],
+  "created_at": "2026-04-20T13:34:49.425932",
+  "source_urls": [],
+  "files": {
+    "original": "original.md",
+    "research": "research.md",
+    "clinical": "clinical.md",
+    "summary": "summary.md"
+  },
+  "stats": {
+    "original_chars": 1907,
+    "research_chars": 50,
+    "clinical_chars": 50
+  }
+}

@@ -1,0 +1,1 @@
+Teste de validacao pipeline memoria cientifica pipeline

@@ -30,12 +30,12 @@ GOLD_LINE = (159, 136, 68, 180)
 GRAY_TEXT = (180, 180, 180)
 
 # Layout proportions
-PHOTO_HEIGHT_RATIO = 0.55  # Photo occupies top 55%
-TEXT_AREA_START = 0.58     # Text area starts at 58%
+PHOTO_HEIGHT_RATIO = 0.58  # Photo occupies top 58%
+TEXT_AREA_START = 0.62     # Text area starts at 62% (menos espaço vazio)
 CIRCLE_SIZE = 120          # Circle inset size
 CIRCLE_MARGIN = 30         # Margin from top-right
 CIRCLE_BORDER = 4          # Gold border width
-LINE_Y_RATIO = 0.56        # Gold divider line position
+LINE_Y_RATIO = 0.59        # Gold divider line position (mais próximo do texto)
 V_SIZE = 20                # V symbol size
 
 # Font paths (try multiple locations)
@@ -115,11 +115,17 @@ def add_gold_line(canvas):
     y = int(H * LINE_Y_RATIO)
     margin = 40
 
-    # Symbol V real da marca
-    SYMBOL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "simbolo_v.png")
+    # Symbol V real da marca - busca em múltiplos caminhos
+    SYMBOL_CANDIDATES = [
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "simbolo_v.png"),
+        "/root/.openclaw/workspace/skills/tweet-carrossel/assets/simbolo_v.png",
+        "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/assets/simbolo_v.png",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "simbolo_v.png"),
+    ]
+    SYMBOL_PATH = next((p for p in SYMBOL_CANDIDATES if os.path.isfile(p)), None)
     SYMBOL_SIZE = 120  # Tamanho do simbolo V
 
-    if os.path.isfile(SYMBOL_PATH):
+    if SYMBOL_PATH:
         # Load symbol
         symbol = Image.open(SYMBOL_PATH).convert("RGBA")
         symbol = symbol.resize((SYMBOL_SIZE, SYMBOL_SIZE), Image.LANCZOS)
@@ -152,28 +158,28 @@ def render_headline(draw, headline_lines, highlight_words, start_y):
     else:
         font_path = find_font(FONT_PATHS)
 
-    # Calculate font size to fit
+    # Calculate font size to fit - prefer larger text to fill space
     num_lines = len(headline_lines)
-    max_font_size = min(72, int((H - start_y - 80) / (num_lines * 1.25)))
+    max_font_size = min(160, int((H - start_y - 20) / (num_lines * 1.05)))
 
     # Try to find the best font size
     font_size = max_font_size
     while font_size > 30:
         font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
         max_width = max(draw.textlength(line, font=font) for line in headline_lines)
-        if max_width <= W - 100:
+        if max_width <= W - 30:  # margem mínima 15px cada lado
             break
         font_size -= 2
 
     font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
-    line_height = int(font_size * 1.2)
+    line_height = int(font_size * 1.05)  # bem tight pra ocupar mais texto
 
     # Calculate total text block height
     total_height = num_lines * line_height
 
-    # Center vertically in remaining space
-    available_space = H - start_y - 60  # 60px for footer
-    y_offset = start_y + (available_space - total_height) // 2
+    # Alinhar texto próximo ao topo da área (logo após a linha dourada)
+    # para eliminar espaço vazio entre linha e texto
+    y_offset = start_y + 10
 
     highlight_set = set(w.strip().upper() for w in highlight_words)
 
@@ -268,9 +274,11 @@ def build_cover(foto_path, circulo_path, headline_lines, highlight_words, output
     # Footer
     add_footer(draw)
 
-    # Save
-    canvas.save(output_path, "PNG", quality=95)
-    print(f"Cover saved: {output_path} ({W}x{H})")
+    # Save as JPEG (compressed) to stay under Claude's 20MB limit
+    if output_path.lower().endswith('.png'):
+        output_path = output_path[:-4] + '.jpg'
+    canvas.save(output_path, "JPEG", quality=85, optimize=True)
+    print(f"Cover saved: {output_path} ({W}x{H}) [JPEG]")
 
 
 def main():
@@ -279,7 +287,7 @@ def main():
     parser.add_argument("--circulo", default=None, help="Imagem para o circulo inset (canto superior direito)")
     parser.add_argument("--headline", required=True, help="Texto da headline. Separe linhas com | (pipe)")
     parser.add_argument("--destaques", default="", help="Palavras em dourado, separadas por virgula")
-    parser.add_argument("--out", default="capa.png", help="Caminho do arquivo de saida")
+    parser.add_argument("--out", default="capa.jpg", help="Caminho do arquivo de saida")
     args = parser.parse_args()
 
     headline_lines = [line.strip() for line in args.headline.split("|")]

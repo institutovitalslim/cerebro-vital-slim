@@ -1,0 +1,399 @@
+{
+  "timestamp": "2026-04-20T18:03:51.146983",
+  "total": 78,
+  "passed": 78,
+  "failed": 0,
+  "warnings": 0,
+  "results": [
+    {
+      "name": "SKILL.md tweet-carrossel em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/SKILL.md"
+    },
+    {
+      "name": "SKILL.md prompt-imagens em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/prompt-imagens/SKILL.md"
+    },
+    {
+      "name": "SKILL.md memoria-cientifica em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/memoria-cientifica/SKILL.md"
+    },
+    {
+      "name": "SKILL.md tweet-carrossel em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/SKILL.md"
+    },
+    {
+      "name": "SKILL.md prompt-imagens em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/prompt-imagens/SKILL.md"
+    },
+    {
+      "name": "SKILL.md memoria-cientifica em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/memoria-cientifica/SKILL.md"
+    },
+    {
+      "name": "script compose_cover.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/compose_cover.py"
+    },
+    {
+      "name": "script compose_cover_auto.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/compose_cover_auto.py"
+    },
+    {
+      "name": "script make_cover.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py"
+    },
+    {
+      "name": "script capture_pubmed.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/capture_pubmed.py"
+    },
+    {
+      "name": "script photo_selector.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/photo_selector.py"
+    },
+    {
+      "name": "script catalog_photos.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/catalog_photos.py"
+    },
+    {
+      "name": "script generate_variation.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/generate_variation.py"
+    },
+    {
+      "name": "script send_to_telegram.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/send_to_telegram.py"
+    },
+    {
+      "name": "script gen_slides_full.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/gen_slides_full.py"
+    },
+    {
+      "name": "script fetch_instagram.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/fetch_instagram.py"
+    },
+    {
+      "name": "script clara_create_carrossel_from_post.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/tweet-carrossel/scripts/clara_create_carrossel_from_post.py"
+    },
+    {
+      "name": "script compose_cover.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/compose_cover.py"
+    },
+    {
+      "name": "script compose_cover_auto.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/compose_cover_auto.py"
+    },
+    {
+      "name": "script make_cover.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/make_cover.py"
+    },
+    {
+      "name": "script capture_pubmed.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/capture_pubmed.py"
+    },
+    {
+      "name": "script photo_selector.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/photo_selector.py"
+    },
+    {
+      "name": "script catalog_photos.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/catalog_photos.py"
+    },
+    {
+      "name": "script generate_variation.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/generate_variation.py"
+    },
+    {
+      "name": "script send_to_telegram.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/send_to_telegram.py"
+    },
+    {
+      "name": "script gen_slides_full.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/gen_slides_full.py"
+    },
+    {
+      "name": "script fetch_instagram.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/fetch_instagram.py"
+    },
+    {
+      "name": "script clara_create_carrossel_from_post.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/tweet-carrossel/scripts/clara_create_carrossel_from_post.py"
+    },
+    {
+      "name": "script build_prompt.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/prompt-imagens/scripts/build_prompt.py"
+    },
+    {
+      "name": "script generate_image.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/prompt-imagens/scripts/generate_image.py"
+    },
+    {
+      "name": "script generate_with_reference.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/prompt-imagens/scripts/generate_with_reference.py"
+    },
+    {
+      "name": "script add_overlay.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/prompt-imagens/scripts/add_overlay.py"
+    },
+    {
+      "name": "script clara_create_image.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/prompt-imagens/scripts/clara_create_image.py"
+    },
+    {
+      "name": "script build_prompt.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/prompt-imagens/scripts/build_prompt.py"
+    },
+    {
+      "name": "script generate_image.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/prompt-imagens/scripts/generate_image.py"
+    },
+    {
+      "name": "script generate_with_reference.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/prompt-imagens/scripts/generate_with_reference.py"
+    },
+    {
+      "name": "script add_overlay.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/prompt-imagens/scripts/add_overlay.py"
+    },
+    {
+      "name": "script clara_create_image.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/prompt-imagens/scripts/clara_create_image.py"
+    },
+    {
+      "name": "script ingest_content.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/memoria-cientifica/scripts/ingest_content.py"
+    },
+    {
+      "name": "script memory_store.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/memoria-cientifica/scripts/memory_store.py"
+    },
+    {
+      "name": "script memory_search.py em root",
+      "passed": true,
+      "detail": "/root/.openclaw/workspace/skills/memoria-cientifica/scripts/memory_search.py"
+    },
+    {
+      "name": "script ingest_content.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/memoria-cientifica/scripts/ingest_content.py"
+    },
+    {
+      "name": "script memory_store.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/memoria-cientifica/scripts/memory_store.py"
+    },
+    {
+      "name": "script memory_search.py em cerebro-vital-slim",
+      "passed": true,
+      "detail": "/root/cerebro-vital-slim/cerebro/empresa/skills/memoria-cientifica/scripts/memory_search.py"
+    },
+    {
+      "name": "CLAUDE.md em workspace tem 7 PROIBICOES",
+      "passed": true,
+      "detail": "7/7 encontradas"
+    },
+    {
+      "name": "CLAUDE.md em cerebro tem 7 PROIBICOES",
+      "passed": true,
+      "detail": "7/7 encontradas"
+    },
+    {
+      "name": "/root/make_cover.py existe (chamado por compose_cover)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "/root/make_cover.py tem strip de ? (chr(63))",
+      "passed": true,
+      "detail": "fix de destaques"
+    },
+    {
+      "name": "Acervo fotos da Dra",
+      "passed": true,
+      "detail": "40 fotos"
+    },
+    {
+      "name": "Avatar oficial",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Avatar b64",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "LICOES_SESSAO_2026-04-20.md documentado",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "make_cover strip remove ? e !",
+      "passed": true,
+      "detail": "OK: strip de ? e ! funciona"
+    },
+    {
+      "name": "memory_search encontra creatina",
+      "passed": true,
+      "detail": "score=0.7993"
+    },
+    {
+      "name": "memory_search lista topicos",
+      "passed": true,
+      "detail": "3 topicos"
+    },
+    {
+      "name": "photo_selector retorna match",
+      "passed": true,
+      "detail": "top-1: Imagem PNG 15.png"
+    },
+    {
+      "name": "capture_pubmed gera imagem",
+      "passed": true,
+      "detail": "34KB"
+    },
+    {
+      "name": "build_prompt gera 7 dimensoes",
+      "passed": true,
+      "detail": "7/7"
+    },
+    {
+      "name": "memory_store armazena pesquisa nova",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "memory_search encontra a pesquisa recem criada",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "E2E: compose_cover gera JPEG",
+      "passed": true,
+      "detail": "98KB"
+    },
+    {
+      "name": "E2E: capa 1080x1350",
+      "passed": true,
+      "detail": "(1080, 1350)"
+    },
+    {
+      "name": "E2E: enviado ao Telegram",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "E2E: capture_pubmed produz arquivo",
+      "passed": true,
+      "detail": "286KB"
+    },
+    {
+      "name": "PROIBICAO 1 presente",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "PROIBICAO 2 presente",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "PROIBICAO 3 presente",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "PROIBICAO 4 presente",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "PROIBICAO 5 presente",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "PROIBICAO 6 presente",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "PROIBICAO 7 presente",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CLAUDE.md proibe ingles no chain-of-thought",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CLAUDE.md proibe entregar texto em vez de JPEG",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CLAUDE.md proibe pular ETAPA 0 memoria-cientifica",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CLAUDE.md proibe inventar caminhos memoria",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CLAUDE.md obrigatorio resumo pratico de cada paper",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CLAUDE.md obrigatorio usar photo real da Dra",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CLAUDE.md obrigatorio enviar via Telegram",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

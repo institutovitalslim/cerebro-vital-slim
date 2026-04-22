@@ -1,0 +1,49 @@
+{
+  "sent": [
+    {
+      "phone": "5575991067188",
+      "nome": "Maria Cedraz de Alencar ",
+      "agendamentoId": 449949728,
+      "dataHoraInicio": "15-04-2026T16:50",
+      "messageId": "C3951E8BFC5A68FC26BA",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571981934519",
+      "nome": "CATARINA CEDRAZ DE ALENCAR",
+      "agendamentoId": 449949633,
+      "dataHoraInicio": "15-04-2026T16:40",
+      "messageId": "3EB069DD68828FEA480A73",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988043788",
+      "nome": "Ana Clara Cedraz de Alencar",
+      "agendamentoId": 449949529,
+      "dataHoraInicio": "15-04-2026T16:30",
+      "messageId": "3EB018AD9896C899927B3F",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571997256868",
+      "nome": "Larissa Correia de Souza ",
+      "agendamentoId": 449850315,
+      "dataHoraInicio": "15-04-2026T17:30",
+      "messageId": "3EB0D1ADB028EBDD22601A",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571994181820",
+      "nome": "TATIANE ANITA ALMEIDA DE SOUZA LEÃO CRUZ",
+      "agendamentoId": 448707757,
+      "dataHoraInicio": "15-04-2026T16:00",
+      "messageId": "3EB09C068135AAE79F353B",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

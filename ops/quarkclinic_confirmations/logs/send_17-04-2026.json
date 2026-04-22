@@ -1,0 +1,31 @@
+{
+  "sent": [
+    {
+      "phone": "5571995583056",
+      "nome": "DAVI CARVALHO RAMOS MELO",
+      "agendamentoId": 454494309,
+      "dataHoraInicio": "17-04-2026T15:00",
+      "messageId": "3EB0334E3FB665FAC719FA",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991583056",
+      "nome": "Lorena Carvalho Ramos Melo",
+      "agendamentoId": 449527484,
+      "dataHoraInicio": "17-04-2026T17:30",
+      "messageId": "3EB056C3277CC3FEFDE4A3",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571997256868",
+      "nome": "Larissa Correia de Souza ",
+      "agendamentoId": 448528600,
+      "dataHoraInicio": "17-04-2026T16:30",
+      "messageId": "3EB00E1534FCF6F27649B3",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}
