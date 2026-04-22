@@ -29,12 +29,24 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - **CRM-BA:** 27588
 - **Especialidade:** Endocrinologia e Metabologia
 - **Instagram:** @dradaniely.freitas
-- **Papel:** Medica responsavel, consultas, prescrisao de protocolos
+- **Papel:** Medica responsavel, consultas, prescricao de protocolos
+
+### Dra. Patricia Fabrini
+- **Instagram:** @patriciafabrini.dra
+- **Especialidade:** Dermatologia, Tricologia
+- **Papel:** Responsavel Tecnica do Centro de Tricologia Avancada
+- **Credenciais:** Dermatologista SBD desde 1999, desenvolvedora da metodologia Nutroboost
+
+### Centro de Tricologia Avancada
+- Parte integrante do Instituto Vital Slim
+- Especialista de referencia: Dra. Patricia Fabrini
+- Servicos: tratamentos capilares avancados
 
 ### Equipe de Apoio
 - Nutricionistas
 - Enfermagem
 - Atendimento (Clara - IA)
+- Contabilidade: Medical Contabilidade
 
 ---
 
@@ -95,10 +107,11 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - Tricologia (queda de cabelo)
 - Nutricao funcional
 
-### Precos (Aproximados - Confirmar)
-- Consulta inicial: R$ [confirmar]
-- Pacote mensal: R$ [confirmar]
-- Pacote trimestral: R$ [confirmar]
+### Precos (Confirmar com a Dra.)
+- Consulta inicial: R$ [PREENCHER]
+- Pacote mensal: R$ [PREENCHER]
+- Pacote trimestral: R$ [PREENCHER]
+- Nota: Nunca divulgar precos publicamente antes da avaliacao (politica da Clara)
 
 ---
 
@@ -115,10 +128,11 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - @dradaniely.freitas
 - Foco: educacao + transformacao + autoridade medica
 
-### WhatsApp
-- Numero principal: [confirmar]
-- Clara: atendimento automatizado com IA
-- Horario: 8h-20h (BRT)
+### WhatsApp (Z-API)
+- Numero principal: [PREENCHER]
+- Clara: atendimento automatizado com IA (ElevenLabs TTS para audio)
+- Horario de atendimento: 8h-20h (BRT)
+- Integracao: QuarkClinic + Omie (cadastro/financeiro)
 
 ---
 
@@ -200,21 +214,97 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 ## 10. CONTEXTO OPERACIONAL
 
 ### Localizacao
-- **Endereco:** [Confirmar endereco completo]
-- **Bairro:** [Confirmar]
+- **Endereco:** [PREENCHER - Rua, numero, complemento]
+- **Bairro:** [PREENCHER]
 - **Cidade:** Salvador, BA
-- **CEP:** [Confirmar]
+- **CEP:** [PREENCHER]
+- **Referencia:** Proximo a [PREENCHER]
 
 ### Horario de Funcionamento
 - Segunda a Sexta: 8h-18h
-- Sabado: 8h-12h (se aplicavel)
+- Sabado: 8h-12h (confirmar)
 
 ### Contato
-- **WhatsApp:** [Confirmar]
-- **Telefone:** [Confirmar]
-- **Email:** [Confirmar]
-- **Site:** [Confirmar]
+- **WhatsApp:** [PREENCHER - numero principal]
+- **Telefone:** [PREENCHER]
+- **Email:** institutovitalslim@gmail.com (confirmar)
+- **Site:** [PREENCHER - ou Instagram como principal]
+- **Instagram:** @institutovitalslim | @dradaniely.freitas
+
+### Sistemas e Integracoes
+- **QuarkClinic:** Gestao de pacientes, agendamentos, prontuarios
+- **Omie:** Faturamento, propostas, boletos
+- **Z-API:** WhatsApp Business API (instancia unica)
+- **Buffer:** Postagem em redes sociais (GraphQL API)
+- **ElevenLabs:** TTS para respostas de audio no WhatsApp
+- **Google Drive:** Armazenamento de documentos e fotos
+- **Google Calendar:** Agenda de consultas
+
+### Contas Google Workspace
+- institutovitalslim@gmail.com (principal)
+- medicalemagrecimento@gmail.com
+- medicalcontabilidade@gmail.com
+
+## 11. ASSETS DE MARKETING
+
+### Fotos da Dra. (Repositorio Oficial)
+- **Originais:** `/root/.openclaw/workspace/fotos_dra/originais/`
+- **Avatares:** `/root/.openclaw/workspace/fotos_dra/avatares/`
+- **Regra:** Sempre usar fotos reais do repositorio. Nunca gerar rosto da Dra. via IA.
+
+### Identidade Visual
+- **Cores principais:** Preto (#000000), Dourado (#d4a84b), Branco (#FFFFFF)
+- **Fonte headline:** Montserrat Black
+- **Badge verificacao:** Azul Twitter (#1D9BF0)
+
+### Ferramentas de Criacao
+- **Capas de carrossel:** `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_cover.py`
+- **Slides tweet:** HTML+Chromium ou Python/Pillow
+- **Geracao de imagens:** NanoBanana 2 (Google) > OpenAI (fallback)
+
+## 12. SKILLS DE MARKETING DISPONIVEIS
+
+### Instaladas
+1. `copywriting-vitalslim` — Copy para healthcare
+2. `customer-research-vitalslim` — Pesquisa com pacientes
+3. `social-content-vitalslim` — Conteudo social
+4. `content-strategy-vitalslim` — Estrategia de conteudo
+5. `whatsapp-marketing` — Fluxos WhatsApp
+6. `local-seo` — SEO local
+7. `medical-content` — Compliance medico
+
+## 13. REGRAS OPERACIONAIS DE MARKETING
+
+### Preco
+- Nunca passar preco antes do paciente entender o valor
+- Postura consultiva, premium, sem pressao artificial
+- Oferecer avaliacao inicial como primeiro passo
+
+### Honestidade
+- Sempre dizer a verdade, mesmo quando incomoda
+- Nao suavizar, nao adivinhar quando houver incerteza
+- Priorizar precisao, clareza e realidade
+
+### Imagens da Dra.
+- Usar fotos reais do repositorio oficial
+- Nunca gerar rosto da Dra. via IA
+- Se precisar editar, apenas o fundo/contexto
+- Usar clausula de consistencia facial quando usar referencia
+
+### Referencias Cientificas
+- Sempre citar estudos quando fizer afirmacoes medicas
+- Formato: Autor et al. (Ano). Revista. PMID: [numero]
+- Preferir meta-analises e revisoes sistematicas
 
 ---
 
 **Nota:** Este documento deve ser atualizado mensalmente ou quando houver mudancas significativas na operacao.
+
+**Campos pendentes de confirmacao:**
+- [ ] Endereco completo
+- [ ] Telefone/WhatsApp principal
+- [ ] Precos de consultas e pacotes
+- [ ] Site oficial
+- [ ] Email institucional
+- [ ] Horario de sabado
+- [ ] Bairro/regiao de atendimento
