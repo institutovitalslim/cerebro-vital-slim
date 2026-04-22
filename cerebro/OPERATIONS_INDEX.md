@@ -56,6 +56,16 @@
 - OpenClaw image providers nativos: preferir Google/NanoBanana 2, fallback OpenAI
 - Para fotos da Dra. com NanoBanana 2 Pro e referência real, usar também a cláusula canônica de `strict facial consistency mode`
 
+### Marketing (skills adaptadas do MarketingSkills)
+- `cerebro/patient-marketing-context.md` — contexto compartilhado de pacientes
+- `~/.openclaw/skills/copywriting-vitalslim/SKILL.md` — copywriting para healthcare
+- `~/.openclaw/skills/customer-research-vitalslim/SKILL.md` — pesquisa com pacientes
+- `~/.openclaw/skills/social-content-vitalslim/SKILL.md` — conteúdo social
+- `~/.openclaw/skills/content-strategy-vitalslim/SKILL.md` — estratégia de conteúdo
+- `~/.openclaw/skills/whatsapp-marketing/SKILL.md` — marketing via WhatsApp
+- `~/.openclaw/skills/local-seo/SKILL.md` — SEO local (Google Maps)
+- `~/.openclaw/skills/medical-content/SKILL.md` — compliance médico
+
 ### Contexto intertópicos (Telegram)
 - `cerebro/telegram-topics.md`
 - `cerebro/cross-topic-memory.md`

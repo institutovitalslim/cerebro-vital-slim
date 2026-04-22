@@ -1,0 +1,117 @@
+from pathlib import Path
+import subprocess, json
+from PIL import Image
+
+OUT = Path('/root/cerebro-vital-slim/deliverables/glicina-carrossel-2026-04-22')
+TMP = OUT / 'tmp'
+TMP.mkdir(exist_ok=True)
+
+SLIDES_SCRIPT = '/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_tweet_slides.py'
+AVATAR = '/root/.openclaw/media/inbound/avatar_dradaniely_oficial.png'
+
+slides = [
+    {'num': 2, 'paragraphs': [
+        'E se eu te dissesse que um aminoácido simples pode:',
+        '',
+        '→ Aumentar sua expectativa de vida',
+        '→ Apagar a inflamação crônica',
+        '→ Curar seu intestino',
+        '→ Fazer você dormir como um bebê'
+    ]},
+    {'num': 3, 'paragraphs': [
+        'Isso tem nome:',
+        '',
+        'GLICINA.',
+        '',
+        'Um aminoácido que seu corpo produz,',
+        'mas em quantidades insuficientes.',
+        '',
+        'Especialmente depois dos 30 anos.',
+        '',
+        'Ref: Razak et al. (2017). PMID: 28337245'
+    ]},
+    {'num': 4, 'paragraphs': [
+        'A glicina também é um potente',
+        'ANTI-INFLAMATÓRIO natural.',
+        '',
+        'Ela reduz a produção de citocinas pró-inflamatórias,',
+        'ajudando a combater doenças crônicas',
+        'ligadas à inflamação de baixo grau.'
+    ]},
+    {'num': 5, 'paragraphs': [
+        'Além disso, a glicina é fundamental',
+        'para a QUALIDADE DO SONO.',
+        '',
+        'Ela regula a temperatura corporal',
+        'e promove relaxamento muscular,',
+        'facilitando o sono profundo e restaurador.'
+    ]},
+    {'num': 6, 'paragraphs': [
+        'Mas aqui está o que poucos sabem:',
+        '',
+        'A glicina contrabalanceia os efeitos',
+        'pró-envelhecimento da METIONINA em excesso,',
+        'principal componente das carnes vermelhas.',
+        '',
+        'Quem come muita carne precisa',
+        'URGENTE de mais glicina.'
+    ]},
+    {'num': 7, 'paragraphs': [
+        'A deficiência de glicina está associada a:',
+        '',
+        '• Envelhecimento prematuro',
+        '• Deterioração da pele',
+        '• Dor articular',
+        '• Síndrome do intestino permeável',
+        '• Dificuldade para dormir'
+    ]},
+    {'num': 8, 'paragraphs': [
+        'E a boa notícia?',
+        '',
+        'Você pode aumentar seus níveis de glicina',
+        'de forma simples e natural.',
+        '',
+        'A suplementação adequada pode trazer',
+        'benefícios em poucas semanas.'
+    ]},
+    {'num': 9, 'paragraphs': [
+        'Mas atenção:',
+        '',
+        'Isso não significa que glicina seja',
+        'solução universal, nem que qualquer dose',
+        'serve para qualquer pessoa.',
+        '',
+        'A individualização do tratamento é',
+        'essencial para o resultado eficaz.'
+    ]},
+    {'num': 10, 'paragraphs': [
+        'Quer saber se a glicina faz sentido',
+        'para o seu caso?',
+        '',
+        'Agende uma consulta de avaliação',
+        'e descubra o que seu corpo realmente precisa.',
+        '',
+        'Link na bio'
+    ]}
+]
+
+slides_json = TMP / 'slides_v2.json'
+slides_json.write_text(json.dumps(slides, ensure_ascii=False, indent=2), encoding='utf-8')
+png_out = TMP / 'png_v2'
+png_out.mkdir(exist_ok=True)
+
+subprocess.run([
+    'python3', SLIDES_SCRIPT,
+    '--config', str(slides_json),
+    '--avatar', AVATAR,
+    '--out', str(png_out),
+    '--name', 'Dra. Daniely Freitas',
+    '--handle', '@dradaniely.freitas'
+], check=True)
+
+for png in sorted(png_out.glob('slide_*.png')):
+    Image.open(png).convert('RGB').save(OUT / f'{png.stem}.jpg', 'JPEG', quality=85, optimize=True, progressive=True)
+
+print('Slides atualizados:')
+for p in sorted(OUT.glob('slide_*.jpg')):
+    print(p.name)

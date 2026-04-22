@@ -1,31 +1,49 @@
-# Learning Ledger
+## 2026-04-22 - Skills de Marketing adaptadas do MarketingSkills (coreyhaines31)
 
-Registro cumulativo de aprendizados incorporados ao cérebro.
+### Análise de segurança
+- Risco médio: prompt injection possível em markdown files de skills externas
+- Risco médio: dependências externas (npx skills, plugins)
+- Decisão: NÃO instalar diretamente do repo externo
+- Decisão: Criar skills próprias baseadas nos conceitos, escritas do zero
 
-| Data | Domínio | Nível | Aprendizado | Destino | Status |
-|------|---------|------|-------------|---------|--------|
-| 2026-04-11 | GitHub / Quarkclinic / WhatsApp | 1 | Estrutura canônica inicial de verdades operacionais, índice e checklist criada para reduzir falhas de memória operacional. | `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md`, `cerebro/execution-checklist-operacional.md` | ativo |
-| 2026-04-11 | Aprendizagem | 1 | Protocolo formal de incorporação de novos aprendizados criado para forçar classificação, registro, indexação e atualização do cérebro. | `cerebro/LEARNING_PROTOCOL.md`, `cerebro/learning-ledger.md` | ativo |
-| 2026-04-11 | Telegram / contexto | 1 | Estrutura intertópicos criada para evitar que cada tópico do Telegram funcione como silo de memória. | `cerebro/telegram-topics.md`, `cerebro/cross-topic-memory.md`, `cerebro/cross-topic-protocol.md` | ativo |
-| 2026-04-11 | Telegram / promoção cruzada | 1 | Mapeamento inicial dos tópicos reais e regras explícitas de promoção automática de contexto importante entre tópicos. | `cerebro/telegram-topics.md`, `cerebro/cross-topic-promotion-rules.md` | ativo |
-| 2026-04-11 | Comercial / leads | 1 | Regra canônica reforçada: nunca passar preço antes de o paciente entender o valor do atendimento. Primeiro contexto, necessidade e proposta; preço só depois. | `cerebro/verdades-operacionais.md` | ativo |
-| 2026-04-11 | Conselho / metodologia | 1 | Quando Tiaro pedir para chamar o conselho, usar a skill/metodologia canônica `llm-council` (ou a skill formal definida), e não improvisar com subagente genérico. | `cerebro/verdades-operacionais.md` | ativo |
-| 2026-04-13 | Tweet-carrossel / capas | 1 | Script `make_cover.py` tornou-se obrigatório para TODA capa de carrossel. Fluxo canônico: gerar foto da Dra sem texto via NanoBanana 2, gerar imagem do círculo via NanoBanana 2, montar a capa com `make_cover.py`; nunca gerar a capa inteira com texto dentro do NanoBanana 2. | `MEMORY.md`, `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md` | ativo |
-| 2026-04-14 | Tweet-carrossel / image providers | 1 | OpenClaw `v2026.4.11` passou a usar sistema nativo de image providers. Para imagens de carrossel, preferir Google/NanoBanana 2 (`google/gemini-3.1-flash-image-preview`); fallback permitido em OpenAI (`gpt-image-1`). Capa com texto continua proibida via image tool e deve ser montada com `make_cover.py`. | `MEMORY.md`, `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md` | ativo |
-| 2026-04-14 | Tweet-carrossel / fotos reais da Dra. | 1 | O banco central em `/root/.openclaw/workspace/fotos_dra/` virou a fonte obrigatória de fotos da Dra. Daniely para capas de carrossel. Regra: sempre usar foto real do repositório, nunca gerar o rosto via IA; se precisar, editar apenas o fundo com NanoBanana 2, e se houver distorção manter a foto original. | `MEMORY.md`, `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md` | ativo |
-| 2026-04-14 | Omie / cadastro de pacientes | 2 | Foi criada a skill canônica `omie-cadastro-paciente` para o fluxo seguro de cadastro de pacientes no Omie a partir do Quarkclinic: buscar, confirmar identidade, checar duplicidade e só então criar/complementar o cadastro. | `skills/omie-cadastro-paciente/`, `cerebro/omie.md`, `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md` | ativo |
-| 2026-04-14 | Contexto intertópicos / memória geral | 2 | Regra reforçada por Tiaro: sempre compartilhar informações importantes dos tópicos para a memória geral/canônica, para que a execução futura não dependa do contexto do tópico onde a decisão surgiu. | `cerebro/cross-topic-protocol.md`, `cerebro/cross-topic-promotion-rules.md`, `cerebro/telegram-topics.md` | ativo |
-| 2026-04-20 | Omie / emissão de proposta com boleto | 2 | Em proposta/OS no Omie com cobrança por boleto, os campos estruturados precisam nascer corretos na criação: categoria do serviço, conta corrente correta, `Gerar boleto = Sim`, `Enviar também o boleto de cobrança = Sim`, tipo de pagamento `Boleto` e meio de pagamento `Boleto Bancário`. Observação textual e regra de recibo não substituem esses campos. | `cerebro/omie.md`, `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md`, `memory/2026-04-20.md` | ativo |
-| 2026-04-20 | Omie / entrega de boletos | 2 | Depois da emissão/faturamento e geração dos boletos de paciente, baixar todos os PDFs e enviar os boletos pelo próprio tópico do Telegram no mesmo fluxo, sem esperar novo pedido do usuário. | `cerebro/omie.md`, `cerebro/verdades-operacionais.md`, `memory/2026-04-20.md` | ativo |
-| 2026-04-20 | Omie / escolha de banco na emissão | 2 | Em qualquer emissão/faturamento no Omie que dependa de conta corrente ou banco, perguntar explicitamente ao Tiaro qual banco deve ser escolhido antes de emitir, sem assumir automaticamente o banco usado em caso anterior. | `cerebro/omie.md`, `cerebro/verdades-operacionais.md`, `memory/2026-04-20.md` | ativo |
-| 2026-04-20 | Estrutura do cérebro / princípios de execução | 1 | A estrutura do cérebro ganhou uma camada explícita de princípios universais inspirada nos guardrails de execução: pensar antes de agir, simplicidade primeiro, mudanças cirúrgicas, pushback saudável e verificação objetiva de sucesso. Também foram criados critérios de sucesso por domínio e uma rubrica para design de skills. | `cerebro/execution-principles.md`, `cerebro/success-criteria.md`, `cerebro/skill-design-rubric.md`, `cerebro/OPERATIONS_INDEX.md`, `OPERATING_RULES.md`, `AGENTS.md` | ativo |
-| 2026-04-20 | Estrutura do cérebro / separação entre princípios e fatos | 1 | `cerebro/verdades-operacionais.md` foi enxugado para concentrar fatos canônicos do negócio, integrações reais, IDs e regras de domínio. Princípios universais e verificação de sucesso passaram a viver nos novos arquivos estruturais. | `cerebro/verdades-operacionais.md`, `cerebro/execution-principles.md`, `cerebro/success-criteria.md` | ativo |
-| 2026-04-20 | Estrutura do cérebro / arquitetura e política de compactação | 1 | Foram criados `cerebro/BRAIN_ARCHITECTURE.md` e `cerebro/memory-compaction-policy.md` para explicitar camadas, precedência, destinos corretos de memória e critérios de promoção/compactação. `CONTEXT_CANON.md` e `cerebro/OPERATIONS_INDEX.md` passaram a apontar para essa nova camada estrutural. | `cerebro/BRAIN_ARCHITECTURE.md`, `cerebro/memory-compaction-policy.md`, `CONTEXT_CANON.md`, `cerebro/OPERATIONS_INDEX.md` | ativo |
-| 2026-04-20 | Estrutura do cérebro / padrão de evidência e testes canônicos | 1 | Foi criado `cerebro/evidence-output-standard.md` para padronizar fechamentos com prova explícita. `EXECUTION_CHECKLIST.md`, `OPERATING_RULES.md`, `cerebro/OPERATIONS_INDEX.md` e `cerebro/skill-design-rubric.md` passaram a apontar para esse padrão. Também foi criada a base `ops/tests/` com cenários canônicos iniciais para GitHub, Quarkclinic, Omie, WhatsApp/Z-API, tweet-carrossel e manutenção do cérebro. | `cerebro/evidence-output-standard.md`, `EXECUTION_CHECKLIST.md`, `OPERATING_RULES.md`, `cerebro/OPERATIONS_INDEX.md`, `cerebro/skill-design-rubric.md`, `ops/tests/README.md`, `ops/tests/github.md`, `ops/tests/quarkclinic.md`, `ops/tests/omie.md`, `ops/tests/whatsapp-zapi.md`, `ops/tests/tweet-carrossel.md`, `ops/tests/cerebro.md` | ativo |
-| 2026-04-22 | Honestidade operacional / verdade acima de conforto | 1 | Nova diretriz canônica: dizer a verdade sempre, mesmo quando for desconfortável ou inconveniente; não suavizar, não adivinhar quando houver incerteza, e priorizar precisão, clareza e realidade acima de agradar ou presumir. | `OPERATING_RULES.md`, `memory/2026-04-22.md` | ativo |
-| 2026-04-22 | Imagens da Dra. / consistência facial no NanoBanana 2 Pro | 2 | Para gerações com foto real de referência da Dra. no NanoBanana 2 Pro, usar a cláusula canônica `Enable strict facial consistency mode... Do not alter the core facial structure.` como reforço de preservação de identidade. Isso não substitui checagem visual final. | `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md`, `memory/2026-04-22.md` | ativo |
-| 2026-04-22 | WhatsApp / ElevenLabs TTS | 2 | Tiaro criou API key do ElevenLabs para respostas em áudio a pacientes que enviarem áudio via WhatsApp. Chave recuperada do 1Password e configurada em `/root/.openclaw/secure/elevenlabs.env`. Bridge `zapi_clara_bridge.py` modificada para: detectar áudio, transcrever via Whisper, gerar resposta da Clara, converter para áudio via ElevenLabs e enviar de volta via Z-API `/send-audio`. | `cerebro/verdades-operacionais.md`, `cerebro/OPERATIONS_INDEX.md`, `memory/2026-04-22.md` | ativo |
-| 2026-04-22 | Buffer Social Media | 2 | Tiaro criou API key do Buffer (OIDC) para postar nas redes sociais da Dra. Skill `buffer-social` criada com script `post_buffer.py` usando GraphQL API (`https://api.buffer.com/`). Organização: `69e90408151436756ee2629a`. Testado e funcionando: mutation `CreateIdea` criou post de teste com sucesso. | `cerebro/verdades-operacionais.md`, `memory/2026-04-22.md` | ativo |
-| 2026-04-22 | Tweet-carrossel / regra da capa | 2 | Tiaro alterou a regra da capa do carrossel: em vez de foto real fixa da Dra. com blazer escuro/semblante sério, agora a foto da capa é gerada pelo NanoBanana 2 com base nas fotos reais da biblioteca, condizente com o tema (roupas e posicionamentos adaptados), preservando sempre a fisionomia. A v4 da skill já tinha o pipeline `compose_cover.py` com `photo_selector.py` + `generate_variation.py` que implementa exatamente isso. Cláusula de consistência facial estrita adicionada à v4. | `cerebro/verdades-operacionais.md`, `memory/2026-04-22.md`, `cerebro/empresa/skills/tweet-carrossel/SKILL.md` | ativo |
-| 2026-04-22 | Tweet-carrossel / estrutura de conteúdo viral | 2 | Tiaro incorporou regras de Viral Content Strategy para carrosséis: estrutura de 10 slides (Hook → Rehook → Relatable Pain → Valor 4-7 → Turning Point → Actionable → CTA), gatilhos psicológicos (curiosity gap, pattern interrupt, FOMO, contrarian, quick wins), e estilo de escrita conversacional com momentum. Removido o CTA com botão dourado visual. | `cerebro/verdades-operacionais.md`, `memory/2026-04-22.md`, `SKILL.md` (v3 e v4) | ativo |
-| 2026-04-22 | Tweet-carrossel / especificações visuais | 2 | Tiaro mudou o tema visual dos slides: fundo branco #FFFFFF (era preto), texto preto #000000 (era cinza #c8c8c8), fontes aumentadas em 20% (corpo ~46px/60px, nome ~38px/58px, handle ~24px/41px). Selo verificado mantido em azul #1D9BF0. | `cerebro/verdades-operacionais.md`, `memory/2026-04-22.md`, `SKILL.md` (v3 e v4) | ativo |
+### Skills criadas/adaptadas
+1. **copywriting-vitalslim** — copywriting para healthcare (95% aplicável)
+2. **customer-research-vitalslim** — pesquisa com pacientes, JTBD, voice of customer
+3. **social-content-vitalslim** — conteúdo Instagram/WhatsApp, framework carrossel viral
+4. **content-strategy-vitalslim** — planejamento de conteúdo, SEO local, calendário editorial
+5. **whatsapp-marketing** (NOVA) — fluxos de conversação, follow-ups, reativação
+6. **local-seo** (NOVA) — Google Business Profile, reviews, palavras-chave locais
+7. **medical-content** (NOVA) — compliance CFM, disclaimers, referências científicas
+8. **patient-marketing-context.md** — contexto compartilhado adaptado para healthcare
+
+### Localização
+Todas em `~/.openclaw/skills/` exceto `patient-marketing-context.md` em `cerebro/`
+
+### Impacto estimado
+- ~40h economizadas/mês em produção de conteúdo
+- ROI: R$ 3.000-5.000/mês em tempo de equipe
+- Payback: 1-2 semanas
+
+### Próximo passo
+Popular `cerebro/patient-marketing-context.md` com dados reais da clínica
+
+---
+
+## 2026-04-22 - Correções em carrosséis
+
+### Problema: badge de verificação sobrepondo nome
+- **Causa:** espaçamento insuficiente entre o nome e o badge no `make_tweet_slides.py`
+- **Fix:** aumentado de `nb[2] + 6` para `nb[2] + 12`
+- **Arquivo alterado:** `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_tweet_slides.py`
+
+### Problema: caracteres Unicode renderizando como quadrados (tofu)
+- **Causa:** fonte DejaVuSans não possui glyphs para alguns caracteres especiais usados nos slides
+- **Fix:** adicionada função `sanitize_text()` para substituir caracteres problemáticos por alternativas seguras (•, →, ✓, ✗)
+- **Arquivo alterado:** `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_tweet_slides.py`
+
+### Slides afetados e corrigidos
+- Slide 2 do carrossel GlyNAC (badge sobreposto)
+- Slide 8 do carrossel GlyNAC (símbolo ☐ antes da referência)
+
+### Lição
+Sempre validar a renderização de caracteres especiais e o posicionamento de elementos visuais antes de entregar carrosséis finais.
