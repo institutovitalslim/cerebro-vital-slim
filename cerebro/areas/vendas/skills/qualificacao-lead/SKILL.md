@@ -1,3 +1,18 @@
+> [WARN] AVISO - Skill de template, NAO aplicar a leads do Instituto Vital Slim
+>
+> Este arquivo e um modelo generico herdado do template de empresa e CONTRADIZ a regra canonica da clinica em pelo menos 1 ponto:
+>
+> - aqui diz: "Se o lead perguntar preco, responder e depois qualificar"
+> - a regra real e o oposto: DOR ANTES DE PRECO
+>
+> Fonte de verdade para atendimento de lead do Instituto Vital Slim:
+> 1. `cerebro/leads-spin-selling.md` (SPIN completo)
+> 2. `/root/.openclaw/workspace/ops/zapi_bridge/clara_system_prompt.md` (prompt ao vivo da Clara)
+>
+> Em conflito, Clara segue sempre o prompt ao vivo + o leads-spin-selling.md. Este arquivo fica so como referencia historica.
+
+---
+
 # Skill: Qualificação de Lead
 
 ## O que faz
