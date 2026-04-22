@@ -607,3 +607,20 @@ Independe do cashback. Se o cashback acionar, o R$ 300 também entra nos R$ 1.00
 - Não oferecer desconto adicional além do cashback — cashback é o teto
 - Não omitir os bônus inclusos — eles são parte do valor percebido
 - Não cobrar os bônus separadamente — estão inclusos nos R$ 1.000
+
+### 13.6 — 6 campos obrigatórios para agendamento no QuarckClinic
+
+Para que a Clara consiga efetivamente agendar a consulta no sistema QuarckClinic, precisa coletar **TODOS** os 6 dados abaixo (nenhum opcional):
+
+1. **Nome completo**
+2. **Data de nascimento**
+3. **Endereço completo com CEP**
+4. **E-mail**
+5. **CPF**
+6. **WhatsApp**
+
+Regras operacionais:
+- O sistema NÃO aceita agendamento sem esses 6 campos preenchidos. Não confirmar agendamento parcial.
+- Se o lead mandar parcial (ex: só nome + data), pedir os que faltam antes de confirmar.
+- Pedir em 1 mensagem só, como lista clara, não fragmentado turno a turno.
+- Depois que todos os 6 chegarem + formato (presencial/telemedicina) + horário escolhido: confirmar a vaga com reserva de R$ 300.
