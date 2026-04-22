@@ -202,12 +202,13 @@ O seletor:
 **Regras da headline:**
 - Fonte Montserrat Black (instalada em /usr/local/share/fonts/)
 - Cores: branco + dourado #9F8844
-- Cap 150px, linha por linha cabe em W-30 (1050px)
+- Cap max 150px, mas o script calcula automaticamente para caber na safe area
 - Line-height 1.05 (tight)
 - Alinhamento: TOPO da area de texto (NAO centrado) para eliminar espaco vazio
-- TEXT_AREA_START: 0.62 (logo apos linha dourada)
-- PHOTO_HEIGHT_RATIO: 0.58
-- LINE_Y_RATIO: 0.59
+- TEXT_AREA_START: 0.58 (logo apos linha dourada) — **elevado para safe area do feed**
+- PHOTO_HEIGHT_RATIO: 0.54 — **reduzido para dar mais espaco ao texto**
+- LINE_Y_RATIO: 0.56 — **acompanha TEXT_AREA_START**
+- **Safe area para feed (1:1):** O Instagram corta ~135px do topo e da base da capa 4:5. A headline deve caber inteiramente dentro da area segura central. O script `make_cover.py` calcula o tamanho da fonte automaticamente para garantir isso.
 
 **Regras de destaques:**
 - Palavras em dourado separadas por virgula
