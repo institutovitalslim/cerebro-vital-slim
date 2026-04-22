@@ -106,4 +106,5 @@ _Curated knowledge and context. Keep only the essential index._
 - 2026-04-14: image providers nativos, fotos reais da Dra. e montagem de capa consolidados
 - 2026-04-20: cérebro ganhou camada explícita de princípios de execução, critérios de sucesso e rubrica de skills
 - 2026-04-20: `verdades-operacionais.md` foi separado da camada universal e passou a concentrar fatos do negócio
+- [Análise diária da Clara (cron)](cerebro/logs/clara-learnings/) — Cron diário 00:00 BRT puxa as conversas das últimas 24h, destila via Kimi K2.6 em aprendizados acionáveis, escreve report em cerebro/logs/clara-learnings/YYYY-MM-DD.md e atualiza rolling buffer clara_learnings_rolling.md que a Clara lê a cada mensagem (últimos 7 dias).
 - [Argumentos de venda — ligações](cerebro/leads-argumentos-venda-ligacoes.md) — Lições condensadas de 15 reels do @vitoroliveiraconsultor (comercial para clínicas médicas) aplicadas à Clara: follow-up 5x, velocidade de resposta, objeção de preço = objeção escondida, recuperação de lead silenciado, 4 pilares de conversão. Fonte de verdade para ligações/atendimento de paciente.
