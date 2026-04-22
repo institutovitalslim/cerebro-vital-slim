@@ -93,3 +93,5 @@
 - Para fluxos de cadastro de paciente no Omie, usar a skill canônica `skills/omie-cadastro-paciente/`.
 - Sempre que houver novo aprendizado relevante, consultar `cerebro/LEARNING_PROTOCOL.md` e registrar a incorporação em `cerebro/learning-ledger.md`.
 - Em grupos com múltiplos tópicos, consultar a estrutura intertópicos antes de tratar o contexto do tópico atual como suficiente.
+
+- `cerebro/leads-argumentos-venda-ligacoes.md` — argumentos de venda para ligações/atendimento de paciente (base Vitor Oliveira, 15 reels)
