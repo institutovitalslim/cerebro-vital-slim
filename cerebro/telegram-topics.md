@@ -41,6 +41,13 @@ Regra reforçada novamente por Tiaro em 2026-04-21: **todos os tópicos devem es
 - Área provável: **Pessoas / RH**
 - Evidência: rotinas de clima, contratos vencendo e onboarding apontam para `topic_id: 8`
 
+### Tópico "Pacientes" (topic_id a confirmar)
+- Nome do tópico: **Pacientes**
+- Volume observado em 2026-04-23: 589 mensagens
+- Contexto: usado para conversas/apresentações relacionadas a pacientes específicos (ex.: apresentação clínica HTML por paciente, follow-up de caso)
+- **Pendente:** confirmar `topic_id` numérico no Telegram e mapear para a área canônica (provavelmente Atendimento ou Operação Clínica)
+- **Identidade neste tópico:** quando perguntarem "qual seu nome" / "você é a Clara" aqui, a resposta canônica é **"Sou a Clara, assistente digital do Instituto Vital Slim"**. Em 2026-04-23 a Clara respondeu "ainda não tenho um nome fixo, pode me chamar como quiser" neste tópico — bug de identidade (carregava só `IDENTITY.md` template em vez de `cerebro/CLAUDE.md`). Corrigido preenchendo `IDENTITY.md` e adicionando regra de precedência em `AGENTS.md`.
+
 ## Regra de promoção entre tópicos
 Quando uma decisão, regra, contato, integração, ID, convenção ou fluxo recorrente surgir em qualquer tópico:
 1. identificar o domínio real do conteúdo;
