@@ -1,149 +1,533 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>@dra.camilapaes — 33 scripts adaptados (produção) — IVS Produção</title><style>* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 110px; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; color: #1a1a1a; background: #f4f2ec; padding-bottom: 100px; }
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Análise dra.camilapaes-2026-04-23 — Produção — IVS Produção</title><style>
+:root {
+  /* Color tokens */
+  --c-ink: #1a1a1a;
+  --c-ink-soft: #2a2a2a;
+  --c-ink-muted: #3a3a3a;
+  --c-gold: #c9a24e;
+  --c-gold-deep: #8b6914;
+  --c-gold-hover: #b08a3e;
+  --c-cream-bg: #f4f2ec;
+  --c-cream-soft: #faf7ee;
+  --c-cream-card: #fafaf7;
+  --c-surface: #ffffff;
+  --c-border: #e0d7bd;
+  --c-border-soft: #e8e5dc;
+  --c-border-neutral: #dcdcdc;
+  --c-text: #1a1a1a;
+  --c-text-muted: #5a5a5a;   /* was #666, darker for AA */
+  --c-text-dim: #6f6f6f;
+  --c-success: #1f6a38;      /* darker green for AA on white */
+  --c-success-bg: #e8f4ee;
+  --c-danger: #8a3838;
+  --c-danger-hover: #6f2a2a;
+
+  /* Type scale (1.125 modular) */
+  --t-xs: 11px;
+  --t-sm: 12px;
+  --t-base: 13px;
+  --t-md: 14px;
+  --t-lg: 16px;
+  --t-xl: 18px;
+  --t-2xl: 22px;
+  --t-3xl: 28px;
+  --t-hero: 34px;
+
+  /* Spacing scale (4pt grid) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-7: 32px;
+  --s-8: 48px;
+
+  /* Radius */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-pill: 999px;
+
+  /* Shadow */
+  --sh-1: 0 1px 2px rgba(0,0,0,0.04);
+  --sh-2: 0 2px 6px rgba(0,0,0,0.06);
+  --sh-3: 0 8px 20px rgba(0,0,0,0.10);
+
+  /* Motion */
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --ease: cubic-bezier(.4,0,.2,1);
+
+  /* Layout */
+  --header-h: 64px;
+  --themenav-h: 54px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + var(--themenav-h) + 8px); }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "ss01","cv11","tnum";
+  line-height: 1.55;
+  color: var(--c-text);
+  background: var(--c-cream-bg);
+  padding-bottom: 100px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 .hidden-copy { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
-header.top { position: sticky; top: 0; z-index: 50; background: #1a1a1a; color: #fff; padding: 14px 24px; border-bottom: 3px solid #c9a24e; }
-header.top h1 { font-size: 17px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.status-badge { background: #2a8a4a; color: #fff; padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
-.toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.toolbar button { background: #2a2a2a; color: #fff; border: 1px solid #444; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; transition: background 0.2s; }
-.toolbar button:hover { background: #c9a24e; color: #1a1a1a; border-color: #c9a24e; }
-main { max-width: 1240px; margin: 0 auto; padding: 24px 20px; }
-.meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 14px 0 24px; }
-.meta-card { background: #fff; padding: 16px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid #c9a24e; }
-.meta-card strong { font-size: 24px; color: #1a1a1a; display: block; }
-.meta-card small { color: #666; font-size: 12px; }
-.theme-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; position: sticky; top: 64px; background: #f4f2ec; padding: 12px 0; z-index: 40; border-bottom: 1px solid #e5e5e5; }
-.chip { background: #fff; border: 1px solid #ddd; padding: 8px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
-.chip:hover { background: #c9a24e; color: #1a1a1a; border-color: #c9a24e; }
-.chip.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
 
-.calendar { background: #fff; border-radius: 8px; padding: 22px; margin-bottom: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-.calendar h2 { font-size: 18px; margin-bottom: 14px; border-bottom: 2px solid #c9a24e; padding-bottom: 8px; }
-.cal-note { font-size: 13px; color: #555; margin-bottom: 14px; padding: 10px 14px; background: #faf7ee; border-radius: 6px; border-left: 3px solid #c9a24e; }
+/* Accessibility: visible keyboard focus on all interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
 
-.batch-suggest { margin-bottom: 18px; }
-.batch-suggest h3 { font-size: 14px; color: #1a1a1a; margin-bottom: 10px; padding: 8px 12px; background: #faf7ee; border-left: 3px solid #c9a24e; border-radius: 0 4px 4px 0; }
-.batch-sessions { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; }
-.batch-session { background: #fafaf7; border: 1px solid #e0d7bd; padding: 14px; border-radius: 6px; }
-.batch-header { display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center; gap: 8px; flex-wrap: wrap; }
-.batch-label { font-weight: 700; color: #8b6914; font-size: 13px; }
-.batch-meta { font-size: 12px; color: #666; }
-.batch-scripts { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
-.batch-script-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #fff; border-radius: 4px; border-left: 2px solid #c9a24e; font-size: 13px; }
-.batch-script-item input[type=checkbox] { cursor: pointer; }
-.batch-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.batch-date-input { padding: 8px 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; }
-.btn-schedule { background: #c9a24e; color: #1a1a1a; border: none; padding: 9px 14px; border-radius: 4px; font-weight: 700; cursor: pointer; font-size: 13px; }
-.btn-schedule:hover { background: #b08a3e; }
+/* Skip link for screen readers */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--c-ink); color: var(--c-gold); padding: var(--s-3) var(--s-4);
+  z-index: 1000; font-weight: 700;
+}
+.skip-link:focus { left: var(--s-3); top: var(--s-3); }
 
-.kanban-wrap { overflow-x: auto; padding-bottom: 12px; }
-.kanban { display: grid; grid-template-columns: repeat(5, minmax(220px, 1fr)); gap: 12px; min-width: 1100px; }
-.kanban-col { background: #f0ede4; border-radius: 6px; padding: 12px; min-height: 200px; transition: background 0.2s; }
-.kanban-col.drag-over { background: #faf7ee; border: 2px dashed #c9a24e; }
-.kanban-col h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #1a1a1a; margin-bottom: 10px; padding: 6px 10px; background: #fff; border-radius: 4px; border-left: 3px solid #c9a24e; }
-.kanban-col h3 .count { background: #1a1a1a; color: #c9a24e; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 6px; font-weight: 700; }
-.kanban-card { background: #fff; border: 1px solid #e0d7bd; padding: 10px 12px; border-radius: 5px; margin-bottom: 8px; cursor: grab; font-size: 12.5px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: all 0.2s; }
-.kanban-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.08); transform: translateY(-1px); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+header.top {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--c-ink); color: #fff;
+  padding: var(--s-4) var(--s-6);
+  border-bottom: 3px solid var(--c-gold);
+  box-shadow: var(--sh-2);
+}
+header.top h1 {
+  font-size: var(--t-lg); font-weight: 600; letter-spacing: -0.01em;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--s-3); flex-wrap: wrap;
+}
+.status-badge {
+  background: var(--c-success); color: #fff;
+  padding: 3px var(--s-3); border-radius: var(--r-sm);
+  font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.6px;
+}
+.toolbar { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-top: var(--s-2); }
+.toolbar button {
+  background: var(--c-ink-soft); color: #fff; border: 1px solid #444;
+  padding: 6px var(--s-3); border-radius: var(--r-sm);
+  font-size: var(--t-sm); cursor: pointer;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.toolbar button:hover { background: var(--c-gold); color: var(--c-ink); border-color: var(--c-gold); }
+
+main { max-width: 1240px; margin: 0 auto; padding: var(--s-6) var(--s-5); }
+
+.meta-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--s-4); margin: var(--s-4) 0 var(--s-6);
+}
+.meta-card {
+  background: var(--c-surface); padding: var(--s-4);
+  border-radius: var(--r-md); box-shadow: var(--sh-1);
+  border-left: 3px solid var(--c-gold);
+}
+.meta-card strong {
+  font-size: var(--t-2xl); color: var(--c-ink); display: block;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+.meta-card small { color: var(--c-text-muted); font-size: var(--t-sm); }
+
+.theme-nav {
+  display: flex; gap: var(--s-2); flex-wrap: wrap;
+  margin: var(--s-4) 0; position: sticky; top: var(--header-h);
+  background: var(--c-cream-bg); padding: var(--s-3) 0;
+  z-index: 40; border-bottom: 1px solid #e5e5e5;
+}
+.chip {
+  background: var(--c-surface); border: 1px solid var(--c-border-neutral);
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-pill);
+  font-size: var(--t-base); cursor: pointer;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.chip:hover { background: var(--c-gold); color: var(--c-ink); border-color: var(--c-gold); }
+.chip.active { background: var(--c-ink); color: #fff; border-color: var(--c-ink); }
+
+.calendar {
+  background: var(--c-surface); border-radius: var(--r-lg);
+  padding: var(--s-6); margin-bottom: var(--s-6); box-shadow: var(--sh-2);
+}
+.calendar h2 {
+  font-size: var(--t-xl); letter-spacing: -0.01em; margin-bottom: var(--s-4);
+  border-bottom: 2px solid var(--c-gold); padding-bottom: var(--s-2);
+}
+.cal-note {
+  font-size: var(--t-base); color: var(--c-text-muted);
+  margin-bottom: var(--s-4); padding: var(--s-3) var(--s-4);
+  background: var(--c-cream-soft); border-radius: var(--r-md);
+  border-left: 3px solid var(--c-gold);
+}
+
+.batch-suggest { margin-bottom: var(--s-5); }
+.batch-suggest h3 {
+  font-size: var(--t-md); color: var(--c-ink); margin-bottom: var(--s-3);
+  padding: var(--s-2) var(--s-3); background: var(--c-cream-soft);
+  border-left: 3px solid var(--c-gold); border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.batch-sessions {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--s-3);
+}
+.batch-session {
+  background: var(--c-cream-card); border: 1px solid var(--c-border);
+  padding: var(--s-4); border-radius: var(--r-md);
+}
+.batch-header {
+  display: flex; justify-content: space-between; margin-bottom: var(--s-3);
+  align-items: center; gap: var(--s-2); flex-wrap: wrap;
+}
+.batch-label { font-weight: 700; color: var(--c-gold-deep); font-size: var(--t-base); }
+.batch-meta { font-size: var(--t-sm); color: var(--c-text-muted); font-variant-numeric: tabular-nums; }
+.batch-scripts { display: flex; flex-direction: column; gap: var(--s-2); margin-top: var(--s-3); }
+.batch-script-item {
+  display: flex; align-items: center; gap: var(--s-2);
+  padding: 6px var(--s-3); background: var(--c-surface);
+  border-radius: var(--r-sm); border-left: 2px solid var(--c-gold);
+  font-size: var(--t-base);
+}
+.batch-script-item input[type=checkbox] { cursor: pointer; width: 16px; height: 16px; accent-color: var(--c-gold-deep); }
+.batch-actions { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-top: var(--s-3); }
+.batch-date-input {
+  padding: var(--s-2) var(--s-3); border: 1px solid var(--c-border-neutral);
+  border-radius: var(--r-sm); font-size: var(--t-base); font-family: inherit;
+}
+.btn-schedule {
+  background: var(--c-gold); color: var(--c-ink); border: none;
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-sm);
+  font-weight: 700; cursor: pointer; font-size: var(--t-base);
+  transition: background var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.btn-schedule:hover { background: var(--c-gold-hover); }
+.btn-schedule:active { transform: translateY(1px); }
+
+.kanban-wrap { overflow-x: auto; padding-bottom: var(--s-3); }
+.kanban {
+  display: grid; grid-template-columns: repeat(5, minmax(220px, 1fr));
+  gap: var(--s-3); min-width: 1100px;
+}
+.kanban-col {
+  background: #f0ede4; border-radius: var(--r-md);
+  padding: var(--s-3); min-height: 200px;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  border: 2px solid transparent;
+}
+.kanban-col.drag-over { background: var(--c-cream-soft); border-color: var(--c-gold); border-style: dashed; }
+.kanban-col h3 {
+  font-size: var(--t-sm); text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--c-ink); margin-bottom: var(--s-3);
+  padding: 6px var(--s-3); background: var(--c-surface);
+  border-radius: var(--r-sm); border-left: 3px solid var(--c-gold);
+}
+.kanban-col h3 .count {
+  background: var(--c-ink); color: var(--c-gold);
+  padding: 2px var(--s-2); border-radius: 10px;
+  font-size: var(--t-xs); margin-left: 6px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.kanban-card {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  padding: var(--s-3); border-radius: 5px; margin-bottom: var(--s-2);
+  cursor: grab; font-size: var(--t-base); box-shadow: var(--sh-1);
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.kanban-card:hover { box-shadow: var(--sh-2); transform: translateY(-1px); }
 .kanban-card.dragging { opacity: 0.4; cursor: grabbing; }
-.kanban-card .k-num { background: #1a1a1a; color: #c9a24e; padding: 2px 6px; border-radius: 3px; font-family: "SF Mono", monospace; font-size: 11px; font-weight: 700; display: inline-block; margin-bottom: 4px; }
-.kanban-card .k-tema { background: #faf7ee; color: #8b6914; padding: 2px 6px; border-radius: 3px; font-size: 10.5px; font-weight: 700; display: inline-block; margin-left: 4px; }
-.kanban-card .k-title { font-weight: 600; font-size: 13px; color: #1a1a1a; margin: 4px 0; line-height: 1.3; }
-.kanban-card .k-hook { font-size: 11.5px; color: #666; line-height: 1.35; margin-top: 4px; font-style: italic; }
-.kanban-card .k-date { font-size: 11px; color: #8b6914; font-weight: 600; margin-top: 6px; padding: 3px 6px; background: #faf7ee; border-radius: 3px; display: inline-block; }
-.kanban-card .k-actions { margin-top: 8px; display: flex; gap: 4px; flex-wrap: wrap; }
-.kanban-card .k-actions button { padding: 3px 8px; font-size: 10.5px; border: none; border-radius: 3px; cursor: pointer; background: #f0ede4; color: #1a1a1a; }
-.kanban-card .k-actions button:hover { background: #c9a24e; }
-.kanban-card .k-actions .k-open { background: #1a1a1a; color: #c9a24e; }
-.kanban-card input.k-date-input { padding: 3px 6px; font-size: 11px; border: 1px solid #ddd; border-radius: 3px; width: 100%; margin-top: 4px; }
+.kanban-card .k-num {
+  background: var(--c-ink); color: var(--c-gold);
+  padding: 2px 6px; border-radius: 3px;
+  font-family: "SF Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: var(--t-xs); font-weight: 700;
+  display: inline-block; margin-bottom: var(--s-1);
+  font-variant-numeric: tabular-nums;
+}
+.kanban-card .k-tema {
+  background: var(--c-cream-soft); color: var(--c-gold-deep);
+  padding: 2px 6px; border-radius: 3px;
+  font-size: 10.5px; font-weight: 700;
+  display: inline-block; margin-left: var(--s-1);
+}
+.kanban-card .k-title { font-weight: 600; font-size: var(--t-md); color: var(--c-ink); margin: var(--s-1) 0; line-height: 1.3; }
+.kanban-card .k-hook { font-size: var(--t-sm); color: var(--c-text-muted); line-height: 1.4; margin-top: var(--s-1); font-style: italic; }
+.kanban-card .k-date {
+  font-size: var(--t-xs); color: var(--c-gold-deep); font-weight: 600;
+  margin-top: 6px; padding: 3px 6px; background: var(--c-cream-soft);
+  border-radius: 3px; display: inline-block; font-variant-numeric: tabular-nums;
+}
+.kanban-card .k-actions { margin-top: var(--s-2); display: flex; gap: var(--s-1); flex-wrap: wrap; }
+.kanban-card .k-actions button {
+  padding: 3px var(--s-2); font-size: 10.5px; border: none;
+  border-radius: 3px; cursor: pointer;
+  background: #f0ede4; color: var(--c-ink);
+  transition: background var(--dur-fast) var(--ease);
+}
+.kanban-card .k-actions button:hover { background: var(--c-gold); }
+.kanban-card .k-actions .k-open { background: var(--c-ink); color: var(--c-gold); }
+.kanban-card input.k-date-input {
+  padding: 3px 6px; font-size: var(--t-xs);
+  border: 1px solid var(--c-border-neutral); border-radius: 3px;
+  width: 100%; margin-top: var(--s-1);
+}
 
-.reel-card { background: #fff; border-radius: 8px; padding: 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-.reel-card h2 { font-size: 20px; color: #1a1a1a; margin-bottom: 8px; border-bottom: 2px solid #c9a24e; padding-bottom: 8px; }
-.reel-meta { display: flex; gap: 14px; font-size: 13px; color: #666; margin-bottom: 14px; }
-.reel-meta a { color: #8b6914; text-decoration: none; }
+.reel-card {
+  background: var(--c-surface); border-radius: var(--r-lg);
+  padding: var(--s-6); margin-bottom: var(--s-5); box-shadow: var(--sh-2);
+}
+.reel-card h2 {
+  font-size: var(--t-xl); color: var(--c-ink); margin-bottom: var(--s-2);
+  border-bottom: 2px solid var(--c-gold); padding-bottom: var(--s-2);
+  letter-spacing: -0.01em;
+}
+.reel-meta { display: flex; gap: var(--s-4); font-size: var(--t-base); color: var(--c-text-muted); margin-bottom: var(--s-4); flex-wrap: wrap; }
+.reel-meta a { color: var(--c-gold-deep); text-decoration: none; font-weight: 600; }
 .reel-meta a:hover { text-decoration: underline; }
-.eng { background: #faf7ee; padding: 2px 10px; border-radius: 4px; color: #8b6914; font-weight: 600; }
-.viral-analysis { background: #faf7ee; padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; font-size: 14px; }
-.viral-analysis summary { cursor: pointer; font-weight: 600; color: #8b6914; }
-.viral-analysis p { margin-top: 8px; }
-.script-card { background: #fafaf7; border: 1px solid #e8e5dc; border-radius: 6px; padding: 16px; margin-top: 14px; }
-.script-header { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-.script-num { background: #1a1a1a; color: #c9a24e; padding: 4px 8px; border-radius: 4px; font-weight: 700; font-size: 13px; font-family: "SF Mono", monospace; }
-.script-title { font-weight: 600; font-size: 15px; color: #1a1a1a; flex: 1; }
-.script-status { font-size: 12px; color: #888; padding: 4px 8px; background: #f0f0f0; border-radius: 4px; }
-.block-group { margin-bottom: 14px; border: 1px solid #e0d7bd; border-radius: 6px; overflow: hidden; background: #fff; }
-.block-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #faf7ee; border-bottom: 1px solid #e0d7bd; gap: 10px; flex-wrap: wrap; }
-.block-header label { font-weight: 700; font-size: 13px; color: #8b6914; text-transform: uppercase; letter-spacing: 0.4px; }
-.btn-copy-block { background: #c9a24e; color: #1a1a1a; border: none; padding: 8px 16px; border-radius: 4px; font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.2s; }
-.btn-copy-block:hover { background: #b08a3e; transform: scale(1.03); }
-.btn-copy-block.copied { background: #2a8a4a; color: #fff; }
-.block-body { padding: 14px; }
-.block-sub { margin-bottom: 12px; }
+.eng { background: var(--c-cream-soft); padding: 2px var(--s-3); border-radius: var(--r-sm); color: var(--c-gold-deep); font-weight: 600; font-variant-numeric: tabular-nums; }
+.viral-analysis { background: var(--c-cream-soft); padding: var(--s-3) var(--s-4); border-radius: var(--r-md); margin-bottom: var(--s-4); font-size: var(--t-md); }
+.viral-analysis summary { cursor: pointer; font-weight: 600; color: var(--c-gold-deep); }
+.viral-analysis p { margin-top: var(--s-2); }
+.script-card { background: var(--c-cream-card); border: 1px solid var(--c-border-soft); border-radius: var(--r-md); padding: var(--s-4); margin-top: var(--s-4); }
+.script-header { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); margin-bottom: var(--s-4); flex-wrap: wrap; }
+.script-num {
+  background: var(--c-ink); color: var(--c-gold);
+  padding: var(--s-1) var(--s-2); border-radius: var(--r-sm);
+  font-weight: 700; font-size: var(--t-base);
+  font-family: "SF Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.script-title { font-weight: 600; font-size: var(--t-md); color: var(--c-ink); flex: 1; line-height: 1.3; }
+.script-status {
+  font-size: var(--t-sm); color: var(--c-ink-muted);  /* was #888 — AA fix */
+  padding: var(--s-1) var(--s-2);
+  background: #ebebeb;                                 /* was #f0f0f0 — AA fix */
+  border-radius: var(--r-sm); font-weight: 600;
+}
+.block-group {
+  margin-bottom: var(--s-4); border: 1px solid var(--c-border);
+  border-radius: var(--r-md); overflow: hidden; background: var(--c-surface);
+}
+.block-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: var(--s-3) var(--s-4); background: var(--c-cream-soft);
+  border-bottom: 1px solid var(--c-border); gap: var(--s-3); flex-wrap: wrap;
+}
+.block-header label {
+  font-weight: 700; font-size: var(--t-base);
+  color: var(--c-gold-deep); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.btn-copy-block {
+  background: var(--c-gold); color: var(--c-ink); border: none;
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-sm);
+  font-weight: 700; font-size: var(--t-base); cursor: pointer;
+  transition: background var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.btn-copy-block:hover { background: var(--c-gold-hover); transform: scale(1.03); }
+.btn-copy-block.copied { background: var(--c-success); color: #fff; }
+.block-body { padding: var(--s-4); }
+.block-sub { margin-bottom: var(--s-3); }
 .block-sub:last-child { margin-bottom: 0; }
-.block-sub .tag { display: inline-block; background: #1a1a1a; color: #c9a24e; padding: 2px 8px; border-radius: 3px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px; }
-.block-sub p { font-size: 14.5px; line-height: 1.55; color: #1a1a1a; padding: 8px 12px; background: #fafaf7; border-left: 3px solid #c9a24e; border-radius: 0 4px 4px 0; }
-.script-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px solid #e8e5dc; }
-.btn-big { padding: 10px 14px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
-.btn-teleprompter { background: #1a1a1a; color: #c9a24e; }
-.btn-teleprompter:hover { background: #c9a24e; color: #1a1a1a; }
+.block-sub .tag {
+  display: inline-block; background: var(--c-ink); color: var(--c-gold);
+  padding: 2px var(--s-2); border-radius: 3px; font-size: 10.5px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px;
+  margin-bottom: 5px;
+}
+.block-sub p {
+  font-size: var(--t-md); line-height: 1.6; color: var(--c-ink);
+  padding: var(--s-2) var(--s-3); background: var(--c-cream-card);
+  border-left: 3px solid var(--c-gold); border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.script-actions { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-top: var(--s-3); padding-top: var(--s-3); border-top: 1px solid var(--c-border-soft); }
+.btn-big {
+  padding: var(--s-3) var(--s-4); border: none; border-radius: var(--r-sm);
+  cursor: pointer; font-size: var(--t-base); font-weight: 600;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.btn-big:active { transform: translateY(1px); }
+.btn-teleprompter { background: var(--c-ink); color: var(--c-gold); }
+.btn-teleprompter:hover { background: var(--c-gold); color: var(--c-ink); }
 .btn-share { background: #25D366; color: #fff; }
 .btn-share:hover { background: #1da851; }
-.status-select { padding: 9px 10px; border: 1px solid #ddd; border-radius: 4px; background: #fff; font-size: 13px; cursor: pointer; }
+.status-select {
+  padding: 9px var(--s-3); border: 1px solid var(--c-border-neutral);
+  border-radius: var(--r-sm); background: var(--c-surface);
+  font-size: var(--t-base); cursor: pointer; font-family: inherit;
+}
 
-
-.month-cal { background: #fff; padding: 18px; border-radius: 6px; }
-.month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
-.month-nav { display: flex; gap: 8px; align-items: center; }
-.month-nav button { background: #1a1a1a; color: #c9a24e; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: 700; font-size: 13px; }
-.month-nav button:hover { background: #c9a24e; color: #1a1a1a; }
-.month-title { font-size: 18px; font-weight: 700; color: #1a1a1a; }
-.month-legend { display: flex; gap: 14px; font-size: 12px; color: #666; margin-bottom: 10px; }
-.month-legend span b { color: #1a1a1a; }
-.month-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.month-dow { text-align: center; padding: 8px; font-size: 11px; font-weight: 700; color: #8b6914; text-transform: uppercase; letter-spacing: 0.6px; }
-.month-cell { background: #fafaf7; border: 1px solid #e8e5dc; border-radius: 4px; min-height: 90px; padding: 6px 8px; cursor: pointer; transition: all 0.2s; position: relative; }
-.month-cell:hover { background: #faf7ee; border-color: #c9a24e; }
+.month-cal { background: var(--c-surface); padding: var(--s-5); border-radius: var(--r-md); }
+.month-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--s-4); padding-bottom: var(--s-3);
+  border-bottom: 1px solid #eee;
+}
+.month-nav { display: flex; gap: var(--s-2); align-items: center; }
+.month-nav button {
+  background: var(--c-ink); color: var(--c-gold); border: none;
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-sm);
+  cursor: pointer; font-weight: 700; font-size: var(--t-base);
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.month-nav button:hover { background: var(--c-gold); color: var(--c-ink); }
+.month-title { font-size: var(--t-xl); font-weight: 700; color: var(--c-ink); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.month-legend { display: flex; gap: var(--s-4); font-size: var(--t-sm); color: var(--c-text-muted); margin-bottom: var(--s-3); flex-wrap: wrap; }
+.month-legend span b { color: var(--c-ink); }
+.month-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--s-1); }
+.month-dow {
+  text-align: center; padding: var(--s-2);
+  font-size: var(--t-xs); font-weight: 700;
+  color: var(--c-gold-deep); text-transform: uppercase; letter-spacing: 0.8px;
+}
+.month-cell {
+  background: var(--c-cream-card); border: 1px solid var(--c-border-soft);
+  border-radius: var(--r-sm); min-height: 90px;
+  padding: 6px var(--s-2); cursor: pointer;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  position: relative;
+}
+.month-cell:hover { background: var(--c-cream-soft); border-color: var(--c-gold); }
 .month-cell.other-month { background: #f0ede4; opacity: 0.45; }
-.month-cell.today { border: 2px solid #c9a24e; background: #faf7ee; }
-.month-cell.has-events { background: #fff; }
-.month-cell .day-num { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+.month-cell.today { border: 2px solid var(--c-gold); background: var(--c-cream-soft); }
+.month-cell.has-events { background: var(--c-surface); }
+.month-cell .day-num { font-size: var(--t-base); font-weight: 700; color: var(--c-ink); margin-bottom: var(--s-1); font-variant-numeric: tabular-nums; }
 .month-cell .day-badges { display: flex; flex-direction: column; gap: 3px; }
-.month-cell .badge-rec { background: #faf7ee; color: #8b6914; padding: 2px 5px; border-radius: 3px; font-size: 10px; font-weight: 600; border-left: 2px solid #c9a24e; }
-.month-cell .badge-pub { background: #e8f4ee; color: #1f6a38; padding: 2px 5px; border-radius: 3px; font-size: 10px; font-weight: 600; border-left: 2px solid #2a8a4a; }
-.day-details { background: #faf7ee; border: 1px solid #c9a24e; border-radius: 6px; padding: 16px; margin-top: 14px; }
+.month-cell .badge-rec {
+  background: var(--c-cream-soft); color: var(--c-gold-deep);
+  padding: 2px 5px; border-radius: 3px; font-size: 10px;
+  font-weight: 600; border-left: 2px solid var(--c-gold);
+}
+.month-cell .badge-pub {
+  background: var(--c-success-bg); color: var(--c-success);
+  padding: 2px 5px; border-radius: 3px; font-size: 10px;
+  font-weight: 600; border-left: 2px solid var(--c-success);
+}
+.day-details {
+  background: var(--c-cream-soft); border: 1px solid var(--c-gold);
+  border-radius: var(--r-md); padding: var(--s-4); margin-top: var(--s-4);
+}
 .day-details.hidden { display: none; }
-.day-details h4 { font-size: 14px; color: #8b6914; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.day-details h4 { font-size: var(--t-md); color: var(--c-gold-deep); margin-bottom: var(--s-3); text-transform: uppercase; letter-spacing: 0.6px; }
 .day-details ul { list-style: none; padding: 0; margin: 0; }
-.day-details li { padding: 8px 12px; background: #fff; border-left: 3px solid #c9a24e; border-radius: 0 4px 4px 0; margin-bottom: 6px; font-size: 13px; }
-.day-details li.pub { border-left-color: #2a8a4a; }
-.day-details li a { color: #8b6914; font-weight: 600; text-decoration: none; font-size: 12px; margin-left: 8px; }
+.day-details li {
+  padding: var(--s-2) var(--s-3); background: var(--c-surface);
+  border-left: 3px solid var(--c-gold);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  margin-bottom: 6px; font-size: var(--t-base);
+}
+.day-details li.pub { border-left-color: var(--c-success); }
+.day-details li a { color: var(--c-gold-deep); font-weight: 600; text-decoration: none; font-size: var(--t-sm); margin-left: var(--s-2); }
 .day-details li a:hover { text-decoration: underline; }
 
-.btn-unschedule { background: #a64a4a; color: #fff; border: none; padding: 3px 8px; font-size: 10.5px; border-radius: 3px; cursor: pointer; margin-top: 4px; }
-.btn-unschedule:hover { background: #8a3838; }
-.btn-unschedule-all { background: #a64a4a; color: #fff; border: none; padding: 8px 14px; border-radius: 4px; font-weight: 700; font-size: 12px; cursor: pointer; }
-.btn-unschedule-all:hover { background: #8a3838; }
+.btn-unschedule {
+  background: var(--c-danger); color: #fff; border: none;
+  padding: 3px var(--s-2); font-size: 10.5px; border-radius: 3px;
+  cursor: pointer; margin-top: var(--s-1);
+  transition: background var(--dur) var(--ease);
+}
+.btn-unschedule:hover { background: var(--c-danger-hover); }
+.btn-unschedule-all {
+  background: var(--c-danger); color: #fff; border: none;
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-sm);
+  font-weight: 700; font-size: var(--t-sm); cursor: pointer;
+  transition: background var(--dur) var(--ease);
+}
+.btn-unschedule-all:hover { background: var(--c-danger-hover); }
 
-.pub-week { margin-bottom: 18px; }
-.pub-week h3 { font-size: 14px; color: #1a1a1a; margin-bottom: 10px; padding: 6px 12px; background: #faf7ee; border-left: 3px solid #c9a24e; border-radius: 0 4px 4px 0; }
-.pub-slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
-.pub-slot { background: linear-gradient(135deg, #fff 0%, #fafaf7 100%); border: 1px solid #e0d7bd; padding: 14px; border-radius: 6px; }
-.pub-when { font-size: 15px; color: #1a1a1a; margin-bottom: 6px; }
-.pub-when b { color: #8b6914; font-size: 17px; }
-.pub-title { font-size: 13.5px; color: #444; line-height: 1.4; margin-bottom: 8px; }
-.pub-link { font-size: 12px; color: #8b6914; text-decoration: none; font-weight: 600; }
+.pub-week { margin-bottom: var(--s-5); }
+.pub-week h3 {
+  font-size: var(--t-md); color: var(--c-ink); margin-bottom: var(--s-3);
+  padding: 6px var(--s-3); background: var(--c-cream-soft);
+  border-left: 3px solid var(--c-gold); border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.pub-slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-3); }
+.pub-slot {
+  background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-cream-card) 100%);
+  border: 1px solid var(--c-border); padding: var(--s-4); border-radius: var(--r-md);
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.pub-slot:hover { box-shadow: var(--sh-2); transform: translateY(-1px); }
+.pub-when { font-size: var(--t-md); color: var(--c-ink); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.pub-when b { color: var(--c-gold-deep); font-size: var(--t-lg); }
+.pub-title { font-size: var(--t-base); color: var(--c-ink-muted); line-height: 1.4; margin-bottom: var(--s-2); }
+.pub-link { font-size: var(--t-sm); color: var(--c-gold-deep); text-decoration: none; font-weight: 600; }
 .pub-link:hover { text-decoration: underline; }
 
-.tele-modal { display: none; position: fixed; inset: 0; background: #000; z-index: 1000; padding: 40px 20px; overflow-y: auto; }
+.tele-modal {
+  display: none; position: fixed; inset: 0;
+  background: #000; z-index: 1000; padding: var(--s-8) var(--s-5); overflow-y: auto;
+}
 .tele-modal.show { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-.tele-modal .tele-text { color: #fff; font-size: 38px; line-height: 1.5; max-width: 900px; text-align: center; font-weight: 400; padding: 60px 20px; white-space: pre-wrap; }
-.tele-modal .tele-close { position: fixed; top: 20px; right: 20px; background: #c9a24e; color: #1a1a1a; border: none; padding: 12px 20px; border-radius: 4px; font-size: 14px; cursor: pointer; font-weight: 700; }
-.tele-modal .tele-size { position: fixed; bottom: 20px; right: 20px; background: #2a2a2a; color: #fff; border: 1px solid #555; padding: 8px 14px; border-radius: 4px; font-size: 13px; cursor: pointer; }
-.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #2a8a4a; color: #fff; padding: 12px 24px; border-radius: 6px; font-weight: 600; z-index: 500; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.tele-modal .tele-text {
+  color: #fff; font-size: var(--t-hero); line-height: 1.5;
+  max-width: 900px; text-align: center; font-weight: 400;
+  padding: var(--s-8) var(--s-5); white-space: pre-wrap;
+}
+.tele-modal .tele-close {
+  position: fixed; top: var(--s-5); right: var(--s-5);
+  background: var(--c-gold); color: var(--c-ink); border: none;
+  padding: var(--s-3) var(--s-5); border-radius: var(--r-sm);
+  font-size: var(--t-md); cursor: pointer; font-weight: 700;
+}
+.tele-modal .tele-size {
+  position: fixed; bottom: var(--s-5); right: var(--s-5);
+  background: var(--c-ink-soft); color: #fff; border: 1px solid #555;
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-sm);
+  font-size: var(--t-base); cursor: pointer;
+}
+
+.toast {
+  position: fixed; bottom: var(--s-5); left: 50%;
+  transform: translateX(-50%); background: var(--c-success); color: #fff;
+  padding: var(--s-3) var(--s-6); border-radius: var(--r-md);
+  font-weight: 600; z-index: 500; opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  pointer-events: none; box-shadow: var(--sh-3);
+}
 .toast.show { opacity: 1; }
-@media print { header.top, .theme-nav, .toolbar, .btn-big, .btn-copy-block, .script-actions, .tele-modal, .kanban-wrap { display: none !important; } body { background: #fff; padding: 0; } main { max-width: 100%; padding: 10px; } .reel-card, .calendar { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; } }
-@media (max-width: 700px) { .kanban { grid-template-columns: repeat(5, 260px); } }
-</style></head><body><header class="top"><h1><span>🩺 IVS Produção — @dra.camilapaes — 33 scripts adaptados (produção)</span><span class="status-badge">✅ APROVADO</span></h1><div class="toolbar"><button onclick="scrollToSection('planner-section')">🎯 Planner</button><button onclick="scrollToSection('month-section')">📅 Mês</button><button onclick="scrollToSection('kanban-section')">📋 Kanban</button><button onclick="scrollToSection('publication-section')">📆 Publicação</button><button onclick="exportJSON()">💾 Export JSON</button><button onclick="window.print()">🖨️ Imprimir</button></div></header><main><div class="meta-grid"><div class="meta-card"><strong>11</strong><small>Reels analisados</small></div><div class="meta-card"><strong>33</strong><small>Scripts prontos</small></div><div class="meta-card"><strong>3</strong><small>Temas clusterizados</small></div><div class="meta-card"><strong>@dra.camilapaes</strong><small>Perfil fonte</small></div></div><div class="calendar" id="planner-section"><h2>🎯 Planner de Gravação — selecione e agende</h2><p class="cal-note">Agrupei os scripts por tema (batch recording). Marque os scripts que quer gravar juntos, escolha uma data e clique "Agendar gravação". Eles aparecerão no Kanban na coluna "🎬 Para gravar".</p><div class="batch-suggest"><h3>T1 — Mindset e Decisão (9 scripts, ~54 min total)</h3><div class="batch-sessions"><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão única</span><span class="batch-meta">9 scripts · ~54 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s1-1" checked><span><b>#1.1</b> — O que muda quando a mente decide</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s1-2" checked><span><b>#1.2</b> — Vontade versus fisiologia</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s1-3" checked><span><b>#1.3</b> — O ponto de virada</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s5-1" checked><span><b>#5.1</b> — Todo mundo tem um início</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s5-2" checked><span><b>#5.2</b> — O jaleco não esconde a história</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s5-3" checked><span><b>#5.3</b> — Vergonha não tem vez aqui</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s10-1" checked><span><b>#10.1</b> — Mérito é seu, estratégia é minha</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s10-2" checked><span><b>#10.2</b> — Sem culpa pelo auxílio médico</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s10-3" checked><span><b>#10.3</b> — Você é a protagonista</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div></div></div><div class="batch-suggest"><h3>T2 — Metodologia Integrada (9 scripts, ~54 min total)</h3><div class="batch-sessions"><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão única</span><span class="batch-meta">9 scripts · ~54 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s2-1" checked><span><b>#2.1</b> — Trocar o pneu com o carro andando</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s2-2" checked><span><b>#2.2</b> — O erro da abordagem isolada</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s2-3" checked><span><b>#2.3</b> — Acompanhamento de verdade</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s6-1" checked><span><b>#6.1</b> — Os cinco pilares que ninguém conta</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s6-2" checked><span><b>#6.2</b> — A magia está no conjunto</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s6-3" checked><span><b>#6.3</b> — Acompanhamento não é luxo</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s11-1" checked><span><b>#11.1</b> — Quando nada funcionava</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s11-2" checked><span><b>#11.2</b> — Plano sob medida existe</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s11-3" checked><span><b>#11.3</b> — Mais que balança</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div></div></div><div class="batch-suggest"><h3>T3 — Jornada e Bem-estar Real (15 scripts, ~90 min total)</h3><div class="batch-sessions"><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão 1/2</span><span class="batch-meta">8 scripts · ~48 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s3-1" checked><span><b>#3.1</b> — Quando a autoestima volta</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s3-2" checked><span><b>#3.2</b> — A primeira consulta que muda tudo</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s3-3" checked><span><b>#3.3</b> — Não é sobre o espelho</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s4-1" checked><span><b>#4.1</b> — O que acontece nas primeiras semanas</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s4-2" checked><span><b>#4.2</b> — Por que o início é diferente</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s4-3" checked><span><b>#4.3</b> — Seguimos com inteligência</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s7-1" checked><span><b>#7.1</b> — Músculo é prioridade</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s7-2" checked><span><b>#7.2</b> — O que 70 dias podem mostrar</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão 2/2</span><span class="batch-meta">7 scripts · ~42 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s7-3" checked><span><b>#7.3</b> — Viva, não só magra</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s8-1" checked><span><b>#8.1</b> — O armário que não mente</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s8-2" checked><span><b>#8.2</b> — Número que não está na balança</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s8-3" checked><span><b>#8.3</b> — Três meses de reequilíbrio</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s9-1" checked><span><b>#9.1</b> — Disposição não tem preço</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s9-2" checked><span><b>#9.2</b> — O número que realmente importa</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s9-3" checked><span><b>#9.3</b> — Contando sem pressa</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div></div></div></div><div class="calendar" id="month-section"><h2>📅 Calendário Mensal — visão combinada</h2><p class="cal-note">🎬 <b>dourado</b> = dias de gravação agendados • 📤 <b>verde</b> = dias de publicação. Clique em qualquer dia para ver detalhes.</p><div class="month-cal"><div class="month-header"><div class="month-title" id="month-title">—</div><div class="month-nav"><button onclick="monthNav(-1)">◀</button><button onclick="monthNav(0)">Hoje</button><button onclick="monthNav(1)">▶</button></div></div><div class="month-legend"><span>🎬 <b>Gravação agendada</b></span><span>📤 <b>Publicação prevista</b></span><span>⭐ <b>Hoje</b></span></div><div class="month-grid" id="month-grid"></div><div class="day-details hidden" id="day-details"></div></div></div><div class="calendar" id="kanban-section"><h2>📋 Kanban — fluxo de produção</h2><p class="cal-note">Arraste os cards entre as colunas ou use os botões (🎬 Gravei / ✂️ Pronto / 📤 Postado). Estado salvo no seu navegador.</p><div class="kanban-wrap"><div class="kanban"><div class="kanban-col" id="col-aguardando"><h3>📝 Aguardando <span class="count">0</span></h3></div><div class="kanban-col" id="col-gravar"><h3>🎬 Para gravar <span class="count">0</span></h3></div><div class="kanban-col" id="col-edicao"><h3>✂️ Em edição <span class="count">0</span></h3></div><div class="kanban-col" id="col-pronto"><h3>✅ Pronto pra postar <span class="count">0</span></h3></div><div class="kanban-col" id="col-postar"><h3>📤 Agendado / Postado <span class="count">0</span></h3></div></div></div><div style="display:none"><div class="kanban-card" draggable="true" data-script-id="s1-1" data-reel="1" data-theme="T1"><span class="k-num">#1.1</span><span class="k-tema">T1</span><div class="k-title">O que muda quando a mente decide</div><div class="k-hook">🚨 Sua mente desistiu do seu corpo antes da hora?</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s1-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s1-1')">🔍 Abrir</button><button onclick="kanbanMove('s1-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s1-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s1-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s1-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s1-2" data-reel="1" data-theme="T1"><span class="k-num">#1.2</span><span class="k-tema">T1</span><div class="k-title">Vontade versus fisiologia</div><div class="k-hook">A força de vontade sozinha nunca emagreceu ninguém.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s1-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s1-2')">🔍 Abrir</button><button onclick="kanbanMove('s1-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s1-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s1-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s1-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s1-3" data-reel="1" data-theme="T1"><span class="k-num">#1.3</span><span class="k-tema">T1</span><div class="k-title">O ponto de virada</div><div class="k-hook">Existe um momento exato em que tudo finalmente clica.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s1-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s1-3')">🔍 Abrir</button><button onclick="kanbanMove('s1-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s1-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s1-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s1-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s2-1" data-reel="2" data-theme="T2"><span class="k-num">#2.1</span><span class="k-tema">T2</span><div class="k-title">Trocar o pneu com o carro andando</div><div class="k-hook">Emagrecer não é só comer menos e se matar na academia.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s2-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s2-1')">🔍 Abrir</button><button onclick="kanbanMove('s2-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s2-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s2-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s2-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s2-2" data-reel="2" data-theme="T2"><span class="k-num">#2.2</span><span class="k-tema">T2</span><div class="k-title">O erro da abordagem isolada</div><div class="k-hook">Dieta sozinha, remédio sozinho ou treino isolado falham.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s2-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s2-2')">🔍 Abrir</button><button onclick="kanbanMove('s2-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s2-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s2-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s2-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s2-3" data-reel="2" data-theme="T2"><span class="k-num">#2.3</span><span class="k-tema">T2</span><div class="k-title">Acompanhamento de verdade</div><div class="k-hook">Médico que enxerga você de verdade ainda existe sim.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s2-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s2-3')">🔍 Abrir</button><button onclick="kanbanMove('s2-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s2-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s2-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s2-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s3-1" data-reel="3" data-theme="T3"><span class="k-num">#3.1</span><span class="k-tema">T3</span><div class="k-title">Quando a autoestima volta</div><div class="k-hook">Ela não conseguia amarrar o tênis. Hoje, caminha confiante.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s3-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s3-1')">🔍 Abrir</button><button onclick="kanbanMove('s3-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s3-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s3-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s3-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s3-2" data-reel="3" data-theme="T3"><span class="k-num">#3.2</span><span class="k-tema">T3</span><div class="k-title">A primeira consulta que muda tudo</div><div class="k-hook">Uma consulta foi o suficiente para ela acreditar de novo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s3-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s3-2')">🔍 Abrir</button><button onclick="kanbanMove('s3-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s3-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s3-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s3-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s3-3" data-reel="3" data-theme="T3"><span class="k-num">#3.3</span><span class="k-tema">T3</span><div class="k-title">Não é sobre o espelho</div><div class="k-hook">O espelho deixou de ser inimigo quando a saúde voltou.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s3-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s3-3')">🔍 Abrir</button><button onclick="kanbanMove('s3-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s3-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s3-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s3-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s4-1" data-reel="4" data-theme="T3"><span class="k-num">#4.1</span><span class="k-tema">T3</span><div class="k-title">O que acontece nas primeiras semanas</div><div class="k-hook">🚨 O início do tratamento médico surpreende muitas pacientes minhas.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s4-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s4-1')">🔍 Abrir</button><button onclick="kanbanMove('s4-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s4-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s4-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s4-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s4-2" data-reel="4" data-theme="T3"><span class="k-num">#4.2</span><span class="k-tema">T3</span><div class="k-title">Por que o início é diferente</div><div class="k-hook">O corpo responde rápido quando encontra o caminho certo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s4-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s4-2')">🔍 Abrir</button><button onclick="kanbanMove('s4-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s4-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s4-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s4-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s4-3" data-reel="4" data-theme="T3"><span class="k-num">#4.3</span><span class="k-tema">T3</span><div class="k-title">Seguimos com inteligência</div><div class="k-hook">Resultado rápido só vale quando é verdadeiramente sustentável.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s4-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s4-3')">🔍 Abrir</button><button onclick="kanbanMove('s4-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s4-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s4-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s4-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s5-1" data-reel="5" data-theme="T1"><span class="k-num">#5.1</span><span class="k-tema">T1</span><div class="k-title">Todo mundo tem um início</div><div class="k-hook">Eu também já me senti completamente perdida no meu corpo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s5-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s5-1')">🔍 Abrir</button><button onclick="kanbanMove('s5-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s5-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s5-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s5-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s5-2" data-reel="5" data-theme="T1"><span class="k-num">#5.2</span><span class="k-tema">T1</span><div class="k-title">O jaleco não esconde a história</div><div class="k-hook">Meu próprio início me fez a médica que sou hoje.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s5-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s5-2')">🔍 Abrir</button><button onclick="kanbanMove('s5-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s5-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s5-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s5-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s5-3" data-reel="5" data-theme="T1"><span class="k-num">#5.3</span><span class="k-tema">T1</span><div class="k-title">Vergonha não tem vez aqui</div><div class="k-hook">Vergonha de buscar ajuda é o que mais atrasa a cura.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s5-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s5-3')">🔍 Abrir</button><button onclick="kanbanMove('s5-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s5-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s5-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s5-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s6-1" data-reel="6" data-theme="T2"><span class="k-num">#6.1</span><span class="k-tema">T2</span><div class="k-title">Os cinco pilares que ninguém conta</div><div class="k-hook">Emagrecer de verdade exige cinco pilares médicos alinhados.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s6-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s6-1')">🔍 Abrir</button><button onclick="kanbanMove('s6-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s6-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s6-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s6-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s6-2" data-reel="6" data-theme="T2"><span class="k-num">#6.2</span><span class="k-tema">T2</span><div class="k-title">A magia está no conjunto</div><div class="k-hook">Medicamento sozinho não sustenta resultado a longo prazo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s6-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s6-2')">🔍 Abrir</button><button onclick="kanbanMove('s6-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s6-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s6-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s6-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s6-3" data-reel="6" data-theme="T2"><span class="k-num">#6.3</span><span class="k-tema">T2</span><div class="k-title">Acompanhamento não é luxo</div><div class="k-hook">Acompanhamento médico próximo não é luxo. É necessidade real.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s6-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s6-3')">🔍 Abrir</button><button onclick="kanbanMove('s6-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s6-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s6-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s6-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s7-1" data-reel="7" data-theme="T3"><span class="k-num">#7.1</span><span class="k-tema">T3</span><div class="k-title">Músculo é prioridade</div><div class="k-hook">Perder gordura sem perder músculo é pura ciência médica.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s7-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s7-1')">🔍 Abrir</button><button onclick="kanbanMove('s7-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s7-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s7-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s7-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s7-2" data-reel="7" data-theme="T3"><span class="k-num">#7.2</span><span class="k-tema">T3</span><div class="k-title">O que 70 dias podem mostrar</div><div class="k-hook">Dois meses de protocolo médico mudam dados e vida.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s7-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s7-2')">🔍 Abrir</button><button onclick="kanbanMove('s7-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s7-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s7-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s7-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s7-3" data-reel="7" data-theme="T3"><span class="k-num">#7.3</span><span class="k-tema">T3</span><div class="k-title">Viva, não só magra</div><div class="k-hook">O objetivo não é caber no manequim. É se sentir viva.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s7-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s7-3')">🔍 Abrir</button><button onclick="kanbanMove('s7-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s7-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s7-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s7-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s8-1" data-reel="8" data-theme="T3"><span class="k-num">#8.1</span><span class="k-tema">T3</span><div class="k-title">O armário que não mente</div><div class="k-hook">🚨 O seu armário está te contando uma história secreta.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s8-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s8-1')">🔍 Abrir</button><button onclick="kanbanMove('s8-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s8-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s8-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s8-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s8-2" data-reel="8" data-theme="T3"><span class="k-num">#8.2</span><span class="k-tema">T3</span><div class="k-title">Número que não está na balança</div><div class="k-hook">Existem resultados reais que a balança nunca mostra.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s8-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s8-2')">🔍 Abrir</button><button onclick="kanbanMove('s8-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s8-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s8-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s8-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s8-3" data-reel="8" data-theme="T3"><span class="k-num">#8.3</span><span class="k-tema">T3</span><div class="k-title">Três meses de reequilíbrio</div><div class="k-hook">Três meses de tratamento médico muda mais que estética.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s8-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s8-3')">🔍 Abrir</button><button onclick="kanbanMove('s8-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s8-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s8-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s8-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s9-1" data-reel="9" data-theme="T3"><span class="k-num">#9.1</span><span class="k-tema">T3</span><div class="k-title">Disposição não tem preço</div><div class="k-hook">Ter disposição pela manhã é o melhor resultado médico.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s9-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s9-1')">🔍 Abrir</button><button onclick="kanbanMove('s9-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s9-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s9-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s9-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s9-2" data-reel="9" data-theme="T3"><span class="k-num">#9.2</span><span class="k-tema">T3</span><div class="k-title">O número que realmente importa</div><div class="k-hook">O número na balança é o menos importante de todos.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s9-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s9-2')">🔍 Abrir</button><button onclick="kanbanMove('s9-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s9-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s9-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s9-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s9-3" data-reel="9" data-theme="T3"><span class="k-num">#9.3</span><span class="k-tema">T3</span><div class="k-title">Contando sem pressa</div><div class="k-hook">O processo médico correto não tem data de validade.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s9-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s9-3')">🔍 Abrir</button><button onclick="kanbanMove('s9-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s9-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s9-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s9-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s10-1" data-reel="10" data-theme="T1"><span class="k-num">#10.1</span><span class="k-tema">T1</span><div class="k-title">Mérito é seu, estratégia é minha</div><div class="k-hook">O resultado não é do remédio. É da sua coragem.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s10-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s10-1')">🔍 Abrir</button><button onclick="kanbanMove('s10-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s10-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s10-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s10-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s10-2" data-reel="10" data-theme="T1"><span class="k-num">#10.2</span><span class="k-tema">T1</span><div class="k-title">Sem culpa pelo auxílio médico</div><div class="k-hook">Usar tratamento médico não é falha. É inteligência pura.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s10-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s10-2')">🔍 Abrir</button><button onclick="kanbanMove('s10-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s10-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s10-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s10-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s10-3" data-reel="10" data-theme="T1"><span class="k-num">#10.3</span><span class="k-tema">T1</span><div class="k-title">Você é a protagonista</div><div class="k-hook">Eu entrego a ciência médica. Você entrega a transformação.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s10-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s10-3')">🔍 Abrir</button><button onclick="kanbanMove('s10-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s10-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s10-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s10-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s11-1" data-reel="11" data-theme="T2"><span class="k-num">#11.1</span><span class="k-tema">T2</span><div class="k-title">Quando nada funcionava</div><div class="k-hook">Ansiedade, dor e cansaço excessivos não são normalidade.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s11-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s11-1')">🔍 Abrir</button><button onclick="kanbanMove('s11-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s11-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s11-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s11-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s11-2" data-reel="11" data-theme="T2"><span class="k-num">#11.2</span><span class="k-tema">T2</span><div class="k-title">Plano sob medida existe</div><div class="k-hook">Seu corpo não é genérico. Seu tratamento também não pode.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s11-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s11-2')">🔍 Abrir</button><button onclick="kanbanMove('s11-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s11-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s11-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s11-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s11-3" data-reel="11" data-theme="T2"><span class="k-num">#11.3</span><span class="k-tema">T2</span><div class="k-title">Mais que balança</div><div class="k-hook">O que a balança não conseguiu mostrar para ela?</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s11-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s11-3')">🔍 Abrir</button><button onclick="kanbanMove('s11-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s11-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s11-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s11-3')">🗑️ Desagendar</button></div></div></div></div><div class="calendar" id="publication-section"><h2>📆 Agenda de Publicação</h2><p class="cal-note">Horários: Quarta 19h, Sexta 12h, Domingo 11h (engagement histórico do público IVS).</p><div class="pub-week"><h3>1</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 29/04</b> • 19:00</div><div class="pub-title">#1.1 — O que muda quando a mente decide</div><a class="pub-link" href="#s1-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 01/05</b> • 12:00</div><div class="pub-title">#5.1 — Todo mundo tem um início</div><a class="pub-link" href="#s5-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 03/05</b> • 11:00</div><div class="pub-title">#10.2 — Sem culpa pelo auxílio médico</div><a class="pub-link" href="#s10-2">⤵️ Ir para roteiro + caption</a></div></div></div><div class="pub-week"><h3>2</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 06/05</b> • 19:00</div><div class="pub-title">#2.2 — O erro da abordagem isolada</div><a class="pub-link" href="#s2-2">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 08/05</b> • 12:00</div><div class="pub-title">#6.1 — Os cinco pilares que ninguém conta</div><a class="pub-link" href="#s6-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 10/05</b> • 11:00</div><div class="pub-title">#11.1 — Quando nada funcionava</div><a class="pub-link" href="#s11-1">⤵️ Ir para roteiro + caption</a></div></div></div><div class="pub-week"><h3>3</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 13/05</b> • 19:00</div><div class="pub-title">#3.3 — Não é sobre o espelho</div><a class="pub-link" href="#s3-3">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 15/05</b> • 12:00</div><div class="pub-title">#7.1 — Músculo é prioridade</div><a class="pub-link" href="#s7-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 17/05</b> • 11:00</div><div class="pub-title">#8.2 — Número que não está na balança</div><a class="pub-link" href="#s8-2">⤵️ Ir para roteiro + caption</a></div></div></div><div class="pub-week"><h3>4</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 20/05</b> • 19:00</div><div class="pub-title">#4.1 — O que acontece nas primeiras semanas</div><a class="pub-link" href="#s4-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 22/05</b> • 12:00</div><div class="pub-title">#6.2 — A magia está no conjunto</div><a class="pub-link" href="#s6-2">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 24/05</b> • 11:00</div><div class="pub-title">#10.3 — Você é a protagonista</div><a class="pub-link" href="#s10-3">⤵️ Ir para roteiro + caption</a></div></div></div></div><div class="theme-nav"><button class="chip active" data-theme="ALL" onclick="filterTheme('ALL')">Todos os reels</button><button class="chip" data-theme="T1">T1 — Mindset e Decisão</button><button class="chip" data-theme="T2">T2 — Metodologia Integrada</button><button class="chip" data-theme="T3">T3 — Jornada e Bem-estar Real</button></div><div id="reels-list"><section class="reel-card" data-reel="1"><h2>#1 — Mente e corpo</h2><div class="reel-meta"><a href="https://instagram.com/reel/DK--BRPMUD1/" target="_blank">🔗 Ver original</a><span class="eng">📊 2.2k eng</span></div><details class="viral-analysis"><summary>🧪 Por que viralizou</summary><p><strong>Hook:</strong> Frase de impacto sobre mente e corpo, universal</p><p><strong>Estrutura:</strong> Curta, inspiracional, com call visual de treino</p><p><strong>Retention:</strong> Identificação imediata com a sensação de superação</p></details><div class="scripts"><div class="script-card" data-reel="1" data-script="1" id="s1-1"><div class="script-header"><span class="script-num">#1.1</span><span class="script-title">O que muda quando a mente decide</span><span class="script-status" data-key="s1-1">⏳ aguardando</span></div><div class="block-group"><div class="block-header"><label>🎥 ROTEIRO — fala gravada (HOOK + CORPO + CTA)</label><button class="btn-copy-block" data-target="s1-1-roteiro">📋 Copiar roteiro</button></div><div class="block-body"><div class="block-sub"><span class="tag">🎬 HOOK (0-3s)</span><p>🚨 Sua mente desistiu do seu corpo antes da hora?</p></div><div class="block-sub"><span class="tag">📝 CORPO (3-25s)</span><p>O corpo da mulher obedece o que o cérebro acredita. Quando a insulina está desregulada e o cortisol alto, a vontade some. Não é falta de força. É bioquímica real. E pode ser revertida com estratégia médica correta e acompanhamento endocrinológico de verdade.</p></div><div class="block-sub"><span class="tag">📣 CTA (25-35s)</span><p>Comenta AVALIAÇÃO agora e descubra seu ponto de partida no IVS.</p></div></div><textarea id="s1-1-roteiro" class="hidden-copy">🚨 Sua mente desistiu do seu corpo antes da hora?
+
+@media print {
+  header.top, .theme-nav, .toolbar, .btn-big, .btn-copy-block, .script-actions, .tele-modal, .kanban-wrap { display: none !important; }
+  body { background: #fff; padding: 0; }
+  main { max-width: 100%; padding: var(--s-3); }
+  .reel-card, .calendar { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+}
+
+/* Mobile: kanban stacks vertically instead of horizontal scroll */
+@media (max-width: 900px) {
+  .kanban-wrap { overflow-x: visible; padding-bottom: 0; }
+  .kanban { grid-template-columns: 1fr; min-width: 0; }
+  .kanban-col { min-height: auto; }
+  main { padding: var(--s-4) var(--s-3); }
+  .meta-grid { gap: var(--s-3); }
+  .calendar { padding: var(--s-4); }
+  .reel-card { padding: var(--s-4); }
+}
+@media (max-width: 560px) {
+  .toolbar { gap: 6px; }
+  .toolbar button { padding: 5px 10px; font-size: var(--t-xs); }
+  .script-header { flex-direction: column; align-items: flex-start; }
+  .block-header { flex-direction: column; align-items: flex-start; }
+  .btn-copy-block { width: 100%; text-align: center; }
+}
+</style></head><body><header class="top"><h1><span>🩺 IVS Produção — Análise dra.camilapaes-2026-04-23 — Produção</span><span class="status-badge">✅ APROVADO</span></h1><div class="toolbar"><button onclick="scrollToSection('planner-section')">🎯 Planner</button><button onclick="scrollToSection('month-section')">📅 Mês</button><button onclick="scrollToSection('kanban-section')">📋 Kanban</button><button onclick="scrollToSection('publication-section')">📆 Publicação</button><button onclick="exportJSON()">💾 Export JSON</button><button onclick="window.print()">🖨️ Imprimir</button></div></header><main><div class="meta-grid"><div class="meta-card"><strong>11</strong><small>Reels analisados</small></div><div class="meta-card"><strong>33</strong><small>Scripts prontos</small></div><div class="meta-card"><strong>3</strong><small>Temas clusterizados</small></div><div class="meta-card"><strong>@dra.camilapaes</strong><small>Perfil fonte</small></div></div><div class="calendar" id="planner-section"><h2>🎯 Planner de Gravação — selecione e agende</h2><p class="cal-note">Agrupei os scripts por tema (batch recording). Marque os scripts que quer gravar juntos, escolha uma data e clique "Agendar gravação". Eles aparecerão no Kanban na coluna "🎬 Para gravar".</p><div class="batch-suggest"><h3>T1 — Mindset e Decisão (9 scripts, ~54 min total)</h3><div class="batch-sessions"><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão única</span><span class="batch-meta">9 scripts · ~54 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s1-1" checked><span><b>#1.1</b> — O que muda quando a mente decide</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s1-2" checked><span><b>#1.2</b> — Vontade versus fisiologia</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s1-3" checked><span><b>#1.3</b> — O ponto de virada</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s5-1" checked><span><b>#5.1</b> — Todo mundo tem um início</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s5-2" checked><span><b>#5.2</b> — O jaleco não esconde a história</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s5-3" checked><span><b>#5.3</b> — Vergonha não tem vez aqui</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s10-1" checked><span><b>#10.1</b> — Mérito é seu, estratégia é minha</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s10-2" checked><span><b>#10.2</b> — Sem culpa pelo auxílio médico</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s10-3" checked><span><b>#10.3</b> — Você é a protagonista</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div></div></div><div class="batch-suggest"><h3>T2 — Metodologia Integrada (9 scripts, ~54 min total)</h3><div class="batch-sessions"><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão única</span><span class="batch-meta">9 scripts · ~54 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s2-1" checked><span><b>#2.1</b> — Trocar o pneu com o carro andando</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s2-2" checked><span><b>#2.2</b> — O erro da abordagem isolada</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s2-3" checked><span><b>#2.3</b> — Acompanhamento de verdade</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s6-1" checked><span><b>#6.1</b> — Os cinco pilares que ninguém conta</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s6-2" checked><span><b>#6.2</b> — A magia está no conjunto</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s6-3" checked><span><b>#6.3</b> — Acompanhamento não é luxo</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s11-1" checked><span><b>#11.1</b> — Quando nada funcionava</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s11-2" checked><span><b>#11.2</b> — Plano sob medida existe</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s11-3" checked><span><b>#11.3</b> — Mais que balança</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div></div></div><div class="batch-suggest"><h3>T3 — Jornada e Bem-estar Real (15 scripts, ~90 min total)</h3><div class="batch-sessions"><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão 1/2</span><span class="batch-meta">8 scripts · ~48 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s3-1" checked><span><b>#3.1</b> — Quando a autoestima volta</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s3-2" checked><span><b>#3.2</b> — A primeira consulta que muda tudo</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s3-3" checked><span><b>#3.3</b> — Não é sobre o espelho</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s4-1" checked><span><b>#4.1</b> — O que acontece nas primeiras semanas</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s4-2" checked><span><b>#4.2</b> — Por que o início é diferente</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s4-3" checked><span><b>#4.3</b> — Seguimos com inteligência</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s7-1" checked><span><b>#7.1</b> — Músculo é prioridade</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s7-2" checked><span><b>#7.2</b> — O que 70 dias podem mostrar</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div><div class="batch-session"><div class="batch-header"><span class="batch-label">Sessão 2/2</span><span class="batch-meta">7 scripts · ~42 min</span></div><div class="batch-scripts"><label class="batch-script-item"><input type="checkbox" data-script-id="s7-3" checked><span><b>#7.3</b> — Viva, não só magra</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s8-1" checked><span><b>#8.1</b> — O armário que não mente</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s8-2" checked><span><b>#8.2</b> — Número que não está na balança</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s8-3" checked><span><b>#8.3</b> — Três meses de reequilíbrio</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s9-1" checked><span><b>#9.1</b> — Disposição não tem preço</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s9-2" checked><span><b>#9.2</b> — O número que realmente importa</span></label><label class="batch-script-item"><input type="checkbox" data-script-id="s9-3" checked><span><b>#9.3</b> — Contando sem pressa</span></label></div><div class="batch-actions"><button class="btn-schedule batch-select-all" type="button">☑️ Selec/Desel tudo</button><input type="date" class="batch-date-input"><button class="btn-schedule">📅 Agendar gravação</button><button class="btn-unschedule-all" type="button">🗑️ Limpar datas deste lote</button></div></div></div></div></div><div class="calendar" id="month-section"><h2>📅 Calendário Mensal — visão combinada</h2><p class="cal-note">🎬 <b>dourado</b> = dias de gravação agendados • 📤 <b>verde</b> = dias de publicação. Clique em qualquer dia para ver detalhes.</p><div class="month-cal"><div class="month-header"><div class="month-title" id="month-title">—</div><div class="month-nav"><button onclick="monthNav(-1)">◀</button><button onclick="monthNav(0)">Hoje</button><button onclick="monthNav(1)">▶</button></div></div><div class="month-legend"><span>🎬 <b>Gravação agendada</b></span><span>📤 <b>Publicação prevista</b></span><span>⭐ <b>Hoje</b></span></div><div class="month-grid" id="month-grid"></div><div class="day-details hidden" id="day-details"></div></div></div><div class="calendar" id="kanban-section"><h2>📋 Kanban — fluxo de produção</h2><p class="cal-note">Arraste os cards entre as colunas ou use os botões (🎬 Gravei / ✂️ Pronto / 📤 Postado). Estado salvo no seu navegador.</p><div class="kanban-wrap"><div class="kanban"><div class="kanban-col" id="col-aguardando"><h3>📝 Aguardando <span class="count">0</span></h3></div><div class="kanban-col" id="col-gravar"><h3>🎬 Para gravar <span class="count">0</span></h3></div><div class="kanban-col" id="col-edicao"><h3>✂️ Em edição <span class="count">0</span></h3></div><div class="kanban-col" id="col-pronto"><h3>✅ Pronto pra postar <span class="count">0</span></h3></div><div class="kanban-col" id="col-postar"><h3>📤 Agendado / Postado <span class="count">0</span></h3></div></div></div><div style="display:none"><div class="kanban-card" draggable="true" data-script-id="s1-1" data-reel="1" data-theme="T1"><span class="k-num">#1.1</span><span class="k-tema">T1</span><div class="k-title">O que muda quando a mente decide</div><div class="k-hook">🚨 Sua mente desistiu do seu corpo antes da hora?</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s1-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s1-1')">🔍 Abrir</button><button onclick="kanbanMove('s1-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s1-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s1-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s1-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s1-2" data-reel="1" data-theme="T1"><span class="k-num">#1.2</span><span class="k-tema">T1</span><div class="k-title">Vontade versus fisiologia</div><div class="k-hook">A força de vontade sozinha nunca emagreceu ninguém.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s1-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s1-2')">🔍 Abrir</button><button onclick="kanbanMove('s1-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s1-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s1-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s1-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s1-3" data-reel="1" data-theme="T1"><span class="k-num">#1.3</span><span class="k-tema">T1</span><div class="k-title">O ponto de virada</div><div class="k-hook">Existe um momento exato em que tudo finalmente clica.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s1-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s1-3')">🔍 Abrir</button><button onclick="kanbanMove('s1-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s1-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s1-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s1-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s2-1" data-reel="2" data-theme="T2"><span class="k-num">#2.1</span><span class="k-tema">T2</span><div class="k-title">Trocar o pneu com o carro andando</div><div class="k-hook">Emagrecer não é só comer menos e se matar na academia.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s2-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s2-1')">🔍 Abrir</button><button onclick="kanbanMove('s2-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s2-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s2-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s2-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s2-2" data-reel="2" data-theme="T2"><span class="k-num">#2.2</span><span class="k-tema">T2</span><div class="k-title">O erro da abordagem isolada</div><div class="k-hook">Dieta sozinha, remédio sozinho ou treino isolado falham.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s2-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s2-2')">🔍 Abrir</button><button onclick="kanbanMove('s2-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s2-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s2-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s2-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s2-3" data-reel="2" data-theme="T2"><span class="k-num">#2.3</span><span class="k-tema">T2</span><div class="k-title">Acompanhamento de verdade</div><div class="k-hook">Médico que enxerga você de verdade ainda existe sim.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s2-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s2-3')">🔍 Abrir</button><button onclick="kanbanMove('s2-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s2-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s2-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s2-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s3-1" data-reel="3" data-theme="T3"><span class="k-num">#3.1</span><span class="k-tema">T3</span><div class="k-title">Quando a autoestima volta</div><div class="k-hook">Ela não conseguia amarrar o tênis. Hoje, caminha confiante.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s3-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s3-1')">🔍 Abrir</button><button onclick="kanbanMove('s3-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s3-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s3-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s3-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s3-2" data-reel="3" data-theme="T3"><span class="k-num">#3.2</span><span class="k-tema">T3</span><div class="k-title">A primeira consulta que muda tudo</div><div class="k-hook">Uma consulta foi o suficiente para ela acreditar de novo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s3-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s3-2')">🔍 Abrir</button><button onclick="kanbanMove('s3-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s3-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s3-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s3-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s3-3" data-reel="3" data-theme="T3"><span class="k-num">#3.3</span><span class="k-tema">T3</span><div class="k-title">Não é sobre o espelho</div><div class="k-hook">O espelho deixou de ser inimigo quando a saúde voltou.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s3-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s3-3')">🔍 Abrir</button><button onclick="kanbanMove('s3-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s3-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s3-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s3-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s4-1" data-reel="4" data-theme="T3"><span class="k-num">#4.1</span><span class="k-tema">T3</span><div class="k-title">O que acontece nas primeiras semanas</div><div class="k-hook">🚨 O início do tratamento médico surpreende muitas pacientes minhas.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s4-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s4-1')">🔍 Abrir</button><button onclick="kanbanMove('s4-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s4-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s4-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s4-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s4-2" data-reel="4" data-theme="T3"><span class="k-num">#4.2</span><span class="k-tema">T3</span><div class="k-title">Por que o início é diferente</div><div class="k-hook">O corpo responde rápido quando encontra o caminho certo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s4-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s4-2')">🔍 Abrir</button><button onclick="kanbanMove('s4-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s4-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s4-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s4-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s4-3" data-reel="4" data-theme="T3"><span class="k-num">#4.3</span><span class="k-tema">T3</span><div class="k-title">Seguimos com inteligência</div><div class="k-hook">Resultado rápido só vale quando é verdadeiramente sustentável.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s4-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s4-3')">🔍 Abrir</button><button onclick="kanbanMove('s4-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s4-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s4-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s4-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s5-1" data-reel="5" data-theme="T1"><span class="k-num">#5.1</span><span class="k-tema">T1</span><div class="k-title">Todo mundo tem um início</div><div class="k-hook">Eu também já me senti completamente perdida no meu corpo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s5-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s5-1')">🔍 Abrir</button><button onclick="kanbanMove('s5-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s5-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s5-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s5-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s5-2" data-reel="5" data-theme="T1"><span class="k-num">#5.2</span><span class="k-tema">T1</span><div class="k-title">O jaleco não esconde a história</div><div class="k-hook">Meu próprio início me fez a médica que sou hoje.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s5-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s5-2')">🔍 Abrir</button><button onclick="kanbanMove('s5-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s5-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s5-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s5-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s5-3" data-reel="5" data-theme="T1"><span class="k-num">#5.3</span><span class="k-tema">T1</span><div class="k-title">Vergonha não tem vez aqui</div><div class="k-hook">Vergonha de buscar ajuda é o que mais atrasa a cura.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s5-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s5-3')">🔍 Abrir</button><button onclick="kanbanMove('s5-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s5-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s5-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s5-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s6-1" data-reel="6" data-theme="T2"><span class="k-num">#6.1</span><span class="k-tema">T2</span><div class="k-title">Os cinco pilares que ninguém conta</div><div class="k-hook">Emagrecer de verdade exige cinco pilares médicos alinhados.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s6-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s6-1')">🔍 Abrir</button><button onclick="kanbanMove('s6-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s6-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s6-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s6-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s6-2" data-reel="6" data-theme="T2"><span class="k-num">#6.2</span><span class="k-tema">T2</span><div class="k-title">A magia está no conjunto</div><div class="k-hook">Medicamento sozinho não sustenta resultado a longo prazo.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s6-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s6-2')">🔍 Abrir</button><button onclick="kanbanMove('s6-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s6-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s6-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s6-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s6-3" data-reel="6" data-theme="T2"><span class="k-num">#6.3</span><span class="k-tema">T2</span><div class="k-title">Acompanhamento não é luxo</div><div class="k-hook">Acompanhamento médico próximo não é luxo. É necessidade real.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s6-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s6-3')">🔍 Abrir</button><button onclick="kanbanMove('s6-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s6-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s6-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s6-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s7-1" data-reel="7" data-theme="T3"><span class="k-num">#7.1</span><span class="k-tema">T3</span><div class="k-title">Músculo é prioridade</div><div class="k-hook">Perder gordura sem perder músculo é pura ciência médica.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s7-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s7-1')">🔍 Abrir</button><button onclick="kanbanMove('s7-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s7-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s7-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s7-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s7-2" data-reel="7" data-theme="T3"><span class="k-num">#7.2</span><span class="k-tema">T3</span><div class="k-title">O que 70 dias podem mostrar</div><div class="k-hook">Dois meses de protocolo médico mudam dados e vida.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s7-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s7-2')">🔍 Abrir</button><button onclick="kanbanMove('s7-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s7-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s7-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s7-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s7-3" data-reel="7" data-theme="T3"><span class="k-num">#7.3</span><span class="k-tema">T3</span><div class="k-title">Viva, não só magra</div><div class="k-hook">O objetivo não é caber no manequim. É se sentir viva.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s7-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s7-3')">🔍 Abrir</button><button onclick="kanbanMove('s7-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s7-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s7-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s7-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s8-1" data-reel="8" data-theme="T3"><span class="k-num">#8.1</span><span class="k-tema">T3</span><div class="k-title">O armário que não mente</div><div class="k-hook">🚨 O seu armário está te contando uma história secreta.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s8-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s8-1')">🔍 Abrir</button><button onclick="kanbanMove('s8-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s8-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s8-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s8-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s8-2" data-reel="8" data-theme="T3"><span class="k-num">#8.2</span><span class="k-tema">T3</span><div class="k-title">Número que não está na balança</div><div class="k-hook">Existem resultados reais que a balança nunca mostra.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s8-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s8-2')">🔍 Abrir</button><button onclick="kanbanMove('s8-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s8-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s8-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s8-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s8-3" data-reel="8" data-theme="T3"><span class="k-num">#8.3</span><span class="k-tema">T3</span><div class="k-title">Três meses de reequilíbrio</div><div class="k-hook">Três meses de tratamento médico muda mais que estética.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s8-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s8-3')">🔍 Abrir</button><button onclick="kanbanMove('s8-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s8-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s8-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s8-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s9-1" data-reel="9" data-theme="T3"><span class="k-num">#9.1</span><span class="k-tema">T3</span><div class="k-title">Disposição não tem preço</div><div class="k-hook">Ter disposição pela manhã é o melhor resultado médico.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s9-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s9-1')">🔍 Abrir</button><button onclick="kanbanMove('s9-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s9-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s9-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s9-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s9-2" data-reel="9" data-theme="T3"><span class="k-num">#9.2</span><span class="k-tema">T3</span><div class="k-title">O número que realmente importa</div><div class="k-hook">O número na balança é o menos importante de todos.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s9-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s9-2')">🔍 Abrir</button><button onclick="kanbanMove('s9-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s9-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s9-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s9-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s9-3" data-reel="9" data-theme="T3"><span class="k-num">#9.3</span><span class="k-tema">T3</span><div class="k-title">Contando sem pressa</div><div class="k-hook">O processo médico correto não tem data de validade.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s9-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s9-3')">🔍 Abrir</button><button onclick="kanbanMove('s9-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s9-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s9-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s9-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s10-1" data-reel="10" data-theme="T1"><span class="k-num">#10.1</span><span class="k-tema">T1</span><div class="k-title">Mérito é seu, estratégia é minha</div><div class="k-hook">O resultado não é do remédio. É da sua coragem.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s10-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s10-1')">🔍 Abrir</button><button onclick="kanbanMove('s10-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s10-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s10-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s10-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s10-2" data-reel="10" data-theme="T1"><span class="k-num">#10.2</span><span class="k-tema">T1</span><div class="k-title">Sem culpa pelo auxílio médico</div><div class="k-hook">Usar tratamento médico não é falha. É inteligência pura.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s10-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s10-2')">🔍 Abrir</button><button onclick="kanbanMove('s10-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s10-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s10-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s10-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s10-3" data-reel="10" data-theme="T1"><span class="k-num">#10.3</span><span class="k-tema">T1</span><div class="k-title">Você é a protagonista</div><div class="k-hook">Eu entrego a ciência médica. Você entrega a transformação.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s10-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s10-3')">🔍 Abrir</button><button onclick="kanbanMove('s10-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s10-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s10-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s10-3')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s11-1" data-reel="11" data-theme="T2"><span class="k-num">#11.1</span><span class="k-tema">T2</span><div class="k-title">Quando nada funcionava</div><div class="k-hook">Ansiedade, dor e cansaço excessivos não são normalidade.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s11-1"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s11-1')">🔍 Abrir</button><button onclick="kanbanMove('s11-1','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s11-1','editado')">✂️ Pronto</button><button onclick="kanbanMove('s11-1','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s11-1')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s11-2" data-reel="11" data-theme="T2"><span class="k-num">#11.2</span><span class="k-tema">T2</span><div class="k-title">Plano sob medida existe</div><div class="k-hook">Seu corpo não é genérico. Seu tratamento também não pode.</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s11-2"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s11-2')">🔍 Abrir</button><button onclick="kanbanMove('s11-2','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s11-2','editado')">✂️ Pronto</button><button onclick="kanbanMove('s11-2','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s11-2')">🗑️ Desagendar</button></div></div><div class="kanban-card" draggable="true" data-script-id="s11-3" data-reel="11" data-theme="T2"><span class="k-num">#11.3</span><span class="k-tema">T2</span><div class="k-title">Mais que balança</div><div class="k-hook">O que a balança não conseguiu mostrar para ela?</div><span class="k-date" style="display:none">—</span><input type="date" class="k-date-input" data-script-id="s11-3"><div class="k-actions"><button class="k-open" onclick="kanbanOpen('s11-3')">🔍 Abrir</button><button onclick="kanbanMove('s11-3','gravado')">🎬 Gravei</button><button onclick="kanbanMove('s11-3','editado')">✂️ Pronto</button><button onclick="kanbanMove('s11-3','postado')">📤 Postado</button><button class="btn-unschedule" onclick="unscheduleScript('s11-3')">🗑️ Desagendar</button></div></div></div></div><div class="calendar" id="publication-section"><h2>📆 Agenda de Publicação</h2><p class="cal-note">Horários: Quarta 19h, Sexta 12h, Domingo 11h (engagement histórico do público IVS).</p><div class="pub-week"><h3>1</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 29/04</b> • 19:00</div><div class="pub-title">#1.1 — O que muda quando a mente decide</div><a class="pub-link" href="#s1-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 01/05</b> • 12:00</div><div class="pub-title">#5.1 — Todo mundo tem um início</div><a class="pub-link" href="#s5-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 03/05</b> • 11:00</div><div class="pub-title">#10.2 — Sem culpa pelo auxílio médico</div><a class="pub-link" href="#s10-2">⤵️ Ir para roteiro + caption</a></div></div></div><div class="pub-week"><h3>2</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 06/05</b> • 19:00</div><div class="pub-title">#2.2 — O erro da abordagem isolada</div><a class="pub-link" href="#s2-2">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 08/05</b> • 12:00</div><div class="pub-title">#6.1 — Os cinco pilares que ninguém conta</div><a class="pub-link" href="#s6-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 10/05</b> • 11:00</div><div class="pub-title">#11.1 — Quando nada funcionava</div><a class="pub-link" href="#s11-1">⤵️ Ir para roteiro + caption</a></div></div></div><div class="pub-week"><h3>3</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 13/05</b> • 19:00</div><div class="pub-title">#3.3 — Não é sobre o espelho</div><a class="pub-link" href="#s3-3">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 15/05</b> • 12:00</div><div class="pub-title">#7.1 — Músculo é prioridade</div><a class="pub-link" href="#s7-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 17/05</b> • 11:00</div><div class="pub-title">#8.2 — Número que não está na balança</div><a class="pub-link" href="#s8-2">⤵️ Ir para roteiro + caption</a></div></div></div><div class="pub-week"><h3>4</h3><div class="pub-slots"><div class="pub-slot"><div class="pub-when"><b>Qua 20/05</b> • 19:00</div><div class="pub-title">#4.1 — O que acontece nas primeiras semanas</div><a class="pub-link" href="#s4-1">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Sex 22/05</b> • 12:00</div><div class="pub-title">#6.2 — A magia está no conjunto</div><a class="pub-link" href="#s6-2">⤵️ Ir para roteiro + caption</a></div><div class="pub-slot"><div class="pub-when"><b>Dom 24/05</b> • 11:00</div><div class="pub-title">#10.3 — Você é a protagonista</div><a class="pub-link" href="#s10-3">⤵️ Ir para roteiro + caption</a></div></div></div></div><div class="theme-nav"><button class="chip active" data-theme="ALL" onclick="filterTheme('ALL')">Todos os reels</button><button class="chip" data-theme="T1">T1 — Mindset e Decisão</button><button class="chip" data-theme="T2">T2 — Metodologia Integrada</button><button class="chip" data-theme="T3">T3 — Jornada e Bem-estar Real</button></div><div id="reels-list"><section class="reel-card" data-reel="1"><h2>#1 — Mente e corpo</h2><div class="reel-meta"><a href="https://instagram.com/reel/DK--BRPMUD1/" target="_blank">🔗 Ver original</a><span class="eng">📊 2.2k eng</span></div><details class="viral-analysis"><summary>🧪 Por que viralizou</summary><p><strong>Hook:</strong> Frase de impacto sobre mente e corpo, universal</p><p><strong>Estrutura:</strong> Curta, inspiracional, com call visual de treino</p><p><strong>Retention:</strong> Identificação imediata com a sensação de superação</p></details><div class="scripts"><div class="script-card" data-reel="1" data-script="1" id="s1-1"><div class="script-header"><span class="script-num">#1.1</span><span class="script-title">O que muda quando a mente decide</span><span class="script-status" data-key="s1-1">⏳ aguardando</span></div><div class="block-group"><div class="block-header"><label>🎥 ROTEIRO — fala gravada (HOOK + CORPO + CTA)</label><button class="btn-copy-block" data-target="s1-1-roteiro">📋 Copiar roteiro</button></div><div class="block-body"><div class="block-sub"><span class="tag">🎬 HOOK (0-3s)</span><p>🚨 Sua mente desistiu do seu corpo antes da hora?</p></div><div class="block-sub"><span class="tag">📝 CORPO (3-25s)</span><p>O corpo da mulher obedece o que o cérebro acredita. Quando a insulina está desregulada e o cortisol alto, a vontade some. Não é falta de força. É bioquímica real. E pode ser revertida com estratégia médica correta e acompanhamento endocrinológico de verdade.</p></div><div class="block-sub"><span class="tag">📣 CTA (25-35s)</span><p>Comenta AVALIAÇÃO agora e descubra seu ponto de partida no IVS.</p></div></div><textarea id="s1-1-roteiro" class="hidden-copy">🚨 Sua mente desistiu do seu corpo antes da hora?
 
 O corpo da mulher obedece o que o cérebro acredita. Quando a insulina está desregulada e o cortisol alto, a vontade some. Não é falta de força. É bioquímica real. E pode ser revertida com estratégia médica correta e acompanhamento endocrinológico de verdade.
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Análise @dra.camilapaes — Fase 2.A — Instituto Vital Slim</title>
+<title>Análise dra.camilapaes-2026-04-23 — Instituto Vital Slim</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; scroll-padding-top: 70px; }
@@ -69,6 +69,14 @@
   tr:last-child td { border-bottom: none; }
   tr:nth-child(even) td { background: #fafaf8; }
   hr { border: none; border-top: 1px solid #e5e5e5; margin: 32px 0; }
+
+  /* A11Y: keyboard focus + reduced motion */
+  *:focus-visible { outline: 2px solid #c9a24e; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+  /* Tabular-nums for dates/counters */
+  th, td, .badge, code { font-variant-numeric: tabular-nums; }
 
   /* VALIDATOR */
   .validator {
@@ -174,7 +182,7 @@
 <main>
   <div class="validator">
     <h2>📋 Documento para sua aprovação</h2>
-    <p><strong>Análise @dra.camilapaes — Fase 2.A</strong></p>
+    <p><strong>Análise dra.camilapaes-2026-04-23</strong></p>
     <p>Revise o conteúdo abaixo. Escolha uma ação:</p>
     <div class="validator-buttons">
       <button class="btn btn-approve" onclick="openModal('APROVO')">✓ APROVO — pode seguir</button>
