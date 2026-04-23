@@ -27,6 +27,20 @@ Para isso, consultar:
 - Mesmo que apareça em versão antiga de doc/template, **nenhum agente deve** zerar `cerebro/empresa/contexto/*`, `cerebro/areas/*/contexto/*`, `cerebro/empresa/projetos/*`, criativos de tráfego, relatórios de `gestao/reports/`, nem `cerebro/areas/vendas/bot/conhecimento.md`.
 - Se o Tiaro pedir "reset" ou "limpar cérebro", **parar e confirmar por escrito** antes de qualquer ação destrutiva, e só proceder com uma tag git de segurança (`pre-reset-<timestamp>`).
 
+## Bridge HTTPS do OpenClaw (acesso remoto)
+- **URL pública:** `https://openclaw.institutovitalslim.com.br`
+- **Liveness (sem auth):** `/__bridge_alive` retorna `ok`
+- **Propósito:** permitir que agentes Claude rodando **fora da VPS** (ex: sandbox GitHub, Claude web) acessem o gateway OpenClaw sob HTTPS.
+- **Arquitetura:** nginx + Let's Encrypt + bearer auth → proxy para `localhost:18789`. O header `Authorization` é strippado antes do upstream, então **endpoints que exigem `gateway.auth.token` do OpenClaw retornam 401 via bridge** — isso é intencional.
+- **Escopo aceitável via bridge:** monitoring e leitura — `/health`, `/version`, `/__bridge_alive`, UI pública do OpenClaw Control. **NÃO** expor endpoints que disparam skills, enviam mensagens, ou operam dados de paciente. Se no futuro precisar, abrir com escopo limitado e documentar aqui.
+- **Gerenciamento:**
+  - Config nginx: `/etc/nginx/sites-available/openclaw-bridge`
+  - Token de borda: `/root/.openclaw/secure/bridge-token.env` (permissões 0600, só root)
+  - Scripts: `ops/setup/openclaw-bridge.sh` (instalar/reconfigurar) e `ops/setup/rotate-bridge-token.sh` (rotacionar)
+- **Rotação de token:** quando suspeitar de vazamento (token em chat, screenshot, log), rodar `bash ops/setup/rotate-bridge-token.sh` na VPS. Nginx recarrega automaticamente e o token antigo vira 401.
+- **Desligar o bridge por completo:** `rm /etc/nginx/sites-enabled/openclaw-bridge && nginx -t && systemctl reload nginx` — a URL passa a retornar 404 de default, gateway interno fica inalterado.
+- **Cert Let's Encrypt:** renovação automática via `certbot.timer`. Se certbot quebrar, `certbot renew --dry-run` diagnostica.
+
 ## WhatsApp
 - A comunicação operacional por WhatsApp deve usar a **bridge da Z-API**.
 - Não assumir que um fluxo criado a partir de contexto Telegram consegue disparar WhatsApp automaticamente sem estar amarrado ao contexto/caminho correto.
