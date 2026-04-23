@@ -24,8 +24,8 @@
 
 ## Top 11 Reels — análise + scripts adaptados
 
-### [#1] DXXXXXXXE — "Comida de verdade vs indústria" (4.6k eng)
-🔗 https://instagram.com/reel/DXXXXXXXE/
+### [#1] DXUNlzhhD8E — "Comida de verdade vs indústria" (4.6k eng)
+🔗 https://instagram.com/reel/DXUNlzhhD8E/
 
 **Por que viralizou:**
 - **Hook:** "A indústria complicou… mas a natureza já resolveu." — tensão direta entre indústria e natural, ativa desconfiança do lead.
