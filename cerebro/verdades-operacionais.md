@@ -21,6 +21,12 @@ Para isso, consultar:
   2. fazer `git commit`;
   3. fazer `git push` para o repositório oficial no GitHub.
 
+## 🚫 Nunca rodar "reset" do onboarding neste cérebro
+- Este repositório é **ambiente de produção** do Instituto Vital Slim, não template.
+- A **Fase 0 do `onboarding/SETUP.md` foi removida em 2026-04-23** a pedido do Tiaro e **nunca deve ser reintroduzida nem executada** aqui.
+- Mesmo que apareça em versão antiga de doc/template, **nenhum agente deve** zerar `cerebro/empresa/contexto/*`, `cerebro/areas/*/contexto/*`, `cerebro/empresa/projetos/*`, criativos de tráfego, relatórios de `gestao/reports/`, nem `cerebro/areas/vendas/bot/conhecimento.md`.
+- Se o Tiaro pedir "reset" ou "limpar cérebro", **parar e confirmar por escrito** antes de qualquer ação destrutiva, e só proceder com uma tag git de segurança (`pre-reset-<timestamp>`).
+
 ## WhatsApp
 - A comunicação operacional por WhatsApp deve usar a **bridge da Z-API**.
 - Não assumir que um fluxo criado a partir de contexto Telegram consegue disparar WhatsApp automaticamente sem estar amarrado ao contexto/caminho correto.
