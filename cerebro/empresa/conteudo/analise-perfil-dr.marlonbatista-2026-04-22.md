@@ -1,5 +1,7 @@
 # Análise @dr.marlonbatista — Fase 2.A (Top 11 Reels + 33 Scripts Adaptados)
 
+> **REGRA ABSOLUTA:** scripts nunca usam crianças como sujeito ou contexto (IVS atende adultos). Scripts podem endereçar mães/pais como leads, mas nunca posicionar o filho como o "caso". — atualizado 2026-04-23 via feedback do Tiaro.
+
 > Engenharia reversa dos 11 reels mais engajados (likes + 4×comments). Scripts adaptados para a voz da Dra. Daniely Freitas, Instituto Vital Slim. Todas as referências científicas mantidas; tom médico-acolhedor em vez de político-provocativo.
 
 ## Perfil do criador (para contexto)
@@ -42,11 +44,11 @@
 - CTA: "Se cansou de dieta e quer olhar seu caso de verdade, comenta AVALIAÇÃO."
 - **LEGENDA:** Toda dieta que vc já fez focou no que tirar. Seu corpo engorda por carência, não por excesso. A saída não é mais dieta — é mais nutriente. | **Hashtags:** #compulsaoalimentar #efeitosanfona #nutrologa #emagrecimentoconsciente
 
-**Script adaptado 3 — "Por que a consulta é sobre nutriente, não sobre cardápio"**
-- HOOK: "Por que a consulta aqui no IVS não te entrega um cardápio pronto — e isso muda tudo?"
-- CORPO: "Cardápio padrão ignora SEU corpo. A gente avalia ferritina, B12, vitamina D, perfil lipídico. Depois sim constrói alimentação. A base é comida de verdade — mas o QUE vc precisa é só a sua avaliação que mostra."
-- CTA: "Comenta AVALIAÇÃO que eu te mostro como funciona."
-- **LEGENDA:** A gente não entrega cardápio. Entrega avaliação. E aí a alimentação faz sentido. | **Hashtags:** #nutrologaclinica #avaliacaometabolica
+**Script adaptado 3 — "A indústria reinventou comida, e seu metabolismo não reconhece"**
+- HOOK: "Por que seu corpo continua com fome mesmo depois de uma refeição 'completa' do mercado? Te explico em 30s."
+- CORPO: "Ultraprocessado foi desenhado pra sobreviver em prateleira, não pra nutrir. Ele tem o aroma, a textura, a cor — mas os nutrientes reais (ferro, B12, colina, zinco) foram substituídos por amido, óleo refinado e conservante. Seu corpo come, mas não reconhece. Resultado: continua com fome, continua acumulando, continua com energia baixa."
+- CTA: "Se cansou de 'comer bem' e não sentir diferença, comenta AVALIAÇÃO que a gente olha o que realmente falta."
+- **LEGENDA:** Ultraprocessado tem aroma, textura, cor. Mas os nutrientes reais saíram no processo. Seu corpo come e continua com fome. | **Hashtags:** #ultraprocessados #comidadeverdade #nutricaofuncional #nutrologa #institutovitalslim #dradaniely
 
 ---
 
@@ -277,11 +279,11 @@
 - **Hook:** medo socializado (diabetes).
 - **Estrutura:** "não é 1 alimento isolado" → lista 6 ultraprocessados "inocentes" (pão, refri, iogurte, bolo caseiro, achocolatado, pizza) → sequência temporal (RI → pré → diabetes).
 
-**Script adaptado 1 — "O achocolatado do seu filho pode ser o começo"**
-- HOOK: "🚨 O achocolatado que vc dá pro seu filho todo dia pode ser o começo da pré-diabetes DELE."
-- CORPO: "Toddy, Nescau, Milo: 10-15g de açúcar por copo. Dado todo dia, criança desenvolve resistência insulínica aos 8-12 anos. Pré-diabetes infantil dobrou nos últimos 10 anos. Não é exagero — é epidemiologia."
-- CTA: "Se vc é mãe e tá olhando o que dá pra seu filho, comenta AVALIAÇÃO."
-- **LEGENDA:** Pré-diabetes infantil dobrou. Achocolatado não é inocente. | **Hashtags:** #saudeinfantil #maeconsciente #prediabetes
+**Script adaptado 1 — "O café adoçado com 3 colheres é o começo"**
+- HOOK: "🚨 Vc toma café adoçado 4 vezes por dia e acha que é 'pouco'? Em 10 anos vira pré-diabetes."
+- CORPO: "4 cafés/dia × 2 colheres de açúcar = 60g de açúcar líquido. E o pior: tomado vazio, sem proteína. Pico de insulina atrás de pico, o dia inteiro. Em 10-15 anos o pâncreas cansa. Não é exagero — é o caminho mais comum pra resistência insulínica silenciosa em adultos."
+- CTA: "Se vc reconhece esse padrão, comenta AVALIAÇÃO — a gente olha glicose, insulina e HOMA-IR."
+- **LEGENDA:** 4 cafés adoçados por dia = 60g de açúcar. Pâncreas não aguenta isso 10 anos. | **Hashtags:** #acucarescondido #prediabetes #resistenciainsulinica #homamais
 
 **Script adaptado 2 — "6 alimentos 'inocentes' que viram diabetes em 10 anos"**
 - HOOK: "6 alimentos aparentemente inofensivos que, juntos, viram diabetes em 10-15 anos."
