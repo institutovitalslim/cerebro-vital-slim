@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@dr.marlonbatista — 33 scripts adaptados (Fase 2.A) — Instituto Vital Slim</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    line-height: 1.65;
+    color: #1a1a1a;
+    background: #f8f7f4;
+    padding: 0;
+  }
+  header.top {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #fff;
+    padding: 20px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-bottom: 3px solid #c9a24e;
+  }
+  header.top h1 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header.top .badge {
+    background: #c9a24e;
+    color: #1a1a1a;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    background: #fff;
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.04);
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #c9a24e;
+    line-height: 1.25;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2a2a2a;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 3px solid #c9a24e;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  p { margin-bottom: 14px; color: #2a2a2a; font-size: 15.5px; }
+  ul, ol { margin-left: 24px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; color: #2a2a2a; font-size: 15.5px; }
+  strong { color: #1a1a1a; font-weight: 700; }
+  em { color: #4a4a4a; font-style: italic; }
+  a { color: #8b6914; text-decoration: none; border-bottom: 1px solid #c9a24e; transition: all 0.2s; }
+  a:hover { color: #1a1a1a; background: #faf7ee; padding: 0 2px; }
+  blockquote {
+    background: #faf7ee;
+    border-left: 4px solid #c9a24e;
+    padding: 14px 20px;
+    margin: 16px 0;
+    color: #4a4a4a;
+    border-radius: 0 4px 4px 0;
+    font-size: 15px;
+  }
+  code {
+    background: #f4f1ea;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13.5px;
+    color: #8b6914;
+  }
+  pre {
+    background: #1a1a1a;
+    color: #e8e0cc;
+    padding: 18px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 16px 0;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14.5px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  th {
+    background: #1a1a1a;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 13.5px;
+    letter-spacing: 0.3px;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #fafaf8; }
+  hr { border: none; border-top: 1px solid #e5e5e5; margin: 32px 0; }
+
+  /* Script blocks styling */
+  main > h3 + p + p strong { color: #c9a24e; }
+
+  /* Validator bar */
+  .validator {
+    background: linear-gradient(135deg, #faf7ee 0%, #f5efd9 100%);
+    border: 2px solid #c9a24e;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+    box-shadow: 0 4px 12px rgba(201,162,78,0.15);
+  }
+  .validator h2 {
+    margin-top: 0;
+    color: #8b6914;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border: none;
+  }
+  .validator p {
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 14px;
+  }
+  .validator-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    border-bottom: none;
+  }
+  .btn-approve { background: #2a8a4a; color: #fff; }
+  .btn-approve:hover { background: #1f6a38; color: #fff; }
+  .btn-adjust { background: #c9a24e; color: #1a1a1a; }
+  .btn-adjust:hover { background: #b08a3e; color: #1a1a1a; }
+  .btn-reject { background: #a64a4a; color: #fff; }
+  .btn-reject:hover { background: #8a3838; color: #fff; }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+    font-size: 12px;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 40px;
+  }
+  footer a { color: #8b6914; }
+
+  @media print {
+    header.top { position: static; }
+    main { box-shadow: none; max-width: 100%; padding: 0 20px; }
+    .validator { display: none; }
+  }
+  @media (max-width: 640px) {
+    main { padding: 24px 18px; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 19px; }
+    h3 { font-size: 16.5px; }
+    p, li { font-size: 15px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>
+    <span>🩺 Instituto Vital Slim — Entrega de conteúdo</span>
+    <span class="badge">AGUARDANDO VALIDAÇÃO</span>
+  </h1>
+</header>
+<main>
+  <div class="validator">
+    <h2>📋 Documento para sua aprovação</h2>
+    <p><strong>@dr.marlonbatista — 33 scripts adaptados (Fase 2.A)</strong></p>
+    <p>Revise o conteúdo abaixo. Ao final, me responda por Telegram ou WhatsApp com uma das opções:</p>
+    <div class="validator-buttons">
+      <span class="btn btn-approve">✓ APROVO — pode seguir</span>
+      <span class="btn btn-adjust">↻ AJUSTAR — vou te dizer o que</span>
+      <span class="btn btn-reject">✗ REJEITAR — refaz do zero</span>
+    </div>
+  </div>
+
+  <h1 id="analise-drmarlonbatista-fase-2a-top-11-reels-33-scripts-adaptados">Análise @dr.marlonbatista — Fase 2.A (Top 11 Reels + 33 Scripts Adaptados)</h1>
+  <blockquote>
+  <p>Engenharia reversa dos 11 reels mais engajados (likes + 4×comments). Scripts adaptados para a voz da Dra. Daniely Freitas, Instituto Vital Slim. Todas as referências científicas mantidas; tom médico-acolhedor em vez de político-provocativo.</p>
+  </blockquote>
+  <h2 id="perfil-do-criador-para-contexto">Perfil do criador (para contexto)</h2>
+  <p><strong>@dr.marlonbatista</strong> — Médico nutrólogo com 96 posts, 68 vídeos (reels). Estilo: educativo-provocativo, base em fisiologia metabólica, quebra de mitos nutricionais, referências a NEJM/Lancet/JAMA/AJCN. Assinatura visual: 🚨 + afirmação contraintuitiva + listas ✔❌ + paper citado. CTA fixo: Desafio "Secando Mais e Melhor".</p>
+  <p><strong>Por que viraliza:</strong> combina (1) provocação de mito consolidado + (2) explicação fisiológica acessível + (3) validação científica + (4) CTA de comunidade. Engaja por tensão ("está errado!"), retém por aprendizado, converte por promessa concreta.</p>
+  <h2 id="clusterizacao-em-3-temas">Clusterização em 3 temas</h2>
+  <ul>
+  <li><strong>T1 — Açúcar &amp; carboidrato como raiz metabólica</strong> (reels 2, 5, 8, 9, 10)</li>
+  <li><strong>T2 — Reabilitação da gordura natural</strong> (reels 1, 6, 11)</li>
+  <li><strong>T3 — Sinais que o corpo dá</strong> (reels 3, 4, 7)</li>
+  </ul>
+  <hr>
+  <h2 id="top-11-reels-analise-scripts-adaptados">Top 11 Reels — análise + scripts adaptados</h2>
+  <h3 id="1-dxunlzhhd8e-comida-de-verdade-vs-industria-46k-eng">[#1] DXUNlzhhD8E — "Comida de verdade vs indústria" (4.6k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXUNlzhhD8E/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> "A indústria complicou… mas a natureza já resolveu." — tensão direta entre indústria e natural, ativa desconfiança do lead.<br>
+  - <strong>Estrutura:</strong> antítese (indústria vs comida real) → lista de 7 alimentos específicos com benefícios técnicos → culpado real (ultraprocessado) → chamada à simplicidade.<br>
+  - <strong>Retention driver:</strong> lista enxuta que o espectador consegue acompanhar sem ler texto — promete virada ("o problema nunca foi X, foi Y").</p>
+  <p><strong>Script adaptado 1 — "O que tá travando sua perda de peso não é o que vc come, é o que vc NÃO come"</strong><br>
+  - HOOK (0-3s): [Dra. Daniely de jaleco, olhando câmera direto] "🚨 Se vc não consegue emagrecer, provavelmente não é o que vc come demais. É o que vc parou de comer."<br>
+  - CORPO (3-25s): "Seu corpo precisa de 5 coisas que a indústria tirou do seu prato: ferro heme da carne vermelha, B12 do fígado, colina do ovo, gordura natural pra saciedade, e caldo de ossos pra seu intestino. Sem isso, seu metabolismo fica travado — e não é força de vontade que resolve."<br>
+  - CTA (25-35s): "Se vc tá nesse ciclo de tentar e o peso não sair, comenta AVALIAÇÃO que eu te explico como a gente olha isso na consulta aqui no Instituto Vital Slim."<br>
+  - <strong>LEGENDA:</strong> O que mais trava sua perda de peso não é o que vc come demais — é o que vc deixou de comer. Ferro heme, B12, colina, gordura boa. Comida de verdade. | <strong>Hashtags:</strong> #emagrecimentoreal #metabolismo #nutrologiafeminina #saudedamulher #institutovitalslim #dradaniely</p>
+  <p><strong>Script adaptado 2 — "Dieta da moda vs base fisiológica"</strong><br>
+  - HOOK: "Vc já tentou 3, 5, 10 dietas diferentes? Eu te explico por que todas falharam."<br>
+  - CORPO: "Toda dieta da moda foca no que TIRAR. Mas seu corpo não engorda por excesso — engorda por carência nutricional que gera compulsão. Carne vermelha, ovo, gordura natural, vegetal fresco. É simples. A indústria que complicou."<br>
+  - CTA: "Se cansou de dieta e quer olhar seu caso de verdade, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> Toda dieta que vc já fez focou no que tirar. Seu corpo engorda por carência, não por excesso. A saída não é mais dieta — é mais nutriente. | <strong>Hashtags:</strong> #compulsaoalimentar #efeitosanfona #nutrologa #emagrecimentoconsciente</p>
+  <p><strong>Script adaptado 3 — "Por que a consulta é sobre nutriente, não sobre cardápio"</strong><br>
+  - HOOK: "Por que a consulta aqui no IVS não te entrega um cardápio pronto — e isso muda tudo?"<br>
+  - CORPO: "Cardápio padrão ignora SEU corpo. A gente avalia ferritina, B12, vitamina D, perfil lipídico. Depois sim constrói alimentação. A base é comida de verdade — mas o QUE vc precisa é só a sua avaliação que mostra."<br>
+  - CTA: "Comenta AVALIAÇÃO que eu te mostro como funciona."<br>
+  - <strong>LEGENDA:</strong> A gente não entrega cardápio. Entrega avaliação. E aí a alimentação faz sentido. | <strong>Hashtags:</strong> #nutrologaclinica #avaliacaometabolica</p>
+  <hr>
+  <h3 id="2-dxxn0lzbkor-frutas-perigosas-para-diabetes-41k-eng">[#2] DXXN0LzBkor — "Frutas perigosas para diabetes?" (4.1k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXXN0LzBkor/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> pergunta que contraria o senso comum ("fruta faz bem!").<br>
+  - <strong>Estrutura:</strong> "Calma" (desarma) → lista 6 frutas específicas → distinção importante (contexto metabólico) → "não é sobre pode ou não pode".<br>
+  - <strong>Retention driver:</strong> frase-tese memorável: <em>"Saúde não é sobre pode ou não pode, é sobre o momento metabólico que vc está."</em></p>
+  <p><strong>Script adaptado 1 — "Frutas: o que muda no seu caso"</strong><br>
+  - HOOK: "🚨 Vc tá comendo fruta toda manhã achando que faz bem — e o ponteiro da balança não se mexe. Me ouve um minuto."<br>
+  - CORPO: "Fruta é natural, sim. Mas banana, manga, melancia têm alta carga glicêmica. Se vc tem resistência insulínica ou pré-diabetes, isso dispara glicose, e o seu corpo armazena como gordura visceral. Não é 'pode ou não pode' — é onde seu metabolismo está HOJE."<br>
+  - CTA: "Pra descobrir onde vc tá, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> "Fruta faz bem" é uma frase incompleta. Faz bem pra QUEM e QUANDO. Se vc tem resistência insulínica, manga de manhã sabota. | <strong>Hashtags:</strong> #resistenciainsulinica #prediabetes #saudemetabolica #emagrecimentoseguro</p>
+  <p><strong>Script adaptado 2 — "Frutose e gordura visceral"</strong><br>
+  - HOOK: "Vc sabia que tomar suco natural pode ser PIOR que refrigerante, pro seu fígado?"<br>
+  - CORPO: "Frutose em excesso sobrecarrega o fígado igual álcool. E vira gordura visceral — a gordura que mais inflama. Fruta inteira tem fibra que segura a absorção. Suco tira a fibra, mantém o açúcar. Naturalizou o estrago."<br>
+  - CTA: "Se tá com barriga teimosa, comenta AVALIAÇÃO que eu te explico."<br>
+  - <strong>LEGENDA:</strong> Suco natural ≠ fruta. Sem a fibra, é açúcar puro no fígado. Natural ≠ saudável no contexto errado. | <strong>Hashtags:</strong> #gorduravisceral #barrigainchada #nutrologia</p>
+  <p><strong>Script adaptado 3 — "O teste simples pra saber se SEU corpo tá inflamado"</strong><br>
+  - HOOK: "Quer saber se seu corpo tá inflamado? Te dou 3 sinais em 30 segundos."<br>
+  - CORPO: "1) barriga crescendo mesmo sem vc comer muito; 2) fome 1-2h depois de comer; 3) compulsão por doce à noite. Se 2 desses batem com vc, provavelmente vc está num ciclo de pico glicêmico e insulina alta. Não é falta de força — é fisiologia."<br>
+  - CTA: "Comenta AVALIAÇÃO que eu te mostro como reverter."<br>
+  - <strong>LEGENDA:</strong> 3 sinais de inflamação metabólica que ninguém te contou. Se 2 batem com vc, precisa avaliar. | <strong>Hashtags:</strong> #inflamacaocronica #compulsaonoturna #saudedamulher</p>
+  <hr>
+  <h3 id="3-dxzyugkhcha-26k-eng-caption-vaga-provavelmente-reacao-visual">[#3] DXZyuGkhCHa — "👀👀👀" (2.6k eng, caption vaga — provavelmente reação visual)</h3>
+  <p>🔗 https://instagram.com/reel/DXZyuGkhCHa/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook puramente visual:</strong> provavelmente reação de surpresa ou antes-e-depois. Caption mínima gera curiosidade — usuário clica por FOMO.<br>
+  - <strong>Mecânica:</strong> usa o "mistério" pra retenção — se vc quer saber o que os olhos veem, precisa assistir até o fim.</p>
+  <p><strong>Script adaptado 1 — "Reação a antes-e-depois de paciente" (ÉTICA: sem antes-depois real; usar recurso narrativo)</strong><br>
+  - HOOK: [Dra. Daniely reagindo pra câmera com mão na boca] "👀 Vcs precisam ver como essa paciente tá 4 meses depois."<br>
+  - CORPO: "Chegou aqui no IVS há 4 meses dizendo: 'já tentei de tudo, tô cansada'. Hoje: dormindo bem, sem compulsão noturna, 8kg a menos — mas o mais importante: ela voltou a se reconhecer no espelho. Não foi dieta milagrosa. Foi avaliação metabólica + hormonal + acompanhamento."<br>
+  - CTA: "Se vc tá nesse ponto, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> 4 meses. Não foi milagre. Foi método. | <strong>Hashtags:</strong> #transformacaoreal #acompanhamentomedico #mulher40mais</p>
+  <p><strong>Script adaptado 2 — "Reação: o que ninguém mostra sobre emagrecimento"</strong><br>
+  - HOOK: "👀 Isso aqui é o que ninguém te mostra quando fala de emagrecimento."<br>
+  - CORPO: "A parte bonita é a foto depois. Mas o que acontece no meio é: noite mal dormida, pele mudando, libido mexida, humor oscilando. Por isso consulta em clínica séria não é só cardápio — é avaliar esses 'efeitos colaterais' do processo."<br>
+  - CTA: "Comenta AVALIAÇÃO pra saber como a gente conduz isso."<br>
+  - <strong>LEGENDA:</strong> Emagrecer afeta sono, humor, libido, pele. Quem não acompanha isso, sofre. Aqui, sim. | <strong>Hashtags:</strong> #emagrecercomsaude #hormonal #sonoehumor</p>
+  <p><strong>Script adaptado 3 — "Reação sincera: isso me marcou"</strong><br>
+  - HOOK: [Dra. séria, sem sorriso] "Vou ser sincera: isso aqui me marcou muito."<br>
+  - CORPO: "Atendi 3 pacientes na última semana com o mesmo padrão: 35-45 anos, mães, já tinham feito 4+ nutricionistas. Todas diziam a mesma frase: 'Dra., acho que o problema sou eu'. O problema NUNCA foi elas. Era a ausência de avaliação metabólica e hormonal. Em 30 dias, as 3 estavam dormindo melhor. Em 90, as 3 emagrecendo com consistência. Não era falta de disciplina."<br>
+  - CTA: "Se vc já disse 'acho que o problema sou eu' — comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> 3 pacientes, 1 padrão. A frase 'acho que o problema sou eu'. Nunca é. | <strong>Hashtags:</strong> #maededois #frustracaoalimentar #compulsao</p>
+  <hr>
+  <h3 id="4-dxsowsuhkve-lucas-gosta-assim-bem-simples-24k-eng-caption-casual">[#4] DXSoWsUhkve — "Lucas gosta assim bem simples" (2.4k eng, caption casual)</h3>
+  <p>🔗 https://instagram.com/reel/DXSoWsUhkve/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> cena familiar relatable (nome próprio "Lucas" + 😅) — gera identificação. Provoca com "será que tem sustância?".<br>
+  - <strong>Mecânica:</strong> linguagem de confraria ("vcs acham?"), convida a opinar — explode comentários.</p>
+  <p><strong>Script adaptado 1 — "Prato do marido: sustância de verdade?"</strong><br>
+  - HOOK: [Dra. mostrando um prato comum] "Casal recebendo os sogros no domingo. Esse prato aqui tem sustância? 😅"<br>
+  - CORPO: "Arroz, feijão, bife magro, salada de alface. Parece saudável? Pra quem? Se o bife for pequeno (&lt;150g), é proteína insuficiente. Se o feijão é a única fibra, falta variedade. Se não tem gordura boa (azeite, manteiga), não tem saciedade. Prato é cultura — mas precisa olhar nutrientes."<br>
+  - CTA: "Comenta se seu prato parece esse. Se quer ajustar, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> Prato do brasileiro médio. Parece saudável, engana o instinto. Olha o que falta. | <strong>Hashtags:</strong> #nutricaofuncional #sustanciareal #saudeemfamilia</p>
+  <p><strong>Script adaptado 2 — "Por que sua mãe/sogra te dá mais comida — e o que ela ainda não sabe"</strong><br>
+  - HOOK: "Por que sua mãe enche seu prato? E por que ela provavelmente está errada hoje?"<br>
+  - CORPO: "Geração da fome passou trauma nutricional. Prato grande = sinal de cuidado. Só que ciência mudou: não é quantidade, é DENSIDADE nutricional. Prato pequeno com proteína de qualidade, gordura natural, vegetal fresco &gt; prato grande com arroz e açúcar."<br>
+  - CTA: "Se vc já ouviu 'come mais' e sentiu culpa, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> A mãe que te ama não sabe o que virou padrão metabólico. Quantidade ≠ nutrição. | <strong>Hashtags:</strong> #geracoes #nutricaoconsciente #culpaalimentar</p>
+  <p><strong>Script adaptado 3 — "Prato simples de verdade (sem complicação)"</strong><br>
+  - HOOK: "Vc acha que comer bem é complicado? Eu te mostro em 30 segundos."<br>
+  - CORPO: "Proteína (carne, peixe, ovo) do tamanho da sua mão. Gordura boa (abacate, azeite, queijo) do tamanho do polegar. Vegetal fresco até enjoar. Carboidrato (arroz, batata doce) do tamanho do punho fechado — e só se vc se exercitou no dia. Fim. Sem app, sem tabela."<br>
+  - CTA: "Se faz sentido, comenta AVALIAÇÃO pra gente ajustar pro seu caso."<br>
+  - <strong>LEGENDA:</strong> Seu prato em 4 linhas. Sem app. Sem tabela. Sem stress. | <strong>Hashtags:</strong> #nutricaosimples #alimentacaointuitiva #pratosaudavel</p>
+  <hr>
+  <h3 id="5-dxcparskbwt-vc-nao-engorda-por-comer-gordura-22k-eng">[#5] DXcPARSkbWt — "Vc não engorda por comer gordura" (2.2k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXcPARSkbWt/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> desmonte direto do mito clássico ("gordura engorda" — falso).<br>
+  - <strong>Estrutura:</strong> mito → causa real (insulina alta crônica) → desconstrói regra popular (3 em 3h, contar caloria) → call to estratégia metabólica + estudo NEJM.<br>
+  - <strong>Retention driver:</strong> frase-memorável <em>"Não é 'só fechar a boca'."</em></p>
+  <p><strong>Script adaptado 1 — "Fechar a boca não funciona pra quem tem resistência insulínica"</strong><br>
+  - HOOK: "🚨 'É só fechar a boca' é o conselho que mais machuca mulher acima dos 35."<br>
+  - CORPO: "Fechar a boca funciona pra corpo jovem, saudável, sem insulina alta. Aos 35+, com menopausa chegando, estresse crônico, sono ruim — fechar a boca só piora. O corpo entra em modo economia, metabolismo desacelera, a fome volta mais forte. A saída não é menos comida. É estratégia metabólica."<br>
+  - CTA: "Comenta AVALIAÇÃO se cansou de tentar 'fechar a boca'."<br>
+  - <strong>LEGENDA:</strong> 'Fecha a boca' não funciona quando seu metabolismo já tá hibernando. Estratégia, não sofrimento. | <strong>Hashtags:</strong> #mulher40mais #perimenopausa #emagrecimentohormonal</p>
+  <p><strong>Script adaptado 2 — "Comer de 3 em 3h: o mito que engorda"</strong><br>
+  - HOOK: "'Come de 3 em 3 horas pra acelerar o metabolismo'. Essa orientação tá destruindo sua perda de peso."<br>
+  - CORPO: "Cada refeição dispara insulina. Quem come 5-6x ao dia vive em insulina alta o tempo todo. Insulina alta = corpo armazena gordura, não queima. Menos refeições, maior espaçamento, mais saciedade = corpo volta a acessar a gordura estocada. Não é inventar — é fisiologia."<br>
+  - CTA: "Quer saber se esse padrão serve pro seu caso? Comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> 3 em 3h é receita dos anos 90. 2024 a ciência já mostrou: espaçamento maior, saciedade maior. | <strong>Hashtags:</strong> #jejumintermitente #insulina #metabolismofeminino</p>
+  <p><strong>Script adaptado 3 — "A conta que todo plano de emagrecimento esquece"</strong><br>
+  - HOOK: "Plano de emagrecimento que ignora insulina tá apagando fogo com gasolina."<br>
+  - CORPO: "Contar caloria sem olhar picos de insulina = perder tempo. Uma fatia de pão de 80kcal e uma porção de abacate de 80kcal fazem coisas OPOSTAS no corpo. Pão dispara insulina, abacate mantém estável. Caloria igual, resultado metabólico oposto. Avaliação séria olha isso."<br>
+  - CTA: "Comenta AVALIAÇÃO pra entender seu caso."<br>
+  - <strong>LEGENDA:</strong> Caloria é uma métrica mentirosa. Insulina é a verdadeira. | <strong>Hashtags:</strong> #resistenciainsulina #cienciadoemagrecimento</p>
+  <hr>
+  <h3 id="6-dxxwpgqbf_x-evite-gordura-o-mito-persistente-17k-eng">[#6] DXXwPgqBf_x — "Evite gordura: o mito persistente" (1.7k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXXwPgqBf_x/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> frase icônica ("evite gordura") entre aspas — ironiza.<br>
+  - <strong>Estrutura:</strong> mito → realidade fisiológica → lista de 5 causas reais (carbo refinado, RI, estresse, sono, disbiose) → argumento histórico (populações ancestrais).</p>
+  <p><strong>Script adaptado 1 — "Gordura boa vs gordura ruim (e por que você confundiu)"</strong><br>
+  - HOOK: "Gordura faz mal, dizem. Gordura faz bem, também dizem. Quem tá certo?"<br>
+  - CORPO: "Gordura de azeite, abacate, manteiga de qualidade, peixe gordo = protetora. Gordura trans de industrializado, óleo de soja aquecido, margarina = vilã real. A confusão foi proposital: nos anos 80 culparam gordura em geral, e a gente parou de comer as boas junto. Reposição começa aqui."<br>
+  - CTA: "Comenta AVALIAÇÃO pra alinhar."<br>
+  - <strong>LEGENDA:</strong> Gordura boa ≠ gordura ruim. A indústria juntou as duas e te deixou com medo de azeite. | <strong>Hashtags:</strong> #gorduraboa #omega3 #saudecelular</p>
+  <p><strong>Script adaptado 2 — "5 causas do seu ganho de peso que não são gordura"</strong><br>
+  - HOOK: "Seu ganho de peso não é culpa da manteiga. É de 5 outras coisas."<br>
+  - CORPO: "1) carboidrato refinado que vc não parou de comer; 2) resistência insulínica silenciosa; 3) estresse crônico (cortisol alto); 4) sono ruim (desregula leptina); 5) disbiose intestinal. Tira a manteiga, mantém essas 5, continua engordando. Ataque a causa real."<br>
+  - CTA: "Quer saber qual dessas tá te pegando? Comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> 5 vilões reais do ganho de peso. Manteiga não tá entre eles. | <strong>Hashtags:</strong> #ganhodepeso #cortisol #sonoesono</p>
+  <p><strong>Script adaptado 3 — "Por que a Dieta do Mediterrâneo não é low-fat"</strong><br>
+  - HOOK: "Dieta que mais reduz doença cardíaca no mundo NÃO é low-fat."<br>
+  - CORPO: "Dieta do Mediterrâneo: azeite, peixe, nozes, queijo, iogurte gordo, abacate. 40% das calorias vêm de gordura. E é A dieta mais estudada do mundo pra longevidade. Se gordura fosse vilã, esse povo seria o mais doente. Não é. É o mais saudável. Gordura natural = matéria-prima pros hormônios."<br>
+  - CTA: "Comenta AVALIAÇÃO pra montar uma estratégia assim pro seu caso."<br>
+  - <strong>LEGENDA:</strong> 40% gordura, zero demonização. A dieta mais saudável do mundo tem azeite. | <strong>Hashtags:</strong> #dietaomediterranea #longevidade #hormonalfeminino</p>
+  <hr>
+  <h3 id="7-dxxidqmbtvg-seu-melasma-comeca-no-intestino-15k-eng">[#7] DXXidQmBtvG — "Seu melasma começa no intestino" (1.5k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXXidQmBtvG/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> conexão inesperada (pele ↔ intestino) — surpresa cognitiva.<br>
+  - <strong>Estrutura:</strong> mito (melasma = só pele) → verdade (inflamação interna) → consequência (só apaga mancha) → convite.</p>
+  <p><strong>Script adaptado 1 — "Melasma: por que clareador sozinho não funciona"</strong><br>
+  - HOOK: "🚨 Vc tá gastando em clareador mensal e o melasma volta? Motivo NÃO é sua pele."<br>
+  - CORPO: "Melasma responde a inflamação sistêmica. Intestino desregulado = mais inflamação = mais melanina ativada. Só tratar a pele = enxugar gelo. A raiz é: disbiose intestinal, permeabilidade intestinal, deficiência de zinco, vitamina D baixa. Avaliação médica olha isso."<br>
+  - CTA: "Comenta AVALIAÇÃO se melasma é seu caso."<br>
+  - <strong>LEGENDA:</strong> Seu melasma é sintoma, não problema. A raiz está 1m abaixo do seu rosto. | <strong>Hashtags:</strong> #melasma #inflamacaointestinal #saudedapele</p>
+  <p><strong>Script adaptado 2 — "3 exames que toda mulher com melasma devia pedir"</strong><br>
+  - HOOK: "Se vc tem melasma, esses 3 exames falam mais que 10 creminhos."<br>
+  - CORPO: "1) Vitamina D (&lt;30 = inflamação aumentada); 2) Ferritina (&lt;50 = estresse oxidativo elevado); 3) TSH e hormônios tireoidianos (disfunção acelera melanina). Dermato que não pede, trata sintoma. Médica que pede, trata causa."<br>
+  - CTA: "Comenta AVALIAÇÃO pra gente pedir juntas no IVS."<br>
+  - <strong>LEGENDA:</strong> 3 exames pra quem tem melasma. Dermato do creminho não pede. | <strong>Hashtags:</strong> #dermatologiafuncional #exameshormonais</p>
+  <p><strong>Script adaptado 3 — "A conexão pele-intestino em 30s"</strong><br>
+  - HOOK: "Como seu intestino manda recado pra sua pele? Vou te mostrar em 30 segundos."<br>
+  - CORPO: "Disbiose = bactéria ruim produz LPS = passa pela parede intestinal permeável = entra na circulação = ativa sistema imune = pele responde com acne, melasma, rosácea, dermatite. Não é mágica — é biologia. Curar intestino = pele melhora em 60-90 dias."<br>
+  - CTA: "Comenta AVALIAÇÃO pra olhar o seu intestino."<br>
+  - <strong>LEGENDA:</strong> Eixo intestino-pele. Bactéria ruim no intestino = mancha no rosto. 60-90 dias pra reverter. | <strong>Hashtags:</strong> #disbiose #eixointestinopele #acne</p>
+  <hr>
+  <h3 id="8-dxzjrbaefoh-o-pior-alimento-a-noite-pode-ser-o-arroz-15k-eng">[#8] DXZJrBAEfoH — "O pior alimento à noite pode ser o arroz" (1.5k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXZJrBAEfoH/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> ataca alimento sagrado do brasileiro ("arroz") com timing específico ("à noite") — dobradinha de choque.<br>
+  - <strong>Estrutura:</strong> desarmar ("não é sobre demonizar") → fisiologia (sensibilidade à insulina reduzida à noite) → consequência (armazena gordura) → contraste (proteína + gordura ideal).</p>
+  <p><strong>Script adaptado 1 — "Janta de brasileira: onde tá o erro"</strong><br>
+  - HOOK: "🚨 Janta de arroz, feijão, bife e salada todo dia? Por que isso pode tá travando vc."<br>
+  - CORPO: "À noite, sensibilidade à insulina cai pela metade. O arroz que vc jantou vira glicose, dispara insulina, e vira gordura estocada — porque vc não vai queimar dormindo. Troca: proteína + gordura + vegetal. Saciedade igual. Efeito metabólico oposto."<br>
+  - CTA: "Se quer ajustar seu jantar, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> Arroz à noite vira gordura mais fácil que arroz no almoço. Fisiologia pura. | <strong>Hashtags:</strong> #jantasaudavel #rotinalimentar #circadiano</p>
+  <p><strong>Script adaptado 2 — "Por que você acorda de mau humor — é o carboidrato da véspera"</strong><br>
+  - HOOK: "Vc acorda de mau humor, com fome já de manhã? Pode ser o jantar de ontem."<br>
+  - CORPO: "Carboidrato alto à noite → pico glicose às 22h → queda brusca às 3h da manhã → cortisol dispara pra compensar → vc acorda 5h ansiosa, com fome. Troca o arroz por vegetal e gordura: glicose estável a noite toda, sono mais profundo, manhã de humor bom."<br>
+  - CTA: "Comenta AVALIAÇÃO pra gente olhar seu padrão."<br>
+  - <strong>LEGENDA:</strong> Mau humor matinal = jantar carbohidratado. Troca e vê a diferença em 5 dias. | <strong>Hashtags:</strong> #cortisolmatinal #sonoprofundo #humoremulher</p>
+  <p><strong>Script adaptado 3 — "O jantar ideal pra quem quer emagrecer dormindo"</strong><br>
+  - HOOK: "Existe um jantar que acelera sua perda de peso enquanto vc dorme. E é simples."<br>
+  - CORPO: "Peixe ou ovo + vegetal folhoso + gordura boa (azeite/abacate). Proteína estimula hormônio do crescimento durante o sono. Gordura mantém glicose estável. Vegetal dá fibra sem picar insulina. Resultado: corpo queima gordura estocada a noite toda."<br>
+  - CTA: "Quer um jantar ajustado pro seu caso? Comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> Jantar que emagrece dormindo: proteína + vegetal + gordura boa. Sem arroz. | <strong>Hashtags:</strong> #emagreceredormindo #hormoniodocrescimento #jantarleve</p>
+  <hr>
+  <h3 id="9-dxsftmxh-sr-sinais-de-carboidrato-demais-13k-eng">[#9] DXSftmXh-SR — "Sinais de carboidrato demais" (1.3k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXSftmXh-SR/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> lista de sintomas relatable que TODA mulher reconhece (barriga, fome, sono pós-almoço, cansaço, compulsão por doce).<br>
+  - <strong>Estrutura:</strong> sinais (lista identificável) → mecanismo (pico-queda) → consequência (RI, inflamação) → reframe ("não é força de vontade").</p>
+  <p><strong>Script adaptado 1 — "6 sinais que seu carboidrato tá demais (e vc nem percebeu)"</strong><br>
+  - HOOK: "Se vc tem 3 desses 6 sinais, seu carboidrato tá demais. Me acompanha."<br>
+  - CORPO: "1) Barriga aumentando só na frente; 2) fome 1-2h depois de comer; 3) sono pesado depois do almoço; 4) cansaço que café não resolve; 5) compulsão por doce à noite; 6) ganho de peso sem mudar hábito. Não é seu metabolismo 'lento'. É seu corpo em pico-queda o dia inteiro."<br>
+  - CTA: "Se 3+ bateu, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> 6 sinais de resistência insulínica silenciosa. Se 3 batem, precisa olhar. | <strong>Hashtags:</strong> #resistenciainsulinica #sinaisdocorpo #barrigateimosa</p>
+  <p><strong>Script adaptado 2 — "Compulsão por doce à noite não é ansiedade — é fisiologia"</strong><br>
+  - HOOK: "Toda noite vc ataca o chocolate? Não é ansiedade. É teu corpo pedindo glicose porque vc ensinou ele."<br>
+  - CORPO: "Quem come carboidrato o dia todo, o corpo espera glicose rápida à noite pra balancear serotonina. Corta o carbo refinado 7 dias — a compulsão some. Não é disciplina — é reprogramação metabólica."<br>
+  - CTA: "Quer reprogramar? Comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> Compulsão noturna = corpo treinado pra pico de insulina. Reversível em 7 dias. | <strong>Hashtags:</strong> #compulsaoporddoce #compulsaonoturna #reprogramametabolica</p>
+  <p><strong>Script adaptado 3 — "Sono depois do almoço: seu corpo pedindo socorro"</strong><br>
+  - HOOK: "Sono pesado depois do almoço é normal? NÃO. É sinal de alerta."<br>
+  - CORPO: "Almoço alto em carboidrato → pico glicose → pico insulina → queda brusca 1h depois → cérebro em modo economia. Vc fica letárgica. Almoço com proteína + gordura + vegetal = glicose estável = tarde com energia. Teste 5 dias."<br>
+  - CTA: "Se sono pós-almoço é seu caso, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> Sono pós-almoço = mensagem do corpo. Não é 'normal'. 5 dias ajustando o prato resolvem. | <strong>Hashtags:</strong> #energianotrabalho #produtividadefeminina</p>
+  <hr>
+  <h3 id="10-dxb8capb9y2-alimentos-que-dao-diabetes-tipo-2-12k-eng">[#10] DXb8CAPB9y2 — "Alimentos que dão diabetes tipo 2" (1.2k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXb8CAPB9y2/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> medo socializado (diabetes).<br>
+  - <strong>Estrutura:</strong> "não é 1 alimento isolado" → lista 6 ultraprocessados "inocentes" (pão, refri, iogurte, bolo caseiro, achocolatado, pizza) → sequência temporal (RI → pré → diabetes).</p>
+  <p><strong>Script adaptado 1 — "O achocolatado do seu filho pode ser o começo"</strong><br>
+  - HOOK: "🚨 O achocolatado que vc dá pro seu filho todo dia pode ser o começo da pré-diabetes DELE."<br>
+  - CORPO: "Toddy, Nescau, Milo: 10-15g de açúcar por copo. Dado todo dia, criança desenvolve resistência insulínica aos 8-12 anos. Pré-diabetes infantil dobrou nos últimos 10 anos. Não é exagero — é epidemiologia."<br>
+  - CTA: "Se vc é mãe e tá olhando o que dá pra seu filho, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> Pré-diabetes infantil dobrou. Achocolatado não é inocente. | <strong>Hashtags:</strong> #saudeinfantil #maeconsciente #prediabetes</p>
+  <p><strong>Script adaptado 2 — "6 alimentos 'inocentes' que viram diabetes em 10 anos"</strong><br>
+  - HOOK: "6 alimentos aparentemente inofensivos que, juntos, viram diabetes em 10-15 anos."<br>
+  - CORPO: "1) pão francês todo dia; 2) refrigerante (até zero); 3) iogurte adoçado; 4) bolo caseiro com açúcar; 5) achocolatado; 6) pizza toda sexta. Isoladamente, cada um é 'nada demais'. Juntos, viram padrão metabólico. Padrão repetido = resistência insulínica progressiva."<br>
+  - CTA: "Se 3+ estão na sua rotina, comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> 6 'inocentes' que juntos viram doença crônica. Se 3 estão na sua rotina, cuidado. | <strong>Hashtags:</strong> #diabetes2 #prevencao #ultraprocessados</p>
+  <p><strong>Script adaptado 3 — "A conta que ninguém quer fazer: açúcar acumulado"</strong><br>
+  - HOOK: "Vc faz ideia de quanto açúcar vc consome no ano sem perceber?"<br>
+  - CORPO: "2 cafés com 1 sachê = 20g. Iogurte adoçado = 12g. Biscoito = 8g. Refri no almoço = 40g. Total: 80g/dia. Multiplica por 365: 29kg de açúcar por ano. Seu fígado, pâncreas, intestino respondem a isso. Resistência insulínica é matemática."<br>
+  - CTA: "Comenta AVALIAÇÃO pra gente olhar seu caso."<br>
+  - <strong>LEGENDA:</strong> 29kg de açúcar por ano. Sem você perceber. Seu pâncreas percebeu. | <strong>Hashtags:</strong> #acucarescondido #pancreas #saudemetabolica</p>
+  <hr>
+  <h3 id="11-dxsmj6jbr8w-vida-fitness-e-frango-ovo-e-carne-moida-errado-12k-eng">[#11] DXSmj6JBR8W — "Vida fitness é frango, ovo e carne moída? Errado" (1.2k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DXSmj6JBR8W/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> ataca uma identidade cultural (vida fitness) + dieta clássica (frango-ovo-moída).<br>
+  - <strong>Estrutura:</strong> contradiz → compara frango vs carne vermelha nutricionalmente → conclui com frase-memorável ("não é sobre bater proteína, é nutrição completa").</p>
+  <p><strong>Script adaptado 1 — "Frango com batata doce: o ciclo que não funciona em mulher 35+"</strong><br>
+  - HOOK: "Vc tá na era 'frango-batata-brócolis' mas continua com compulsão à noite? Te explico por que."<br>
+  - CORPO: "Frango tem proteína, mas é pobre em ferro, zinco, B12, gordura boa. Mulher 35+ precisa desses nutrientes por questões hormonais. Sem eles, mesmo 'comendo limpinho', compulsão dispara, humor oscila, libido cai. Carne vermelha 2-3x/semana resolve muito mais que contar caloria."<br>
+  - CTA: "Comenta AVALIAÇÃO pra montar isso pro seu caso."<br>
+  - <strong>LEGENDA:</strong> Frango sem carne vermelha = nutrição incompleta. Mulher 35+ precisa de mais que proteína. | <strong>Hashtags:</strong> #mulher35mais #nutricaohormonal #ferroheme</p>
+  <p><strong>Script adaptado 2 — "Nutrientes que a vida fitness ignora"</strong><br>
+  - HOOK: "Sua nutricionista olhou 'quantas gramas de proteína' — esqueceu os 5 nutrientes que mais importam."<br>
+  - CORPO: "Ferro heme (só na carne vermelha e órgãos). Vitamina B12 (animal-exclusivo). Zinco (carne vermelha, frutos do mar). Colina (ovo inteiro). Ômega 3 (peixe gordo). Sem esses 5, sua massa magra não cresce, seu hormônio não equilibra, sua pele murcha."<br>
+  - CTA: "Quer saber se tá deficiente? Comenta AVALIAÇÃO."<br>
+  - <strong>LEGENDA:</strong> 5 nutrientes que a dieta padrão esquece. Ferro, B12, zinco, colina, ômega 3. | <strong>Hashtags:</strong> #nutrientesessenciais #dietareal #vitaminacompleta</p>
+  <p><strong>Script adaptado 3 — "Por que vc come bem mas continua com pele opaca e cabelo ralo"</strong><br>
+  - HOOK: "Vc come frango, batata, salada todo dia. Mesmo assim: cabelo ralo, pele opaca, unha que quebra. Te mostro o motivo."<br>
+  - CORPO: "Cabelo, pele e unha são o último da fila do seu corpo. Se vc só come 'saudável limitado' (frango-batata), falta ferro, zinco, biotina. O corpo prioriza órgãos vitais. Cabelo e pele recebem o resto — e quando falta, murcham. Proteína animal variada + gordura boa resolve."<br>
+  - CTA: "Comenta AVALIAÇÃO pra olhar ferritina, zinco e B12."<br>
+  - <strong>LEGENDA:</strong> Cabelo ralo + pele opaca = deficiência nutricional, não creme ruim. | <strong>Hashtags:</strong> #quedadecabelo #peleopaca #ferritinabaixa</p>
+  <hr>
+  <h2 id="plano-de-publicacao-sugerido-fase-1-scripts-de-reel">Plano de publicação sugerido (Fase 1 — scripts de Reel)</h2>
+  <h3 id="cadencia-recomendada">Cadência recomendada</h3>
+  <ul>
+  <li><strong>Reels:</strong> 4-5 por semana (2 temas/semana alternando)</li>
+  <li><strong>Horários:</strong> quarta 19h, sexta 12h, domingo 11h (baseado em engagement histórico do @institutovitalslim — validar)</li>
+  <li><strong>Duração alvo:</strong> 30-40s (conforme framework)</li>
+  </ul>
+  <h3 id="sequenciamento-sugerido-primeiras-4-semanas">Sequenciamento sugerido (primeiras 4 semanas)</h3>
+  <table>
+  <thead>
+  <tr>
+  <th>Semana</th>
+  <th>Reels publicados</th>
+  <th>Tema dominante</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>1</td>
+  <td>Scripts #5.1, #5.2, #6.1</td>
+  <td>Insulina/carboidrato (quebra de mito clássico)</td>
+  </tr>
+  <tr>
+  <td>2</td>
+  <td>Scripts #9.1, #9.2, #2.1</td>
+  <td>Sinais do corpo (relatable, gera identificação)</td>
+  </tr>
+  <tr>
+  <td>3</td>
+  <td>Scripts #1.1, #11.1, #6.3</td>
+  <td>Nutrientes + gordura boa (base da construção)</td>
+  </tr>
+  <tr>
+  <td>4</td>
+  <td>Scripts #3.3, #7.1, #8.1</td>
+  <td>Histórias reais / conexões (intestino-pele, melasma)</td>
+  </tr>
+  </tbody>
+  </table>
+  <h2 id="proximos-passos-fase-2b-e-2c">Próximos passos (Fase 2.B e 2.C)</h2>
+  <p>Quando você aprovar os scripts acima, sigo com:<br>
+  - <strong>Fase 2.B:</strong> briefing dos 10 carrosseis do <strong>Tema 1</strong> (Açúcar &amp; carboidrato), cada um explorando 1 ângulo diferente do tema<br>
+  - <strong>Fase 2.C:</strong> 100 imagens NanoBanana + legendas com hashtags + pergunta explícita "Autorizo postagem via Buffer?"</p>
+  <p>Depois, tema 2 e 3 do dr.marlonbatista, depois passamos pra @dra.camilapaes, depois @dra.patriciacavalcante.</p>
+  <hr>
+  <p><strong>Status:</strong> Fase 2.A de @dr.marlonbatista entregue. Aguardando sua aprovação dos scripts antes de seguir pra 2.B.</p>
+
+  <footer>
+    Gerado automaticamente pelo pipeline de conteúdo do IVS • Fonte canônica: <a href="https://github.com/institutovitalslim/cerebro-vital-slim">GitHub cerebro-vital-slim</a>
+  </footer>
+</main>
+</body>
+</html>
