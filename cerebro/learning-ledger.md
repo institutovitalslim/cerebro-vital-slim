@@ -78,3 +78,24 @@ Popular `cerebro/patient-marketing-context.md` com dados reais da clínica
 
 ### Lição
 Sempre validar a renderização de caracteres especiais e o posicionamento de elementos visuais antes de entregar carrosséis finais.
+
+---
+
+## 2026-04-23 - Omie: serviço deve ser confirmado antes de emitir NFS-e
+
+### Problema
+A NFS-e do caso de Mario Gomes de Abreu Filho retornou com rejeição da prefeitura porque a OS foi criada com serviço incorreto para o caso.
+
+### Aprendizado
+- Em emissão de OS/NFS-e no Omie, nunca criar ou assumir serviço por conta própria.
+- Sempre perguntar ao Tiaro qual serviço/cadastro de serviço do Omie deve ser usado.
+- Serviço parecido ou descrição improvisada pode passar na criação da OS e falhar depois na autorização da NFS-e.
+
+### Regras reforçadas
+- Confirmar explicitamente o banco antes da emissão.
+- Confirmar explicitamente o serviço exato antes da emissão.
+- Não inventar novo serviço textual quando o correto é usar um cadastro específico já existente no Omie, como `PROGRAMA DE ACOMPANHAMENTO INTENSIVO`.
+- Quando a emissão for com nota fiscal, habilitar sempre `Enviar o link da NFS-e gerada na prefeitura`.
+- Em emissão com NFS-e, o serviço deve ser selecionado pela lista/cadastro de serviços do Omie, nunca digitado manualmente, porque o cadastro da lista puxa os dados fiscais corretos.
+- Mapeamentos confirmados: `Tricologia` = `SRV00016`; `Programa de Acompanhamento Intensivo` = item da lista correspondente, com referência visual apontando `SRV00013`.
+- Regra técnica validada por teste real: para a OS puxar a descrição fiscal completa do serviço cadastrado, `ServicosPrestados` precisa enviar o `nCodServico` do cadastro do serviço (`nCodServ`), e não apenas descrição/campos montados manualmente.

@@ -23,9 +23,11 @@
 
 ### Omie
 - `cerebro/omie.md`
+- `cerebro/omie-servicos.md`
 - `cerebro/verdades-operacionais.md`
 - `skills/omie-cadastro-paciente/SKILL.md`
 - Emissões de proposta/OS com boleto devem seguir os campos estruturados documentados em `cerebro/omie.md`
+- Emissões com NFS-e devem consultar o cadastro de serviços em `cerebro/omie-servicos.md`
 
 ### WhatsApp / Z-API
 - `cerebro/whatsapp-zapi.md`

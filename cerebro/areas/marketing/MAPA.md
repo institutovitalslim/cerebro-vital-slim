@@ -12,6 +12,8 @@ marketing/
 │   └── lessons.md         ← Lições aprendidas
 ├── rotinas/
 │   └── relatorio-campanha-semanal.md
+├── ferramentas/
+│   └── yarn-co.md         ← Busca trechos de vídeo por frase (B-roll, hooks)
 ├── skills/
 │   └── _index.md
 ├── projetos/
@@ -36,6 +38,7 @@ marketing/
 | `contexto/people.md` | Responsáveis e estrutura de decisão |
 | `contexto/decisions.md` | Decisões tomadas na área |
 | `contexto/lessons.md` | Lições aprendidas |
+| `ferramentas/` | Ferramentas externas da área (yarn.co, etc.) |
 | `rotinas/` | Crons configurados (relatório semanal) |
 | `skills/` | Skills da área (ver `_index.md`) |
 | `projetos/` | Projetos ativos e concluídos |
