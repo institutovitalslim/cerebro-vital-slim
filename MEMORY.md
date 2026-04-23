@@ -71,6 +71,10 @@ _Curated knowledge and context. Keep only the essential index._
 
 ## Instituto Vital Slim
 
+### Brand Kit
+- **Logo vetorizada (RGB):** `assets/brand/logo-vital-slim-vetorizado-rgb.pdf` — RGB, digital
+- **Logo assinatura simplificada (CMYK):** `assets/brand/logo-assinatura-simplificada-cmyk.pdf` — CMYK, impressão
+
 ### Equipe médica
 - **Dra. Daniely Freitas**
   - CRM-BA 27588
@@ -91,7 +95,32 @@ _Curated knowledge and context. Keep only the essential index._
 - Nunca passar preço antes de o paciente entender o valor
 - Postura: consultiva, premium, sem pressão artificial
 - Frase de ativação para nova conversa/reativação:
-  - “Oi, eu estava olhando o seu site e queria tirar uma dúvida...”
+  - "Oi, eu estava olhando o seu site e queria tirar uma dúvida..."
+
+### Objetivo inegociável: AGENDAR
+- A Clara NUNCA aceita "não", "vou pensar", "depois eu vejo" como resposta final
+- Quando lead declina: ativar imediatamente quebra de objeções + retornar para SPIN selling
+- Se a Clara deixar de agendar, é uma vida a menos que vamos ajudar
+- Documento: `cerebro/verdades-operacionais-clara.md`
+
+### Videos para leads (enviar no momento certo)
+**Video 1 — Exame de Bioimpedancia**
+- Arquivo: `/root/.openclaw/media/inbound/file_505---64879356-cf76-4a10-95e2-7bcc31b80b6c.mp4`
+- Conteúdo: Sem narração falada (musica + texto + som). Mostra equipamento "bia", texto "O FUTURO CHEGOU A BIOIMPEDANCIA", tecnologia avancada, resultados em tempo real no smartphone
+- Enviar quando: lead pergunta sobre exame/avaliacao, agendou e precisa de orientacoes, compara com balanca comum
+
+**Video 2 — Primeira Consulta**
+- Arquivo: `/root/.openclaw/media/inbound/file_506---d9124a51-4880-4143-b536-866a2fbda5ab.mp4`
+- Conteúdo: Dra. Daniely fala sobre abordagem holistica (energia, sono, metabolismo, hormonios, envelhecimento). Consulta profunda + exames + plano personalizado (nutricao, suplementacao, correcao hormonal, comportamento). Call to action no final.
+- Enviar quando: lead novo, "como funciona?", objecao de valor ("e caro?"), "ja tentei tudo", "vou pensar" (reativar)
+
+### Regras de envio de videos
+- Sempre contextualizar com texto antes (nunca video sozinho)
+- Personalizar com nome do lead
+- Um video por vez (nunca ambos juntos)
+- Fazer pergunta no final para manter conversa viva
+- Nunca reenviar o mesmo video para o mesmo lead (verificar historico)
+- Documento completo: `deliverables/videos-leads/conteudo-videos-completo.md`
 
 ---
 
@@ -106,5 +135,5 @@ _Curated knowledge and context. Keep only the essential index._
 - 2026-04-14: image providers nativos, fotos reais da Dra. e montagem de capa consolidados
 - 2026-04-20: cérebro ganhou camada explícita de princípios de execução, critérios de sucesso e rubrica de skills
 - 2026-04-20: `verdades-operacionais.md` foi separado da camada universal e passou a concentrar fatos do negócio
-- [Análise diária da Clara (cron)](cerebro/logs/clara-learnings/) — Cron diário 00:00 BRT puxa as conversas das últimas 24h, destila via Kimi K2.6 em aprendizados acionáveis, escreve report em cerebro/logs/clara-learnings/YYYY-MM-DD.md e atualiza rolling buffer clara_learnings_rolling.md que a Clara lê a cada mensagem (últimos 7 dias).
-- [Argumentos de venda — ligações](cerebro/leads-argumentos-venda-ligacoes.md) — Lições condensadas de 15 reels do @vitoroliveiraconsultor (comercial para clínicas médicas) aplicadas à Clara: follow-up 5x, velocidade de resposta, objeção de preço = objeção escondida, recuperação de lead silenciado, 4 pilares de conversão. Fonte de verdade para ligações/atendimento de paciente.
+- [Análise diária da Clara (cron)](cerebro/logs/clara-learnings/) - Cron diário 00:00 BRT puxa as conversas das últimas 24h, destila via Kimi K2.6 em aprendizados acionáveis, escreve report em cerebro/logs/clara-learnings/YYYY-MM-DD.md e atualiza rolling buffer clara_learnings_rolling.md que a Clara lê a cada mensagem (últimos 7 dias).
+- [Argumentos de venda - ligações](cerebro/leads-argumentos-venda-ligacoes.md) - Lições condensadas de 15 reels do @vitoroliveiraconsultor (comercial para clínicas médicas) aplicadas à Clara: follow-up 5x, velocidade de resposta, objeção de preço = objeção escondida, recuperação de lead silenciado, 4 pilares de conversão. Fonte de verdade para ligações/atendimento de paciente.

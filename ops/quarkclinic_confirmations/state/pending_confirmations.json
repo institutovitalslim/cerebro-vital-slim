@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-04-22T16:00:19.486360-03:00",
+  "generatedAt": "2026-04-23T16:00:27.224535-03:00",
   "lastRunMode": "next-morning",
-  "lastRunDate": "23-04-2026",
+  "lastRunDate": "24-04-2026",
   "items": [
     {
       "phone": "5571993245545",
@@ -22,15 +22,6 @@
       "turno": "afternoon"
     },
     {
-      "phone": "557193873221",
-      "nome": "Diogo de Jesus Melo",
-      "agendamentoId": 456034159,
-      "dataHoraInicio": "23-04-2026T09:00",
-      "messageId": "37687E85A27B11B4B2EB",
-      "status": "confirmed",
-      "turno": "morning"
-    },
-    {
       "phone": "5571993245545",
       "nome": "FRANCISCO DE ASSIS DE LIMA",
       "agendamentoId": 448548759,
@@ -45,6 +36,60 @@
       "agendamentoId": 448548135,
       "dataHoraInicio": "23-04-2026T11:00",
       "messageId": "3EB05427B1F53EE008A07E",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571991025202",
+      "nome": "MARIO GOMES DE ABREU FILHO",
+      "agendamentoId": 455979531,
+      "dataHoraInicio": "23-04-2026T15:09",
+      "messageId": "3EB0ED273DAF364D7CA771",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991175387",
+      "nome": "ROBERTA FRANCO DE CARVALHO PINHO",
+      "agendamentoId": 454947956,
+      "dataHoraInicio": "24-04-2026T08:30",
+      "messageId": "3EB0A6FB6C696214322577",
+      "status": "confirmed",
+      "turno": "morning"
+    },
+    {
+      "phone": "5561981640792",
+      "nome": "Erick Magalhaes Santos",
+      "agendamentoId": 456139287,
+      "dataHoraInicio": "24-04-2026T10:00",
+      "messageId": "DE41267AA19EB1873A85",
+      "status": "confirmed",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571988365569",
+      "nome": "Cíntia Souza Japiassu de Oliveira",
+      "agendamentoId": 456060889,
+      "dataHoraInicio": "24-04-2026T10:10",
+      "messageId": "3EB0C6A490D0BD8E9C6C6F",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571993652820",
+      "nome": "Tainara Selene Japiassu de França",
+      "agendamentoId": 456060838,
+      "dataHoraInicio": "24-04-2026T10:20",
+      "messageId": "3EB075B342DBA4B83D24F7",
+      "status": "confirmed",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571991262370",
+      "nome": "Tainá Japiassu Teles",
+      "agendamentoId": 455486788,
+      "dataHoraInicio": "24-04-2026T10:30",
+      "messageId": "3EB0509C85AF9E263F85F7",
       "status": "sent",
       "turno": "morning"
     }

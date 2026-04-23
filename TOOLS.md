@@ -38,3 +38,8 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
+
+### LLMs via OpenRouter
+- OpenRouter tem grande maioria das LLMs disponiveis
+- Usar para qualquer atividade quando necessario
+- Fallback universal quando modelo padrao nao e suficiente

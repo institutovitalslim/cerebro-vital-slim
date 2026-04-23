@@ -54,8 +54,8 @@ Ao emitir proposta/OS no Omie com cobrança por boleto bancário, os campos crí
 - Se a emissão depender de banco/conta corrente, perguntar explicitamente ao Tiaro qual banco deve ser usado antes de criar a OS ou faturar, sem assumir automaticamente o banco do caso anterior.
 - Se a emissão depender de serviço/cadastro de serviço no Omie, perguntar explicitamente ao Tiaro qual serviço exato deve ser usado. Nunca inventar descrição de serviço e nunca assumir serviço parecido, porque isso pode rejeitar a NFS-e na prefeitura.
 
-### Regra de serviço para nota fiscal
-Em emissão com NFS-e, o serviço deve ser selecionado pela lista/cadastro de serviços do Omie, nunca digitado manualmente. O item da lista é o que carrega os dados fiscais corretos para evitar rejeição da prefeitura.
+### Regra de serviço para orçamento, OS e nota fiscal
+Em orçamento, criação de OS e emissão com NFS-e, o serviço deve ser selecionado pela lista/cadastro de serviços do Omie, nunca digitado manualmente. O item da lista é o que carrega os dados operacionais e fiscais corretos e evita divergência entre proposta, OS e nota.
 
 Fonte canônica da lista de serviços:
 - `cerebro/omie-servicos.md`
