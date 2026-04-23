@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seu Plano de Saúde em Movimento — Instituto Vital Slim</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#9F8844;
+    --brown:#574717;
+    --dark:#1a1a1a;
+    --light:#f7f5f0;
+    --white:#ffffff;
+    --alert:#c0392b;
+    --warn:#e67e22;
+    --ok:#27ae60;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;font-family:'Montserrat',sans-serif;color:var(--dark);background:var(--light)}
+  section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:3rem 1.5rem;position:relative}
+  .container{max-width:980px;width:100%}
+  h1,h2,h3{font-family:'Playfair Display',serif;color:var(--brown)}
+  h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15}
+  h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:1.2rem}
+  h3{font-size:clamp(1.1rem,2.5vw,1.4rem);margin-bottom:.6rem}
+  p{line-height:1.7;margin-bottom:1rem;font-weight:400}
+  .gold{color:var(--gold)}
+  .small{font-size:.9rem;opacity:.85}
+
+  /* Cover */
+  #cover{background:linear-gradient(135deg, var(--brown) 0%, #2e240e 100%);color:var(--white);text-align:center}
+  #cover h1{color:var(--white)}
+  #cover .subtitle{font-weight:300;letter-spacing:.08em;text-transform:uppercase;margin-top:.8rem;font-size:.95rem;opacity:.9}
+  #cover .name{display:inline-block;margin-top:1.6rem;padding:.6rem 1.4rem;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-weight:600}
+  .logo-mark{width:64px;height:64px;margin-bottom:1.2rem;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold)}
+
+  /* Cards */
+  .grid{display:grid;gap:1rem;margin-top:1.2rem}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .card{background:var(--white);border-radius:12px;padding:1.4rem 1.6rem;box-shadow:0 8px 24px rgba(87,71,23,.08);border-left:5px solid var(--gold)}
+  .card.alert{border-left-color:var(--alert)}
+  .card.warn{border-left-color:var(--warn)}
+  .card.ok{border-left-color:var(--ok)}
+  .card h3{font-size:1.05rem;margin-bottom:.3rem}
+  .card .value{font-size:1.6rem;font-weight:700;color:var(--brown);margin:.2rem 0}
+  .card .unit{font-size:.8rem;opacity:.7}
+  .card .badge{display:inline-block;padding:.25rem .55rem;border-radius:999px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:.4rem}
+  .badge-alert{background:rgba(192,57,43,.1);color:var(--alert)}
+  .badge-warn{background:rgba(230,126,34,.1);color:var(--warn)}
+  .badge-ok{background:rgba(39,174,96,.1);color:var(--ok)}
+
+  /* Sections */
+  #problema{background:var(--white)}
+  #implicacao{background:#f0ece3}
+  #solucao{background:linear-gradient(180deg, var(--white) 0%, var(--light) 100%)}
+  #cta{background:var(--brown);color:var(--white);text-align:center}
+  #cta h2{color:var(--gold)}
+
+  /* Lists */
+  ul{list-style:none;margin-top:.6rem}
+  ul li{padding:.45rem 0;padding-left:1.6rem;position:relative}
+  ul li::before{content:"•";position:absolute;left:0;color:var(--gold);font-weight:700}
+
+  /* Big number */
+  .big-number{font-size:clamp(3rem,8vw,5.5rem);font-weight:700;color:var(--gold);line-height:1}
+  .big-label{font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;opacity:.8;margin-top:.4rem}
+
+  /* Quote */
+  .quote{border-left:3px solid var(--gold);padding-left:1rem;margin:1.2rem 0;font-style:italic;opacity:.9}
+
+  /* CTA button */
+  .btn{display:inline-block;margin-top:1.4rem;padding:1rem 2.2rem;background:var(--gold);color:var(--white);text-decoration:none;border-radius:999px;font-weight:700;letter-spacing:.02em;box-shadow:0 10px 30px rgba(159,136,68,.35);transition:transform .2s}
+  .btn:hover{transform:translateY(-2px)}
+
+  /* Footer note */
+  .footer-note{font-size:.75rem;opacity:.6;margin-top:2rem;text-align:center}
+
+  /* Stepper */
+  .step{display:flex;gap:1rem;align-items:flex-start;margin:1.2rem 0}
+  .step-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+  .step-content h4{margin-bottom:.2rem;color:var(--brown)}
+  .step-content p{margin:0;font-size:.95rem}
+
+  @media (max-width:640px){
+    section{padding:2rem 1rem}
+    .grid-2,.grid-3{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. SITUAÇÃO — Capa -->
+<section id="cover">
+  <div class="container">
+    <div style="display:flex;justify-content:center"><div class="logo-mark">V</div></div>
+    <h1>Seu Plano de Saúde<br><span class="gold">em Movimento</span></h1>
+    <div class="subtitle">Instituto Vital Slim · Acompanhamento Individualizado</div>
+    <div class="name">Paciente: Mário Gomes de Abreu Filho</div>
+    <p style="margin-top:1.6rem;opacity:.9;max-width:640px;margin-left:auto;margin-right:auto">
+      Você buscou ajuda para emagrecer. Esse primeiro passo já mostra compromisso com a sua saúde.<br>
+      Hoje, vamos olhar juntos o que seus exames dizem — e traçar o caminho mais seguro para transformar esses números em resultado real.
+    </p>
+  </div>
+</section>
+
+<!-- 2. PROBLEMA — O que os exames revelam -->
+<section id="problema">
+  <div class="container">
+    <h2>O que seus exames estão <span class="gold">sinalizando</span></h2>
+    <p>A maioria dos resultados está equilibrada, o que é bom. Porém, <strong>alguns marcadores pedem atenção imediata</strong>, especialmente para quem quer emagrecer com saúde e manter o resultado a longo prazo.</p>
+
+    <div class="grid grid-2">
+      <div class="card alert">
+        <h3>Triglicerídeos</h3>
+        <div class="value">431 <span class="unit">mg/dL</span></div>
+        <div class="badge badge-alert">Muito acima do ideal</div>
+        <p class="small">Referência: &lt;150. Esse valor indica excesso de gordura circulante, com impacto direto no fígado, pâncreas e risco cardiovascular.</p>
+      </div>
+      <div class="card alert">
+        <h3>Colesterol Total</h3>
+        <div class="value">237 <span class="unit">mg/dL</span></div>
+        <div class="badge badge-alert">Acima da meta</div>
+        <p class="small">Meta terapêutica: &lt;190. O colesterol elevado acelera o depósito de placas nas artérias.</p>
+      </div>
+      <div class="card warn">
+        <h3>LDL (Colesterol "Ruim")</h3>
+        <div class="value">136 <span class="unit">mg/dL</span></div>
+        <div class="badge badge-warn">Acima do alvo</div>
+        <p class="small">Alvo intermediário: &lt;100. Principal responsável pelo endurecimento das artérias.</p>
+      </div>
+      <div class="card warn">
+        <h3>Colesterol Não-HDL</h3>
+        <div class="value">194 <span class="unit">mg/dL</span></div>
+        <div class="badge badge-warn">Acima do alvo</div>
+        <p class="small">Alvo: &lt;130. Reflete toda a carga aterogênica do sangue.</p>
+      </div>
+      <div class="card alert">
+        <h3>Ácido Úrico</h3>
+        <div class="value">8,5 <span class="unit">mg/dL</span></div>
+        <div class="badge badge-alert">Elevado</div>
+        <p class="small">Referência: 3,5–7,2. Aumenta risco de gota, pedras nos rins e está ligado à resistência insulínica.</p>
+      </div>
+      <div class="card warn">
+        <h3>Filtração Glomerular (eGFR)</h3>
+        <div class="value">88 <span class="unit">mL/min</span></div>
+        <div class="badge badge-warn">Levemente reduzida</div>
+        <p class="small">Ideal: &gt;90. Indica que os rins já trabalham com uma reserva menor.</p>
+      </div>
+      <div class="card alert">
+        <h3>Proteínas na Urina</h3>
+        <div class="value">+++</div>
+        <div class="badge badge-alert">Presença anormal</div>
+        <p class="small">Proteínas na urina não deveriam aparecer. Associada à pressão do excesso de peso e risco renal.</p>
+      </div>
+      <div class="card ok">
+        <h3>HDL (Colesterol "Bom")</h3>
+        <div class="value">43 <span class="unit">mg/dL</span></div>
+        <div class="badge badge-ok">Na fronteira</div>
+        <p class="small">Referência: &gt;40. Está no limite. A perda de peso e atividade física costumam elevar esse número.</p>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:1.6rem">
+      “Esses exames mostram que o seu corpo já está pedindo ajuda. A boa notícia é que todos esses marcadores são <strong>reversíveis</strong> com o tratamento certo.”
+    </div>
+  </div>
+</section>
+
+<!-- 3. IMPLICAÇÃO — O que acontece se não agirmos -->
+<section id="implicacao">
+  <div class="container">
+    <h2>O que isso significa para o seu <span class="gold">futuro</span></h2>
+    <p>Sem intervenção direcionada, esses números tendem a piorar. Não por falta de vontade, mas porque o metabolismo precisa de suporte clínico estruturado.</p>
+
+    <div class="grid grid-3" style="margin-top:1.4rem">
+      <div class="card" style="border-left-color:var(--brown)">
+        <h3 style="color:var(--brown)">Fígado e Pâncreas</h3>
+        <p class="small">Triglicerídeos acima de 400 estão fortemente associados à esteatose hepática e ao risco de pancreatite. O fígado gorduroso silencioso evolui sem dor.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--brown)">
+        <h3 style="color:var(--brown)">Coração e Artérias</h3>
+        <p class="small">Colesterol LDL e não-HDL elevados aceleram a formação de placas. Aos 42 anos, ainda dá tempo de reverter esse processo antes que ele se torne irreversível.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--brown)">
+        <h3 style="color:var(--brown)">Rins</h3>
+        <p class="small">Proteínas na urina + eGFR 88 sugerem que os rins já sentem o peso do metabolismo. Sem cuidado, a função renal declina de forma silenciosa.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--brown)">
+        <h3 style="color:var(--brown)">Articulações</h3>
+        <p class="small">Ácido úrico alto predispõe a crises de gota e formação de cristais nas articulações, além de pedras nos rins.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--brown)">
+        <h3 style="color:var(--brown)">Resistência Insulínica</h3>
+        <p class="small">O conjunto de alterações lipídicas + ácido úrico + peso excesso é o cenário clássico da resistência insulínica, porta de entrada para o diabetes tipo 2.</p>
+      </div>
+      <div class="card" style="border-left-color:var(--brown)">
+        <h3 style="color:var(--brown)">Qualidade de Vida</h3>
+        <p class="small">Fadiga, sono fragmentado, queda de libido e humor alterado são frequentes nesse perfil metabólico — e melhoram drasticamente com a reversão.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem">
+      <div class="big-number">42 anos</div>
+      <div class="big-label">A idade ideal para reverter</div>
+      <p style="max-width:640px;margin:1rem auto 0">Aos 42, você ainda tem alta capacidade de regeneração. Mas essa janela não fica aberta para sempre. Quanto antes agirmos, menor o custo biológico e maior o resultado sustentável.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SOLUÇÃO — Need-Payoff -->
+<section id="solucao">
+  <div class="container">
+    <h2>O caminho que <span class="gold">transforma esses números</span></h2>
+    <p>O Instituto Vital Slim não oferece apenas uma dieta. Oferecemos um <strong>Programa de Acompanhamento Intensivo de Emagrecimento</strong> construído sobre três pilares: medicina de precisão, nutrição individualizada e mudança de comportamento sustentável.</p>
+
+    <div style="margin-top:1.4rem">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Avaliação Integrativa Completa</h4>
+          <p>Você já fez a parte mais difícil: os exames. Agora vamos cruzar esses dados com sua história clínica, hábitos, sono, estresse e composição corporal para desenhar o plano certo para o <em>seu</em> metabolismo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Plano Personalizado de Emagrecimento</h4>
+          <p>Nutrição de precisão, correção hormonal quando indicada, suplementação estratégica e acompanhamento médico periódico. Cada etapa ajustada conforme sua evolução.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Monitoramento Contínuo e Resultados Mensuráveis</h4>
+          <p>Você não vai ficar no escuro. A cada etapa refazemos exames específicos para comprovar a melhora: triglicerídeos, colesterol, função renal, inflamação e, claro, composição corporal.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Sustentabilidade a Longo Prazo</h4>
+          <p>O maior risco do emagrecimento é o efeito sanfona. Nosso programa inclui reeducação comportamental e acompanhamento de manutenção para que o resultado seja para a vida toda.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:1.6rem">
+      <div class="card">
+        <h3>O que esperar em 90 dias</h3>
+        <ul>
+          <li>Redução de 30–50% nos triglicerídeos</li>
+          <li>Queda significativa no colesterol LDL e não-HDL</li>
+          <li>Normalização do ácido úrico</li>
+          <li>Melhora da função renal e redução da proteinúria</li>
+          <li>Perda de gordura visceral mensurável</li>
+          <li>Mais energia, foco e qualidade de sono</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Por que funciona</h3>
+        <ul>
+          <li>Abordagem médica, não comercial</li>
+          <li>Protocolos baseados em evidência científica</li>
+          <li>Acompanhamento real, não automação</li>
+          <li>Correção das causas, não só dos sintomas</li>
+          <li>Flexibilidade para o seu ritmo de vida</li>
+          <li>Equipe multidisciplinar dedicada</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CTA -->
+<section id="cta">
+  <div class="container">
+    <h2>Vamos começar o seu <span class="gold">programa hoje?</span></h2>
+    <p style="max-width:700px;margin-left:auto;margin-right:auto;opacity:.9">
+      Seus exames já mostraram o problema.<br>
+      Nosso método já mostrou a solução em centenas de pacientes.<br>
+      Agora falta apenas uma decisão: <strong>iniciar.</strong>
+    </p>
+    <div style="margin-top:1.2rem">
+      <a class="btn" href="#">Quero iniciar meu acompanhamento</a>
+    </div>
+    <p class="small" style="margin-top:1.2rem;opacity:.7">
+      Instituto Vital Slim<br>
+      Dra. Daniely Freitas · CRM-BA 27588<br>
+      Dra. Patrícia Fabrini · Dermatologista SBD
+    </p>
+    <div class="footer-note">Apresentação médico-institucional para uso interno. Não substitui consulta médica.</div>
+  </div>
+</section>
+
+</body>
+</html>
