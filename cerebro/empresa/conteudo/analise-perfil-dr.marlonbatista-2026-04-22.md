@@ -8,11 +8,15 @@
 
 **Por que viraliza:** combina (1) provocação de mito consolidado + (2) explicação fisiológica acessível + (3) validação científica + (4) CTA de comunidade. Engaja por tensão ("está errado!"), retém por aprendizado, converte por promessa concreta.
 
-## Clusterização em 3 temas
+## Clusterização em 3 temas (atualizada após substituição de reels 3 e 4)
 
 - **T1 — Açúcar & carboidrato como raiz metabólica** (reels 2, 5, 8, 9, 10)
-- **T2 — Reabilitação da gordura natural** (reels 1, 6, 11)
-- **T3 — Sinais que o corpo dá** (reels 3, 4, 7)
+- **T2 — Gordura natural + mitos vasculares** (reels 1, **3 novo**, 6, 11)
+- **T3 — Medicina metabólica + sinais do corpo** (reels **4 novo**, 7)
+
+> Substituição feita em 2026-04-23 (a pedido do Tiaro, via feedback APROVO/AJUSTAR): reels 3 original (reação vaga "👀👀👀") e 4 original (cena familiar "Lucas") foram trocados por:
+> - Novo #3: DXRbEQRBpjc — "O que entope as veias" (4.6k eng, tema: gordura natural vs indústria)
+> - Novo #4: DXPEEBNBtZJ — "Nova geração das canetas GLP-1/Retatrutida" (3.4k eng, tema: medicação injetável + obesidade como doença)
 
 ---
 
@@ -74,57 +78,59 @@
 
 ---
 
-### [#3] DXZyuGkhCHa — "👀👀👀" (2.6k eng, caption vaga — provavelmente reação visual)
-🔗 https://instagram.com/reel/DXZyuGkhCHa/
+### [#3] DXRbEQRBpjc — "O que entope as veias? Não é gordura natural" (4.6k eng)
+🔗 https://instagram.com/reel/DXRbEQRBpjc/
 
 **Por que viralizou:**
-- **Hook puramente visual:** provavelmente reação de surpresa ou antes-e-depois. Caption mínima gera curiosidade — usuário clica por FOMO.
-- **Mecânica:** usa o "mistério" pra retenção — se vc quer saber o que os olhos veem, precisa assistir até o fim.
+- **Hook:** pergunta universal que todo mundo tem ("o que entope veias?") + resposta contraintuitiva imediata.
+- **Estrutura:** desmonte do mito (gordura natural ≠ vilã) → aponta vilão real (margarina, frituras, ultraprocessados, biscoito recheado) → explica mecanismo inflamatório (LDL oxidado, estresse oxidativo, resistência insulínica) → ancora em paper de aterosclerose.
+- **Retention driver:** toca num medo universal (infarto/AVC) e reframe em 30s, inverte décadas de conselho nutricional popular.
 
-**Script adaptado 1 — "Reação a antes-e-depois de paciente" (ÉTICA: sem antes-depois real; usar recurso narrativo)**
-- HOOK: [Dra. Daniely reagindo pra câmera com mão na boca] "👀 Vcs precisam ver como essa paciente tá 4 meses depois."
-- CORPO: "Chegou aqui no IVS há 4 meses dizendo: 'já tentei de tudo, tô cansada'. Hoje: dormindo bem, sem compulsão noturna, 8kg a menos — mas o mais importante: ela voltou a se reconhecer no espelho. Não foi dieta milagrosa. Foi avaliação metabólica + hormonal + acompanhamento."
-- CTA: "Se vc tá nesse ponto, comenta AVALIAÇÃO."
-- **LEGENDA:** 4 meses. Não foi milagre. Foi método. | **Hashtags:** #transformacaoreal #acompanhamentomedico #mulher40mais
+**Script adaptado 1 — "O colesterol alto não é sempre perigoso"**
+- HOOK (0-3s): [Dra. Daniely séria, apontando pra câmera] "🚨 Vc tem colesterol alto e tá apavorada? Calma — olhar só o número pode te levar pra tratamento errado."
+- CORPO (3-25s): "Colesterol isoladamente não diz nada. O que importa é o ambiente inflamatório do seu corpo. Se vc tem glicose descontrolada, triglicerídeos altos e PCR elevado, aí sim seu LDL fica perigoso. Se não, pode tá até protetor."
+- CTA (25-35s): "Na consulta aqui no IVS a gente olha esse quadro completo — não só o colesterol. Comenta AVALIAÇÃO que eu te explico."
+- **LEGENDA:** Colesterol alto por si só é um número. O que importa é o contexto inflamatório. Vc olha isso ou só o valor? | **Hashtags:** #colesterol #saudecardiovascular #prevencaocardiovascular #nutrologia #institutovitalslim #dradaniely
 
-**Script adaptado 2 — "Reação: o que ninguém mostra sobre emagrecimento"**
-- HOOK: "👀 Isso aqui é o que ninguém te mostra quando fala de emagrecimento."
-- CORPO: "A parte bonita é a foto depois. Mas o que acontece no meio é: noite mal dormida, pele mudando, libido mexida, humor oscilando. Por isso consulta em clínica séria não é só cardápio — é avaliar esses 'efeitos colaterais' do processo."
-- CTA: "Comenta AVALIAÇÃO pra saber como a gente conduz isso."
-- **LEGENDA:** Emagrecer afeta sono, humor, libido, pele. Quem não acompanha isso, sofre. Aqui, sim. | **Hashtags:** #emagrecercomsaude #hormonal #sonoehumor
+**Script adaptado 2 — "Os 4 verdadeiros vilões das veias"**
+- HOOK: "Vc parou de comer manteiga, mas continua com risco cardiovascular alto? Te explico os 4 vilões que ninguém fala."
+- CORPO: "1) Açúcar refinado oxida o LDL. 2) Óleos vegetais refinados (soja, canola) inflamam endotélio. 3) Ultraprocessados destroem microbiota. 4) Estresse crônico + sono ruim elevam cortisol e pressão. Manteiga no pão integral é menor risco do que biscoito 'zero gordura'."
+- CTA: "Se vc tá preocupada com coração, comenta AVALIAÇÃO — a gente olha o quadro inflamatório completo."
+- **LEGENDA:** 4 vilões reais do coração que a mídia não fala. Manteiga não tá entre eles. | **Hashtags:** #inflamacao #ldl #nutricaofuncional #saudeintegrativa
 
-**Script adaptado 3 — "Reação sincera: isso me marcou"**
-- HOOK: [Dra. séria, sem sorriso] "Vou ser sincera: isso aqui me marcou muito."
-- CORPO: "Atendi 3 pacientes na última semana com o mesmo padrão: 35-45 anos, mães, já tinham feito 4+ nutricionistas. Todas diziam a mesma frase: 'Dra., acho que o problema sou eu'. O problema NUNCA foi elas. Era a ausência de avaliação metabólica e hormonal. Em 30 dias, as 3 estavam dormindo melhor. Em 90, as 3 emagrecendo com consistência. Não era falta de disciplina."
-- CTA: "Se vc já disse 'acho que o problema sou eu' — comenta AVALIAÇÃO."
-- **LEGENDA:** 3 pacientes, 1 padrão. A frase 'acho que o problema sou eu'. Nunca é. | **Hashtags:** #maededois #frustracaoalimentar #compulsao
+**Script adaptado 3 — "Por que a Dra. Daniely olha PCR e homocisteína, não só colesterol"**
+- HOOK: "Na sua última consulta, pediram proteína C reativa ou homocisteína? Se não, vc tá sendo avaliada com ferramenta dos anos 80."
+- CORPO: "Inflamação vascular hoje se mede com: PCR ultrassensível, homocisteína, ApoB, Lp(a), relação TG/HDL. Isso fala mais sobre SEU risco real que o colesterol total. Se a avaliação só olha lipidograma básico, tá incompleta."
+- CTA: "Se vc tem histórico cardiovascular familiar, vale a consulta. Comenta AVALIAÇÃO."
+- **LEGENDA:** 5 exames que mostram seu risco cardio REAL. Colesterol total sozinho é frio. | **Hashtags:** #pcr #homocisteina #apob #avaliacaocompleta #saudepremium
 
 ---
 
-### [#4] DXSoWsUhkve — "Lucas gosta assim bem simples" (2.4k eng, caption casual)
-🔗 https://instagram.com/reel/DXSoWsUhkve/
+### [#4] DXPEEBNBtZJ — "Nova geração das canetas GLP-1 (Retatrutida)" (3.4k eng)
+🔗 https://instagram.com/reel/DXPEEBNBtZJ/
 
 **Por que viralizou:**
-- **Hook:** cena familiar relatable (nome próprio "Lucas" + 😅) — gera identificação. Provoca com "será que tem sustância?".
-- **Mecânica:** linguagem de confraria ("vcs acham?"), convida a opinar — explode comentários.
+- **Hook:** "A nova geração das canetas chegou… e quase ninguém entendeu" — cria curiosidade + privilégio de informação.
+- **Estrutura:** revela o ativo (Retatrutida) → explica os 3 mecanismos (GLP-1, GIP, Glucagon) → contraste com abordagem antiga ("enquanto discutem dieta de 1200kcal…") → reframe (obesidade é doença metabólica, não falta de força).
+- **Retention driver:** combina tema da moda (canetas) + ciência (3 eixos hormonais) + reframe emocional (não é sua culpa).
 
-**Script adaptado 1 — "Prato do marido: sustância de verdade?"**
-- HOOK: [Dra. mostrando um prato comum] "Casal recebendo os sogros no domingo. Esse prato aqui tem sustância? 😅"
-- CORPO: "Arroz, feijão, bife magro, salada de alface. Parece saudável? Pra quem? Se o bife for pequeno (<150g), é proteína insuficiente. Se o feijão é a única fibra, falta variedade. Se não tem gordura boa (azeite, manteiga), não tem saciedade. Prato é cultura — mas precisa olhar nutrientes."
-- CTA: "Comenta se seu prato parece esse. Se quer ajustar, comenta AVALIAÇÃO."
-- **LEGENDA:** Prato do brasileiro médio. Parece saudável, engana o instinto. Olha o que falta. | **Hashtags:** #nutricaofuncional #sustanciareal #saudeemfamilia
+**Script adaptado 1 — "Retatrutida, Mounjaro, Ozempic: qual a diferença (na prática da consulta)"**
+- HOOK (0-3s): [Dra. Daniely] "🚨 Tá escutando sobre Mounjaro, Ozempic, Retatrutida e perdida? Em 30s a gente organiza."
+- CORPO (3-25s): "Ozempic (semaglutida) age em 1 eixo: GLP-1, reduz fome. Mounjaro (tirzepatida) age em 2: GLP-1 + GIP, efeito metabólico mais amplo. Retatrutida age em 3: GLP-1 + GIP + Glucagon, inclui gasto energético. É evolução — cada geração mais completa que a anterior. Qual serve pra vc? Só a avaliação diz."
+- CTA (25-35s): "Aqui no IVS a Dra. Daniely avalia indicação personalizada. Comenta AVALIAÇÃO."
+- **LEGENDA:** Ozempic ≠ Mounjaro ≠ Retatrutida. 3 gerações de tecnologia diferente. Qual cabe no seu caso? | **Hashtags:** #mounjaro #ozempic #retatrutida #glp1 #emagrecimentomedico #nutrologia #institutovitalslim
 
-**Script adaptado 2 — "Por que sua mãe/sogra te dá mais comida — e o que ela ainda não sabe"**
-- HOOK: "Por que sua mãe enche seu prato? E por que ela provavelmente está errada hoje?"
-- CORPO: "Geração da fome passou trauma nutricional. Prato grande = sinal de cuidado. Só que ciência mudou: não é quantidade, é DENSIDADE nutricional. Prato pequeno com proteína de qualidade, gordura natural, vegetal fresco > prato grande com arroz e açúcar."
-- CTA: "Se vc já ouviu 'come mais' e sentiu culpa, comenta AVALIAÇÃO."
-- **LEGENDA:** A mãe que te ama não sabe o que virou padrão metabólico. Quantidade ≠ nutrição. | **Hashtags:** #geracoes #nutricaoconsciente #culpaalimentar
+**Script adaptado 2 — "Obesidade não é falta de força de vontade — a ciência confirma"**
+- HOOK: "Já te disseram que vc só precisa 'ter mais disciplina'? A ciência já desbancou essa ideia anos atrás."
+- CORPO: "Obesidade é doença metabólica com componente hormonal (leptina, insulina, grelina), genético, inflamatório e neurológico. 'Mais disciplina' ignora tudo isso. Medicação + mudança de estilo de vida + acompanhamento médico = tratamento completo. Não é moleza, mas também não é culpa sua."
+- CTA: "Se vc cansou de se culpar, comenta AVALIAÇÃO."
+- **LEGENDA:** Obesidade NÃO é falta de força. É doença metabólica. A ciência sabe disso há 30 anos. | **Hashtags:** #obesidade #doencametabolica #culpaalimentar #tratamentosemjulgamento
 
-**Script adaptado 3 — "Prato simples de verdade (sem complicação)"**
-- HOOK: "Vc acha que comer bem é complicado? Eu te mostro em 30 segundos."
-- CORPO: "Proteína (carne, peixe, ovo) do tamanho da sua mão. Gordura boa (abacate, azeite, queijo) do tamanho do polegar. Vegetal fresco até enjoar. Carboidrato (arroz, batata doce) do tamanho do punho fechado — e só se vc se exercitou no dia. Fim. Sem app, sem tabela."
-- CTA: "Se faz sentido, comenta AVALIAÇÃO pra gente ajustar pro seu caso."
-- **LEGENDA:** Seu prato em 4 linhas. Sem app. Sem tabela. Sem stress. | **Hashtags:** #nutricaosimples #alimentacaointuitiva #pratosaudavel
+**Script adaptado 3 — "Caneta não é atalho — é ferramenta"**
+- HOOK: "Vc tá pensando em começar Mounjaro e acha que é atalho pra magreza fácil? Preciso te alinhar em 30s."
+- CORPO: "Caneta sozinha, sem ajustar alimentação e sono, emagrece mas destrói massa magra, gera efeito sanfona ao parar, e não corrige a raiz metabólica. Com acompanhamento: preserva músculo, ajusta hormônio, ensina o corpo. Sem acompanhamento: perde peso e recupera com juros. A caneta é ferramenta dentro de um método, não o método sozinho."
+- CTA: "Se vc quer começar do jeito certo, comenta AVALIAÇÃO."
+- **LEGENDA:** Caneta sem método = peso volta. Caneta com médica experiente = resultado sustentado. | **Hashtags:** #mounjaro #ozempic #efeitosanfona #massamagra #acompanhamentomedico
 
 ---
 
@@ -332,7 +338,7 @@
 | 1 | Scripts #5.1, #5.2, #6.1 | Insulina/carboidrato (quebra de mito clássico) |
 | 2 | Scripts #9.1, #9.2, #2.1 | Sinais do corpo (relatable, gera identificação) |
 | 3 | Scripts #1.1, #11.1, #6.3 | Nutrientes + gordura boa (base da construção) |
-| 4 | Scripts #3.3, #7.1, #8.1 | Histórias reais / conexões (intestino-pele, melasma) |
+| 4 | Scripts #4.1 (GLP-1), #7.1, #3.1 (colesterol) | Medicina metabólica + sintomas reais |
 
 ## Próximos passos (Fase 2.B e 2.C)
 
