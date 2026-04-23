@@ -107,11 +107,12 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - Tricologia (queda de cabelo)
 - Nutricao funcional
 
-### Precos (Confirmar com a Dra.)
-- Consulta inicial: R$ [PREENCHER]
-- Pacote mensal: R$ [PREENCHER]
-- Pacote trimestral: R$ [PREENCHER]
-- Nota: Nunca divulgar precos publicamente antes da avaliacao (politica da Clara)
+### Precos
+- Consulta inicial: R$ 1.000
+  - Inclui: exame de bioimpedancia + elaboracao de plano nutricional
+- Pacote mensal: [PREENCHER]
+- Pacote trimestral: [PREENCHER]
+- **Politica:** Nunca divulgar precos publicamente em copy. Sempre direcionar para avaliacao personalizada.
 
 ---
 
@@ -227,9 +228,9 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - Sabado: 8h-12h (confirmado)
 
 ### Contato
-- **WhatsApp:** [PREENCHER - numero principal]
-- **Telefone:** [PREENCHER]
-- **Email:** institutovitalslim@gmail.com (confirmar)
+- **WhatsApp:** +55 71 3838-8708
+- **Telefone:** +55 71 3838-8708
+- **Email:** agendamento@institutovitalslim.com.br
 - **Site:** www.institutovitalslim.com.br
 - **Instagram:** @institutovitalslim | @dradaniely.freitas
 
@@ -304,9 +305,10 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 
 **Campos pendentes de confirmacao:**
 - [x] Endereco completo: Rua Priscila B. Dutra, 389, Estacao Villas Shopping, sala 305, Buraquinho, Lauro de Freitas - BA, 42709-200
-- [ ] Telefone/WhatsApp principal
-- [ ] Precos de consultas e pacotes
+- [x] Telefone/WhatsApp principal: +55 71 3838-8708
+- [x] Preco consulta inicial: R$ 1.000 (inclui bioimpedancia + plano nutricional)
 - [x] Site oficial: www.institutovitalslim.com.br
-- [ ] Email institucional
+- [x] Email institucional: agendamento@institutovitalslim.com.br
 - [x] Horario de sabado: 8h-12h (confirmado)
 - [x] Bairro/regiao: Buraquinho, Lauro de Freitas (proximo a Salvador)
+- [ ] Precos de pacotes mensal/trimestral
