@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@dra.camilapaes — 33 scripts adaptados (validação) — Instituto Vital Slim</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    line-height: 1.65;
+    color: #1a1a1a;
+    background: #f8f7f4;
+  }
+  header.top {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #fff;
+    padding: 20px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-bottom: 3px solid #c9a24e;
+  }
+  header.top h1 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header.top .badge {
+    background: #c9a24e;
+    color: #1a1a1a;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    background: #fff;
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.04);
+  }
+  h1 { font-size: 30px; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #c9a24e; line-height: 1.25; }
+  h2 { font-size: 22px; font-weight: 700; margin-top: 40px; margin-bottom: 16px; line-height: 1.3; }
+  h3 { font-size: 18px; font-weight: 600; color: #2a2a2a; margin-top: 28px; margin-bottom: 12px; padding-left: 10px; border-left: 3px solid #c9a24e; }
+  h4 { font-size: 15px; font-weight: 600; color: #4a4a4a; margin-top: 18px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.6px; }
+  p { margin-bottom: 14px; color: #2a2a2a; font-size: 15.5px; }
+  ul, ol { margin-left: 24px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; color: #2a2a2a; font-size: 15.5px; }
+  strong { color: #1a1a1a; font-weight: 700; }
+  em { color: #4a4a4a; font-style: italic; }
+  a { color: #8b6914; text-decoration: none; border-bottom: 1px solid #c9a24e; transition: all 0.2s; }
+  a:hover { color: #1a1a1a; background: #faf7ee; padding: 0 2px; }
+  blockquote { background: #faf7ee; border-left: 4px solid #c9a24e; padding: 14px 20px; margin: 16px 0; color: #4a4a4a; border-radius: 0 4px 4px 0; font-size: 15px; }
+  code { background: #f4f1ea; padding: 2px 6px; border-radius: 3px; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; color: #8b6914; }
+  pre { background: #1a1a1a; color: #e8e0cc; padding: 18px; border-radius: 6px; overflow-x: auto; margin: 16px 0; font-size: 13px; line-height: 1.55; }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-radius: 4px; overflow: hidden; }
+  th { background: #1a1a1a; color: #fff; font-weight: 600; padding: 12px 14px; text-align: left; font-size: 13.5px; letter-spacing: 0.3px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #fafaf8; }
+  hr { border: none; border-top: 1px solid #e5e5e5; margin: 32px 0; }
+
+  /* VALIDATOR */
+  .validator {
+    background: linear-gradient(135deg, #faf7ee 0%, #f5efd9 100%);
+    border: 2px solid #c9a24e;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+    box-shadow: 0 4px 12px rgba(201,162,78,0.15);
+  }
+  .validator h2 { margin-top: 0; color: #8b6914; font-size: 16px; text-transform: uppercase; letter-spacing: 0.8px; border: none; }
+  .validator p { font-size: 14px; color: #4a4a4a; margin-bottom: 14px; }
+  .validator-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: inherit;
+  }
+  .btn-approve { background: #2a8a4a; color: #fff; }
+  .btn-approve:hover { background: #1f6a38; transform: translateY(-1px); }
+  .btn-adjust { background: #c9a24e; color: #1a1a1a; }
+  .btn-adjust:hover { background: #b08a3e; transform: translateY(-1px); }
+  .btn-reject { background: #a64a4a; color: #fff; }
+  .btn-reject:hover { background: #8a3838; transform: translateY(-1px); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal h3 { border: none; padding: 0; margin-bottom: 12px; font-size: 22px; }
+  .modal p { color: #666; font-size: 14px; margin-bottom: 16px; }
+  .modal textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .modal textarea:focus { border-color: #c9a24e; outline: none; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  .btn-cancel { background: #ddd; color: #333; }
+  .btn-cancel:hover { background: #bbb; }
+  .btn-send { background: #1a1a1a; color: #fff; }
+  .btn-send:hover { background: #2a2a2a; }
+  .modal-status { margin-top: 12px; padding: 10px; border-radius: 4px; font-size: 14px; display: none; }
+  .modal-status.success { background: #d4edda; color: #1a7a3a; display: block; }
+  .modal-status.error { background: #f8d7da; color: #721c24; display: block; }
+
+  footer { text-align: center; padding: 30px; color: #888; font-size: 12px; border-top: 1px solid #e5e5e5; margin-top: 40px; }
+  footer a { color: #8b6914; }
+
+  @media print {
+    header.top, .validator { display: none; }
+    main { box-shadow: none; max-width: 100%; padding: 0 20px; }
+  }
+  @media (max-width: 640px) {
+    main { padding: 24px 18px; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 19px; }
+    h3 { font-size: 16.5px; }
+    p, li { font-size: 15px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px 10px; }
+    .validator-buttons { flex-direction: column; }
+    .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>
+    <span>🩺 Instituto Vital Slim — Entrega de conteúdo</span>
+    <span class="badge" id="status-badge">AGUARDANDO VALIDAÇÃO</span>
+  </h1>
+</header>
+<main>
+  <div class="validator">
+    <h2>📋 Documento para sua aprovação</h2>
+    <p><strong>@dra.camilapaes — 33 scripts adaptados (validação)</strong></p>
+    <p>Revise o conteúdo abaixo. Escolha uma ação:</p>
+    <div class="validator-buttons">
+      <button class="btn btn-approve" onclick="openModal('APROVO')">✓ APROVO — pode seguir</button>
+      <button class="btn btn-adjust" onclick="openModal('AJUSTAR')">↻ AJUSTAR</button>
+      <button class="btn btn-reject" onclick="openModal('REJEITAR')">✗ REJEITAR</button>
+    </div>
+  </div>
+
+  <h1 id="analise-dracamilapaes-fase-2a-top-11-reels-33-scripts-adaptados">Análise @dra.camilapaes — Fase 2.A (Top 11 Reels + 33 Scripts Adaptados)</h1>
+  <blockquote>
+  <p>Engenharia reversa dos 11 reels mais engajados. Scripts adaptados para a voz da Dra. Daniely Freitas, Instituto Vital Slim.</p>
+  </blockquote>
+  <h2 id="perfil-do-criador-para-contexto">Perfil do criador (para contexto)</h2>
+  <p><strong>@dra.camilapaes</strong> — Médica endocrinologista/popular no nicho de emagrecimento e obesidade. Estilo: mistura de depoimentos de pacientes, resultados quantificados, abordagem multidisciplinar e conteúdo motivacional pessoal. Viraliza por combinar vulnerabilidade ("meu início"), prova social intensa (casos com números) e mensagem de que emagrecimento exige mais que medicamento.</p>
+  <h2 id="clusterizacao-em-3-temas">Clusterização em 3 temas</h2>
+  <ul>
+  <li><strong>T1 — Mindset e Decisão</strong> (reels 1, 5, 10)</li>
+  <li><strong>T2 — Metodologia Integrada</strong> (reels 2, 6, 11)</li>
+  <li><strong>T3 — Jornada e Bem-estar Real</strong> (reels 3, 4, 7, 8, 9)</li>
+  </ul>
+  <hr>
+  <h2 id="top-11-reels-analise-scripts-adaptados">Top 11 Reels — análise + scripts adaptados</h2>
+  <h3 id="1-dk-brpmud1-mente-e-corpo-22k-eng">[#1] DK--BRPMUD1 — "Mente e corpo" (2.2k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DK--BRPMUD1/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Frase de impacto sobre mente e corpo, universal<br>
+  - <strong>Estrutura:</strong> Curta, inspiracional, com call visual de treino<br>
+  - <strong>Retention driver:</strong> Identificação imediata com a sensação de superação</p>
+  <p><strong>Script adaptado 1 — "O que muda quando a mente decide"</strong><br>
+  - HOOK (0-3s): "🚨 Sua mente desistiu do seu corpo antes da hora?"<br>
+  - CORPO (3-25s): "O corpo da mulher obedece o que o cérebro acredita. Quando a insulina está desregulada e o cortisol alto, a vontade some. Não é falta de força. É bioquímica real. E pode ser revertida com estratégia médica correta e acompanhamento endocrinológico de verdade."<br>
+  - CTA (25-35s): "Comenta AVALIAÇÃO agora e descubra seu ponto de partida no IVS."<br>
+  - <strong>LEGENDA:</strong> A mudança começa antes da balança mexer. Quando a mente encontra o método médico certo, o corpo acompanha naturalmente. | <strong>Hashtags:</strong> #emagrecimentosaudavel #saudehormonal #obesidade #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Vontade versus fisiologia"</strong><br>
+  - HOOK: "A força de vontade sozinha nunca emagreceu ninguém."<br>
+  - CORPO: "Você já tentou de tudo e culpou sua mente. Mas estudos no NEJM mostram que a regulação hormonal precede a mudança comportamental. Sem metabolismo endócrino equilibrado, a mente cansa antes do previsto. O método IVS começa exatamente pela raiz bioquímica."<br>
+  - CTA: "Comenta AVALIAÇÃO e agende sua avaliação médica completa hoje."<br>
+  - <strong>LEGENDA:</strong> Força de vontade é consequência de um corpo equilibrado, não causa. Vamos cuidar da sua bioquímica primeiro no IVS? | <strong>Hashtags:</strong> #endocrinologia #emagrecimentocomsaude #metodovitalslim #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "O ponto de virada"</strong><br>
+  - HOOK: "Existe um momento exato em que tudo finalmente clica."<br>
+  - CORPO: "Para minhas pacientes, esse momento não acontece na academia. Ele vem quando entendem que o ganho de peso tem causa médica real. A partir daí, a mente para de brigar com o corpo e finalmente começa a trabalhar a seu favor."<br>
+  - CTA: "Comenta AVALIAÇÃO e vamos encontrar seu momento de virada juntas."<br>
+  - <strong>LEGENDA:</strong> O ponto de virada não é força bruta. É compreensão médica. Estratégia correta muda tudo no seu corpo e mente. | <strong>Hashtags:</strong> #transformaçãosaude #emagrecimentointeligente #saudehormonal #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="2-dn4ls6edipe-nao-e-so-remedio-21k-eng">[#2] DN4LS6EDiPe — "Não é só remédio" (2.1k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DN4LS6EDiPe/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Negações sequenciais criam curiosidade<br>
+  - <strong>Estrutura:</strong> Construção de argumento com metáfora ("trocar pneu com carro andando")<br>
+  - <strong>Retention driver:</strong> Autoridade pela vivência pessoal e promessa de método</p>
+  <p><strong>Script adaptado 1 — "Trocar o pneu com o carro andando"</strong><br>
+  - HOOK: "Emagrecer não é só comer menos e se matar na academia."<br>
+  - CORPO: "Você está tentando trocar o pneu com o carro andando. Trabalho, filhos, casa. Não dá para parar a vida. Por isso o IVS usa protocolo integrado: endocrinologia, nutrição funcional e comportamento. Tudo ao mesmo tempo, sem pausar sua rotina diária."<br>
+  - CTA: "Comenta AVALIAÇÃO e venha conhecer nosso protocolo integrado agora."<br>
+  - <strong>LEGENDA:</strong> Você não precisa parar sua vida para cuidar do seu corpo. O método integrado do IVS foi feito para mulheres com rotina real. | <strong>Hashtags:</strong> #protocolovitalslim #emagrecimentointegrativo #saudehormonal #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "O erro da abordagem isolada"</strong><br>
+  - HOOK: "Dieta sozinha, remédio sozinho ou treino isolado falham."<br>
+  - CORPO: "A obesidade é multifatorial e complexa. Estudos publicados no Lancet demonstram que abordagens isoladas apresentam recaída superior a oitenta por cento. O corpo feminino precisa de alinhamento hormonal, nutricional e emocional simultâneo e contínuo. É exatamente isso que construímos no IVS."<br>
+  - CTA: "Comenta AVALIAÇÃO para um plano combinado feito para você hoje."<br>
+  - <strong>LEGENDA:</strong> Abordagem isolada não funciona para obesidade. Seu corpo precisa de um time médico alinhado. Vamos conversar sobre o seu caso? | <strong>Hashtags:</strong> #obesidade #medicinaintegrativa #emagrecimentoduradouro #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Acompanhamento de verdade"</strong><br>
+  - HOOK: "Médico que enxerga você de verdade ainda existe sim."<br>
+  - CORPO: "Você não precisa de mais uma receita genérica e fria. Precisa de alguém que ajuste seu plano enquanto você vive sua rotina. No IVS, o acompanhamento é próximo porque sua fisiologia muda a cada semana. E o protocolo médico muda junto com você."<br>
+  - CTA: "Comenta AVALIAÇÃO e sinta a diferença do acompanhamento médico."<br>
+  - <strong>LEGENDA:</strong> Genérico não muda vida. Acompanhamento médico próximo e personalizado transforma resultados de verdade. Comente AVALIAÇÃO. | <strong>Hashtags:</strong> #consultamedica #protocolopersonalizado #saudefeminina #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="3-dlsz-ajuujk-depoimento-transformacao-12k-eng">[#3] DLsz-AJuUjK — "Depoimento transformação" (1.2k eng)</h3>
+  <p>🔗 https://instagram.com/reel/DLsz-AJuUjK/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Citação emocional da paciente<br>
+  - <strong>Estrutura:</strong> Storytelling completo com dor, número e transformação<br>
+  - <strong>Retention driver:</strong> Prova social intensa e identificação com a frustração</p>
+  <p><strong>Script adaptado 1 — "Quando a autoestima volta"</strong><br>
+  - HOOK: "Ela não conseguia amarrar o tênis. Hoje, caminha confiante."<br>
+  - CORPO: "A paciente chegou sem acreditar que ainda existia solução médica. A obesidade grave nunca é falta de disciplina. É uma doença crônica que exige tratamento médico especializado e contínuo. Quando a fisiologia entra em ordem, a autoestima naturalmente renasce no corpo e na mente."<br>
+  - CTA: "Comenta AVALIAÇÃO se você também perdeu a esperança algum dia."<br>
+  - <strong>LEGENDA:</strong> Mais importante que qualquer número na balança é recuperar a dignidade de viver bem no próprio corpo. Você merece isso. | <strong>Hashtags:</strong> #autoestima #obesidadegrave #tratamentomedico #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "A primeira consulta que muda tudo"</strong><br>
+  - HOOK: "Uma consulta foi o suficiente para ela acreditar de novo."<br>
+  - CORPO: "A diferença não foi apenas o plano alimentar. Foi ser ouvida, diagnosticada corretamente e finalmente entender que não estava sozinha. No IVS, a primeira avaliação médica já traz clareza sobre o que seu corpo precisa para começar a reverter o quadro clínico."<br>
+  - CTA: "Comenta AVALIAÇÃO e marque sua primeira consulta médica agora."<br>
+  - <strong>LEGENDA:</strong> Às vezes falta apenas uma avaliação médica que investigue a raiz. Marque sua consulta no IVS e recomece sua história hoje. | <strong>Hashtags:</strong> #primeiraconsulta #avaliaçãomédica #emagrecimentosaudavel #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Não é sobre o espelho"</strong><br>
+  - HOOK: "O espelho deixou de ser inimigo quando a saúde voltou."<br>
+  - CORPO: "Quando a inflamação crônica sistêmica e a resistência insulínica são tratadas medicalmente, a paciente para de lutar contra si mesma. O emagrecimento passa a ser efeito colateral natural da saúde recuperada. E o olhar no espelho muda junto com a fisiologia."<br>
+  - CTA: "Comenta AVALIAÇÃO para recuperar sua relação com seu corpo."<br>
+  - <strong>LEGENDA:</strong> Saúde em primeiro lugar sempre. O resto é consequência natural do corpo funcionando bem e se curando de dentro para fora agora. | <strong>Hashtags:</strong> #saudehormonal #resistenciainsulinica #inflamaçãocrônica #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="4-dktmqwss-us-2-semanas-e-6kg-924-eng">[#4] DKTMqwSs-uS — "2 semanas e -6kg" (924 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DKTMqwSs-uS/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Número específico em curto prazo<br>
+  - <strong>Estrutura:</strong> Ultra curto, impacto visual direto<br>
+  - <strong>Retention driver:</strong> Curiosidade sobre método que gera resultado rápido</p>
+  <p><strong>Script adaptado 1 — "O que acontece nas primeiras semanas"</strong><br>
+  - HOOK: "🚨 O início do tratamento médico surpreende muitas pacientes minhas."<br>
+  - CORPO: "Nas primeiras semanas de reequilíbrio hormonal e nutricional, ocorre ajuste natural de líquidos e glicogênio muscular. Isso reflete na disposição e no corpo de forma imediata. Mas o que me importa como médica é a tendência de longo prazo e a saúde metabólica verdadeiramente estabilizada."<br>
+  - CTA: "Comenta AVALIAÇÃO e entenda seu metabolismo de verdade hoje."<br>
+  - <strong>LEGENDA:</strong> O começo pode ser acelerado, mas o que importa é a consistência médica e o acompanhamento contínuo ao longo do tempo. Vem comigo. | <strong>Hashtags:</strong> #metabolismo #emagrecimentocomsaude #saudefeminina #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Por que o início é diferente"</strong><br>
+  - HOOK: "O corpo responde rápido quando encontra o caminho certo."<br>
+  - CORPO: "Quando retiramos os alimentos inflamatórios da rotina e corrigimos o eixo hormonal, o corpo para de reter líquido e a insulina celular trabalha melhor. Estudos publicados no JAMA mostram que essa fase inicial bem organizada motiva significativamente a adesão ao tratamento médico."<br>
+  - CTA: "Comenta AVALIAÇÃO para mapear seu eixo hormonal completo agora."<br>
+  - <strong>LEGENDA:</strong> Resposta rápida é possível quando o protocolo respeita sua fisiologia. Agende sua avaliação no IVS e descubra seu eixo hormonal. | <strong>Hashtags:</strong> #eixohormonal #medicinabaseadaemevidencias #protocolovitalslim #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Seguimos com inteligência"</strong><br>
+  - HOOK: "Resultado rápido só vale quando é verdadeiramente sustentável."<br>
+  - CORPO: "Muitas pacientes chegam após dietas milagre que emagrecem e recuperam tudo. No IVS, as primeiras semanas são de organização metabólica. Se o peso cai, ótimo. Mas o foco é construir um corpo que não queira mais armazenar gordura em excesso."<br>
+  - CTA: "Comenta AVALIAÇÃO e comece seu tratamento do jeito certo."<br>
+  - <strong>LEGENDA:</strong> Rápido sem sustentabilidade é armadilha. Inteligência metabólica é o foco do nosso trabalho médico no IVS. Comente AVALIAÇÃO. | <strong>Hashtags:</strong> #sustentabilidade #emagrecimentoduradouro #metodovitalslim #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="5-dj8ffm7mjjm-meu-inicio-879-eng">[#5] DJ8FfM7Mjjm — "meu início" (879 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DJ8FfM7Mjjm/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Vulnerabilidade extrema, texto curto emocional<br>
+  - <strong>Estrutura:</strong> Pessoal, mostrando origem da médica<br>
+  - <strong>Retention driver:</strong> Humanização da autoridade médica</p>
+  <p><strong>Script adaptado 1 — "Todo mundo tem um início"</strong><br>
+  - HOOK: "Eu também já me senti completamente perdida no meu corpo."<br>
+  - CORPO: "Antes de ser médica, fui mulher. Mulher que tentou, que errou, que se frustrou. Por isso entendo quando você diz que desistiu de si mesma. No IVS, ninguém julga seu início. A gente só precisa que você dê o primeiro passo."<br>
+  - CTA: "Comenta AVALIAÇÃO e recomece com quem realmente entende você."<br>
+  - <strong>LEGENDA:</strong> Por trás do jaleco, tem uma mulher que já sentiu o que você sente. No IVS, você nunca estará sozinha nesse processo. Comente. | <strong>Hashtags:</strong> #empatiamédica #recomeço #saudedamulher #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "O jaleco não esconde a história"</strong><br>
+  - HOOK: "Meu próprio início me fez a médica que sou hoje."<br>
+  - CORPO: "Não acredito em tratamento frio e distante. Acredito em olho no olho, em escutar sua frustração de verdade e em construir um plano que respeite sua história completa. Cada paciente do IVS carrega uma trajetória única. E cada trajetória única merece total dignidade."<br>
+  - CTA: "Comenta AVALIAÇÃO e venha contar sua história para mim."<br>
+  - <strong>LEGENDA:</strong> Sua história não é vergonha. É o mapa para o tratamento certo. Vamos caminhar juntas a partir de agora. Comente AVALIAÇÃO aqui. | <strong>Hashtags:</strong> #historiadavida #tratamentopersonalizado #saudehormonal #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Vergonha não tem vez aqui"</strong><br>
+  - HOOK: "Vergonha de buscar ajuda é o que mais atrasa a cura."<br>
+  - CORPO: "Você não precisa chegar perfeita na consulta médica. Só precisa chegar. O início é o momento mais corajoso de todo o processo de transformação. E no IVS, ele é recebido com acolhimento, investigação médica completa e um plano real para sua realidade."<br>
+  - CTA: "Comenta AVALIAÇÃO e dê o passo mais importante agora."<br>
+  - <strong>LEGENDA:</strong> Chegar é o ato mais corajoso. Daqui para frente, a gente cuida junto de você e do seu corpo. Comente AVALIAÇÃO agora. | <strong>Hashtags:</strong> #primeiropasso #acolhimento #consultamedica #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="6-dka_pdrsvzb-combo-da-paciente-806-eng">[#6] DKA_pDRsVzb — "Combo da paciente" (806 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DKA_pDRsVzb/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Depoimento autêntico de paciente feliz<br>
+  - <strong>Estrutura:</strong> Lista de pilares do método<br>
+  - <strong>Retention driver:</strong> Prova social + checklist de solução</p>
+  <p><strong>Script adaptado 1 — "Os cinco pilares que ninguém conta"</strong><br>
+  - HOOK: "Emagrecer de verdade exige cinco pilares médicos alinhados."<br>
+  - CORPO: "Medicação ajustada, nutrição funcional individual, movimento adequado, saúde mental ativa e acompanhamento médico contínuo. Não dá para escolher apenas um pilar isolado. A obesidade é multifatorial e o tratamento médico precisa ser também. É exatamente isso que chamamos de método IVS."<br>
+  - CTA: "Comenta AVALIAÇÃO e conheça os cinco pilares do IVS agora."<br>
+  - <strong>LEGENDA:</strong> Não existe atalho mágico. Existe método inteligente, completo e médico. Vamos conhecer o seu protocolo no IVS. Comente AVALIAÇÃO. | <strong>Hashtags:</strong> #metodovitalslim #pilaresdasaude #emagrecimentointegrativo #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "A magia está no conjunto"</strong><br>
+  - HOOK: "Medicamento sozinho não sustenta resultado a longo prazo."<br>
+  - CORPO: "Quando associamos estratégia hormonal precisa, plano nutricional individualizado e suporte comportamental contínuo, o corpo feminino entende que finalmente pode confiar no processo médico. Revisões sistemáticas em endocrinologia mostram que abordagem combinada reduz recaída significativamente em até sessenta por cento."<br>
+  - CTA: "Comenta AVALIAÇÃO e peça seu plano combinado para você hoje."<br>
+  - <strong>LEGENDA:</strong> O segredo não é um remédio isolado. É a sinfonia completa do cuidado médico integrado. Comente AVALIAÇÃO e comece hoje. | <strong>Hashtags:</strong> #endocrinologia #abordagemcombinada #saudehormonal #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Acompanhamento não é luxo"</strong><br>
+  - HOOK: "Acompanhamento médico próximo não é luxo. É necessidade real."<br>
+  - CORPO: "Sua fisiologia muda a cada ciclo menstrual, a cada estresse e a cada nova fase da vida. Um plano travado em janeiro simplesmente não serve em junho. Por isso no IVS o acompanhamento médico é contínuo. Ajustamos seu protocolo enquanto você vive sua rotina."<br>
+  - CTA: "Comenta AVALIAÇÃO e sinta a diferença do acompanhamento contínuo."<br>
+  - <strong>LEGENDA:</strong> Seu corpo muda constantemente. Seu tratamento precisa acompanhar. Isso é medicina de verdade. Comente AVALIAÇÃO para começar. | <strong>Hashtags:</strong> #acompanhamentomédico #medicinapersonalizada #protocolovitalslim #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="7-dmjbse9pqal-70-dias-de-processo-708-eng">[#7] DMjBSe9PQAL — "70 dias de processo" (708 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DMjBSe9PQAL/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Números detalhados (peso, gordura, músculo)<br>
+  - <strong>Estrutura:</strong> Antes/depois implícito com dados de bioimpedância<br>
+  - <strong>Retention driver:</strong> Precisão dos resultados e preservação de músculo</p>
+  <p><strong>Script adaptado 1 — "Músculo é prioridade"</strong><br>
+  - HOOK: "Perder gordura sem perder músculo é pura ciência médica."<br>
+  - CORPO: "A bioimpedância mostra exatamente o que a balança comum esconde de você. Quando o protocolo médico preserva massa magra ativa, o metabolismo basal não desacelera. Estudos publicados no NEJM confirmam: manter músculo durante o emagrecimento saudável é fator decisivo de sustentabilidade metabólica."<br>
+  - CTA: "Comenta AVALIAÇÃO e faça sua bioimpedância de precisão agora."<br>
+  - <strong>LEGENDA:</strong> A balança mente. A bioimpedância revela a verdade. Avalie sua composição corporal no IVS. Comente AVALIAÇÃO para agendar. | <strong>Hashtags:</strong> #bioimpedancia #massamagra #metabolismo #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "O que 70 dias podem mostrar"</strong><br>
+  - HOOK: "Dois meses de protocolo médico mudam dados e vida."<br>
+  - CORPO: "Em dez semanas de tratamento endocrinológico direcionado, frequentemente observamos redução de gordura visceral, melhora progressiva do HOMA-IR e aumento significativo de disposição diária. Não prometo números mágicos na balança. Prometo direção científica, monitoramento de verdade e ajustes médicos contínuos no IVS."<br>
+  - CTA: "Comenta AVALIAÇÃO e inicie seu acompanhamento com dados reais."<br>
+  - <strong>LEGENDA:</strong> Dados claros, protocolo médico e direção certa. Sem promessas vazias. Só ciência e resultado real. Comente AVALIAÇÃO para começar. | <strong>Hashtags:</strong> #protocolocientifico #saudemetabolica #medicinabaseadaemevidencias #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Viva, não só magra"</strong><br>
+  - HOOK: "O objetivo não é caber no manequim. É se sentir viva."<br>
+  - CORPO: "Quando a gordura inflamatória visceral diminui e os hormônios entram em sintonia, a energia naturalmente volta. Não é apenas estética. É liberdade real para viver sem dor articular, sem fome emocional e sem culpa constante. Esse é o resultado verdadeiro que buscamos no IVS."<br>
+  - CTA: "Comenta AVALIAÇÃO e recupere sua vitalidade plena hoje."<br>
+  - <strong>LEGENDA:</strong> Viver bem pesa mais que qualquer número na balança. Vamos recuperar sua energia e vitalidade. Comente AVALIAÇÃO e venha conhecer o IVS. | <strong>Hashtags:</strong> #qualidadedevida #saudehormonal #bemestar #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="8-dkntehxsmj_-20-pecas-a-menos-688-eng">[#8] DKNteHxSmj_ — "20 peças a menos" (688 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DKNteHxSmj_/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Resultado não numérico (peças de roupa)<br>
+  - <strong>Estrutura:</strong> Curto, visual e celebrativo<br>
+  - <strong>Retention driver:</strong> Metáfora tangível de transformação</p>
+  <p><strong>Script adaptado 1 — "O armário que não mente"</strong><br>
+  - HOOK: "🚨 O seu armário está te contando uma história secreta."<br>
+  - CORPO: "Quando a inflamação corporal sistêmica diminui, o corpo feminino muda de forma. Cintura, quadril e braço. A roupa solta é sinal claro de redução de gordura visceral, não apenas de peso. E isso é o que realmente protege seu coração e seu fígado a longo prazo."<br>
+  - CTA: "Comenta AVALIAÇÃO e vamos medir sua cintura e sua saúde."<br>
+  - <strong>LEGENDA:</strong> A roupa solta é consequência. A causa é a saúde metabolicamente restaurada. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #gorduravisceral #saudecardiaca #transformaçãosaude #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Número que não está na balança"</strong><br>
+  - HOOK: "Existem resultados reais que a balança nunca mostra."<br>
+  - CORPO: "Reduzir números do manequim sem perder músculo é sinal claro de emagrecimento inteligente e médico. A gordura abdominal está diretamente ligada à resistência insulínica. Quando tratamos a causa de verdade, o corpo feminino se recompõe naturalmente e de forma saudável."<br>
+  - CTA: "Comenta AVALIAÇÃO e avalie sua gordura visceral agora mesmo."<br>
+  - <strong>LEGENDA:</strong> Manequim é efeito. Causa é saúde metabólica em ordem. Vamos investigar. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #resistenciainsulinica #emagrecimentointeligente #saudehormonal #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Três meses de reequilíbrio"</strong><br>
+  - HOOK: "Três meses de tratamento médico muda mais que estética."<br>
+  - CORPO: "Em doze semanas de protocolo IVS, reorganizamos o eixo glicose-insulina, o cortisol e o sono profundo. O resultado clínico? Corpo menos inchado, mente mais clara e roupas que finalmente servem bem. Sem sofrimento extremo e sem promessas absurdas de milagre."<br>
+  - CTA: "Comenta AVALIAÇÃO e comece seu reequilíbrio no IVS hoje."<br>
+  - <strong>LEGENDA:</strong> Doze semanas de ciência médica podem reescrever sua relação com o corpo. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #reequilibrio #protocolovitalslim #saudefeminina #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="9-dls_jvjpvkb-16kg-e-contando-635-eng">[#9] DLs_jvJPVkB — "-16kg e contando" (635 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DLs_jvJPVkB/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Número + continuidade<br>
+  - <strong>Estrutura:</strong> Foco em bem-estar e disposição<br>
+  - <strong>Retention driver:</strong> Mensagem de que resultado é mais que balança</p>
+  <p><strong>Script adaptado 1 — "Disposição não tem preço"</strong><br>
+  - HOOK: "Ter disposição pela manhã é o melhor resultado médico."<br>
+  - CORPO: "Quando a tireoide funciona direito, a insulina responde bem e o sono restaura, você acorda diferente. Não é magia. É fisiologia real e mensurável. Muitas pacientes relatam que o ganho de energia vale muito mais que qualquer queda isolada de peso."<br>
+  - CTA: "Comenta AVALIAÇÃO e vamos recuperar sua energia juntas agora."<br>
+  - <strong>LEGENDA:</strong> Energia de sobra, sono profundo e alegria de viver. Isso é tratamento médico feito direito. Comente AVALIAÇÃO e comece hoje. | <strong>Hashtags:</strong> #disposição #tireoide #saudehormonal #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "O número que realmente importa"</strong><br>
+  - HOOK: "O número na balança é o menos importante de todos."<br>
+  - CORPO: "O que importa de verdade é o HOMA-IR melhorando, a cintura diminuindo e o colesterol se organizando. Esses são os marcadores reais que definem sua longevidade. O peso corporal é apenas um reflexo tardio desses processos internos profundos e importantes."<br>
+  - CTA: "Comenta AVALIAÇÃO e descubra seus marcadores reais hoje."<br>
+  - <strong>LEGENDA:</strong> Saúde interna primeiro. O externo acompanha naturalmente. Avalie seu metabolismo. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #saudemetabolica #longevidade #protocolocientifico #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Contando sem pressa"</strong><br>
+  - HOOK: "O processo médico correto não tem data de validade."<br>
+  - CORPO: "Cada corpo feminino tem seu próprio ritmo de reequilíbrio hormonal. O que importa é a direção correta, não a velocidade. No IVS, respeitamos sua fisiologia individual. Sem comparação, sem culpa. Só ciência médica, estratégia e paciência real com seu corpo."<br>
+  - CTA: "Comenta AVALIAÇÃO e encontre seu ritmo certo no IVS."<br>
+  - <strong>LEGENDA:</strong> Seu ritmo é o certo. O importante é ter direção médica clara e sustentável. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #processosaude #emagrecimentosaudavel #saudefeminina #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="10-dkiwmabmank-nao-e-sobre-mounjaro-595-eng">[#10] DKIwmaBMank — "Não é sobre mounjaro" (595 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DKIwmaBMank/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Negação de buzzword + reframe para mérito pessoal<br>
+  - <strong>Estrutura:</strong> Posicionamento contra dependência de medicamento<br>
+  - <strong>Retention driver:</strong> Empoderamento e autoria do paciente</p>
+  <p><strong>Script adaptado 1 — "Mérito é seu, estratégia é minha"</strong><br>
+  - HOOK: "O resultado não é do remédio. É da sua coragem."<br>
+  - CORPO: "Medicamentos auxiliam, mas quem muda hábitos reais, comparece às consultas e escolhe cuidar de si mesma é sempre você. No IVS, eu ofereço a estratégia médica completa. Você oferece a decisão firme. Juntas, construímos uma nova trajetória duradoura de saúde real."<br>
+  - CTA: "Comenta AVALIAÇÃO e venha construir sua estratégia médica hoje."<br>
+  - <strong>LEGENDA:</strong> Eu entrego a ciência médica. Você entrega a decisão. O resultado pertence a quem não desiste. Comente AVALIAÇÃO e venha conhecer o IVS. | <strong>Hashtags:</strong> #coragem #estrategiamedica #protagonismo #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Sem culpa pelo auxílio médico"</strong><br>
+  - HOOK: "Usar tratamento médico não é falha. É inteligência pura."<br>
+  - CORPO: "A obesidade é doença crônica reconhecida oficialmente pela OMS. Utilizar recursos médicos adequados não tira seu mérito pessoal. Pelo contrário mesmo. Reconhecer que precisa de ajuda especializada é o ato mais maduro e corajoso que uma mulher inteligente pode ter hoje."<br>
+  - CTA: "Comenta AVALIAÇÃO e pare de se punir por buscar ajuda agora."<br>
+  - <strong>LEGENDA:</strong> Buscar tratamento médico para obesidade é ato de amor-próprio, nunca de fraqueza. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #obesidade #tratamentomedico #amorproprio #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Você é a protagonista"</strong><br>
+  - HOOK: "Eu entrego a ciência médica. Você entrega a transformação."<br>
+  - CORPO: "Nenhum plano médico funciona sem sua adesão real. Nenhuma consulta substitui sua escolha diária consciente. No IVS, eu sou sua médica endocrinologista. Você é a protagonista. Meu papel é garantir que seu corpo tenha condições fisiológicas ideais para responder bem."<br>
+  - CTA: "Comenta AVALIAÇÃO e assuma o protagonismo da sua saúde hoje."<br>
+  - <strong>LEGENDA:</strong> Protagonismo não é fazer sozinha. É liderar o processo com apoio médico de verdade. Comente AVALIAÇÃO e venha conhecer o IVS. | <strong>Hashtags:</strong> #protagonismo #saudefeminina #transformaçãosaude #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="11-dm06ktnuesq-historia-da-luana-594-eng">[#11] DM06KTNuesQ — "História da Luana" (594 eng)</h3>
+  <p>🔗 https://instagram.com/reel/DM06KTNuesQ/</p>
+  <p><strong>Por que viralizou:</strong><br>
+  - <strong>Hook:</strong> Storytelling clássico de dor e solução<br>
+  - <strong>Estrutura:</strong> Narrativa em terceira pessoa com arco completo<br>
+  - <strong>Retention driver:</strong> Identificação com "tentei de tudo" e promessa de método sob medida</p>
+  <p><strong>Script adaptado 1 — "Quando nada funcionava"</strong><br>
+  - HOOK: "Ansiedade, dor e cansaço excessivos não são normalidade."<br>
+  - CORPO: "Ela tentou de tudo porque ninguém tinha investigado a raiz clínica. Quando fizemos a avaliação hormonal e metabólica completa, descobrimos que o emagrecimento estava bloqueado por causas médicas tratáveis. O plano sob medida finalmente fez sentido real para ela."<br>
+  - CTA: "Comenta AVALIAÇÃO se você também acha que tentou de tudo já."<br>
+  - <strong>LEGENDA:</strong> Se nada funcionou, talvez nada tenha sido investigado direito. Vamos encontrar sua raiz. Comente AVALIAÇÃO e venha conhecer o IVS. | <strong>Hashtags:</strong> #investigaçãomédica #causaderaiz #saudehormonal #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Plano sob medida existe"</strong><br>
+  - HOOK: "Seu corpo não é genérico. Seu tratamento também não pode."<br>
+  - CORPO: "Protocolo de emagrecimento em massa ignora sua história completa, seus hormônios e seu metabolismo individual. No IVS, construímos plano totalmente individualizado porque cada mulher tem um eixo hormonal único e complexo. E isso muda completamente o resultado clínico real obtido por você."<br>
+  - CTA: "Comenta AVALIAÇÃO e receba um plano feito para você hoje."<br>
+  - <strong>LEGENDA:</strong> Genérico falha sempre. Personalizado médico transforma. Vamos construir seu protocolo. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #protocolopersonalizado #medicinadeprecisao #saudefeminina #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Mais que balança"</strong><br>
+  - HOOK: "O que a balança não conseguiu mostrar para ela?"<br>
+  - CORPO: "Mostrou autoestima, sono reparador, pele diferente e vontade real de viver. O emagrecimento, quando guiado médicamente com estratégia, é portal para uma vida que você achava que tinha perdido. Não é sobre peso. É sobre quem você finalmente volta a ser."<br>
+  - CTA: "Comenta AVALIAÇÃO e redescubra sua melhor versão agora."<br>
+  - <strong>LEGENDA:</strong> A transformação vai muito além do peso. É sobre voltar a se reconhecer. Comente AVALIAÇÃO e venha conhecer o IVS hoje. | <strong>Hashtags:</strong> #transformaçãosaude #autoestima #qualidadedevida #dradaniely #institutovitalslim</p>
+  <hr>
+  <h2 id="plano-de-publicacao-sugerido">Plano de publicação sugerido</h2>
+  <h3 id="cadencia-recomendada">Cadência recomendada</h3>
+  <ul>
+  <li>Reels: 3-4 por semana</li>
+  <li>Horários: Quarta 19h, Sexta 12h, Domingo 11h (engagement público IVS)</li>
+  </ul>
+  <h3 id="sequenciamento-sugerido-primeiras-4-semanas">Sequenciamento sugerido (primeiras 4 semanas)</h3>
+  <table>
+  <thead>
+  <tr>
+  <th>Semana</th>
+  <th>Scripts publicados</th>
+  <th>Tema dominante</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>1</td>
+  <td>Scripts #1.1, #5.1, #10.2</td>
+  <td>Mindset e Decisão</td>
+  </tr>
+  <tr>
+  <td>2</td>
+  <td>Scripts #2.2, #6.1, #11.1</td>
+  <td>Metodologia Integrada</td>
+  </tr>
+  <tr>
+  <td>3</td>
+  <td>Scripts #3.3, #7.1, #8.2, #9.3</td>
+  <td>Jornada e Bem-estar Real</td>
+  </tr>
+  <tr>
+  <td>4</td>
+  <td>Scripts #4.1, #6.2, #10.3, #11.3</td>
+  <td>Mix de conversão</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr>
+  <p>Status: Fase 2.A de @dra.camilapaes entregue. Aguardando aprovação dos scripts.</p>
+
+  <footer>
+    Gerado automaticamente pelo pipeline de conteúdo do IVS • Fonte canônica: <a href="https://github.com/institutovitalslim/cerebro-vital-slim">GitHub cerebro-vital-slim</a>
+  </footer>
+</main>
+
+<!-- MODAL DE FEEDBACK -->
+<div class="modal-overlay" id="feedback-modal">
+  <div class="modal">
+    <h3 id="modal-title">Enviar feedback</h3>
+    <p id="modal-subtitle">Descreva o que vc quer ajustar ou deixe em branco pra só confirmar.</p>
+    <textarea id="feedback-text" placeholder="Ex: ajustar script 5.1 pra tom mais empático; trocar hashtags do tema hormonal..."></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-send" onclick="submitFeedback()" id="send-btn">Enviar</button>
+    </div>
+    <div class="modal-status" id="modal-status"></div>
+  </div>
+</div>
+
+<script>
+  const docName = window.location.pathname.split('/').pop() || 'unknown';
+  let currentAction = null;
+  function openModal(action) {
+    currentAction = action;
+    document.getElementById('modal-title').textContent = action === 'APROVO' ? 'Aprovar entrega' : action === 'AJUSTAR' ? 'O que ajustar?' : 'Por que rejeitar?';
+    document.getElementById('modal-subtitle').textContent = action === 'APROVO'
+      ? 'Clica em Enviar pra confirmar a aprovacao. Pode adicionar uma nota se quiser.'
+      : action === 'AJUSTAR'
+      ? 'Descreve em texto o que vc quer ajustar. Quanto mais especifico, melhor.'
+      : 'Me conta o motivo pra eu refazer do zero no caminho certo.';
+    document.getElementById('feedback-text').value = '';
+    document.getElementById('modal-status').className = 'modal-status';
+    document.getElementById('modal-status').textContent = '';
+    document.getElementById('feedback-modal').classList.add('show');
+    setTimeout(() => document.getElementById('feedback-text').focus(), 100);
+  }
+  function closeModal() {
+    document.getElementById('feedback-modal').classList.remove('show');
+  }
+  async function submitFeedback() {
+    const text = document.getElementById('feedback-text').value.trim();
+    const btn = document.getElementById('send-btn');
+    const status = document.getElementById('modal-status');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    try {
+      const res = await fetch('/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ doc: docName, action: currentAction, text: text, ts: new Date().toISOString() }),
+      });
+      if (res.ok) {
+        status.className = 'modal-status success';
+        status.textContent = '✓ Feedback enviado! Vou processar e retornar.';
+        document.getElementById('status-badge').textContent = currentAction + ' RECEBIDO';
+        document.getElementById('status-badge').style.background = currentAction === 'APROVO' ? '#2a8a4a' : currentAction === 'AJUSTAR' ? '#c9a24e' : '#a64a4a';
+        document.getElementById('status-badge').style.color = currentAction === 'AJUSTAR' ? '#1a1a1a' : '#fff';
+        setTimeout(closeModal, 1800);
+      } else {
+        status.className = 'modal-status error';
+        status.textContent = '✗ Erro ao enviar (HTTP ' + res.status + '). Tenta de novo.';
+      }
+    } catch (e) {
+      status.className = 'modal-status error';
+      status.textContent = '✗ Erro de rede. Tenta de novo.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar';
+    }
+  }
+  // Close modal on Escape or click outside
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.getElementById('feedback-modal').addEventListener('click', e => {
+    if (e.target.id === 'feedback-modal') closeModal();
+  });
+</script>
+</body>
+</html>
