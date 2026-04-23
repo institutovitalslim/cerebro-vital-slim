@@ -214,11 +214,13 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 ## 10. CONTEXTO OPERACIONAL
 
 ### Localizacao
-- **Endereco:** [PREENCHER - Rua, numero, complemento]
-- **Bairro:** [PREENCHER]
-- **Cidade:** Salvador, BA
-- **CEP:** [PREENCHER]
-- **Referencia:** Proximo a [PREENCHER]
+- **Endereco:** Rua Priscila B. Dutra, 389
+- **Complemento:** Estacao Villas Shopping, sala 305 (3o andar)
+- **Bairro:** Buraquinho
+- **Cidade:** Lauro de Freitas, BA
+- **CEP:** 42709-200
+- **Google Maps:** https://maps.app.goo.gl/ADT3m3rqTKM7Q3oV6
+- **Waze/Uber:** Buscar por "Instituto Vital Slim"
 
 ### Horario de Funcionamento
 - Segunda a Sexta: 8h-18h
@@ -301,10 +303,10 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 **Nota:** Este documento deve ser atualizado mensalmente ou quando houver mudancas significativas na operacao.
 
 **Campos pendentes de confirmacao:**
-- [ ] Endereco completo
+- [x] Endereco completo: Rua Priscila B. Dutra, 389, Estacao Villas Shopping, sala 305, Buraquinho, Lauro de Freitas - BA, 42709-200
 - [ ] Telefone/WhatsApp principal
 - [ ] Precos de consultas e pacotes
 - [x] Site oficial: www.institutovitalslim.com.br
 - [ ] Email institucional
 - [x] Horario de sabado: 8h-12h (confirmado)
-- [ ] Bairro/regiao de atendimento
+- [x] Bairro/regiao: Buraquinho, Lauro de Freitas (proximo a Salvador)
