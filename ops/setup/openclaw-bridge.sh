@@ -21,6 +21,11 @@
 
 set -euo pipefail
 
+# Alguns consoles web (ex: hpanel da Hostinger) expoem um shell minimalista
+# sem /sbin nem /usr/sbin no PATH. Injetamos defensivamente pra garantir que
+# nginx, systemctl, certbot, ss e outros sejam encontrados.
+export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/usr/sbin:/bin:/usr/bin:${PATH:-}"
+
 DOMAIN="${DOMAIN:-openclaw.institutovitalslim.com.br}"
 UPSTREAM_PORT="${UPSTREAM_PORT:-18789}"
 LE_EMAIL="${LE_EMAIL:-tiarofernandes@gmail.com}"
