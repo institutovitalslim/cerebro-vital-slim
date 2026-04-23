@@ -1,0 +1,23 @@
+{
+  "session_start": "2026-04-23T01:45:00Z",
+  "model": "openrouter/moonshotai/kimi-k2.6",
+  "last_action": "reindex_memory",
+  "context": "Reindexação completa da memória operacional do Instituto Vital Slim",
+  "pending_tasks": [],
+  "critical_files": {
+    "memory_master": "/root/cerebro-vital-slim/MEMORY_MASTER_INDEX.md",
+    "system_prompt": "/root/.openclaw/workspace/ops/zapi_bridge/clara_system_prompt.md",
+    "verdades_operacionais": "/root/cerebro-vital-slim/cerebro/verdades-operacionais.md",
+    "clara_rules": "/root/cerebro-vital-slim/cerebro/verdades-operacionais-clara.md"
+  },
+  "videos_leads": {
+    "bioimpedancia": "/root/.openclaw/media/inbound/file_505---64879356-cf76-4a10-95e2-7bcc31b80b6c.mp4",
+    "primeira_consulta": "/root/.openclaw/media/inbound/file_506---d9124a51-4880-4143-b536-866a2fbda5ab.mp4"
+  },
+  "bridge_status": {
+    "running": true,
+    "pid": 864460,
+    "paused": false
+  },
+  "notes": "Memória reindexada com sucesso. Próximo passo: aguardar instrução do usuário."
+}

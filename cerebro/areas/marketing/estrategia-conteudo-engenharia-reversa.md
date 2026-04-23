@@ -76,6 +76,7 @@ Padrão Viral Content Strategy (10 slides):
 - **Nunca usar antes-e-depois** sem contexto clínico + autorização explícita
 - **Nunca medicalizar conteúdo educativo** (não dizer "você TEM hipotireoidismo" — dizer "esses sintomas podem indicar")
 - **Sempre incluir CTA de consulta** quando o conteúdo levanta sintoma/diagnóstico
+- **NUNCA use crianças como sujeito/contexto em scripts.** IVS atende adultos. Mães/pais podem ser o lead, mas o filho não é o caso.
 - **Nunca copiar caption literal** — sempre reescrever na voz da Dra. Daniely
 - **Sempre creditar fonte de dado científico** se usar (PubMed/estudos)
 
