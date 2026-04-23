@@ -222,13 +222,13 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 
 ### Horario de Funcionamento
 - Segunda a Sexta: 8h-18h
-- Sabado: 8h-12h (confirmar)
+- Sabado: 8h-12h (confirmado)
 
 ### Contato
 - **WhatsApp:** [PREENCHER - numero principal]
 - **Telefone:** [PREENCHER]
 - **Email:** institutovitalslim@gmail.com (confirmar)
-- **Site:** [PREENCHER - ou Instagram como principal]
+- **Site:** www.institutovitalslim.com.br
 - **Instagram:** @institutovitalslim | @dradaniely.freitas
 
 ### Sistemas e Integracoes
@@ -304,7 +304,7 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - [ ] Endereco completo
 - [ ] Telefone/WhatsApp principal
 - [ ] Precos de consultas e pacotes
-- [ ] Site oficial
+- [x] Site oficial: www.institutovitalslim.com.br
 - [ ] Email institucional
-- [ ] Horario de sabado
+- [x] Horario de sabado: 8h-12h (confirmado)
 - [ ] Bairro/regiao de atendimento
