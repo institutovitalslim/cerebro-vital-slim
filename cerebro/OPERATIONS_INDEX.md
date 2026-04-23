@@ -66,6 +66,11 @@
 - `~/.openclaw/skills/local-seo/SKILL.md` — SEO local (Google Maps)
 - `~/.openclaw/skills/medical-content/SKILL.md` — compliance médico
 
+### Campanhas ativas / prontas para execução
+- `cerebro/areas/marketing/campanhas/follow-up-leads-whatsapp.md` — sequência 7 mensagens para leads não agendados
+- `cerebro/areas/marketing/campanhas/reativacao-300-pacientes.md` — reativação de 300 pacientes inativos (45 dias)
+- `cerebro/areas/marketing/campanhas/google-business-otimizacao.md` — otimização completa do Google Business Profile
+
 ### Contexto intertópicos (Telegram)
 - `cerebro/telegram-topics.md`
 - `cerebro/cross-topic-memory.md`
