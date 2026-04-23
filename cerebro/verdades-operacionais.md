@@ -47,6 +47,13 @@ Para isso, consultar:
 - Quando o caso exigir recibo em vez de nota fiscal, isso deve coexistir com a configuração correta de boleto nas parcelas; uma coisa não substitui a outra.
 - Depois da emissão/faturamento e geração dos boletos de paciente, baixar todos os PDFs e enviar os boletos pelo próprio tópico do Telegram, sem esperar novo pedido, sempre que o usuário tiver solicitado a emissão naquele fluxo.
 - Em qualquer emissão/faturamento no Omie que dependa de conta corrente ou banco, perguntar explicitamente ao Tiaro qual banco deve ser escolhido antes de emitir, mesmo quando houver um banco usado em caso anterior.
+- Em qualquer emissão de OS/NFS-e no Omie, nunca inventar ou assumir descrição de serviço. Sempre perguntar explicitamente ao Tiaro qual serviço exato/cadastro de serviço do Omie deve ser usado antes de criar a OS, especialmente quando a emissão for para nota fiscal.
+- Em emissão com NFS-e, o serviço deve ser selecionado pela lista/cadastro de serviços do Omie, nunca digitado manualmente, porque é esse cadastro que puxa os dados fiscais corretos para a prefeitura.
+- A lista canônica de serviços do Omie deve ser mantida em `cerebro/omie-servicos.md`.
+- Mapeamentos já confirmados pelo Tiaro: `Tricologia` = `SRV00016`; `Programa de Acompanhamento Intensivo` = `SRV00013`.
+- Regra técnica obrigatória: para o Omie puxar a descrição fiscal completa do serviço, `ServicosPrestados` na OS deve referenciar o `nCodServico` do cadastro do serviço (`nCodServ` retornado por `ListarCadastroServico` / `ConsultarCadastroServico`), em vez de montar a descrição manualmente.
+- Em NFS-e, após `FaturarOS`, a OS pode demorar para refletir `cFaturada = "S"` em `ConsultarOS` porque a prefeitura ainda não devolveu a nota autorizada. Se `FaturarOS` retornou sucesso, tratar esse intervalo como estado assíncrono normal, não como erro automático.
+- Quando a emissão for com nota fiscal, habilitar sempre `Enviar o link da NFS-e gerada na prefeitura`.
 
 ## Time da clínica
 - **Dra. Daniely Alves Freitas**

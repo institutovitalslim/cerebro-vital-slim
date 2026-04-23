@@ -50,8 +50,45 @@ Ao emitir proposta/OS no Omie com cobrança por boleto bancário, os campos crí
 - Meio de pagamento das parcelas = `Boleto Bancário`.
 - Quando o caso exigir, manter a observação comercial/fiscal: emitir `recibos` em vez de `nota fiscal`.
 
-### Pergunta obrigatória antes de emitir
-Se a emissão depender de banco/conta corrente, perguntar explicitamente ao Tiaro qual banco deve ser usado antes de criar a OS ou faturar, sem assumir automaticamente o banco do caso anterior.
+### Perguntas obrigatórias antes de emitir
+- Se a emissão depender de banco/conta corrente, perguntar explicitamente ao Tiaro qual banco deve ser usado antes de criar a OS ou faturar, sem assumir automaticamente o banco do caso anterior.
+- Se a emissão depender de serviço/cadastro de serviço no Omie, perguntar explicitamente ao Tiaro qual serviço exato deve ser usado. Nunca inventar descrição de serviço e nunca assumir serviço parecido, porque isso pode rejeitar a NFS-e na prefeitura.
+
+### Regra de serviço para nota fiscal
+Em emissão com NFS-e, o serviço deve ser selecionado pela lista/cadastro de serviços do Omie, nunca digitado manualmente. O item da lista é o que carrega os dados fiscais corretos para evitar rejeição da prefeitura.
+
+Fonte canônica da lista de serviços:
+- `cerebro/omie-servicos.md`
+
+Mapeamentos já confirmados:
+- `Tricologia` → `SRV00016`
+- `Programa de Acompanhamento Intensivo` → `SRV00013`
+
+### Regra técnica do payload da OS
+Para o Omie realmente puxar a descrição fiscal completa do serviço cadastrado, o item em `ServicosPrestados` deve referenciar o `nCodServico` do cadastro do serviço listado em `ListarCadastroServico` / `ConsultarCadastroServico`.
+
+Exemplo validado:
+- `SRV00016` (Tricologia) → `nCodServ = 6831167233`
+- Quando a OS foi criada enviando `ServicosPrestados: [{"nCodServico": 6831167233, "nQtde": 1, "nSeqItem": 1, "nValUnit": 8100}]`, o Omie puxou automaticamente a descrição completa: `SERVIÇO MÉDICO DE PROCEDIMENTO COM APLICAÇÃO DE MEDICAÇÃO SC`.
+
+Regra prática:
+- não montar manualmente os campos fiscais do serviço quando existir cadastro canônico;
+- primeiro mapear o código comercial (`SRV00016`, `SRV00013`, etc.), depois consultar/usar o `nCodServ` correspondente;
+- só então incluir a OS.
+
+### Comportamento assíncrono do faturamento NFS-e
+Depois de `FaturarOS`, o Omie pode ainda não marcar imediatamente `cFaturada = "S"` em `ConsultarOS`.
+
+Interpretação correta confirmada pelo Tiaro:
+- isso pode ocorrer porque a prefeitura demora um pouco para devolver a NFS-e autorizada;
+- enquanto esse retorno não volta, a OS pode permanecer temporariamente sem status final de faturada;
+- esse estado transitório não deve ser tratado automaticamente como falha se o `FaturarOS` já retornou sucesso.
+
+Caso validado:
+- Mario Gomes de Abreu Filho, OS `6832443045` / número `000000002025699`, serviço da lista `SRV00013`, teve a nota emitida com sucesso após esse fluxo assíncrono.
+
+### Regra de envio para nota fiscal
+Quando a emissão for com nota fiscal, habilitar sempre a opção `Enviar o link da NFS-e gerada na prefeitura`.
 
 ### Armadilha já observada
 Não confiar apenas na observação textual da OS para registrar `boleto bancário Bradesco`. Esses dados precisam estar refletidos também nos campos estruturados da OS e das parcelas, senão a proposta pode nascer com configuração financeira incorreta.
