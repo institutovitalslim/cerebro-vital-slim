@@ -12,7 +12,6 @@
     line-height: 1.65;
     color: #1a1a1a;
     background: #f8f7f4;
-    padding: 0;
   }
   header.top {
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
@@ -49,41 +48,10 @@
     min-height: 100vh;
     box-shadow: 0 0 40px rgba(0,0,0,0.04);
   }
-  h1 {
-    font-size: 30px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #c9a24e;
-    line-height: 1.25;
-  }
-  h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-top: 40px;
-    margin-bottom: 16px;
-    line-height: 1.3;
-  }
-  h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #2a2a2a;
-    margin-top: 28px;
-    margin-bottom: 12px;
-    padding-left: 10px;
-    border-left: 3px solid #c9a24e;
-  }
-  h4 {
-    font-size: 15px;
-    font-weight: 600;
-    color: #4a4a4a;
-    margin-top: 18px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-  }
+  h1 { font-size: 30px; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #c9a24e; line-height: 1.25; }
+  h2 { font-size: 22px; font-weight: 700; margin-top: 40px; margin-bottom: 16px; line-height: 1.3; }
+  h3 { font-size: 18px; font-weight: 600; color: #2a2a2a; margin-top: 28px; margin-bottom: 12px; padding-left: 10px; border-left: 3px solid #c9a24e; }
+  h4 { font-size: 15px; font-weight: 600; color: #4a4a4a; margin-top: 18px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.6px; }
   p { margin-bottom: 14px; color: #2a2a2a; font-size: 15.5px; }
   ul, ol { margin-left: 24px; margin-bottom: 16px; }
   li { margin-bottom: 6px; color: #2a2a2a; font-size: 15.5px; }
@@ -91,66 +59,18 @@
   em { color: #4a4a4a; font-style: italic; }
   a { color: #8b6914; text-decoration: none; border-bottom: 1px solid #c9a24e; transition: all 0.2s; }
   a:hover { color: #1a1a1a; background: #faf7ee; padding: 0 2px; }
-  blockquote {
-    background: #faf7ee;
-    border-left: 4px solid #c9a24e;
-    padding: 14px 20px;
-    margin: 16px 0;
-    color: #4a4a4a;
-    border-radius: 0 4px 4px 0;
-    font-size: 15px;
-  }
-  code {
-    background: #f4f1ea;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 13.5px;
-    color: #8b6914;
-  }
-  pre {
-    background: #1a1a1a;
-    color: #e8e0cc;
-    padding: 18px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 16px 0;
-    font-size: 13px;
-    line-height: 1.55;
-  }
+  blockquote { background: #faf7ee; border-left: 4px solid #c9a24e; padding: 14px 20px; margin: 16px 0; color: #4a4a4a; border-radius: 0 4px 4px 0; font-size: 15px; }
+  code { background: #f4f1ea; padding: 2px 6px; border-radius: 3px; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; color: #8b6914; }
+  pre { background: #1a1a1a; color: #e8e0cc; padding: 18px; border-radius: 6px; overflow-x: auto; margin: 16px 0; font-size: 13px; line-height: 1.55; }
   pre code { background: transparent; color: inherit; padding: 0; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 14.5px;
-    background: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  th {
-    background: #1a1a1a;
-    color: #fff;
-    font-weight: 600;
-    padding: 12px 14px;
-    text-align: left;
-    font-size: 13.5px;
-    letter-spacing: 0.3px;
-  }
-  td {
-    padding: 10px 14px;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
-  }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-radius: 4px; overflow: hidden; }
+  th { background: #1a1a1a; color: #fff; font-weight: 600; padding: 12px 14px; text-align: left; font-size: 13.5px; letter-spacing: 0.3px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
   tr:last-child td { border-bottom: none; }
   tr:nth-child(even) td { background: #fafaf8; }
   hr { border: none; border-top: 1px solid #e5e5e5; margin: 32px 0; }
 
-  /* Script blocks styling */
-  main > h3 + p + p strong { color: #c9a24e; }
-
-  /* Validator bar */
+  /* VALIDATOR */
   .validator {
     background: linear-gradient(135deg, #faf7ee 0%, #f5efd9 100%);
     border: 2px solid #c9a24e;
@@ -159,28 +79,12 @@
     margin: 32px 0;
     box-shadow: 0 4px 12px rgba(201,162,78,0.15);
   }
-  .validator h2 {
-    margin-top: 0;
-    color: #8b6914;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border: none;
-  }
-  .validator p {
-    font-size: 14px;
-    color: #4a4a4a;
-    margin-bottom: 14px;
-  }
-  .validator-buttons {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 16px;
-  }
+  .validator h2 { margin-top: 0; color: #8b6914; font-size: 16px; text-transform: uppercase; letter-spacing: 0.8px; border: none; }
+  .validator p { font-size: 14px; color: #4a4a4a; margin-bottom: 14px; }
+  .validator-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
   .btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 22px;
     border-radius: 6px;
     font-weight: 600;
     font-size: 14px;
@@ -188,29 +92,64 @@
     cursor: pointer;
     transition: all 0.2s;
     text-decoration: none;
-    border-bottom: none;
+    font-family: inherit;
   }
   .btn-approve { background: #2a8a4a; color: #fff; }
-  .btn-approve:hover { background: #1f6a38; color: #fff; }
+  .btn-approve:hover { background: #1f6a38; transform: translateY(-1px); }
   .btn-adjust { background: #c9a24e; color: #1a1a1a; }
-  .btn-adjust:hover { background: #b08a3e; color: #1a1a1a; }
+  .btn-adjust:hover { background: #b08a3e; transform: translateY(-1px); }
   .btn-reject { background: #a64a4a; color: #fff; }
-  .btn-reject:hover { background: #8a3838; color: #fff; }
+  .btn-reject:hover { background: #8a3838; transform: translateY(-1px); }
 
-  footer {
-    text-align: center;
-    padding: 30px;
-    color: #888;
-    font-size: 12px;
-    border-top: 1px solid #e5e5e5;
-    margin-top: 40px;
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
   }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal h3 { border: none; padding: 0; margin-bottom: 12px; font-size: 22px; }
+  .modal p { color: #666; font-size: 14px; margin-bottom: 16px; }
+  .modal textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .modal textarea:focus { border-color: #c9a24e; outline: none; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  .btn-cancel { background: #ddd; color: #333; }
+  .btn-cancel:hover { background: #bbb; }
+  .btn-send { background: #1a1a1a; color: #fff; }
+  .btn-send:hover { background: #2a2a2a; }
+  .modal-status { margin-top: 12px; padding: 10px; border-radius: 4px; font-size: 14px; display: none; }
+  .modal-status.success { background: #d4edda; color: #1a7a3a; display: block; }
+  .modal-status.error { background: #f8d7da; color: #721c24; display: block; }
+
+  footer { text-align: center; padding: 30px; color: #888; font-size: 12px; border-top: 1px solid #e5e5e5; margin-top: 40px; }
   footer a { color: #8b6914; }
 
   @media print {
-    header.top { position: static; }
+    header.top, .validator { display: none; }
     main { box-shadow: none; max-width: 100%; padding: 0 20px; }
-    .validator { display: none; }
   }
   @media (max-width: 640px) {
     main { padding: 24px 18px; }
@@ -220,6 +159,8 @@
     p, li { font-size: 15px; }
     table { font-size: 13px; }
     th, td { padding: 8px 10px; }
+    .validator-buttons { flex-direction: column; }
+    .btn { width: 100%; }
   }
 </style>
 </head>
@@ -227,18 +168,18 @@
 <header class="top">
   <h1>
     <span>🩺 Instituto Vital Slim — Entrega de conteúdo</span>
-    <span class="badge">AGUARDANDO VALIDAÇÃO</span>
+    <span class="badge" id="status-badge">AGUARDANDO VALIDAÇÃO</span>
   </h1>
 </header>
 <main>
   <div class="validator">
     <h2>📋 Documento para sua aprovação</h2>
     <p><strong>@dr.marlonbatista — 33 scripts adaptados (Fase 2.A)</strong></p>
-    <p>Revise o conteúdo abaixo. Ao final, me responda por Telegram ou WhatsApp com uma das opções:</p>
+    <p>Revise o conteúdo abaixo. Escolha uma ação:</p>
     <div class="validator-buttons">
-      <span class="btn btn-approve">✓ APROVO — pode seguir</span>
-      <span class="btn btn-adjust">↻ AJUSTAR — vou te dizer o que</span>
-      <span class="btn btn-reject">✗ REJEITAR — refaz do zero</span>
+      <button class="btn btn-approve" onclick="openModal('APROVO')">✓ APROVO — pode seguir</button>
+      <button class="btn btn-adjust" onclick="openModal('AJUSTAR')">↻ AJUSTAR</button>
+      <button class="btn btn-reject" onclick="openModal('REJEITAR')">✗ REJEITAR</button>
     </div>
   </div>
 
@@ -542,5 +483,77 @@
     Gerado automaticamente pelo pipeline de conteúdo do IVS • Fonte canônica: <a href="https://github.com/institutovitalslim/cerebro-vital-slim">GitHub cerebro-vital-slim</a>
   </footer>
 </main>
+
+<!-- MODAL DE FEEDBACK -->
+<div class="modal-overlay" id="feedback-modal">
+  <div class="modal">
+    <h3 id="modal-title">Enviar feedback</h3>
+    <p id="modal-subtitle">Descreva o que vc quer ajustar ou deixe em branco pra só confirmar.</p>
+    <textarea id="feedback-text" placeholder="Ex: ajustar script 5.1 pra tom mais empático; trocar hashtags do tema hormonal..."></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-send" onclick="submitFeedback()" id="send-btn">Enviar</button>
+    </div>
+    <div class="modal-status" id="modal-status"></div>
+  </div>
+</div>
+
+<script>
+  const docName = window.location.pathname.split('/').pop() || 'unknown';
+  let currentAction = null;
+  function openModal(action) {
+    currentAction = action;
+    document.getElementById('modal-title').textContent = action === 'APROVO' ? 'Aprovar entrega' : action === 'AJUSTAR' ? 'O que ajustar?' : 'Por que rejeitar?';
+    document.getElementById('modal-subtitle').textContent = action === 'APROVO'
+      ? 'Clica em Enviar pra confirmar a aprovacao. Pode adicionar uma nota se quiser.'
+      : action === 'AJUSTAR'
+      ? 'Descreve em texto o que vc quer ajustar. Quanto mais especifico, melhor.'
+      : 'Me conta o motivo pra eu refazer do zero no caminho certo.';
+    document.getElementById('feedback-text').value = '';
+    document.getElementById('modal-status').className = 'modal-status';
+    document.getElementById('modal-status').textContent = '';
+    document.getElementById('feedback-modal').classList.add('show');
+    setTimeout(() => document.getElementById('feedback-text').focus(), 100);
+  }
+  function closeModal() {
+    document.getElementById('feedback-modal').classList.remove('show');
+  }
+  async function submitFeedback() {
+    const text = document.getElementById('feedback-text').value.trim();
+    const btn = document.getElementById('send-btn');
+    const status = document.getElementById('modal-status');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    try {
+      const res = await fetch('/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ doc: docName, action: currentAction, text: text, ts: new Date().toISOString() }),
+      });
+      if (res.ok) {
+        status.className = 'modal-status success';
+        status.textContent = '✓ Feedback enviado! Vou processar e retornar.';
+        document.getElementById('status-badge').textContent = currentAction + ' RECEBIDO';
+        document.getElementById('status-badge').style.background = currentAction === 'APROVO' ? '#2a8a4a' : currentAction === 'AJUSTAR' ? '#c9a24e' : '#a64a4a';
+        document.getElementById('status-badge').style.color = currentAction === 'AJUSTAR' ? '#1a1a1a' : '#fff';
+        setTimeout(closeModal, 1800);
+      } else {
+        status.className = 'modal-status error';
+        status.textContent = '✗ Erro ao enviar (HTTP ' + res.status + '). Tenta de novo.';
+      }
+    } catch (e) {
+      status.className = 'modal-status error';
+      status.textContent = '✗ Erro de rede. Tenta de novo.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar';
+    }
+  }
+  // Close modal on Escape or click outside
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.getElementById('feedback-modal').addEventListener('click', e => {
+    if (e.target.id === 'feedback-modal') closeModal();
+  });
+</script>
 </body>
 </html>
