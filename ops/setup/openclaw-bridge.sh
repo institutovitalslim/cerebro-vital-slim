@@ -124,6 +124,10 @@ cat > "/etc/nginx/sites-available/${NGINX_SITE_NAME}" <<NGINX
 # Auto-gerado por ops/setup/openclaw-bridge.sh
 # Bridge: ${DOMAIN} -> http://127.0.0.1:${UPSTREAM_PORT}
 
+# Token "Bearer <64 hex>" = 71 chars; default bucket eh 64 em algumas builds
+map_hash_bucket_size 128;
+map_hash_max_size 2048;
+
 map \$http_authorization \$bridge_auth_ok {
   default 0;
   "Bearer ${TOKEN}" 1;
