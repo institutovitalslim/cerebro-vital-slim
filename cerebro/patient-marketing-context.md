@@ -110,8 +110,10 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 ### Precos
 - Consulta inicial: R$ 1.000
   - Inclui: exame de bioimpedancia + elaboracao de plano nutricional
-- Pacote mensal: [PREENCHER]
-- Pacote trimestral: [PREENCHER]
+- Programa de Acompanhamento Intensivo: **Valor personalizado**
+  - Definido apos avaliacao medica completa
+  - Depende das necessidades especificas de cada paciente
+  - Inclui protocolo exclusivo, medicamentos, suplementos e acompanhamento
 - **Politica:** Nunca divulgar precos publicamente em copy. Sempre direcionar para avaliacao personalizada.
 
 ---
@@ -311,4 +313,4 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - [x] Email institucional: agendamento@institutovitalslim.com.br
 - [x] Horario de sabado: 8h-12h (confirmado)
 - [x] Bairro/regiao: Buraquinho, Lauro de Freitas (proximo a Salvador)
-- [ ] Precos de pacotes mensal/trimestral
+- [x] Precos: consulta inicial R$ 1.000 | programa personalizado (valor definido apos avaliacao)
