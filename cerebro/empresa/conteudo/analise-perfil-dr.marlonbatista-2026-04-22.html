@@ -543,7 +543,7 @@
     try {
       const res = await fetch('/feedback', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-IVS-Feedback-Key': '__IVS_FEEDBACK_KEY__' },
         body: JSON.stringify({ doc: docName, action: currentAction, text: text, ts: new Date().toISOString() }),
       });
       if (res.ok) {
