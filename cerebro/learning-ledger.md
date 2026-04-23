@@ -1,3 +1,34 @@
+## 2026-04-23 - Bridge HTTPS para acesso remoto ao OpenClaw (agente sandbox)
+
+### Problema
+Claude rodando no sandbox GitHub (ambiente de execução via Claude Code web) só tem HTTP/HTTPS de saída. Porta 22 (SSH), 53 (DNS), outras TCP — todas bloqueadas. Sem como investigar a Clara na VPS quando ela silencia, ou monitorar o gateway `localhost:18789` em qualquer circunstância.
+
+### Escolha de arquitetura
+Três caminhos avaliados:
+- **Cloudflare Tunnel + Access Service Token** — melhor em segurança + UX, mas exige DNS na Cloudflare (DNS da VitalSlim está na HostGator).
+- **nginx + Let's Encrypt + bearer** na VPS — escolhido. Self-contained, não depende da Cloudflare, reutiliza o domínio existente.
+- **Cloudflare Quick Tunnel (trycloudflare)** — avaliado e rejeitado para uso permanente: URL efêmera, pública, sem Access.
+
+### Princípio do menor privilégio aplicado
+Bridge valida `BRIDGE_TOKEN` **na borda** (nginx) e **strippa o header Authorization** antes do proxy pro gateway interno. Resultado: Claude remoto consegue `/health`, `/version`, liveness e UI pública — **mas não dispara skills, não manda WhatsApp, não opera dados de paciente** (o `gateway.auth.token` interno bloqueia). Se o BRIDGE_TOKEN vazar, estrago é limitado a leitura de telemetria.
+
+### Artefatos
+- `ops/setup/openclaw-bridge.sh` — instala nginx+certbot, gera token, configura proxy, smoke test. Idempotente.
+- `ops/setup/rotate-bridge-token.sh` — rotaciona token em 5s, nginx recarrega, antigo vira 401.
+- `cerebro/verdades-operacionais.md` — seção "Bridge HTTPS do OpenClaw" documenta URL, paths, política.
+
+### Gotchas descobertos no caminho (pra próxima vez)
+1. **Ubuntu 25.10 `apt-get install -qq ... >/dev/null`** pode retornar 0 sem instalar. Pacote meta `nginx` falhou silenciosamente, `nginx-core` direto funciona.
+2. **Shell do hpanel da Hostinger não tem /sbin nem /usr/sbin no PATH**, mesmo como root. Script agora exporta PATH defensivamente.
+3. **nginx `map_hash_bucket_size` default = 64** é pequeno pra bearer token de 64 chars + "Bearer " (71 chars total). Setar 128 explicitamente.
+4. **iOS Smart Punctuation envelopa URLs em `<...>`** quando digitadas em terminal via Safari. Bash trata `<` como redirect de input. Evitar URLs em CLI quando possível — usar git.
+5. **Paste services (0x0.st) estão desabilitados por abuso de bots IA** (`uploads disabled because it's been almost nothing but AI botnet spam`). Fallback: `paste.rs`.
+
+### Regra canônica
+Se no futuro for considerar abrir **endpoints de escrita** via bridge (disparar skill, mandar mensagem, etc.), **exigir**: (a) escopo específico (location block dedicado, não wildcard), (b) rate limit mais agressivo, (c) audit log, (d) IP allowlist se possível, (e) documentar no `verdades-operacionais.md` o que é permitido. Caso contrário, mantido read-only.
+
+---
+
 ## 2026-04-22 - Skills de Marketing adaptadas do MarketingSkills (coreyhaines31)
 
 ### Análise de segurança
