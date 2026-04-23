@@ -119,3 +119,5 @@ Para isso, consultar:
 
 ## Regra de operação
 Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, WhatsApp/Z-API, Omie, time da clínica ou tweet-carrossel, consultar os arquivos canônicos correspondentes em `cerebro/`.
+
+- **Roteamento Omie -> gpt-5.4:** qualquer pedido que envolva a API do Omie (faturamento, OS, boleto, NFe, cadastro, financeiro) roda no modelo gpt-5.4 (provider openai-codex). Kimi K2.6 trava em tool-use longo (stopReason=toolUse com payloads=0). Ver cerebro/omie.md secao Regra de roteamento de modelo.

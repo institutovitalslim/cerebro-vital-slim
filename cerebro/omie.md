@@ -1,5 +1,15 @@
 # Omie
 
+## Regra de roteamento de modelo (obrigatória)
+
+**Todo pedido relacionado ao Omie deve ser processado pelo modelo `gpt-5.4` (provider `openai-codex`).**
+
+- Motivo: Kimi K2.6 via openai-completions tem bug recorrente em tool-use + reasoning longo (stopReason=toolUse com payloads=0), que trava operações Omie complexas (faturamento, OS, boletos, NFe, ListarClientes paginado).
+- Escopo: faturar orçamento/OS, emitir NFe, gerar boleto, cadastrar/alterar cliente, consultar financeiro, baixar títulos, qualquer coisa que chame tools da API Omie.
+- Como garantir: a sessão do tópico precisa estar com `model = gpt-5.4` / `modelProvider = openai-codex`. Se um tópico novo começar em Kimi e o pedido for Omie, trocar o modelo **antes** de responder.
+- Kimi K2.6 continua padrão só pra conversas da Clara no WhatsApp (Z-API bridge), onde não há tool-use pesado.
+- Histórico do bug: incidente 2026-04-23 19:52 UTC, tópico 1980 (MARIO GOMES DE ABREU FILHO, R$ 45.500), backup `sessions.json.bak-omie-fix-20260423-*`.
+
 ## Cadastro de pacientes a partir do Quarkclinic
 
 ### Skill canônica
