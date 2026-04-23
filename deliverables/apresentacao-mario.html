@@ -84,6 +84,25 @@
   .step-content h4{margin-bottom:.2rem;color:var(--brown)}
   .step-content p{margin:0;font-size:.95rem}
 
+  /* Before/After Slider */
+  .ba-slider{position:relative;width:100%;max-width:320px;margin:0 auto;overflow:hidden;border-radius:12px;cursor:ew-resize;aspect-ratio:318/385}
+  .ba-slider img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .ba-slider .after{clip-path:inset(0 50% 0 0)}
+  .ba-slider .handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;background:var(--gold);border:3px solid var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.3);pointer-events:none}
+  .ba-slider .handle::before{content:'';width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:8px solid var(--white);margin-right:4px}
+  .ba-slider .handle::after{content:'';width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:8px solid var(--white)}
+  .ba-labels{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:space-between;padding:0 12px;pointer-events:none}
+  .ba-labels span{background:rgba(0,0,0,.5);color:#fff;padding:2px 8px;border-radius:4px;font-size:.7rem;text-transform:uppercase}
+
+  /* Depoimentos */
+  #depoimentos{background:var(--dark);color:var(--white)}
+  #depoimentos h2{color:var(--gold)}
+  #depoimentos .subtitle{color:var(--white);opacity:.7}
+  .depo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:1.5rem}
+  .depo-card{background:rgba(255,255,255,.05);border-radius:16px;padding:1.2rem;text-align:center;border:1px solid rgba(159,136,68,.2)}
+  .depo-card h3{margin:.8rem 0 .4rem;color:var(--gold);font-size:1.1rem}
+  .depo-card p{font-size:.9rem;opacity:.85;font-style:italic;line-height:1.6}
+
   @media (max-width:640px){
     section{padding:2rem 1rem}
     .grid-2,.grid-3{grid-template-columns:1fr}
@@ -287,7 +306,68 @@
   </div>
 </section>
 
-<!-- 5. CTA -->
+<!-- 5. DEPOIMENTOS — Resultados Reais -->
+<section id="depoimentos">
+  <div class="container">
+    <h2>Resultados <span class="gold">Reais</span></h2>
+    <div class="subtitle">O que muda quando o protocolo é correto.</div>
+
+    <div class="depo-grid">
+      <div class="depo-card">
+        <div class="ba-slider" data-slider>
+          <img src="https://institutovitalslim.com.br/wp-content/uploads/2026/04/Frame-1992.png" alt="Antes">
+          <img src="https://institutovitalslim.com.br/wp-content/uploads/2026/04/Frame-1993.png" alt="Depois" class="after">
+          <div class="handle"></div>
+          <div class="ba-labels"><span>Antes</span><span>Depois</span></div>
+        </div>
+        <h3>Tiaro Neves</h3>
+        <p>"Poucas pessoas sabem o que é ter 150kg. Eu sei. Dores no corpo, 3 remédios para pressão e toda a falta de saúde. Hoje estou na minha melhor forma, mais jovem e sem uso de nenhum remédio. Obrigado Dra Daniely Freitas"</p>
+      </div>
+      <div class="depo-card">
+        <div class="ba-slider" data-slider>
+          <img src="https://institutovitalslim.com.br/wp-content/uploads/2026/04/Frame-1994.png" alt="Antes">
+          <img src="https://institutovitalslim.com.br/wp-content/uploads/2026/04/Frame-1995.png" alt="Depois" class="after">
+          <div class="handle"></div>
+          <div class="ba-labels"><span>Antes</span><span>Depois</span></div>
+        </div>
+        <h3>Silvana A.</h3>
+        <p>"O sentimento que eu tenho é Felicidade, grande...a atenção e o carinho que recebi não tem igual. Os meus resultados falam por si só"</p>
+      </div>
+      <div class="depo-card">
+        <div class="ba-slider" data-slider>
+          <img src="https://institutovitalslim.com.br/wp-content/uploads/2026/04/Frame-1998-1.png" alt="Antes">
+          <img src="https://institutovitalslim.com.br/wp-content/uploads/2026/04/Frame-1997-1.png" alt="Depois" class="after">
+          <div class="handle"></div>
+          <div class="ba-labels"><span>Antes</span><span>Depois</span></div>
+        </div>
+        <h3>Darilene A.</h3>
+        <p>"Eu nem acredito que estou vivendo esse momento. Quando eu cheguei aqui, na clínica, eu estava cansada, sem esperança. Achava que nunca ia conseguir emagrecer. Mas a equipe me acolheu de um jeito tão especial. Me ajudaram, me orientaram e, o mais importante, acreditaram em mim mesmo quando eu duvidava"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-slider]').forEach(slider => {
+    let isDragging = false;
+    const afterImg = slider.querySelector('.after');
+    const handle = slider.querySelector('.handle');
+
+    function update(x) {
+      const rect = slider.getBoundingClientRect();
+      let pct = ((x - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      afterImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+      handle.style.left = pct + '%';
+    }
+
+    slider.addEventListener('pointerdown', e => { isDragging = true; update(e.clientX); });
+    window.addEventListener('pointermove', e => { if (isDragging) update(e.clientX); });
+    window.addEventListener('pointerup', () => { isDragging = false; });
+  });
+</script>
+
+<!-- 6. CTA -->
 <section id="cta">
   <div class="container">
     <h2>Vamos começar o seu <span class="gold">programa hoje?</span></h2>
