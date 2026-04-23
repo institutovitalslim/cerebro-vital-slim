@@ -11,6 +11,8 @@
 
 set -euo pipefail
 
+export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/usr/sbin:/bin:/usr/bin:${PATH:-}"
+
 TOKEN_FILE="/root/.openclaw/secure/bridge-token.env"
 NGINX_SITE="/etc/nginx/sites-available/openclaw-bridge"
 
