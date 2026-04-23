@@ -111,9 +111,10 @@ Medicina do emagrecimento, endocrinologia, nutricao funcional e tricologia
 - Consulta inicial: R$ 1.000
   - Inclui: exame de bioimpedancia + elaboracao de plano nutricional
 - Programa de Acompanhamento Intensivo: **Valor personalizado**
-  - Definido apos avaliacao medica completa
-  - Depende das necessidades especificas de cada paciente
+  - Definido pela Dra. Daniely juntamente com o paciente durante a consulta
+  - Baseado nas necessidades especificas e objetivos individuais
   - Inclui protocolo exclusivo, medicamentos, suplementos e acompanhamento
+  - Abordagem colaborativa: medico e paciente constroem o plano juntos
 - **Politica:** Nunca divulgar precos publicamente em copy. Sempre direcionar para avaliacao personalizada.
 
 ---
