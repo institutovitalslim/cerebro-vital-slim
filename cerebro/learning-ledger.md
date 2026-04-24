@@ -1,3 +1,40 @@
+## 2026-04-24 - Adoção de skills de design externas (Impeccable + Emil Kowalski)
+
+### Contexto
+Tiaro indicou 3 skills de design externas encontradas no Instagram:
+- `emilkowalski/skill` (Emil Kowalski, 938 stars) — UI polish + animation
+- `pbakaus/impeccable` (Paul Bakaus, 10k stars, Apache 2.0, baseado no frontend-design oficial da Anthropic) — 35 comandos de design (polish, critique, audit, typeset, colorize, layout…)
+- `Leonxlnx/taste-skill` (12.5k stars) — anti-slop frontend
+
+### Análise de segurança
+- **Prompt injection scan**: zero hits em todos os 35 reference files do Impeccable e no SKILL.md do Emil
+- **Scripts do Impeccable** (`.claude/skills/impeccable/scripts/*.mjs`): usam `child_process.spawn`/`execSync`, sobem local server. Rodam apenas no modo `/live` (variante visual via Puppeteer/Chromium). Não trouxemos pra VPS.
+- **Taste Skill**: sem licença declarada no README (bloqueador jurídico para uso comercial) + autor menos rastreável + conteúdo volátil (fev/2026). **Rejeitada**.
+
+### Decisão
+- ✅ **Impeccable** — adotado via fork curado em `cerebro/empresa/skills/design-impeccable/`:
+  - 35 reference files copiados verbatim sob Apache 2.0 (ver `NOTICE.md` com atribuição completa a Paul Bakaus + Anthropic frontend-design + ehmo/typecraft-guide-skill)
+  - `SKILL.md` reescrito em PT-BR com contexto Vital Slim (apresentações HTML de paciente, novo site, brand tokens)
+  - `brand-adapter.md` novo — mapeia tokens de marca IVS (dourado `#9F8844`, tom clínico, compliance CFM/CRM-BA) e define precedência: `cerebro/CLAUDE.md` > `brand-adapter.md` > `reference/*.md`
+  - Scripts, CLI, `.claude-plugin` NÃO foram trazidos (segurança primeiro)
+- ✅ **Emil Kowalski** — não instalado como skill; conceitos destilados em `cerebro/design-principles-motion.md` (~150 linhas, PT-BR, com framework de decisão de animação + formato obrigatório de review em tabela markdown).
+- ❌ **Taste Skill** — rejeitado.
+
+### Política canônica reforçada
+Política do `learning-ledger.md` de 2026-04-22 continua valendo: **nunca instalar skill externa diretamente**. Este caso foi uma exceção aceita com mitigações pesadas (fork curado, NOTICE explícito, scripts excluídos, brand adapter, sem atualização automática upstream). Próximas skills externas devem passar pelo mesmo processo.
+
+### Como usar
+- **Antes de entregar qualquer HTML** (apresentação de paciente, landing page, site), invocar mentalmente o workflow:
+  1. `reference/critique.md` — review UX
+  2. `reference/polish.md` — passagem final
+  3. `reference/audit.md` — checagem técnica
+- **Para motion**: consultar `cerebro/design-principles-motion.md` (framework de decisão: essa animação deveria existir? se sim, que curva?)
+
+### Próxima atualização
+Quando vier nova major do upstream Impeccable, rever manualmente — security scan + diff dos reference files. Nunca `git pull` cego.
+
+---
+
 ## 2026-04-23 - Bridge HTTPS para acesso remoto ao OpenClaw (agente sandbox)
 
 ### Problema
