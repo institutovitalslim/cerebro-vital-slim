@@ -1,3 +1,71 @@
+## 2026-04-24 - Adoção de skills de design externas (Impeccable + Emil Kowalski)
+
+### Contexto
+Tiaro indicou 3 skills de design externas encontradas no Instagram:
+- `emilkowalski/skill` (Emil Kowalski, 938 stars) — UI polish + animation
+- `pbakaus/impeccable` (Paul Bakaus, 10k stars, Apache 2.0, baseado no frontend-design oficial da Anthropic) — 35 comandos de design (polish, critique, audit, typeset, colorize, layout…)
+- `Leonxlnx/taste-skill` (12.5k stars) — anti-slop frontend
+
+### Análise de segurança
+- **Prompt injection scan**: zero hits em todos os 35 reference files do Impeccable e no SKILL.md do Emil
+- **Scripts do Impeccable** (`.claude/skills/impeccable/scripts/*.mjs`): usam `child_process.spawn`/`execSync`, sobem local server. Rodam apenas no modo `/live` (variante visual via Puppeteer/Chromium). Não trouxemos pra VPS.
+- **Taste Skill**: sem licença declarada no README (bloqueador jurídico para uso comercial) + autor menos rastreável + conteúdo volátil (fev/2026). **Rejeitada**.
+
+### Decisão
+- ✅ **Impeccable** — adotado via fork curado em `cerebro/empresa/skills/design-impeccable/`:
+  - 35 reference files copiados verbatim sob Apache 2.0 (ver `NOTICE.md` com atribuição completa a Paul Bakaus + Anthropic frontend-design + ehmo/typecraft-guide-skill)
+  - `SKILL.md` reescrito em PT-BR com contexto Vital Slim (apresentações HTML de paciente, novo site, brand tokens)
+  - `brand-adapter.md` novo — mapeia tokens de marca IVS (dourado `#9F8844`, tom clínico, compliance CFM/CRM-BA) e define precedência: `cerebro/CLAUDE.md` > `brand-adapter.md` > `reference/*.md`
+  - Scripts, CLI, `.claude-plugin` NÃO foram trazidos (segurança primeiro)
+- ✅ **Emil Kowalski** — não instalado como skill; conceitos destilados em `cerebro/design-principles-motion.md` (~150 linhas, PT-BR, com framework de decisão de animação + formato obrigatório de review em tabela markdown).
+- ❌ **Taste Skill** — rejeitado.
+
+### Política canônica reforçada
+Política do `learning-ledger.md` de 2026-04-22 continua valendo: **nunca instalar skill externa diretamente**. Este caso foi uma exceção aceita com mitigações pesadas (fork curado, NOTICE explícito, scripts excluídos, brand adapter, sem atualização automática upstream). Próximas skills externas devem passar pelo mesmo processo.
+
+### Como usar
+- **Antes de entregar qualquer HTML** (apresentação de paciente, landing page, site), invocar mentalmente o workflow:
+  1. `reference/critique.md` — review UX
+  2. `reference/polish.md` — passagem final
+  3. `reference/audit.md` — checagem técnica
+- **Para motion**: consultar `cerebro/design-principles-motion.md` (framework de decisão: essa animação deveria existir? se sim, que curva?)
+
+### Próxima atualização
+Quando vier nova major do upstream Impeccable, rever manualmente — security scan + diff dos reference files. Nunca `git pull` cego.
+
+---
+
+## 2026-04-23 - Bridge HTTPS para acesso remoto ao OpenClaw (agente sandbox)
+
+### Problema
+Claude rodando no sandbox GitHub (ambiente de execução via Claude Code web) só tem HTTP/HTTPS de saída. Porta 22 (SSH), 53 (DNS), outras TCP — todas bloqueadas. Sem como investigar a Clara na VPS quando ela silencia, ou monitorar o gateway `localhost:18789` em qualquer circunstância.
+
+### Escolha de arquitetura
+Três caminhos avaliados:
+- **Cloudflare Tunnel + Access Service Token** — melhor em segurança + UX, mas exige DNS na Cloudflare (DNS da VitalSlim está na HostGator).
+- **nginx + Let's Encrypt + bearer** na VPS — escolhido. Self-contained, não depende da Cloudflare, reutiliza o domínio existente.
+- **Cloudflare Quick Tunnel (trycloudflare)** — avaliado e rejeitado para uso permanente: URL efêmera, pública, sem Access.
+
+### Princípio do menor privilégio aplicado
+Bridge valida `BRIDGE_TOKEN` **na borda** (nginx) e **strippa o header Authorization** antes do proxy pro gateway interno. Resultado: Claude remoto consegue `/health`, `/version`, liveness e UI pública — **mas não dispara skills, não manda WhatsApp, não opera dados de paciente** (o `gateway.auth.token` interno bloqueia). Se o BRIDGE_TOKEN vazar, estrago é limitado a leitura de telemetria.
+
+### Artefatos
+- `ops/setup/openclaw-bridge.sh` — instala nginx+certbot, gera token, configura proxy, smoke test. Idempotente.
+- `ops/setup/rotate-bridge-token.sh` — rotaciona token em 5s, nginx recarrega, antigo vira 401.
+- `cerebro/verdades-operacionais.md` — seção "Bridge HTTPS do OpenClaw" documenta URL, paths, política.
+
+### Gotchas descobertos no caminho (pra próxima vez)
+1. **Ubuntu 25.10 `apt-get install -qq ... >/dev/null`** pode retornar 0 sem instalar. Pacote meta `nginx` falhou silenciosamente, `nginx-core` direto funciona.
+2. **Shell do hpanel da Hostinger não tem /sbin nem /usr/sbin no PATH**, mesmo como root. Script agora exporta PATH defensivamente.
+3. **nginx `map_hash_bucket_size` default = 64** é pequeno pra bearer token de 64 chars + "Bearer " (71 chars total). Setar 128 explicitamente.
+4. **iOS Smart Punctuation envelopa URLs em `<...>`** quando digitadas em terminal via Safari. Bash trata `<` como redirect de input. Evitar URLs em CLI quando possível — usar git.
+5. **Paste services (0x0.st) estão desabilitados por abuso de bots IA** (`uploads disabled because it's been almost nothing but AI botnet spam`). Fallback: `paste.rs`.
+
+### Regra canônica
+Se no futuro for considerar abrir **endpoints de escrita** via bridge (disparar skill, mandar mensagem, etc.), **exigir**: (a) escopo específico (location block dedicado, não wildcard), (b) rate limit mais agressivo, (c) audit log, (d) IP allowlist se possível, (e) documentar no `verdades-operacionais.md` o que é permitido. Caso contrário, mantido read-only.
+
+---
+
 ## 2026-04-22 - Skills de Marketing adaptadas do MarketingSkills (coreyhaines31)
 
 ### Análise de segurança
