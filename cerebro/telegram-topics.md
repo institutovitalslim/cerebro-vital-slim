@@ -48,6 +48,14 @@ Regra reforçada novamente por Tiaro em 2026-04-21: **todos os tópicos devem es
 - **Pendente:** confirmar `topic_id` numérico no Telegram e mapear para a área canônica (provavelmente Atendimento ou Operação Clínica)
 - **Identidade neste tópico:** quando perguntarem "qual seu nome" / "você é a Clara" aqui, a resposta canônica é **"Sou a Clara, assistente digital do Instituto Vital Slim"**. Em 2026-04-23 a Clara respondeu "ainda não tenho um nome fixo, pode me chamar como quiser" neste tópico — bug de identidade (carregava só `IDENTITY.md` template em vez de `cerebro/CLAUDE.md`). Corrigido preenchendo `IDENTITY.md` e adicionando regra de precedência em `AGENTS.md`.
 
+### Tópico "Financeiro" (topic_id 1980, a confirmar)
+- Nome do tópico: **💰 Financeiro**
+- Ícone observado: saco de dinheiro 💰
+- Link: `t.me/c/3803476669/1980`
+- Possível `topic_id`: **1980** (extraído do link; confirmar)
+- Contexto: usado para análise financeira (extratos, empréstimos, relatórios PDF, boletos, Omie)
+- **Incidente 2026-04-24:** Clara retornou `Agent couldn't generate a response. Please try again.` quando Tiaro anexou `relatório.pdf` (203 KB) e perguntou sobre valor total de empréstimo. Erro do gateway do OpenClaw chamando o modelo (não bug da Clara) — suspeita: PDF grande estourou contexto OU quota do modelo. Ver `memory/2026-04-24.md` para diagnóstico detalhado.
+
 ## Regra de promoção entre tópicos
 Quando uma decisão, regra, contato, integração, ID, convenção ou fluxo recorrente surgir em qualquer tópico:
 1. identificar o domínio real do conteúdo;
