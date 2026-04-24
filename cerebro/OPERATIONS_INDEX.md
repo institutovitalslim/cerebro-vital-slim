@@ -23,16 +23,18 @@
 
 ### Omie
 - `cerebro/omie.md`
+- `cerebro/omie-emissao-checklist.md`
 - `cerebro/omie-servicos.md`
 - `cerebro/verdades-operacionais.md`
 - `skills/omie-cadastro-paciente/SKILL.md`
 - Emissões de proposta/OS com boleto devem seguir os campos estruturados documentados em `cerebro/omie.md`
-- Emissões com NFS-e devem consultar o cadastro de serviços em `cerebro/omie-servicos.md`
+- Emissões com NFS-e devem consultar o cadastro de serviços em `cerebro/omie-servicos.md` e o checklist em `cerebro/omie-emissao-checklist.md`
 
 ### WhatsApp / Z-API
 - `cerebro/whatsapp-zapi.md`
+- `cerebro/elevenlabs.md`
 - `cerebro/verdades-operacionais.md`
-- ElevenLabs TTS para respostas de áudio: `cerebro/verdades-operacionais.md`
+- ElevenLabs TTS para respostas de áudio: `cerebro/elevenlabs.md`
 
 ### Time da clínica
 - `cerebro/time-clinica.md`
@@ -60,6 +62,7 @@
 
 ### Marketing (skills adaptadas do MarketingSkills)
 - `cerebro/patient-marketing-context.md` — contexto compartilhado de pacientes
+- `cerebro/buffer.md` — postagem automática em redes sociais
 - `~/.openclaw/skills/copywriting-vitalslim/SKILL.md` — copywriting para healthcare
 - `~/.openclaw/skills/customer-research-vitalslim/SKILL.md` — pesquisa com pacientes
 - `~/.openclaw/skills/social-content-vitalslim/SKILL.md` — conteúdo social
