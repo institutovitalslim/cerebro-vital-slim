@@ -15,5 +15,8 @@ Skills que não pertencem a uma área específica — servem a empresa como um t
 | `memoria-cientifica` | Memoria semantica com embeddings Gemini. Clara consulta SEMPRE antes de criar conteudo cientifico ou responder paciente. Ingere conteudo novo via Perplexity + aplicacao clinica IVS |
 | `prompt-imagens` | Cria imagens via NanoBanana 2 Pro seguindo 7 dimensoes (sujeito, aparencia, acao, cenario, iluminacao, estilo, camera) + 15 estilos fotograficos. Pergunta se eh com/sem referencia e preserva rosto. VALIDA prompt com Tiaro antes de gerar |
 | `deep-research` | Pesquisa cientifica profunda com multiplas fontes + relatorio HTML |
+| `design-impeccable` | Vocabulário de design para HTML (35 comandos: polish, critique, audit, typeset, colorize, layout…). Adaptação curada do Impeccable (pbakaus, Apache 2.0) com brand adapter Vital Slim. Aplicar ANTES de entregar qualquer apresentação de paciente, landing page ou componente visual. |
+
+**Princípios de motion/craft (não-skill, só doc):** `cerebro/design-principles-motion.md` — destilado de `emilkowalski/skill`.
 
 Para skills específicas de cada área, consulte `areas/[área]/skills/`.
