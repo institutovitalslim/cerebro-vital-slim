@@ -21,47 +21,24 @@ Para isso, consultar:
   2. fazer `git commit`;
   3. fazer `git push` para o repositório oficial no GitHub.
 
-## WhatsApp
-- A comunicação operacional por WhatsApp deve usar a **bridge da Z-API**.
-- Não assumir que um fluxo criado a partir de contexto Telegram consegue disparar WhatsApp automaticamente sem estar amarrado ao contexto/caminho correto.
-- **ElevenLabs TTS**: respostas em áudio para pacientes que enviarem áudio via WhatsApp.
-  - Chave: `/root/.openclaw/secure/elevenlabs.env` (ELEVENLABS_API_KEY)
-  - Voice ID padrão: `EXAVITQu4vr4xnSDxMaL` (Rachel)
-  - Modelo: `eleven_multilingual_v2`
-  - Fluxo: áudio do paciente → transcrição via Whisper (OpenAI) → resposta da Clara → TTS ElevenLabs → envio via Z-API `/send-audio` com `audioBase64`
+## WhatsApp / Z-API
+- Detalhes completos: `cerebro/whatsapp-zapi.md`
+- ElevenLabs TTS: `cerebro/elevenlabs.md`
 
 ## Quarkclinic
-- Agenda padrão para novos agendamentos via API: **AGENDA OPENCLAW**
-- `agendaId`: `445996589`
-- `profissionalId`: `240623016` (Daniely Alves Freitas)
-- `clinicaId`: `227138348` (Instituto Vital Slim)
-- A agenda `240623539` pode listar horários livres, mas pode bloquear criação via endpoint com erro de agenda não permitir agendamentos online.
-- Ao marcar consulta, sempre consultar `/horarios-livres` da agenda padrão primeiro.
-- Quando o horário exato não existir, usar o início real do slot livre mais próximo e informar isso claramente.
+- Detalhes completos: `cerebro/quarkclinic.md`
+- Agenda padrão: **AGENDA OPENCLAW** (`agendaId`: `445996589`)
 
 ## Omie
-- Para cadastrar paciente no Omie a partir de um nome solto, usar o fluxo canônico da skill `skills/omie-cadastro-paciente/`.
-- `codigo_cliente_integracao` do cadastro vindo do Quarkclinic deve seguir o padrão `QC-<id do paciente>`.
-- Não inferir cidade, estado, CEP ou complemento quando esses dados não vierem preenchidos no Quarkclinic; pedir complemento ao usuário ou manter vazio.
-- Ao emitir proposta/OS no Omie com cobrança por boleto, não basta escrever isso em observação: é obrigatório preencher corretamente os campos estruturados de categoria, conta corrente, `Gerar boleto = Sim`, `Enviar também o boleto de cobrança = Sim`, tipo de pagamento `Boleto` e meio de pagamento `Boleto Bancário`.
-- Quando o caso exigir recibo em vez de nota fiscal, isso deve coexistir com a configuração correta de boleto nas parcelas; uma coisa não substitui a outra.
-- Depois da emissão/faturamento e geração dos boletos de paciente, baixar todos os PDFs e enviar os boletos pelo próprio tópico do Telegram, sem esperar novo pedido, sempre que o usuário tiver solicitado a emissão naquele fluxo.
-- Em qualquer emissão/faturamento no Omie que dependa de conta corrente ou banco, perguntar explicitamente ao Tiaro qual banco deve ser escolhido antes de emitir, mesmo quando houver um banco usado em caso anterior.
-- Em qualquer emissão de OS/NFS-e no Omie, nunca inventar ou assumir descrição de serviço. Sempre perguntar explicitamente ao Tiaro qual serviço exato/cadastro de serviço do Omie deve ser usado antes de criar a OS, especialmente quando a emissão for para nota fiscal.
-- Em orçamento, OS e emissão com NFS-e no Omie, o serviço deve ser selecionado pela lista/cadastro de serviços do Omie, nunca digitado manualmente, porque é esse cadastro que puxa os dados corretos e evita divergência operacional/fiscal.
-- A lista canônica de serviços do Omie deve ser mantida em `cerebro/omie-servicos.md`.
-- Mapeamentos já confirmados pelo Tiaro: `Tricologia` = `SRV00016`; `Programa de Acompanhamento Intensivo` = `SRV00013`.
-- Regra técnica obrigatória: para o Omie puxar a descrição fiscal completa do serviço, `ServicosPrestados` na OS deve referenciar o `nCodServico` do cadastro do serviço (`nCodServ` retornado por `ListarCadastroServico` / `ConsultarCadastroServico`), em vez de montar a descrição manualmente.
-- Em NFS-e, após `FaturarOS`, a OS pode demorar para refletir `cFaturada = "S"` em `ConsultarOS` porque a prefeitura ainda não devolveu a nota autorizada. Se `FaturarOS` retornou sucesso, tratar esse intervalo como estado assíncrono normal, não como erro automático.
-- Quando a emissão for com nota fiscal, habilitar sempre `Enviar o link da NFS-e gerada na prefeitura`.
+- Detalhes completos: `cerebro/omie.md`
+- Checklist de emissão: `cerebro/omie-emissao-checklist.md`
+- Serviços cadastrados: `cerebro/omie-servicos.md`
+- Skill de cadastro: `skills/omie-cadastro-paciente/`
+- Mapeamentos: `Tricologia` = `SRV00016`; `Programa de Acompanhamento Intensivo` = `SRV00013`
+- Regra crítica: sempre perguntar banco e serviço antes de emitir
 
 ## Time da clínica
-- **Dra. Daniely Alves Freitas**
-  - WhatsApp: `+55 71 99696-2059`
-  - E-mail: `danyafreitas@hotmail.com`
-- **Liane (enfermeira)**
-  - WhatsApp: `+55 71 99157-4827`
-  - E-mail: `enfermagem.vitalslim@gmail.com`
+- Detalhes completos: `cerebro/time-clinica.md`
 
 ## Comercial / Leads
 - Nunca passar preço antes de o paciente entender o valor do atendimento.
@@ -69,13 +46,7 @@ Para isso, consultar:
 - Quando Tiaro pedir para "chamar o conselho", usar a skill/metodologia canônica de conselho (`llm-council`) quando ela for a referência definida, e não improvisar com subagente genérico.
 
 ## Buffer Social Media
-- Skill criada: `~/.openclaw/workspace/skills/buffer-social/`
-- Script: `scripts/post_buffer.py`
-- API key do Buffer (OIDC) salva em `/root/.openclaw/secure/buffer.env`
-- Endpoint GraphQL: `https://api.buffer.com/`
-- Organização: `69e90408151436756ee2629a` (Instituto Vital Slim)
-- Funcionalidade: criação de posts via mutation `CreateIdea` na GraphQL API
-- Testado e funcionando: criou post de teste com sucesso (`id: 69e9275415b2e6acbd361053`)
+- Detalhes completos: `cerebro/buffer.md`
 
 ## Tweet-carrossel
 - OpenClaw `v2026.4.11` possui sistema nativo de image providers.
