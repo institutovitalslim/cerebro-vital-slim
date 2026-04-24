@@ -185,6 +185,21 @@ ad, imagem da Dra, banner, etc.), Clara DEVE:
    mudar conforme o prompt textual.
 
 
+## Fluxo obrigatório para APRESENTAÇÕES HTML DE PACIENTE
+
+**SEMPRE que o Tiaro pedir uma apresentação de paciente** (HTML, ex: Mario, Silvana, Francisco) — seja explicitamente ("cria a apresentação de X") ou implicitamente (via cron das 06:40 / 12:00) — Clara DEVE seguir este fluxo:
+
+1. **Rodar a skill `geracao-apresentacao-paciente`** (localizada em `/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/SKILL.md`) — ela orquestra busca de paciente, exames, questionários e geração do HTML.
+2. **Antes de entregar o HTML gerado**, aplicar obrigatoriamente o Quality Gate da skill `design-impeccable` (passo 5.5 da `geracao-apresentacao-paciente/SKILL.md`):
+   - Ler `cerebro/empresa/skills/design-impeccable/reference/_ivs-overrides.md` (contexto IVS)
+   - Ler `cerebro/empresa/skills/design-impeccable/brand-adapter.md` (tokens de marca)
+   - Aplicar `critique.md` → `polish.md` → `audit.md` em sequência
+   - Confirmar todo o checklist de brand/compliance/a11y/responsivo antes de enviar
+3. **Nunca entregar apresentação sem passar pelo Quality Gate.** Se houver qualquer dúvida de conteúdo clínico (exame alterado, interpretação, CRM, serviço), **acionar o Protocolo de Dúvida** antes de gerar o HTML.
+4. **Enviar o link do arquivo automaticamente** ao Tiaro assim que gerado (regra operacional 2026-04-23: toda alteração em apresentação, link sem esperar pedir).
+
+Esse é o caminho **único** aceito para apresentação HTML de paciente. Não improvisar, não pular etapas, não entregar sem design-impeccable.
+
 ## Fluxo obrigatório para criação de carrosséis
 
 **SEMPRE seguir a skill `tweet-carrossel` em 2 etapas:**
@@ -215,6 +230,8 @@ Skills da clínica (instaladas em `/root/.openclaw/workspace/skills/`):
 - **llm-council** — conselho de 5 LLMs para decisões críticas
 - **quarkclinic-api** — integração com sistema QuarkClinic
 - **perplexity**, **gemini**, **github**, **gog** — utilitários
+- **design-impeccable** — vocabulário de design (34 references: polish, critique, audit, typeset, colorize, layout, typography, brand, ux-writing…) com brand adapter Vital Slim. **OBRIGATÓRIO antes de entregar qualquer HTML** (apresentação de paciente, landing page, site). Localizado em `cerebro/empresa/skills/design-impeccable/`.
+- **geracao-apresentacao-paciente** — pipeline completo de apresentação HTML de paciente novo (busca exames Drive, questionários Forms, dados QuarkClinic → HTML). **Invoca design-impeccable como quality gate obrigatório**. Localizada em `/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/`.
 
 Ao perceber uma tarefa que se encaixa em uma skill existente, **use a skill** em vez de improvisar.
 
