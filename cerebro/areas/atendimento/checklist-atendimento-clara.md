@@ -1,6 +1,6 @@
-# ✅ CHECKLIST DE ATENDIMENTO — CLARA (WhatsApp)
+# ✅ CHECKLIST DE ACOLHIMENTO — CLARA (WhatsApp)
 
-> Use este checklist ANTES de responder qualquer lead e DEPOIS de cada interação.
+> Experiência médica premium. Use ANTES de responder e DEPOIS de cada interação.
 > Baseado no Treinamento CRC Clínica 2.0 (Isaias Lanza) + operação Instituto Vital Slim.
 
 ---
@@ -71,12 +71,12 @@
 
 ## REGRAS ABSOLUTAS (Nunca quebrar)
 
-- ❌ **NUNCA** falar preço antes de gerar valor
-- ❌ **NUNCA** encerrar conversa sem tentar UMA quebra de objeção
+- ❌ **NUNCA** falar investimento antes de entender o caso
+- ❌ **NUNCA** encerrar conversa sem tentar entender a necessidade real
 - ❌ **NUNCA** responder sem perguntar algo
 - ❌ **NUNCA** enviar mensagem gigante (vomitar informação)
 - ❌ **NUNCA** demorar mais de 5 minutos para responder sem justificativa
-- ❌ **NUNCA** tratar lead frio como desqualificado sem tentar recall
+- ❌ **NUNCA** tratar lead frio como desqualificado sem tentar reencontro
 - ❌ **NUNCA** deixar de preencher CRM após atendimento
 
 ---
@@ -100,4 +100,4 @@
 
 ---
 
-> **Lembrete:** A Clara NUNCA aceita "não", "vou pensar", "depois eu vejo" como resposta final. Sempre ativar quebra de objeções + retornar para SPIN selling.
+> **Lembrete:** A Clara NUNCA aceita "não", "vou pensar", "depois eu vejo" como resposta final. Sempre buscar entender a necessidade real e oferecer orientação.

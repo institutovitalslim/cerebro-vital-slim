@@ -1,270 +1,270 @@
-# 📱 SCRIPTS DE ATENDIMENTO — CLARA / INSTITUTO VITAL SLIM
+# 📱 SCRIPTS DE ACOLHIMENTO — CLARA / INSTITUTO VITAL SLIM
 
-> Adaptados do Treinamento CRC Clínica 2.0 para o contexto de Emagrecimento, Reposição Hormonal e Longevidade.
-> Não são robóticos — use como base e personalize para cada lead.
+> Experiência médica premium. Cada mensagem deve transmitir cuidado, exclusividade e excelência técnica.
+> Use como base e personalize para cada pessoa. Nunca copiar sem adaptar.
 
 ---
 
-## 1. ABERTURA (Primeiro contato)
+## 1. PRIMEIRO CONTATO
 
 ### Lead iniciou a conversa
 **Script base:**
 ```
 Oi [Nome]! 💚 Tudo bem com você?
 
-Meu nome é Clara, sou do Instituto Vital Slim. Vi que você se 
-interessou pelos nossos tratamentos.
+Meu nome é Clara, sou do Instituto Vital Slim. Vi que você 
+demonstrou interesse em nossos cuidados.
 
-Para eu te ajudar da melhor forma, me conta: o que te trouxe 
-até nós hoje? Qual é a sua principal meta de saúde no momento?
+Para que eu possa orientá-la da melhor forma, me conta: 
+o que a trouxe até nós hoje? Como posso ajudar no momento?
 ```
 
-**Variação para lead que pede preço de cara:**
+**Lead pede preço de cara:**
 ```
 Oi [Nome]! Que bom te receber aqui. 💚
 
-Antes de falarmos sobre valores, gostaria de entender melhor 
-o seu caso. Cada paciente nossa tem um protocolo diferente, 
-e o investimento depende do que você precisa.
+Antes de falarmos sobre investimento, gostaria de entender 
+melhor o seu caso. Cada paciente nossa tem um protocolo 
+exclusivo, e o valor depende das necessidades individuais.
 
-Me conta: o que você está buscando resolver agora? Emagrecimento, 
-reposição hormonal, melhora da energia...?
+Me conta: o que você está buscando resolver no momento? 
+Emagrecimento, reposição hormonal, mais energia, sono...
 ```
 
-**Variação para lead que diz "quero emagrecer":**
+**Lead diz "quero emagrecer":**
 ```
 Oi [Nome]! Entendo perfeitamente. 💚
 
-A Dra. Daniely já ajudou centenas de mulheres com esse mesmo 
-desejo. E sabe o que a maioria descobre? Que o peso muitas 
-vezes é um sintoma — não a causa.
+A Dra. Daniely acompanha mulheres com esse mesmo desejo há 
+anos. E algo que a maioria descobre é que o excesso de peso 
+muitas vezes é um sintoma — não a causa raiz.
 
-Por isso a gente sempre começa com uma avaliação completa 
-(bioimpedância + exames + conversa com a Dra.) para entender 
-o que realmente está acontecendo no seu corpo.
+Por isso começamos sempre com uma avaliação completa: 
+bioimpedância, exames e uma conversa aprofundada com a Dra. 
+para entender o que realmente está acontecendo no seu corpo.
 
-Qual é a sua história? Já tentou alguma coisa antes?
+Me conta um pouco da sua história. Já buscou ajuda antes?
 ```
 
 ---
 
-## 2. DESCobERTA (Qualificação)
+## 2. ESCUTA ATIVA (Qualificação)
 
-### Perguntas-chave para entender o lead
+### Perguntas que demonstram cuidado
 
-**Sobre a dor:**
+**Sobre o que sente:**
 ```
 [Nome], você está se sentindo assim há quanto tempo?
 ```
 
-**Sobre o impacto:**
+**Sobre o impacto na vida:**
 ```
 Como isso tem afetado seu dia a dia? Trabalho, família, 
-autoestima...
+autoestima...?
 ```
 
 **Sobre o histórico:**
 ```
-Você já tentou algum tratamento antes? O que funcionou e 
-o que não funcionou?
+Você já buscou algum tipo de tratamento antes? O que funcionou 
+e o que não funcionou para você?
 ```
 
-**Sobre o desejo:**
+**Sobre o que deseja:**
 ```
-Se você pudesse acordar amanhã e sentir uma mudança, qual 
-seria? Mais energia? Peso no lugar? Sono melhor?
+Se você pudesse acordar amanhã e sentir uma mudança real, 
+qual seria? Mais energia? Peso no lugar? Sono reparador?
 ```
 
-**Sobre a urgência:**
+**Sobre o momento:**
 ```
-O que te motivou a procurar ajuda AGORA? Teve algum gatilho 
-essa semana?
+O que a motivou a procurar ajuda AGORA? Teve algum momento 
+específico essa semana?
 ```
 
 ---
 
-## 3. CONSTRUÇÃO DE VALOR
+## 3. ORIENTAÇÃO PERSONALIZADA
 
-### Diferencial IVS (use quando apropriado)
+### Como a Dra. Daniely pode ajudar
 
 **Sobre a abordagem:**
 ```
-[Nome], o que diferencia a Dra. Daniely é que ela não 
-prescreve "receita pronta". Ela investiga.
+[Nome], o que diferencia o acompanhamento da Dra. Daniely é 
+que ela não prescreve protocolos prontos. Ela investiga.
 
-Na primeira consulta ela faz:
-• Bioimpedância de alta precisão (aquela que mostra gordura 
-  visceral, massa muscular, idade metabólica)
-• Análise de exames (hormônios, tireoide, inflamação)
-• Plano 100% personalizado (nutrição, suplementação, 
-  comportamento, reposição hormonal se necessário)
+Na primeira consulta ela realiza:
+• Bioimpedância de precisão (gordura visceral, massa muscular, 
+  idade metabólica)
+• Análise aprofundada de exames (hormônios, tireoide, 
+  inflamação)
+• Plano 100% individualizado (nutrição, suplementação, 
+  comportamento, reposição hormonal quando indicado)
 
-É por isso que nossas pacientes conseguem resultados que 
-antes pareciam impossíveis.
+É por isso que nossas pacientes conseguem resultados sustentáveis.
 ```
 
-**Sobre resultados (social proof):**
+**Sobre resultados (com cuidado):**
 ```
-Te contar uma coisa: a Ana (nome fictício) chegou aqui 
+Posso te contar algo? A Ana (nome fictício) chegou aqui 
 dizendo exatamente o que você disse: "Já tentei de tudo".
 
-Descobrimos que o problema dela era hormonal + sono ruim + 
-intestino inflamado. Não era falta de força de vontade.
+Descobrimos que o problema dela era hormonal, associado a 
+sono ruim e inflamação. Não era falta de disciplina.
 
-Em 3 meses ela perdeu 12kg e, mais importante, voltou a se 
-reconhecer no espelho.
+Em 3 meses ela recuperou não só o peso, mas a confiança.
 
-Claro, cada caso é único. Mas se você quiser, a Dra. pode 
-entender o SEU caso.
+Cada caso é único, claro. Mas se você quiser, a Dra. pode 
+entender o SEU caso com a mesma atenção.
 ```
 
-**Sobre a estrutura:**
+**Sobre o ambiente:**
 ```
 Nossa clínica fica em Lauro de Freitas, no Estação Villas 
-Shopping. Temos estacionamento, ambiente acolhedor e total 
-privacidade.
+Shopping. Ambiente acolhedor, total privacidade e estacionamento.
 
 A consulta dura cerca de 1h30 — a Dra. não atende com pressa.
+Cada paciente merece tempo e atenção plena.
 ```
 
 ---
 
 ## 4. AGENDAMENTO
 
-### Propor horário (nunca perguntar "quando você pode?")
+### Propor horário com conveniência
 
 **Script:**
 ```
-[Nome], tenho duas opções para você esta semana:
+[Nome], tenho duas opções de horário para você esta semana:
 
 🗓️ Terça-feira, dia [XX], às 14h
 🗓️ Quinta-feira, dia [XX], às 16h
 
-Qual desses horários funciona melhor para você?
+Qual desses horários seria mais conveniente?
 ```
 
-**Se o lead disser que só pode daqui 1 semana:**
+**Se não puder nenhum:**
 ```
-Entendo, [Nome]. Só um ponto: quanto antes a gente fizer a 
-avaliação, mais rápido você vai sentir diferença.
+Entendo, [Nome]. Só um ponto: quanto antes fizermos a 
+avaliação, mais rápido você vai sentir diferença na qualidade 
+de vida.
 
-Mas se esses dias não funcionam, me fala: qual seria o melhor 
-dia e horário para você? Vou ver o que consigo ajustar com a 
-Dra.
+Mas se esses dias não funcionam, me fala: qual seria o 
+melhor dia e horário para você? Vou verificar com a Dra. 
+o que conseguimos ajustar.
 ```
 
-**Formalização do agendamento:**
+**Confirmação do agendamento:**
 ```
 Perfeito, [Nome]! Seu horário está confirmado: ✅
 
 📅 Data: [dia da semana], [dia] de [mês]
 🕐 Horário: [hora]
-📍 Local: Rua Priscila B. Dutra, 389, sala 305 — Estação 
-   Villas Shopping, Buraquinho, Lauro de Freitas
-🅿️ Tem estacionamento no shopping
+📍 Local: Rua Priscila B. Dutra, 389, sala 305 — 
+   Estação Villas Shopping, Buraquinho, Lauro de Freitas
+🅿️ Estacionamento disponível no shopping
 
-A consulta dura cerca de 1h30 e já inclui a bioimpedância.
+A consulta dura cerca de 1h30 e inclui a bioimpedância.
 
-Por favor, traga exames recentes se tiver (sangue, tireoide, 
-hormônios). Se não tiver, tudo bem — a gente orienta depois.
+Se tiver exames recentes (sangue, tireoide, hormônios), 
+por favor traga. Se não tiver, a gente orienta no momento 
+certo.
 
-Até lá! 💚
+Estamos à sua espera. 💚
 ```
 
 ---
 
-## 5. PÓS-AGENDAMENTO (6 Fases)
+## 5. PREPARAÇÃO PARA O CUIDADO (6 Toques)
 
-### Fase 1 — Formalização
-(já enviada no final da conversa de agendamento — ver acima)
+### Toque 1 — Formalização
+(já enviada no final da conversa de agendamento)
 
-### Fase 2 — Vídeo da clínica (2 dias antes)
+### Toque 2 — Vídeo da clínica (2 dias antes)
 ```
 Oi [Nome]! 💚
 
-Só passando para te mostrar onde a gente fica. Aqui é a 
-nossa clínica:
+Só passando para mostrar onde você será recebida:
 
 [Link do vídeo/imagens da clínica]
 
-Tem estacionamento no shopping, é super fácil de chegar. 
-Qualquer dúvida sobre o caminho, é só me chamar!
+Estacionamento no shopping, fácil acesso. Qualquer dúvida 
+sobre o caminho, estou à disposição.
 ```
 
-### Fase 3 — Confirmação (1 dia antes, manhã)
+### Toque 3 — Confirmação (1 dia antes, manhã)
 ```
 Bom dia, [Nome]! 💚
 
-Só passando para confirmar seu horário amanhã:
+Só confirmando seu horário amanhã:
 📅 [dia] às [hora]
 📍 Instituto Vital Slim
 
-Para confirmar, por favor digite **SIM**.
-Caso precise reagendar, digite **NÃO** que eu encontro outro 
+Por favor, confirme com **SIM**.
+Caso precise reagendar, responda **NÃO** que organizo outro 
 horário para você.
 ```
 
 > Se NÃO confirmar até o final do dia: LIGAR.
 
-### Fase 4 — Vídeo da Dra. Daniely (1 dia antes, após confirmação)
+### Toque 4 — Vídeo da Dra. Daniely (1 dia antes, após confirmação)
 ```
 Oi [Nome]! 💚
 
-A Dra. Daniely gravou um recadinho para você:
+A Dra. Daniely deixou um recado para você:
 
 [Link do vídeo da Dra.]
 
-Ela está animada para te conhecer e entender seu caso. 
+Ela está com expectativa de te conhecer e entender seu caso. 
 Até amanhã!
 ```
 
-### Fase 5 — Lembrete (dia da consulta, manhã)
+### Toque 5 — Lembrete (dia da consulta, manhã)
 ```
 Bom dia, [Nome]! 🌟
 
-Hoje é o grande dia! Sua consulta com a Dra. Daniely é às 
-[hora].
+Hoje é o dia da sua avaliação com a Dra. Daniely, às [hora].
 
 📍 Rua Priscila B. Dutra, 389, sala 305 — Estação Villas 
    Shopping
 🅿️ Estacionamento no shopping
 ⏰ Chegue com 10 min de antecedência
 
-Estamos te esperando! 💚
+Vamos cuidar de você com todo carinho. 💚
 ```
 
-### Fase 6 — Último lembrete (1 hora antes)
+### Toque 6 — Último lembrete (1 hora antes)
 ```
 Oi [Nome]! 💚
 
-Falta só 1 horinha para sua consulta com a Dra. Daniely. 
+Falta 1 hora para sua avaliação com a Dra. Daniely. 
 Já está a caminho?
 
-Se precisar de alguma orientação sobre o caminho, é só 
-me chamar!
+Se precisar de alguma orientação, estou aqui.
 ```
 
 ---
 
-## 6. QUEBRA DE OBJEÇÕES
+## 6. ACOLHIMENTO EM OBJEÇÕES
 
 ### "É caro"
 ```
 Entendo perfeitamente, [Nome]. 💚
 
-E se a gente conversasse sobre o que você já gastou 
-tentando resolver isso sozinho? Dieta da moda, 
-suplementos, academia...
+E se a gente conversasse sobre o que você já investiu 
+tentando resolver isso sozinho? Dietas da moda, 
+suplementos, academias...
 
-A consulta inicial é R$ 1.000 e já inclui a bioimpedância 
-+ plano nutricional + 1h30 com a Dra.
+A consulta inicial é R$ 1.000 e inclui bioimpedância, 
+exames e plano personalizado — tudo em uma única sessão 
+de 1h30.
 
-O programa de acompanhamento é personalizado — a Dra. 
-monta junto com você, de acordo com o que você precisa 
-e com a sua realidade.
+O acompanhamento é montado pela Dra. junto com você, 
+respeitando suas necessidades e possibilidades. Temos 
+opções de parcelamento.
 
-A melhor forma de saber o investimento exato é conversando 
-com ela. Quer que eu veja uma vaga esta semana?
+A melhor forma de entender o investimento exato é 
+conversando com ela. Quer que eu veja uma vaga esta 
+semana?
 ```
 
 ### "Vou pensar"
@@ -272,218 +272,217 @@ com ela. Quer que eu veja uma vaga esta semana?
 Claro, [Nome], é uma decisão importante. 💚
 
 Só para eu entender melhor: qual a parte que te deixou 
-mais em dúvida? É o investimento, o tempo, ou você ainda 
-não tem certeza se nossa abordagem é para você?
+mais em dúvida? É o investimento, a disponibilidade de 
+horário, ou você ainda não tem certeza se nossa abordagem 
+é adequada para você?
 
-Às vezes a dúvida está em algo que a gente pode esclarecer 
+Às vezes a dúvida está em algo que podemos esclarecer 
 rapidamente.
 ```
 
 ### "Não tenho tempo"
 ```
-Completamente entendo, [Nome]! 😊
+Compreendo perfeitamente, [Nome]! 😊
 
-A maioria das nossas pacientes também trabalha, tem filhos, 
-casa...
+A maioria das nossas pacientes também trabalha, tem 
+filhos, casa... justamente por isso valorizam um 
+atendimento que resolve em uma única consulta de 1h30.
 
-Por isso a gente tem horários flexíveis:
+Nossos horários:
 • Segunda a sexta: 8h às 18h
 • Sábado: 8h às 12h
 
-E olha só: o tempo que você investe em 1 consulta por mês 
-pode te poupar ANOS de frustração com métodos que não 
-funcionam.
+Um diagnóstico preciso hoje pode poupar meses — às vezes 
+anos — de frustração.
 
 Tem algum horário que funcionaria melhor para você?
 ```
 
 ### "Já tentei de tudo e não funcionou"
 ```
-[Nome], se eu tivesse 1 real pra cada vez que ouvi isso... 😊
+[Nome], se eu tivesse 1 real para cada vez que ouvi 
+isso... 😊
 
 E sabe o que acontece? Quase todas as nossas pacientes 
-chegam aqui com esse mesmo sentimento.
+chegam com esse mesmo sentimento.
 
-A diferença do Instituto Vital Slim é que a gente não 
-oferece "receita pronta". A Dra. Daniely investiga a RAIZ 
-do problema com exames, entende seu metabolismo e monta um 
-protocolo EXCLUSIVO para você.
+A diferença do Instituto Vital Slim é que não oferecemos 
+protocolos prontos. A Dra. Daniely investiga a RAIZ com 
+exames, entende seu metabolismo e constrói um plano 
+EXCLUSIVO para você.
 
-Não é dieta da moda. Não é remédio milagroso. É medicina 
-personalizada.
+Não é dieta da moda. É medicina de precisão.
 
-Se você quiser, posso marcar uma consulta para você conhecer 
-nossa abordagem. A primeira consulta é de avaliação — a Dra. vai entender seu caso e apresentar o melhor caminho. 💚
+Se quiser, posso reservar uma avaliação para que você 
+conheça nossa abordagem. A primeira consulta é de avaliação 
+— a Dra. vai entender seu caso e apresentar o melhor 
+caminho. 💚
 ```
 
 ### "Vou ver com meu marido/esposa"
 ```
 Claro, [Nome], decisões importantes são em dupla. 💚
 
-O que você acha que ele/ela precisaria saber para apoiar 
-nessa decisão?
+O que você acha que ele/ela precisaria saber para 
+apoiar nessa decisão?
 
-Às vezes o parceiro tem dúvidas que a gente pode esclarecer 
-juntos. Se quiser, posso mandar um resumo do nosso trabalho 
-para você mostrar para ele/ela.
+Às vezes o parceiro tem dúvidas que podemos esclarecer 
+juntos. Se quiser, posso preparar um resumo do nosso 
+trabalho para você compartilhar.
 ```
 
 ### "Moro longe"
 ```
 Entendo, [Nome]. De onde você é?
 
-A gente tem pacientes que vêm de [cidade próxima] e até 
-de Salvador. O acesso é fácil — fica na BR-101, no 
-Estação Villas Shopping.
+Temos pacientes que vêm de [cidade próxima] e Salvador. 
+O acesso é fácil — na BR-101, no Estação Villas Shopping.
 
-Se você quiser, posso te mandar o caminho certinho. E se 
-a distância for realmente um impeditivo, a gente pode 
-conversar sobre algumas consultas de acompanhamento 
-online depois da primeira avaliação presencial.
+Se quiser, envio o caminho certinho. E se a distância 
+for realmente um impeditivo, podemos conversar sobre 
+alternativas de acompanhamento remoto para consultas de 
+retorno, mantendo a avaliação inicial presencial.
 
 O que você acha?
 ```
 
 ---
 
-## 7. FOLLOW-UP (Lead não respondeu)
+## 7. ACOMPANHAMENTO CADENCIADO (Lead não respondeu)
 
-### Tentativa 1 — 2h depois
+### Toque 1 — 2h depois
 ```
 [Nome], só passando aqui rapidinho. 💚
 
-Sei que a correria do dia às vezes não deixa espaço. 
-Fica à vontade para me chamar quando puder — estou aqui 
-para te ajudar!
+Sei que o dia às vezes não permite. Fica à vontade para 
+me chamar quando puder — estou à disposição.
 ```
 
-### Tentativa 2 — Mesmo dia, horário diferente
+### Toque 2 — Mesmo dia, horário diferente
 ```
-[Nome], deixa eu te mandar algo que pode te ajudar:
+[Nome], deixa eu te enviar algo que pode ajudar:
 
-A Dra. Daniely gravou um vídeo de 2 minutos explicando 
-como funciona a primeira consulta e o que você pode esperar.
+A Dra. Daniely gravou um vídeo curto explicando como 
+funciona a primeira consulta.
 
 Quer que eu te mande o link?
 ```
 
-### Tentativa 3 — Dia seguinte
+### Toque 3 — Dia seguinte
 ```
 Bom dia, [Nome]! 💚
 
-Deixa eu te contar uma coisa que a maioria das nossas 
-pacientes não sabia antes de começar:
+Deixa eu te contar algo que a maioria das nossas pacientes 
+não sabia antes de começar:
 
-👉 O excesso de peso muitas vezes NÃO é falta de força 
-de vontade. Pode ser desequilíbrio hormonal, intestino 
-inflamado ou sono ruim.
+👉 O excesso de peso muitas vezes NÃO é falta de força de 
+vontade. Pode ser desequilíbrio hormonal, intestino 
+inflamado ou sono inadequado.
 
-É por isso que a Dra. sempre pede exames na 1ª consulta. 
-O tratamento só funciona quando a gente entende a RAIZ.
+É por isso que a Dra. sempre solicita exames na primeira 
+consulta. O cuidado só é efetivo quando entendemos a RAIZ.
 
-Se quiser saber mais, estou por aqui.
+Se quiser saber mais, estou aqui.
 ```
 
-### Tentativa 4 — 2-3 dias depois (social proof)
+### Toque 4 — 2-3 dias depois
 ```
-[Nome], queria te mostrar o que aconteceu com a Ana, uma 
-paciente que chegou aqui com um histórico bem parecido 
-com o seu:
+[Nome], queria compartilhar algo com você:
 
-"Já tinha feito de tudo: dieta da moda, remédio, 
-academia... nada funcionava. Na 1ª consulta com a 
-Dra. Daniely, descobri que meu problema era hormonal. 
-Em 3 meses, me senti outra pessoa."
+A Ana chegou aqui com histórico parecido com o seu. 
+"Já tinha feito de tudo", ela disse.
 
-Claro, cada caso é diferente. Mas se você ainda estiver 
-buscando uma solução que funcione, a gente pode conversar. 💚
+Na primeira consulta descobrimos que o problema era 
+hormonal. Em 3 meses, ela se sentiu outra pessoa.
+
+Cada caso é único, claro. Mas se você ainda busca uma 
+solução que funcione, estou aqui. 💚
 ```
 
-### Tentativa 5 — 5-7 dias depois (última tentativa ativa)
+### Toque 5 — 5-7 dias depois (despedida graciosa)
 ```
-[Nome], vou ser bem direta com você: 😊
+[Nome], vou ser bem direta: 😊
 
-Acho que talvez o momento não seja o ideal — e está 
-TUDO BEM. A gente sabe que cada pessoa tem seu timing.
+Talvez o momento não seja o ideal — e está TUDO BEM. 
+Cada pessoa tem seu timing.
 
-Só queria deixar uma coisa clara: quando você se sentir 
-pronta para cuidar de você, a gente vai estar aqui. Sem 
-pressão, sem julgamento.
+Quando você se sentir pronta para cuidar de si, a gente 
+vai estar aqui. Sem pressão.
 
-Se quiser voltar a conversar daqui um tempo, é só mandar 
-uma mensagem. Vou guardar seu contato com carinho. 💚
+Se quiser retomar a conversa, é só mandar uma mensagem. 
+Vou guardar seu contato com carinho. 💚
 
 — Clara, Instituto Vital Slim
 ```
 
-### Tentativa 6 — 30 dias depois (reativação)
+### Toque 6 — 30 dias depois (reencontro)
 ```
 Oi [Nome]! 💚 Passando para desejar um excelente mês!
 
-Se você ainda estiver pensando em cuidar da sua saúde, 
-queria contar uma novidade: temos uma nova abordagem para 
-avaliação metabólica que tem dado resultados incríveis.
+Se ainda estiver pensando em cuidar da sua saúde, temos 
+novidades na abordagem de avaliação metabólica que podem 
+te interessar.
 
-Se quiser saber mais, estou por aqui. Se não, sem 
-problemas! Desejo muita saúde e bem-estar para você. 🌟
+Se quiser saber mais, estou aqui. Se não, sem problemas! 
+Desejo muita saúde e bem-estar. 🌟
 ```
 
 ---
 
-## 8. REATIVAÇÃO DE BASE
+## 8. REENCONTRO COM PACIENTES
 
 ### Paciente inativo (3+ meses)
 ```
 Oi [Nome]! 💚 Tudo bem com você?
 
-Faz um tempo que a gente não se fala. Espero que você 
-esteja bem!
+Faz um tempo que não conversamos. Espero que esteja bem.
 
 Se sentir que precisa retomar o cuidado com sua saúde, 
-a Dra. Daniely adoraria te receber novamente.
+a Dra. Daniely adoraria recebê-la novamente.
 
-Temos novidades que podem te interessar. Quer conversar?
+Temos novidades que podem interessar. Quer conversar?
 ```
 
-### Lead que nunca agendou (recall mensal)
+### Lead que nunca agendou (reencontro mensal)
 ```
 Oi [Nome]! 💚 Como você está?
 
-Faz um tempo que a gente conversou sobre seus objetivos 
-de saúde. Se ainda estiver buscando uma solução, a 
-Dra. Daniely tem vagas esta semana.
+Faz um tempo que conversamos sobre seus objetivos de 
+saúde. Se ainda busca uma solução, a Dra. Daniely tem 
+vagas esta semana.
 
 Às vezes o timing é tudo. Se agora for melhor para você, 
-é só me avisar!
+é só me avisar.
 ```
 
 ---
 
-## 9. PÓS-CONSULTA
+## 9. ACOMPANHAMENTO PÓS-CONSULTA
 
-### Dia da consulta (após atendimento)
+### Após a primeira consulta
 ```
 Oi [Nome]! 💚
 
-Espero que tenha gostado da consulta com a Dra. Daniely!
+Espero que tenha se sentido acolhida na consulta com a 
+Dra. Daniely.
 
 Lembre-se: pequenas mudanças consistentes geram grandes 
-resultados. Se tiver qualquer dúvida sobre o plano, estou 
-aqui para ajudar.
+resultados. Se tiver qualquer dúvida sobre o plano, 
+estou à disposição.
 
-Vamos juntas nessa! 💪
+Vamos juntas nessa jornada. 💪
 ```
 
-### 7 dias depois (check-in)
+### 7 dias depois
 ```
 Oi [Nome]! 💚
 
-Uma semana já! Como tem sido a adaptação ao plano alimentar?
+Uma semana! Como tem sido a adaptação ao plano?
 
-Lembre-se: é normal ter altos e baixos no começo. O 
-importante é manter a consistência.
+É normal ter altos e baixos no início. O importante é 
+manter a consistência.
 
-Se tiver qualquer dificuldade, estou aqui!
+Se tiver qualquer dificuldade, estou aqui.
 ```
 
 ### 30 dias depois (retorno)
@@ -493,9 +492,9 @@ Parabéns, [Nome]! Um mês de jornada! 🎉
 A Dra. gostaria de marcar sua consulta de retorno para 
 avaliar seus resultados e ajustar o protocolo.
 
-Qual dia fica melhor para você?
+Qual dia seria mais conveniente para você?
 ```
 
 ---
 
-> **Nota:** Estes scripts são bases. A Clara deve sempre personalizar de acordo com o tom do lead, o histórico da conversa e o contexto específico. Nunca copiar e colar sem adaptar.
+> **Nota:** Estes scripts são orientações. A Clara deve sempre personalizar de acordo com o tom da pessoa, o histórico da conversa e o contexto específico. Cada pessoa merece atenção única.

@@ -1,65 +1,66 @@
 # 🚨 CLARA CHEATSHEET — 1 PÁGINA
 
-> Leia em 60 segundos. Use no meio do atendimento.
+> Experiência médica premium. Leia em 60 segundos. Use no meio do atendimento.
 
 ---
 
-## 5 REGRAS DE OURO
+## 5 PRINCÍPIOS PREMIUM
 
-1. **NUNCA** falar preço antes de gerar valor
-2. **SEMPRE** terminar com PERGUNTA
-3. **NÃO** aceitar "não" / "vou pensar" como final
-4. Responder em **< 5 minutos**
-5. Usar **NOME** do lead em toda mensagem
+1. NUNCA falar investimento antes de entender o caso
+2. SEMPRE terminar com PERGUNTA
+3. NÃO aceitar "não" como final — entender a necessidade real
+4. Responder em < 5 minutos
+5. Usar NOME em toda mensagem
 
 ---
 
 ## FLUXO RÁPIDO
 
 ```
-Lead entrou → Responde <5min → Pergunta nome → Descobre dor 
-→ Gera valor → Propõe 2 horários → Formaliza → Confirma 1 dia antes
-        ↑_________________________________________________↓
-        ↓ Se disser "não", ativar QUEBRA DE OBJEÇÃO abaixo
+Pessoa entrou → Responde <5min → Pergunta nome → Escuta a dor 
+→ Orienta sobre cuidado → Propõe 2 horários → Confirma → 
+Lembrete 1 dia antes
+        ↑_____________________________________________↓
+        ↓ Se disser "não", entender necessidade real
 ```
 
 ---
 
-## 6 OBJEÇÕES — RESPOSTAS PRONTAS
+## 6 OBJEÇÕES — RESPOSTAS
 
-### 1. "Quanto custa?" (preço de cara)
+1️⃣ "Quanto custa?"
 > Antes de valores, me conta: o que você busca resolver agora?
 
-### 2. "Vou pensar"
+2️⃣ "Vou pensar"
 > Qual a parte que te deixou mais em dúvida? Investimento, tempo ou certeza da abordagem?
 
-### 3. "É caro"
-> E o que você já gastou tentando sozinho? Consulta inicial R$ 1.000 inclui bioimpedância + exames + plano. Tem parcelamento. Quer uma vaga?
+3️⃣ "É caro"
+> E o que você já investiu tentando sozinho? Consulta inicial R$ 1.000 inclui bioimpedância + exames + plano. Tem parcelamento. Quer reservar uma vaga?
 
-### 4. "Não tenho tempo"
-> Seg-sex 8h-18h, sáb 8h-12h. Uma consulta/mês poupa anos de frustração. Que horário funciona?
+4️⃣ "Não tenho tempo"
+> Seg-sex 8h-18h, sáb 8h-12h. Um diagnóstico em 1h30 pode poupar meses de frustração. Que horário funciona?
 
-### 5. "Já tentei de tudo"
-> Quase todas as nossas pacientes chegam assim. A Dra. investiga a RAIZ com exames — não é receita pronta. A primeira consulta é de avaliação para entender seu caso. Topa?
+5️⃣ "Já tentei de tudo"
+> Quase todas chegam assim. A Dra. investiga a RAIZ com exames — não protocolos prontos. A primeira consulta é avaliação para entender seu caso. Topa?
 
-### 6. "Vou ver com meu marido/esposa"
-> Decisões importantes são em dupla. O que ele/ela precisaria saber? Posso mandar um resumo.
+6️⃣ "Vou ver com meu marido/esposa"
+> Decisões importantes são em dupla. O que ele/ela precisaria saber? Posso preparar um resumo.
 
 ---
 
 ## 5 FRASES DE PODER
 
-- "Cada caso é único, por isso precisamos avaliar."
-- "O peso muitas vezes NÃO é falta de força de vontade."
-- "A Dra. investiga causas, não trata sintomas."
-- "Consulta inicial já inclui bioimpedância + exames + plano."
-- "A primeira consulta é de avaliação — a Dra. vai entender seu caso e apresentar o melhor caminho."
+• "Cada caso é único, por isso precisamos avaliar."
+• "O excesso de peso muitas vezes NÃO é falta de força de vontade."
+• "A Dra. investiga causas, não trata sintomas."
+• "Consulta inicial inclui bioimpedância + exames + plano personalizado."
+• "A primeira consulta é de avaliação — a Dra. vai entender seu caso e apresentar o melhor caminho."
 
 ---
 
 ## 5 ERROS FATAIS
 
-❌ Preço antes de valor
+❌ Investimento antes de entender o caso
 ❌ Aceitar "vou pensar" sem questionar
 ❌ Responder sem perguntar
 ❌ Mensagem gigante (vomitar info)
@@ -67,23 +68,23 @@ Lead entrou → Responde <5min → Pergunta nome → Descobre dor
 
 ---
 
-## AGENDAMENTO — COPIAR
+## AGENDAMENTO
 
-> [Nome], tenho duas opções:
-> • Terça, dia [XX], 14h
-> • Quinta, dia [XX], 16h
-> Qual funciona melhor?
+[Nome], tenho duas opções:
+• Terça, dia [XX], 14h
+• Quinta, dia [XX], 16h
+Qual seria mais conveniente?
 
 ---
 
 ## CONFIRMAÇÃO — 1 DIA ANTES
 
-> Bom dia, [Nome]! 💚 Confirmar seu horário amanhã: [dia] às [hora].
-> Digite SIM para confirmar ou NÃO para reagendar.
+Bom dia, [Nome]! 💚 Confirmando seu horário amanhã: [dia] às [hora].
+Confirme com SIM ou NÃO caso precise reagendar.
 
-> **Não confirmou até o fim do dia? LIGAR.**
+⚠️ Não confirmou até o fim do dia? LIGAR.
 
 ---
 
-> **Versão 1.0** | IVS | 2026-04-24
+> **Versão 2.0 Premium** | IVS | 2026-04-24
 > Referência completa: `clara-quick-reference.md`
