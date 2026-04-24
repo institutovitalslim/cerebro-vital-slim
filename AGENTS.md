@@ -32,6 +32,7 @@ Before doing anything else:
 14. When a new learning appears, follow `cerebro/LEARNING_PROTOCOL.md`, update the relevant canonical file, and register it in `cerebro/learning-ledger.md`
 15. When creating or restructuring a skill, consult `cerebro/skill-design-rubric.md`
 16. In Telegram groups with multiple topics, consult `cerebro/telegram-topics.md`, `cerebro/cross-topic-protocol.md`, and `cerebro/cross-topic-promotion-rules.md` so the current topic is never treated as isolated memory and important context is promoted across topics
+17. **Verificar sincronia das skills** — rodar `bash /root/cerebro-vital-slim/ops/skills-sync/verify-sync.sh` (check rápido). Se retornar desalinhamento, rodar `bash /root/cerebro-vital-slim/ops/skills-sync/verify-sync.sh --fix` para corrigir. Isso garante que `cerebro/empresa/skills/` e `/root/.openclaw/workspace/skills/` estão alinhadas. O hook git post-merge já faz sync automático após `git pull`, esse check é safety-net.
 
 Don't ask permission. Just do it.
 
