@@ -109,6 +109,30 @@ Para cada PDF de exame:
 
 **Salvar em:** `/root/cerebro-vital-slim/deliverables/apresentacao-[nome-paciente].html`
 
+### 5.5 Quality Gate — design-impeccable (OBRIGATÓRIO antes de entregar)
+
+**Nunca entregar apresentação HTML sem passar pelo workflow da skill `design-impeccable`.**
+
+Antes de avançar para o passo 6, ler e aplicar (nessa ordem):
+
+1. **`cerebro/empresa/skills/design-impeccable/reference/_ivs-overrides.md`** — entender o que substituir no contexto IVS (scripts upstream não estão instalados aqui)
+2. **`cerebro/empresa/skills/design-impeccable/brand-adapter.md`** — aplicar tokens de marca (dourado `#9F8844`, tom clínico, compliance CFM/CRM-BA)
+3. **`cerebro/empresa/skills/design-impeccable/reference/critique.md`** — review UX (hierarquia visual, clareza, decisão do paciente)
+4. **`cerebro/empresa/skills/design-impeccable/reference/polish.md`** — passagem final (detalhes, consistência, tipografia)
+5. **`cerebro/empresa/skills/design-impeccable/reference/audit.md`** — checagem técnica (acessibilidade contraste AA, responsivo mobile — paciente abre no celular, semântica HTML correta)
+
+**Checklist mínimo aplicado do `brand-adapter.md` antes de entregar:**
+- [ ] Logo Vital Slim em posição correta, vetorial (não PNG downscaled)
+- [ ] Dourado `#9F8844` usado em acentos, **não em texto corrido sobre branco** (contraste baixo)
+- [ ] CFM do médico correto (Dra. Daniely CRM-BA 27588; Dra. Patrícia quando for tricologia)
+- [ ] Exames alterados apresentados com **gravidade adequada** — não minimizar na copy (regra Tiaro 2026-04-23)
+- [ ] Contraste AA mínimo em todo texto (testar com `prefers-color-scheme` dark também se suportado)
+- [ ] Responsivo em 375px (iPhone) — paciente abre no celular
+- [ ] Semântica HTML correta (`<h1>`, `<h2>`, `<strong>` — não `<div class="bold">`)
+- [ ] **Nada inventado** — nome, exames, valores, CRM, telefone. Na dúvida, perguntar ao Tiaro antes.
+
+**Se o HTML falhar em qualquer item:** voltar ao passo 5, corrigir, re-aplicar o quality gate. Nunca pular.
+
 ### 6. Enviar Apresentação
 
 - Enviar arquivo HTML gerado no canal configurado
