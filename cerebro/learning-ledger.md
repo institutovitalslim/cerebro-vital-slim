@@ -150,6 +150,14 @@ Sempre validar a renderização de caracteres especiais e o posicionamento de el
 
 ---
 
+## 2026-04-24 - Leitura de PDF: usar a tool nativa `pdf` como caminho principal
+
+- **Tipo:** operacional
+- **Origem:** correção direta do Tiaro após erro de interpretação ao analisar extrato PDF da Cloudwalk/InfinitePay.
+- **Decisão incorporada:** em qualquer tarefa que dependa de leitura/análise de PDF, usar primeiro a tool nativa `pdf`. Não culpar o arquivo, o usuário ou a extração parcial sem antes tentar a leitura correta. Ferramentas shell como `pdftotext` podem ser usadas apenas como fallback técnico.
+- **Arquivos atualizados:** `cerebro/verdades-operacionais.md`, `memory/2026-04-24.md`
+- **Motivo:** evitar erro operacional por leitura parcial de documento e evitar atrito desnecessário com o usuário quando o arquivo estiver correto.
+
 ## 2026-04-23 - Omie: serviço deve ser confirmado antes de emitir NFS-e
 
 ### Problema
