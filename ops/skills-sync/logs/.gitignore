@@ -1,0 +1,3 @@
+# Logs de sync são efêmeros — nunca committar
+*.log
+!.gitignore
