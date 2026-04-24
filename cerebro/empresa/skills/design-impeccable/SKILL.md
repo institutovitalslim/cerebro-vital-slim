@@ -20,6 +20,10 @@ license: Apache-2.0 (upstream) + camada Vital Slim
 
 Dar à Clara **vocabulário de design** para produzir HTML de qualidade clínica-premium. Evita os anti-patterns conhecidos (Inter em tudo, gradiente roxo, cards com borda grossa, modal abuse, contraste ruim, ícones gigantes).
 
+## PRIMEIRO PASSO OBRIGATÓRIO
+
+**Antes de usar qualquer reference, ler `reference/_ivs-overrides.md`.** Os reference files foram copiados verbatim do upstream Impeccable e mencionam scripts (`load-context.mjs`, `npx impeccable`, modo `/live`) que **não estão instalados** neste fork. O `_ivs-overrides.md` define o que substituir em cada caso.
+
 ## Quando disparar
 
 - **Toda apresentação HTML de paciente**, ANTES de enviar o link ao Tiaro
@@ -100,7 +104,7 @@ Organizados por fase do trabalho:
 | `reference/cognitive-load.md` | Reduzir esforço mental do usuário |
 | `reference/brand.md` | Aderência à marca |
 | `reference/product.md` | Alinhamento com estratégia de produto |
-| `reference/live.md` | ⚠️ Modo live — upstream tem via Puppeteer, **não instalado aqui** |
+| ~~`reference/live.md`~~ | **Removido neste fork** — modo live depende de Puppeteer que não trouxemos |
 
 ## Anti-patterns críticos (consultar antes de entregar)
 
