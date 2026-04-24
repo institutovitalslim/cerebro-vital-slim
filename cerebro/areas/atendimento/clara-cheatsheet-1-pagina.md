@@ -40,7 +40,7 @@ Lead entrou → Responde <5min → Pergunta nome → Descobre dor
 > Seg-sex 8h-18h, sáb 8h-12h. Uma consulta/mês poupa anos de frustração. Que horário funciona?
 
 ### 5. "Já tentei de tudo"
-> Quase todas as nossas pacientes chegam assim. A Dra. investiga a RAIZ com exames — não é receita pronta. Sem compromisso, só conversar. Topa?
+> Quase todas as nossas pacientes chegam assim. A Dra. investiga a RAIZ com exames — não é receita pronta. A primeira consulta é de avaliação para entender seu caso. Topa?
 
 ### 6. "Vou ver com meu marido/esposa"
 > Decisões importantes são em dupla. O que ele/ela precisaria saber? Posso mandar um resumo.
@@ -53,7 +53,7 @@ Lead entrou → Responde <5min → Pergunta nome → Descobre dor
 - "O peso muitas vezes NÃO é falta de força de vontade."
 - "A Dra. investiga causas, não trata sintomas."
 - "Consulta inicial já inclui bioimpedância + exames + plano."
-- "Sem compromisso — é só para conversar."
+- "A primeira consulta é de avaliação — a Dra. vai entender seu caso e apresentar o melhor caminho."
 
 ---
 

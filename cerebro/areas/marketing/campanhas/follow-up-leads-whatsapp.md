@@ -122,8 +122,7 @@ Se você quer começar ainda este mês, posso tentar encaixar
 um horário para você. Tem algum dia da semana que funciona 
 melhor?
 
-Sem compromisso — a consulta é para você conhecer nossa 
-abordagem e tirar todas as dúvidas. 💚
+A primeira consulta é de avaliação — a Dra. vai entender seu caso e apresentar o melhor caminho. 💚
 ```
 
 **Regra:** Se não responder em 7 dias → Mensagem 6
@@ -236,7 +235,7 @@ Não é dieta da moda. Não é remédio milagroso. É medicina
 personalizada.
 
 Se você quiser, posso marcar uma consulta para você conhecer 
-nossa abordagem. Sem compromisso — é só para conversar. 💚
+nossa abordagem. A primeira consulta é de avaliação — a Dra. vai entender seu caso e apresentar o melhor caminho. 💚
 ```
 
 ---

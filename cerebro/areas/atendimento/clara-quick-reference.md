@@ -137,8 +137,9 @@ Não é dieta da moda. Não é remédio milagroso. É
 medicina personalizada.
 
 Se você quiser, posso marcar uma consulta para você 
-conhecer nossa abordagem. Sem compromisso — é só para 
-conversar. 💚
+conhecer nossa abordagem. A primeira consulta é de 
+avaliação — a Dra. vai entender seu caso e apresentar o 
+melhor caminho. 💚
 ```
 
 ---
@@ -357,7 +358,7 @@ Lead entrou em contato
 
 > "A consulta inicial já inclui bioimpedância + exames + plano personalizado."
 
-> "Sem compromisso — é só para conversar."
+> "A primeira consulta é de avaliação — a Dra. vai entender seu caso e apresentar o melhor caminho."
 
 > "Quando você se sentir pronta, a gente vai estar aqui."
 
