@@ -21,6 +21,24 @@ Para isso, consultar:
   2. fazer `git commit`;
   3. fazer `git push` para o repositório oficial no GitHub.
 
+## Skills — cérebro é fonte de verdade, workspace é runtime
+
+- **Fonte de verdade (cérebro):** `cerebro/empresa/skills/` no repositório. Aqui ficam as definições canônicas: `SKILL.md`, `reference/`, `scripts/` de cada skill. Versionado no GitHub.
+- **Runtime (VPS):** `/root/.openclaw/workspace/skills/` na VPS. É aqui que o OpenClaw/Clara efetivamente **invoca** as skills em tempo de execução.
+- **Sincronia:** one-way, cérebro → workspace. Nunca o contrário.
+- **Mecanismo:**
+  1. **Automático via git hook** — após qualquer `git pull`, `git merge`, `git checkout` ou `git rebase` dentro do cérebro na VPS, o hook `.git/hooks/post-merge` (e irmãos) dispara `ops/skills-sync/sync-skills.sh` e espelha cérebro → workspace.
+  2. **Safety-net da Clara** — no startup da sessão (passo 17 do `AGENTS.md`), Clara roda `ops/skills-sync/verify-sync.sh`. Se detectar desalinhamento, pode rodar `--fix` pra corrigir.
+  3. **Manual** — qualquer um pode rodar `bash /root/cerebro-vital-slim/ops/skills-sync/sync-skills.sh` a qualquer momento. Idempotente, seguro.
+- **Preservação:** o rsync é sem `--delete`, então arquivos runtime-only do workspace (caches, logs, state) **nunca são removidos** pelo sync. Só SKILL.md, reference/, scripts/ são sobrescritos com a versão do cérebro.
+- **Exclusões do sync:** `_index.md`, `_templates/`, `.git/`, `logs/`, `state/` — metadados que não pertencem ao runtime.
+- **Instalação do hook (uma vez só, na VPS):**
+  ```bash
+  cd /root/cerebro-vital-slim
+  bash ops/skills-sync/install-hook.sh
+  ```
+- **Logs de sync:** `ops/skills-sync/logs/sync-<timestamp>.log` (gitignored)
+
 ## 🚫 Nunca rodar "reset" do onboarding neste cérebro
 - Este repositório é **ambiente de produção** do Instituto Vital Slim, não template.
 - A **Fase 0 do `onboarding/SETUP.md` foi removida em 2026-04-23** a pedido do Tiaro e **nunca deve ser reintroduzida nem executada** aqui.
