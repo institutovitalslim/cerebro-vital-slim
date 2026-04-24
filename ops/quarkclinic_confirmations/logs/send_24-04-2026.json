@@ -1,49 +1,13 @@
 {
   "sent": [
     {
-      "phone": "5561981640792",
-      "nome": "Erick Magalhaes Santos",
-      "agendamentoId": 456139287,
-      "dataHoraInicio": "24-04-2026T10:00",
-      "messageId": "DE41267AA19EB1873A85",
+      "phone": "5571993403712",
+      "nome": "Felipe Cedraz de Alencar",
+      "agendamentoId": 454350857,
+      "dataHoraInicio": "24-04-2026T14:00",
+      "messageId": "82E033673C185AC86289",
       "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571988365569",
-      "nome": "Cíntia Souza Japiassu de Oliveira",
-      "agendamentoId": 456060889,
-      "dataHoraInicio": "24-04-2026T10:10",
-      "messageId": "3EB0C6A490D0BD8E9C6C6F",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571993652820",
-      "nome": "Tainara Selene Japiassu de França",
-      "agendamentoId": 456060838,
-      "dataHoraInicio": "24-04-2026T10:20",
-      "messageId": "3EB075B342DBA4B83D24F7",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571991262370",
-      "nome": "Tainá Japiassu Teles",
-      "agendamentoId": 455486788,
-      "dataHoraInicio": "24-04-2026T10:30",
-      "messageId": "3EB0509C85AF9E263F85F7",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571991175387",
-      "nome": "ROBERTA FRANCO DE CARVALHO PINHO",
-      "agendamentoId": 454947956,
-      "dataHoraInicio": "24-04-2026T08:30",
-      "messageId": "3EB0A6FB6C696214322577",
-      "status": "sent",
-      "turno": "morning"
+      "turno": "afternoon"
     }
   ]
 }

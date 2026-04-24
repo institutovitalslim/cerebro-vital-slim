@@ -1,3 +1,35 @@
+## 2026-04-24 - Integração Treinamento CRC Clínica 2.0 na operação Clara
+
+### Contexto
+Tiaro pediu extração e análise da playlist completa "Treinamento CRC de Clínica 2.0" do YouTube (Isaias Lanza/Lanzatec), com foco em atendimento de leads novos via WhatsApp.
+
+### Extração
+- Método: RapidAPI `yt-api.p.rapidapi.com` (key existente para Instagram reutilizada)
+- 17 de 18 vídeos transcritos com sucesso (~160K caracteres)
+- 1 vídeo sem legendas disponíveis: "Como agendar um lead por ligação"
+- Arquivos gerados em `/tmp/crc_transcriptions/`
+
+### Integração nos 4 passos solicitados
+1. **Atualizado `cerebro/verdades-operacionais-clara.md`** — adicionada seção "Princípios CRC Clínica 2.0 (Integrados)" com mentalidade core, comunicação, perfil, jornada do lead, 6 fases pós-agendamento, follow-up cadenciado, erros fatais, lead frio vs. desqualificado, funis de retenção
+2. **Criado `cerebro/areas/atendimento/checklist-atendimento-clara.md`** — checklist operacional completo (setup, durante atendimento, pós-agendamento 6 fases, follow-up 6 tentativas, regras absolutas, métricas diárias)
+3. **Criado `cerebro/areas/atendimento/scripts-crc-ivs.md`** — 9 seções de scripts adaptados do CRC para contexto IVS (emagrecimento/reposição hormonal): abertura, descoberta, construção de valor, agendamento, pós-agendamento 6 fases, quebra de 6 objeções, follow-up 6 tentativas, reativação, pós-consulta
+4. **Criado `cerebro/areas/atendimento/exemplos-praticos-treino.md`** — 7 cenários práticos com ERRO → ACERTO → ANÁLISE: preço de cara, mensagem curta genérica, áudio, "vou pensar", não responde, lead formal, dúvida técnica
+
+### Aprendizados-chave incorporados
+- **NUNCA vomitar informação** — mensagens longas no WhatsApp matam conversa
+- **Sempre terminar com pergunta** — evita o "vácuo"
+- **6 fases pós-agendamento** — formalização → vídeo clínica → confirmação → vídeo Dra. → lembrete → último lembrete
+- **Follow-up cadenciado** — 6 tentativas com valor decrescente e despedida graciosa
+- **Lead frio ≠ desqualificado** — lead frio entrou em contato e parou; desqualificado é clicou por engano/mora longe
+
+### Arquivos criados/atualizados
+- `cerebro/verdades-operacionais-clara.md`
+- `cerebro/areas/atendimento/checklist-atendimento-clara.md`
+- `cerebro/areas/atendimento/scripts-crc-ivs.md`
+- `cerebro/areas/atendimento/exemplos-praticos-treino.md`
+
+---
+
 ## 2026-04-24 - Adoção de skills de design externas (Impeccable + Emil Kowalski)
 
 ### Contexto

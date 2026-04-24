@@ -1,26 +1,8 @@
 {
-  "generatedAt": "2026-04-23T16:00:27.224535-03:00",
-  "lastRunMode": "next-morning",
+  "generatedAt": "2026-04-24T07:30:31.833789-03:00",
+  "lastRunMode": "same-day-afternoon",
   "lastRunDate": "24-04-2026",
   "items": [
-    {
-      "phone": "5571993245545",
-      "nome": "FRANCISCO DE ASSIS DE LIMA",
-      "agendamentoId": 455166737,
-      "dataHoraInicio": "22-04-2026T09:00",
-      "messageId": "29050B7BDE8963E51073",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571995583056",
-      "nome": "DAVI CARVALHO RAMOS MELO",
-      "agendamentoId": 455098104,
-      "dataHoraInicio": "22-04-2026T14:00",
-      "messageId": "33DA49B0669E3BBC8B7F",
-      "status": "sent",
-      "turno": "afternoon"
-    },
     {
       "phone": "5571993245545",
       "nome": "FRANCISCO DE ASSIS DE LIMA",
@@ -49,39 +31,12 @@
       "turno": "afternoon"
     },
     {
-      "phone": "5571991175387",
-      "nome": "ROBERTA FRANCO DE CARVALHO PINHO",
-      "agendamentoId": 454947956,
-      "dataHoraInicio": "24-04-2026T08:30",
-      "messageId": "3EB0A6FB6C696214322577",
-      "status": "confirmed",
-      "turno": "morning"
-    },
-    {
-      "phone": "5561981640792",
-      "nome": "Erick Magalhaes Santos",
-      "agendamentoId": 456139287,
-      "dataHoraInicio": "24-04-2026T10:00",
-      "messageId": "DE41267AA19EB1873A85",
-      "status": "confirmed",
-      "turno": "morning"
-    },
-    {
       "phone": "5571988365569",
       "nome": "Cíntia Souza Japiassu de Oliveira",
       "agendamentoId": 456060889,
       "dataHoraInicio": "24-04-2026T10:10",
       "messageId": "3EB0C6A490D0BD8E9C6C6F",
       "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571993652820",
-      "nome": "Tainara Selene Japiassu de França",
-      "agendamentoId": 456060838,
-      "dataHoraInicio": "24-04-2026T10:20",
-      "messageId": "3EB075B342DBA4B83D24F7",
-      "status": "confirmed",
       "turno": "morning"
     },
     {
@@ -92,6 +47,15 @@
       "messageId": "3EB0509C85AF9E263F85F7",
       "status": "sent",
       "turno": "morning"
+    },
+    {
+      "phone": "5571993403712",
+      "nome": "Felipe Cedraz de Alencar",
+      "agendamentoId": 454350857,
+      "dataHoraInicio": "24-04-2026T14:00",
+      "messageId": "82E033673C185AC86289",
+      "status": "confirmed",
+      "turno": "afternoon"
     }
   ]
 }

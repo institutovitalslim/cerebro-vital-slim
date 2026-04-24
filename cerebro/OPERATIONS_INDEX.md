@@ -60,6 +60,12 @@
 - OpenClaw image providers nativos: preferir Google/NanoBanana 2, fallback OpenAI
 - Para fotos da Dra. com NanoBanana 2 Pro e referência real, usar também a cláusula canônica de `strict facial consistency mode`
 
+### Atendimento / Clara (WhatsApp)
+- `cerebro/verdades-operacionais-clara.md` — princípios, objeções, regras de ouro + integração CRC Clínica 2.0
+- `cerebro/areas/atendimento/checklist-atendimento-clara.md` — checklist operacional completo (setup, atendimento, pós-agendamento, follow-up, métricas)
+- `cerebro/areas/atendimento/scripts-crc-ivs.md` — scripts adaptados do CRC para IVS (9 seções: abertura, descoberta, valor, agendamento, pós-agendamento 6 fases, quebra de objeções, follow-up, reativação, pós-consulta)
+- `cerebro/areas/atendimento/exemplos-praticos-treino.md` — 7 cenários práticos: ERRO → ACERTO → ANÁLISE
+
 ### Marketing (skills adaptadas do MarketingSkills)
 - `cerebro/patient-marketing-context.md` — contexto compartilhado de pacientes
 - `cerebro/buffer.md` — postagem automática em redes sociais

@@ -1,0 +1,96 @@
+# Carrossel GLP-1 e Câncer Endometrial — Copy
+
+## Slide 1 (Capa)
+**O NOVO PARADIGMA DA PRESERVAÇÃO**
+
+Como os agonistas do receptor GLP-1 estão mudando o tratamento do câncer endometrial em mulheres jovens
+
+## Slide 2
+**O PROBLEMA É REAL**
+
+O câncer endometrial cresce 4.5% ao ano entre mulheres de 20 a 29 anos
+
+Cada aumento de 5 pontos no índice de massa corporal eleva o risco em 50%
+
+A obesidade não é apenas um fator de risco: ela muda a biologia do tumor
+
+## Slide 3
+**POR QUE A PROGESTINA SOZINHA FALHA?**
+
+Em pacientes com obesidade, a inflamação crônica e a hiperinsulinemia silenciam os receptores de progesterona no tumor
+
+O medicamento está lá, mas o tumor não "ouve"
+
+Resultado: taxas de remissão caem, recidiva aumenta e a histerectomia acaba sendo a única saída
+
+## Slide 4
+**A CHAVE DUPLA**
+
+O GLP-1 não emagrece apenas: ele destrava a célula para que a progestina possa agir
+
+Passo 1: aumenta a molécula mensageira cAMP dentro da célula
+Passo 2: ressuscita os receptores de progesterona silenciados pela obesidade
+Passo 3: a progestina se liga e elimina a célula cancerígena
+
+## Slide 5
+**OS NÚMEROS NÃO MENTEM**
+
+Estudo com 165 milhões de pacientes (banco de dados TriNetX, 2017-2025)
+
+Mulheres até 45 anos com câncer endometrial buscando preservar o útero:
+
+Apenas Progestina: 23.4% precisaram de cirurgia em 18 meses
+GLP-1 + Progestina: 10.2% precisaram de cirurgia
+
+Redução de 59% no risco de perder o útero
+
+## Slide 6
+**FUNCIONA NOS CASOS MAIS DIFÍCEIS**
+
+Mulheres com menos de 40 anos:
+- Antes: 21.2% de histerectomias
+- Depois: 8.8%
+
+Câncer endometrial invasivo confirmado:
+- Antes: 30.2% de histerectomias
+- Depois: 11.5%
+
+Semaglutida: redução de 68% no risco
+Tirzepatida: redução de 80% no risco
+
+## Slide 7
+**ANTES E DEPOIS DO PARADIGMA**
+
+Apenas Progestina:
+- Nenhuma ação sistêmica
+- Receptores silenciados pela obesidade
+- Risco de cirurgia: 23%
+- Vulnerável à resistência
+
+GLP-1 + Progestina:
+- Reduz inflamação e resistência à insulina
+- Restaura receptores ativamente
+- Risco de cirurgia: 10%
+- Perfil resiliente molecularmente
+
+## Slide 8
+**O FUTURO JÁ COMEÇOU**
+
+Ensaio WE-FIERCE em andamento: Tirzepatida + dispositivo intrauterino com levonorgestrel
+
+Biomarcadores moleculares sendo estudados para prever quais pacientes mais se beneficiam
+
+A onco-endocrinologia não trata apenas o tumor: restaura o ambiente metabólico para suportar uma gestação futura
+
+## Slide 9 (Referência)
+**Fonte:**
+
+Dados TriNetX (2017-2025) — 165 milhões de pacientes
+Mentoria Endogin — Análise Translacional
+
+Referências citadas:
+- Podder et al., Clinical Cancer Research 2026
+- Hsieh et al., Volume 207 Suplemento 2026
+
+@dradaniely.freitas
+Instituto Vital Slim
