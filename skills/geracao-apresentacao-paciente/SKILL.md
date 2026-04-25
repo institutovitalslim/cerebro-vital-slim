@@ -26,6 +26,19 @@ Para verificar: `gog auth list` e `python3 scripts/quarkclinic_api.py --check`
 
 ## Fluxo Principal
 
+### 0. Resumo automático do novo Portal IVS
+
+O **próprio portal** (`preconsulta.institutovitalslim.com.br`) envia o resumo para o Telegram **imediatamente após o submit** do formulário.
+
+- O envio acontece dentro de `src/app/api/submit/route.ts` via `notifyTelegram()`
+- Publica no grupo `AI Vital Slim`, tópico `271`
+- Não há polling; o push é síncrono com a submissão
+
+**Fallback manual** (se necessário reenviar um JSON específico):
+```bash
+python3 scripts/notificar_resumos_portal_ivs.py --force-file /root/ivs-preconsulta-data/ARQUIVO.json
+```
+
 ### 1. Buscar Pacientes Novos
 
 ```bash
