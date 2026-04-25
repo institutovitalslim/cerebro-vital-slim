@@ -149,3 +149,22 @@ Antes de responder ou executar tarefas recorrentes de GitHub, Quarkclinic, Whats
 
 - **Leitura de PDF:** quando a tarefa depender de análise de PDF, usar primeiro a tool nativa `pdf`. Não assumir limitação do arquivo ou do usuário sem tentar a leitura correta. Extração por shell (ex.: `pdftotext`) é fallback técnico, não caminho principal.
 - **Roteamento Omie -> gpt-5.4:** qualquer pedido que envolva a API do Omie (faturamento, OS, boleto, NFe, cadastro, financeiro) roda no modelo gpt-5.4 (provider openai-codex). Kimi K2.6 trava em tool-use longo (stopReason=toolUse com payloads=0). Ver cerebro/omie.md secao Regra de roteamento de modelo.
+
+## Portal de Pré-Consulta IVS
+- **URL:** `preconsulta.institutovitalslim.com.br`
+- **Runtime:** Next.js em `localhost:3001` (PM2 gerenciado)
+- **Código-fonte:** `/root/ivs-preconsulta/`
+- **Dados submetidos:** `/root/ivs-preconsulta-data/` (JSONs com timestamp)
+- **Envio de resumo:** síncrono no submit via `notifyTelegram()` em `src/app/api/submit/route.ts`
+- **Destino:** grupo AI Vital Slim, tópico 271 (Pacientes)
+- **Fallback manual:** `python3 skills/geracao-apresentacao-paciente/scripts/notificar_resumos_portal_ivs.py --force-file ARQUIVO.json`
+- **Problema comum:** build do Next.js desatualizado causa erro "Could not find a production build". Solução: PM2 reinicia automaticamente ou rodar `cd /root/ivs-preconsulta && npm run build && pm2 restart ivs-preconsulta`
+
+## Template de Apresentação de Paciente
+- **Skill:** `skills/geracao-apresentacao-paciente/`
+- **Template:** `assets/template-apresentacao.html` — Jinja2, dark theme, baseline aprovado do Erick (2026-04-25)
+- **Script:** `scripts/gerar_apresentacao.py` — renderiza Jinja2 com placeholders dinâmicos
+- **Placeholders principais:** `nome_paciente`, `idade_paciente`, `crm_medico`, `stats_section`, `diagnostico_section`, `history_section`, `exams_section`, `timeline_section`, `contexto_section`, `references_section`
+- **Seções do questionário:** history e contexto são geradas automaticamente a partir dos dados do pré-consulta
+- **Seções clínicas:** stats, diagnostico, exams são placeholders para preenchimento após análise dos PDFs de exames
+- **Pendente:** trocar logo no template para versão oficial do brand kit (`assets/brand/logo-vital-slim-vetorizado-rgb.pdf`)
