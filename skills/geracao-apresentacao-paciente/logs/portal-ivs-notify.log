@@ -1,0 +1,15 @@
+[2026-04-25 16:01:36] OK: mensagem enviada ao Telegram
+[2026-04-25 16:01:36] OK: resumo enviado para Tiaro Fernandes Neves (2026-04-24T21-07-12-692Z-tiaro-fernandes-neves.json)
+[2026-04-25 16:01:36] Force-file: /root/ivs-preconsulta-data/2026-04-24T21-07-12-692Z-tiaro-fernandes-neves.json -> enviado
+[2026-04-25 16:01:36] Resumo: 1 resumo(s) enviado(s).
+[2026-04-25 16:05:01] ERRO: TELEGRAM_BOT_TOKEN não configurado
+[2026-04-25 16:05:01] FALHA: não consegui enviar resumo de 2026-04-25T16-01-54-662Z-teste-clara.json
+[2026-04-25 16:05:01] ERRO: TELEGRAM_BOT_TOKEN não configurado
+[2026-04-25 16:05:01] FALHA: não consegui enviar resumo de 2026-04-25T16-04-29-053Z-teste-debug.json
+[2026-04-25 16:05:01] Resumo: 0 resumo(s) enviado(s).
+[2026-04-25 16:05:01] ERRO: TELEGRAM_BOT_TOKEN não configurado
+[2026-04-25 16:05:01] FALHA: não consegui enviar resumo de 2026-04-25T16-01-54-662Z-teste-clara.json
+[2026-04-25 16:05:01] ERRO: TELEGRAM_BOT_TOKEN não configurado
+[2026-04-25 16:05:01] FALHA: não consegui enviar resumo de 2026-04-25T16-04-29-053Z-teste-debug.json
+[2026-04-25 16:05:01] Resumo: 0 resumo(s) enviado(s).
+OK: 0 resumo(s) enviado(s).
