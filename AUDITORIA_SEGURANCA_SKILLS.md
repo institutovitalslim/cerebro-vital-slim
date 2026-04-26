@@ -1,95 +1,95 @@
-# Auditoria de Segurança — Skills Instaladas em 2026-04-26
+# Auditoria de Segurança — Skills Instaladas (2026-04-26)
 
 ## Resumo Executivo
-**Total de skills instaladas:** 41 (1 removida por risco)
-**Skills removidas:** 1 (soho — blockchain payments)
-**Skills com API externa:** 6
-**Skills puramente locais/documentação:** 34
+**Total de skills instaladas:** 27 (ClawHub) + skills customizadas + skills do sistema
+**Skills removidas:** 26 (design gráfico)
+**Skills bloqueadas pelo VirusTotal:** 8
+**Skills com API externa:** 4
+**Skills puramente locais/documentação:** 23
 
 ---
 
 ## Classificação por Risco
 
-### 🔴 REMOVIDA (Risco Financeiro)
+### 🔴 BLOQUEADAS (VirusTotal — não instaladas)
 | Skill | Motivo |
 |-------|--------|
-| soho | Blockchain payments, requer PRIVATE_KEY, risco de transações não autorizadas |
+| crm-in-a-box | Flagged: crypto keys, external APIs, eval |
+| lead-generation | Flagged: crypto keys, external APIs, eval |
+| google-sheets-api | Flagged: crypto keys, external APIs, eval |
+| lead-researcher | Flagged: crypto keys, external APIs, eval |
+| csv-data-explorer | Flagged: crypto keys, external APIs, eval |
+| data-visualizer | Flagged: crypto keys, external APIs, eval |
+| email-daily-summary | Flagged: crypto keys, external APIs, eval |
+| cold-email-outreach | Flagged: crypto keys, external APIs, eval |
 
 ### 🟡 API EXTERNA (Requer Token/Key)
 | Skill | API | Requer | Risco |
 |-------|-----|--------|-------|
-| logo-branding-system | dlazy.com | API Key | Médio — geração de imagem via API |
-| app-icon-generator | talesofai.com | Token | Médio — geração de imagem via API |
-| kai-tw-figma | Figma REST API | FIGMA_TOKEN | Baixo — apenas leitura/export |
-| figma-2 | MorphixAI proxy | MORPHIXAI_API_KEY | Baixo — proxy para Figma |
-| figma-sync | Figma REST API | FIGMA_TOKEN | Baixo — sync bidirecional |
-| figma-bridge | Figma REST API | FIGMA_TOKEN | Baixo — extração de tokens |
-| pro-color-palette | requests.get | Nenhum | Baixo — download de imagens para extração |
+| google-sheets | maton.ai gateway | MATON_API_KEY | Médio — proxy OAuth para Google Sheets |
+| porteden-email | porteden.com | PE_API_KEY | Médio-Alto — acesso total a email (ler/enviar/deletar) |
+| meta-ads-analytics | brijr/meta-mcp (MCP) | MCP config | Médio — leitura de dados Meta Ads |
+| whatsapp-business-api | Meta Cloud API | WHATSAPP_ACCESS_TOKEN | Médio — envio de mensagens WhatsApp |
 
 ### 🟢 PURAMENTE LOCAL/SEGURA
 | Skill | Descrição |
 |-------|-----------|
-| design-studio | Scripts Python locais (Pillow, ImageMagick) |
-| brand-dna | Apenas documentação/texto |
-| brand-visual-generator | Apenas documentação/texto |
-| svg-artist | Gera SVG via código, sem API |
-| svg-draw | Gera SVG via código, sem API |
-| svg-generator-pro | Gera SVG via código, sem API |
-| bitmap-vectorize | Vetorização local |
-| fonts | Apenas guias de tipografia |
-| google-fonts | Apenas guias de tipografia |
-| color-sense | Apenas guias de cor |
-| icon-generator | Scripts Python locais (Pillow) |
-| minimalist-design-system | Apenas documentação/texto |
-| creative-genius | Apenas documentação/texto |
-| creative-eye | Apenas documentação/texto |
-| text-art | Geração de ASCII art local |
-| biz-hospitality | Apenas documentação/texto |
+| copywriting-pro | Apenas documentação/texto |
+| content-marketing | Apenas documentação/texto |
+| social-media-scheduler | Apenas documentação/texto |
 | marketing-analytics | Apenas documentação/texto |
 | sales-mastery | Apenas documentação/texto |
 | sales-pipeline-tracker | Apenas documentação/texto |
-| check-analytics | Apenas documentação/texto (auditoria local) |
-| automation-workflows | Apenas documentação/texto |
+| lead-scorer | Apenas documentação/texto (framework de pontuação) |
+| lead-extractor | Apenas documentação/texto (regras de extração) |
+| mini-crm | Apenas documentação/texto (chinês) |
+| market-research-agent | Apenas documentação/texto |
 | data-analyst-pro | Análise local de arquivos |
+| check-analytics | Apenas documentação/texto |
 | in-depth-research | Apenas documentação/texto |
-| social-media-scheduler | Apenas documentação/texto |
-| content-marketing | Apenas documentação/texto |
-| copywriting-pro | Apenas documentação/texto |
+| automation-workflows | Apenas documentação/texto |
+| n8n-workflow-automation | Apenas documentação/texto (gera JSON) |
+| n8n-monitor | Apenas documentação/texto |
+| n8n-api | Apenas documentação/texto |
+| web-scraping | Apenas documentação/texto (guia de uso) |
 | project-planner | Apenas documentação/texto |
-| communication-skill | Apenas documentação/texto |
 | ai-presentation-maker | Export local (HTML, PPTX, PDF) |
-| adobe-illustrator-scripting | Scripts JSX locais |
-| wireframe | Geração de wireframes local |
-| design-to-code | Apenas documentação/texto |
-| logo-creator | Apenas documentação/texto (guia de design) |
+| communication-skill | Apenas documentação/texto |
+| biz-hospitality | Apenas documentação/texto |
+| notion-skill | Apenas documentação/texto |
 
 ---
 
-## Verificações Realizadas
-
-✅ **Nenhum eval() suspeito encontrado**
-✅ **Nenhum exec() arbitrário encontrado**
-✅ **Nenhum token/key hardcoded encontrado**
-✅ **Nenhuma execução remota de código**
-
-⚠️ **Chamadas de rede identificadas:**
-- `requests.get` em pro-color-palette (download de imagens)
-- `fetch` em app-icon-generator (API talesofai.com)
-- `requests.get` em figma-sync (API Figma)
-- `fetchBorrowerProfile` em soho (REMOVIDO)
+## Skills Customizadas (Workspace)
+| Skill | Tipo | Risco |
+|-------|------|-------|
+| agenda-diaria-whatsapp | Script local + API Z-API | 🟡 Médio |
+| historico-conversas | Script local + API Google Sheets | 🟡 Médio |
+| omie-boletos | Script local + API Omie | 🟡 Médio |
+| omie-linha-corte | Script local + API Omie | 🟡 Médio |
+| tweet-carrossel | Script local + geração de imagem | 🟢 Baixo |
+| llm-council | Apenas documentação | 🟢 Baixo |
+| deep-research | Script local | 🟢 Baixo |
+| prompt-imagens | Script local | 🟢 Baixo |
+| homematch-brand | Apenas documentação | 🟢 Baixo |
+| vitalslim-atendimento | Apenas documentação | 🟢 Baixo |
 
 ---
 
 ## Recomendações
 
-1. **Manter monitoramento** das skills com API externa
-2. **Não configurar tokens** sem necessidade imediata
-3. **Revisar código** antes de usar skills desconhecidas
+1. **NÃO configurar tokens sem necessidade imediata** — skills com API externa só precisam de configuração quando forem usar
+2. **Manter monitoramento** das skills com API externa (rate limits, custos)
+3. **PULAR skills flagged pelo VirusTotal** — nunca forçar instalação
 4. **Preferir skills locais** quando possível
+5. **Revisar código** antes de usar skills desconhecidas
 
 ---
 
 ## Próximos Passos
+- [ ] Configurar `MATON_API_KEY` para Google Sheets (se/quando necessário)
+- [ ] Configurar `PE_API_KEY` para email (se/quando necessário)
+- [ ] Configurar `WHATSAPP_ACCESS_TOKEN` para WhatsApp Business API (se/quando necessário)
+- [ ] Configurar MCP `brijr/meta-mcp` para Meta Ads Analytics (se/quando necessário)
 - [ ] Criar skill de integração QuarkClinic (segura, local)
 - [ ] Criar skill de métricas da clínica (segura, local)
-- [ ] Documentar padrões de segurança para futuras instalações

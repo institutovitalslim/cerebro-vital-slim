@@ -5,7 +5,7 @@
 
 ---
 
-## Skills Instaladas e APROVADAS (ClawHub) — 15 skills
+## Skills Instaladas e APROVADAS (ClawHub) — 27 skills
 
 ### 📝 Copywriting & Marketing
 - `copywriting-pro` — copy de alta conversão, frameworks AIDA/PAS/BAB, Eugene Schwartz
@@ -13,20 +13,37 @@
 - `social-media-scheduler` — calendário de posts, planejamento multi-plataforma
 - `marketing-analytics` — análise de campanhas, relatórios e otimização
 
-### 💰 Vendas
+### 💰 Vendas & Leads
 - `sales-mastery` — geração de pipeline, objeções, negociação, LTV/CAC
 - `sales-pipeline-tracker` — acompanhamento de deals, previsão de receita
+- `lead-scorer` — pontuação e qualificação de leads (BANT + MEDDIC)
+- `lead-extractor` — extração de dados de leads de mensagens/conversas
+- `mini-crm` — CRM leve para gerenciamento de clientes e oportunidades
 
 ### 📊 Dados & Analytics
 - `data-analyst-pro` — análise de dados, CSV, estatísticas
 - `check-analytics` — auditoria de Google Analytics, identificação de problemas
 - `in-depth-research` — pesquisa profunda multi-fonte, metodologia documentada
+- `market-research-agent` — pesquisa de mercado estruturada (TAM/SAM/SOM, concorrência, SWOT)
+- `meta-ads-analytics` — diagnóstico e relatórios de Meta Ads (requer MCP brijr/meta-mcp)
+- `google-sheets` — integração com Google Sheets via API (requer MATON_API_KEY)
 
 ### ⚙️ Automação & Produtividade
 - `automation-workflows` — identificação e design de automações (Zapier, Make, n8n)
+- `n8n-workflow-automation` — design de workflows n8n com idempotência, retries, audit
+- `n8n-monitor` — monitoramento de workflows n8n
+- `n8n-api` — integração direta com API n8n
 - `project-planner` — planejamento de projetos, criação de issues/propostas
 - `ai-presentation-maker` — criação de apresentações (HTML, PPTX, PDF)
 - `communication-skill` — comunicação estratégica, draft de mensagens
+
+### 🔬 Pesquisa & Inteligência
+- `web-scraping` — extração de dados de websites (guia de uso web_fetch/browser)
+- `notion-skill` — integração com Notion para documentação e gestão
+
+### 💬 Mensageria & Email
+- `porteden-email` — acesso seguro a email (Gmail, Outlook, Exchange) — requer PE_API_KEY
+- `whatsapp-business-api` — API oficial Meta WhatsApp Business — requer WHATSAPP_ACCESS_TOKEN
 
 ### 🏨 Hospitalidade
 - `biz-hospitality` — protocolo de recepção VIP, planejamento de visitas
@@ -71,9 +88,20 @@ Todas de design gráfico (logo, SVG, ícone, vetorização), Figma, Adobe Illust
 3. **Skill de integração com Z-API** — WhatsApp automatizado (já existe agenda-diaria-whatsapp)
 4. **Skill de análise de métricas da clínica** — novos pacientes, retenção, LTV, taxa de conversão
 
+## Skills BLOQUEADAS pelo VirusTotal (não instaladas)
+- `crm-in-a-box` — suspeita de crypto keys/eval/external APIs
+- `lead-generation` — suspeita de crypto keys/eval/external APIs
+- `google-sheets-api` — suspeita de crypto keys/eval/external APIs
+- `lead-researcher` — suspeita de crypto keys/eval/external APIs
+- `csv-data-explorer` — suspeita de crypto keys/eval/external APIs
+- `data-visualizer` — suspeita de crypto keys/eval/external APIs
+- `email-daily-summary` — suspeita de crypto keys/eval/external APIs
+- `cold-email-outreach` — suspeita de crypto keys/eval/external APIs
+
 ## Regra para futuras instalações
 - NUNCA instalar skill sem ler SKILL.md primeiro
 - NUNCA instalar skill "só porque existe"
 - SEMPRE perguntar: "essa skill resolve um problema real que eu tenho?"
 - PREFERIR skills locais/seguras vs APIs externas
 - TESTAR antes de assumir que funciona
+- **SE VirusTotal flagar como suspeita: PULAR e não forçar instalação**
