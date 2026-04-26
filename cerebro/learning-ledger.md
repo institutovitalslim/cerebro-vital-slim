@@ -1,3 +1,34 @@
+## 2026-04-26 - Criação de 5 skills adaptadas do ecossistema Claude Code
+
+### Contexto
+Tiaro solicitou instalação de skills do ecossistema Claude Code (VoltAgent/awesome-agent-skills, qdhenry/Claude-Command-Suite, wshobson/commands). Análise mostrou que essas skills são projetadas para Claude Code CLI (formato SKILL.md com YAML frontmatter, model-invoked), que não está instalado na VPS.
+
+### Decisão
+Em vez de instalar Claude Code CLI, **adaptar as skills mais relevantes para o formato OpenClaw nativo** — scripts Python executáveis via `exec`/`message`.
+
+### Skills criadas
+| Skill | Base | Capacidade | Status |
+|-------|------|-----------|--------|
+| `document-word` | `anthropics/docx` | Criar/editar .docx | ✅ Testado |
+| `document-excel` | `anthropics/xlsx` | Criar/editar .xlsx | ✅ Testado |
+| `document-presentation` | `anthropics/pptx` | Criar/editar .pptx | ✅ Testado |
+| `security-compliance` | `compliance-check` + `audit-env-variables` | Auditoria deps + .env | ✅ Testado |
+| `skill-creator` | `anthropics/skill-creator` | Gerar nova skill | ✅ Testado |
+
+### Dependências instaladas
+- `python-docx` — manipulação Word
+- `openpyxl` + `pandas` — manipulação Excel
+- `python-pptx` — manipulação PowerPoint
+- `pip-audit` — auditoria de vulnerabilidades
+
+### Local das skills
+Todas em `~/.openclaw/workspace/skills/`
+
+### Lição
+Skills de ecossistemas externos (Claude Code, Cursor) **não são diretamente compatíveis** com OpenClaw. O formato é diferente (YAML frontmatter vs. markdown livre, model-invoked vs. tool-based). A abordagem correta é extrair o **conhecimento** e recriar como scripts Python executáveis.
+
+---
+
 ## 2026-04-24 - Integração Treinamento CRC Clínica 2.0 na operação Clara
 
 ### Contexto

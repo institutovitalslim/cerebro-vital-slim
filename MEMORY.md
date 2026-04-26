@@ -73,6 +73,36 @@ _Curated knowledge and context. Keep only the essential index._
 - Uso: prototipagem, conceitos, testes rápidos
 - ⚠️ SEMPRE perguntar qual tecnologia usar antes de gerar imagens
 
+### document-word
+- Local: `/root/.openclaw/workspace/skills/document-word/`
+- Criar/editar documentos Word (.docx)
+- Script: `scripts/create_doc.py`
+- Dependências: `python-docx`
+
+### document-excel
+- Local: `/root/.openclaw/workspace/skills/document-excel/`
+- Criar/editar planilhas Excel (.xlsx)
+- Script: `scripts/create_xlsx.py`
+- Dependências: `openpyxl`, `pandas`
+
+### document-presentation
+- Local: `/root/.openclaw/workspace/skills/document-presentation/`
+- Criar apresentações PowerPoint (.pptx)
+- Script: `scripts/create_pptx.py`
+- Dependências: `python-pptx`
+
+### security-compliance
+- Local: `/root/.openclaw/workspace/skills/security-compliance/`
+- Auditoria de segurança e compliance (LGPD/GDPR)
+- Script: `scripts/audit_deps.py`
+- Dependências: `pip-audit`
+
+### skill-creator
+- Local: `/root/.openclaw/workspace/skills/skill-creator/`
+- Criar novas skills no formato OpenClaw
+- Script: `scripts/create_skill.py`
+- Dependências: Nenhuma (Python nativo)
+
 ### memoria-cientifica
 - Local: `/root/cerebro-vital-slim/cerebro/empresa/skills/memoria-cientifica/`
 - Clara consulta antes de criar conteúdo científico ou responder paciente
