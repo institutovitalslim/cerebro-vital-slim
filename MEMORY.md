@@ -66,6 +66,13 @@ _Curated knowledge and context. Keep only the essential index._
 - Caminho obrigatório para criação de imagem guiada
 - Orquestrador oficial: `scripts/clara_create_image.py`
 
+### z-image-turbo
+- Local: `/root/.openclaw/workspace/skills/z-image-turbo/`
+- HuggingFace Space `mrfakename/Z-Image-Turbo` — geração rápida gratuita
+- Script: `scripts/generate_image.py`
+- Uso: prototipagem, conceitos, testes rápidos
+- ⚠️ SEMPRE perguntar qual tecnologia usar antes de gerar imagens
+
 ### memoria-cientifica
 - Local: `/root/cerebro-vital-slim/cerebro/empresa/skills/memoria-cientifica/`
 - Clara consulta antes de criar conteúdo científico ou responder paciente
@@ -129,6 +136,21 @@ _Curated knowledge and context. Keep only the essential index._
 - Fazer pergunta no final para manter conversa viva
 - Nunca reenviar o mesmo video para o mesmo lead (verificar historico)
 - Documento completo: `deliverables/videos-leads/conteudo-videos-completo.md`
+
+---
+
+## Regra de geração de imagens (2026-04-26)
+
+**Sempre perguntar qual tecnologia usar antes de gerar qualquer imagem:**
+
+| Tecnologia | Melhor para | Custo | Velocidade |
+|-----------|-------------|-------|------------|
+| **OpenAI (DALL-E)** | Produção final, alta qualidade, compliance | Pago | Rápido |
+| **Google (NanoBanana)** | Fotos reais, capas com Dra., preservação facial | Pago | Rápido |
+| **Z-Image-Turbo** | Prototipagem, conceitos, testes rápidos | Grátis | Médio |
+| **Wan 2.2** | Vídeo (não imagem estática) | Pago | Médio |
+
+**Nunca gerar imagem sem confirmar tecnologia com o usuário primeiro.**
 
 ---
 

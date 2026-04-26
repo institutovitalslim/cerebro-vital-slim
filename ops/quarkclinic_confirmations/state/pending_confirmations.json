@@ -1,6 +1,43 @@
 {
-  "generatedAt": "2026-04-26T07:30:07.521161-03:00",
-  "lastRunMode": "same-day-afternoon",
-  "lastRunDate": "26-04-2026",
-  "items": []
+  "generatedAt": "2026-04-26T16:00:12.102057-03:00",
+  "lastRunMode": "next-morning",
+  "lastRunDate": "27-04-2026",
+  "items": [
+    {
+      "phone": "5571994181820",
+      "nome": "TATIANE ANITA ALMEIDA DE SOUZA LEÃO CRUZ",
+      "agendamentoId": 456894982,
+      "dataHoraInicio": "27-04-2026T09:00",
+      "messageId": "5C7DBFA3032D753BCDAD",
+      "status": "confirmed",
+      "turno": "morning"
+    },
+    {
+      "phone": "557193873221",
+      "nome": "Diogo de Jesus Melo",
+      "agendamentoId": 456391234,
+      "dataHoraInicio": "27-04-2026T09:30",
+      "messageId": "3EB0B16132E3A7D315F770",
+      "status": "confirmed",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571993245545",
+      "nome": "FRANCISCO DE ASSIS DE LIMA",
+      "agendamentoId": 456478480,
+      "dataHoraInicio": "27-04-2026T10:00",
+      "messageId": "3EB0616C535D345919C509",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571991896551",
+      "nome": "SILVANA MODESTO RODRIGUES",
+      "agendamentoId": 456478587,
+      "dataHoraInicio": "27-04-2026T10:10",
+      "messageId": "3EB0B8C259E68AE17A6944",
+      "status": "confirmed",
+      "turno": "morning"
+    }
+  ]
 }
