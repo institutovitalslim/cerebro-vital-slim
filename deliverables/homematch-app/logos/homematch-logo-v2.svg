@@ -1,0 +1,40 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9F8844;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1024" height="1024" fill="#0A0A0A"/>
+  
+  <!-- HM with elegant curves - intertwined -->
+  <g transform="translate(512, 380)" fill="none" stroke="url(#goldGrad2)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- H left stem with slight curve -->
+    <path d="M -170,-130 Q -175,-50 -170,130" stroke-width="22"/>
+    <!-- H right stem -->
+    <path d="M -50,-130 Q -55,-50 -50,130" stroke-width="22"/>
+    <!-- H crossbar with curve -->
+    <path d="M -170,0 Q -110,-8 -50,0" stroke-width="18"/>
+    
+    <!-- M left - starts from H crossbar area -->
+    <path d="M 50,-130 Q 45,-50 50,130" stroke-width="22"/>
+    <!-- M center peak -->
+    <path d="M 50,-130 Q 120,-20 190,-130" stroke-width="20"/>
+    <!-- M right -->
+    <path d="M 190,-130 Q 195,-50 190,130" stroke-width="22"/>
+  </g>
+  
+  <!-- Single elegant line -->
+  <line x1="312" y1="580" x2="712" y2="580" stroke="#D4AF37" stroke-width="2.5" opacity="0.85"/>
+  
+  <!-- Brand name -->
+  <text x="512" y="650" 
+        font-family="'Cormorant Garamond', 'Times New Roman', serif" 
+        font-size="38" 
+        font-weight="300"
+        letter-spacing="14"
+        fill="#D4AF37" 
+        text-anchor="middle"
+        opacity="0.9">HOMEMATCH CLUB</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#0A0A0A"/>
+  
+  <!-- Abstract: two overlapping squares/diamonds representing exchange -->
+  <g transform="translate(512, 480)" fill="none" stroke="#C9A96E" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left diamond (home) -->
+    <path d="M -100,-60 L -160,0 L -100,60 L -40,0 Z" stroke-width="16"/>
+    <!-- Right diamond (match/exchange) -->
+    <path d="M 40,-60 L -20,0 L 40,60 L 100,0 Z" stroke-width="16"/>
+    <!-- Connecting line -->
+    <path d="M -40,0 L 40,0" stroke-width="12"/>
+    <!-- H inside left -->
+    <path d="M -115,-15 L -115,15" stroke-width="10"/>
+    <path d="M -85,-15 L -85,15" stroke-width="10"/>
+    <path d="M -115,0 L -85,0" stroke-width="8"/>
+    <!-- M inside right -->
+    <path d="M 25,-15 L 25,15" stroke-width="10"/>
+    <path d="M 55,-15 L 55,15" stroke-width="10"/>
+    <path d="M 25,-15 L 40,5 L 55,-15" stroke-width="8" fill="none"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="512" y="720" 
+        font-family="Arial, sans-serif" 
+        font-size="26" 
+        font-weight="300"
+        letter-spacing="14"
+        fill="#C9A96E" 
+        text-anchor="middle">HOMEMATCH CLUB</text>
+</svg>

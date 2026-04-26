@@ -1,61 +1,6 @@
 {
-  "generatedAt": "2026-04-24T07:30:31.833789-03:00",
+  "generatedAt": "2026-04-26T07:30:07.521161-03:00",
   "lastRunMode": "same-day-afternoon",
-  "lastRunDate": "24-04-2026",
-  "items": [
-    {
-      "phone": "5571993245545",
-      "nome": "FRANCISCO DE ASSIS DE LIMA",
-      "agendamentoId": 448548759,
-      "dataHoraInicio": "23-04-2026T10:00",
-      "messageId": "3EB0EF14D5CFC016F1BEA3",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571991896551",
-      "nome": "SILVANA MODESTO RODRIGUES",
-      "agendamentoId": 448548135,
-      "dataHoraInicio": "23-04-2026T11:00",
-      "messageId": "3EB05427B1F53EE008A07E",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571991025202",
-      "nome": "MARIO GOMES DE ABREU FILHO",
-      "agendamentoId": 455979531,
-      "dataHoraInicio": "23-04-2026T15:09",
-      "messageId": "3EB0ED273DAF364D7CA771",
-      "status": "sent",
-      "turno": "afternoon"
-    },
-    {
-      "phone": "5571988365569",
-      "nome": "Cíntia Souza Japiassu de Oliveira",
-      "agendamentoId": 456060889,
-      "dataHoraInicio": "24-04-2026T10:10",
-      "messageId": "3EB0C6A490D0BD8E9C6C6F",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571991262370",
-      "nome": "Tainá Japiassu Teles",
-      "agendamentoId": 455486788,
-      "dataHoraInicio": "24-04-2026T10:30",
-      "messageId": "3EB0509C85AF9E263F85F7",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571993403712",
-      "nome": "Felipe Cedraz de Alencar",
-      "agendamentoId": 454350857,
-      "dataHoraInicio": "24-04-2026T14:00",
-      "messageId": "82E033673C185AC86289",
-      "status": "confirmed",
-      "turno": "afternoon"
-    }
-  ]
+  "lastRunDate": "26-04-2026",
+  "items": []
 }

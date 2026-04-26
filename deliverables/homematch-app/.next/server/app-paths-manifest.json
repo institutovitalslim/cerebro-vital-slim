@@ -1,0 +1,15 @@
+{
+  "/admin/page": "app/admin/page.js",
+  "/chat/page": "app/chat/page.js",
+  "/auth/page": "app/auth/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/feed/page": "app/feed/page.js",
+  "/offer/page": "app/offer/page.js",
+  "/match/page": "app/match/page.js",
+  "/onboarding/page": "app/onboarding/page.js",
+  "/page": "app/page.js",
+  "/properties/new/page": "app/properties/new/page.js",
+  "/verification/page": "app/verification/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/properties/[id]/page": "app/properties/[id]/page.js"
+}

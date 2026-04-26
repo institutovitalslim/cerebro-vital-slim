@@ -1,0 +1,30 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldCircle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9F8844;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1024" height="1024" fill="#0A0A0A"/>
+  
+  <!-- Perfect circle -->
+  <circle cx="512" cy="512" r="320" fill="none" stroke="url(#goldCircle)" stroke-width="4" opacity="0.9"/>
+  <circle cx="512" cy="512" r="305" fill="none" stroke="#C9A96E" stroke-width="1.5" opacity="0.4"/>
+  
+  <!-- HM inside circle -->
+  <g transform="translate(512, 512)" fill="none" stroke="#D4AF37" stroke-linecap="round" stroke-linejoin="round">
+    <!-- H -->
+    <path d="M -130,-100 L -130,100" stroke-width="24"/>
+    <path d="M -40,-100 L -40,100" stroke-width="24"/>
+    <path d="M -130,0 L -40,0" stroke-width="20"/>
+    
+    <!-- M -->
+    <path d="M 40,-100 L 40,100" stroke-width="24"/>
+    <path d="M 130,-100 L 130,100" stroke-width="24"/>
+    <path d="M 40,-100 L 85,-10 L 130,-100" stroke-width="20" fill="none"/>
+  </g>
+  
+  <!-- Dot below -->
+  <circle cx="512" cy="720" r="8" fill="#C9A96E" opacity="0.7"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F5F0E8"/>
+  
+  <g transform="translate(512, 480)">
+    <!-- Roof (filled triangle) -->
+    <polygon points="-160,0 0,-160 160,0" fill="#1A1A1A"/>
+    <!-- House body -->
+    <rect x="-130" y="0" width="260" height="220" fill="#1A1A1A"/>
+    <!-- H cutout (cream color to create negative space) -->
+    <rect x="-70" y="50" width="22" height="120" fill="#F5F0E8"/>
+    <rect x="48" y="50" width="22" height="120" fill="#F5F0E8"/>
+    <rect x="-70" y="100" width="140" height="20" fill="#F5F0E8"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="512" y="820" 
+        font-family="Arial, sans-serif" 
+        font-size="40" 
+        font-weight="400"
+        fill="#1A1A1A" 
+        text-anchor="middle">HOMEMATCH CLUB</text>
+</svg>

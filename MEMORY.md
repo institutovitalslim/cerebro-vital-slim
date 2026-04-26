@@ -132,6 +132,44 @@ _Curated knowledge and context. Keep only the essential index._
 
 ---
 
+## Skills — Evolução e lições (2026-04-26)
+
+### Hard Lesson do dia
+Instalar 41 skills de design gráfico (logo, SVG, ícone, vetorização, Figma, Adobe Illustrator) foi um erro. Nenhuma substitui designer humano ou ferramenta profissional. Resultado: amadorismo.
+
+### Skills que FUNCIONAM (mantidas — 15)
+- `copywriting-pro` — copy de alta conversão, frameworks AIDA/PAS/BAB
+- `sales-mastery` — pipeline, objeções, negociação, LTV/CAC
+- `sales-pipeline-tracker` — acompanhamento de deals
+- `marketing-analytics` — análise de campanhas
+- `content-marketing` — estratégia de conteúdo e editorial
+- `social-media-scheduler` — calendário de posts
+- `data-analyst-pro` — análise de dados e estatísticas
+- `check-analytics` — auditoria de Google Analytics
+- `in-depth-research` — pesquisa profunda multi-fonte
+- `automation-workflows` — automação de processos (Zapier, Make, n8n)
+- `project-planner` — planejamento e criação de issues
+- `ai-presentation-maker` — apresentações HTML/PPTX/PDF
+- `communication-skill` — comunicação estratégica
+- `biz-hospitality` — protocolo de recepção VIP
+
+### Skills que NÃO funcionam (removidas — 26)
+Todas de design gráfico: logo-branding-system, logo-creator, design-studio, claude-designer, brand-dna, brand-visual-generator, svg-artist, svg-draw, svg-generator-pro, bitmap-vectorize, icon-generator, app-icon-generator, fonts, google-fonts, pro-color-palette, color-sense, minimalist-design-system, creative-genius, creative-eye, text-art, kai-tw-figma, figma-2, figma-sync, figma-bridge, adobe-illustrator-scripting, wireframe, design-to-code
+
+### Regra de ouro para skills
+1. NUNCA instalar sem ler SKILL.md primeiro
+2. NUNCA instalar "só porque existe"
+3. SEMPRE perguntar: "essa skill resolve um problema real que eu tenho?"
+4. PREFERIR skills locais/seguras vs APIs externas
+5. TESTAR antes de assumir que funciona
+
+### Documentos de referência
+- `EVOLUCAO_CLARA.md` — status completo das skills
+- `AUDITORIA_SEGURANCA_SKILLS.md` — auditoria de segurança
+- `memory/2026-04-26.md` — log detalhado da sessão
+
+---
+
 ## Índice resumido
 - 2026-04-07: skills `omie-boletos`, `omie-linha-corte`, `agenda-diaria-whatsapp`, `deep-research`
 - 2026-04-09: `tweet-carrossel` consolidado com `llm-council`, NanoBanana 2 e capa obrigatória via `make_cover.py`

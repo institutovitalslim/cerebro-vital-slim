@@ -1,0 +1,20 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F5F0E8"/>
+  
+  <!-- App icon: HM only, larger, bolder -->
+  <g transform="translate(512, 520)">
+    <!-- H left stem -->
+    <rect x="-180" y="-160" width="48" height="320" fill="#1A1A1A"/>
+    <!-- H right stem -->
+    <rect x="-50" y="-160" width="48" height="320" fill="#1A1A1A"/>
+    <!-- H crossbar -->
+    <rect x="-180" y="-32" width="178" height="40" fill="#1A1A1A"/>
+    
+    <!-- M left stem -->
+    <rect x="50" y="-160" width="48" height="320" fill="#1A1A1A"/>
+    <!-- M right stem -->
+    <rect x="180" y="-160" width="48" height="320" fill="#1A1A1A"/>
+    <!-- M center peak -->
+    <polygon points="98,-160 138,80 178,-160 214,-160 138,140 62,-160" fill="#1A1A1A"/>
+  </g>
+</svg>

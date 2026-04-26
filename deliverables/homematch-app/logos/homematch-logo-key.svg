@@ -1,0 +1,26 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#0A0A0A"/>
+  
+  <!-- Two keys forming HM -->
+  <g transform="translate(512, 480)" fill="none" stroke="#C9A96E" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left key (H shape) -->
+    <circle cx="-80" cy="-60" r="45" stroke-width="20"/>
+    <path d="M -80,-15 L -80,80" stroke-width="20"/>
+    <path d="M -80,40 L -30,40" stroke-width="18"/>
+    <path d="M -80,70 L -40,70" stroke-width="18"/>
+    
+    <!-- Right key (M shape in handle) -->
+    <circle cx="80" cy="-60" r="45" stroke-width="20"/>
+    <path d="M 80,-15 L 80,80" stroke-width="20"/>
+    <path d="M 30,70 L 80,20 L 130,70" stroke-width="18" fill="none"/>
+  </g>
+  
+  <!-- Simple text -->
+  <text x="512" y="720" 
+        font-family="Arial, sans-serif" 
+        font-size="26" 
+        font-weight="300"
+        letter-spacing="14"
+        fill="#C9A96E" 
+        text-anchor="middle">HOMEMATCH CLUB</text>
+</svg>

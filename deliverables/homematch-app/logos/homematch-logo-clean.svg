@@ -1,0 +1,28 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#0A0A0A"/>
+  
+  <!-- Simple, clean HM monogram -->
+  <g transform="translate(512, 400)" fill="none" stroke="#C9A96E" stroke-linecap="round" stroke-linejoin="round">
+    <!-- H -->
+    <path d="M -160,-130 L -160,130" stroke-width="28"/>
+    <path d="M -50,-130 L -50,130" stroke-width="28"/>
+    <path d="M -160,0 L -50,0" stroke-width="24"/>
+    
+    <!-- M -->
+    <path d="M 50,-130 L 50,130" stroke-width="28"/>
+    <path d="M 160,-130 L 160,130" stroke-width="28"/>
+    <path d="M 50,-130 L 105,20 L 160,-130" stroke-width="24" fill="none"/>
+  </g>
+  
+  <!-- Single clean line -->
+  <line x1="312" y1="600" x2="712" y2="600" stroke="#C9A96E" stroke-width="3"/>
+  
+  <!-- Clean text -->
+  <text x="512" y="670" 
+        font-family="Arial, sans-serif" 
+        font-size="28" 
+        font-weight="300"
+        letter-spacing="16"
+        fill="#C9A96E" 
+        text-anchor="middle">HOMEMATCH CLUB</text>
+</svg>

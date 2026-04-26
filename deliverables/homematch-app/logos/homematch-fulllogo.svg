@@ -1,0 +1,30 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#0A0A0A"/>
+  
+  <!-- Full logo: HM + text -->
+  <g transform="translate(512, 380)" fill="#E8D5A3">
+    <!-- H -->
+    <rect x="-150" y="-100" width="34" height="200" rx="3"/>
+    <rect x="-46" y="-100" width="34" height="200" rx="3"/>
+    <rect x="-150" y="-16" width="138" height="30" rx="2"/>
+    
+    <!-- M left -->
+    <rect x="46" y="-100" width="34" height="200" rx="3"/>
+    <!-- M right -->
+    <rect x="150" y="-100" width="34" height="200" rx="3"/>
+    <!-- M center -->
+    <polygon points="80,-100 113,50 146,-100 165,-100 113,80 61,-100"/>
+  </g>
+  
+  <!-- Line -->
+  <line x1="390" y1="540" x2="634" y2="540" stroke="#C9A96E" stroke-width="2.5" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="512" y="590" 
+        font-family="Arial, sans-serif" 
+        font-size="28" 
+        font-weight="300"
+        letter-spacing="5"
+        fill="#C9A96E" 
+        text-anchor="middle">HOMEMATCH CLUB</text>
+</svg>

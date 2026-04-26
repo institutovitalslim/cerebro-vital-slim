@@ -1,0 +1,42 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#0A0A0A"/>
+  
+  <!-- Bold geometric HM -->
+  <g transform="translate(512, 400)" fill="#C9A96E">
+    <!-- H -->
+    <rect x="-190" y="-120" width="28" height="240" rx="3"/>
+    <rect x="-70" y="-120" width="28" height="240" rx="3"/>
+    <rect x="-190" y="-12" width="148" height="24" rx="2"/>
+    
+    <!-- M -->
+    <rect x="50" y="-120" width="28" height="240" rx="3"/>
+    <rect x="170" y="-120" width="28" height="240" rx="3"/>
+    <!-- M top connector -->
+    <polygon points="50,-120 78,-120 120,20 162,-120 190,-120 190,-90 120,55 50,-90" fill="#C9A96E"/>
+  </g>
+  
+  <!-- Double line -->
+  <g transform="translate(512, 600)">
+    <line x1="-220" y1="0" x2="220" y2="0" stroke="#C9A96E" stroke-width="4" opacity="0.9"/>
+    <line x1="-200" y1="20" x2="200" y2="20" stroke="#9F8844" stroke-width="2.5" opacity="0.7"/>
+  </g>
+  
+  <!-- Brand name -->
+  <text x="512" y="680" 
+        font-family="'Arial', sans-serif" 
+        font-size="32" 
+        font-weight="400"
+        letter-spacing="16"
+        fill="#C9A96E" 
+        text-anchor="middle">HOMEMATCH CLUB</text>
+        
+  <!-- Est. -->
+  <text x="512" y="730" 
+        font-family="'Cormorant Garamond', serif" 
+        font-size="18" 
+        font-style="italic"
+        letter-spacing="8"
+        fill="#9F8844" 
+        text-anchor="middle"
+        opacity="0.5">Est. 2026</text>
+</svg>
