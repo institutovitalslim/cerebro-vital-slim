@@ -6,3 +6,10 @@ node_modules/
 out/
 .next/
 *.log
+
+# Build caches e arquivos temporários
+.next/
+tmp/
+*.pack
+*.pack.old
+cover.html
