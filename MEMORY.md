@@ -97,6 +97,18 @@ _Curated knowledge and context. Keep only the essential index._
 - Script: `scripts/audit_deps.py`
 - Dependências: `pip-audit`
 
+### gerar-ficha-balanco-estoque
+- Local: `/root/.openclaw/workspace/skills/gerar-ficha-balanco-estoque/`
+- Script: `scripts/main.py`
+- Dependências: `weasyprint`
+- Função: gera ficha de balanço de estoque de injetáveis em PDF com logomarca da clínica
+- Lê o arquivo de estoque atual (`estoque-injetaveis-clinica-2026-04-02.md`)
+- Identifica automaticamente itens críticos (≤ 5 unidades) e destaca em vermelho
+- Inclui seção especial para controle de ampolas de Tirzepatida
+- Saída padrão: `memory/tactical/balanco-estoque-fisico-YYYY-MM-DD.pdf`
+- Uso: contagem física mensal, inventário, antes de pedidos de reposição
+- Logo convertido de: `assets/brand/logo-vital-slim-vetorizado-rgb.pdf`
+
 ### skill-creator
 - Local: `/root/.openclaw/workspace/skills/skill-creator/`
 - Criar novas skills no formato OpenClaw
