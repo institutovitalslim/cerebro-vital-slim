@@ -1,26 +1,8 @@
 {
-  "generatedAt": "2026-04-27T07:30:09.966177-03:00",
-  "lastRunMode": "same-day-afternoon",
-  "lastRunDate": "27-04-2026",
+  "generatedAt": "2026-04-27T16:01:11.867376-03:00",
+  "lastRunMode": "next-morning",
+  "lastRunDate": "28-04-2026",
   "items": [
-    {
-      "phone": "5571993245545",
-      "nome": "FRANCISCO DE ASSIS DE LIMA",
-      "agendamentoId": 456478480,
-      "dataHoraInicio": "27-04-2026T10:00",
-      "messageId": "3EB0616C535D345919C509",
-      "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "5571988762126",
-      "nome": "IVANA SOUZA LOPES",
-      "agendamentoId": 456391062,
-      "dataHoraInicio": "27-04-2026T14:00",
-      "messageId": "3EB09DABC6BB9F6C9A66DD",
-      "status": "confirmed",
-      "turno": "afternoon"
-    },
     {
       "phone": "5571991583056",
       "nome": "Lorena Carvalho Ramos Melo",
@@ -38,6 +20,15 @@
       "messageId": "B409A2882D8BB3505FA7",
       "status": "sent",
       "turno": "afternoon"
+    },
+    {
+      "phone": "5571993245545",
+      "nome": "FRANCISCO DE ASSIS DE LIMA",
+      "agendamentoId": 456478480,
+      "dataHoraInicio": "28-04-2026T08:30",
+      "messageId": "5B6B0EF4CB2AFBDE42F5",
+      "status": "sent",
+      "turno": "morning"
     }
   ]
 }

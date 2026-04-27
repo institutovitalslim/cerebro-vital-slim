@@ -1,0 +1,13 @@
+{
+  "sent": [
+    {
+      "phone": "5571993245545",
+      "nome": "FRANCISCO DE ASSIS DE LIMA",
+      "agendamentoId": 456478480,
+      "dataHoraInicio": "28-04-2026T08:30",
+      "messageId": "5B6B0EF4CB2AFBDE42F5",
+      "status": "sent",
+      "turno": "morning"
+    }
+  ]
+}
