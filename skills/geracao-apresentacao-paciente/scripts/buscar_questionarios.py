@@ -428,11 +428,31 @@ def main():
     if pasta_paciente:
         pdf_questionario = verificar_questionario_pdf_na_pasta(pasta_paciente["id"])
 
-    encontrado = resposta_forms is not None or pdf_questionario["encontrado"]
+    # Consolida pre-consulta com a melhor fonte disponível.
+    # "dados" = dict raw camelCase que gerar_apresentacao.py consome diretamente.
+    # Prioridade: portal_ivs > forms > pdf_drive
+    if portal_data:
+        # Portal IVS contém os mesmos dados da pré-consulta — usa como fonte primária.
+        fonte_pre = "portal_ivs"
+        dados_pre = portal_data          # raw camelCase (altura, pesoAtual, spin_* etc.)
+        encontrado_pre = True
+    elif resposta_forms is not None:
+        fonte_pre = "forms"
+        dados_pre = {}                   # Forms usa texto de pergunta como chave; sem mapeamento reverso
+        encontrado_pre = True
+    elif pdf_questionario["encontrado"]:
+        fonte_pre = "pdf_drive"
+        dados_pre = {}
+        encontrado_pre = True
+    else:
+        fonte_pre = None
+        dados_pre = {}
+        encontrado_pre = False
 
     resultados["pre-consulta"] = {
-        "encontrado": encontrado,
-        "fonte": "forms" if resposta_forms else ("pdf_drive" if pdf_questionario["encontrado"] else None),
+        "encontrado": encontrado_pre,
+        "fonte": fonte_pre,
+        "dados": dados_pre,
         "respostas": formatar_resposta_forms(resposta_forms, form_structure) if resposta_forms else None,
         "pdf_drive": pdf_questionario if pdf_questionario["encontrado"] else None,
     }

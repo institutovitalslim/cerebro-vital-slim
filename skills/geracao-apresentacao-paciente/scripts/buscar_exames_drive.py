@@ -78,7 +78,7 @@ def encontrar_pasta_paciente(nome_paciente):
             melhor_match = pasta
     
     # Retorna o melhor match se tiver pelo menos 3 palavras significativas em comum
-    if melhor_match and melhor_score >= 3:
+    if melhor_match and melhor_score >= 2:
         return melhor_match
     
     return None
