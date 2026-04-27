@@ -24,6 +24,13 @@ import subprocess
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 
+# Verificar se o cron está desabilitado
+DISABLED_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".disabled")
+if os.path.exists(DISABLED_FILE):
+    with open(DISABLED_FILE, "r") as f:
+        print(f"[BLOQUEADO] Cron de apresentação desabilitado: {f.read().strip()}")
+    sys.exit(0)
+
 # Diretório base da skill
 SKILL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS_DIR = os.path.join(SKILL_DIR, "scripts")
