@@ -777,6 +777,36 @@ def agrupar_exames(exames_enriquecidos):
 # Pipeline principal
 # ---------------------------------------------------------------------------
 
+
+# Indicadores de laudo laboratorial
+LAB_INDICATORS = [
+    "coleta:", "data de coleta", "laborat", "hemograma", "eritrograma",
+    "leucograma", "valores de referencia", "valores de referencia",
+    "vr:", "crbm:", "cnes", "fase analitica",
+]
+# Indicadores de receita/formula magistral
+PRESCRIPTION_INDICATORS = [
+    "capsula q.s.p", "comprimido", "posologia",
+    "tomar 0", "uso: tomar", "manipulad",
+]
+
+def is_lab_report(linhas):
+    """
+    Retorna True se o PDF parece ser um laudo laboratorial.
+    Retorna False se parece ser receita/formula magistral — sera ignorado.
+    """
+    import unicodedata
+    def strip(s):
+        return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+    texto = strip(" ".join(linhas[:80]).lower())
+    lab_score = sum(1 for k in LAB_INDICATORS if strip(k) in texto)
+    presc_score = sum(1 for k in PRESCRIPTION_INDICATORS if strip(k) in texto)
+    if presc_score >= 2 and lab_score == 0:
+        return False
+    if lab_score >= 1:
+        return True
+    return True
+
 def extrair_e_analisar(file_id, nome_arquivo="exame.pdf"):
     """Pipeline completo: download -> extração -> parse -> classificação."""
     tmpdir = tempfile.mkdtemp(prefix="exames_")
@@ -793,7 +823,11 @@ def extrair_e_analisar(file_id, nome_arquivo="exame.pdf"):
         if not linhas:
             return {"encontrado": False, "erro": "PDF sem texto extraível (pode ser imagem)"}
 
-        print(f"[PDF] {len(linhas)} linhas extraídas. Parseando exames...", file=sys.stderr)
+        if not is_lab_report(linhas):
+            print(f"[PDF] {nome_arquivo}: parece ser receita/formula, ignorando.", file=sys.stderr)
+            return {"encontrado": False, "erro": "PDF nao e laudo laboratorial (receita/formula detectada)"}
+
+        print(f"[PDF] {len(linhas)} linhas extraidas. Parseando exames...", file=sys.stderr)
         exames_raw = parse_exames_linhas(linhas)
         print(f"[PDF] {len(exames_raw)} exames identificados.", file=sys.stderr)
 
