@@ -7,9 +7,9 @@ Orquestra todo o fluxo:
 2. Para cada paciente:
    a. Busca exames no Google Drive
    b. Busca respostas dos questionários
-   c. Extrai dados dos PDFs de exames
-   d. Gera apresentação HTML usando template Jinja2
-   e. Envia notificação se faltar informação
+   c. Extrai e classifica dados dos PDFs de exames
+   d. Gera apresentação HTML
+   e. Loga pacientes com informações pendentes
 
 Uso:
     python3 gerar_apresentacao.py <data_dd-MM-yyyy> <turno>
@@ -21,7 +21,6 @@ import sys
 import os
 import json
 import subprocess
-import tempfile
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 
@@ -62,24 +61,205 @@ def calcular_idade(data_nascimento_ms):
         return None
 
 
-def gerar_stats_section(exames_analisados=None):
-    """Gera seção de stats. Placeholder até análise clínica."""
-    if not exames_analisados:
-        return '<!-- stats_section: preencher com dados dos exames -->'
-    # TODO: gerar HTML real a partir dos exames analisados
-    return '<!-- stats_section: preencher com dados dos exames -->'
+def calcular_imc(peso_str, altura_str):
+    """Calcula IMC a partir de peso (kg) e altura (cm)."""
+    try:
+        peso = float(str(peso_str).replace(",", "."))
+        altura_cm = float(str(altura_str).replace(",", "."))
+        altura_m = altura_cm / 100
+        return round(peso / (altura_m ** 2), 1)
+    except (ValueError, TypeError, ZeroDivisionError):
+        return None
 
 
-def gerar_diagnostico_section(exames_analisados=None):
-    """Gera seção de diagnóstico. Placeholder até análise clínica."""
-    if not exames_analisados:
-        return '<!-- diagnostico_section: preencher com dados dos exames -->'
-    return '<!-- diagnostico_section: preencher com dados dos exames -->'
+def classificar_imc(imc):
+    """Retorna label e class CSS para o IMC."""
+    if imc is None:
+        return "—", ""
+    if imc < 18.5:
+        return "Abaixo do peso", "tag-attn"
+    if imc < 25.0:
+        return "Normal", "tag-optimal"
+    if imc < 30.0:
+        return "Sobrepeso", "tag-attn"
+    if imc < 35.0:
+        return "Obesidade I", "tag-alert"
+    if imc < 40.0:
+        return "Obesidade II", "tag-alert"
+    return "Obesidade III", "tag-crit"
+
+
+# ---------------------------------------------------------------------------
+# Geração de seções HTML
+# ---------------------------------------------------------------------------
+
+def gerar_stats_section(exames_parsed=None):
+    """
+    Gera os 4 hero alert cards com os achados mais relevantes.
+    """
+    if not exames_parsed or not exames_parsed.get("hero_alerts"):
+        return "<!-- stats_section: aguardando exames -->"
+
+    hero_alerts = exames_parsed["hero_alerts"]
+    if not hero_alerts:
+        # Sem alterações — mostra mensagem positiva
+        stats = exames_parsed.get("stats", {})
+        return f"""<section class="hero-alerts" aria-label="Destaques dos exames">
+  <div class="wrap">
+    <div class="hero-alerts intro">
+      <h2>Exames analisados</h2>
+      <p>{stats.get("total", 0)} parâmetros avaliados · <strong style="color:var(--sev-ok)">{stats.get("normais", 0)} dentro da referência</strong></p>
+    </div>
+  </div>
+</section>"""
+
+    severity_label = {"crit": "CRÍTICO", "alert": "ATENÇÃO", "attn": "MONITORAR", "baixo": "BAIXO", "normal": "NORMAL"}
+
+    cards = []
+    for alert in hero_alerts:
+        sev = alert.get("status", "alert")
+        sev_class = "crit" if sev == "crit" else ("attn" if sev == "attn" else "alert")
+        label = severity_label.get(sev, "ATENÇÃO")
+        unidade_html = f'<span style="font-size:0.4em;font-weight:400;color:var(--ink-dim);margin-left:6px;">{alert["unidade"]}</span>' if alert.get("unidade") else ""
+        ref_html = f'<div class="alert-ref">Ref: {alert["referencia"]}</div>' if alert.get("referencia") else ""
+
+        cards.append(f"""    <article class="alert-card {sev_class}" role="listitem" aria-labelledby="a-{alert["nome"].replace(" ", "-").lower()}-name">
+      <span class="alert-label">{label}</span>
+      <div class="alert-name" id="a-{alert["nome"].replace(" ", "-").lower()}-name">{alert["nome"]}</div>
+      <div class="hero-number">{alert["valor"]}{unidade_html}</div>
+      {ref_html}
+      <p class="alert-explain">{alert["explicacao"]}</p>
+    </article>""")
+
+    cards_html = "\n".join(cards)
+    stats = exames_parsed.get("stats", {})
+    return f"""<section class="hero-alerts" aria-label="Principais achados">
+  <div class="hero-alerts intro">
+    <h2>Principais achados</h2>
+    <p>{stats.get("total", 0)} parâmetros · <strong>{stats.get("criticos", 0) + stats.get("alertas", 0)}</strong> fora da referência · {stats.get("normais", 0)} normais</p>
+  </div>
+  <div class="alert-grid" role="list">
+{cards_html}
+  </div>
+</section>"""
+
+
+def gerar_exams_section(exames_parsed=None):
+    """
+    Gera a seção de tabela de exames agrupados por categoria.
+    """
+    if not exames_parsed or not exames_parsed.get("grupos"):
+        return "<!-- exams_section: aguardando extração dos PDFs de exames -->"
+
+    grupos = exames_parsed["grupos"]
+    if not grupos:
+        return "<!-- exams_section: nenhum exame identificado nos PDFs -->"
+
+    html_partes = []
+    for grupo in grupos:
+        exames = grupo.get("exames", [])
+        if not exames:
+            continue
+
+        rows = []
+        for ex in exames:
+            altered_class = " altered" if ex["alterado"] else ""
+            unidade_html = f'<span class="unit">{ex["unidade"]}</span>' if ex.get("unidade") else ""
+            ref_html = f'<span class="exam-ref">Ref: {ex["referencia"]}</span>' if ex.get("referencia") else ""
+            rows.append(f"""  <div class="exam-row{altered_class}">
+    <div><span class="exam-name">{ex["nome"]}</span><br>{ref_html}</div>
+    <div class="exam-value">{ex["valor"]}{unidade_html}</div>
+    <span class="exam-tag {ex["tag_class"]}">{ex["tag_label"]}</span>
+  </div>""")
+
+        rows_html = "\n".join(rows)
+        hint_html = f'<span class="hint">{grupo["hint"]}</span>' if grupo.get("hint") else ""
+        html_partes.append(f"""<div class="exam-group">
+  <div class="exam-group-head"><h4>{grupo["nome"]}</h4>{hint_html}</div>
+{rows_html}
+</div>""")
+
+    return "\n\n".join(html_partes)
+
+
+def gerar_diagnostico_section(exames_parsed=None, questionarios=None):
+    """
+    Gera interpretação clínica baseada nos achados alterados.
+    """
+    if not exames_parsed or not exames_parsed.get("grupos"):
+        return "<!-- diagnostico_section: aguardando exames -->"
+
+    # Coleta todos os exames alterados
+    alterados = []
+    for grupo in exames_parsed.get("grupos", []):
+        for ex in grupo.get("exames", []):
+            if ex.get("alterado"):
+                alterados.append(ex)
+
+    if not alterados:
+        return """<section class="implications" aria-labelledby="impl-title">
+  <div class="wrap">
+    <h2 id="impl-title">Interpretação clínica</h2>
+    <p class="lead">Exames dentro dos parâmetros de referência. Ótimo ponto de partida para otimização metabólica.</p>
+  </div>
+</section>"""
+
+    # Monta texto de interpretação por sistema
+    por_grupo = {}
+    for ex in alterados:
+        g = ex["grupo"]
+        if g not in por_grupo:
+            por_grupo[g] = []
+        direcao = "elevado" if ex["status"] in ("alert", "crit") else "baixo"
+        por_grupo[g].append(f"{ex['nome']} {direcao} ({ex['valor']} {ex['unidade']})")
+
+    group_labels = {
+        "metabolico": "Metabolismo glicêmico",
+        "lipidico": "Perfil lipídico",
+        "hormonal": "Eixo hormonal",
+        "hepatico": "Função hepática",
+        "renal": "Função renal",
+        "hemograma": "Sangue",
+        "vitaminas": "Micronutrientes",
+        "inflamacao": "Inflamação",
+        "autoimune": "Autoimunidade",
+        "oncologico": "Marcadores oncológicos",
+        "outros": "Outros",
+    }
+
+    cards = []
+    for grupo_key, items in por_grupo.items():
+        titulo = group_labels.get(grupo_key, grupo_key.capitalize())
+        itens_html = "".join(f"<li>{item}</li>" for item in items)
+        cards.append(f"""      <div class="imp-card">
+        <h3>{titulo}</h3>
+        <ul style="padding-left:1.2em;color:var(--ink-soft);font-size:14px;line-height:1.7">{itens_html}</ul>
+      </div>""")
+
+    cards_html = "\n".join(cards)
+
+    # Dados do paciente para contextualizar
+    dados_q = questionarios.get("pre-consulta", {}).get("dados", {}) if questionarios else {}
+    peso = dados_q.get("pesoAtual", "")
+    altura = dados_q.get("altura", "")
+    imc = calcular_imc(peso, altura)
+    imc_label, _ = classificar_imc(imc)
+    contexto_imc = f" (IMC {imc} kg/m² — {imc_label})" if imc else ""
+
+    return f"""<section class="implications" aria-labelledby="impl-title">
+  <div class="wrap">
+    <h2 id="impl-title">Interpretação clínica</h2>
+    <p class="lead">{len(alterados)} parâmetro(s) fora da referência{contexto_imc}. Cada achado informa o plano individual.</p>
+    <div class="imp-grid">
+{cards_html}
+    </div>
+  </div>
+</section>"""
 
 
 def gerar_anchor_section():
     """Gera seção anchor com link para a Dra."""
-    return '''<section class="anchor" aria-labelledby="anchor-title">
+    return """<section class="anchor" aria-labelledby="anchor-title">
   <div class="wrap">
     <h2 id="anchor-title">Sua médica</h2>
     <div class="anchor-card">
@@ -91,27 +271,34 @@ def gerar_anchor_section():
       <p class="anchor-text">Cada paciente recebe um plano individual construído a partir dos próprios exames, histórico e objetivos. Nada de protocolo genérico.</p>
     </div>
   </div>
-</section>'''
+</section>"""
 
 
 def gerar_history_section(questionarios=None):
     """Gera seção de histórico a partir dos questionários."""
     if not questionarios:
-        return '<!-- history_section: preencher com dados do questionário -->'
+        return "<!-- history_section: preencher com dados do questionário -->"
 
     pre = questionarios.get("pre-consulta", {})
     if not pre.get("encontrado"):
-        return '<!-- history_section: questionário não encontrado -->'
+        return "<!-- history_section: questionário não encontrado -->"
 
     dados = pre.get("dados", {})
-    linhas = []
+    if not dados:
+        return "<!-- history_section: dados do questionário vazios -->"
 
     def val(campo, fallback="—"):
         v = dados.get(campo)
-        if not v or v == "" or str(v).lower() in ("nenhum", "nenhuma", "nao", "não"):
+        if not v or str(v).strip() == "" or str(v).lower() in ("nenhum", "nenhuma", "nao", "não"):
             return fallback
         return str(v)
 
+    # Calcula IMC se possível
+    imc = calcular_imc(val("pesoAtual", ""), val("altura", ""))
+    imc_label, imc_class = classificar_imc(imc)
+    imc_html = f'<p><strong>IMC:</strong> {imc} kg/m² <span style="font-size:12px;color:var(--ink-dim)">({imc_label})</span></p>' if imc else ""
+
+    linhas = []
     linhas.append('<section class="history" aria-labelledby="hist-title">')
     linhas.append('  <div class="wrap">')
     linhas.append('    <h2 id="hist-title">O que nos contou</h2>')
@@ -124,6 +311,8 @@ def gerar_history_section(questionarios=None):
     linhas.append(f'        <p><strong>Peso atual:</strong> {val("pesoAtual")} kg</p>')
     linhas.append(f'        <p><strong>Peso ideal:</strong> {val("pesoIdeal")} kg</p>')
     linhas.append(f'        <p><strong>Maior peso:</strong> {val("pesoMaximoAnterior")} kg</p>')
+    if imc_html:
+        linhas.append(f'        {imc_html}')
     linhas.append('      </div>')
 
     # Card 2: Rotina
@@ -133,6 +322,7 @@ def gerar_history_section(questionarios=None):
     linhas.append(f'        <p><strong>Sono:</strong> {val("horasSono")}h (nota {val("qualidadeSono")}/10)</p>')
     linhas.append(f'        <p><strong>Energia:</strong> {val("nivelEnergia")}/10</p>')
     linhas.append(f'        <p><strong>Água:</strong> {val("consumoAgua")}</p>')
+    linhas.append(f'        <p><strong>Reposição hormonal:</strong> {val("reposicaoHormonal")}</p>')
     linhas.append('      </div>')
 
     # Card 3: Alimentação
@@ -142,98 +332,106 @@ def gerar_history_section(questionarios=None):
     linhas.append(f'        <p><strong>Café da manhã:</strong> {val("cafeDaManha")}</p>')
     linhas.append(f'        <p><strong>Almoço:</strong> {val("almoco")}</p>')
     linhas.append(f'        <p><strong>Jantar:</strong> {val("jantar")}</p>')
+    linhas.append(f'        <p><strong>Doces:</strong> {val("consumoDoces")}</p>')
+    linhas.append(f'        <p><strong>Álcool:</strong> {val("consumoAlcool")}</p>')
     linhas.append('      </div>')
 
-    # Card 4: Jornada
+    # Card 4: Jornada (SPIN)
     linhas.append('      <div class="hist-card">')
     linhas.append('        <h3>Jornada</h3>')
     linhas.append(f'        <p><strong>Tempo de luta:</strong> {val("spin_s_tempoLuta")}</p>')
-    linhas.append(f'        <p><strong>O que já tentou:</strong> {val("spin_s_tentativas")}</p>')
+    linhas.append(f'        <p><strong>Já tentou:</strong> {val("spin_s_tentativas")}</p>')
     linhas.append(f'        <p><strong>Principal incômodo:</strong> {val("spin_p_principalIncomodo")}</p>')
-    linhas.append(f'        <p><strong>Objetivo:</strong> {val("tresObjetivos")}</p>')
+    linhas.append(f'        <p><strong>Impacto na vida:</strong> {val("spin_i_impactoVida")}</p>')
+    linhas.append(f'        <p><strong>Vida resolvida seria:</strong> {val("spin_n_vidaResolvida")}</p>')
     linhas.append('      </div>')
 
     linhas.append('    </div>')
     linhas.append('  </div>')
     linhas.append('</section>')
 
-    return '\n'.join(linhas)
-
-
-def gerar_exams_section(exames=None):
-    """Gera seção de exames. Placeholder até análise clínica dos PDFs."""
-    if not exames or not exames.get("encontrado"):
-        return '<!-- exams_section: preencher após análise dos PDFs de exames -->'
-    total = exames.get("total_pdfs", 0)
-    return f'<!-- exams_section: {total} PDF(s) encontrado(s). Análise clínica pendente. -->'
-
-
-def gerar_timeline_section():
-    """Gera seção de timeline padrão de 180 dias."""
-    return '''<section class="timeline" aria-labelledby="time-title">
-  <div class="wrap">
-    <h2 id="time-title">O que esperar em 180 dias</h2>
-    <ul class="time-list">
-      <li><strong>Mês 1 — Diagnóstico e ajuste:</strong> Plano alimentar personalizado, suplementação de base e primeiros ajustes de estilo de vida.</li>
-      <li><strong>Mês 2 — Reversão:</strong> Sensibilidade insulínica começa a melhorar, energia sobe, sono fica mais reparador.</li>
-      <li><strong>Mês 3 — Consolidação:</strong> Peso em queda sustentável, exames mostrando melhora objetiva.</li>
-      <li><strong>Mês 4-6 — Otimização:</strong> Ajustes finos baseados em novos exames. Resultado sustentável a longo prazo.</li>
-    </ul>
-  </div>
-</section>'''
+    return "\n".join(linhas)
 
 
 def gerar_contexto_section(questionarios=None):
-    """Gera seção de contexto a partir dos questionários."""
+    """Gera seção de contexto do paciente."""
     if not questionarios:
-        return '<!-- contexto_section: preencher com dados do questionário -->'
+        return "<!-- contexto_section: preencher com dados do questionário -->"
 
     pre = questionarios.get("pre-consulta", {})
     if not pre.get("encontrado"):
-        return '<!-- contexto_section: questionário não encontrado -->'
+        return "<!-- contexto_section: questionário não encontrado -->"
 
     dados = pre.get("dados", {})
 
     def val(campo, fallback="—"):
         v = dados.get(campo)
-        if not v or v == "" or str(v).lower() in ("nenhum", "nenhuma", "nao", "não"):
+        if not v or str(v).strip() == "" or str(v).lower() in ("nenhum", "nenhuma", "nao", "não"):
             return fallback
         return str(v)
 
     panels = []
 
     # Panel 1: Histórico e objetivos
-    panels.append(f'''<div class="ctx-panel">
-  <h3>Histórico e objetivos</h3>
-  <dl>
-    <dt>Objetivo</dt><dd>{val("tresObjetivos", "Não informado")}</dd>
-    <dt>Peso atual</dt><dd>{val("pesoAtual")} kg</dd>
-    <dt>Peso desejado</dt><dd>{val("pesoIdeal")} kg</dd>
-    <dt>Altura</dt><dd>{val("altura")} cm</dd>
-    <dt>Medicamentos</dt><dd>{val("medicamentosAtuais")}</dd>
-    <dt>Condições</dt><dd>{val("doencasCronicas")}</dd>
-    <dt>Atividade física</dt><dd>{val("atividadeFisica")}</dd>
-  </dl>
-</div>''')
+    panels.append(f"""      <div class="ctx-panel">
+        <h3>Histórico e objetivos</h3>
+        <dl>
+          <dt>Objetivo</dt><dd>{val("spin_n_vidaResolvida", val("tresObjetivos", "Não informado"))}</dd>
+          <dt>Peso atual</dt><dd>{val("pesoAtual")} kg</dd>
+          <dt>Peso desejado</dt><dd>{val("pesoIdeal")} kg</dd>
+          <dt>Altura</dt><dd>{val("altura")} cm</dd>
+          <dt>Medicamentos</dt><dd>{val("medicamentosAtuais")}</dd>
+          <dt>Condições</dt><dd>{val("doencasCronicas")}</dd>
+          <dt>Atividade física</dt><dd>{val("atividadeFisica")} ({val("frequenciaAtividade")})</dd>
+          <dt>Perfil DISC</dt><dd>{val("discPerfil")}</dd>
+          <dt>Perfil financeiro</dt><dd>{val("perfilFinanceiro")}</dd>
+        </dl>
+      </div>""")
 
     # Panel 2: Hábitos alimentares
-    panels.append(f'''<div class="ctx-panel">
-  <h3>Hábitos alimentares</h3>
-  <dl>
-    <dt>Refeições / dia</dt><dd>{val("refeicoesDia")}</dd>
-    <dt>Café da manhã</dt><dd>{val("cafeDaManha")}</dd>
-    <dt>Almoço</dt><dd>{val("almoco")}</dd>
-    <dt>Jantar</dt><dd>{val("jantar")}</dd>
-    <dt>Água</dt><dd>{val("consumoAgua")}</dd>
-  </dl>
-</div>''')
+    panels.append(f"""      <div class="ctx-panel">
+        <h3>Hábitos alimentares</h3>
+        <dl>
+          <dt>Refeições / dia</dt><dd>{val("refeicoesDia")}</dd>
+          <dt>Café da manhã</dt><dd>{val("cafeDaManha")}</dd>
+          <dt>Almoço</dt><dd>{val("almoco")}</dd>
+          <dt>Jantar</dt><dd>{val("jantar")}</dd>
+          <dt>Água</dt><dd>{val("consumoAgua")}</dd>
+          <dt>Álcool</dt><dd>{val("consumoAlcool")}</dd>
+          <dt>Doces</dt><dd>{val("consumoDoces")}</dd>
+          <dt>Intestino</dt><dd>{val("frequenciaIntestinal")}</dd>
+        </dl>
+      </div>""")
 
-    return '<section class="contexto" aria-labelledby="ctx-title">\n  <div class="wrap">\n    <h2 id="ctx-title">Contexto do paciente</h2>\n    <div class="ctx-grid">\n' + '\n'.join(panels) + '\n    </div>\n  </div>\n</section>'
+    panels_html = "\n".join(panels)
+    return f"""<section class="contexto" aria-labelledby="ctx-title">
+  <div class="wrap">
+    <h2 id="ctx-title">Contexto do paciente</h2>
+    <div class="ctx-grid">
+{panels_html}
+    </div>
+  </div>
+</section>"""
+
+
+def gerar_timeline_section():
+    """Gera seção de timeline padrão de 180 dias."""
+    return """<section class="timeline" aria-labelledby="time-title">
+  <div class="wrap">
+    <h2 id="time-title">O que esperar em 180 dias</h2>
+    <ul class="time-list">
+      <li><strong>Mês 1 — Diagnóstico e ajuste:</strong> Plano alimentar personalizado, suplementação de base e primeiros ajustes de estilo de vida.</li>
+      <li><strong>Mês 2 — Reversão:</strong> Sensibilidade insulínica começa a melhorar, energia sobe, sono fica mais reparador.</li>
+      <li><strong>Mês 3 — Consolidação:</strong> Peso em queda sustentável, exames mostrando melhora objetiva.</li>
+      <li><strong>Mês 4–6 — Otimização:</strong> Ajustes finos baseados em novos exames. Resultado sustentável a longo prazo.</li>
+    </ul>
+  </div>
+</section>"""
 
 
 def gerar_references_section():
     """Gera seção de referências bibliográficas padrão."""
-    return '''<section class="references" aria-labelledby="ref-title">
+    return """<section class="references" aria-labelledby="ref-title">
   <div class="wrap">
     <h2 id="ref-title">Referências</h2>
     <ul class="ref-list">
@@ -242,13 +440,122 @@ def gerar_references_section():
       <li>DeFronzo RA. Insulin resistance, lipotoxicity, type 2 diabetes and atherosclerosis. <em>Diabetologia</em>. 2010.</li>
     </ul>
   </div>
-</section>'''
+</section>"""
 
 
-def gerar_html_apresentacao(paciente, dados_exames, dados_questionarios):
+# ---------------------------------------------------------------------------
+# Extração de exames dos PDFs
+# ---------------------------------------------------------------------------
+
+def extrair_todos_exames(lista_pdfs):
+    """
+    Extrai exames de todos os PDFs de um paciente e mescla os resultados.
+    Retorna dict no formato esperado pelas funções de seção.
+    """
+    if not lista_pdfs:
+        return None
+
+    todos_grupos = {}
+    todos_hero = []
+    stats_total = {"total": 0, "criticos": 0, "alertas": 0, "atencao": 0, "normais": 0}
+
+    for pdf in lista_pdfs:
+        pdf_id = pdf.get("id")
+        pdf_nome = pdf.get("nome", "exame.pdf")
+        if not pdf_id:
+            continue
+
+        resultado = run_script("extrair_exames_pdf.py", pdf_id, "--nome", pdf_nome)
+        if not resultado or not resultado.get("encontrado"):
+            print(f"  PDF {pdf_nome}: não foi possível extrair exames.", file=sys.stderr)
+            continue
+
+        # Mescla grupos
+        for grupo in resultado.get("grupos", []):
+            gid = grupo["id"]
+            if gid not in todos_grupos:
+                todos_grupos[gid] = grupo.copy()
+                todos_grupos[gid]["exames"] = []
+            # Adiciona exames que ainda não estão (por nome)
+            nomes_existentes = {ex["nome"] for ex in todos_grupos[gid]["exames"]}
+            for ex in grupo.get("exames", []):
+                if ex["nome"] not in nomes_existentes:
+                    todos_grupos[gid]["exames"].append(ex)
+                    nomes_existentes.add(ex["nome"])
+
+        # Mescla hero alerts (sem duplicar)
+        nomes_hero = {h["nome"] for h in todos_hero}
+        for h in resultado.get("hero_alerts", []):
+            if h["nome"] not in nomes_hero:
+                todos_hero.append(h)
+                nomes_hero.add(h["nome"])
+
+        # Acumula stats
+        s = resultado.get("stats", {})
+        for k in stats_total:
+            stats_total[k] += s.get(k, 0)
+
+    if not todos_grupos:
+        return None
+
+    PRIORITY_GROUPS = ["metabolico", "hormonal", "lipidico", "inflamacao",
+                       "vitaminas", "hepatico", "renal", "hemograma",
+                       "autoimune", "oncologico", "outros"]
+
+    SEVERIDADE_ORDEM = {"crit": 0, "alert": 1, "baixo": 1, "attn": 2, "normal": 3, "otimo": 4}
+
+    grupos_ordenados = []
+    for gid in PRIORITY_GROUPS:
+        if gid in todos_grupos:
+            grupos_ordenados.append(todos_grupos[gid])
+
+    # Mantém os 4 hero alerts mais graves
+    todos_hero.sort(key=lambda x: SEVERIDADE_ORDEM.get(x.get("status", "normal"), 5))
+    todos_hero = todos_hero[:4]
+
+    return {
+        "encontrado": True,
+        "grupos": grupos_ordenados,
+        "hero_alerts": todos_hero,
+        "stats": stats_total,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Geração do HTML final
+# ---------------------------------------------------------------------------
+
+def gerar_resumo_clinico(exames_parsed, questionarios):
+    """Gera frase de resumo clínico breve para o cover da apresentação."""
+    if not exames_parsed:
+        return "Apresentação clínica em elaboração."
+
+    dados = questionarios.get("pre-consulta", {}).get("dados", {}) if questionarios else {}
+    peso = dados.get("pesoAtual", "")
+    altura = dados.get("altura", "")
+    imc = calcular_imc(peso, altura)
+
+    alterados = []
+    for grupo in exames_parsed.get("grupos", []):
+        for ex in grupo.get("exames", []):
+            if ex.get("alterado"):
+                alterados.append(ex["nome"])
+
+    partes = []
+    if imc:
+        _, imc_label = classificar_imc(imc)
+        partes.append(f"IMC {imc} kg/m²")
+
+    if alterados:
+        partes.append(f"{len(alterados)} parâmetro(s) fora da referência: {', '.join(alterados[:3])}" +
+                      (f" e mais {len(alterados) - 3}" if len(alterados) > 3 else ""))
+
+    return " · ".join(partes) if partes else "Perfil metabólico em análise."
+
+
+def gerar_html_apresentacao(paciente, exames_parsed, questionarios):
     """
     Gera o arquivo HTML da apresentação do paciente.
-    Usa o template Jinja2 e substitui os placeholders.
     """
     env = Environment(loader=FileSystemLoader(ASSETS_DIR))
     template = env.get_template("template-apresentacao.html")
@@ -256,29 +563,38 @@ def gerar_html_apresentacao(paciente, dados_exames, dados_questionarios):
     idade = calcular_idade(paciente.get("dataNascimento"))
     nome = paciente.get("nome", "Paciente")
 
+    # Dados extras do questionário para o card do paciente
+    dados_q = questionarios.get("pre-consulta", {}).get("dados", {}) if questionarios else {}
+    peso = dados_q.get("pesoAtual", "")
+    altura = dados_q.get("altura", "")
+    imc = calcular_imc(peso, altura)
+    imc_label, _ = classificar_imc(imc)
+
     context = {
         "nome_paciente": nome,
         "idade_paciente": idade if idade else "—",
         "crm_medico": "27.588",
-        "stats_section": gerar_stats_section(dados_exames),
-        "diagnostico_section": gerar_diagnostico_section(dados_exames),
+        "peso_paciente": peso or "—",
+        "altura_paciente": altura or "—",
+        "imc_paciente": f"{imc} kg/m² ({imc_label})" if imc else "—",
+        "stats_section": gerar_stats_section(exames_parsed),
+        "diagnostico_section": gerar_diagnostico_section(exames_parsed, questionarios),
         "anchor_section": gerar_anchor_section(),
-        "history_section": gerar_history_section(dados_questionarios),
-        "exams_section": gerar_exams_section(dados_exames),
+        "history_section": gerar_history_section(questionarios),
+        "exams_section": gerar_exams_section(exames_parsed),
         "timeline_section": gerar_timeline_section(),
-        "contexto_section": gerar_contexto_section(dados_questionarios),
+        "contexto_section": gerar_contexto_section(questionarios),
         "references_section": gerar_references_section(),
-        "resumo_clinico_breve": "[resumo clínico a ser preenchido após análise dos exames]",
+        "resumo_clinico_breve": gerar_resumo_clinico(exames_parsed, questionarios),
     }
 
     html = template.render(context)
 
     # Salva o arquivo
-    nome_slug = nome.lower().replace(' ', '-').replace('.', '')
+    nome_slug = re.sub(r"[^a-z0-9\-]", "", nome.lower().replace(" ", "-").replace(".", ""))
     nome_arquivo = f"apresentacao-{nome_slug}.html"
     output_path = os.path.join(DELIVERABLES_DIR, nome_arquivo)
 
-    # Se já existir, usa nome com timestamp
     if os.path.exists(output_path):
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         nome_arquivo = f"apresentacao-{nome_slug}-{ts}.html"
@@ -290,6 +606,113 @@ def gerar_html_apresentacao(paciente, dados_exames, dados_questionarios):
 
     return output_path
 
+
+import re  # usado em gerar_html_apresentacao
+
+
+# ---------------------------------------------------------------------------
+# OpenClaw: delega geração HTML com design-impeccable + stitch-design
+# ---------------------------------------------------------------------------
+
+# Session ID do tópico 4 (AI Vital Slim — canal principal da Clara)
+OPENCLAW_SESSION_ID = "782d6df3-83de-4c50-ac79-2aef5d55480d"
+DELIVERABLES_URL_BASE = "https://vps.institutovitalslim.com.br/deliverables"
+
+
+def delegar_geracao_openclaw(paciente, exames_parsed, questionarios, dados_path, faltantes):
+    """
+    Envia mensagem ao OpenClaw agent (topic 4) para gerar apresentação HTML
+    usando as skills design-impeccable e stitch-design. Retorna True se enviado com sucesso.
+    """
+    nome = paciente.get("nome", "Paciente")
+    idade = calcular_idade(paciente.get("dataNascimento"))
+    sexo = paciente.get("sexo", "")
+    data_hoje = datetime.now().strftime("%d/%m/%Y")
+
+    # Resume os achados principais para o contexto
+    dados_q = questionarios.get("pre-consulta", {}).get("dados", {}) if questionarios else {}
+    peso = dados_q.get("pesoAtual", "?")
+    altura = dados_q.get("altura", "?")
+    imc = calcular_imc(peso, altura)
+
+    heroes = []
+    if exames_parsed:
+        for h in exames_parsed.get("hero_alerts", []):
+            heroes.append(f"• {h['nome']}: {h['valor']} {h['unidade']} [{h['tag_label']}]")
+
+    faltantes_str = f"\n⚠️ FALTANTES: {', '.join(faltantes)}" if faltantes else ""
+
+    msg = f"""📋 CRON APRESENTACAO — {data_hoje}
+
+Novo paciente para consulta detectado no Quarkclinic:
+
+👤 **{nome}**
+📅 {idade} anos | {sexo} | IMC {imc} kg/m²
+📞 {paciente.get("telefone", "—")} | ✉️ {paciente.get("email", "—")}
+{faltantes_str}
+
+📊 Dados coletados em:
+`{dados_path}`
+
+🔬 Principais achados:{chr(10) + chr(10).join(heroes) if heroes else " (exames ainda não extraídos)"}
+
+**Ação:**
+1. Ler o arquivo de dados em `{dados_path}`
+2. Usar a skill **`stitch-design`** (Google Stitch MCP) para gerar o UI completo da apresentação — componentes visuais, layout responsivo, cards de exames, hero alerts
+3. Aplicar revisão com **`design-impeccable`** para garantir tipografia, hierarquia visual e brand IVS (tokens em `brand-adapter.md`)
+4. Salvar o HTML final em `{DELIVERABLES_DIR}/apresentacao-{re.sub(r"[^a-z0-9-]", "", nome.lower().replace(" ", "-"))}.html`
+5. Enviar o link da apresentação aqui."""
+
+    cmd = [
+        "openclaw", "agent",
+        "--session-id", OPENCLAW_SESSION_ID,
+        "-m", msg,
+    ]
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if result.returncode == 0:
+            print(f"  ✅ Delegado ao OpenClaw (session {OPENCLAW_SESSION_ID[:8]}...)")
+            return True
+        else:
+            print(f"  ⚠️ OpenClaw retornou erro: {result.stderr[:200]}", file=sys.stderr)
+            return False
+    except subprocess.TimeoutExpired:
+        print("  ⚠️ OpenClaw timeout (30s) — mensagem pode ter sido enviada", file=sys.stderr)
+        return True
+    except Exception as e:
+        print(f"  ⚠️ Erro ao chamar openclaw: {e}", file=sys.stderr)
+        return False
+
+
+def salvar_dados_paciente(paciente, exames_drive, exames_parsed, questionarios, data_str, turno):
+    """Salva todos os dados coletados em um JSON estruturado para a Clara usar."""
+    nome = paciente.get("nome", "paciente")
+    nome_slug = re.sub(r"[^a-z0-9-]", "", nome.lower().replace(" ", "-"))
+    ts = datetime.now().strftime("%Y%m%d_%H%M")
+    filename = f"dados-{nome_slug}-{ts}.json"
+
+    dados = {
+        "gerado_em": datetime.now().isoformat(),
+        "data_consulta": data_str,
+        "turno": turno,
+        "paciente": paciente,
+        "exames_drive": exames_drive,
+        "exames_analisados": exames_parsed,
+        "questionarios": questionarios,
+    }
+
+    os.makedirs(DELIVERABLES_DIR, exist_ok=True)
+    path = os.path.join(DELIVERABLES_DIR, filename)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(dados, f, indent=2, ensure_ascii=False)
+
+    return path
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 
 def main():
     if len(sys.argv) < 3:
@@ -316,7 +739,6 @@ def main():
     for p in pacientes:
         print(f"  - {p['nome']} ({p.get('sexo', 'N/A')})")
 
-    # 2. Para cada paciente, busca exames e questionários
     relatorio = []
 
     for paciente in pacientes:
@@ -326,69 +748,94 @@ def main():
 
         # Busca exames no Drive
         print("  Buscando exames no Drive...")
-        exames = run_script("buscar_exames_drive.py", nome)
-        tem_exames = exames and exames.get("encontrado") and exames.get("total_pdfs", 0) > 0
+        exames_drive = run_script("buscar_exames_drive.py", nome)
+        tem_exames = exames_drive and exames_drive.get("encontrado") and exames_drive.get("total_pdfs", 0) > 0
+
+        # Extrai e analisa os PDFs de exames
+        exames_parsed = None
+        if tem_exames:
+            print(f"  Extraindo dados de {exames_drive['total_pdfs']} PDF(s)...")
+            exames_parsed = extrair_todos_exames(exames_drive.get("pdfs", []))
+            if exames_parsed:
+                stats = exames_parsed.get("stats", {})
+                print(f"  ✅ {stats.get('total', 0)} exames extraídos "
+                      f"({stats.get('criticos', 0) + stats.get('alertas', 0)} alterados)")
+            else:
+                print("  ⚠️ PDFs encontrados mas extração sem resultado.")
 
         # Busca questionários
         print("  Buscando questionários...")
+        args_q = [nome]
         if sexo:
-            questionarios = run_script("buscar_questionarios.py", nome, "--sexo", sexo)
-        else:
-            questionarios = run_script("buscar_questionarios.py", nome)
-
+            args_q += ["--sexo", sexo]
+        questionarios = run_script("buscar_questionarios.py", *args_q)
         tem_pre_consulta = questionarios and questionarios.get("pre-consulta", {}).get("encontrado")
-        tem_hormonal = questionarios and questionarios.get("analise-hormonal", {}).get("encontrado")
 
-        # Verifica o que falta
+        # Verifica faltantes
         faltantes = []
         if not tem_exames:
             faltantes.append("exames laboratoriais")
         if not tem_pre_consulta:
             faltantes.append("questionário de pré-consulta")
-        if sexo == "FEMININO" and not tem_hormonal:
+        if sexo == "FEMININO" and not (questionarios and questionarios.get("analise-hormonal", {}).get("encontrado")):
             faltantes.append("questionário de análise hormonal")
 
-        if faltantes:
-            msg = f"⚠️ PACIENTE: {nome}\n❌ FALTAM: {', '.join(faltantes)}\n📞 Contato: {paciente.get('telefone', 'N/A')}"
+        if faltantes and not tem_pre_consulta and not tem_exames:
+            # Sem NADA — log simples, sem delegação
+            msg = (f"⚠️ PACIENTE: {nome}\n"
+                   f"❌ FALTAM: {', '.join(faltantes)}\n"
+                   f"📞 Contato: {paciente.get('telefone', 'N/A')}")
             relatorio.append({
                 "paciente": nome,
                 "status": "incompleto",
                 "faltantes": faltantes,
-                "mensagem": msg
+                "mensagem": msg,
             })
-            print(f"  ⚠️ Faltam informações: {', '.join(faltantes)}")
+            print(f"  ⚠️ Sem dados suficientes para apresentação.")
         else:
-            # Tudo OK - gera apresentação
-            print("  ✅ Todas as informações encontradas. Gerando apresentação...")
+            # Tem dados suficientes — salva JSON e delega ao OpenClaw
+            dados_path = salvar_dados_paciente(
+                paciente, exames_drive, exames_parsed, questionarios, data_str, turno
+            )
+            print(f"  📁 Dados salvos: {dados_path}")
 
-            html_path = gerar_html_apresentacao(paciente, exames, questionarios)
+            delegado = delegar_geracao_openclaw(
+                paciente, exames_parsed, questionarios, dados_path, faltantes
+            )
 
             relatorio.append({
                 "paciente": nome,
-                "status": "ok",
-                "html_path": html_path,
-                "total_exames": exames.get("total_pdfs", 0),
-                "exames": [p["nome"] for p in exames.get("pdfs", [])]
+                "status": "delegado" if delegado else "dados_coletados",
+                "faltantes": faltantes,
+                "dados_path": dados_path,
+                "total_exames": exames_parsed.get("stats", {}).get("total", 0) if exames_parsed else 0,
             })
-            print(f"  ✅ Apresentação gerada: {html_path}")
 
-    # 3. Imprime relatório final
+    # Relatório final
     print("\n=== RELATÓRIO FINAL ===")
     incompletos = [r for r in relatorio if r["status"] == "incompleto"]
-    completos = [r for r in relatorio if r["status"] == "ok"]
+    delegados = [r for r in relatorio if r["status"] == "delegado"]
+    coletados = [r for r in relatorio if r["status"] == "dados_coletados"]
 
     if incompletos:
-        print(f"\n⚠️ {len(incompletos)} PACIENTE(S) COM INFORMAÇÕES PENDENTES:")
+        print(f"\n⚠️ {len(incompletos)} sem dados suficientes:")
         for r in incompletos:
             print(f"\n{r['mensagem']}")
 
-    if completos:
-        print(f"\n✅ {len(completos)} PACIENTE(S) COM APRESENTAÇÃO GERADA:")
-        for r in completos:
-            print(f"  - {r['paciente']}: {r['html_path']}")
+    if delegados:
+        print(f"\n✅ {len(delegados)} delegado(s) ao OpenClaw:")
+        for r in delegados:
+            parcial = f" [parcial: faltam {', '.join(r['faltantes'])}]" if r.get("faltantes") else ""
+            print(f"  - {r['paciente']}: {r['dados_path']}{parcial}")
 
-    # Salva relatório JSON para o agente processar
+    if coletados:
+        print(f"\n📁 {len(coletados)} com dados coletados (openclaw offline):")
+        for r in coletados:
+            print(f"  - {r['paciente']}: {r['dados_path']}")
+
+    # Salva relatório JSON
     relatorio_path = os.path.join(DELIVERABLES_DIR, f"relatorio-{data_str}-{turno}.json")
+    os.makedirs(DELIVERABLES_DIR, exist_ok=True)
     with open(relatorio_path, "w") as f:
         json.dump(relatorio, f, indent=2, ensure_ascii=False)
 
