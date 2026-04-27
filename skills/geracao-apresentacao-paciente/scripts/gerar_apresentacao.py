@@ -686,14 +686,18 @@ Novo paciente para consulta detectado no Quarkclinic:
 
 
 def salvar_dados_paciente(paciente, exames_drive, exames_parsed, questionarios, data_str, turno):
-    """Salva todos os dados coletados em um JSON estruturado para a Clara usar."""
+    """
+    Salva todos os dados coletados em JSON.
+    Deduplicacao por hash: se ja existir arquivo do mesmo paciente no mesmo dia
+    com conteudo identico (exceto timestamp), retorna o arquivo existente.
+    """
+    import hashlib
+    import glob as _glob
+
     nome = paciente.get("nome", "paciente")
     nome_slug = re.sub(r"[^a-z0-9-]", "", nome.lower().replace(" ", "-"))
-    ts = datetime.now().strftime("%Y%m%d_%H%M")
-    filename = f"dados-{nome_slug}-{ts}.json"
 
-    dados = {
-        "gerado_em": datetime.now().isoformat(),
+    dados_sem_ts = {
         "data_consulta": data_str,
         "turno": turno,
         "paciente": paciente,
@@ -702,17 +706,38 @@ def salvar_dados_paciente(paciente, exames_drive, exames_parsed, questionarios, 
         "questionarios": questionarios,
     }
 
+    conteudo_hash = hashlib.md5(
+        json.dumps(dados_sem_ts, sort_keys=True, ensure_ascii=False).encode()
+    ).hexdigest()[:8]
+
+    # Verifica se ja existe arquivo com mesmo hash hoje
+    hoje = datetime.now().strftime("%Y%m%d")
+    pattern = os.path.join(DELIVERABLES_DIR, f"dados-{nome_slug}-{hoje}*.json")
+    for existente in _glob.glob(pattern):
+        try:
+            with open(existente) as f_ex:
+                ex_dados = json.load(f_ex)
+            if ex_dados.get("content_hash") == conteudo_hash:
+                print(f"  Arquivo identico ja existe: {os.path.basename(existente)} -- pulando", file=sys.stderr)
+                return existente
+        except Exception:
+            pass
+
+    ts = datetime.now().strftime("%Y%m%d_%H%M")
+    filename = f"dados-{nome_slug}-{ts}.json"
+
+    dados = {
+        "gerado_em": datetime.now().isoformat(),
+        "content_hash": conteudo_hash,
+        **dados_sem_ts,
+    }
+
     os.makedirs(DELIVERABLES_DIR, exist_ok=True)
-    path = os.path.join(DELIVERABLES_DIR, filename)
-    with open(path, "w", encoding="utf-8") as f:
+    path_out = os.path.join(DELIVERABLES_DIR, filename)
+    with open(path_out, "w", encoding="utf-8") as f:
         json.dump(dados, f, indent=2, ensure_ascii=False)
 
-    return path
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
+    return path_out
 
 def main():
     if len(sys.argv) < 3:
