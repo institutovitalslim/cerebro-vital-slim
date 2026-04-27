@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria de Integridade — Agentes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --red: #ef4444; --purple: #a78bfa; --teal: #14b8a6;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); font-family:'Inter',system-ui,sans-serif; color:var(--text); padding:32px; min-height:100vh; }
+  .container { max-width:960px; margin:0 auto; }
+
+  .header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; padding-bottom:20px; border-bottom:2px solid var(--blue); }
+  .header-left { display:flex; align-items:center; gap:16px; }
+  .logo { width:42px; height:42px; background:var(--blue); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; color:white; }
+  .header-title { font-size:24px; font-weight:900; }
+  .header-title span { color:var(--blue); }
+  .header-right { text-align:right; }
+  .header-date { font-size:13px; color:var(--text2); }
+  .header-badge { display:inline-block; background:rgba(96,165,250,0.12); color:var(--blue); padding:3px 10px; border-radius:6px; font-size:10px; font-weight:700; margin-top:6px; }
+
+  /* SUMMARY */
+  .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:24px; }
+  .sum-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:16px; text-align:center; }
+  .sum-value { font-size:32px; font-weight:900; }
+  .sum-green { color:var(--green); }
+  .sum-yellow { color:var(--yellow); }
+  .sum-blue { color:var(--blue); }
+  .sum-label { font-size:10px; color:var(--text2); margin-top:4px; font-weight:600; }
+
+  /* AGENT AUDIT */
+  .audit-card { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; }
+  .audit-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .audit-name { font-size:16px; font-weight:800; display:flex; align-items:center; gap:8px; }
+  .audit-status { display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; }
+  .status-pass { color:var(--green); }
+  .status-warn { color:var(--yellow); }
+
+  .checks { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+  .check { display:flex; align-items:center; gap:10px; background:var(--bg3); border-radius:8px; padding:10px 14px; }
+  .check-icon { font-size:16px; flex-shrink:0; }
+  .check-info { flex:1; }
+  .check-name { font-size:12px; font-weight:700; }
+  .check-detail { font-size:10px; color:var(--text2); margin-top:2px; }
+
+  .issues-title { font-size:11px; font-weight:700; color:var(--yellow); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+  .issue { display:flex; align-items:flex-start; gap:8px; padding:8px 12px; background:rgba(234,179,8,0.06); border:1px solid rgba(234,179,8,0.15); border-radius:8px; margin-bottom:6px; }
+  .issue-icon { font-size:14px; flex-shrink:0; margin-top:1px; }
+  .issue-text { font-size:12px; line-height:1.5; }
+  .issue-text strong { color:var(--yellow); }
+  .issue-fix { font-size:11px; color:var(--teal); margin-top:4px; }
+
+  .no-issues { padding:10px 14px; background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.15); border-radius:8px; font-size:12px; color:var(--green); font-weight:600; }
+
+  /* TIMELINE */
+  .timeline-section { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; }
+  .timeline-title { font-size:14px; font-weight:800; margin-bottom:14px; }
+  .timeline { display:flex; flex-direction:column; gap:8px; }
+  .tl-item { display:flex; align-items:center; gap:12px; font-size:12px; }
+  .tl-date { width:60px; color:var(--text2); font-weight:600; flex-shrink:0; }
+  .tl-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .tl-green { background:var(--green); }
+  .tl-blue { background:var(--blue); }
+  .tl-yellow { background:var(--yellow); }
+  .tl-text { color:var(--text); }
+
+  .footer { text-align:center; margin-top:24px; padding-top:16px; border-top:1px solid var(--border); font-size:11px; color:var(--text2); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">🔍</div>
+      <div><div class="header-title">Auditoria de <span>Integridade</span></div></div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">Gerado em 01/03/2026 às 08:00</div>
+      <div class="header-badge">🔍 Auditoria mensal automática</div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="sum-card"><div class="sum-value sum-blue">2</div><div class="sum-label">Agentes auditados</div></div>
+    <div class="sum-card"><div class="sum-value sum-green">9</div><div class="sum-label">Checks OK</div></div>
+    <div class="sum-card"><div class="sum-value sum-yellow">1</div><div class="sum-label">Alertas</div></div>
+    <div class="sum-card"><div class="sum-value sum-green">90%</div><div class="sum-label">Score geral</div></div>
+  </div>
+
+  <!-- OPERAÇÕES -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="audit-name">🤖 Agente Operações</div>
+      <div class="audit-status status-pass">✅ 100% — Nenhum problema</div>
+    </div>
+
+    <div class="checks">
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">SOUL.md válido</div><div class="check-detail">Personalidade, tom, escopo, proatividade — tudo definido</div></div></div>
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">AGENTS.md consistente</div><div class="check-detail">Permissões batem com seguranca/permissoes.md</div></div></div>
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">HEARTBEAT.md presente</div><div class="check-detail">5 verificações periódicas configuradas</div></div></div>
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">Skills no _index.md</div><div class="check-detail">7/7 skills referenciadas existem como pastas</div></div></div>
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">Rotinas documentadas</div><div class="check-detail">3/3 crons têm .md correspondente</div></div></div>
+    </div>
+
+    <div class="no-issues">✅ Nenhum problema encontrado — agente 100% documentado e consistente no GitHub</div>
+  </div>
+
+  <!-- MARKETING -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="audit-name">🎯 Agente Marketing</div>
+      <div class="audit-status status-warn">⚠️ 80% — 1 alerta</div>
+    </div>
+
+    <div class="checks">
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">SOUL.md válido</div><div class="check-detail">Personalidade, mentores, tom, escopo, proatividade</div></div></div>
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">AGENTS.md consistente</div><div class="check-detail">Acesso restrito a empresa/ e areas/marketing/</div></div></div>
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">HEARTBEAT.md presente</div><div class="check-detail">5 verificações periódicas configuradas</div></div></div>
+      <div class="check"><div class="check-icon">⚠️</div><div class="check-info"><div class="check-name">Skills no _index.md</div><div class="check-detail">4/5 skills referenciadas — 1 skill órfã encontrada</div></div></div>
+      <div class="check"><div class="check-icon">✅</div><div class="check-info"><div class="check-name">Rotinas documentadas</div><div class="check-detail">5/5 crons têm .md correspondente</div></div></div>
+    </div>
+
+    <div class="issues-title">⚠️ Problemas encontrados</div>
+    <div class="issue">
+      <div class="issue-icon">⚠️</div>
+      <div>
+        <div class="issue-text"><strong>Skill órfã:</strong> <code>areas/marketing/skills/ab-test-criativos/</code> existe como pasta mas NÃO está referenciada no <code>_index.md</code>. O agente não sabe que essa skill existe.</div>
+        <div class="issue-fix">🔧 Correção sugerida: adicionar entrada no _index.md ou remover a pasta se a skill foi descontinuada.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <div class="timeline-title">📅 Linha do tempo — últimos 30 dias</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">01/02</div><div class="tl-dot tl-blue"></div><div class="tl-text">Auditoria anterior — 100% ambos agentes</div></div>
+      <div class="tl-item"><div class="tl-date">08/02</div><div class="tl-dot tl-green"></div><div class="tl-text">Marketing: adicionou HEARTBEAT.md (antes não tinha)</div></div>
+      <div class="tl-item"><div class="tl-date">15/02</div><div class="tl-dot tl-green"></div><div class="tl-text">Operações: atualizou SOUL.md com seção de proatividade</div></div>
+      <div class="tl-item"><div class="tl-date">19/02</div><div class="tl-dot tl-yellow"></div><div class="tl-text">Marketing: skill ab-test-criativos criada mas não adicionada ao _index.md</div></div>
+      <div class="tl-item"><div class="tl-date">01/03</div><div class="tl-dot tl-blue"></div><div class="tl-text">Auditoria atual — Operações 100%, Marketing 80%</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    TechFlow Solutions · Auditoria automática pelo Agente Generalista via cron auditoria-agentes-mensal · Próxima auditoria: 01/04/2026
+  </div>
+
+</div>
+</body>
+</html>

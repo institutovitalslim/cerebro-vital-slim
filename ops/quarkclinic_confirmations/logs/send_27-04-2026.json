@@ -1,40 +1,31 @@
 {
   "sent": [
     {
-      "phone": "5571994181820",
-      "nome": "TATIANE ANITA ALMEIDA DE SOUZA LEÃO CRUZ",
-      "agendamentoId": 456894982,
-      "dataHoraInicio": "27-04-2026T09:00",
-      "messageId": "5C7DBFA3032D753BCDAD",
+      "phone": "5571991583056",
+      "nome": "Marize de Jesus Carvalho",
+      "agendamentoId": 456459079,
+      "dataHoraInicio": "27-04-2026T17:10",
+      "messageId": "B409A2882D8BB3505FA7",
       "status": "sent",
-      "turno": "morning"
+      "turno": "afternoon"
     },
     {
-      "phone": "5571991896551",
-      "nome": "SILVANA MODESTO RODRIGUES",
-      "agendamentoId": 456478587,
-      "dataHoraInicio": "27-04-2026T10:10",
-      "messageId": "3EB0B8C259E68AE17A6944",
+      "phone": "5571991583056",
+      "nome": "Lorena Carvalho Ramos Melo",
+      "agendamentoId": 456409460,
+      "dataHoraInicio": "27-04-2026T17:00",
+      "messageId": "3EB07D529D2CE8DE473EC8",
       "status": "sent",
-      "turno": "morning"
+      "turno": "afternoon"
     },
     {
-      "phone": "5571993245545",
-      "nome": "FRANCISCO DE ASSIS DE LIMA",
-      "agendamentoId": 456478480,
-      "dataHoraInicio": "27-04-2026T10:00",
-      "messageId": "3EB0616C535D345919C509",
+      "phone": "5571988762126",
+      "nome": "IVANA SOUZA LOPES",
+      "agendamentoId": 456391062,
+      "dataHoraInicio": "27-04-2026T14:00",
+      "messageId": "3EB09DABC6BB9F6C9A66DD",
       "status": "sent",
-      "turno": "morning"
-    },
-    {
-      "phone": "557193873221",
-      "nome": "Diogo de Jesus Melo",
-      "agendamentoId": 456391234,
-      "dataHoraInicio": "27-04-2026T09:30",
-      "messageId": "3EB0B16132E3A7D315F770",
-      "status": "sent",
-      "turno": "morning"
+      "turno": "afternoon"
     }
   ]
 }

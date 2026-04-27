@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal — Gestão dos Agentes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --red: #ef4444; --purple: #a78bfa; --teal: #14b8a6;
+    --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); font-family:'Inter',system-ui,sans-serif; color:var(--text); padding:32px; min-height:100vh; }
+  .container { max-width:1080px; margin:0 auto; }
+
+  /* HEADER */
+  .header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:20px; border-bottom:2px solid var(--accent); }
+  .header-left { display:flex; align-items:center; gap:16px; }
+  .logo { width:46px; height:46px; background:var(--accent); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; color:white; }
+  .header-title { font-size:22px; font-weight:900; }
+  .header-title span { color:var(--accent2); }
+  .header-sub { font-size:12px; color:var(--text2); margin-top:2px; }
+  .header-right { text-align:right; }
+  .header-date { font-size:12px; color:var(--text2); }
+  .header-badge { display:inline-block; background:rgba(34,197,94,0.12); color:var(--green); padding:3px 10px; border-radius:6px; font-size:10px; font-weight:700; margin-top:6px; }
+
+  /* EXECUTIVE SUMMARY */
+  .exec-summary { background:linear-gradient(135deg, rgba(254,80,0,0.08), rgba(96,165,250,0.08)); border:1px solid var(--border); border-radius:14px; padding:20px 24px; margin-bottom:20px; }
+  .exec-title { font-size:14px; font-weight:800; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .exec-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
+  .exec-stat { text-align:center; }
+  .exec-val { font-size:26px; font-weight:900; }
+  .exec-label { font-size:9px; color:var(--text2); margin-top:2px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; }
+  .exec-change { font-size:10px; font-weight:700; margin-top:2px; }
+  .c-green { color:var(--green); }
+  .c-red { color:var(--red); }
+  .c-yellow { color:var(--yellow); }
+  .c-blue { color:var(--blue); }
+  .c-accent { color:var(--accent2); }
+  .c-teal { color:var(--teal); }
+  .c-purple { color:var(--purple); }
+
+  /* SECTION */
+  .section { margin-bottom:20px; }
+  .section-title { font-size:15px; font-weight:800; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+
+  /* AGENT CARDS */
+  .agents-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .agent-card { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:18px; position:relative; overflow:hidden; }
+  .agent-card::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; }
+  .agent-card.ops::before { background:var(--green); }
+  .agent-card.mkt::before { background:var(--blue); }
+
+  .agent-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .agent-name { font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px; }
+  .agent-area { font-size:10px; color:var(--text2); font-weight:600; }
+  .agent-score-box { text-align:center; }
+  .agent-score { font-size:28px; font-weight:900; }
+  .agent-score-label { font-size:9px; color:var(--text2); font-weight:600; }
+
+  /* METRICS ROWS */
+  .metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:12px; }
+  .m-card { background:var(--bg3); border-radius:8px; padding:8px 10px; }
+  .m-val { font-size:16px; font-weight:800; }
+  .m-label { font-size:9px; color:var(--text2); margin-top:1px; font-weight:600; }
+  .m-change { font-size:9px; font-weight:700; }
+
+  /* TASK BREAKDOWN */
+  .task-title { font-size:10px; font-weight:700; color:var(--text2); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .task-bar-row { display:flex; align-items:center; gap:8px; margin-bottom:4px; font-size:11px; }
+  .task-bar-label { width:100px; color:var(--text2); font-weight:600; text-align:right; flex-shrink:0; }
+  .task-bar-bg { flex:1; height:14px; background:rgba(255,255,255,0.04); border-radius:4px; overflow:hidden; position:relative; }
+  .task-bar { height:100%; border-radius:4px; display:flex; align-items:center; justify-content:flex-end; padding-right:6px; font-size:9px; font-weight:700; color:white; }
+  .task-bar-count { width:30px; text-align:right; font-weight:700; color:var(--text); flex-shrink:0; }
+  .tb-green { background:var(--green); }
+  .tb-blue { background:var(--blue); }
+  .tb-purple { background:var(--purple); }
+  .tb-yellow { background:var(--yellow); }
+  .tb-teal { background:var(--teal); }
+  .tb-accent { background:var(--accent); }
+
+  /* PROACTIVITY */
+  .proactivity { display:flex; gap:8px; margin:10px 0; }
+  .proact-item { flex:1; background:var(--bg3); border-radius:8px; padding:8px 10px; text-align:center; }
+  .proact-val { font-size:18px; font-weight:900; }
+  .proact-label { font-size:9px; color:var(--text2); margin-top:1px; }
+
+  /* ACTIVITY LOG */
+  .activity-item { display:flex; align-items:center; gap:8px; padding:5px 0; border-bottom:1px solid rgba(42,48,96,0.3); font-size:11px; }
+  .activity-item:last-child { border-bottom:none; }
+  .activity-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .activity-date { font-size:9px; color:var(--text3); width:40px; flex-shrink:0; }
+  .activity-type { font-weight:700; flex-shrink:0; }
+  .activity-desc { color:var(--text2); flex:1; }
+
+  /* ROI SECTION */
+  .roi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .roi-card { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:18px; text-align:center; }
+  .roi-icon { font-size:28px; margin-bottom:8px; }
+  .roi-val { font-size:28px; font-weight:900; }
+  .roi-label { font-size:11px; color:var(--text2); margin-top:4px; line-height:1.4; }
+  .roi-detail { font-size:10px; color:var(--text3); margin-top:6px; }
+
+  .bar-green { background:var(--green); }
+  .bar-yellow { background:var(--yellow); }
+  .bar-red { background:var(--red); }
+  .bar-blue { background:var(--blue); }
+
+  /* ADOPTION */
+  .adoption-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .adopt-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:14px; }
+  .adopt-title { font-size:12px; font-weight:800; margin-bottom:8px; }
+  .adopt-row { display:flex; align-items:center; justify-content:space-between; padding:4px 0; font-size:11px; border-bottom:1px solid rgba(42,48,96,0.3); }
+  .adopt-row:last-child { border-bottom:none; }
+  .adopt-name { font-weight:600; }
+  .adopt-val { font-weight:700; }
+  .adopt-bar-mini { width:60px; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden; }
+  .adopt-bar-fill { height:100%; border-radius:3px; }
+
+  /* RISKS */
+  .risk-list { display:flex; flex-direction:column; gap:8px; }
+  .risk { display:flex; gap:10px; padding:12px 14px; border-radius:10px; }
+  .risk.high { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); }
+  .risk.medium { background:rgba(234,179,8,0.06); border:1px solid rgba(234,179,8,0.2); }
+  .risk.low { background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.2); }
+  .risk-icon { font-size:18px; flex-shrink:0; }
+  .risk-content { flex:1; }
+  .risk-title { font-size:12px; font-weight:700; }
+  .risk.high .risk-title { color:var(--red); }
+  .risk.medium .risk-title { color:var(--yellow); }
+  .risk.low .risk-title { color:var(--blue); }
+  .risk-desc { font-size:11px; color:var(--text2); margin-top:2px; line-height:1.4; }
+  .risk-action { font-size:10px; color:var(--teal); margin-top:4px; font-weight:600; }
+
+  /* INSIGHTS */
+  .insights-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .insight { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:14px; display:flex; gap:10px; }
+  .insight-icon { font-size:20px; flex-shrink:0; }
+  .insight-text { font-size:12px; line-height:1.5; }
+  .insight-text strong { color:var(--accent2); }
+
+  /* TREND */
+  .trend-table { width:100%; border-collapse:collapse; }
+  .trend-table th { font-size:10px; color:var(--text2); text-align:center; padding:8px 6px; border-bottom:1px solid var(--border); font-weight:700; letter-spacing:0.5px; }
+  .trend-table td { font-size:12px; text-align:center; padding:8px 6px; border-bottom:1px solid rgba(42,48,96,0.3); }
+  .trend-table .agent-col { text-align:left; font-weight:700; }
+  .trend-arrow { font-size:10px; font-weight:700; }
+
+  .footer { text-align:center; margin-top:28px; padding-top:16px; border-top:1px solid var(--border); font-size:11px; color:var(--text2); }
+  .footer strong { color:var(--text); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">P</div>
+      <div>
+        <div class="header-title">Relatório Semanal — <span>Gestão dos Agentes</span></div>
+        <div class="header-sub">TechFlow Solutions · Visão executiva do sistema de agentes</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">Gerado: 24/03/2026 às 07:00</div>
+      <div class="header-date">Período: 17/03 a 23/03/2026 (Semana 12)</div>
+      <div class="header-badge">✅ Cron semanal · Agente Generalista</div>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="exec-summary">
+    <div class="exec-title">📊 Resumo Executivo</div>
+    <div class="exec-grid">
+      <div class="exec-stat"><div class="exec-val c-accent">2</div><div class="exec-label">Agentes ativos</div><div class="exec-change c-green">estável</div></div>
+      <div class="exec-stat"><div class="exec-val c-green">147</div><div class="exec-label">Tarefas concluídas</div><div class="exec-change c-green">↑ 23% vs semana anterior</div></div>
+      <div class="exec-stat"><div class="exec-val c-blue">94%</div><div class="exec-label">Taxa de acerto</div><div class="exec-change c-green">↑ 2pp</div></div>
+      <div class="exec-stat"><div class="exec-val c-teal">R$ 12.4k</div><div class="exec-label">Economia estimada</div><div class="exec-change c-green">↑ 18%</div></div>
+      <div class="exec-stat"><div class="exec-val c-purple">23</div><div class="exec-label">Commits no Cérebro</div><div class="exec-change c-green">↑ 35%</div></div>
+      <div class="exec-stat"><div class="exec-val c-yellow">3</div><div class="exec-label">Alertas ativos</div><div class="exec-change c-red">↑ 1 novo</div></div>
+    </div>
+  </div>
+
+  <!-- AGENT DEEP DIVE -->
+  <div class="section">
+    <div class="section-title">🤖 Desempenho por Agente</div>
+    <div class="agents-grid">
+
+      <!-- OPERAÇÕES -->
+      <div class="agent-card ops">
+        <div class="agent-top">
+          <div><div class="agent-name">🤖 Operações</div><div class="agent-area">Escopo: vendas, suporte, operações, empresa</div></div>
+          <div class="agent-score-box"><div class="agent-score c-green">A+</div><div class="agent-score-label">Score semanal</div></div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="m-card"><div class="m-val c-green">89</div><div class="m-label">Tarefas concluídas</div><div class="m-change c-green">↑ 28%</div></div>
+          <div class="m-card"><div class="m-val c-blue">96%</div><div class="m-label">Taxa de acerto</div><div class="m-change c-green">↑ 3pp</div></div>
+          <div class="m-card"><div class="m-val c-purple">3</div><div class="m-label">Escalações</div><div class="m-change c-green">↓ 40%</div></div>
+          <div class="m-card"><div class="m-val c-teal">0</div><div class="m-label">Retrabalho</div><div class="m-change c-green">zero</div></div>
+        </div>
+
+        <div class="task-title">Proatividade</div>
+        <div class="proactivity">
+          <div class="proact-item"><div class="proact-val c-green">7</div><div class="proact-label">Sugestões feitas</div></div>
+          <div class="proact-item"><div class="proact-val c-blue">5</div><div class="proact-label">Aceitas pela equipe</div></div>
+          <div class="proact-item"><div class="proact-val c-accent">71%</div><div class="proact-label">Taxa de aprovação</div></div>
+          <div class="proact-item"><div class="proact-val c-purple">3</div><div class="proact-label">Viraram skill</div></div>
+        </div>
+
+        <div class="task-title">Atividade destaque</div>
+        <div class="activity-item"><div class="activity-date">18/03</div><div class="activity-dot" style="background:var(--green)"></div><span class="activity-type">Skill</span> <span class="activity-desc">consolidacao-memoria — sugeriu após detectar 3 pedidos iguais</span></div>
+        <div class="activity-item"><div class="activity-date">19/03</div><div class="activity-dot" style="background:var(--green)"></div><span class="activity-type">Skill</span> <span class="activity-desc">alerta-clientes-inativos — criou com QA automático</span></div>
+        <div class="activity-item"><div class="activity-date">20/03</div><div class="activity-dot" style="background:var(--blue)"></div><span class="activity-type">Rotina</span> <span class="activity-desc">follow-up-leads-diario — cron 9h, tópico Vendas</span></div>
+        <div class="activity-item"><div class="activity-date">22/03</div><div class="activity-dot" style="background:var(--green)"></div><span class="activity-type">Skill</span> <span class="activity-desc">analise-suporte-vs-vendas — sugerida proativamente</span></div>
+        <div class="activity-item"><div class="activity-date">23/03</div><div class="activity-dot" style="background:var(--yellow)"></div><span class="activity-type">Evolução</span> <span class="activity-desc">relatorio-vendas: texto → dashboard HTML com gráficos</span></div>
+      </div>
+
+      <!-- MARKETING -->
+      <div class="agent-card mkt">
+        <div class="agent-top">
+          <div><div class="agent-name">🎯 Marketing</div><div class="agent-area">Escopo: marketing, tráfego pago, conteúdo</div></div>
+          <div class="agent-score-box"><div class="agent-score c-yellow">B+</div><div class="agent-score-label">Score semanal</div></div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="m-card"><div class="m-val c-blue">58</div><div class="m-label">Tarefas concluídas</div><div class="m-change c-green">↑ 15%</div></div>
+          <div class="m-card"><div class="m-val c-blue">91%</div><div class="m-label">Taxa de acerto</div><div class="m-change c-green">↑ 1pp</div></div>
+          <div class="m-card"><div class="m-val c-yellow">5</div><div class="m-label">Escalações</div><div class="m-change c-red">↑ 2</div></div>
+          <div class="m-card"><div class="m-val c-red">2</div><div class="m-label">Retrabalho</div><div class="m-change c-red">↑ 1</div></div>
+        </div>
+
+        <div class="task-title">Proatividade</div>
+        <div class="proactivity">
+          <div class="proact-item"><div class="proact-val c-blue">3</div><div class="proact-label">Sugestões feitas</div></div>
+          <div class="proact-item"><div class="proact-val c-blue">2</div><div class="proact-label">Aceitas pela equipe</div></div>
+          <div class="proact-item"><div class="proact-val c-yellow">67%</div><div class="proact-label">Taxa de aprovação</div></div>
+          <div class="proact-item"><div class="proact-val c-purple">1</div><div class="proact-label">Virou skill</div></div>
+        </div>
+
+        <div class="task-title">Atividade destaque</div>
+        <div class="activity-item"><div class="activity-date">19/03</div><div class="activity-dot" style="background:var(--green)"></div><span class="activity-type">Skill</span> <span class="activity-desc">analise-angulos-performance — detectou padrão repetitivo</span></div>
+        <div class="activity-item"><div class="activity-date">20/03</div><div class="activity-dot" style="background:var(--blue)"></div><span class="activity-type">Rotina</span> <span class="activity-desc">report-meta-ads-diario — cron 8h</span></div>
+        <div class="activity-item"><div class="activity-date">21/03</div><div class="activity-dot" style="background:var(--teal)"></div><span class="activity-type">Contexto</span> <span class="activity-desc">learnings/resumo.md atualizado com 4 novos padrões</span></div>
+        <div class="activity-item"><div class="activity-date">22/03</div><div class="activity-dot" style="background:var(--red)"></div><span class="activity-type">Alerta</span> <span class="activity-desc">Campanha "Retargeting Q1" ROAS 0.8 por 3 dias → pausar</span></div>
+        <div class="activity-item"><div class="activity-date">23/03</div><div class="activity-dot" style="background:var(--yellow)"></div><span class="activity-type">Retrabalho</span> <span class="activity-desc">Criativo #14 precisou de ajuste de copy — hook fraco</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROI -->
+  <div class="section">
+    <div class="section-title">💰 ROI — Retorno sobre Investimento</div>
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-icon">⏱️</div>
+        <div class="roi-val c-green">68h</div>
+        <div class="roi-label">Horas economizadas na semana</div>
+        <div class="roi-detail">Ops: 42h (relatórios, análises, alertas) · Mkt: 26h (reports, criativos, calendário)</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-icon">💵</div>
+        <div class="roi-val c-teal">R$ 12.400</div>
+        <div class="roi-label">Economia semanal estimada</div>
+        <div class="roi-detail">Base: R$ 45/hora analista júnior · 68h × R$ 45 = R$ 3.060 + R$ 9.340 em eficiência</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-icon">📈</div>
+        <div class="roi-val c-accent">847%</div>
+        <div class="roi-label">ROI sobre custo das assinaturas</div>
+        <div class="roi-detail">Custo semanal: R$ 1.310 (2 assinaturas Claude) · Retorno: R$ 12.400</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREND -->
+  <div class="section">
+    <div class="section-title">📈 Tendência — Últimas 4 Semanas</div>
+    <div style="background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:16px; overflow-x:auto;">
+      <table class="trend-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">Agente</th>
+            <th>Sem 9</th>
+            <th>Sem 10</th>
+            <th>Sem 11</th>
+            <th>Sem 12 (atual)</th>
+            <th>Tendência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="agent-col">🤖 Operações — Tarefas</td>
+            <td>52</td><td>61</td><td>69</td><td style="font-weight:800; color:var(--green)">89</td>
+            <td><span class="trend-arrow c-green">↑↑ acelerando</span></td>
+          </tr>
+          <tr>
+            <td class="agent-col">🤖 Operações — Acerto</td>
+            <td>89%</td><td>91%</td><td>93%</td><td style="font-weight:800; color:var(--green)">96%</td>
+            <td><span class="trend-arrow c-green">↑ melhorando</span></td>
+          </tr>
+          <tr>
+            <td class="agent-col">🎯 Marketing — Tarefas</td>
+            <td>38</td><td>42</td><td>50</td><td style="font-weight:800; color:var(--blue)">58</td>
+            <td><span class="trend-arrow c-green">↑ crescendo</span></td>
+          </tr>
+          <tr>
+            <td class="agent-col">🎯 Marketing — Acerto</td>
+            <td>87%</td><td>88%</td><td>90%</td><td style="font-weight:800; color:var(--yellow)">91%</td>
+            <td><span class="trend-arrow c-yellow">→ estável</span></td>
+          </tr>
+          <tr>
+            <td class="agent-col">🧠 Cérebro — Commits</td>
+            <td>11</td><td>14</td><td>17</td><td style="font-weight:800; color:var(--purple)">23</td>
+            <td><span class="trend-arrow c-green">↑↑ acelerando</span></td>
+          </tr>
+          <tr>
+            <td class="agent-col">💰 ROI semanal</td>
+            <td>R$ 7.2k</td><td>R$ 8.8k</td><td>R$ 10.5k</td><td style="font-weight:800; color:var(--teal)">R$ 12.4k</td>
+            <td><span class="trend-arrow c-green">↑ 18% WoW</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- ADOPTION -->
+  <div class="section">
+    <div class="section-title">👥 Adoção pela Equipe</div>
+    <div class="adoption-grid">
+      <div class="adopt-card">
+        <div class="adopt-title">Quem mais usa os agentes (por mensagens)</div>
+        <div class="adopt-row"><span class="adopt-name">Bruno (CEO)</span><span class="adopt-val c-green">84 msgs</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-green" style="width:100%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">Camila (Mkt)</span><span class="adopt-val c-blue">52 msgs</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-blue" style="width:62%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">André (Ops)</span><span class="adopt-val c-blue">41 msgs</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-blue" style="width:49%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">Felipe (Vendas)</span><span class="adopt-val c-yellow">18 msgs</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-yellow" style="width:21%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">Lucas (Suporte)</span><span class="adopt-val c-red">6 msgs</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-red" style="width:7%"></div></div></div>
+      </div>
+      <div class="adopt-card">
+        <div class="adopt-title">Horários de pico de uso</div>
+        <div class="adopt-row"><span class="adopt-name">08h–10h</span><span class="adopt-val">38%</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-green" style="width:100%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">10h–12h</span><span class="adopt-val">24%</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-blue" style="width:63%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">14h–16h</span><span class="adopt-val">22%</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-blue" style="width:58%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">16h–18h</span><span class="adopt-val">11%</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-yellow" style="width:29%"></div></div></div>
+        <div class="adopt-row"><span class="adopt-name">Fora do horário</span><span class="adopt-val">5%</span><div class="adopt-bar-mini"><div class="adopt-bar-fill bar-red" style="width:13%"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISKS -->
+  <div class="section">
+    <div class="section-title">⚠️ Riscos e Alertas</div>
+    <div class="risk-list">
+      <div class="risk high">
+        <div class="risk-icon">🔴</div>
+        <div class="risk-content">
+          <div class="risk-title">Campanha "Retargeting Q1" com ROAS 0.8 há 3 dias</div>
+          <div class="risk-desc">O agente de marketing alertou 3 vezes sobre a performance abaixo do piso (ROAS < 1.0). Gasto acumulado no período: R$ 1.2k sem retorno positivo.</div>
+          <div class="risk-action">→ Ação sugerida: pausar campanha imediatamente, realocar budget para campanha "Lookalike v3" que está com ROAS 3.8</div>
+        </div>
+      </div>
+      <div class="risk medium">
+        <div class="risk-icon">🟡</div>
+        <div class="risk-content">
+          <div class="risk-title">Campanha "Retargeting Q1" com ROAS 0.8 há 3 dias</div>
+          <div class="risk-desc">Queimando R$ 120/dia sem retorno positivo. Agente de marketing já alertou — aguardando decisão do Bruno.</div>
+          <div class="risk-action">→ Ação sugerida: pausar campanha e realocar budget para "Lookalike Buyers" (ROAS 4.2)</div>
+        </div>
+      </div>
+      <div class="risk medium">
+        <div class="risk-icon">🟡</div>
+        <div class="risk-content">
+          <div class="risk-title">Baixa adoção do Lucas (Suporte) — 6 msgs na semana</div>
+          <div class="risk-desc">Lucas é o único da equipe de suporte e está subutilizando o agente. Pode estar resolvendo tickets manualmente.</div>
+          <div class="risk-action">→ Ação sugerida: sessão de 15min com Lucas mostrando as skills de suporte disponíveis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section">
+    <div class="section-title">💡 Insights e Recomendações</div>
+    <div class="insights-grid">
+      <div class="insight"><div class="insight-icon">🚀</div><div class="insight-text"><strong>Operações acelerou:</strong> 89 tarefas (+28% WoW). A proatividade está funcionando — 71% das sugestões foram aceitas. O agente está se tornando cada vez mais útil.</div></div>
+      <div class="insight"><div class="insight-icon">📊</div><div class="insight-text"><strong>Cérebro mais rico:</strong> 23 commits na semana. 4 skills novas, 2 rotinas, 10 arquivos de contexto atualizados. O conhecimento da empresa está acumulando — efeito composto ativo.</div></div>
+      <div class="insight"><div class="insight-icon">⚡</div><div class="insight-text"><strong>Marketing precisa de atenção:</strong> 2 retrabalhos na semana (hook fraco em criativos). Sugestão: adicionar exemplos de hooks validados na skill stack-ad-creator-pixel (Nível 2 → +examples/).</div></div>
+      <div class="insight"><div class="insight-icon">💰</div><div class="insight-text"><strong>ROI subindo consistentemente:</strong> R$ 7.2k → R$ 12.4k em 4 semanas (+72%). A cada skill criada, o sistema fica mais eficiente. Projeção mensal: R$ 50k+ de economia.</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>TechFlow Solutions</strong> · Relatório gerado automaticamente pelo Agente Generalista · Cron: gestao-agentes-semanal · Próximo: 31/03/2026 às 07:00
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Multi-Agente</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px 32px;
+    gap: 16px;
+  }
+
+  h2 { font-size: clamp(20px, 2.3vw, 32px); font-weight: 800; text-align: center; }
+  .tagline { color: var(--text2); font-size: clamp(13px, 1.4vw, 16px); text-align: center; }
+
+  /* ── Assistente no topo ── */
+  .assistente {
+    background: var(--bg3);
+    border: 2px solid var(--accent);
+    border-radius: 20px;
+    padding: 20px 32px;
+    text-align: center;
+    box-shadow: 0 0 48px rgba(254,80,0,0.2);
+    min-width: 280px;
+  }
+  .assistente-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .assistente-icon { font-size: 38px; }
+  .assistente-name { font-size: 18px; font-weight: 800; }
+  .assistente-sub { font-size: 13px; color: var(--text2); margin-bottom: 10px; }
+  .cerebro-badge {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 11px;
+    color: var(--text2);
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+  }
+
+  /* ── Setas ── */
+  .arrows-row {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    color: var(--accent);
+    font-size: 24px;
+    line-height: 1;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+  }
+  .arrow-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .arrow-line {
+    width: 2px;
+    height: 24px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+  .arrow-head {
+    font-size: 16px;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  /* ── Grid de agentes ── */
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .agent {
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .agent:hover { border-color: rgba(255,255,255,0.2); }
+  .agent-icon { font-size: 32px; margin-bottom: 8px; }
+  .agent-name { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .agent-soul {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+  }
+  .agent-focus { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .agent-path {
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    margin-top: 6px;
+    opacity: 0.8;
+  }
+
+  .agent.marketing { border-color: rgba(254,80,0,0.4); }
+  .agent.marketing .agent-soul { background: rgba(254,80,0,0.12); color: var(--accent2); }
+  .agent.marketing .agent-path { color: var(--accent2); }
+
+  .agent.vendas { border-color: rgba(96,165,250,0.4); }
+  .agent.vendas .agent-soul { background: rgba(96,165,250,0.12); color: var(--blue); }
+  .agent.vendas .agent-path { color: var(--blue); }
+
+  .agent.atendimento { border-color: rgba(34,197,94,0.4); }
+  .agent.atendimento .agent-soul { background: rgba(34,197,94,0.12); color: var(--green); }
+  .agent.atendimento .agent-path { color: var(--green); }
+
+  .agent.operacoes { border-color: rgba(234,179,8,0.4); }
+  .agent.operacoes .agent-soul { background: rgba(234,179,8,0.12); color: var(--yellow); }
+  .agent.operacoes .agent-path { color: var(--yellow); }
+
+  /* ── Bottom bar ── */
+  .bottom {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 4px;
+  }
+  .bottom-pill {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 13px;
+    color: var(--text2);
+    text-align: center;
+    flex: 1;
+  }
+  .bottom-pill strong { color: var(--text); display: block; margin-bottom: 2px; }
+  .example-pill {
+    background: rgba(254,80,0,0.08);
+    border: 1px solid rgba(254,80,0,0.25);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 13px;
+    color: var(--text2);
+    text-align: center;
+    flex: 1;
+  }
+  .example-pill strong { color: var(--accent2); display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+  <h2>🤖 Estágio 4 — Sistema Multi-Agente Completo</h2>
+  <p class="tagline">O suprassumo: cada agente com SOUL.md, HEARTBEAT.md e AGENTS.md próprio — coordenados por um master</p>
+
+  <!-- Assistente Central no topo -->
+  <div class="assistente">
+    <div class="assistente-top">
+      <div class="assistente-icon">🧠</div>
+      <div class="assistente-name">Assistente Central</div>
+    </div>
+    <div class="assistente-sub">Master · Acesso total · Coordena, audita e gera relatórios de evolução</div>
+    <div class="cerebro-badge">📦 cerebro/ compartilhado</div>
+  </div>
+
+  <!-- Setas descendo -->
+  <div class="arrows-row">
+    <div class="arrow-down"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+    <div class="arrow-down"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+    <div class="arrow-down"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+    <div class="arrow-down"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+  </div>
+
+  <!-- 4 agentes em grid -->
+  <div class="agents-grid">
+
+    <div class="agent marketing">
+      <div class="agent-icon">📣</div>
+      <div class="agent-name">Marketing</div>
+      <div class="agent-soul">Data-driven · ROAS-first</div>
+      <div class="agent-focus">Relatórios, criativos, tráfego pago</div>
+      <div class="agent-path">areas/marketing/</div>
+    </div>
+
+    <div class="agent vendas">
+      <div class="agent-icon">💼</div>
+      <div class="agent-name">Vendas</div>
+      <div class="agent-soul">SDR mode · Conversão-first</div>
+      <div class="agent-focus">Leads, pipeline, follow-up</div>
+      <div class="agent-path">areas/vendas/</div>
+    </div>
+
+    <div class="agent atendimento">
+      <div class="agent-icon">💬</div>
+      <div class="agent-name">Atendimento</div>
+      <div class="agent-soul">Empático · Cliente-first</div>
+      <div class="agent-focus">FAQ, tickets, escala de dúvidas</div>
+      <div class="agent-path">areas/atendimento/</div>
+    </div>
+
+    <div class="agent operacoes">
+      <div class="agent-icon">⚙️</div>
+      <div class="agent-name">Operações</div>
+      <div class="agent-soul">Sistemático · Processos-first</div>
+      <div class="agent-focus">Heartbeat, sync, monitoramento</div>
+      <div class="agent-path">areas/operacoes/</div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom">
+    <div class="bottom-pill">
+      <strong>SOUL.md único por agente</strong>
+      Personalidade e tom diferentes
+    </div>
+    <div class="example-pill">
+      <strong>💬 "Qual o ROAS de hoje?"</strong>
+      Marketing → responde · Vendas → fora do escopo
+    </div>
+    <div class="bottom-pill">
+      <strong>Isolamento por área</strong>
+      Bot de suporte não vê financeiro
+    </div>
+  </div>
+
+</body>
+</html>

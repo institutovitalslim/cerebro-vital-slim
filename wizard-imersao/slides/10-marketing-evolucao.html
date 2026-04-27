@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolução do Marketing de Performance</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg:#0A0E2A; --bg2:#111630; --bg3:#181e3a;
+    --border:#2a3260; --accent:#FE5000;
+    --green:#22c55e; --blue:#60a5fa; --yellow:#eab308;
+    --purple:#a78bfa; --teal:#14b8a6; --pink:#f472b6;
+    --text:#e2e8f0; --text2:#94a3b8; --text3:#64748b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg);
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 24px;
+  }
+
+  .container { width:100%; max-width:940px; }
+
+  /* HEADER */
+  h1 { font-size:clamp(24px, 3.5vw, 38px); font-weight:900; text-align:center; margin-bottom:6px; }
+  h1 span { color:var(--accent); }
+  .subtitle { font-size:clamp(13px, 1.5vw, 16px); color:var(--text2); text-align:center; margin-bottom:12px; }
+
+  /* BEFORE/AFTER STRIP */
+  .before-after {
+    display:flex; justify-content:center; gap:24px; margin-bottom:36px; flex-wrap:wrap;
+  }
+  .ba-tag {
+    display:flex; align-items:center; gap:8px;
+    padding:8px 16px; border-radius:10px;
+    font-size:13px; font-weight:700;
+  }
+  .ba-before {
+    background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); color:#f87171;
+  }
+  .ba-arrow { color:var(--text3); font-size:18px; }
+  .ba-after {
+    background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.25); color:var(--green);
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position:relative;
+    padding-left:72px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .timeline::before {
+    content:"";
+    position:absolute;
+    left:30px;
+    top:24px;
+    bottom:24px;
+    width:4px;
+    border-radius:2px;
+    background:linear-gradient(to bottom, var(--text3) 0%, var(--yellow) 18%, var(--blue) 36%, var(--green) 54%, var(--purple) 72%, var(--accent) 100%);
+  }
+
+  /* STAGE */
+  .stage {
+    position:relative;
+    display:flex;
+    align-items:stretch;
+    min-height:110px;
+  }
+
+  /* DOT */
+  .dot {
+    position:absolute;
+    left:-72px;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:900;
+    color:white;
+    border:4px solid var(--bg);
+    z-index:2;
+    flex-shrink:0;
+  }
+  .dot-1 { background:var(--text3); left:-70px; }
+  .dot-2 { background:var(--yellow); left:-70px; }
+  .dot-3 { background:var(--blue); left:-70px; }
+  .dot-4 { background:var(--green); left:-70px; }
+  .dot-5 { background:var(--purple); left:-70px; }
+  .dot-6 { background:var(--accent); left:-70px; box-shadow:0 0 20px rgba(254,80,0,0.45); }
+
+  /* CARD */
+  .card {
+    flex:1;
+    background:var(--bg2);
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    padding:18px 22px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:2px 20px;
+  }
+  .card.highlight {
+    border-color:var(--accent);
+    background:linear-gradient(135deg, rgba(254,80,0,0.06), rgba(254,80,0,0.01));
+    box-shadow:0 0 32px rgba(254,80,0,0.08);
+  }
+
+  .card-label {
+    grid-column:1; grid-row:1;
+    font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  }
+  .label-1 { color:var(--text3); }
+  .label-2 { color:var(--yellow); }
+  .label-3 { color:var(--blue); }
+  .label-4 { color:var(--green); }
+  .label-5 { color:var(--purple); }
+  .label-6 { color:var(--accent); }
+
+  .card-title {
+    grid-column:1; grid-row:2;
+    font-size:17px; font-weight:800; line-height:1.3;
+    margin-top:3px;
+  }
+
+  .card-desc {
+    grid-column:1; grid-row:3;
+    font-size:13px; color:var(--text2); line-height:1.5;
+    margin-top:4px;
+  }
+  .card-desc strong { color:var(--text); }
+
+  .card-result {
+    grid-column:2; grid-row:1 / 4;
+    display:flex; align-items:center; justify-content:center;
+    min-width:130px;
+    padding-left:16px;
+    border-left:1px solid var(--border);
+    text-align:center;
+  }
+  .result-text {
+    font-size:11px; color:var(--text2); line-height:1.5;
+  }
+  .result-text strong { color:var(--text); font-size:13px; display:block; margin-bottom:2px; }
+
+  /* NEXT STEP — standalone outside timeline */
+  .next-step-standalone {
+    margin-top:20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:16px 22px;
+    border:2px dashed var(--text3);
+    border-radius:14px;
+    opacity:0.55;
+    background:transparent;
+  }
+  .nss-icon {
+    width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; font-weight:900; color:var(--text3);
+    border:2px dashed var(--text3);
+    background:var(--bg3);
+    flex-shrink:0;
+  }
+  .nss-content { flex:1; }
+  .nss-label { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); }
+  .nss-title { font-size:16px; font-weight:800; color:var(--text3); margin-top:2px; }
+  .nss-desc { font-size:12px; color:var(--text3); margin-top:2px; }
+  .nss-badge {
+    font-size:11px; font-weight:700; color:var(--text3);
+    padding:6px 12px; border-radius:8px;
+    border:1px dashed var(--text3);
+    white-space:nowrap; text-align:center;
+  }
+
+  /* BOTTOM STRIP */
+  .bottom {
+    display:flex; justify-content:center; flex-wrap:wrap; gap:16px;
+    font-size:12px; color:var(--text2);
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:12px; padding:14px 20px; margin-top:28px;
+  }
+  .bottom span { display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .bb { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Marketing de Performance — <span>a evolução real</span></h1>
+  <div class="subtitle">Como saímos do Ads Manager + Reportei para um ciclo 95% automatizado</div>
+
+  <div class="before-after">
+    <div class="ba-tag ba-before">❌ Antes: Ads Manager + Reportei + planilha manual</div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-tag ba-after">✅ Hoje: agente gerencia o ciclo inteiro via Cérebro</div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- NIVEL 1 -->
+    <div class="stage">
+      <div class="dot dot-1">1</div>
+      <div class="card">
+        <div class="card-label label-1">Base</div>
+        <div class="card-title">Monitoramento básico</div>
+        <div class="card-desc">API do Meta puxa dados dos criativos automaticamente — relatório diário no Telegram</div>
+        <div class="card-result">
+          <div class="result-text"><strong>Visibilidade</strong>Dados chegam até você</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEL 2 -->
+    <div class="stage">
+      <div class="dot dot-2">2</div>
+      <div class="card">
+        <div class="card-label label-2">Inteligência</div>
+        <div class="card-title">Inteligência sobre criativos</div>
+        <div class="card-desc">Cada criativo mapeado com ângulo, formato, hook e performance — padrões identificados</div>
+        <div class="card-result">
+          <div class="result-text"><strong>Decisão por dados</strong>Não mais por intuição</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEL 3 -->
+    <div class="stage">
+      <div class="dot dot-3">3</div>
+      <div class="card">
+        <div class="card-label label-3">Metodologia</div>
+        <div class="card-title">Teste estruturado</div>
+        <div class="card-desc">Framework A/B com regras de decisão e learnings acumulados no Cérebro</div>
+        <div class="card-result">
+          <div class="result-text"><strong>Cada teste = aprendizado</strong>Reutilizável pra sempre</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEL 4 -->
+    <div class="stage">
+      <div class="dot dot-4">4</div>
+      <div class="card">
+        <div class="card-label label-4">Produção</div>
+        <div class="card-title">Produção automatizada de criativos</div>
+        <div class="card-desc">Skills geram banners automaticamente — 95 criativos documentados e testados</div>
+        <div class="card-result">
+          <div class="result-text"><strong>Agente propõe</strong>Humano aprova</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEL 5 -->
+    <div class="stage">
+      <div class="dot dot-5">5</div>
+      <div class="card">
+        <div class="card-label label-5">Recomendações</div>
+        <div class="card-title">Recomendações de campanha: teste → escala</div>
+        <div class="card-desc">Campanha de teste + campanha de escala. Agente recomenda: promover, manter, pausar ou monitorar cada criativo</div>
+        <div class="card-result">
+          <div class="result-text"><strong>Agente decide</strong>Humano executa</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEL 6 -->
+    <div class="stage">
+      <div class="dot dot-6">6</div>
+      <div class="card highlight">
+        <div class="card-label label-6">Estado atual</div>
+        <div class="card-title">95% automatizado</div>
+        <div class="card-desc">Loop perpétuo: dados → hipótese → criativo → teste → learning — time só opera</div>
+        <div class="card-result">
+          <div class="result-text"><strong>Ciclo completo</strong>em loop perpétuo</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROXIMO PASSO — fora da timeline -->
+  <div class="next-step-standalone">
+    <div class="nss-icon">→</div>
+    <div class="nss-content">
+      <div class="nss-label">Próximo passo</div>
+      <div class="nss-title">Automação total via API</div>
+      <div class="nss-desc">Upload + pausa via API do Meta — em espera por risco de banimento de conta</div>
+    </div>
+    <div class="nss-badge">Risco > ganho · Por enquanto, humano opera</div>
+  </div>
+
+  <div class="bottom">
+    <span><div class="bb" style="background:var(--text3)"></div> Nível 1-2: primeiras semanas</span>
+    <span><div class="bb" style="background:var(--blue)"></div> Nível 3-4: 1-2 meses</span>
+    <span><div class="bb" style="background:var(--accent)"></div> Nível 5-6: 3+ meses</span>
+    <span style="color:var(--accent); font-weight:700;">Cada nível constrói em cima do anterior.</span>
+  </div>
+
+</div>
+</body>
+</html>

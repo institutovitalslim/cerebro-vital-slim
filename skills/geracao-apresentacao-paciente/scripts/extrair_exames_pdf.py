@@ -450,9 +450,19 @@ def extrair_linhas_pdf(pdf_path):
 # Padrões de extração de resultados de exames
 # Tenta capturar: (nome_exame) ... (valor numerico) ... (unidade) ... (referencia)
 PATTERNS = [
-    # Formato tabular: "Glicose  88  mg/dL  70 a 99"
+    # NOVO: Exames com dígito no nome (HbA1c, VitaminaB12 etc) — antes do padrão geral
     re.compile(
-        r"^(?P<nome>[A-ZÀ-Ú][A-Za-zÀ-ú0-9\s\-\.\/\(\)]+?)"
+        r"^(?P<nome>[A-ZÀ-Ú][A-Za-zÀ-ú0-9]{1,20}(?:\s[A-Za-zÀ-ú0-9]{1,20}){0,2})"
+        r"\s{2,}"
+        r"(?P<valor>[\d\.,]+(?:\s*[<>]\s*[\d\.,]+)?)"
+        r"\s+"
+        r"(?P<unidade>[A-Za-zµ/%°]+(?:\/[A-Za-zµ]+)?)"
+        r"(?:\s+(?P<referencia>.+?))?$",
+        re.UNICODE
+    ),
+    # Formato tabular padrão (sem dígitos no nome): "Glicose  88  mg/dL  70 a 99"
+    re.compile(
+        r"^(?P<nome>[A-ZÀ-Ú][A-Za-zÀ-ú\s\-\.\/\(\)]+?)"
         r"\s{2,}"
         r"(?P<valor>[\d\.,]+(?:\s*[<>]\s*[\d\.,]+)?)"
         r"\s+"
@@ -465,9 +475,9 @@ PATTERNS = [
         r"(?:Resultado|Result):\s*(?P<valor>[\d\.,<>]+)\s*(?P<unidade>[A-Za-zµ/%°\/]+)?",
         re.IGNORECASE
     ),
-    # Formato compacto: "Glicose: 88 mg/dL" ou "TSH 1,60 µUI/mL"
+    # Formato compacto sem dígitos no nome: "Glicose: 88 mg/dL"
     re.compile(
-        r"^(?P<nome>[A-ZÀ-Ú][A-Za-zÀ-ú0-9\s\-\.\/\(\)]+?)"
+        r"^(?P<nome>[A-ZÀ-Ú][A-Za-zÀ-ú\s\-\.\/\(\)]+?)"
         r"[:\s]+"
         r"(?P<valor>[\d\.,]+)"
         r"\s*"
@@ -486,6 +496,25 @@ REF_PATTERNS = [
         re.IGNORECASE
     ),
 ]
+
+
+def extrair_data_exame(linhas):
+    """Extrai a data do exame do conteúdo do PDF."""
+    patterns = [
+        r'[Cc]oleta[:\s]+(\d{2}/\d{2}/\d{4})',
+        r'[Aa]tendimento[:\s]+(\d{2}/\d{2}/\d{4})',
+        r'[Dd]ata[:\s]+(?:do\s+)?[Ee]xame[:\s]+(\d{2}/\d{2}/\d{4})',
+        r'[Dd]ata[:\s]+(\d{2}/\d{2}/\d{4})',
+        r'[Ee]mission[:\s]+(\d{2}/\d{2}/\d{4})',
+        r'[Ll]ibera(?:ção|cao)[:\s]+(\d{2}/\d{2}/\d{4})',
+    ]
+    for linha in linhas[:50]:  # data geralmente nas primeiras linhas
+        for pat in patterns:
+            import re as _re
+            m = _re.search(pat, linha)
+            if m:
+                return m.group(1)
+    return None
 
 
 def parse_exames_linhas(linhas):
@@ -697,12 +726,16 @@ def agrupar_exames(exames_enriquecidos):
         if g_key not in grupos_dict:
             continue
         titulo, hint = GROUP_META.get(g_key, (g_key.capitalize(), ""))
-        grupos.append({
+        grupo = {
             "id": g_key,
             "nome": titulo,
             "hint": hint,
             "exames": grupos_dict[g_key],
-        })
+        }
+        # Filter "outros" to only lab values with references or known catalog entries
+        if g_key == "outros":
+            grupo["exames"] = [ex for ex in grupo["exames"] if ex.get("referencia") or ex.get("valor_f") is not None]
+        grupos.append(grupo)
 
     # Seleciona os 4 hero alerts (os mais alterados, com prioridade para crit/alert)
     alterados = [ex for ex in exames if ex["alterado"]]
@@ -715,6 +748,7 @@ def agrupar_exames(exames_enriquecidos):
             "unidade": ex["unidade"],
             "referencia": ex["referencia"],
             "status": ex["status"],
+            "tag_label": ex.get("tag_label", ex["status"].upper()),
             "tag_class": ex["tag_class"],
             "explicacao": HERO_EXPLICACOES.get(ex["nome"], f"{ex['nome']} fora da referência."),
         })
@@ -776,9 +810,11 @@ def extrair_e_analisar(file_id, nome_arquivo="exame.pdf"):
         exames_enriquecidos = [enriquecer_exame(ex) for ex in exames_raw]
         resultado = agrupar_exames(exames_enriquecidos)
 
+        data_exame = extrair_data_exame(linhas)
         return {
             "encontrado": True,
             "arquivo": nome_arquivo,
+            "data_exame": data_exame,
             **resultado,
         }
 

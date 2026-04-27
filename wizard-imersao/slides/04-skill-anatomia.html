@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomia de uma Skill</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 32px 24px; }
+  h2 { font-size: clamp(24px, 2.8vw, 38px); font-weight: 800; text-align: center; margin-bottom: 8px; }
+  .example-tag { background: var(--accent); color: white; font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 100px; margin-bottom: 32px; display: inline-block; }
+  .flow { display: flex; align-items: stretch; gap: 0; width: 100%; max-width: 1050px; }
+  .box {
+    flex: 1;
+    border-radius: 16px;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .box.input { background: rgba(96,165,250,0.1); border: 2px solid var(--blue); }
+  .box.process { background: rgba(254,80,0,0.08); border: 2px solid var(--accent); flex: 1.5; }
+  .box.output { background: rgba(34,197,94,0.1); border: 2px solid var(--green); }
+  .box-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .box.input .box-label { color: var(--blue); }
+  .box.process .box-label { color: var(--accent2); }
+  .box.output .box-label { color: var(--green); }
+  .box-icon { font-size: 40px; margin-bottom: 14px; }
+  .box-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+  .item { font-size: 15px; color: var(--text2); text-align: center; line-height: 1.6; }
+  .item strong { color: var(--text); }
+  .steps { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 4px; }
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 14px;
+  }
+  .step-num {
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; flex-shrink: 0;
+  }
+  .arrow-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    font-size: 28px;
+    color: var(--text2);
+    flex-shrink: 0;
+  }
+  .footer-note {
+    margin-top: 28px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text2);
+    text-align: center;
+  }
+  .footer-note span { color: var(--accent2); }
+</style>
+</head>
+<body>
+  <h2>Anatomia de uma Skill</h2>
+  <div class="example-tag">📊 Exemplo: Relatório de Vendas</div>
+
+  <div class="flow">
+    <div class="box input">
+      <div class="box-label">Input</div>
+      <div class="box-icon">📥</div>
+      <div class="box-title">Fonte de Dados</div>
+      <div class="item">📄 <strong>vendas.csv</strong><br>ou<br>📊 <strong>Google Sheets</strong><br><br>Dados brutos de vendas do período</div>
+    </div>
+
+    <div class="arrow-box">→</div>
+
+    <div class="box process">
+      <div class="box-label">Processo</div>
+      <div class="box-icon">⚙️</div>
+      <div class="box-title">O que o agente executa</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div> Ler e interpretar os dados</div>
+        <div class="step"><div class="step-num">2</div> Calcular métricas-chave (faturamento, ticket médio, canal top)</div>
+        <div class="step"><div class="step-num">3</div> Identificar tendências e anomalias</div>
+        <div class="step"><div class="step-num">4</div> Gerar insights acionáveis</div>
+      </div>
+    </div>
+
+    <div class="arrow-box">→</div>
+
+    <div class="box output">
+      <div class="box-label">Output</div>
+      <div class="box-icon">📤</div>
+      <div class="box-title">Entrega Final</div>
+      <div class="item">📱 <strong>Relatório formatado</strong><br>enviado via<br>💬 <strong>Telegram</strong><br><br>Com métricas, alertas<br>e recomendações</div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <span>Uma skill = uma receita</span> que o agente segue — sempre do mesmo jeito, sem esquecer nenhum passo.
+  </div>
+</body>
+</html>

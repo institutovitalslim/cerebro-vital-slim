@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permissionamento no Telegram</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px 24px; gap: 14px; }
+  h2 { font-size: clamp(20px, 2.3vw, 30px); font-weight: 800; text-align: center; }
+  .sub { color: var(--text2); font-size: 14px; text-align: center; }
+
+  .comparison { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; width: 100%; max-width: 1000px; align-items: start; }
+
+  .scenario {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+  }
+  .scenario.a { border-color: var(--blue); }
+  .scenario.b { border-color: var(--green); }
+  .scenario-label {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .scenario.a .scenario-label { color: var(--blue); }
+  .scenario.b .scenario-label { color: var(--green); }
+  .scenario-title { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
+  .scenario-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+
+  .tg-groups { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .tg-group {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg3); border-radius: 10px; padding: 9px 12px;
+    font-size: 13px; border: 1px solid var(--border);
+  }
+  .tg-group .icon { font-size: 18px; }
+  .tg-group .name { font-weight: 600; flex: 1; }
+  .tg-group .agent { font-size: 11px; color: var(--text2); }
+
+  .tg-topics { background: var(--bg3); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 14px; }
+  .tg-group-header { padding: 9px 12px; background: rgba(34,197,94,0.1); border-bottom: 1px solid var(--border); font-weight: 700; font-size: 13px; display: flex; gap: 8px; align-items: center; }
+  .tg-topic { display: flex; align-items: center; gap: 8px; padding: 7px 12px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .tg-topic:last-child { border-bottom: none; }
+
+  .pros-cons { display: flex; flex-direction: column; gap: 4px; }
+  .pro, .con { display: flex; align-items: flex-start; gap: 6px; font-size: 13px; }
+  .pro { color: var(--green); }
+  .con { color: #f87171; }
+
+  /* Seta central */
+  .evolution-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 60px;
+  }
+  .arrow-label {
+    font-size: 11px;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+  .arrow-icon {
+    font-size: 28px;
+    color: var(--accent);
+  }
+
+  /* Seção de evolução */
+  .evolution {
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(254,80,0,0.06);
+    border: 1px solid rgba(254,80,0,0.25);
+    border-radius: 14px;
+    padding: 16px 22px;
+  }
+  .evolution-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--accent2);
+    margin-bottom: 10px;
+  }
+  .evolution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .evo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .evo-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .evo-label { font-weight: 700; display: block; margin-bottom: 2px; }
+  .evo-desc { color: var(--text2); }
+
+  .note-banner {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: var(--text2);
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+  }
+  .note-banner strong { color: var(--text); }
+</style>
+</head>
+<body>
+  <h2>🔐 Permissionamento no Telegram</h2>
+  <p class="sub">Começa simples, evolui conforme a empresa escala</p>
+
+  <div class="comparison">
+    <!-- Cenário A: Tópicos -->
+    <div class="scenario b">
+      <div class="scenario-label">Começo</div>
+      <div class="scenario-title">🗂️ Tópicos (1 agente)</div>
+      <div class="scenario-desc">Um grupo Telegram com tópicos por área. Um agente único que separa o contexto entre os tópicos.</div>
+      <div class="tg-topics">
+        <div class="tg-group-header">
+          <span>💼</span> Empresa Central — 🤖 1 agente
+        </div>
+        <div class="tg-topic"><span>💰</span> Vendas</div>
+        <div class="tg-topic"><span>📣</span> Marketing</div>
+        <div class="tg-topic"><span>💬</span> Atendimento</div>
+        <div class="tg-topic"><span>⚙️</span> Operações</div>
+      </div>
+      <div class="pros-cons">
+        <div class="pro">✅ Simples de começar</div>
+        <div class="pro">✅ Visibilidade cruzada</div>
+        <div class="con">❌ Agente generalista</div>
+        <div class="con">❌ Sem isolamento real</div>
+      </div>
+    </div>
+
+    <!-- Seta de evolução -->
+    <div class="evolution-arrow">
+      <div class="arrow-label">ESCALA</div>
+      <div class="arrow-icon">→</div>
+    </div>
+
+    <!-- Cenário B: Grupos -->
+    <div class="scenario a">
+      <div class="scenario-label">Escala</div>
+      <div class="scenario-title">📱 Grupos Separados</div>
+      <div class="scenario-desc">Um grupo por área, cada um com agente dedicado. SOUL.md, arquivos e identidade específicos.</div>
+      <div class="tg-groups">
+        <div class="tg-group">
+          <div class="icon">💰</div>
+          <div class="name">Grupo Vendas</div>
+          <div class="agent">🤖 Agente Vendas</div>
+        </div>
+        <div class="tg-group">
+          <div class="icon">📣</div>
+          <div class="name">Grupo Marketing</div>
+          <div class="agent">🤖 Agente Marketing</div>
+        </div>
+        <div class="tg-group">
+          <div class="icon">💬</div>
+          <div class="name">Grupo Atendimento</div>
+          <div class="agent">🤖 Bot Suporte</div>
+        </div>
+        <div class="tg-group">
+          <div class="icon">⚙️</div>
+          <div class="name">Grupo Operações</div>
+          <div class="agent">🤖 Agente Ops</div>
+        </div>
+      </div>
+      <div class="pros-cons">
+        <div class="pro">✅ Agente especialista por área</div>
+        <div class="pro">✅ Permissão por grupo</div>
+        <div class="pro">✅ Contexto limpo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Por que escalar -->
+  <div class="evolution">
+    <div class="evolution-title">📈 Por que migrar pra grupos quando escalar?</div>
+    <div class="evolution-grid">
+      <div class="evo-item">
+        <div class="evo-icon">🎯</div>
+        <div>
+          <span class="evo-label">Especificidade</span>
+          <span class="evo-desc">SOUL.md dedicado, arquivos dedicados. Extrai o máximo de cada área.</span>
+        </div>
+      </div>
+      <div class="evo-item">
+        <div class="evo-icon">🔒</div>
+        <div>
+          <span class="evo-label">Permissionamento real</span>
+          <span class="evo-desc">Só quem tá no grupo acessa aquele agente. Controle por grupo, não por config.</span>
+        </div>
+      </div>
+      <div class="evo-item">
+        <div class="evo-icon">🧹</div>
+        <div>
+          <span class="evo-label">Contexto limpo</span>
+          <span class="evo-desc">Cada agente lê só os arquivos da área dele. Sem ruído, sem confusão.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-banner">🔑 Em ambos os cenários: <strong>2 camadas de segurança</strong> — estar no grupo + estar na whitelist de IDs do agente</div>
+</body>
+</html>

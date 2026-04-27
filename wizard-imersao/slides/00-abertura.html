@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imersão OpenClaw nos Negócios</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A;
+    --bg2: #111630;
+    --bg3: #181e3a;
+    --border: #2a3260;
+    --accent: #FE5000;
+    --accent2: #ff7a35;
+    --green: #22c55e;
+    --blue: #60a5fa;
+    --yellow: #eab308;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 60px;
+    position: relative;
+  }
+  .bg-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(254,80,0,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+  }
+  .bg-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96,165,250,0.07) 0%, transparent 70%);
+    bottom: 10%; right: 10%;
+    pointer-events: none;
+  }
+  .layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    animation: fadeIn 0.8s ease;
+    gap: 40px;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .logo { font-size: 72px; filter: drop-shadow(0 0 30px rgba(254,80,0,0.5)); animation: pulse 3s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(254,80,0,0.5)); }
+    50% { filter: drop-shadow(0 0 60px rgba(254,80,0,0.9)); }
+  }
+  .badge {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+  }
+  h1 {
+    font-size: clamp(32px, 4vw, 58px);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 30%, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .pills {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 18px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .pill.accent { border-color: var(--accent); color: var(--accent2); background: rgba(254,80,0,0.1); }
+
+  /* AGENDA */
+  .agenda {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  .day-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+  }
+  .day-card.day2 { border-color: rgba(96,165,250,0.3); }
+  .day-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .day-card.day2 .day-label { color: var(--blue); }
+  .day-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .day-result {
+    font-size: 12px;
+    color: var(--accent2);
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-card.day2 .day-result { color: var(--blue); }
+  .topics { display: flex; flex-direction: column; gap: 9px; }
+  .topic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text2);
+    font-weight: 500;
+  }
+  .topic-left { display: flex; align-items: center; gap: 10px; }
+  .topic-time { font-size: 11px; color: #ffffff; font-weight: 600; white-space: nowrap; }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .day-card.day2 .dot { background: var(--blue); }
+
+  /* INSTRUTORES */
+  .instrutores {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+  }
+  .inst-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text2);
+    white-space: nowrap;
+  }
+  .inst-cards { display: flex; gap: 20px; flex: 1; }
+  .inst {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .inst-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--bg3); border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+    overflow: hidden;
+  }
+  .inst-avatar img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .inst-name { font-size: 13px; font-weight: 700; }
+  .inst-role { font-size: 11px; color: var(--text2); }
+
+  .footer {
+    position: absolute;
+    bottom: 24px;
+    color: var(--text2);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="bg-glow2"></div>
+
+  <div class="layout">
+    <div class="top">
+      <div class="logo">🧠</div>
+      <div class="badge">✦ OpenClaw ✦</div>
+      <h1>Imersão OpenClaw nos Negócios</h1>
+      <div class="pills">
+        <div class="pill">📅 28–29/03/2026</div>
+        <div class="pill">⏱️ 2 dias · 3h cada</div>
+        <div class="pill accent">🎯 100% Demo ao Vivo</div>
+      </div>
+    </div>
+
+    <div class="instrutores">
+      <div class="inst-label">Instrutores</div>
+      <div class="inst-cards">
+        <div class="inst">
+          <div class="inst-avatar"><img src="data:image/jpeg;base64,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" alt="Bruno"></div>
+          <div><div class="inst-name">Bruno Okamoto</div><div class="inst-role">CCO & Fundador · Apresentador da Imersão</div></div>
+        </div>
+        <div class="inst">
+          <div class="inst-avatar"><img src="data:image/jpeg;base64,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" alt="Cayo"></div>
+          <div><div class="inst-name">Cayo Syllos</div><div class="inst-role">CEO & Co-Fundador · Copiloto da Imersão</div></div>
+        </div>
+        <div class="inst">
+          <div class="inst-avatar"><img src="data:image/jpeg;base64,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" alt="Matheus"></div>
+          <div><div class="inst-name">Matheus</div><div class="inst-role">COO & Co-Fundador · 💬 no Chat</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agenda">
+      <div class="day-card">
+        <div class="day-label">Dia 1 — 28/03</div>
+        <div class="day-title">Fundação do Sistema</div>
+        <div class="day-result">Você aprende a construir o Cérebro, criar automações em linguagem natural e colocar o sistema pra rodar sozinho.</div>
+        <div class="topics">
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Abertura & apresentação</div><div class="topic-time">15min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>O problema e a arquitetura</div><div class="topic-time">20min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>O Cérebro — estrutura e organização</div><div class="topic-time">30min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Skills — automações em linguagem natural</div><div class="topic-time">40min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Skill-creator — o agente cria skills</div><div class="topic-time">25min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Crons — o sistema roda sozinho</div><div class="topic-time">20min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Segurança em 3 camadas</div><div class="topic-time">20min</div></div>
+        </div>
+      </div>
+      <div class="day-card day2">
+        <div class="day-label">Dia 2 — 29/03</div>
+        <div class="day-title">Sistema Completo</div>
+        <div class="day-result">Você aprende a configurar múltiplos agentes, automatizar marketing e suporte, e montar seu plano de implementação.</div>
+        <div class="topics">
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Abertura & recap do dia 1</div><div class="topic-time">15min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Multi-agente — cada um no seu papel</div><div class="topic-time">30min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Permissionamento por área</div><div class="topic-time">20min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Marketing de performance automatizado</div><div class="topic-time">35min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Bot de suporte que aprende sozinho</div><div class="topic-time">30min</div></div>
+          <div class="topic"><div class="topic-left"><div class="dot"></div>Plano 30 dias — como começar</div><div class="topic-time">20min</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Toda empresa precisa de uma estratégia de uso do OpenClaw.</div>
+</body>
+</html>

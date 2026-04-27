@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>As 3 Camadas de Proteção</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  :root {
+    --bg: #0A0E2A; --bg2: #111630; --bg3: #181e3a;
+    --border: #2a3260; --accent: #FE5000; --accent2: #ff7a35;
+    --green: #22c55e; --blue: #60a5fa; --yellow: #eab308;
+    --red: #ef4444; --purple: #a78bfa; --teal: #14b8a6;
+    --text: #e2e8f0; --text2: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 48px 20px; gap: 18px; }
+
+  /* HEADER */
+  .header { display: flex; align-items: center; gap: 14px; width: 100%; max-width: 1100px; }
+  h1 { font-size: clamp(24px, 3vw, 36px); font-weight: 900; }
+  h1 span { color: var(--accent2); }
+  .owasp-badge {
+    margin-left: auto; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 8px; padding: 6px 14px; font-size: 11px; font-weight: 700;
+    color: var(--red); display: flex; align-items: center; gap: 6px;
+  }
+
+  /* STATS BAR */
+  .stats { display: flex; gap: 12px; width: 100%; max-width: 1100px; }
+  .stat {
+    flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .stat-number { font-size: 20px; font-weight: 900; color: var(--accent2); }
+  .stat-text { font-size: 10px; color: var(--text2); line-height: 1.3; }
+
+  /* ROWS */
+  .rows { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 1100px; flex: 1; }
+  .row {
+    display: grid; grid-template-columns: 160px 1fr 220px;
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; flex: 1;
+  }
+
+  /* LEFT LABEL */
+  .row-label {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 16px 18px; border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .row-label::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .row-servidor .row-label::before { background: var(--blue); }
+  .row-agente .row-label::before { background: var(--green); }
+  .row-processo .row-label::before { background: var(--accent); }
+
+  .row-tag { font-size: 11px; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px; }
+  .row-servidor .row-tag { color: var(--blue); }
+  .row-agente .row-tag { color: var(--green); }
+  .row-processo .row-tag { color: var(--accent2); }
+  .row-icon { font-size: 20px; margin-bottom: 4px; }
+  .row-name { font-size: 14px; font-weight: 800; }
+  .row-desc { font-size: 10px; color: var(--text2); line-height: 1.3; margin-top: 2px; }
+
+  /* CONTROLS */
+  .row-controls {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 12px 18px; gap: 6px;
+  }
+  .controls-title { font-size: 9px; font-weight: 700; color: var(--text2); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+  .control {
+    display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 1.3;
+  }
+  .control-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .cd-blue { background: var(--blue); }
+  .cd-green { background: var(--green); }
+  .cd-orange { background: var(--accent); }
+  .control-name { font-weight: 700; }
+  .control-desc { color: var(--text2); }
+
+  /* PROTECTS */
+  .row-protects {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 12px 18px; gap: 6px; border-left: 1px solid var(--border);
+    background: rgba(0,0,0,0.15);
+  }
+  .protects-title { font-size: 9px; font-weight: 700; color: var(--text2); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+  .threat {
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; width: fit-content;
+  }
+  .t-red { background: rgba(239,68,68,0.12); color: var(--red); }
+  .t-yellow { background: rgba(234,179,8,0.12); color: var(--yellow); }
+  .t-green { background: rgba(34,197,94,0.12); color: var(--green); }
+  .t-purple { background: rgba(167,139,250,0.12); color: var(--purple); }
+  .t-icon { font-size: 12px; }
+
+  /* BOTTOM */
+  .bottom {
+    display: flex; gap: 10px; width: 100%; max-width: 1100px; align-items: center; flex-wrap: wrap;
+  }
+  .bottom-msg {
+    font-size: 13px; color: var(--text2); flex: 1;
+  }
+  .bottom-msg strong { color: var(--text); }
+  .bottom-msg .pct { color: var(--green); font-weight: 900; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700;
+    background: var(--bg3); border: 1px solid var(--border); color: var(--text2);
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🔒 As 3 Camadas de <span>Proteção</span></h1>
+    <div class="owasp-badge">⚠️ OWASP LLM Top 10 · 2026</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">21K+</div>
+      <div class="stat-text">instâncias expostas<br>com chaves vazadas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">88%</div>
+      <div class="stat-text">das empresas<br>tiveram incidente</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">#1</div>
+      <div class="stat-text">Prompt Injection<br>risco mais explorado</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">~90%</div>
+      <div class="stat-text">redução com<br>hardening correto</div>
+    </div>
+  </div>
+
+  <div class="rows">
+    <!-- C1 SERVIDOR -->
+    <div class="row row-servidor">
+      <div class="row-label">
+        <div class="row-tag">C1</div>
+        <div class="row-icon">🔒</div>
+        <div class="row-name">Servidor</div>
+        <div class="row-desc">a fundação — tudo começa aqui antes do agente existir</div>
+      </div>
+      <div class="row-controls">
+        <div class="controls-title">5 controles</div>
+        <div class="control"><div class="control-dot cd-blue"></div><span class="control-name">SSH key-only</span> — <span class="control-desc">desabilitar login com senha</span></div>
+        <div class="control"><div class="control-dot cd-blue"></div><span class="control-name">Fail2ban</span> — <span class="control-desc">ban automático após 5 tentativas</span></div>
+        <div class="control"><div class="control-dot cd-blue"></div><span class="control-name">UFW Firewall</span> — <span class="control-desc">só portas 22, 80, 443 abertas</span></div>
+        <div class="control"><div class="control-dot cd-blue"></div><span class="control-name">Gateway em localhost</span> — <span class="control-desc">nunca expor porta 18789</span></div>
+        <div class="control"><div class="control-dot cd-blue"></div><span class="control-name">Updates automáticos</span> — <span class="control-desc">fecha CVEs conhecidas</span></div>
+      </div>
+      <div class="row-protects">
+        <div class="protects-title">Protege contra</div>
+        <div class="threat t-red"><span class="t-icon">🔴</span> Prompt Injection</div>
+        <div class="threat t-purple"><span class="t-icon">🟣</span> Privilege Abuse</div>
+        <div class="threat t-yellow"><span class="t-icon">🟡</span> Tool Misuse (infra)</div>
+      </div>
+    </div>
+
+    <!-- C2 AGENTE -->
+    <div class="row row-agente">
+      <div class="row-label">
+        <div class="row-tag">C2</div>
+        <div class="row-icon">🤖</div>
+        <div class="row-name">Agente</div>
+        <div class="row-desc">o comportamento — o que o agente pode e não pode fazer</div>
+      </div>
+      <div class="row-controls">
+        <div class="controls-title">5 controles</div>
+        <div class="control"><div class="control-dot cd-green"></div><span class="control-name">dmPolicy: allowlist</span> — <span class="control-desc">só IDs autorizados falam</span></div>
+        <div class="control"><div class="control-dot cd-green"></div><span class="control-name">Credenciais no .env</span> — <span class="control-desc">chmod 600, nunca em código</span></div>
+        <div class="control"><div class="control-dot cd-green"></div><span class="control-name">Skills auditadas</span> — <span class="control-desc">ler código antes de instalar</span></div>
+        <div class="control"><div class="control-dot cd-green"></div><span class="control-name">Tool restrictions</span> — <span class="control-desc">allowlist de comandos</span></div>
+        <div class="control"><div class="control-dot cd-green"></div><span class="control-name">requireMention: true</span> — <span class="control-desc">bot só responde mencionado</span></div>
+      </div>
+      <div class="row-protects">
+        <div class="protects-title">Protege contra</div>
+        <div class="threat t-yellow"><span class="t-icon">🟡</span> Tool Misuse</div>
+        <div class="threat t-yellow"><span class="t-icon">🟡</span> Goal Hijack</div>
+        <div class="threat t-red"><span class="t-icon">🔴</span> Prompt Injection</div>
+      </div>
+    </div>
+
+    <!-- C3 PROCESSO -->
+    <div class="row row-processo">
+      <div class="row-label">
+        <div class="row-tag">C3</div>
+        <div class="row-icon">📋</div>
+        <div class="row-name">Processo</div>
+        <div class="row-desc">a disciplina — rotinas que mantêm a segurança viva</div>
+      </div>
+      <div class="row-controls">
+        <div class="controls-title">5 controles</div>
+        <div class="control"><div class="control-dot cd-orange"></div><span class="control-name">Dupla autorização</span> — <span class="control-desc">2 confirmações antes de prod</span></div>
+        <div class="control"><div class="control-dot cd-orange"></div><span class="control-name">Audit crons</span> — <span class="control-desc">auditoria diária automática</span></div>
+        <div class="control"><div class="control-dot cd-orange"></div><span class="control-name">Logs completos</span> — <span class="control-desc">toda ação com timestamp</span></div>
+        <div class="control"><div class="control-dot cd-orange"></div><span class="control-name">Rotação de tokens</span> — <span class="control-desc">trocar chaves a cada 90 dias</span></div>
+        <div class="control"><div class="control-dot cd-orange"></div><span class="control-name">Memória no GitHub</span> — <span class="control-desc">backup de decisões críticas</span></div>
+      </div>
+      <div class="row-protects">
+        <div class="protects-title">Protege contra</div>
+        <div class="threat t-purple"><span class="t-icon">🟣</span> Memory Poisoning</div>
+        <div class="threat t-yellow"><span class="t-icon">🟡</span> Goal Hijack</div>
+        <div class="threat t-purple"><span class="t-icon">🟣</span> Privilege Abuse</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="bottom-msg">~<span class="pct">90%</span> de redução na superfície de ataque. Poder sem controle é brecha — com as <strong>3 camadas</strong>, você fecha ~90%.</div>
+    <div class="tags">
+      <div class="tag">Prompt Injection</div>
+      <div class="tag">Tool Misuse</div>
+      <div class="tag">Goal Hijack</div>
+      <div class="tag">Memory Poisoning</div>
+      <div class="tag">Privilege Abuse</div>
+    </div>
+  </div>
+
+</body>
+</html>

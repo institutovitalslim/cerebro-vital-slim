@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como começar na sua empresa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --bg: #06080F;
+    --bg2: #0C1022;
+    --bg3: #131830;
+    --border: #1e2548;
+    --border-hover: #2e3668;
+    --accent: #FE5000;
+    --accent-glow: rgba(254, 80, 0, 0.12);
+    --green: #34d399;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --yellow: #fbbf24;
+    --teal: #2dd4bf;
+    --pink: #f472b6;
+    --text: #f1f5f9;
+    --text2: #94a3b8;
+    --text3: #475569;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 24px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 880px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-glow);
+    border: 1px solid rgba(254, 80, 0, 0.2);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  h1 span { color: var(--accent); }
+  .header-sub {
+    font-size: 16px;
+    color: var(--text2);
+    font-weight: 400;
+  }
+
+  /* STEPS */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0 20px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .step:nth-child(1) { animation-delay: 0.05s; }
+  .step:nth-child(2) { animation-delay: 0.1s; }
+  .step:nth-child(3) { animation-delay: 0.15s; }
+  .step:nth-child(4) { animation-delay: 0.2s; }
+  .step:nth-child(5) { animation-delay: 0.25s; }
+  .step:nth-child(6) { animation-delay: 0.3s; }
+  .step:nth-child(7) { animation-delay: 0.35s; }
+  .step:nth-child(8) { animation-delay: 0.4s; }
+  .step:nth-child(9) { animation-delay: 0.45s; }
+  .step:nth-child(10) { animation-delay: 0.5s; }
+
+  /* LEFT COLUMN */
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    flex-shrink: 0;
+    z-index: 2;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+  }
+  .step:hover .step-number {
+    transform: scale(1.08);
+  }
+
+  .step-line {
+    width: 2px;
+    flex: 1;
+    min-height: 16px;
+    background: linear-gradient(180deg, var(--border-hover) 0%, var(--border) 100%);
+  }
+  .step:last-child .step-line { display: none; }
+
+  /* RIGHT COLUMN */
+  .step-content {
+    padding: 8px 0 28px;
+  }
+
+  .step-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .step-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+  .step-desc strong { color: var(--text); font-weight: 600; }
+
+  /* STEP COLORS */
+  .sn-green { background: rgba(52, 211, 153, 0.1); border: 1.5px solid rgba(52, 211, 153, 0.3); color: var(--green); }
+  .sn-blue { background: rgba(96, 165, 250, 0.1); border: 1.5px solid rgba(96, 165, 250, 0.3); color: var(--blue); }
+  .sn-purple { background: rgba(167, 139, 250, 0.1); border: 1.5px solid rgba(167, 139, 250, 0.3); color: var(--purple); }
+  .sn-yellow { background: rgba(251, 191, 36, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.3); color: var(--yellow); }
+  .sn-teal { background: rgba(45, 212, 191, 0.1); border: 1.5px solid rgba(45, 212, 191, 0.3); color: var(--teal); }
+  .sn-pink { background: rgba(244, 114, 182, 0.1); border: 1.5px solid rgba(244, 114, 182, 0.3); color: var(--pink); }
+  .sn-accent { background: var(--accent-glow); border: 1.5px solid rgba(254, 80, 0, 0.35); color: var(--accent); }
+
+  .step:hover .sn-green { box-shadow: 0 0 20px rgba(52, 211, 153, 0.15); }
+  .step:hover .sn-blue { box-shadow: 0 0 20px rgba(96, 165, 250, 0.15); }
+  .step:hover .sn-purple { box-shadow: 0 0 20px rgba(167, 139, 250, 0.15); }
+  .step:hover .sn-yellow { box-shadow: 0 0 20px rgba(251, 191, 36, 0.15); }
+  .step:hover .sn-teal { box-shadow: 0 0 20px rgba(45, 212, 191, 0.15); }
+  .step:hover .sn-pink { box-shadow: 0 0 20px rgba(244, 114, 182, 0.15); }
+  .step:hover .sn-accent { box-shadow: 0 0 24px rgba(254, 80, 0, 0.2); }
+
+  .st-green { color: var(--green); }
+  .st-blue { color: var(--blue); }
+  .st-purple { color: var(--purple); }
+  .st-yellow { color: var(--yellow); }
+  .st-teal { color: var(--teal); }
+  .st-pink { color: var(--pink); }
+  .st-accent { color: var(--accent); }
+
+  /* HIGHLIGHT LAST STEP */
+  .step-highlight .step-content {
+    background: var(--accent-glow);
+    border: 1px solid rgba(254, 80, 0, 0.15);
+    border-radius: 16px;
+    padding: 16px 20px 20px;
+    margin-top: 4px;
+  }
+
+  /* PHASE DIVIDER */
+  .phase-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 12px 0 12px 0;
+    padding-left: 64px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .pd-1 { animation-delay: 0.32s; }
+  .pd-2 { animation-delay: 0.47s; }
+  .phase-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-hover), transparent);
+  }
+  .phase-divider-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    white-space: nowrap;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-badge">Roadmap prático — 3 etapas</div>
+    <h1>Como começar <span>na sua empresa</span></h1>
+    <div class="header-sub">Etapa 1 é da diretoria. Etapa 2 escala pro time. Etapa 3 é adoção.</div>
+  </div>
+
+  <div class="steps">
+
+    <!-- ETAPA 1 — FUNDAÇÃO -->
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-green">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-green">Etapa 1 — Fundação</div>
+        <div class="step-title">Criar o repositório (cérebro)</div>
+        <div class="step-desc">A estrutura de pastas que vocês viram: <strong>áreas, agentes, skills, rotinas</strong>. É o sistema nervoso central da operação com IA.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-blue">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-blue">Conexão pessoal</div>
+        <div class="step-title">Conectar os agentes dos diretores</div>
+        <div class="step-desc">Cada diretor já usa seu agente pessoal. Agora <strong>conecta ele ao cérebro</strong> pra que tenha acesso ao contexto da empresa.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-purple">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-purple">Primeiro agente</div>
+        <div class="step-title">Criar o agente da empresa</div>
+        <div class="step-desc">Um agente compartilhado, conectado ao cérebro. <strong>O ponto de partida pra toda a operação.</strong></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-yellow">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-yellow">O mais importante</div>
+        <div class="step-title">Alimentar com contexto</div>
+        <div class="step-desc">O passo mais demorado. Documenta processos, conecta nas ferramentas que você já usa — <strong>Notion, Google Drive, exporta em Markdown</strong>.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-teal">5</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-teal">Execução</div>
+        <div class="step-title">Criar as primeiras skills</div>
+        <div class="step-desc">Começa pelas mais simples, valida, e vai evoluindo. <strong>Cada skill é um documento em linguagem natural.</strong></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-pink">6</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-pink">Automação</div>
+        <div class="step-title">Criar rotinas</div>
+        <div class="step-desc">O que deve rodar sozinho, <strong>roda sozinho</strong>. Relatórios, consolidações, health checks — agenda os primeiros crons.</div>
+      </div>
+    </div>
+
+    <!-- ETAPA 2 — ESCALAR PRO TIME -->
+
+    <div class="phase-divider pd-1">
+      <div class="phase-divider-line"></div>
+      <div class="phase-divider-label">Etapa 2 — Escalar pro time</div>
+      <div class="phase-divider-line"></div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-blue">7</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-blue">Profundidade</div>
+        <div class="step-title">Alimentar o contexto de cada área</div>
+        <div class="step-desc">Com mais riqueza e profundidade, <strong>área por área</strong>. Quanto mais contexto, mais inteligente o agente fica.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-purple">8</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-purple">Especialização</div>
+        <div class="step-title">Criar agentes especializados</div>
+        <div class="step-desc">Quando fizer sentido, <strong>separa workspaces com escopo claro</strong> por área. Cada agente acessa só o que precisa.</div>
+      </div>
+    </div>
+
+    <!-- ETAPA 3 — ADOÇÃO -->
+
+    <div class="phase-divider pd-2">
+      <div class="phase-divider-line"></div>
+      <div class="phase-divider-label">Etapa 3 — Adoção</div>
+      <div class="phase-divider-line"></div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-number sn-accent">9</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-accent">Onboarding</div>
+        <div class="step-title">Onboarding do time</div>
+        <div class="step-desc">Configura o agente pra se apresentar — <strong>regra no SOUL.md que lê o _index.md das skills</strong>. Coloca no grupo e deixa o próprio agente ensinar o time a usá-lo.</div>
+      </div>
+    </div>
+
+    <div class="step step-highlight">
+      <div class="step-left">
+        <div class="step-number sn-accent">10</div>
+      </div>
+      <div class="step-content">
+        <div class="step-tag st-accent">Evolução contínua</div>
+        <div class="step-title">Acompanhar e iterar</div>
+        <div class="step-desc">O sistema evolui com o uso. <strong>Cada conversa, cada rotina, cada skill nova alimenta o cérebro.</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
