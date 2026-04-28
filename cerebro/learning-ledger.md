@@ -61,6 +61,30 @@ Tiaro pediu extração e análise da playlist completa "Treinamento CRC de Clín
 
 ---
 
+## 2026-04-28 - Aprendizado de SPIN selling por reel do Vitor Oliveira
+
+### Contexto
+Tiaro enviou o reel `DXr-WEdicUL` e pediu que a Clara aprendesse com o vídeo para evoluir o SPIN selling no atendimento de pacientes via WhatsApp.
+
+### Extração
+- Reel público do Instagram baixado com `yt-dlp`
+- Áudio extraído com `ffmpeg`
+- Transcrição feita via skill `openai-whisper-api`
+
+### Aprendizados incorporados
+Atualizado `cerebro/leads-argumentos-venda-ligacoes.md` com a seção **"Microlições de recuperação high-ticket"**:
+- não discutir após o primeiro "não posso"; pivotar rápido para outro horário
+- reforçar autoridade antes do convite para consulta
+- usar microcompromisso (sinal pequeno) para reduzir fricção
+- preferir condição vinculada ao próximo passo em vez de desconto seco
+- fechar com perguntas curtas e objetivas, em degraus
+- aplicar um **SPIN curto de recuperação** quando a lead já demonstrou interesse e só falta remover a trava final
+
+### Impacto operacional
+Esse aprendizado refina a atuação da Clara em leads que já estão quentes, mas travam em agenda, valor ou decisão final. A mudança mais importante é: **não reabrir descoberta longa quando a objeção já ficou clara; remover a trava específica e conduzir para o micropróximo passo.**
+
+---
+
 ## 2026-04-24 - Adoção de skills de design externas (Impeccable + Emil Kowalski)
 
 ### Contexto

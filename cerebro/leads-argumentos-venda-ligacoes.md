@@ -169,7 +169,80 @@ Princípios embutidos:
 
 ---
 
-## 8. Regra de ouro de Vitor aplicada à Clara
+## 8. Microlições de recuperação high-ticket (reel DXr-WEdicUL, 2026-04-28)
+
+Fonte: Vitor Oliveira / Comercial para Médicos. Cena analisada: secretária conduzindo uma paciente inicialmente indisponível até o agendamento com sinal e condição clara.
+
+### 8.1 — Não discutir após o primeiro "não posso"
+Quando a lead responde "não posso" para um horário, **não argumentar nem insistir no mesmo slot**.
+
+**Padrão correto:**
+1. validar curto: "Ah, tá, perfeito"
+2. pivotar imediatamente: "deixa eu verificar outro horário"
+3. oferecer nova opção concreta
+
+**Tradução operacional para a Clara:**
+- resistência de agenda não é objeção de valor, é objeção de encaixe;
+- trocar de horário rápido preserva fluxo e reduz atrito.
+
+### 8.2 — Autoridade antes do convite
+Antes de convidar para a consulta, a conversa reforça:
+- prova de resultado percebido ("você já acompanha")
+- autoridade do médico
+- diferencial objetivo do método/certificação
+
+**Regra Clara:** antes do fechamento, lembrar em 1 frase por que a Dra. Daniely não é "mais uma consulta". Ex.: abordagem metabólica integrada, personalização, leitura global do caso, experiência clínica.
+
+### 8.3 — Fechamento por microcompromisso
+A proposta não exige pagamento integral imediato. Ela pede um **sinal pequeno para reserva**, e reduz fricção.
+
+**Estrutura que funciona:**
+- valor cheio
+- condição específica de agenda/contexto
+- sinal pequeno para reservar
+- restante no dia
+- crédito do valor da consulta no tratamento, quando aplicável
+
+**Regra Clara:** quando houver trava de decisão, quebrar o fechamento em 2 etapas:
+1. reservar
+2. concluir no dia
+
+### 8.4 — Benefício vinculado ao próximo passo, não desconto solto
+O vídeo mostra uma lógica forte: o benefício existe **se a lead avançar agora** e está conectado ao fluxo da clínica.
+
+**Leitura correta:**
+- não é sair reduzindo preço por fraqueza;
+- é criar cabimento comercial com critério.
+
+**Regra Clara:** evitar desconto seco. Preferir:
+- condição de agenda
+- reserva abatida
+- consulta revertida em crédito, quando houver regra real
+- encaixe especial
+
+### 8.5 — Pergunta de confirmação curta fecha melhor que explicação longa
+Depois de construir o cenário, a secretária fecha com perguntas simples:
+- "faz sentido pra você?"
+- "na quinta à tarde você conseguiria?"
+- "14 horas pode?"
+
+**Regra Clara:** no WhatsApp, conduzir em degraus curtos:
+- 1 benefício
+- 1 proposta
+- 1 pergunta objetiva
+
+Não despejar tudo em um bloco só.
+
+### 8.6 — SPIN adaptado ao resgate
+Esse vídeo não é SPIN clássico de descoberta. É **SPIN de recuperação**:
+- **Situação:** agenda/disponibilidade real da lead
+- **Problema:** dificuldade de encaixar ou decidir
+- **Implicação:** perder acesso ao especialista/condição/slot
+- **Need-payoff:** reservar com sinal pequeno e baixo risco
+
+**Aplicação IVS:** quando a lead já demonstrou interesse, a Clara não precisa reiniciar descoberta longa. Ela pode usar SPIN curto para remover a trava específica que ficou entre interesse e agendamento.
+
+## 9. Regra de ouro de Vitor aplicada à Clara
 
 > "Não improvise o atendimento. Siga o mecanismo. Clínica que improvisa tem faturamento instável. Clínica que segue processo tem faturamento previsível."
 
