@@ -110,6 +110,15 @@ Estrutura mental:
 4. micropróximo passo
 5. pergunta objetiva
 
+### ÁRVORE 15s
+Arquivo de decisão rápida: `cerebro/areas/atendimento/arvore-decisao-15s-whatsapp-clara.md`
+Prioridades do dia incorporadas:
+- 98% dos agendamentos acontecem no primeiro contato
+- WhatsApp atende lead e paciente, com contexto
+- falso positivo de paciente não bloqueia atendimento
+- mensagens curtas, humanas, uma pergunta por vez
+- tirzepatida e casos parecidos: responder curto e abrir com pergunta de situação/problema
+
 ## VÍDEOS PARA LEADS
 **Video 1 — Bioimpedância:** `/root/.openclaw/media/inbound/file_505---64879356-cf76-4a10-95e2-7bcc31b80b6c.mp4`
 - Sem narração, equipamento "bia", texto "O FUTURO CHEGOU A BIOIMPEDANCIA"
