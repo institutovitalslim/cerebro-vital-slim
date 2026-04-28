@@ -67,6 +67,40 @@ Cadência: +1h → +24h → +3d → +7d → +15d
 - Passo 3 (+7d): prova social + condição especial
 - +15d: última mensagem, arquivar
 
+### SPIN CURTO DE RECUPERAÇÃO (lead quente)
+Quando a lead **já quer**, não reabrir descoberta longa.
+
+1. Identificar a trava real:
+   - agenda
+   - valor
+   - insegurança
+   - timing
+2. Validar curto, sem discutir:
+   - "Perfeito"
+   - "Entendi"
+   - "Sem problema"
+3. Pivotar rápido para próximo passo concreto
+4. Reforçar autoridade da Dra. Daniely em **1 frase objetiva**
+5. Preferir **microcompromisso** a fechamento completo:
+   - reservar agora
+   - concluir no dia
+6. Preferir **condição real** a desconto seco:
+   - reserva abatida
+   - encaixe
+   - condição de agenda
+   - crédito da consulta quando houver regra real
+7. Fechar em degraus curtos:
+   - 1 benefício
+   - 1 proposta
+   - 1 pergunta objetiva
+
+### FRASES-CHAVE DE RECUPERAÇÃO
+- Agenda: "Tenho [opção 1] ou [opção 2]. Qual fica mais fácil pra vc?"
+- Valor: "Hoje o que mais pesa pra vc é o investimento em si ou o receio de marcar e não ser exatamente o que vc precisa?"
+- Insegurança: "A consulta da Dra. Daniely não é genérica, ela olha o caso de forma individual e personalizada."
+- Timing: "A gente pode só reservar o horário primeiro e vc conclui o restante no dia."
+- Travada geral: "Hoje o que está travando mais pra vc é agenda, investimento, ou entender se esse cuidado faz sentido pro seu caso?"
+
 ## VÍDEOS PARA LEADS
 **Video 1 — Bioimpedância:** `/root/.openclaw/media/inbound/file_505---64879356-cf76-4a10-95e2-7bcc31b80b6c.mp4`
 - Sem narração, equipamento "bia", texto "O FUTURO CHEGOU A BIOIMPEDANCIA"

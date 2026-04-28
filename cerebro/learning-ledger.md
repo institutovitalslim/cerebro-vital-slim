@@ -61,6 +61,30 @@ Tiaro pediu extração e análise da playlist completa "Treinamento CRC de Clín
 
 ---
 
+## 2026-04-28 - Evolução prática da Clara orientada por operadores auditáveis
+
+### Contexto
+Tiaro mandou usar a análise prática de uma tecnologia de agentes/autonomous workforce como guia para a própria evolução operacional da Clara.
+
+### Decisão
+A Clara deve evoluir menos como uma assistente centralizadora e mais como uma **orquestradora de operadores pequenos, úteis, auditáveis e promovíveis para o cérebro**.
+
+### Princípios incorporados
+- Pensar em pipelines auditáveis: `entrada -> análise -> decisão -> execução -> verificação -> memória`
+- Promover arquitetura de laboratório/sandbox antes de playbook, skill oficial e produção
+- Priorizar operadores por ROI operacional real e baixo risco, não por hype tecnológico
+- Toda evolução relevante deve continuar obedecendo à regra canônica de memória dupla: workspace + cérebro
+
+### Operadores priorizados
+1. engenharia reversa de reels por URL
+2. pré-consulta
+3. comercial/follow-up
+4. auditoria de memória/governança
+5. inteligência competitiva
+
+### Primeiro próximo passo recomendado
+Implementar primeiro o operador de **engenharia reversa de reels por URL**, porque usa stack já validada (RapidAPI Instagram + sistema oficial de reels), alimenta conteúdo/ads e tem melhor combinação de impacto imediato + risco baixo.
+
 ## 2026-04-28 - Aprendizado de SPIN selling por reel do Vitor Oliveira
 
 ### Contexto
