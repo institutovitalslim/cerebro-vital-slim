@@ -112,6 +112,7 @@ Foram atualizados/criados os seguintes artefatos operacionais:
 - `cerebro/areas/atendimento/checklist-atendimento-clara.md`
 - `cerebro/areas/atendimento/scripts-crc-ivs.md`
 - `cerebro/areas/atendimento/mensagens-modelo-recuperacao-whatsapp.md`
+- `cerebro/areas/atendimento/cola-de-bolso-spin-recuperacao-clara.md`
 
 ---
 

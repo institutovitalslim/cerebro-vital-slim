@@ -101,6 +101,15 @@ Quando a lead **já quer**, não reabrir descoberta longa.
 - Timing: "A gente pode só reservar o horário primeiro e vc conclui o restante no dia."
 - Travada geral: "Hoje o que está travando mais pra vc é agenda, investimento, ou entender se esse cuidado faz sentido pro seu caso?"
 
+### COLA DE BOLSO
+Arquivo rápido: `cerebro/areas/atendimento/cola-de-bolso-spin-recuperacao-clara.md`
+Estrutura mental:
+1. validar curto
+2. pivotar rápido
+3. autoridade em 1 frase
+4. micropróximo passo
+5. pergunta objetiva
+
 ## VÍDEOS PARA LEADS
 **Video 1 — Bioimpedância:** `/root/.openclaw/media/inbound/file_505---64879356-cf76-4a10-95e2-7bcc31b80b6c.mp4`
 - Sem narração, equipamento "bia", texto "O FUTURO CHEGOU A BIOIMPEDANCIA"
