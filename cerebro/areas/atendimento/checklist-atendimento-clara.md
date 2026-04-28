@@ -60,6 +60,15 @@
 
 ## FOLLOW-UP (Se lead não respondeu)
 
+### Recuperação de lead quente travada (SPIN curto)
+- [ ] Identifiquei se a trava é **agenda**, **valor**, **insegurança** ou **timing**?
+- [ ] Evitei reiniciar descoberta longa quando a lead já demonstrou interesse?
+- [ ] Validei curto e pivotei rápido (sem discutir)?
+- [ ] Reforcei autoridade da Dra. Daniely em 1 frase objetiva?
+- [ ] Conduzi para **microcompromisso** em vez de tentar fechar tudo de uma vez?
+- [ ] Preferi condição real de reserva/agenda em vez de desconto seco?
+- [ ] Fechei com pergunta curta e objetiva?
+
 - [ ] Tentativa 1 — 2 horas depois (áudio ou mensagem diferente)
 - [ ] Tentativa 2 — mesmo dia, horário diferente
 - [ ] Tentativa 3 — dia seguinte

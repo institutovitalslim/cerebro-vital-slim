@@ -497,4 +497,60 @@ Qual dia seria mais conveniente para você?
 
 ---
 
+## 10. RECUPERAÇÃO DE LEAD QUENTE (SPIN CURTO)
+
+### Caso 1 — Lead quer, mas não pode no horário
+```
+Perfeito, [Nome]. Sem problema 😊
+Deixa eu te passar outra opção então.
+
+Tenho [dia/hora 1] ou [dia/hora 2].
+Qual desses fica mais fácil pra vc?
+```
+
+### Caso 2 — Lead interessada, mas travada no valor
+```
+Entendi.
+E pra eu te orientar da forma mais honesta: hoje o que mais pesa pra vc é o investimento em si, ou o receio de marcar e não ser exatamente o que vc precisa?
+```
+
+### Caso 3 — Autoridade antes do convite
+```
+Faz sentido te dizer isso porque a consulta com a Dra. Daniely não é uma consulta genérica.
+Ela olha o caso de forma bem individual, entende metabolismo, sintomas, rotina e monta uma direção personalizada.
+
+Se eu conseguir um horário bom pra vc essa semana, quer que eu veja?
+```
+
+### Caso 4 — Microcompromisso para reduzir fricção
+```
+Pra facilitar pra vc, não precisa resolver tudo agora.
+A gente pode só reservar o horário primeiro e vc conclui o restante no dia da consulta.
+
+Se eu separar esse horário pra vc, quer que eu te explique como funciona a reserva?
+```
+
+### Caso 5 — Condição em vez de desconto seco
+```
+O que eu consigo te ajudar aqui não é mexer de forma solta no valor, e sim te colocar numa condição melhor de agenda/reserva.
+
+Se fizer sentido, eu vejo a melhor condição real que consigo pra vc e já te passo com objetividade.
+```
+
+### Caso 6 — Fechamento em degraus curtos
+```
+Perfeito.
+Então me confirma só uma coisa: vc prefere [opção A] ou [opção B]?
+```
+
+### Caso 7 — SPIN curto de recuperação
+```
+Entendi, [Nome].
+Pra eu não te falar algo fora da sua realidade: hoje o que está travando mais pra vc é encaixar na agenda, o investimento, ou ainda entender se esse cuidado faz sentido pro seu caso?
+```
+
+> **Uso correto:** quando a lead já mostrou interesse e só existe uma trava entre ela e o agendamento. Não reabrir anamnese longa. Identificar a trava e conduzir para o próximo passo.
+
+---
+
 > **Nota:** Estes scripts são orientações. A Clara deve sempre personalizar de acordo com o tom da pessoa, o histórico da conversa e o contexto específico. Cada pessoa merece atenção única.

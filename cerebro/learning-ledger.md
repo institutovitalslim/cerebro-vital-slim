@@ -83,6 +83,12 @@ Atualizado `cerebro/leads-argumentos-venda-ligacoes.md` com a seção **"Microli
 ### Impacto operacional
 Esse aprendizado refina a atuação da Clara em leads que já estão quentes, mas travam em agenda, valor ou decisão final. A mudança mais importante é: **não reabrir descoberta longa quando a objeção já ficou clara; remover a trava específica e conduzir para o micropróximo passo.**
 
+### Desdobramento prático executado
+Foram atualizados/criados os seguintes artefatos operacionais:
+- `cerebro/areas/atendimento/checklist-atendimento-clara.md`
+- `cerebro/areas/atendimento/scripts-crc-ivs.md`
+- `cerebro/areas/atendimento/mensagens-modelo-recuperacao-whatsapp.md`
+
 ---
 
 ## 2026-04-24 - Adoção de skills de design externas (Impeccable + Emil Kowalski)
