@@ -1,8 +1,8 @@
 ---
 name: historico-conversas
 description: >
-  Consulta o historico completo de conversas de um lead/paciente na planilha central do Instituto Vital Slim ANTES de iniciar qualquer atendimento no WhatsApp. Essa skill deve ser acionada OBRIGATORIAMENTE antes de Clara responder qualquer lead, para evitar respostas genericas e preservar o contexto historico.
-  Use quando: receber mensagem nova de lead no WhatsApp, antes de responder qualquer contato, quando precisar saber o historico de um paciente, quando precisar verificar se é lead novo ou recorrente.
+  Consulta o historico completo de conversas de um lead/paciente na planilha central do Instituto Vital Slim ANTES de iniciar qualquer atendimento no WhatsApp. Essa skill deve ser acionada OBRIGATORIAMENTE antes de Clara responder qualquer contato, para evitar respostas genericas e preservar o contexto historico.
+  Use quando: receber mensagem nova no WhatsApp, antes de responder qualquer contato, quando precisar saber o historico de um paciente, quando precisar verificar se é lead novo ou recorrente.
 metadata:
   version: 1.0.0
   domain: atendimento
@@ -37,7 +37,7 @@ Garantir que a Clara SEMPRE consulte o historico de conversas de um lead/pacient
 
 ## Protocolo Obrigatorio (antes de cada resposta)
 
-### Passo 1 — Identificar o telefone do lead
+### Passo 1 — Identificar o telefone do contato
 Extrair o numero do telefone da mensagem recebida.
 
 ### Passo 2 — Consultar a planilha
@@ -61,11 +61,11 @@ Com base no retorno:
 |----------|-----------|
 | Lead novo (sem historico) | Primeira interacao: acolher, apresentar-se, perguntar como pode ajudar |
 | Lead recorrente | Retomar do ponto onde parou, NAO fazer perguntas ja respondidas |
-| Paciente ativo | Bloqueado pela logica do bridge — NAO responder (Clara so atende leads) |
+| Paciente ativo | Responder no WhatsApp com contexto, respeitando o historico e evitando abordagem comercial indevida |
 | Contexto estruturado disponivel | Usar as informacoes para personalizar a resposta |
 
 ### Passo 4 — Responder com contexto
-So entao gerar a resposta para o lead, partindo do contexto correto.
+So entao gerar a resposta para o contato, partindo do contexto correto.
 
 ### Passo 5 — Se nao conseguir acessar a planilha
 1. **NAO inventar historico**
@@ -97,7 +97,7 @@ python3 consultar_historico.py --telefone 557192501702 --apenas-status
 
 ## Regras Criticas
 
-1. **OBRIGATORIO consultar antes de CADA resposta** a lead novo
+1. **OBRIGATORIO consultar antes de CADA resposta** no WhatsApp
 2. **Nunca responder sem consultar** — mesmo que a consulta demore
 3. **Nunca inventar contexto** — se o script falhar, notificar Tiaro
 4. **Preservar o historico** — nao apagar nem modificar registros
@@ -117,4 +117,4 @@ python3 consultar_historico.py --telefone 557192501702 --apenas-status
 - **agenda-diaria-whatsapp**: nao usa esta skill (envia para destinatarios fixos)
 - **llm-council**: pode ser acionado APOS consulta do historico se precisar avaliar resposta complexa
 
-Esta skill é **especifica para atendimento de leads** no WhatsApp via bridge Z-API.
+Esta skill é **especifica para atendimento 1:1 no WhatsApp** via bridge Z-API, tanto para leads quanto para pacientes, sempre com contexto.
