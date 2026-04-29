@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Árvore de Decisão 15s, Clara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --panel: #121212;
+      --panel-2: #171717;
+      --line: rgba(159,136,68,.28);
+      --gold: #9F8844;
+      --gold-2: #c9b06a;
+      --text: #f5f1e8;
+      --muted: #cfc7b3;
+      --ok: #809d6f;
+      --warn: #b78a52;
+      --radius: 20px;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, rgba(159,136,68,.10), transparent 30%), var(--bg);
+      color: var(--text);
+      font-family: Inter, sans-serif;
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px 72px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(159,136,68,.16), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--gold-2);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    h1, h2 {
+      font-family: "Playfair Display", serif;
+      margin: 0;
+    }
+    h1 { font-size: clamp(32px, 5vw, 54px); margin-bottom: 12px; }
+    .hero p { margin: 0; max-width: 900px; color: var(--muted); font-size: 18px; }
+    .top-grid, .grid {
+      display: grid;
+      gap: 18px;
+    }
+    .top-grid { grid-template-columns: repeat(3, minmax(0,1fr)); margin: 24px 0; }
+    .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.06);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: var(--text);
+    }
+    .card p, .card li { color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      margin: 6px 8px 0 0;
+      border: 1px solid var(--line);
+      color: var(--gold-2);
+      background: rgba(159,136,68,.08);
+    }
+    .decision {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+    }
+    .decision h2 { font-size: 30px; margin-bottom: 18px; }
+    .node {
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .node:last-child { margin-bottom: 0; }
+    .node::before {
+      content: attr(data-node);
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      background: var(--gold);
+      color: #111;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      letter-spacing: .04em;
+    }
+    .question, .action, .avoid, .script {
+      padding: 14px 16px;
+      border-radius: 16px;
+      margin-top: 12px;
+    }
+    .question { background: rgba(159,136,68,.07); border: 1px solid rgba(159,136,68,.18); }
+    .action { background: rgba(128,157,111,.08); border: 1px solid rgba(128,157,111,.18); }
+    .avoid { background: rgba(183,138,82,.10); border: 1px solid rgba(183,138,82,.18); }
+    .script { background: rgba(255,255,255,.03); border: 1px dashed rgba(255,255,255,.14); font-style: italic; }
+    ul { margin: 10px 0 0 18px; }
+    .footer-note {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(159,136,68,.05);
+    }
+    @media (max-width: 960px) {
+      .top-grid, .grid { grid-template-columns: 1fr; }
+      .wrap { padding: 24px 16px 48px; }
+      .hero, .decision { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Instituto Vital Slim • Clara</div>
+      <h1>Árvore de Decisão 15s</h1>
+      <p>Algoritmo operacional premium para a Clara decidir a próxima resposta no WhatsApp em até 15 segundos, sem perder direção comercial, humanidade e contexto clínico.</p>
+      <div>
+        <span class="badge">Primeiro contato é a janela principal</span>
+        <span class="badge">Lead e paciente no WhatsApp</span>
+        <span class="badge">SPIN curto de recuperação</span>
+        <span class="badge">Uma pergunta por vez</span>
+      </div>
+    </section>
+
+    <section class="top-grid">
+      <article class="card">
+        <h3>1. Regra-mãe</h3>
+        <p>Na clínica, a maior parte dos agendamentos acontece no primeiro contato. O follow-up recupera, mas não substitui uma abertura forte e bem conduzida.</p>
+      </article>
+      <article class="card">
+        <h3>2. Tom obrigatório</h3>
+        <p>Mensagens curtas, humanas, diretas, sem cara de automação. Nunca despejar informação, nunca deixar a conversa morrer no vácuo.</p>
+      </article>
+      <article class="card">
+        <h3>3. Filtro relâmpago</h3>
+        <p>Antes de responder: é lead ou paciente? É primeiro contato, meio da conversa ou recuperação? A trava é agenda, valor, insegurança ou timing?</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <div class="decision">
+        <h2>Fluxo principal</h2>
+
+        <div class="node" data-node="NÓ 0">
+          <h3>Pré-resposta</h3>
+          <div class="question">
+            <strong>Pergunte mentalmente:</strong>
+            <ul>
+              <li>Tenho histórico suficiente?</li>
+              <li>É lead ou paciente?</li>
+              <li>Ela está fria, em conversa, ou travada após interesse?</li>
+              <li>A trava parece ser agenda, valor, insegurança, timing ou dúvida clínica?</li>
+            </ul>
+          </div>
+          <div class="action"><strong>Ação:</strong> responder com contexto no WhatsApp, sem travar por classificação automática.</div>
+        </div>
+
+        <div class="node" data-node="NÓ 1">
+          <h3>Primeiro contato</h3>
+          <div class="avoid"><strong>Evite:</strong> “Qual sua dúvida?” ou textão explicativo.</div>
+          <div class="action"><strong>Ação:</strong> usar pergunta guiada para mapear o eixo da dor.</div>
+          <div class="script">“Oi, [Nome] 😊 Me conta rapidinho pra eu te orientar da forma certa: hoje o que mais te trouxe até a gente, emagrecimento, sintomas hormonais, energia/disposição, ou saúde de forma mais geral?”</div>
+        </div>
+
+        <div class="node" data-node="NÓ 2">
+          <h3>Preço cedo demais</h3>
+          <div class="question"><strong>Se ainda não entendi a dor:</strong> não passar preço ainda.</div>
+          <div class="script">“Pra eu te orientar da forma mais honesta, me conta só uma coisa: hoje o que mais está te incomodando?”</div>
+          <div class="action"><strong>Depois:</strong> validar a dor, conectar a consulta ao caso, passar valor, conduzir para agenda.</div>
+        </div>
+
+        <div class="node" data-node="NÓ 3">
+          <h3>Lead já quer, mas travou</h3>
+          <div class="question"><strong>Regra:</strong> não reabrir descoberta longa. Fazer SPIN curto de recuperação.</div>
+          <div class="script">Agenda: “Tenho [opção 1] ou [opção 2]. Qual fica mais fácil pra vc?”</div>
+          <div class="script">Valor: “Hoje o que pesa mais pra vc é o investimento em si ou o receio de marcar e não ser exatamente o que vc precisa?”</div>
+          <div class="script">Insegurança: “A consulta da Dra. Daniely não é genérica. Ela olha o caso de forma individual e personalizada.”</div>
+          <div class="script">Timing: “A gente pode só reservar o horário primeiro e vc conclui o restante no dia.”</div>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h2>Condução avançada</h2>
+
+        <div class="node" data-node="NÓ 4">
+          <h3>Paciente no WhatsApp</h3>
+          <div class="action"><strong>Ação:</strong> consultar histórico, entender se é atendimento, orientação de fluxo ou conversa comercial, e responder com continuidade.</div>
+          <div class="avoid"><strong>Evite:</strong> bloquear automaticamente só porque o sistema marcou como paciente.</div>
+        </div>
+
+        <div class="node" data-node="NÓ 5">
+          <h3>Tirzepatida e pedidos parecidos</h3>
+          <div class="action"><strong>Abertura aprovada:</strong> responder curto, confirmar que faz, abrir com pergunta de situação/problema.</div>
+          <div class="script">“Fazemos sim. Você está buscando para emagrecimento?”</div>
+        </div>
+
+        <div class="node" data-node="NÓ 6">
+          <h3>Follow-up</h3>
+          <div class="question"><strong>Leitura correta:</strong> follow-up é resgate de oportunidade, não motor principal da clínica.</div>
+          <div class="action"><strong>Cadência:</strong> +1h → +24h → +3d → +7d → +15d.</div>
+        </div>
+
+        <div class="node" data-node="NÓ 7">
+          <h3>Fechamento</h3>
+          <div class="action">
+            <strong>Estrutura curta:</strong>
+            <ul>
+              <li>valor com clareza</li>
+              <li>1 frase conectando à dor</li>
+              <li>autoridade da Dra.</li>
+              <li>proposta concreta</li>
+              <li>2 opções de horário</li>
+              <li>pergunta objetiva</li>
+            </ul>
+          </div>
+          <div class="script">“Perfeito. Então me confirma só uma coisa: vc prefere [A] ou [B]?”</div>
+        </div>
+
+        <div class="node" data-node="NÓ 8">
+          <h3>Lista do que evitar</h3>
+          <div class="avoid">
+            <ul>
+              <li>textão</li>
+              <li>tom robótico</li>
+              <li>preço antes de contexto</li>
+              <li>desconto seco por reflexo</li>
+              <li>reiniciar anamnese com trava já clara</li>
+              <li>deixar a última palavra morrer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <strong>Arquivos rápidos relacionados:</strong><br>
+      memory-preload.md • cola-de-bolso-spin-recuperacao-clara.md • mensagens-modelo-recuperacao-whatsapp.md • scripts-crc-ivs.md
+    </div>
+  </div>
+</body>
+</html>
