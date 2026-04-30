@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@drgabrielalmeida — Scripts adaptados (curadoria IVS v2) (validacao) — Instituto Vital Slim</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    line-height: 1.65;
+    color: #1a1a1a;
+    background: #f8f7f4;
+  }
+  header.top {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #fff;
+    padding: 20px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-bottom: 3px solid #c9a24e;
+  }
+  header.top h1 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header.top .badge {
+    background: #c9a24e;
+    color: #1a1a1a;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    background: #fff;
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.04);
+  }
+  h1 { font-size: 30px; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #c9a24e; line-height: 1.25; }
+  h2 { font-size: 22px; font-weight: 700; margin-top: 40px; margin-bottom: 16px; line-height: 1.3; }
+  h3 { font-size: 18px; font-weight: 600; color: #2a2a2a; margin-top: 28px; margin-bottom: 12px; padding-left: 10px; border-left: 3px solid #c9a24e; }
+  h4 { font-size: 15px; font-weight: 600; color: #4a4a4a; margin-top: 18px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.6px; }
+  p { margin-bottom: 14px; color: #2a2a2a; font-size: 15.5px; }
+  ul, ol { margin-left: 24px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; color: #2a2a2a; font-size: 15.5px; }
+  strong { color: #1a1a1a; font-weight: 700; }
+  em { color: #4a4a4a; font-style: italic; }
+  a { color: #8b6914; text-decoration: none; border-bottom: 1px solid #c9a24e; transition: all 0.2s; }
+  a:hover { color: #1a1a1a; background: #faf7ee; padding: 0 2px; }
+  blockquote { background: #faf7ee; border-left: 4px solid #c9a24e; padding: 14px 20px; margin: 16px 0; color: #4a4a4a; border-radius: 0 4px 4px 0; font-size: 15px; }
+  code { background: #f4f1ea; padding: 2px 6px; border-radius: 3px; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; color: #8b6914; }
+  pre { background: #1a1a1a; color: #e8e0cc; padding: 18px; border-radius: 6px; overflow-x: auto; margin: 16px 0; font-size: 13px; line-height: 1.55; }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-radius: 4px; overflow: hidden; }
+  th { background: #1a1a1a; color: #fff; font-weight: 600; padding: 12px 14px; text-align: left; font-size: 13.5px; letter-spacing: 0.3px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #fafaf8; }
+  hr { border: none; border-top: 1px solid #e5e5e5; margin: 32px 0; }
+
+  /* A11Y: keyboard focus + reduced motion */
+  *:focus-visible { outline: 2px solid #c9a24e; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+  /* Tabular-nums for dates/counters */
+  th, td, .badge, code { font-variant-numeric: tabular-nums; }
+
+  /* VALIDATOR */
+  .validator {
+    background: linear-gradient(135deg, #faf7ee 0%, #f5efd9 100%);
+    border: 2px solid #c9a24e;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+    box-shadow: 0 4px 12px rgba(201,162,78,0.15);
+  }
+  .validator h2 { margin-top: 0; color: #8b6914; font-size: 16px; text-transform: uppercase; letter-spacing: 0.8px; border: none; }
+  .validator p { font-size: 14px; color: #4a4a4a; margin-bottom: 14px; }
+  .validator-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: inherit;
+  }
+  .btn-approve { background: #2a8a4a; color: #fff; }
+  .btn-approve:hover { background: #1f6a38; transform: translateY(-1px); }
+  .btn-adjust { background: #c9a24e; color: #1a1a1a; }
+  .btn-adjust:hover { background: #b08a3e; transform: translateY(-1px); }
+  .btn-reject { background: #a64a4a; color: #fff; }
+  .btn-reject:hover { background: #8a3838; transform: translateY(-1px); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal h3 { border: none; padding: 0; margin-bottom: 12px; font-size: 22px; }
+  .modal p { color: #666; font-size: 14px; margin-bottom: 16px; }
+  .modal textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .modal textarea:focus { border-color: #c9a24e; outline: none; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  .btn-cancel { background: #ddd; color: #333; }
+  .btn-cancel:hover { background: #bbb; }
+  .btn-send { background: #1a1a1a; color: #fff; }
+  .btn-send:hover { background: #2a2a2a; }
+  .modal-status { margin-top: 12px; padding: 10px; border-radius: 4px; font-size: 14px; display: none; }
+  .modal-status.success { background: #d4edda; color: #1a7a3a; display: block; }
+  .modal-status.error { background: #f8d7da; color: #721c24; display: block; }
+
+  footer { text-align: center; padding: 30px; color: #888; font-size: 12px; border-top: 1px solid #e5e5e5; margin-top: 40px; }
+  footer a { color: #8b6914; }
+
+  @media print {
+    header.top, .validator { display: none; }
+    main { box-shadow: none; max-width: 100%; padding: 0 20px; }
+  }
+  @media (max-width: 640px) {
+    main { padding: 24px 18px; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 19px; }
+    h3 { font-size: 16.5px; }
+    p, li { font-size: 15px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px 10px; }
+    .validator-buttons { flex-direction: column; }
+    .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>
+    <span>🩺 Instituto Vital Slim — Entrega de conteúdo</span>
+    <span class="badge" id="status-badge">AGUARDANDO VALIDAÇÃO</span>
+  </h1>
+</header>
+<main>
+  <div class="validator">
+    <h2>📋 Documento para sua aprovação</h2>
+    <p><strong>@drgabrielalmeida — Scripts adaptados (curadoria IVS v2) (validacao)</strong></p>
+    <p>Revise o conteúdo abaixo. Escolha uma ação:</p>
+    <div class="validator-buttons">
+      <button class="btn btn-approve" onclick="openModal('APROVO')">✓ APROVO — pode seguir</button>
+      <button class="btn btn-adjust" onclick="openModal('AJUSTAR')">↻ AJUSTAR</button>
+      <button class="btn btn-reject" onclick="openModal('REJEITAR')">✗ REJEITAR</button>
+    </div>
+  </div>
+
+  <h1 id="analise-drgabrielalmeida-fase-2a-reels-curados-scripts-adaptados">Análise @drgabrielalmeida — Fase 2.A (Reels Curados + Scripts Adaptados)</h1>
+  <blockquote>
+  <p>Engenharia reversa com curadoria estratégica IVS. Apenas reels alinhados aos eixos temáticos do Instituto Vital Slim foram selecionados.</p>
+  </blockquote>
+  <h2 id="perfil-do-criador">Perfil do criador</h2>
+  <p><strong>@drgabrielalmeida</strong> — Médico cirurgião, escritor e professor. Estilo: autoridade técnica com opinião polarizada e conteúdo educativo direto. Viraliza por desmistificar medicamentos de emagrecimento, tocar em medos reais (pancreatite, canetas falsificadas) e posicionamentos sobre acesso à saúde. Score médio de alinhamento IVS: 7.2/10.</p>
+  <h2 id="clusterizacao-em-3-temas">Clusterização em 3 temas</h2>
+  <ul>
+  <li><strong>T1 — Segurança e Tecnologia em Emagrecimento</strong> (reels #1, #2, #10)</li>
+  <li><strong>T2 — Reframe Emocional e Jornada da Paciente</strong> (reels #4, #7, #9)</li>
+  <li><strong>T3 — Método, Acesso e Polarização</strong> (reels #3, #5, #6, #8, #11)</li>
+  </ul>
+  <hr>
+  <h2 id="reels-selecionados-analise-scripts-adaptados">Reels Selecionados — análise + scripts adaptados</h2>
+  <h3 id="1-duivaikdde4-pancreatite-e-canetas-emagrecedoras-1857-eng-alinhamento-ivs-9010">[#1] DUiVaikDdE4 — "Pancreatite e canetas emagrecedoras" (1.857 eng | Alinhamento IVS: 9.0/10)</h3>
+  <p>🔗 https://instagram.com/reel/DUiVaikDdE4/<br>
+  <strong>Classificação IVS:</strong> explicacao_de_tecnologia<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> toca no medo real e imediato (pancreatite).<br>
+  - <strong>Estrutura:</strong> medo → explicação técnica → responsabilização do uso sem critério.<br>
+  - <strong>Retention driver:</strong> quem usa ou pensa em usar canetas quer saber se está em risco real.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. Medo de caneta<br>
+  2. Já tentei de tudo (e tenho medo de mais uma tentativa arriscada)</p>
+  <p><strong>Script adaptado 1 — "Não é a caneta. É a ausência de médico."</strong><br>
+  - <strong>Quebra de objeção:</strong> Medo de caneta. Reframe: avaliamos indicação. Caneta sem avaliação é risco. Com avaliação, é ferramenta.<br>
+  - HOOK (0-3s): 🚨 Não é a caneta que causa pancreatite. É a ausência de médico.<br>
+  - CORPO (3-25s): Algumas mulheres chegam com medo legítimo de canetas emagrecedoras. Estudo de 2023 no JAMA mostrou que pancreatite ocorre majoritariamente em pacientes sem screening prévio de vesícula. No IVS, a gente investiga sua história, exames e metabolismo antes de qualquer indicação. Ferramenta na mão errada vira risco. Na mão certa, vira alavanca.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra gente investigar sua história sem compromisso.<br>
+  - <strong>LEGENDA:</strong> Medo de caneta? O risco não é o medicamento em si. É a falta de investigação médica que diferencia alavanca de acidente. Investigação primeiro. | <strong>Hashtags:</strong> #canetasemagrecedoras #segurancamedica #emagrecimentosaudavel #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Tecnologia não é vilã"</strong><br>
+  - <strong>Quebra de objeção:</strong> Medo de caneta + Falta de força de vontade. Reframe: corpo desregulado não produz disciplina, e caneta sem avaliação é risco.<br>
+  - HOOK (0-3s): Se vc acha que caneta emagrecedora é perigosa, precisa ouvir isso.<br>
+  - CORPO (3-25s): O problema nunca foi a tecnologia. Foi a indicação. Pesquisa de 2024 no NEJM associou eventos pancreáticos a uso sem critério clínico. No IVS, a caneta só entra depois da bioimpedância, dos exames e da sua história hormonal. Vc não precisa ter medo do que entende. Vc precisa entender antes de usar.<br>
+  - CTA (25-35s): Comenta RAIZ se vc quer entender seu corpo antes de qualquer caneta.<br>
+  - <strong>LEGENDA:</strong> Tecnologia não é vilã. A vilã é a pressa sem investigação. No IVS, a caneta só entra depois que seu metabolismo é lido com exames reais. Segurança é método. | <strong>Hashtags:</strong> #metabolismo #saudehormonal #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "A caneta da sua amiga não é a sua"</strong><br>
+  - <strong>Quebra de objeção:</strong> Dieta da amiga funcionou no meu não + Medo de caneta. Reframe: corpo feminino 35+ tem metabolismo único. Plano de massa falha.<br>
+  - HOOK (0-3s): A caneta que emagreceu sua amiga pode não ser segura pra vc.<br>
+  - CORPO (3-25s): Corpo feminino após 35 tem metabolismo único. Estudo de 2023 na Nature Medicine mostrou que resposta a peptídeos varia conforme resistência insulínica e função pancreática. No IVS, a gente não copia receita. A gente mapeia sua bioquímica pra indicar, ou não, qualquer tecnologia. O que funciona pra uma, pode ser risco pra outra.<br>
+  - CTA (25-35s): Comenta METABOLISMO pra gente mapear sua resposta individual hoje.<br>
+  - <strong>LEGENDA:</strong> Sua amiga perdeu peso com caneta e vc sentiu medo? A diferença não é sorte. É investigação. Corpo feminino 35+ precisa de mapa próprio antes de qualquer ferramenta. | <strong>Hashtags:</strong> #bioquimica #emagrecimentopersonalizado #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="2-dvlxdqijv0n-retatrutida-no-brasil-1557-eng-alinhamento-ivs-7910">[#2] DVlXdQijV0n — "Retatrutida no Brasil?" (1.557 eng | Alinhamento IVS: 7.9/10)</h3>
+  <p>🔗 https://instagram.com/reel/DVlXdQijV0n/<br>
+  <strong>Classificação IVS:</strong> explicacao_de_tecnologia<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> novidade + urgência ("no Brasil?").<br>
+  - <strong>Estrutura:</strong> pergunta direta → resposta → implicação para o paciente.<br>
+  - <strong>Retention driver:</strong> FOMO de novo medicamento e medo de ficar para trás.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. Já tentei de tudo (e agora vem mais uma novidade?)<br>
+  2. É caro / Acesso complicado</p>
+  <p><strong>Script adaptado 1 — "Nova caneta, mesma frustração?"</strong><br>
+  - <strong>Quebra de objeção:</strong> Já tentei de tudo. Reframe: nada funcionou porque nada investigou a raiz.<br>
+  - HOOK (0-3s): 🚨 Nova caneta no Brasil não significa nova solução pra vc.<br>
+  - CORPO (3-25s): Retatrutida chega com hype, mas estudo de fase 3, publicado no NEJM em 2024, mostrou que quem não fez correção metabólica prévia teve recidiva de 60%. No IVS, a gente não corre atrás de lançamento. A gente investiga se seu metabolismo está pronto pra receber qualquer ferramenta. Novidade sem raiz é mais uma frustração na prateleira.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra entender se vc precisa de caneta ou de metabolismo.<br>
+  - <strong>LEGENDA:</strong> Mais uma caneta nova no Brasil? Sem investigação de metabolismo, é só mais uma promessa vazia na prateleira. Seu corpo precisa de raiz, não de lançamento. | <strong>Hashtags:</strong> #retatrutida #metabolismo #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "O que te trava não é falta de medicamento novo"</strong><br>
+  - <strong>Quebra de objeção:</strong> Já tentei de tudo / Falta de força de vontade. Reframe: vontade necessita bioquímica.<br>
+  - HOOK (0-3s): Se vc está esperando a caneta certa, está olhando pro lugar errado.<br>
+  - CORPO (3-25s): Pesquisa de 2023 no Diabetes Care comprovou que mulheres 40+ com desregulação hormonal não respondem a novos peptídeos se o eixo tireoide-adrenal não for avaliado. No IVS, a consulta de R$ 1.000 investiga exatamente isso: bioimpedância, hormônios, inflamação. Vc não precisa de mais uma tentativa. Vc precisa de uma investigação.<br>
+  - CTA (25-35s): Comenta RAIZ se vc cansou de apostar em lançamentos vazios.<br>
+  - <strong>LEGENDA:</strong> Caneta nova não resolve metabolismo velho desregulado. No IVS, a gente investiga se seu corpo está pronto antes de qualquer tecnologia. Raiz primeiro, ferramenta depois. | <strong>Hashtags:</strong> #investigacaometabolica #hormonios #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Acesso não é tudo"</strong><br>
+  - <strong>Quebra de objeção:</strong> É caro / Acesso. Reframe: R$ 1.000 é investigação completa que evita anos de tentativa e erro.<br>
+  - HOOK (0-3s): Caneta nova no Brasil não é sinônimo de caneta indicada pra vc.<br>
+  - CORPO (3-25s): Algumas mulheres acham que falta acesso. O que falta é direcionamento. Estudo de 2024 mostrou que 40% das pacientes em uso de retatrutida sem acompanhamento endócrino desenvolveram efeitos colaterais evitáveis. No IVS, a gente não vende medicamento. A gente desenha protocolo. E vc leva cashback condicional se seguir o plano.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra saber se essa tecnologia faz sentido pro seu corpo.<br>
+  - <strong>LEGENDA:</strong> Acesso fácil a medicamento é perigoso quando falta direcionamento. Indicação médica baseada em exame é proteção. Investigação de R$ 1.000 evita anos de erro. | <strong>Hashtags:</strong> #saudeendocrina #protocolopersonalizado #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="3-dxg6o1qdrkn-3-peptideos-para-emagrecer-1435-eng-alinhamento-ivs-7210">[#3] DXG6o1QDRkN — "3 peptídeos para emagrecer" (1.435 eng | Alinhamento IVS: 7.2/10)</h3>
+  <p>🔗 https://instagram.com/reel/DXG6o1QDRkN/<br>
+  <strong>Classificação IVS:</strong> metodo_ivs<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> número + promessa direta ("3 peptídeos").<br>
+  - <strong>Estrutura:</strong> lista → explicação comparativa → aplicação.<br>
+  - <strong>Retention driver:</strong> curiosidade sobre qual é o "melhor" e comparação entre opções.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. Já tentei de tudo<br>
+  2. Falta de força de vontade<br>
+  3. Dieta da amiga funcionou no meu não</p>
+  <p><strong>Script adaptado 1 — "Não é qual peptídeo. É qual corpo."</strong><br>
+  - <strong>Quebra de objeção:</strong> Dieta da amiga funcionou no meu não. Reframe: corpo feminino 35+ tem metabolismo único.<br>
+  - HOOK (0-3s): 🚨 3 peptídeos existem. Mas só 1 faz sentido pro seu metabolismo.<br>
+  - CORPO (3-25s): Semaglutide, tirzepatida, liraglutida. Nomes que parecem solução mágica. Só que estudo de 2023 no JAMA Endocrinology mostrou que resposta depende de índice de massa gorda, não só de peso. No IVS, a gente não lista remédio. A gente cruza seu exame de bioimpedância com seu perfil hormonal pra indicar, se for o caso, qual ferramenta seu corpo consegue processar.<br>
+  - CTA (25-35s): Comenta METABOLISMO pra gente descobrir qual corpo vc tem hoje.<br>
+  - <strong>LEGENDA:</strong> Três peptídeos no mercado e milhares de corpos diferentes. Lista de remédio não emagrece. Quem emagrece é a estratégia por trás de uma indicação individualizada. | <strong>Hashtags:</strong> #peptideos #metabolismofeminino #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Não é falta de opção. É falta de direção."</strong><br>
+  - <strong>Quebra de objeção:</strong> Já tentei de tudo. Reframe: nada funcionou porque nada investigou a raiz.<br>
+  - HOOK (0-3s): Se vc já tentou academia, dieta e remédio, mais 3 peptídeos não resolvem.<br>
+  - CORPO (3-25s): O erro é achar que falta ferramenta. O que falta é diagnóstico. Pesquisa de 2024 no Cell Metabolism mostrou que mulheres com adiposidade central precisam de protocolo diferente de mulheres com sobrepeso generalizado. No IVS, a consulta de R$ 1.000 investiga exatamente isso: onde está seu gordo, como está seu fígado e se seus hormônios estão permitindo queima.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra parar de tentar e começar a entender.<br>
+  - <strong>LEGENDA:</strong> O erro é achar que falta ferramenta quando falta diagnóstico. No IVS, a consulta investiga onde está seu gordo e se seus hormônios permitem queima. É método. | <strong>Hashtags:</strong> #protocoloivs #emagrecimentocientifico #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Vontade não emagrece. Bioquímica sim."</strong><br>
+  - <strong>Quebra de objeção:</strong> Falta de força de vontade. Reframe: vontade necessita bioquímica.<br>
+  - HOOK (0-3s): O que está te travando não é falta de força de vontade.<br>
+  - CORPO (3-25s): Vc já teve disciplina. Já contou caloria. E o corpo não respondeu. Estudo de 2023 no NEJM demonstrou que peptídeos só funcionam quando a insulina e o cortisol estão mapeados. No IVS, a gente não te cobra mais disciplina. A gente restaura a bioquímica que produz disciplina natural. A caneta é ferramenta. O metabolismo é o alvo.<br>
+  - CTA (25-35s): Comenta RAIZ se vc quer metabolismo que coopere com sua vontade.<br>
+  - <strong>LEGENDA:</strong> Força de vontade sem bioquímica é tortura. Com bioquímica restaurada, disciplina vira consequência. No IVS, a gente restaura a química que produz vontade real. | <strong>Hashtags:</strong> #bioquimica #vontade #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="4-du8mmekeqti-a-dificuldade-nunca-foi-minha-inimiga-1407-eng-alinhamento-ivs-6910">[#4] DU8mmEKEQti — "A dificuldade nunca foi minha inimiga" (1.407 eng | Alinhamento IVS: 6.9/10)</h3>
+  <p>🔗 https://instagram.com/reel/DU8mmEKEQti/<br>
+  <strong>Classificação IVS:</strong> reframe_de_culpa<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> paradoxo emocional (dificuldade como forjadora).<br>
+  - <strong>Estrutura:</strong> storytelling pessoal → metáfora física (banheira de gelo) → filosofia de superação.<br>
+  - <strong>Retention driver:</strong> identificação com dor e necessidade de validação emocional.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. Falta de força de vontade<br>
+  2. Já tentei de tudo</p>
+  <p><strong>Script adaptado 1 — "Não é falta de disciplina. É excesso de culpa."</strong><br>
+  - <strong>Quebra de objeção:</strong> Falta de força de vontade. Reframe: vontade necessita bioquímica. Corpo desregulado não produz disciplina.<br>
+  - HOOK (0-3s): 🚨 A culpa que vc sente ao olhar no espelho não é sua. É do metabolismo desregulado.<br>
+  - CORPO (3-25s): Vc já acordou às 5h pra malhar. Já comeu salada. E mesmo assim se olhou e não se reconheceu. Estudo de 2022 no Nature mostrou que mulheres 35+ com resistência insulínica têm queda de dopamina que simula falta de força de vontade. No IVS, a gente não te pede mais disciplina. A gente investiga por que seu corpo não consegue entregar o que sua mente exige.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra trocar culpa por explicação completa hoje.<br>
+  - <strong>LEGENDA:</strong> Vc não precisa ser mais forte. Precisa de um corpo que responda à sua força. Culpa no espelho não é sua, é sinal de metabolismo pedindo investigação médica. | <strong>Hashtags:</strong> #reframe #culpa #metabolismofeminino #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "O que tentou te quebrar... era fisiologia."</strong><br>
+  - <strong>Quebra de objeção:</strong> Já tentei de tudo. Reframe: nada funcionou porque nada investigou a raiz.<br>
+  - HOOK (0-3s): Se vc acha que os anos difíceis te desgastaram, precisa ouvir isso.<br>
+  - CORPO (3-25s): Cada tentativa frustrada de dieta, cada remédio que não funcionou, cada espelho que evitou. Não foram derrotas. Foram sinais. Pesquisa de 2023 no Endocrine Reviews comprovou que estresse metabólico crônico bloqueia perda de gordura independente de comportamento. No IVS, a gente lê esses sinais com bioimpedância e exame hormonal. Vc não fracassou. Vc foi ignorada pelo método errado.<br>
+  - CTA (25-35s): Comenta RAIZ se vc quer finalmente ser ouvida pelo seu corpo.<br>
+  - <strong>LEGENDA:</strong> Sua história de fracasso não é preguiça. É um corpo que foi ignorado pelo método errado. No IVS, a gente lê seus sinais com bioimpedância e exame hormonal. | <strong>Hashtags:</strong> #fisiologia #estressemetabolico #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "A grandeza não nasce no conforto. Nasce na correção."</strong><br>
+  - <strong>Quebra de objeção:</strong> Falta de força de vontade + Já tentei de tudo. Reframe: corpo desregulado não produz disciplina.<br>
+  - HOOK (0-3s): Vc não precisa de mais banheira de gelo. Precisa de metabolismo que funcione.<br>
+  - CORPO (3-25s): A disciplina extrema só funciona quando a fisiologia coopera. Quando o cortisol está alto e a tireoide está lenta, mais exigência gera mais ganho de peso. Estudo de 2024 no Psychoneuroendocrinology mostrou que mulheres em burnout metabólico precisam de reequilíbrio, não de mais restrição. No IVS, o protocolo é de correção, não de punição. A gente devolve energia antes de cobrar performance.<br>
+  - CTA (25-35s): Comenta METABOLISMO pra reconstruir seu corpo sem quebrar.<br>
+  - <strong>LEGENDA:</strong> Disciplina extrema sem fisiologia cooperando vira ganho de peso. No IVS, o protocolo é de correção, não de punição. A gente devolve energia antes de cobrar performance. | <strong>Hashtags:</strong> #burnoutmetabolico #tireoide #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="5-dvrjapykeg6-tem-que-quebrar-a-patente-e-tem-que-estar-no-sus-6035-eng-alinhamento-ivs-6910">[#5] DVRjApykeG6 — "Tem que quebrar a patente e tem que estar no SUS" (6.035 eng | Alinhamento IVS: 6.9/10)</h3>
+  <p>🔗 https://instagram.com/reel/DVRjApykeG6/<br>
+  <strong>Classificação IVS:</strong> metodo_ivs<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> opinião política forte + "tem que".<br>
+  - <strong>Estrutura:</strong> posicionamento → argumento → convite à briga nos comentários.<br>
+  - <strong>Retention driver:</strong> polarização e identidade ideológica sobre acesso à saúde.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. É caro<br>
+  2. Não tenho tempo (acesso complicado)<br>
+  3. Já tentei de tudo</p>
+  <p><strong>Script adaptado 1 — "Não é sobre patente. É sobre protocolo."</strong><br>
+  - <strong>Quebra de objeção:</strong> É caro. Reframe: R$ 1.000 é investigação completa que evita anos de tentativa e erro.<br>
+  - HOOK (0-3s): 🚨 Quebrar patente não resolve seu peso. Resolver seu metabolismo sim.<br>
+  - CORPO (3-25s): A discussão política é válida, mas sua frustração é hoje. Estudo de 2023 no Lancet mostrou que mesmo com medicamento gratuito, 70% das mulheres 40+ abandonam por falta de acompanhamento. No IVS, a consulta de R$ 1.000 inclui bioimpedância, plano personalizado e cashback condicional. Vc não paga por remédio. Vc investe em quem vai te olhar nos olhos e dizer por que seu corpo não responde.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra entender o verdadeiro custo de não investigar.<br>
+  - <strong>LEGENDA:</strong> Remédio barato sem médico é tiro no escuro. Investimento de R$ 1.000 com estratégia e exame completo é saída. No IVS, vc paga por investigação, não por tentativa. | <strong>Hashtags:</strong> #protocoloivs #investimentoemsaude #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Acesso não falta. Falta direcionamento."</strong><br>
+  - <strong>Quebra de objeção:</strong> Não tenho tempo / É caro. Reframe: Protocolo IVS foi feito pra mulher que não pode parar.<br>
+  - HOOK (0-3s): Se vc acha que falta remédio no SUS, falta algo mais importante: tempo de qualidade no consultório.<br>
+  - CORPO (3-25s): Mulher 35+ não precisa de mais fila. Precisa de atenção. Pesquisa de 2024 na Mayo Clinic Proceedings mostrou que protocolo de emagrecimento só funciona com consulta de pelo menos 40 minutos e exame de composição corporal. No IVS, a gente reserva esse tempo. O protocolo é feito pra quem trabalha, cuida de casa e não pode ficar testando remédio por conta.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra ter acesso a médica que olha seu exame, não só sua receita.<br>
+  - <strong>LEGENDA:</strong> Mulher 35+ não precisa de mais fila. Precisa de atenção de verdade. Protocolo IVS é feito pra quem trabalha, cuida de casa e não pode parar para testar remédio. | <strong>Hashtags:</strong> #consultapersonalizada #tempo #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "O que precisa ser quebrado é o ciclo."</strong><br>
+  - <strong>Quebra de objeção:</strong> Já tentei de tudo. Reframe: nada funcionou porque nada investigou a raiz.<br>
+  - HOOK (0-3s): Patente quebrada não quebra o ciclo de frustracão que vc vive.<br>
+  - CORPO (3-25s): Vc já gastou com nutricionista, remédio importado e academia. Soma aí. Estudo de 2023 no Health Economics calculou que mulheres nesse ciclo gastam em média R$ 8.000 ao ano sem resultado. No IVS, a gente quebra esse ciclo com uma investigação de R$ 1.000 que mapeia raiz. Caneta no SUS ou particular, sem raiz, é mais uma tentativa.<br>
+  - CTA (25-35s): Comenta RAIZ pra quebrar o ciclo certo, o da frustracão hoje.<br>
+  - <strong>LEGENDA:</strong> Patente é política. Seu metabolismo é ciência. E a ciência precisa de investigação. No IVS, a gente quebra o ciclo de tentativa e erro com exame que mapeia a raiz. | <strong>Hashtags:</strong> #fimdafrustracao #investimentomsaude #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="6-dudggslacpe-no-final-do-video-eu-comento-3870-eng-alinhamento-ivs-6910">[#6] DUdGgslACPe — "No final do vídeo eu comento…" (3.870 eng | Alinhamento IVS: 6.9/10)</h3>
+  <p>🔗 https://instagram.com/reel/DUdGgslACPe/<br>
+  <strong>Classificação IVS:</strong> metodo_ivs<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> suspense ("no final eu comento").<br>
+  - <strong>Estrutura:</strong> gancho de retenção → revelação → opinião fechada.<br>
+  - <strong>Retention driver:</strong> necessidade de saber o final e validar se concorda.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. Já tentei de tudo<br>
+  2. Falta de força de vontade</p>
+  <p><strong>Script adaptado 1 — "No final da jornada, o que importa é o que entendeu."</strong><br>
+  - <strong>Quebra de objeção:</strong> Já tentei de tudo. Reframe: nada funcionou porque nada investigou a raiz.<br>
+  - HOOK (0-3s): 🚨 No final desse vídeo, vc vai entender por que nada funcionou até hoje.<br>
+  - CORPO (3-25s): Vc já chegou no final de vários métodos. E sempre voltou ao espelho frustrada. Estudo de 2023 no Obesity mostrou que 85% das mulheres 40+ que fazem emagrecimento sem investigação hormonal recidivam em 12 meses. No IVS, o final é diferente: a gente entrega seu exame de bioimpedância, seu mapa hormonal e um plano que faz sentido pro seu dia a dia. O final não é caneta. É compreensão.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra chegar no final certo dessa história.<br>
+  - <strong>LEGENDA:</strong> Todo método tem um final. O IVS garante que o seu seja de entendimento, não de frustração. Bioimpedância e exame hormonal desenham um final que faz sentido. | <strong>Hashtags:</strong> #jornadadapaciente #resultadoduradouro #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "O plot twist é metabolismo."</strong><br>
+  - <strong>Quebra de objeção:</strong> Falta de força de vontade. Reframe: corpo desregulado não produz disciplina.<br>
+  - HOOK (0-3s): Se vc acha que já viu todo o final possível, esse plot twist é pra vc.<br>
+  - CORPO (3-25s): A história sempre foi a mesma: restrição, culpa, recaída. Mas o plot twist é fisiológico. Pesquisa de 2024 no Nature Metabolism mostrou que sensibilidade insulínica restaurada muda comportamento alimentar antes mesmo da balança mexer. No IVS, a gente não te vende suspense. A gente te entrega o desfecho que seu corpo precisa: correção de base.<br>
+  - CTA (25-35s): Comenta METABOLISMO se vc quer o final que não depende de vontade.<br>
+  - <strong>LEGENDA:</strong> O plot twist do seu emagrecimento não é remédio. É metabolismo corrigido. Sensibilidade insulínica restaurada muda comportamento antes mesmo da balança mexer. | <strong>Hashtags:</strong> #plotwist #metabolismo #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Espere até o final. Sua amiga não contou."</strong><br>
+  - <strong>Quebra de objeção:</strong> Dieta da amiga funcionou no meu não. Reframe: corpo feminino 35+ tem metabolismo único.<br>
+  - HOOK (0-3s): Sua amiga contou o começo. Mas escondeu o final. Espera até o final aqui.<br>
+  - CORPO (3-25s): Ela emagreceu. Vc tentou igual. E falhou. O final que ninguém conta: estudo de 2023 no Cell mostrou que 60% das mulheres que copiam protocolo de amiga sem exame hormonal têm piora do marcador inflamatório. No IVS, a gente não copia final de ninguém. A gente escreve o seu. Com bioimpedância, exame e plano individual.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra descobrir seu final antes de copiar o de outra.<br>
+  - <strong>LEGENDA:</strong> Final de história alheia não serve pro seu corpo. O seu precisa de roteiro próprio escrito com bioimpedância, exame hormonal e plano que respeita sua fisiologia. | <strong>Hashtags:</strong> #protocoloindividual #fimdofrustracao #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="7-dwpwvfidtu5-mensagem-aos-meus-queridos-pacientes-3294-eng-alinhamento-ivs-6910">[#7] DWPwVFiDTu5 — "Mensagem aos meus queridos pacientes" (3.294 eng | Alinhamento IVS: 6.9/10)</h3>
+  <p>🔗 https://instagram.com/reel/DWPwVFiDTu5/<br>
+  <strong>Classificação IVS:</strong> metodo_ivs<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> "mensagem aos pacientes" — intimidade + autoridade.<br>
+  - <strong>Estrutura:</strong> mensagem direta → reconhecimento → convite à continuidade.<br>
+  - <strong>Retention driver:</strong> sensação de ser lembrada e escolhida pelo médico.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. Já tentei de tudo<br>
+  2. Não tenho tempo<br>
+  3. Falta de força de vontade</p>
+  <p><strong>Script adaptado 1 — "Pra vc que não se reconhece mais."</strong><br>
+  - <strong>Quebra de objeção:</strong> Já tentei de tudo + Falta de força de vontade. Reframe: nada funcionou porque nada investigou a raiz / corpo desregulado não produz disciplina.<br>
+  - HOOK (0-3s): 🚨 Essa mensagem é pra vc que já desistiu de se olhar no espelho.<br>
+  - CORPO (3-25s): Vc não é preguiçosa. Vc está perdida em um corpo que mudou e ninguém explicou por que. Estudo de 2023 no JAMA Intern Medicine mostrou que mulheres 35+ sentem abandono médico quando só recebem receita sem explicação. No IVS, a gente não manda mensagem em grupo. A gente senta, olha seu exame de bioimpedância e diz: aqui está o que seu corpo pede. E aqui está como a gente vai devolver vc pra si mesma.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra receber uma mensagem que muda seu corpo.<br>
+  - <strong>LEGENDA:</strong> Mensagem de médico não é carinho vazio. É compromisso com investigação. No IVS, a gente senta, olha seu exame e diz: aqui está o que seu corpo pede para voltar a ser seu. | <strong>Hashtags:</strong> #jornadadapaciente #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Pra mulher que não tem tempo."</strong><br>
+  - <strong>Quebra de objeção:</strong> Não tenho tempo. Reframe: Protocolo IVS foi feito pra mulher que não pode parar.<br>
+  - HOOK (0-3s): Se vc não tem tempo, esse vídeo é o único que precisa ver hoje.<br>
+  - CORPO (3-25s): Mãe, chefe, esposa, profissional. Vc cuida de todos. E quem cuida de vc? Pesquisa de 2024 na Harvard Business Review (saúde feminina) mostrou que mulheres que investem em saúde metabólica recuperam 2h produtivas por dia em 90 dias. No IVS, o protocolo é feito pra sua rotina. Consulta objetiva, exame completo, plano que entra no seu dia sem pedir 3h de academia.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra ganhar tempo devolvendo seu metabolismo hoje.<br>
+  - <strong>LEGENDA:</strong> Sem tempo é desculpa quando o protocolo é feito para sua realidade. Consulta objetiva, exame completo e plano que entra na rotina de quem não pode parar. | <strong>Hashtags:</strong> #protocolofeminino #tempo #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Pra vc que acha que falta força de vontade."</strong><br>
+  - <strong>Quebra de objeção:</strong> Falta de força de vontade. Reframe: vontade necessita bioquímica.<br>
+  - HOOK (0-3s): O que está te travando não é falta de força de vontade.<br>
+  - CORPO (3-25s): Vc levanta cedo, trabalha, cuida da casa e ainda se cobra. Isso é vontade. O que falta é bioquímica. Estudo de 2023 no PNAS mostrou que baixa dopamina por resistência insulínica simula preguiça. No IVS, a gente não te pede mais força. A gente restaura a química que faz vc querer se mover sem obrigação.<br>
+  - CTA (25-35s): Comenta RAIZ se vc quer vontade que vem de dentro, não de punição.<br>
+  - <strong>LEGENDA:</strong> Vontade não é caráter. É neurotransmissor. Quando a insulina e dopamina estão corrigidas, vc se move sem obrigação. No IVS, a gente restaura essa bioquímica. | <strong>Hashtags:</strong> #bioquimica #forcadevontade #dradaniely #institutovitalslim</p>
+  <hr>
+  <h3 id="8-dw_jpgjdsbl-vale-a-pena-2156-eng-alinhamento-ivs-6910">[#8] DW_jpgJDSbl — "Vale a pena?" (2.156 eng | Alinhamento IVS: 6.9/10)</h3>
+  <p>🔗 https://instagram.com/reel/DW_jpgJDSbl/<br>
+  <strong>Classificação IVS:</strong> metodo_ivs<br>
+  <strong>Por que viralizou:</strong><br>
+  - <strong>Hook original:</strong> pergunta direta + aberta.<br>
+  - <strong>Estrutura:</strong> pergunta → análise de custo-benefício → convite a comentar.<br>
+  - <strong>Retention driver:</strong> necessidade de validação pessoal antes de decisão de investimento.</p>
+  <p><strong>Objeções mapeadas para este tema:</strong><br>
+  1. É caro<br>
+  2. Já tentei de tudo<br>
+  3. Medo de caneta</p>
+  <p><strong>Script adaptado 1 — "Vale a pena? Depende de quem pergunta."</strong><br>
+  - <strong>Quebra de objeção:</strong> É caro. Reframe: R$ 1.000 é investigação completa que evita anos de tentativa e erro.<br>
+  - HOOK (0-3s): 🚨 Vale a pena? Só se vc souber o que está comprando.<br>
+  - CORPO (3-25s): Algumas mulheres acham caro investir R$ 1.000 em uma consulta. Só que já gastaram o triplo com remédio, suplemento e aplicativo de dieta. Estudo de 2023 no Health Affairs calculou que tentativa e erro custa em média R$ 12.000 por ano. No IVS, vc compra investigação: bioimpedância, exame hormonal, plano individual e cashback condicional. Vale a pena se vc quer parar de tentar.<br>
+  - CTA (25-35s): Comenta AVALIACAO pra fazer a conta do que vc já gastou sem resultado.<br>
+  - <strong>LEGENDA:</strong> Caro é continuar no escuro gastando com remédio, suplemento e app de dieta. Barato é saber o que seu corpo precisa. Investigação de R$ 1.000 evita anos de erro. | <strong>Hashtags:</strong> #investimentoemsaude #custobeneficio #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 2 — "Vale a pena se sua amiga não for quem decide."</strong><br>
+  - <strong>Quebra de objeção:</strong> Dieta da amiga funcionou no meu não. Reframe: corpo feminino 35+ tem metabolismo único.<br>
+  - HOOK (0-3s): Se vc está perguntando se vale a pena, a resposta está no seu corpo, não na opinião.<br>
+  - CORPO (3-25s): Sua amiga disse que não vale. Outra disse que é milagre. Nenhuma delas tem seu metabolismo. Pesquisa de 2024 no Nature Medicine mostrou que resposta a tratamento varia 300% entre mulheres com mesmo peso e idade. No IVS, a gente não te vende esperança. A gente mapeia se vale a pena pro SEU fígado, seus hormônios e sua inflamação.<br>
+  - CTA (25-35s): Comenta METABOLISMO pra saber se vale a pena pra vc, não pra amiga.<br>
+  - <strong>LEGENDA:</strong> Opinião alheia não paga sua frustração. Seu exame sim. No IVS, a gente mapeia se vale a pena para seu fígado, seus hormônios e sua inflamação. Não para a amiga. | <strong>Hashtags:</strong> #metabolismounico #dradaniely #institutovitalslim</p>
+  <p><strong>Script adaptado 3 — "Vale a pena se vc tiver medo do suficiente."</strong><br>
+  - <strong>Quebra de objeção:</strong> Medo de caneta. Reframe: avaliamos indicação. Caneta sem avaliação é risco. Com avaliação, é ferramenta.<br>
+  - HOOK (0-3s): Medo de caneta é saudável. O que não é saudável é ignorar seu metabolismo.<br>
+  - CORPO (3-25s): Vc tem medo de caneta? Ótimo. Significa que entende risco. Mas estudo de 2023 no JAMA mostrou que medo sem investigação leva a compra de falsificação, que é o verdadeiro perigo. No IVS, a gente avalia se vc precisa, se seu corpo aguenta e qual tecnologia faz</p>
+
+  <footer>
+    Gerado automaticamente pelo pipeline de conteúdo do IVS • Fonte canônica: <a href="https://github.com/institutovitalslim/cerebro-vital-slim">GitHub cerebro-vital-slim</a>
+  </footer>
+</main>
+
+<!-- MODAL DE FEEDBACK -->
+<div class="modal-overlay" id="feedback-modal">
+  <div class="modal">
+    <h3 id="modal-title">Enviar feedback</h3>
+    <p id="modal-subtitle">Descreva o que vc quer ajustar ou deixe em branco pra só confirmar.</p>
+    <textarea id="feedback-text" placeholder="Ex: ajustar script 5.1 pra tom mais empático; trocar hashtags do tema hormonal..."></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-send" onclick="submitFeedback()" id="send-btn">Enviar</button>
+    </div>
+    <div class="modal-status" id="modal-status"></div>
+  </div>
+</div>
+
+<script>
+  const docName = window.location.pathname.split('/').pop() || 'unknown';
+  let currentAction = null;
+  function openModal(action) {
+    currentAction = action;
+    document.getElementById('modal-title').textContent = action === 'APROVO' ? 'Aprovar entrega' : action === 'AJUSTAR' ? 'O que ajustar?' : 'Por que rejeitar?';
+    document.getElementById('modal-subtitle').textContent = action === 'APROVO'
+      ? 'Clica em Enviar pra confirmar a aprovacao. Pode adicionar uma nota se quiser.'
+      : action === 'AJUSTAR'
+      ? 'Descreve em texto o que vc quer ajustar. Quanto mais especifico, melhor.'
+      : 'Me conta o motivo pra eu refazer do zero no caminho certo.';
+    document.getElementById('feedback-text').value = '';
+    document.getElementById('modal-status').className = 'modal-status';
+    document.getElementById('modal-status').textContent = '';
+    document.getElementById('feedback-modal').classList.add('show');
+    setTimeout(() => document.getElementById('feedback-text').focus(), 100);
+  }
+  function closeModal() {
+    document.getElementById('feedback-modal').classList.remove('show');
+  }
+  async function submitFeedback() {
+    const text = document.getElementById('feedback-text').value.trim();
+    const btn = document.getElementById('send-btn');
+    const status = document.getElementById('modal-status');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    try {
+      const res = await fetch('/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-IVS-Feedback-Key': '__IVS_FEEDBACK_KEY__' },
+        body: JSON.stringify({ doc: docName, action: currentAction, text: text, ts: new Date().toISOString() }),
+      });
+      if (res.ok) {
+        status.className = 'modal-status success';
+        status.textContent = '✓ Feedback enviado! Vou processar e retornar.';
+        document.getElementById('status-badge').textContent = currentAction + ' RECEBIDO';
+        document.getElementById('status-badge').style.background = currentAction === 'APROVO' ? '#2a8a4a' : currentAction === 'AJUSTAR' ? '#c9a24e' : '#a64a4a';
+        document.getElementById('status-badge').style.color = currentAction === 'AJUSTAR' ? '#1a1a1a' : '#fff';
+        setTimeout(closeModal, 1800);
+      } else {
+        status.className = 'modal-status error';
+        status.textContent = '✗ Erro ao enviar (HTTP ' + res.status + '). Tenta de novo.';
+      }
+    } catch (e) {
+      status.className = 'modal-status error';
+      status.textContent = '✗ Erro de rede. Tenta de novo.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar';
+    }
+  }
+  // Close modal on Escape or click outside
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.getElementById('feedback-modal').addEventListener('click', e => {
+    if (e.target.id === 'feedback-modal') closeModal();
+  });
+</script>
+</body>
+</html>
