@@ -49,25 +49,29 @@ cp -a "$CFG" "$BAK"
 log ""
 log "backup salvo em: $BAK"
 
-# Detecta se color ja eh string nao-vazia
+# Schema espera hex RRGGBB (6 chars, sem #). Valida que esta nesse formato.
 HAS_COLOR="$(jq -r '.browser.profiles.openclaw.color // "" | tostring' "$CFG" 2>/dev/null)"
-if [ -n "$HAS_COLOR" ] && [ "$HAS_COLOR" != "null" ] && [ "$HAS_COLOR" != "" ]; then
+is_valid_hex() { echo "$1" | grep -qE '^[0-9a-fA-F]{6}$'; }
+
+if is_valid_hex "$HAS_COLOR"; then
   log ""
-  log "color ja preenchido ('$HAS_COLOR') — nao precisa patchar config."
+  log "color ja em formato hex valido ('$HAS_COLOR') — nao precisa patchar."
 else
+  log ""
+  log "color atual: '${HAS_COLOR:-<vazio>}' (invalido — schema espera RRGGBB)"
   log ""
   log "--- tentando openclaw doctor --fix (60s timeout) ---"
   timeout 60 openclaw doctor --fix </dev/null 2>&1 | tail -40 | tee -a "$LOG" || \
     log "(doctor saiu com codigo nao-zero ou timed out — vamos checar config)"
 
   HAS_COLOR2="$(jq -r '.browser.profiles.openclaw.color // "" | tostring' "$CFG" 2>/dev/null)"
-  if [ -n "$HAS_COLOR2" ] && [ "$HAS_COLOR2" != "null" ] && [ "$HAS_COLOR2" != "" ]; then
+  if is_valid_hex "$HAS_COLOR2"; then
     log "doctor consertou color: '$HAS_COLOR2'"
   else
     log ""
-    log "--- doctor nao preencheu color, patchando manualmente: color=blue ---"
+    log "--- doctor nao preencheu color valido, patchando manualmente: color=3b82f6 ---"
     TMP_JSON="$(mktemp)"
-    jq '.browser.profiles.openclaw.color = "blue"' "$CFG" > "$TMP_JSON" \
+    jq '.browser.profiles.openclaw.color = "3b82f6"' "$CFG" > "$TMP_JSON" \
       && mv "$TMP_JSON" "$CFG" \
       && log "patch aplicado." \
       || { log "ERRO: jq patch falhou"; exit 2; }
