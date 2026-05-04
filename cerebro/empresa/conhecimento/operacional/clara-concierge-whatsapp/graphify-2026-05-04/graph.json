@@ -1,0 +1,2246 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "RC-01 Sem valores programa pre-consulta",
+      "type": "RC",
+      "source_file": "",
+      "community": 5,
+      "norm_label": "rc-01 sem valores programa pre-consulta",
+      "id": "rc_01"
+    },
+    {
+      "label": "RC-02 Catalogo permitido pre-consulta",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-02 catalogo permitido pre-consulta",
+      "id": "rc_02"
+    },
+    {
+      "label": "RC-03 Resposta padrao programa",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-03 resposta padrao programa",
+      "id": "rc_03"
+    },
+    {
+      "label": "RC-04 Reembolso antigo legacy",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-04 reembolso antigo legacy",
+      "id": "rc_04"
+    },
+    {
+      "label": "RC-05 Reembolso vigente",
+      "type": "RC",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "rc-05 reembolso vigente",
+      "id": "rc_05"
+    },
+    {
+      "label": "RC-06 R$100 OFF + cashback 100%",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-06 r$100 off + cashback 100%",
+      "id": "rc_06"
+    },
+    {
+      "label": "RC-07 Desconto recorrente so humano",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-07 desconto recorrente so humano",
+      "id": "rc_07"
+    },
+    {
+      "label": "RC-08 Mamaes Baianas nao atendido",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-08 mamaes baianas nao atendido",
+      "id": "rc_08"
+    },
+    {
+      "label": "RC-09 Plano: menciona reembolso sem calcular",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-09 plano: menciona reembolso sem calcular",
+      "id": "rc_09"
+    },
+    {
+      "label": "RC-10 Promessa retorno = follow-up auto",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-10 promessa retorno = follow-up auto",
+      "id": "rc_10"
+    },
+    {
+      "label": "RC-11 Bonus do mes autorizado",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-11 bonus do mes autorizado",
+      "id": "rc_11"
+    },
+    {
+      "label": "RC-12 Lead vs Paciente (QuarkClinic)",
+      "type": "RC",
+      "source_file": "",
+      "community": 5,
+      "norm_label": "rc-12 lead vs paciente (quarkclinic)",
+      "id": "rc_12"
+    },
+    {
+      "label": "RC-13 Criterios Nao Qualificado",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-13 criterios nao qualificado",
+      "id": "rc_13"
+    },
+    {
+      "label": "RC-14 Pre-consulta R$300 universal",
+      "type": "RC",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "rc-14 pre-consulta r$300 universal",
+      "id": "rc_14"
+    },
+    {
+      "label": "RC-15 Cashback = credito Programa",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-15 cashback = credito programa",
+      "id": "rc_15"
+    },
+    {
+      "label": "RC-16 Handoff financeiro Tiaro -> Liane 2h",
+      "type": "RC",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "rc-16 handoff financeiro tiaro -> liane 2h",
+      "id": "rc_16"
+    },
+    {
+      "label": "RC-17 Clara nao escala caso clinico",
+      "type": "RC",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "rc-17 clara nao escala caso clinico",
+      "id": "rc_17"
+    },
+    {
+      "label": "RC-18 Apenas 1:1 WhatsApp",
+      "type": "RC",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "rc-18 apenas 1:1 whatsapp",
+      "id": "rc_18"
+    },
+    {
+      "label": "RC-19 Escalacao paralela sensivel/urgente",
+      "type": "RC",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "rc-19 escalacao paralela sensivel/urgente",
+      "id": "rc_19"
+    },
+    {
+      "label": "RC-20 Stack tecnico",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-20 stack tecnico",
+      "id": "rc_20"
+    },
+    {
+      "label": "RC-21 QuarkClinic fonte de verdade",
+      "type": "RC",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "rc-21 quarkclinic fonte de verdade",
+      "id": "rc_21"
+    },
+    {
+      "label": "RC-22 Sistema preconsulta.institutovitalslim.com.br",
+      "type": "RC",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "rc-22 sistema preconsulta.institutovitalslim.com.br",
+      "id": "rc_22"
+    },
+    {
+      "label": "RC-23 Reembolso aplicacoes/medicacoes negado",
+      "type": "RC",
+      "source_file": "",
+      "community": 6,
+      "norm_label": "rc-23 reembolso aplicacoes/medicacoes negado",
+      "id": "rc_23"
+    },
+    {
+      "label": "RC-24 Imposto de Renda como argumento",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-24 imposto de renda como argumento",
+      "id": "rc_24"
+    },
+    {
+      "label": "RC-25 Toda atualizacao memoria/cerebro via graphify",
+      "type": "RC",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "rc-25 toda atualizacao memoria/cerebro via graphify",
+      "id": "rc_25"
+    },
+    {
+      "label": "A: Mulher 30-50 emagrecimento",
+      "type": "PERSONA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "a: mulher 30-50 emagrecimento",
+      "id": "persona_a"
+    },
+    {
+      "label": "B: Homem 40-60 RH/longevidade",
+      "type": "PERSONA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "b: homem 40-60 rh/longevidade",
+      "id": "persona_b"
+    },
+    {
+      "label": "C: Casal/familia",
+      "type": "PERSONA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "c: casal/familia",
+      "id": "persona_c"
+    },
+    {
+      "label": "D: Premium Tirzepatida",
+      "type": "PERSONA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "d: premium tirzepatida",
+      "id": "persona_d"
+    },
+    {
+      "label": "E: Referencia VIP",
+      "type": "PERSONA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "e: referencia vip",
+      "id": "persona_e"
+    },
+    {
+      "label": "F: Idoso 60+",
+      "type": "PERSONA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "f: idoso 60+",
+      "id": "persona_f"
+    },
+    {
+      "label": "G: Mulher jovem SOP/hormonal",
+      "type": "PERSONA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "g: mulher jovem sop/hormonal",
+      "id": "persona_g"
+    },
+    {
+      "label": "Dra. Daniely Freitas (medica)",
+      "type": "PESSOA",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "dra. daniely freitas (medica)",
+      "id": "pessoa_dra_daniely"
+    },
+    {
+      "label": "Liane (enfermeira chefe)",
+      "type": "PESSOA",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "liane (enfermeira chefe)",
+      "id": "pessoa_liane"
+    },
+    {
+      "label": "Cyntia (nutricionista)",
+      "type": "PESSOA",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "cyntia (nutricionista)",
+      "id": "pessoa_cyntia"
+    },
+    {
+      "label": "Valter Santos (preparador fisico)",
+      "type": "PESSOA",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "valter santos (preparador fisico)",
+      "id": "pessoa_valter"
+    },
+    {
+      "label": "Dra. Patricia Fabrini (tricologista)",
+      "type": "PESSOA",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "dra. patricia fabrini (tricologista)",
+      "id": "pessoa_dra_patricia"
+    },
+    {
+      "label": "Tiaro F. Neves (CEO/gestao)",
+      "type": "PESSOA",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "tiaro f. neves (ceo/gestao)",
+      "id": "pessoa_tiaro"
+    },
+    {
+      "label": "Z-API (WhatsApp)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "z-api (whatsapp)",
+      "id": "sis_zapi"
+    },
+    {
+      "label": "Telegram (interno)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "telegram (interno)",
+      "id": "sis_telegram"
+    },
+    {
+      "label": "QuarkClinic (prontuario/CRM)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "quarkclinic (prontuario/crm)",
+      "id": "sis_quarkclinic"
+    },
+    {
+      "label": "OpenClaw gateway (GPT-5.4)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "openclaw gateway (gpt-5.4)",
+      "id": "sis_openclaw"
+    },
+    {
+      "label": "Memed (receita digital)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "memed (receita digital)",
+      "id": "sis_memed"
+    },
+    {
+      "label": "Galileu Online (bioimpedancia)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "galileu online (bioimpedancia)",
+      "id": "sis_galileu"
+    },
+    {
+      "label": "InfinityPay (pagamento, manual)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "infinitypay (pagamento, manual)",
+      "id": "sis_infinitypay"
+    },
+    {
+      "label": "Banco Inter (boletos)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "banco inter (boletos)",
+      "id": "sis_inter"
+    },
+    {
+      "label": "Omie (ERP)",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "omie (erp)",
+      "id": "sis_omie"
+    },
+    {
+      "label": "preconsulta.institutovitalslim.com.br",
+      "type": "SISTEMA",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "preconsulta.institutovitalslim.com.br",
+      "id": "sis_preconsulta"
+    },
+    {
+      "label": "CRON-CONFIRM-AM",
+      "type": "CRON",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "cron-confirm-am",
+      "id": "cron_am"
+    },
+    {
+      "label": "CRON-CONFIRM-PM",
+      "type": "CRON",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "cron-confirm-pm",
+      "id": "cron_pm"
+    },
+    {
+      "label": "CRON-D1-LEAD-FIRST (a implementar)",
+      "type": "CRON",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "cron-d1-lead-first (a implementar)",
+      "id": "cron_d1_lead"
+    },
+    {
+      "label": "Template Confirmacao D-1/D-0",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 7,
+      "norm_label": "template confirmacao d-1/d-0",
+      "id": "tpl_confirmacao"
+    },
+    {
+      "label": "Template Onboarding pos pre-consulta paga",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 13,
+      "norm_label": "template onboarding pos pre-consulta paga",
+      "id": "tpl_onboarding_pre"
+    },
+    {
+      "label": "Template Onboarding pos questionario",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 8,
+      "norm_label": "template onboarding pos questionario",
+      "id": "tpl_onboarding_questionario"
+    },
+    {
+      "label": "Template Handoff financeiro RC-16",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 9,
+      "norm_label": "template handoff financeiro rc-16",
+      "id": "tpl_handoff_financeiro"
+    },
+    {
+      "label": "Template Reengajamento lead silencioso",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 14,
+      "norm_label": "template reengajamento lead silencioso",
+      "id": "tpl_reengajamento"
+    },
+    {
+      "label": "Template Recupera NQ D+60",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 15,
+      "norm_label": "template recupera nq d+60",
+      "id": "tpl_recupera_nq"
+    },
+    {
+      "label": "Template Escalacao RC-19 sensivel",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "template escalacao rc-19 sensivel",
+      "id": "tpl_escalacao_sensivel"
+    },
+    {
+      "label": "Template Escalacao RC-19 risco real (CVV 188)",
+      "type": "TEMPLATE",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "template escalacao rc-19 risco real (cvv 188)",
+      "id": "tpl_escalacao_risco"
+    },
+    {
+      "label": "Objecao: Atende plano de saude?",
+      "type": "OBJECAO",
+      "source_file": "",
+      "community": 16,
+      "norm_label": "objecao: atende plano de saude?",
+      "id": "obj_plano_saude"
+    },
+    {
+      "label": "Objecao: Esta caro",
+      "type": "OBJECAO",
+      "source_file": "",
+      "community": 10,
+      "norm_label": "objecao: esta caro",
+      "id": "obj_preco_caro"
+    },
+    {
+      "label": "Objecao: Vou pensar",
+      "type": "OBJECAO",
+      "source_file": "",
+      "community": 17,
+      "norm_label": "objecao: vou pensar",
+      "id": "obj_vou_pensar"
+    },
+    {
+      "label": "Objecao: Consulta e mensal?",
+      "type": "OBJECAO",
+      "source_file": "",
+      "community": 11,
+      "norm_label": "objecao: consulta e mensal?",
+      "id": "obj_consulta_mensal"
+    },
+    {
+      "label": "Objecao: Depois do [evento pessoal]",
+      "type": "OBJECAO",
+      "source_file": "",
+      "community": 18,
+      "norm_label": "objecao: depois do [evento pessoal]",
+      "id": "obj_apos_evento"
+    },
+    {
+      "label": "Objecao: Nova consulta para repetir formula",
+      "type": "OBJECAO",
+      "source_file": "",
+      "community": 19,
+      "norm_label": "objecao: nova consulta para repetir formula",
+      "id": "obj_nova_consulta"
+    },
+    {
+      "label": "Objecao: Nao consigo abrir boleto",
+      "type": "OBJECAO",
+      "source_file": "",
+      "community": 20,
+      "norm_label": "objecao: nao consigo abrir boleto",
+      "id": "obj_problema_boleto"
+    },
+    {
+      "label": "Lead (0 atendimentos)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 5,
+      "norm_label": "lead (0 atendimentos)",
+      "id": "c_lead"
+    },
+    {
+      "label": "Paciente (1+ atendimentos)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 5,
+      "norm_label": "paciente (1+ atendimentos)",
+      "id": "c_paciente"
+    },
+    {
+      "label": "Programa de Acompanhamento",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "programa de acompanhamento",
+      "id": "c_programa"
+    },
+    {
+      "label": "Consulta inicial R$1.000",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "consulta inicial r$1.000",
+      "id": "c_consulta"
+    },
+    {
+      "label": "Pre-consulta R$300",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "pre-consulta r$300",
+      "id": "c_pre_consulta"
+    },
+    {
+      "label": "Combo R$2.100 (consulta+exames)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "combo r$2.100 (consulta+exames)",
+      "id": "c_combo_exames"
+    },
+    {
+      "label": "Bioimpedancia",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "bioimpedancia",
+      "id": "c_bioimpedancia"
+    },
+    {
+      "label": "Dinamometria computadorizada",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 4,
+      "norm_label": "dinamometria computadorizada",
+      "id": "c_dinamometria"
+    },
+    {
+      "label": "Tirzepatida (Mounjaro)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 6,
+      "norm_label": "tirzepatida (mounjaro)",
+      "id": "c_tirzepatida"
+    },
+    {
+      "label": "Implante hormonal",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 6,
+      "norm_label": "implante hormonal",
+      "id": "c_implante"
+    },
+    {
+      "label": "Soroterapia EV (= Suplementacao injetavel)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 6,
+      "norm_label": "soroterapia ev (= suplementacao injetavel)",
+      "id": "c_soroterapia"
+    },
+    {
+      "label": "Aplicacao IM",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 21,
+      "norm_label": "aplicacao im",
+      "id": "c_aplicacao_im"
+    },
+    {
+      "label": "Aplicacao SC",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 22,
+      "norm_label": "aplicacao sc",
+      "id": "c_aplicacao_sc"
+    },
+    {
+      "label": "SPIN Selling",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "spin selling",
+      "id": "c_spin"
+    },
+    {
+      "label": "ENDOGIN/MLS (Flavio Augusto, Joel Jota, Caio Carneiro)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 12,
+      "norm_label": "endogin/mls (flavio augusto, joel jota, caio carneiro)",
+      "id": "c_endogin"
+    },
+    {
+      "label": "VOICE-RULE-001 (1 ideia/bloco)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 5,
+      "norm_label": "voice-rule-001 (1 ideia/bloco)",
+      "id": "c_voice_rule"
+    },
+    {
+      "label": "Medicina Preventiva",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 12,
+      "norm_label": "medicina preventiva",
+      "id": "c_medicina_preventiva"
+    },
+    {
+      "label": "Grupo Programa (15 grupos WhatsApp)",
+      "type": "CONCEITO",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "grupo programa (15 grupos whatsapp)",
+      "id": "c_grupo_programa"
+    },
+    {
+      "label": "WhatsApp 1:1 (Clara opera)",
+      "type": "CANAL",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "whatsapp 1:1 (clara opera)",
+      "id": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "Grupos WhatsApp Programa (humano)",
+      "type": "CANAL",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "grupos whatsapp programa (humano)",
+      "id": "canal_whatsapp_grupo"
+    },
+    {
+      "label": "Telegram interno (-1003803476669)",
+      "type": "CANAL",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "telegram interno (-1003803476669)",
+      "id": "canal_telegram_grupo"
+    },
+    {
+      "label": "Telegram DM Tiaro",
+      "type": "CANAL",
+      "source_file": "",
+      "community": 23,
+      "norm_label": "telegram dm tiaro",
+      "id": "canal_telegram_dm"
+    },
+    {
+      "label": "Telegram topico Pacientes (questionarios)",
+      "type": "CANAL",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "telegram topico pacientes (questionarios)",
+      "id": "canal_topico_pacientes"
+    },
+    {
+      "label": "Telegram topico Evolucao do Openclaw (768)",
+      "type": "CANAL",
+      "source_file": "",
+      "community": 24,
+      "norm_label": "telegram topico evolucao do openclaw (768)",
+      "id": "canal_topico_evolucao"
+    },
+    {
+      "label": "SKILL.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 25,
+      "norm_label": "skill.md",
+      "id": "file_skill.md"
+    },
+    {
+      "label": "README.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 26,
+      "norm_label": "readme.md",
+      "id": "file_readme.md"
+    },
+    {
+      "label": "REGRAS/CANONICAS.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "regras/canonicas.md",
+      "id": "file_regras_canonicas.md"
+    },
+    {
+      "label": "VOICE/GUIDE.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 5,
+      "norm_label": "voice/guide.md",
+      "id": "file_voice_guide.md"
+    },
+    {
+      "label": "PERSONAS.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "personas.md",
+      "id": "file_personas.md"
+    },
+    {
+      "label": "PIPELINE/TAGS.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 27,
+      "norm_label": "pipeline/tags.md",
+      "id": "file_pipeline_tags.md"
+    },
+    {
+      "label": "CRONS.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 1,
+      "norm_label": "crons.md",
+      "id": "file_crons.md"
+    },
+    {
+      "label": "HIERARQUIA/ESCALACAO.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 28,
+      "norm_label": "hierarquia/escalacao.md",
+      "id": "file_hierarquia_escalacao.md"
+    },
+    {
+      "label": "CATALOGO/FINANCEIRO.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 29,
+      "norm_label": "catalogo/financeiro.md",
+      "id": "file_catalogo_financeiro.md"
+    },
+    {
+      "label": "PITCH/OFICIAL.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "pitch/oficial.md",
+      "id": "file_pitch_oficial.md"
+    },
+    {
+      "label": "REFRAMES/OURO.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 30,
+      "norm_label": "reframes/ouro.md",
+      "id": "file_reframes_ouro.md"
+    },
+    {
+      "label": "EQUIPE.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "equipe.md",
+      "id": "file_equipe.md"
+    },
+    {
+      "label": "INFRAESTRUTURA.MD",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 3,
+      "norm_label": "infraestrutura.md",
+      "id": "file_infraestrutura.md"
+    },
+    {
+      "label": "TEMPLATES/CONFIRMACAO/D1/D0",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 7,
+      "norm_label": "templates/confirmacao/d1/d0",
+      "id": "file_templates_confirmacao_d1_d0"
+    },
+    {
+      "label": "TEMPLATES/ONBOARDING/PRE/CONSULTA/PAGA",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 13,
+      "norm_label": "templates/onboarding/pre/consulta/paga",
+      "id": "file_templates_onboarding_pre_consulta_paga"
+    },
+    {
+      "label": "TEMPLATES/ONBOARDING/POS/QUESTIONARIO",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 8,
+      "norm_label": "templates/onboarding/pos/questionario",
+      "id": "file_templates_onboarding_pos_questionario"
+    },
+    {
+      "label": "TEMPLATES/HANDOFF/FINANCEIRO",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 9,
+      "norm_label": "templates/handoff/financeiro",
+      "id": "file_templates_handoff_financeiro"
+    },
+    {
+      "label": "TEMPLATES/REENGAJAMENTO/LEAD/SILENCIOSO",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 14,
+      "norm_label": "templates/reengajamento/lead/silencioso",
+      "id": "file_templates_reengajamento_lead_silencioso"
+    },
+    {
+      "label": "TEMPLATES/RECUPERA/NQ/D60",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 15,
+      "norm_label": "templates/recupera/nq/d60",
+      "id": "file_templates_recupera_nq_d60"
+    },
+    {
+      "label": "TEMPLATES/ESCALACAO/RC19/SENSIVEL",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "templates/escalacao/rc19/sensivel",
+      "id": "file_templates_escalacao_rc19_sensivel"
+    },
+    {
+      "label": "TEMPLATES/ESCALACAO/RC19/RISCO",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 2,
+      "norm_label": "templates/escalacao/rc19/risco",
+      "id": "file_templates_escalacao_rc19_risco"
+    },
+    {
+      "label": "OBJECOES/PLANO/SAUDE",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 16,
+      "norm_label": "objecoes/plano/saude",
+      "id": "file_objecoes_plano_saude"
+    },
+    {
+      "label": "OBJECOES/PRECO/CARO",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 10,
+      "norm_label": "objecoes/preco/caro",
+      "id": "file_objecoes_preco_caro"
+    },
+    {
+      "label": "OBJECOES/VOU/PENSAR",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 17,
+      "norm_label": "objecoes/vou/pensar",
+      "id": "file_objecoes_vou_pensar"
+    },
+    {
+      "label": "OBJECOES/CONSULTA/MENSAL",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 11,
+      "norm_label": "objecoes/consulta/mensal",
+      "id": "file_objecoes_consulta_mensal"
+    },
+    {
+      "label": "OBJECOES/APOS/EVENTO/PESSOAL",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 18,
+      "norm_label": "objecoes/apos/evento/pessoal",
+      "id": "file_objecoes_apos_evento_pessoal"
+    },
+    {
+      "label": "OBJECOES/NOVA/CONSULTA/FORMULA",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 19,
+      "norm_label": "objecoes/nova/consulta/formula",
+      "id": "file_objecoes_nova_consulta_formula"
+    },
+    {
+      "label": "OBJECOES/PROBLEMA/TECNICO/BOLETO",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 20,
+      "norm_label": "objecoes/problema/tecnico/boleto",
+      "id": "file_objecoes_problema_tecnico_boleto"
+    },
+    {
+      "label": "OPERACOES/PAUSA/EMERGENCIA",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 31,
+      "norm_label": "operacoes/pausa/emergencia",
+      "id": "file_operacoes_pausa_emergencia"
+    },
+    {
+      "label": "OPERACOES/ENDPOINTS/BRIDGE",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 32,
+      "norm_label": "operacoes/endpoints/bridge",
+      "id": "file_operacoes_endpoints_bridge"
+    },
+    {
+      "label": "MEMORIA/CONSOLIDADA",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 0,
+      "norm_label": "memoria/consolidada",
+      "id": "file_memoria_consolidada"
+    },
+    {
+      "label": "SYSTEM/PROMPT/CLARA",
+      "type": "ARQUIVO",
+      "source_file": "",
+      "community": 5,
+      "norm_label": "system/prompt/clara",
+      "id": "file_system_prompt_clara"
+    }
+  ],
+  "links": [
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_01",
+      "confidence_score": 1.0,
+      "source": "rc_01",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "rc_01",
+      "confidence_score": 1.0,
+      "source": "rc_01",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "deveria implementar",
+      "type": "EXTRACTED",
+      "_src": "file_system_prompt_clara",
+      "_tgt": "rc_01",
+      "confidence_score": 1.0,
+      "source": "rc_01",
+      "target": "file_system_prompt_clara"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_02",
+      "confidence_score": 1.0,
+      "source": "rc_02",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "rc_02",
+      "confidence_score": 1.0,
+      "source": "rc_02",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_03",
+      "confidence_score": 1.0,
+      "source": "rc_03",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "rc_03",
+      "confidence_score": 1.0,
+      "source": "rc_03",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_04",
+      "confidence_score": 1.0,
+      "source": "rc_04",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "elegivel reembolso",
+      "type": "EXTRACTED",
+      "_src": "rc_05",
+      "_tgt": "c_consulta",
+      "confidence_score": 1.0,
+      "source": "rc_05",
+      "target": "c_consulta"
+    },
+    {
+      "label": "elegivel reembolso",
+      "type": "EXTRACTED",
+      "_src": "rc_05",
+      "_tgt": "c_dinamometria",
+      "confidence_score": 1.0,
+      "source": "rc_05",
+      "target": "c_dinamometria"
+    },
+    {
+      "label": "elegivel reembolso",
+      "type": "EXTRACTED",
+      "_src": "rc_05",
+      "_tgt": "c_bioimpedancia",
+      "confidence_score": 1.0,
+      "source": "rc_05",
+      "target": "c_bioimpedancia"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_05",
+      "confidence_score": 1.0,
+      "source": "rc_05",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "aplica desconto R$100",
+      "type": "EXTRACTED",
+      "_src": "rc_06",
+      "_tgt": "c_consulta",
+      "confidence_score": 1.0,
+      "source": "rc_06",
+      "target": "c_consulta"
+    },
+    {
+      "label": "aplica cashback 100%",
+      "type": "EXTRACTED",
+      "_src": "rc_06",
+      "_tgt": "c_programa",
+      "confidence_score": 1.0,
+      "source": "rc_06",
+      "target": "c_programa"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_06",
+      "confidence_score": 1.0,
+      "source": "rc_06",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "rc_06",
+      "confidence_score": 1.0,
+      "source": "rc_06",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "deveria implementar",
+      "type": "EXTRACTED",
+      "_src": "file_system_prompt_clara",
+      "_tgt": "rc_06",
+      "confidence_score": 1.0,
+      "source": "rc_06",
+      "target": "file_system_prompt_clara"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_07",
+      "confidence_score": 1.0,
+      "source": "rc_07",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_08",
+      "confidence_score": 1.0,
+      "source": "rc_08",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_09",
+      "confidence_score": 1.0,
+      "source": "rc_09",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_10",
+      "confidence_score": 1.0,
+      "source": "rc_10",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_11",
+      "confidence_score": 1.0,
+      "source": "rc_11",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "rc_11",
+      "confidence_score": 1.0,
+      "source": "rc_11",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "usa",
+      "type": "EXTRACTED",
+      "_src": "rc_12",
+      "_tgt": "sis_quarkclinic",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "sis_quarkclinic"
+    },
+    {
+      "label": "diferencia",
+      "type": "EXTRACTED",
+      "_src": "rc_12",
+      "_tgt": "c_lead",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "c_lead"
+    },
+    {
+      "label": "diferencia",
+      "type": "EXTRACTED",
+      "_src": "rc_12",
+      "_tgt": "c_paciente",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "c_paciente"
+    },
+    {
+      "label": "escala",
+      "type": "EXTRACTED",
+      "_src": "rc_12",
+      "_tgt": "pessoa_liane",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "pessoa_liane"
+    },
+    {
+      "label": "escala VIP",
+      "type": "EXTRACTED",
+      "_src": "rc_12",
+      "_tgt": "pessoa_tiaro",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "pessoa_tiaro"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_12",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_voice_guide.md",
+      "_tgt": "rc_12",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "file_voice_guide.md"
+    },
+    {
+      "label": "DEVERIA mas NAO implementa",
+      "type": "EXTRACTED",
+      "_src": "file_system_prompt_clara",
+      "_tgt": "rc_12",
+      "confidence_score": 1.0,
+      "source": "rc_12",
+      "target": "file_system_prompt_clara"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_13",
+      "confidence_score": 1.0,
+      "source": "rc_13",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "usa",
+      "type": "EXTRACTED",
+      "_src": "rc_14",
+      "_tgt": "sis_infinitypay",
+      "confidence_score": 1.0,
+      "source": "rc_14",
+      "target": "sis_infinitypay"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "rc_14",
+      "_tgt": "c_pre_consulta",
+      "confidence_score": 1.0,
+      "source": "rc_14",
+      "target": "c_pre_consulta"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_14",
+      "confidence_score": 1.0,
+      "source": "rc_14",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_15",
+      "confidence_score": 1.0,
+      "source": "rc_15",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "depende",
+      "type": "EXTRACTED",
+      "_src": "rc_16",
+      "_tgt": "sis_infinitypay",
+      "confidence_score": 1.0,
+      "source": "rc_16",
+      "target": "sis_infinitypay"
+    },
+    {
+      "label": "escala primeiro",
+      "type": "EXTRACTED",
+      "_src": "rc_16",
+      "_tgt": "pessoa_tiaro",
+      "confidence_score": 1.0,
+      "source": "rc_16",
+      "target": "pessoa_tiaro"
+    },
+    {
+      "label": "escala em T+2h",
+      "type": "EXTRACTED",
+      "_src": "rc_16",
+      "_tgt": "pessoa_liane",
+      "confidence_score": 1.0,
+      "source": "rc_16",
+      "target": "pessoa_liane"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_16",
+      "confidence_score": 1.0,
+      "source": "rc_16",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "usa",
+      "type": "EXTRACTED",
+      "_src": "rc_17",
+      "_tgt": "canal_topico_pacientes",
+      "confidence_score": 1.0,
+      "source": "rc_17",
+      "target": "canal_topico_pacientes"
+    },
+    {
+      "label": "alimenta",
+      "type": "EXTRACTED",
+      "_src": "rc_17",
+      "_tgt": "sis_preconsulta",
+      "confidence_score": 1.0,
+      "source": "rc_17",
+      "target": "sis_preconsulta"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_17",
+      "confidence_score": 1.0,
+      "source": "rc_17",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "permite",
+      "type": "EXTRACTED",
+      "_src": "rc_18",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "rc_18",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "proibe",
+      "type": "EXTRACTED",
+      "_src": "rc_18",
+      "_tgt": "canal_whatsapp_grupo",
+      "confidence_score": 1.0,
+      "source": "rc_18",
+      "target": "canal_whatsapp_grupo"
+    },
+    {
+      "label": "permite (interno)",
+      "type": "EXTRACTED",
+      "_src": "rc_18",
+      "_tgt": "canal_telegram_grupo",
+      "confidence_score": 1.0,
+      "source": "rc_18",
+      "target": "canal_telegram_grupo"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_18",
+      "confidence_score": 1.0,
+      "source": "rc_18",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "notifica",
+      "type": "EXTRACTED",
+      "_src": "rc_19",
+      "_tgt": "pessoa_tiaro",
+      "confidence_score": 1.0,
+      "source": "rc_19",
+      "target": "pessoa_tiaro"
+    },
+    {
+      "label": "notifica",
+      "type": "EXTRACTED",
+      "_src": "rc_19",
+      "_tgt": "pessoa_liane",
+      "confidence_score": 1.0,
+      "source": "rc_19",
+      "target": "pessoa_liane"
+    },
+    {
+      "label": "implementa",
+      "type": "EXTRACTED",
+      "_src": "tpl_escalacao_sensivel",
+      "_tgt": "rc_19",
+      "confidence_score": 1.0,
+      "source": "rc_19",
+      "target": "tpl_escalacao_sensivel"
+    },
+    {
+      "label": "implementa",
+      "type": "EXTRACTED",
+      "_src": "tpl_escalacao_risco",
+      "_tgt": "rc_19",
+      "confidence_score": 1.0,
+      "source": "rc_19",
+      "target": "tpl_escalacao_risco"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_19",
+      "confidence_score": 1.0,
+      "source": "rc_19",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "DEVERIA mas NAO implementa",
+      "type": "EXTRACTED",
+      "_src": "file_system_prompt_clara",
+      "_tgt": "rc_19",
+      "confidence_score": 1.0,
+      "source": "rc_19",
+      "target": "file_system_prompt_clara"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_20",
+      "confidence_score": 1.0,
+      "source": "rc_20",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "define como fonte verdade",
+      "type": "EXTRACTED",
+      "_src": "rc_21",
+      "_tgt": "sis_quarkclinic",
+      "confidence_score": 1.0,
+      "source": "rc_21",
+      "target": "sis_quarkclinic"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_21",
+      "confidence_score": 1.0,
+      "source": "rc_21",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "rc_22",
+      "_tgt": "sis_preconsulta",
+      "confidence_score": 1.0,
+      "source": "rc_22",
+      "target": "sis_preconsulta"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_22",
+      "confidence_score": 1.0,
+      "source": "rc_22",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "desatualizado - usa Google Forms antigo",
+      "type": "EXTRACTED",
+      "_src": "file_system_prompt_clara",
+      "_tgt": "rc_22",
+      "confidence_score": 1.0,
+      "source": "rc_22",
+      "target": "file_system_prompt_clara"
+    },
+    {
+      "label": "exclui reembolso",
+      "type": "EXTRACTED",
+      "_src": "rc_23",
+      "_tgt": "c_tirzepatida",
+      "confidence_score": 1.0,
+      "source": "rc_23",
+      "target": "c_tirzepatida"
+    },
+    {
+      "label": "exclui reembolso",
+      "type": "EXTRACTED",
+      "_src": "rc_23",
+      "_tgt": "c_implante",
+      "confidence_score": 1.0,
+      "source": "rc_23",
+      "target": "c_implante"
+    },
+    {
+      "label": "exclui reembolso",
+      "type": "EXTRACTED",
+      "_src": "rc_23",
+      "_tgt": "c_soroterapia",
+      "confidence_score": 1.0,
+      "source": "rc_23",
+      "target": "c_soroterapia"
+    },
+    {
+      "label": "exclui reembolso",
+      "type": "EXTRACTED",
+      "_src": "rc_23",
+      "_tgt": "c_programa",
+      "confidence_score": 1.0,
+      "source": "rc_23",
+      "target": "c_programa"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_23",
+      "confidence_score": 1.0,
+      "source": "rc_23",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "argumenta IR",
+      "type": "EXTRACTED",
+      "_src": "rc_24",
+      "_tgt": "c_programa",
+      "confidence_score": 1.0,
+      "source": "rc_24",
+      "target": "c_programa"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_24",
+      "confidence_score": 1.0,
+      "source": "rc_24",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "rc_24",
+      "confidence_score": 1.0,
+      "source": "rc_24",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "exige usar graphify",
+      "type": "EXTRACTED",
+      "_src": "rc_25",
+      "_tgt": "file_memoria_consolidada",
+      "confidence_score": 1.0,
+      "source": "rc_25",
+      "target": "file_memoria_consolidada"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_regras_canonicas.md",
+      "_tgt": "rc_25",
+      "confidence_score": 1.0,
+      "source": "rc_25",
+      "target": "file_regras_canonicas.md"
+    },
+    {
+      "label": "interage via",
+      "type": "EXTRACTED",
+      "_src": "persona_a",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "persona_a",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_personas.md",
+      "_tgt": "persona_a",
+      "confidence_score": 1.0,
+      "source": "persona_a",
+      "target": "file_personas.md"
+    },
+    {
+      "label": "interage via",
+      "type": "EXTRACTED",
+      "_src": "persona_b",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "persona_b",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_personas.md",
+      "_tgt": "persona_b",
+      "confidence_score": 1.0,
+      "source": "persona_b",
+      "target": "file_personas.md"
+    },
+    {
+      "label": "interage via",
+      "type": "EXTRACTED",
+      "_src": "persona_c",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "persona_c",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_personas.md",
+      "_tgt": "persona_c",
+      "confidence_score": 1.0,
+      "source": "persona_c",
+      "target": "file_personas.md"
+    },
+    {
+      "label": "interage via",
+      "type": "EXTRACTED",
+      "_src": "persona_d",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "persona_d",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_personas.md",
+      "_tgt": "persona_d",
+      "confidence_score": 1.0,
+      "source": "persona_d",
+      "target": "file_personas.md"
+    },
+    {
+      "label": "interage via",
+      "type": "EXTRACTED",
+      "_src": "persona_e",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "persona_e",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_personas.md",
+      "_tgt": "persona_e",
+      "confidence_score": 1.0,
+      "source": "persona_e",
+      "target": "file_personas.md"
+    },
+    {
+      "label": "interage via",
+      "type": "EXTRACTED",
+      "_src": "persona_f",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "persona_f",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_personas.md",
+      "_tgt": "persona_f",
+      "confidence_score": 1.0,
+      "source": "persona_f",
+      "target": "file_personas.md"
+    },
+    {
+      "label": "interage via",
+      "type": "EXTRACTED",
+      "_src": "persona_g",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "persona_g",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_personas.md",
+      "_tgt": "persona_g",
+      "confidence_score": 1.0,
+      "source": "persona_g",
+      "target": "file_personas.md"
+    },
+    {
+      "label": "consome dados",
+      "type": "EXTRACTED",
+      "_src": "pessoa_dra_daniely",
+      "_tgt": "canal_topico_pacientes",
+      "confidence_score": 1.0,
+      "source": "pessoa_dra_daniely",
+      "target": "canal_topico_pacientes"
+    },
+    {
+      "label": "intermedia",
+      "type": "EXTRACTED",
+      "_src": "pessoa_liane",
+      "_tgt": "pessoa_dra_daniely",
+      "confidence_score": 1.0,
+      "source": "pessoa_dra_daniely",
+      "target": "pessoa_liane"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_equipe.md",
+      "_tgt": "pessoa_dra_daniely",
+      "confidence_score": 1.0,
+      "source": "pessoa_dra_daniely",
+      "target": "file_equipe.md"
+    },
+    {
+      "label": "delega para",
+      "type": "EXTRACTED",
+      "_src": "pessoa_tiaro",
+      "_tgt": "pessoa_liane",
+      "confidence_score": 1.0,
+      "source": "pessoa_liane",
+      "target": "pessoa_tiaro"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_equipe.md",
+      "_tgt": "pessoa_liane",
+      "confidence_score": 1.0,
+      "source": "pessoa_liane",
+      "target": "file_equipe.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_equipe.md",
+      "_tgt": "pessoa_cyntia",
+      "confidence_score": 1.0,
+      "source": "pessoa_cyntia",
+      "target": "file_equipe.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_equipe.md",
+      "_tgt": "pessoa_valter",
+      "confidence_score": 1.0,
+      "source": "pessoa_valter",
+      "target": "file_equipe.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_equipe.md",
+      "_tgt": "pessoa_dra_patricia",
+      "confidence_score": 1.0,
+      "source": "pessoa_dra_patricia",
+      "target": "file_equipe.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_equipe.md",
+      "_tgt": "pessoa_tiaro",
+      "confidence_score": 1.0,
+      "source": "pessoa_tiaro",
+      "target": "file_equipe.md"
+    },
+    {
+      "label": "envia via",
+      "type": "EXTRACTED",
+      "_src": "cron_am",
+      "_tgt": "sis_zapi",
+      "confidence_score": 1.0,
+      "source": "sis_zapi",
+      "target": "cron_am"
+    },
+    {
+      "label": "envia via",
+      "type": "EXTRACTED",
+      "_src": "cron_pm",
+      "_tgt": "sis_zapi",
+      "confidence_score": 1.0,
+      "source": "sis_zapi",
+      "target": "cron_pm"
+    },
+    {
+      "label": "envia via",
+      "type": "EXTRACTED",
+      "_src": "cron_d1_lead",
+      "_tgt": "sis_zapi",
+      "confidence_score": 1.0,
+      "source": "sis_zapi",
+      "target": "cron_d1_lead"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_zapi",
+      "confidence_score": 1.0,
+      "source": "sis_zapi",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_telegram",
+      "confidence_score": 1.0,
+      "source": "sis_telegram",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_quarkclinic",
+      "confidence_score": 1.0,
+      "source": "sis_quarkclinic",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_openclaw",
+      "confidence_score": 1.0,
+      "source": "sis_openclaw",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_memed",
+      "confidence_score": 1.0,
+      "source": "sis_memed",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_galileu",
+      "confidence_score": 1.0,
+      "source": "sis_galileu",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_infinitypay",
+      "confidence_score": 1.0,
+      "source": "sis_infinitypay",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_inter",
+      "confidence_score": 1.0,
+      "source": "sis_inter",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_omie",
+      "confidence_score": 1.0,
+      "source": "sis_omie",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_infraestrutura.md",
+      "_tgt": "sis_preconsulta",
+      "confidence_score": 1.0,
+      "source": "sis_preconsulta",
+      "target": "file_infraestrutura.md"
+    },
+    {
+      "label": "atua em",
+      "type": "EXTRACTED",
+      "_src": "cron_am",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "cron_am",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_crons.md",
+      "_tgt": "cron_am",
+      "confidence_score": 1.0,
+      "source": "cron_am",
+      "target": "file_crons.md"
+    },
+    {
+      "label": "atua em",
+      "type": "EXTRACTED",
+      "_src": "cron_pm",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "cron_pm",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_crons.md",
+      "_tgt": "cron_pm",
+      "confidence_score": 1.0,
+      "source": "cron_pm",
+      "target": "file_crons.md"
+    },
+    {
+      "label": "atua em",
+      "type": "EXTRACTED",
+      "_src": "cron_d1_lead",
+      "_tgt": "canal_whatsapp_1to1",
+      "confidence_score": 1.0,
+      "source": "cron_d1_lead",
+      "target": "canal_whatsapp_1to1"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_crons.md",
+      "_tgt": "cron_d1_lead",
+      "confidence_score": 1.0,
+      "source": "cron_d1_lead",
+      "target": "file_crons.md"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_confirmacao_d1_d0",
+      "_tgt": "tpl_confirmacao",
+      "confidence_score": 1.0,
+      "source": "tpl_confirmacao",
+      "target": "file_templates_confirmacao_d1_d0"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_onboarding_pre_consulta_paga",
+      "_tgt": "tpl_onboarding_pre",
+      "confidence_score": 1.0,
+      "source": "tpl_onboarding_pre",
+      "target": "file_templates_onboarding_pre_consulta_paga"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_onboarding_pos_questionario",
+      "_tgt": "tpl_onboarding_questionario",
+      "confidence_score": 1.0,
+      "source": "tpl_onboarding_questionario",
+      "target": "file_templates_onboarding_pos_questionario"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_handoff_financeiro",
+      "_tgt": "tpl_handoff_financeiro",
+      "confidence_score": 1.0,
+      "source": "tpl_handoff_financeiro",
+      "target": "file_templates_handoff_financeiro"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_reengajamento_lead_silencioso",
+      "_tgt": "tpl_reengajamento",
+      "confidence_score": 1.0,
+      "source": "tpl_reengajamento",
+      "target": "file_templates_reengajamento_lead_silencioso"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_recupera_nq_d60",
+      "_tgt": "tpl_recupera_nq",
+      "confidence_score": 1.0,
+      "source": "tpl_recupera_nq",
+      "target": "file_templates_recupera_nq_d60"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_escalacao_rc19_sensivel",
+      "_tgt": "tpl_escalacao_sensivel",
+      "confidence_score": 1.0,
+      "source": "tpl_escalacao_sensivel",
+      "target": "file_templates_escalacao_rc19_sensivel"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_templates_escalacao_rc19_risco",
+      "_tgt": "tpl_escalacao_risco",
+      "confidence_score": 1.0,
+      "source": "tpl_escalacao_risco",
+      "target": "file_templates_escalacao_rc19_risco"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_objecoes_plano_saude",
+      "_tgt": "obj_plano_saude",
+      "confidence_score": 1.0,
+      "source": "obj_plano_saude",
+      "target": "file_objecoes_plano_saude"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_objecoes_preco_caro",
+      "_tgt": "obj_preco_caro",
+      "confidence_score": 1.0,
+      "source": "obj_preco_caro",
+      "target": "file_objecoes_preco_caro"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_objecoes_vou_pensar",
+      "_tgt": "obj_vou_pensar",
+      "confidence_score": 1.0,
+      "source": "obj_vou_pensar",
+      "target": "file_objecoes_vou_pensar"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_objecoes_consulta_mensal",
+      "_tgt": "obj_consulta_mensal",
+      "confidence_score": 1.0,
+      "source": "obj_consulta_mensal",
+      "target": "file_objecoes_consulta_mensal"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_objecoes_apos_evento_pessoal",
+      "_tgt": "obj_apos_evento",
+      "confidence_score": 1.0,
+      "source": "obj_apos_evento",
+      "target": "file_objecoes_apos_evento_pessoal"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_objecoes_nova_consulta_formula",
+      "_tgt": "obj_nova_consulta",
+      "confidence_score": 1.0,
+      "source": "obj_nova_consulta",
+      "target": "file_objecoes_nova_consulta_formula"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_objecoes_problema_tecnico_boleto",
+      "_tgt": "obj_problema_boleto",
+      "confidence_score": 1.0,
+      "source": "obj_problema_boleto",
+      "target": "file_objecoes_problema_tecnico_boleto"
+    },
+    {
+      "label": "implementa em WhatsApp",
+      "type": "EXTRACTED",
+      "_src": "c_grupo_programa",
+      "_tgt": "c_programa",
+      "confidence_score": 1.0,
+      "source": "c_programa",
+      "target": "c_grupo_programa"
+    },
+    {
+      "label": "inclui",
+      "type": "EXTRACTED",
+      "_src": "c_consulta",
+      "_tgt": "c_pre_consulta",
+      "confidence_score": 1.0,
+      "source": "c_consulta",
+      "target": "c_pre_consulta"
+    },
+    {
+      "label": "inclui",
+      "type": "EXTRACTED",
+      "_src": "c_consulta",
+      "_tgt": "c_bioimpedancia",
+      "confidence_score": 1.0,
+      "source": "c_consulta",
+      "target": "c_bioimpedancia"
+    },
+    {
+      "label": "inclui",
+      "type": "EXTRACTED",
+      "_src": "c_consulta",
+      "_tgt": "c_dinamometria",
+      "confidence_score": 1.0,
+      "source": "c_consulta",
+      "target": "c_dinamometria"
+    },
+    {
+      "label": "extends",
+      "type": "EXTRACTED",
+      "_src": "c_combo_exames",
+      "_tgt": "c_consulta",
+      "confidence_score": 1.0,
+      "source": "c_consulta",
+      "target": "c_combo_exames"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "c_spin",
+      "confidence_score": 1.0,
+      "source": "c_spin",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "valida abordagem",
+      "type": "EXTRACTED",
+      "_src": "c_endogin",
+      "_tgt": "c_medicina_preventiva",
+      "confidence_score": 1.0,
+      "source": "c_endogin",
+      "target": "c_medicina_preventiva"
+    },
+    {
+      "label": "define",
+      "type": "EXTRACTED",
+      "_src": "file_voice_guide.md",
+      "_tgt": "c_voice_rule",
+      "confidence_score": 1.0,
+      "source": "c_voice_rule",
+      "target": "file_voice_guide.md"
+    },
+    {
+      "label": "referencia",
+      "type": "EXTRACTED",
+      "_src": "file_pitch_oficial.md",
+      "_tgt": "c_voice_rule",
+      "confidence_score": 1.0,
+      "source": "c_voice_rule",
+      "target": "file_pitch_oficial.md"
+    },
+    {
+      "label": "violado - usa 'vc'",
+      "type": "EXTRACTED",
+      "_src": "file_system_prompt_clara",
+      "_tgt": "c_voice_rule",
+      "confidence_score": 1.0,
+      "source": "c_voice_rule",
+      "target": "file_system_prompt_clara"
+    },
+    {
+      "label": "consolida",
+      "type": "EXTRACTED",
+      "_src": "file_memoria_consolidada",
+      "_tgt": "file_regras_canonicas.md",
+      "confidence_score": 1.0,
+      "source": "file_regras_canonicas.md",
+      "target": "file_memoria_consolidada"
+    },
+    {
+      "label": "consolida",
+      "type": "EXTRACTED",
+      "_src": "file_memoria_consolidada",
+      "_tgt": "file_personas.md",
+      "confidence_score": 1.0,
+      "source": "file_personas.md",
+      "target": "file_memoria_consolidada"
+    },
+    {
+      "label": "consolida",
+      "type": "EXTRACTED",
+      "_src": "file_memoria_consolidada",
+      "_tgt": "file_pitch_oficial.md",
+      "confidence_score": 1.0,
+      "source": "file_pitch_oficial.md",
+      "target": "file_memoria_consolidada"
+    },
+    {
+      "label": "consolida",
+      "type": "EXTRACTED",
+      "_src": "file_memoria_consolidada",
+      "_tgt": "file_equipe.md",
+      "confidence_score": 1.0,
+      "source": "file_equipe.md",
+      "target": "file_memoria_consolidada"
+    }
+  ],
+  "hyperedges": []
+}
