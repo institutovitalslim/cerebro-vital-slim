@@ -10,9 +10,18 @@ description: >
 - **Imagens:** sempre usar **NanoBanana2** (`google/gemini-3.1-flash-lite-preview`) para análise, extração de texto e descrição de imagens
 - **Avatar Dra. Daniely:** nunca modificar — usar sempre `/root/.openclaw/workspace/deliverables/tmp_modelo01_v4/avatar.png`
 - **Script:** `/root/.openclaw/workspace/skills/tweet-carrossel/scripts/make_tweet_slides.py` — Modelo 01
+- Antes de escolher provider para geração visual, consultar:
+  - `cerebro/areas/marketing/providers-midia-mapa-e-playbook-2026-04-28.md`
+  - `cerebro/areas/marketing/providers-midia-checklist-rapido.md`
 
 ## Quando usar
 Sempre que Tiaro pedir um carrossel. Se mencionar "Modelo 01", seguir este playbook com alta fidelidade.
+
+## Regra de escolha de provider para imagem estática
+- **Z-Image-Turbo** = conceito, mockup, teste rápido, rascunho
+- **Google / NanoBanana2** = estética premium, realismo melhor, peça mais refinada
+- **OpenAI** = output final consistente e mais previsível
+- **Nunca usar Z-Image-Turbo** para foto da Dra., paciente, contexto médico sensível ou arte final premium
 
 ## Input necessário
 - Tema ou assunto do carrossel
@@ -100,6 +109,7 @@ Proporções validadas por Tiaro (2026-04-06):
 - Se Tiaro enviar imagens de referência → elas viram a fonte primária do estilo
 - Conflito entre playbook e referência enviada por Tiaro → referência de Tiaro vence
 - Se Tiaro mencionar "Modelo 01" → assumir este playbook automaticamente
+- Não escolher provider por hype; escolher por compliance, qualidade percebida, previsibilidade e simplicidade operacional
 
 ## Output esperado
 Roteiro completo slide a slide com:

@@ -2,38 +2,27 @@
 
 ## Estrutura
 
-```
-empresa/
-├── MAPA.md
-├── contexto/
-│   ├── geral.md          ← Quem é a empresa, missão, produtos
-│   ├── people.md          ← Equipe, cargos, estrutura de decisão
-│   ├── metricas.md        ← KPIs e números atuais
-│   ├── decisions.md       ← Decisões estratégicas registradas
-│   └── lessons.md         ← Lições aprendidas
-├── conhecimento/          ← MEMÓRIA CIENTÍFICA SEMÂNTICA (NOVO)
-│   ├── pesquisas/         ← Pesquisas armazenadas (1 pasta por tema)
-│   ├── topicos/           ← Links simbólicos por tópico (navegação)
-│   ├── index/             ← Indices: master.jsonl, embeddings.jsonl, topics.json
-│   └── logs/              ← Histórico de uso
-├── rotinas/
-├── skills/
-└── projetos/
-    ├── README.md          ← Projetos ativos e concluídos
-    └── pendencias.md      ← Pendências abertas
-```
+### Camada canônica
+- `contexto/` → contexto institucional, decisões, métricas, pessoas e aprendizados
+- `skills/GOVERNANCA-SKILLS.md` → regra comum das skills
+- `skills/DEPENDENCIAS-SKILLS.md` → dependências centrais das skills
+- `skills/TEMPLATE-SKILL-IVS.md` → template padrão de novas skills
+- `skills/_index.md` → índice mestre de skills cross-area
+- `vendas/lead-qualificacao-framework.md` → framework canônico de qualificação
 
-## O que tem em cada lugar
+### Camada operacional
+- `conteudo/` → análises e ativos de conteúdo reaproveitáveis
+- `projetos/` → backlog, projetos ativos e pendências
+- `skills/` → skills cross-area da empresa
+- `conhecimento/README.md` e conteúdos ativos relacionados
 
-| Caminho | O que o agente encontra |
-|---------|------------------------|
-| `contexto/geral.md` | Missão, produtos, canais, modelo de negócio |
-| `contexto/people.md` | Quem trabalha aqui, papéis e estrutura de decisão |
-| `contexto/metricas.md` | MRR, clientes, CAC, ROAS — números atuais |
-| `contexto/decisions.md` | Decisões estratégicas com contexto e status |
-| `contexto/lessons.md` | Lições aprendidas com erros e acertos |
-| `rotinas/` | Rotinas automáticas (crons) |
-| `skills/` | Skills cross-área (ver `_index.md`) |
-| `skills/memoria-cientifica/` | Memoria semantica de pesquisas cientificas (Perplexity+Gemini embeddings). Clara consulta SEMPRE antes de gerar conteudo |
-| `skills/prompt-imagens/` | Cria imagens via NanoBanana 2 Pro com 7 dimensoes do prompt + 15 estilos. SEMPRE valida prompt com Tiaro antes de gerar |
-| `projetos/` | Projetos em andamento e concluídos |
+### Camada experimental / teste
+- `pacientes/` → testes, simulações e validações operacionais enquanto não promovidos
+
+### Camada histórico / log
+- `conhecimento/logs/` → histórico de execuções e lições registradas
+- `conhecimento/index/` → artefatos técnicos de indexação
+
+## Arquivos de governança estrutural
+- `_governanca/CLASSIFICACAO-ESTRUTURAL.md`
+- `_governanca/INDEX-ESTRUTURAL.md`

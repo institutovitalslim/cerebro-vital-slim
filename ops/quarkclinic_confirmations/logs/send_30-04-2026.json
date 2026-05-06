@@ -1,0 +1,67 @@
+{
+  "sent": [
+    {
+      "phone": "5571999543781",
+      "nome": "JOYCE ANDREA SANTOS PARENTE BEZERRA ",
+      "agendamentoId": 458056566,
+      "dataHoraInicio": "30-04-2026T16:00",
+      "messageId": "EF8AAEEC86ED446D8FF4",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988365569",
+      "nome": "Cíntia Souza Japiassu de Oliveira",
+      "agendamentoId": 457522541,
+      "dataHoraInicio": "30-04-2026T14:40",
+      "messageId": "3EB0EA201BE1695F8CF29E",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991262370",
+      "nome": "Tainá Japiassu Teles",
+      "agendamentoId": 457521913,
+      "dataHoraInicio": "30-04-2026T14:30",
+      "messageId": "3EB0B6497B74F4E7CD38C0",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571988067626",
+      "nome": "LIGIA LIMA FONTANARI JACINTO",
+      "agendamentoId": 456815216,
+      "dataHoraInicio": "30-04-2026T17:00",
+      "messageId": "3EB0660459CAB1ABCBEFB1",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5575999406785",
+      "nome": "Darilene Bispo Oliveira de Araújo",
+      "agendamentoId": 456784326,
+      "dataHoraInicio": "30-04-2026T15:30",
+      "messageId": "3EB0963B8ABA8B72259B06",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991583056",
+      "nome": "Marize de Jesus Carvalho",
+      "agendamentoId": 456459079,
+      "dataHoraInicio": "30-04-2026T17:20",
+      "messageId": "3EB04976636DF829733203",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571991583056",
+      "nome": "Lorena Carvalho Ramos Melo",
+      "agendamentoId": 456409460,
+      "dataHoraInicio": "30-04-2026T17:10",
+      "messageId": "3EB0BE0DBB197A2F0674D7",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

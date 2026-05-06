@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Único de Backlog e Status — IVS V1</title>
+  <style>
+    :root{--bg:#07111f;--panel:#0d1b2a;--panel2:#10243a;--line:#1d3958;--text:#f5f7fb;--muted:#aeb8c6;--blue:#8dccff;--gold:#f3df9b;--green:#2cd39a;--red:#ff8b8b;--amber:#ffd166}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#091827);color:var(--text);padding:28px}
+    .wrap{max-width:1180px;margin:0 auto}.hero,.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 42px rgba(0,0,0,.22)}
+    .hero{padding:30px;margin-bottom:22px}.k{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}h1{margin:10px 0;font-size:34px}.sub{color:var(--muted);max-width:900px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}.card{padding:20px}.title{font-size:20px;font-weight:800;margin:0 0 12px}.tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:10px}
+    .green{background:rgba(44,211,154,.12);color:#9cf0d0;border:1px solid rgba(44,211,154,.28)} .red{background:rgba(255,139,139,.12);color:#ffbbbb;border:1px solid rgba(255,139,139,.28)} .amber{background:rgba(255,209,102,.12);color:#ffe29a;border:1px solid rgba(255,209,102,.28)} .blue{background:rgba(141,204,255,.12);color:#bfe1ff;border:1px solid rgba(141,204,255,.28)}
+    ul{margin:0;padding-left:18px} li{margin:8px 0;color:var(--muted)} strong{color:var(--text)} code{color:#bfe1ff}.footer{margin-top:20px;text-align:center;color:var(--muted);font-size:12px}
+    @media (max-width:900px){.span-4,.span-6,.span-8,.span-12{grid-column:span 12}h1{font-size:28px}body{padding:16px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="k">Instituto Vital Slim • Governança Central</div>
+      <h1>Painel Único de Backlog e Status — V1</h1>
+      <div class="sub">Primeira versão executiva da porta central de backlog e status do IVS, criada para reduzir dispersão entre pendências, memória, relatórios, playbooks e backlog recuperável.</div>
+    </section>
+
+    <section class="grid">
+      <div class="card span-6">
+        <div class="tag red">Abertos reais</div>
+        <div class="title">Itens que continuam abertos</div>
+        <ul>
+          <li><strong>Painel único de backlog/status</strong> ainda precisa virar a porta mestra de consulta executiva.</li>
+          <li><strong>Redução de dispersão</strong> entre memória, skill, playbook, projeto e relatório ainda é trabalho contínuo.</li>
+          <li><strong>Logo oficial</strong> no template de apresentação segue pendente.</li>
+          <li><strong>Disciplina operacional</strong> dos scripts de recuperação ainda precisa de consolidação no uso real.</li>
+          <li><strong>Tópico “Pacientes”</strong> ainda precisa de confirmação do <code>topic_id</code> numérico.</li>
+        </ul>
+      </div>
+
+      <div class="card span-6">
+        <div class="tag green">Fechados reais</div>
+        <div class="title">Itens resolvidos que não devem reabrir</div>
+        <ul>
+          <li><strong>Correção intertópicos da manutenção diária</strong>.</li>
+          <li><strong>Validação real do João no tópico 5782</strong>.</li>
+          <li><strong>Handoff/manual takeover da Clara</strong>.</li>
+          <li><strong>Fluxo único de produção de vídeo</strong> na camada estrutural.</li>
+          <li><strong>Ativo operacional de bioimpedância da Clara</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="card span-6">
+        <div class="tag amber">Monitoramentos contínuos</div>
+        <div class="title">O que exige vigilância recorrente</div>
+        <ul>
+          <li>novos pedidos recorrentes do Tiaro</li>
+          <li>aderência entre nomes técnicos de skill e linguagem real</li>
+          <li>promoção de relatórios HTML para camada recuperável</li>
+          <li>bridge da Clara sem regressão</li>
+          <li>aderência prática ao fluxo único de vídeo</li>
+        </ul>
+      </div>
+
+      <div class="card span-6">
+        <div class="tag blue">Fontes de verdade</div>
+        <div class="title">Portas canônicas por frente</div>
+        <ul>
+          <li><strong>Atendimento:</strong> <code>cerebro/areas/atendimento/checklist-atendimento-clara.md</code></li>
+          <li><strong>Marketing:</strong> <code>cerebro/areas/marketing/fluxo-unico-producao-video-ivs.md</code></li>
+          <li><strong>Governança / backlog:</strong> <code>cerebro/empresa/projetos/pendencias.md</code></li>
+          <li><strong>Recuperabilidade:</strong> <code>cerebro/operacional/INDEX-PEDIDOS-RECORRENTES.md</code></li>
+          <li><strong>Ambiguidades:</strong> <code>cerebro/operacional/ITENS-AMBIGUOS-A-AUDITAR.md</code></li>
+          <li><strong>Tópicos Telegram:</strong> <code>cerebro/telegram-topics.md</code></li>
+        </ul>
+      </div>
+
+      <div class="card span-12">
+        <div class="tag amber">Risco de dispersão</div>
+        <div class="title">Onde ainda pode haver perda de contexto</div>
+        <ul>
+          <li><strong>Relatório sem promoção:</strong> aprendizado importante ficar só em HTML.</li>
+          <li><strong>Memória diária sem porta única:</strong> decisão existir, mas continuar difícil de recuperar.</li>
+          <li><strong>Item fechado reaparecer como aberto:</strong> retrabalho por leitura incompleta de contexto.</li>
+          <li><strong>Tópico especializado ser confundido com memória isolada:</strong> falha de continuidade entre áreas.</li>
+        </ul>
+      </div>
+
+      <div class="card span-12">
+        <div class="tag blue">Leitura executiva</div>
+        <div class="title">Síntese</div>
+        <ul>
+          <li>O bloco crítico mais sensível foi fechado.</li>
+          <li>O principal aberto estrutural agora é consolidar este próprio painel como porta mestra.</li>
+          <li>O restante hoje é majoritariamente governança contínua e disciplina operacional.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">Painel executivo V1 — 2026-05-02 • IVS • Backlog, status e governança central</div>
+  </div>
+</body>
+</html>

@@ -43,3 +43,11 @@ marketing/
 | `skills/` | Skills da área (ver `_index.md`) |
 | `projetos/` | Projetos ativos e concluídos |
 | `sub-areas/trafego-pago/` | Sub-área com mesma estrutura (sem sub-areas dentro) |
+
+
+## Leitura estrutural da área
+- `contexto/` = camada canônica
+- `rotinas/` = camada operacional recorrente
+- `skills/` = camada operacional especializada
+- `projetos/` = frentes e backlog da área
+- materiais fora desse padrão devem ser tratados como experimental/teste ou histórico/log

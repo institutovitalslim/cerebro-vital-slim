@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatório Executivo — Matriz Super João</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b16;
+      --bg2: #0d1326;
+      --panel: rgba(15, 23, 42, 0.72);
+      --panel-strong: rgba(17, 24, 39, 0.92);
+      --line: rgba(212, 175, 55, 0.18);
+      --white: #f8fafc;
+      --muted: #c7d2fe;
+      --soft: #94a3b8;
+      --gold: #d4af37;
+      --gold-soft: #f3df9b;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --blue: #60a5fa;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--white);
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(96,165,250,.10), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 42px 24px 80px;
+    }
+    .hero {
+      border-radius: 32px;
+      padding: 42px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(212,175,55,.14), rgba(255,255,255,.03) 35%, rgba(96,165,250,.08)), var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,.28);
+      color: var(--gold-soft);
+      background: rgba(212,175,55,.08);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: 40px;
+      line-height: 1.08;
+      max-width: 900px;
+    }
+    .subtitle {
+      margin-top: 14px;
+      color: var(--muted);
+      max-width: 860px;
+      font-size: 16px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .meta span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #dbeafe;
+      font-size: 13px;
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 26px;
+    }
+    .kpi {
+      border-radius: 22px;
+      background: var(--panel-strong);
+      border: 1px solid rgba(255,255,255,.06);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .kpi small {
+      display: block;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: 11px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .kpi strong {
+      display: block;
+      font-size: 34px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .kpi p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .section { margin-top: 28px; }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 14px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+    .section-title::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 18px rgba(212,175,55,.6);
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1450px;
+    }
+    thead th {
+      text-align: left;
+      padding: 16px 18px;
+      font-size: 12px;
+      color: var(--soft);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    tbody td {
+      padding: 18px;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: rgba(255,255,255,.02); }
+    .agent { font-weight: 700; color: #fff; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .alta { color: #fecaca; background: rgba(239,68,68,.14); border-color: rgba(239,68,68,.24); }
+    .mediaalta { color: #fde68a; background: rgba(245,158,11,.14); border-color: rgba(245,158,11,.24); }
+    .media { color: #bfdbfe; background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.24); }
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 { margin: 0 0 12px; font-size: 20px; }
+    ul { margin: 0; padding-left: 20px; }
+    li + li { margin-top: 8px; }
+    .callout {
+      margin-top: 18px;
+      padding: 20px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(212,175,55,.10), rgba(255,255,255,.03));
+      border: 1px solid rgba(212,175,55,.18);
+      color: #f8fafc;
+    }
+    .footer {
+      margin-top: 20px;
+      text-align: right;
+      color: var(--soft);
+      font-size: 12px;
+    }
+    @media (max-width: 980px) {
+      .kpis, .cols { grid-template-columns: 1fr; }
+      h1 { font-size: 32px; }
+      .hero { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Instituto Vital Slim • Relatório Executivo</div>
+      <h1>Matriz consolidada de agentes-base para o projeto Super João</h1>
+      <p class="subtitle">Entrelaçamento das funções, forças, blocos aproveitáveis, adaptações necessárias e descartes dos agentes mapeados para apoiar a futura arquitetura do João, sem ainda redigir o SOUL final.</p>
+      <div class="meta">
+        <span>Data de consolidação: 30/04/2026</span>
+        <span>Escopo: 13 agentes-base</span>
+        <span>Foco: conteúdo, performance criativa, reaproveitamento e leitura de resultado</span>
+      </div>
+    </section>
+
+    <section class="kpis">
+      <div class="kpi">
+        <small>Agentes mapeados</small>
+        <strong>13</strong>
+        <p>Base consolidada para leitura estratégica e absorção futura.</p>
+      </div>
+      <div class="kpi">
+        <small>Essenciais</small>
+        <strong>6</strong>
+        <p>Blocos centrais para formar o núcleo do Super João.</p>
+      </div>
+      <div class="kpi">
+        <small>Muito relevantes</small>
+        <strong>4</strong>
+        <p>Camada forte de complemento para performance e leitura.</p>
+      </div>
+      <div class="kpi">
+        <small>Complementares</small>
+        <strong>3</strong>
+        <p>Camada de suporte visual, editorial e organizacional.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Matriz executiva consolidada</h2>
+      <div class="panel table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Agente</th>
+              <th>Função principal</th>
+              <th>Força principal</th>
+              <th>O que absorver</th>
+              <th>O que adaptar</th>
+              <th>O que descartar</th>
+              <th>Relevância para João</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="agent">video-scripter</td>
+              <td>Roteiro de vídeo</td>
+              <td>Estrutura, retenção, hook e CTA</td>
+              <td>Hook-corpo-CTA, pacing, direção visual, adaptação por formato</td>
+              <td>Reduzir foco em longform e ampliar shortform IVS</td>
+              <td>Excesso de detalhamento para vídeos simples</td>
+              <td><span class="badge alta">Muito alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">instagram-reels-creator</td>
+              <td>Criação de Reels</td>
+              <td>Lógica nativa de Reels, estética e compartilhamento</td>
+              <td>Hook visual, duração ideal, linguagem de Reels, lógica de save/share</td>
+              <td>Ajustar para operação real do IVS</td>
+              <td>Dependência de geração automática de vídeo/música</td>
+              <td><span class="badge alta">Muito alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">content-repurposer</td>
+              <td>Transformar conteúdo em vários formatos</td>
+              <td>Desdobramento multicanal</td>
+              <td>Transformar 1 ativo em muitos ativos</td>
+              <td>Trocar foco Twitter/LinkedIn por Reels, Shorts, anúncios e carrossel</td>
+              <td>Formatos pouco úteis no IVS atual</td>
+              <td><span class="badge alta">Muito alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">ad-copywriter</td>
+              <td>Copy de tráfego pago</td>
+              <td>Variações, ângulos, funil e teste</td>
+              <td>Headline, corpo, CTA, matriz de testes, ângulo psicológico</td>
+              <td>Adequar à linguagem IVS e políticas</td>
+              <td>Linguagem genérica demais de mercado amplo</td>
+              <td><span class="badge alta">Muito alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">copywriter</td>
+              <td>Copy de conversão</td>
+              <td>Headline, CTA e frameworks</td>
+              <td>Benefícios, dor, promessa, CTA, variações</td>
+              <td>Adaptar para estética, emagrecimento e autoridade clínica</td>
+              <td>Excesso de modelo SaaS</td>
+              <td><span class="badge alta">Muito alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">ab-test-analyzer</td>
+              <td>Leitura de testes</td>
+              <td>Rigor decisório</td>
+              <td>Lógica de comparação, evitar decisão precoce, leitura de vencedores</td>
+              <td>Simplificar a parte estatística para operação</td>
+              <td>Academicismo excessivo</td>
+              <td><span class="badge alta">Muito alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">ugc-video</td>
+              <td>Criativo UGC</td>
+              <td>Naturalidade, prova e retenção</td>
+              <td>Problema-descoberta-resultado-CTA, tom humano</td>
+              <td>Restringir claims para saúde/estética</td>
+              <td>Exageros típicos de UGC agressivo</td>
+              <td><span class="badge mediaalta">Alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">video-ad-creator</td>
+              <td>Anúncio em vídeo</td>
+              <td>Criativo de performance</td>
+              <td>Variações de anúncio, estrutura por ângulo, CTA</td>
+              <td>Menos foco em geração automática e mais em briefing</td>
+              <td>Complexidade desnecessária de produção</td>
+              <td><span class="badge mediaalta">Alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">metrics</td>
+              <td>Leitura objetiva de números</td>
+              <td>Disciplina, anomalia e dados crus</td>
+              <td>Rotina de olhar performance, alertas, comparação</td>
+              <td>Acrescentar interpretação prática</td>
+              <td>Saída crua sem recomendação</td>
+              <td><span class="badge mediaalta">Alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">report-generator</td>
+              <td>Síntese executiva de dados</td>
+              <td>Comparação, KPI e anomalias</td>
+              <td>Formato de relatório, comparação de períodos, destaque de mudanças</td>
+              <td>Ajustar KPIs para IVS</td>
+              <td>Foco SaaS/receita recorrente pura</td>
+              <td><span class="badge mediaalta">Alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">social-media</td>
+              <td>Gestão geral de conteúdo social</td>
+              <td>Adaptação por canal e calendário</td>
+              <td>Tom por canal, leitura de desempenho, visão editorial</td>
+              <td>Trocar X/LinkedIn por Instagram e vídeo curto</td>
+              <td>Scheduler como prioridade inicial</td>
+              <td><span class="badge media">Média</span></td>
+            </tr>
+            <tr>
+              <td class="agent">storyboard-writer</td>
+              <td>Transformar ideia em cenas</td>
+              <td>Produção visual organizada</td>
+              <td>Cena, enquadramento, propósito, B-roll, sequência visual</td>
+              <td>Simplificar para rotina leve</td>
+              <td>Detalhamento excessivo em peças simples</td>
+              <td><span class="badge mediaalta">Média-Alta</span></td>
+            </tr>
+            <tr>
+              <td class="agent">thumbnail-designer</td>
+              <td>Thumb e capa visual</td>
+              <td>Clique e contraste visual</td>
+              <td>Lógica de CTR visual, texto curto, composição</td>
+              <td>Adaptar para capas e criativos IVS</td>
+              <td>Peso excessivo para momento atual</td>
+              <td><span class="badge media">Média</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="cols">
+      <div class="card">
+        <h3>Blocos funcionais</h3>
+        <ul>
+          <li><strong>Bloco A — estrutura criativa central:</strong> video-scripter, instagram-reels-creator, content-repurposer.</li>
+          <li><strong>Bloco B — conversão e tráfego:</strong> ad-copywriter, copywriter, ugc-video, video-ad-creator.</li>
+          <li><strong>Bloco C — leitura e decisão:</strong> ab-test-analyzer, metrics, report-generator.</li>
+          <li><strong>Bloco D — organização visual e operacional:</strong> social-media, storyboard-writer, thumbnail-designer.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Ranking de importância</h3>
+        <ul>
+          <li><strong>Essenciais:</strong> video-scripter, instagram-reels-creator, content-repurposer, ad-copywriter, copywriter, ab-test-analyzer.</li>
+          <li><strong>Muito relevantes:</strong> ugc-video, video-ad-creator, metrics, report-generator.</li>
+          <li><strong>Complementares:</strong> storyboard-writer, social-media, thumbnail-designer.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cols">
+      <div class="card">
+        <h3>Sobreposições saudáveis</h3>
+        <ul>
+          <li><strong>copywriter + ad-copywriter:</strong> conversão geral + mídia paga.</li>
+          <li><strong>video-scripter + instagram-reels-creator:</strong> roteiro + gramática nativa de Reels.</li>
+          <li><strong>metrics + report-generator:</strong> dado bruto + síntese executiva.</li>
+          <li><strong>ugc-video + video-ad-creator:</strong> naturalidade humana + lógica de anúncio.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Riscos de sobreposição</h3>
+        <ul>
+          <li><strong>social-media</strong> pode competir com content-repurposer e instagram-reels-creator se ganhar escopo demais.</li>
+          <li><strong>thumbnail-designer</strong> pode virar perfumaria se entrar cedo demais.</li>
+          <li><strong>storyboard-writer</strong> pode burocratizar produção curta se for aplicado em tudo.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="callout">
+      <strong>Conclusão executiva:</strong> o entrelaçamento mostra que o João não deve ser apenas um agente de social media nem apenas um criador de Reels. A base correta aponta para um núcleo de conteúdo, performance criativa, reaproveitamento, teste e leitura de resultado, com camadas complementares de organização visual e editorial.
+    </section>
+
+    <div class="footer">Relatório em HTML • Matriz consolidada do projeto Super João</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,359 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "nidhinjs/prompt-master",
+      "type": "external_reference",
+      "source_file": "https://github.com/nidhinjs/prompt-master",
+      "file_type": "document",
+      "id": "prompt_master_repo",
+      "community": 4,
+      "norm_label": "nidhinjs/prompt-master"
+    },
+    {
+      "label": "Ado\u00e7\u00e3o seletiva do prompt-master no IVS",
+      "type": "decision",
+      "source_file": "memory/2026-05-04.md",
+      "file_type": "document",
+      "id": "prompt_master_selective_adaptation",
+      "community": 4,
+      "norm_label": "adocao seletiva do prompt-master no ivs"
+    },
+    {
+      "label": "JOAO-PROMPTS-PARA-FERRAMENTAS-WEB.md",
+      "type": "canonical_doc",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-PROMPTS-PARA-FERRAMENTAS-WEB.md",
+      "file_type": "document",
+      "id": "joao_prompts_web",
+      "community": 0,
+      "norm_label": "joao-prompts-para-ferramentas-web.md"
+    },
+    {
+      "label": "JOAO-REGRAS-DE-OPERACAO.md",
+      "type": "canonical_doc",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-REGRAS-DE-OPERACAO.md",
+      "file_type": "document",
+      "id": "joao_regras_operacao",
+      "community": 1,
+      "norm_label": "joao-regras-de-operacao.md"
+    },
+    {
+      "label": "JOAO-FONTES-E-FERRAMENTAS.md",
+      "type": "canonical_doc",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-FONTES-E-FERRAMENTAS.md",
+      "file_type": "document",
+      "id": "joao_fontes_ferramentas",
+      "community": 0,
+      "norm_label": "joao-fontes-e-ferramentas.md"
+    },
+    {
+      "label": "PROMPT-BASE.md",
+      "type": "agent_prompt",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/PROMPT-BASE.md",
+      "file_type": "document",
+      "id": "prompt_base_joao",
+      "community": 0,
+      "norm_label": "prompt-base.md"
+    },
+    {
+      "label": "prompt-imagens/SKILL.md",
+      "type": "skill",
+      "source_file": "/root/.openclaw/workspace/skills/prompt-imagens/SKILL.md",
+      "file_type": "document",
+      "id": "prompt_imagens_skill",
+      "community": 3,
+      "norm_label": "prompt-imagens/skill.md"
+    },
+    {
+      "label": "Replit Agent",
+      "type": "tool",
+      "file_type": "document",
+      "id": "replit_agent",
+      "community": 0,
+      "norm_label": "replit agent"
+    },
+    {
+      "label": "Bolt.new",
+      "type": "tool",
+      "file_type": "document",
+      "id": "bolt_new",
+      "community": 0,
+      "norm_label": "bolt.new"
+    },
+    {
+      "label": "v0",
+      "type": "tool",
+      "file_type": "document",
+      "id": "v0",
+      "community": 0,
+      "norm_label": "v0"
+    },
+    {
+      "label": "Lovable",
+      "type": "tool",
+      "file_type": "document",
+      "id": "lovable",
+      "community": 0,
+      "norm_label": "lovable"
+    },
+    {
+      "label": "OpenClaw/browser agent",
+      "type": "tool",
+      "file_type": "document",
+      "id": "openclaw_browser_agent",
+      "community": 0,
+      "norm_label": "openclaw/browser agent"
+    },
+    {
+      "label": "Blocos obrigat\u00f3rios de briefing web",
+      "type": "process",
+      "file_type": "document",
+      "id": "prompt_web_blocks",
+      "community": 2,
+      "norm_label": "blocos obrigatorios de briefing web"
+    },
+    {
+      "label": "Stop conditions e aprova\u00e7\u00e3o humana",
+      "type": "guardrail",
+      "file_type": "document",
+      "id": "stop_conditions",
+      "community": 2,
+      "norm_label": "stop conditions e aprovacao humana"
+    },
+    {
+      "label": "Lista de n\u00e3o fazer",
+      "type": "guardrail",
+      "file_type": "document",
+      "id": "nao_fazer",
+      "community": 2,
+      "norm_label": "lista de nao fazer"
+    },
+    {
+      "label": "Pend\u00eancia HTML direto no t\u00f3pico Telegram",
+      "type": "pending",
+      "file_type": "document",
+      "id": "html_topic_delivery_pending",
+      "community": 1,
+      "norm_label": "pendencia html direto no topico telegram"
+    },
+    {
+      "label": "21st.dev pendente at\u00e9 API key + teste magic21st",
+      "type": "pending",
+      "file_type": "document",
+      "id": "dev21_pending",
+      "community": 1,
+      "norm_label": "21st.dev pendente ate api key + teste magic21st"
+    },
+    {
+      "label": "Dra. Daniely: foto-m\u00e3e, face lock, sem jaleco por padr\u00e3o",
+      "type": "guardrail",
+      "file_type": "document",
+      "id": "dra_face_lock",
+      "community": 3,
+      "norm_label": "dra. daniely: foto-mae, face lock, sem jaleco por padrao"
+    },
+    {
+      "label": "Prompt visual positivo/negativo estruturado",
+      "type": "process",
+      "file_type": "document",
+      "id": "positive_negative_image_prompt",
+      "community": 3,
+      "norm_label": "prompt visual positivo/negativo estruturado"
+    }
+  ],
+  "links": [
+    {
+      "label": "inspirou",
+      "kind": "EXTRACTED",
+      "type": "inspirou",
+      "_src": "prompt_master_repo",
+      "_tgt": "prompt_master_selective_adaptation",
+      "source": "prompt_master_repo",
+      "target": "prompt_master_selective_adaptation",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "gerou documento can\u00f4nico",
+      "kind": "EXTRACTED",
+      "type": "gerou documento can\u00f4nico",
+      "_src": "prompt_master_selective_adaptation",
+      "_tgt": "joao_prompts_web",
+      "source": "prompt_master_selective_adaptation",
+      "target": "joao_prompts_web",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para",
+      "_src": "joao_prompts_web",
+      "_tgt": "replit_agent",
+      "source": "joao_prompts_web",
+      "target": "replit_agent",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para",
+      "_src": "joao_prompts_web",
+      "_tgt": "bolt_new",
+      "source": "joao_prompts_web",
+      "target": "bolt_new",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para",
+      "_src": "joao_prompts_web",
+      "_tgt": "v0",
+      "source": "joao_prompts_web",
+      "target": "v0",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "define modelo contingencial para",
+      "kind": "EXTRACTED",
+      "type": "define modelo contingencial para",
+      "_src": "joao_prompts_web",
+      "_tgt": "lovable",
+      "source": "joao_prompts_web",
+      "target": "lovable",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para",
+      "_src": "joao_prompts_web",
+      "_tgt": "openclaw_browser_agent",
+      "source": "joao_prompts_web",
+      "target": "openclaw_browser_agent",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "exige",
+      "kind": "EXTRACTED",
+      "type": "exige",
+      "_src": "joao_prompts_web",
+      "_tgt": "prompt_web_blocks",
+      "source": "joao_prompts_web",
+      "target": "prompt_web_blocks",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "passa a referenciar",
+      "kind": "EXTRACTED",
+      "type": "passa a referenciar",
+      "_src": "joao_regras_operacao",
+      "_tgt": "joao_prompts_web",
+      "source": "joao_prompts_web",
+      "target": "joao_regras_operacao",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "registra como fonte",
+      "kind": "EXTRACTED",
+      "type": "registra como fonte",
+      "_src": "joao_fontes_ferramentas",
+      "_tgt": "joao_prompts_web",
+      "source": "joao_prompts_web",
+      "target": "joao_fontes_ferramentas",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "carrega como fonte can\u00f4nica",
+      "kind": "EXTRACTED",
+      "type": "carrega como fonte can\u00f4nica",
+      "_src": "prompt_base_joao",
+      "_tgt": "joao_prompts_web",
+      "source": "joao_prompts_web",
+      "target": "prompt_base_joao",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "mant\u00e9m pend\u00eancia",
+      "kind": "EXTRACTED",
+      "type": "mant\u00e9m pend\u00eancia",
+      "_src": "joao_prompts_web",
+      "_tgt": "dev21_pending",
+      "source": "joao_prompts_web",
+      "target": "dev21_pending",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "registra pend\u00eancia",
+      "kind": "EXTRACTED",
+      "type": "registra pend\u00eancia",
+      "_src": "joao_regras_operacao",
+      "_tgt": "html_topic_delivery_pending",
+      "source": "joao_regras_operacao",
+      "target": "html_topic_delivery_pending",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "mant\u00e9m fora do stack can\u00f4nico",
+      "kind": "EXTRACTED",
+      "type": "mant\u00e9m fora do stack can\u00f4nico",
+      "_src": "joao_regras_operacao",
+      "_tgt": "dev21_pending",
+      "source": "joao_regras_operacao",
+      "target": "dev21_pending",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "incorpora estrutura",
+      "kind": "EXTRACTED",
+      "type": "incorpora estrutura",
+      "_src": "prompt_imagens_skill",
+      "_tgt": "positive_negative_image_prompt",
+      "source": "prompt_imagens_skill",
+      "target": "positive_negative_image_prompt",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "preserva regra absoluta",
+      "kind": "EXTRACTED",
+      "type": "preserva regra absoluta",
+      "_src": "prompt_imagens_skill",
+      "_tgt": "dra_face_lock",
+      "source": "prompt_imagens_skill",
+      "target": "dra_face_lock",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "inclui",
+      "kind": "EXTRACTED",
+      "type": "inclui",
+      "_src": "prompt_web_blocks",
+      "_tgt": "stop_conditions",
+      "source": "prompt_web_blocks",
+      "target": "stop_conditions",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "inclui",
+      "kind": "EXTRACTED",
+      "type": "inclui",
+      "_src": "prompt_web_blocks",
+      "_tgt": "nao_fazer",
+      "source": "prompt_web_blocks",
+      "target": "nao_fazer",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "subordinado a",
+      "kind": "EXTRACTED",
+      "type": "subordinado a",
+      "_src": "positive_negative_image_prompt",
+      "_tgt": "dra_face_lock",
+      "source": "dra_face_lock",
+      "target": "positive_negative_image_prompt",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,31 @@
+{
+  "sent": [
+    {
+      "phone": "5571988067626",
+      "nome": "LIGIA LIMA FONTANARI JACINTO",
+      "agendamentoId": 457487409,
+      "dataHoraInicio": "29-04-2026T14:00",
+      "messageId": "AEF269F2C2B76BC5D58C",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571996800509",
+      "nome": "MARIO GOMES DE ABREU FILHO",
+      "agendamentoId": 456715779,
+      "dataHoraInicio": "29-04-2026T17:00",
+      "messageId": "3EB0654868C407E93F549C",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571997256868",
+      "nome": "Larissa Correia de Souza ",
+      "agendamentoId": 456242625,
+      "dataHoraInicio": "29-04-2026T17:30",
+      "messageId": "3EB0CA855D42D88C9A8BCA",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

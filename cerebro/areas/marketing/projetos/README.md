@@ -18,6 +18,8 @@
 |--------|------|--------|----------|
 | @dr.marlonbatista | 22/04/2026 | ✅ Completo | `.md`, `.html`, `-producao.html` |
 | @dra.camilapaes | 23/04/2026 | ✅ Completo | `.md`, `.html`, `-producao.html` |
+| Síntese operacional da varredura | 27/04/2026 | ✅ Completo | `reels-sistema-aprendizados-varredura-instagram-2026-04-27.md` |
+| Governança visual IVS | 28/04/2026 | ✅ Completo | `governanca-visual-ivs-index.md`, `providers-midia-mapa-e-playbook-2026-04-28.md`, `providers-midia-checklist-rapido.md` |
 | *Próximos perfis* | — | ⏳ Aguardando lista do Tiaro | — |
 
 **Entregáveis por perfil:**
@@ -26,6 +28,7 @@
 3. Clusterização em 3 temas
 4. 1 carrossel sugerido por tema
 5. Plano de publicação
+6. Extração dos padrões para o sistema oficial de reels
 
 **Local dos arquivos:** `cerebro/empresa/conteudo/`
 
@@ -38,7 +41,15 @@ python3 /root/.openclaw/workspace/skills/tweet-carrossel/scripts/fetch_top_reels
 
 ## Concluídos
 
-_Nenhum projeto concluído._
+### Governança visual IVS
+- Índice central criado: `cerebro/areas/marketing/governanca-visual-ivs-index.md`
+- Playbook completo criado: `cerebro/areas/marketing/providers-midia-mapa-e-playbook-2026-04-28.md`
+- Checklist operacional curto criado: `cerebro/areas/marketing/providers-midia-checklist-rapido.md`
+- Governança aplicada aos fluxos de:
+  - reels
+  - vídeos
+  - carrosséis
+  - apresentações clínicas/visuais
 
 ---
 

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programa de Acompanhamento IVS — Tatiane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f4efe8;--surface:#fffdf9;--surface2:#fbf6f0;--ink:#2d241d;--muted:#76685b;--line:#eadfce;--gold:#b18a49;--gold-soft:#d7ba7f;--brown:#4f3a29;--brown-deep:#342418;--green:#5d7e68;--red:#b35d50;--shadow:0 20px 60px rgba(61,45,31,.08);--radius-xl:32px;--radius-lg:22px;--max:1240px}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,sans-serif;color:var(--ink);background:radial-gradient(circle at top left,rgba(215,186,127,.14),transparent 24%),radial-gradient(circle at top right,rgba(177,138,73,.08),transparent 22%),linear-gradient(180deg,#f7f2eb 0%,#f3ede6 100%);line-height:1.65}
+    .wrap{width:min(100%,1480px);margin:0 auto;padding:28px}.section{width:min(100%,var(--max));margin:0 auto 26px;background:var(--surface);border:1px solid rgba(177,138,73,.14);border-radius:var(--radius-xl);box-shadow:var(--shadow);overflow:hidden}.inner{padding:60px}.hero{background:linear-gradient(135deg,rgba(52,36,24,.98),rgba(79,58,41,.96)),var(--brown-deep);color:#fff;position:relative}.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 14%,rgba(215,186,127,.18),transparent 22%);pointer-events:none}.eyebrow{display:inline-flex;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--gold-soft);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.14em}h1,h2,h3{font-family:"Playfair Display",serif;margin:0 0 14px;line-height:1.08}h1{font-size:clamp(38px,5vw,70px);max-width:860px}h2{font-size:clamp(28px,3.2vw,44px);color:var(--brown)}h3{font-size:22px;color:var(--brown)}p{margin:0 0 14px}.lead{font-size:20px;color:rgba(255,255,255,.86);max-width:760px}.lead-dark{font-size:18px;color:var(--muted);max-width:860px}.gold{color:var(--gold)}.small{font-size:14px;color:var(--muted)}.hero-grid,.grid-2,.grid-3,.stats{display:grid;gap:20px}.hero-grid{grid-template-columns:1.4fr .9fr;position:relative;z-index:1;align-items:end}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:30px}.hero-card,.card,.metric,.quote,.data-card,.step,.focus-box{border-radius:var(--radius-lg);border:1px solid var(--line);background:var(--surface2)}.hero-card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);padding:28px;backdrop-filter:blur(6px)}.card,.metric,.quote,.data-card,.focus-box{padding:24px}.section-label{display:block;margin-bottom:16px;color:var(--gold);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.pill{padding:10px 14px;border-radius:999px;background:rgba(215,186,127,.14);color:#fff;border:1px solid rgba(215,186,127,.18);font-size:14px;font-weight:700}.patient-name{font-size:30px;font-weight:800;margin-bottom:8px}.metric-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800}.metric-value{font-size:34px;color:var(--brown);font-weight:800;margin:6px 0 8px}.quote{background:linear-gradient(180deg,rgba(177,138,73,.10),rgba(177,138,73,.04));border-left:5px solid var(--gold);color:var(--brown)}.badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}.alert{background:rgba(179,93,80,.12);color:var(--red)}.warn{background:rgba(177,138,73,.16);color:var(--brown)}.ok{background:rgba(93,126,104,.12);color:var(--green)}.signal{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}.signal:before{content:"";width:10px;height:10px;border-radius:50%}.signal-green{background:rgba(93,126,104,.12);color:var(--green)}.signal-green:before{background:var(--green)}.signal-yellow{background:rgba(177,138,73,.16);color:var(--brown)}.signal-yellow:before{background:var(--gold)}.signal-red{background:rgba(179,93,80,.12);color:var(--red)}.signal-red:before{background:var(--red)}.data-value{font-size:30px;font-weight:800;color:var(--brown);margin:8px 0}ul.clean{list-style:none;margin:0;padding:0;display:grid;gap:10px}ul.clean li{position:relative;padding-left:22px}ul.clean li:before{content:'•';position:absolute;left:0;color:var(--gold);font-weight:900}.steps{display:grid;gap:16px;margin-top:20px}.step{display:grid;grid-template-columns:58px 1fr;gap:18px;padding:20px;background:#fff}.step-num{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),#d7ba7f);color:#fff;font-weight:800;font-size:18px;box-shadow:0 12px 28px rgba(177,138,73,.24)}.cta{background:linear-gradient(135deg,#4c3828,#352419);color:#fff}.cta h2,.cta h3{color:#fff}.cta-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:22px}.divider{height:1px;background:linear-gradient(90deg,rgba(177,138,73,.26),transparent);margin:20px 0 0}.exam-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:15px}.exam-table th,.exam-table td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.exam-table th{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}@media (max-width:980px){.hero-grid,.grid-2,.grid-3,.stats{grid-template-columns:1fr}.inner{padding:34px 24px}.wrap{padding:14px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="section hero">
+      <div class="inner">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Instituto Vital Slim · apresentação personalizada</span>
+            <h1>Tatiane, seus exames ajudam a mostrar que a sua dificuldade hoje <span class="gold">não deve ser lida só como peso</span>.</h1>
+            <p class="lead">Quando a paciente sente cansaço, travamento, dificuldade de sustentar resultado e sinais hormonais, os dados laboratoriais ajudam a dar mais clareza sobre o que pode estar pedindo atenção no corpo.</p>
+            <div class="pill-row">
+              <div class="pill">38 anos</div>
+              <div class="pill">Feminino</div>
+              <div class="pill">Leitura consultiva com exames</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="small" style="color:rgba(255,255,255,.74);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;">Paciente simulada com exames reais anexados</div>
+            <div class="patient-name">Tatiane Anita Almeida de Souza Leao Cruz</div>
+            <p><strong>Leitura central:</strong><br>há sinais laboratoriais que conversam com inflamação, perfil lipídico, estoque de ferro limítrofe e eixo hormonal feminino que merecem acompanhamento individualizado.</p>
+            <p><strong>Uso da peça:</strong><br>apresentação consultiva de apoio para paciente nova.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="metric"><div class="metric-title">Inflamação</div><div class="metric-value">Elevada</div><div class="small">PCR 3,43 · VHS 38</div></div>
+          <div class="metric"><div class="metric-title">Perfil lipídico</div><div class="metric-value">Alterado</div><div class="small">LDL 153 · Colesterol total 226,8</div></div>
+          <div class="metric"><div class="metric-title">Estoque de ferro</div><div class="metric-value">Limítrofe</div><div class="small">Ferritina 30 · Saturação 20%</div></div>
+          <div class="metric"><div class="metric-title">Hormonal</div><div class="metric-value">Pede contexto</div><div class="small">Estradiol baixo no laudo isolado</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Problem · o que os exames mostram</span>
+        <h2>Os exames não contam tudo sozinhos, mas mostram pontos que <span class="gold">merecem atenção clínica</span>.</h2>
+        <p class="lead-dark">A leitura abaixo é consultiva, cautelosa e pensada para apoiar uma conversa sobre acompanhamento. Não fecha diagnóstico isolado e precisa sempre ser relacionada à história, sintomas e fase do ciclo.</p>
+        <table class="exam-table">
+          <thead>
+            <tr><th>Exame</th><th>Sinalizador</th><th>Resultado</th><th>Referência</th><th>Leitura simplificada</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>PCR</strong></td><td><span class="signal signal-red">Muito alterado</span></td><td>3,43 mg/L</td><td>&lt; 1,0 mg/L risco baixo</td><td>Marcador inflamatório acima do desejável, sugerindo que o organismo pode estar em um estado de alerta inflamatório.</td></tr>
+            <tr><td><strong>VHS</strong></td><td><span class="signal signal-red">Muito alterado</span></td><td>38 mm/h</td><td>até 19 mm/h</td><td>Reforça a percepção de que há algum processo reativo ou inflamatório merecendo contexto clínico.</td></tr>
+            <tr><td><strong>LDL</strong></td><td><span class="signal signal-yellow">Alterado</span></td><td>153 mg/dL</td><td>&lt; 130 mg/dL desejável</td><td>Mostra uma fração de colesterol acima do ideal, o que pede estratégia e acompanhamento metabólico.</td></tr>
+            <tr><td><strong>Colesterol total</strong></td><td><span class="signal signal-yellow">Alterado</span></td><td>226,8 mg/dL</td><td>&lt; 190 mg/dL</td><td>Aponta desajuste no perfil lipídico e reforça a necessidade de olhar o terreno metabólico como um todo.</td></tr>
+            <tr><td><strong>Ferritina</strong></td><td><span class="signal signal-yellow">Alterado</span></td><td>30 ng/mL</td><td>13 a 150 ng/mL</td><td>Mesmo dentro do intervalo laboratorial, aparece em faixa limítrofe para quem relata cansaço, cabelo e unhas.</td></tr>
+            <tr><td><strong>Saturação de transferrina</strong></td><td><span class="signal signal-yellow">Alterado</span></td><td>20%</td><td>20 a 50%</td><td>No limite inferior, podendo conversar com sensação de energia baixa e menor reserva funcional.</td></tr>
+            <tr><td><strong>Vitamina C</strong></td><td><span class="signal signal-red">Muito alterado</span></td><td>1,9 mg/L</td><td>4,6 a 15,0 mg/L</td><td>Baixa disponibilidade antioxidante, o que pode pesar em recuperação, inflamação e vitalidade global.</td></tr>
+            <tr><td><strong>Testosterona livre</strong></td><td><span class="signal signal-red">Muito alterado</span></td><td>0,23 ng/dL</td><td>referência do laudo acima desse valor</td><td>Nível baixo no laudo, o que pode conversar com cansaço, libido e sensação de menor potência física.</td></tr>
+            <tr><td><strong>Estradiol</strong></td><td><span class="signal signal-yellow">Alterado</span></td><td>20,10 pg/mL</td><td>varia conforme fase do ciclo</td><td>Resultado baixo frente a algumas fases do ciclo, mas precisa obrigatoriamente ser lido junto da fase menstrual.</td></tr>
+            <tr><td><strong>Glicose de jejum</strong></td><td><span class="signal signal-green">Normal</span></td><td>96 mg/dL</td><td>65 a 100 mg/dL</td><td>Dentro da referência, porém perto do limite superior do normal, o que merece leitura metabólica em conjunto.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Problem · principais blocos de leitura</span>
+        <h2>Quando juntamos esses dados, aparecem <span class="gold">4 frentes principais</span>.</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card">
+            <h3>1. Inflamação e terreno metabólico</h3>
+            <p>PCR e VHS elevados sugerem um corpo em estado de alerta. Isso pode conversar com dificuldade de resposta metabólica, cansaço, sensação de inchaço e piora da qualidade global de vida.</p>
+          </div>
+          <div class="card">
+            <h3>2. Perfil lipídico desajustado</h3>
+            <p>LDL e colesterol total acima do desejável reforçam que não é só uma questão estética. Existe um racional de cuidado metabólico e prevenção.</p>
+          </div>
+          <div class="card">
+            <h3>3. Reserva funcional e energia</h3>
+            <p>Ferritina limítrofe, saturação no limite inferior e vitamina C baixa podem conversar com indisposição, menor recuperação e queixas de cabelo, pele e unhas.</p>
+          </div>
+          <div class="card">
+            <h3>4. Eixo hormonal feminino</h3>
+            <p>Estradiol e testosterona livre merecem leitura contextualizada. Quando a paciente relata ciclo, libido, energia ou composição corporal alterados, isso ganha mais importância clínica.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:20px;">Seu corpo não está te sabotando — ele está te mostrando que, com o cuidado certo, ainda existe muito espaço para recuperar energia, equilíbrio e confiança.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Implication · o que isso pode significar</span>
+        <h2>Se esse conjunto não for organizado, a paciente tende a continuar sentindo que <span class="gold">se esforça e não destrava</span>.</h2>
+        <div class="grid-3" style="margin-top:22px;">
+          <div class="card">
+            <h3>Na energia</h3>
+            <p>Mais cansaço, menor disposição, pior recuperação e menos constância para sustentar mudanças ao longo do tempo.</p>
+          </div>
+          <div class="card">
+            <h3>Na percepção corporal</h3>
+            <p>Mais frustração com peso, medidas, inchaço e resposta lenta do corpo mesmo quando há tentativa de mudança.</p>
+          </div>
+          <div class="card">
+            <h3>Na saúde futura</h3>
+            <p>Persistência de inflamação e perfil lipídico alterado aumenta a sensação de que o corpo está fora do eixo e pede acompanhamento estruturado.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:20px;">A implicação aqui não é alarmar. É mostrar que adiar a organização desse cenário costuma prolongar a dificuldade.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Need-payoff · por que acompanhamento faz sentido</span>
+        <h2>Nesse tipo de caso, o valor não está em olhar um exame isolado. Está em <span class="gold">conectar sinais, sintomas e estratégia</span>.</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div><h3>Entender o contexto da paciente</h3><p>Fase do ciclo, sintomas, energia, rotina, alimentação, composição corporal e histórico de tentativas.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div><h3>Traduzir o exame em conduta</h3><p>Separar o que é achado laboratorial, o que é consequência prática e o que realmente muda no plano.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div><h3>Ajustar o que trava o resultado</h3><p>Inflamação, perfil lipídico, reserva funcional, eixo hormonal, rotina e aderência precisam conversar entre si.</p></div></div>
+          <div class="step"><div class="step-num">4</div><div><h3>Acompanhar evolução real</h3><p>Não só peso, mas também energia, sintomas, constância e marcadores de resposta ao longo do processo.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="inner">
+        <span class="eyebrow">Fechamento consultivo</span>
+        <h2>O que esta leitura sustenta</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="cta-box">
+            <h3>Síntese</h3>
+            <p>Os exames da Tatiane reforçam uma narrativa coerente de acompanhamento: inflamação, desajuste lipídico, estoque funcional que merece atenção e eixo hormonal que precisa ser lido com contexto.</p>
+          </div>
+          <div class="cta-box">
+            <h3>Quebra de objeção embutida</h3>
+            <p>Isso ajuda a paciente a entender que o problema não é só “tentar mais forte”, e sim ter uma estratégia que leia o corpo com mais profundidade.</p>
+          </div>
+          <div class="cta-box">
+            <h3>O que ela compra de verdade</h3>
+            <p>Clareza, monitoramento, individualização, correção de rota e uma jornada acompanhada em vez de novas tentativas desconectadas.</p>
+          </div>
+          <div class="cta-box">
+            <h3>Nota de compliance</h3>
+            <p>Todos os achados precisam ser correlacionados com quadro clínico, sintomas, fase do ciclo e avaliação médica. A apresentação apoia a conversa, não substitui conduta.</p>
+          </div>
+        </div>
+        <p class="small" style="color:rgba(255,255,255,.74);margin-top:18px;">HTML premium com exames incorporados para apresentação consultiva IVS. Leitura cautelosa, sem fechamento diagnóstico isolado.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

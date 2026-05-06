@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparativo Executivo — João / IVS</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 32px; color: #1f2937; background: #f8fafc; }
+    .wrap { max-width: 1100px; margin: 0 auto; background: #ffffff; padding: 32px; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+    h1, h2 { margin-top: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 20px; margin-top: 28px; }
+    p, li { line-height: 1.6; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { border: 1px solid #d1d5db; padding: 12px; text-align: left; vertical-align: top; }
+    th { background: #111827; color: white; }
+    tr:nth-child(even) td { background: #f9fafb; }
+    .tag { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #e5eefc; color: #1d4ed8; font-size: 12px; font-weight: 700; }
+    .ok { color: #065f46; font-weight: 700; }
+    .warn { color: #92400e; font-weight: 700; }
+    .bad { color: #991b1b; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Comparativo Executivo — João operando sozinho no IVS</h1>
+    <p><span class="tag">Resumo gerencial</span></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Critério</th>
+          <th>Replit Agent</th>
+          <th>Bolt.new</th>
+          <th>v0</th>
+          <th>Lovable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Operação contínua</td>
+          <td class="ok">Muito boa</td>
+          <td>Boa</td>
+          <td>Média</td>
+          <td class="bad">Hoje ruim no nosso cenário</td>
+        </tr>
+        <tr>
+          <td>Estabilidade para o João</td>
+          <td class="ok">Alta</td>
+          <td>Média</td>
+          <td>Média</td>
+          <td class="bad">Baixa na VPS atual</td>
+        </tr>
+        <tr>
+          <td>Dependência de UI frágil</td>
+          <td>Média</td>
+          <td class="warn">Alta</td>
+          <td class="warn">Alta</td>
+          <td class="warn">Alta</td>
+        </tr>
+        <tr>
+          <td>Facilidade para prototipar</td>
+          <td>Boa</td>
+          <td class="ok">Muito boa</td>
+          <td class="ok">Muito boa</td>
+          <td class="ok">Muito boa</td>
+        </tr>
+        <tr>
+          <td>Melhor para app completo</td>
+          <td class="ok">Sim</td>
+          <td>Parcial</td>
+          <td>Não é o foco</td>
+          <td>Sim</td>
+        </tr>
+        <tr>
+          <td>Melhor para front/UI</td>
+          <td>Boa</td>
+          <td>Boa</td>
+          <td class="ok">Excelente</td>
+          <td>Boa</td>
+        </tr>
+        <tr>
+          <td>Chance de rodar com menos atrito operacional</td>
+          <td class="ok">Alta</td>
+          <td>Média</td>
+          <td>Média</td>
+          <td class="bad">Baixa hoje</td>
+        </tr>
+        <tr>
+          <td>Melhor escolha para substituir o Lovable</td>
+          <td class="ok">Sim</td>
+          <td>Segunda opção</td>
+          <td>Não como principal</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Leitura gerencial</h2>
+
+    <h2>1. Replit Agent</h2>
+    <ul>
+      <li>Melhor para o João trabalhar com continuidade.</li>
+      <li>Melhor para editar, iterar e manter projeto vivo.</li>
+      <li>Reduz dependência de truques de browser e login.</li>
+    </ul>
+    <p><strong>Leitura:</strong> melhor candidato para operação real.</p>
+
+    <h2>2. Bolt.new</h2>
+    <ul>
+      <li>Mais próximo da experiência “prompt → app rápido”.</li>
+      <li>Ponto forte: rapidez de protótipo.</li>
+      <li>Ponto fraco: mais sensível a fluxo de produto web do que a operação contínua.</li>
+    </ul>
+    <p><strong>Leitura:</strong> boa segunda opção.</p>
+
+    <h2>3. v0</h2>
+    <ul>
+      <li>Muito forte para landing pages, componentes e front-end.</li>
+      <li>Não é a melhor base para operação contínua do João.</li>
+    </ul>
+    <p><strong>Leitura:</strong> ótimo complemento, não substituto principal.</p>
+
+    <h2>Recomendação objetiva</h2>
+    <ul>
+      <li><strong>Plano A:</strong> Replit Agent</li>
+      <li><strong>Plano B:</strong> Bolt.new</li>
+      <li><strong>Plano C:</strong> v0 como apoio de interface</li>
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manutenção Diária do Cérebro — 2026-05-03</title>
+<style>
+  body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif; margin: 0; padding: 24px; background: #f5f7fa; color: #1a202c; line-height: 1.6; }
+  .container { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; color: #0f172a; }
+  .subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 20px; }
+  .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .badge { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .badge-ok { background: #dcfce7; color: #15803d; }
+  .badge-fechado { background: #e0f2fe; color: #0369a1; }
+  .badge-aberto { background: #fef3c7; color: #b45309; }
+  .badge-info { background: #f3e8ff; color: #6d28d9; }
+  .section-title { font-size: 1.05rem; font-weight: 600; margin-top: 0; margin-bottom: 12px; color: #334155; }
+  .item { padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
+  .item:last-child { border-bottom: none; }
+  .item-head { font-weight: 600; color: #0f172a; margin-bottom: 3px; }
+  .item-desc { font-size: 0.88rem; color: #475569; }
+  .meta { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid .card { margin-bottom: 0; }
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+    body { padding: 12px; }
+  }
+  .cta { background: #0f172a; color: #fff; text-align: center; padding: 16px; border-radius: 10px; margin-top: 20px; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🧠 Manutenção Diária do Cérebro</h1>
+  <div class="subtitle">Clara / IVS — 01:00 UTC · 2026-05-03 · Domingo · Identificador de sessão: cron-54fb064e</div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="section-title">Estado Geral</div>
+      <div style="margin-bottom: 6px;"><span class="badge badge-ok">Saúde</span> OK. Nenhum erro de execução.</div>
+      <div style="margin-bottom: 6px;"><span class="badge badge-info">Transversal</span> Rotina obedecida entre tópicos.</div>
+      <div><span class="badge badge-ok">Commit</span> <code>3859ad5</code> gerado com 4 arquivos.</div>
+    </div>
+    <div class="card">
+      <div class="section-title">Resumo Numérico</div>
+      <div class="item">
+        <div class="item-head">Abertos reais: 5</div>
+        <div class="item-desc">A1, A2, A4, A5 + M1-M5 em monitoramento</div>
+      </div>
+      <div class="item">
+        <div class="item-head">Fechados: 9</div>
+        <div class="item-desc">F1-F9 incluindo Rótulo Marketing 5782</div>
+      </div>
+      <div class="item">
+        <div class="item-head">Pedidos recorrentes: 12</div>
+        <div class="item-desc">Índice estável desde 30/04/2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">✅ Itens Resolvidos e Arquivados</div>
+    <div class="item">
+      <span class="badge badge-fechado">Fechado</span>
+      <div class="item-head">Handoff / Manual Takeover da Clara</div>
+      <div class="item-desc">Bridge endurecida, validação controlada confirmou bloqueio por ownership humano. Monitoramento transferido para checklist operacional.</div>
+      <div class="meta">Arquivado em 03/05/2026 · Fonte: checklist-atendimento-clara.md</div>
+    </div>
+    <div class="item">
+      <span class="badge badge-fechado">Fechado</span>
+      <div class="item-head">Rótulo do Tópico João (Reels → Marketing)</div>
+      <div class="item-desc">Tópico operacional confirmado como Marketing <code>5782</code>. Gateway reiniciado. Não há mais ambiguidade 768 vs 5782.</div>
+      <div class="meta">Arquivado em 03/05/2026 · Fonte: telegram-topics.md + telegram-topic-agent-routing.json</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">📋 Abertos Reais — Prioridade Executiva</div>
+    <div class="item">
+      <span class="badge badge-aberto">Aberto</span>
+      <div class="item-head">A4. Tópico "Pacientes" — topic_id numérico não confirmado</div>
+      <div class="item-desc">Pendente de Tiaro: confirmar o ID numérico do tópico "Pacientes" e mapear área canônica correspondente (Atendimento ou Operação Clínica).</div>
+      <div class="meta">Fonte: telegram-topics.md · Status inalterado desde 30/04/2026</div>
+    </div>
+    <div class="item">
+      <span class="badge badge-aberto">Aberto</span>
+      <div class="item-head">A5. Notion — João com ferramenta instalada, sem credencial habilitada</div>
+      <div class="item-desc">Skill <code>notion_reader.py</code> existe. Bloqueio operacional: <code>NOTION_TOKEN</code> + compartilhamento de página/database. Próximo passo: Tiaro gerar token de integração e compartilhar.</div>
+      <div class="meta">Fonte: memory/2026-05-02.md · Levantado em 03/05/2026</div>
+    </div>
+    <div class="item">
+      <span class="badge badge-info">Monitoramento</span>
+      <div class="item-head">A1. Redução de dispersão entre camadas</div>
+      <div class="item-desc">Aprendizados ainda nascem em relatório/memória antes de ganhar porta única definitiva. Contenção ativa via rotina diária.</div>
+    </div>
+    <div class="item">
+      <span class="badge badge-info">Monitoramento</span>
+      <div class="item-head">A2. Disciplina operacional dos scripts de recuperação</div>
+      <div class="item-desc">Scripts e mensagens fortalecidos, mas uso operacional consistente precisa ser mantido e revisado no atendimento real.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">🔄 Camada Operacional — Evolução</div>
+    <div class="item">
+      <div class="item-head">ITENS-AMBIGUOS-A-AUDITAR.md</div>
+      <div class="item-desc">2 itens resolvidos arquivados (Handoff, Rótulo Marketing). 2 itens vivos adicionados (Notion, Tópico Pacientes). Monitoramentos preservados.</div>
+    </div>
+    <div class="item">
+      <div class="item-head">PAINEL-UNICO-BACKLOG-STATUS-IVS-V1.md</div>
+      <div class="item-desc">Fechado F8 (Rótulo João). Aberto A5 (Notion). Estado executivo atualizado.</div>
+    </div>
+    <div class="item">
+      <div class="item-head">pendencias.md</div>
+      <div class="item-desc">Consolidação de governança e datas. Pendências encerradas desde 30/04/2026 registradas com rastrabilidade.</div>
+    </div>
+    <div class="item">
+      <div class="item-head">learning-ledger.md</div>
+      <div class="item-desc">Nova entrada da rotina diária registrada para rastrabilidade de evolução.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">🎯 Próximos Passos Recomendados</div>
+    <div class="item">
+      <div class="item-head">1. Confirmar topic_id do tópico "Pacientes"</div>
+      <div class="item-desc">Tiaro ou operador do Telegram pode fornecer o número. Depois disso, atualizar telegram-topics.md e arquivar A4.</div>
+    </div>
+    <div class="item">
+      <div class="item-head">2. Habilitar Notion para João</div>
+      <div class="item-desc">Gerar token de integração Notion, compartilhar página/database, validar leitura em tópico de Operações.</div>
+    </div>
+    <div class="item">
+      <div class="item-head">3. Continuar monitoramento contínuo</div>
+      <div class="item-desc">Bridge deduplicação/cooldown, novos pedidos recorrentes, promoção de relatórios HTML para portas operacionais.</div>
+    </div>
+  </div>
+
+  <div class="cta">
+    Relatório gerado automaticamente pela rotina de manutenção diária · Clara / IVS
+  </div>
+</div>
+</body>
+</html>

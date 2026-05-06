@@ -1,0 +1,1392 @@
+#!/usr/bin/env python3
+"""
+V10 — Renderer da Apresentação V2 do Programa de Acompanhamento Avançado IVS
+
+Implementação fiel ao briefing do Conselho Growth (padrão conselho.html, 05/05/2026).
+
+Estrutura DOM (na ordem):
+  body
+    header.topbar
+    nav.progress-nav
+    main
+      section.hero-clinical-document
+      section.executive-diagnosis
+      section.patient-mirror
+      section.critical-levers
+      section.spin-guided
+      section.ivs-machine
+      section.proof-by-process
+      section.program-180-days
+      section.objection-preemption
+      section.decision-checklist
+      section.final-cta
+      section.technical-appendix
+
+Compliance:
+  - Sem "garantido", "cura", "X dias", "reverte com certeza"
+  - Disclaimer "Resultados individuais variam..." nos casos reais
+  - Linguagem: "pode", "tende", "merece atenção", "minha recomendação"
+"""
+from __future__ import annotations
+import base64
+import json
+import re
+from datetime import date, datetime
+from html import escape as _html_escape
+from pathlib import Path
+
+ASSETS_DIR = Path("/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/assets")
+SITE_IMAGES = ASSETS_DIR / "site-images"
+BIBLIOTECA_PATH = ASSETS_DIR / "biblioteca_implicacoes.json"
+REFS_PATH = ASSETS_DIR / "refs_canonicas.json"
+
+
+def safe_html(s):
+    if s is None:
+        return ""
+    return _html_escape(str(s), quote=False)
+
+
+def img_b64(path: Path) -> str:
+    if not path.exists():
+        return ""
+    with open(path, "rb") as f:
+        data = base64.b64encode(f.read()).decode("ascii")
+    ext = path.suffix.lstrip(".").lower()
+    if ext == "jpg":
+        ext = "jpeg"
+    return f"data:image/{ext};base64,{data}"
+
+
+def calcular_idade(data_nasc_ms):
+    if not data_nasc_ms:
+        return None
+    try:
+        d = datetime.fromtimestamp(int(data_nasc_ms) / 1000)
+        today = date.today()
+        return today.year - d.year - ((today.month, today.day) < (d.month, d.day))
+    except Exception:
+        return None
+
+
+# ---------------------------------------------------------------------------
+# CSS — paleta IVS (creme + dourado), tipografia premium, responsivo, print
+# ---------------------------------------------------------------------------
+CSS = r"""
+:root{
+  --gold:#9F8844; --gold2:#D4BC79; --gold-dark:#6B5A2B;
+  --cream:#F7F2E4; --paper:#FFFFFF; --elev:#FBF6E8;
+  --ink:#1F1A12; --body:#3D3528; --muted:#756A55;
+  --line:rgba(107,90,43,.18); --line-strong:rgba(107,90,43,.32);
+  --red:#8E2417; --amber:#A06D0A; --green:#155527;
+  --serif:Georgia, "Playfair Display", serif;
+  --sans:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --max-w:1240px;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+  --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body{
+  font-family: var(--sans); font-size: 16px; line-height: 1.62;
+  color: var(--body); background: var(--cream);
+  text-rendering: optimizeLegibility; font-weight: 400;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--gold-dark); text-decoration: none; }
+
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); line-height: 1.15; font-weight: 500; }
+h1 { font-size: clamp(36px, 5vw, 64px); letter-spacing: -0.015em; }
+h2 { font-size: clamp(28px, 3.6vw, 48px); margin-bottom: var(--s-5); }
+h3 { font-size: clamp(20px, 2.2vw, 26px); margin-bottom: var(--s-4); }
+h4 { font-family: var(--sans); font-size: 12px; font-weight: 600; text-transform: uppercase;
+     letter-spacing: 0.18em; color: var(--gold-dark); margin-bottom: var(--s-3); }
+p { font-family: var(--sans); margin-bottom: var(--s-4); }
+
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--s-5); }
+.section { padding: var(--s-9) 0; border-top: 1px solid var(--line); }
+.section:first-of-type { border-top: none; }
+
+/* === TOPBAR === */
+.topbar{
+  background:#FFFFFF; padding:var(--s-3) var(--s-5);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  max-width:var(--max-w); margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+  min-height:96px; gap: var(--s-5);
+}
+.topbar .logo{ height:80px; max-width:280px; object-fit:contain; }
+.topbar .doctor-tag{
+  font-family:var(--sans); font-size:11px; font-weight:500;
+  text-transform:uppercase; letter-spacing:0.18em; color:var(--muted);
+  text-align:right; line-height:1.5;
+}
+.topbar .doctor-tag .name{
+  display:block; font-family:var(--serif); font-size:16px; font-weight:500;
+  font-style:italic; text-transform:none; letter-spacing:0;
+  color:var(--ink); margin-bottom:2px;
+}
+
+/* === PROGRESS NAV === */
+.progress-nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(247,242,228,0.95); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.progress-nav-inner{
+  max-width:var(--max-w); margin:0 auto;
+  padding:var(--s-3) var(--s-5);
+  display:flex; gap:var(--s-2); flex-wrap:wrap; align-items:center;
+  font-size:11px; letter-spacing:0.10em; text-transform:uppercase; font-weight:600;
+}
+.progress-step{
+  color:var(--muted); padding:6px 12px; border-radius:999px;
+  cursor:pointer; transition:all 0.2s; border:1px solid transparent;
+}
+.progress-step.active{ background:var(--gold); color:#fff; border-color:var(--gold); }
+.progress-step:hover{ color:var(--ink); }
+.progress-toggle{
+  margin-left:auto; padding:6px 14px; border-radius:999px;
+  border:1px solid var(--gold); color:var(--gold-dark); background:transparent;
+  font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  cursor:pointer; font-family:var(--sans);
+}
+.progress-toggle:hover{ background:var(--gold); color:#fff; }
+.progress-toggle.active{ background:var(--gold-dark); color:#fff; border-color:var(--gold-dark); }
+
+/* === HERO CLINICAL DOCUMENT === */
+.hero-clinical-document{
+  padding:var(--s-9) 0 var(--s-8);
+  background:linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.hero-meta-bar{
+  display:flex; gap:var(--s-6); flex-wrap:wrap;
+  padding-bottom:var(--s-5); margin-bottom:var(--s-6);
+  border-bottom:1px solid var(--line);
+}
+.hero-meta-item{ font-size:13px; color:var(--muted); }
+.hero-meta-item strong{
+  display:block; color:var(--ink); font-family:var(--serif);
+  font-size:18px; font-weight:500; font-style:italic; margin-top:2px;
+}
+.hero-clinical-h1{ max-width:920px; margin-bottom:var(--s-5); }
+.hero-clinical-lead{
+  font-size:clamp(17px, 1.5vw, 20px); color:var(--ink);
+  max-width:780px; line-height:1.55; font-weight:400;
+}
+.hero-clinical-lead strong{ color:var(--gold-dark); font-weight:600; }
+
+/* === EXECUTIVE DIAGNOSIS === */
+.executive-diagnosis{ background:var(--paper); }
+.diag-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-5); margin-top:var(--s-6); }
+.diag-card{
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); border-top:3px solid var(--gold);
+}
+.diag-card h4{ color:var(--gold-dark); margin-bottom:var(--s-3); }
+.diag-card .body-text{ font-size:15px; line-height:1.6; color:var(--body); margin:0; }
+.diag-recomendacao{
+  background:#1F1A12; color:#F7F2E4; border-radius:14px;
+  padding:var(--s-6) var(--s-7); margin-top:var(--s-6);
+  font-family:var(--serif); font-size:clamp(18px, 1.8vw, 22px);
+  font-style:italic; line-height:1.5;
+}
+.diag-recomendacao strong{ color:var(--gold2); font-style:normal; }
+
+/* === PATIENT MIRROR === */
+.patient-mirror{ background:var(--cream); }
+.mirror-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-4); margin-top:var(--s-5); }
+.mirror-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5);
+}
+.mirror-card .label{
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:0.16em; color:var(--gold-dark); margin-bottom:var(--s-3);
+}
+.mirror-card .value{
+  font-family:var(--serif); font-size:20px; font-weight:500;
+  color:var(--ink); line-height:1.3;
+}
+.mirror-card .value.empty{
+  font-family:var(--sans); font-size:13px; font-style:italic;
+  color:var(--muted); font-weight:400;
+}
+.mirror-card .sub{ font-size:13px; color:var(--muted); margin-top:var(--s-2); }
+.mirror-card.feature{ grid-column:span 3; border-left:4px solid var(--gold); }
+
+/* === CRITICAL LEVERS === */
+.critical-levers{ background:var(--paper); }
+.lever-list{ display:flex; flex-direction:column; gap:var(--s-5); margin-top:var(--s-6); }
+.lever-card{
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); display:grid; grid-template-columns:1fr 2fr; gap:var(--s-6);
+}
+.lever-card[data-sev="crit"]{ border-left:4px solid var(--red); }
+.lever-card[data-sev="alert"]{ border-left:4px solid var(--amber); }
+.lever-numeric .name{
+  font-family:var(--serif); font-size:22px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-3);
+}
+.lever-numeric .value{
+  font-family:var(--serif); font-size:42px; font-weight:600;
+  color:var(--ink); line-height:1; margin-bottom:var(--s-2);
+}
+.lever-numeric .value .unit{
+  font-size:0.45em; color:var(--muted); margin-left:6px; font-weight:400;
+}
+.lever-numeric .ref{ font-size:13px; color:var(--muted); margin-bottom:var(--s-3); }
+.lever-numeric .badge{
+  display:inline-block; padding:4px 10px; border-radius:6px;
+  font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+}
+.lever-card[data-sev="crit"] .badge{ background:rgba(142,36,23,0.10); color:var(--red); }
+.lever-card[data-sev="alert"] .badge{ background:rgba(160,109,10,0.10); color:var(--amber); }
+.lever-narrative h4{ color:var(--gold-dark); margin-bottom:var(--s-2); }
+.lever-narrative .interp{
+  font-size:15px; line-height:1.55; color:var(--body); margin-bottom:var(--s-3);
+}
+.lever-narrative .impact{
+  font-size:14px; color:var(--muted); margin-bottom:var(--s-4);
+  padding:var(--s-3) var(--s-4); background:var(--paper); border-radius:8px;
+  border-left:2px solid var(--line);
+}
+.lever-narrative .spin-q{
+  font-family:var(--serif); font-size:16px; font-style:italic;
+  color:var(--ink); padding-left:var(--s-4); border-left:3px solid var(--gold);
+  line-height:1.5;
+}
+.lever-narrative .spin-q::before{ content:"Pergunta para a consulta: "; color:var(--gold-dark); font-style:normal; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.14em; display:block; margin-bottom:var(--s-2); }
+
+/* === SPIN GUIDED === */
+.spin-guided{ background:var(--cream); }
+.spin-step-block{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6) var(--s-7); margin-bottom:var(--s-5);
+}
+.spin-step-block .step-tag{
+  display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:var(--s-3);
+}
+.spin-step-block h3{ margin-bottom:var(--s-4); }
+.spin-step-block .body-text{ font-size:15px; line-height:1.6; color:var(--body); margin-bottom:var(--s-4); }
+.spin-step-block .confirmation{
+  background:var(--cream); padding:var(--s-4) var(--s-5);
+  border-left:3px solid var(--gold); border-radius:0 8px 8px 0;
+  font-family:var(--serif); font-style:italic; font-size:16px; color:var(--ink);
+  margin-top:var(--s-4);
+}
+.spin-step-block .confirmation::before{
+  content:"Pergunta de confirmação:"; display:block;
+  font-family:var(--sans); font-style:normal; font-weight:600;
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--gold-dark); margin-bottom:var(--s-2);
+}
+.spin-table{ width:100%; border-collapse:collapse; margin:var(--s-4) 0; font-size:14px; }
+.spin-table th, .spin-table td{
+  padding:var(--s-3) var(--s-4); text-align:left; vertical-align:top;
+  border-bottom:1px solid var(--line);
+}
+.spin-table th{
+  background:var(--cream); font-size:11px; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-dark);
+}
+.spin-table tr:last-child td{ border-bottom:none; }
+
+/* === IVS MACHINE === */
+.ivs-machine{ background:var(--paper); }
+.machine-flow{
+  display:grid; grid-template-columns:repeat(6, 1fr); gap:var(--s-3);
+  margin-top:var(--s-7); position:relative;
+}
+.machine-step{
+  background:var(--cream); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5) var(--s-4); text-align:center; position:relative;
+}
+.machine-step .num{
+  width:36px; height:36px; border-radius:50%;
+  background:var(--gold); color:#fff; display:flex;
+  align-items:center; justify-content:center; font-weight:700;
+  font-size:14px; margin:0 auto var(--s-3);
+}
+.machine-step .title{
+  font-family:var(--serif); font-size:15px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-2); line-height:1.25;
+}
+.machine-step .desc{ font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* === PROOF BY PROCESS === */
+.proof-by-process{ background:var(--cream); }
+.proof-list{ display:flex; flex-direction:column; gap:var(--s-7); margin-top:var(--s-6); }
+.proof-card{
+  display:grid; grid-template-columns:1.2fr 1fr; gap:var(--s-7);
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); align-items:center;
+}
+.proof-card:nth-child(even){ grid-template-columns:1fr 1.2fr; }
+.proof-card:nth-child(even) .proof-imgs{ order:2; }
+.proof-imgs{
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--s-3);
+}
+.proof-img{ position:relative; aspect-ratio:3/4; overflow:hidden; border-radius:10px; background:var(--cream); }
+.proof-img img{ width:100%; height:100%; object-fit:cover; object-position:center top; }
+.proof-img .label{
+  position:absolute; top:var(--s-3); left:var(--s-3);
+  background:rgba(255,255,255,0.95); padding:4px 10px; border-radius:4px;
+  font-size:10px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--ink);
+}
+.proof-text .step-eyebrow{
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:0.20em; color:var(--gold-dark); margin-bottom:var(--s-3);
+  display:block;
+}
+.proof-text h3{ margin-bottom:var(--s-4); }
+.proof-text blockquote{
+  font-family:var(--serif); font-size:17px; font-style:italic;
+  line-height:1.55; color:var(--body); margin:0 0 var(--s-5);
+  padding-left:var(--s-4); border-left:2px solid var(--gold);
+}
+.proof-disclaimer{
+  margin-top:var(--s-7); padding:var(--s-4) var(--s-5);
+  background:var(--paper); border:1px solid var(--line); border-radius:8px;
+  font-size:12px; color:var(--muted); font-style:italic; line-height:1.5;
+}
+
+/* === PROGRAM 180 DAYS === */
+.program-180-days{ background:var(--paper); }
+.program-timeline{
+  display:flex; flex-direction:column; gap:var(--s-5); margin-top:var(--s-6);
+}
+.program-phase{
+  display:grid; grid-template-columns:120px 1fr; gap:var(--s-6);
+  padding:var(--s-5) 0; border-bottom:1px solid var(--line); align-items:start;
+}
+.program-phase:last-child{ border-bottom:none; }
+.program-phase .phase-marker{
+  width:120px; padding:var(--s-3) 0; text-align:center;
+  background:var(--cream); border:1px solid var(--line); border-radius:10px;
+}
+.program-phase .phase-marker .num{
+  font-family:var(--serif); font-size:24px; font-weight:600; color:var(--gold-dark);
+  font-style:italic; line-height:1;
+}
+.program-phase .phase-marker .label{
+  font-size:10px; font-weight:600; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--muted); margin-top:4px;
+}
+.program-phase .phase-content h4{ font-family:var(--serif); font-size:20px; font-weight:500; color:var(--ink); margin-bottom:var(--s-3); text-transform:none; letter-spacing:-0.01em; }
+.program-phase .phase-content .desc{ font-size:14px; line-height:1.6; color:var(--body); margin-bottom:var(--s-3); }
+.program-phase .phase-content ul{ list-style:none; padding:0; }
+.program-phase .phase-content li{
+  font-size:13px; color:var(--muted); padding:4px 0 4px var(--s-4);
+  position:relative; line-height:1.5;
+}
+.program-phase .phase-content li::before{
+  content:""; position:absolute; left:0; top:13px;
+  width:6px; height:6px; border-radius:50%; background:var(--gold);
+}
+
+/* === OBJECTION PREEMPTION === */
+.objection-preemption{ background:var(--cream); }
+.obj-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-4); margin-top:var(--s-6); }
+.obj-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5); border-top:3px solid var(--gold-dark);
+}
+.obj-card .obj-q{
+  font-family:var(--serif); font-size:17px; font-weight:500; font-style:italic;
+  color:var(--ink); margin-bottom:var(--s-4); line-height:1.35;
+}
+.obj-card .obj-a{ font-size:13px; line-height:1.6; color:var(--body); }
+
+/* === DECISION CHECKLIST === */
+.decision-checklist{ background:var(--paper); }
+.checklist-card{
+  max-width:780px; margin:var(--s-6) auto 0;
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-7);
+}
+.checklist-item{
+  display:flex; align-items:flex-start; gap:var(--s-4);
+  padding:var(--s-4) 0; border-bottom:1px solid var(--line); cursor:pointer;
+}
+.checklist-item:last-child{ border-bottom:none; }
+.checklist-item .check{
+  flex:0 0 28px; width:28px; height:28px; border-radius:6px;
+  border:1.5px solid var(--gold); background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  margin-top:2px; transition:all 0.2s;
+}
+.checklist-item.checked .check{ background:var(--gold); }
+.checklist-item.checked .check::after{
+  content:""; width:8px; height:14px; border:solid #fff;
+  border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px, -1px);
+}
+.checklist-item .text{ font-size:15px; line-height:1.5; color:var(--ink); flex:1; padding-top:2px; }
+.checklist-item.checked .text{ color:var(--muted); }
+
+/* === FINAL CTA === */
+.final-cta{ background:var(--cream); }
+.cta-decision{ display:grid; grid-template-columns:1fr 1fr; gap:var(--s-5); margin-top:var(--s-6); max-width:1000px; margin-left:auto; margin-right:auto; }
+.cta-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-7); display:flex; flex-direction:column; gap:var(--s-4);
+}
+.cta-card.recommended{ border-top:4px solid var(--gold); background:#FFFCF3; }
+.cta-card.alternative{ opacity:0.85; }
+.cta-card .label{
+  font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase;
+}
+.cta-card.recommended .label{ color:var(--gold-dark); }
+.cta-card.alternative .label{ color:var(--muted); }
+.cta-card h3{ margin-bottom:var(--s-3); }
+.cta-card .desc{ font-size:14px; line-height:1.6; color:var(--body); flex:1; }
+.cta-card .button{
+  display:inline-block; padding:var(--s-4) var(--s-6);
+  border-radius:8px; font-size:13px; font-weight:700;
+  letter-spacing:0.16em; text-transform:uppercase; cursor:pointer;
+  font-family:var(--sans); border:none; text-decoration:none; text-align:center;
+  margin-top:var(--s-3);
+}
+.cta-card.recommended .button{ background:var(--gold-dark); color:#fff; }
+.cta-card.alternative .button{ background:transparent; color:var(--muted); border:1px solid var(--line-strong); }
+
+.cta-signature{
+  text-align:center; margin-top:var(--s-8); padding-top:var(--s-6);
+  border-top:1px solid var(--line);
+}
+.cta-signature .name{
+  font-family:var(--serif); font-size:22px; font-weight:500;
+  font-style:italic; color:var(--ink); margin-bottom:var(--s-2);
+}
+.cta-signature .meta{
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);
+}
+
+/* === TECHNICAL APPENDIX === */
+.technical-appendix{ background:var(--paper); }
+.appendix-controls{
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:var(--s-3); margin-bottom:var(--s-5);
+}
+.appendix-controls .lead{ font-size:14px; color:var(--muted); margin:0; max-width:680px; }
+.appendix-toggle-all{
+  padding:8px 16px; border-radius:8px; border:1px solid var(--gold);
+  background:transparent; color:var(--gold-dark); font-size:11px;
+  font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
+  cursor:pointer; font-family:var(--sans);
+}
+.appendix-toggle-all:hover{ background:var(--gold); color:#fff; }
+
+.exam-group{
+  border:1px solid var(--line); border-radius:10px; margin-bottom:var(--s-3); overflow:hidden;
+  background:var(--cream);
+}
+.exam-group-header{
+  padding:var(--s-4) var(--s-5); cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  background:var(--paper); user-select:none;
+}
+.exam-group-header h4{
+  font-family:var(--serif); font-size:18px; font-weight:500;
+  color:var(--ink); text-transform:none; letter-spacing:-0.005em; margin:0;
+}
+.exam-group-header .meta{
+  display:flex; gap:var(--s-3); align-items:center; font-size:12px; color:var(--muted);
+}
+.exam-group-header .toggle{
+  width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+  transition:transform 0.2s;
+}
+.exam-group.open .exam-group-header .toggle{ transform:rotate(180deg); }
+.exam-group-body{ display:none; padding:0 var(--s-5) var(--s-5); }
+.exam-group.open .exam-group-body{ display:block; }
+.exam-row{
+  display:grid; grid-template-columns:1.6fr 1fr 1.2fr 0.8fr;
+  gap:var(--s-4); padding:var(--s-3) 0;
+  border-bottom:1px solid var(--line); align-items:center; font-size:14px;
+}
+.exam-row:last-child{ border-bottom:none; }
+.exam-row .e-nome{ font-family:var(--serif); font-weight:500; font-size:15px; color:var(--ink); }
+.exam-row .e-valor{ font-family:var(--serif); font-weight:600; color:var(--ink); }
+.exam-row .e-valor .e-unit{ color:var(--muted); font-size:12px; margin-left:4px; font-weight:400; }
+.exam-row .e-ref{ font-size:12px; color:var(--muted); }
+.exam-row .e-status{
+  font-size:10px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; text-align:right;
+}
+.exam-row[data-sev="crit"] .e-status{ color:var(--red); }
+.exam-row[data-sev="alert"] .e-status, .exam-row[data-sev="low"] .e-status{ color:var(--amber); }
+.exam-row[data-sev="ok"] .e-status, .exam-row[data-sev="normal"] .e-status{ color:var(--green); }
+
+/* === Mobile === */
+@media(max-width: 900px){
+  .diag-grid, .mirror-grid, .machine-flow, .obj-grid, .cta-decision { grid-template-columns: 1fr; }
+  .lever-card, .proof-card, .proof-card:nth-child(even), .program-phase{ grid-template-columns: 1fr; }
+  .proof-card:nth-child(even) .proof-imgs{ order:0; }
+  .machine-flow{ grid-template-columns: repeat(2, 1fr); }
+  .progress-nav-inner{ overflow-x:auto; flex-wrap:nowrap; }
+  .topbar .doctor-tag{ display:none; }
+  .topbar .logo{ height:60px; max-width:200px; }
+  .hero-meta-bar{ flex-direction:column; gap:var(--s-3); }
+  .program-phase .phase-marker{ width:auto; padding:var(--s-3) var(--s-4); }
+  .program-phase{ gap:var(--s-3); }
+  .exam-row{ grid-template-columns:2fr 1fr; row-gap:6px; }
+  .exam-row .e-ref, .exam-row .e-status{ grid-column:span 2; }
+  .lever-card{ gap:var(--s-3); }
+  .lever-numeric{ display:flex; align-items:baseline; gap:var(--s-3); flex-wrap:wrap; }
+}
+
+/* === Print === */
+@media print{
+  .progress-nav, .progress-toggle, .appendix-toggle-all{ display:none !important; }
+  body{ background:#fff; color:#000; font-size:12pt; }
+  .section{ padding:24pt 0; page-break-inside:avoid; border-top-color:#ccc; }
+  h1{ font-size:24pt; }
+  h2{ font-size:18pt; }
+  h3{ font-size:14pt; }
+  .exam-group, .exam-group-body{ display:block !important; }
+  .exam-group-header .toggle{ display:none; }
+  .lever-card, .diag-card, .obj-card, .mirror-card, .cta-card{
+    page-break-inside:avoid; box-shadow:none;
+  }
+  .proof-disclaimer, .checklist-card{ page-break-inside:avoid; }
+}
+
+/* Modo apresentacao: esconde apendice tecnico */
+body.modo-apresentacao .technical-appendix{ display:none; }
+"""
+
+
+# ---------------------------------------------------------------------------
+# JS — progress nav scroll-spy, accordion, decision checklist, modo apresentação
+# ---------------------------------------------------------------------------
+JS = r"""
+(function(){
+  // === Progress nav scroll spy ===
+  const sections = document.querySelectorAll('main > section[id]');
+  const steps = document.querySelectorAll('.progress-step[data-target]');
+  function updateActive(){
+    let active = null;
+    const offset = 120;
+    sections.forEach(sec => {
+      const r = sec.getBoundingClientRect();
+      if(r.top < offset) active = sec.id;
+    });
+    steps.forEach(s => {
+      s.classList.toggle('active', s.dataset.target === active);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+  steps.forEach(s => {
+    s.addEventListener('click', () => {
+      const t = document.getElementById(s.dataset.target);
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // === Modo apresentação toggle ===
+  const toggle = document.querySelector('.progress-toggle');
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('modo-apresentacao');
+      toggle.classList.toggle('active');
+      toggle.textContent = document.body.classList.contains('modo-apresentacao')
+        ? 'Mostrar painel completo'
+        : 'Modo apresentação';
+    });
+  }
+
+  // === Accordion exames ===
+  document.querySelectorAll('.exam-group-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+  const openAll = document.querySelector('.appendix-toggle-all');
+  if(openAll){
+    openAll.addEventListener('click', () => {
+      const groups = document.querySelectorAll('.exam-group');
+      const allOpen = Array.from(groups).every(g => g.classList.contains('open'));
+      groups.forEach(g => g.classList.toggle('open', !allOpen));
+      openAll.textContent = allOpen ? 'Expandir todos' : 'Recolher todos';
+    });
+  }
+
+  // === Decision checklist ===
+  document.querySelectorAll('.checklist-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('checked'));
+  });
+})();
+"""
+
+
+# ---------------------------------------------------------------------------
+# Helpers — interpretação clínica para Critical Levers
+# ---------------------------------------------------------------------------
+INTERPRETACAO_LEVERS = {
+    "HOMA-IR": {
+        "interpretacao": "Sinal de resistência à insulina.",
+        "impacto": "Pode dificultar perda de gordura, favorecer fome e sonolência pós-refeição.",
+        "spin": "Isso conversa com sua dificuldade de manter resultado?",
+    },
+    "HOMA-Beta": {
+        "interpretacao": "Função pancreática em compensação ativa.",
+        "impacto": "Indica que o corpo está trabalhando mais para manter glicemia — janela de intervenção precoce.",
+        "spin": "Faz sentido agir agora enquanto o pâncreas ainda compensa bem?",
+    },
+    "HbA1c": {
+        "interpretacao": "Tendência glicêmica acima do alvo funcional.",
+        "impacto": "Indica necessidade de agir antes de maior progressão metabólica.",
+        "spin": "Faz sentido agir agora enquanto ainda temos margem?",
+    },
+    "Glicemia Média": {
+        "interpretacao": "Glicose média dos últimos 3 meses elevada.",
+        "impacto": "Pré-diabetes silenciosa: pode evoluir sem sintomas claros.",
+        "spin": "Você prefere acompanhar agora ou esperar o sintoma aparecer?",
+    },
+    "PCR-us": {
+        "interpretacao": "Inflamação de baixo grau.",
+        "impacto": "Pode interferir em recuperação, dores, energia e risco cardiometabólico.",
+        "spin": "Você percebe sinais de recuperação lenta ou cansaço fora do esperado?",
+    },
+    "Vitamina D": {
+        "interpretacao": "Abaixo do alvo funcional adotado no acompanhamento.",
+        "impacto": "Pode impactar imunidade, força, bem-estar e saúde óssea.",
+        "spin": "Você quer que isso seja corrigido dentro de um plano acompanhado?",
+    },
+    "Vitamina B12": {
+        "interpretacao": "Abaixo do alvo funcional.",
+        "impacto": "Pode afetar energia celular, função neurológica e produção de neurotransmissores.",
+        "spin": "Quer corrigir essa base antes de pensar em performance?",
+    },
+    "Prolactina": {
+        "interpretacao": "Alteração hormonal que merece interpretação clínica.",
+        "impacto": "Pode demandar investigação, correlação com sintomas e monitoramento.",
+        "spin": "Você entende por que não devemos olhar apenas para peso?",
+    },
+    "Testosterona Total": {
+        "interpretacao": "Abaixo do alvo funcional masculino.",
+        "impacto": "Pode afetar libido, composição corporal, disposição e recuperação.",
+        "spin": "Você sente algum desses sintomas no dia a dia?",
+    },
+    "Testosterona Livre": {
+        "interpretacao": "Fração biodisponível abaixo do alvo.",
+        "impacto": "Mesmo com testo total normal, a fração livre é a que age nos tecidos.",
+        "spin": "Faz sentido olhar o quadro hormonal completo, não só um número?",
+    },
+    "Cortisol Basal": {
+        "interpretacao": "Eixo adrenal em padrão alterado.",
+        "impacto": "Pode afetar resposta ao estresse, sono, energia matinal e composição corporal.",
+        "spin": "Você nota cansaço logo cedo ou dificuldade de relaxar à noite?",
+    },
+    "Ferritina": {
+        "interpretacao": "Reserva de ferro fora do alvo funcional.",
+        "impacto": "Afeta energia, oxigenação, queda capilar e recuperação.",
+        "spin": "Você percebe esses sintomas que muitas vezes são atribuídos à idade?",
+    },
+}
+
+DEFAULT_INTERP = {
+    "interpretacao": "Marcador fora do alvo funcional adotado pela clínica.",
+    "impacto": "Merece interpretação clínica e correlação com sintomas e outros marcadores.",
+    "spin": "Você prefere tratar isso isolado ou dentro de um plano acompanhado?",
+}
+
+
+def _ranking_severidade(ex):
+    rank = {"crit": 0, "alert": 1, "low": 1, "attn": 2, "ok": 4, "normal": 4}
+    return rank.get(ex.get("status", "normal"), 9)
+
+
+def _selecionar_critical_levers(exames, max_levers=5):
+    """Seleciona 3-5 alavancas críticas: prioriza crit/alert/low; máx 5."""
+    ranked = sorted(exames, key=_ranking_severidade)
+    levers = [e for e in ranked if e.get("status") in ("crit", "alert", "low")][:max_levers]
+    return levers
+
+
+def _process_exames(raw):
+    """Normaliza lista de exames para o formato interno."""
+    out = []
+    for ex in (raw or []):
+        if not isinstance(ex, dict):
+            continue
+        nome = ex.get("nome") or ex.get("name") or ""
+        if not nome:
+            continue
+        out.append({
+            "nome": nome,
+            "valor": ex.get("valor") or "—",
+            "unit": ex.get("unit") or ex.get("unidade") or "",
+            "ref": ex.get("ref") or ex.get("referencia") or "—",
+            "status": (ex.get("status") or "normal").lower(),
+            "grupo": ex.get("grupo") or _infer_grupo(nome),
+        })
+    return out
+
+
+GRUPOS_DEF = [
+    ("hemograma", "Hemograma e Coagulação"),
+    ("glicidico", "Perfil Glicídico"),
+    ("lipidico", "Perfil Lipídico"),
+    ("hepatico", "Função Hepática"),
+    ("renal", "Função Renal"),
+    ("tireoide", "Tireoide"),
+    ("hormonal", "Hormonal Sexual"),
+    ("inflamatorio", "Marcadores Inflamatórios"),
+    ("vitaminas", "Vitaminas e Minerais"),
+    ("adrenal", "Função Adrenal e Outros"),
+]
+
+GRUPO_KEYWORDS = {
+    "hemograma": ["hemácia", "hemoglobina", "hematócrito", "leucócito", "plaqueta", "vcm", "hcm", "chcm", "rdw",
+                   "linfócito", "neutrófilo", "monócito", "basófilo", "eosinófilo", "bastonete", "segmentado"],
+    "glicidico": ["glicose", "insulina", "homa", "hba1c", "frutosamina", "glicemia"],
+    "lipidico": ["colesterol", "hdl", "ldl", "vldl", "triglicéride", "apo", "lp(a)", "não-hdl"],
+    "hepatico": ["tgo", "tgp", "ggt", "fosfatase", "bilirrubina", "ast", "alt"],
+    "renal": ["ureia", "creatinina", "ácido úrico"],
+    "tireoide": ["tsh", "t4", "t3", "anti-tpo"],
+    "hormonal": ["testosterona", "estradiol", "progesterona", "fsh", "lh", "prolactina", "shbg", "dhea"],
+    "inflamatorio": ["pcr", "homocisteína", "vhs"],
+    "vitaminas": ["vitamina", "ferro", "ferritina", "magnésio", "cálcio", "sódio", "potássio", "zinco", "pth", "fólico"],
+    "adrenal": ["cortisol", "igf"],
+}
+
+
+def _infer_grupo(nome):
+    n = nome.lower()
+    for gid, kws in GRUPO_KEYWORDS.items():
+        for kw in kws:
+            if kw in n:
+                return gid
+    return "outros"
+
+
+# ---------------------------------------------------------------------------
+# Section render functions
+# ---------------------------------------------------------------------------
+def render_topbar(logo_b64):
+    return f"""
+<header class="topbar">
+  <div class="topbar-inner">
+    <img src="{logo_b64}" alt="Instituto Vital Slim" class="logo">
+    <div class="doctor-tag">
+      <span class="name">Dra. Daniely Freitas</span>
+      CRM-BA 27.588 · Médica do Estilo de Vida
+    </div>
+  </div>
+</header>
+"""
+
+
+def render_progress_nav():
+    steps = [
+        ("hero", "1 · Diagnóstico"),
+        ("executive-diagnosis", "2 · Causa"),
+        ("critical-levers", "3 · Alavancas"),
+        ("spin-guided", "4 · Análise"),
+        ("ivs-machine", "5 · Sistema"),
+        ("decision-checklist", "6 · Decisão"),
+    ]
+    items = "".join(
+        f'<button class="progress-step" data-target="{sid}">{safe_html(label)}</button>'
+        for sid, label in steps
+    )
+    return f"""
+<nav class="progress-nav" aria-label="Navegação da apresentação">
+  <div class="progress-nav-inner">
+    {items}
+    <button class="progress-toggle">Modo apresentação</button>
+  </div>
+</nav>
+"""
+
+
+def render_hero(paciente):
+    nome = safe_html(paciente.get("nome", "Paciente"))
+    primeiro = nome.split()[0] if nome else "Paciente"
+    idade = paciente.get("idade") or calcular_idade(paciente.get("dataNascimento")) or "—"
+    data_consulta = paciente.get("data_consulta") or date.today().strftime("%d.%m.%Y")
+    return f"""
+<section id="hero" class="section hero-clinical-document">
+  <div class="wrap">
+    <div class="hero-meta-bar">
+      <div class="hero-meta-item">Paciente<strong>{nome}</strong></div>
+      <div class="hero-meta-item">Idade<strong>{idade} anos</strong></div>
+      <div class="hero-meta-item">Consulta<strong>{safe_html(data_consulta)}</strong></div>
+      <div class="hero-meta-item">Médica<strong>Dra. Daniely Freitas</strong></div>
+      <div class="hero-meta-item">CRM<strong>BA 27.588</strong></div>
+    </div>
+    <h1 class="hero-clinical-h1">{primeiro}, sua avaliação mostrou padrões objetivos que explicam por que tentativas isoladas <span style="color:var(--gold-dark)">podem não sustentar resultado</span>.</h1>
+    <p class="hero-clinical-lead">Hoje vamos olhar para o seu mapa clínico e <strong>decidir juntos o caminho mais seguro para os próximos 180 dias</strong>. Esta apresentação é um documento clínico individual, baseado no seu questionário pré-consulta e nos exames laboratoriais mais recentes.</p>
+  </div>
+</section>
+"""
+
+
+def render_executive_diagnosis(paciente, levers):
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+    # Gera 3 cards: o que está acontecendo / onde aparece / por que muda estratégia
+    sistemas_afetados = set()
+    for lv in levers:
+        sistemas_afetados.add(lv.get("grupo", "outros"))
+    sistemas_label = {
+        "glicidico": "metabolismo glicêmico", "lipidico": "perfil lipídico",
+        "hormonal": "eixo hormonal", "tireoide": "tireoide",
+        "inflamatorio": "inflamação sistêmica", "vitaminas": "micronutrientes",
+        "adrenal": "eixo adrenal", "hepatico": "função hepática",
+        "renal": "função renal", "hemograma": "hemograma",
+    }
+    sistemas_str = ", ".join(sorted({sistemas_label.get(s, s) for s in sistemas_afetados})) or "múltiplos sistemas"
+
+    # Onde aparece: lista as alavancas
+    levers_html = ""
+    for lv in levers:
+        sev_class = "red" if lv["status"] == "crit" else "amber"
+        levers_html += (
+            f'<span class="tag" style="background:#f3ead1;color:var(--ink);'
+            f'display:inline-block;padding:4px 10px;border-radius:6px;margin:2px 4px 2px 0;'
+            f'font-size:12px;font-weight:600;">'
+            f'{safe_html(lv["nome"])} {safe_html(lv["valor"])}{safe_html(lv["unit"])}</span>'
+        )
+
+    return f"""
+<section id="executive-diagnosis" class="section executive-diagnosis">
+  <div class="wrap">
+    <h2>Diagnóstico executivo do caso</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Antes de mostrar todos os exames, este é o resumo clínico do seu caso — o que decide o plano.</p>
+    <div class="diag-grid">
+      <div class="diag-card">
+        <h4>O que está acontecendo</h4>
+        <p class="body-text">No seu caso, {primeiro}, o ponto principal não é apenas peso ou estética. Existem sinais simultâneos em <strong>{sistemas_str}</strong> que, quando tratados isoladamente, tendem a produzir resultado pouco previsível.</p>
+      </div>
+      <div class="diag-card">
+        <h4>Onde aparece nos exames</h4>
+        <p class="body-text" style="margin-bottom:var(--s-3);">Marcadores fora do alvo funcional adotado pela clínica:</p>
+        <div>{levers_html}</div>
+      </div>
+      <div class="diag-card">
+        <h4>Por que isso muda a estratégia</h4>
+        <p class="body-text">Quando esses fatores aparecem juntos, a recomendação clínica é <strong>acompanhar em conjunto</strong>: o resultado depende de ajustes feitos durante o processo, não de uma prescrição única.</p>
+      </div>
+    </div>
+    <div class="diag-recomendacao">
+      Minha recomendação clínica para o seu caso é <strong>acompanhamento estruturado</strong>, não orientação isolada. Não é por gravidade — é porque a previsibilidade do resultado depende dos ajustes que faremos juntos durante o processo.
+    </div>
+  </div>
+</section>
+"""
+
+
+def _q_field(label, value, sub="", feature=False):
+    cls = "mirror-card feature" if feature else "mirror-card"
+    if not value or value == "—" or value == "":
+        val_html = '<div class="value empty">não informado · preencher antes da consulta</div>'
+    else:
+        val_html = f'<div class="value">{safe_html(value)}</div>'
+    sub_html = f'<div class="sub">{safe_html(sub)}</div>' if sub else ""
+    return f'<div class="{cls}"><div class="label">{safe_html(label)}</div>{val_html}{sub_html}</div>'
+
+
+def render_patient_mirror(paciente, questionario):
+    dados = (questionario or {}).get("pre-consulta", {}).get("dados", {}) if questionario else {}
+    if not dados and isinstance(questionario, dict) and "dados" in questionario:
+        dados = questionario["dados"]
+
+    queixa = dados.get("queixaPrincipal") or dados.get("spin_p_principalIncomodo") or ""
+    tempo = dados.get("spin_s_tempoLuta") or dados.get("tempoLuta") or ""
+    if isinstance(tempo, list):
+        tempo = ", ".join(tempo)
+    tentativas = dados.get("tentativasAnteriores") or dados.get("jaTentou") or ""
+    if isinstance(tentativas, list):
+        tentativas = "; ".join(tentativas)
+    sono = dados.get("qualidadeSono") or ""
+    if sono and isinstance(sono, (int, str)):
+        sono = f"{sono}/5"
+    energia = dados.get("nivelEnergia") or ""
+    if energia and isinstance(energia, (int, str)):
+        energia = f"{energia}/5" if not isinstance(energia, str) or "/" not in energia else energia
+    alimentacao = dados.get("alimentacaoFimSemana") or dados.get("alimentacao") or ""
+    if isinstance(alimentacao, list):
+        alimentacao = ", ".join(alimentacao)
+    motivo = dados.get("spin_n_vidaResolvida") or dados.get("motivoIVS") or ""
+    peso = dados.get("pesoAtual") or dados.get("peso") or ""
+    altura = dados.get("altura") or ""
+
+    return f"""
+<section id="patient-mirror" class="section patient-mirror">
+  <div class="wrap">
+    <h2>O espelho do seu caso</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">O que você nos contou antes da consulta. Cada item aqui é uma pista clínica que vamos cruzar com os exames.</p>
+    <div class="mirror-grid">
+      {_q_field("O que mais te incomoda hoje", queixa, feature=True)}
+      {_q_field("Há quanto tempo", tempo)}
+      {_q_field("Já tentou", tentativas)}
+      {_q_field("Por que IVS agora", motivo)}
+      {_q_field("Qualidade do sono", sono)}
+      {_q_field("Nível de energia", energia)}
+      {_q_field("Alimentação típica", alimentacao)}
+      {_q_field("Peso atual", peso, sub=f"Altura {altura}" if altura else "")}
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_critical_levers(levers):
+    if not levers:
+        return ""
+    cards = []
+    for lv in levers:
+        nome = lv["nome"]
+        interp = INTERPRETACAO_LEVERS.get(nome, DEFAULT_INTERP)
+        sev = lv.get("status", "alert")
+        sev_label = "Crítico" if sev == "crit" else ("Alterado" if sev == "alert" else "Atenção")
+        cards.append(f"""
+<div class="lever-card" data-sev="{sev}">
+  <div class="lever-numeric">
+    <div class="name">{safe_html(nome)}</div>
+    <div class="value">{safe_html(lv["valor"])}<span class="unit">{safe_html(lv.get("unit",""))}</span></div>
+    <div class="ref">Referência IVS: {safe_html(lv.get("ref","—"))}</div>
+    <span class="badge">{sev_label}</span>
+  </div>
+  <div class="lever-narrative">
+    <h4>Como ler este marcador</h4>
+    <p class="interp">{safe_html(interp["interpretacao"])}</p>
+    <div class="impact">{safe_html(interp["impacto"])}</div>
+    <div class="spin-q">{safe_html(interp["spin"])}</div>
+  </div>
+</div>
+""")
+    return f"""
+<section id="critical-levers" class="section critical-levers">
+  <div class="wrap">
+    <h2>Mapa de alavancas críticas</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">As {len(levers)} alavancas que mais influenciam o seu plano. Cada uma traz interpretação clínica, impacto prático e a pergunta que a Dra. usará na consulta para confirmar o diagnóstico.</p>
+    <div class="lever-list">{"".join(cards)}</div>
+  </div>
+</section>
+"""
+
+
+def render_spin_guided(paciente, questionario, levers):
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+
+    # Tabela P (Problema) — uma linha por alavanca
+    rows_p = ""
+    for lv in levers[:5]:
+        interp = INTERPRETACAO_LEVERS.get(lv["nome"], DEFAULT_INTERP)
+        rows_p += (f"<tr><td><strong>{safe_html(lv['nome'])} {safe_html(lv['valor'])}"
+                   f"{safe_html(lv.get('unit',''))}</strong></td>"
+                   f"<td>{safe_html(interp['interpretacao'])} {safe_html(interp['impacto'])}</td>"
+                   f"<td><em>{safe_html(interp['spin'])}</em></td></tr>")
+
+    return f"""
+<section id="spin-guided" class="section spin-guided">
+  <div class="wrap">
+    <h2>Conversa guiada — onde estamos e o que isso significa</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Quatro perguntas que estruturam a consulta. Cada bloco termina com uma pergunta de confirmação — sem o "sim" do paciente, a apresentação não avança para o programa.</p>
+
+    <div class="spin-step-block">
+      <span class="step-tag">S · Situação</span>
+      <h3>Onde você está hoje</h3>
+      <p class="body-text">Antes de falar em tratamento, precisamos entender seu ponto de partida: o que você sente, o que já tentou e como seu corpo está respondendo hoje. O questionário e os exames juntos formam o retrato funcional do momento — e é a partir dele que decidimos o plano.</p>
+      <div class="confirmation">{primeiro}, quando você olha para esse resumo, ele descreve bem o ciclo que você vem vivendo?</div>
+    </div>
+
+    <div class="spin-step-block">
+      <span class="step-tag">P · Problema</span>
+      <h3>Os sinais que seu corpo está dando</h3>
+      <p class="body-text">Aquilo que você sente não é coincidência. Os exames mostram exatamente onde o sistema está pedindo socorro. Cada alavanca abaixo tem interpretação clínica e a pergunta que ajuda a conectar exame e sintoma:</p>
+      <table class="spin-table">
+        <thead><tr><th>Alavanca</th><th>Como ler</th><th>Pergunta</th></tr></thead>
+        <tbody>{rows_p}</tbody>
+      </table>
+      <div class="confirmation">Faz sentido tratar esses pontos como peças de um mesmo quebra-cabeça, ou você ainda enxerga eles separados?</div>
+    </div>
+
+    <div class="spin-step-block">
+      <span class="step-tag">I · Implicação</span>
+      <h3>Para onde isso pode levar, sem mudança</h3>
+      <p class="body-text">O risco de adiar não é apenas manter o mesmo peso. É continuar acumulando tentativa frustrada, perder previsibilidade metabólica e chegar daqui a alguns meses precisando de uma intervenção <strong>mais difícil do que seria hoje</strong>. Não é alarmismo — é o caminho fisiológico conhecido para esse tipo de combinação.</p>
+      <div class="confirmation">Quando você imagina os próximos 6 meses sem mudar nada, isso te preocupa o suficiente para agir agora?</div>
+    </div>
+
+    <div class="spin-step-block">
+      <span class="step-tag">N · Necessidade</span>
+      <h3>Por que minha recomendação é acompanhamento</h3>
+      <p class="body-text">Por isso minha recomendação, para o seu caso, não é uma orientação isolada. É <strong>acompanhamento</strong>. Porque a diferença vai estar nos ajustes: o que muda na segunda, quarta, oitava semana, conforme seu corpo responde. Sozinho — mesmo com disciplina — falta o que mais importa: leitura clínica contínua e correção de rota.</p>
+      <div class="confirmation">{primeiro}, você concorda que esse caminho exige acompanhamento e não apenas uma prescrição?</div>
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_ivs_machine():
+    steps = [
+        ("01", "Diagnóstico", "Bateria avançada de biomarcadores + leitura clínica individualizada."),
+        ("02", "Protocolo", "Plano construído para o seu perfil — hormonal, nutricional, farmacológico quando indicado."),
+        ("03", "Execução", "Início assistido. Equipe completa orienta a primeira semana e o primeiro mês."),
+        ("04", "Suporte", "Canal direto com a Dra. e equipe (nutri, preparador, enfermeira). Suporte semanal."),
+        ("05", "Ajuste", "Mudanças baseadas em resposta clínica, não em calendário fixo."),
+        ("06", "Reavaliação", "Reavaliação trimestral de biomarcadores. Plano de manutenção construído junto."),
+    ]
+    items = "".join(
+        f'<div class="machine-step"><div class="num">{n}</div>'
+        f'<div class="title">{safe_html(t)}</div>'
+        f'<div class="desc">{safe_html(d)}</div></div>'
+        for n, t, d in steps
+    )
+    return f"""
+<section id="ivs-machine" class="section ivs-machine">
+  <div class="wrap">
+    <h2>O mecanismo do acompanhamento</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Não é uma lista de benefícios — é um sistema. Cada etapa alimenta a próxima, e os ajustes feitos durante o caminho é que constroem o resultado.</p>
+    <div class="machine-flow">{items}</div>
+  </div>
+</section>
+"""
+
+
+def render_proof_by_process():
+    casos = [
+        {
+            "nome": "Tiaro Neves", "iniciais": "TN",
+            "antes": "tiaro-antes.png", "depois": "tiaro-depois.png",
+            "frase": "O peso era apenas o sintoma. O que mudou foi o corpo todo: pressão estabilizada, energia diferente, dores que sumiram. Hoje vivo de outra forma.",
+        },
+        {
+            "nome": "Silvana A.", "iniciais": "SA",
+            "antes": "silvana-antes.png", "depois": "silvana-depois.png",
+            "frase": "O sentimento que eu tenho é felicidade. A atenção e o carinho que recebi não tiveram igual. Os meus resultados falam por si só.",
+        },
+        {
+            "nome": "Darilene A.", "iniciais": "DA",
+            "antes": "darilene-antes.png", "depois": "darilene-depois.png",
+            "frase": "Quando cheguei na clínica eu estava cansada, sem esperança. Achava que nunca ia conseguir. A equipe acreditou em mim mesmo quando eu duvidava.",
+        },
+    ]
+    cards = []
+    for i, c in enumerate(casos):
+        antes_b64 = img_b64(SITE_IMAGES / c["antes"])
+        depois_b64 = img_b64(SITE_IMAGES / c["depois"])
+        cards.append(f"""
+<div class="proof-card">
+  <div class="proof-imgs">
+    <div class="proof-img"><span class="label">Antes</span><img src="{antes_b64}" alt="{safe_html(c['nome'])} antes"></div>
+    <div class="proof-img"><span class="label">Depois</span><img src="{depois_b64}" alt="{safe_html(c['nome'])} depois"></div>
+  </div>
+  <div class="proof-text">
+    <span class="step-eyebrow">Caso {str(i+1).zfill(2)} · {safe_html(c['iniciais'])}</span>
+    <h3>{safe_html(c['nome'])}</h3>
+    <blockquote>"{safe_html(c['frase'])}"</blockquote>
+  </div>
+</div>
+""")
+    return f"""
+<section id="proof-by-process" class="section proof-by-process">
+  <div class="wrap">
+    <h2>Prova pelo processo</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Três pacientes acompanhados por meses ou anos. Casos reais, não promessa. O método é o mesmo — o caminho de cada um foi construído individualmente.</p>
+    <div class="proof-list">{"".join(cards)}</div>
+    <div class="proof-disclaimer">Resultados individuais variam e dependem de avaliação clínica, adesão ao plano e acompanhamento contínuo. As imagens ilustram acompanhamento clínico real e não constituem promessa de resultado.</div>
+  </div>
+</section>
+"""
+
+
+def render_program_180():
+    fases = [
+        {
+            "marker": "D0", "label": "Início",
+            "title": "Avaliação aprofundada e linha de base",
+            "desc": "Anamnese clínica completa, leitura do questionário pré-consulta e definição do mapa metabólico individualizado.",
+            "items": [
+                "Plano construído conforme o seu perfil específico",
+                "Definição da prescrição inicial (nutricional, hormonal e farmacológica quando indicado)",
+                "Onboarding com a equipe — nutricionista, preparador físico, enfermeira",
+            ],
+        },
+        {
+            "marker": "Sem 1-2", "label": "Primeiras semanas",
+            "title": "Modulação inicial e adaptação",
+            "desc": "Início do protocolo personalizado. Primeira janela de ajustes baseados em como seu corpo está respondendo.",
+            "items": [
+                "Suporte ativo da equipe nas primeiras 2 semanas",
+                "Ajuste fino de doses e rotina conforme tolerância",
+                "Canal direto com a Dra. para dúvidas que aparecerem",
+            ],
+        },
+        {
+            "marker": "M1-2", "label": "Mês 1 a 2",
+            "title": "Estabilização e leitura de resposta",
+            "desc": "Reavaliação clínica de sintomas e padrões. Plano evolui conforme resposta — não conforme calendário fixo.",
+            "items": [
+                "Reavaliação dos pontos do questionário inicial",
+                "Reavaliação de marcadores específicos quando indicado",
+                "Plano de movimento e nutrição refinados",
+            ],
+        },
+        {
+            "marker": "M3-4", "label": "Mês 3 a 4",
+            "title": "Refinamento com biomarcadores",
+            "desc": "Reavaliação laboratorial completa. Comparação com a linha de base inicial. Ajuste fino do protocolo.",
+            "items": [
+                "Painel laboratorial avançado de reavaliação",
+                "Análise de evolução de cada alavanca crítica",
+                "Decisão clínica sobre continuidade, suspensão ou intensificação de cada componente",
+            ],
+        },
+        {
+            "marker": "M5-6", "label": "Mês 5 a 6",
+            "title": "Consolidação e plano de manutenção",
+            "desc": "Estabilização do estado funcional. Construção do plano para sustentar o resultado a longo prazo.",
+            "items": [
+                "Reavaliação final dos biomarcadores",
+                "Construção do plano de manutenção individualizado",
+                "Definição da cadência de acompanhamento pós-programa",
+            ],
+        },
+    ]
+    fases_html = "".join(
+        f'<div class="program-phase">'
+        f'<div class="phase-marker"><div class="num">{safe_html(f["marker"])}</div>'
+        f'<div class="label">{safe_html(f["label"])}</div></div>'
+        f'<div class="phase-content"><h4>{safe_html(f["title"])}</h4>'
+        f'<p class="desc">{safe_html(f["desc"])}</p>'
+        f'<ul>{"".join(f"<li>{safe_html(it)}</li>" for it in f["items"])}</ul></div>'
+        f'</div>'
+        for f in fases
+    )
+    return f"""
+<section id="program-180-days" class="section program-180-days">
+  <div class="wrap">
+    <h2>Os próximos 180 dias, desenhados para o seu corpo</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Não é dieta. Não é mais uma tentativa. É engenharia metabólica conduzida em fases, com ajustes feitos durante o caminho — porque é nos ajustes que mora o resultado.</p>
+    <div class="program-timeline">{fases_html}</div>
+  </div>
+</section>
+"""
+
+
+def render_objection_preemption():
+    objs = [
+        ("E se eu preferir tentar sozinho mais uma vez?",
+         "Tentar sozinho não é falta de disciplina — é falta de leitura clínica em tempo real. O acompanhamento existe justamente para corrigir rota antes do platô virar desistência."),
+        ("Tenho receio de medicação contínua.",
+         "Medicação só entra quando há indicação clínica e revisão periódica. Não é regra do programa — é ferramenta usada quando o caso pede. E o objetivo é sempre função, não dependência."),
+        ("O investimento parece alto.",
+         "Vale comparar com o custo das tentativas isoladas que não sustentaram resultado. O programa é um sistema completo — médica, equipe, exames trimestrais e suporte semanal por 180 dias."),
+        ("Preciso conversar com minha família primeiro.",
+         "Faz total sentido. A decisão é sua, no seu tempo. Vou te enviar um resumo desta consulta para você apresentar em casa, com os pontos clínicos principais."),
+        ("Não tenho tempo agora.",
+         "O programa foi desenhado para integrar à rotina, não substituí-la. A maior parte dos ajustes é remota; as consultas presenciais são pontuais e planejadas."),
+        ("E se eu não conseguir manter?",
+         "É exatamente para isso que existe a equipe. Cada paciente tem oscilação. O acompanhamento ajusta a rota — sem julgamento e sem reiniciar do zero."),
+    ]
+    cards = "".join(
+        f'<div class="obj-card"><div class="obj-q">"{safe_html(q)}"</div>'
+        f'<div class="obj-a">{safe_html(a)}</div></div>'
+        for q, a in objs
+    )
+    return f"""
+<section id="objection-preemption" class="section objection-preemption">
+  <div class="wrap">
+    <h2>O que costuma passar pela sua cabeça nesse momento</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Quase todo paciente chega aqui com uma dessas dúvidas. Trazer cada uma para a mesa antes de decidir torna a decisão mais consciente.</p>
+    <div class="obj-grid">{cards}</div>
+  </div>
+</section>
+"""
+
+
+def render_decision_checklist(paciente):
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+    items = [
+        "Reconheço que existe um problema funcional no meu caso, não apenas estético.",
+        "Entendo o risco clínico de adiar e seguir tentando sozinho.",
+        "Concordo que minha situação pede acompanhamento, não orientação isolada.",
+        "Aceito iniciar o programa com a equipe da Dra. Daniely Freitas.",
+    ]
+    items_html = "".join(
+        f'<div class="checklist-item"><div class="check"></div>'
+        f'<div class="text">{safe_html(it)}</div></div>'
+        for it in items
+    )
+    return f"""
+<section id="decision-checklist" class="section decision-checklist">
+  <div class="wrap">
+    <h2>Antes da decisão, {primeiro}</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);text-align:center;margin:0 auto;">Marque cada item com o qual você concorda. Não é vinculante — é uma forma de tornar a decisão mais clara para você.</p>
+    <div class="checklist-card">
+      {items_html}
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_final_cta(paciente):
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+    return f"""
+<section id="final-cta" class="section final-cta">
+  <div class="wrap">
+    <h2 style="text-align:center;">A recomendação clínica é começar de forma assistida</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);text-align:center;margin:0 auto var(--s-7);">Se fizer sentido para você, o próximo passo é organizarmos juntos a sua linha de acompanhamento e colocarmos a equipe para caminhar contigo nos próximos 180 dias.</p>
+    <div class="cta-decision">
+      <div class="cta-card recommended">
+        <div class="label">Recomendação clínica</div>
+        <h3>Começar assistido</h3>
+        <p class="desc">180 dias com diagnóstico, protocolo individualizado, equipe completa, ajustes baseados em resposta clínica e reavaliações trimestrais. {primeiro}, é o caminho mais previsível para o seu caso.</p>
+        <span class="button">Quero começar agora</span>
+      </div>
+      <div class="cta-card alternative">
+        <div class="label">Alternativa</div>
+        <h3>Seguir tentando sem acompanhamento</h3>
+        <p class="desc">Continuar com tentativas isoladas. Os marcadores alterados tendem a manter a trajetória atual; cada mês sem ação reduz a margem de reversão. Se essa for a sua escolha, registre-a com clareza.</p>
+        <span class="button">Adiar a decisão</span>
+      </div>
+    </div>
+    <div class="cta-signature">
+      <div class="name">Dra. Daniely Freitas</div>
+      <div class="meta">CRM-BA 27.588 · Médica do Estilo de Vida · Instituto Vital Slim</div>
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_technical_appendix(exames):
+    by_g = {}
+    for ex in exames:
+        gid = ex.get("grupo", "outros")
+        by_g.setdefault(gid, []).append(ex)
+
+    grupos_html = []
+    for gid, gnome in GRUPOS_DEF:
+        items = by_g.get(gid, [])
+        if not items:
+            continue
+        rows = []
+        alterados = 0
+        for ex in items:
+            sev = ex.get("status", "ok")
+            if sev in ("crit", "alert", "low"):
+                alterados += 1
+            rows.append(
+                f'<div class="exam-row" data-sev="{sev}">'
+                f'<div class="e-nome">{safe_html(ex["nome"])}</div>'
+                f'<div class="e-valor">{safe_html(ex["valor"])} '
+                f'<span class="e-unit">{safe_html(ex.get("unit",""))}</span></div>'
+                f'<div class="e-ref">{safe_html(ex.get("ref","—"))}</div>'
+                f'<div class="e-status">{sev}</div></div>'
+            )
+        grupos_html.append(
+            f'<div class="exam-group">'
+            f'<div class="exam-group-header"><h4>{safe_html(gnome)}</h4>'
+            f'<div class="meta"><span>{alterados}/{len(items)} alterados</span>'
+            f'<span class="toggle">▾</span></div></div>'
+            f'<div class="exam-group-body">{"".join(rows)}</div></div>'
+        )
+    return f"""
+<section id="technical-appendix" class="section technical-appendix">
+  <div class="wrap">
+    <h2>Apêndice técnico — painel completo</h2>
+    <div class="appendix-controls">
+      <p class="lead">Painel laboratorial completo organizado por sistema. Disponível para argumentação médica detalhada e auditoria clínica. Clique no nome do grupo para expandir.</p>
+      <button class="appendix-toggle-all">Expandir todos</button>
+    </div>
+    {"".join(grupos_html)}
+  </div>
+</section>
+"""
+
+
+# ---------------------------------------------------------------------------
+# Main render
+# ---------------------------------------------------------------------------
+def render_apresentacao_v10(paciente, questionario=None, exames=None, output_dir=None):
+    """Renderiza a V2 da apresentação conforme briefing do Conselho Growth (2026-05-05)."""
+    output_dir = Path(output_dir) if output_dir else Path("/root/cerebro-vital-slim/deliverables")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    logo_b64 = img_b64(SITE_IMAGES / "logo-ivs-correta.png")
+    if not logo_b64:
+        logo_b64 = img_b64(SITE_IMAGES / "logo-ivs-transparente.png")
+
+    nome_completo = paciente.get("nome", "Paciente")
+    paciente_full = {**paciente,
+                     "idade": paciente.get("idade") or calcular_idade(paciente.get("dataNascimento"))}
+
+    exames_proc = _process_exames(exames or [])
+    levers = _selecionar_critical_levers(exames_proc, max_levers=5)
+
+    html = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{safe_html(nome_completo)} · Apresentação V2 · Instituto Vital Slim</title>
+<meta name="description" content="Documento clínico individual — Dra. Daniely Freitas, CRM-BA 27.588">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+{CSS}
+</style>
+</head>
+<body>
+{render_topbar(logo_b64)}
+{render_progress_nav()}
+<main>
+{render_hero(paciente_full)}
+{render_executive_diagnosis(paciente_full, levers)}
+{render_patient_mirror(paciente_full, questionario)}
+{render_critical_levers(levers)}
+{render_spin_guided(paciente_full, questionario, levers)}
+{render_ivs_machine()}
+{render_proof_by_process()}
+{render_program_180()}
+{render_objection_preemption()}
+{render_decision_checklist(paciente_full)}
+{render_final_cta(paciente_full)}
+{render_technical_appendix(exames_proc)}
+</main>
+<script>
+{JS}
+</script>
+</body>
+</html>
+"""
+    nome_slug = re.sub(r"[^a-z0-9-]", "", nome_completo.lower().replace(" ", "-").replace(".", ""))
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_path = output_dir / f"apresentacao-{nome_slug}-v10-{ts}.html"
+    output_path.write_text(html, encoding="utf-8")
+    return str(output_path)
+
+
+if __name__ == "__main__":
+    # Smoke test
+    paciente = {
+        "nome": "Erick Magalhaes Santos",
+        "dataNascimento": int(datetime(1990, 9, 25).timestamp() * 1000),
+        "sexo": "M",
+        "idade": 35,
+        "data_consulta": "05.05.2026",
+    }
+    exames = [
+        {"nome": "HOMA-IR", "valor": "3,8", "unit": "", "ref": "<2.7", "status": "alert", "grupo": "glicidico"},
+        {"nome": "HbA1c", "valor": "5,5", "unit": "%", "ref": "<5.4", "status": "alert", "grupo": "glicidico"},
+        {"nome": "Vitamina D", "valor": "31", "unit": "ng/mL", "ref": "80 a 100", "status": "crit", "grupo": "vitaminas"},
+        {"nome": "Prolactina", "valor": "24,7", "unit": "ng/mL", "ref": "4.04 a 15.2", "status": "crit", "grupo": "hormonal"},
+        {"nome": "PCR-us", "valor": "3,49", "unit": "mg/L", "ref": "<3.0", "status": "alert", "grupo": "inflamatorio"},
+    ]
+    out = render_apresentacao_v10(paciente, {}, exames)
+    print(f"OK {out}")

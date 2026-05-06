@@ -1,0 +1,141 @@
+{
+  "_metadata": {
+    "versao": "1.0",
+    "criado": "2026-05-05",
+    "descricao": "Variações de textos da apresentação clínica por perfil DISC. Personaliza tom, ênfase e linguagem para D (Dominante), I (Influenciador), S (Estável), C (Cauteloso/Analítico). Há um perfil 'default' usado quando DISC não está disponível.",
+    "principio": [
+      "D: direto, números, decisão rápida, ROI",
+      "I: emocional, conexão, transformação, sociabilidade",
+      "S: segurança, processo gradual, suporte, sem pressão",
+      "C: ciência, evidências, métricas detalhadas, metodologia"
+    ]
+  },
+
+  "hero_eyebrow": {
+    "default": "Apresentação clínica individual",
+    "D":       "Diagnóstico clínico — direção em 180 dias",
+    "I":       "Sua jornada começa aqui",
+    "S":       "Caminho clínico — passo a passo",
+    "C":       "Análise clínica baseada em biomarcadores"
+  },
+
+  "hero_h1": {
+    "default": "Você nos contou. <span class=\"gold\">Seus exames confirmaram</span>. Agora vamos olhar juntos <span class=\"gold\">o que eles nos disseram</span>, {primeiro_nome}.",
+    "D":       "Você nos contou. <span class=\"gold\">Os números confirmaram</span>. Próximos 180 dias decidem se a tendência se mantém ou se <span class=\"gold\">você reverte agora</span>, {primeiro_nome}.",
+    "I":       "Você nos contou. <span class=\"gold\">Seus exames confirmaram tudo</span>. Vamos transformar juntos <span class=\"gold\">como você sente seu corpo todo dia</span>, {primeiro_nome}.",
+    "S":       "Você nos contou. <span class=\"gold\">Os exames mostraram</span>. Agora vamos caminhar juntos, <span class=\"gold\">no seu ritmo</span>, {primeiro_nome}.",
+    "C":       "Você nos contou. <span class=\"gold\">Os biomarcadores mostraram o quadro completo</span>. Próximos 180 dias <span class=\"gold\">mapeados em 4 fases clínicas</span>, {primeiro_nome}."
+  },
+
+  "dra_quote": {
+    "default": "Cada paciente que chega ao consultório já tentou de tudo. Meu trabalho não é dar mais uma tentativa. É encontrar exatamente onde o sistema está desregulado e corrigi-lo com precisão. <strong>Resultados não são promessas, são consequências de diagnóstico correto.</strong>",
+    "D":       "Não falo em tentativa. Falo em correção precisa. Identifico onde está desregulado, ajusto com protocolo individualizado e acompanho até reverter. <strong>Resultado é consequência, não promessa.</strong>",
+    "I":       "Cada paciente chega exausto de tentar sozinho. Meu trabalho é estar ao seu lado, decifrar o que seu corpo está dizendo e devolver a você a energia, a disposição e a autoestima de antes. <strong>Você não está sozinho nessa.</strong>",
+    "S":       "Sei que você já tentou muito antes de chegar aqui. Aqui você não enfrenta sozinho. Tem equipe completa, protocolo testado e acompanhamento semanal. <strong>É um caminho seguro, no seu tempo.</strong>",
+    "C":       "Medicina baseada em biomarcadores, não em achismo. Painel laboratorial avançado, leitura clínica individualizada de cada parâmetro, ajustes guiados por métricas precisas. <strong>Cada decisão clínica é rastreável.</strong>"
+  },
+
+  "exames_lead": {
+    "default": "Quando os números mostram a verdade. Cada marcador conta uma parte da história — juntos, formam o mapa do seu corpo agora.",
+    "D":       "O retrato objetivo. Sem rodeios — onde você está e o que precisa mudar.",
+    "I":       "Os números traduzem o que você sente. Cada alteração tem reflexo no seu dia: energia, humor, libido, peso.",
+    "S":       "Vamos olhar com calma cada marcador. Nada aqui é razão para alarme — é informação para construir um plano seguro.",
+    "C":       "Painel completo de biomarcadores, cruzados contra referências canônicas por sexo e idade. Cada parâmetro avaliado individualmente."
+  },
+
+  "spin_situacao_lead": {
+    "default": "O retrato da sua saúde neste momento, lendo o que você sente e o que os números dizem.",
+    "D":       "Status atual: o que está funcionando e o que precisa mudar — em uma página.",
+    "I":       "Como seu corpo está agora — não só nos números, mas no que você vive todo dia.",
+    "S":       "Um retrato calmo do momento. Ponto de partida claro para a jornada que vem.",
+    "C":       "Estado funcional atual, integrando dados clínicos, antropométricos e questionário de pré-consulta."
+  },
+
+  "spin_implicacao_lead": {
+    "default": "Cada alteração tem um caminho conhecido pela ciência. Cada mês sem corrigir é um passo dado nessa direção.",
+    "D":       "Tendência fisiológica conhecida. Sem mudança, o quadro evolui — em meses, não em anos.",
+    "I":       "Imagina como você vai se sentir daqui 6 meses se nada mudar — depois imagina o oposto.",
+    "S":       "Sem pressão, mas com clareza: a direção atual leva a um lugar específico. Conhecer permite escolher.",
+    "C":       "Trajetória esperada documentada em literatura científica (PubMed). Cada alteração tem progressão conhecida."
+  },
+
+  "spin_necessidade_lead": {
+    "default": "Você já tentou. Isolado, cada esforço se perde. O que muda agora é ter um sistema inteiro orquestrado para o seu resultado.",
+    "D":       "Sozinho não funciona. Você já provou isso. Agora é sistema completo orquestrado para resultado.",
+    "I":       "Não é sobre força de vontade. É sobre ter quem caminhe junto, ajustando cada peça do quebra-cabeça.",
+    "S":       "Equipe completa do seu lado: médica, nutricionista, preparador físico, enfermeira. Você não fica sozinho em nenhuma fase.",
+    "C":       "Protocolo integrado: diagnóstico avançado + modulação hormonal + farmacológico estratégico + acompanhamento contínuo. Quatro pilares mensuráveis."
+  },
+
+  "cta_eyebrow": {
+    "default": "06 — A decisão",
+    "D":       "06 — Decisão binária",
+    "I":       "06 — Sua escolha",
+    "S":       "06 — O próximo passo",
+    "C":       "06 — Decisão clínica"
+  },
+
+  "cta_h2": {
+    "default": "A decisão é sua, <span class=\"gold\">{primeiro_nome}</span>.",
+    "D":       "A decisão é binária, <span class=\"gold\">{primeiro_nome}</span>.",
+    "I":       "Vamos juntos, <span class=\"gold\">{primeiro_nome}</span>?",
+    "S":       "No seu tempo, <span class=\"gold\">{primeiro_nome}</span>.",
+    "C":       "Os dados estão na sua frente, <span class=\"gold\">{primeiro_nome}</span>."
+  },
+
+  "cta_lead": {
+    "default": "Os exames já mostraram onde o corpo precisa de direção. Agora há dois caminhos.",
+    "D":       "Os números mostraram onde está o problema. Duas opções, sem meio-termo.",
+    "I":       "Você sente seu corpo todo dia. Os exames mostraram a causa. Vamos transformar isso?",
+    "S":       "Não há urgência artificial. Apenas duas opções, escolha quando estiver pronto.",
+    "C":       "Análise concluída. Recomendação clínica baseada em biomarcadores. Decisão informada."
+  },
+
+  "cta_opcao_now_titulo": {
+    "default": "Começar agora",
+    "D":       "Começar agora",
+    "I":       "Começar essa jornada",
+    "S":       "Iniciar quando se sentir pronto",
+    "C":       "Iniciar protocolo"
+  },
+
+  "cta_opcao_now_h4": {
+    "default": "180 dias com direção clínica precisa",
+    "D":       "180 dias com resultado mensurável",
+    "I":       "180 dias para sentir a diferença",
+    "S":       "180 dias com acompanhamento contínuo",
+    "C":       "180 dias com 4 reavaliações laboratoriais"
+  },
+
+  "cta_opcao_now_p": {
+    "default": "Cada mês contado dentro de um protocolo desenhado pelo seu corpo. Acompanhamento contínuo, ajustes baseados em resposta clínica, equipe ao seu lado.",
+    "D":       "Protocolo desenhado para o seu perfil específico. Métricas reavaliadas a cada trimestre. Ajustes baseados em resposta, não em calendário fixo.",
+    "I":       "Cada conquista celebrada, cada ajuste explicado. Você acompanha sua transformação acontecendo, com a equipe inteira torcendo por você.",
+    "S":       "Caminho gradual, com checkpoints frequentes. A médica conhece você, a nutricionista entende sua rotina, o preparador respeita seu ritmo. Tudo integrado.",
+    "C":       "Protocolo evidence-based: bateria de biomarcadores, ajustes guiados por dados, reavaliação trimestral. Cada decisão clínica documentada e rastreável."
+  },
+
+  "cta_opcao_depois_titulo": {
+    "default": "Adiar",
+    "D":       "Adiar",
+    "I":       "Esperar mais um pouco",
+    "S":       "Pensar mais um pouco",
+    "C":       "Postergar decisão"
+  },
+
+  "cta_opcao_depois_h4": {
+    "default": "Mais 6 meses como tem sido",
+    "D":       "Mais 6 meses sem mudança",
+    "I":       "Mais 6 meses sentindo o que sente hoje",
+    "S":       "Mais 6 meses no padrão atual",
+    "C":       "Mais 6 meses com biomarcadores na trajetória atual"
+  },
+
+  "cta_opcao_depois_p": {
+    "default": "Os marcadores alterados continuam o curso. Cada mês é mais um mês de receptores se ajustando ao desequilíbrio. Quanto mais tempo, mais difícil reverter.",
+    "D":       "A tendência fisiológica é conhecida: piora gradual, dano funcional progressivo. 6 meses sem ação = 6 meses de afastamento do estado funcional.",
+    "I":       "Aquela energia baixa que você sente, o cansaço, a libido — tudo isso continua. Pior: piora silenciosamente, mesmo sem você perceber.",
+    "S":       "Sem julgamento — postergar é uma opção válida. Apenas saiba que o quadro tende a manter a direção atual durante esse período.",
+    "C":       "Sem intervenção, biomarcadores tendem a manter trajetória observada. Janela de reversão funcional pode estreitar com o tempo (literatura PubMed)."
+  }
+}

@@ -7,3 +7,10 @@
 | consulta-base-conhecimento | Busca no workspace da Amora (KB + transcrições) antes de responder | ✅ Ativo |
 | registro-duvida-pendente | Registra dúvida que o bot não sabe + escala pro Bruno | ✅ Ativo |
 | relatorio-suporte | Gera resumo diário: volume, perguntas frequentes, escalações, taxa de resolução | ✅ Ativo |
+
+
+## Regra estrutural
+- cada skill deve ser lida primeiro pelo `SKILL.md`
+- scripts não substituem a interface da skill
+- referências e assets são camadas auxiliares
+- toda skill deve seguir `cerebro/empresa/skills/GOVERNANCA-SKILLS.md`

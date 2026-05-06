@@ -240,12 +240,17 @@ Qual seria mais conveniente?
 ## 📱 CENÁRIO 12: Confirmação (1 dia antes)
 
 ```
-Bom dia, [Nome]! 💚 Confirmando seu horário amanhã:
-📅 [dia] às [hora] — Instituto Vital Slim
+Oi, [Nome]! Tudo bem?
 
-Por favor, confirme com SIM.
-Caso precise reagendar, responda NÃO.
+Estou passando para confirmar seu atendimento [amanhã/hoje], às [hora], aqui no Instituto Vital Slim.
+
+Se estiver tudo certo, pode me responder com Confirmo.
+Se precisar, você também pode me dizer Quero remarcar ou Não vou conseguir.
 ```
+
+**Aceitar como confirmação válida:** Confirmo, Confirmado, pode, sim, ótimo, ok.
+
+**Se houver conflito de horário, atraso ou pedido de mudança:** tratar como remarcação imediatamente.
 
 **Não confirmou até o fim do dia? LIGAR.**
 

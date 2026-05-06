@@ -1,0 +1,29 @@
+{
+  "files": {
+    "code": [
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/scripts-clara_learning.py",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/scripts-youtube_learning.py",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/scripts-fetch_top_reels.py",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/scripts-social_learning.py",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/scripts-fetch_instagram.py"
+    ],
+    "document": [
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/cron-list.txt",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/conselho-growth-vital-slim-SKILL.md",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/clara-learning-orchestrator-SKILL.md",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/memory-2026-05-05.md",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/youtube-learning-ivs-SKILL.md",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/rapidapi-social-learning-SKILL.md",
+      "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/raw/OPERATING_RULES.md"
+    ],
+    "paper": [],
+    "image": [],
+    "video": []
+  },
+  "total_files": 12,
+  "total_words": 7532,
+  "needs_graph": false,
+  "warning": "Corpus is ~7,532 words - fits in a single context window. You may not need a graph.",
+  "skipped_sensitive": [],
+  "graphifyignore_patterns": 0
+}

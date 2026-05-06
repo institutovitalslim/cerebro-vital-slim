@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programa de Acompanhamento IVS — Template Pacientes Novos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f1eb;
+      --paper: #fffdf9;
+      --section: #fffaf5;
+      --text: #2d241d;
+      --muted: #6f6257;
+      --line: #e8ddd0;
+      --gold: #b08a4a;
+      --gold-2: #d8b97a;
+      --brown: #4e3a28;
+      --accent: #7a5b3b;
+      --success: #5a7f64;
+      --alert: #b45a4d;
+      --shadow: 0 18px 45px rgba(78, 58, 40, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(216,185,122,.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(176,138,74,.08), transparent 24%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    .page-shell {
+      width: min(100%, 1440px);
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .section {
+      width: min(100%, var(--max));
+      margin: 0 auto 24px;
+      background: var(--paper);
+      border: 1px solid rgba(176,138,74,.16);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-inner {
+      padding: 56px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(78,58,40,.96), rgba(56,41,28,.98)),
+        var(--brown);
+      color: #fff;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 15%, rgba(216,185,122,.18), transparent 20%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: var(--gold-2);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 14px;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 64px);
+      color: #fff;
+      max-width: 800px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 3.4vw, 42px);
+      color: var(--brown);
+    }
+
+    h3 {
+      font-size: clamp(18px, 2.2vw, 24px);
+      color: var(--accent);
+    }
+
+    p { margin: 0 0 14px; }
+    .lead {
+      font-size: clamp(18px, 2vw, 22px);
+      color: rgba(255,255,255,.88);
+      max-width: 760px;
+    }
+
+    .lead-dark {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 840px;
+    }
+
+    .gold { color: var(--gold); }
+    .muted { color: var(--muted); }
+    .small { font-size: 14px; color: var(--muted); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr .9fr;
+      gap: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .patient-name {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(216,185,122,.14);
+      color: #fff;
+      border: 1px solid rgba(216,185,122,.28);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 18px;
+    }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--section);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .card strong { color: var(--brown); }
+
+    .section-label {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .quote-box {
+      margin-top: 18px;
+      background: linear-gradient(180deg, rgba(176,138,74,.10), rgba(176,138,74,.04));
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 22px;
+      font-size: 17px;
+      color: var(--brown);
+    }
+
+    .data-card {
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: #fff;
+      position: relative;
+    }
+
+    .data-card.alert { border-left: 6px solid var(--alert); }
+    .data-card.warn { border-left: 6px solid var(--gold); }
+    .data-card.ok { border-left: 6px solid var(--success); }
+
+    .data-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--brown);
+      margin: 8px 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 12px;
+    }
+
+    .badge.alert { background: rgba(180,90,77,.12); color: var(--alert); }
+    .badge.warn { background: rgba(176,138,74,.16); color: var(--accent); }
+    .badge.ok { background: rgba(90,127,100,.12); color: var(--success); }
+
+    .step-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: #fff;
+    }
+
+    .step-num {
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 10px 24px rgba(176,138,74,.22);
+    }
+
+    ul.clean {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    ul.clean li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--text);
+    }
+
+    ul.clean li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #4c3929, #38291c);
+      color: #fff;
+    }
+
+    .cta-section h2,
+    .cta-section h3 { color: #fff; }
+
+    .highlight-box {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 13px;
+      opacity: .8;
+      color: rgba(255,255,255,.76);
+    }
+
+    .code-block {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      color: var(--accent);
+      background: rgba(176,138,74,.08);
+      border: 1px dashed rgba(176,138,74,.28);
+      padding: 14px;
+      border-radius: 12px;
+      word-break: break-word;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .section-inner { padding: 34px 24px; }
+      .page-shell { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+
+    <section class="section hero">
+      <div class="section-inner">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Programa de Acompanhamento IVS</span>
+            <h1>Uma jornada estruturada para cuidar do seu emagrecimento com <span class="gold">estratégia, acompanhamento e constância</span>.</h1>
+            <p class="lead">Esta apresentação foi pensada para pacientes novos do Instituto Vital Slim e pode ser personalizada com dados do formulário de pré-consulta e exames para apoiar a decisão durante o atendimento.</p>
+            <div class="pill-row">
+              <div class="pill">SPIN Selling</div>
+              <div class="pill">Template dinâmico</div>
+              <div class="pill">TV consultiva</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="small" style="color:rgba(255,255,255,.78);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Exemplo de campos variáveis</div>
+            <div class="patient-name">{{paciente_nome}}</div>
+            <p><strong>Objetivo principal:</strong><br>{{objetivo_principal}}</p>
+            <p><strong>Frase de acolhimento:</strong><br>{{frase_acolhimento}}</p>
+            <p class="small" style="color:rgba(255,255,255,.7);margin-top:18px;">Use estes campos como placeholders para a Maria preencher automaticamente no fluxo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Situation · abertura e identificação</span>
+        <h2>O que te trouxe até <span class="gold">aqui</span></h2>
+        <p class="lead-dark">No questionário, o paciente mostra que o incômodo não está só no peso. Ele já impacta rotina, autoestima, disposição e a forma como a pessoa se sente no próprio corpo.</p>
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="card">
+            <h3>Queixa principal</h3>
+            <p><strong>{{queixa_principal}}</strong></p>
+            <p class="small">Resumo do incômodo central relatado na pré-consulta.</p>
+          </div>
+          <div class="card">
+            <h3>O que mais incomoda hoje</h3>
+            <p>{{incomodos_secundarios}}</p>
+            <p class="small">Pode incluir barriga, cansaço, libido, dor, roupa apertada, mobilidade, insegurança.</p>
+          </div>
+          <div class="card">
+            <h3>Tentativas anteriores</h3>
+            <p>{{tentativas_anteriores}}</p>
+            <p class="small">Aqui entram dietas, academia, remédios, nutricionista, recomeços sem sustentação.</p>
+          </div>
+          <div class="card">
+            <h3>Motivação para mudar agora</h3>
+            <p>{{motivacao_pessoal}}</p>
+            <p class="small">Ex.: saúde, autoestima, energia, família, mobilidade, performance, envelhecer melhor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Situation → Problem · contexto da rotina</span>
+        <h2>O que a sua rotina hoje <span class="gold">revela</span></h2>
+        <p class="lead-dark">O desafio não está apenas em querer emagrecer. Está em conseguir sustentar um processo que funcione dentro da vida real do paciente.</p>
+        <div class="grid-3" style="margin-top:24px;">
+          <div class="card">
+            <h3>Rotina que dificulta</h3>
+            <p>{{rotina_dificultadora}}</p>
+          </div>
+          <div class="card">
+            <h3>Hábitos relevantes</h3>
+            <p>{{habitos_relevantes}}</p>
+          </div>
+          <div class="card">
+            <h3>Ponto positivo</h3>
+            <p>{{ponto_positivo}}</p>
+          </div>
+        </div>
+        <div class="quote-box">Isso mostra que o problema não é apenas força de vontade. Existe um padrão que precisa ser tratado com estratégia, ajuste e acompanhamento.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Problem · validação objetiva</span>
+        <h2>O que seus exames e sinais <span class="gold">mostram</span></h2>
+        <p class="lead-dark">Além do que o paciente sente no dia a dia, os dados mostram de forma objetiva que o corpo já está dando sinais de alerta.</p>
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="data-card alert">
+            <h3>{{exame_1_nome}}</h3>
+            <div class="badge alert">{{exame_1_classificacao}}</div>
+            <div class="data-value">{{exame_1_valor}}</div>
+            <p class="small"><strong>Referência:</strong> {{exame_1_referencia}}</p>
+            <p>{{exame_1_leitura_simplificada}}</p>
+          </div>
+          <div class="data-card warn">
+            <h3>{{exame_2_nome}}</h3>
+            <div class="badge warn">{{exame_2_classificacao}}</div>
+            <div class="data-value">{{exame_2_valor}}</div>
+            <p class="small"><strong>Referência:</strong> {{exame_2_referencia}}</p>
+            <p>{{exame_2_leitura_simplificada}}</p>
+          </div>
+          <div class="data-card alert">
+            <h3>{{exame_3_nome}}</h3>
+            <div class="badge alert">{{exame_3_classificacao}}</div>
+            <div class="data-value">{{exame_3_valor}}</div>
+            <p class="small"><strong>Referência:</strong> {{exame_3_referencia}}</p>
+            <p>{{exame_3_leitura_simplificada}}</p>
+          </div>
+          <div class="data-card ok">
+            <h3>{{exame_4_nome}}</h3>
+            <div class="badge ok">{{exame_4_classificacao}}</div>
+            <div class="data-value">{{exame_4_valor}}</div>
+            <p class="small"><strong>Referência:</strong> {{exame_4_referencia}}</p>
+            <p>{{exame_4_leitura_simplificada}}</p>
+          </div>
+        </div>
+        <div class="quote-box">Esses achados ajudam a explicar por que o corpo hoje pode não estar respondendo como o paciente gostaria — e por que tentar sozinho costuma falhar.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Problem · fatores que travam</span>
+        <h2>O que hoje está <span class="gold">travando o resultado</span></h2>
+        <p class="lead-dark">No caso deste paciente, emagrecer não depende só de decisão. Existem fatores biológicos, comportamentais e de rotina atrapalhando a resposta do corpo.</p>
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="card">
+            <h3>Fatores que travam</h3>
+            <ul class="clean">
+              <li>{{fator_1}}</li>
+              <li>{{fator_2}}</li>
+              <li>{{fator_3}}</li>
+              <li>{{fator_4}}</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Reframe sem culpa</h3>
+            <p>{{reframe_sem_culpa}}</p>
+            <p class="small">Exemplo: “isso tira um peso desnecessário das suas costas: não é só esforço, é estrutura, ajuste e acompanhamento.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Implication · o custo de adiar</span>
+        <h2>O que isso significa se <span class="gold">nada mudar</span></h2>
+        <p class="lead-dark">Quando esse cenário se mantém, a tendência normalmente não é de estabilização. O quadro se prolonga, a dificuldade aumenta e o impacto se espalha para outras áreas da vida.</p>
+        <div class="grid-3" style="margin-top:24px;">
+          <div class="card">
+            <h3>Na rotina</h3>
+            <p>{{impactos_na_rotina}}</p>
+          </div>
+          <div class="card">
+            <h3>Na energia e disposição</h3>
+            <p>{{impactos_na_energia}}</p>
+          </div>
+          <div class="card">
+            <h3>Na saúde futura</h3>
+            <p>{{impactos_na_saude_futura}}</p>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:18px;">
+          <div class="card">
+            <h3>Implicações principais</h3>
+            <p>{{implicacoes_principais}}</p>
+          </div>
+          <div class="card">
+            <h3>Impacto emocional</h3>
+            <p>{{impacto_em_autoestima}}</p>
+          </div>
+        </div>
+        <div class="quote-box">Adiar esse cuidado normalmente não mantém as coisas iguais. Normalmente torna o processo mais difícil depois.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Implication → Need-payoff · necessidade de acompanhamento</span>
+        <h2>Por que tentar sozinho costuma <span class="gold">não sustentar</span></h2>
+        <div class="grid-2" style="margin-top:16px;">
+          <div class="card">
+            <h3>Motivos para não conseguir sozinho</h3>
+            <p>{{motivos_para_nao_conseguir_sozinho}}</p>
+          </div>
+          <div class="card">
+            <h3>Barreiras de constância</h3>
+            <p>{{barreiras_de_constancia}}</p>
+          </div>
+        </div>
+        <div class="quote-box">O maior erro não é começar. É tentar sustentar sozinho um processo que exige ajuste, leitura de resposta do corpo e correção de rota.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Need-payoff · onde o programa entra</span>
+        <h2>Onde o Programa IVS entra no <span class="gold">seu caso</span></h2>
+        <p class="lead-dark">Aqui o acompanhamento deixa de ser algo genérico e passa a ser a resposta lógica para o que hoje está fora do eixo.</p>
+        <div class="card" style="margin-top:20px;">
+          <h3>Conexão com o programa</h3>
+          <p>{{conexao_programa}}</p>
+        </div>
+        <div class="step-list">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h3>Avaliação do momento atual</h3>
+              <p>Entender exames, rotina, composição corporal, sintomas, objetivos e histórico do paciente.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h3>Plano individualizado</h3>
+              <p>Montar estratégia de acordo com a necessidade real e não com protocolo genérico.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h3>Acompanhamento contínuo</h3>
+              <p>Monitorar resposta, revisar evolução e ajustar a rota ao longo do processo.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <h3>Sustentação do resultado</h3>
+              <p>O foco não é só começar. É criar constância e reduzir risco de recaída.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Need-payoff · valor percebido</span>
+        <h2>O que o paciente está comprando de <span class="gold">verdade</span></h2>
+        <div class="grid-2" style="margin-top:20px;">
+          <div class="card">
+            <h3>Entregáveis visíveis</h3>
+            <ul class="clean">
+              <li>Avaliação estruturada</li>
+              <li>Plano individualizado</li>
+              <li>Acompanhamento contínuo</li>
+              <li>Monitoramento clínico</li>
+              <li>Ajustes ao longo da evolução</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Benefícios invisíveis</h3>
+            <ul class="clean">
+              <li>Mais clareza sobre o que fazer</li>
+              <li>Mais segurança durante o processo</li>
+              <li>Correção de rota quando necessário</li>
+              <li>Mais constância e sustentação</li>
+              <li>{{beneficios_reais_invisiveis}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="quote-box">O paciente não está contratando só consulta. Está entrando em uma jornada acompanhada.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Need-payoff · evolução acompanhada</span>
+        <h2>O que esperamos acompanhar ao longo da <span class="gold">jornada</span></h2>
+        <div class="grid-2" style="margin-top:20px;">
+          <div class="card">
+            <h3>Marcadores para acompanhar</h3>
+            <p>{{marcadores_para_acompanhar}}</p>
+          </div>
+          <div class="card">
+            <h3>Metas iniciais realistas</h3>
+            <p>{{metas_iniciais_realistas}}</p>
+          </div>
+          <div class="card">
+            <h3>Ganhos esperados na rotina</h3>
+            <p>{{ganhos_esperados_na_rotina}}</p>
+          </div>
+          <div class="card">
+            <h3>Ganhos esperados em saúde</h3>
+            <p>{{ganhos_esperados_em_saude}}</p>
+          </div>
+        </div>
+        <p class="small" style="margin-top:16px;">Cada organismo responde de uma forma. Por isso a evolução precisa ser acompanhada e ajustada com critério.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Need-payoff · segurança e prova</span>
+        <h2>Segurança, método e <span class="gold">acompanhamento real</span></h2>
+        <div class="grid-3" style="margin-top:20px;">
+          <div class="card">
+            <h3>Abordagem médica estruturada</h3>
+            <p>O diferencial não está em promessas, mas em método, individualização e acompanhamento contínuo.</p>
+          </div>
+          <div class="card">
+            <h3>Processo baseado em evidência</h3>
+            <p>Protocolos pensados para leitura clínica do caso, não para soluções genéricas.</p>
+          </div>
+          <div class="card">
+            <h3>Acompanhamento de verdade</h3>
+            <p>O paciente não caminha no escuro. Existe reavaliação, ajuste e sustentação.</p>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:18px;">
+          <div class="card">
+            <h3>Provas institucionais</h3>
+            <p>{{provas_institucionais}}</p>
+          </div>
+          <div class="card">
+            <h3>Diferenciais da equipe</h3>
+            <p>{{diferenciais_da_equipe}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="section-inner">
+        <span class="eyebrow">Fechamento</span>
+        <h2>O próximo passo</h2>
+        <p class="lead">Hoje, a decisão não é apenas sobre emagrecer. É sobre escolher entre continuar tentando sozinho ou iniciar um acompanhamento estruturado para mudar sua trajetória com mais clareza, segurança e constância.</p>
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="highlight-box">
+            <h3>Síntese final do caso</h3>
+            <p>{{sintese_final_do_caso}}</p>
+          </div>
+          <div class="highlight-box">
+            <h3>Risco de adiar</h3>
+            <p>{{risco_de_adiar}}</p>
+          </div>
+          <div class="highlight-box">
+            <h3>Frase de oportunidade</h3>
+            <p>{{frase_de_oportunidade}}</p>
+          </div>
+          <div class="highlight-box">
+            <h3>CTA final</h3>
+            <p><strong>{{cta_final}}</strong></p>
+          </div>
+        </div>
+        <p class="footer-note">Template institucional IVS para pacientes novos. Estruturado em lógica SPIN Selling e preparado para receber questionário de pré-consulta + exames do paciente.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <span class="section-label">Placeholders principais</span>
+        <h2>Campos que a Maria precisa <span class="gold">preencher</span></h2>
+        <div class="code-block">
+          paciente_nome · objetivo_principal · frase_acolhimento · queixa_principal · incomodos_secundarios · tentativas_anteriores · motivacao_pessoal · rotina_dificultadora · habitos_relevantes · ponto_positivo · exames_alerta[] · fatores_que_travam_resultado · reframe_sem_culpa · implicacoes_principais · impactos_na_rotina · impactos_na_energia · impactos_na_saude_futura · impacto_em_autoestima · motivos_para_nao_conseguir_sozinho · barreiras_de_constancia · conexao_programa · beneficios_reais_invisiveis · marcadores_para_acompanhar · metas_iniciais_realistas · ganhos_esperados_na_rotina · ganhos_esperados_em_saude · provas_institucionais · diferenciais_da_equipe · sintese_final_do_caso · risco_de_adiar · frase_de_oportunidade · cta_final
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

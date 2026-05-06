@@ -24,10 +24,10 @@ _Curated knowledge and context. Keep only the essential index._
 
 ### geracao-apresentacao-paciente
 - Local: `skills/geracao-apresentacao-paciente/`
-- Template base: `assets/template-apresentacao.html` (Jinja2, dark theme, aprovado pelo Tiaro em 2026-04-25)
-- Script: `scripts/gerar_apresentacao.py` (Jinja2, placeholders dinâmicos)
-- Seções dinâmicas: stats, diagnostico, anchor, history, exams, timeline, contexto, references
-- Logo no template: pendente (trocar para brand kit oficial)
+- SKILL.md atualizado para uso manual e individual em programas de acompanhamento
+- Gera HTML premium com evolução antropométrica, exames recentes, fotos comparativas e identidade visual IVS
+- Quando solicitado, entrega versão inline com imagens incorporadas no próprio HTML
+- Usa `gog` autenticado para localizar exames e fotos na pasta do paciente no Google Drive
 - Pré-consulta integrada via portal `preconsulta.institutovitalslim.com.br`
 
 ### omie-boletos
@@ -43,6 +43,12 @@ _Curated knowledge and context. Keep only the essential index._
 - Local: `/root/.openclaw/workspace/skills/agenda-diaria-whatsapp/`
 - Cron: `2ba465d4-3dd0-435b-bb12-1576ed6c0403`
 - Envio somente via Z-API
+
+### Clara / atendimento inbound
+- SLA inicial de primeira resposta para lead inbound no WhatsApp: **1 minuto**
+- Se Clara não responder em 1 minuto, escalar imediatamente para **Tiaro e Liane**
+- Regra consolidada após incidente em que Tiaro precisou responder manualmente uma lead
+- Regra canônica adicional: sempre que for armazenar algo na memória ou no cérebro, usar **graphify**
 
 ### historico-conversas
 - Local: `/root/.openclaw/workspace/skills/historico-conversas/`
@@ -247,5 +253,6 @@ Todas de design gráfico: logo-branding-system, logo-creator, design-studio, cla
 - 2026-04-20: `verdades-operacionais.md` foi separado da camada universal e passou a concentrar fatos do negócio
 - 2026-04-25: template `geracao-apresentacao-paciente` reconstruído com HTML aprovado do Erick (dark theme, Jinja2, placeholders dinâmicos)
 - 2026-04-25: pré-consulta do portal IVS verificada — código já existia, build Next.js estava desatualizado. Portal roda em `localhost:3001`
+- 2026-05-06: manutenção diária deduplicou `memory/2026-05-05.md`, promoveu pedidos recorrentes de Conselho Growth/briefing HTML para Claude/enxugar apresentações e abriu monitoramento da Clara RC-27/28/29 e apresentação Erick V2.3.
 - [Análise diária da Clara (cron)](cerebro/logs/clara-learnings/) - Cron diário 00:00 BRT puxa as conversas das últimas 24h, destila via Kimi K2.6 em aprendizados acionáveis, escreve report em cerebro/logs/clara-learnings/YYYY-MM-DD.md e atualiza rolling buffer clara_learnings_rolling.md que a Clara lê a cada mensagem (últimos 7 dias).
 - [Argumentos de venda - ligações](cerebro/leads-argumentos-venda-ligacoes.md) - Lições condensadas de 15 reels do @vitoroliveiraconsultor (comercial para clínicas médicas) aplicadas à Clara: follow-up 5x, velocidade de resposta, objeção de preço = objeção escondida, recuperação de lead silenciado, 4 pilares de conversão. Fonte de verdade para ligações/atendimento de paciente.

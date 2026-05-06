@@ -146,6 +146,17 @@ Reactions are lightweight social signals. Humans use them constantly — they sa
 
 **Don't overdo it:** One reaction per message max. Pick the one that fits best.
 
+## graphify
+
+This workspace has graphify installed as an auxiliary knowledge-graph skill for controlled use.
+
+Rules:
+- Use graphify only as a secondary discovery/mapping layer, never as the canonical memory source
+- Do not let graphify write directly into canonical memory files without human validation
+- Prefer sandboxed/corpus-scoped runs before any broader use
+- For codebase or docs relationship questions, prefer `graphify query`, `graphify path`, or `graphify explain` when a graph exists
+- After modifying code in a graphified project, run `graphify update .` to refresh the AST graph when applicable
+
 ## Tools
 
 Skills provide your tools. When you need one, check its `SKILL.md`. Keep local notes (camera names, SSH details, voice preferences) in `TOOLS.md`.

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITULO_DOCUMENTO}}</title>
+  <style>
+    :root {
+      --bg: #f3f5f7;
+      --card: #ffffff;
+      --ink: #17324d;
+      --muted: #4c5d70;
+      --line: #cfd8e3;
+      --blue: #133b66;
+      --green: #1f7a56;
+      --gold: #d4af37;
+      --soft-blue: #eef4fb;
+      --soft-green: #edf8f3;
+      --soft-gold: #fbf7e8;
+      --radius: 18px;
+      --shadow: 0 8px 24px rgba(18, 44, 74, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      padding: 24px;
+    }
+    .sheet {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .title {
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 20px 24px;
+      margin-bottom: 18px;
+    }
+    .title h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: 0.3px;
+      color: var(--ink);
+    }
+    .title h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .band {
+      margin: 18px 0 12px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 14px;
+      padding: 12px 18px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+    }
+    .intro, .split, .three {
+      display: grid;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .intro { grid-template-columns: 1.2fr 1fr; margin-top: 0; }
+    .split { grid-template-columns: 1fr 1fr; }
+    .three { grid-template-columns: repeat(3, 1fr); }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: var(--ink);
+    }
+    .card p, .card li {
+      font-size: 18px;
+      line-height: 1.45;
+      color: #23384f;
+      margin: 0;
+    }
+    .card ul {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 8px;
+    }
+    .panel {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .panel .head {
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .panel.blue .head { background: var(--blue); }
+    .panel.green .head { background: var(--green); }
+    .panel .body {
+      padding: 16px;
+      background: #fff;
+      display: grid;
+      gap: 14px;
+    }
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--soft-blue);
+    }
+    .green .mini { background: var(--soft-green); }
+    .mini h4 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: var(--ink);
+    }
+    .mini p {
+      font-size: 17px;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .three .card { background: var(--soft-gold); }
+    .footer-box {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      background: #f8fbff;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .small-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #66788b;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .intro, .split, .three { grid-template-columns: 1fr; }
+      .title h1 { font-size: 28px; }
+      .title h2, .band, .panel .head, .card h3 { font-size: 20px; }
+      .card p, .card li, .mini p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <section class="title">
+      <h1>{{TITULO_PRINCIPAL}}</h1>
+      <h2>{{SUBTITULO}}</h2>
+    </section>
+
+    <div class="band">{{FAIXA_1}}</div>
+    <section class="intro">
+      <article class="card">{{INTRO_CARD_1}}</article>
+      <article class="card">{{INTRO_CARD_2}}</article>
+    </section>
+
+    <div class="band">{{FAIXA_2}}</div>
+    <section class="split">
+      <article class="panel blue">{{PAINEL_A}}</article>
+      <article class="panel green">{{PAINEL_B}}</article>
+    </section>
+
+    <div class="band">{{FAIXA_3}}</div>
+    <section class="split">
+      <article class="panel blue">{{PAINEL_C}}</article>
+      <article class="panel green">{{PAINEL_D}}</article>
+    </section>
+
+    <div class="band">{{FAIXA_4}}</div>
+    <section class="three">
+      <article class="card">{{CARD_FINAL_1}}</article>
+      <article class="card">{{CARD_FINAL_2}}</article>
+      <article class="card">{{CARD_FINAL_3}}</article>
+    </section>
+
+    <div class="band">OBJETIVO CENTRAL</div>
+    <div class="footer-box">{{OBJETIVO_CENTRAL}}</div>
+    <div class="small-note">{{NOTA_RODAPE}}</div>
+  </main>
+</body>
+</html>

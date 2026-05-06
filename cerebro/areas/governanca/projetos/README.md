@@ -1,21 +1,14 @@
-# Projetos
-
-> Projetos ativos e concluídos desta área.
-
----
+# Projetos de Governança
 
 ## Em andamento
 
-| Projeto | Status | Prazo | Responsável |
-|---------|--------|-------|-------------|
-| Implementação de dashboard em tempo real | Planejado | 15/04 | Agente Generalista |
+### Governança do cérebro / playbooks
+- **Status:** Em andamento
+- **Objetivo:** centralizar a fonte de verdade, reduzir dispersão e criar um núcleo claro de governança
+- **Escopo atual:** mapa mestre, backlog central, regra de atualização e página índice única
+- **Próxima ação:** consolidar backlog executivo e rotinas de manutenção
+- **Prioridade:** Alta
 
 ## Concluídos
 
-| Projeto | Data | Resultado |
-|---------|------|-----------|
-| Estruturação da área de governança | 28/03/2026 | Área criada com 2 skills e 2 rotinas |
-
----
-
-_Atualizado: março 2026_
+_Nenhum projeto concluído registrado nesta área até o momento._

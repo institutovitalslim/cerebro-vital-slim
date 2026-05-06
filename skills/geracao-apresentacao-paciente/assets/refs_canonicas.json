@@ -1,0 +1,1815 @@
+{
+  "_metadata": {
+    "versao": "1.0",
+    "criado": "2026-05-05",
+    "descricao": "Catálogo canônico de referências clínicas por exame + sexo + idade. Fonte única de verdade para classificação de status. Atualizar conforme literatura.",
+    "fontes_principais": [
+      "Sociedade Brasileira de Patologia Clínica (SBPC/ML)",
+      "Sociedade Brasileira de Endocrinologia e Metabologia (SBEM)",
+      "Diretrizes Brasileiras de Dislipidemia (SBC)",
+      "Bula de fabricantes (Roche, Siemens, Beckman)",
+      "Referências clínicas amplamente aceitas"
+    ],
+    "regras_uso": [
+      "Todos os refs são para adulto (18+) salvo idade_min/idade_max diferentes",
+      "Idade_max=120 representa 'sem limite superior'",
+      "ref_min/max=null representa 'sem limite' (apenas um lado é checked)",
+      "abs_min/max são limites absolutos de plausibilidade fisiológica",
+      "Quando paciente tem idade fora dos ranges, usar o range mais próximo (idoso/jovem)"
+    ]
+  },
+  "Glicose": {
+    "unit": "mg/dL",
+    "grupo": "glicidico",
+    "abs_min": 20,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 70,
+        "ref_max": 99,
+        "fonte": "ADA — IVS pode considerar <90 como otimo"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 70,
+        "ref_max": 99,
+        "fonte": "ADA"
+      }
+    ]
+  },
+  "HbA1c": {
+    "unit": "%",
+    "grupo": "glicidico",
+    "abs_min": 3,
+    "abs_max": 20,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 5.4,
+        "fonte": "IVS conservador — HbA1c >5,5% ja indica risco alto de pre-diabetes (oficial >=5,7%)"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 5.4,
+        "fonte": "IVS conservador"
+      }
+    ]
+  },
+  "Insulina": {
+    "unit": "mU/mL",
+    "grupo": "glicidico",
+    "abs_min": 0,
+    "abs_max": 500,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 2.6,
+        "ref_max": 24.9
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 2.6,
+        "ref_max": 24.9
+      }
+    ]
+  },
+  "HOMA-IR": {
+    "unit": "",
+    "grupo": "glicidico",
+    "abs_min": 0,
+    "abs_max": 100,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 2.7
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 2.7
+      }
+    ]
+  },
+  "HOMA-Beta": {
+    "unit": "",
+    "grupo": "glicidico",
+    "abs_min": 0,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 100,
+        "ref_max": 250
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 100,
+        "ref_max": 250
+      }
+    ]
+  },
+  "Glicemia Média": {
+    "unit": "mg/dL",
+    "grupo": "glicidico",
+    "abs_min": 50,
+    "abs_max": 400,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 100,
+        "fonte": "IVS conservador — GME >100 indica alto risco metabolico mesmo com HbA1c normal (pre-diabetes silenciosa)"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 100,
+        "fonte": "IVS conservador"
+      }
+    ]
+  },
+  "Frutosamina": {
+    "unit": "umol/L",
+    "grupo": "glicidico",
+    "abs_min": 100,
+    "abs_max": 800,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 285
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 285
+      }
+    ]
+  },
+  "Hemácias": {
+    "unit": "milhoes/mm3",
+    "grupo": "hemograma",
+    "abs_min": 1,
+    "abs_max": 10,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 4.5,
+        "ref_max": 6.1
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 4.0,
+        "ref_max": 5.4
+      }
+    ]
+  },
+  "Hemoglobina": {
+    "unit": "g/dL",
+    "grupo": "hemograma",
+    "abs_min": 3,
+    "abs_max": 25,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 13.0,
+        "ref_max": 16.5
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 12.0,
+        "ref_max": 15.8
+      }
+    ]
+  },
+  "Hematócrito": {
+    "unit": "%",
+    "grupo": "hemograma",
+    "abs_min": 10,
+    "abs_max": 70,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 36,
+        "ref_max": 54
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 33,
+        "ref_max": 47.8
+      }
+    ]
+  },
+  "VCM": {
+    "unit": "fl",
+    "grupo": "hemograma",
+    "abs_min": 50,
+    "abs_max": 130,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 80,
+        "ref_max": 98
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 80,
+        "ref_max": 98
+      }
+    ]
+  },
+  "HCM": {
+    "unit": "pg",
+    "grupo": "hemograma",
+    "abs_min": 15,
+    "abs_max": 45,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 26.8,
+        "ref_max": 32.9
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 26.2,
+        "ref_max": 32.6
+      }
+    ]
+  },
+  "CHCM": {
+    "unit": "g/dl",
+    "grupo": "hemograma",
+    "abs_min": 20,
+    "abs_max": 45,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 30,
+        "ref_max": 36.5
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 30,
+        "ref_max": 36.5
+      }
+    ]
+  },
+  "RDW": {
+    "unit": "%",
+    "grupo": "hemograma",
+    "abs_min": 8,
+    "abs_max": 25,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 11,
+        "ref_max": 16
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 11,
+        "ref_max": 16
+      }
+    ]
+  },
+  "Leucócitos": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 500,
+    "abs_max": 100000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 3600,
+        "ref_max": 11000
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 3600,
+        "ref_max": 11000
+      }
+    ]
+  },
+  "Plaquetas": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 5000,
+    "abs_max": 2000000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 130000,
+        "ref_max": 450000
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 130000,
+        "ref_max": 450000
+      }
+    ]
+  },
+  "Bastonetes": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 0,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 0,
+        "ref_max": 700
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 0,
+        "ref_max": 700
+      }
+    ]
+  },
+  "Segmentados": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 200,
+    "abs_max": 30000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1700,
+        "ref_max": 8000
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1700,
+        "ref_max": 8000
+      }
+    ]
+  },
+  "Neutrófilos": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 200,
+    "abs_max": 30000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1700,
+        "ref_max": 8000
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1700,
+        "ref_max": 8000
+      }
+    ]
+  },
+  "Eosinófilos": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 0,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 50,
+        "ref_max": 500
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 50,
+        "ref_max": 500
+      }
+    ]
+  },
+  "Basófilos": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 0,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0,
+        "ref_max": 100
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0,
+        "ref_max": 100
+      }
+    ]
+  },
+  "Monócitos": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 0,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 100,
+        "ref_max": 1200
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 100,
+        "ref_max": 1200
+      }
+    ]
+  },
+  "Linfócitos": {
+    "unit": "/mm3",
+    "grupo": "hemograma",
+    "abs_min": 200,
+    "abs_max": 20000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1000,
+        "ref_max": 4800
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1000,
+        "ref_max": 4800
+      }
+    ]
+  },
+  "Colesterol Total": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 50,
+    "abs_max": 500,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 190
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 190
+      }
+    ]
+  },
+  "HDL": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 10,
+    "abs_max": 150,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 40,
+        "ref_max": null
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 50,
+        "ref_max": null
+      }
+    ]
+  },
+  "LDL": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 10,
+    "abs_max": 400,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 130
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 130
+      }
+    ]
+  },
+  "VLDL": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 0,
+    "abs_max": 200,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 30
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 30
+      }
+    ]
+  },
+  "Triglicérides": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 10,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 150
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 150
+      }
+    ]
+  },
+  "Não-HDL": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 10,
+    "abs_max": 400,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 130
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 130
+      }
+    ]
+  },
+  "ApoB": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 10,
+    "abs_max": 300,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 100
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 100
+      }
+    ]
+  },
+  "ApoA": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 30,
+    "abs_max": 400,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 79,
+        "ref_max": 169
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 76,
+        "ref_max": 214
+      }
+    ]
+  },
+  "Lp(a)": {
+    "unit": "mg/dL",
+    "grupo": "lipidico",
+    "abs_min": 0,
+    "abs_max": 500,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 30
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 30
+      }
+    ]
+  },
+  "TGO": {
+    "unit": "U/L",
+    "grupo": "hepatico",
+    "abs_min": 1,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 40
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 32
+      }
+    ]
+  },
+  "TGP": {
+    "unit": "U/L",
+    "grupo": "hepatico",
+    "abs_min": 1,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 41
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 33
+      }
+    ]
+  },
+  "GGT": {
+    "unit": "U/L",
+    "grupo": "hepatico",
+    "abs_min": 1,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 60
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 38
+      }
+    ]
+  },
+  "Fosfatase Alcalina": {
+    "unit": "U/L",
+    "grupo": "hepatico",
+    "abs_min": 10,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 40,
+        "ref_max": 130
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 35,
+        "ref_max": 105
+      }
+    ]
+  },
+  "Bilirrubina": {
+    "unit": "mg/dL",
+    "grupo": "hepatico",
+    "abs_min": 0,
+    "abs_max": 30,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 1.2
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 1.2
+      }
+    ]
+  },
+  "Ureia": {
+    "unit": "mg/dL",
+    "grupo": "renal",
+    "abs_min": 3,
+    "abs_max": 300,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 10,
+        "ref_max": 50
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 10,
+        "ref_max": 50
+      }
+    ]
+  },
+  "Creatinina": {
+    "unit": "mg/dL",
+    "grupo": "renal",
+    "abs_min": 0.2,
+    "abs_max": 20,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0.7,
+        "ref_max": 1.2
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0.5,
+        "ref_max": 1.0
+      }
+    ]
+  },
+  "Ácido Úrico": {
+    "unit": "mg/dL",
+    "grupo": "renal",
+    "abs_min": 1,
+    "abs_max": 20,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 3.4,
+        "ref_max": 7.0
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 2.4,
+        "ref_max": 5.7
+      }
+    ]
+  },
+  "TSH": {
+    "unit": "uUI/mL",
+    "grupo": "tireoide",
+    "abs_min": 0.01,
+    "abs_max": 100,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0.27,
+        "ref_max": 4.2
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0.27,
+        "ref_max": 4.2
+      }
+    ]
+  },
+  "T4 Livre": {
+    "unit": "ng/dL",
+    "grupo": "tireoide",
+    "abs_min": 0.1,
+    "abs_max": 10,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0.85,
+        "ref_max": 1.86
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0.85,
+        "ref_max": 1.86
+      }
+    ]
+  },
+  "T3 Livre": {
+    "unit": "pg/mL",
+    "grupo": "tireoide",
+    "abs_min": 0.5,
+    "abs_max": 15,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 2.0,
+        "ref_max": 4.4
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 2.0,
+        "ref_max": 4.4
+      }
+    ]
+  },
+  "T3 Total": {
+    "unit": "ng/dL",
+    "grupo": "tireoide",
+    "abs_min": 10,
+    "abs_max": 600,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 60,
+        "ref_max": 200
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 60,
+        "ref_max": 200
+      }
+    ]
+  },
+  "T4 Total": {
+    "unit": "ug/dL",
+    "grupo": "tireoide",
+    "abs_min": 1,
+    "abs_max": 30,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 5.1,
+        "ref_max": 14.1
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 5.1,
+        "ref_max": 14.1
+      }
+    ]
+  },
+  "Anti-TPO": {
+    "unit": "UI/mL",
+    "grupo": "tireoide",
+    "abs_min": 0,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 35
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 35
+      }
+    ]
+  },
+  "Testosterona Total": {
+    "unit": "ng/dL",
+    "grupo": "hormonal",
+    "abs_min": 5,
+    "abs_max": 2000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 17,
+        "idade_max": 40,
+        "ref_min": 400,
+        "ref_max": 916,
+        "fonte": "IVS conservador — Testo Total >400 ng/dL (oficial 264-916)"
+      },
+      {
+        "sexo": "M",
+        "idade_min": 41,
+        "idade_max": 60,
+        "ref_min": 400,
+        "ref_max": 800,
+        "fonte": "IVS conservador"
+      },
+      {
+        "sexo": "M",
+        "idade_min": 61,
+        "idade_max": 120,
+        "ref_min": 400,
+        "ref_max": 700,
+        "fonte": "IVS conservador"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 15,
+        "ref_max": 70
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 5,
+        "ref_max": 50
+      }
+    ]
+  },
+  "Testosterona Livre": {
+    "unit": "pg/mL",
+    "grupo": "hormonal",
+    "abs_min": 0.1,
+    "abs_max": 500,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 17,
+        "idade_max": 40,
+        "ref_min": 34.01,
+        "ref_max": 245.82,
+        "fonte": "Adulto homem 17-40 anos (ref Tiaro 2026-05-05)"
+      },
+      {
+        "sexo": "M",
+        "idade_min": 41,
+        "idade_max": 60,
+        "ref_min": 18.0,
+        "ref_max": 150.0
+      },
+      {
+        "sexo": "M",
+        "idade_min": 61,
+        "idade_max": 120,
+        "ref_min": 10.0,
+        "ref_max": 100.0
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 0.3,
+        "ref_max": 3.18
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 0.1,
+        "ref_max": 2.0
+      }
+    ]
+  },
+  "Testo Biodisponível": {
+    "unit": "ng/dL",
+    "grupo": "hormonal",
+    "abs_min": 0.1,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 17,
+        "idade_max": 40,
+        "ref_min": 103,
+        "ref_max": 420
+      },
+      {
+        "sexo": "M",
+        "idade_min": 41,
+        "idade_max": 60,
+        "ref_min": 80,
+        "ref_max": 350
+      },
+      {
+        "sexo": "M",
+        "idade_min": 61,
+        "idade_max": 120,
+        "ref_min": 60,
+        "ref_max": 280
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1,
+        "ref_max": 9
+      }
+    ]
+  },
+  "Estradiol": {
+    "unit": "pg/mL",
+    "grupo": "hormonal",
+    "abs_min": 1,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 53
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 12,
+        "ref_max": 350,
+        "fonte": "Faixa ampla — varia por fase do ciclo"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 32,
+        "fonte": "Pós-menopausa"
+      }
+    ]
+  },
+  "Progesterona": {
+    "unit": "ng/mL",
+    "grupo": "hormonal",
+    "abs_min": 0,
+    "abs_max": 200,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 0,
+        "ref_max": 0.5
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 0.1,
+        "ref_max": 25,
+        "fonte": "Faixa ampla — varia por fase"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 0.7
+      }
+    ]
+  },
+  "FSH": {
+    "unit": "mUI/mL",
+    "grupo": "hormonal",
+    "abs_min": 0.1,
+    "abs_max": 200,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1.5,
+        "ref_max": 12.4
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 3.5,
+        "ref_max": 12.5
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 25.8,
+        "ref_max": 134.8,
+        "fonte": "Pós-menopausa"
+      }
+    ]
+  },
+  "LH": {
+    "unit": "mUI/mL",
+    "grupo": "hormonal",
+    "abs_min": 0.1,
+    "abs_max": 200,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 1.7,
+        "ref_max": 8.6
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 2.4,
+        "ref_max": 12.6
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 7.7,
+        "ref_max": 58.5,
+        "fonte": "Pós-menopausa"
+      }
+    ]
+  },
+  "Prolactina": {
+    "unit": "ng/mL",
+    "grupo": "hormonal",
+    "abs_min": 1,
+    "abs_max": 500,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 4.04,
+        "ref_max": 15.2
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 4.79,
+        "ref_max": 23.3
+      }
+    ]
+  },
+  "SHBG": {
+    "unit": "nmol/L",
+    "grupo": "hormonal",
+    "abs_min": 5,
+    "abs_max": 300,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 16.5,
+        "ref_max": 55.9
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 24.6,
+        "ref_max": 122
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 27.1,
+        "ref_max": 128
+      }
+    ]
+  },
+  "DHEA-S": {
+    "unit": "ug/dL",
+    "grupo": "hormonal",
+    "abs_min": 10,
+    "abs_max": 2000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 30,
+        "ref_min": 280,
+        "ref_max": 640
+      },
+      {
+        "sexo": "M",
+        "idade_min": 31,
+        "idade_max": 50,
+        "ref_min": 120,
+        "ref_max": 520
+      },
+      {
+        "sexo": "M",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 70,
+        "ref_max": 310
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 30,
+        "ref_min": 65,
+        "ref_max": 380
+      },
+      {
+        "sexo": "F",
+        "idade_min": 31,
+        "idade_max": 50,
+        "ref_min": 60,
+        "ref_max": 340
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 30,
+        "ref_max": 220
+      }
+    ]
+  },
+  "PCR-us": {
+    "unit": "mg/L",
+    "grupo": "inflamatorio",
+    "abs_min": 0,
+    "abs_max": 200,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 3.0
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 3.0
+      }
+    ]
+  },
+  "Homocisteína": {
+    "unit": "umol/L",
+    "grupo": "inflamatorio",
+    "abs_min": 3,
+    "abs_max": 100,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 12
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 12
+      }
+    ]
+  },
+  "VHS": {
+    "unit": "mm/h",
+    "grupo": "inflamatorio",
+    "abs_min": 0,
+    "abs_max": 150,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 50,
+        "ref_min": null,
+        "ref_max": 15
+      },
+      {
+        "sexo": "M",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 20
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 50,
+        "ref_min": null,
+        "ref_max": 20
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": null,
+        "ref_max": 30
+      }
+    ]
+  },
+  "Vitamina D": {
+    "unit": "ng/mL",
+    "grupo": "vitaminas",
+    "abs_min": 5,
+    "abs_max": 200,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 80,
+        "ref_max": 100,
+        "fonte": "IVS conservador — otimo acima de 80 ng/mL (suficiencia geral >=30; toxicidade >100)"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 80,
+        "ref_max": 100,
+        "fonte": "IVS conservador"
+      }
+    ]
+  },
+  "Vitamina B12": {
+    "unit": "pg/mL",
+    "grupo": "vitaminas",
+    "abs_min": 50,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 800,
+        "ref_max": 1500,
+        "fonte": "IVS conservador — B12 >800 pg/mL para funcao otima (oficial 211-946)"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 800,
+        "ref_max": 1500,
+        "fonte": "IVS conservador"
+      }
+    ]
+  },
+  "Ácido Fólico": {
+    "unit": "ng/mL",
+    "grupo": "vitaminas",
+    "abs_min": 0.5,
+    "abs_max": 50,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 3.0,
+        "ref_max": 17
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 3.0,
+        "ref_max": 17
+      }
+    ]
+  },
+  "Zinco": {
+    "unit": "ug/dL",
+    "grupo": "vitaminas",
+    "abs_min": 20,
+    "abs_max": 300,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 60,
+        "ref_max": 130
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 60,
+        "ref_max": 130
+      }
+    ]
+  },
+  "Ferro": {
+    "unit": "ug/dL",
+    "grupo": "vitaminas",
+    "abs_min": 10,
+    "abs_max": 500,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 65,
+        "ref_max": 175
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 50,
+        "ref_max": 170
+      }
+    ]
+  },
+  "Ferritina": {
+    "unit": "ng/mL",
+    "grupo": "vitaminas",
+    "abs_min": 1,
+    "abs_max": 5000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 30,
+        "ref_max": 400
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 50,
+        "ref_min": 13,
+        "ref_max": 150
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 13,
+        "ref_max": 200
+      }
+    ]
+  },
+  "Magnésio": {
+    "unit": "mg/dL",
+    "grupo": "vitaminas",
+    "abs_min": 0.5,
+    "abs_max": 5,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 1.6,
+        "ref_max": 2.6
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 1.6,
+        "ref_max": 2.6
+      }
+    ]
+  },
+  "Cálcio": {
+    "unit": "mg/dL",
+    "grupo": "vitaminas",
+    "abs_min": 5,
+    "abs_max": 15,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 8.6,
+        "ref_max": 10.2
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 8.6,
+        "ref_max": 10.2
+      }
+    ]
+  },
+  "Sódio": {
+    "unit": "mEq/L",
+    "grupo": "vitaminas",
+    "abs_min": 110,
+    "abs_max": 180,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 136,
+        "ref_max": 146
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 136,
+        "ref_max": 146
+      }
+    ]
+  },
+  "Potássio": {
+    "unit": "mEq/L",
+    "grupo": "vitaminas",
+    "abs_min": 1.5,
+    "abs_max": 8,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 3.5,
+        "ref_max": 5.1
+      },
+      {
+        "sexo": "F",
+        "idade_min": 0,
+        "idade_max": 120,
+        "ref_min": 3.5,
+        "ref_max": 5.1
+      }
+    ]
+  },
+  "PTH": {
+    "unit": "pg/mL",
+    "grupo": "vitaminas",
+    "abs_min": 1,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 15,
+        "ref_max": 65
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 15,
+        "ref_max": 65
+      }
+    ]
+  },
+  "Cortisol": {
+    "unit": "ug/dL",
+    "grupo": "adrenal",
+    "abs_min": 0.5,
+    "abs_max": 100,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 6.7,
+        "ref_max": 22.6,
+        "fonte": "Cortisol matinal (08h)"
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 6.7,
+        "ref_max": 22.6
+      }
+    ]
+  },
+  "Cortisol Basal": {
+    "unit": "ug/dL",
+    "grupo": "adrenal",
+    "abs_min": 0.5,
+    "abs_max": 100,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 6.7,
+        "ref_max": 22.6
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 6.7,
+        "ref_max": 22.6
+      }
+    ]
+  },
+  "IGF-1": {
+    "unit": "ng/mL",
+    "grupo": "adrenal",
+    "abs_min": 10,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 30,
+        "ref_min": 116,
+        "ref_max": 358
+      },
+      {
+        "sexo": "M",
+        "idade_min": 31,
+        "idade_max": 50,
+        "ref_min": 100,
+        "ref_max": 303
+      },
+      {
+        "sexo": "M",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 78,
+        "ref_max": 258
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 30,
+        "ref_min": 116,
+        "ref_max": 358
+      },
+      {
+        "sexo": "F",
+        "idade_min": 31,
+        "idade_max": 50,
+        "ref_min": 100,
+        "ref_max": 303
+      },
+      {
+        "sexo": "F",
+        "idade_min": 51,
+        "idade_max": 120,
+        "ref_min": 78,
+        "ref_max": 258
+      }
+    ]
+  }
+}

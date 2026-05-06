@@ -292,4 +292,4 @@ Toda peça de conteúdo IVS deve conter **pelo menos 1** das seguintes quebras, 
 
 ---
 
-**Status:** Mapa v3.0 canônico entregue. Aguardando: aprovação do Tiaro + calendário editorial Semanas 1-4.
+**Status:** Mapa v3.0 canônico **APROVADO** em 2026-04-30 por Tiaro. Próximo passo: calendário editorial Semanas 1-4.

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "channel": "telegram",
+      "groupId": "-1003803476669:topic:5782",
+      "agentId": "agente-reels-intel"
+    },
+    {
+      "channel": "telegram",
+      "groupId": "-1003803476669",
+      "topicId": "5782",
+      "agentId": "agente-reels-intel"
+    }
+  ]
+}

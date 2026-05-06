@@ -368,9 +368,9 @@ Qual seu maior objetivo hoje?
 - **Inbox manual:** `/root/.openclaw/workspace/ops/zapi_bridge/clara_manual_inbox.json`
 
 ### Configuração Z-API
-- `ZAPI_INSTANCE_ID`: `3CF367BB00EB205F87468A74AFBCE7F1`
-- `ZAPI_TOKEN`: `C26CFC41175FD987513C3202`
-- `ZAPI_CLIENT_TOKEN`: `F277815dcf4e94be7bc2861e8ae9fc369S`
+- `ZAPI_INSTANCE_ID`: `[REDACTED_ZAPI_INSTANCE_ID]`
+- `ZAPI_TOKEN`: `[REDACTED_ZAPI_TOKEN]`
+- `ZAPI_CLIENT_TOKEN`: `[REDACTED_ZAPI_CLIENT_TOKEN]`
 - Base URL: `https://api.z-api.io/instances/{INSTANCE_ID}/token/{TOKEN}`
 
 ### ElevenLabs TTS (áudio)
@@ -388,7 +388,7 @@ Qual seu maior objetivo hoje?
 ### Regras da bridge
 1. Sempre retornar sucesso rápido para Z-API primeiro, processar async depois
 2. Sempre verificar exclusões antes de responder
-3. Sempre consultar base de pacientes (QuarkClinic) para não responder pacientes existentes
+3. Sempre consultar base de pacientes (QuarkClinic) para identificar se o contato ja e paciente e responder com o contexto adequado no WhatsApp
 4. Sempre carregar prompt do arquivo (não embed)
 5. Sempre logar operações
 

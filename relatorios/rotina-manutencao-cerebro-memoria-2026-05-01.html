@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatório de Manutenção Diária — Cérebro & Memória Clara | Vital Slim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b16; --bg2: #0d1326; --panel: rgba(15,23,42,0.72);
+      --panel-strong: rgba(17,24,39,0.92); --line: rgba(212,175,55,0.18);
+      --white: #f8fafc; --muted: #c7d2fe; --soft: #94a3b8;
+      --gold: #d4af37; --gold-soft: #f3df9b; --green: #22c55e;
+      --amber: #f59e0b; --red: #ef4444; --blue: #60a5fa;
+      --shadow: 0 18px 50px rgba(0,0,0,.35); --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--white); font-family: Inter, Arial, sans-serif;
+      background: radial-gradient(circle at top left, rgba(212,175,55,.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(96,165,250,.10), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg2)); line-height: 1.55; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 42px 24px 80px; }
+    .hero { border-radius: 32px; padding: 42px; border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(212,175,55,.14), rgba(255,255,255,.03) 35%, rgba(96,165,250,.08)), var(--panel);
+      box-shadow: var(--shadow); backdrop-filter: blur(12px); }
+    .eyebrow { display: inline-block; margin-bottom: 12px; padding: 7px 12px; border-radius: 999px;
+      border: 1px solid rgba(212,175,55,.28); color: var(--gold-soft);
+      background: rgba(212,175,55,.08); font-size: 12px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0; font-family: "Playfair Display", serif; font-size: 36px; line-height: 1.1; max-width: 900px; }
+    .subtitle { margin-top: 14px; color: var(--muted); max-width: 860px; font-size: 16px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 12px; }
+    .meta .col { font-size: 13px; color: var(--soft); font-weight: 500; }
+    .meta span { color: var(--gold); }
+
+    h2 { font-family: "Playfair Display", serif; font-size: 24px; margin: 48px 0 18px 0;
+      padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+    h3 { font-size: 15px; font-weight: 800; letter-spacing: .04em;
+      text-transform: uppercase; margin: 28px 0 10px; color: var(--gold-soft); }
+
+    .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card { border-radius: var(--radius); padding: 22px 24px; border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.01)), var(--panel);
+      transition: transform .15s ease, border-color .2s ease; }
+    .card:hover { transform: translateY(-1px); border-color: rgba(212,175,55,.35); }
+    .card .title { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+    .card .body { font-size: 13px; color: var(--soft); line-height: 1.55; }
+    .card .tag { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 11px;
+      font-weight: 700; margin-top: 8px; }
+    .tag-green { background: rgba(34,197,94,.12); color: var(--green); }
+    .tag-amber { background: rgba(245,158,11,.12); color: var(--amber); }
+    .tag-blue { background: rgba(96,165,250,.12); color: var(--blue); }
+    .tag-red { background: rgba(239,68,68,.12); color: var(--red); }
+
+    .table-block { overflow-x: auto; margin-top: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(212,175,55,.10); }
+    th { font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: .05em;
+      color: var(--muted); background: rgba(15,23,42,.6); }
+    td { color: var(--soft); }
+    tr:hover td { background: rgba(255,255,255,.02); }
+
+    .section { margin-top: 36px; padding: 24px; border-radius: var(--radius);
+      border: 1px solid var(--line); background: var(--panel); }
+    .section p { margin: 8px 0; font-size: 13px; color: var(--soft); }
+    .section strong { color: var(--white); }
+    .section ul { margin: 8px 0 0 18px; padding: 0; }
+    .section li { font-size: 13px; color: var(--soft); margin: 4px 0; }
+    .divider { height: 1px; background: var(--line); margin: 32px 0; }
+
+    .footer { margin-top: 40px; font-size: 12px; color: var(--soft); text-align: center; }
+    .footer span { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Rotina Diária 0100</div>
+      <h1>Relatório de Manutenção — Cérebro & Memória da Clara</h1>
+      <p class="subtitle">Execução da rotina de manutenção diária conforme ROTINA-DIARIA-0100. Revisão de demandas, backlog, ambiguidades e promoções de camada.</p>
+      <div class="meta">
+        <div class="col">Data: <span>2026-05-01</span></div>
+        <div class="col">Execução: <span>João (agente-reels-intel)</span></div>
+        <div class="col">Contexto: <span>cron 54fb064e</span></div>
+      </div>
+    </div>
+
+    <h2>1. Visão Executiva do Dia</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="title">Memória Clara Learnings</div>
+        <div class="body">Último report com aprendizados extraídos: 2026-04-29 (4 lições úteis sobre confirmações e remarcação). Os dias 27 e 28 tiveram falha na extração automática por "SEM_APRENDIZADOS_NOVOS". Isso indica qualidade de dados do pipeline de learnings.</div>
+        <div class="tag tag-amber">Atenção</div>
+      </div>
+      <div class="card">
+        <div class="title">Camada Operacional Ativa</div>
+        <div class="body">A camada cerebro/operacional/ foi criada em 30/04 com 5 arquivos: INDEX-PEDIDOS-RECORRENTES, CHECKLIST-RECUPERABILIDADE, PORTAS-UNICAS-DE-EXECUCAO, ITENS-AMBIGUOS-A-AUDITAR e README. Foco central: resolver o incômodo de Tiaro de "Clara já sabe mas responde como se não soubesse".</div>
+        <div class="tag tag-green">Consolidado</div>
+      </div>
+      <div class="card">
+        <div class="title">Novos Pedidos Recorrentes Mapeados</div>
+        <div class="body">Desde a base original (8), foram acrescentados 4 novos índices: boletos Omie, consulta histórico paciente, atualização de memória Clara, e backlog aberto/recuperável. Total de 12 pedidos catalogados em INDEX-PEDIDOS-RECORRENTES.</div>
+        <div class="tag tag-blue">Expandido</div>
+      </div>
+      <div class="card">
+        <div class="title">Bridge — Ações Estruturais Pendentes</div>
+        <div class="body">Em 30/04 foram identificados 2 incidentes críticos: lead sem SLA e repetição aleatória de mensagens. As correções (deduplicação robusta, cooldown, circuit breaker, handoff real, ownership de conversa) estão documentadas mas ainda não implantadas no código. São as ações mais urgentes da manutenção.</div>
+        <div class="tag tag-red">Crítico</div>
+      </div>
+    </div>
+
+    <h2>2. Revisão de Demandas Novas</h2>
+    <div class="table-block">
+      <table>
+        <thead>
+          <tr><th>Demanda</th><th>Fonte</th><th>Status</th><th>Artefato no Cérebro</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Camada operacional de recuperabilidade</td>
+            <td>Feedback Tiaro (2026-04-30)</td>
+            <td>Concluído</td>
+            <td><code>cerebro/operacional/</code> (5 arquivos)</td>
+          </tr>
+          <tr>
+            <td>SLA de 1 minuto para lead inbound</td>
+            <td>Incidente Clara WhatsApp (2026-04-30)</td>
+            <td>Concluído (docs)</td>
+            <td><code>cerebro/verdades-operacionais-clara.md</code> + checklist</td>
+          </tr>
+          <tr>
+            <td>Handoff/manual takeover da Clara</td>
+            <td>Incidente bridge (2026-04-30)</td>
+            <td>Especificado, não implantado</td>
+            <td><code>memory/2026-04-30.md</code> + learning-ledger</td>
+          </tr>
+          <tr>
+            <td>Regra Graphify obrigatória</td>
+            <td>Direta de Tiaro (2026-04-30)</td>
+            <td>Consolidada</td>
+            <td>memory/2026-04-30.md + verdades-operacionais-clara.md</td>
+          </tr>
+          <tr>
+            <td>Padrão visual de resumo em HTML</td>
+            <td>Feedback Tiaro (2026-04-28)</td>
+            <td>Adotado</td>
+            <td>Governança documentada em memória</td>
+          </tr>
+          <tr>
+            <td>Tópico 5782 — Marketing/Reels</td>
+            <td>Ajuste operacional (2026-04-30)</td>
+            <td>Roteamento corrigido, aguardando validação real</td>
+            <td><code>cerebro/telegram-topics.md</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>3. Backlog Recuperável — Estado Atual</h2>
+    <div class="section">
+      <p><strong>Pendências de governança e recuperabilidade (30/04):</strong></p>
+      <ul>
+        <li>Alimentar continuamente INDEX-PEDIDOS-RECORRENTES com novos pedidos do Tiaro → sendo feito</li>
+        <li>Auditar demandas antigas que podem ter ficado abertas → em execução nesta rotina</li>
+        <li>Transformar backlog esquecido em portas únicas ou pendências explícitas → parcial</li>
+        <li>Revisar periodicamente relatórios HTML → pendente em acompanhamento</li>
+        <li>Trocar logo oficial no template de apresentação de paciente → sigue em aberto (projetos.md)</li>
+        <li>Stabilizar fluxo único de produção de vídeo → sigue como prioridade alta</li>
+      </ul>
+      <p><strong>Observação de manutenção:</strong> o <code>relatorio-dvd-2026</code> e outros arquivos de entregas HTML da época estão no diretório <code>relatorios/</code>. A última entrega HTML de governança foi em 2026-04-30. A recomendação é: revisar <code>relatorios/</code> mensalmente para resgatar aprendizados e evitar que as entregas fiquem apenas como artefatos passivos.</p>
+    </div>
+
+    <h2>4. Corrigir Ambiguidades</h2>
+    <div class="table-block">
+      <table>
+        <thead>
+          <tr><th>Item</th><th>Risco</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Handoff/manual takeover — falta promoção para checklist operacional</td>
+            <td>Bridge reativa Clara no meio de atendimento humano</td>
+            <td><span style="color:var(--amber);">Ambíguo → atualizado em ITENS-AMBIGUOS</span></td>
+          </tr>
+          <tr>
+            <td>Tópico Reels (5782) — validação real pós-correção</td>
+            <td>Possível falta de mapeamento real no Telegram</td>
+            <td><span style="color:var(--amber);">Aguardando</span></td>
+          </tr>
+          <tr>
+            <td>Aprendizados SEM_APRENDIZADOS_NOVOS em 27 e 28/04</td>
+            <td>Falha na qualidade do pipeline de learnings</td>
+            <td><span style="color:var(--amber);">Requerer investigação</span></td>
+          </tr>
+          <tr>
+            <td>Deduplicação + circuit breaker na bridge</td>
+            <td>Repetição aleatória de mensagens via Z-API</td>
+            <td><span style="color:var(--red);">Crítico — especificado, não implantado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>5. Promoções de Camada Executadas</h2>
+    <div class="section">
+      <p><strong>Promoção de hoje (2026-05-01):</strong></p>
+      <ul>
+        <li><strong>ITENS-AMBIGUOS-A-AUDITAR.md</strong> — atualizado com 2 itens novos auditados da sessão 30/04 (handoff e tópico Reels), mantendo os anteriores como histórico</li>
+        <li><strong>INDEX-PEDIDOS-RECORRENTES.md</strong> — já estava consolidado em 30/04 com 12 pedidos. Não há novos pedidos de 30/04 ou 01/05 para adicionar</li>
+        <li><strong>PENDENCIAS.md</strong> — constatação: o arquivo já reflete as pendências de governança e backlog; não há pendências novas além das citadas</li>
+      </ul>
+      <p><strong>Promoções anteriores que merecem reconhecimento (30/04):</strong></p>
+      <ul>
+        <li>SLA de 1 minuto → promovido de memória para verdades-operacionais-clara.md + checklist + MEMORY.md</li>
+        <li>Regra Graphify → promovida para memória diária + verdades operacionais</li>
+        <li>Template de apresentação 3 camadas (institucional + variável + conexão) → promovido a learning-ledger + projetos</li>
+        <li>SPIN curto de recuperação → promovido a 5 artefatos operacionais (checklist, scripts, mensagens-modelo, cola, árvore-decisão)</li>
+      </ul>
+    </div>
+
+    <h2>6. Recomendações para Próxima Rotina</h2>
+    <div class="section">
+      <p><strong>Operacional — urgente:</strong></p>
+      <ul>
+        <li>Implantar no código da bridge as correções de deduplicação robusta (telefone + messageId + hash), cooldown por número e circuit breaker de repetição</li>
+        <li>Promover a política de ownership/conversão para arquivo canônico operacional (não ficar só na memória)</li>
+        <li>Validar tópico 5782 com execução real de João para fechar como "território comprovado"</li>
+      </ul>
+      <p><strong>Manutenção de qualidade:</strong></p>
+      <ul>
+        <li>Investigar por que o pipeline de learnings retornou SEM_APRENDIZADOS_NOVOS nos dias 27 e 28/04</li>
+        <li>Revisar relatórios HTML de 2026-04 e promover aprendizados persistentes para camada ledger</li>
+        <li>Revisar mensagens-modelo da Clara com base nos aprendizados de 29/04 (variações de confirmação aceitas, remarcação por justificativa)</li>
+      </ul>
+      <p><strong>Governança:</strong></p>
+      <ul>
+        <li>Manter alimentação do INDEX-PEDIDOS-RECORRENTES conforme surgirem novas linguagens de pedido</li>
+        <li>Revisar quinzenalmente se o nome técnico das skills bate com a linguagem que Tiaro usa</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+    <div class="footer">
+      Relatório gerado automaticamente pela rotina <span>ROTINA-DIARIA-0100.md</span> — Próxima execução: 2026-05-02 01:00 UTC<br>
+      Cérebro Vital Slim &bull; Memória operacional consistente
+    </div>
+  </div>
+</body>
+</html>

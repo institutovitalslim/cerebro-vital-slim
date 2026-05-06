@@ -1,0 +1,3046 @@
+#!/usr/bin/env python3
+"""
+V10 — Renderer da Apresentação V2 do Programa de Acompanhamento Avançado IVS
+
+Implementação fiel ao briefing do Conselho Growth (padrão conselho.html, 05/05/2026).
+
+Estrutura DOM (na ordem):
+  body
+    header.topbar
+    nav.progress-nav
+    main
+      section.hero-clinical-document
+      section.executive-diagnosis
+      section.patient-mirror
+      section.critical-levers
+      section.spin-guided
+      section.ivs-machine
+      section.proof-by-process
+      section.program-180-days
+      section.objection-preemption
+      section.decision-checklist
+      section.final-cta
+      section.technical-appendix
+
+Compliance:
+  - Sem "garantido", "cura", "X dias", "reverte com certeza"
+  - Disclaimer "Resultados individuais variam..." nos casos reais
+  - Linguagem: "pode", "tende", "merece atenção", "minha recomendação"
+"""
+from __future__ import annotations
+import base64
+import json
+import re
+from datetime import date, datetime
+from html import escape as _html_escape
+from pathlib import Path
+
+ASSETS_DIR = Path("/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/assets")
+SITE_IMAGES = ASSETS_DIR / "site-images"
+BIBLIOTECA_PATH = ASSETS_DIR / "biblioteca_implicacoes.json"
+REFS_PATH = ASSETS_DIR / "refs_canonicas.json"
+
+
+def safe_html(s):
+    if s is None:
+        return ""
+    return _html_escape(str(s), quote=False)
+
+
+def img_b64(path: Path) -> str:
+    if not path.exists():
+        return ""
+    with open(path, "rb") as f:
+        data = base64.b64encode(f.read()).decode("ascii")
+    ext = path.suffix.lstrip(".").lower()
+    if ext == "jpg":
+        ext = "jpeg"
+    return f"data:image/{ext};base64,{data}"
+
+
+def calcular_idade(data_nasc_ms):
+    if not data_nasc_ms:
+        return None
+    try:
+        d = datetime.fromtimestamp(int(data_nasc_ms) / 1000)
+        today = date.today()
+        return today.year - d.year - ((today.month, today.day) < (d.month, d.day))
+    except Exception:
+        return None
+
+
+# ---------------------------------------------------------------------------
+# CSS — paleta IVS (creme + dourado), tipografia premium, responsivo, print
+# ---------------------------------------------------------------------------
+CSS = r"""
+:root{
+  --gold:#9F8844; --gold2:#D4BC79; --gold-dark:#6B5A2B;
+  --cream:#F7F2E4; --paper:#FFFFFF; --elev:#FBF6E8;
+  --ink:#1F1A12; --body:#3D3528; --muted:#756A55;
+  --line:rgba(107,90,43,.18); --line-strong:rgba(107,90,43,.32);
+  --red:#8E2417; --amber:#A06D0A; --green:#155527;
+  --serif:Georgia, "Playfair Display", serif;
+  --sans:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --max-w:1240px;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+  --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body{
+  font-family: var(--sans); font-size: 16px; line-height: 1.62;
+  color: var(--body); background: var(--cream);
+  text-rendering: optimizeLegibility; font-weight: 400;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--gold-dark); text-decoration: none; }
+
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); line-height: 1.15; font-weight: 500; }
+h1 { font-size: clamp(36px, 5vw, 64px); letter-spacing: -0.015em; }
+h2 { font-size: clamp(28px, 3.6vw, 48px); margin-bottom: var(--s-5); }
+h3 { font-size: clamp(20px, 2.2vw, 26px); margin-bottom: var(--s-4); }
+h4 { font-family: var(--sans); font-size: 12px; font-weight: 600; text-transform: uppercase;
+     letter-spacing: 0.18em; color: var(--gold-dark); margin-bottom: var(--s-3); }
+p { font-family: var(--sans); margin-bottom: var(--s-4); }
+
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--s-5); }
+.section { padding: var(--s-9) 0; border-top: 1px solid var(--line); }
+.section:first-of-type { border-top: none; }
+
+/* === TOPBAR === */
+.topbar{
+  background:#FFFFFF; padding:var(--s-3) var(--s-5);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  max-width:var(--max-w); margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+  min-height:96px; gap: var(--s-5);
+}
+.topbar .logo{ height:80px; max-width:280px; object-fit:contain; }
+.topbar .doctor-tag{
+  font-family:var(--sans); font-size:11px; font-weight:500;
+  text-transform:uppercase; letter-spacing:0.18em; color:var(--muted);
+  text-align:right; line-height:1.5;
+}
+.topbar .doctor-tag .name{
+  display:block; font-family:var(--serif); font-size:16px; font-weight:500;
+  font-style:italic; text-transform:none; letter-spacing:0;
+  color:var(--ink); margin-bottom:2px;
+}
+
+/* === PROGRESS NAV === */
+.progress-nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(247,242,228,0.95); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.progress-nav-inner{
+  max-width:var(--max-w); margin:0 auto;
+  padding:var(--s-3) var(--s-5);
+  display:flex; gap:var(--s-2); flex-wrap:wrap; align-items:center;
+  font-size:11px; letter-spacing:0.10em; text-transform:uppercase; font-weight:600;
+}
+.progress-step{
+  color:var(--muted); padding:6px 12px; border-radius:999px;
+  cursor:pointer; transition:all 0.2s; border:1px solid transparent;
+}
+.progress-step.active{ background:var(--gold); color:#fff; border-color:var(--gold); }
+.progress-step:hover{ color:var(--ink); }
+.progress-toggle{
+  margin-left:auto; padding:6px 14px; border-radius:999px;
+  border:1px solid var(--gold); color:var(--gold-dark); background:transparent;
+  font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  cursor:pointer; font-family:var(--sans);
+}
+.progress-toggle:hover{ background:var(--gold); color:#fff; }
+.progress-toggle.active{ background:var(--gold-dark); color:#fff; border-color:var(--gold-dark); }
+
+/* === HERO CLINICAL DOCUMENT === */
+.hero-clinical-document{
+  padding:var(--s-9) 0 var(--s-8);
+  background:linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.hero-meta-bar{
+  display:flex; gap:var(--s-6); flex-wrap:wrap;
+  padding-bottom:var(--s-5); margin-bottom:var(--s-6);
+  border-bottom:1px solid var(--line);
+}
+.hero-meta-item{ font-size:13px; color:var(--muted); }
+.hero-meta-item strong{
+  display:block; color:var(--ink); font-family:var(--serif);
+  font-size:18px; font-weight:500; font-style:italic; margin-top:2px;
+}
+.hero-clinical-h1{ max-width:920px; margin-bottom:var(--s-5); }
+.hero-clinical-lead{
+  font-size:clamp(17px, 1.5vw, 20px); color:var(--ink);
+  max-width:780px; line-height:1.55; font-weight:400;
+}
+.hero-clinical-lead strong{ color:var(--gold-dark); font-weight:600; }
+
+/* === EXECUTIVE DIAGNOSIS === */
+.executive-diagnosis{ background:var(--paper); }
+.diag-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-5); margin-top:var(--s-6); }
+.diag-card{
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); border-top:3px solid var(--gold);
+}
+.diag-card h4{ color:var(--gold-dark); margin-bottom:var(--s-3); }
+.diag-card .body-text{ font-size:15px; line-height:1.6; color:var(--body); margin:0; }
+.diag-recomendacao{
+  background:#1F1A12; color:#F7F2E4; border-radius:14px;
+  padding:var(--s-6) var(--s-7); margin-top:var(--s-6);
+  font-family:var(--serif); font-size:clamp(18px, 1.8vw, 22px);
+  font-style:italic; line-height:1.5;
+}
+.diag-recomendacao strong{ color:var(--gold2); font-style:normal; }
+
+/* === PATIENT MIRROR === */
+.patient-mirror{ background:var(--cream); }
+.mirror-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-4); margin-top:var(--s-5); }
+.mirror-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5);
+}
+.mirror-card .label{
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:0.16em; color:var(--gold-dark); margin-bottom:var(--s-3);
+}
+.mirror-card .value{
+  font-family:var(--serif); font-size:20px; font-weight:500;
+  color:var(--ink); line-height:1.3;
+}
+.mirror-card .value.empty{
+  font-family:var(--sans); font-size:13px; font-style:italic;
+  color:var(--muted); font-weight:400;
+}
+.mirror-card .sub{ font-size:13px; color:var(--muted); margin-top:var(--s-2); }
+.mirror-card.feature{ grid-column:span 3; border-left:4px solid var(--gold); }
+
+/* === CRITICAL LEVERS === */
+.critical-levers{ background:var(--paper); }
+.lever-list{ display:flex; flex-direction:column; gap:var(--s-5); margin-top:var(--s-6); }
+.lever-card{
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); display:grid; grid-template-columns:1fr 2fr; gap:var(--s-6);
+}
+.lever-card[data-sev="crit"]{ border-left:4px solid var(--red); }
+.lever-card[data-sev="alert"]{ border-left:4px solid var(--amber); }
+.lever-numeric .name{
+  font-family:var(--serif); font-size:22px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-3);
+}
+.lever-numeric .value{
+  font-family:var(--serif); font-size:42px; font-weight:600;
+  color:var(--ink); line-height:1; margin-bottom:var(--s-2);
+}
+.lever-numeric .value .unit{
+  font-size:0.45em; color:var(--muted); margin-left:6px; font-weight:400;
+}
+.lever-numeric .ref{ font-size:13px; color:var(--muted); margin-bottom:var(--s-3); }
+.lever-numeric .badge{
+  display:inline-block; padding:4px 10px; border-radius:6px;
+  font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+}
+.lever-card[data-sev="crit"] .badge{ background:rgba(142,36,23,0.10); color:var(--red); }
+.lever-card[data-sev="alert"] .badge{ background:rgba(160,109,10,0.10); color:var(--amber); }
+.lever-narrative h4{ color:var(--gold-dark); margin-bottom:var(--s-2); }
+.lever-narrative .interp{
+  font-size:15px; line-height:1.55; color:var(--body); margin-bottom:var(--s-3);
+}
+.lever-narrative .impact{
+  font-size:14px; color:var(--muted); margin-bottom:var(--s-4);
+  padding:var(--s-3) var(--s-4); background:var(--paper); border-radius:8px;
+  border-left:2px solid var(--line);
+}
+.lever-narrative .spin-q{
+  font-family:var(--serif); font-size:16px; font-style:italic;
+  color:var(--ink); padding-left:var(--s-4); border-left:3px solid var(--gold);
+  line-height:1.5;
+}
+.lever-narrative .spin-q::before{ content:"Pergunta para a consulta: "; color:var(--gold-dark); font-style:normal; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.14em; display:block; margin-bottom:var(--s-2); }
+
+/* === SPIN GUIDED === */
+.spin-guided{ background:var(--cream); }
+.spin-step-block{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6) var(--s-7); margin-bottom:var(--s-5);
+}
+.spin-step-block .step-tag{
+  display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:var(--s-3);
+}
+.spin-step-block h3{ margin-bottom:var(--s-4); }
+.spin-step-block .body-text{ font-size:15px; line-height:1.6; color:var(--body); margin-bottom:var(--s-4); }
+.spin-step-block .confirmation{
+  background:var(--cream); padding:var(--s-4) var(--s-5);
+  border-left:3px solid var(--gold); border-radius:0 8px 8px 0;
+  font-family:var(--serif); font-style:italic; font-size:16px; color:var(--ink);
+  margin-top:var(--s-4);
+}
+.spin-step-block .confirmation::before{
+  content:"Pergunta de confirmação:"; display:block;
+  font-family:var(--sans); font-style:normal; font-weight:600;
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--gold-dark); margin-bottom:var(--s-2);
+}
+.spin-table{ width:100%; border-collapse:collapse; margin:var(--s-4) 0; font-size:14px; }
+.spin-table th, .spin-table td{
+  padding:var(--s-3) var(--s-4); text-align:left; vertical-align:top;
+  border-bottom:1px solid var(--line);
+}
+.spin-table th{
+  background:var(--cream); font-size:11px; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-dark);
+}
+.spin-table tr:last-child td{ border-bottom:none; }
+
+/* === IVS MACHINE === */
+.ivs-machine{ background:var(--paper); }
+.machine-flow{
+  display:grid; grid-template-columns:repeat(6, 1fr); gap:var(--s-3);
+  margin-top:var(--s-7); position:relative;
+}
+.machine-step{
+  background:var(--cream); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5) var(--s-4); text-align:center; position:relative;
+}
+.machine-step .num{
+  width:36px; height:36px; border-radius:50%;
+  background:var(--gold); color:#fff; display:flex;
+  align-items:center; justify-content:center; font-weight:700;
+  font-size:14px; margin:0 auto var(--s-3);
+}
+.machine-step .title{
+  font-family:var(--serif); font-size:15px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-2); line-height:1.25;
+}
+.machine-step .desc{ font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* === PROOF BY PROCESS === */
+.proof-by-process{ background:var(--cream); }
+.proof-list{ display:flex; flex-direction:column; gap:var(--s-7); margin-top:var(--s-6); }
+.proof-card{
+  display:grid; grid-template-columns:1.2fr 1fr; gap:var(--s-7);
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); align-items:center;
+}
+.proof-card:nth-child(even){ grid-template-columns:1fr 1.2fr; }
+.proof-card:nth-child(even) .proof-imgs{ order:2; }
+.proof-imgs{
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--s-3);
+}
+.proof-img{ position:relative; aspect-ratio:3/4; overflow:hidden; border-radius:10px; background:var(--cream); }
+.proof-img img{ width:100%; height:100%; object-fit:cover; object-position:center top; }
+.proof-img .label{
+  position:absolute; top:var(--s-3); left:var(--s-3);
+  background:rgba(255,255,255,0.95); padding:4px 10px; border-radius:4px;
+  font-size:10px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--ink);
+}
+.proof-text .step-eyebrow{
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:0.20em; color:var(--gold-dark); margin-bottom:var(--s-3);
+  display:block;
+}
+.proof-text h3{ margin-bottom:var(--s-4); }
+.proof-text blockquote{
+  font-family:var(--serif); font-size:17px; font-style:italic;
+  line-height:1.55; color:var(--body); margin:0 0 var(--s-5);
+  padding-left:var(--s-4); border-left:2px solid var(--gold);
+}
+.proof-disclaimer{
+  margin-top:var(--s-7); padding:var(--s-4) var(--s-5);
+  background:var(--paper); border:1px solid var(--line); border-radius:8px;
+  font-size:12px; color:var(--muted); font-style:italic; line-height:1.5;
+}
+
+/* === PROGRAM 180 DAYS === */
+.program-180-days{ background:var(--paper); }
+.program-timeline{
+  display:flex; flex-direction:column; gap:var(--s-5); margin-top:var(--s-6);
+}
+.program-phase{
+  display:grid; grid-template-columns:120px 1fr; gap:var(--s-6);
+  padding:var(--s-5) 0; border-bottom:1px solid var(--line); align-items:start;
+}
+.program-phase:last-child{ border-bottom:none; }
+.program-phase .phase-marker{
+  width:120px; padding:var(--s-3) 0; text-align:center;
+  background:var(--cream); border:1px solid var(--line); border-radius:10px;
+}
+.program-phase .phase-marker .num{
+  font-family:var(--serif); font-size:24px; font-weight:600; color:var(--gold-dark);
+  font-style:italic; line-height:1;
+}
+.program-phase .phase-marker .label{
+  font-size:10px; font-weight:600; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--muted); margin-top:4px;
+}
+.program-phase .phase-content h4{ font-family:var(--serif); font-size:20px; font-weight:500; color:var(--ink); margin-bottom:var(--s-3); text-transform:none; letter-spacing:-0.01em; }
+.program-phase .phase-content .desc{ font-size:14px; line-height:1.6; color:var(--body); margin-bottom:var(--s-3); }
+.program-phase .phase-content ul{ list-style:none; padding:0; }
+.program-phase .phase-content li{
+  font-size:13px; color:var(--muted); padding:4px 0 4px var(--s-4);
+  position:relative; line-height:1.5;
+}
+.program-phase .phase-content li::before{
+  content:""; position:absolute; left:0; top:13px;
+  width:6px; height:6px; border-radius:50%; background:var(--gold);
+}
+
+/* === OBJECTION PREEMPTION === */
+.objection-preemption{ background:var(--cream); }
+.obj-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-4); margin-top:var(--s-6); }
+.obj-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5); border-top:3px solid var(--gold-dark);
+}
+.obj-card .obj-q{
+  font-family:var(--serif); font-size:17px; font-weight:500; font-style:italic;
+  color:var(--ink); margin-bottom:var(--s-4); line-height:1.35;
+}
+.obj-card .obj-a{ font-size:13px; line-height:1.6; color:var(--body); }
+
+/* === DECISION CHECKLIST === */
+.decision-checklist{ background:var(--paper); }
+.checklist-card{
+  max-width:780px; margin:var(--s-6) auto 0;
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-7);
+}
+.checklist-item{
+  display:flex; align-items:flex-start; gap:var(--s-4);
+  padding:var(--s-4) 0; border-bottom:1px solid var(--line); cursor:pointer;
+}
+.checklist-item:last-child{ border-bottom:none; }
+.checklist-item .check{
+  flex:0 0 28px; width:28px; height:28px; border-radius:6px;
+  border:1.5px solid var(--gold); background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  margin-top:2px; transition:all 0.2s;
+}
+.checklist-item.checked .check{ background:var(--gold); }
+.checklist-item.checked .check::after{
+  content:""; width:8px; height:14px; border:solid #fff;
+  border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px, -1px);
+}
+.checklist-item .text{ font-size:15px; line-height:1.5; color:var(--ink); flex:1; padding-top:2px; }
+.checklist-item.checked .text{ color:var(--muted); }
+
+/* === FINAL CTA === */
+.final-cta{ background:var(--cream); }
+.cta-decision{ display:grid; grid-template-columns:1fr 1fr; gap:var(--s-5); margin-top:var(--s-6); max-width:1000px; margin-left:auto; margin-right:auto; }
+.cta-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-7); display:flex; flex-direction:column; gap:var(--s-4);
+}
+.cta-card.recommended{ border-top:4px solid var(--gold); background:#FFFCF3; }
+.cta-card.alternative{ opacity:0.85; }
+.cta-card .label{
+  font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase;
+}
+.cta-card.recommended .label{ color:var(--gold-dark); }
+.cta-card.alternative .label{ color:var(--muted); }
+.cta-card h3{ margin-bottom:var(--s-3); }
+.cta-card .desc{ font-size:14px; line-height:1.6; color:var(--body); flex:1; }
+.cta-card .button{
+  display:inline-block; padding:var(--s-4) var(--s-6);
+  border-radius:8px; font-size:13px; font-weight:700;
+  letter-spacing:0.16em; text-transform:uppercase; cursor:pointer;
+  font-family:var(--sans); border:none; text-decoration:none; text-align:center;
+  margin-top:var(--s-3);
+}
+.cta-card.recommended .button{ background:var(--gold-dark); color:#fff; }
+.cta-card.alternative .button{ background:transparent; color:var(--muted); border:1px solid var(--line-strong); }
+
+.cta-signature{
+  text-align:center; margin-top:var(--s-8); padding-top:var(--s-6);
+  border-top:1px solid var(--line);
+}
+.cta-signature .name{
+  font-family:var(--serif); font-size:22px; font-weight:500;
+  font-style:italic; color:var(--ink); margin-bottom:var(--s-2);
+}
+.cta-signature .meta{
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);
+}
+
+/* === TECHNICAL APPENDIX === */
+.technical-appendix{ background:var(--paper); }
+.appendix-controls{
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:var(--s-3); margin-bottom:var(--s-5);
+}
+.appendix-controls .lead{ font-size:14px; color:var(--muted); margin:0; max-width:680px; }
+.appendix-toggle-all{
+  padding:8px 16px; border-radius:8px; border:1px solid var(--gold);
+  background:transparent; color:var(--gold-dark); font-size:11px;
+  font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
+  cursor:pointer; font-family:var(--sans);
+}
+.appendix-toggle-all:hover{ background:var(--gold); color:#fff; }
+
+.exam-group{
+  border:1px solid var(--line); border-radius:10px; margin-bottom:var(--s-3); overflow:hidden;
+  background:var(--cream);
+}
+.exam-group-header{
+  padding:var(--s-4) var(--s-5); cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  background:var(--paper); user-select:none;
+}
+.exam-group-header h4{
+  font-family:var(--serif); font-size:18px; font-weight:500;
+  color:var(--ink); text-transform:none; letter-spacing:-0.005em; margin:0;
+}
+.exam-group-header .meta{
+  display:flex; gap:var(--s-3); align-items:center; font-size:12px; color:var(--muted);
+}
+.exam-group-header .toggle{
+  width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+  transition:transform 0.2s;
+}
+.exam-group.open .exam-group-header .toggle{ transform:rotate(180deg); }
+.exam-group-body{ display:none; padding:0 var(--s-5) var(--s-5); }
+.exam-group.open .exam-group-body{ display:block; }
+.exam-row{
+  display:grid; grid-template-columns:1.6fr 1fr 1.2fr 0.8fr;
+  gap:var(--s-4); padding:var(--s-3) 0;
+  border-bottom:1px solid var(--line); align-items:center; font-size:14px;
+}
+.exam-row:last-child{ border-bottom:none; }
+.exam-row .e-nome{ font-family:var(--serif); font-weight:500; font-size:15px; color:var(--ink); }
+.exam-row .e-valor{ font-family:var(--serif); font-weight:600; color:var(--ink); }
+.exam-row .e-valor .e-unit{ color:var(--muted); font-size:12px; margin-left:4px; font-weight:400; }
+.exam-row .e-ref{ font-size:12px; color:var(--muted); }
+.exam-row .e-status{
+  font-size:10px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; text-align:right;
+}
+.exam-row[data-sev="crit"] .e-status{ color:var(--red); }
+.exam-row[data-sev="alert"] .e-status, .exam-row[data-sev="low"] .e-status{ color:var(--amber); }
+.exam-row[data-sev="ok"] .e-status, .exam-row[data-sev="normal"] .e-status{ color:var(--green); }
+
+/* === Mobile === */
+@media(max-width: 900px){
+  .diag-grid, .mirror-grid, .machine-flow, .obj-grid, .cta-decision { grid-template-columns: 1fr; }
+  .lever-card, .proof-card, .proof-card:nth-child(even), .program-phase{ grid-template-columns: 1fr; }
+  .proof-card:nth-child(even) .proof-imgs{ order:0; }
+  .machine-flow{ grid-template-columns: repeat(2, 1fr); }
+  .progress-nav-inner{ overflow-x:auto; flex-wrap:nowrap; }
+  .topbar .doctor-tag{ display:none; }
+  .topbar .logo{ height:60px; max-width:200px; }
+  .hero-meta-bar{ flex-direction:column; gap:var(--s-3); }
+  .program-phase .phase-marker{ width:auto; padding:var(--s-3) var(--s-4); }
+  .program-phase{ gap:var(--s-3); }
+  .exam-row{ grid-template-columns:2fr 1fr; row-gap:6px; }
+  .exam-row .e-ref, .exam-row .e-status{ grid-column:span 2; }
+  .lever-card{ gap:var(--s-3); }
+  .lever-numeric{ display:flex; align-items:baseline; gap:var(--s-3); flex-wrap:wrap; }
+}
+
+/* === Print === */
+@media print{
+  .progress-nav, .progress-toggle, .appendix-toggle-all{ display:none !important; }
+  body{ background:#fff; color:#000; font-size:12pt; }
+  .section{ padding:24pt 0; page-break-inside:avoid; border-top-color:#ccc; }
+  h1{ font-size:24pt; }
+  h2{ font-size:18pt; }
+  h3{ font-size:14pt; }
+  .exam-group, .exam-group-body{ display:block !important; }
+  .exam-group-header .toggle{ display:none; }
+  .lever-card, .diag-card, .obj-card, .mirror-card, .cta-card{
+    page-break-inside:avoid; box-shadow:none;
+  }
+  .proof-disclaimer, .checklist-card{ page-break-inside:avoid; }
+}
+
+/* CSS dos 3 modos é gerenciado abaixo (V2.5) */
+
+
+
+
+
+
+
+
+/* ========================================================================
+   V2.5 — 3 modos de visualização (exclusivos)
+   ======================================================================== */
+
+/* Mode switcher (substitui progress-toggle) */
+.mode-switcher{
+  display: inline-flex; gap: 4px; padding: 4px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: rgba(255,255,255,0.85);
+  margin-left: auto;
+}
+.mode-btn{
+  padding: 6px 14px; border-radius: 999px;
+  border: none; background: transparent;
+  font-family: var(--sans); font-size: 11px;
+  font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  transition: all 0.2s;
+}
+.mode-btn:hover{ color: var(--ink); }
+.mode-btn.active{ background: var(--gold-dark); color: #fff; box-shadow: 0 2px 6px rgba(107,90,43,0.20); }
+
+/* === MODO APRESENTAÇÃO === (default) */
+/* Mostra fluxo principal, esconde apêndices */
+body.modo-apresentacao .technical-appendix,
+body.modo-apresentacao .doctor-objections{
+  display: none !important;
+}
+
+/* === MODO EXAMES === */
+/* Mostra apenas o painel técnico de exames */
+body.modo-exames main > section:not(#technical-appendix){
+  display: none !important;
+}
+body.modo-exames .technical-appendix{ padding-top: var(--s-7); }
+
+/* === MODO OBJEÇÕES === */
+/* Mostra apenas o painel de objeções da médica */
+body.modo-objecoes main > section:not(#doctor-objections){
+  display: none !important;
+}
+body.modo-objecoes .doctor-objections{ padding-top: var(--s-7); }
+
+@media print{
+  .mode-switcher{ display: none !important; }
+}
+
+/* ========================================================================
+   V2.5 — Painel de objeções otimizado para consulta rápida
+   ======================================================================== */
+
+/* Barra de busca + categorias no topo do painel */
+.obj-toolbar{
+  position: sticky; top: 76px; z-index: 5;
+  background: rgba(247,242,228,0.95); backdrop-filter: blur(10px);
+  padding: var(--s-4) 0; margin-bottom: var(--s-5);
+  border-bottom: 1px solid var(--line);
+}
+.obj-search-wrap{ position: relative; max-width: 920px; margin: 0 auto; }
+.obj-search{
+  width: 100%; padding: var(--s-4) var(--s-5) var(--s-4) 48px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--paper);
+  font-family: var(--sans); font-size: 16px;
+  color: var(--ink); outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.obj-search:focus{
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(159,136,68,0.15);
+}
+.obj-search::placeholder{ color: var(--muted); }
+.obj-search-icon{
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; color: var(--muted); pointer-events: none;
+}
+.obj-search-clear{
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%;
+  border: none; background: var(--cream); color: var(--muted);
+  cursor: pointer; display: none; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1;
+}
+.obj-search-clear.visible{ display: flex; }
+.obj-search-clear:hover{ background: var(--gold); color: #fff; }
+
+.obj-cats{
+  display: flex; gap: 6px; flex-wrap: wrap; max-width: 920px; margin: var(--s-3) auto 0;
+}
+.obj-cat-chip{
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--paper);
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted);
+  cursor: pointer; transition: all 0.2s;
+}
+.obj-cat-chip:hover{ border-color: var(--gold); color: var(--ink); }
+.obj-cat-chip.active{
+  background: var(--gold-dark); color: #fff; border-color: var(--gold-dark);
+}
+
+.obj-counter{
+  max-width: 920px; margin: var(--s-3) auto 0;
+  font-size: 12px; color: var(--muted);
+  font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase;
+}
+
+/* Lista de objeções — 1 coluna max-width 920px */
+.doctor-obj-list{
+  max-width: 920px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: var(--s-3);
+}
+
+/* Card collapsable */
+.doctor-obj-card{
+  background: var(--paper); border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 0;
+  transition: box-shadow 0.25s, border-color 0.25s;
+  overflow: hidden;
+}
+.doctor-obj-card.hidden{ display: none; }
+.doctor-obj-card:hover{
+  border-color: var(--gold);
+  box-shadow: 0 8px 18px -10px rgba(54,43,24,0.12);
+}
+.doctor-obj-card .obj-header{
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-4) var(--s-5); cursor: pointer;
+  user-select: none;
+}
+.doctor-obj-card .obj-cat-tag{
+  flex-shrink: 0;
+  padding: 3px 9px; border-radius: 4px;
+  font-family: var(--sans); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  background: rgba(159,136,68,0.10); color: var(--gold-dark);
+}
+.doctor-obj-card .obj-header h3{
+  flex: 1; font-family: var(--serif); font-size: 17px;
+  font-weight: 500; font-style: italic; color: var(--ink);
+  margin: 0; line-height: 1.4;
+}
+.doctor-obj-card .obj-toggle{
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(159,136,68,0.10); color: var(--gold-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: transform 0.25s;
+}
+.doctor-obj-card.open .obj-toggle{ transform: rotate(180deg); }
+.doctor-obj-card .obj-body{
+  display: none; padding: 0 var(--s-5) var(--s-5);
+  border-top: 1px dashed var(--line);
+  margin-top: 0;
+}
+.doctor-obj-card.open .obj-body{ display: block; padding-top: var(--s-4); }
+.doctor-obj-card .obj-body p{
+  font-size: 14px; line-height: 1.55; color: var(--body); margin-bottom: var(--s-3);
+}
+.doctor-obj-card .obj-body p:last-child{ margin-bottom: 0; }
+.doctor-obj-card .obj-body p strong{
+  color: var(--gold-dark); font-weight: 700;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  display: block; margin-bottom: 4px;
+}
+.doctor-obj-card .obj-body .cond{
+  border-top: 1px dashed var(--line);
+  padding-top: var(--s-3); margin-top: var(--s-3);
+  font-style: italic; color: var(--ink);
+}
+.doctor-obj-card .obj-body .cond strong{ color: var(--gold-dark); font-style: normal; }
+
+/* Estado: nenhum resultado */
+.obj-empty{
+  text-align: center; padding: var(--s-8) 0;
+  color: var(--muted); font-style: italic;
+}
+
+/* Atalho de teclado hint */
+.obj-shortcut{
+  position: absolute; right: 52px; top: 50%; transform: translateY(-50%);
+  font-size: 10px; color: var(--muted); font-weight: 600;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  background: var(--cream); padding: 2px 8px; border-radius: 4px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+.obj-search:focus + .obj-shortcut{ display: none; }
+
+@media(max-width: 720px){
+  .obj-toolbar{ top: 60px; }
+  .obj-cats{ overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
+  .obj-cat-chip{ flex-shrink: 0; }
+  .doctor-obj-card .obj-cat-tag{ display: none; }
+  .doctor-obj-card .obj-header h3{ font-size: 15px; }
+  .obj-shortcut{ display: none; }
+}
+
+/* V2.4 — Apêndice da médica (legacy, sobrescrito por V2.5) */
+.doctor-objections{
+  background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+  border-top: 1px dashed var(--gold);
+}
+.doctor-objections .doctor-tag{
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold-dark);
+  background: rgba(159,136,68,0.10);
+  padding: 6px 12px; border-radius: 4px;
+  margin-bottom: var(--s-4);
+}
+.doctor-objections h2{
+  font-family: var(--serif); font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500; color: var(--ink); letter-spacing: -0.01em;
+  margin-bottom: var(--s-4);
+}
+.doctor-objections .lead{
+  max-width: 780px; font-size: 15px; line-height: 1.6;
+  color: var(--muted); margin-bottom: var(--s-7); font-style: italic;
+}
+.doctor-obj-grid{
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+}
+.doctor-obj-card{
+  background: var(--paper); border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 12px; padding: var(--s-5) var(--s-6);
+  transition: box-shadow 0.3s;
+}
+.doctor-obj-card:hover{ box-shadow: 0 14px 28px -14px rgba(54,43,24,0.12); }
+.doctor-obj-card h3{
+  font-family: var(--serif); font-size: 19px; font-weight: 500;
+  font-style: italic; color: var(--ink); margin-bottom: var(--s-4);
+  line-height: 1.4;
+}
+.doctor-obj-card p{
+  font-size: 13.5px; line-height: 1.55; color: var(--body);
+  margin-bottom: var(--s-3);
+}
+.doctor-obj-card p strong{
+  color: var(--gold-dark); font-weight: 700;
+  font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase;
+  display: inline-block; margin-right: 6px;
+}
+.doctor-obj-card .cond{
+  border-top: 1px dashed var(--line);
+  padding-top: var(--s-3); margin-top: var(--s-3);
+  font-style: italic; color: var(--ink);
+}
+
+@media(max-width: 900px){
+  .doctor-obj-grid{ grid-template-columns: 1fr; }
+}
+
+/* Ocultar em modo apresentação (uso médico interno apenas) */
+/* doctor-objections gerenciado pelas regras de modo (V2.5) */
+
+/* Print: oculto também (não é parte do documento entregue ao paciente) */
+@media print{
+  .doctor-objections{ display: none !important; }
+}
+
+/* V2.3 — Programa enxuto (4 fases simples) */
+.program-180-days .program-phase{ padding: var(--s-6) 0; }
+.program-180-days .phase-marker .num{
+  font-family: var(--serif); font-size: 26px; font-weight: 600;
+  color: var(--gold-dark); font-style: italic; line-height: 1;
+}
+.program-180-days .phase-content h4{
+  font-family: var(--serif); font-size: clamp(20px, 2vw, 24px);
+  font-weight: 500; color: var(--ink); margin-bottom: var(--s-3);
+  text-transform: none; letter-spacing: -0.005em;
+}
+.program-180-days .phase-content .desc{ font-size: 15px; line-height: 1.6; color: var(--body); margin: 0; }
+
+/* V2.3 — Leitura integrada do caso (substitui SPIN visível) */
+.leitura-integrada{ background: var(--cream); }
+.leitura-block{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: var(--s-6) var(--s-7);
+  margin-bottom: var(--s-5);
+  position: relative;
+  background: linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+  transition: box-shadow 0.3s;
+}
+.leitura-block:hover{ box-shadow: 0 18px 36px -16px rgba(54,43,24,0.10); }
+.leitura-block h3{
+  font-family: var(--serif); font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 500; color: var(--ink); margin-bottom: var(--s-3);
+  letter-spacing: -0.01em;
+}
+.leitura-block .body-text{
+  font-size: 15px; line-height: 1.6; color: var(--body); margin-bottom: var(--s-4);
+}
+.leitura-block .alinhamento{
+  background: linear-gradient(135deg, #fffcf3 0%, var(--cream) 100%);
+  border-left: 3px solid var(--gold);
+  padding: var(--s-4) var(--s-5); border-radius: 0 8px 8px 0;
+  font-family: var(--serif); font-style: italic; font-size: 16px;
+  color: var(--ink); margin-top: var(--s-4); position: relative;
+}
+.leitura-block .alinhamento::after{
+  content:"›"; position:absolute; right:var(--s-5); top:50%; transform:translateY(-50%);
+  font-size:32px; color:var(--gold); font-weight:300; font-family:var(--serif);
+}
+
+/* V2.2 — Hero com foto da Dra */
+.hero-grid{
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--s-7);
+  align-items: center;
+}
+.hero-text{ min-width: 0; }
+.hero-photo{
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--cream-elev);
+  box-shadow: 0 30px 60px -25px rgba(31,26,18,0.30), 0 14px 28px -10px rgba(159,136,68,0.15);
+  aspect-ratio: 4 / 5;
+  max-width: 380px;
+  justify-self: end;
+  width: 100%;
+}
+.hero-photo img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero-photo::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, rgba(31,26,18,0.45) 100%);
+}
+.hero-photo-caption{
+  position: absolute; left: var(--s-5); right: var(--s-5); bottom: var(--s-5);
+  z-index: 2; color: #F7F2E4;
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.5;
+}
+.hero-photo-caption strong{
+  display: block;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+  color: #FFFFFF;
+}
+
+@media(max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; gap: var(--s-5); }
+  .hero-photo{ max-width: 280px; justify-self: center; aspect-ratio: 3 / 4; }
+  .hero-photo-caption{ font-size: 10px; }
+  .hero-photo-caption strong{ font-size: 15px; }
+}
+
+/* V2.2 — Progress nav: scroll suave sem sobreposição */
+section[id]{ scroll-margin-top: 76px; }
+@media(max-width: 900px){ section[id]{ scroll-margin-top: 60px; } }
+
+/* V2.2 — Grid 2 colunas no Diagnóstico Executivo */
+.diag-grid-2col{ grid-template-columns: 1fr 1fr !important; }
+@media(max-width: 900px){ .diag-grid-2col{ grid-template-columns: 1fr !important; } }
+
+/* === Tese clínica do caso (P1.7) === */
+.tese-clinica{
+  background: linear-gradient(135deg, #1F1A12 0%, #2D2310 100%);
+  border-radius:14px; padding:var(--s-6) var(--s-7);
+  margin-bottom:var(--s-6); position:relative; overflow:hidden;
+  border:1px solid rgba(212,188,121,0.20);
+  box-shadow: 0 18px 36px -16px rgba(31,26,18,0.40);
+}
+.tese-clinica::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+}
+.tese-clinica .tese-tag{
+  font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase; color:var(--gold2);
+  display:block; margin-bottom:var(--s-3);
+}
+.tese-clinica .tese-texto{
+  font-family:var(--serif); font-size:clamp(18px, 1.9vw, 22px);
+  line-height:1.5; color:#F7F2E4; font-style:italic; margin:0;
+}
+.tese-clinica .tese-texto strong{ color:var(--gold2); font-style:normal; font-weight:600; }
+
+/* === Conexão exame → sintoma (P1.8) === */
+.conexao-sintoma{
+  background:linear-gradient(135deg, rgba(159,136,68,0.06) 0%, rgba(159,136,68,0.02) 100%);
+  border-left:2px solid var(--gold);
+  padding:var(--s-3) var(--s-4); margin:var(--s-4) 0;
+  border-radius:0 8px 8px 0;
+}
+.conexao-sintoma .conexao-tag{
+  font-size:10px; font-weight:700; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--gold-dark); display:block; margin-bottom:4px;
+}
+.conexao-sintoma p{
+  font-family:var(--serif); font-size:14px; font-style:italic;
+  color:var(--ink); margin:0; line-height:1.5;
+}
+
+/* === Custo de não acompanhar (P0.4) === */
+.custo-nao-acompanhar{ background:var(--paper); }
+.custo-grid{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:var(--s-4); margin-top:var(--s-6);
+}
+.custo-card{
+  background: linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+  border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5) var(--s-6); border-left:3px solid var(--amber);
+  position:relative;
+}
+.custo-card .custo-icon{
+  width:32px; height:32px; color:var(--amber); margin-bottom:var(--s-3);
+}
+.custo-card .custo-icon svg{ width:100%; height:100%; }
+.custo-card .custo-titulo{
+  font-family:var(--serif); font-size:18px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-3); text-transform:none; letter-spacing:-0.005em;
+}
+.custo-card .custo-desc{
+  font-size:14px; line-height:1.55; color:var(--body); margin:0;
+}
+
+/* === Inclusos (P0.5) === */
+.inclusos{ background:var(--cream); }
+.inclusos-grid{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  gap:var(--s-4); margin-top:var(--s-6);
+}
+.incluso-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5); text-align:left;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position:relative; border-top:3px solid var(--gold);
+}
+.incluso-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -16px rgba(54,43,24,0.14);
+  border-top-color: var(--gold-dark);
+}
+.incluso-card .incluso-icon{
+  width:32px; height:32px; color:var(--gold-dark); margin-bottom:var(--s-3);
+}
+.incluso-card .incluso-icon svg{ width:100%; height:100%; }
+.incluso-card .incluso-titulo{
+  font-family:var(--serif); font-size:16px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-2); text-transform:none; letter-spacing:-0.005em;
+}
+.incluso-card .incluso-desc{
+  font-size:13px; line-height:1.55; color:var(--body); margin:0;
+}
+
+/* === Proof thesis (P1.9) === */
+.proof-thesis{
+  margin:var(--s-6) 0; padding:var(--s-5) var(--s-6);
+  background: linear-gradient(135deg, var(--paper) 0%, #fffcf3 100%);
+  border:1px solid var(--line); border-radius:12px; border-left:3px solid var(--gold);
+}
+.proof-thesis p{
+  font-family:var(--serif); font-size:17px; font-style:italic;
+  color:var(--ink); margin:0; line-height:1.55;
+}
+.proof-thesis strong{ color:var(--gold-dark); font-style:normal; font-weight:600; }
+
+/* === Objection close (P1.10) === */
+.obj-card{ display:flex; flex-direction:column; }
+.obj-card .obj-a{ flex:1; }
+.obj-card .obj-close{
+  margin-top:var(--s-4); padding-top:var(--s-4);
+  border-top:1px dashed var(--line);
+  font-family:var(--serif); font-size:14px; font-style:italic;
+  color:var(--gold-dark); line-height:1.5;
+  display:flex; gap:var(--s-3); align-items:flex-start;
+}
+.obj-card .obj-close-marker{ color:var(--gold); font-weight:700; font-style:normal; flex-shrink:0; }
+
+/* === Modo apresentação: oculta detalhes técnicos das alavancas (P2.11) === */
+body.modo-apresentacao .lever-numeric .ref,
+body.modo-apresentacao .lever-sparkline,
+body.modo-apresentacao .lever-narrative h4,
+body.modo-apresentacao .lever-narrative .impact{
+  display:none !important;
+}
+
+/* === Mobile padding (P2.13) === */
+@media(max-width: 900px){
+  .section{ padding: var(--s-7) 0; }
+  .custo-grid, .inclusos-grid{ grid-template-columns: 1fr; }
+}
+@media(max-width: 600px){
+  .inclusos-grid{ grid-template-columns: 1fr; }
+}
+@media(min-width: 601px) and (max-width: 900px){
+  .inclusos-grid{ grid-template-columns: repeat(2, 1fr); }
+  .custo-grid{ grid-template-columns: 1fr; }
+}
+
+/* Fade-up p/ tese-clinica + proof-thesis + custo-card + incluso-card já é aplicado na classe */
+
+/* Print: novas seções */
+@media print{
+  .tese-clinica{ background:#fff !important; color:#000 !important; border:1px solid #ccc !important; box-shadow:none !important; }
+  .tese-clinica .tese-texto{ color:#000 !important; }
+  .tese-clinica .tese-tag{ color:#666 !important; }
+  .custo-card, .incluso-card, .proof-thesis{ box-shadow:none !important; background:#fff !important; }
+}
+
+
+/* === PREMIUM REFINEMENTS === */
+
+/* Tipografia variable + features */
+body{
+  font-feature-settings: "ss01", "kern", "liga", "calt", "tnum";
+  text-underline-offset: 2px;
+}
+.tabular { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* Background com texture sutil */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(159,136,68,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(159,136,68,0.05) 0%, transparent 40%);
+}
+
+/* Decorative gold corner brackets em cards principais */
+.diag-recomendacao{
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, #1F1A12 0%, #2D2310 100%);
+  border:1px solid rgba(212,188,121,0.20);
+  box-shadow:0 30px 60px -20px rgba(31,26,18,0.50), 0 18px 36px -12px rgba(159,136,68,0.15);
+}
+.diag-recomendacao::before, .diag-recomendacao::after{
+  content:""; position:absolute; width:42px; height:42px;
+  border:1.5px solid var(--gold2); opacity:0.55;
+}
+.diag-recomendacao::before{ top:14px; left:14px; border-right:none; border-bottom:none; }
+.diag-recomendacao::after{ bottom:14px; right:14px; border-left:none; border-top:none; }
+
+/* Diagnostic cards com subtle gradient + hover depth */
+.diag-card{
+  position:relative; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s, border-color 0.35s;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.diag-card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(159,136,68,0.30);
+  box-shadow: 0 22px 42px -18px rgba(54,43,24,0.18);
+}
+.diag-card::after{
+  content:""; position:absolute; top:0; left:50%; width:60px; height:3px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
+  transform: translateX(-50%);
+}
+
+/* Hero — decorative eyebrow ornament */
+.hero-clinical-document{ position:relative; }
+.hero-clinical-document::before{
+  content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:60px; height:1px; background:var(--gold); opacity:0.4;
+}
+.hero-meta-bar{ position:relative; }
+.hero-meta-item strong{ font-feature-settings:"tnum"; }
+
+/* Mirror cards com hover lift */
+.mirror-card{
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, #fff 0%, #fbf6e8 100%);
+}
+.mirror-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -12px rgba(54,43,24,0.10);
+  border-color: rgba(159,136,68,0.25);
+}
+.mirror-card.feature{
+  background:linear-gradient(135deg, #fffcf3 0%, #fbf6e8 50%, #f7f2e4 100%);
+}
+
+/* Critical Levers — severity ring + sparkline visual */
+.lever-card{
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+  position:relative;
+  overflow:hidden;
+}
+.lever-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 44px -20px rgba(54,43,24,0.16);
+}
+.lever-card::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+}
+.lever-card[data-sev="crit"]::before{ background:linear-gradient(180deg, var(--red) 0%, #6e1d12 100%); }
+.lever-card[data-sev="alert"]::before{ background:linear-gradient(180deg, var(--amber) 0%, #7a5108 100%); }
+
+.lever-numeric{
+  display:flex; flex-direction:column; gap:var(--s-2);
+  padding-right:var(--s-5); border-right:1px solid var(--line);
+}
+.lever-numeric .name{
+  display:flex; align-items:center; gap:var(--s-3);
+}
+.lever-numeric .value{ font-feature-settings:"tnum"; letter-spacing:-0.025em; }
+
+/* Severity Ring (donut) */
+.sev-ring{
+  width:54px; height:54px; flex-shrink:0; position:relative;
+}
+.sev-ring svg{ width:100%; height:100%; transform:rotate(-90deg); }
+.sev-ring .ring-track{ fill:none; stroke:var(--line); stroke-width:6; }
+.sev-ring .ring-fill{ fill:none; stroke-width:6; stroke-linecap:round; transition:stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.lever-card[data-sev="crit"] .sev-ring .ring-fill{ stroke:var(--red); }
+.lever-card[data-sev="alert"] .sev-ring .ring-fill{ stroke:var(--amber); }
+.lever-card[data-sev="low"] .sev-ring .ring-fill{ stroke:var(--amber); }
+.sev-ring .ring-label{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; letter-spacing:0.05em; color:var(--ink);
+  font-family:var(--sans); font-feature-settings:"tnum";
+}
+
+/* Sparkline (valor x faixa) */
+.lever-sparkline{
+  margin-top:var(--s-3); padding-top:var(--s-3); border-top:1px dashed var(--line);
+}
+.lever-sparkline .sparkline-label{
+  font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted);
+  margin-bottom:6px; font-weight:600;
+}
+.lever-sparkline svg{ width:100%; height:36px; display:block; }
+.spark-track{ fill:rgba(159,136,68,0.08); }
+.spark-range{ fill:rgba(21,85,39,0.18); }
+.spark-marker{ fill:var(--ink); }
+.spark-marker.alert{ fill:var(--amber); }
+.spark-marker.crit{ fill:var(--red); }
+.spark-marker.low{ fill:var(--amber); }
+.spark-tick{ stroke:var(--muted); stroke-width:1; }
+.spark-label{ font-size:9px; fill:var(--muted); font-family:var(--sans); font-feature-settings:"tnum"; }
+
+/* Lever narrative — subtle improvements */
+.lever-narrative .impact{
+  background:linear-gradient(180deg, var(--paper) 0%, #fff 100%);
+  position:relative; padding-left:var(--s-5);
+}
+.lever-narrative .impact::before{
+  content:"⚡"; position:absolute; left:8px; top:8px; color:var(--gold-dark); font-size:14px;
+}
+
+/* SPIN steps — number badges decorativos */
+.spin-step-block{
+  position:relative;
+  background:linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+  transition: box-shadow 0.3s;
+}
+.spin-step-block:hover{ box-shadow: 0 18px 36px -16px rgba(54,43,24,0.10); }
+.spin-step-block .step-tag{
+  background:linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
+  color:#fff !important;
+  padding:5px 14px; border-radius:6px;
+  display:inline-block;
+}
+.spin-step-block .confirmation{
+  background:linear-gradient(135deg, #fffcf3 0%, var(--cream) 100%);
+  position:relative;
+}
+.spin-step-block .confirmation::after{
+  content:"›"; position:absolute; right:var(--s-5); top:50%; transform:translateY(-50%);
+  font-size:32px; color:var(--gold); font-weight:300; font-family:var(--serif);
+}
+
+/* IVS Machine — connected flow (linha conectora) */
+.machine-flow{ position:relative; }
+.machine-flow::before{
+  content:""; position:absolute; top:50px; left:8%; right:8%; height:1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--gold) 80%, transparent 100%);
+  opacity:0.35; z-index:0;
+}
+.machine-step{
+  position:relative; z-index:1;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.machine-step:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -14px rgba(54,43,24,0.16);
+  border-color: rgba(159,136,68,0.30);
+}
+.machine-step .num{
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  box-shadow: 0 4px 12px rgba(159,136,68,0.30);
+  border:2px solid #fff;
+}
+
+/* Proof — refinement das imagens */
+.proof-card{
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+}
+.proof-card:hover{ box-shadow: 0 22px 44px -20px rgba(54,43,24,0.18); }
+.proof-img{ box-shadow: 0 6px 16px -8px rgba(54,43,24,0.20); }
+.proof-img .label{
+  background:rgba(31,26,18,0.85); color:#f7f2e4 !important;
+  backdrop-filter: blur(4px);
+}
+.proof-text blockquote{ position:relative; }
+.proof-text blockquote::before{
+  content:"\201C"; position:absolute; left:-22px; top:-12px;
+  font-family:var(--serif); font-size:48px; color:var(--gold); opacity:0.30; line-height:1;
+}
+
+/* Program timeline — phase markers premium */
+.program-phase .phase-marker{
+  background:linear-gradient(135deg, var(--paper) 0%, var(--cream) 100%);
+  box-shadow: 0 4px 12px -4px rgba(54,43,24,0.10);
+}
+.program-phase .phase-marker .num{ font-feature-settings:"tnum"; }
+.program-phase{ transition: background 0.3s; }
+.program-phase:hover{ background: rgba(255,253,247,0.5); }
+
+/* Objection cards */
+.obj-card{
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+}
+.obj-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -16px rgba(54,43,24,0.14);
+}
+
+/* Decision Checklist — animação */
+.checklist-card{
+  background:linear-gradient(135deg, var(--cream) 0%, #fffcf3 100%);
+  position:relative; overflow:hidden;
+  box-shadow: 0 24px 50px -22px rgba(54,43,24,0.12);
+}
+.checklist-card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+}
+.checklist-item{ transition: all 0.25s; }
+.checklist-item:hover{ background: rgba(255,255,255,0.5); padding-left: 6px; padding-right: 6px; border-radius:6px; }
+.checklist-item .check{ box-shadow: 0 2px 6px -2px rgba(159,136,68,0.20); }
+.checklist-progress{
+  margin-top:var(--s-5); padding-top:var(--s-4); border-top:1px solid var(--line);
+  display:flex; align-items:center; gap:var(--s-3);
+}
+.checklist-progress-bar{
+  flex:1; height:6px; background:rgba(159,136,68,0.15); border-radius:999px; overflow:hidden;
+}
+.checklist-progress-fill{
+  height:100%; background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
+  width:0%; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.checklist-progress-text{
+  font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted);
+  font-weight:700; font-feature-settings:"tnum";
+}
+
+/* Final CTA — premium buttons */
+.cta-card{
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position:relative;
+}
+.cta-card.recommended{
+  background: linear-gradient(180deg, #FFFCF3 0%, var(--paper) 100%);
+  box-shadow: 0 30px 60px -25px rgba(159,136,68,0.30);
+}
+.cta-card.recommended::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+  border-radius:14px 14px 0 0;
+}
+.cta-card.recommended:hover{ transform: translateY(-4px); box-shadow: 0 40px 80px -30px rgba(159,136,68,0.40); }
+.cta-card .button{
+  position:relative; overflow:hidden; transition: all 0.3s;
+}
+.cta-card.recommended .button{
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  box-shadow: 0 6px 18px -4px rgba(107,90,43,0.40);
+}
+.cta-card.recommended .button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -4px rgba(107,90,43,0.50);
+}
+
+.cta-signature{ position:relative; }
+.cta-signature::before{
+  content:""; display:block; width:48px; height:1px; background:var(--gold);
+  margin:0 auto var(--s-5);
+}
+
+/* Technical Appendix — premium accordion */
+.exam-group{
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+}
+.exam-group:hover{ border-color: rgba(159,136,68,0.25); }
+.exam-group.open{ box-shadow: 0 8px 20px -10px rgba(54,43,24,0.10); }
+.exam-group-header{
+  background: linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+  transition: background 0.25s;
+}
+.exam-group-header:hover{ background: linear-gradient(180deg, #fffcf3 0%, var(--cream) 100%); }
+.exam-group-header .toggle{
+  font-size:18px; color:var(--gold-dark);
+  background:rgba(159,136,68,0.10); border-radius:50%;
+  width:28px; height:28px;
+}
+.exam-row{ transition: background 0.2s; }
+.exam-row:hover{ background:rgba(159,136,68,0.04); padding-left:6px; padding-right:6px; border-radius:6px; }
+.exam-row .e-valor{ font-feature-settings:"tnum"; }
+.exam-row[data-sev="crit"] .e-status::before,
+.exam-row[data-sev="alert"] .e-status::before,
+.exam-row[data-sev="low"] .e-status::before{
+  content:"●"; margin-right:4px;
+}
+
+/* Animações scroll-triggered */
+.fade-up{ opacity:0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.fade-up.in{ opacity:1; transform: translateY(0); }
+.fade-up.delay-1{ transition-delay: 0.10s; }
+.fade-up.delay-2{ transition-delay: 0.20s; }
+.fade-up.delay-3{ transition-delay: 0.30s; }
+.fade-up.delay-4{ transition-delay: 0.40s; }
+
+/* Section icons */
+.section-icon{
+  width:32px; height:32px; color:var(--gold-dark); margin-bottom:var(--s-3);
+  display:inline-block;
+}
+.section-icon svg{ width:100%; height:100%; stroke:currentColor; fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+
+/* Eyebrow / pill premium */
+h2 + p, .section-header p{ font-feature-settings:"kern", "liga"; }
+
+
+/* P2.13 — Modo apresentação amplificado */
+body.modo-apresentacao .lever-numeric .ref{ display:none !important; }
+body.modo-apresentacao .lever-sparkline{ display:none !important; }
+body.modo-apresentacao .sev-ring{ display:none !important; }
+body.modo-apresentacao .lever-numeric .name{ font-size:24px; }
+body.modo-apresentacao .lever-numeric{ border-right:none; padding-right:0; }
+body.modo-apresentacao .lever-card{ grid-template-columns: 1fr 1.6fr; }
+body.modo-apresentacao .technical-appendix{ display:none !important; }
+
+/* P2.12 — Apêndice toggle só desktop */
+@media(max-width: 768px){
+  .appendix-toggle-all{ display:none; }
+}
+
+/* P1.10 — CTA frame */
+.cta-frame{
+  margin: 0 auto var(--s-7);
+  max-width: 880px;
+  padding: var(--s-6) var(--s-7);
+  background: linear-gradient(135deg, var(--paper) 0%, var(--cream) 100%);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 14px 28px -14px rgba(54,43,24,0.12);
+}
+.cta-frame-text{
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+  font-style: italic;
+}
+.cta-frame-text strong{ color: var(--gold-dark); font-style: normal; font-weight: 600; }
+.cta-frame-text em{ font-style: italic; color: var(--muted); }
+
+/* P1.9 — Sev ring tooltip */
+.sev-ring{ cursor: help; }
+.sev-ring::after{
+  content: attr(title);
+  position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--cream);
+  padding: 4px 10px; border-radius: 6px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.10em;
+  text-transform: uppercase; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.sev-ring:hover::after{ opacity: 1; }
+
+/* P0.2 — números com tabular-nums em todo o documento */
+.exam-row, .lever-numeric .value, .program-phase .num,
+.checklist-progress-text, .ring-label, .spark-label, .e-valor{
+  font-feature-settings: "tnum"; font-variant-numeric: tabular-nums;
+}
+
+/* Print refinements */
+@media print{
+  body::before{ display:none; }
+  .diag-recomendacao::before, .diag-recomendacao::after{ display:none; }
+  .lever-card, .diag-card, .obj-card, .mirror-card, .cta-card, .exam-group{
+    box-shadow: none !important;
+    background: #fff !important;
+    border: 1px solid #ddd !important;
+  }
+  .machine-flow::before{ display:none; }
+  .fade-up{ opacity:1 !important; transform:none !important; }
+}
+
+"""
+
+
+# ---------------------------------------------------------------------------
+# JS — progress nav scroll-spy, accordion, decision checklist, modo apresentação
+# ---------------------------------------------------------------------------
+JS = r"""
+(function(){
+  // === Progress nav scroll spy ===
+  const allSections = document.querySelectorAll('main > section[id]');
+  const steps = document.querySelectorAll('.progress-step[data-target]');
+  // Só considera seções que estão no progress nav
+  const navTargets = new Set(Array.from(steps).map(s => s.dataset.target));
+  const trackedSections = Array.from(allSections).filter(s => navTargets.has(s.id));
+  function updateActive(){
+    if(!trackedSections.length) return;
+    const trigger = window.innerHeight * 0.30;  // 30% do viewport
+    let active = trackedSections[0].id;
+    // Encontra a última seção cujo top já passou do trigger
+    for(const sec of trackedSections){
+      const r = sec.getBoundingClientRect();
+      if(r.top - trigger <= 0) active = sec.id;
+      else break;
+    }
+    steps.forEach(s => {
+      s.classList.toggle('active', s.dataset.target === active);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+  steps.forEach(s => {
+    s.addEventListener('click', () => {
+      const t = document.getElementById(s.dataset.target);
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // === Mode switcher (3 modos exclusivos) ===
+  const modeButtons = document.querySelectorAll('.mode-btn[data-mode]');
+  const modes = ['apresentacao', 'exames', 'objecoes'];
+  function setMode(mode){
+    modes.forEach(m => document.body.classList.toggle('modo-' + m, m === mode));
+    modeButtons.forEach(b => {
+      const active = b.dataset.mode === mode;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    // Scroll suave para topo da seção do modo
+    if(mode === 'exames'){
+      const t = document.querySelector('#technical-appendix');
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    } else if(mode === 'objecoes'){
+      const t = document.querySelector('#doctor-objections');
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    } else {
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  }
+  modeButtons.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  // Default: apresentação
+  document.body.classList.add('modo-apresentacao');
+
+  // === Accordion exames ===
+  document.querySelectorAll('.exam-group-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+  const openAll = document.querySelector('.appendix-toggle-all');
+  if(openAll){
+    openAll.addEventListener('click', () => {
+      const groups = document.querySelectorAll('.exam-group');
+      const allOpen = Array.from(groups).every(g => g.classList.contains('open'));
+      groups.forEach(g => g.classList.toggle('open', !allOpen));
+      openAll.textContent = allOpen ? 'Expandir todos' : 'Recolher todos';
+    });
+  }
+
+  // === Decision checklist ===
+  document.querySelectorAll('.checklist-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('checked'));
+  });
+
+  // === Scroll-triggered fade-up ===
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('in'));
+  }
+
+  // === Severity rings (donut) ===
+  document.querySelectorAll('.sev-ring').forEach(ring => {
+    const pct = parseFloat(ring.dataset.pct || '0');
+    const r = 22, c = 2 * Math.PI * r;
+    const offset = c - (Math.min(pct, 100) / 100) * c;
+    const fill = ring.querySelector('.ring-fill');
+    if(fill){
+      fill.setAttribute('stroke-dasharray', c.toFixed(2));
+      fill.setAttribute('stroke-dashoffset', c.toFixed(2));
+      // Animate after a tick
+      requestAnimationFrame(() => {
+        fill.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        fill.setAttribute('stroke-dashoffset', offset.toFixed(2));
+      });
+    }
+  });
+
+
+  // === Painel de objeções: busca + filtro por categoria + accordion ===
+  const objSearch = document.querySelector('.obj-search');
+  const objSearchClear = document.querySelector('.obj-search-clear');
+  const objChips = document.querySelectorAll('.obj-cat-chip');
+  const objCards = document.querySelectorAll('.doctor-obj-card');
+  const objCounter = document.querySelector('.obj-counter-num');
+  const objEmpty = document.querySelector('.obj-empty');
+  let activeCat = 'todas';
+  let activeQuery = '';
+
+  function applyObjFilter(){
+    const q = activeQuery.toLowerCase().trim();
+    let visible = 0;
+    objCards.forEach(card => {
+      const matchCat = activeCat === 'todas' || card.dataset.cat === activeCat;
+      const matchQuery = !q || card.dataset.search.includes(q);
+      const show = matchCat && matchQuery;
+      card.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    if(objCounter) objCounter.textContent = visible;
+    if(objEmpty) objEmpty.hidden = visible > 0;
+    if(objSearchClear) objSearchClear.classList.toggle('visible', !!q);
+  }
+
+  if(objSearch){
+    objSearch.addEventListener('input', (e) => {
+      activeQuery = e.target.value;
+      applyObjFilter();
+    });
+  }
+  if(objSearchClear){
+    objSearchClear.addEventListener('click', () => {
+      objSearch.value = ''; activeQuery = ''; applyObjFilter(); objSearch.focus();
+    });
+  }
+  objChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      objChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeCat = chip.dataset.cat;
+      applyObjFilter();
+    });
+  });
+
+  // Accordion individual
+  objCards.forEach(card => {
+    const header = card.querySelector('.obj-header');
+    if(header){
+      header.addEventListener('click', () => card.classList.toggle('open'));
+    }
+  });
+
+  // Atalhos de teclado
+  document.addEventListener('keydown', (e) => {
+    if(!document.body.classList.contains('modo-objecoes')) return;
+    if(e.key === '/' && document.activeElement !== objSearch){
+      e.preventDefault();
+      if(objSearch) objSearch.focus();
+    } else if(e.key === 'Escape' && document.activeElement === objSearch){
+      objSearch.value = ''; activeQuery = ''; applyObjFilter(); objSearch.blur();
+    }
+  });
+
+  // === Decision checklist progress bar ===
+  const checklistItems = document.querySelectorAll('.checklist-item');
+  const progressFill = document.querySelector('.checklist-progress-fill');
+  const progressText = document.querySelector('.checklist-progress-text');
+  function updateProgress(){
+    const total = checklistItems.length;
+    const checked = document.querySelectorAll('.checklist-item.checked').length;
+    const pct = total ? (checked / total) * 100 : 0;
+    if(progressFill) progressFill.style.width = pct + '%';
+    if(progressText) progressText.textContent = checked + ' de ' + total + ' confirmados';
+  }
+  checklistItems.forEach(it => it.addEventListener('click', updateProgress));
+  updateProgress();
+
+})();
+"""
+
+
+# ---------------------------------------------------------------------------
+# Helpers — interpretação clínica para Critical Levers
+# ---------------------------------------------------------------------------
+
+# Conexão exame → sintoma sentido pelo paciente (clinical bridge)
+EXAM_SYMPTOM_MAP = {
+    "HOMA-IR": "fome súbita após refeições, sonolência depois do almoço, dificuldade de manter peso",
+    "HOMA-Beta": "oscilação de energia ao longo do dia, vontade frequente de doce",
+    "HbA1c": "energia inconsistente, fadiga sem causa aparente, dificuldade de concentração",
+    "Glicemia Média": "energia inconsistente, fadiga após carboidratos, dificuldade de manter peso",
+    "PCR-us": "recuperação lenta de exercícios, dores articulares difusas, sensação de inflamação",
+    "Vitamina D": "imunidade baixa, força reduzida, humor variável, recuperação lenta",
+    "Vitamina B12": "cansaço persistente, dificuldade de concentração, energia matinal baixa",
+    "Prolactina": "libido reduzida, fadiga, alteração de sono",
+    "Testosterona Total": "libido baixa, perda de massa muscular, disposição reduzida",
+    "Testosterona Livre": "libido, força e disposição em queda mesmo com testo total normal",
+    "Cortisol Basal": "cansaço matinal, dificuldade de relaxar à noite, peso central",
+    "Ferritina": "queda capilar, oxigenação reduzida, fadiga aos pequenos esforços",
+    "Hemácias": "pode se relacionar com capacidade de transporte e disposição.",
+    "Hemoglobina": "pode se relacionar com cansaço, recuperação e desempenho.",
+    "Hematócrito": "ajuda a compor a leitura do padrão hematológico junto aos demais marcadores.",
+    "VCM": "compõe a leitura do padrão hematológico — perfil das hemácias.",
+    "HCM": "compõe a leitura do conteúdo de hemoglobina por hemácia.",
+    "CHCM": "compõe a leitura da concentração de hemoglobina nas hemácias.",
+    "RDW": "indica variabilidade no tamanho das hemácias — pista para o tipo de anemia quando há.",
+    "Leucócitos": "termômetro de defesa imune e inflamação aguda quando alterado.",
+    "Plaquetas": "marcador de hemostasia e, indiretamente, de inflamação sistêmica.",
+}
+
+
+def _conexao_sintoma(nome_exame):
+    return EXAM_SYMPTOM_MAP.get(nome_exame, "compõe o quadro funcional integrado — sua relevância depende da leitura conjunta com os demais marcadores.")
+
+
+INTERPRETACAO_LEVERS = {
+    # === Glicídico ===
+    "Glicose": {
+        "interpretacao": "Glicemia de jejum no limite ou acima do alvo funcional.",
+        "impacto": "Sinal precoce de desregulação do metabolismo de carboidratos, mesmo antes de sintomas claros.",
+        "spin": "Você prefere agir enquanto o quadro ainda é silencioso ou esperar até virar sintoma?",
+    },
+    "Insulina": {
+        "interpretacao": "Hormônio que precisa ser lido em conjunto com glicemia (HOMA-IR) e clínica.",
+        "impacto": "Insulina alta com glicemia normal já indica que o pâncreas está trabalhando mais para compensar.",
+        "spin": "Faz sentido olhar o esforço do pâncreas, e não só o resultado final no sangue?",
+    },
+    "HOMA-IR": {
+        "interpretacao": "Índice clínico de resistência à insulina.",
+        "impacto": "Pode dificultar perda de gordura, favorecer fome e sonolência pós-refeição.",
+        "spin": "Isso conversa com a dificuldade que você descreveu de sustentar resultado?",
+    },
+    "HOMA-Beta": {
+        "interpretacao": "Função pancreática em compensação ativa.",
+        "impacto": "Indica que o corpo está trabalhando mais para manter a glicemia — janela de intervenção precoce.",
+        "spin": "Vale agir nessa janela em que o pâncreas ainda compensa bem?",
+    },
+    "HbA1c": {
+        "interpretacao": "Tendência glicêmica média dos últimos 3 meses, acima do alvo funcional.",
+        "impacto": "Sinaliza necessidade de agir antes da progressão metabólica se firmar.",
+        "spin": "Quando você imagina esse número 6 meses adiante sem mudança, o que sente?",
+    },
+    "Glicemia Média": {
+        "interpretacao": "Glicose média do trimestre acima do alvo conservador da clínica.",
+        "impacto": "Pré-diabetes silenciosa: pode evoluir sem sintomas claros perceptíveis.",
+        "spin": "O que costuma te fazer agir: o número, ou só quando o sintoma aparece?",
+    },
+    "Frutosamina": {
+        "interpretacao": "Marcador glicêmico de prazo curto (2-3 semanas).",
+        "impacto": "Útil para acompanhar resposta a ajustes recentes no plano.",
+        "spin": "Quer um marcador que mostre resposta rápida aos ajustes que faremos?",
+    },
+    # === Lipídico ===
+    "Colesterol Total": {
+        "interpretacao": "Carga lipídica total acima da faixa funcional.",
+        "impacto": "Compõe a leitura do risco cardiovascular junto a HDL, LDL e ApoB.",
+        "spin": "Quer entender o seu colesterol como contexto, e não como número solto?",
+    },
+    "LDL": {
+        "interpretacao": "Fração lipídica diretamente associada a risco cardiovascular.",
+        "impacto": "Acima do alvo, contribui silenciosamente para placas vasculares ao longo dos anos.",
+        "spin": "Você prefere agir quando o número aponta, ou esperar evento clínico?",
+    },
+    "HDL": {
+        "interpretacao": "Fração protetora do colesterol abaixo do alvo masculino/feminino.",
+        "impacto": "HDL baixo reduz a 'capacidade de limpeza' do sistema vascular.",
+        "spin": "Faz sentido tratar HDL baixo como sinal funcional, não como detalhe?",
+    },
+    "VLDL": {
+        "interpretacao": "Fração lipídica relacionada a triglicérides e gordura hepática.",
+        "impacto": "Quando elevada, sugere alteração metabólica do fígado e do açúcar.",
+        "spin": "Você notou peso na digestão, sonolência ou ganho central recente?",
+    },
+    "Triglicérides": {
+        "interpretacao": "Tipicamente sobe com excesso de carboidrato refinado e álcool.",
+        "impacto": "Está ligada à resistência à insulina e à gordura hepática.",
+        "spin": "Esse número faz sentido com sua rotina alimentar das últimas semanas?",
+    },
+    "Não-HDL": {
+        "interpretacao": "Soma de todas as frações aterogênicas — leitura mais ampla que LDL isolado.",
+        "impacto": "Hoje é considerado mais preditivo de risco cardiovascular do que LDL solo.",
+        "spin": "Quer trabalhar com o indicador mais preditivo, e não só com o tradicional?",
+    },
+    "ApoB": {
+        "interpretacao": "Conta direta das partículas aterogênicas circulantes.",
+        "impacto": "Refina o risco quando LDL e Triglicérides dão leituras divergentes.",
+        "spin": "Faz sentido refinar o quadro com ApoB antes de decidir intensidade do plano?",
+    },
+    "ApoA": {
+        "interpretacao": "Apoproteína protetora associada à HDL.",
+        "impacto": "Mesmo com HDL aceitável, ApoA baixa reduz a função protetora real.",
+        "spin": "Quer enxergar HDL pelo seu efeito funcional, e não só pela quantidade?",
+    },
+    "Lp(a)": {
+        "interpretacao": "Fator genético independente de risco cardiovascular.",
+        "impacto": "Mesmo com colesterol controlado, valores altos pedem estratégia diferenciada.",
+        "spin": "Faz sentido considerar fatores genéticos no desenho do plano?",
+    },
+    # === Hepático ===
+    "TGO": {
+        "interpretacao": "Enzima hepática que também aparece em músculo.",
+        "impacto": "Sozinha diz pouco — interpretada com TGP e GGT mostra sobrecarga hepática.",
+        "spin": "Quer ler TGO no contexto, e não como número avulso?",
+    },
+    "TGP": {
+        "interpretacao": "Enzima mais específica de fígado.",
+        "impacto": "Elevações sugerem sobrecarga hepática gordurosa, medicamentosa ou alimentar.",
+        "spin": "Você associa esse número a algum hábito atual que podemos rever?",
+    },
+    "GGT": {
+        "interpretacao": "Marcador sensível de sobrecarga hepática (álcool, gordura, medicamentos).",
+        "impacto": "Sobe antes do TGP — sinal precoce de fígado pedindo alívio.",
+        "spin": "GGT alta combina com cansaço pela manhã ou má digestão que você sente?",
+    },
+    "Fosfatase Alcalina": {
+        "interpretacao": "Enzima hepática/óssea — leitura depende do contexto clínico.",
+        "impacto": "Útil quando há suspeita de colestase ou metabolismo ósseo alterado.",
+        "spin": "Vale interpretar essa enzima junto com cálcio, PTH e vit. D?",
+    },
+    "Bilirrubina": {
+        "interpretacao": "Resíduo da degradação da hemoglobina.",
+        "impacto": "Discretos aumentos pedem leitura com TGO/TGP/GGT antes de qualquer conclusão.",
+        "spin": "Quer ler bilirrubina dentro do quadro hepático completo?",
+    },
+    # === Renal ===
+    "Ureia": {
+        "interpretacao": "Indicador de função renal e de ingestão proteica.",
+        "impacto": "Pode oscilar com hidratação e dieta — leitura conjunta evita conclusão precipitada.",
+        "spin": "Sua hidratação dos últimos dias confere com esse valor?",
+    },
+    "Creatinina": {
+        "interpretacao": "Reflete filtração glomerular e massa muscular.",
+        "impacto": "Em homens treinados pode estar discretamente elevada sem patologia.",
+        "spin": "Vale calcular sua taxa de filtração ajustada antes de qualquer alarme?",
+    },
+    "Ácido Úrico": {
+        "interpretacao": "Associado a metabolismo de purinas e função renal.",
+        "impacto": "Valores altos pedem atenção a dor articular, álcool e função renal.",
+        "spin": "Você notou episódios de dor articular ou inchaço em pés/joelhos?",
+    },
+    # === Tireoide ===
+    "TSH": {
+        "interpretacao": "Hormônio que comanda a produção tireoidiana.",
+        "impacto": "Mesmo dentro da faixa, valores nas extremidades pedem leitura clínica completa.",
+        "spin": "Você nota frio fora de hora, queda de cabelo ou cansaço sem motivo aparente?",
+    },
+    "T4 Livre": {
+        "interpretacao": "Hormônio circulante disponível para os tecidos.",
+        "impacto": "Junto com TSH e T3 mostra como a tireoide está realmente entregando função.",
+        "spin": "Quer enxergar a tireoide pelo que ela entrega, não só pelo que ela produz?",
+    },
+    "T3 Livre": {
+        "interpretacao": "Forma ativa do hormônio tireoidiano nos tecidos.",
+        "impacto": "T3 baixo com TSH normal explica fadiga e ganho de peso em muitos casos.",
+        "spin": "Sua disposição combina com o que esse número sugere?",
+    },
+    "Anti-TPO": {
+        "interpretacao": "Anticorpo que indica processo autoimune da tireoide.",
+        "impacto": "Quando positivo, muda a estratégia de acompanhamento mesmo sem hipotireoidismo.",
+        "spin": "Quer ajustar o plano considerando autoimunidade tireoidiana?",
+    },
+    # === Hormonal ===
+    "Testosterona Total": {
+        "interpretacao": "Andrógeno principal abaixo do alvo funcional masculino.",
+        "impacto": "Pode afetar libido, composição corporal, disposição e recuperação.",
+        "spin": "Quais desses sintomas você reconhece no seu dia a dia?",
+    },
+    "Testosterona Livre": {
+        "interpretacao": "Fração biodisponível — a que de fato age nos tecidos.",
+        "impacto": "Pode estar baixa mesmo com testo total normal, explicando sintomas reais.",
+        "spin": "Faz sentido olhar o quadro hormonal completo, e não um número isolado?",
+    },
+    "Testo Biodisponível": {
+        "interpretacao": "Soma da testo livre + ligada à albumina (a que de fato circula útil).",
+        "impacto": "Cruzar com SHBG e clínica refina muito a leitura andrógena.",
+        "spin": "Vale refinar a leitura andrógena com biodisponível e SHBG?",
+    },
+    "Estradiol": {
+        "interpretacao": "Estrogênio principal — em homens entra na leitura junto com testo.",
+        "impacto": "Equilíbrio testo↔estradiol importa para libido, gordura central e humor.",
+        "spin": "Quer trabalhar o eixo hormonal como conjunto, não como hormônios isolados?",
+    },
+    "Progesterona": {
+        "interpretacao": "Hormônio cuja leitura depende fortemente da fase do ciclo (em mulheres).",
+        "impacto": "Em homens, valores muito baixos são esperados — análise é contextual.",
+        "spin": "Vale interpretar esse valor dentro do seu momento hormonal específico?",
+    },
+    "FSH": {
+        "interpretacao": "Hormônio do eixo central reprodutivo.",
+        "impacto": "Quando alto, sinaliza compensação para baixa produção gonadal.",
+        "spin": "Faz sentido investigar se há sinal de compensação central?",
+    },
+    "LH": {
+        "interpretacao": "Hormônio do eixo central que comanda produção de testo.",
+        "impacto": "Junto com FSH, distingue causa central de causa periférica.",
+        "spin": "Quer entender a origem do quadro hormonal antes de tratar?",
+    },
+    "Prolactina": {
+        "interpretacao": "Hormônio cuja elevação merece interpretação clínica cuidadosa.",
+        "impacto": "Pode demandar investigação adicional, correlação com sintomas e monitoramento.",
+        "spin": "Você associa libido reduzida ou cansaço aos últimos meses?",
+    },
+    "SHBG": {
+        "interpretacao": "Proteína que carrega hormônios sexuais — afeta a fração 'livre' real.",
+        "impacto": "SHBG alta reduz testo livre, mesmo com testo total normal.",
+        "spin": "Quer enxergar SHBG como parte da leitura hormonal, e não como detalhe?",
+    },
+    "DHEA-S": {
+        "interpretacao": "Andrógeno adrenal que cai naturalmente com a idade.",
+        "impacto": "Niveis baixos podem se associar a fadiga, libido e perda de força.",
+        "spin": "Esses sintomas combinam com o que você tem sentido?",
+    },
+    # === Inflamatórios ===
+    "PCR-us": {
+        "interpretacao": "Marcador sensível de inflamação de baixo grau.",
+        "impacto": "Pode interferir em recuperação, dores difusas, energia e risco cardiometabólico.",
+        "spin": "Você percebe recuperação lenta de exercícios ou dores fora do esperado?",
+    },
+    "Homocisteína": {
+        "interpretacao": "Aminoácido associado a risco cardiovascular e neurológico quando alto.",
+        "impacto": "Costuma responder a B12, B6, B9 e estilo de vida — pede leitura conjunta.",
+        "spin": "Vale corrigir esse marcador antes que ele se torne fator de risco maduro?",
+    },
+    "VHS": {
+        "interpretacao": "Marcador inespecífico de inflamação sistêmica.",
+        "impacto": "Lido junto a PCR-us para ampliar a leitura inflamatória.",
+        "spin": "Quer ler inflamação por mais de uma janela, não só por PCR?",
+    },
+    # === Vitaminas / Minerais ===
+    "Vitamina D": {
+        "interpretacao": "Hormônio-vitamina abaixo do alvo funcional adotado pela clínica.",
+        "impacto": "Pode impactar imunidade, força, humor, recuperação e saúde óssea.",
+        "spin": "Você reconhece imunidade mais frágil ou recuperação devagar nos últimos meses?",
+    },
+    "Vitamina B12": {
+        "interpretacao": "Cofator essencial para função neurológica, energia e produção de neurotransmissores.",
+        "impacto": "Mesmo dentro da faixa laboratorial, valores baixos comprometem performance funcional.",
+        "spin": "Quer corrigir essa base antes de pensar em performance ou suplementação avulsa?",
+    },
+    "Ácido Fólico": {
+        "interpretacao": "Cofator do metabolismo da homocisteína e síntese de DNA.",
+        "impacto": "Trabalha em conjunto com B12 e B6 — reposição isolada raramente resolve.",
+        "spin": "Faz sentido ajustar B-vitaminas em conjunto, e não isoladamente?",
+    },
+    "Zinco": {
+        "interpretacao": "Mineral envolvido em imunidade, testosterona e cicatrização.",
+        "impacto": "Quando baixo, costuma se conectar a queda de imunidade e libido.",
+        "spin": "Você notou queda de imunidade ou cicatrização lenta recentemente?",
+    },
+    "Ferro": {
+        "interpretacao": "Mineral central no transporte de oxigênio.",
+        "impacto": "Lido junto a ferritina, transferrina e saturação para conclusão real.",
+        "spin": "Quer ler ferro no contexto do estoque (ferritina), e não isolado?",
+    },
+    "Ferritina": {
+        "interpretacao": "Reserva de ferro do organismo.",
+        "impacto": "Afeta energia, oxigenação tecidual, queda capilar e recuperação.",
+        "spin": "Esses sintomas sutis costumam ser atribuídos à idade — você reconhece algum?",
+    },
+    "Magnésio": {
+        "interpretacao": "Mineral envolvido em sono, contração muscular e produção de energia.",
+        "impacto": "Discreta queda já se conecta a câimbra, sono ruim e fadiga.",
+        "spin": "Você nota câimbras, sono leve ou tensão muscular sem causa clara?",
+    },
+    "Cálcio": {
+        "interpretacao": "Mineral lido junto com PTH e vit. D para entender o eixo ósseo.",
+        "impacto": "Cálcio sérico isolado diz pouco — o eixo é o que importa.",
+        "spin": "Vale interpretar cálcio no eixo PTH-vit.D, não como número solto?",
+    },
+    "Sódio": {
+        "interpretacao": "Eletrólito principal — variações tipicamente conectadas a hidratação.",
+        "impacto": "Alterações pequenas raramente são clinicamente relevantes em pessoas saudáveis.",
+        "spin": "Você consegue pontuar como anda sua hidratação no dia a dia?",
+    },
+    "Potássio": {
+        "interpretacao": "Eletrólito sensível a hidratação, dieta e função renal.",
+        "impacto": "Variações pequenas são comuns; alterações maiores pedem investigação.",
+        "spin": "Vale revisar esse valor com hidratação e dieta da semana?",
+    },
+    "PTH": {
+        "interpretacao": "Hormônio paratireoidiano — comandante do eixo cálcio/vit.D.",
+        "impacto": "Lido com cálcio e vit.D explica saúde óssea e absorção real.",
+        "spin": "Quer entender saúde óssea pelo eixo, não pelo cálcio isolado?",
+    },
+    # === Adrenal ===
+    "Cortisol": {
+        "interpretacao": "Hormônio do estresse — leitura de coleta matinal é o padrão.",
+        "impacto": "Padrão alterado afeta sono, energia matinal, peso e composição corporal.",
+        "spin": "Você nota cansaço logo cedo ou dificuldade de relaxar à noite?",
+    },
+    "Cortisol Basal": {
+        "interpretacao": "Coleta padrão matinal — referência funcional do eixo adrenal.",
+        "impacto": "Padrão alterado afeta sono, energia matinal, peso e composição corporal.",
+        "spin": "Sua disposição matinal combina com o que esse número sugere?",
+    },
+    "IGF-1": {
+        "interpretacao": "Marcador funcional do eixo de crescimento e recuperação.",
+        "impacto": "Reflete performance anabólica geral; varia naturalmente com idade.",
+        "spin": "Quer acompanhar capacidade anabólica como parte da estratégia?",
+    },
+    # === Hemograma ===
+    "Hemácias": {
+        "interpretacao": "Conta de células vermelhas circulantes.",
+        "impacto": "Compõe a leitura da capacidade de transporte de oxigênio e disposição.",
+        "spin": "Você nota fôlego curto ou disposição abaixo do normal em atividades simples?",
+    },
+    "Hemoglobina": {
+        "interpretacao": "Proteína responsável pelo transporte de oxigênio.",
+        "impacto": "Liga-se diretamente a cansaço, recuperação de exercícios e desempenho.",
+        "spin": "Você associa cansaço atual a esforços que antes fazia sem dificuldade?",
+    },
+    "Hematócrito": {
+        "interpretacao": "Porcentagem volumétrica das células vermelhas no sangue.",
+        "impacto": "Compõe a leitura do padrão hematológico junto aos demais marcadores.",
+        "spin": "Faz sentido ler o hemograma como conjunto, e não como números soltos?",
+    },
+    "VCM": {
+        "interpretacao": "Tamanho médio das hemácias.",
+        "impacto": "Pista importante quando há suspeita de deficiências (B12, ferro, fólico).",
+        "spin": "Vale cruzar VCM com ferritina e B12 antes de qualquer conclusão?",
+    },
+    "HCM": {
+        "interpretacao": "Conteúdo médio de hemoglobina por hemácia.",
+        "impacto": "Compõe a leitura do tipo de eventual anemia, quando ela existe.",
+        "spin": "Quer ler HCM dentro do quadro hematológico completo?",
+    },
+    "CHCM": {
+        "interpretacao": "Concentração de hemoglobina nas hemácias.",
+        "impacto": "Refina ainda mais a tipagem hematológica.",
+        "spin": "Faz sentido olhar para o conjunto das frações eritrocitárias?",
+    },
+    "RDW": {
+        "interpretacao": "Variabilidade do tamanho das hemácias.",
+        "impacto": "Pista precoce para deficiências antes da anemia se estabelecer.",
+        "spin": "Vale agir em sinais precoces, antes do hemograma virar anemia?",
+    },
+    "Leucócitos": {
+        "interpretacao": "Termômetro de defesa imune e inflamação aguda.",
+        "impacto": "Variações pedem leitura junto aos diferenciais e PCR-us.",
+        "spin": "Você passou por infecções recentes, estresse ou alergias?",
+    },
+    "Plaquetas": {
+        "interpretacao": "Marcador de hemostasia e, indiretamente, de inflamação sistêmica.",
+        "impacto": "Variações pequenas dentro da faixa raramente alteram conduta.",
+        "spin": "Quer entender plaquetas dentro do quadro inflamatório global?",
+    },
+}
+
+DEFAULT_INTERP = {
+    "interpretacao": "Marcador fora do alvo funcional adotado pela clínica.",
+    "impacto": "Merece interpretação clínica conjunta com sintomas e demais marcadores.",
+    "spin": "Vale incluir esse marcador na leitura integrada, em vez de tratar como detalhe?",
+}
+
+
+def _ranking_severidade(ex):
+    rank = {"crit": 0, "alert": 1, "low": 1, "attn": 2, "ok": 4, "normal": 4}
+    return rank.get(ex.get("status", "normal"), 9)
+
+
+def _selecionar_critical_levers(exames, max_levers=5):
+    """Seleciona 3-5 alavancas críticas: prioriza crit/alert/low; máx 5."""
+    ranked = sorted(exames, key=_ranking_severidade)
+    levers = [e for e in ranked if e.get("status") in ("crit", "alert", "low")][:max_levers]
+    return levers
+
+
+
+# === Premium visual helpers ===
+
+ICONS = {
+    "diagnosis": '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+    "mirror":    '<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9h8M8 13h6M8 17h4"/></svg>',
+    "levers":    '<svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>',
+    "spin":      '<svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15 6.7L3 16m0 5v-5h5"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8m0-5v5h-5"/></svg>',
+    "machine":   '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+    "proof":     '<svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7-6.5-4-6.5 4 2-7L2 9.5 9 9z"/></svg>',
+    "program":   '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    "objection": '<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M12 7v5M12 16h.01"/></svg>',
+    "checklist": '<svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+    "cta":       '<svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>',
+    "appendix":  '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>',
+}
+
+
+def _icon(key):
+    """Section icon SVG."""
+    svg = ICONS.get(key, "")
+    if not svg:
+        return ""
+    return f'<span class="section-icon">{svg}</span>'
+
+
+def _parse_value(s):
+    """Parse string com vírgula BR → float."""
+    if s is None: return None
+    try:
+        s = str(s).strip().replace(",", ".")
+        # Remove unidades concatenadas
+        m = re.match(r"^(-?\d+\.?\d*)", s)
+        if m: return float(m.group(1))
+    except (ValueError, TypeError): pass
+    return None
+
+
+def _parse_ref_range(ref_str):
+    """Extrai (min, max) de string de referência. Retorna (None, None) se não conseguir."""
+    if not ref_str: return None, None
+    s = str(ref_str).strip().replace(",", ".")
+    # Padrão "X a Y"
+    m = re.search(r"(-?\d+\.?\d*)\s*[aàÀA]\s*(-?\d+\.?\d*)", s)
+    if m: return float(m.group(1)), float(m.group(2))
+    # Padrão "<Y" ou "≤Y"
+    m = re.search(r"[<≤]\s*(-?\d+\.?\d*)", s)
+    if m: return None, float(m.group(1))
+    # Padrão ">X" ou "≥X"
+    m = re.search(r"[>≥]\s*(-?\d+\.?\d*)", s)
+    if m: return float(m.group(1)), None
+    return None, None
+
+
+def _severity_pct(valor_f, ref_min, ref_max):
+    """Calcula % de desvio para o severity ring (0-100)."""
+    if valor_f is None: return 0
+    if ref_max is not None and valor_f > ref_max:
+        # quanto acima
+        if ref_max == 0: return 100
+        return min(100, ((valor_f - ref_max) / ref_max) * 100)
+    if ref_min is not None and valor_f < ref_min:
+        if ref_min == 0: return 100
+        return min(100, ((ref_min - valor_f) / ref_min) * 100)
+    return 0
+
+
+def render_sev_ring(valor, ref_str, sev):
+    """Donut ring mostrando % de desvio. Retorna SVG inline."""
+    valor_f = _parse_value(valor)
+    rmin, rmax = _parse_ref_range(ref_str)
+    pct = _severity_pct(valor_f, rmin, rmax)
+    label = f"+{int(pct)}%" if pct > 5 else "—"
+    return (f'<div class="sev-ring" data-pct="{pct:.0f}" title="Distância do alvo funcional">'
+            f'<svg viewBox="0 0 56 56">'
+            f'<circle cx="28" cy="28" r="22" class="ring-track"/>'
+            f'<circle cx="28" cy="28" r="22" class="ring-fill"/>'
+            f'</svg>'
+            f'<span class="ring-label">{label}</span></div>')
+
+
+def render_sparkline(valor, ref_str, sev):
+    """Sparkline horizontal mostrando valor vs faixa de referência."""
+    valor_f = _parse_value(valor)
+    rmin, rmax = _parse_ref_range(ref_str)
+    if valor_f is None:
+        return ""
+    # Define escala visual: 0 a 1.5x do max OU 0 a max+50% se só rmax, etc
+    if rmin is not None and rmax is not None:
+        range_min = max(0, rmin - (rmax - rmin) * 0.5)
+        range_max = rmax + (rmax - rmin) * 0.5
+    elif rmax is not None:
+        range_min = 0
+        range_max = rmax * 1.5
+    elif rmin is not None:
+        range_min = 0
+        range_max = rmin * 2
+    else:
+        return ""
+    range_max = max(range_max, valor_f * 1.1)
+    range_min = min(range_min, valor_f * 0.9 if valor_f < range_min else range_min)
+    if range_max - range_min <= 0: return ""
+
+    def x(v):
+        return ((v - range_min) / (range_max - range_min)) * 280 + 4
+
+    # SVG: 288 wide, 36 high
+    track = f'<rect x="0" y="14" width="288" height="8" rx="4" class="spark-track"/>'
+    range_rect = ""
+    if rmin is not None and rmax is not None:
+        rx, rw = x(rmin), x(rmax) - x(rmin)
+        range_rect = f'<rect x="{rx:.0f}" y="14" width="{rw:.0f}" height="8" rx="4" class="spark-range"/>'
+    elif rmax is not None:
+        range_rect = f'<rect x="0" y="14" width="{x(rmax):.0f}" height="8" rx="4" class="spark-range"/>'
+    elif rmin is not None:
+        range_rect = f'<rect x="{x(rmin):.0f}" y="14" width="{288 - x(rmin):.0f}" height="8" rx="4" class="spark-range"/>'
+
+    # Marker
+    marker_cls = sev if sev in ("crit", "alert", "low") else ""
+    marker = f'<circle cx="{x(valor_f):.0f}" cy="18" r="6" class="spark-marker {marker_cls}"/>'
+    # Tick labels
+    label_min = f'<text x="0" y="34" class="spark-label">{_fmt_axis(range_min)}</text>'
+    label_max = f'<text x="288" y="34" class="spark-label" text-anchor="end">{_fmt_axis(range_max)}</text>'
+    label_val = f'<text x="{x(valor_f):.0f}" y="10" class="spark-label" text-anchor="middle" style="fill:var(--ink);font-weight:600">{valor}</text>'
+
+    return (f'<div class="lever-sparkline">'
+            f'<div class="sparkline-label">Onde seu valor está na faixa</div>'
+            f'<svg viewBox="0 0 288 36" preserveAspectRatio="xMidYMid meet">'
+            f'{track}{range_rect}{marker}{label_min}{label_max}{label_val}'
+            f'</svg></div>')
+
+
+def _fmt_axis(n):
+    if n is None: return ""
+    if abs(n) >= 1000:
+        return f"{n/1000:.1f}k".replace(".0k", "k")
+    if abs(n - int(n)) < 0.01:
+        return str(int(n))
+    return f"{n:.1f}"
+
+
+def _normalizar_unidade(u):
+    """Padroniza unidades para apresentacao premium."""
+    if not u: return ""
+    s = str(u).strip()
+    # Substitui chars ASCII por unicode tipograficos
+    s = s.replace("milhoes/mm3", "milhões/mm³")
+    s = s.replace("milhoes/mm", "milhões/mm")
+    s = s.replace("nanog/mL", "ng/mL")
+    s = s.replace("nanog/ml", "ng/mL")
+    s = s.replace("/mm3", "/mm³")
+    s = s.replace("u3", "ug/dL").replace("ug/dL", "µg/dL") if "u3" in s else s
+    s = s.replace("ug/dL", "µg/dL")
+    s = s.replace("ug/dl", "µg/dL")
+    s = s.replace("mcg/dL", "µg/dL")
+    s = s.replace("uUI/mL", "µUI/mL")
+    s = s.replace("uIU/mL", "µUI/mL")
+    s = s.replace("umol/L", "µmol/L")
+    s = s.replace("ug/mL", "µg/mL")
+    return s
+
+
+def _normalizar_valor(v):
+    """Padroniza valor numerico com virgula decimal BR."""
+    if v is None or v == "":
+        return "—"
+    s = str(v).strip()
+    # Se eh numero com ponto decimal, troca por virgula
+    import re as _re
+    if _re.match(r"^-?\d+\.\d+$", s):
+        s = s.replace(".", ",")
+    return s
+
+
+def _normalizar_ref(r):
+    """Padroniza referencia com virgula decimal BR e unicode."""
+    if not r:
+        return "—"
+    s = str(r).strip()
+    # Substitui unidades dentro da ref tambem
+    s = _normalizar_unidade(s)
+    # Trocar pontos decimais por virgulas em padroes "X.YY a Z.WW"
+    import re as _re
+    s = _re.sub(r"(\d+)\.(\d+)", lambda m: f"{m.group(1)},{m.group(2)}", s)
+    return s
+
+
+def _process_exames(raw):
+    """Normaliza lista de exames para o formato interno."""
+    out = []
+    for ex in (raw or []):
+        if not isinstance(ex, dict):
+            continue
+        nome = ex.get("nome") or ex.get("name") or ""
+        if not nome:
+            continue
+        out.append({
+            "nome": nome,
+            "valor": _normalizar_valor(ex.get("valor") or "—"),
+            "unit": _normalizar_unidade(ex.get("unit") or ex.get("unidade") or ""),
+            "ref": _normalizar_ref(ex.get("ref") or ex.get("referencia") or "—"),
+            "status": (ex.get("status") or "normal").lower(),
+            "grupo": ex.get("grupo") or _infer_grupo(nome),
+        })
+    return out
+
+
+GRUPOS_DEF = [
+    ("hemograma", "Hemograma e Coagulação"),
+    ("glicidico", "Perfil Glicídico"),
+    ("lipidico", "Perfil Lipídico"),
+    ("hepatico", "Função Hepática"),
+    ("renal", "Função Renal"),
+    ("tireoide", "Tireoide"),
+    ("hormonal", "Hormonal Sexual"),
+    ("inflamatorio", "Marcadores Inflamatórios"),
+    ("vitaminas", "Vitaminas e Minerais"),
+    ("adrenal", "Função Adrenal e Outros"),
+]
+
+GRUPO_KEYWORDS = {
+    "hemograma": ["hemácia", "hemoglobina", "hematócrito", "leucócito", "plaqueta", "vcm", "hcm", "chcm", "rdw",
+                   "linfócito", "neutrófilo", "monócito", "basófilo", "eosinófilo", "bastonete", "segmentado"],
+    "glicidico": ["glicose", "insulina", "homa", "hba1c", "frutosamina", "glicemia"],
+    "lipidico": ["colesterol", "hdl", "ldl", "vldl", "triglicéride", "apo", "lp(a)", "não-hdl"],
+    "hepatico": ["tgo", "tgp", "ggt", "fosfatase", "bilirrubina", "ast", "alt"],
+    "renal": ["ureia", "creatinina", "ácido úrico"],
+    "tireoide": ["tsh", "t4", "t3", "anti-tpo"],
+    "hormonal": ["testosterona", "estradiol", "progesterona", "fsh", "lh", "prolactina", "shbg", "dhea"],
+    "inflamatorio": ["pcr", "homocisteína", "vhs"],
+    "vitaminas": ["vitamina", "ferro", "ferritina", "magnésio", "cálcio", "sódio", "potássio", "zinco", "pth", "fólico"],
+    "adrenal": ["cortisol", "igf"],
+}
+
+
+def _infer_grupo(nome):
+    n = nome.lower()
+    for gid, kws in GRUPO_KEYWORDS.items():
+        for kw in kws:
+            if kw in n:
+                return gid
+    return "outros"
+
+
+# ---------------------------------------------------------------------------
+# Section render functions
+# ---------------------------------------------------------------------------
+def render_topbar(logo_b64):
+    return f"""
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#hero" aria-label="Voltar ao início" style="line-height:0;"><img src="{logo_b64}" alt="Instituto Vital Slim" class="logo"></a>
+    <div class="doctor-tag">
+      <span class="name">Dra. Daniely Freitas</span>
+      CRM-BA 27.588 · Médica do Estilo de Vida
+    </div>
+  </div>
+</header>
+"""
+
+
+def render_progress_nav():
+    steps = [
+        ("executive-diagnosis", "1 · Diagnóstico"),
+        ("patient-mirror", "2 · Seu caso"),
+        ("critical-levers", "3 · Alavancas"),
+        ("leitura-integrada", "4 · Leitura clínica"),
+        ("ivs-machine", "5 · Acompanhamento"),
+        ("decision-checklist", "6 · Decisão"),
+    ]
+    items = "".join(
+        f'<button class="progress-step" data-target="{sid}">{safe_html(label)}</button>'
+        for sid, label in steps
+    )
+    return f"""
+<nav class="progress-nav" aria-label="Navegação da apresentação">
+  <div class="progress-nav-inner">
+    {items}
+    <div class="mode-switcher" role="tablist" aria-label="Modo de visualização">
+      <button class="mode-btn active" data-mode="apresentacao" role="tab" aria-selected="true">Apresentação</button>
+      <button class="mode-btn" data-mode="exames" role="tab" aria-selected="false">Exames</button>
+      <button class="mode-btn" data-mode="objecoes" role="tab" aria-selected="false">Médica</button>
+    </div>
+  </div>
+</nav>
+"""
+
+
+def render_hero(paciente, dra_b64=""):
+    nome = safe_html(paciente.get("nome", "Paciente"))
+    primeiro = nome.split()[0] if nome else "Paciente"
+    idade = paciente.get("idade") or calcular_idade(paciente.get("dataNascimento")) or "—"
+    data_consulta = paciente.get("data_consulta") or date.today().strftime("%d.%m.%Y")
+    foto_html = (
+        f'<div class="hero-photo fade-up">'
+        f'<img src="{dra_b64}" alt="Dra. Daniely Freitas">'
+        f'<div class="hero-photo-caption"><strong>Dra. Daniely Freitas</strong>CRM-BA 27.588 · Médica do Estilo de Vida</div>'
+        f'</div>'
+    ) if dra_b64 else ''
+    return f"""
+<section id="hero" class="section hero-clinical-document">
+  <div class="wrap">
+    <div class="hero-meta-bar">
+      <div class="hero-meta-item">Paciente<strong>{nome}</strong></div>
+      <div class="hero-meta-item">Idade<strong>{idade} anos</strong></div>
+      <div class="hero-meta-item">Consulta<strong>{safe_html(data_consulta)}</strong></div>
+      <div class="hero-meta-item">Médica<strong>Dra. Daniely Freitas</strong></div>
+      <div class="hero-meta-item">CRM<strong>BA 27.588</strong></div>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1 class="hero-clinical-h1">{primeiro}, seus exames e seu questionário contam a mesma história: <span style="color:var(--gold-dark)">o problema não parece ser falta de esforço</span>, mas falta de acompanhamento integrado.</h1>
+      </div>
+      {foto_html}
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_executive_diagnosis(paciente, levers):
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+    # Gera 3 cards: o que está acontecendo / onde aparece / por que muda estratégia
+    sistemas_afetados = set()
+    for lv in levers:
+        sistemas_afetados.add(lv.get("grupo", "outros"))
+    sistemas_label = {
+        "glicidico": "metabolismo glicêmico", "lipidico": "perfil lipídico",
+        "hormonal": "eixo hormonal", "tireoide": "tireoide",
+        "inflamatorio": "inflamação sistêmica", "vitaminas": "micronutrientes",
+        "adrenal": "eixo adrenal", "hepatico": "função hepática",
+        "renal": "função renal", "hemograma": "hemograma",
+    }
+    sistemas_str = ", ".join(sorted({sistemas_label.get(s, s) for s in sistemas_afetados})) or "múltiplos sistemas"
+
+    # Onde aparece: lista as alavancas
+    levers_html = ""
+    for lv in levers:
+        sev_class = "red" if lv["status"] == "crit" else "amber"
+        levers_html += (
+            f'<span class="tag" style="background:#f3ead1;color:var(--ink);'
+            f'display:inline-block;padding:4px 10px;border-radius:6px;margin:2px 4px 2px 0;'
+            f'font-size:12px;font-weight:600;">'
+            f'{safe_html(lv["nome"])} {safe_html(lv["valor"])}{safe_html(lv["unit"])}</span>'
+        )
+
+    return f"""
+<section id="executive-diagnosis" class="section executive-diagnosis">
+  <div class="wrap">
+    <h2>Diagnóstico executivo do caso</h2>
+    <div class="tese-clinica fade-up">
+      <span class="tese-tag">Tese clínica do caso</span>
+      <p class="tese-texto">Quando sintomas e marcadores apontam na mesma direção, o plano precisa ser <strong>acompanhado, medido e ajustado</strong>.</p>
+    </div>
+    <div class="diag-grid diag-grid-2col">
+      <div class="diag-card fade-up">
+        <h4>O que está acontecendo</h4>
+        <p class="body-text">No seu caso, {primeiro}, o ponto principal não é peso ou estética. Há sinais simultâneos em <strong>{sistemas_str}</strong> — quando tratados isoladamente, tendem a produzir resultado pouco previsível.</p>
+      </div>
+      <div class="diag-card fade-up">
+        <h4>Onde aparece nos exames</h4>
+        <div style="margin-top:var(--s-3)">{levers_html}</div>
+      </div>
+    </div>
+    <div class="diag-recomendacao">
+      Minha recomendação para o seu caso é <strong>acompanhamento estruturado</strong>. A previsibilidade do resultado depende dos ajustes que faremos juntos durante o processo.
+    </div>
+  </div>
+</section>
+"""
+
+
+def _q_field(label, value, sub="", feature=False):
+    cls = "mirror-card feature" if feature else "mirror-card"
+    if not value or value == "—" or value == "":
+        val_html = '<div class="value empty">não informado · preencher antes da consulta</div>'
+    else:
+        val_html = f'<div class="value">{safe_html(value)}</div>'
+    sub_html = f'<div class="sub">{safe_html(sub)}</div>' if sub else ""
+    return f'<div class="{cls}"><div class="label">{safe_html(label)}</div>{val_html}{sub_html}</div>'
+
+
+def render_patient_mirror(paciente, questionario):
+    dados = (questionario or {}).get("pre-consulta", {}).get("dados", {}) if questionario else {}
+    if not dados and isinstance(questionario, dict) and "dados" in questionario:
+        dados = questionario["dados"]
+
+    queixa = dados.get("queixaPrincipal") or dados.get("spin_p_principalIncomodo") or ""
+    tempo = dados.get("spin_s_tempoLuta") or dados.get("tempoLuta") or ""
+    if isinstance(tempo, list):
+        tempo = ", ".join(tempo)
+    tentativas = dados.get("tentativasAnteriores") or dados.get("jaTentou") or ""
+    if isinstance(tentativas, list):
+        tentativas = "; ".join(tentativas)
+    sono = dados.get("qualidadeSono") or ""
+    if sono and isinstance(sono, (int, str)):
+        sono = f"{sono}/5"
+    energia = dados.get("nivelEnergia") or ""
+    if energia and isinstance(energia, (int, str)):
+        energia = f"{energia}/5" if not isinstance(energia, str) or "/" not in energia else energia
+    alimentacao = dados.get("alimentacaoFimSemana") or dados.get("alimentacao") or ""
+    if isinstance(alimentacao, list):
+        alimentacao = ", ".join(alimentacao)
+    motivo = dados.get("spin_n_vidaResolvida") or dados.get("motivoIVS") or ""
+    peso = dados.get("pesoAtual") or dados.get("peso") or ""
+    altura = dados.get("altura") or ""
+
+    return f"""
+<section id="patient-mirror" class="section patient-mirror">
+  <div class="wrap">
+    <h2>O espelho do seu caso</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">O que você nos contou antes da consulta. Cada item aqui é uma pista clínica que vamos cruzar com os exames.</p>
+    <div class="mirror-grid">
+      {_q_field("O que mais te incomoda hoje", queixa, feature=True)}
+      {_q_field("Há quanto tempo", tempo)}
+      {_q_field("Já tentou", tentativas)}
+      {_q_field("Por que IVS agora", motivo)}
+      {_q_field("Qualidade do sono", sono)}
+      {_q_field("Nível de energia", energia)}
+      {_q_field("Alimentação típica", alimentacao)}
+      {_q_field("Peso atual", f"{peso} kg" if peso else "", sub=f"Altura {altura.replace('.', ',')} m" if altura else "")}
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_critical_levers(levers):
+    if not levers:
+        return ""
+    cards = []
+    for lv in levers:
+        nome = lv["nome"]
+        interp = INTERPRETACAO_LEVERS.get(nome, DEFAULT_INTERP)
+        sev = lv.get("status", "alert")
+        sev_label = "Crítico" if sev == "crit" else ("Alterado" if sev == "alert" else "Atenção")
+        cards.append(f"""
+<div class="lever-card fade-up" data-sev="{sev}">
+  <div class="lever-numeric">
+    <div class="name">{render_sev_ring(lv["valor"], lv.get("ref","—"), sev)}<span>{safe_html(nome)}</span></div>
+    <div class="value tabular">{safe_html(lv["valor"])}<span class="unit">{safe_html(lv.get("unit",""))}</span></div>
+    <div class="ref">Referência IVS: {safe_html(lv.get("ref","—"))}</div>
+    <span class="badge">{sev_label}</span>
+    {render_sparkline(lv["valor"], lv.get("ref","—"), sev)}
+  </div>
+  <div class="lever-narrative">
+    <p class="interp">{safe_html(interp["interpretacao"])}</p>
+    <div class="conexao-sintoma">
+      <span class="conexao-tag">Conexão com o que você relatou</span>
+      <p>{safe_html(_conexao_sintoma(nome))}</p>
+    </div>
+    <div class="spin-q">{safe_html(interp["spin"])}</div>
+  </div>
+</div>
+""")
+    return f"""
+<section id="critical-levers" class="section critical-levers">
+  <div class="wrap">
+    <h2>Mapa de alavancas críticas</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">As {len(levers)} alavancas que mais influenciam o seu plano. Cada uma traz interpretação clínica, impacto prático e a pergunta que a Dra. usará na consulta para confirmar o diagnóstico.</p>
+    <div class="lever-list">{"".join(cards)}</div>
+  </div>
+</section>
+"""
+
+
+def render_spin_guided(paciente, questionario, levers):
+    """Renderiza 'Leitura integrada do caso' — sem labels de venda S/P/I/N."""
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+
+    # Tabela de marcadores: alavanca + interpretação clínica
+    rows_p = ""
+    for lv in levers[:5]:
+        interp = INTERPRETACAO_LEVERS.get(lv["nome"], DEFAULT_INTERP)
+        rows_p += (f"<tr><td><strong>{safe_html(lv['nome'])} {safe_html(lv['valor'])}"
+                   f"{safe_html(lv.get('unit',''))}</strong></td>"
+                   f"<td>{safe_html(interp['interpretacao'])} {safe_html(interp['impacto'])}</td></tr>")
+
+    return f"""
+<section id="leitura-integrada" class="section leitura-integrada">
+  <div class="wrap">
+    <h2>Leitura integrada do caso</h2>
+    <p style="max-width:720px;font-size:16px;color:var(--muted);">Como seu quadro clínico se conecta — questionário, exames e o que isso significa para a estratégia de acompanhamento.</p>
+
+    <div class="leitura-block fade-up">
+      <h3>O ponto de partida</h3>
+      <p class="body-text">Questionário e exames formam o retrato funcional do seu momento. É a partir desse retrato — não de um protocolo padrão — que se constrói o plano.</p>
+      <div class="alinhamento">{primeiro}, esse resumo descreve bem o ciclo que você vem vivendo?</div>
+    </div>
+
+    <div class="leitura-block fade-up">
+      <h3>Os sinais que se conectam</h3>
+      <p class="body-text">Cada marcador abaixo carrega uma leitura clínica e se conecta a sintomas relatados — peças do mesmo quadro funcional.</p>
+      <table class="spin-table">
+        <thead><tr><th>Marcador</th><th>Leitura clínica</th></tr></thead>
+        <tbody>{rows_p}</tbody>
+      </table>
+      <div class="alinhamento">Você enxerga esses pontos como peças do mesmo quadro?</div>
+    </div>
+
+    <div class="leitura-block fade-up">
+      <h3>Para onde a tendência aponta</h3>
+      <p class="body-text">Sem ação clínica integrada, o cenário tende a <strong>menor previsibilidade e mais ajustes necessários</strong> ao longo do tempo.</p>
+      <div class="alinhamento">Olhar 6 meses adiante sem mudança te preocupa o suficiente para agir agora?</div>
+    </div>
+
+    <div class="leitura-block fade-up">
+      <h3>Recomendação clínica</h3>
+      <p class="body-text">A diferença mora nos ajustes — o que muda na segunda, quarta, oitava semana conforme seu corpo responde. Por isso, a recomendação para o seu caso é <strong>acompanhamento médico estruturado</strong>, não orientação isolada.</p>
+      <div class="alinhamento">{primeiro}, você concorda que esse caminho exige acompanhamento e não apenas uma prescrição?</div>
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_ivs_machine():
+    steps = [
+        ("01", "Diagnóstico", "Bateria avançada de biomarcadores + leitura clínica individualizada."),
+        ("02", "Protocolo", "Plano construído para o seu perfil — hormonal, nutricional, farmacológico quando indicado."),
+        ("03", "Execução", "Início assistido. Equipe completa orienta a primeira semana e o primeiro mês."),
+        ("04", "Suporte", "Acompanhamento médico com suporte da equipe (nutri, preparador, enfermeira). Cadência semanal."),
+        ("05", "Ajuste", "Mudanças baseadas em resposta clínica, não em calendário fixo."),
+        ("06", "Reavaliação", "Reavaliação trimestral de biomarcadores. Plano de manutenção construído junto."),
+    ]
+    items = "".join(
+        f'<div class="machine-step fade-up"><div class="num">{n}</div>'
+        f'<div class="title">{safe_html(t)}</div>'
+        f'<div class="desc">{safe_html(d)}</div></div>'
+        for n, t, d in steps
+    )
+    return f"""
+<section id="ivs-machine" class="section ivs-machine">
+  <div class="wrap">
+    <h2>O mecanismo do acompanhamento</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Não é uma lista de benefícios — é um sistema. Cada etapa alimenta a próxima, e os ajustes feitos durante o caminho é que constroem o resultado.</p>
+    <div class="machine-flow">{items}</div>
+  </div>
+</section>
+"""
+
+
+def render_proof_by_process():
+    casos = [
+        {
+            "nome": "Tiaro Neves", "iniciais": "TN",
+            "antes": "tiaro-antes.png", "depois": "tiaro-depois.png",
+            "frase": "O peso era apenas o sintoma. O que mudou foi o corpo todo: pressão estabilizada, energia diferente, dores que sumiram. Hoje vivo de outra forma.",
+        },
+        {
+            "nome": "Silvana A.", "iniciais": "SA",
+            "antes": "silvana-antes.png", "depois": "silvana-depois.png",
+            "frase": "O sentimento que eu tenho é felicidade. A atenção e o carinho que recebi não tiveram igual. Os meus resultados falam por si só.",
+        },
+        {
+            "nome": "Darilene A.", "iniciais": "DA",
+            "antes": "darilene-antes.png", "depois": "darilene-depois.png",
+            "frase": "Quando cheguei na clínica eu estava cansada, sem esperança. Achava que nunca ia conseguir. A equipe acreditou em mim mesmo quando eu duvidava.",
+        },
+    ]
+    cards = []
+    for i, c in enumerate(casos):
+        antes_b64 = img_b64(SITE_IMAGES / c["antes"])
+        depois_b64 = img_b64(SITE_IMAGES / c["depois"])
+        cards.append(f"""
+<div class="proof-card fade-up">
+  <div class="proof-imgs">
+    <div class="proof-img"><span class="label">Antes</span><img src="{antes_b64}" alt="{safe_html(c['nome'])}"></div>
+    <div class="proof-img"><span class="label">Depois</span><img src="{depois_b64}" alt="{safe_html(c['nome'])}"></div>
+  </div>
+  <div class="proof-text">
+    <span class="step-eyebrow">Caso {str(i+1).zfill(2)} · {safe_html(c['iniciais'])}</span>
+    <h3>{safe_html(c['nome'])}</h3>
+    <blockquote>"{safe_html(c['frase'])}"</blockquote>
+  </div>
+</div>
+""")
+    return f"""
+<section id="proof-by-process" class="section proof-by-process">
+  <div class="wrap">
+    <h2>Prova pelo processo</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Três pacientes acompanhados por meses ou anos. Casos reais, não promessa. O método é o mesmo — o caminho de cada um foi construído individualmente.</p>
+    <div class="proof-thesis fade-up">
+      <p>Não mostramos esses casos como promessa. Mostramos para <strong>provar o processo</strong>: acompanhamento, ajustes e continuidade são o que constrói o resultado.</p>
+    </div>
+    <div class="proof-list">{"".join(cards)}</div>
+    <div class="proof-disclaimer">Resultados individuais variam e dependem de avaliação clínica, adesão ao plano e acompanhamento contínuo. As imagens ilustram acompanhamento clínico real e não constituem promessa de resultado.</div>
+  </div>
+</section>
+"""
+
+
+def render_program_180():
+    """V2.3 — programa enxuto, 4 marcos simples, sem detalhamento operacional."""
+    fases = [
+        ("Início assistido",
+         "Avaliação aprofundada, definição do mapa metabólico individualizado e onboarding com a equipe."),
+        ("Acompanhamento",
+         "Cadência semanal entre consultas, suporte ativo da equipe, leitura contínua de sintomas e resposta clínica."),
+        ("Ajustes",
+         "Mudanças de protocolo guiadas por resposta clínica do seu corpo — não por calendário fixo."),
+        ("Reavaliação",
+         "Painel laboratorial recorrente. Construção do plano de manutenção ao final do ciclo."),
+    ]
+    fases_html = "".join(
+        f'<div class="program-phase fade-up">'
+        f'<div class="phase-marker"><div class="num">{i+1:02d}</div></div>'
+        f'<div class="phase-content"><h4>{safe_html(t)}</h4>'
+        f'<p class="desc">{safe_html(d)}</p></div>'
+        f'</div>'
+        for i, (t, d) in enumerate(fases)
+    )
+    return f"""
+<section id="program-180-days" class="section program-180-days">
+  <div class="wrap">
+    <h2>Os próximos 180 dias</h2>
+    <p style="max-width:680px;font-size:16px;color:var(--muted);">Quatro movimentos clínicos. O que importa não é o cronograma — é a continuidade dos ajustes feitos durante o caminho.</p>
+    <div class="program-timeline">{fases_html}</div>
+  </div>
+</section>
+"""
+
+
+def render_doctor_objections():
+    """V2.5 — Apêndice da médica com busca, categorias e cards collapsable.
+    Otimizado para consulta rápida durante a consulta clínica."""
+    # (categoria, objeção, o que revela, resposta, pergunta de condução)
+    objs = [
+        ("Hesitação", "Quero pensar.",
+         "Costuma ser sinal de que ainda falta clareza sobre o que está em jogo, ou tempo para processar a recomendação.",
+         "Faz total sentido pensar com calma. Posso te enviar um resumo dessa consulta com os pontos clínicos principais para revisitar quando precisar.",
+         "O que ainda falta ficar claro para você se sentir confortável com a próxima decisão?"),
+        ("Família", "Preciso conversar com minha família primeiro.",
+         "Sinaliza um espaço de validação importante — paciente quer dividir a decisão com alguém de confiança.",
+         "Faz total sentido. Posso preparar um resumo da consulta com os pontos clínicos principais, para você apresentar em casa com base nos exames, não em uma proposta comercial.",
+         "Quem normalmente conversa com você sobre esse tipo de decisão?"),
+        ("Financeiro", "Achei o investimento alto.",
+         "O paciente ainda está comparando com consulta avulsa, dieta isolada ou tentativa anterior — não com um sistema clínico contínuo.",
+         "Faz sentido olhar com cuidado. A diferença aqui é que não estamos falando de intervenção isolada, mas de acompanhamento com leitura clínica, equipe, ajustes e reavaliações ao longo do processo.",
+         "Quando você compara com o custo somado das tentativas que não sustentaram resultado, faz sentido olhar para isso como acompanhamento e não como uma consulta?"),
+        ("Autonomia", "Vou tentar sozinho primeiro.",
+         "Reflete confiança na própria disciplina e desconfiança quanto à necessidade real de acompanhamento.",
+         "Tentar sozinho não é falta de disciplina — é falta de leitura clínica em tempo real. Se você já tentou antes, provavelmente já sentiu o que falta: alguém ajustando rota com você.",
+         "O que costuma fazer você desistir quando tenta sozinho?"),
+        ("Medicação", "Tenho medo de medicação.",
+         "Geralmente vem de experiência negativa anterior ou da preocupação com efeitos colaterais e dependência.",
+         "Medicação só entra quando há indicação clínica clara e revisão periódica. Não é regra do programa — é ferramenta usada quando o caso pede. E o objetivo é sempre função, não dependência.",
+         "Que experiência prévia com medicação fez você desenvolver esse cuidado?"),
+        ("Medicação", "Não quero ficar dependente.",
+         "Próxima do medo de medicação, mas costuma envolver também receio de virar paciente crônico ou de perder autonomia.",
+         "Acompanhar permite usar medicação só quando faz diferença real — e suspender quando não precisa mais. O que se busca é função, não dependência.",
+         "O que você considera 'estar bem sem precisar de nada'?"),
+        ("Tempo", "Não tenho tempo agora.",
+         "Pode refletir agenda real ou ansiedade sobre o compromisso operacional do programa.",
+         "O programa foi desenhado para integrar à rotina, não substituí-la. A maior parte dos ajustes é remota; as consultas presenciais são pontuais e planejadas.",
+         "Como ficaria se a parte mais demandante fosse na primeira semana, e depois ficasse mais leve?"),
+        ("Histórico", "Já tentei muitas vezes e não funcionou.",
+         "Há cansaço acumulado e proteção emocional contra mais uma frustração.",
+         "Tentativas frustradas costumam ter um padrão em comum: faltou leitura clínica e correção de rota. Não foi falta de esforço seu.",
+         "Se a gente conseguisse identificar o que realmente derruba sua adesão, valeria tentar de um jeito diferente?"),
+        ("Manutenção", "Tenho medo de não conseguir manter.",
+         "Reflete autoavaliação realista, mas também a expectativa de que manter dependa só de força de vontade.",
+         "Manter raramente é questão de disciplina pessoal. É ter quem leia sua resposta e ajuste a rota. É exatamente para isso que existe a equipe.",
+         "Se tivesse alguém olhando o seu caso a cada duas semanas, mudaria a sua percepção sobre conseguir manter?"),
+        ("Resultado", "E se eu pagar e não tiver resultado?",
+         "Pede transparência sobre o que é prometido e como o resultado é construído.",
+         "Não prometo resultado fechado — isso seria desonesto. O que ofereço é leitura clínica contínua, ajustes baseados em resposta e reavaliações com biomarcadores. Resultado depende de adesão, indicação e seu organismo.",
+         "Para você, como ficaria a percepção de valor se a gente combinasse marcos de reavaliação claros desde o início?"),
+        ("Autonomia", "Prefiro começar só com dieta e treino.",
+         "Subestima a complexidade do caso ou tenta minimizar a entrada no programa.",
+         "Dieta e treino isolados resolvem alguns casos. O seu, pelos exames, mostra sinais que pedem leitura conjunta — hormônio, inflamação e metabolismo. Tratar isolado tende a frustrar.",
+         "Você já tentou só dieta e treino antes? O que aconteceu depois de algumas semanas?"),
+        ("Compromisso", "Quero fazer só os exames e depois vejo.",
+         "Quer reduzir compromisso inicial; pode ser legítimo ou pode ser fuga da decisão.",
+         "Exames sem leitura clínica acompanhada raramente mudam o cenário. O número sozinho não muda nada — o que muda é a interpretação e a estratégia construída em cima.",
+         "Se eu lesse seus exames hoje e te entregasse a interpretação, qual seria o próximo passo lógico para você?"),
+        ("Autonomia", "Não gosto de acompanhamento muito próximo.",
+         "Reflete preferência por autonomia ou desconforto com proximidade clínica.",
+         "Acompanhar não significa controlar. Significa ter alguém disponível quando você precisa, sem exigir contato constante. A cadência é planejada, não invasiva.",
+         "Como seria, para você, um acompanhamento que respeitasse mais sua autonomia?"),
+        ("Hormônios", "Tenho receio de hormônios.",
+         "Costuma vir de informação assimétrica — mídia, casos isolados, falta de explicação clínica.",
+         "Reposição hormonal só entra com indicação clínica precisa, monitoramento de biomarcadores e revisão periódica. Não é regra do programa — é ferramenta para casos específicos.",
+         "Se hormônio entrasse no plano só após reavaliação clínica e exames específicos, mudaria sua percepção?"),
+        ("Hesitação", "Não estou pronto para começar agora.",
+         "Sinal de que ainda falta um gatilho emocional ou clínico para a decisão.",
+         "Faz sentido. Não há urgência artificial. Mas vale registrar a recomendação clínica e o quadro atual, para que possamos retomar quando você decidir.",
+         "O que precisaria mudar — clinicamente ou na sua vida — para você se sentir pronto?"),
+    ]
+
+    # Categorias únicas em ordem de aparição
+    cats_seen = []
+    for cat, *_ in objs:
+        if cat not in cats_seen:
+            cats_seen.append(cat)
+
+    cards = ""
+    for cat, q, reveals, resp, cond in objs:
+        # data attributes para busca e filtro
+        searchtext = f"{cat} {q} {reveals} {resp} {cond}".lower()
+        cards += (
+            f'<div class="doctor-obj-card" data-cat="{safe_html(cat)}" data-search="{safe_html(searchtext)}">'
+            f'<div class="obj-header">'
+            f'<span class="obj-cat-tag">{safe_html(cat)}</span>'
+            f'<h3>"{safe_html(q)}"</h3>'
+            f'<span class="obj-toggle">▾</span>'
+            f'</div>'
+            f'<div class="obj-body">'
+            f'<p><strong>O que revela</strong>{safe_html(reveals)}</p>'
+            f'<p><strong>Resposta sugerida</strong>{safe_html(resp)}</p>'
+            f'<p class="cond"><strong>Pergunta de condução</strong>{safe_html(cond)}</p>'
+            f'</div>'
+            f'</div>'
+        )
+
+    chips = '<button class="obj-cat-chip active" data-cat="todas">Todas</button>'
+    chips += "".join(
+        f'<button class="obj-cat-chip" data-cat="{safe_html(cat)}">{safe_html(cat)}</button>'
+        for cat in cats_seen
+    )
+
+    return f"""
+<section id="doctor-objections" class="section doctor-objections">
+  <div class="wrap">
+    <span class="doctor-tag">Apêndice da médica · Uso interno</span>
+    <h2>Objeções e condução da conversa</h2>
+    <p class="lead">Material interno para apoio da Dra. Daniely durante a consulta. Busque por palavra-chave ou filtre por categoria. Clique no card para expandir resposta e pergunta de condução.</p>
+
+    <div class="obj-toolbar">
+      <div class="obj-search-wrap">
+        <svg class="obj-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" class="obj-search" placeholder="Buscar objeção, palavra-chave ou categoria..." autocomplete="off">
+        <span class="obj-shortcut">/</span>
+        <button class="obj-search-clear" aria-label="Limpar busca">×</button>
+      </div>
+      <div class="obj-cats" role="tablist">{chips}</div>
+      <div class="obj-counter"><span class="obj-counter-num">{len(objs)}</span> objeções disponíveis</div>
+    </div>
+
+    <div class="doctor-obj-list">
+      {cards}
+      <div class="obj-empty" hidden>Nenhuma objeção encontrada com este filtro.</div>
+    </div>
+  </div>
+</section>
+"""
+
+
+
+def render_decision_checklist(paciente):
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+    items = [
+        "Reconheço que existe um problema funcional no meu caso, não apenas estético.",
+        "Entendo que adiar pode manter o quadro sem uma leitura clínica mais acompanhada.",
+        "Concordo que minha situação pede acompanhamento, não orientação isolada.",
+        "Estou pronto para discutir o início assistido com a equipe da Dra. Daniely Freitas.",
+    ]
+    items_html = "".join(
+        f'<div class="checklist-item"><div class="check"></div>'
+        f'<div class="text">{safe_html(it)}</div></div>'
+        for it in items
+    )
+    return f"""
+<section id="decision-checklist" class="section decision-checklist">
+  <div class="wrap">
+    <h2>Antes da decisão, {primeiro}</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);text-align:center;margin:0 auto;">Marque cada item com o qual você concorda. Não é vinculante — é uma forma de tornar a decisão mais clara para você.</p>
+    <div class="checklist-card">
+      {items_html}
+      <div class="checklist-progress">
+        <div class="checklist-progress-bar"><div class="checklist-progress-fill"></div></div>
+        <div class="checklist-progress-text">0 de 4 confirmados</div>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+
+
+
+def render_inclusos():
+    """Ancoragem de valor antes da decisão — 4 blocos consolidados."""
+    items = [
+        ("Médica + biomarcadores",
+         "Acompanhamento médico da Dra. Daniely Freitas com bateria avançada de biomarcadores e leitura clínica individualizada.",
+         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/><path d="M14 2v6h6"/></svg>'),
+        ("Nutrição + movimento",
+         "Plano alimentar e programa de movimento integrados à sua resposta clínica e rotina.",
+         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v6a3 3 0 0 0 6 0V3M16 3v18M16 12c-2 0-3 2-3 5"/></svg>'),
+        ("Enfermagem + suporte",
+         "Suporte para coletas, aplicações e dúvidas operacionais. Cadência semanal entre consultas.",
+         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9 11h6M12 8v6"/></svg>'),
+        ("Reavaliações + manutenção",
+         "Painel laboratorial nas reavaliações trimestrais. Plano de manutenção individualizado ao final do programa.",
+         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8m0-5v5h-5M21 12a9 9 0 0 1-15 6.7L3 16m0 5v-5h5"/></svg>'),
+    ]
+    cards = "".join(
+        f'<div class="incluso-card fade-up">'
+        f'<div class="incluso-icon">{svg}</div>'
+        f'<h4 class="incluso-titulo">{safe_html(t)}</h4>'
+        f'<p class="incluso-desc">{safe_html(d)}</p></div>'
+        for t, d, svg in items
+    )
+    return f"""
+<section id="inclusos" class="section inclusos">
+  <div class="wrap">
+    <h2>O que está incluído no acompanhamento</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">Antes de pensar em decisão, vale entender o que compõe o programa. Não é uma consulta avulsa — é uma estrutura completa de cuidado clínico.</p>
+    <div class="inclusos-grid">{cards}</div>
+  </div>
+</section>
+"""
+
+
+def render_final_cta(paciente):
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+    return f"""
+<section id="final-cta" class="section final-cta">
+  <div class="wrap">
+    <div class="cta-frame fade-up">
+      <p class="cta-frame-text">O próximo passo é escolher se faz sentido iniciar agora um <strong>acompanhamento estruturado</strong>, com leitura clínica, equipe e ajustes ao longo do caminho.</p>
+    </div>
+    <h2 style="text-align:center;">A recomendação clínica é começar de forma assistida</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);text-align:center;margin:0 auto var(--s-7);">Se fizer sentido para você, o próximo passo é organizarmos juntos a sua linha de acompanhamento e colocarmos a equipe para caminhar contigo nos próximos 180 dias.</p>
+    <div class="cta-decision">
+      <div class="cta-card recommended fade-up">
+        <div class="label">Recomendação clínica</div>
+        <h3>Começar assistido</h3>
+        <p class="desc">180 dias com diagnóstico, protocolo individualizado, equipe completa, ajustes baseados em resposta clínica e reavaliações trimestrais. {primeiro}, é o caminho mais previsível para o seu caso.</p>
+        <span class="button">Quero iniciar o acompanhamento</span>
+      </div>
+      <div class="cta-card alternative fade-up">
+        <div class="label">Alternativa</div>
+        <h3>Adiar a decisão agora</h3>
+        <p class="desc">Prefiro decidir depois. Podemos revisitar quando fizer sentido — o quadro clínico continua sendo seu, e a recomendação fica registrada para retomarmos.</p>
+        <span class="button">Prefiro decidir depois</span>
+      </div>
+    </div>
+    <div class="cta-signature">
+      <div class="name">Dra. Daniely Freitas</div>
+      <div class="meta">CRM-BA 27.588 · Médica do Estilo de Vida · Instituto Vital Slim</div>
+    </div>
+  </div>
+</section>
+"""
+
+
+def render_technical_appendix(exames):
+    by_g = {}
+    for ex in exames:
+        gid = ex.get("grupo", "outros")
+        by_g.setdefault(gid, []).append(ex)
+
+    grupos_html = []
+    for gid, gnome in GRUPOS_DEF:
+        items = by_g.get(gid, [])
+        if not items:
+            continue
+        rows = []
+        alterados = 0
+        for ex in items:
+            sev = ex.get("status", "ok")
+            if sev in ("crit", "alert", "low"):
+                alterados += 1
+            rows.append(
+                f'<div class="exam-row" data-sev="{sev}">'
+                f'<div class="e-nome">{safe_html(ex["nome"])}</div>'
+                f'<div class="e-valor">{safe_html(ex["valor"])} '
+                f'<span class="e-unit">{safe_html(ex.get("unit",""))}</span></div>'
+                f'<div class="e-ref">{safe_html(ex.get("ref","—"))}</div>'
+                f'<div class="e-status">{sev}</div></div>'
+            )
+        grupos_html.append(
+            f'<div class="exam-group fade-up">'
+            f'<div class="exam-group-header"><h4>{safe_html(gnome)}</h4>'
+            f'<div class="meta"><span>{alterados}/{len(items)} alterados</span>'
+            f'<span class="toggle">▾</span></div></div>'
+            f'<div class="exam-group-body">{"".join(rows)}</div></div>'
+        )
+    return f"""
+<section id="technical-appendix" class="section technical-appendix">
+  <div class="wrap">
+    <h2>Apêndice técnico — painel completo</h2>
+    <div class="appendix-controls">
+      <p class="lead">Painel laboratorial completo organizado por sistema. Disponível para argumentação médica detalhada e auditoria clínica. Clique no nome do grupo para expandir.</p>
+      <button class="appendix-toggle-all">Expandir todos</button>
+    </div>
+    {"".join(grupos_html)}
+  </div>
+</section>
+"""
+
+
+# ---------------------------------------------------------------------------
+# Main render
+# ---------------------------------------------------------------------------
+def render_apresentacao_v10(paciente, questionario=None, exames=None, output_dir=None):
+    """Renderiza a V2 da apresentação conforme briefing do Conselho Growth (2026-05-05)."""
+    output_dir = Path(output_dir) if output_dir else Path("/root/cerebro-vital-slim/deliverables")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    logo_b64 = img_b64(SITE_IMAGES / "logo-ivs-correta.png")
+    if not logo_b64:
+        logo_b64 = img_b64(SITE_IMAGES / "logo-ivs-transparente.png")
+    dra_b64 = img_b64(SITE_IMAGES / "dra-daniely-hero.png")
+
+    nome_completo = paciente.get("nome", "Paciente")
+    paciente_full = {**paciente,
+                     "idade": paciente.get("idade") or calcular_idade(paciente.get("dataNascimento"))}
+
+    exames_proc = _process_exames(exames or [])
+    levers = _selecionar_critical_levers(exames_proc, max_levers=5)
+
+    html = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{safe_html(nome_completo)} · Apresentação V2 · Instituto Vital Slim</title>
+<meta name="description" content="Documento clínico individual — Dra. Daniely Freitas, CRM-BA 27.588">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+{CSS}
+</style>
+</head>
+<body>
+{render_topbar(logo_b64)}
+{render_progress_nav()}
+<main>
+{render_hero(paciente_full, dra_b64=dra_b64)}
+{render_executive_diagnosis(paciente_full, levers)}
+{render_patient_mirror(paciente_full, questionario)}
+{render_critical_levers(levers)}
+{render_spin_guided(paciente_full, questionario, levers)}
+{render_ivs_machine()}
+{render_proof_by_process()}
+{render_program_180()}
+{render_inclusos()}
+{render_decision_checklist(paciente_full)}
+{render_final_cta(paciente_full)}
+{render_technical_appendix(exames_proc)}
+{render_doctor_objections()}
+</main>
+<script>
+{JS}
+</script>
+</body>
+</html>
+"""
+    nome_slug = re.sub(r"[^a-z0-9-]", "", nome_completo.lower().replace(" ", "-").replace(".", ""))
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_path = output_dir / f"apresentacao-{nome_slug}-v10-{ts}.html"
+    output_path.write_text(html, encoding="utf-8")
+    return str(output_path)
+
+
+if __name__ == "__main__":
+    # Smoke test
+    paciente = {
+        "nome": "Erick Magalhaes Santos",
+        "dataNascimento": int(datetime(1990, 9, 25).timestamp() * 1000),
+        "sexo": "M",
+        "idade": 35,
+        "data_consulta": "05.05.2026",
+    }
+    exames = [
+        {"nome": "HOMA-IR", "valor": "3,8", "unit": "", "ref": "<2.7", "status": "alert", "grupo": "glicidico"},
+        {"nome": "HbA1c", "valor": "5,5", "unit": "%", "ref": "<5.4", "status": "alert", "grupo": "glicidico"},
+        {"nome": "Vitamina D", "valor": "31", "unit": "ng/mL", "ref": "80 a 100", "status": "crit", "grupo": "vitaminas"},
+        {"nome": "Prolactina", "valor": "24,7", "unit": "ng/mL", "ref": "4.04 a 15.2", "status": "crit", "grupo": "hormonal"},
+        {"nome": "PCR-us", "valor": "3,49", "unit": "mg/L", "ref": "<3.0", "status": "alert", "grupo": "inflamatorio"},
+    ]
+    out = render_apresentacao_v10(paciente, {}, exames)
+    print(f"OK {out}")

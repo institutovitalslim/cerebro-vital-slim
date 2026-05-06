@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-15T18:08:10.849Z",
+  "updatedAt": "2026-05-06T21:28:53.924Z",
   "entries": {
     "memory:memory/2026-04-09.md:53:58": {
       "key": "memory:memory/2026-04-09.md:53:58",
@@ -124,21 +124,27 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "### Regra de honestidade operacional Se não executou, dizer explicitamente: “não executei”. Nunca responder como se tivesse feito. ### Regra de linguagem em execução Menos promessa, mais confirmação real. Responder só após executar ou constatar bloqueio verdadeiro. ## 2026-04-12 — Aprendizados adicionais desta sessão ### Skill `llm-council` — localização e contexto canônico - A skill existe no workspace em: `/root/cerebro-vital-slim/skills/llm-council/SKILL.md` - O fluxo canônico recuperado foi: 1. framing da questão com contexto 2. 5 advisors em paralelo (Contrarian, First Principles Thinker, Expansionist, Outsider, Executor) 3. peer review anônimo 4. síntese do chairman 5. ger",
-      "recallCount": 3,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.9216513931751251,
-      "maxScore": 0.33153641819953916,
+      "totalScore": 1.9781753867864607,
+      "maxScore": 0.38023362755775447,
       "firstRecalledAt": "2026-04-13T22:36:09.143Z",
-      "lastRecalledAt": "2026-04-14T13:25:57.744Z",
+      "lastRecalledAt": "2026-05-03T14:19:59.550Z",
       "queryHashes": [
         "4f5dcbd70e2a",
         "33886c43459d",
-        "ad29f8c50fa0"
+        "ad29f8c50fa0",
+        "f086dbaacc15",
+        "3737d05ec765",
+        "4955c445ac22"
       ],
       "recallDays": [
         "2026-04-13",
-        "2026-04-14"
+        "2026-04-14",
+        "2026-04-30",
+        "2026-05-02",
+        "2026-05-03"
       ],
       "conceptTags": [
         "llm-council",
@@ -226,20 +232,25 @@
       "endLine": 19,
       "source": "memory",
       "snippet": "## 2026-04-10 — Flush de memória - Tiaro iniciou planejamento operacional de lançamento do **Centro de Tricologia / Centro de Tricologia Avançada** do Instituto Vital Slim para conteúdos entre sexta, sábado, domingo, segunda e terça (inauguração em dois dias). - Estratégia sugerida e bem recebida: lançamento orquestrado com **Reels para alcance**, **carrosséis para autoridade/educação** e **Stories para conversão**, evitando depender só de cards estáticos. - Estrutura operacional proposta por dia: - sexta: Reel de dor/identificação sobre queda de cabelo - sábado: Carrossel educativo com sinais de que a queda precisa de investigação - domingo: Reel emocional/manifesto preparando a inau",
-      "recallCount": 2,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.5291565537452698,
-      "maxScore": 0.2707608699798584,
+      "totalScore": 1.6022290736436844,
+      "maxScore": 0.36807964444160457,
       "firstRecalledAt": "2026-04-14T21:54:28.255Z",
-      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "lastRecalledAt": "2026-05-05T15:41:39.046Z",
       "queryHashes": [
         "fb68fd74b159",
-        "2afea6bd4014"
+        "2afea6bd4014",
+        "913978f2d0ae",
+        "3146c309ccbe",
+        "40d85bf4ab8d"
       ],
       "recallDays": [
         "2026-04-14",
-        "2026-04-15"
+        "2026-04-15",
+        "2026-04-30",
+        "2026-05-05"
       ],
       "conceptTags": [
         "autoridade/educação",
@@ -259,18 +270,20 @@
       "endLine": 7,
       "source": "memory",
       "snippet": "- Sistema anti-esquecimento implantado: criei arquivos canônicos em `cerebro/` para verdades operacionais, GitHub, Quarkclinic, WhatsApp/Z-API e time da clínica; também atualizei `AGENTS.md` para obrigar consulta a `cerebro/verdades-operacionais.md` em operações recorrentes. - Segunda camada do sistema anti-esquecimento implantada: criei `cerebro/OPERATIONS_INDEX.md` e `cerebro/execution-checklist-operacional.md`, e atualizei `AGENTS.md` para obrigar consulta ao índice e à checklist antes de responder tarefas operacionais recorrentes. - Terceira camada implantada: protocolo formal de aprendizagem criado em `cerebro/LEARNING_PROTOCOL.md`, ledger cumulativo em `cerebro/learning-ledger.md`, índ",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.2567711055278778,
-      "maxScore": 0.2567711055278778,
+      "totalScore": 0.6362187713384628,
+      "maxScore": 0.379447665810585,
       "firstRecalledAt": "2026-04-14T21:54:28.255Z",
-      "lastRecalledAt": "2026-04-14T21:54:28.255Z",
+      "lastRecalledAt": "2026-05-02T10:52:10.435Z",
       "queryHashes": [
-        "fb68fd74b159"
+        "fb68fd74b159",
+        "40e14e167743"
       ],
       "recallDays": [
-        "2026-04-14"
+        "2026-04-14",
+        "2026-05-02"
       ],
       "conceptTags": [
         "anti-esquecimento",
@@ -290,20 +303,30 @@
       "endLine": 56,
       "source": "memory",
       "snippet": "- Dra. Daniely Freitas: CRM-BA 27588, Instagram `@dradaniely.freitas`, atua com medicina do emagrecimento, medicina metabólica e modulação hormonal; é a médica fundadora e responsável pela clínica. - Dra. Patrícia Fabrini: Instagram `@patriciafabrini.dra`, Responsável Técnica do Centro de Tricologia Avançada, dermatologista SBD desde 1999, desenvolvedora da Metodologia Nutroboost, com metodologia presente na Europa, Estados Unidos e Brasil; atende tratamentos capilares no Instituto Vital Slim. - Centro de Tricologia Avançada: faz parte do Instituto Vital Slim, tem Dra. Patrícia Fabrini como Responsável Técnica e usa a Metodologia Nutroboost como principal. - Regra operacional de atendime",
-      "recallCount": 3,
+      "recallCount": 9,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7678524792194366,
-      "maxScore": 0.2732500374317169,
+      "totalScore": 3.0659966170787807,
+      "maxScore": 0.416388139128685,
       "firstRecalledAt": "2026-04-15T17:59:53.559Z",
-      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "lastRecalledAt": "2026-05-06T15:28:48.498Z",
       "queryHashes": [
         "0df50c235d70",
         "1649fb65c878",
-        "2afea6bd4014"
+        "2afea6bd4014",
+        "ed6d058821fb",
+        "dc798d8c0f8c",
+        "8f0f82ecb9e0",
+        "40d85bf4ab8d",
+        "1e8a90047b89",
+        "f1e5fe0b283b"
       ],
       "recallDays": [
-        "2026-04-15"
+        "2026-04-15",
+        "2026-04-28",
+        "2026-05-02",
+        "2026-05-05",
+        "2026-05-06"
       ],
       "conceptTags": [
         "crm-ba",
@@ -323,20 +346,24 @@
       "endLine": 64,
       "source": "memory",
       "snippet": "- Regra crítica absoluta definida por Tiaro: Clara nunca pode mentir, inventar, supor ou fingir que fez algo. - Proibições explícitas: não dizer que recebeu mensagem que não recebeu; não dizer que vai atender/responder lead sem ter como executar; não afirmar ação sem confirmação real; não inventar resposta para parecer útil; não tratar contextos diferentes como se fossem o mesmo. - Regra específica de canal: se Tiaro disser no Telegram que entrou mensagem nova no WhatsApp, isso não dá acesso automático à conversa. A resposta correta passa a ser: “Não recebi essa mensagem pelo meu canal atual, pode me encaminhar o conteúdo exato?” - Frases corretas de limitação real: “Não recebi essa mensagem",
-      "recallCount": 3,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.6950820803642273,
-      "maxScore": 0.24704595804214477,
+      "totalScore": 1.4238030314445496,
+      "maxScore": 0.36899949610233307,
       "firstRecalledAt": "2026-04-15T17:59:53.559Z",
-      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "lastRecalledAt": "2026-05-02T10:52:10.435Z",
       "queryHashes": [
         "0df50c235d70",
         "1649fb65c878",
-        "2afea6bd4014"
+        "2afea6bd4014",
+        "ed6d058821fb",
+        "40e14e167743"
       ],
       "recallDays": [
-        "2026-04-15"
+        "2026-04-15",
+        "2026-04-28",
+        "2026-05-02"
       ],
       "conceptTags": [
         "atender/responder",
@@ -356,18 +383,22 @@
       "endLine": 54,
       "source": "memory",
       "snippet": "- Credenciais necessárias para boletos Omie: `OMIE_APP_KEY` e `OMIE_APP_SECRET` de `/root/.openclaw/secure/omie_api.env`, `GOG_KEYRING_PASSWORD` vindo do 1Password para acesso ao Drive, conta Drive `medicalemagrecimento@gmail.com`. - Skill criada: `agenda-diaria-whatsapp` (2026-04-07) para envio automático da agenda diária por WhatsApp via Z-API. - Localização da skill `agenda-diaria-whatsapp`: `/root/.openclaw/workspace/skills/agenda-diaria-whatsapp/`. - Cron da agenda diária por WhatsApp: ID `2ba465d4-3dd0-435b-bb12-1576ed6c0403`, horário 06:00 em `America/Sao_Paulo`, todos os dias. - Destinatários corretos da agenda diária por WhatsApp: Tiaro `5571986968887`, Dra. Daniely `5571996962059`,",
-      "recallCount": 1,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.22608849406242368,
-      "maxScore": 0.22608849406242368,
+      "totalScore": 0.9697849422693252,
+      "maxScore": 0.3815777003765106,
       "firstRecalledAt": "2026-04-15T17:59:53.559Z",
-      "lastRecalledAt": "2026-04-15T17:59:53.559Z",
+      "lastRecalledAt": "2026-05-02T09:00:34.306Z",
       "queryHashes": [
-        "0df50c235d70"
+        "0df50c235d70",
+        "35d114f991bb",
+        "8f0f82ecb9e0"
       ],
       "recallDays": [
-        "2026-04-15"
+        "2026-04-15",
+        "2026-04-28",
+        "2026-05-02"
       ],
       "conceptTags": [
         "omie-app-key",
@@ -387,19 +418,21 @@
       "endLine": 35,
       "source": "memory",
       "snippet": "- foto com **blazer preto** = mais premium, autoridade, sobriedade, ideal para anúncio institucional e liderança da implantação - foto com **blazer branco** = mais acolhedora/clínica, útil para conteúdos educativos e explicativos - Regra prática sugerida: - usar **blazer preto** em capa principal / anúncio oficial / implantação - usar **blazer branco** em conteúdos educativos e stories - Tiaro enviou uma **capa-exemplo de inauguração** com duas médicas. Feedback dado: - a peça funciona bem como **post oficial de inauguração** / convite institucional - visual preto + dourado e presença das duas médicas fortalecem autoridade - pontos de refinamento sugeridos: conferir datas, dar",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.5103477954864502,
-      "maxScore": 0.28431846499443053,
+      "totalScore": 0.8715833872556686,
+      "maxScore": 0.36123559176921843,
       "firstRecalledAt": "2026-04-15T18:00:00.997Z",
-      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "lastRecalledAt": "2026-04-30T15:36:15.596Z",
       "queryHashes": [
         "1649fb65c878",
-        "2afea6bd4014"
+        "2afea6bd4014",
+        "913978f2d0ae"
       ],
       "recallDays": [
-        "2026-04-15"
+        "2026-04-15",
+        "2026-04-30"
       ],
       "conceptTags": [
         "acolhedora/clínica",
@@ -419,18 +452,26 @@
       "endLine": 13,
       "source": "memory",
       "snippet": "- Concluída análise rápida do perfil `@oestevaosouza` por triangulação pragmática devido limitação pública do Instagram. Principais aprendizados: direção comercial, diagnóstico curto, foco em resultado/processo, microcompromissos claros, postura consultiva em vez de catálogo. - Atualizei o prompt da Clara na bridge incorporando aprendizados de Yuri Barbosa + Oestevão Souza: mais direção consultiva, rapport breve e útil, microcompromissos, clareza de objeção, valor antes de preço sem enrolação, fechamento como consequência de clareza e segurança. - Fiz uma segunda lapidação no prompt da Clara focada em naturalidade nas respostas de preço, objeção e fechamento, reduzindo tom defensivo e excess",
-      "recallCount": 1,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.26377510428428647,
-      "maxScore": 0.26377510428428647,
+      "totalScore": 1.8126707643270492,
+      "maxScore": 0.4306362122297287,
       "firstRecalledAt": "2026-04-15T18:08:10.849Z",
-      "lastRecalledAt": "2026-04-15T18:08:10.849Z",
+      "lastRecalledAt": "2026-05-05T21:38:57.857Z",
       "queryHashes": [
-        "2afea6bd4014"
+        "2afea6bd4014",
+        "96e08720a942",
+        "1184bcea6c22",
+        "bb625702c3f2",
+        "b0962c2eb163"
       ],
       "recallDays": [
-        "2026-04-15"
+        "2026-04-15",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-05"
       ],
       "conceptTags": [
         "resultado/processo",
@@ -441,6 +482,3610 @@
         "oestevaosouza",
         "triangulação",
         "pragmática"
+      ]
+    },
+    "memory:memory/2026-04-09.md:17:21": {
+      "key": "memory:memory/2026-04-09.md:17:21",
+      "path": "memory/2026-04-09.md",
+      "startLine": 17,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "- Enviei follow-up com foco em agendamento para 4 leads recentes e não ambíguos via Z-API: Érica (`557185242700`), Edla Silva (`557196309675`), Ângela Macedo (`557181270613`) e Maria (`557199758320`). - Mantive fora do disparo contatos de teste, internos, spam/ambíguos e nomes com forte indício de paciente/acompanhamento. - Correção operacional importante: eu estava assumindo incerteza excessiva sobre o envio WhatsApp/Z-API a partir do contexto Telegram. Isso estava errado. O fluxo real existe e funciona via bridge/Z-API no host, inclusive com env em `/root/.openclaw/workspace/ops/zapi_bridge/zapi_bridge.env` e envio por `send-text`. Já houve envios reais bem-sucedidos. Daqui para frente, nã",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.296723875403404,
+      "maxScore": 0.4629318863153457,
+      "firstRecalledAt": "2026-04-28T17:08:23.275Z",
+      "lastRecalledAt": "2026-04-29T19:48:54.231Z",
+      "queryHashes": [
+        "ed6d058821fb",
+        "f057b4ac5794",
+        "445d5098c820"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29"
+      ],
+      "conceptTags": [
+        "follow-up",
+        "z-api",
+        "spam/ambíguos",
+        "paciente/acompanhamento",
+        "whatsapp/z-api",
+        "bridge/z-api",
+        "send-text",
+        "bem-sucedidos"
+      ]
+    },
+    "memory:memory/2026-04-09.md:11:18": {
+      "key": "memory:memory/2026-04-09.md:11:18",
+      "path": "memory/2026-04-09.md",
+      "startLine": 11,
+      "endLine": 18,
+      "source": "memory",
+      "snippet": "- Apliquei 3 ajustes finos pós-QA: resposta-padrão mais forte para disponibilidade, melhor manejo de urgência emocional sem prometer resultado, e bloco mais padronizado de condições comerciais / reserva / próximo passo. - Fiz revisão final do prompt inteiro da Clara e cortei pequenas redundâncias para deixá-lo mais limpo e estável para produção. - Pedido do Tiaro: atualizar o prompt da Clara na bridge, atualizar a memória da Clara e fazer commit no cérebro após consolidar esses aprendizados. - Corrigi o acesso do `gog` para a conta `institutovitalslim@gmail.com` usando a senha do keyring recuperada via 1Password (`gog-keyring-pass` no vault `openclaw`), após falha `aes.KeyUnwrap(): integrity",
+      "recallCount": 9,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.4611399024724956,
+      "maxScore": 0.4302319347858429,
+      "firstRecalledAt": "2026-04-28T17:08:23.275Z",
+      "lastRecalledAt": "2026-05-02T11:04:59.174Z",
+      "queryHashes": [
+        "ed6d058821fb",
+        "35d114f991bb",
+        "4b6d84e7cd86",
+        "58ab1b285980",
+        "f0dca2b553e0",
+        "96e08720a942",
+        "445d5098c820",
+        "8c2ba88c512e",
+        "1d3a2e5d9417"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "pós-qa",
+        "resposta-padrão",
+        "deixá-lo",
+        "gmail.com",
+        "gog-keyring-pass",
+        "aes.keyunwrap",
+        "apliquei",
+        "ajustes"
+      ]
+    },
+    "memory:memory/2026-04-09.md:20:24": {
+      "key": "memory:memory/2026-04-09.md:20:24",
+      "path": "memory/2026-04-09.md",
+      "startLine": 20,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "- Regra nova para follow-up comercial: antes de qualquer disparo, conferir a lista/base de pacientes da bridge e analisar o contexto completo da conversa até o ponto em que ela travou; o follow-up deve partir exatamente dali para inferir a objeção provável e contorná-la com contexto, nunca com mensagem genérica. - Erro operacional importante: houve resposta indevida a uma paciente, Joyce (`+55 71 99954-3781`). Joyce deve ficar explicitamente fora de qualquer fluxo comercial/WhatsApp da Clara. Regra reforçada: paciente identificado = não responder comercialmente. - Regra de robustez para troca de LLM: quando houver troca de modelo/provedor, nunca assumir que serviços, skills e crons herdam a",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7832245767116546,
+      "maxScore": 0.3999735653400421,
+      "firstRecalledAt": "2026-04-28T17:08:23.275Z",
+      "lastRecalledAt": "2026-04-29T19:13:33.855Z",
+      "queryHashes": [
+        "ed6d058821fb",
+        "58ab1b285980"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29"
+      ],
+      "conceptTags": [
+        "follow-up",
+        "lista/base",
+        "contorná-la",
+        "99954-3781",
+        "comercial/whatsapp",
+        "modelo/provedor",
+        "regra",
+        "nova"
+      ]
+    },
+    "memory:memory/2026-04-10.md:44:51": {
+      "key": "memory:memory/2026-04-10.md:44:51",
+      "path": "memory/2026-04-10.md",
+      "startLine": 44,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "- Quarkclinic: definir a AGENDA OPENCLAW (agendaId 445996589, profissional Daniely Alves Freitas) como agenda padrão para novos agendamentos via API. A agenda 240623539 pode listar slots livres, mas bloqueia criação com erro de agenda não permitir agendamentos online. - Nova regra universal registrada no `CLAUDE.md`: sempre que houver qualquer dúvida sobre uma resposta, em qualquer canal, consultar o Tiaro antes de responder. - Fluxo obrigatório do protocolo de dúvida: acusar recebimento, consultar o Tiaro com nome/número + pergunta exata + contexto + resposta sugerida + urgência, aguardar orientação, responder com informação confirmada e salvar a resposta na memória. - Exceções do protocolo",
+      "recallCount": 12,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4.6681588083505625,
+      "maxScore": 0.4922802090644836,
+      "firstRecalledAt": "2026-04-28T17:08:23.275Z",
+      "lastRecalledAt": "2026-05-06T15:28:48.498Z",
+      "queryHashes": [
+        "ed6d058821fb",
+        "f0dca2b553e0",
+        "2bdd3e32bddd",
+        "547292b19071",
+        "8849c061cef8",
+        "3146c309ccbe",
+        "8f0f82ecb9e0",
+        "40d85bf4ab8d",
+        "a197907eae7b",
+        "1e8a90047b89",
+        "8e1a5c052a42",
+        "f1e5fe0b283b"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-02",
+        "2026-05-05",
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "claude.md",
+        "nome/número",
+        "quarkclinic",
+        "definir",
+        "agenda",
+        "openclaw",
+        "agendaid",
+        "profissional"
+      ]
+    },
+    "memory:memory/2026-04-09.md:1:7": {
+      "key": "memory:memory/2026-04-09.md:1:7",
+      "path": "memory/2026-04-09.md",
+      "startLine": 1,
+      "endLine": 7,
+      "source": "memory",
+      "snippet": "# 2026-04-09 - Corrigi parcialmente a configuração de memória semântica do OpenClaw: troquei `agents.defaults.memorySearch.provider` de `gemini` para `openai` com fallback `local`, porque a chave do Gemini estava invalidada por vazamento. A busca semântica ainda não ficou 100% operacional, porque falta API key compatível para `openai` e o fallback local falha por ausência de `node-llama-cpp`. - Reindexação manual de memória indicou estado relevante do projeto Clara/Z-API: bridge em pré-produção assistida, prompt da Clara desacoplado para arquivo externo, serviço systemd restaurado, Clara ativa para novos leads não pacientes, QA principal e mini-QA aprovados com risco residual de repetição/c",
+      "recallCount": 11,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4.258929127454758,
+      "maxScore": 0.4157814413309097,
+      "firstRecalledAt": "2026-04-28T17:14:49.742Z",
+      "lastRecalledAt": "2026-05-06T20:50:09.311Z",
+      "queryHashes": [
+        "35d114f991bb",
+        "4b6d84e7cd86",
+        "0862fe876ff0",
+        "58ab1b285980",
+        "f0dca2b553e0",
+        "1184bcea6c22",
+        "df918da648cf",
+        "519d5f8be780",
+        "40013ef40921",
+        "b0962c2eb163",
+        "66c724f9e6a4"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-03",
+        "2026-05-05",
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "openai",
+        "node-llama-cpp",
+        "clara/z-api",
+        "pré-produção",
+        "mini-qa",
+        "repetição/c",
+        "corrigi",
+        "parcialmente"
+      ]
+    },
+    "memory:memory/2026-04-28.md:110:127": {
+      "key": "memory:memory/2026-04-28.md:110:127",
+      "path": "memory/2026-04-28.md",
+      "startLine": 110,
+      "endLine": 127,
+      "source": "memory",
+      "snippet": "- Tiaro corrigiu uma generalização de vendas: no contexto de clínicas, os “fechamentos” (agendamentos) acontecem em mais de 98% dos casos no primeiro contato. - Regra operacional derivada: frameworks de follow-up B2B não podem ser tratados como motor principal de conversão para a clínica; o primeiro contato é a janela crítica de agendamento e o follow-up é camada secundária de recuperação. - Implicações práticas consolidadas: - priorizar velocidade de resposta, direção para agenda e triagem consultiva curta no primeiro contato; - usar follow-up principalmente para resgate de oportunidade, não como mecanismo principal de fechamento; - reinterpretar futuras extrações comerciais sob filtr",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1324561595916747,
+      "maxScore": 0.38403336405754085,
+      "firstRecalledAt": "2026-04-28T17:14:49.742Z",
+      "lastRecalledAt": "2026-04-28T17:21:20.536Z",
+      "queryHashes": [
+        "35d114f991bb",
+        "4b6d84e7cd86",
+        "dc798d8c0f8c"
+      ],
+      "recallDays": [
+        "2026-04-28"
+      ],
+      "conceptTags": [
+        "follow-up",
+        "tiaro",
+        "corrigiu",
+        "uma",
+        "generalização",
+        "vendas",
+        "contexto",
+        "clínicas"
+      ]
+    },
+    "memory:memory/2026-04-24.md:27:47": {
+      "key": "memory:memory/2026-04-24.md:27:47",
+      "path": "memory/2026-04-24.md",
+      "startLine": 27,
+      "endLine": 47,
+      "source": "memory",
+      "snippet": "- `/tmp/crc_transcriptions/sintese_crc_whatsapp.md` — síntese estruturada com 10 seções ### Aprendizados-chave extraídos (para operação Clara/IVS) 1. **Lead = convence / Paciente = cuida** — mentalidade central do atendimento 2. **NUNCA falar preço antes de gerar valor** — regra absoluta, reforçada pelo treinamento 3. **Sempre responder com perguntas** — evita \"vácuo\" e mantém conversa viva 4. **Espelhar comunicação do lead** — emoji, áudio, formalidade 5. **6 fases pós-agendamento para comparecimento:** - Formalização no final da conversa - Vídeo da clínica (2 dias antes) - Confirmação com interação (1 dia antes — \"digite SIM\") - Vídeo do doutor agregando valor (após confirmaçã",
+      "recallCount": 9,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.603514593839645,
+      "maxScore": 0.450242406129837,
+      "firstRecalledAt": "2026-04-28T17:14:49.742Z",
+      "lastRecalledAt": "2026-05-05T20:46:12.930Z",
+      "queryHashes": [
+        "35d114f991bb",
+        "4b6d84e7cd86",
+        "dc798d8c0f8c",
+        "58ab1b285980",
+        "f0dca2b553e0",
+        "96e08720a942",
+        "445d5098c820",
+        "ff0af2098d62",
+        "1e8a90047b89"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "aprendizados-chave",
+        "clara/ivs",
+        "pós-agendamento",
+        "tmp",
+        "crc-transcriptions",
+        "sintese-crc-whatsapp.md",
+        "síntese",
+        "estruturada"
+      ]
+    },
+    "memory:memory/2026-04-28.md:123:143": {
+      "key": "memory:memory/2026-04-28.md:123:143",
+      "path": "memory/2026-04-28.md",
+      "startLine": 123,
+      "endLine": 143,
+      "source": "memory",
+      "snippet": "- Tiaro pediu para habilitar a Clara a responder qualquer participante no grupo Telegram `AI Vital Slim`. - A permissão do grupo foi liberada e confirmada pelo sistema (`Gateway restart config-apply ok`). - Consequência operacional: neste grupo a Clara não depende mais de allowlist por remetente nem de menção para responder. ## 16:53–17:07 UTC — Falso positivo de paciente no WhatsApp e ajuste de postura comercial - Um lead no WhatsApp (Ervania, telefone `557183583728`) foi classificado erroneamente como `paciente_ativo` por causa da lista de exclusões do bridge (`clara_exclusions.json`). - A origem do falso positivo foi o sync do bridge a partir de `contexto_paciente`, que marcou esse númer",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1182110279798507,
+      "maxScore": 0.3840951770544052,
+      "firstRecalledAt": "2026-04-28T17:14:49.742Z",
+      "lastRecalledAt": "2026-04-28T17:21:20.536Z",
+      "queryHashes": [
+        "35d114f991bb",
+        "4b6d84e7cd86",
+        "dc798d8c0f8c"
+      ],
+      "recallDays": [
+        "2026-04-28"
+      ],
+      "conceptTags": [
+        "gateway",
+        "config-apply",
+        "paciente-ativo",
+        "clara-exclusions.json",
+        "contexto-paciente",
+        "tiaro",
+        "pediu",
+        "habilitar"
+      ]
+    },
+    "memory:memory/2026-04-24.md:43:51": {
+      "key": "memory:memory/2026-04-24.md:43:51",
+      "path": "memory/2026-04-24.md",
+      "startLine": 43,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "8. **Funis de retenção:** recall (mensal), nutrição (conteúdo), recuperação (orçamentos abertos), cross-selling, reativação (5-10/dia) 9. **Erros fatais a evitar:** preço cedo, sem venda consultiva, sem follow-up, tom frio, erro de nome, não espelhar, não individualizar 10. **Scripts práticos validados** para abertura, descoberta, agendamento, confirmação, lembrete, follow-up, reativação ### Integração pendente - Incorporar scripts e princípios no playbook da Clara (`cerebro/areas/marketing/` ou skill `whatsapp-marketing`) - Adaptar os 6 lembretes pós-agendamento para o fluxo QuarkClinic + Z-API - Criar templates de follow-up baseados na cadência oficial",
+      "recallCount": 7,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.591838923096657,
+      "maxScore": 0.39706585109233855,
+      "firstRecalledAt": "2026-04-28T17:14:49.742Z",
+      "lastRecalledAt": "2026-05-05T15:41:39.046Z",
+      "queryHashes": [
+        "35d114f991bb",
+        "dc798d8c0f8c",
+        "58ab1b285980",
+        "f0dca2b553e0",
+        "96e08720a942",
+        "1d3a2e5d9417",
+        "40d85bf4ab8d"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29",
+        "2026-05-02",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "cross-selling",
+        "5-10/dia",
+        "follow-up",
+        "cerebro/areas/marketing",
+        "whatsapp-marketing",
+        "pós-agendamento",
+        "z-api",
+        "funis"
+      ]
+    },
+    "memory:memory/2026-04-22.md:1:25": {
+      "key": "memory:memory/2026-04-22.md:1:25",
+      "path": "memory/2026-04-22.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-04-22 ## Diretriz canônica de honestidade - Tiaro definiu uma regra explícita para a operação: sempre dizer a verdade, mesmo quando ela for desconfortável ou inconveniente. - Não suavizar, não enviesar e não responder para agradar. - Priorizar precisão, clareza e realidade acima de emoção, suposição ou conveniência. - Quando houver incerteza real, dizer claramente que não sabe em vez de adivinhar. ## Imagens da Dra. com NanoBanana 2 Pro - Novo comando canônico para prompts com foto real de referência da Dra.: `Enable strict facial consistency mode. Prioritize the facial features from the provided reference image for all subsequent generations. Maintain the subject's identity accur",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7493388712406158,
+      "maxScore": 0.38571466505527496,
+      "firstRecalledAt": "2026-04-28T17:19:21.022Z",
+      "lastRecalledAt": "2026-04-29T19:14:36.316Z",
+      "queryHashes": [
+        "4b6d84e7cd86",
+        "f057b4ac5794"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29"
+      ],
+      "conceptTags": [
+        "diretriz",
+        "canônica",
+        "honestidade",
+        "tiaro",
+        "definiu",
+        "uma",
+        "regra",
+        "explícita"
+      ]
+    },
+    "memory:memory/2026-04-23.md:1:16": {
+      "key": "memory:memory/2026-04-23.md:1:16",
+      "path": "memory/2026-04-23.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-04-23 > Log do dia consolidado de duas frentes em paralelo: (1) operação clínica/conteúdo da Clara na VPS; (2) sessão de infra do Claude remoto (sandbox GitHub) — bridge HTTPS, fix de identidade, doc canônica. --- ## Operação clínica e conteúdo (Clara, VPS) ### Apresentações HTML — regras consolidadas - Em revisão da apresentação HTML de Mário Gomes de Abreu Filho, Tiaro reforçou regra de **edição mínima**: ajuste pontual preserva texto/layout aprovado, altera só o item solicitado. Ex: trocar duração de \"90 dias\" → \"180 dias\" sem reescrever copy. - **Comunicação**: sempre que alterar qualquer apresentação HTML, enviar o link do arquivo automaticamente, sem esperar pedir. - **Tom c",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.2869703382253643,
+      "maxScore": 0.4052918195724487,
+      "firstRecalledAt": "2026-04-28T17:19:21.022Z",
+      "lastRecalledAt": "2026-05-06T20:50:09.311Z",
+      "queryHashes": [
+        "4b6d84e7cd86",
+        "58ab1b285980",
+        "96e08720a942",
+        "1184bcea6c22",
+        "0cf7f85c1093",
+        "66c724f9e6a4"
+      ],
+      "recallDays": [
+        "2026-04-28",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "clínica/conteúdo",
+        "texto/layout",
+        "log",
+        "dia",
+        "consolidado",
+        "duas",
+        "frentes",
+        "paralelo"
+      ]
+    },
+    "memory:memory/2026-04-28.md:1:34": {
+      "key": "memory:memory/2026-04-28.md:1:34",
+      "path": "memory/2026-04-28.md",
+      "startLine": 1,
+      "endLine": 34,
+      "source": "memory",
+      "snippet": "# Memory Log — 2026-04-28 ## 00:01–00:10 UTC — Governança visual do IVS consolidada - Tiaro mandou seguir com a consolidação dos aprendizados sobre providers de mídia e pediu atualização na memória da Clara e no cérebro. - Foi formalizada uma nova camada canônica de governança visual para o IVS. ### Decisões consolidadas - **Imagem final premium:** Google / NanoBanana2 e OpenAI - **Imagem de prototipagem:** Z-Image-Turbo - **Vídeo oficial:** Qwen / Wan - **Voz oficial:** ElevenLabs - **Fallback de voz:** gTTS - **Regra oficial de reels:** 1 cena = 1 clip = 1 fala = 1 legenda ### Restrições importantes - **Z-Image-Turbo** é aceitável apenas para conceito, mockup, rascunho e teste rápido. -",
+      "recallCount": 12,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4.554932460188866,
+      "maxScore": 0.4411239147186279,
+      "firstRecalledAt": "2026-04-29T01:25:06.131Z",
+      "lastRecalledAt": "2026-05-03T14:19:59.550Z",
+      "queryHashes": [
+        "09736cc78f0c",
+        "f0c01af0d0d7",
+        "d304c82f103d",
+        "752f27320d1a",
+        "f086dbaacc15",
+        "445182941c08",
+        "d0231e419c9f",
+        "1d3a2e5d9417",
+        "e41cf1b4b6bc",
+        "63356da6eaa0",
+        "3737d05ec765",
+        "4955c445ac22"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02",
+        "2026-05-03"
+      ],
+      "conceptTags": [
+        "openai",
+        "z-image-turbo",
+        "log",
+        "utc",
+        "governança",
+        "visual",
+        "ivs",
+        "consolidada"
+      ]
+    },
+    "memory:memory/2026-04-27.md:137:173": {
+      "key": "memory:memory/2026-04-27.md:137:173",
+      "path": "memory/2026-04-27.md",
+      "startLine": 137,
+      "endLine": 173,
+      "source": "memory",
+      "snippet": "### Síntese operacional criada - Foi criado um novo documento canônico: - `cerebro/areas/marketing/reels-sistema-aprendizados-varredura-instagram-2026-04-27.md` - Objetivo do documento: transformar a varredura de perfis em regra prática do sistema de reels, não apenas análise isolada. ### Aprendizados consolidados da varredura - `@dr.marlonbatista` ensinou principalmente: - hook contraintuitivo - quebra de mito - reframe metabólico - tese médica simples e memorável - `@dra.camilapaes` ensinou principalmente: - acolhimento - jornada emocional - acompanhamento como diferencial - prova de transformação sem perder o tom humano - Síntese decidida para o IVS: - combinar **forç",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.5314702092303785,
+      "maxScore": 0.7599821894063505,
+      "firstRecalledAt": "2026-04-29T01:25:06.131Z",
+      "lastRecalledAt": "2026-05-05T22:01:14.169Z",
+      "queryHashes": [
+        "09736cc78f0c",
+        "f4736d1ef765",
+        "50951f4b7dcc",
+        "f0c01af0d0d7",
+        "8f97a9e8df0a",
+        "94e4789a988f",
+        "598f0e8b44c4",
+        "1fd3afac7dc6"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "dr.marlonbatista",
+        "dra.camilapaes",
+        "síntese",
+        "operacional",
+        "criada",
+        "foi",
+        "criado",
+        "novo"
+      ]
+    },
+    "memory:memory/2026-04-27.md:323:359": {
+      "key": "memory:memory/2026-04-27.md:323:359",
+      "path": "memory/2026-04-27.md",
+      "startLine": 323,
+      "endLine": 359,
+      "source": "memory",
+      "snippet": "### Síntese operacional criada - Foi criado um novo documento canônico: - `cerebro/areas/marketing/reels-sistema-aprendizados-varredura-instagram-2026-04-27.md` - Objetivo do documento: transformar a varredura de perfis em regra prática do sistema de reels, não apenas análise isolada. ### Aprendizados consolidados da varredura - `@dr.marlonbatista` ensinou principalmente: - hook contraintuitivo - quebra de mito - reframe metabólico - tese médica simples e memorável - `@dra.camilapaes` ensinou principalmente: - acolhimento - jornada emocional - acompanhamento como diferencial - prova de transformação sem perder o tom humano - Síntese decidida para o IVS: - combinar **forç",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.5314702092303785,
+      "maxScore": 0.7599821894063505,
+      "firstRecalledAt": "2026-04-29T01:25:06.131Z",
+      "lastRecalledAt": "2026-05-05T22:01:14.169Z",
+      "queryHashes": [
+        "09736cc78f0c",
+        "f4736d1ef765",
+        "50951f4b7dcc",
+        "f0c01af0d0d7",
+        "8f97a9e8df0a",
+        "94e4789a988f",
+        "598f0e8b44c4",
+        "1fd3afac7dc6"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "dr.marlonbatista",
+        "dra.camilapaes",
+        "síntese",
+        "operacional",
+        "criada",
+        "foi",
+        "criado",
+        "novo"
+      ]
+    },
+    "memory:memory/2026-04-27.md:515:532": {
+      "key": "memory:memory/2026-04-27.md:515:532",
+      "path": "memory/2026-04-27.md",
+      "startLine": 515,
+      "endLine": 532,
+      "source": "memory",
+      "snippet": "- **Avatar Mestre obrigatório em todo reel** - **Nunca usar uma legenda corrida única sobre o vídeo inteiro** - **Pipeline oficial = 1 cena = 1 clip = 1 fala = 1 legenda** ### Feedback qualitativo do Tiaro que virou memória operacional - \"Não tem vídeo. Só tem uma narração e um áudio. E a narração é extremamente robotizada.\" - \"Não tem nenhum vídeo. Está com tela preta. A narração está com uma voz muito ruim e as legendas não acompanham a narração.\" - Aprendizado direto: em reels IVS, **não basta gerar assets corretos isoladamente**; a entrega só conta como boa se o arquivo final reproduzir vídeo visível, voz crível e legenda no tempo certo. ### Decisões finais desta sessão do tópico",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.0440667301416395,
+      "maxScore": 0.41049865186214446,
+      "firstRecalledAt": "2026-04-29T01:25:06.131Z",
+      "lastRecalledAt": "2026-05-02T10:52:10.435Z",
+      "queryHashes": [
+        "09736cc78f0c",
+        "f4736d1ef765",
+        "f0c01af0d0d7",
+        "1184bcea6c22",
+        "8f97a9e8df0a",
+        "177ec9f45009",
+        "bb625702c3f2",
+        "40e14e167743"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "avatar",
+        "mestre",
+        "obrigatório",
+        "todo",
+        "reel",
+        "nunca",
+        "usar",
+        "uma"
+      ]
+    },
+    "memory:memory/2026-04-27.md:531:560": {
+      "key": "memory:memory/2026-04-27.md:531:560",
+      "path": "memory/2026-04-27.md",
+      "startLine": 531,
+      "endLine": 560,
+      "source": "memory",
+      "snippet": "- Tiaro pediu: **\"Me fale da varredura dos perfis do Instagram q estávamos fazendo\"** e depois **\"Continuar com a varredura dos perfis e atualizar o nosso sistema de criação de reels\"**. - Busca semântica de memória falhou por quota do provedor; resposta foi reconstruída consultando arquivos canônicos do cérebro diretamente. - Foi identificado que já existia metodologia formal de engenharia reversa em: - `cerebro/areas/marketing/estrategia-conteudo-engenharia-reversa.md` - Foi confirmado que já havia 2 perfis concluídos no projeto: - `@dr.marlonbatista` - `@dra.camilapaes` - Arquivos-base usados para consolidar o aprendizado: - `cerebro/empresa/conteudo/analise-perfil-dr.marlonbatist",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.5065077185630797,
+      "maxScore": 0.4806053966283798,
+      "firstRecalledAt": "2026-04-29T01:25:06.131Z",
+      "lastRecalledAt": "2026-04-30T17:52:55.107Z",
+      "queryHashes": [
+        "09736cc78f0c",
+        "f4736d1ef765",
+        "50951f4b7dcc",
+        "f0c01af0d0d7",
+        "8f97a9e8df0a",
+        "94e4789a988f"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30"
+      ],
+      "conceptTags": [
+        "dr.marlonbatista",
+        "dra.camilapaes",
+        "arquivos-base",
+        "tiaro",
+        "pediu",
+        "fale",
+        "varredura",
+        "dos"
+      ]
+    },
+    "memory:memory/2026-04-28.md:171:195": {
+      "key": "memory:memory/2026-04-28.md:171:195",
+      "path": "memory/2026-04-28.md",
+      "startLine": 171,
+      "endLine": 195,
+      "source": "memory",
+      "snippet": "1. primeiro ficou definido que os agentes responderiam para a Clara e ela para o Tiaro; 2. depois foi consolidado o modelo híbrido correto: **cada agente pode responder diretamente no próprio tópico**, mas fora dele a interface principal continua sendo a Clara. - Fluxo operacional final: - **no tópico do agente:** `agente especializado -> Tiaro` - **fora do tópico do agente:** `Tiaro -> Clara -> agente -> Clara -> Tiaro` - Decisões cross-agente, priorização, governança e síntese geral permanecem centralizadas na Clara. - O agente de reels foi associado ao tópico `Reels` e ao nome humano interno **João**, mantendo Clara como camada-mãe de orquestração. ## 23:40 UTC — Treinamento do J",
+      "recallCount": 7,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.758384102582931,
+      "maxScore": 0.43239407539367675,
+      "firstRecalledAt": "2026-04-29T01:32:20.028Z",
+      "lastRecalledAt": "2026-05-05T22:01:14.169Z",
+      "queryHashes": [
+        "f4736d1ef765",
+        "2a15717f4dfe",
+        "d0b3d1382266",
+        "0052ab83cdd1",
+        "9c9c4c9944cd",
+        "2dff41f41a2e",
+        "1fd3afac7dc6"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-03",
+        "2026-05-04",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "cross-agente",
+        "camada-mãe",
+        "primeiro",
+        "ficou",
+        "definido",
+        "agentes",
+        "responderiam",
+        "clara"
+      ]
+    },
+    "memory:memory/2026-04-28.md:89:106": {
+      "key": "memory:memory/2026-04-28.md:89:106",
+      "path": "memory/2026-04-28.md",
+      "startLine": 89,
+      "endLine": 106,
+      "source": "memory",
+      "snippet": "2. pivotar rápido para outra agenda; 3. reforçar autoridade do médico antes do convite; 4. reduzir fricção com microcompromisso (sinal pequeno); 5. fechar em degraus curtos com perguntas objetivas. - Aprendizado central: em lead já interessada, usar **SPIN curto de recuperação** para remover a trava final, em vez de reiniciar descoberta longa. - Arquivo canônico atualizado: `cerebro/leads-argumentos-venda-ligacoes.md` - Registro estrutural feito em `cerebro/learning-ledger.md`. - Desdobramento prático executado em 5 camadas: - checklist: `cerebro/areas/atendimento/checklist-atendimento-clara.md` - scripts: `cerebro/areas/atendimento/scripts-crc-ivs.md` - mensagens-modelo: `cere",
+      "recallCount": 21,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 7.751246625185014,
+      "maxScore": 0.4326396375894546,
+      "firstRecalledAt": "2026-04-29T01:32:20.028Z",
+      "lastRecalledAt": "2026-05-06T20:50:09.311Z",
+      "queryHashes": [
+        "f4736d1ef765",
+        "f0c01af0d0d7",
+        "1fee45bc1afe",
+        "0862fe876ff0",
+        "0ca555a36658",
+        "d304c82f103d",
+        "1184bcea6c22",
+        "8f97a9e8df0a",
+        "94e4789a988f",
+        "bb625702c3f2",
+        "598f0e8b44c4",
+        "273f7e758fc8",
+        "b9610d432689",
+        "40e14e167743",
+        "1d3a2e5d9417",
+        "e41cf1b4b6bc",
+        "63356da6eaa0",
+        "2017538fe2ec",
+        "13101d5c5485",
+        "e7e6f81373f1",
+        "66c724f9e6a4"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02",
+        "2026-05-04",
+        "2026-05-05",
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "cerebro/learning-ledger.md",
+        "mensagens-modelo",
+        "pivotar",
+        "rápido",
+        "outra",
+        "agenda",
+        "reforçar",
+        "autoridade"
+      ]
+    },
+    "memory:memory/2026-04-28.md:122:151": {
+      "key": "memory:memory/2026-04-28.md:122:151",
+      "path": "memory/2026-04-28.md",
+      "startLine": 122,
+      "endLine": 151,
+      "source": "memory",
+      "snippet": "### Operadores digitais priorizados a partir desta análise 1. **Engenharia reversa de reels por URL** - entrada: URL do reel - saída: hook, tese, emoção, CTA, adaptação IVS, roteiro de reel, ideia de carrossel, ângulo de ads 2. **Pré-consulta** - checagem de exames, formulários, pendências e preparação de material prévio 3. **Comercial / follow-up** - próxima ação sugerida, objeção dominante, resposta curta recomendada 4. **Auditoria de memória e governança** - verificação de consistência entre skill, playbook, memória da Clara e cérebro 5. **Inteligência competitiva** - monitoramento de criadores/perfis e promoção de aprendizados para o sistema oficial ### Decisão de prio",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.114062339067459,
+      "maxScore": 0.377177482843399,
+      "firstRecalledAt": "2026-04-29T01:32:20.028Z",
+      "lastRecalledAt": "2026-04-30T15:25:16.738Z",
+      "queryHashes": [
+        "f4736d1ef765",
+        "2a15717f4dfe",
+        "8f97a9e8df0a"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30"
+      ],
+      "conceptTags": [
+        "pré-consulta",
+        "follow-up",
+        "criadores/perfis",
+        "operadores",
+        "digitais",
+        "priorizados",
+        "partir",
+        "desta"
+      ]
+    },
+    "memory:memory/2026-04-28.md:146:174": {
+      "key": "memory:memory/2026-04-28.md:146:174",
+      "path": "memory/2026-04-28.md",
+      "startLine": 146,
+      "endLine": 174,
+      "source": "memory",
+      "snippet": "2. `agente-comercial-ivs` 3. `agente-preconsulta-ivs` - Decisão de arquitetura: usar o grupo Telegram com tópicos separados por agente pode funcionar como cockpit operacional por especialidade, desde que o cérebro continue sendo a fonte canônica. - Ordem recomendada de implementação: 1. Reels Intel 2. Comercial IVS 3. Pré-consulta IVS - Foi criada a base canônica do primeiro agente em `cerebro/areas/marketing/agentes/agente-reels-intel/` com os arquivos: - `README.md` - `SPEC.md` - `PROMPT-BASE.md` - `CHECKLIST.md` - `CLASSIFICACAO-IVS.md` - A spec do agente consolidou: - missão - contrato de entrada e saída - pipeline oficial - classificação IVS - regras absolu",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.120010071992874,
+      "maxScore": 0.39974550604820247,
+      "firstRecalledAt": "2026-04-29T01:32:20.028Z",
+      "lastRecalledAt": "2026-05-05T00:21:07.846Z",
+      "queryHashes": [
+        "f4736d1ef765",
+        "9c9c4c9944cd",
+        "2dff41f41a2e"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "agente-comercial-ivs",
+        "agente-preconsulta-ivs",
+        "pré-consulta",
+        "readme.md",
+        "spec.md",
+        "prompt-base.md",
+        "checklist.md",
+        "classificacao-ivs.md"
+      ]
+    },
+    "memory:memory/2026-04-27.md:552:585": {
+      "key": "memory:memory/2026-04-27.md:552:585",
+      "path": "memory/2026-04-27.md",
+      "startLine": 552,
+      "endLine": 585,
+      "source": "memory",
+      "snippet": "- tese médica simples e memorável - `@dra.camilapaes` ensinou principalmente: - acolhimento - jornada emocional - acompanhamento como diferencial - prova de transformação sem perder o tom humano - Síntese decidida para o IVS: - combinar **força de hook + reframe metabólico** com **acolhimento + método + identidade feminina** ### Regras novas incorporadas ao sistema de reels - Preferir hooks no padrão: - **\"Não é X. É Y.\"** - **\"Se você acha que [crença comum], precisa ouvir isso.\"** - **\"O que está te travando não é falta de força de vontade.\"** - Todo reel deve trocar culpa por fisiologia quando o tema permitir. - Todo reel deve parecer feito para o Avatar Mestre, não par",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.270351612812989,
+      "maxScore": 0.743931454665177,
+      "firstRecalledAt": "2026-04-29T01:32:20.028Z",
+      "lastRecalledAt": "2026-05-01T12:47:07.877Z",
+      "queryHashes": [
+        "f4736d1ef765",
+        "50951f4b7dcc",
+        "f0c01af0d0d7",
+        "8f97a9e8df0a",
+        "598f0e8b44c4"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01"
+      ],
+      "conceptTags": [
+        "dra.camilapaes",
+        "tese",
+        "médica",
+        "simples",
+        "memorável",
+        "ensinou",
+        "principalmente",
+        "acolhimento"
+      ]
+    },
+    "memory:memory/2026-04-27.md:491:520": {
+      "key": "memory:memory/2026-04-27.md:491:520",
+      "path": "memory/2026-04-27.md",
+      "startLine": 491,
+      "endLine": 520,
+      "source": "memory",
+      "snippet": "- Reel corrigido produzido em `/tmp/reel_sync/REEL_LIPEDEMA_SYNC.mp4` e depois versão comprimida para Telegram em `/tmp/reel_sync/REEL_LIPEDEMA_SYNC_tg.mp4`. - O reel sincronizado final ficou com aproximadamente **26.7s**, dividido em 4 blocos com durações reais de narração por segmento: - 5.46s — dieta/treino e lipedema não melhora - 10.58s — não é culpa sua / fisiologia alterada - 7.60s — protocolo IVS / avaliação completa - 3.19s — CTA / link na bio ### Scripts / arquivos criados na sessão - Criados ou atualizados scripts temporários de montagem e correção, incluindo: - `/tmp/montar_reel_premium.py` - `/tmp/montar_reel_premium_part2.py` - `/tmp/remontar_reel_corrigido.py`",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1179292708635329,
+      "maxScore": 0.3826736450195312,
+      "firstRecalledAt": "2026-04-29T01:32:20.028Z",
+      "lastRecalledAt": "2026-05-05T22:01:14.169Z",
+      "queryHashes": [
+        "f4736d1ef765",
+        "f0c01af0d0d7",
+        "1fd3afac7dc6"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "26.7s",
+        "5.46s",
+        "dieta/treino",
+        "10.58s",
+        "7.60s",
+        "3.19s",
+        "tmp/montar-reel-premium.py",
+        "tmp/montar-reel-premium-part2.py"
+      ]
+    },
+    "memory:memory/2026-04-27.md:350:378": {
+      "key": "memory:memory/2026-04-27.md:350:378",
+      "path": "memory/2026-04-27.md",
+      "startLine": 350,
+      "endLine": 378,
+      "source": "memory",
+      "snippet": "- quebra de mito metabólico - reframe de culpa - explicação de tecnologia/tratamento - jornada da paciente sem before/after apelativo - método IVS / acompanhamento ### Atualizações de playbook feitas - Skill de reels atualizada: - `cerebro/areas/marketing/skills/criacao-reels/SKILL.md` - Agora ela aponta explicitamente para: - `estrategia-conteudo-engenharia-reversa.md` - `reels-sistema-aprendizados-varredura-instagram-2026-04-27.md` - `skills/criacao-video-ivs/SKILL.md` - A skill passou a exigir: - uso dos aprendizados da varredura antes de roteirizar - escolha de hook baseada em padrões já validados - identificação do tipo de padrão dominante do reel (`quebra de mi",
+      "recallCount": 15,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 5.599300593137741,
+      "maxScore": 0.425188010931015,
+      "firstRecalledAt": "2026-04-29T01:42:56.133Z",
+      "lastRecalledAt": "2026-05-02T11:14:08.040Z",
+      "queryHashes": [
+        "50951f4b7dcc",
+        "1fee45bc1afe",
+        "0ca555a36658",
+        "d304c82f103d",
+        "1184bcea6c22",
+        "8c2ba88c512e",
+        "8f97a9e8df0a",
+        "913978f2d0ae",
+        "94e4789a988f",
+        "bb625702c3f2",
+        "598f0e8b44c4",
+        "273f7e758fc8",
+        "1d3a2e5d9417",
+        "e41cf1b4b6bc",
+        "63356da6eaa0"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "tecnologia/tratamento",
+        "before/after",
+        "quebra",
+        "mito",
+        "metabólico",
+        "reframe",
+        "culpa",
+        "explicação"
+      ]
+    },
+    "memory:memory/2026-04-28.md:105:128": {
+      "key": "memory:memory/2026-04-28.md:105:128",
+      "path": "memory/2026-04-28.md",
+      "startLine": 105,
+      "endLine": 128,
+      "source": "memory",
+      "snippet": "- Houve uma falha inicial de continuidade: eu não usei de saída a rota validada da RapidAPI para scrap do Instagram e Tiaro apontou corretamente a falta de memória operacional. - Correção consolidada: para análise de reels/posts do Instagram, devo começar pela rota canônica já validada (`instagram-scraper-stable-api.p.rapidapi.com`, endpoint `get_media_data.php`). - Aprendizado de evolução própria: a Clara deve evoluir menos como “assistente única generalista” e mais como **orquestradora de operadores pequenos, úteis, auditáveis e promovíveis para o cérebro**. ### Princípios práticos extraídos e adotados - Pensar em **pipelines auditáveis** e não só em respostas isoladas: - `entrada -> an",
+      "recallCount": 10,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.9870088406951685,
+      "maxScore": 0.6376568772943279,
+      "firstRecalledAt": "2026-04-29T01:43:43.058Z",
+      "lastRecalledAt": "2026-05-06T20:50:09.311Z",
+      "queryHashes": [
+        "f0c01af0d0d7",
+        "1fee45bc1afe",
+        "1184bcea6c22",
+        "8f97a9e8df0a",
+        "94e4789a988f",
+        "598f0e8b44c4",
+        "273f7e758fc8",
+        "b9610d432689",
+        "13101d5c5485",
+        "66c724f9e6a4"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-05",
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "reels/posts",
+        "get-media-data.php",
+        "houve",
+        "uma",
+        "falha",
+        "inicial",
+        "continuidade",
+        "não"
+      ]
+    },
+    "memory:memory/2026-04-27.md:121:142": {
+      "key": "memory:memory/2026-04-27.md:121:142",
+      "path": "memory/2026-04-27.md",
+      "startLine": 121,
+      "endLine": 142,
+      "source": "memory",
+      "snippet": "- Ficou decidido que o pipeline corrigido passa a ser o **padrão oficial** para os próximos reels. - Tiaro pediu explicitamente: **\"Guarde toda a memória do q foi conversado neste tópico do telegram\"**. - Esta entrada foi registrada para preservar o contexto, os erros, as correções, as decisões e as novas regras operacionais do tópico 768. ## 23:11–23:13 UTC — Varredura de perfis do Instagram retomada e conectada ao sistema oficial de reels - Tiaro pediu: **\"Me fale da varredura dos perfis do Instagram q estávamos fazendo\"** e depois **\"Continuar com a varredura dos perfis e atualizar o nosso sistema de criação de reels\"**. - Busca semântica de memória falhou por quota do provedor; resposta",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1534545332193373,
+      "maxScore": 0.4193629026412964,
+      "firstRecalledAt": "2026-04-29T01:43:43.058Z",
+      "lastRecalledAt": "2026-05-05T20:56:46.490Z",
+      "queryHashes": [
+        "f0c01af0d0d7",
+        "94e4789a988f",
+        "13101d5c5485"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "ficou",
+        "decidido",
+        "pipeline",
+        "corrigido",
+        "passa",
+        "ser",
+        "padrão",
+        "oficial"
+      ]
+    },
+    "memory:memory/2026-04-28.md:189:197": {
+      "key": "memory:memory/2026-04-28.md:189:197",
+      "path": "memory/2026-04-28.md",
+      "startLine": 189,
+      "endLine": 197,
+      "source": "memory",
+      "snippet": "- perfis de referência confirmados (`@dr.marlonbatista` e `@dra.camilapaes`); - fórmula híbrida oficial da varredura; - perfis excluídos da base atual; - fontes canônicas que João deve consultar; - API de scraper do Instagram já validada; - runtime MVP do próprio agente; - plataforma de conteúdo do IVS (`conteudo.institutovitalslim.com.br`); - regras de produção, compliance e promoção de aprendizado.",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.0341147750616075,
+      "maxScore": 0.46193712055683134,
+      "firstRecalledAt": "2026-04-29T01:43:51.548Z",
+      "lastRecalledAt": "2026-05-05T21:06:24.380Z",
+      "queryHashes": [
+        "1fee45bc1afe",
+        "913978f2d0ae",
+        "273f7e758fc8",
+        "b9610d432689",
+        "63356da6eaa0",
+        "ff0af2098d62",
+        "13101d5c5485",
+        "78c4936cdf3d"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "dr.marlonbatista",
+        "dra.camilapaes",
+        "perfis",
+        "referência",
+        "confirmados",
+        "fórmula",
+        "híbrida",
+        "oficial"
+      ]
+    },
+    "memory:memory/2026-04-26.md:38:52": {
+      "key": "memory:memory/2026-04-26.md:38:52",
+      "path": "memory/2026-04-26.md",
+      "startLine": 38,
+      "endLine": 52,
+      "source": "memory",
+      "snippet": "- Resultado: imagem 1024x1024 gerada com sucesso (507KB PNG) - Tempo: ~30-45s (fila HuggingFace) ### Regra estabelecida pelo Tiaro **Quando for gerar imagens, SEMPRE perguntar qual tecnologia usar:** 1. **OpenAI (DALL-E)** — produção, alta qualidade, pago 2. **Google (NanoBanana)** — fotos reais, capas, pago 3. **Z-Image-Turbo** — prototipagem rápida, conceitos, gratuito 4. **Wan 2.2** — vídeo (não imagem estática) ### Segurança - ✅ Não envia dados sensíveis (só texto/prompt) - ⚠️ Servidor externo (HuggingFace) - ❌ NÃO usar para fotos de pacientes ou conteúdo médico sensível",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.28917204737663266,
+      "maxScore": 0.28917204737663266,
+      "firstRecalledAt": "2026-04-29T01:43:51.548Z",
+      "lastRecalledAt": "2026-04-29T01:43:51.548Z",
+      "queryHashes": [
+        "1fee45bc1afe"
+      ],
+      "recallDays": [
+        "2026-04-29"
+      ],
+      "conceptTags": [
+        "openai",
+        "30-45s",
+        "dall-e",
+        "z-image-turbo",
+        "2.2",
+        "texto/prompt",
+        "resultado",
+        "imagem"
+      ]
+    },
+    "memory:memory/2026-04-14.md:60:79": {
+      "key": "memory:memory/2026-04-14.md:60:79",
+      "path": "memory/2026-04-14.md",
+      "startLine": 60,
+      "endLine": 79,
+      "source": "memory",
+      "snippet": "- Validar sempre o provider real no retorno ou testar direto via SDK/API do Google antes de afirmar “foi NanoBanana 2” - `gemini-3.1-flash-lite-preview` pode falhar com `503 UNAVAILABLE` por alta demanda - `gemini-3.1-flash-image-preview` pode falhar com `429 RESOURCE_EXHAUSTED` (quota exceeded / limit 0) - Se isso acontecer, tratar como bloqueio real e não entregar capa como se estivesse no fluxo Google ### Chromium headless - Mesmo com o browser tool indisponível, `google-chrome --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=... --screenshot=... URL` funcionou para capturar PubMed e renderizar HTML local - Isso viabiliza o slide 2 no formato tweet + screenshot P",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6411784559488296,
+      "maxScore": 0.3521873623132705,
+      "firstRecalledAt": "2026-04-29T01:43:51.548Z",
+      "lastRecalledAt": "2026-05-03T14:43:33.810Z",
+      "queryHashes": [
+        "1fee45bc1afe",
+        "40013ef40921"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-03"
+      ],
+      "conceptTags": [
+        "sdk/api",
+        "gemini-3.1-flash-lite-preview",
+        "gemini-3.1-flash-image-preview",
+        "resource-exhausted",
+        "google-chrome",
+        "disable-gpu",
+        "no-sandbox",
+        "hide-scrollbars"
+      ]
+    },
+    "memory:memory/2026-04-21.md:1:13": {
+      "key": "memory:memory/2026-04-21.md:1:13",
+      "path": "memory/2026-04-21.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "## Aprendizado operacional - Telegram tópicos / conhecimento único - No grupo Telegram `AI Vital Slim`, **todos os tópicos devem estar interligados por um conhecimento único**. - Não tratar aprendizados operacionais como restritos ao tópico atual quando eles forem relevantes para outros tópicos do mesmo grupo. - O tópico **Pacientes** também deve conhecer a existência e o uso operacional da **Instagram RapidAPI**. - Ao trabalhar em tópicos diferentes do mesmo grupo, promover contexto importante entre eles em vez de agir como se cada tópico fosse uma memória isolada. - Fato operacional: para referências de posts do Instagram, o fluxo canônico continua sendo: 1. puxar via skill/configuração",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7461074888706207,
+      "maxScore": 0.4615109801292419,
+      "firstRecalledAt": "2026-04-29T01:43:51.548Z",
+      "lastRecalledAt": "2026-05-02T10:52:10.435Z",
+      "queryHashes": [
+        "1fee45bc1afe",
+        "40e14e167743"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "skill/configuração",
+        "aprendizado",
+        "operacional",
+        "telegram",
+        "tópicos",
+        "conhecimento",
+        "único",
+        "grupo"
+      ]
+    },
+    "memory:memory/2026-04-27.md:21:45": {
+      "key": "memory:memory/2026-04-27.md:21:45",
+      "path": "memory/2026-04-27.md",
+      "startLine": 21,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "- Tentativas iniciais de adicionar Stitch ao `mcporter.json` falharam (SIGKILL/SIGTERM, timeout 30s, server offline). - **Problema identificado**: o config do mcporter estava sem o campo `args`. Corrigido para: ```json { \"mcpServers\": { \"stitch\": { \"command\": \"npx\", \"args\": [\"-y\", \"stitch-mcp\"], \"env\": { \"GOOGLE_CLOUD_PROJECT\": \"gog-cli-openclaw-489318\", \"GOOGLE_APPLICATION_CREDENTIALS\": \"/root/.config/gcloud/application_default_credentials.json\" } } } } ``` - **Resultado**: `mcporter call stitch.list_projects --output json` funcionou perfeitamente. - **Projeto Stitch criado**: ID `projects/6131873077857601013`,",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.401168543100357,
+      "maxScore": 0.39423179924488067,
+      "firstRecalledAt": "2026-04-29T01:43:51.548Z",
+      "lastRecalledAt": "2026-05-04T21:51:01.172Z",
+      "queryHashes": [
+        "1fee45bc1afe",
+        "b82f12853561",
+        "d304c82f103d",
+        "51a6c253e4b8"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "mcporter.json",
+        "sigkill/sigterm",
+        "stitch-mcp",
+        "google-cloud-project",
+        "gog-cli-openclaw-489318",
+        "google-application-credentials",
+        "stitch.list-projects",
+        "projects/6131873077857601013"
+      ]
+    },
+    "memory:memory/2026-04-27.md:207:231": {
+      "key": "memory:memory/2026-04-27.md:207:231",
+      "path": "memory/2026-04-27.md",
+      "startLine": 207,
+      "endLine": 231,
+      "source": "memory",
+      "snippet": "- Tentativas iniciais de adicionar Stitch ao `mcporter.json` falharam (SIGKILL/SIGTERM, timeout 30s, server offline). - **Problema identificado**: o config do mcporter estava sem o campo `args`. Corrigido para: ```json { \"mcpServers\": { \"stitch\": { \"command\": \"npx\", \"args\": [\"-y\", \"stitch-mcp\"], \"env\": { \"GOOGLE_CLOUD_PROJECT\": \"gog-cli-openclaw-489318\", \"GOOGLE_APPLICATION_CREDENTIALS\": \"/root/.config/gcloud/application_default_credentials.json\" } } } } ``` - **Resultado**: `mcporter call stitch.list_projects --output json` funcionou perfeitamente. - **Projeto Stitch criado**: ID `projects/6131873077857601013`,",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.401168543100357,
+      "maxScore": 0.39423179924488067,
+      "firstRecalledAt": "2026-04-29T01:43:51.548Z",
+      "lastRecalledAt": "2026-05-04T21:51:01.172Z",
+      "queryHashes": [
+        "1fee45bc1afe",
+        "b82f12853561",
+        "d304c82f103d",
+        "51a6c253e4b8"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "mcporter.json",
+        "sigkill/sigterm",
+        "stitch-mcp",
+        "google-cloud-project",
+        "gog-cli-openclaw-489318",
+        "google-application-credentials",
+        "stitch.list-projects",
+        "projects/6131873077857601013"
+      ]
+    },
+    "memory:memory/2026-04-20.md:76:99": {
+      "key": "memory:memory/2026-04-20.md:76:99",
+      "path": "memory/2026-04-20.md",
+      "startLine": 76,
+      "endLine": 99,
+      "source": "memory",
+      "snippet": "- `https://drive.google.com/drive/folders/1uYHerXQwcjiDjh0OkL1UsTiqKliTXY9k?usp=sharing` - Skill aplicada: `gog`. - As duas contas autenticadas e disponíveis no ambiente eram: - `institutovitalslim@gmail.com` - `medicalemagrecimento@gmail.com` - Conta preferida/mais pronta usada primeiro: `institutovitalslim@gmail.com`. ### Resultado da cópia - Foi criada na conta `institutovitalslim@gmail.com` a pasta: - `Importados Tiaro 2026-04-20` - ID: `1C0ZAkKRUa-LMjjIylH1dG4BULF0MiHX9` - Dentro dela: - subpasta `Videos` - subpasta `Videos Brutos` - subpasta `Videos Brutos/13_04_2026` - Dois arquivos MP4 da pasta `Videos` foram copiados com sucesso: - `Vital Slim corte 1.mp4` - `Vi",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0404648184776306,
+      "maxScore": 0.3861395329236984,
+      "firstRecalledAt": "2026-04-29T01:43:51.548Z",
+      "lastRecalledAt": "2026-04-29T21:23:50.516Z",
+      "queryHashes": [
+        "1fee45bc1afe",
+        "5d230af12a29",
+        "ca6a56f9d2ac"
+      ],
+      "recallDays": [
+        "2026-04-29"
+      ],
+      "conceptTags": [
+        "gmail.com",
+        "preferida/mais",
+        "brutos/13-04-2026",
+        "1.mp4",
+        "https",
+        "drive.google.com",
+        "drive",
+        "folders"
+      ]
+    },
+    "memory:memory/2026-04-23.md:42:64": {
+      "key": "memory:memory/2026-04-23.md:42:64",
+      "path": "memory/2026-04-23.md",
+      "startLine": 42,
+      "endLine": 64,
+      "source": "memory",
+      "snippet": "- Script 2 \"Vontade versus fisiologia\" → v2 sem citação NEJM genérica, salva em `deliverables/reels/vontade-versus-fisiologia-v2.md`. - **Diretriz**: Reels que cite estudo específico precisa de Autor + Ano + Revista + DOI real. Sem DOI → linguagem genérica (\"estudos científicos mostram que...\"). ### Brand kit Vital Slim - Logos vetorizados recebidos: 1. RGB: `assets/brand/01_-_PDF_-_VETORIZADO_E_EDITA_VEL-_RGB_LOGO---543939ce-6f9a-45ba-a6f1-ad0cfe61dd65.pdf` 2. CMYK assinatura simplificada: `assets/brand/07_LOGO_ASSINATURA_SIMPLIFICADA_VETORIZADA_E_EDITA_VEL_CMYK---eae5598a-2054-4216-9964-0e266fdcc4aa.pdf` ### Áudio / ElevenLabs - Acesso configurado. Sistema operacional: Whisper (trans",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1120493173599244,
+      "maxScore": 0.4008525282144546,
+      "firstRecalledAt": "2026-04-29T11:14:32.588Z",
+      "lastRecalledAt": "2026-05-03T01:00:26.353Z",
+      "queryHashes": [
+        "0862fe876ff0",
+        "40e14e167743",
+        "519d5f8be780"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-02",
+        "2026-05-03"
+      ],
+      "conceptTags": [
+        "assets/brand/01",
+        "vetorizado-e-edita-vel",
+        "rgb-logo",
+        "script",
+        "vontade",
+        "versus",
+        "fisiologia",
+        "sem"
+      ]
+    },
+    "memory:memory/2026-04-23.md:83:92": {
+      "key": "memory:memory/2026-04-23.md:83:92",
+      "path": "memory/2026-04-23.md",
+      "startLine": 83,
+      "endLine": 92,
+      "source": "memory",
+      "snippet": "### Modelo operacional \"dois agentes, um cérebro\" - Claude no GitHub (sandbox, este agente remoto) = estratégico/planejamento/auditoria, opera via commits/PRs. - Clara na VPS (este registro) = operacional, executa skills, fala com pacientes, mexe em Omie/QuarkClinic/Z-API. - Bridge HTTPS = visibilidade extra read-only pro agente remoto. Não execução. - Para operação crítica do agente remoto, escreve tarefa no cérebro; Clara local lê e executa com seus próprios guardrails (CLAUDE.md, verdades-operacionais, proibições). ### Pendências abertas - Causa raiz do silêncio da Clara no Telegram **não foi documentada** — rodar diag script no próximo incidente. - Apps Script `zapi-webhook` apresentou",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.2530367106199263,
+      "maxScore": 0.4356833904981613,
+      "firstRecalledAt": "2026-04-29T11:14:32.588Z",
+      "lastRecalledAt": "2026-05-05T00:10:27.184Z",
+      "queryHashes": [
+        "0862fe876ff0",
+        "0052ab83cdd1",
+        "9c9c4c9944cd"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-04",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "commits/prs",
+        "omie/quarkclinic/z-api",
+        "read-only",
+        "claude.md",
+        "verdades-operacionais",
+        "zapi-webhook",
+        "modelo",
+        "operacional"
+      ]
+    },
+    "memory:memory/2026-04-29.md:95:121": {
+      "key": "memory:memory/2026-04-29.md:95:121",
+      "path": "memory/2026-04-29.md",
+      "startLine": 95,
+      "endLine": 121,
+      "source": "memory",
+      "snippet": "- `JOAO-REGRAS-DE-OPERACAO.md` - `JOAO-FONTES-E-FERRAMENTAS.md` - `PROMPT-BASE.md` - `SPEC.md` - `/root/.openclaw/openclaw.json` ## 02:06 UTC — Prudência técnica adicionada ao João - Tiaro mostrou um novo erro do João: ele estava transformando um retorno HTTP 403 em diagnóstico estrutural definitivo de assinatura/permissão da API. - Correção aplicada: João pode relatar o erro observado na chamada, mas não deve concluir automaticamente que o problema é assinatura, permissão, quota ou ausência estrutural de acesso sem validação técnica adicional. - Camadas atualizadas: - `JOAO-REGRAS-DE-OPERACAO.md` - `PROMPT-BASE.md` - `SPEC.md` - `/root/.openclaw/openclaw.json` - Objetivo:",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.8103684961795805,
+      "maxScore": 0.37349386215209956,
+      "firstRecalledAt": "2026-04-29T11:44:48.735Z",
+      "lastRecalledAt": "2026-05-04T23:28:16.361Z",
+      "queryHashes": [
+        "2a15717f4dfe",
+        "d0b3d1382266",
+        "40013ef40921",
+        "2017538fe2ec",
+        "b2bd649d746a"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-03",
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "joao-regras-de-operacao.md",
+        "joao-fontes-e-ferramentas.md",
+        "prompt-base.md",
+        "spec.md",
+        "openclaw/openclaw.json",
+        "assinatura/permissão",
+        "joao",
+        "regras"
+      ]
+    },
+    "memory:memory/2026-04-25.md:21:60": {
+      "key": "memory:memory/2026-04-25.md:21:60",
+      "path": "memory/2026-04-25.md",
+      "startLine": 21,
+      "endLine": 60,
+      "source": "memory",
+      "snippet": "- `skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py` — reescrito com Jinja2 ### Pendente - Trocar a logo no template para a versão oficial do brand kit (Tiaro pediu pra fazer depois) --- ## Pré-consulta do portal IVS corrigida ### Problema Formulário preenchido em `preconsulta.institutovitalslim.com.br` (Tiaro, 2026-04-24 21:07) não gerou resumo no grupo AI Vital Slim. ### Diagnóstico O código do portal (`/root/ivs-preconsulta/src/app/api/submit/route.ts`) **já tinha** a função `notifyTelegram()` que envia pro tópico 271. O problema era que o build do Next.js estava desatualizado — os logs do PM2 mostravam erro \"Could not find a production build\". ### Solução - O PM2",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.2166108965873716,
+      "maxScore": 0.3805840820074081,
+      "firstRecalledAt": "2026-04-29T13:42:39.271Z",
+      "lastRecalledAt": "2026-05-04T22:02:33.392Z",
+      "queryHashes": [
+        "b82f12853561",
+        "0ca555a36658",
+        "d304c82f103d",
+        "3cc2066054bb",
+        "63356da6eaa0",
+        "07096c5cee21"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-02",
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "pré-consulta",
+        "next.js",
+        "skills",
+        "geracao",
+        "apresentacao",
+        "paciente",
+        "scripts",
+        "gerar-apresentacao.py"
+      ]
+    },
+    "memory:memory/2026-04-27.md:433:456": {
+      "key": "memory:memory/2026-04-27.md:433:456",
+      "path": "memory/2026-04-27.md",
+      "startLine": 433,
+      "endLine": 456,
+      "source": "memory",
+      "snippet": "\"args\": [\"-y\", \"stitch-mcp\"], \"env\": { \"GOOGLE_CLOUD_PROJECT\": \"gog-cli-openclaw-489318\", \"GOOGLE_APPLICATION_CREDENTIALS\": \"/root/.config/gcloud/application_default_credentials.json\" } } } } ``` - **Resultado**: `mcporter call stitch.list_projects --output json` funcionou perfeitamente. - **Projeto Stitch criado**: ID `projects/6131873077857601013`, título \"HomeMatch Club - App Design\". - **Tela de splash gerada** com design system \"Obsidian Gilt\" (dark luxury, gold #D4AF37, Playfair Display + Inter). - **Config salvo em**: `/root/cerebro-vital-slim/config/mcporter.json`. - Próximos passos pendentes (Tiaro ainda não respondeu sobre o",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4549966067075728,
+      "maxScore": 0.37904639244079585,
+      "firstRecalledAt": "2026-04-29T13:42:39.271Z",
+      "lastRecalledAt": "2026-05-04T23:25:39.709Z",
+      "queryHashes": [
+        "b82f12853561",
+        "d304c82f103d",
+        "51a6c253e4b8",
+        "2017538fe2ec"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "stitch-mcp",
+        "google-cloud-project",
+        "gog-cli-openclaw-489318",
+        "google-application-credentials",
+        "stitch.list-projects",
+        "projects/6131873077857601013",
+        "args",
+        "stitch"
+      ]
+    },
+    "memory:memory/2026-04-25.md:1:32": {
+      "key": "memory:memory/2026-04-25.md:1:32",
+      "path": "memory/2026-04-25.md",
+      "startLine": 1,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "# 2026-04-25 ## Template de apresentação reconstruído com HTML aprovado do Erick ### Contexto Tiaro aprovou o HTML da apresentação do Erick (dark theme, hero com foto da Dra., stats, diagnóstico, anchor, histórico, exames, timeline, contexto, CTA verde, referências) como o novo padrão da skill `geracao-apresentacao-paciente`. ### O que foi feito - Template base da skill substituído pelo HTML aprovado do Erick - Convertido para Jinja2 com placeholders dinâmicos: - `{{ nome_paciente }}`, `{{ idade_paciente }}`, `{{ crm_medico }}` - `{{ stats_section | safe }}`, `{{ diagnostico_section | safe }}`, `{{ anchor_section | safe }}` - `{{ history_section | safe }}`, `{{ exams_section | safe",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5145785987377165,
+      "maxScore": 0.4268328458070755,
+      "firstRecalledAt": "2026-04-29T13:42:39.271Z",
+      "lastRecalledAt": "2026-05-02T10:58:15.091Z",
+      "queryHashes": [
+        "b82f12853561",
+        "6c1b0f4b8c93",
+        "0cf7f85c1093",
+        "3cc2066054bb"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "geracao-apresentacao-paciente",
+        "nome-paciente",
+        "idade-paciente",
+        "crm-medico",
+        "stats-section",
+        "diagnostico-section",
+        "anchor-section",
+        "history-section"
+      ]
+    },
+    "memory:memory/2026-04-27.md:100:124": {
+      "key": "memory:memory/2026-04-27.md:100:124",
+      "path": "memory/2026-04-27.md",
+      "startLine": 100,
+      "endLine": 124,
+      "source": "memory",
+      "snippet": "- `/root/.openclaw/workspace/skills/criacao-video-ivs/scripts/elevenlabs_tts.py` ### Atualizações de playbook / skill - Skill pessoal da workspace atualizada: - `/root/.openclaw/workspace/skills/criacao-video-ivs/SKILL.md` - Skill do cérebro da empresa atualizada: - `/root/cerebro-vital-slim/cerebro/areas/marketing/skills/criacao-video-ivs/SKILL.md` - Regras consolidadas nos playbooks: - **ElevenLabs como padrão de voz natural** - **Qwen como padrão de vídeo** - **Avatar Mestre obrigatório em todo reel** - **Nunca usar uma legenda corrida única sobre o vídeo inteiro** - **Pipeline oficial = 1 cena = 1 clip = 1 fala = 1 legenda** ### Feedback qualitativo do Tiaro que virou m",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7722260981798171,
+      "maxScore": 0.4145121783018112,
+      "firstRecalledAt": "2026-04-29T13:43:14.365Z",
+      "lastRecalledAt": "2026-04-30T01:52:29.259Z",
+      "queryHashes": [
+        "0ca555a36658",
+        "1184bcea6c22"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30"
+      ],
+      "conceptTags": [
+        "root",
+        "openclaw",
+        "skills",
+        "criacao",
+        "video",
+        "ivs",
+        "scripts",
+        "elevenlabs-tts.py"
+      ]
+    },
+    "memory:memory/2026-04-27.md:286:310": {
+      "key": "memory:memory/2026-04-27.md:286:310",
+      "path": "memory/2026-04-27.md",
+      "startLine": 286,
+      "endLine": 310,
+      "source": "memory",
+      "snippet": "- `/root/.openclaw/workspace/skills/criacao-video-ivs/scripts/elevenlabs_tts.py` ### Atualizações de playbook / skill - Skill pessoal da workspace atualizada: - `/root/.openclaw/workspace/skills/criacao-video-ivs/SKILL.md` - Skill do cérebro da empresa atualizada: - `/root/cerebro-vital-slim/cerebro/areas/marketing/skills/criacao-video-ivs/SKILL.md` - Regras consolidadas nos playbooks: - **ElevenLabs como padrão de voz natural** - **Qwen como padrão de vídeo** - **Avatar Mestre obrigatório em todo reel** - **Nunca usar uma legenda corrida única sobre o vídeo inteiro** - **Pipeline oficial = 1 cena = 1 clip = 1 fala = 1 legenda** ### Feedback qualitativo do Tiaro que virou m",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7722260981798171,
+      "maxScore": 0.4145121783018112,
+      "firstRecalledAt": "2026-04-29T13:43:14.365Z",
+      "lastRecalledAt": "2026-04-30T01:52:29.259Z",
+      "queryHashes": [
+        "0ca555a36658",
+        "1184bcea6c22"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30"
+      ],
+      "conceptTags": [
+        "root",
+        "openclaw",
+        "skills",
+        "criacao",
+        "video",
+        "ivs",
+        "scripts",
+        "elevenlabs-tts.py"
+      ]
+    },
+    "memory:memory/2026-04-27.md:164:193": {
+      "key": "memory:memory/2026-04-27.md:164:193",
+      "path": "memory/2026-04-27.md",
+      "startLine": 164,
+      "endLine": 193,
+      "source": "memory",
+      "snippet": "- quebra de mito metabólico - reframe de culpa - explicação de tecnologia/tratamento - jornada da paciente sem before/after apelativo - método IVS / acompanhamento ### Atualizações de playbook feitas - Skill de reels atualizada: - `cerebro/areas/marketing/skills/criacao-reels/SKILL.md` - Agora ela aponta explicitamente para: - `estrategia-conteudo-engenharia-reversa.md` - `reels-sistema-aprendizados-varredura-instagram-2026-04-27.md` - `skills/criacao-video-ivs/SKILL.md` - A skill passou a exigir: - uso dos aprendizados da varredura antes de roteirizar - escolha de hook baseada em padrões já validados - identificação do tipo de padrão dominante do reel (`quebra de mi",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.8210297882556914,
+      "maxScore": 0.3890437006950378,
+      "firstRecalledAt": "2026-04-29T13:44:54.805Z",
+      "lastRecalledAt": "2026-05-05T21:48:34.541Z",
+      "queryHashes": [
+        "d304c82f103d",
+        "8849c061cef8",
+        "8f0f82ecb9e0",
+        "1d3a2e5d9417",
+        "8e1a5c052a42"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-02",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "tecnologia/tratamento",
+        "before/after",
+        "quebra",
+        "mito",
+        "metabólico",
+        "reframe",
+        "culpa",
+        "explicação"
+      ]
+    },
+    "memory:memory/2026-04-27.md:581:600": {
+      "key": "memory:memory/2026-04-27.md:581:600",
+      "path": "memory/2026-04-27.md",
+      "startLine": 581,
+      "endLine": 600,
+      "source": "memory",
+      "snippet": "- `skills/criacao-video-ivs/SKILL.md` - A skill passou a exigir: - uso dos aprendizados da varredura antes de roteirizar - escolha de hook baseada em padrões já validados - identificação do tipo de padrão dominante do reel (`quebra de mito`, `reframe de culpa`, `método IVS`, `jornada da paciente`, `explicação de tecnologia`) - regra de produção conectada ao vídeo real: **1 cena = 1 clip = 1 fala = 1 legenda** ### Gestão do projeto atualizada - `cerebro/areas/marketing/projetos/README.md` foi atualizado para registrar: - a síntese operacional da varredura como entregável oficial - que cada perfil analisado agora deve também alimentar o sistema oficial de reels ## 23:14–23:25 U",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1023750305175781,
+      "maxScore": 0.4020236790180206,
+      "firstRecalledAt": "2026-04-29T13:44:54.805Z",
+      "lastRecalledAt": "2026-05-02T11:14:08.040Z",
+      "queryHashes": [
+        "d304c82f103d",
+        "94e4789a988f",
+        "63356da6eaa0"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "skills",
+        "criacao",
+        "video",
+        "ivs",
+        "skill.md",
+        "skill",
+        "passou",
+        "exigir"
+      ]
+    },
+    "memory:memory/2026-04-28.md:59:81": {
+      "key": "memory:memory/2026-04-28.md:59:81",
+      "path": "memory/2026-04-28.md",
+      "startLine": 59,
+      "endLine": 81,
+      "source": "memory",
+      "snippet": "- A origem do falso positivo foi o sync do bridge a partir de `contexto_paciente`, que marcou esse número como `patient_bridge_known`. - Regra prática importante: a lista automática de telefones de paciente pode conter falsos positivos e não deve ser tratada como verdade absoluta quando Tiaro corrigir o status do contato. - Para esse caso específico, o número `557183583728` deve ser tratado como **lead**, não paciente. - Tiaro reforçou a preferência de copy comercial no WhatsApp: - mensagens curtas; - humanas; - uma pergunta por vez; - sem cara de automação; - sem passar preço cedo; - seguir lógica de **SPIN selling** desde a primeira resposta. - Primeira abordagem aprovada por T",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.2410385847091674,
+      "maxScore": 0.4476763010025024,
+      "firstRecalledAt": "2026-04-29T19:14:36.316Z",
+      "lastRecalledAt": "2026-05-05T20:46:12.930Z",
+      "queryHashes": [
+        "f057b4ac5794",
+        "445d5098c820",
+        "1e8a90047b89"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "contexto-paciente",
+        "patient-bridge-known",
+        "origem",
+        "falso",
+        "positivo",
+        "foi",
+        "sync",
+        "bridge"
+      ]
+    },
+    "memory:memory/2026-04-28.md:44:60": {
+      "key": "memory:memory/2026-04-28.md:44:60",
+      "path": "memory/2026-04-28.md",
+      "startLine": 44,
+      "endLine": 60,
+      "source": "memory",
+      "snippet": "- usar follow-up principalmente para resgate de oportunidade, não como mecanismo principal de fechamento; - reinterpretar futuras extrações comerciais sob filtro clínico premium. - Tiaro também definiu um padrão visual canônico para resumos de aprendizados: - sempre em HTML; - visual de infográfico/algoritmo clínico; - blocos visuais separados, hierarquia forte, leitura rápida e estética premium. - Esse padrão passa a governar a apresentação futura de resumos visuais de aprendizados no cérebro/entregáveis. ## 12:34–12:38 UTC — Grupo AI Vital Slim liberado para resposta ampla - Tiaro pediu para habilitar a Clara a responder qualquer participante no grupo Telegram `AI Vital Slim`. -",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.6264751851558685,
+      "maxScore": 0.44416541457176206,
+      "firstRecalledAt": "2026-04-29T19:14:36.316Z",
+      "lastRecalledAt": "2026-05-05T20:46:12.930Z",
+      "queryHashes": [
+        "f057b4ac5794",
+        "445d5098c820",
+        "40e14e167743",
+        "1e8a90047b89"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-02",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "follow-up",
+        "infográfico/algoritmo",
+        "cérebro/entregáveis",
+        "usar",
+        "follow",
+        "principalmente",
+        "resgate",
+        "oportunidade"
+      ]
+    },
+    "memory:memory/2026-04-28.md:76:93": {
+      "key": "memory:memory/2026-04-28.md:76:93",
+      "path": "memory/2026-04-28.md",
+      "startLine": 76,
+      "endLine": 93,
+      "source": "memory",
+      "snippet": "- Foi identificado que a regra errada estava em múltiplas camadas do cérebro, inclusive materiais de treinamento/concierge e a lógica operacional antiga da bridge. - Regra operacional consolidada: - consultar histórico antes de responder no WhatsApp; - responder pacientes e leads com contexto adequado; - diferenciar **abordagem comercial** de **atendimento**; - evitar travamento automático só por classificação de paciente. - Também ficou reforçado por Tiaro que a Clara deve **acompanhar ativamente** as respostas no WhatsApp, lendo a mensagem no histórico/bridge sem depender de o usuário colar o texto no Telegram. - No caso de Ervania, após a primeira resposta aprovada, a paciente res",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.6430725276470182,
+      "maxScore": 0.4656524926424026,
+      "firstRecalledAt": "2026-04-29T19:14:36.316Z",
+      "lastRecalledAt": "2026-05-05T20:46:12.930Z",
+      "queryHashes": [
+        "f057b4ac5794",
+        "445d5098c820",
+        "a197907eae7b",
+        "1e8a90047b89"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "treinamento/concierge",
+        "histórico/bridge",
+        "foi",
+        "identificado",
+        "regra",
+        "errada",
+        "estava",
+        "múltiplas"
+      ]
+    },
+    "memory:memory/2026-04-29.md:1:20": {
+      "key": "memory:memory/2026-04-29.md:1:20",
+      "path": "memory/2026-04-29.md",
+      "startLine": 1,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "# Memory Log — 2026-04-29 ## 00:01 UTC — Atendimento WhatsApp da Clara ganhou camada de decisão rápida - Tiaro mandou consolidar na memória rápida da Clara os aprendizados do dia sobre SPIN selling e recuperação de leads no WhatsApp. - Foi criada a árvore operacional `cerebro/areas/atendimento/arvore-decisao-15s-whatsapp-clara.md` para decidir a próxima resposta em até 15 segundos. - A árvore consolida regras críticas do dia: - no contexto de clínica, o primeiro contato é a principal janela de agendamento; - follow-up é camada secundária de recuperação, não motor principal de conversão; - WhatsApp atende tanto lead quanto paciente, sem bloqueio automático por classificação; - falsos",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.287975201010704,
+      "maxScore": 0.4294446378946304,
+      "firstRecalledAt": "2026-04-29T19:14:36.316Z",
+      "lastRecalledAt": "2026-05-06T21:28:53.924Z",
+      "queryHashes": [
+        "f057b4ac5794",
+        "445182941c08",
+        "df918da648cf",
+        "1d3a2e5d9417",
+        "4449000a7fb2",
+        "0e84a62aa996"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-05-01",
+        "2026-05-02",
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "follow-up",
+        "log",
+        "utc",
+        "atendimento",
+        "whatsapp",
+        "clara",
+        "ganhou",
+        "camada"
+      ]
+    },
+    "memory:memory/2026-04-09.md:41:44": {
+      "key": "memory:memory/2026-04-09.md:41:44",
+      "path": "memory/2026-04-09.md",
+      "startLine": 41,
+      "endLine": 44,
+      "source": "memory",
+      "snippet": "- Integrei o preflight automático ao fluxo da bridge: `zapi_clara_bridge.py` agora roda `preflight_check.py bridge-followup` antes de qualquer resposta comercial. Se o preflight falhar, a Clara é bloqueada com motivo `preflight:*` em vez de responder no escuro. - Reiniciei `zapi-clara-bridge.service` após integrar o preflight ao fluxo operacional. - Correção da regra de destino dos boletos do Omie: o destino principal no Google Drive é `## Medical Contabilidade / #Instituto Vital Slim / Boletos de Programa de Acompanhamento / [NOME DO PACIENTE]`, com ID da pasta `1hbF8K-wil6NNyQ2PyXZK8PZ1jEZhccOr`, na conta `medicalemagrecimento@gmail.com`. Não existe pasta intermediária `Pacientes` para bol",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.2790304243564603,
+      "maxScore": 0.4178892582654953,
+      "firstRecalledAt": "2026-04-29T19:15:59.460Z",
+      "lastRecalledAt": "2026-04-29T22:04:46.887Z",
+      "queryHashes": [
+        "96e08720a942",
+        "69668a063948",
+        "5d230af12a29",
+        "ca6a56f9d2ac",
+        "e91d1aae8f9e",
+        "4719bb4776a8"
+      ],
+      "recallDays": [
+        "2026-04-29"
+      ],
+      "conceptTags": [
+        "zapi-clara-bridge.py",
+        "preflight-check.py",
+        "bridge-followup",
+        "zapi-clara-bridge.service",
+        "gmail.com",
+        "integrei",
+        "preflight",
+        "automático"
+      ]
+    },
+    "memory:memory/2026-04-09.md:43:47": {
+      "key": "memory:memory/2026-04-09.md:43:47",
+      "path": "memory/2026-04-09.md",
+      "startLine": 43,
+      "endLine": 47,
+      "source": "memory",
+      "snippet": "- Correção da regra de destino dos boletos do Omie: o destino principal no Google Drive é `## Medical Contabilidade / #Instituto Vital Slim / Boletos de Programa de Acompanhamento / [NOME DO PACIENTE]`, com ID da pasta `1hbF8K-wil6NNyQ2PyXZK8PZ1jEZhccOr`, na conta `medicalemagrecimento@gmail.com`. Não existe pasta intermediária `Pacientes` para boletos; as subpastas dos pacientes ficam diretamente dentro de `Boletos de Programa de Acompanhamento`. Sempre verificar se a pasta do paciente já existe antes de criar e nunca duplicar pastas. O caminho local sincronizado permanece `C:\\Users\\tiaro\\Documents\\## Medical Contabilidade\\#Instituto Vital Slim\\Boletos de Programa de Acompanhamento\\[Nome do",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.4628635729629353,
+      "maxScore": 0.6406719560701211,
+      "firstRecalledAt": "2026-04-29T20:42:41.911Z",
+      "lastRecalledAt": "2026-04-29T22:04:46.887Z",
+      "queryHashes": [
+        "8f10b6b90305",
+        "1587e1d51aa8",
+        "69668a063948",
+        "5d230af12a29",
+        "ca6a56f9d2ac",
+        "a29f971b58c1",
+        "e91d1aae8f9e",
+        "4719bb4776a8"
+      ],
+      "recallDays": [
+        "2026-04-29"
+      ],
+      "conceptTags": [
+        "gmail.com",
+        "correção",
+        "regra",
+        "destino",
+        "dos",
+        "boletos",
+        "omie",
+        "principal"
+      ]
+    },
+    "memory:memory/2026-04-10.md:62:70": {
+      "key": "memory:memory/2026-04-10.md:62:70",
+      "path": "memory/2026-04-10.md",
+      "startLine": 62,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "- essa conta já tem os scopes autorizados: `appscript`, `calendar`, `chat`, `classroom`, `contacts`, `docs`, `drive`, `forms`, `gmail`, `people`, `sheets`, `slides`, `tasks` - planilha confirmada: `ZAPI_Historico_Pacientes` (`1QXvRhElCx1t7mxMAwGkcvh5V7YyKLjP9zozSGH7LHnM`), abas `Folha1`, `pacientes`, `contexto_paciente` - script testado e funcionando: `/root/.openclaw/workspace/skills/historico-conversas/scripts/consultar_historico.py` - comando de uso: `python3 consultar_historico.py --telefone NUMERO` - credenciais necessárias no ambiente: `OP_SERVICE_ACCOUNT_TOKEN` (de `/root/.openclaw/.op.service-account.env`) e `GOG_KEYRING_PASSWORD` (1Password item `gog-keyring-pass`) - Nova",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0455515503883361,
+      "maxScore": 0.36348916888237,
+      "firstRecalledAt": "2026-04-29T22:04:46.887Z",
+      "lastRecalledAt": "2026-05-02T11:04:59.174Z",
+      "queryHashes": [
+        "4719bb4776a8",
+        "8c2ba88c512e",
+        "1d3a2e5d9417"
+      ],
+      "recallDays": [
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "zapi-historico-pacientes",
+        "contexto-paciente",
+        "consultar-historico.py",
+        "op-service-account-token",
+        "op.service-account.env",
+        "gog-keyring-password",
+        "gog-keyring-pass",
+        "essa"
+      ]
+    },
+    "memory:memory/2026-04-28.md:26:49": {
+      "key": "memory:memory/2026-04-28.md:26:49",
+      "path": "memory/2026-04-28.md",
+      "startLine": 26,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "- `cerebro/areas/marketing/skills/criacao-video-ivs/SKILL.md` - `cerebro/areas/marketing/skills/criacao-reels/SKILL.md` - `cerebro/areas/marketing/skills/criacao-carrossel/SKILL.md` - `skills/geracao-apresentacao-paciente/SKILL.md` ### Resultado estrutural - A mesma camada de decisão de mídia agora governa: - reels - vídeos - carrosséis - apresentações clínicas/visuais - A porta única de consulta dessa camada é `cerebro/areas/marketing/governanca-visual-ivs-index.md`. ## 09:38–10:03 UTC — Correção crítica sobre conversão em clínica e padrão de resumos - Tiaro corrigiu uma generalização de vendas: no contexto de clínicas, os “fechamentos” (agendamentos) acontecem em mais de 98% dos",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7755379438400267,
+      "maxScore": 0.4182262361049652,
+      "firstRecalledAt": "2026-04-30T01:40:40.981Z",
+      "lastRecalledAt": "2026-05-02T10:58:15.091Z",
+      "queryHashes": [
+        "f086dbaacc15",
+        "3cc2066054bb"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "clínicas/visuais",
+        "cerebro",
+        "areas",
+        "marketing",
+        "skills",
+        "criacao",
+        "video",
+        "ivs"
+      ]
+    },
+    "memory:memory/2026-04-20.md:5:28": {
+      "key": "memory:memory/2026-04-20.md:5:28",
+      "path": "memory/2026-04-20.md",
+      "startLine": 5,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "- Nova regra operacional pedida por Tiaro: em qualquer emissão/faturamento no Omie que dependa de banco/conta corrente, perguntar explicitamente qual banco deve ser escolhido antes da emissão, sem assumir o banco de um caso anterior. ## 2026-04-20 — Evolução estrutural do cérebro inspirada por análise de skills externas - Foi analisado o repositório `forrestchang/andrej-karpathy-skills` para comparar com a estrutura atual do cérebro. - Conclusão consolidada: o cérebro já era mais forte em memória, canon, ledger e operações; o principal valor novo veio de princípios explícitos de execução, simplicidade, mudanças cirúrgicas e critérios verificáveis de sucesso. ### Novos arquivos estruturais",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7320617735385895,
+      "maxScore": 0.37659191787242885,
+      "firstRecalledAt": "2026-04-30T01:40:40.981Z",
+      "lastRecalledAt": "2026-05-01T13:12:04.970Z",
+      "queryHashes": [
+        "f086dbaacc15",
+        "dfc878af9745"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-01"
+      ],
+      "conceptTags": [
+        "emissão/faturamento",
+        "banco/conta",
+        "nova",
+        "regra",
+        "operacional",
+        "pedida",
+        "tiaro",
+        "qualquer"
+      ]
+    },
+    "memory:memory/2026-04-22.md:59:88": {
+      "key": "memory:memory/2026-04-22.md:59:88",
+      "path": "memory/2026-04-22.md",
+      "startLine": 59,
+      "endLine": 88,
+      "source": "memory",
+      "snippet": "9. Actionable Takeaway — passos práticos 10. CTA (Engagement Trigger) — call-to-action no texto - Gatilhos psicológicos: curiosity gap, pattern interrupt, social proof, FOMO, contrarian, quick wins - Estilo de escrita: conversacional, frases curtas, momentum, uma pessoa só - Removido: regra do botão dourado no último slide - Arquivos atualizados: ambos os `SKILL.md` (v3 e v4), `cerebro/verdades-operacionais.md` ## Especificações visuais dos slides atualizadas - Tiaro mudou o tema visual dos slides de carrossel: - **Fundo**: preto #000000 → **branco #FFFFFF** - **Texto**: cinza #c8c8c8 → **preto #000000** - **Fontes aumentadas em 20%**: - Texto corpo: ~38px → ~46px (v3",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7445502310991287,
+      "maxScore": 0.3896415740251541,
+      "firstRecalledAt": "2026-04-30T01:40:40.981Z",
+      "lastRecalledAt": "2026-05-02T10:58:15.091Z",
+      "queryHashes": [
+        "f086dbaacc15",
+        "3cc2066054bb"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "call-to-action",
+        "skill.md",
+        "cerebro/verdades-operacionais.md",
+        "actionable",
+        "takeaway",
+        "passos",
+        "práticos",
+        "cta"
+      ]
+    },
+    "memory:memory/2026-04-20.md:26:51": {
+      "key": "memory:memory/2026-04-20.md:26:51",
+      "path": "memory/2026-04-20.md",
+      "startLine": 26,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "- O cérebro deve continuar preferindo a estrutura atual de memória/canon, mas absorver princípios de execução de repositórios externos quando eles melhorarem clareza, verificabilidade e disciplina operacional. - Regra reforçada: não copiar estruturas externas literalmente; incorporar apenas o que melhora a arquitetura já existente. ## 2026-04-20 — Conselho sobre skill/repo estilo Karpathy e melhorias estruturais - Foi acionado o `llm-council` para criticar a skill/repositório `forrestchang/andrej-karpathy-skills` e traduzir isso em melhorias para a operação do cérebro. - Conclusão consolidada do conselho: - o repositório é útil como camada de disciplina mental (pensar antes, simplicidade",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7077345728874206,
+      "maxScore": 0.35438888967037196,
+      "firstRecalledAt": "2026-04-30T01:40:40.981Z",
+      "lastRecalledAt": "2026-05-01T13:11:41.772Z",
+      "queryHashes": [
+        "f086dbaacc15",
+        "a4c2ca5f269d"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-01"
+      ],
+      "conceptTags": [
+        "memória/canon",
+        "skill/repo",
+        "llm-council",
+        "skill/repositório",
+        "cérebro",
+        "deve",
+        "continuar",
+        "preferindo"
+      ]
+    },
+    "memory:memory/2026-04-12.md:1:42": {
+      "key": "memory:memory/2026-04-12.md:1:42",
+      "path": "memory/2026-04-12.md",
+      "startLine": 1,
+      "endLine": 42,
+      "source": "memory",
+      "snippet": "## 2026-04-12 — Correção definitiva de execução Falha repetida identificada por Tiaro: responder com intenção de execução sem executar de fato no mesmo turno. ### Erro crítico - dizer “vou fazer”, “vou acionar”, “vou corrigir” sem ter executado - responder como se uma ferramenta/skill/conselho tivesse sido acionada quando não foi - improvisar fluxo alternativo quando já existe um fluxo definido - repetir erro já corrigido anteriormente ### Protocolo operacional definitivo Para qualquer pedido executivo, só responder em um destes estados: 1. feito 2. bloqueado por motivo real 3. precisa de decisão objetiva do usuário 4. parado por segurança ### Ordem obrigatória 1. verificar acesso real 2",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37132527530193327,
+      "maxScore": 0.37132527530193327,
+      "firstRecalledAt": "2026-04-30T01:55:03.186Z",
+      "lastRecalledAt": "2026-04-30T01:55:03.186Z",
+      "queryHashes": [
+        "8c2ba88c512e"
+      ],
+      "recallDays": [
+        "2026-04-30"
+      ],
+      "conceptTags": [
+        "ferramenta/skill/conselho",
+        "correção",
+        "definitiva",
+        "execução",
+        "falha",
+        "repetida",
+        "identificada",
+        "tiaro"
+      ]
+    },
+    "memory:memory/2026-04-27.md:375:397": {
+      "key": "memory:memory/2026-04-27.md:375:397",
+      "path": "memory/2026-04-27.md",
+      "startLine": 375,
+      "endLine": 397,
+      "source": "memory",
+      "snippet": "- Tiaro enviou o domínio `https://conteudo.institutovitalslim.com.br`. - O domínio foi entendido como portal/vitrine das entregas de conteúdo do IVS, servindo atualmente os HTMLs das análises de perfis via endpoint `/api/list`. - Itens confirmados no portal nesse momento: - `analise-perfil-dr.marlonbatista-2026-04-22-producao.html` - `analise-perfil-dr.marlonbatista-2026-04-22.html` - `analise-perfil-dra.camilapaes-2026-04-23-producao.html` - `analise-perfil-dra.camilapaes-2026-04-23.html` - Leitura operacional: o portal já funciona como superfície pública/interna de validação das análises renderizadas. - Direção implícita importante: futuras sínteses da varredura e evolução do siste",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5002246737480163,
+      "maxScore": 0.42650375366210935,
+      "firstRecalledAt": "2026-04-30T01:55:03.186Z",
+      "lastRecalledAt": "2026-05-02T11:14:08.040Z",
+      "queryHashes": [
+        "8c2ba88c512e",
+        "94e4789a988f",
+        "bb625702c3f2",
+        "63356da6eaa0"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "portal/vitrine",
+        "api/list",
+        "pública/interna",
+        "tiaro",
+        "enviou",
+        "domínio",
+        "https",
+        "foi"
+      ]
+    },
+    "memory:memory/2026-04-29.md:172:199": {
+      "key": "memory:memory/2026-04-29.md:172:199",
+      "path": "memory/2026-04-29.md",
+      "startLine": 172,
+      "endLine": 199,
+      "source": "memory",
+      "snippet": "- Tiaro pediu explicitamente que isso **nunca mais fosse esquecido**. - **Ação tomada:** arquivo canônico de conhecimento operacional criado em `cerebro/empresa/conhecimento/operacional/boletos-omie-processo.md` contendo: - localização exata do script (`/root/.openclaw/workspace/skills/omie-boletos/scripts/omie_boletos.py`); - comandos de execução completos (listar, drive, local, período); - credenciais e destinos; - regras de negócio automáticas; - troubleshooting completo; - checklist pré-execução. - Arquivo RC-25 (graphify-canonical) registrado no cérebro para acesso imediato em futuras consultas. ## 22:03 UTC — Correção canônica: pasta de destino dos boletos - Tiaro confirmo",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36183678209781645,
+      "maxScore": 0.36183678209781645,
+      "firstRecalledAt": "2026-04-30T01:55:03.186Z",
+      "lastRecalledAt": "2026-04-30T01:55:03.186Z",
+      "queryHashes": [
+        "8c2ba88c512e"
+      ],
+      "recallDays": [
+        "2026-04-30"
+      ],
+      "conceptTags": [
+        "pré-execução",
+        "rc-25",
+        "graphify-canonical",
+        "tiaro",
+        "pediu",
+        "explicitamente",
+        "isso",
+        "nunca"
+      ]
+    },
+    "memory:memory/2026-04-29.md:83:102": {
+      "key": "memory:memory/2026-04-29.md:83:102",
+      "path": "memory/2026-04-29.md",
+      "startLine": 83,
+      "endLine": 102,
+      "source": "memory",
+      "snippet": "- regra de não tratar perguntas sobre memória, cérebro e recursos necessários à própria função como fuga automática de escopo; - protocolo de falha de captura incorporado à spec. - Resultado esperado: João mais aderente, menos propenso a escalar cedo e mais consistente ao explicar os recursos necessários para executar bem a função dele. ## 01:51 UTC — Correção de hierarquia e de acesso confirmado no João - Tiaro mostrou que o problema atual não era falta de acesso ao scraper, e sim falha de hierarquia/persona e formulação vaga sobre captura. - Foi reforçado no cérebro do agente que: - João é subordinado à Clara na arquitetura do IVS; - quando houver governança, instrução superior, m",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.8112391978502271,
+      "maxScore": 0.3777850985527038,
+      "firstRecalledAt": "2026-04-30T12:18:33.398Z",
+      "lastRecalledAt": "2026-05-05T20:56:46.490Z",
+      "queryHashes": [
+        "0cf7f85c1093",
+        "40013ef40921",
+        "951d7a6b63b9",
+        "2017538fe2ec",
+        "13101d5c5485"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-03",
+        "2026-05-04",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "hierarquia/persona",
+        "regra",
+        "não",
+        "tratar",
+        "perguntas",
+        "sobre",
+        "memória",
+        "cérebro"
+      ]
+    },
+    "memory:memory/2026-04-22.md:41:63": {
+      "key": "memory:memory/2026-04-22.md:41:63",
+      "path": "memory/2026-04-22.md",
+      "startLine": 41,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- **Antes**: Capa com Dra. de semblante sério, blazer escuro, braços cruzados (foto real fixa) - **Agora**: Foto da Dra. **gerada pelo NanoBanana 2** com base nas fotos reais da biblioteca - A foto deve ser **condizente com o tema abordado** — roupas e posicionamentos adaptados ao tema - **Fisionomia preservada** — nunca alterar o rosto, apenas roupas e posicionamentos - Usar fotos reais como referência obrigatória com cláusula de consistência facial estrita - A v4 da skill `tweet-carrossel` já tinha o pipeline correto: `photo_selector.py` + `generate_variation.py` - Cláusula de consistência facial estrita adicionada à v4 da skill - Arquivos atualizados: `cerebro/empresa/skills/twe",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1121353298425674,
+      "maxScore": 0.37778662145137787,
+      "firstRecalledAt": "2026-04-30T15:25:16.738Z",
+      "lastRecalledAt": "2026-05-02T10:58:15.091Z",
+      "queryHashes": [
+        "8f97a9e8df0a",
+        "993b9313cbb9",
+        "3cc2066054bb"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "tweet-carrossel",
+        "photo-selector.py",
+        "generate-variation.py",
+        "cerebro/empresa/skills/twe",
+        "antes",
+        "capa",
+        "com",
+        "dra"
+      ]
+    },
+    "memory:memory/2026-04-27.md:307:328": {
+      "key": "memory:memory/2026-04-27.md:307:328",
+      "path": "memory/2026-04-27.md",
+      "startLine": 307,
+      "endLine": 328,
+      "source": "memory",
+      "snippet": "- Ficou decidido que o pipeline corrigido passa a ser o **padrão oficial** para os próximos reels. - Tiaro pediu explicitamente: **\"Guarde toda a memória do q foi conversado neste tópico do telegram\"**. - Esta entrada foi registrada para preservar o contexto, os erros, as correções, as decisões e as novas regras operacionais do tópico 768. ## 23:11–23:13 UTC — Varredura de perfis do Instagram retomada e conectada ao sistema oficial de reels - Tiaro pediu: **\"Me fale da varredura dos perfis do Instagram q estávamos fazendo\"** e depois **\"Continuar com a varredura dos perfis e atualizar o nosso sistema de criação de reels\"**. - Busca semântica de memória falhou por quota do provedor; resposta",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7805122524499892,
+      "maxScore": 0.4193629026412964,
+      "firstRecalledAt": "2026-04-30T17:52:55.107Z",
+      "lastRecalledAt": "2026-05-05T20:56:46.490Z",
+      "queryHashes": [
+        "94e4789a988f",
+        "13101d5c5485"
+      ],
+      "recallDays": [
+        "2026-04-30",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "ficou",
+        "decidido",
+        "pipeline",
+        "corrigido",
+        "passa",
+        "ser",
+        "padrão",
+        "oficial"
+      ]
+    },
+    "memory:memory/2026-04-30.md:1:4": {
+      "key": "memory:memory/2026-04-30.md:1:4",
+      "path": "memory/2026-04-30.md",
+      "startLine": 1,
+      "endLine": 4,
+      "source": "memory",
+      "snippet": "- Tiaro explicitou incômodo operacional central: quando a Clara já sabe fazer algo, ele odeia que ela responda como se não soubesse por não achar isso na memória operacional. Isso virou direcionador estrutural para criar/manter uma camada de memória operacional recuperável. - Em 2026-04-30 foi consolidada a nova camada `cerebro/operacional/` com foco em recuperabilidade, incluindo `INDEX-PEDIDOS-RECORRENTES.md`, `CHECKLIST-RECUPERABILIDADE.md` e `PORTAS-UNICAS-DE-EXECUCAO.md`; essa camada deve ser continuamente alimentada com a linguagem real de pedido do Tiaro. - Tiaro autorizou seguir com plano de manutenção contínua tanto para o cérebro quanto para a memória da Clara.",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7836606472730636,
+      "maxScore": 0.4180797457695007,
+      "firstRecalledAt": "2026-05-01T01:00:21.839Z",
+      "lastRecalledAt": "2026-05-01T01:00:33.741Z",
+      "queryHashes": [
+        "445182941c08",
+        "df918da648cf"
+      ],
+      "recallDays": [
+        "2026-05-01"
+      ],
+      "conceptTags": [
+        "criar/manter",
+        "cerebro/operacional",
+        "index-pedidos-recorrentes.md",
+        "checklist-recuperabilidade.md",
+        "portas-unicas-de-execucao.md",
+        "tiaro",
+        "explicitou",
+        "incômodo"
+      ]
+    },
+    "memory:memory/2026-04-29.md:67:86": {
+      "key": "memory:memory/2026-04-29.md:67:86",
+      "path": "memory/2026-04-29.md",
+      "startLine": 67,
+      "endLine": 86,
+      "source": "memory",
+      "snippet": "- nova regra: perguntas sobre memória, cérebro, RapidAPI e recursos necessários à própria função não devem ser tratadas automaticamente como fuga de escopo; - João deve primeiro explicar quais acessos precisa e por quê; - reforço de que João precisa operar com cérebro/memória canônica do IVS; - conduta formalizada para falha de captura: registrar tentativa real, não inventar contexto e pedir vídeo/prints/legenda/transcrição/resumo quando necessário. - Objetivo do ajuste: reduzir respostas erradas de escopo e garantir que João opere com memória + RapidAPI + fontes canônicas como parte explícita da função dele. ## 01:37 UTC — Camada principal do agente João blindada - Tiaro pe",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3515020161867142,
+      "maxScore": 0.3515020161867142,
+      "firstRecalledAt": "2026-05-01T01:00:21.839Z",
+      "lastRecalledAt": "2026-05-01T01:00:21.839Z",
+      "queryHashes": [
+        "445182941c08"
+      ],
+      "recallDays": [
+        "2026-05-01"
+      ],
+      "conceptTags": [
+        "cérebro/memória",
+        "nova",
+        "regra",
+        "perguntas",
+        "sobre",
+        "memória",
+        "cérebro",
+        "rapidapi"
+      ]
+    },
+    "memory:memory/2026-04-10.md:29:45": {
+      "key": "memory:memory/2026-04-10.md:29:45",
+      "path": "memory/2026-04-10.md",
+      "startLine": 29,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "- O DOCX foi extraído por parsing direto do XML interno e organizado em TXT final salvo em: - `/root/cerebro-vital-slim/deliverables/roteiros_voiceover_vitalslim_formatado.txt` - O TXT foi estruturado com: - separação por roteiro - headline - blocos curtos por fala - marcadores de entonação como `[ÍNTIMO]`, `[FIRME]`, `[CTA]`, `[VIRADA]`, etc. - Observação importante: o conteúdo extraído mostrou **10 roteiros**; o roteiro “Medo de tentar” apareceu com pouco ou nenhum corpo legível no XML, então foi sinalizado no TXT que pode haver texto em arte/caixa não extraível e talvez precise revisão manual do DOCX original. - Arquivo entregue ao usuário via anexo relativo: - `MEDIA:./deliv",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38010476529598236,
+      "maxScore": 0.38010476529598236,
+      "firstRecalledAt": "2026-05-02T09:00:34.306Z",
+      "lastRecalledAt": "2026-05-02T09:00:34.306Z",
+      "queryHashes": [
+        "8f0f82ecb9e0"
+      ],
+      "recallDays": [
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "arte/caixa",
+        "docx",
+        "foi",
+        "extraído",
+        "parsing",
+        "direto",
+        "xml",
+        "interno"
+      ]
+    },
+    "memory:memory/2026-04-27.md:598:616": {
+      "key": "memory:memory/2026-04-27.md:598:616",
+      "path": "memory/2026-04-27.md",
+      "startLine": 598,
+      "endLine": 616,
+      "source": "memory",
+      "snippet": "- Foi feita busca cruzada em histórico recuperável de tópicos do Telegram para tentar recuperar a lista dos \"demais perfis\" da varredura. - Conclusão segura: a lista completa adicional **não foi recuperável** do histórico disponível; só é seguro trabalhar com os perfis confirmados. - Tiaro corrigiu explicitamente que **`@yuribarbosaoficial` e `@oestevaosouza` não devem ser tratados como base de criadores médicos** para esta varredura. - Escopo confirmado da varredura no momento: - `@dr.marlonbatista` - `@dra.camilapaes` - Decisão operacional importante: listas críticas compartilhadas em tópicos do Telegram são frágeis e, quando recuperadas, devem ser promovidas para arquivos canônicos do",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36394011378288266,
+      "maxScore": 0.36394011378288266,
+      "firstRecalledAt": "2026-05-02T10:52:10.435Z",
+      "lastRecalledAt": "2026-05-02T10:52:10.435Z",
+      "queryHashes": [
+        "40e14e167743"
+      ],
+      "recallDays": [
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "dr.marlonbatista",
+        "dra.camilapaes",
+        "foi",
+        "feita",
+        "busca",
+        "cruzada",
+        "histórico",
+        "recuperável"
+      ]
+    },
+    "memory:memory/2026-04-30.md:7:12": {
+      "key": "memory:memory/2026-04-30.md:7:12",
+      "path": "memory/2026-04-30.md",
+      "startLine": 7,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "- Incidente crítico adicional da Clara: repetição aleatória da mesma mensagem no WhatsApp. O pause lógico não bastou; o bloqueio efetivo só ocorreu após interromper o processo da bridge. Causa mais provável identificada: deduplicação frágil (dependente de `messageId` em memória), ausência de cooldown por telefone, processamento assíncrono suscetível a reentrega/reentrada de webhook. - Diretriz de correção da bridge da Clara antes de religar: endurecer deduplicação persistente por telefone + `messageId` + hash do texto, bloquear repetição em janela curta, implementar cooldown por número, auto-pause/circuit breaker para resposta repetida, e só retomar após teste controlado. - No grupo AI Vital",
+      "recallCount": 7,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.6788913995027546,
+      "maxScore": 0.42365395128726957,
+      "firstRecalledAt": "2026-05-02T10:52:10.435Z",
+      "lastRecalledAt": "2026-05-05T21:48:34.541Z",
+      "queryHashes": [
+        "40e14e167743",
+        "63356da6eaa0",
+        "ff0af2098d62",
+        "40d85bf4ab8d",
+        "a197907eae7b",
+        "1e8a90047b89",
+        "8e1a5c052a42"
+      ],
+      "recallDays": [
+        "2026-05-02",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "reentrega/reentrada",
+        "auto-pause/circuit",
+        "incidente",
+        "crítico",
+        "adicional",
+        "clara",
+        "repetição",
+        "aleatória"
+      ]
+    },
+    "memory:memory/2026-04-12.md:69:72": {
+      "key": "memory:memory/2026-04-12.md:69:72",
+      "path": "memory/2026-04-12.md",
+      "startLine": 69,
+      "endLine": 72,
+      "source": "memory",
+      "snippet": "- 2026-04-12: Para análises de conversas comerciais via “conselho”, foi executada análise no padrão SPIN Selling e consolidado o aprendizado estrutural no playbook canônico `cerebro/leads-spin-selling.md`. Regra central reforçada: dor antes de preço, contexto antes de proposta, valor percebido antes de investimento. - 2026-04-12: Houve falha operacional anterior ao sugerir que um “conselho” estava pendente sem fluxo externo real observável; a correção explícita foi passar a só afirmar acionamento/retorno quando houver execução real verificável. - 2026-04-12: Erro grave em composição de capa. Nunca sobrepor texto novo por cima de arte de referência já rasterizada esperando “substituir” elemen",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7025305569171905,
+      "maxScore": 0.3556710660457611,
+      "firstRecalledAt": "2026-05-02T11:07:32.057Z",
+      "lastRecalledAt": "2026-05-02T11:20:14.540Z",
+      "queryHashes": [
+        "e41cf1b4b6bc",
+        "3737d05ec765"
+      ],
+      "recallDays": [
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "cerebro/leads-spin-selling.md",
+        "acionamento/retorno",
+        "análises",
+        "conversas",
+        "comerciais",
+        "via",
+        "conselho",
+        "foi"
+      ]
+    },
+    "memory:memory/2026-04-30.md:11:16": {
+      "key": "memory:memory/2026-04-30.md:11:16",
+      "path": "memory/2026-04-30.md",
+      "startLine": 11,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "- Foi definido um fluxo em que a Maria busca os resultados de exames do paciente e as respostas do formulário de pré-consulta e injeta esses dados na apresentação, tornando a peça híbrida: institucional + personalizada. - Diretriz estratégica derivada: a apresentação deve operar em 3 camadas: (1) camada fixa institucional do IVS, (2) camada variável do paciente com nome/objetivos/dores/rotina/exames, e (3) camada de conexão explicando por que, no caso específico, o programa de acompanhamento faz sentido. - Recomendação operacional associada: construir um template master parametrizável de HTML para essa apresentação, com placeholders como `paciente_nome`, `objetivo_principal`, `incômodo_centr",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35575092434883115,
+      "maxScore": 0.35575092434883115,
+      "firstRecalledAt": "2026-05-02T11:14:08.040Z",
+      "lastRecalledAt": "2026-05-02T11:14:08.040Z",
+      "queryHashes": [
+        "63356da6eaa0"
+      ],
+      "recallDays": [
+        "2026-05-02"
+      ],
+      "conceptTags": [
+        "pré-consulta",
+        "paciente-nome",
+        "objetivo-principal",
+        "incômodo-centr",
+        "foi",
+        "definido",
+        "fluxo",
+        "maria"
+      ]
+    },
+    "memory:memory/2026-05-02.md:1:4": {
+      "key": "memory:memory/2026-05-02.md:1:4",
+      "path": "memory/2026-05-02.md",
+      "startLine": 1,
+      "endLine": 4,
+      "source": "memory",
+      "snippet": "- Regra canônica reforçada no IVS: a manutenção diária de cérebro/memória é transversal entre tópicos do grupo Telegram e não pode deixar de ser executada por causa do tópico atual ou pela presença do João em um tópico específico. - Correção operacional consolidada: tópicos organizam interface/escopo de resposta, mas não isolam conhecimento; fatos relevantes surgidos em qualquer tópico devem ser promovidos para a camada canônica de memória/cérebro via graphify. - Tiaro autorizou seguir com a consolidação formal após a correção conceitual da rotina de manutenção intertópicos.",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1060695409774781,
+      "maxScore": 0.3922669470310211,
+      "firstRecalledAt": "2026-05-02T11:20:14.540Z",
+      "lastRecalledAt": "2026-05-03T14:46:44.755Z",
+      "queryHashes": [
+        "3737d05ec765",
+        "4955c445ac22",
+        "a4b571931725"
+      ],
+      "recallDays": [
+        "2026-05-02",
+        "2026-05-03"
+      ],
+      "conceptTags": [
+        "cérebro/memória",
+        "interface/escopo",
+        "memória/cérebro",
+        "regra",
+        "canônica",
+        "reforçada",
+        "ivs",
+        "manutenção"
+      ]
+    },
+    "memory:memory/2026-04-30.md:1:7": {
+      "key": "memory:memory/2026-04-30.md:1:7",
+      "path": "memory/2026-04-30.md",
+      "startLine": 1,
+      "endLine": 7,
+      "source": "memory",
+      "snippet": "- Tiaro explicitou incômodo operacional central: quando a Clara já sabe fazer algo, ele odeia que ela responda como se não soubesse por não achar isso na memória operacional. Isso virou direcionador estrutural para criar/manter uma camada de memória operacional recuperável. - Em 2026-04-30 foi consolidada a nova camada `cerebro/operacional/` com foco em recuperabilidade, incluindo `INDEX-PEDIDOS-RECORRENTES.md`, `CHECKLIST-RECUPERABILIDADE.md` e `PORTAS-UNICAS-DE-EXECUCAO.md`; essa camada deve ser continuamente alimentada com a linguagem real de pedido do Tiaro. - Tiaro autorizou seguir com plano de manutenção contínua tanto para o cérebro quanto para a memória da Clara. ## IVS / Maria — 202",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8197733521461487,
+      "maxScore": 0.43593946695327757,
+      "firstRecalledAt": "2026-05-03T01:00:26.353Z",
+      "lastRecalledAt": "2026-05-06T01:00:17.269Z",
+      "queryHashes": [
+        "519d5f8be780",
+        "4449000a7fb2"
+      ],
+      "recallDays": [
+        "2026-05-03",
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "criar/manter",
+        "cerebro/operacional",
+        "index-pedidos-recorrentes.md",
+        "checklist-recuperabilidade.md",
+        "portas-unicas-de-execucao.md",
+        "tiaro",
+        "explicitou",
+        "incômodo"
+      ]
+    },
+    "memory:memory/2026-04-29.md:54:70": {
+      "key": "memory:memory/2026-04-29.md:54:70",
+      "path": "memory/2026-04-29.md",
+      "startLine": 54,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "- **Ainda falta a prova final de território em uma nova entrada real no tópico `768` após o patch**, para registrar a primeira validação ponta a ponta do João respondendo nativamente por roteamento de tópico. - Ou seja: não é mais só documentação, mas a validação final de produção ainda precisa de um teste real pós-patch. ## 01:32 UTC — Memória operacional do João reforçada - Tiaro pediu para atualizar os arquivos de memória do João com o que é estrutural para a operação dele. - Foram reforçados os arquivos canônicos do agente `agente-reels-intel` em `cerebro/areas/marketing/agentes/agente-reels-intel/`. - Atualizações consolidadas: - `JOAO-FONTES-E-FERRAMENTAS.md` - RapidAPI de scrap",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36984798014163967,
+      "maxScore": 0.36984798014163967,
+      "firstRecalledAt": "2026-05-03T14:24:19.331Z",
+      "lastRecalledAt": "2026-05-03T14:24:19.331Z",
+      "queryHashes": [
+        "d0b3d1382266"
+      ],
+      "recallDays": [
+        "2026-05-03"
+      ],
+      "conceptTags": [
+        "pós-patch",
+        "agente-reels-intel",
+        "joao-fontes-e-ferramentas.md",
+        "ainda",
+        "falta",
+        "prova",
+        "final",
+        "território"
+      ]
+    },
+    "memory:memory/2026-04-29.md:114:136": {
+      "key": "memory:memory/2026-04-29.md:114:136",
+      "path": "memory/2026-04-29.md",
+      "startLine": 114,
+      "endLine": 136,
+      "source": "memory",
+      "snippet": "- Nova resposta-alvo: informar apenas que tentou a rota padrão, que o conteúdo não ficou acessível o suficiente nesta execução e pedir vídeo, prints, legenda, transcrição ou resumo. - Camadas atualizadas: - `JOAO-REGRAS-DE-OPERACAO.md` - `PROMPT-BASE.md` - `SPEC.md` - `/root/.openclaw/openclaw.json` ## 02:16 UTC — Fluxo executável do João corrigido - Tiaro pediu a correção do problema real, não só do comportamento textual. - Foi auditado o fluxo de coleta do agente `agente-reels-intel` e validado que a API canônica da RapidAPI estava funcionando de verdade via chamada direta com retorno `200 OK`. - Conclusão: o gargalo estava no fluxo executável do João, não na API. - Correção aplic",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1141970843076705,
+      "maxScore": 0.3918519467115402,
+      "firstRecalledAt": "2026-05-03T14:43:33.810Z",
+      "lastRecalledAt": "2026-05-05T20:56:46.490Z",
+      "queryHashes": [
+        "40013ef40921",
+        "9c9c4c9944cd",
+        "13101d5c5485"
+      ],
+      "recallDays": [
+        "2026-05-03",
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "resposta-alvo",
+        "joao-regras-de-operacao.md",
+        "prompt-base.md",
+        "spec.md",
+        "openclaw/openclaw.json",
+        "agente-reels-intel",
+        "nova",
+        "resposta"
+      ]
+    },
+    "memory:memory/2026-05-04.md:29:36": {
+      "key": "memory:memory/2026-05-04.md:29:36",
+      "path": "memory/2026-05-04.md",
+      "startLine": 29,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "- Próximo passo pendente: provisionar e validar um novo ambiente/IP/browser persistente para o João operar no Lovable sem depender do browser do Tiaro. ## 2026-05-04 21:05 UTC — SOP Gemini para fotos da Dra. Daniely registrada para o João - Foi consolidado no cérebro do João um padrão canônico de geração de fotos da Dra. Daniely no Gemini com foco em consistência facial. - A SOP registra: uso obrigatório de foto-mãe oficial, bloco fixo de `FACE LOCK`, separação entre identidade e cena, checklist de aprovação e lista de prompts proibidos. - Também foram registrados 5 prompts canônicos prontos para uso: `Consultório`, `Autoridade`, `Acolhimento`, `Bastidor` e `Retrato premium`. - Regra operac",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.360122874379158,
+      "maxScore": 0.360122874379158,
+      "firstRecalledAt": "2026-05-04T21:10:58.375Z",
+      "lastRecalledAt": "2026-05-04T21:10:58.375Z",
+      "queryHashes": [
+        "94614f5f72f1"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "ambiente/ip/browser",
+        "foto-mãe",
+        "próximo",
+        "passo",
+        "pendente",
+        "provisionar",
+        "validar",
+        "novo"
+      ]
+    },
+    "memory:memory/2026-05-04.md:1:11": {
+      "key": "memory:memory/2026-05-04.md:1:11",
+      "path": "memory/2026-05-04.md",
+      "startLine": 1,
+      "endLine": 11,
+      "source": "memory",
+      "snippet": "## 2026-05-04 13:08 UTC — Notion do João validado + bunkers operacionais - A leitura real de Notion pelo João foi consolidada como funcional via `notion-api` / `notion_reader.py`. - Bunkers confirmados acessíveis ao João: Bunker 1, Bunker 3 (`74aebf9b19e7821e9dd9014fb9e365fe`), Bunker 4 (`252ebf9b19e782b8bce38167182b26c8`) e Bunker 5 (`52eebf9b19e78383adb2810d6930f21c`). - Foi observada uma possível variante/duplicidade do Bunker 4 em `3dcebf9b19e78320bed8815a19f26412`. - Regra operacional consolidada: antes de dizer que falta material de repertório/roteiro, João deve consultar primeiro os bunkers validados do Notion. ## 2026-05-04 14:15 UTC — Lovable/browser do João operacional - Tiaro ped",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1665472894906999,
+      "maxScore": 0.3970031201839447,
+      "firstRecalledAt": "2026-05-04T21:51:01.172Z",
+      "lastRecalledAt": "2026-05-04T22:16:11.918Z",
+      "queryHashes": [
+        "51a6c253e4b8",
+        "07096c5cee21",
+        "951d7a6b63b9"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "notion-api",
+        "notion-reader.py",
+        "variante/duplicidade",
+        "repertório/roteiro",
+        "lovable/browser",
+        "utc",
+        "notion",
+        "joão"
+      ]
+    },
+    "memory:memory/2026-05-04.md:10:21": {
+      "key": "memory:memory/2026-05-04.md:10:21",
+      "path": "memory/2026-05-04.md",
+      "startLine": 10,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "- Configuração de SSRF do browser foi mantida restritiva e ampliada apenas com hostnames mínimos de Lovable: `lovable.dev`, `www.lovable.dev`, `docs.lovable.dev`, `lovable.app`, `www.lovable.app`, em `allowedHostnames` e `hostnameAllowlist`. - Regra operacional consolidada no cérebro do João: ele está autorizado a usar Lovable via browser OpenClaw para construir, editar, revisar e validar telas/protótipos/apps ligados ao Marketing; antes de dizer que Lovable está indisponível, deve validar o browser real e tentar abrir a URL aplicável. - Se o Lovable abrir em login, o diagnóstico correto é bloqueio de autenticação/sessão, não falha técnica do browser; para previews em subdomínios específicos",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.214943215250969,
+      "maxScore": 0.45880163908004756,
+      "firstRecalledAt": "2026-05-04T21:51:01.172Z",
+      "lastRecalledAt": "2026-05-04T22:16:11.918Z",
+      "queryHashes": [
+        "51a6c253e4b8",
+        "07096c5cee21",
+        "951d7a6b63b9"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "lovable.dev",
+        "www.lovable.dev",
+        "docs.lovable.dev",
+        "lovable.app",
+        "www.lovable.app",
+        "telas/protótipos/apps",
+        "autenticação/sessão",
+        "configuração"
+      ]
+    },
+    "memory:memory/2026-05-04.md:18:32": {
+      "key": "memory:memory/2026-05-04.md:18:32",
+      "path": "memory/2026-05-04.md",
+      "startLine": 18,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "- Observação: a sessão foi obtida via validação humana devido a bloqueio Cloudflare/Turnstile no fluxo headless; se expirar, repetir login humano pelo mesmo procedimento. ## 2026-05-04 16:30 UTC — Teste Lovable bloqueado por permissão do workspace - Tentativa de criar projeto teste no Lovable com prompt \"IVS Teste Operacional Maria João\". - Lovable exibiu: \"You don't have permission to create projects in this workspace. Select a workspace where you have editor access or higher.\" - Workspace visível: `Instituto's Lovable` (PRO), porém sem permissão de criação para o usuário/sessão atual. - Próximo passo operacional: Tiaro precisa conceder permissão Editor/Owner ao usuário logado ou fazer log",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.792306414246559,
+      "maxScore": 0.4300948321819305,
+      "firstRecalledAt": "2026-05-04T21:51:01.172Z",
+      "lastRecalledAt": "2026-05-04T22:16:11.918Z",
+      "queryHashes": [
+        "51a6c253e4b8",
+        "951d7a6b63b9"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "cloudflare/turnstile",
+        "usuário/sessão",
+        "editor/owner",
+        "observação",
+        "sessão",
+        "foi",
+        "obtida",
+        "via"
+      ]
+    },
+    "memory:memory/2026-04-27.md:629:642": {
+      "key": "memory:memory/2026-04-27.md:629:642",
+      "path": "memory/2026-04-27.md",
+      "startLine": 629,
+      "endLine": 642,
+      "source": "memory",
+      "snippet": "- superfície ampla para imagem, vídeo, cinema, lip sync e workflows - Achado de segurança importante: - no Electron, `webPreferences.webSecurity = false`, aumentando risco e reduzindo proteções esperadas do renderer - Riscos operacionais identificados: - projeto grande demais para virar skill do cérebro - alto custo de instalação/manutenção - branding/posicionamento “uncensored / no filters / no guardrails”, desalinhado com compliance médico do IVS - não resolve um gargalo principal já melhor coberto pelo stack atual (OpenAI/Google para final, Qwen para vídeo, ElevenLabs para voz, Z-Image-Turbo para protótipo) - Veredito consolidado ao Tiaro: - **não instalar no ambiente princi",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35813434422016144,
+      "maxScore": 0.35813434422016144,
+      "firstRecalledAt": "2026-05-04T21:51:01.172Z",
+      "lastRecalledAt": "2026-05-04T21:51:01.172Z",
+      "queryHashes": [
+        "51a6c253e4b8"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "openai",
+        "webpreferences.websecurity",
+        "instalação/manutenção",
+        "branding/posicionamento",
+        "openai/google",
+        "z-image-turbo",
+        "superfície",
+        "ampla"
+      ]
+    },
+    "memory:memory/2026-05-04.md:41:49": {
+      "key": "memory:memory/2026-05-04.md:41:49",
+      "path": "memory/2026-05-04.md",
+      "startLine": 41,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "- `framer-motion` não está padronizado globalmente no ambiente do João, mas foi validado com sucesso como dependência npm instalável em ambiente de teste (`npm install framer-motion react react-dom`). - Skill equivalente de UI/UX identificada no ambiente: `design-impeccable`, já instalada no workspace e adequada para polish/revisão de HTML e interfaces do IVS. - Skill institucional de geração de imagem já instalada: `prompt-imagens`, incluindo fluxo com referência real para fotos da Dra. Daniely. - `21st.dev` não está integrado nem homologado como parte do stack canônico atual do João. - Decisão operacional consolidada: padrão UI/web do João passa a ser `Stitch + design-impeccable`, com `Fra",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.41596504449844357,
+      "maxScore": 0.41596504449844357,
+      "firstRecalledAt": "2026-05-04T22:02:33.392Z",
+      "lastRecalledAt": "2026-05-04T22:02:33.392Z",
+      "queryHashes": [
+        "07096c5cee21"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "framer-motion",
+        "react-dom",
+        "ui/ux",
+        "design-impeccable",
+        "polish/revisão",
+        "prompt-imagens",
+        "21st.dev",
+        "ui/web"
+      ]
+    },
+    "memory:memory/2026-05-04.md:29:42": {
+      "key": "memory:memory/2026-05-04.md:29:42",
+      "path": "memory/2026-05-04.md",
+      "startLine": 29,
+      "endLine": 42,
+      "source": "memory",
+      "snippet": "- Próximo passo pendente: provisionar e validar um novo ambiente/IP/browser persistente para o João operar no Lovable sem depender do browser do Tiaro. ## 2026-05-04 21:05 UTC — SOP Gemini para fotos da Dra. Daniely registrada para o João - Foi consolidado no cérebro do João um padrão canônico de geração de fotos da Dra. Daniely no Gemini com foco em consistência facial. - A SOP registra: uso obrigatório de foto-mãe oficial, bloco fixo de `FACE LOCK`, separação entre identidade e cena, checklist de aprovação e lista de prompts proibidos. - Também foram registrados 5 prompts canônicos prontos para uso: `Consultório`, `Autoridade`, `Acolhimento`, `Bastidor` e `Retrato premium`. - Regra operac",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.41205570101737976,
+      "maxScore": 0.41205570101737976,
+      "firstRecalledAt": "2026-05-04T22:02:33.392Z",
+      "lastRecalledAt": "2026-05-04T22:02:33.392Z",
+      "queryHashes": [
+        "07096c5cee21"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "ambiente/ip/browser",
+        "foto-mãe",
+        "próximo",
+        "passo",
+        "pendente",
+        "provisionar",
+        "validar",
+        "novo"
+      ]
+    },
+    "memory:memory/2026-05-02.md:8:12": {
+      "key": "memory:memory/2026-05-02.md:8:12",
+      "path": "memory/2026-05-02.md",
+      "startLine": 8,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "- A arquitetura operacional foi ajustada para explicitar **Maria como supervisão operacional do João** e **João com escopo de Marketing**, com recarga do gateway para aplicar essa governança. - Diagnóstico de Notion para o João: o ambiente já possui ferramenta de leitura (`/root/.openclaw/workspace/skills/notion-api/scripts/notion_reader.py`) e skills/documentação de Notion instaladas, portanto o bloqueio não é ausência de ferramenta. - Causa raiz atual para João não acessar conteúdo no Notion: **falta de habilitação operacional de acesso**, especialmente token/configuração (`NOTION_TOKEN` ou equivalente) e permissão/compartilhamento da página ou database com a integração. - Decisão operacio",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3603695839643478,
+      "maxScore": 0.3603695839643478,
+      "firstRecalledAt": "2026-05-04T22:16:11.918Z",
+      "lastRecalledAt": "2026-05-04T22:16:11.918Z",
+      "queryHashes": [
+        "951d7a6b63b9"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "gateway",
+        "skills/documentação",
+        "token/configuração",
+        "notion-token",
+        "permissão/compartilhamento",
+        "arquitetura",
+        "operacional",
+        "foi"
+      ]
+    },
+    "memory:memory/2026-04-23.md:61:76": {
+      "key": "memory:memory/2026-04-23.md:61:76",
+      "path": "memory/2026-04-23.md",
+      "startLine": 61,
+      "endLine": 76,
+      "source": "memory",
+      "snippet": "- Script de diagnóstico criado para próxima vez: `ops/diag/clara-telegram.sh` (pm2/systemctl, gateway local, Telegram getMe/getWebhookInfo/getUpdates, logs, redação de secrets, upload em paste com TTL 1h). - **Clara voltou a responder** sem causa/fix registrados pelo Tiaro. Lição: rodar o script **antes** de qualquer restart. ### Fase 0 do `onboarding/SETUP.md` removida - Cérebro é produção, não template. Fase 0 era reset destrutivo (zerava `cerebro/empresa/contexto/*`, áreas, criativos, relatórios, bot de vendas). Removida em `3c67ee8`. - Guardrail permanente em `cerebro/verdades-operacionais.md` — seção \"🚫 Nunca rodar reset do onboarding neste cérebro\". ### Bridge HTTPS para o OpenClaw",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.353795251250267,
+      "maxScore": 0.353795251250267,
+      "firstRecalledAt": "2026-05-04T22:16:11.918Z",
+      "lastRecalledAt": "2026-05-04T22:16:11.918Z",
+      "queryHashes": [
+        "951d7a6b63b9"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "gateway",
+        "ops/diag/clara-telegram.sh",
+        "pm2/systemctl",
+        "getme/getwebhookinfo/getupdates",
+        "causa/fix",
+        "onboarding/setup.md",
+        "cerebro/empresa/contexto",
+        "cerebro/verdades-operacionais.md"
+      ]
+    },
+    "memory:memory/2026-05-04.md:1:9": {
+      "key": "memory:memory/2026-05-04.md:1:9",
+      "path": "memory/2026-05-04.md",
+      "startLine": 1,
+      "endLine": 9,
+      "source": "memory",
+      "snippet": "## 2026-05-04 22:31 UTC — Lovable API: emissão de chave ainda não documentada claramente; SDK indica rota oficial forte - A documentação pública acessível do Lovable não mostrou, até aqui, uma página explícita ensinando emissão de API key pessoal/workspace. - Em UI autenticada, `lovable.dev/settings/account` abre normalmente, mas não exibiu seção visível de API keys nas configurações de conta consultadas nesta rodada. - Rotas testadas por hipótese (`/settings/api`, `/settings/developers`) retornaram 404; `/settings/api-keys` não apresentou conteúdo utilizável nesta checagem, então não pode ser tratada como fluxo confirmado. - Apesar disso, o SDK oficial `@lovable.dev/sdk` confirma superfície",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43766432702541347,
+      "maxScore": 0.43766432702541347,
+      "firstRecalledAt": "2026-05-04T22:34:16.060Z",
+      "lastRecalledAt": "2026-05-04T22:34:16.060Z",
+      "queryHashes": [
+        "4d10f990a4ca"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "pessoal/workspace",
+        "lovable.dev/settings/account",
+        "settings/api",
+        "settings/developers",
+        "settings/api-keys",
+        "lovable.dev/sdk",
+        "utc",
+        "lovable"
+      ]
+    },
+    "memory:memory/2026-05-04.md:1:6": {
+      "key": "memory:memory/2026-05-04.md:1:6",
+      "path": "memory/2026-05-04.md",
+      "startLine": 1,
+      "endLine": 6,
+      "source": "memory",
+      "snippet": "## 2026-05-04 22:36 UTC — Alternativas externas ao Lovable sem API nativa homologada - Fonte oficial: a documentação do Lovable confirma `Build with URL` como beta aberta para iniciar criação por link com `autosubmit=true`, mas isso ainda depende de autenticação e seleção de workspace pelo usuário logado; não resolve sozinho o problema de operação autônoma do João. - Fonte oficial: a documentação do `Lovable desktop app` confirma app nativo para macOS, com suporte a múltiplas abas e MCP local; isso sugere uma rota oficial fora do browser web puro, mas não atende diretamente a VPS Linux atual. - Terceiro não oficial encontrado: `ai-tool-development/lovable-automation` (GitHub) declara POC exp",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5000235855579376,
+      "maxScore": 0.5000235855579376,
+      "firstRecalledAt": "2026-05-04T22:39:26.349Z",
+      "lastRecalledAt": "2026-05-04T22:39:26.349Z",
+      "queryHashes": [
+        "06a71c25da89"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "utc",
+        "alternativas",
+        "externas",
+        "lovable",
+        "sem",
+        "api",
+        "nativa",
+        "homologada"
+      ]
+    },
+    "memory:memory/2026-05-04.md:5:8": {
+      "key": "memory:memory/2026-05-04.md:5:8",
+      "path": "memory/2026-05-04.md",
+      "startLine": 5,
+      "endLine": 8,
+      "source": "memory",
+      "snippet": "- Terceiro não oficial encontrado: `SnakeBett/lovable-automation` (GitHub) descreve um framework TypeScript/Playwright para fluxos de automação do Lovable com retry por etapas; é genérico, sem evidência forte de produção e sem validação institucional. - Terceiro não oficial encontrado: `thefcraft/lovable-project-cloner` (GitHub) baixa código/arquivos de projetos Lovable usando bearer token extraído do DevTools; útil para export/backup/inspeção, mas não para criação/edição autônoma completa. - Leitura operacional: as alternativas reais fora da UI oficial hoje se dividem em três classes: (1) Build with URL oficial, porém ainda dependente de login/workspace; (2) desktop app oficial em macOS; (3",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4324035882949829,
+      "maxScore": 0.4324035882949829,
+      "firstRecalledAt": "2026-05-04T22:39:26.349Z",
+      "lastRecalledAt": "2026-05-04T22:39:26.349Z",
+      "queryHashes": [
+        "06a71c25da89"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "backup",
+        "snakebett/lovable-automation",
+        "typescript/playwright",
+        "thefcraft/lovable-project-cloner",
+        "código/arquivos",
+        "export/backup/inspeção",
+        "criação/edição",
+        "login/workspace"
+      ]
+    },
+    "memory:memory/2026-04-26.md:1:45": {
+      "key": "memory:memory/2026-04-26.md:1:45",
+      "path": "memory/2026-04-26.md",
+      "startLine": 1,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "--- ## Correção operacional (2026-04-26 17:46) ### ERRO cometido com a paciente Mara **Informação errada:** Disse que o acompanhamento do programa intensivo é a cada 45-60 dias. **Correto:** O programa de acompanhamento intensivo é **SEMANAL**. ### Detalhes do programa intensivo - Frequência: SEMANAL (consulta presencial ou online) - Acompanhamento próximo e constante - Bioimpedância nas consultas presenciais - Ajustes de plano, evolução e dúvidas semanais ### Ação tomada - Correção enviada para Mara via WhatsApp explicando o erro - Registrado em `cerebro/verdades-operacionais.md` para nunca mais errar - Lição: sempre confirmar modelo de atendimento antes de informar paciente --- ## I",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7354531437158585,
+      "maxScore": 0.37023003995418546,
+      "firstRecalledAt": "2026-05-04T23:25:39.709Z",
+      "lastRecalledAt": "2026-05-04T23:28:16.361Z",
+      "queryHashes": [
+        "2017538fe2ec",
+        "b2bd649d746a"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "45-60",
+        "cerebro/verdades-operacionais.md",
+        "correção",
+        "operacional",
+        "erro",
+        "cometido",
+        "com",
+        "paciente"
+      ]
+    },
+    "memory:memory/2026-04-14.md:1:40": {
+      "key": "memory:memory/2026-04-14.md:1:40",
+      "path": "memory/2026-04-14.md",
+      "startLine": 1,
+      "endLine": 40,
+      "source": "memory",
+      "snippet": "## 2026-04-14 — OpenClaw image providers para carrossel Aprendizado registrado por Tiaro. ### Regra canônica - OpenClaw `v2026.4.11` tem sistema nativo de image providers - Para gerar imagens de carrossel, preferir provider Google com NanoBanana 2 (`google/gemini-3.1-flash-image-preview` / NanoBanana 2) - Fallback permitido: OpenAI (`gpt-image-1`) - NUNCA gerar capa com texto via image tool - SEMPRE usar `make_cover.py` para montar a capa ### Banco de fotos reais da Dra. Daniely - Repositório central: - originais: `/root/.openclaw/workspace/fotos_dra/originais/` - avatares: `/root/.openclaw/workspace/fotos_dra/avatares/` - Regra canônica: - sempre usar foto real da Dra. desse reposi",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3506210923194885,
+      "maxScore": 0.3506210923194885,
+      "firstRecalledAt": "2026-05-04T23:28:16.361Z",
+      "lastRecalledAt": "2026-05-04T23:28:16.361Z",
+      "queryHashes": [
+        "b2bd649d746a"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "v2026.4.11",
+        "gpt-image-1",
+        "make-cover.py",
+        "openclaw",
+        "image",
+        "providers"
+      ]
+    },
+    "memory:memory/2026-05-03.md:1:8": {
+      "key": "memory:memory/2026-05-03.md:1:8",
+      "path": "memory/2026-05-03.md",
+      "startLine": 1,
+      "endLine": 8,
+      "source": "memory",
+      "snippet": "- Nova regra canônica determinada por Tiaro: toda implementação operacional relevante no IVS deve terminar com implantação total na mesma execução, sem depender só de runtime e sem depender de autorização posterior para promoção ao cérebro. - A governança central foi atualizada em `cerebro/empresa/skills/GOVERNANCA-SKILLS.md` com a regra de implantação total: runtime + camada canônica + atualização dos agentes impactados + registro durável via graphify. - A regra também foi incorporada ao cérebro operacional do João em `JOAO-REGRAS-DE-OPERACAO.md`, para que liberação de ferramenta, capability ou integração relevante não fique apenas em configuração temporária. - O princípio foi registrado co",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4158851027488708,
+      "maxScore": 0.4158851027488708,
+      "firstRecalledAt": "2026-05-04T23:40:43.055Z",
+      "lastRecalledAt": "2026-05-04T23:40:43.055Z",
+      "queryHashes": [
+        "0052ab83cdd1"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "joao-regras-de-operacao.md",
+        "nova",
+        "regra",
+        "canônica",
+        "determinada",
+        "tiaro",
+        "toda",
+        "implementação"
+      ]
+    },
+    "memory:memory/2026-04-09.md:23:28": {
+      "key": "memory:memory/2026-04-09.md:23:28",
+      "path": "memory/2026-04-09.md",
+      "startLine": 23,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "- Fonte de verdade para serviços operacionais: preferir `openai/gpt-5.4` como override explícito quando o fluxo depender do gateway local já validado; evitar deixar serviços críticos em `anthropic/claude-sonnet-4-6` sem validar cota/uso disponível. - Caso concreto aprendido: a bridge Z-API da Clara parou de responder pacientes porque `zapi_bridge.env` estava com `OPENCLAW_MODEL_OVERRIDE=anthropic/claude-sonnet-4-6`, gerando erro de limite de uso do Claude. Corrigido para `OPENCLAW_MODEL_OVERRIDE=openai/gpt-5.4` e serviço reiniciado. - Checklist obrigatório para qualquer troca de LLM em produção: (1) localizar overrides de modelo em `.env`, `x-openclaw-model`, scripts e services; (2) alinhar",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3923370838165283,
+      "maxScore": 0.3923370838165283,
+      "firstRecalledAt": "2026-05-04T23:40:43.055Z",
+      "lastRecalledAt": "2026-05-04T23:40:43.055Z",
+      "queryHashes": [
+        "0052ab83cdd1"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "gateway",
+        "gpt",
+        "openai",
+        "openai/gpt-5.4",
+        "anthropic/claude-sonnet-4-6",
+        "cota/uso",
+        "z-api",
+        "zapi-bridge.env"
+      ]
+    },
+    "memory:memory/2026-04-29.md:15:33": {
+      "key": "memory:memory/2026-04-29.md:15:33",
+      "path": "memory/2026-04-29.md",
+      "startLine": 15,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "- `cerebro/areas/atendimento/cola-de-bolso-spin-recuperacao-clara.md` - Tiaro pediu explicitamente que essas informações entrassem na memória de acesso rápido da Clara (`memory-preload.md`) e fossem commitadas no cérebro. - Commits relevantes da consolidação: - `27661c0` — memória rápida atualizada - `0bc094b` — cola de bolso criada - `8936d56` — árvore de decisão 15s criada - Desdobramento visual adicional: criada a versão HTML premium da árvore em `cerebro/areas/atendimento/arvore-decisao-15s-whatsapp-clara.html`, no formato de algoritmo clínico escuro com brand IVS. ## 00:13–00:18 UTC — Implementação definitiva do roteamento topic -> agent no OpenClaw - Tiaro escolheu explicitame",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39208705723285675,
+      "maxScore": 0.39208705723285675,
+      "firstRecalledAt": "2026-05-04T23:40:43.055Z",
+      "lastRecalledAt": "2026-05-04T23:40:43.055Z",
+      "queryHashes": [
+        "0052ab83cdd1"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "memory-preload.md",
+        "cerebro",
+        "areas",
+        "atendimento",
+        "cola",
+        "bolso",
+        "spin",
+        "recuperacao"
+      ]
+    },
+    "memory:memory/2026-04-29.md:30:58": {
+      "key": "memory:memory/2026-04-29.md:30:58",
+      "path": "memory/2026-04-29.md",
+      "startLine": 30,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- resolução do `agentId` por metadados reais de entrada (`channel`, `groupId`, `topicId`, `conversationLabel`); - conversão do `sessionKey` resolvido para o namespace do agente roteado; - correção adicional para migrar mensagens que ainda chegarem com `SessionKey` antigo do `main`, desde que o tópico tenha rota configurada. ### Arquivos vivos criados/configurados - runtime map: `/root/.openclaw/topic-agent-routing.json` - espelho canônico: `cerebro/telegram-topic-agent-routing.json` - rota ativa registrada: - `telegram` - grupo `-1003803476669` - tópico `768` (`Reels`) - `agentId: agente-reels-intel` ### Configuração do agente - O agente `agente-reels-intel` foi cadastrado em `~/.o",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.383783420920372,
+      "maxScore": 0.383783420920372,
+      "firstRecalledAt": "2026-05-05T00:10:27.184Z",
+      "lastRecalledAt": "2026-05-05T00:10:27.184Z",
+      "queryHashes": [
+        "9c9c4c9944cd"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "criados/configurados",
+        "agente-reels-intel",
+        "resolução",
+        "agentid",
+        "metadados",
+        "reais",
+        "entrada",
+        "channel"
+      ]
+    },
+    "memory:memory/2026-05-05.md:1:23": {
+      "key": "memory:memory/2026-05-05.md:1:23",
+      "path": "memory/2026-05-05.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "## 2026-05-05 — Graphify RC-25 concluído para subagentes sob demanda do João Consolidação via graphify realizada para a decisão de não criar 12 agentes fixos e implementar no João uma biblioteca de subagentes sob demanda baseada no soul dos perfis úteis do `agency-agents`. Diretório de saída: - `/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/` Arquivos de saída: - `graphify-out/graph.json` - `graphify-out/graph.html` - `graphify-out/graph.graphml` - `graphify-out/GRAPH_REPORT.md` - `graphify-out/AUDIT.md` - `extraction.json` Métricas finais: - nodes=24 - edges=45 - communities=4 Observação: execução focada no delta de gov",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4835053503513336,
+      "maxScore": 0.4835053503513336,
+      "firstRecalledAt": "2026-05-05T00:19:09.369Z",
+      "lastRecalledAt": "2026-05-05T00:19:09.369Z",
+      "queryHashes": [
+        "135c0585be54"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "rc-25",
+        "agency-agents",
+        "graphify-out/graph.json",
+        "graphify-out/graph.html",
+        "graphify-out/graph.graphml",
+        "graphify-out/graph-report.md",
+        "graphify-out/audit.md",
+        "extraction.json"
+      ]
+    },
+    "memory:memory/2026-05-05.md:59:73": {
+      "key": "memory:memory/2026-05-05.md:59:73",
+      "path": "memory/2026-05-05.md",
+      "startLine": 59,
+      "endLine": 73,
+      "source": "memory",
+      "snippet": "Auditoria identificou que o cérebro e o graphify estavam consistentes, mas o `systemPromptOverride` runtime do agente `agente-reels-intel` ainda não citava explicitamente a nova biblioteca `JOAO-SUBAGENTES-SOB-DEMANDA.md`. Correção aplicada: - `/root/.openclaw/openclaw.json` atualizado no agente `agente-reels-intel` com a regra `REGRA DE SUBAGENTES SOB DEMANDA`. Regra runtime adicionada: - João não deve criar nem depender de 12 agentes fixos. - Deve usar `cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md` como repertório interno de especialidades. - Pode acionar subagente sob demanda via briefing controlado quando a demanda exigir. - João valida, sintetiza e",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7178535979123029,
+      "maxScore": 0.7178535979123029,
+      "firstRecalledAt": "2026-05-05T00:21:07.846Z",
+      "lastRecalledAt": "2026-05-05T00:21:07.846Z",
+      "queryHashes": [
+        "2dff41f41a2e"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "agente-reels-intel",
+        "joao-subagentes-sob-demanda.md",
+        "openclaw/openclaw.json",
+        "auditoria",
+        "identificou",
+        "cérebro",
+        "graphify",
+        "estavam"
+      ]
+    },
+    "memory:memory/2026-05-05.md:1:36": {
+      "key": "memory:memory/2026-05-05.md:1:36",
+      "path": "memory/2026-05-05.md",
+      "startLine": 1,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "## 2026-05-05 — Modelo de subagentes sob demanda do João Tiaro aprovou seguir com o modelo em que João incorpora o soul/repertório dos perfis úteis do `agency-agents` como biblioteca interna de especialidades, em vez de criar 12 agentes fixos no OpenClaw neste momento. Decisão canônica operacional: - João permanece como agente principal de marketing/web. - Subagentes são acionados sob demanda e não falam diretamente com Tiaro. - Fluxo recomendado: `Tiaro → João → subagente sob demanda → João → Tiaro`. - Critério de promoção para agente fixo: uso em 5+ demandas reais, ganho operacional claro, redução de retrabalho, sem conflito com governança IVS, entregas melhores que João sozinho e aprova",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9073124885559081,
+      "maxScore": 0.4858504474163055,
+      "firstRecalledAt": "2026-05-05T00:21:07.846Z",
+      "lastRecalledAt": "2026-05-05T00:23:14.592Z",
+      "queryHashes": [
+        "2dff41f41a2e",
+        "e52cfb7668a6"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "soul/repertório",
+        "agency-agents",
+        "marketing/web",
+        "modelo",
+        "subagentes",
+        "sob",
+        "demanda",
+        "joão"
+      ]
+    },
+    "memory:memory/2026-05-05.md:30:64": {
+      "key": "memory:memory/2026-05-05.md:30:64",
+      "path": "memory/2026-05-05.md",
+      "startLine": 30,
+      "endLine": 64,
+      "source": "memory",
+      "snippet": "- não substitui Maria, Clara, Dra. Daniely ou regras do cérebro; - não decide orçamento, contratação, stack oficial, compliance ou estratégia sem validação; - não instala dependência, altera produção ou muda arquitetura sem aprovação; - João consolida e valida a resposta final. ## 2026-05-05 — Graphify RC-25 concluído para subagentes sob demanda do João Consolidação via graphify realizada para a decisão de não criar 12 agentes fixos e implementar no João uma biblioteca de subagentes sob demanda baseada no soul dos perfis úteis do `agency-agents`. Diretório de saída: - `/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/` Arquiv",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40654535293579097,
+      "maxScore": 0.40654535293579097,
+      "firstRecalledAt": "2026-05-05T00:21:07.846Z",
+      "lastRecalledAt": "2026-05-05T00:21:07.846Z",
+      "queryHashes": [
+        "2dff41f41a2e"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "rc-25",
+        "agency-agents",
+        "não",
+        "substitui",
+        "maria",
+        "clara",
+        "dra",
+        "daniely"
+      ]
+    },
+    "memory:memory/2026-05-05.md:60:78": {
+      "key": "memory:memory/2026-05-05.md:60:78",
+      "path": "memory/2026-05-05.md",
+      "startLine": 60,
+      "endLine": 78,
+      "source": "memory",
+      "snippet": "Observação: execução focada no delta de governança do João para evitar ruído de todo o diretório. Schema ajustado com campos obrigatórios de graphify (`file_type`, `source_file`, `relation`, `confidence`). Após auditoria, foi incluído também o arquivo `raw/RUNTIME-JOAO-SUBAGENTES.md` para registrar a sincronização da regra no `systemPromptOverride`. ## 2026-05-05 — Auditoria de sincronização runtime/cérebro Auditoria identificou que o cérebro e o graphify estavam consistentes, mas o `systemPromptOverride` runtime do agente `agente-reels-intel` ainda não citava explicitamente a nova biblioteca `JOAO-SUBAGENTES-SOB-DEMANDA.md`. Correção aplicada: - `/root/.openclaw/openclaw.json` atualizado",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6889970914580954,
+      "maxScore": 0.6889970914580954,
+      "firstRecalledAt": "2026-05-05T00:23:14.592Z",
+      "lastRecalledAt": "2026-05-05T00:23:14.592Z",
+      "queryHashes": [
+        "e52cfb7668a6"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "file-type",
+        "source-file",
+        "raw/runtime-joao-subagentes.md",
+        "runtime/cérebro",
+        "agente-reels-intel",
+        "joao-subagentes-sob-demanda.md",
+        "openclaw/openclaw.json",
+        "observação"
+      ]
+    },
+    "memory:memory/2026-05-05.md:30:63": {
+      "key": "memory:memory/2026-05-05.md:30:63",
+      "path": "memory/2026-05-05.md",
+      "startLine": 30,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- não substitui Maria, Clara, Dra. Daniely ou regras do cérebro; - não decide orçamento, contratação, stack oficial, compliance ou estratégia sem validação; - não instala dependência, altera produção ou muda arquitetura sem aprovação; - João consolida e valida a resposta final. ## 2026-05-05 — Graphify RC-25 concluído para subagentes sob demanda do João Consolidação via graphify realizada para a decisão de não criar 12 agentes fixos e implementar no João uma biblioteca de subagentes sob demanda baseada no soul dos perfis úteis do `agency-agents`. Diretório de saída: - `/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/` Arquiv",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7678227722644806,
+      "maxScore": 0.3966964542865753,
+      "firstRecalledAt": "2026-05-05T00:23:14.592Z",
+      "lastRecalledAt": "2026-05-05T21:38:57.857Z",
+      "queryHashes": [
+        "e52cfb7668a6",
+        "b0962c2eb163"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "rc-25",
+        "agency-agents",
+        "não",
+        "substitui",
+        "maria",
+        "clara",
+        "dra",
+        "daniely"
+      ]
+    },
+    "memory:memory/2026-05-05.md:163:182": {
+      "key": "memory:memory/2026-05-05.md:163:182",
+      "path": "memory/2026-05-05.md",
+      "startLine": 163,
+      "endLine": 182,
+      "source": "memory",
+      "snippet": "- Requisitos: Node.js >= 22 e FFmpeg. - Renderização baseada em browser/headless Chrome e FFmpeg. - Inclui skills como `hyperframes`, `hyperframes-cli`, `website-to-hyperframes`, adaptadores de animação e comandos para preview/render/lint/inspect. Veredito operacional: - Aprovar somente teste em sandbox, não instalar ainda como skill oficial IVS. - Melhor encaixe: produção programática de Reels, vídeos explicativos, overlays, legendas animadas, vídeos 9:16 e templates reutilizáveis para João. - Não substitui CapCut/Canva/HeyGen Studio/editor humano para finalização/publicação. - Não resolve avatar HeyGen sozinho; é motor de composição/renderização, não plataforma completa de avatar. Riscos",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4042114794254303,
+      "maxScore": 0.4042114794254303,
+      "firstRecalledAt": "2026-05-05T00:29:47.918Z",
+      "lastRecalledAt": "2026-05-05T00:29:47.918Z",
+      "queryHashes": [
+        "ff0af2098d62"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "node.js",
+        "browser/headless",
+        "hyperframes-cli",
+        "website-to-hyperframes",
+        "preview/render/lint/inspect",
+        "capcut/canva/heygen",
+        "studio/editor",
+        "finalização/publicação"
+      ]
+    },
+    "memory:memory/2026-04-29.md:146:163": {
+      "key": "memory:memory/2026-04-29.md:146:163",
+      "path": "memory/2026-04-29.md",
+      "startLine": 146,
+      "endLine": 163,
+      "source": "memory",
+      "snippet": "- Conclusão: agora o tópico real de Reels está apontando para o João no runtime ativo com roteamento mais robusto. ## 02:37 UTC — Estado real após prova visual do tópico de Reels - Tiaro enviou print comprovando que a resposta ruim no tópico de Reels ainda estava saindo como **Clara (admin)**, não como João. - Isso invalida a hipótese de resolução ponta a ponta apenas com ajustes de prompt, runner, API e roteamento por tópico. - Conclusão operacional consolidada: - a API RapidAPI do scraper está funcional; - o runner do João foi corrigido; - o roteamento por tópico foi ajustado para `topicId 5365` e simplificado sem `conversationLabel`; - porém o **tráfego real do tópico continua se",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3533549040555954,
+      "maxScore": 0.3533549040555954,
+      "firstRecalledAt": "2026-05-05T20:56:46.490Z",
+      "lastRecalledAt": "2026-05-05T20:56:46.490Z",
+      "queryHashes": [
+        "13101d5c5485"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "conclusão",
+        "agora",
+        "tópico",
+        "real",
+        "reels",
+        "está",
+        "apontando",
+        "joão"
+      ]
+    },
+    "memory:memory/2026-05-05.md:60:79": {
+      "key": "memory:memory/2026-05-05.md:60:79",
+      "path": "memory/2026-05-05.md",
+      "startLine": 60,
+      "endLine": 79,
+      "source": "memory",
+      "snippet": "Observação: execução focada no delta de governança do João para evitar ruído de todo o diretório. Schema ajustado com campos obrigatórios de graphify (`file_type`, `source_file`, `relation`, `confidence`). Após auditoria, foi incluído também o arquivo `raw/RUNTIME-JOAO-SUBAGENTES.md` para registrar a sincronização da regra no `systemPromptOverride`. ## 2026-05-05 — Auditoria de sincronização runtime/cérebro Auditoria identificou que o cérebro e o graphify estavam consistentes, mas o `systemPromptOverride` runtime do agente `agente-reels-intel` ainda não citava explicitamente a nova biblioteca `JOAO-SUBAGENTES-SOB-DEMANDA.md`. Correção aplicada: - `/root/.openclaw/openclaw.json` atualizado",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3834163188934326,
+      "maxScore": 0.3834163188934326,
+      "firstRecalledAt": "2026-05-05T21:38:57.857Z",
+      "lastRecalledAt": "2026-05-05T21:38:57.857Z",
+      "queryHashes": [
+        "b0962c2eb163"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "file-type",
+        "source-file",
+        "raw/runtime-joao-subagentes.md",
+        "runtime/cérebro",
+        "agente-reels-intel",
+        "joao-subagentes-sob-demanda.md",
+        "openclaw/openclaw.json",
+        "observação"
+      ]
+    },
+    "memory:memory/2026-05-05.md:91:107": {
+      "key": "memory:memory/2026-05-05.md:91:107",
+      "path": "memory/2026-05-05.md",
+      "startLine": 91,
+      "endLine": 107,
+      "source": "memory",
+      "snippet": "- Melhor encaixe: produção programática de Reels, vídeos explicativos, overlays, legendas animadas, vídeos 9:16 e templates reutilizáveis para João. - Não substitui CapCut/Canva/HeyGen Studio/editor humano para finalização/publicação. - Não resolve avatar HeyGen sozinho; é motor de composição/renderização, não plataforma completa de avatar. Riscos/limitações: - versão 0.x, APIs ainda sujeitas a mudança; - dependência técnica e render pesado; - precisa guia visual IVS para não gerar peças desalinhadas; - não pode acessar dados de pacientes/leads; - conteúdo clínico sensível precisa validação da Dra. Daniely. Próximo passo recomendado: - Piloto controlado: criar 1 Reel vertical 1080x1920 de",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.392388841509819,
+      "maxScore": 0.392388841509819,
+      "firstRecalledAt": "2026-05-05T21:48:34.541Z",
+      "lastRecalledAt": "2026-05-05T21:48:34.541Z",
+      "queryHashes": [
+        "8e1a5c052a42"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "capcut/canva/heygen",
+        "studio/editor",
+        "finalização/publicação",
+        "composição/renderização",
+        "riscos/limitações",
+        "0.x",
+        "pacientes/leads",
+        "melhor"
+      ]
+    },
+    "memory:memory/2026-05-05.md:106:115": {
+      "key": "memory:memory/2026-05-05.md:106:115",
+      "path": "memory/2026-05-05.md",
+      "startLine": 106,
+      "endLine": 115,
+      "source": "memory",
+      "snippet": "- Tiaro enviou o HTML `modelo_apresentação---8960a26f-c93c-406b-8ba2-523ad48e8677.html`, modelo de apresentação do Programa de Acompanhamento Avançado para pacientes de primeira vez. - Pedido: passar pelo `conselho-growth-vital-slim` e propor mudanças significativas para elevar taxa de fechamento para mais de 95%, com foco em design e aprofundamento de SPIN Selling. - Direção estratégica aprovada: material atual é premium/bonito, mas precisa vender antes de apresentar o programa. V2 deve abrir com diagnóstico executivo, usar SPIN com perguntas de confirmação e conduzir paciente a concluir que acompanhamento é a decisão lógica. - Tiaro aprovou o relatório anterior: “o documento ficou ótimo. o",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3912716597318649,
+      "maxScore": 0.3912716597318649,
+      "firstRecalledAt": "2026-05-05T21:48:34.541Z",
+      "lastRecalledAt": "2026-05-05T21:48:34.541Z",
+      "queryHashes": [
+        "8e1a5c052a42"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "modelo-apresentação",
+        "conselho-growth-vital-slim",
+        "premium/bonito",
+        "tiaro",
+        "enviou",
+        "html",
+        "8960a26f",
+        "c93c"
+      ]
+    },
+    "memory:memory/2026-04-29.md:131:150": {
+      "key": "memory:memory/2026-04-29.md:131:150",
+      "path": "memory/2026-04-29.md",
+      "startLine": 131,
+      "endLine": 150,
+      "source": "memory",
+      "snippet": "- output gerado em `cerebro/areas/marketing/agentes/agente-reels-intel/outputs/20260429-021611-DXWyuCIkqiY.md` - Resultado: o João agora tem fluxo executável funcional para coleta real do reel pela rota canônica. ## 02:21 UTC — Causa-raiz final identificada e corrigida - O problema restante não era mais API, prompt nem runner: era o roteamento do tópico Telegram. - O tópico real em uso por Tiaro era `5365`, mas o roteamento ativo do OpenClaw ainda apontava o agente `agente-reels-intel` para o tópico antigo `768`. - Efeito: as mensagens no tópico atual não estavam entrando no agente João correto; por isso ele seguia respondendo fora do fluxo operacional esperado. - Correção aplicada: -",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3980566948652267,
+      "maxScore": 0.3980566948652267,
+      "firstRecalledAt": "2026-05-05T22:01:14.169Z",
+      "lastRecalledAt": "2026-05-05T22:01:14.169Z",
+      "queryHashes": [
+        "1fd3afac7dc6"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "causa-raiz",
+        "agente-reels-intel",
+        "output",
+        "gerado",
+        "cerebro",
+        "areas",
+        "marketing",
+        "agentes"
+      ]
+    },
+    "memory:memory/2026-05-05.md:135:145": {
+      "key": "memory:memory/2026-05-05.md:135:145",
+      "path": "memory/2026-05-05.md",
+      "startLine": 135,
+      "endLine": 145,
+      "source": "memory",
+      "snippet": "- Foram criados crons silenciosos para aprendizado externo da Clara: Instagram manhã 07:10, YouTube 10:30, X/Twitter 12:40, Instagram tarde 17:40 e revisão 21:20. - Foi identificado problema no cron antigo `agenda-diaria-whatsapp`: entrega `last` falhava por falta de alvo Telegram. Corrigido para `delivery.mode=none`, pois o envio real é por Z-API. - Credenciais Z-API estavam indevidamente presentes em prompt/skill/cron/sessões. Corrigido com criação de `/root/.openclaw/secure/zapi.env` com permissão `600`, criação do script seguro `/root/.openclaw/workspace/skills/agenda-diaria-whatsapp/scripts/send_agenda.py`, atualização da skill `agenda-diaria-whatsapp` e redação das ocorrências não-env.",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.6718617796897888,
+      "maxScore": 0.45213755965232844,
+      "firstRecalledAt": "2026-05-06T20:50:02.758Z",
+      "lastRecalledAt": "2026-05-06T21:28:53.924Z",
+      "queryHashes": [
+        "e7e6f81373f1",
+        "66c724f9e6a4",
+        "357286762545",
+        "0e84a62aa996"
+      ],
+      "recallDays": [
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "x/twitter",
+        "agenda-diaria-whatsapp",
+        "delivery.mode",
+        "z-api",
+        "prompt/skill/cron/sessões",
+        "openclaw/secure/zapi.env",
+        "não-env",
+        "foram"
+      ]
+    },
+    "memory:memory/2026-05-05.md:109:114": {
+      "key": "memory:memory/2026-05-05.md:109:114",
+      "path": "memory/2026-05-05.md",
+      "startLine": 109,
+      "endLine": 114,
+      "source": "memory",
+      "snippet": "- Resposta operacional já dada: HTML pronto/enviado com arquitetura completa da nova apresentação, preservação de exames/questionário, SPIN Selling aprofundado, componentes visuais novos, copy sugerida, estrutura técnica HTML/CSS/JS, critérios de aceite e checklist de implementação. ## 2026-05-05 — Clara: treinamento diário e RapidAPI Social Learning - Tiaro pediu que, com base no HTML `programa_treinamento_diario_clara_conselho_growth_2026_05_05`, o Conselho Growth criasse o prompt para implementar na Clara. - Foi definido o bloco operacional **RC-26 — Conversão Premium WhatsApp · Conselho Growth** para Clara, com foco em: mentalidade de closer concierge, SPIN Selling curto, uma pergunta po",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.2236765593290329,
+      "maxScore": 0.47234980463981624,
+      "firstRecalledAt": "2026-05-06T20:50:02.758Z",
+      "lastRecalledAt": "2026-05-06T21:28:53.924Z",
+      "queryHashes": [
+        "e7e6f81373f1",
+        "66c724f9e6a4",
+        "0e84a62aa996"
+      ],
+      "recallDays": [
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "pronto/enviado",
+        "exames/questionário",
+        "html/css/js",
+        "rc-26",
+        "resposta",
+        "operacional",
+        "dada",
+        "html"
+      ]
+    },
+    "memory:memory/2026-05-05.md:113:121": {
+      "key": "memory:memory/2026-05-05.md:113:121",
+      "path": "memory/2026-05-05.md",
+      "startLine": 113,
+      "endLine": 121,
+      "source": "memory",
+      "snippet": "- Tiaro pediu dar à Clara acesso à RapidAPI para conteúdos de Instagram e X/Twitter e definir o que/quando ela deve buscar para aprender diariamente. - Foi definida a regra **RC-27 — Aprendizado Diário com RapidAPI · Instagram e X/Twitter**: Clara deve usar conteúdos externos apenas como insumo de aprendizado e transformar em comportamento de atendimento premium; não deve copiar conteúdo externo diretamente. - Rotina RC-27 definida: 07:10 Instagram para vendas consultivas/WhatsApp/atendimento premium/clínica premium e extração de 1 pergunta melhor; 12:40 X/Twitter para posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente e extração de 1",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8412215858697891,
+      "maxScore": 0.44867914021015165,
+      "firstRecalledAt": "2026-05-06T20:50:09.311Z",
+      "lastRecalledAt": "2026-05-06T21:28:53.924Z",
+      "queryHashes": [
+        "66c724f9e6a4",
+        "0e84a62aa996"
+      ],
+      "recallDays": [
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "x/twitter",
+        "que/quando",
+        "rc-27",
+        "consultivas/whatsapp/atendimento",
+        "premium/clínica",
+        "tiaro",
+        "pediu",
+        "dar"
+      ]
+    },
+    "memory:memory/2026-05-05.md:116:136": {
+      "key": "memory:memory/2026-05-05.md:116:136",
+      "path": "memory/2026-05-05.md",
+      "startLine": 116,
+      "endLine": 136,
+      "source": "memory",
+      "snippet": "- Foi mencionada a criação operacional da skill `rapidapi-social-learning` e uso de chave RapidAPI em arquivo seguro, sem exposição no prompt/respostas. Antes de depender disso em produção, validar se a skill e crons existem fisicamente no workspace e se a chave está em arquivo seguro adequado. ## 2026-05-05 — Auditoria Graphify RC-25 da execução Clara/Maria/Conselho Growth Tiaro solicitou auditoria de tudo o que foi executado no dia nas memórias dos agentes e no cérebro, usando graphify, e correção do que estivesse errado. Diretório canônico da auditoria: - `/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/` Saídas: - `graphify-out/graph.json` - `",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7857893049716949,
+      "maxScore": 0.42869334816932675,
+      "firstRecalledAt": "2026-05-06T20:50:09.311Z",
+      "lastRecalledAt": "2026-05-06T21:28:53.924Z",
+      "queryHashes": [
+        "66c724f9e6a4",
+        "0e84a62aa996"
+      ],
+      "recallDays": [
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "rapidapi-social-learning",
+        "prompt/respostas",
+        "rc-25",
+        "clara/maria/conselho",
+        "graphify-out/graph.json",
+        "foi",
+        "mencionada",
+        "criação"
       ]
     }
   }

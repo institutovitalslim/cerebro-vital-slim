@@ -17,8 +17,10 @@
 ## DURANTE O ATENDIMENTO (A cada mensagem)
 
 ### 1. Velocidade
-- [ ] Respondi em menos de 5 minutos?
+- [ ] Respondi em até 1 minuto?
+- [ ] Se o prazo de 1 minuto estourou, escalei imediatamente para Tiaro e Liane?
 - [ ] Se demorou mais, pedi desculpas pela demora?
+- [ ] Confirmei se a conversa está sob automação ou sob atendimento humano antes de qualquer retomada?
 
 ### 2. Humanização
 - [ ] Usei o NOME do lead na mensagem?
@@ -50,11 +52,18 @@
 
 - [ ] **Fase 1** — Formalização enviada no final da conversa
 - [ ] **Fase 2** — Vídeo da clínica enviado 2 dias antes
-- [ ] **Fase 3** — Confirmação pedida 1 dia antes ("Digite SIM")
+- [ ] **Fase 3** — Confirmação pedida 1 dia antes com saídas claras: **Confirmo / Quero remarcar / Não vou conseguir**
+  - [ ] Aceitar também: Confirmado, pode, sim, ótimo, ok
+  - [ ] Se houver conflito de horário, atraso ou pedido de mudança: tratar como remarcação imediata
   - [ ] Se NÃO confirmou: LIGAR no final do dia
 - [ ] **Fase 4** — Vídeo da Dra. Daniely enviado 1 dia antes (após confirmação)
 - [ ] **Fase 5** — Lembrete no dia da consulta (manhã)
 - [ ] **Fase 6** — Segundo lembrete 1 hora antes
+
+## ATIVO OPERACIONAL DE APOIO
+- [ ] Vídeo de bioimpedância disponível para reforço do atendimento quando fizer sentido
+- [ ] Caminho operacional atual: `/root/.openclaw/media/outbound/clara-assets/video-bioimpedancia-ivs.mp4`
+- [ ] Usar principalmente para explicar tecnologia, diagnóstico, evolução e seriedade do acompanhamento
 
 ---
 
@@ -84,7 +93,10 @@
 - ❌ **NUNCA** encerrar conversa sem tentar entender a necessidade real
 - ❌ **NUNCA** responder sem perguntar algo
 - ❌ **NUNCA** enviar mensagem gigante (vomitar informação)
-- ❌ **NUNCA** demorar mais de 5 minutos para responder sem justificativa
+- ❌ **NUNCA** demorar mais de 1 minuto para a primeira resposta do lead inbound
+- ❌ **NUNCA** deixar de escalar para Tiaro e Liane quando o SLA de 1 minuto estourar
+- ❌ **NUNCA** reativar a Clara em conversa que está sob atendimento humano sem liberação explícita
+- ❌ **NUNCA** permitir disputa de ownership entre humano e automação
 - ❌ **NUNCA** tratar lead frio como desqualificado sem tentar reencontro
 - ❌ **NUNCA** deixar de preencher CRM após atendimento
 
@@ -94,6 +106,7 @@
 
 - [ ] Preenchi o CRM/planilha (nome, contato, status, objeção, próxima ação)
 - [ ] Arquivei a conversa na etiqueta correta (Quente/Morno/Frio/Agendado)
+- [ ] Se houve atendimento humano, garanti `manual_assume` até a liberação segura
 - [ ] Programei o follow-up se necessário
 - [ ] Atualizei métricas (lead respondido, agendado, etc.)
 

@@ -36,13 +36,40 @@
 
 ## Item adicionado em 03/05/2026
 
-### 7. Notion — João com ferramenta instalada, mas sem credencial habilitada
-**Risco original:** Tiaro solicita que João acesse Notion, mas o token/permissão não está configurado.
-**Status atual:** **vivo/dependente de credencial**. A skill `notion_reader.py` existe. O bloqueio é ausência de `NOTION_TOKEN` e eventual permissão/página compartilhada.
-**Próximo passo:** (a) Tiaro gerar token de integração Notion; (b) compartilhar página/database com a integração; (c) validar leitura em tópico de Operações ou Marketing.
-**Fonte:** `memory/2026-05-02.md`
+### 7. Notion — governança de bunkers e duplicidades após validação de acesso
+**Risco original:** o João até consegue ler o Notion, mas sem governança oficial de quais bunkers consultar por padrão e como tratar páginas variantes/duplicadas a operação pode voltar a dispersar.
+**Status atual:** **vivo/monitoramento contínuo**. A leitura real já foi validada com token funcional e páginas compartilhadas; o ponto aberto passou a ser governança de uso, mapa oficial dos bunkers e tratamento de duplicidades.
+**Próximo passo:** manter lista canônica dos bunkers/páginas prioritárias no arquivo operacional do João e decidir se variantes devem ser mantidas ou arquivadas.
+**Fonte:** `cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-FONTES-E-FERRAMENTAS.md`
 
-### 8. Tópico "Pacientes" — topic_id ainda não confirmado
-**Risco original:** tópico existe conceitualmente, mas não está mapeado numericamente.
-**Status atual:** **vivo/pendente de Tiaro**. Mapeado no painel como A4.
-**Fonte:** `cerebro/empresa/projetos/pendencias.md`
+## Itens adicionados em 05/05/2026
+
+### 8. Avaliação de ferramentas externas — diferença entre teste, homologação e adoção
+**Risco original:** pedido do tipo "olha essa ferramenta/repo/skill" virar instalação ou adoção canônica sem validação, ou um teste em sandbox ser confundido com aprovação operacional.
+**Status atual:** **vivo/monitoramento contínuo**. O padrão foi reforçado após avaliações de prompt-master, 21st.dev e Hyperframes/HeyGen: ferramenta externa pode ser útil como referência ou piloto sem virar skill oficial.
+**Próximo passo:** em toda avaliação, registrar veredito, riscos, requisitos, status de homologação e menor piloto seguro.
+**Fonte:** `cerebro/operacional/INDEX-PEDIDOS-RECORRENTES.md`
+
+### 9. Tokens/segredos em URLs recebidas pelo chat
+**Risco original:** links com parâmetros sensíveis, como `mcp_token`, serem copiados para relatório, memória ou comandos e exporem credenciais.
+**Status atual:** **vivo/monitoramento contínuo**. Token recebido deve ser tratado como segredo potencial: não reutilizar, não expor e recomendar rotação quando parecer vinculado a ambiente real.
+**Próximo passo:** manter higiene de segredo em avaliações técnicas, principalmente MCPs, Replit, Notion, Lovable, HeyGen e ferramentas de automação.
+**Fonte:** memória de 2026-05-05 sobre avaliação Hyperframes/HeyGen.
+
+### 10. Subagentes sob demanda do João vs agentes fixos
+**Risco original:** transformar repertório de especialidades em 12 agentes fixos antes de haver demanda real suficiente, aumentando complexidade e manutenção.
+**Status atual:** **resolvido como regra operacional, com monitoramento de promoção**. João usa biblioteca interna sob demanda; especialidade só vira agente fixo após 5+ demandas reais e aprovação do Tiaro.
+**Próximo passo:** observar uso real por especialidade e registrar evidência antes de qualquer promoção.
+**Fonte:** `cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md`
+
+### 11. Conselho Growth — parecer aprovado precisa virar especificação/pendência
+**Risco original:** conselho produzir diagnóstico ótimo, mas a execução ficar dispersa em HTML/relatório sem porta operacional.
+**Status atual:** **vivo/monitoramento contínuo**. Em 05/05, a avaliação da apresentação V2.2 do Erick gerou cortes cirúrgicos para V2.3; isso deve ficar em pendência até implementação/validação.
+**Próximo passo:** quando Tiaro aprovar parecer do Conselho Growth, transformar em briefing executável, checklist ou item de backlog.
+**Fonte:** `memory/2026-05-05.md` e `cerebro/operacional/INDEX-PEDIDOS-RECORRENTES.md`.
+
+### 12. Aprendizado externo da Clara — cron útil vs regra canônica
+**Risco original:** conteúdos de Instagram/YouTube/X virarem regra fixa ou linguagem copiada sem validação.
+**Status atual:** **vivo/monitoramento contínuo**. RC-27/RC-28/RC-29 definem aprendizado externo como insumo, com filtro anti-guru e classificação antes de promoção.
+**Próximo passo:** revisar relatórios do orquestrador e promover apenas aprendizados validados por Maria/Tiaro/RC-25 quando necessário.
+**Fonte:** `memory/2026-05-05.md` e skill `clara-learning-orchestrator`.

@@ -1,0 +1,22 @@
+{
+  "sent": [
+    {
+      "phone": "5571995583056",
+      "nome": "DAVI CARVALHO RAMOS MELO",
+      "agendamentoId": 458743954,
+      "dataHoraInicio": "05-05-2026T14:00",
+      "messageId": "A727F4CB2BD043CD5A2A",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571999543781",
+      "nome": "JOYCE ANDREA SANTOS PARENTE BEZERRA ",
+      "agendamentoId": 458326978,
+      "dataHoraInicio": "05-05-2026T17:00",
+      "messageId": "3EB048274ED24AA3AA2F99",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

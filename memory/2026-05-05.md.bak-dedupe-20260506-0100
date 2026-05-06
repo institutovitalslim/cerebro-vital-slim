@@ -1,0 +1,343 @@
+## 2026-05-05 — Modelo de subagentes sob demanda do João
+
+Tiaro aprovou seguir com o modelo em que João incorpora o soul/repertório dos perfis úteis do `agency-agents` como biblioteca interna de especialidades, em vez de criar 12 agentes fixos no OpenClaw neste momento.
+
+Decisão canônica operacional:
+- João permanece como agente principal de marketing/web.
+- Subagentes são acionados sob demanda e não falam diretamente com Tiaro.
+- Fluxo recomendado: `Tiaro → João → subagente sob demanda → João → Tiaro`.
+- Critério de promoção para agente fixo: uso em 5+ demandas reais, ganho operacional claro, redução de retrabalho, sem conflito com governança IVS, entregas melhores que João sozinho e aprovação do Tiaro.
+
+Arquivo criado:
+- `/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md`
+
+Especialidades registradas:
+- `frontend-developer`
+- `ui-designer`
+- `ux-architect`
+- `accessibility-auditor`
+- `performance-benchmarker`
+- `api-tester`
+- `reality-checker`
+- `tool-evaluator`
+- `project-shepherd`
+- `social-media-strategist`
+- `instagram-curator`
+- `short-video-coach`
+
+Guardrails principais:
+- subagente não atende paciente/lead;
+- não substitui Maria, Clara, Dra. Daniely ou regras do cérebro;
+- não decide orçamento, contratação, stack oficial, compliance ou estratégia sem validação;
+- não instala dependência, altera produção ou muda arquitetura sem aprovação;
+- João consolida e valida a resposta final.
+
+## 2026-05-05 — Graphify RC-25 concluído para subagentes sob demanda do João
+
+Consolidação via graphify realizada para a decisão de não criar 12 agentes fixos e implementar no João uma biblioteca de subagentes sob demanda baseada no soul dos perfis úteis do `agency-agents`.
+
+Diretório de saída:
+- `/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/`
+
+Arquivos de saída:
+- `graphify-out/graph.json`
+- `graphify-out/graph.html`
+- `graphify-out/graph.graphml`
+- `graphify-out/GRAPH_REPORT.md`
+- `graphify-out/AUDIT.md`
+- `extraction.json`
+
+Métricas iniciais:
+- nodes=24
+- edges=45
+- communities=4
+
+Métricas após auditoria de runtime:
+- nodes=25
+- edges=49
+- communities=4
+
+Observação: execução focada no delta de governança do João para evitar ruído de todo o diretório. Schema ajustado com campos obrigatórios de graphify (`file_type`, `source_file`, `relation`, `confidence`). Após auditoria, foi incluído também o arquivo `raw/RUNTIME-JOAO-SUBAGENTES.md` para registrar a sincronização da regra no `systemPromptOverride`.
+
+## 2026-05-05 — Auditoria de sincronização runtime/cérebro
+
+Auditoria identificou que o cérebro e o graphify estavam consistentes, mas o `systemPromptOverride` runtime do agente `agente-reels-intel` ainda não citava explicitamente a nova biblioteca `JOAO-SUBAGENTES-SOB-DEMANDA.md`.
+
+Correção aplicada:
+- `/root/.openclaw/openclaw.json` atualizado no agente `agente-reels-intel` com a regra `REGRA DE SUBAGENTES SOB DEMANDA`.
+
+Regra runtime adicionada:
+- João não deve criar nem depender de 12 agentes fixos.
+- Deve usar `cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md` como repertório interno de especialidades.
+- Pode acionar subagente sob demanda via briefing controlado quando a demanda exigir.
+- João valida, sintetiza e responde ao Tiaro.
+- Fluxo padrão: `Tiaro → João → subagente sob demanda → João → Tiaro`.
+- Subagente não atende paciente/lead, não decide estratégia/compliance/orçamento/stack oficial, não altera produção e não fala diretamente com Tiaro salvo autorização explícita.
+
+Status após correção: cérebro, memória e configuração runtime estão alinhados.
+## 2026-05-05 — Avaliação Hyperframes / HeyGen para operação IVS
+
+Tiaro solicitou avaliação da skill/repositório `heygen-com/hyperframes`. O link recebido continha parâmetro `mcp_token`; tratado como segredo potencial, sem reutilização ou exposição operacional. Recomendação registrada: revogar/rotacionar o token se ele estiver vinculado a conta ou ambiente real.
+
+Resultado da avaliação:
+- Hyperframes é framework open-source da HeyGen para criar e renderizar vídeos a partir de HTML/CSS/GSAP, com suporte a agentes.
+- Licença: Apache 2.0.
+- Requisitos: Node.js >= 22 e FFmpeg.
+- Renderização baseada em browser/headless Chrome e FFmpeg.
+- Inclui skills como `hyperframes`, `hyperframes-cli`, `website-to-hyperframes`, adaptadores de animação e comandos para preview/render/lint/inspect.
+
+Veredito operacional:
+- Aprovar somente teste em sandbox, não instalar ainda como skill oficial IVS.
+- Melhor encaixe: produção programática de Reels, vídeos explicativos, overlays, legendas animadas, vídeos 9:16 e templates reutilizáveis para João.
+- Não substitui CapCut/Canva/HeyGen Studio/editor humano para finalização/publicação.
+- Não resolve avatar HeyGen sozinho; é motor de composição/renderização, não plataforma completa de avatar.
+
+Riscos/limitações:
+- versão 0.x, APIs ainda sujeitas a mudança;
+- dependência técnica e render pesado;
+- precisa guia visual IVS para não gerar peças desalinhadas;
+- não pode acessar dados de pacientes/leads;
+- conteúdo clínico sensível precisa validação da Dra. Daniely.
+
+Próximo passo recomendado:
+- Piloto controlado: criar 1 Reel vertical 1080x1920 de 15 segundos, sem dados de paciente, com identidade IVS, render MP4, avaliando qualidade visual, tempo de geração, facilidade de ajuste pelo João, peso do render e reaproveitamento como template.
+
+## 2026-05-05 — Conselho Growth / Apresentação Programa de Acompanhamento Avançado
+- Tiaro enviou o HTML `modelo_apresentação---8960a26f-c93c-406b-8ba2-523ad48e8677.html`, modelo de apresentação do Programa de Acompanhamento Avançado para pacientes de primeira vez.
+- Pedido: passar pelo `conselho-growth-vital-slim` e propor mudanças significativas para elevar taxa de fechamento para mais de 95%, com foco em design e aprofundamento de SPIN Selling.
+- Direção estratégica aprovada: material atual é premium/bonito, mas precisa vender antes de apresentar o programa. V2 deve abrir com diagnóstico executivo, usar SPIN com perguntas de confirmação e conduzir paciente a concluir que acompanhamento é a decisão lógica.
+- Tiaro aprovou o relatório anterior: “o documento ficou ótimo. o conselho foi cirúrgico”.
+- Novo pedido de Tiaro: gerar uma apresentação detalhada em HTML com todas as alterações necessárias, no máximo de detalhes possível, para entregar ao Claude Code desenvolver.
+- Requisito importante de Tiaro para esta especificação: por ser atendimento médico, manter e contextualizar resultados dos exames e informações do questionário como base de argumentação para a médica.
+- Resposta operacional já dada: HTML pronto/enviado com arquitetura completa da nova apresentação, preservação de exames/questionário, SPIN Selling aprofundado, componentes visuais novos, copy sugerida, estrutura técnica HTML/CSS/JS, critérios de aceite e checklist de implementação.
+
+
+## 2026-05-05 — Clara: treinamento diário e RapidAPI Social Learning
+- Tiaro pediu que, com base no HTML `programa_treinamento_diario_clara_conselho_growth_2026_05_05`, o Conselho Growth criasse o prompt para implementar na Clara.
+- Foi definido o bloco operacional **RC-26 — Conversão Premium WhatsApp · Conselho Growth** para Clara, com foco em: mentalidade de closer concierge, SPIN Selling curto, uma pergunta por vez, não falar preço cedo, condução para agendamento, scripts de objeções, follow-up premium, checklist mental diário e métrica interna de qualidade por conversa.
+- Tiaro pediu dar à Clara acesso à RapidAPI para conteúdos de Instagram e X/Twitter e definir o que/quando ela deve buscar para aprender diariamente.
+- Foi definida a regra **RC-27 — Aprendizado Diário com RapidAPI · Instagram e X/Twitter**: Clara deve usar conteúdos externos apenas como insumo de aprendizado e transformar em comportamento de atendimento premium; não deve copiar conteúdo externo diretamente.
+- Rotina RC-27 definida: 07:10 Instagram para vendas consultivas/WhatsApp/atendimento premium/clínica premium e extração de 1 pergunta melhor; 12:40 X/Twitter para posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente e extração de 1 frase/ângulo; 17:40 Instagram para SPIN/negociação/social selling e criação de script WhatsApp antes/depois; 21:20 revisão cruzando aprendizados externos com conversas do dia e classificando aplicar amanhã/descartar/testar 3 dias/propor atualização de memória.
+- Foi mencionada a criação operacional da skill `rapidapi-social-learning` e uso de chave RapidAPI em arquivo seguro, sem exposição no prompt/respostas. Antes de depender disso em produção, validar se a skill e crons existem fisicamente no workspace e se a chave está em arquivo seguro adequado.
+
+## 2026-05-05 — Auditoria Graphify RC-25 da execução Clara/Maria/Conselho Growth
+
+Tiaro solicitou auditoria de tudo o que foi executado no dia nas memórias dos agentes e no cérebro, usando graphify, e correção do que estivesse errado.
+
+Diretório canônico da auditoria:
+- `/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/`
+
+Saídas:
+- `graphify-out/graph.json`
+- `graphify-out/GRAPH_REPORT.md`
+- `graphify-out/AUDIT.md`
+- `extraction.json`
+- `.graphify_detect.json`
+
+Achados e correções:
+- A memória estava incompleta: registrava RC-26 e RC-27, mas faltavam RC-28, RC-29, skill `clara-learning-orchestrator` e crons silenciosos de aprendizado. Corrigido nesta consolidação.
+- Runtime da Clara auditado: RC-26, RC-27, RC-28 e RC-29 aparecem uma vez cada, sem duplicação.
+- Foi criado e validado o orquestrador `clara-learning-orchestrator`, com saídas em `/root/.openclaw/reports/clara-learning/`.
+- Foram criados crons silenciosos para aprendizado externo da Clara: Instagram manhã 07:10, YouTube 10:30, X/Twitter 12:40, Instagram tarde 17:40 e revisão 21:20.
+- Foi identificado problema no cron antigo `agenda-diaria-whatsapp`: entrega `last` falhava por falta de alvo Telegram. Corrigido para `delivery.mode=none`, pois o envio real é por Z-API.
+- Credenciais Z-API estavam indevidamente presentes em prompt/skill/cron/sessões. Corrigido com criação de `/root/.openclaw/secure/zapi.env` com permissão `600`, criação do script seguro `/root/.openclaw/workspace/skills/agenda-diaria-whatsapp/scripts/send_agenda.py`, atualização da skill `agenda-diaria-whatsapp` e redação das ocorrências não-env.
+- Token/URL Picsart MCP foi tratado como segredo e ocorrências não-env foram redigidas; wrapper Picsart mantém sanitização de saída.
+
+Status final: cérebro, memória diária, runtime da Clara e crons principais foram alinhados. Próximo cuidado operacional: não registrar tokens ou URLs completas com token em prompts, sessões, relatórios ou skills; credenciais devem permanecer em `/root/.openclaw/secure/*.env` ou arquivo operacional com permissão restrita.
+
+## 2026-05-05 — Clara RC-28 e RC-29 consolidados
+
+RC-28 — Aprendizado com YouTube:
+- Clara deve usar YouTube como fonte de aprendizado operacional, não como fonte clínica.
+- Calendário semanal: segunda Patrick Dang; terça Alex Hormozi; quarta Gong; quinta Chris Voss/Shep Hyken; sexta Camila Porto/Thiago Concer/G4; sábado Grant Cardone/Jordan Belfort com filtro ético; domingo Will Guidara/HubSpot.
+- Entrega esperada: ideia central, aplicação no WhatsApp, script antes/depois, métrica e risco.
+
+RC-29 — Governança do Aprendizado Externo:
+- Nenhum aprendizado externo vira regra fixa automaticamente.
+- Classificação obrigatória: aplicar amanhã, testar por 3 dias, descartar ou propor para memória/cérebro.
+- Atualização de memória/cérebro continua exigindo Maria/Tiaro e RC-25/graphify.
+- Filtro anti-guru: rejeitar agressividade comercial, promessa de resultado, urgência falsa, desconto como argumento principal, linguagem de infoproduto e recomendação clínica sem validação.
+- Placar de qualidade: primeira resposta mais humana, mais leads conduzidos para dor, menos preço cedo, mais convites para avaliação, follow-ups qualificados e menos conversas sem próximo passo.
+## 2026-05-05 — Modelo de subagentes sob demanda do João
+
+Tiaro aprovou seguir com o modelo em que João incorpora o soul/repertório dos perfis úteis do `agency-agents` como biblioteca interna de especialidades, em vez de criar 12 agentes fixos no OpenClaw neste momento.
+
+Decisão canônica operacional:
+- João permanece como agente principal de marketing/web.
+- Subagentes são acionados sob demanda e não falam diretamente com Tiaro.
+- Fluxo recomendado: `Tiaro → João → subagente sob demanda → João → Tiaro`.
+- Critério de promoção para agente fixo: uso em 5+ demandas reais, ganho operacional claro, redução de retrabalho, sem conflito com governança IVS, entregas melhores que João sozinho e aprovação do Tiaro.
+
+Arquivo criado:
+- `/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md`
+
+Especialidades registradas:
+- `frontend-developer`
+- `ui-designer`
+- `ux-architect`
+- `accessibility-auditor`
+- `performance-benchmarker`
+- `api-tester`
+- `reality-checker`
+- `tool-evaluator`
+- `project-shepherd`
+- `social-media-strategist`
+- `instagram-curator`
+- `short-video-coach`
+
+Guardrails principais:
+- subagente não atende paciente/lead;
+- não substitui Maria, Clara, Dra. Daniely ou regras do cérebro;
+- não decide orçamento, contratação, stack oficial, compliance ou estratégia sem validação;
+- não instala dependência, altera produção ou muda arquitetura sem aprovação;
+- João consolida e valida a resposta final.
+
+## 2026-05-05 — Graphify RC-25 concluído para subagentes sob demanda do João
+
+Consolidação via graphify realizada para a decisão de não criar 12 agentes fixos e implementar no João uma biblioteca de subagentes sob demanda baseada no soul dos perfis úteis do `agency-agents`.
+
+Diretório de saída:
+- `/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/`
+
+Arquivos de saída:
+- `graphify-out/graph.json`
+- `graphify-out/graph.html`
+- `graphify-out/graph.graphml`
+- `graphify-out/GRAPH_REPORT.md`
+- `graphify-out/AUDIT.md`
+- `extraction.json`
+
+Métricas iniciais:
+- nodes=24
+- edges=45
+- communities=4
+
+Métricas após auditoria de runtime:
+- nodes=25
+- edges=49
+- communities=4
+
+Observação: execução focada no delta de governança do João para evitar ruído de todo o diretório. Schema ajustado com campos obrigatórios de graphify (`file_type`, `source_file`, `relation`, `confidence`). Após auditoria, foi incluído também o arquivo `raw/RUNTIME-JOAO-SUBAGENTES.md` para registrar a sincronização da regra no `systemPromptOverride`.
+
+## 2026-05-05 — Auditoria de sincronização runtime/cérebro
+
+Auditoria identificou que o cérebro e o graphify estavam consistentes, mas o `systemPromptOverride` runtime do agente `agente-reels-intel` ainda não citava explicitamente a nova biblioteca `JOAO-SUBAGENTES-SOB-DEMANDA.md`.
+
+Correção aplicada:
+- `/root/.openclaw/openclaw.json` atualizado no agente `agente-reels-intel` com a regra `REGRA DE SUBAGENTES SOB DEMANDA`.
+
+Regra runtime adicionada:
+- João não deve criar nem depender de 12 agentes fixos.
+- Deve usar `cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md` como repertório interno de especialidades.
+- Pode acionar subagente sob demanda via briefing controlado quando a demanda exigir.
+- João valida, sintetiza e responde ao Tiaro.
+- Fluxo padrão: `Tiaro → João → subagente sob demanda → João → Tiaro`.
+- Subagente não atende paciente/lead, não decide estratégia/compliance/orçamento/stack oficial, não altera produção e não fala diretamente com Tiaro salvo autorização explícita.
+
+Status após correção: cérebro, memória e configuração runtime estão alinhados.
+## 2026-05-05 — Avaliação Hyperframes / HeyGen para operação IVS
+
+Tiaro solicitou avaliação da skill/repositório `heygen-com/hyperframes`. O link recebido continha parâmetro `mcp_token`; tratado como segredo potencial, sem reutilização ou exposição operacional. Recomendação registrada: revogar/rotacionar o token se ele estiver vinculado a conta ou ambiente real.
+
+Resultado da avaliação:
+- Hyperframes é framework open-source da HeyGen para criar e renderizar vídeos a partir de HTML/CSS/GSAP, com suporte a agentes.
+- Licença: Apache 2.0.
+- Requisitos: Node.js >= 22 e FFmpeg.
+- Renderização baseada em browser/headless Chrome e FFmpeg.
+- Inclui skills como `hyperframes`, `hyperframes-cli`, `website-to-hyperframes`, adaptadores de animação e comandos para preview/render/lint/inspect.
+
+Veredito operacional:
+- Aprovar somente teste em sandbox, não instalar ainda como skill oficial IVS.
+- Melhor encaixe: produção programática de Reels, vídeos explicativos, overlays, legendas animadas, vídeos 9:16 e templates reutilizáveis para João.
+- Não substitui CapCut/Canva/HeyGen Studio/editor humano para finalização/publicação.
+- Não resolve avatar HeyGen sozinho; é motor de composição/renderização, não plataforma completa de avatar.
+
+Riscos/limitações:
+- versão 0.x, APIs ainda sujeitas a mudança;
+- dependência técnica e render pesado;
+- precisa guia visual IVS para não gerar peças desalinhadas;
+- não pode acessar dados de pacientes/leads;
+- conteúdo clínico sensível precisa validação da Dra. Daniely.
+
+Próximo passo recomendado:
+- Piloto controlado: criar 1 Reel vertical 1080x1920 de 15 segundos, sem dados de paciente, com identidade IVS, render MP4, avaliando qualidade visual, tempo de geração, facilidade de ajuste pelo João, peso do render e reaproveitamento como template.
+
+## 2026-05-05 — Conselho Growth / Apresentação Programa de Acompanhamento Avançado
+- Tiaro enviou o HTML `modelo_apresentação---8960a26f-c93c-406b-8ba2-523ad48e8677.html`, modelo de apresentação do Programa de Acompanhamento Avançado para pacientes de primeira vez.
+- Pedido: passar pelo `conselho-growth-vital-slim` e propor mudanças significativas para elevar taxa de fechamento para mais de 95%, com foco em design e aprofundamento de SPIN Selling.
+- Direção estratégica aprovada: material atual é premium/bonito, mas precisa vender antes de apresentar o programa. V2 deve abrir com diagnóstico executivo, usar SPIN com perguntas de confirmação e conduzir paciente a concluir que acompanhamento é a decisão lógica.
+- Tiaro aprovou o relatório anterior: “o documento ficou ótimo. o conselho foi cirúrgico”.
+- Novo pedido de Tiaro: gerar uma apresentação detalhada em HTML com todas as alterações necessárias, no máximo de detalhes possível, para entregar ao Claude Code desenvolver.
+- Requisito importante de Tiaro para esta especificação: por ser atendimento médico, manter e contextualizar resultados dos exames e informações do questionário como base de argumentação para a médica.
+- Resposta operacional já dada: HTML pronto/enviado com arquitetura completa da nova apresentação, preservação de exames/questionário, SPIN Selling aprofundado, componentes visuais novos, copy sugerida, estrutura técnica HTML/CSS/JS, critérios de aceite e checklist de implementação.
+
+
+## 2026-05-05 — Clara: treinamento diário e RapidAPI Social Learning
+- Tiaro pediu que, com base no HTML `programa_treinamento_diario_clara_conselho_growth_2026_05_05`, o Conselho Growth criasse o prompt para implementar na Clara.
+- Foi definido o bloco operacional **RC-26 — Conversão Premium WhatsApp · Conselho Growth** para Clara, com foco em: mentalidade de closer concierge, SPIN Selling curto, uma pergunta por vez, não falar preço cedo, condução para agendamento, scripts de objeções, follow-up premium, checklist mental diário e métrica interna de qualidade por conversa.
+- Tiaro pediu dar à Clara acesso à RapidAPI para conteúdos de Instagram e X/Twitter e definir o que/quando ela deve buscar para aprender diariamente.
+- Foi definida a regra **RC-27 — Aprendizado Diário com RapidAPI · Instagram e X/Twitter**: Clara deve usar conteúdos externos apenas como insumo de aprendizado e transformar em comportamento de atendimento premium; não deve copiar conteúdo externo diretamente.
+- Rotina RC-27 definida: 07:10 Instagram para vendas consultivas/WhatsApp/atendimento premium/clínica premium e extração de 1 pergunta melhor; 12:40 X/Twitter para posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente e extração de 1 frase/ângulo; 17:40 Instagram para SPIN/negociação/social selling e criação de script WhatsApp antes/depois; 21:20 revisão cruzando aprendizados externos com conversas do dia e classificando aplicar amanhã/descartar/testar 3 dias/propor atualização de memória.
+- Foi mencionada a criação operacional da skill `rapidapi-social-learning` e uso de chave RapidAPI em arquivo seguro, sem exposição no prompt/respostas. Antes de depender disso em produção, validar se a skill e crons existem fisicamente no workspace e se a chave está em arquivo seguro adequado.
+
+## 2026-05-05 — Auditoria Graphify RC-25 da execução Clara/Maria/Conselho Growth
+
+Tiaro solicitou auditoria de tudo o que foi executado no dia nas memórias dos agentes e no cérebro, usando graphify, e correção do que estivesse errado.
+
+Diretório canônico da auditoria:
+- `/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/`
+
+Saídas:
+- `graphify-out/graph.json`
+- `graphify-out/GRAPH_REPORT.md`
+- `graphify-out/AUDIT.md`
+- `extraction.json`
+- `.graphify_detect.json`
+
+Achados e correções:
+- A memória estava incompleta: registrava RC-26 e RC-27, mas faltavam RC-28, RC-29, skill `clara-learning-orchestrator` e crons silenciosos de aprendizado. Corrigido nesta consolidação.
+- Runtime da Clara auditado: RC-26, RC-27, RC-28 e RC-29 aparecem uma vez cada, sem duplicação.
+- Foi criado e validado o orquestrador `clara-learning-orchestrator`, com saídas em `/root/.openclaw/reports/clara-learning/`.
+- Foram criados crons silenciosos para aprendizado externo da Clara: Instagram manhã 07:10, YouTube 10:30, X/Twitter 12:40, Instagram tarde 17:40 e revisão 21:20.
+- Foi identificado problema no cron antigo `agenda-diaria-whatsapp`: entrega `last` falhava por falta de alvo Telegram. Corrigido para `delivery.mode=none`, pois o envio real é por Z-API.
+- Credenciais Z-API estavam indevidamente presentes em prompt/skill/cron/sessões. Corrigido com criação de `/root/.openclaw/secure/zapi.env` com permissão `600`, criação do script seguro `/root/.openclaw/workspace/skills/agenda-diaria-whatsapp/scripts/send_agenda.py`, atualização da skill `agenda-diaria-whatsapp` e redação das ocorrências não-env.
+- Token/URL Picsart MCP foi tratado como segredo e ocorrências não-env foram redigidas; wrapper Picsart mantém sanitização de saída.
+
+Status final: cérebro, memória diária, runtime da Clara e crons principais foram alinhados. Próximo cuidado operacional: não registrar tokens ou URLs completas com token em prompts, sessões, relatórios ou skills; credenciais devem permanecer em `/root/.openclaw/secure/*.env` ou arquivo operacional com permissão restrita.
+
+## 2026-05-05 — Clara RC-28 e RC-29 consolidados
+
+RC-28 — Aprendizado com YouTube:
+- Clara deve usar YouTube como fonte de aprendizado operacional, não como fonte clínica.
+- Calendário semanal: segunda Patrick Dang; terça Alex Hormozi; quarta Gong; quinta Chris Voss/Shep Hyken; sexta Camila Porto/Thiago Concer/G4; sábado Grant Cardone/Jordan Belfort com filtro ético; domingo Will Guidara/HubSpot.
+- Entrega esperada: ideia central, aplicação no WhatsApp, script antes/depois, métrica e risco.
+
+RC-29 — Governança do Aprendizado Externo:
+- Nenhum aprendizado externo vira regra fixa automaticamente.
+- Classificação obrigatória: aplicar amanhã, testar por 3 dias, descartar ou propor para memória/cérebro.
+- Atualização de memória/cérebro continua exigindo Maria/Tiaro e RC-25/graphify.
+- Filtro anti-guru: rejeitar agressividade comercial, promessa de resultado, urgência falsa, desconto como argumento principal, linguagem de infoproduto e recomendação clínica sem validação.
+- Placar de qualidade: primeira resposta mais humana, mais leads conduzidos para dor, menos preço cedo, mais convites para avaliação, follow-ups qualificados e menos conversas sem próximo passo.
+
+## 2026-05-05 — Conselho Growth avaliou apresentação V2.2 do paciente Erick
+
+Tiaro enviou a nova versão HTML `v2.2---65ad16b2-e067-43ca-a64d-f56a3d0487e1.html` e sinalizou que ainda parecia prolixa, com frases repetidas sem ganho objetivo. A resposta operacional reportada a Tiaro confirmou o diagnóstico: V2.2 melhorou tecnicamente, mas ficou redundante e deve perder 25% a 35% do texto.
+
+Parecer consolidado:
+- Não adicionar novas seções; cortar e enxugar.
+- Problema central: a apresentação repete em várias áreas a mesma tese — não é tentativa isolada, é acompanhamento com leitura clínica e ajustes.
+- Prioridade para V2.3: fluidez para condução médica, redução de redundância e preservação de ética/premium sem alarmismo.
+
+Instruções cirúrgicas recomendadas para Claude Code:
+1. Reduzir hero, mantendo título e dados do paciente; remover parágrafo introdutório explicativo.
+2. Enxugar diagnóstico executivo e remover redundância entre tese clínica e “por que isso muda a estratégia”.
+3. Em alavancas, remover títulos/frases repetidas como “Como ler este marcador” e “Marcador fora do alvo funcional...”; cada card deve ter nome, valor, referência, interpretação em 1 frase, conexão com sintoma e pergunta.
+4. Reescrever SPIN para metade do tamanho: título, 1 parágrafo curto e 1 pergunta por bloco.
+5. Remover ou condensar a seção “O que provavelmente continua igual se nada mudar” para 1 box de 3 bullets.
+6. Consolidar “O que está incluído” de 8 cards para 4: médico+biomarcadores, nutrição+movimento, enfermagem+suporte, reavaliações+manutenção.
+7. Corrigir definitivamente qualquer duplicidade “Antes/Depois” nos cases.
+8. Reescrever CTA frame para: “A decisão é simples: seguir tentando sozinho ou atravessar os próximos 180 dias com leitura clínica, equipe e ajustes.”
+9. Reescrever CTA alternativo para: “Prefiro decidir depois. Podemos revisitar quando fizer sentido.”
+10. Reduzir repetição de “180 dias”, mantendo apenas no título do programa, CTA final e timeline.
+
+Estrutura final recomendada: Hero curto; Diagnóstico executivo; Espelho do caso; Alavancas críticas; SPIN guiado enxuto; Mecanismo do acompanhamento; Prova pelo processo; Programa em fases; Inclusos consolidado; Objeções; Checklist; CTA final; Apêndice técnico.

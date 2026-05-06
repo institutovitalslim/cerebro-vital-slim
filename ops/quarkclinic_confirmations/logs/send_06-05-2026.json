@@ -1,0 +1,22 @@
+{
+  "sent": [
+    {
+      "phone": "5571996800509",
+      "nome": "MARIO GOMES DE ABREU FILHO",
+      "agendamentoId": 458945647,
+      "dataHoraInicio": "06-05-2026T17:00",
+      "messageId": "B84FE8D7EF514513BC16",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571997256868",
+      "nome": "Larissa Correia de Souza ",
+      "agendamentoId": 458042971,
+      "dataHoraInicio": "06-05-2026T17:30",
+      "messageId": "3EB048F5E8AC5475A3494C",
+      "status": "sent",
+      "turno": "afternoon"
+    }
+  ]
+}

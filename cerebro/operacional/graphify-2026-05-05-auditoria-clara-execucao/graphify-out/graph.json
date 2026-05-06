@@ -1,0 +1,981 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "scripts-clara_learning.py",
+      "file_type": "code",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L1",
+      "id": "raw_scripts_clara_learning_py"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L11",
+      "id": "raw_scripts_clara_learning_run"
+    },
+    {
+      "label": "save()",
+      "file_type": "code",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L18",
+      "id": "raw_scripts_clara_learning_save"
+    },
+    {
+      "label": "day_index()",
+      "file_type": "code",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L25",
+      "id": "raw_scripts_clara_learning_day_index"
+    },
+    {
+      "label": "slot()",
+      "file_type": "code",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L27",
+      "id": "raw_scripts_clara_learning_slot"
+    },
+    {
+      "label": "scripts-youtube_learning.py",
+      "file_type": "code",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L1",
+      "id": "raw_scripts_youtube_learning_py"
+    },
+    {
+      "label": "save()",
+      "file_type": "code",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L46",
+      "id": "raw_scripts_youtube_learning_save"
+    },
+    {
+      "label": "plan()",
+      "file_type": "code",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L51",
+      "id": "raw_scripts_youtube_learning_plan"
+    },
+    {
+      "label": "search()",
+      "file_type": "code",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L55",
+      "id": "raw_scripts_youtube_learning_search"
+    },
+    {
+      "label": "transcript()",
+      "file_type": "code",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L71",
+      "id": "raw_scripts_youtube_learning_transcript"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L84",
+      "id": "raw_scripts_youtube_learning_main"
+    },
+    {
+      "label": "scripts-fetch_top_reels.py",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L1",
+      "id": "raw_scripts_fetch_top_reels_py"
+    },
+    {
+      "label": "load_rapidapi_key()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L23",
+      "id": "raw_scripts_fetch_top_reels_load_rapidapi_key"
+    },
+    {
+      "label": "http_post()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L42",
+      "id": "raw_scripts_fetch_top_reels_http_post"
+    },
+    {
+      "label": "http_get()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L53",
+      "id": "raw_scripts_fetch_top_reels_http_get"
+    },
+    {
+      "label": "list_profile_posts()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L59",
+      "id": "raw_scripts_fetch_top_reels_list_profile_posts"
+    },
+    {
+      "label": "extract_video_summary()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L94",
+      "id": "raw_scripts_fetch_top_reels_extract_video_summary"
+    },
+    {
+      "label": "fetch_full_caption_via_stable()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L122",
+      "id": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L142",
+      "id": "raw_scripts_fetch_top_reels_main"
+    },
+    {
+      "label": "Pagina por todos os posts do perfil via instagram120.",
+      "file_type": "rationale",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L60",
+      "id": "raw_scripts_fetch_top_reels_rationale_60"
+    },
+    {
+      "label": "Extrai metadata de um post de vídeo/reel.",
+      "file_type": "rationale",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L95",
+      "id": "raw_scripts_fetch_top_reels_rationale_95"
+    },
+    {
+      "label": "Tenta pegar caption mais completa via Stable API (que retorna text não-truncado)",
+      "file_type": "rationale",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L123",
+      "id": "raw_scripts_fetch_top_reels_rationale_123"
+    },
+    {
+      "label": "scripts-social_learning.py",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L1",
+      "id": "raw_scripts_social_learning_py"
+    },
+    {
+      "label": "load_key()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L10",
+      "id": "raw_scripts_social_learning_load_key"
+    },
+    {
+      "label": "get_json()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L20",
+      "id": "raw_scripts_social_learning_get_json"
+    },
+    {
+      "label": "post_json()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L31",
+      "id": "raw_scripts_social_learning_post_json"
+    },
+    {
+      "label": "save()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L45",
+      "id": "raw_scripts_social_learning_save"
+    },
+    {
+      "label": "instagram_url()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L51",
+      "id": "raw_scripts_social_learning_instagram_url"
+    },
+    {
+      "label": "instagram_profile()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L59",
+      "id": "raw_scripts_social_learning_instagram_profile"
+    },
+    {
+      "label": "x_top()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L82",
+      "id": "raw_scripts_social_learning_x_top"
+    },
+    {
+      "label": "summarize_ig_item()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L91",
+      "id": "raw_scripts_social_learning_summarize_ig_item"
+    },
+    {
+      "label": "daily_plan()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L99",
+      "id": "raw_scripts_social_learning_daily_plan"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L115",
+      "id": "raw_scripts_social_learning_main"
+    },
+    {
+      "label": "scripts-fetch_instagram.py",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L1",
+      "id": "raw_scripts_fetch_instagram_py"
+    },
+    {
+      "label": "load_rapidapi_key()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L15",
+      "id": "raw_scripts_fetch_instagram_load_rapidapi_key"
+    },
+    {
+      "label": "extract_shortcode()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L29",
+      "id": "raw_scripts_fetch_instagram_extract_shortcode"
+    },
+    {
+      "label": "fetch_stable_api()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L34",
+      "id": "raw_scripts_fetch_instagram_fetch_stable_api"
+    },
+    {
+      "label": "fetch_via_profile()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L49",
+      "id": "raw_scripts_fetch_instagram_fetch_via_profile"
+    },
+    {
+      "label": "parse_stable()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L95",
+      "id": "raw_scripts_fetch_instagram_parse_stable"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L110",
+      "id": "raw_scripts_fetch_instagram_main"
+    },
+    {
+      "label": "API 1: instagram-scraper-stable-api (endpoint direto por URL).",
+      "file_type": "rationale",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L35",
+      "id": "raw_scripts_fetch_instagram_rationale_35"
+    },
+    {
+      "label": "API 2: instagram120 - busca em posts do perfil ate achar o shortcode.",
+      "file_type": "rationale",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L50",
+      "id": "raw_scripts_fetch_instagram_rationale_50"
+    },
+    {
+      "label": "Extrai caption + owner do payload da stable-api.",
+      "file_type": "rationale",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L96",
+      "id": "raw_scripts_fetch_instagram_rationale_96"
+    }
+  ],
+  "edges": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "raw_scripts_clara_learning_py",
+      "_tgt": "raw_scripts_clara_learning_run",
+      "source": "raw_scripts_clara_learning_py",
+      "target": "raw_scripts_clara_learning_run"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "raw_scripts_clara_learning_py",
+      "_tgt": "raw_scripts_clara_learning_save",
+      "source": "raw_scripts_clara_learning_py",
+      "target": "raw_scripts_clara_learning_save"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "raw_scripts_clara_learning_py",
+      "_tgt": "raw_scripts_clara_learning_day_index",
+      "source": "raw_scripts_clara_learning_py",
+      "target": "raw_scripts_clara_learning_day_index"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_src": "raw_scripts_clara_learning_py",
+      "_tgt": "raw_scripts_clara_learning_slot",
+      "source": "raw_scripts_clara_learning_py",
+      "target": "raw_scripts_clara_learning_slot"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "raw_scripts_clara_learning_slot",
+      "_tgt": "raw_scripts_clara_learning_run",
+      "source": "raw_scripts_clara_learning_run",
+      "target": "raw_scripts_clara_learning_slot"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "raw_scripts_clara_learning_slot",
+      "_tgt": "raw_scripts_clara_learning_save",
+      "source": "raw_scripts_clara_learning_save",
+      "target": "raw_scripts_clara_learning_slot"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-clara_learning.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "raw_scripts_clara_learning_slot",
+      "_tgt": "raw_scripts_clara_learning_day_index",
+      "source": "raw_scripts_clara_learning_day_index",
+      "target": "raw_scripts_clara_learning_slot"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "raw_scripts_youtube_learning_py",
+      "_tgt": "raw_scripts_youtube_learning_save",
+      "source": "raw_scripts_youtube_learning_py",
+      "target": "raw_scripts_youtube_learning_save"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "raw_scripts_youtube_learning_py",
+      "_tgt": "raw_scripts_youtube_learning_plan",
+      "source": "raw_scripts_youtube_learning_py",
+      "target": "raw_scripts_youtube_learning_plan"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_src": "raw_scripts_youtube_learning_py",
+      "_tgt": "raw_scripts_youtube_learning_search",
+      "source": "raw_scripts_youtube_learning_py",
+      "target": "raw_scripts_youtube_learning_search"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_src": "raw_scripts_youtube_learning_py",
+      "_tgt": "raw_scripts_youtube_learning_transcript",
+      "source": "raw_scripts_youtube_learning_py",
+      "target": "raw_scripts_youtube_learning_transcript"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_src": "raw_scripts_youtube_learning_py",
+      "_tgt": "raw_scripts_youtube_learning_main",
+      "source": "raw_scripts_youtube_learning_py",
+      "target": "raw_scripts_youtube_learning_main"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_src": "raw_scripts_youtube_learning_search",
+      "_tgt": "raw_scripts_youtube_learning_save",
+      "source": "raw_scripts_youtube_learning_save",
+      "target": "raw_scripts_youtube_learning_search"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-youtube_learning.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "raw_scripts_youtube_learning_transcript",
+      "_tgt": "raw_scripts_youtube_learning_save",
+      "source": "raw_scripts_youtube_learning_save",
+      "target": "raw_scripts_youtube_learning_transcript"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_py",
+      "_tgt": "raw_scripts_fetch_top_reels_load_rapidapi_key",
+      "source": "raw_scripts_fetch_top_reels_py",
+      "target": "raw_scripts_fetch_top_reels_load_rapidapi_key"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_py",
+      "_tgt": "raw_scripts_fetch_top_reels_http_post",
+      "source": "raw_scripts_fetch_top_reels_py",
+      "target": "raw_scripts_fetch_top_reels_http_post"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_py",
+      "_tgt": "raw_scripts_fetch_top_reels_http_get",
+      "source": "raw_scripts_fetch_top_reels_py",
+      "target": "raw_scripts_fetch_top_reels_http_get"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_py",
+      "_tgt": "raw_scripts_fetch_top_reels_list_profile_posts",
+      "source": "raw_scripts_fetch_top_reels_py",
+      "target": "raw_scripts_fetch_top_reels_list_profile_posts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_py",
+      "_tgt": "raw_scripts_fetch_top_reels_extract_video_summary",
+      "source": "raw_scripts_fetch_top_reels_py",
+      "target": "raw_scripts_fetch_top_reels_extract_video_summary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_py",
+      "_tgt": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable",
+      "source": "raw_scripts_fetch_top_reels_py",
+      "target": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_py",
+      "_tgt": "raw_scripts_fetch_top_reels_main",
+      "source": "raw_scripts_fetch_top_reels_py",
+      "target": "raw_scripts_fetch_top_reels_main"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_list_profile_posts",
+      "_tgt": "raw_scripts_fetch_top_reels_http_post",
+      "source": "raw_scripts_fetch_top_reels_http_post",
+      "target": "raw_scripts_fetch_top_reels_list_profile_posts"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L131",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable",
+      "_tgt": "raw_scripts_fetch_top_reels_http_get",
+      "source": "raw_scripts_fetch_top_reels_http_get",
+      "target": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_main",
+      "_tgt": "raw_scripts_fetch_top_reels_list_profile_posts",
+      "source": "raw_scripts_fetch_top_reels_list_profile_posts",
+      "target": "raw_scripts_fetch_top_reels_main"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_rationale_60",
+      "_tgt": "raw_scripts_fetch_top_reels_list_profile_posts",
+      "source": "raw_scripts_fetch_top_reels_list_profile_posts",
+      "target": "raw_scripts_fetch_top_reels_rationale_60"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_main",
+      "_tgt": "raw_scripts_fetch_top_reels_extract_video_summary",
+      "source": "raw_scripts_fetch_top_reels_extract_video_summary",
+      "target": "raw_scripts_fetch_top_reels_main"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_rationale_95",
+      "_tgt": "raw_scripts_fetch_top_reels_extract_video_summary",
+      "source": "raw_scripts_fetch_top_reels_extract_video_summary",
+      "target": "raw_scripts_fetch_top_reels_rationale_95"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L175",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_main",
+      "_tgt": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable",
+      "source": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable",
+      "target": "raw_scripts_fetch_top_reels_main"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_top_reels.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_top_reels_rationale_123",
+      "_tgt": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable",
+      "source": "raw_scripts_fetch_top_reels_fetch_full_caption_via_stable",
+      "target": "raw_scripts_fetch_top_reels_rationale_123"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_load_key",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_load_key"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_get_json",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_get_json"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_post_json",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_post_json"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_save",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_save"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_instagram_url",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_instagram_url"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_instagram_profile",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_instagram_profile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_x_top",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_x_top"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_summarize_ig_item",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_summarize_ig_item"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_daily_plan",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_daily_plan"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_py",
+      "_tgt": "raw_scripts_social_learning_main",
+      "source": "raw_scripts_social_learning_py",
+      "target": "raw_scripts_social_learning_main"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_get_json",
+      "_tgt": "raw_scripts_social_learning_load_key",
+      "source": "raw_scripts_social_learning_load_key",
+      "target": "raw_scripts_social_learning_get_json"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_post_json",
+      "_tgt": "raw_scripts_social_learning_load_key",
+      "source": "raw_scripts_social_learning_load_key",
+      "target": "raw_scripts_social_learning_post_json"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_instagram_url",
+      "_tgt": "raw_scripts_social_learning_get_json",
+      "source": "raw_scripts_social_learning_get_json",
+      "target": "raw_scripts_social_learning_instagram_url"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_x_top",
+      "_tgt": "raw_scripts_social_learning_get_json",
+      "source": "raw_scripts_social_learning_get_json",
+      "target": "raw_scripts_social_learning_x_top"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_instagram_profile",
+      "_tgt": "raw_scripts_social_learning_post_json",
+      "source": "raw_scripts_social_learning_post_json",
+      "target": "raw_scripts_social_learning_instagram_profile"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_instagram_url",
+      "_tgt": "raw_scripts_social_learning_save",
+      "source": "raw_scripts_social_learning_save",
+      "target": "raw_scripts_social_learning_instagram_url"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_instagram_profile",
+      "_tgt": "raw_scripts_social_learning_save",
+      "source": "raw_scripts_social_learning_save",
+      "target": "raw_scripts_social_learning_instagram_profile"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_x_top",
+      "_tgt": "raw_scripts_social_learning_save",
+      "source": "raw_scripts_social_learning_save",
+      "target": "raw_scripts_social_learning_x_top"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-social_learning.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_src": "raw_scripts_social_learning_instagram_url",
+      "_tgt": "raw_scripts_social_learning_summarize_ig_item",
+      "source": "raw_scripts_social_learning_instagram_url",
+      "target": "raw_scripts_social_learning_summarize_ig_item"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_py",
+      "_tgt": "raw_scripts_fetch_instagram_load_rapidapi_key",
+      "source": "raw_scripts_fetch_instagram_py",
+      "target": "raw_scripts_fetch_instagram_load_rapidapi_key"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_py",
+      "_tgt": "raw_scripts_fetch_instagram_extract_shortcode",
+      "source": "raw_scripts_fetch_instagram_py",
+      "target": "raw_scripts_fetch_instagram_extract_shortcode"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_py",
+      "_tgt": "raw_scripts_fetch_instagram_fetch_stable_api",
+      "source": "raw_scripts_fetch_instagram_py",
+      "target": "raw_scripts_fetch_instagram_fetch_stable_api"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_py",
+      "_tgt": "raw_scripts_fetch_instagram_fetch_via_profile",
+      "source": "raw_scripts_fetch_instagram_py",
+      "target": "raw_scripts_fetch_instagram_fetch_via_profile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_py",
+      "_tgt": "raw_scripts_fetch_instagram_parse_stable",
+      "source": "raw_scripts_fetch_instagram_py",
+      "target": "raw_scripts_fetch_instagram_parse_stable"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_py",
+      "_tgt": "raw_scripts_fetch_instagram_main",
+      "source": "raw_scripts_fetch_instagram_py",
+      "target": "raw_scripts_fetch_instagram_main"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_main",
+      "_tgt": "raw_scripts_fetch_instagram_extract_shortcode",
+      "source": "raw_scripts_fetch_instagram_extract_shortcode",
+      "target": "raw_scripts_fetch_instagram_main"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_main",
+      "_tgt": "raw_scripts_fetch_instagram_fetch_stable_api",
+      "source": "raw_scripts_fetch_instagram_fetch_stable_api",
+      "target": "raw_scripts_fetch_instagram_main"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_rationale_35",
+      "_tgt": "raw_scripts_fetch_instagram_fetch_stable_api",
+      "source": "raw_scripts_fetch_instagram_fetch_stable_api",
+      "target": "raw_scripts_fetch_instagram_rationale_35"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L132",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_main",
+      "_tgt": "raw_scripts_fetch_instagram_fetch_via_profile",
+      "source": "raw_scripts_fetch_instagram_fetch_via_profile",
+      "target": "raw_scripts_fetch_instagram_main"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_rationale_50",
+      "_tgt": "raw_scripts_fetch_instagram_fetch_via_profile",
+      "source": "raw_scripts_fetch_instagram_fetch_via_profile",
+      "target": "raw_scripts_fetch_instagram_rationale_50"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L127",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_main",
+      "_tgt": "raw_scripts_fetch_instagram_parse_stable",
+      "source": "raw_scripts_fetch_instagram_parse_stable",
+      "target": "raw_scripts_fetch_instagram_main"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/scripts-fetch_instagram.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_src": "raw_scripts_fetch_instagram_rationale_96",
+      "_tgt": "raw_scripts_fetch_instagram_parse_stable",
+      "source": "raw_scripts_fetch_instagram_parse_stable",
+      "target": "raw_scripts_fetch_instagram_rationale_96"
+    }
+  ]
+}

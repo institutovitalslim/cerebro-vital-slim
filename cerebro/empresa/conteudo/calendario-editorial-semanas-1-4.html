@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendário Editorial IVS — Semanas 1 a 4 — Instituto Vital Slim</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    line-height: 1.65;
+    color: #1a1a1a;
+    background: #f8f7f4;
+  }
+  header.top {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #fff;
+    padding: 20px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-bottom: 3px solid #c9a24e;
+  }
+  header.top h1 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header.top .badge {
+    background: #c9a24e;
+    color: #1a1a1a;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    background: #fff;
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.04);
+  }
+  h1 { font-size: 30px; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #c9a24e; line-height: 1.25; }
+  h2 { font-size: 22px; font-weight: 700; margin-top: 40px; margin-bottom: 16px; line-height: 1.3; }
+  h3 { font-size: 18px; font-weight: 600; color: #2a2a2a; margin-top: 28px; margin-bottom: 12px; padding-left: 10px; border-left: 3px solid #c9a24e; }
+  h4 { font-size: 15px; font-weight: 600; color: #4a4a4a; margin-top: 18px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.6px; }
+  p { margin-bottom: 14px; color: #2a2a2a; font-size: 15.5px; }
+  ul, ol { margin-left: 24px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; color: #2a2a2a; font-size: 15.5px; }
+  strong { color: #1a1a1a; font-weight: 700; }
+  em { color: #4a4a4a; font-style: italic; }
+  a { color: #8b6914; text-decoration: none; border-bottom: 1px solid #c9a24e; transition: all 0.2s; }
+  a:hover { color: #1a1a1a; background: #faf7ee; padding: 0 2px; }
+  blockquote { background: #faf7ee; border-left: 4px solid #c9a24e; padding: 14px 20px; margin: 16px 0; color: #4a4a4a; border-radius: 0 4px 4px 0; font-size: 15px; }
+  code { background: #f4f1ea; padding: 2px 6px; border-radius: 3px; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; color: #8b6914; }
+  pre { background: #1a1a1a; color: #e8e0cc; padding: 18px; border-radius: 6px; overflow-x: auto; margin: 16px 0; font-size: 13px; line-height: 1.55; }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-radius: 4px; overflow: hidden; }
+  th { background: #1a1a1a; color: #fff; font-weight: 600; padding: 12px 14px; text-align: left; font-size: 13.5px; letter-spacing: 0.3px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #fafaf8; }
+  hr { border: none; border-top: 1px solid #e5e5e5; margin: 32px 0; }
+
+  /* A11Y: keyboard focus + reduced motion */
+  *:focus-visible { outline: 2px solid #c9a24e; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+  /* Tabular-nums for dates/counters */
+  th, td, .badge, code { font-variant-numeric: tabular-nums; }
+
+  /* VALIDATOR */
+  .validator {
+    background: linear-gradient(135deg, #faf7ee 0%, #f5efd9 100%);
+    border: 2px solid #c9a24e;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+    box-shadow: 0 4px 12px rgba(201,162,78,0.15);
+  }
+  .validator h2 { margin-top: 0; color: #8b6914; font-size: 16px; text-transform: uppercase; letter-spacing: 0.8px; border: none; }
+  .validator p { font-size: 14px; color: #4a4a4a; margin-bottom: 14px; }
+  .validator-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: inherit;
+  }
+  .btn-approve { background: #2a8a4a; color: #fff; }
+  .btn-approve:hover { background: #1f6a38; transform: translateY(-1px); }
+  .btn-adjust { background: #c9a24e; color: #1a1a1a; }
+  .btn-adjust:hover { background: #b08a3e; transform: translateY(-1px); }
+  .btn-reject { background: #a64a4a; color: #fff; }
+  .btn-reject:hover { background: #8a3838; transform: translateY(-1px); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal h3 { border: none; padding: 0; margin-bottom: 12px; font-size: 22px; }
+  .modal p { color: #666; font-size: 14px; margin-bottom: 16px; }
+  .modal textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .modal textarea:focus { border-color: #c9a24e; outline: none; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  .btn-cancel { background: #ddd; color: #333; }
+  .btn-cancel:hover { background: #bbb; }
+  .btn-send { background: #1a1a1a; color: #fff; }
+  .btn-send:hover { background: #2a2a2a; }
+  .modal-status { margin-top: 12px; padding: 10px; border-radius: 4px; font-size: 14px; display: none; }
+  .modal-status.success { background: #d4edda; color: #1a7a3a; display: block; }
+  .modal-status.error { background: #f8d7da; color: #721c24; display: block; }
+
+  footer { text-align: center; padding: 30px; color: #888; font-size: 12px; border-top: 1px solid #e5e5e5; margin-top: 40px; }
+  footer a { color: #8b6914; }
+
+  @media print {
+    header.top, .validator { display: none; }
+    main { box-shadow: none; max-width: 100%; padding: 0 20px; }
+  }
+  @media (max-width: 640px) {
+    main { padding: 24px 18px; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 19px; }
+    h3 { font-size: 16.5px; }
+    p, li { font-size: 15px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px 10px; }
+    .validator-buttons { flex-direction: column; }
+    .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>
+    <span>🩺 Instituto Vital Slim — Entrega de conteúdo</span>
+    <span class="badge" id="status-badge">AGUARDANDO VALIDAÇÃO</span>
+  </h1>
+</header>
+<main>
+  <div class="validator">
+    <h2>📋 Documento para sua aprovação</h2>
+    <p><strong>Calendário Editorial IVS — Semanas 1 a 4</strong></p>
+    <p>Revise o conteúdo abaixo. Escolha uma ação:</p>
+    <div class="validator-buttons">
+      <button class="btn btn-approve" onclick="openModal('APROVO')">✓ APROVO — pode seguir</button>
+      <button class="btn btn-adjust" onclick="openModal('AJUSTAR')">↻ AJUSTAR</button>
+      <button class="btn btn-reject" onclick="openModal('REJEITAR')">✗ REJEITAR</button>
+    </div>
+  </div>
+
+  <h1 id="calendario-editorial-ivs-semanas-1-a-4-pos-restart">Calendário Editorial IVS — Semanas 1 a 4 (pós-restart)</h1>
+  <blockquote>
+  <p>Baseado no Mapa Estratégico de Conteúdo IVS v3.0<br>
+  Período: Semana 1 = Maio 2026 (início imediato)</p>
+  </blockquote>
+  <hr>
+  <h2 id="semana-1-nao-e-sua-culpa-construcao-de-empatia-autoridade">SEMANA 1: "Não é sua culpa" (Construção de empatia + autoridade)</h2>
+  <p><strong>Tema-âncora:</strong> Reframe de culpa + Quebra de mito introdutivo<br>
+  <strong>Objeção foco:</strong> "É falta de força de vontade" (O4)<br>
+  <strong>Emoção:</strong> Alívio + Surpresa</p>
+  <table>
+  <thead>
+  <tr>
+  <th>Data</th>
+  <th>Dia</th>
+  <th>Formato</th>
+  <th>Tipo</th>
+  <th>Eixo</th>
+  <th>Roteiro #</th>
+  <th>Título</th>
+  <th>Hook (preview)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Qua 19h</td>
+  <td>D3</td>
+  <td>Reel</td>
+  <td>reframe_de_culpa</td>
+  <td>C (Compulsão)</td>
+  <td>R01</td>
+  <td>"Não é falta de vontade"</td>
+  <td>O que está te travando não é falta de força. É bioquímica.</td>
+  </tr>
+  <tr>
+  <td>Sex 12h</td>
+  <td>D5</td>
+  <td>Reel</td>
+  <td>quebra_de_mito</td>
+  <td>A (Insulina)</td>
+  <td>R02</td>
+  <td>"Caloria é mentira"</td>
+  <td>Não é quanto você come. É o que o seu corpo faz com o que você come.</td>
+  </tr>
+  <tr>
+  <td>Dom 11h</td>
+  <td>D7</td>
+  <td>Reel</td>
+  <td>sinalizacao_corporal</td>
+  <td>F (Sintomas)</td>
+  <td>R03</td>
+  <td>"5 sinais de resistência insulínica"</td>
+  <td>5 sinais que seu corpo dá. Se 3 baterem, comenta RAIZ.</td>
+  </tr>
+  <tr>
+  <td>Qui 20h</td>
+  <td>D4</td>
+  <td>Carrossel</td>
+  <td>reframe_de_culpa</td>
+  <td>C (Compulsão)</td>
+  <td>C01</td>
+  <td>"Por que você come quando não tem fome"</td>
+  <td>Hook visual: "Não é culpa sua. É fisiologia."</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr>
+  <h2 id="semana-2-o-que-ninguem-investigou-autoridade-medica-diferenciacao-ivs">SEMANA 2: "O que ninguém investigou" (Autoridade médica + diferenciação IVS)</h2>
+  <p><strong>Tema-âncora:</strong> Explicação de tecnologia + Método IVS<br>
+  <strong>Objeção foco:</strong> "Já gastei com médico e não deu certo" (O1) + "É caro" (O6)<br>
+  <strong>Emoção:</strong> Curiosidade + Confiança</p>
+  <table>
+  <thead>
+  <tr>
+  <th>Data</th>
+  <th>Dia</th>
+  <th>Formato</th>
+  <th>Tipo</th>
+  <th>Eixo</th>
+  <th>Roteiro #</th>
+  <th>Título</th>
+  <th>Hook (preview)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Qua 19h</td>
+  <td>D10</td>
+  <td>Reel</td>
+  <td>explicacao_de_tecnologia</td>
+  <td>D (Canetas)</td>
+  <td>R04</td>
+  <td>"Ozempic ≠ Mounjaro ≠ Retatrutida"</td>
+  <td>Três canetas, três tecnologias. Em 30s você entende.</td>
+  </tr>
+  <tr>
+  <td>Sex 12h</td>
+  <td>D12</td>
+  <td>Reel</td>
+  <td>metodo_ivs</td>
+  <td>E (Protocolo)</td>
+  <td>R05</td>
+  <td>"O que a avaliação IVS descobre"</td>
+  <td>Sua consulta anterior pediu exame de 1980. A gente pede esses 7.</td>
+  </tr>
+  <tr>
+  <td>Dom 11h</td>
+  <td>D14</td>
+  <td>Reel</td>
+  <td>quebra_de_mito</td>
+  <td>A (Insulina)</td>
+  <td>R06</td>
+  <td>"Fruta não é inocente"</td>
+  <td>Se você acha que fruta faz bem sempre, precisa ouvir isso.</td>
+  </tr>
+  <tr>
+  <td>Qui 20h</td>
+  <td>D11</td>
+  <td>Carrossel</td>
+  <td>metodo_ivs</td>
+  <td>E (Protocolo)</td>
+  <td>C02</td>
+  <td>"7 exames que descobrem o que ninguém viu"</td>
+  <td>Hook visual: "O que sua consulta deveria ter pedido"</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr>
+  <h2 id="semana-3-seu-corpo-esta-falando-sinais-gatilho-de-consulta">SEMANA 3: "Seu corpo está falando" (Sinais + Gatilho de consulta)</h2>
+  <p><strong>Tema-âncora:</strong> Sinalização corporal + Psicologia da comida<br>
+  <strong>Objeção foco:</strong> "É normal da idade" (O7) + "Tenho que esperar a vontade passar" (O8)<br>
+  <strong>Emoção:</strong> Identificação + Urgência</p>
+  <table>
+  <thead>
+  <tr>
+  <th>Data</th>
+  <th>Dia</th>
+  <th>Formato</th>
+  <th>Tipo</th>
+  <th>Eixo</th>
+  <th>Roteiro #</th>
+  <th>Título</th>
+  <th>Hook (preview)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Qua 19h</td>
+  <td>D17</td>
+  <td>Reel</td>
+  <td>sinalizacao_corporal</td>
+  <td>F (Sintomas)</td>
+  <td>R07</td>
+  <td>"Barriga crescendo sem mudar hábito"</td>
+  <td>Sua barriga cresceu e você come igual? Não é normal. É sinal.</td>
+  </tr>
+  <tr>
+  <td>Sex 12h</td>
+  <td>D19</td>
+  <td>Reel</td>
+  <td>psicologia_da_comida</td>
+  <td>C (Compulsão)</td>
+  <td>R08</td>
+  <td>"Por que você ataca a geladeira à noite"</td>
+  <td>Toda noite a mesma história. Não é ansiedade. É treino metabólico.</td>
+  </tr>
+  <tr>
+  <td>Dom 11h</td>
+  <td>D21</td>
+  <td>Reel</td>
+  <td>sinalizacao_corporal</td>
+  <td>F (Sintomas)</td>
+  <td>R09</td>
+  <td>"Cansaço que café não resolve"</td>
+  <td>Água de caju? Sem ponto na aurícula? Seu cansaço tem causa médica.</td>
+  </tr>
+  <tr>
+  <td>Qui 20h</td>
+  <td>D18</td>
+  <td>Carrossel</td>
+  <td>sinalizacao_corporal</td>
+  <td>B (Hormônios)</td>
+  <td>C03</td>
+  <td>"Seu corpo manda recado. Você está ouvindo?"</td>
+  <td>Hook visual: "6 sinais de metabolismo travado"</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr>
+  <h2 id="semana-4-existe-metodo-metodo-ivs-prova-social-emocional">SEMANA 4: "Existe método" (Método IVS + Prova social emocional)</h2>
+  <p><strong>Tema-âncora:</strong> Método IVS + Jornada da paciente<br>
+  <strong>Objeção foco:</strong> "Não tenho tempo" (O2) + "Medo de caneta" (O3)<br>
+  <strong>Emoção:</strong> Esperança + Desejo</p>
+  <table>
+  <thead>
+  <tr>
+  <th>Data</th>
+  <th>Dia</th>
+  <th>Formato</th>
+  <th>Tipo</th>
+  <th>Eixo</th>
+  <th>Roteiro #</th>
+  <th>Título</th>
+  <th>Hook (preview)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Qua 19h</td>
+  <td>D24</td>
+  <td>Reel</td>
+  <td>jornada_da_paciente</td>
+  <td>G (Transformação)</td>
+  <td>R10</td>
+  <td>"Ela não acreditava mais. Até esse dia."</td>
+  <td>Ela tinha desistido de si. Até a primeira consulta IVS.</td>
+  </tr>
+  <tr>
+  <td>Sex 12h</td>
+  <td>D26</td>
+  <td>Reel</td>
+  <td>metodo_ivs</td>
+  <td>E (Protocolo)</td>
+  <td>R11</td>
+  <td>"Protocolo IVS em 60 segundos"</td>
+  <td>Endócrino + nutri funcional + comportamento. Tudo junto. Sem parar a vida.</td>
+  </tr>
+  <tr>
+  <td>Dom 11h</td>
+  <td>D28</td>
+  <td>Reel</td>
+  <td>explicacao_de_tecnologia</td>
+  <td>D (Canetas)</td>
+  <td>R12</td>
+  <td>"Caneta sozinha destrói músculo"</td>
+  <td>Caneta sem método = peso volta. Com método = resultado sustentado.</td>
+  </tr>
+  <tr>
+  <td>Qui 20h</td>
+  <td>D25</td>
+  <td>Carrossel</td>
+  <td>jornada_da_paciente</td>
+  <td>G (Transformação)</td>
+  <td>C04</td>
+  <td>"De 'não me reconheço' para 'voltei a ser eu'"</td>
+  <td>Hook visual: "A transformação que a balança não conta"</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr>
+  <h2 id="resumo-dos-16-roteiros-12-reels-4-carrosseis">RESUMO DOS 16 ROTEIROS (12 Reels + 4 Carrosséis)</h2>
+  <table>
+  <thead>
+  <tr>
+  <th>#</th>
+  <th>Tipo</th>
+  <th>Pilar</th>
+  <th>Eixo</th>
+  <th>Objeção</th>
+  <th>Quebra de objeção</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>R01</td>
+  <td>reframe_de_culpa</td>
+  <td>P2</td>
+  <td>C (Compulsão)</td>
+  <td>O4</td>
+  <td>Vontade é produto de bioquímica</td>
+  </tr>
+  <tr>
+  <td>R02</td>
+  <td>quebra_de_mito</td>
+  <td>P1</td>
+  <td>A (Insulina)</td>
+  <td>O5</td>
+  <td>Corpo 35+ tem metabolismo ÚNICO</td>
+  </tr>
+  <tr>
+  <td>R03</td>
+  <td>sinalizacao_corporal</td>
+  <td>P6</td>
+  <td>F (Sintomas)</td>
+  <td>O7</td>
+  <td>Não é "normal da idade"</td>
+  </tr>
+  <tr>
+  <td>C01</td>
+  <td>reframe_de_culpa</td>
+  <td>P2</td>
+  <td>C (Compulsão)</td>
+  <td>O8</td>
+  <td>Vontade não passa sozinha</td>
+  </tr>
+  <tr>
+  <td>R04</td>
+  <td>explicacao_de_tecnologia</td>
+  <td>P3</td>
+  <td>D (Canetas)</td>
+  <td>O3</td>
+  <td>Com avaliação, caneta é ferramenta</td>
+  </tr>
+  <tr>
+  <td>R05</td>
+  <td>metodo_ivs</td>
+  <td>P4</td>
+  <td>E (Protocolo)</td>
+  <td>O1</td>
+  <td>Ninguém investigou a RAIZ</td>
+  </tr>
+  <tr>
+  <td>R06</td>
+  <td>quebra_de_mito</td>
+  <td>P1</td>
+  <td>A (Insulina)</td>
+  <td>O5</td>
+  <td>Plano de massa falha</td>
+  </tr>
+  <tr>
+  <td>C02</td>
+  <td>metodo_ivs</td>
+  <td>P4</td>
+  <td>E (Protocolo)</td>
+  <td>O6</td>
+  <td>R$ 1.000 evita anos de erro</td>
+  </tr>
+  <tr>
+  <td>R07</td>
+  <td>sinalizacao_corporal</td>
+  <td>P6</td>
+  <td>F (Sintomas)</td>
+  <td>O7</td>
+  <td>Não é normal, é ignorado</td>
+  </tr>
+  <tr>
+  <td>R08</td>
+  <td>psicologia_da_comida</td>
+  <td>P1+P2</td>
+  <td>C (Compulsão)</td>
+  <td>O4</td>
+  <td>Não é disciplina, é bioquímica</td>
+  </tr>
+  <tr>
+  <td>R09</td>
+  <td>sinalizacao_corporal</td>
+  <td>P6</td>
+  <td>F (Sintomas)</td>
+  <td>O1</td>
+  <td>Cansaço tem causa médica</td>
+  </tr>
+  <tr>
+  <td>C03</td>
+  <td>sinalizacao_corporal</td>
+  <td>P6</td>
+  <td>B (Hormônios)</td>
+  <td>O7</td>
+  <td>Metabolismo travado ≠ idade</td>
+  </tr>
+  <tr>
+  <td>R10</td>
+  <td>jornada_da_paciente</td>
+  <td>P5</td>
+  <td>G (Transformação)</td>
+  <td>O2</td>
+  <td>Não precisa parar a vida</td>
+  </tr>
+  <tr>
+  <td>R11</td>
+  <td>metodo_ivs</td>
+  <td>P4</td>
+  <td>E (Protocolo)</td>
+  <td>O2</td>
+  <td>Protocolo feito pra rotina real</td>
+  </tr>
+  <tr>
+  <td>R12</td>
+  <td>explicacao_de_tecnologia</td>
+  <td>P3</td>
+  <td>D (Canetas)</td>
+  <td>O3</td>
+  <td>Sem avaliação = risco</td>
+  </tr>
+  <tr>
+  <td>C04</td>
+  <td>jornada_da_paciente</td>
+  <td>P5</td>
+  <td>G (Transformação)</td>
+  <td>O2</td>
+  <td>Transformação sem parar a vida</td>
+  </tr>
+  </tbody>
+  </table>
+  <hr>
+  <h2 id="padrao-de-sequenciamento-emocional">Padrão de sequenciamento emocional</h2>
+  <p>Semana 1 → <strong>Alívio</strong> (não é culpa sua)<br>
+  Semana 2 → <strong>Autoridade</strong> (aqui investigamos de verdade)<br>
+  Semana 3 → <strong>Urgência</strong> (seu corpo está falando)<br>
+  Semana 4 → <strong>Esperança</strong> (existe método, existe caminho)</p>
+  <blockquote>
+  <p>Ciclo emocional: culpa → confiança → alerta → esperança → consulta</p>
+  </blockquote>
+  <hr>
+  <h2 id="status">Status</h2>
+  <ul>
+  <li>[x] Mapa estratégico v3.0</li>
+  <li>[x] Calendário editorial Semanas 1-4</li>
+  <li>[ ] Roteiros detalhados (12 reels + 4 carrosséis)</li>
+  <li>[ ] Aprovação do Tiaro</li>
+  <li>[ ] Gravação (Dra. Daniely)</li>
+  <li>[ ] Produção de assets (edição + NanoBanana)</li>
+  </ul>
+
+  <footer>
+    Gerado automaticamente pelo pipeline de conteúdo do IVS • Fonte canônica: <a href="https://github.com/institutovitalslim/cerebro-vital-slim">GitHub cerebro-vital-slim</a>
+  </footer>
+</main>
+
+<!-- MODAL DE FEEDBACK -->
+<div class="modal-overlay" id="feedback-modal">
+  <div class="modal">
+    <h3 id="modal-title">Enviar feedback</h3>
+    <p id="modal-subtitle">Descreva o que vc quer ajustar ou deixe em branco pra só confirmar.</p>
+    <textarea id="feedback-text" placeholder="Ex: ajustar script 5.1 pra tom mais empático; trocar hashtags do tema hormonal..."></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-send" onclick="submitFeedback()" id="send-btn">Enviar</button>
+    </div>
+    <div class="modal-status" id="modal-status"></div>
+  </div>
+</div>
+
+<script>
+  const docName = window.location.pathname.split('/').pop() || 'unknown';
+  let currentAction = null;
+  function openModal(action) {
+    currentAction = action;
+    document.getElementById('modal-title').textContent = action === 'APROVO' ? 'Aprovar entrega' : action === 'AJUSTAR' ? 'O que ajustar?' : 'Por que rejeitar?';
+    document.getElementById('modal-subtitle').textContent = action === 'APROVO'
+      ? 'Clica em Enviar pra confirmar a aprovacao. Pode adicionar uma nota se quiser.'
+      : action === 'AJUSTAR'
+      ? 'Descreve em texto o que vc quer ajustar. Quanto mais especifico, melhor.'
+      : 'Me conta o motivo pra eu refazer do zero no caminho certo.';
+    document.getElementById('feedback-text').value = '';
+    document.getElementById('modal-status').className = 'modal-status';
+    document.getElementById('modal-status').textContent = '';
+    document.getElementById('feedback-modal').classList.add('show');
+    setTimeout(() => document.getElementById('feedback-text').focus(), 100);
+  }
+  function closeModal() {
+    document.getElementById('feedback-modal').classList.remove('show');
+  }
+  async function submitFeedback() {
+    const text = document.getElementById('feedback-text').value.trim();
+    const btn = document.getElementById('send-btn');
+    const status = document.getElementById('modal-status');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    try {
+      const res = await fetch('/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-IVS-Feedback-Key': '__IVS_FEEDBACK_KEY__' },
+        body: JSON.stringify({ doc: docName, action: currentAction, text: text, ts: new Date().toISOString() }),
+      });
+      if (res.ok) {
+        status.className = 'modal-status success';
+        status.textContent = '✓ Feedback enviado! Vou processar e retornar.';
+        document.getElementById('status-badge').textContent = currentAction + ' RECEBIDO';
+        document.getElementById('status-badge').style.background = currentAction === 'APROVO' ? '#2a8a4a' : currentAction === 'AJUSTAR' ? '#c9a24e' : '#a64a4a';
+        document.getElementById('status-badge').style.color = currentAction === 'AJUSTAR' ? '#1a1a1a' : '#fff';
+        setTimeout(closeModal, 1800);
+      } else {
+        status.className = 'modal-status error';
+        status.textContent = '✗ Erro ao enviar (HTTP ' + res.status + '). Tenta de novo.';
+      }
+    } catch (e) {
+      status.className = 'modal-status error';
+      status.textContent = '✗ Erro de rede. Tenta de novo.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar';
+    }
+  }
+  // Close modal on Escape or click outside
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.getElementById('feedback-modal').addEventListener('click', e => {
+    if (e.target.id === 'feedback-modal') closeModal();
+  });
+</script>
+</body>
+</html>

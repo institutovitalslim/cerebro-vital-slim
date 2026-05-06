@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programa de Acompanhamento IVS — Tatiane com Exames Completos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f4efe8;--surface:#fffdf9;--surface2:#fbf6f0;--ink:#2d241d;--muted:#76685b;--line:#eadfce;--gold:#b18a49;--gold-soft:#d7ba7f;--brown:#4f3a29;--brown-deep:#342418;--green:#5d7e68;--red:#b35d50;--yellow:#b18a49;--shadow:0 20px 60px rgba(61,45,31,.08);--radius-xl:32px;--radius-lg:22px;--max:1260px}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,sans-serif;color:var(--ink);background:radial-gradient(circle at top left,rgba(215,186,127,.14),transparent 24%),radial-gradient(circle at top right,rgba(177,138,73,.08),transparent 22%),linear-gradient(180deg,#f7f2eb 0%,#f3ede6 100%);line-height:1.6}.wrap{width:min(100%,1500px);margin:0 auto;padding:28px}.section{width:min(100%,var(--max));margin:0 auto 26px;background:var(--surface);border:1px solid rgba(177,138,73,.14);border-radius:32px;box-shadow:var(--shadow);overflow:hidden}.inner{padding:56px}.hero{background:linear-gradient(135deg,rgba(52,36,24,.98),rgba(79,58,41,.96)),var(--brown-deep);color:#fff;position:relative}.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 14%,rgba(215,186,127,.18),transparent 22%);pointer-events:none}.eyebrow{display:inline-flex;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--gold-soft);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.14em}h1,h2,h3{font-family:"Playfair Display",serif;margin:0 0 14px;line-height:1.08}h1{font-size:clamp(36px,5vw,66px);max-width:900px}h2{font-size:clamp(28px,3.2vw,42px);color:var(--brown)}h3{font-size:22px;color:var(--brown)}p{margin:0 0 14px}.lead{font-size:20px;color:rgba(255,255,255,.86);max-width:780px}.lead-dark{font-size:18px;color:var(--muted);max-width:900px}.gold{color:var(--gold)}.small{font-size:14px;color:var(--muted)}.hero-grid,.grid-2,.grid-3,.stats{display:grid;gap:20px}.hero-grid{grid-template-columns:1.4fr .9fr;position:relative;z-index:1;align-items:end}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:30px}.hero-card,.card,.metric,.quote,.focus-box{border-radius:22px;border:1px solid var(--line);background:var(--surface2)}.hero-card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);padding:28px;backdrop-filter:blur(6px)}.card,.metric,.quote,.focus-box{padding:24px}.section-label{display:block;margin-bottom:16px;color:var(--gold);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.pill{padding:10px 14px;border-radius:999px;background:rgba(215,186,127,.14);color:#fff;border:1px solid rgba(215,186,127,.18);font-size:14px;font-weight:700}.patient-name{font-size:30px;font-weight:800;margin-bottom:8px}.metric-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800}.metric-value{font-size:32px;color:var(--brown);font-weight:800;margin:6px 0 8px}.quote{background:linear-gradient(180deg,rgba(177,138,73,.10),rgba(177,138,73,.04));border-left:5px solid var(--gold);color:var(--brown)}.signal{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}.signal:before{content:"";width:10px;height:10px;border-radius:50%}.signal-green{background:rgba(93,126,104,.12);color:var(--green)}.signal-green:before{background:var(--green)}.signal-yellow{background:rgba(177,138,73,.16);color:var(--brown)}.signal-yellow:before{background:var(--yellow)}.signal-red{background:rgba(179,93,80,.12);color:var(--red)}.signal-red:before{background:var(--red)}.signal-gray{background:rgba(118,104,91,.12);color:var(--muted)}.signal-gray:before{background:var(--muted)}ul.clean{list-style:none;margin:0;padding:0;display:grid;gap:10px}ul.clean li{position:relative;padding-left:22px}ul.clean li:before{content:'•';position:absolute;left:0;color:var(--gold);font-weight:900}.table{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.table th,.table td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.table th{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}.table tr:hover td{background:#fffaf3}.subhead{margin-top:28px;margin-bottom:8px;font-size:20px;color:var(--brown)}@media (max-width:980px){.hero-grid,.grid-2,.grid-3,.stats{grid-template-columns:1fr}.inner{padding:32px 22px}.wrap{padding:12px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="section hero">
+      <div class="inner">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Instituto Vital Slim · exames completos</span>
+            <h1>Tatiane, aqui estão <span class="gold">todos os exames presentes no material</span>, com destaque visual para o que mais merece atenção.</h1>
+            <p class="lead">Mantivemos os grandes pontos de alerta em evidência, mas agora toda a base laboratorial analisada aparece na apresentação para leitura completa e contextualizada.</p>
+            <div class="pill-row">
+              <div class="pill">Todos os exames incluídos</div>
+              <div class="pill">Sinalizadores visuais</div>
+              <div class="pill">Leitura consultiva</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="small" style="color:rgba(255,255,255,.74);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;">Paciente</div>
+            <div class="patient-name">Tatiane Anita Almeida de Souza Leao Cruz</div>
+            <p><strong>Nasc.:</strong> 09/10/1987</p>
+            <p><strong>Objetivo desta peça:</strong><br>apoiar a conversa de acompanhamento com visão ampla do material laboratorial anexado.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="metric"><div class="metric-title">Muito alterados</div><div class="metric-value">4+</div><div class="small">PCR, VHS, Vitamina C, Testosterona livre</div></div>
+          <div class="metric"><div class="metric-title">Alterados / limítrofes</div><div class="metric-value">8+</div><div class="small">LDL, colesterol total, ferritina funcional, urina e outros</div></div>
+          <div class="metric"><div class="metric-title">Dentro da referência</div><div class="metric-value">Maioria</div><div class="small">Boa parte do painel está estável</div></div>
+          <div class="metric"><div class="metric-title">Leitura correta</div><div class="metric-value" style="font-size:22px;line-height:1.3;">Contexto clínico</div><div class="small">Especialmente hormônios e urina</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Destaques principais</span>
+        <h2>O que mais chama atenção primeiro</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card"><h3>Inflamação</h3><p>PCR e VHS elevados sustentam um sinal de alerta inflamatório que merece leitura cuidadosa.</p></div>
+          <div class="card"><h3>Perfil lipídico</h3><p>Colesterol total e LDL aparecem acima do desejável, reforçando o racional de acompanhamento metabólico.</p></div>
+          <div class="card"><h3>Reserva funcional</h3><p>Ferritina e saturação no limite inferior, somadas à vitamina C baixa, podem conversar com energia e vitalidade.</p></div>
+          <div class="card"><h3>Eixo hormonal</h3><p>Estradiol precisa de fase do ciclo, e testosterona livre baixa chama atenção para leitura mais fina do caso.</p></div>
+        </div>
+        <div class="quote" style="margin-top:20px;">Seu corpo não está te sabotando — ele está te mostrando que, com o cuidado certo, ainda existe muito espaço para recuperar energia, equilíbrio e confiança.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Exames completos · PDF 1</span>
+        <h2>Marcadores imunológicos, hormonais e urinários</h2>
+
+        <h3 class="subhead">Painel imunológico / glúten</h3>
+        <table class="table"><thead><tr><th>Exame</th><th>Sinalizador</th><th>Resultado</th><th>Referência</th></tr></thead><tbody>
+          <tr><td>Anti Gliadina Deaminada IgA</td><td><span class="signal signal-green">Normal</span></td><td>0,90 EliA U/mL</td><td>Não reagente &lt; 5,0</td></tr>
+          <tr><td>Anti Gliadina Deaminada IgG</td><td><span class="signal signal-green">Normal</span></td><td>&lt; 0,6 EliA U/mL</td><td>Não reagente &lt; 5,0</td></tr>
+          <tr><td>Anti-Endomísio IgA</td><td><span class="signal signal-green">Normal</span></td><td>Não reagente</td><td>Não reagente</td></tr>
+        </tbody></table>
+
+        <h3 class="subhead">Hormonal feminino e reguladores</h3>
+        <table class="table"><thead><tr><th>Exame</th><th>Sinalizador</th><th>Resultado</th><th>Referência</th></tr></thead><tbody>
+          <tr><td>Estradiol</td><td><span class="signal signal-gray">Depende da fase</span></td><td>20,10 pg/mL</td><td>Varia conforme fase do ciclo</td></tr>
+          <tr><td>FSH</td><td><span class="signal signal-green">Normal</span></td><td>7,56 mUI/mL</td><td>Fase folicular 3,5 a 12,5</td></tr>
+          <tr><td>LH</td><td><span class="signal signal-green">Normal</span></td><td>9,19 mUI/mL</td><td>Fase folicular 2,4 a 12,6</td></tr>
+          <tr><td>Progesterona</td><td><span class="signal signal-green">Normal</span></td><td>0,23 ng/mL</td><td>Compatível com fase folicular</td></tr>
+          <tr><td>Prolactina</td><td><span class="signal signal-green">Normal</span></td><td>8,30 ng/mL</td><td>4,79 a 23,3</td></tr>
+          <tr><td>PTH Intacto</td><td><span class="signal signal-yellow">Limítrofe</span></td><td>15 pg/mL</td><td>15,0 a 65,0</td></tr>
+          <tr><td>SHBG</td><td><span class="signal signal-green">Normal</span></td><td>45,3 nmol/L</td><td>32,4 a 128</td></tr>
+          <tr><td>IGF-1</td><td><span class="signal signal-green">Normal</span></td><td>174 ng/mL</td><td>76 a 277</td></tr>
+          <tr><td>T3 Livre</td><td><span class="signal signal-green">Normal</span></td><td>2,63 pg/mL</td><td>2,0 a 4,4</td></tr>
+          <tr><td>Testosterona Livre</td><td><span class="signal signal-red">Muito alterado</span></td><td>0,23 ng/dL</td><td>Acima desse valor no laudo</td></tr>
+          <tr><td>Testosterona Total</td><td><span class="signal signal-green">Normal</span></td><td>15,40 ng/dL</td><td>8 a 49</td></tr>
+          <tr><td>ACTH / Anti-GAD*</td><td><span class="signal signal-green">Normal</span></td><td>Anti-GAD &lt; 5 UI/mL</td><td>Negativo até 10</td></tr>
+          <tr><td>Glicose 6-Fosfato Desidrogenase</td><td><span class="signal signal-green">Normal</span></td><td>11,09 U/g Hb</td><td>Feminino &gt; 5,84</td></tr>
+        </tbody></table>
+        <p class="small">*Anti-GAD é autoanticorpo; mantido aqui porque aparece no mesmo material extraído.</p>
+
+        <h3 class="subhead">Urina tipo I</h3>
+        <table class="table"><thead><tr><th>Parâmetro</th><th>Sinalizador</th><th>Resultado</th><th>Referência</th></tr></thead><tbody>
+          <tr><td>Densidade</td><td><span class="signal signal-green">Normal</span></td><td>1.012</td><td>1.010 a 1.030</td></tr>
+          <tr><td>pH</td><td><span class="signal signal-green">Normal</span></td><td>6,0</td><td>5,0 a 8,0</td></tr>
+          <tr><td>Sangue</td><td><span class="signal signal-red">Muito alterado</span></td><td>Positivo +++</td><td>Negativo</td></tr>
+          <tr><td>Nitrito</td><td><span class="signal signal-red">Muito alterado</span></td><td>Positivo</td><td>Negativo</td></tr>
+          <tr><td>Leucócitos</td><td><span class="signal signal-yellow">Alterado</span></td><td>19,14 /µL</td><td>Até 7</td></tr>
+          <tr><td>Hemácias</td><td><span class="signal signal-yellow">Alterado</span></td><td>7,04 /µL</td><td>Até 5</td></tr>
+          <tr><td>Células epiteliais</td><td><span class="signal signal-gray">Depende do contexto</span></td><td>Frequentes</td><td>Correlacionar clinicamente</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Exames completos · PDF 2</span>
+        <h2>Bioquímica, vitaminas, tireoide, lipidograma e hemograma</h2>
+
+        <h3 class="subhead">Bioquímica geral e função orgânica</h3>
+        <table class="table"><thead><tr><th>Exame</th><th>Sinalizador</th><th>Resultado</th><th>Referência</th></tr></thead><tbody>
+          <tr><td>ACTH</td><td><span class="signal signal-green">Normal</span></td><td>26,0 pg/mL</td><td>&lt; 46,0</td></tr>
+          <tr><td>Aldolase</td><td><span class="signal signal-green">Normal</span></td><td>6,3 U/L</td><td>Até 7,6</td></tr>
+          <tr><td>Ácido úrico</td><td><span class="signal signal-green">Normal</span></td><td>3,6 mg/dL</td><td>2,4 a 5,7</td></tr>
+          <tr><td>Cálcio iônico</td><td><span class="signal signal-green">Normal</span></td><td>1,11 mmol/L</td><td>1,0 a 1,32</td></tr>
+          <tr><td>Ferro sérico</td><td><span class="signal signal-green">Normal</span></td><td>79,00 µg/dL</td><td>Dentro do contexto do painel</td></tr>
+          <tr><td>Índice de saturação</td><td><span class="signal signal-yellow">Limítrofe</span></td><td>20%</td><td>20 a 50%</td></tr>
+          <tr><td>Cloro</td><td><span class="signal signal-green">Normal</span></td><td>103 mmol/L</td><td>98 a 107</td></tr>
+          <tr><td>CPK</td><td><span class="signal signal-green">Normal</span></td><td>89 U/L</td><td>&lt; 170</td></tr>
+          <tr><td>Creatinina</td><td><span class="signal signal-green">Normal</span></td><td>0,86 mg/dL</td><td>0,50 a 0,90</td></tr>
+          <tr><td>eGFR</td><td><span class="signal signal-green">Normal</span></td><td>86 mL/min</td><td>&gt; 60</td></tr>
+          <tr><td>Fosfatase alcalina</td><td><span class="signal signal-green">Normal</span></td><td>95 U/L</td><td>35 a 104</td></tr>
+          <tr><td>GGT</td><td><span class="signal signal-green">Normal</span></td><td>10 U/L</td><td>5 a 36</td></tr>
+          <tr><td>Glicose</td><td><span class="signal signal-green">Normal</span></td><td>96 mg/dL</td><td>65 a 100</td></tr>
+          <tr><td>Homocisteína</td><td><span class="signal signal-green">Normal</span></td><td>9,90 µmol/L</td><td>&lt; 15</td></tr>
+          <tr><td>LDH</td><td><span class="signal signal-green">Normal</span></td><td>177 U/L</td><td>Até 250</td></tr>
+          <tr><td>Magnésio</td><td><span class="signal signal-green">Normal</span></td><td>2,4 mg/dL</td><td>1,6 a 2,4</td></tr>
+          <tr><td>PCR alta sensibilidade</td><td><span class="signal signal-red">Muito alterado</span></td><td>3,43 mg/L</td><td>Baixo risco &lt; 1,0</td></tr>
+          <tr><td>Potássio</td><td><span class="signal signal-green">Normal</span></td><td>4,8 mmol/L</td><td>3,5 a 5,1</td></tr>
+          <tr><td>Sódio</td><td><span class="signal signal-green">Normal</span></td><td>142,1 mmol/L</td><td>136 a 145</td></tr>
+          <tr><td>Proteínas totais</td><td><span class="signal signal-green">Normal</span></td><td>6,74 g/dL</td><td>6 a 8</td></tr>
+          <tr><td>TGO (AST)</td><td><span class="signal signal-green">Normal</span></td><td>19 U/L</td><td>Até 32</td></tr>
+          <tr><td>TGP (ALT)</td><td><span class="signal signal-green">Normal</span></td><td>19 U/L</td><td>Até 33</td></tr>
+          <tr><td>Ureia</td><td><span class="signal signal-green">Normal</span></td><td>24 mg/dL</td><td>16,6 a 48,5</td></tr>
+          <tr><td>Hemoglobina glicada</td><td><span class="signal signal-green">Normal</span></td><td>5,51%</td><td>4,8 a 5,7</td></tr>
+          <tr><td>VHS</td><td><span class="signal signal-red">Muito alterado</span></td><td>38 mm/h</td><td>Até 19</td></tr>
+          <tr><td>Anti-Tireoglobulina</td><td><span class="signal signal-green">Normal</span></td><td>20,30 UI/mL</td><td>Até 115</td></tr>
+          <tr><td>Anti-TPO</td><td><span class="signal signal-green">Normal</span></td><td>14,9 UI/mL</td><td>&lt; 34</td></tr>
+          <tr><td>Vitamina B12</td><td><span class="signal signal-green">Normal</span></td><td>658 pg/mL</td><td>197 a 771</td></tr>
+          <tr><td>Cortisol manhã</td><td><span class="signal signal-green">Normal</span></td><td>13,10 µg/dL</td><td>4,82 a 19,5</td></tr>
+          <tr><td>Ferritina</td><td><span class="signal signal-yellow">Limítrofe</span></td><td>30 ng/mL</td><td>13 a 150</td></tr>
+          <tr><td>Ácido fólico</td><td><span class="signal signal-green">Normal</span></td><td>6,33 ng/mL</td><td>3,89 a 26,8</td></tr>
+          <tr><td>Insulina</td><td><span class="signal signal-yellow">Limítrofe</span></td><td>2,46 µU/mL</td><td>2,6 a 24,9</td></tr>
+          <tr><td>T4 Livre</td><td><span class="signal signal-green">Normal</span></td><td>1,13 ng/dL</td><td>0,93 a 1,7</td></tr>
+          <tr><td>TSH</td><td><span class="signal signal-green">Normal</span></td><td>2,08 µIU/mL</td><td>0,27 a 4,20</td></tr>
+          <tr><td>Vitamina D 25-OH</td><td><span class="signal signal-green">Normal</span></td><td>32,90 ng/mL</td><td>30 a 60 desejável</td></tr>
+          <tr><td>Vitamina A</td><td><span class="signal signal-green">Normal</span></td><td>0,62 mg/L</td><td>0,30 a 0,70</td></tr>
+          <tr><td>Vitamina C</td><td><span class="signal signal-red">Muito alterado</span></td><td>1,9 mg/L</td><td>4,6 a 15,0</td></tr>
+          <tr><td>Zinco sérico</td><td><span class="signal signal-green">Normal</span></td><td>83 µg/dL</td><td>70 a 120</td></tr>
+        </tbody></table>
+
+        <h3 class="subhead">Lipidograma</h3>
+        <table class="table"><thead><tr><th>Exame</th><th>Sinalizador</th><th>Resultado</th><th>Referência</th></tr></thead><tbody>
+          <tr><td>Colesterol total</td><td><span class="signal signal-yellow">Alterado</span></td><td>226,8 mg/dL</td><td>&lt; 190</td></tr>
+          <tr><td>HDL</td><td><span class="signal signal-green">Normal</span></td><td>54,1 mg/dL</td><td>&gt; 40</td></tr>
+          <tr><td>LDL</td><td><span class="signal signal-yellow">Alterado</span></td><td>153 mg/dL</td><td>&lt; 130</td></tr>
+          <tr><td>Triglicérides</td><td><span class="signal signal-green">Normal</span></td><td>92,5 mg/dL</td><td>&lt; 150</td></tr>
+        </tbody></table>
+
+        <h3 class="subhead">Hemograma resumido</h3>
+        <table class="table"><thead><tr><th>Exame</th><th>Sinalizador</th><th>Resultado</th><th>Referência</th></tr></thead><tbody>
+          <tr><td>Eritrócitos</td><td><span class="signal signal-green">Normal</span></td><td>5,00</td><td>4 a 5</td></tr>
+          <tr><td>Hemoglobina</td><td><span class="signal signal-green">Normal</span></td><td>14,4 g/dL</td><td>12 a 15</td></tr>
+          <tr><td>Hematócrito</td><td><span class="signal signal-green">Normal</span></td><td>44,9%</td><td>36 a 46</td></tr>
+          <tr><td>Leucócitos totais</td><td><span class="signal signal-green">Normal</span></td><td>7.170 /mm³</td><td>4.000 a 10.000</td></tr>
+          <tr><td>Plaquetas</td><td><span class="signal signal-green">Normal</span></td><td>254.000 /mm³</td><td>150.000 a 400.000</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Leitura consultiva</span>
+        <h2>Como usar isso na apresentação</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card"><h3>Manter os destaques em cima</h3><p>Inflamação, perfil lipídico, reserva funcional e eixo hormonal continuam puxando a narrativa principal.</p></div>
+          <div class="card"><h3>Mostrar completude abaixo</h3><p>Todos os exames ficam presentes para reforçar profundidade, transparência e percepção de acompanhamento individualizado.</p></div>
+        </div>
+        <div class="quote" style="margin-top:20px;">Assim a apresentação fica forte em conversão sem perder completude clínica percebida.</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

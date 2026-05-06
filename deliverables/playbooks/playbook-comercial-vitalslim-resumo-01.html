@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playbook Comercial Vital Slim - Resumo Visual</title>
+  <style>
+    :root {
+      --bg: #f3f5f7;
+      --card: #ffffff;
+      --ink: #17324d;
+      --muted: #4c5d70;
+      --line: #cfd8e3;
+      --blue: #133b66;
+      --green: #1f7a56;
+      --gold: #d4af37;
+      --soft-blue: #eef4fb;
+      --soft-green: #edf8f3;
+      --soft-gold: #fbf7e8;
+      --radius: 18px;
+      --shadow: 0 8px 24px rgba(18, 44, 74, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      padding: 24px;
+    }
+    .sheet {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .title {
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 20px 24px;
+      margin-bottom: 18px;
+    }
+    .title h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: 0.3px;
+      color: var(--ink);
+    }
+    .title h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .band {
+      margin: 18px 0 12px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 14px;
+      padding: 12px 18px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+    }
+    .intro {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: var(--ink);
+    }
+    .card p, .card li {
+      font-size: 18px;
+      line-height: 1.45;
+      color: #23384f;
+      margin: 0;
+    }
+    .card ul {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 8px;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .panel {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .panel .head {
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .panel.blue .head { background: var(--blue); }
+    .panel.green .head { background: var(--green); }
+    .panel .body {
+      padding: 16px;
+      background: #fff;
+      display: grid;
+      gap: 14px;
+    }
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--soft-blue);
+    }
+    .green .mini { background: var(--soft-green); }
+    .mini h4 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: var(--ink);
+    }
+    .mini p {
+      font-size: 17px;
+      line-height: 1.45;
+    }
+    .three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .three .card {
+      background: var(--soft-gold);
+    }
+    .footer-box {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      background: #f8fbff;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .small-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #66788b;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .intro, .split, .three { grid-template-columns: 1fr; }
+      .title h1 { font-size: 28px; }
+      .title h2, .band, .panel .head, .card h3 { font-size: 20px; }
+      .card p, .card li, .mini p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <section class="title">
+      <h1>ALGORITMO COMERCIAL VITAL SLIM</h1>
+      <h2>Secretária, Closer, Follow-up e Objeções em Contexto Premium e Consultivo</h2>
+    </section>
+
+    <div class="band">PONTO DE ENTRADA E TRIAGEM COMERCIAL</div>
+
+    <section class="intro">
+      <article class="card">
+        <h3>Entrada da conversa</h3>
+        <ul>
+          <li><strong>Velocidade importa:</strong> responder rápido aumenta a conversão.</li>
+          <li><strong>Diagnóstico antes de proposta:</strong> entender dor, objetivo e momento antes de falar de preço.</li>
+          <li><strong>Perguntas conduzem melhor:</strong> menos monólogo, mais perguntas curtas e úteis.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Regra central do tom</h3>
+        <ul>
+          <li>Clareza vende mais que pressão.</li>
+          <li>Objeção geralmente é insegurança, não rejeição final.</li>
+          <li>Toda conversa precisa terminar com próximo passo explícito.</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="band">CAMINHO A, SECRETÁRIA / RECEPÇÃO, E CAMINHO B, CLOSER / COMERCIAL</div>
+
+    <section class="split">
+      <article class="panel blue">
+        <div class="head">CAMINHO A, SECRETÁRIA / RECEPÇÃO</div>
+        <div class="body">
+          <div class="mini">
+            <h4>Função principal</h4>
+            <p>Acolher rápido, entender a motivação inicial, reduzir atrito no agendamento e organizar o próximo passo com segurança.</p>
+          </div>
+          <div class="mini">
+            <h4>Boas práticas</h4>
+            <p>Triagem objetiva, poucas mensagens, CTA claro, confirmação de agenda, follow-up leve e postura profissional.</p>
+          </div>
+          <div class="mini">
+            <h4>Erros comuns</h4>
+            <p>Responder como robô, mandar preço cedo, não investigar motivação e terminar a conversa sem direção.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel green">
+        <div class="head">CAMINHO B, CLOSER / COMERCIAL</div>
+        <div class="body">
+          <div class="mini">
+            <h4>Função principal</h4>
+            <p>Aprofundar dor, construir valor, contornar objeções com elegância e conduzir a decisão de forma ética e consultiva.</p>
+          </div>
+          <div class="mini">
+            <h4>Boas práticas</h4>
+            <p>Diagnóstico forte, perguntas inteligentes, construção de valor percebido, follow-up estratégico e leitura de timing.</p>
+          </div>
+          <div class="mini">
+            <h4>Erros comuns</h4>
+            <p>Argumentar cedo demais, aceitar “vou pensar” sem explorar, soar agressivo ou vender sem contexto clínico.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="band">IMPLEMENTAÇÃO PRÁTICA NO WHATSAPP E NO FOLLOW-UP</div>
+
+    <section class="split">
+      <article class="panel blue">
+        <div class="head">SCRIPTS CURTOS DE CONDUÇÃO</div>
+        <div class="body">
+          <div class="mini">
+            <h4>Primeiro contato</h4>
+            <p>“Que bom falar com você. Me conta: o que fez você buscar ajuda neste momento?”</p>
+          </div>
+          <div class="mini">
+            <h4>Triagem com direção</h4>
+            <p>“Hoje, o que mais te incomoda ou preocupa em relação a isso?”</p>
+          </div>
+          <div class="mini">
+            <h4>Condução para avaliação</h4>
+            <p>“Pelo que você me contou, o ideal é agendarmos uma avaliação para entender seu caso com mais profundidade.”</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel green">
+        <div class="head">FRAMEWORKS DE FOLLOW-UP</div>
+        <div class="body">
+          <div class="mini">
+            <h4>Retomada</h4>
+            <p>Retomar contato e validar se aquilo ainda é prioridade.</p>
+          </div>
+          <div class="mini">
+            <h4>Clareza</h4>
+            <p>Abrir espaço para dúvida real sem pressionar a decisão.</p>
+          </div>
+          <div class="mini">
+            <h4>Decisão</h4>
+            <p>Oferecer dois horários ou dois próximos passos simples.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="band">OBJEÇÕES, DIAGNÓSTICO E ROTINA OPERACIONAL</div>
+
+    <section class="three">
+      <article class="card">
+        <h3>Objeções</h3>
+        <ul>
+          <li>Preço: reposicionar valor e contexto.</li>
+          <li>Distância: reforçar personalização e segurança.</li>
+          <li>“Vou pensar”: investigar dúvida real.</li>
+          <li>“Manda informações”: qualificar antes de despejar conteúdo.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Perguntas de diagnóstico</h3>
+        <ul>
+          <li>O que virou prioridade agora?</li>
+          <li>O que você já tentou antes?</li>
+          <li>O que mais te preocupa se continuar assim?</li>
+          <li>O que te impede hoje de avançar com segurança?</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Mini rotina diária</h3>
+        <ul>
+          <li>Responder leads novos rápido.</li>
+          <li>Confirmar agenda do dia seguinte.</li>
+          <li>Retomar leads mornos.</li>
+          <li>Registrar objeções e revisar aprendizados.</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="band">OBJETIVO CENTRAL DO PLAYBOOK</div>
+
+    <div class="footer-box">
+      Conduzir o paciente com clareza, confiança e direção, aumentando conversão sem perder o posicionamento ético, premium e consultivo do Instituto Vital Slim.
+    </div>
+
+    <div class="small-note">
+      Base conceitual sintetizada de fontes práticas de vendas consultivas, scripts, objection handling e follow-up adaptadas para contexto clínico.
+    </div>
+  </main>
+</body>
+</html>

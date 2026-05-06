@@ -99,7 +99,9 @@ Depois:
 - autoridade em 1 frase;
 - microcompromisso > fechamento pesado;
 - condição real > desconto seco;
-- fechar com pergunta objetiva.
+- fechar com pergunta objetiva;
+- se houver conflito de horário, atraso ou pedido de mudança, tratar como remarcação mesmo sem a expressão exata “quero remarcar”;
+- se a lead repetir a mesma mensagem duas vezes, responder em até 5 minutos com pergunta direta que avance o atendimento.
 
 ---
 
@@ -162,7 +164,7 @@ O principal é converter bem no primeiro contato.
 6. pergunta objetiva
 
 ### Exemplo de saída
-> "Perfeito. Então me confirma só uma coisa: vc prefere [A] ou [B]?"
+> "Perfeito. Então me confirma só uma coisa: você prefere [A] ou [B]?"
 
 ---
 

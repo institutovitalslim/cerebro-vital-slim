@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatório Executivo — Mapeamento IVS</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121936;
+      --panel-2: #182247;
+      --text: #eef2ff;
+      --muted: #b9c2e6;
+      --line: #2b376b;
+      --gold: #d4af37;
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --blue: #60a5fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg), #0f1731 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(212,175,55,.18), rgba(96,165,250,.10));
+      border: 1px solid rgba(212,175,55,.35);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      line-height: 1.15;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 24px 0 28px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .big {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .section {
+      margin-top: 30px;
+    }
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+    }
+    th, td {
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th {
+      background: var(--panel-2);
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    tr:last-child td { border-bottom: none; }
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .alta { background: rgba(239,68,68,.15); color: #fecaca; border: 1px solid rgba(239,68,68,.35); }
+    .mediaalta { background: rgba(245,158,11,.15); color: #fde68a; border: 1px solid rgba(245,158,11,.35); }
+    .media { background: rgba(96,165,250,.15); color: #bfdbfe; border: 1px solid rgba(96,165,250,.35); }
+    .baixa { background: rgba(34,197,94,.15); color: #bbf7d0; border: 1px solid rgba(34,197,94,.35); }
+    ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+    li + li { margin-top: 6px; }
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 900px) {
+      .grid, .cols { grid-template-columns: 1fr; }
+      h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Relatório Executivo — Mapeamento de Projetos e Melhorias em Andamento</h1>
+      <div class="sub">Instituto Vital Slim • consolidado em 29/04/2026</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Frentes mapeadas</h3>
+        <div class="big">7</div>
+      </div>
+      <div class="card">
+        <h3>Prioridade alta</h3>
+        <div class="big">4</div>
+      </div>
+      <div class="card">
+        <h3>Prioridade média</h3>
+        <div class="big">2</div>
+      </div>
+      <div class="card">
+        <h3>Prioridade baixa</h3>
+        <div class="big">1</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Quadro de gestão executivo</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Projeto</th>
+              <th>Status</th>
+              <th>Impacto</th>
+              <th>Próxima ação</th>
+              <th>Gargalo</th>
+              <th>Prioridade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sistema de Reels IVS</strong></td>
+              <td>Em evolução ativa</td>
+              <td>Muito alto</td>
+              <td>Organizar esteira visível: referência → leitura → adaptação → roteiro → produção</td>
+              <td>Aprendizado espalhado entre memória, skill e playbook</td>
+              <td><span class="pill alta">Alta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pipeline de Vídeo IVS</strong></td>
+              <td>Padrão definido, consolidando execução</td>
+              <td>Muito alto</td>
+              <td>Fechar fluxo único de produção com menos variação operacional</td>
+              <td>Diferença entre padrão ideal e execução corrida</td>
+              <td><span class="pill alta">Alta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Atendimento / Recuperação de Leads</strong></td>
+              <td>Melhoria incorporada</td>
+              <td>Muito alto</td>
+              <td>Transformar SPIN curto de recuperação em rotina disciplinada da operação</td>
+              <td>Consistência humana na execução</td>
+              <td><span class="pill alta">Alta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Governança do cérebro / playbooks</strong></td>
+              <td>Estruturando</td>
+              <td>Alto</td>
+              <td>Criar painel central de backlog e status por frente</td>
+              <td>Informação distribuída demais</td>
+              <td><span class="pill alta">Alta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Portal de Pré-consulta</strong></td>
+              <td>Corrigido e operacional</td>
+              <td>Alto</td>
+              <td>Manter monitoramento pós-deploy e checklist de verificação</td>
+              <td>Risco operacional de deploy/build</td>
+              <td><span class="pill mediaalta">Média-Alta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Template de Apresentação de Paciente</strong></td>
+              <td>Quase finalizado</td>
+              <td>Médio-Alto</td>
+              <td>Trocar logo pela oficial e validar versão final</td>
+              <td>Acabamento visual / brand kit</td>
+              <td><span class="pill media">Média</span></td>
+            </tr>
+            <tr>
+              <td><strong>Stitch / capacidade técnica</strong></td>
+              <td>Operacional</td>
+              <td>Baixo no IVS atual</td>
+              <td>Decidir se vira frente ativa ou fica como capacidade disponível</td>
+              <td>Prioridade de negócio indefinida</td>
+              <td><span class="pill baixa">Baixa</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section cols">
+      <div class="card">
+        <h2>Prioridade prática de ataque</h2>
+        <ul>
+          <li><strong>Tier 1 — mexer agora:</strong> Sistema de Reels IVS, Pipeline de Vídeo IVS, Atendimento/Recuperação de Leads, Governança central do backlog</li>
+          <li><strong>Tier 2 — manter redondo:</strong> Portal de Pré-consulta, Template de Apresentação</li>
+          <li><strong>Tier 3 — decidir depois:</strong> Stitch</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Leitura executiva</h2>
+        <ul>
+          <li>O maior ganho agora não está em abrir novas frentes, e sim em centralizar o que já existe.</li>
+          <li>O risco principal é a dispersão entre memória, skills, playbooks e ajustes técnicos.</li>
+          <li>O próximo salto operacional vem de visibilidade, priorização e rotina estável.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>Recomendação direta</h2>
+      <p>Criar um quadro-mestre único com dono, status, impacto, próxima ação e bloqueio de cada frente. Isso tende a reduzir retrabalho, acelerar decisão e transformar inteligência já criada em execução previsível.</p>
+    </section>
+
+    <div class="footer">
+      Arquivo gerado em HTML para compartilhamento e revisão executiva.
+    </div>
+  </div>
+</body>
+</html>

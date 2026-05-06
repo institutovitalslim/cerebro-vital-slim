@@ -1,0 +1,344 @@
+{
+  "metadata": {
+    "version": "1.1-conservador",
+    "created": "2026-05-04",
+    "description": "Biblioteca de implicações clínicas baseadas em PubMed para apresentação de pacientes IVS",
+    "total_rules": 15,
+    "review_cycle": "trimestral",
+    "updated": "2026-05-04"
+  },
+  "rules": [
+    {
+      "id": "homa-ir-resistencia",
+      "trigger": {
+        "exame": "HOMA-IR",
+        "operador": ">",
+        "valor": 2.5,
+        "categoria": "metabolico"
+      },
+      "titulo": "Resistência à insulina instalada",
+      "implicacao": {
+        "6m": "tendência pré-diabética (glicemia jejum 100-125 mg/dL)",
+        "1ano": "tendência a alteração glicêmica progressiva — necessidade de Metformina + dieta restritiva",
+        "3anos": "necessidade de intervenção medicamentosa intensiva + risco cardiovascular dobrado"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "21422106",
+        "titulo_estudo": "HOMA-IR as predictor of progression to diabetes",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21422106/"
+      },
+      "decisao": "Cada mês sem reverter = perda funcional de receptores de insulina"
+    },
+    {
+      "id": "cortisol-baixo",
+      "trigger": {
+        "exame": "Cortisol Basal",
+        "operador": "<",
+        "valor": 6.7,
+        "categoria": "adrenal"
+      },
+      "titulo": "Eixo adrenal exausto",
+      "implicacao": {
+        "6m": "Imunidade caindo — infecções recorrentes, gripes mais longas",
+        "1ano": "sintomas depressivos persistentes + ganho de peso abdominal apesar de dieta",
+        "3anos": "síndrome metabólica em desenvolvimento + redução progressiva da densidade óssea"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "19628582",
+        "titulo_estudo": "Adrenal insufficiency and metabolic consequences",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19628582/"
+      },
+      "decisao": "Eixo HPA leva 6-12 meses pra recuperar — quanto mais demora, mais difícil"
+    },
+    {
+      "id": "pcr-inflamacao",
+      "trigger": {
+        "exame": "PCR-us",
+        "operador": ">",
+        "valor": 3.0,
+        "categoria": "inflamatorio"
+      },
+      "titulo": "Inflamação crônica sistêmica",
+      "implicacao": {
+        "6m": "Placas de ateroma se formando agora — cada dia conta",
+        "1ano": "Risco cardiovascular 2x maior que população normal",
+        "3anos": "Angina ou maior probabilidade de eventos cardiovasculares"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "16352796",
+        "titulo_estudo": "C-reactive protein and cardiovascular risk",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16352796/"
+      },
+      "decisao": "Inflamação não dói — só vira sintoma quando já é tarde"
+    },
+    {
+      "id": "testo-baixa-homem",
+      "trigger": {
+        "exame": "Testosterona Total",
+        "operador": "<",
+        "valor": 300,
+        "categoria": "hormonal",
+        "sexo": "M"
+      },
+      "titulo": "Testosterona insuficiente",
+      "implicacao": {
+        "6m": "Libido cai mais 40% · sono fragmentado · concentração prejudicada",
+        "1ano": "Perda de massa muscular 8% + acúmulo gordura abdominal",
+        "3anos": "redução da densidade óssea (osteopenia inicial) + risco sintomas de humor depressivo + declínio androgênico antecipado"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "27379744",
+        "titulo_estudo": "Testosterone deficiency: cardiovascular and metabolic risks",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27379744/"
+      },
+      "decisao": "Cada ano sem tratar = densidade óssea perdida que não volta"
+    },
+    {
+      "id": "vit-d-baixa",
+      "trigger": {
+        "exame": "Vitamina D",
+        "operador": "<",
+        "valor": 30,
+        "categoria": "vitaminas"
+      },
+      "titulo": "Deficiência de vitamina D",
+      "implicacao": {
+        "6m": "Imunidade 30% reduzida · cansaço persistente",
+        "1ano": "Densidade óssea começa a cair · risco fratura aumenta",
+        "3anos": "Risco aumentado de câncer (cólon, mama, próstata)"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "23404923",
+        "titulo_estudo": "Vitamin D deficiency and chronic disease prevention",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23404923/"
+      },
+      "decisao": "Reposição leva 90 dias pra normalizar — cada dia sem é dia perdendo função imune"
+    },
+    {
+      "id": "tsh-hipotireoidismo",
+      "trigger": {
+        "exame": "TSH",
+        "operador": ">",
+        "valor": 4.0,
+        "categoria": "tireoide"
+      },
+      "titulo": "Tireoide desacelerada",
+      "implicacao": {
+        "6m": "Ganho de 3-5kg sem mudar dieta · cabelo enfraquece · pele seca",
+        "1ano": "Depressão · queda libido · colesterol sobe 20%",
+        "3anos": "Doença cardíaca + risco demência aumentado"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "24969954",
+        "titulo_estudo": "Subclinical hypothyroidism: clinical impact",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24969954/"
+      },
+      "decisao": "Tireoide deficiente envelhece o corpo 5x mais rápido"
+    },
+    {
+      "id": "dislipidemia-risco",
+      "trigger": {
+        "combinado": "Triglicérides > 150 E HDL < 40",
+        "categoria": "lipidico"
+      },
+      "titulo": "Padrão lipídico aterogênico",
+      "implicacao": {
+        "6m": "Placas pequenas formando nas coronárias",
+        "1ano": "Risco infarto +60% comparado a normal",
+        "3anos": "Pâncreas sob estresse — risco pancreatite aguda"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "20089546",
+        "titulo_estudo": "Atherogenic dyslipidemia and cardiovascular risk",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20089546/"
+      },
+      "decisao": "Esse perfil é o que mais mata homens entre 40-55 anos"
+    },
+    {
+      "id": "ferritina-alta",
+      "trigger": {
+        "exame": "Ferritina",
+        "operador": ">",
+        "valor": 400,
+        "categoria": "vitaminas",
+        "sexo": "M"
+      },
+      "titulo": "Ferro em excesso = inflamação ativa",
+      "implicacao": {
+        "6m": "Fígado já está inflamado — TGO/TGP elevados são reflexo",
+        "1ano": "Esteatose hepática evoluindo · resistência insulínica piora",
+        "3anos": "Risco hepatite crônica + alteração glicêmica progressiva"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "20736518",
+        "titulo_estudo": "Hyperferritinemia and metabolic syndrome",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20736518/"
+      },
+      "decisao": "Ferro alto sem causa identificada = bandeira vermelha hepática"
+    },
+    {
+      "id": "homocisteina-alta",
+      "trigger": {
+        "exame": "Homocisteína",
+        "operador": ">",
+        "valor": 12,
+        "categoria": "inflamatorio"
+      },
+      "titulo": "Toxicidade vascular silenciosa",
+      "implicacao": {
+        "6m": "Endotélio vascular sofrendo dano contínuo",
+        "1ano": "Risco evento cerebrovascular +75% · risco trombose venosa profunda",
+        "3anos": "declínio cognitivo importante precoce — risco alterações cognitivas degenerativas 2x maior"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "12036894",
+        "titulo_estudo": "Hyperhomocysteinemia and stroke/dementia risk",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12036894/"
+      },
+      "decisao": "Reposição B12/B6/Folato corrige em 90 dias — sem tratar, dano é cumulativo"
+    },
+    {
+      "id": "hba1c-pre-diabetes",
+      "trigger": {
+        "exame": "HbA1c",
+        "operador": "entre",
+        "valor": [
+          5.7,
+          6.4
+        ],
+        "categoria": "metabolico"
+      },
+      "titulo": "Pré-diabetes ativo",
+      "implicacao": {
+        "6m": "25% de chance de evoluir para alteração glicêmica progressiva",
+        "1ano": "50% de chance — sem mudança, é estatística",
+        "3anos": "75% — você JÁ é diabético, só sem o nome ainda"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "19833885",
+        "titulo_estudo": "Progression from prediabetes to type 2 diabetes",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19833885/"
+      },
+      "decisao": "Janela de reversão: 12-18 meses. Depois, é controle, não cura"
+    },
+    {
+      "id": "ggt-fígado",
+      "trigger": {
+        "exame": "GGT",
+        "operador": ">",
+        "valor": 60,
+        "categoria": "hepatico"
+      },
+      "titulo": "Sobrecarga hepática",
+      "implicacao": {
+        "6m": "Esteatose hepática (gordura no fígado) já estabelecida",
+        "1ano": "Função hepática começa a comprometer detox de hormônios",
+        "3anos": "Risco cirrose alcoólica/não-alcoólica em 5-10 anos"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "18458086",
+        "titulo_estudo": "GGT as marker of liver disease and metabolic syndrome",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18458086/"
+      },
+      "decisao": "Fígado regenera — mas só se você der espaço pra isso"
+    },
+    {
+      "id": "b12-alta-investigar",
+      "trigger": {
+        "exame": "Vitamina B12",
+        "operador": ">",
+        "valor": 1000,
+        "categoria": "vitaminas"
+      },
+      "titulo": "B12 elevada — sinal de alerta",
+      "implicacao": {
+        "geral": "Pode estar mascarando: doença hepática · síndrome mielodisplásica · resistência à B12 (MTHFR)",
+        "investigar": "Necessária dosagem de homocisteína + ácido metilmalônico + perfil hepático"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "23981510",
+        "titulo_estudo": "Elevated B12: clinical significance",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23981510/"
+      },
+      "decisao": "B12 alta sem suplementação = procurar causa hoje, não amanhã"
+    },
+    {
+      "id": "cortisol-alto-cronico",
+      "trigger": {
+        "exame": "Cortisol Basal",
+        "operador": ">",
+        "valor": 25,
+        "categoria": "adrenal"
+      },
+      "titulo": "Estresse crônico fisiológico",
+      "implicacao": {
+        "6m": "Pressão arterial sobe · ganho gordura abdominal acelera",
+        "1ano": "Ansiedade clínica · insônia persistente · insulina sobe",
+        "3anos": "Síndrome de Cushing funcional · pele fina · diabetes"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "30207646",
+        "titulo_estudo": "Chronic stress and cortisol — health consequences",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30207646/"
+      },
+      "decisao": "Cortisol alto é o veneno mais lento — você só sente 5 anos depois"
+    },
+    {
+      "id": "lh-suprimido-homem",
+      "trigger": {
+        "exame": "LH",
+        "operador": "<",
+        "valor": 1.0,
+        "categoria": "hormonal",
+        "sexo": "M"
+      },
+      "titulo": "Hipogonadismo central",
+      "implicacao": {
+        "geral": "Hipófise não está estimulando os testículos · investigar adenoma + função tireoidiana"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "24517145",
+        "titulo_estudo": "Central hypogonadism diagnosis",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24517145/"
+      },
+      "decisao": "LH suprimido em homem = exame de imagem da hipófise pode ser necessário"
+    },
+    {
+      "id": "estradiol-baixo-homem",
+      "trigger": {
+        "exame": "Estradiol",
+        "operador": "<",
+        "valor": 30,
+        "categoria": "hormonal",
+        "sexo": "M"
+      },
+      "titulo": "Estradiol insuficiente (homem)",
+      "implicacao": {
+        "6m": "Cognição prejudicada — memória de curto prazo cai",
+        "1ano": "Densidade óssea começa a perder cálcio",
+        "3anos": "Osteoporose precoce + risco cardiovascular sobe"
+      },
+      "evidencia": {
+        "fonte": "PubMed",
+        "pmid": "23737558",
+        "titulo_estudo": "Estradiol deficiency in men: bone and cardiovascular impact",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23737558/"
+      },
+      "decisao": "Estradiol é tão essencial pro homem quanto pra mulher"
+    }
+  ]
+}

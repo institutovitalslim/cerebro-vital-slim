@@ -1,0 +1,1792 @@
+#!/usr/bin/env python3
+"""
+gerar_apresentacao_v9.py — Apresentação clínica IVS, Light cream luxury cinematic.
+
+Estrutura: landing page única (não slides) com 7 sections:
+  1. Hero (Dra. Daniely + frase boas-vindas + impacto)
+  2. Sua jornada (questionário em 8 cards)
+  3. Seus exames (alertas críticos + 10 grupos)  [TODO Parte 2]
+  4. SPIN Selling (situação/problema/implicação/necessidade)  [TODO Parte 2]
+  5. Resultados Reais (Tiaro/Silvana/Darilene antes/depois)  [TODO Parte 3]
+  6. Programa 180 dias (10 cards)  [TODO Parte 3]
+  7. CTA / Fechamento  [TODO Parte 3]
+
+Uso:
+  from gerar_apresentacao_v9 import render_apresentacao_v9
+  output_path = render_apresentacao_v9(paciente, questionario, exames, output_dir)
+"""
+from __future__ import annotations
+import base64
+import json
+import os
+from datetime import date
+from pathlib import Path
+from typing import Optional
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+ASSETS_DIR = Path("/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/assets")
+SITE_IMAGES = ASSETS_DIR / "site-images"
+BIBLIOTECA_PATH = ASSETS_DIR / "biblioteca_implicacoes.json"
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def img_b64(path: Path) -> str:
+    """Encode image to data URI base64."""
+    if not path.exists():
+        return ""
+    ext = path.suffix.lstrip(".").lower()
+    if ext == "jpg":
+        ext = "jpeg"
+    data = base64.b64encode(path.read_bytes()).decode()
+    return f"data:image/{ext};base64,{data}"
+
+
+def safe_html(s: str | None) -> str:
+    if not s:
+        return ""
+    return (str(s)
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace('"', "&quot;"))
+
+
+def calcular_idade(data_nasc_ms: int | None) -> int | None:
+    if not data_nasc_ms:
+        return None
+    from datetime import datetime
+    try:
+        d = datetime.fromtimestamp(int(data_nasc_ms) / 1000)
+        today = date.today()
+        return today.year - d.year - ((today.month, today.day) < (d.month, d.day))
+    except Exception:
+        return None
+
+
+# ---------------------------------------------------------------------------
+# CSS
+# ---------------------------------------------------------------------------
+CSS = """
+:root {
+  /* Dourado oficial */
+  --gold: #9F8844;
+  --gold-mid: #B5A05B;
+  --gold-light: #D4BC79;
+  --gold-dark: #6B5A2B;
+  --gold-shimmer: linear-gradient(135deg, #9F8844 0%, #C4A96A 50%, #9F8844 100%);
+
+  /* Cream MAIS QUENTE — sensação luxury de verdade */
+  --cream-bg: #EBDFC0;
+  --cream-surface: #F2E8CD;
+  --cream-elev: #F8F1DA;
+
+  /* Texto WARM DARK — não preto puro */
+  --text-dark: #2D2310;
+  --text-body: #4A3A1B;
+  --text-muted: #7A6634;
+
+  /* Linhas */
+  --line: rgba(107,90,43,0.30);
+  --line-soft: rgba(107,90,43,0.14);
+  --line-strong: rgba(107,90,43,0.55);
+
+  /* Severidades clínicas — sóbrias */
+  --sev-crit: #8E2417;
+  --sev-alert: #A06D0A;
+  --sev-attn: #8A7A26;
+  --sev-ok: #155527;
+  --sev-low: #432A60;
+
+  /* Tipografia */
+  --serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --sans: "Inter", "Montserrat", -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacing */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 160px;
+  --max-w: 1280px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-body);
+  background: var(--cream-bg);
+  text-rendering: optimizeLegibility;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Tipografia — pesos mais delicados pra luxury */
+h1, h2, h3 {
+  font-family: var(--serif);
+  color: var(--text-dark);
+  letter-spacing: -0.020em;
+  line-height: 1.1;
+}
+h1 { font-size: clamp(48px, 6vw, 84px); font-weight: 500; }
+h2 { font-size: clamp(38px, 4.4vw, 60px); font-weight: 500; margin-bottom: var(--s-7); }
+h3 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 500; line-height: 1.25; }
+h4 {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold-dark);
+}
+
+p {
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin-bottom: var(--s-4);
+  font-weight: 400;
+}
+p:last-child { margin-bottom: 0; }
+p.lead {
+  font-size: 22px;
+  color: var(--text-dark);
+  font-weight: 400;
+  line-height: 1.55;
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+em, .italic { font-style: italic; font-family: var(--serif); }
+strong, b { color: var(--text-dark); font-weight: 600; }
+
+.gold { color: var(--gold-dark); font-weight: 600; }
+
+/* Topbar — refinado */
+.topbar {
+  background: transparent;
+  padding: var(--s-7) var(--s-7);
+  border-bottom: 1px solid var(--line-soft);
+}
+.topbar-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.topbar .logo {
+  height: 80px;
+  width: auto;
+}
+.topbar .doctor-tag {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--text-muted);
+  text-align: right;
+  line-height: 1.5;
+}
+.topbar .doctor-tag .name {
+  display: block;
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.30em;
+  color: var(--gold-dark);
+  margin-bottom: var(--s-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* Sections */
+section {
+  padding: var(--s-10) 0;
+  position: relative;
+}
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--s-7);
+}
+
+/* HERO */
+.hero {
+  padding: var(--s-9) 0 var(--s-10);
+  background: var(--cream-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--s-7);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--s-9);
+  align-items: center;
+}
+
+.hero-text { padding-right: var(--s-4); }
+
+.hero-greeting {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.30em;
+  margin-bottom: var(--s-7);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.hero-greeting::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-size: clamp(44px, 5.4vw, 72px);
+  font-weight: 500;
+  line-height: 1.08;
+  margin-bottom: var(--s-7);
+  color: var(--text-dark);
+  letter-spacing: -0.025em;
+}
+.hero h1 .gold {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-6);
+  margin-top: var(--s-8);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--gold);
+}
+.hero-meta .item .label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold-dark);
+  margin-bottom: var(--s-2);
+}
+.hero-meta .item .value {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.hero-photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-photo::before {
+  content: "";
+  position: absolute;
+  width: 86%; height: 92%;
+  border: 1px solid var(--gold);
+  top: 6%; right: -3%;
+  z-index: 0;
+}
+.hero-photo img {
+  position: relative;
+  z-index: 1;
+  max-height: 620px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: 0 40px 80px -30px rgba(107,90,43,0.40);
+}
+
+/* Hero quote */
+.hero-quote {
+  max-width: 920px;
+  margin: var(--s-10) auto 0;
+  padding: var(--s-8);
+  background: var(--cream-elev);
+  border: 1px solid var(--line-soft);
+  border-left: 3px solid var(--gold);
+  text-align: left;
+  position: relative;
+}
+.hero-quote blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.45;
+  color: var(--text-dark);
+  margin: 0 0 var(--s-5);
+}
+.hero-quote blockquote strong {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--gold-dark);
+}
+.hero-quote cite {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--text-muted);
+  display: block;
+  margin-top: var(--s-3);
+}
+
+/* Section header */
+.section-header {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto var(--s-9);
+}
+.section-header h2 {
+  margin-bottom: var(--s-5);
+  color: var(--text-dark);
+}
+.section-header p.lead {
+  font-size: 22px;
+  color: var(--text-body);
+  font-weight: 400;
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+/* Questionário */
+#jornada {
+  background: var(--cream-surface);
+  border-top: 1px solid var(--line-soft);
+}
+.q-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-5);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.q-card {
+  background: var(--cream-elev);
+  border: 1px solid var(--line-soft);
+  padding: var(--s-7) var(--s-6);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+.q-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px -16px rgba(107,90,43,0.20);
+}
+.q-card .icon {
+  font-size: 28px;
+  margin-bottom: var(--s-5);
+  color: var(--gold);
+  line-height: 1;
+  font-weight: 400;
+}
+.q-card .label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold-dark);
+  margin-bottom: var(--s-3);
+}
+.q-card .value {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--text-dark);
+  font-weight: 500;
+  line-height: 1.25;
+}
+.q-card .sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: var(--s-3);
+}
+.q-card .list {
+  list-style: none;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-body);
+  margin-top: var(--s-3);
+}
+.q-card .list li {
+  padding: var(--s-2) 0;
+  padding-left: var(--s-5);
+  position: relative;
+  border-bottom: 1px solid var(--line-soft);
+}
+.q-card .list li:last-child { border-bottom: none; }
+.q-card .list li::before {
+  content: "—";
+  color: var(--gold);
+  position: absolute;
+  left: 0;
+  top: var(--s-2);
+  font-weight: 400;
+}
+
+/* Feature card (queixa principal) */
+.q-card.feature {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #F8F1DA 0%, #EFE0B0 100%);
+  border-color: var(--gold);
+  border-width: 1px;
+  padding: var(--s-8);
+  position: relative;
+}
+.q-card.feature::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold);
+}
+.q-card.feature .label {
+  color: var(--gold-dark);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+}
+.q-card.feature .value {
+  font-size: clamp(28px, 2.8vw, 36px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--text-dark);
+}
+
+/* Reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+[data-reveal][data-delay="100"] { transition-delay: 0.10s; }
+[data-reveal][data-delay="150"] { transition-delay: 0.15s; }
+[data-reveal][data-delay="200"] { transition-delay: 0.20s; }
+[data-reveal][data-delay="250"] { transition-delay: 0.25s; }
+[data-reveal][data-delay="300"] { transition-delay: 0.30s; }
+[data-reveal][data-delay="350"] { transition-delay: 0.35s; }
+[data-reveal][data-delay="400"] { transition-delay: 0.40s; }
+[data-reveal][data-delay="450"] { transition-delay: 0.45s; }
+[data-reveal][data-delay="500"] { transition-delay: 0.50s; }
+[data-reveal][data-delay="600"] { transition-delay: 0.60s; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: var(--s-7); }
+  .hero-photo { min-height: 460px; max-width: 580px; margin: 0 auto; }
+  .q-grid { grid-template-columns: repeat(2, 1fr); }
+  .topbar .logo { height: 56px; }
+}
+@media (max-width: 640px) {
+  .wrap, .hero-grid { padding-left: var(--s-5); padding-right: var(--s-5); }
+  .q-grid { grid-template-columns: 1fr; }
+  .q-card.feature { grid-column: span 1; }
+  section { padding: var(--s-8) 0; }
+  .hero-meta { grid-template-columns: 1fr; gap: var(--s-4); }
+}
+
+
+/* === EXAMES === */
+.alertas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-5);
+  max-width: var(--max-w);
+  margin: 0 auto var(--s-9);
+}
+.alerta-card {
+  background: var(--cream-elev);
+  border: 1px solid var(--line-soft);
+  border-top: 3px solid var(--sev-crit);
+  padding: var(--s-7) var(--s-6);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.alerta-card[data-sev="crit"] { border-top-color: var(--sev-crit); }
+.alerta-card[data-sev="alert"] { border-top-color: var(--sev-alert); }
+.alerta-card[data-sev="attn"] { border-top-color: var(--sev-attn); }
+.alerta-card[data-sev="low"] { border-top-color: var(--sev-low); }
+
+.alerta-card .nome {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+  color: var(--text-muted);
+  margin-bottom: var(--s-3);
+}
+.alerta-card .valor {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1;
+  margin-bottom: var(--s-2);
+}
+.alerta-card .valor .unit {
+  font-size: 0.45em;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+.alerta-card .ref {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: var(--s-4);
+}
+.alerta-card .status {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  align-self: flex-start;
+  margin-top: auto;
+}
+.alerta-card[data-sev="crit"] .status { background: rgba(142,36,23,0.10); color: var(--sev-crit); }
+.alerta-card[data-sev="alert"] .status { background: rgba(160,109,10,0.10); color: var(--sev-alert); }
+.alerta-card[data-sev="attn"] .status { background: rgba(138,122,38,0.10); color: var(--sev-attn); }
+.alerta-card[data-sev="low"] .status { background: rgba(67,42,96,0.10); color: var(--sev-low); }
+
+/* Grupos de exames */
+.grupos-exames {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+}
+.grupo-exame {
+  background: var(--cream-elev);
+  border: 1px solid var(--line-soft);
+  padding: var(--s-6);
+  position: relative;
+}
+.grupo-exame .grupo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--s-4);
+  margin-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line-soft);
+}
+.grupo-exame h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin: 0;
+}
+.grupo-exame .grupo-count {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.exame-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.2fr 0.8fr;
+  gap: var(--s-3);
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: center;
+  font-family: var(--sans);
+  font-size: 14px;
+}
+.exame-row:last-child { border-bottom: none; }
+.exame-row .e-nome {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+.exame-row .e-valor {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-dark);
+}
+.exame-row .e-ref {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.exame-row .e-status {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: right;
+}
+.exame-row[data-sev="crit"] .e-status { color: var(--sev-crit); }
+.exame-row[data-sev="alert"] .e-status { color: var(--sev-alert); }
+.exame-row[data-sev="attn"] .e-status { color: var(--sev-attn); }
+.exame-row[data-sev="ok"] .e-status { color: var(--sev-ok); }
+.exame-row[data-sev="low"] .e-status { color: var(--sev-low); }
+
+/* === SPIN SELLING === */
+#spin {
+  background: var(--cream-bg);
+}
+.spin-step {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--s-9) var(--s-7);
+  position: relative;
+}
+.spin-step + .spin-step {
+  border-top: 1px solid var(--line-soft);
+}
+.spin-step-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-7);
+  align-items: start;
+  margin-bottom: var(--s-7);
+}
+.spin-num {
+  font-family: var(--serif);
+  font-size: clamp(72px, 8vw, 120px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 0.85;
+  opacity: 0.85;
+}
+.spin-step-title h3 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 500;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--s-3);
+  line-height: 1.1;
+}
+.spin-step-title .step-eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.30em;
+  color: var(--gold-dark);
+  margin-bottom: var(--s-3);
+  display: block;
+}
+.spin-step-title p.lead {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text-body);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* SPIN — Situação stats */
+.situacao-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+  margin-top: var(--s-6);
+}
+.stat-card {
+  background: var(--cream-elev);
+  border: 1px solid var(--line-soft);
+  padding: var(--s-7);
+}
+.stat-card .stat-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold-dark);
+  margin-bottom: var(--s-3);
+}
+.stat-card .stat-value {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: var(--s-2);
+  line-height: 1.15;
+}
+.stat-card .stat-detail {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* SPIN — Problema cards */
+.problemas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+  margin-top: var(--s-6);
+}
+.problema-card {
+  background: var(--cream-elev);
+  border: 1px solid var(--line-soft);
+  padding: var(--s-7);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-5);
+  align-items: start;
+}
+.problema-card .conexao {
+  width: 60px; height: 60px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--gold-dark);
+  flex-shrink: 0;
+}
+.problema-card .descricao .exame-tag {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+  color: var(--sev-crit);
+  margin-bottom: var(--s-2);
+  display: block;
+}
+.problema-card .descricao h4 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: var(--s-3);
+  line-height: 1.25;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.problema-card .descricao p {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-body);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* SPIN — Implicações (biblioteca) */
+.implicacoes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  margin-top: var(--s-6);
+}
+.implicacao-card {
+  background: var(--cream-elev);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--sev-crit);
+  padding: var(--s-7);
+  position: relative;
+}
+.implicacao-card[data-grav="alta"] { border-left-color: var(--sev-crit); }
+.implicacao-card[data-grav="media"] { border-left-color: var(--sev-alert); }
+.implicacao-card[data-grav="baixa"] { border-left-color: var(--sev-attn); }
+
+.implicacao-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line-soft);
+  gap: var(--s-5);
+  flex-wrap: wrap;
+}
+.implicacao-header .trigger {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--sev-crit);
+}
+.implicacao-header h4 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 500;
+  color: var(--text-dark);
+  margin: 0;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 200px;
+}
+
+.horizontes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+  margin-bottom: var(--s-5);
+}
+.horizonte {
+  padding: var(--s-4);
+  background: var(--cream-bg);
+  border: 1px solid var(--line-soft);
+  position: relative;
+}
+.horizonte .h-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold-dark);
+  margin-bottom: var(--s-2);
+}
+.horizonte .h-text {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.implicacao-decisao {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text-dark);
+  padding: var(--s-4) var(--s-5);
+  background: rgba(159,136,68,0.08);
+  border-left: 3px solid var(--gold);
+  margin-bottom: var(--s-4);
+  line-height: 1.4;
+}
+.implicacao-evidencia {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.implicacao-evidencia .pubmed-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold-dark);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.implicacao-evidencia .pubmed-badge::before {
+  content: "📖";
+  filter: grayscale(1) sepia(1) saturate(1.5) hue-rotate(20deg);
+}
+.implicacao-evidencia .pubmed-badge:hover {
+  background: var(--gold);
+  color: var(--cream-elev);
+  border-color: var(--gold);
+}
+
+/* SPIN — Necessidade (Convencional vs IVS) */
+.comparativo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: var(--s-6);
+  border: 1px solid var(--line);
+}
+.comparativo .col {
+  padding: var(--s-7);
+}
+.comparativo .col.left {
+  background: var(--cream-elev);
+  border-right: 1px solid var(--line);
+}
+.comparativo .col.right {
+  background: linear-gradient(135deg, #F8F1DA 0%, #EFE0B0 100%);
+  border-left: 3px solid var(--gold);
+}
+.comparativo .col h4 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: var(--s-5);
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+.comparativo .col.right h4 { color: var(--gold-dark); }
+.comparativo .col-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.comparativo .col-list li {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-body);
+  padding-left: var(--s-5);
+  position: relative;
+}
+.comparativo .col-list li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+}
+.comparativo .col.left .col-list li::before { content: "✕"; color: var(--text-muted); }
+.comparativo .col.right .col-list li::before { content: "✓"; color: var(--gold); }
+
+.pilares {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+  margin-top: var(--s-7);
+}
+.pilar {
+  background: var(--cream-elev);
+  border: 1px solid var(--line-soft);
+  padding: var(--s-6);
+}
+.pilar .num {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: var(--s-3);
+}
+.pilar h4 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: var(--s-3);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.pilar p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-body);
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .alertas-grid { grid-template-columns: repeat(2, 1fr); }
+  .grupos-exames { grid-template-columns: 1fr; }
+  .situacao-stats { grid-template-columns: 1fr; }
+  .problemas-grid { grid-template-columns: 1fr; }
+  .horizontes { grid-template-columns: 1fr; }
+  .comparativo { grid-template-columns: 1fr; }
+  .comparativo .col.left { border-right: none; border-bottom: 1px solid var(--line); }
+  .pilares { grid-template-columns: 1fr; }
+  .spin-step-header { grid-template-columns: 1fr; }
+  .spin-num { font-size: 64px; }
+}
+
+"""
+
+# ---------------------------------------------------------------------------
+# JS — cinematic effects
+# ---------------------------------------------------------------------------
+JS = """
+// Intersection Observer for reveal animations
+(function() {
+  const reveals = document.querySelectorAll('[data-reveal]');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  reveals.forEach(el => obs.observe(el));
+})();
+"""
+
+# ---------------------------------------------------------------------------
+# Section: Hero
+# ---------------------------------------------------------------------------
+def render_topbar(logo_b64: str) -> str:
+    return f"""
+<header class="topbar">
+  <div class="topbar-inner">
+    <img src="{logo_b64}" alt="Instituto Vital Slim" class="logo">
+    <div class="doctor-tag">
+      <span class="name">Dra. Daniely Freitas</span>
+      CRM-BA 27.588 · Médica do Estilo de Vida
+    </div>
+  </div>
+</header>
+"""
+
+
+def render_hero(paciente: dict, dra_b64: str) -> str:
+    nome_completo = safe_html(paciente.get("nome", "Paciente"))
+    primeiro_nome = nome_completo.split()[0] if nome_completo else "Paciente"
+    idade = paciente.get("idade") or calcular_idade(paciente.get("dataNascimento"))
+    data_consulta = paciente.get("data_consulta") or date.today().strftime("%d.%m.%Y")
+
+    return f"""
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text" data-reveal>
+      <p class="hero-greeting">Apresentação clínica individual</p>
+      <h1>Você nos contou. Seus exames <span class="gold">confirmaram</span>. Agora vamos olhar juntos os próximos <span class="gold">180 dias</span>, {primeiro_nome}.</h1>
+      <div class="hero-meta">
+        <div>
+          <span class="label">Paciente</span>
+          <span class="value">{nome_completo}</span>
+        </div>
+        <div>
+          <span class="label">Idade</span>
+          <span class="value">{idade or '—'} anos</span>
+        </div>
+        <div>
+          <span class="label">Consulta</span>
+          <span class="value">{data_consulta}</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-photo" data-reveal data-delay="200">
+      <img src="{dra_b64}" alt="Dra. Daniely Freitas">
+    </div>
+  </div>
+  <div class="wrap hero-quote" data-reveal data-delay="500">
+    <blockquote>"Cada paciente que chega ao consultório já tentou de tudo. Meu trabalho não é dar mais uma tentativa. É encontrar exatamente onde o sistema está desregulado e corrigi-lo com precisão. <strong>Resultados não são promessas, são consequências de diagnóstico correto.</strong>"</blockquote>
+    <cite>Dra. Daniely Freitas</cite>
+  </div>
+</section>
+"""
+
+
+# ---------------------------------------------------------------------------
+# Section: Questionário (Sua Jornada)
+# ---------------------------------------------------------------------------
+def _q_card(label: str, value: str, sub: str = "", icon: str = "", feature: bool = False, list_items: list = None, delay: int = 0) -> str:
+    cls = "q-card feature" if feature else "q-card"
+    delay_attr = f' data-delay="{delay}"' if delay else ""
+    sub_html = f'<div class="sub">{safe_html(sub)}</div>' if sub else ""
+    list_html = ""
+    if list_items:
+        items = "".join(f"<li>{safe_html(i)}</li>" for i in list_items)
+        list_html = f'<ul class="list">{items}</ul>'
+    return f"""
+<div class="{cls}" data-reveal{delay_attr}>
+  <div class="icon">{icon}</div>
+  <div class="label">{safe_html(label)}</div>
+  <div class="value">{safe_html(value)}</div>
+  {sub_html}
+  {list_html}
+</div>
+"""
+
+
+def render_questionario(questionario: dict) -> str:
+    dados = questionario.get("pre-consulta", {}).get("dados", {}) if questionario else {}
+    if not dados and isinstance(questionario, dict) and "dados" in questionario:
+        dados = questionario["dados"]
+
+    idade = dados.get("idade") or "—"
+    peso = dados.get("pesoAtual") or dados.get("peso") or "—"
+    altura = dados.get("altura") or "—"
+    queixa = dados.get("queixaPrincipal") or dados.get("spin_p_principalIncomodo") or "—"
+    tempo = dados.get("spin_s_tempoLuta") or dados.get("tempoLuta") or "—"
+    if isinstance(tempo, list):
+        tempo = ", ".join(tempo)
+    sono = dados.get("qualidadeSono") or "—"
+    if sono != "—":
+        sono = f"{sono}/5"
+    alimentacao = dados.get("alimentacaoFimSemana") or dados.get("alimentacao") or "—"
+    if isinstance(alimentacao, list):
+        alimentacao = ", ".join(alimentacao)
+    motivo = dados.get("spin_n_vidaResolvida") or dados.get("motivoIVS") or "—"
+    tentativas = dados.get("tentativasAnteriores") or dados.get("jaTentou") or []
+    if isinstance(tentativas, str):
+        tentativas = [tentativas]
+
+    # IMC
+    imc_str = "—"
+    try:
+        if peso != "—" and altura != "—":
+            p = float(str(peso).replace(",", "."))
+            a = float(str(altura).replace(",", "."))
+            if a > 3:
+                a = a / 100
+            imc = round(p / (a * a), 1)
+            if imc < 18.5:
+                cat = "Abaixo"
+            elif imc < 25:
+                cat = "Normal"
+            elif imc < 30:
+                cat = "Sobrepeso"
+            elif imc < 35:
+                cat = "Obesidade I"
+            elif imc < 40:
+                cat = "Obesidade II"
+            else:
+                cat = "Obesidade III"
+            imc_str = f"{imc} · {cat}"
+    except Exception:
+        pass
+
+    cards_html = (
+        _q_card("Idade", f"{idade}", "anos", icon="◉", delay=100)
+        + _q_card("Peso atual", f"{peso} kg", f"IMC {imc_str}", icon="◯", delay=150)
+        + _q_card("O que mais te incomoda hoje", queixa, feature=True, icon="✦", delay=200)
+        + _q_card("Há quanto tempo", tempo, icon="◐", delay=300)
+        + _q_card("Já tentou", "", list_items=tentativas if tentativas else ["—"], icon="◑", delay=350)
+        + _q_card("Qualidade do sono", sono, icon="☾", delay=400)
+        + _q_card("Alimentação", alimentacao, icon="◍", delay=450)
+        + _q_card("Por que IVS agora", motivo, icon="✧", delay=500)
+    )
+
+    return f"""
+<section id="jornada">
+  <div class="wrap">
+    <div class="section-header" data-reveal>
+      <p class="eyebrow">01 — Sua Jornada</p>
+      <h2>O que você nos contou</h2>
+      <p class="lead">Cada palavra sua é uma pista. A medicina começa no que o paciente sente.</p>
+    </div>
+    <div class="q-grid">
+      {cards_html}
+    </div>
+  </div>
+</section>
+"""
+
+
+# ---------------------------------------------------------------------------
+# Sections 3-7 — placeholders (Parte 2 e 3)
+# ---------------------------------------------------------------------------
+# === PARTE 2: Exames + SPIN (auto-gerado) ===
+
+GRUPOS_EXAMES_DEF = [
+    ("hemograma", "Hemograma e Coagulação", ["Hemoglobina", "Hematócrito", "Eritrócitos", "Leucócitos", "Plaquetas", "Fibrinogênio", "G6PD"]),
+    ("glicidico", "Perfil Glicídico", ["Glicose", "Glicemia", "Insulina", "HbA1c", "Hemoglobina Glicada", "HOMA-IR"]),
+    ("lipidico", "Perfil Lipídico", ["Colesterol Total", "LDL", "HDL", "Triglicérides", "Triglicerídeos", "ApoA1", "ApoA-I", "ApoB"]),
+    ("hepatico", "Função Hepática", ["TGO", "AST", "TGP", "ALT", "GGT", "Gama-GT", "FA", "Fosfatase Alcalina", "Bilirrubina"]),
+    ("renal", "Função Renal", ["Ureia", "Creatinina", "Ácido Úrico", "eTFG", "Clearance"]),
+    ("tireoide", "Tireoide", ["TSH", "T4L", "T4 Livre", "T3L", "T3 Livre", "Anti-TPO", "Anti-Tireoglobulina"]),
+    ("hormonal", "Hormonal Sexual", ["Testosterona Total", "Testosterona Livre", "Testo Livre", "Testosterona Biodisponível", "Estradiol", "Progesterona", "FSH", "LH", "Prolactina", "SHBG", "DHEA", "DHEA-S"]),
+    ("inflamatorio", "Marcadores Inflamatórios", ["PCR-us", "PCR", "Proteína C Reativa", "Homocisteína", "VHS"]),
+    ("vitaminas", "Vitaminas e Minerais", ["Vitamina D", "Vitamina B12", "Vitamina C", "Ácido Fólico", "Folato", "Zinco", "Ferro", "Ferritina", "Magnésio", "Cálcio", "Sódio", "Potássio", "PTH"]),
+    ("adrenal", "Função Adrenal e Outros", ["Cortisol Basal", "Cortisol", "Cortisol Salivar", "ACTH", "IGF-1"]),
+]
+
+SEV_LABELS = {"crit": "Crítico", "alert": "Alterado", "attn": "Atenção", "low": "Baixo", "ok": "Normal"}
+
+SINTOMA_MAP = {
+    "homa-ir": "fome súbita, sonolência depois das refeições, gordura abdominal",
+    "cortisol": "cansaço persistente, falta de energia mesmo dormindo bem",
+    "pcr": "inflamação silenciosa, articulações que doem, recuperação lenta",
+    "testosterona": "libido baixa, perda de massa muscular, motivação diminuída",
+    "ggt": "fígado sobrecarregado, ressaca leve sem beber, digestão pesada",
+    "vitamina d": "imunidade baixa, mais resfriados, ossos sensíveis",
+    "ferritina": "inflamação sistêmica, fadiga, fígado em alerta",
+    "homocisteína": "risco vascular silencioso, possível névoa mental",
+    "tsh": "ganho de peso sem mudar dieta, frio constante, cabelo seco",
+    "hba1c": "glicemia média elevada, pré-diabetes silenciosa",
+    "lh": "eixo hormonal central comprometido",
+    "estradiol": "perda óssea, cognição prejudicada (em homem)",
+}
+
+
+def _grupo_de(nome_exame):
+    nome_lower = (nome_exame or "").lower()
+    for gid, _, exames in GRUPOS_EXAMES_DEF:
+        for e in exames:
+            if e.lower() in nome_lower or nome_lower in e.lower():
+                return gid
+    return "outros"
+
+
+def _sev_from_status(status):
+    s = (status or "").upper()
+    if "CRITICO" in s or "CRÍTICO" in s or "MUITO" in s:
+        return "crit"
+    if "ALTERADO" in s or "ALTO" in s or "ELEVADO" in s:
+        return "alert"
+    if "ATENCAO" in s or "ATENÇÃO" in s or "LIMITROFE" in s or "LIMÍTROFE" in s:
+        return "attn"
+    if "BAIXO" in s or "SUPRIMIDO" in s or "DEFICIE" in s:
+        return "low"
+    if "NORMAL" in s or "OK" in s:
+        return "ok"
+    return "ok"
+
+
+def _sev_label(sev):
+    return SEV_LABELS.get(sev, "—")
+
+
+def process_exames_input(raw):
+    import re
+    processed = []
+    for ex in (raw or []):
+        if not isinstance(ex, dict):
+            continue
+        nome = ex.get("nome") or ex.get("exame") or ex.get("name") or ""
+        if not nome:
+            continue
+        valor = ex.get("valor") or ex.get("value") or "—"
+        ref = ex.get("ref") or ex.get("referencia") or ex.get("reference") or "—"
+        unit = ex.get("unit") or ex.get("unidade") or ""
+        status = ex.get("status") or ex.get("classificacao") or "NORMAL"
+        sev = _sev_from_status(status)
+        grupo = _grupo_de(nome)
+        delta = 0
+        try:
+            v = float(str(valor).replace(",", ".").replace("<", "").replace(">", ""))
+            r = str(ref)
+            m = re.search(r"([\d,\.]+)\s*[-aà]\s*([\d,\.]+)", r)
+            if m:
+                lo = float(m.group(1).replace(",", "."))
+                hi = float(m.group(2).replace(",", "."))
+                if v > hi:
+                    delta = (v - hi) / max(hi, 0.001)
+                elif v < lo:
+                    delta = (lo - v) / max(lo, 0.001)
+        except Exception:
+            pass
+        processed.append({
+            "nome": nome, "valor": str(valor), "ref": str(ref), "unit": unit,
+            "status": status, "sev": sev, "grupo": grupo, "delta": delta,
+        })
+    return processed
+
+
+def render_alertas_criticos(exames_processed):
+    rank = {"crit": 0, "alert": 1, "low": 2, "attn": 3, "ok": 4}
+    sorted_ex = sorted(exames_processed, key=lambda e: (rank.get(e.get("sev", "ok"), 9), -float(e.get("delta", 0))))
+    top4 = [e for e in sorted_ex if e.get("sev") in ("crit", "alert", "low", "attn")][:4]
+    if not top4:
+        return ""
+    cards = []
+    for i, ex in enumerate(top4):
+        delay = (i + 1) * 100
+        cards.append(
+            '<div class="alerta-card" data-sev="' + ex['sev'] + '" data-reveal data-delay="' + str(delay) + '">' +
+            '<div class="nome">' + safe_html(ex['nome']) + '</div>' +
+            '<div class="valor">' + safe_html(ex['valor']) + '<span class="unit">' + safe_html(ex.get('unit', '')) + '</span></div>' +
+            '<div class="ref">Ref: ' + safe_html(ex.get('ref', '—')) + '</div>' +
+            '<div class="status">' + _sev_label(ex['sev']) + '</div>' +
+            '</div>'
+        )
+    return '<div class="alertas-grid">' + "".join(cards) + '</div>'
+
+
+def render_grupos_exames(exames_processed):
+    by_group = {}
+    for ex in exames_processed:
+        g = ex.get("grupo") or _grupo_de(ex["nome"])
+        by_group.setdefault(g, []).append(ex)
+    blocos = []
+    for gid, gnome, _ in GRUPOS_EXAMES_DEF:
+        items = by_group.get(gid, [])
+        if not items:
+            continue
+        rows = []
+        for ex in items:
+            rows.append(
+                '<div class="exame-row" data-sev="' + ex.get('sev', 'ok') + '">' +
+                '<div class="e-nome">' + safe_html(ex['nome']) + '</div>' +
+                '<div class="e-valor">' + safe_html(ex['valor']) + ' <span style="font-size: 12px; color: var(--text-muted);">' + safe_html(ex.get('unit', '')) + '</span></div>' +
+                '<div class="e-ref">' + safe_html(ex.get('ref', '—')) + '</div>' +
+                '<div class="e-status">' + _sev_label(ex.get('sev', 'ok')) + '</div>' +
+                '</div>'
+            )
+        alterados = sum(1 for e in items if e.get("sev") != "ok")
+        blocos.append(
+            '<div class="grupo-exame" data-reveal>' +
+            '<div class="grupo-header">' +
+            '<h3>' + safe_html(gnome) + '</h3>' +
+            '<div class="grupo-count">' + str(alterados) + '/' + str(len(items)) + ' alterações</div>' +
+            '</div>' +
+            "".join(rows) +
+            '</div>'
+        )
+    return '<div class="grupos-exames">' + "".join(blocos) + '</div>'
+
+
+def render_exames(exames_processed):
+    if not exames_processed:
+        return '<section id="exames"><div class="wrap"><div class="section-header" data-reveal><p class="eyebrow">02 — Seus Exames</p><h2>Aguardando exames do paciente</h2><p class="lead">Os exames serão processados via skill extrai-laudo.</p></div></div></section>'
+    return (
+        '<section id="exames"><div class="wrap">' +
+        '<div class="section-header" data-reveal>' +
+        '<p class="eyebrow">02 — Seus Exames</p>' +
+        '<h2>O que seu corpo está dizendo</h2>' +
+        '<p class="lead">Cada número aqui conta uma parte da sua história.</p>' +
+        '</div>' +
+        '<div data-reveal>' +
+        '<h3 style="font-family: var(--serif); font-size: 24px; font-weight: 500; color: var(--text-dark); margin-bottom: var(--s-5); text-align: center;">Os 4 sinais que mais chamam atenção</h3>' +
+        render_alertas_criticos(exames_processed) +
+        '</div>' +
+        '<div data-reveal>' +
+        '<h3 style="font-family: var(--serif); font-size: 24px; font-weight: 500; color: var(--text-dark); margin: var(--s-9) 0 var(--s-5); text-align: center;">Painel completo</h3>' +
+        render_grupos_exames(exames_processed) +
+        '</div>' +
+        '</div></section>'
+    )
+
+
+def _matches_rule(rule, exame, paciente):
+    trig = rule.get("trigger", {})
+    if not trig:
+        return False
+    target_exame = (trig.get("exame") or "").lower()
+    if not target_exame:
+        return False
+    if target_exame not in exame["nome"].lower() and exame["nome"].lower() not in target_exame:
+        return False
+    op = trig.get("operador")
+    val = trig.get("valor")
+    if val is None or op is None:
+        return rule.get("trigger", {}).get("categoria") == exame.get("grupo")
+    try:
+        e_val = float(str(exame["valor"]).replace(",", ".").replace("<", "").replace(">", ""))
+    except Exception:
+        return False
+    sexo = paciente.get("sexo", "M") or "M"
+    if trig.get("sexo") and trig["sexo"] != sexo:
+        return False
+    if op == ">":
+        return e_val > val
+    if op == "<":
+        return e_val < val
+    if op == "entre":
+        try:
+            lo, hi = val
+            return lo <= e_val <= hi
+        except Exception:
+            return False
+    return False
+
+
+def render_spin_situacao(paciente, questionario, exames):
+    dados_q = (questionario or {}).get("pre-consulta", {}).get("dados", {})
+    if not dados_q and isinstance(questionario, dict) and "dados" in questionario:
+        dados_q = questionario["dados"]
+    peso = dados_q.get("pesoAtual") or "—"
+    altura = dados_q.get("altura") or "—"
+    imc = "—"
+    try:
+        if peso != "—" and altura != "—":
+            p = float(str(peso).replace(",", "."))
+            a = float(str(altura).replace(",", "."))
+            if a > 3:
+                a = a / 100
+            imc = str(round(p / (a*a), 1))
+    except Exception:
+        pass
+    alterados = sum(1 for e in exames if e.get("sev") in ("crit", "alert", "low"))
+    total = len(exames)
+    sono = dados_q.get("qualidadeSono") or "—"
+    energia = dados_q.get("nivelEnergia") or "—"
+    return (
+        '<div class="spin-step" data-reveal>' +
+        '<div class="spin-step-header">' +
+        '<div class="spin-num">01</div>' +
+        '<div class="spin-step-title">' +
+        '<span class="step-eyebrow">Situação</span>' +
+        '<h3>Onde você está hoje</h3>' +
+        '<p class="lead">O retrato da sua saúde neste momento, lendo o que você sente e o que os números dizem.</p>' +
+        '</div></div>' +
+        '<div class="situacao-stats">' +
+        '<div class="stat-card"><div class="stat-label">Composição corporal</div>' +
+        '<div class="stat-value">' + safe_html(peso) + ' kg · IMC ' + safe_html(imc) + '</div>' +
+        '<div class="stat-detail">Altura ' + safe_html(altura) + ' m · referência clínica para acompanhamento.</div></div>' +
+        '<div class="stat-card"><div class="stat-label">Saúde metabólica</div>' +
+        '<div class="stat-value">' + str(alterados) + ' de ' + str(total) + ' exames alterados</div>' +
+        '<div class="stat-detail">Marcadores fora da faixa ideal — cada um conta um problema específico que merece atenção.</div></div>' +
+        '<div class="stat-card"><div class="stat-label">Energia e disposição</div>' +
+        '<div class="stat-value">Sono ' + safe_html(sono) + '/5 · Energia ' + safe_html(energia) + '/5</div>' +
+        '<div class="stat-detail">Como seu corpo está respondendo no dia a dia. Não é "frescura" — é dado clínico.</div></div>' +
+        '</div></div>'
+    )
+
+
+def render_spin_problema(paciente, questionario, exames):
+    dados_q = (questionario or {}).get("pre-consulta", {}).get("dados", {})
+    if not dados_q and isinstance(questionario, dict) and "dados" in questionario:
+        dados_q = questionario["dados"]
+    queixa = dados_q.get("queixaPrincipal") or dados_q.get("spin_p_principalIncomodo") or ""
+    conexoes = []
+    for ex in exames:
+        if ex.get("sev") not in ("crit", "alert", "low"):
+            continue
+        nome_lower = ex["nome"].lower()
+        sintoma = None
+        for k, v in SINTOMA_MAP.items():
+            if k in nome_lower:
+                sintoma = v
+                break
+        if sintoma:
+            conexoes.append({"exame": ex["nome"], "valor": ex["valor"], "sintoma": sintoma})
+    conexoes = conexoes[:6]
+    if not conexoes:
+        return ""
+    cards = []
+    for i, c in enumerate(conexoes):
+        delay = (i + 1) * 100
+        cards.append(
+            '<div class="problema-card" data-reveal data-delay="' + str(delay) + '">' +
+            '<div class="conexao">↔</div>' +
+            '<div class="descricao">' +
+            '<span class="exame-tag">' + safe_html(c['exame']) + ' · ' + safe_html(c['valor']) + '</span>' +
+            '<h4>O que você sente quando esse marcador está assim</h4>' +
+            '<p>' + safe_html(c['sintoma']) + '</p>' +
+            '</div></div>'
+        )
+    queixa_block = ""
+    if queixa:
+        queixa_block = '<p style="font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--text-dark); text-align: center; max-width: 760px; margin: 0 auto var(--s-7);">"' + safe_html(queixa) + '"</p>'
+    return (
+        '<div class="spin-step" data-reveal>' +
+        '<div class="spin-step-header"><div class="spin-num">02</div>' +
+        '<div class="spin-step-title">' +
+        '<span class="step-eyebrow">Problema</span>' +
+        '<h3>Os sinais que seu corpo está dando</h3>' +
+        '<p class="lead">Aquilo que você sente não é coincidência. Os exames mostram exatamente onde o sistema está pedindo socorro.</p>' +
+        '</div></div>' +
+        queixa_block +
+        '<div class="problemas-grid">' + "".join(cards) + '</div>' +
+        '</div>'
+    )
+
+
+def render_spin_implicacao(paciente, exames, biblioteca):
+    rules = (biblioteca or {}).get("rules", [])
+    if not rules or not exames:
+        return ""
+    matched = []
+    seen_ids = set()
+    for ex in exames:
+        if ex.get("sev") not in ("crit", "alert", "low"):
+            continue
+        for rule in rules:
+            if rule["id"] in seen_ids:
+                continue
+            if _matches_rule(rule, ex, paciente):
+                matched.append((ex, rule))
+                seen_ids.add(rule["id"])
+    if not matched:
+        return ""
+    cards = []
+    for i, (ex, rule) in enumerate(matched[:6]):
+        delay = (i + 1) * 100
+        impl = rule.get("implicacao", {})
+        horizons = []
+        for h_label, h_text in impl.items():
+            if h_label in ("6m", "1ano", "3anos"):
+                label_pretty = {"6m": "Em 6 meses", "1ano": "Em 1 ano", "3anos": "Em 3 anos"}[h_label]
+                horizons.append(
+                    '<div class="horizonte"><div class="h-label">' + label_pretty + '</div>' +
+                    '<div class="h-text">' + safe_html(h_text) + '</div></div>'
+                )
+        if not horizons and "geral" in impl:
+            horizons.append(
+                '<div class="horizonte" style="grid-column: 1/-1;"><div class="h-label">Implicação clínica</div>' +
+                '<div class="h-text">' + safe_html(impl["geral"]) + '</div></div>'
+            )
+        evidencia = rule.get("evidencia", {})
+        pmid = evidencia.get("pmid", "")
+        url = evidencia.get("url", "https://pubmed.ncbi.nlm.nih.gov/" + pmid + "/")
+        titulo_estudo = evidencia.get("titulo_estudo", "")
+        sev = ex.get("sev", "alert")
+        grav = "alta" if sev == "crit" else ("media" if sev == "alert" else "baixa")
+        cards.append(
+            '<div class="implicacao-card" data-grav="' + grav + '" data-reveal data-delay="' + str(delay) + '">' +
+            '<div class="implicacao-header">' +
+            '<span class="trigger">' + safe_html(ex['nome']) + ' · ' + safe_html(ex['valor']) + safe_html(ex.get('unit', '')) + '</span>' +
+            '<h4>' + safe_html(rule.get("titulo", "")) + '</h4>' +
+            '</div>' +
+            '<div class="horizontes">' + "".join(horizons) + '</div>' +
+            '<div class="implicacao-decisao">' + safe_html(rule.get("decisao", "")) + '</div>' +
+            '<div class="implicacao-evidencia">' +
+            '<span>' + safe_html(titulo_estudo) + '</span>' +
+            '<a class="pubmed-badge" href="' + safe_html(url) + '" target="_blank" rel="noopener">PubMed PMID ' + safe_html(pmid) + '</a>' +
+            '</div></div>'
+        )
+    return (
+        '<div class="spin-step" data-reveal>' +
+        '<div class="spin-step-header"><div class="spin-num">03</div>' +
+        '<div class="spin-step-title">' +
+        '<span class="step-eyebrow">Implicação</span>' +
+        '<h3>Para onde isso leva, sem mudança</h3>' +
+        '<p class="lead">Cada alteração tem um caminho conhecido pela ciência. Cada mês sem corrigir é um passo dado nessa direção.</p>' +
+        '</div></div>' +
+        '<div class="implicacoes-list">' + "".join(cards) + '</div>' +
+        '</div>'
+    )
+
+
+def render_spin_necessidade():
+    return (
+        '<div class="spin-step" data-reveal>' +
+        '<div class="spin-step-header"><div class="spin-num">04</div>' +
+        '<div class="spin-step-title">' +
+        '<span class="step-eyebrow">Necessidade</span>' +
+        '<h3>Por que sozinho não resolve</h3>' +
+        '<p class="lead">Você já tentou. Isolado, cada esforço se perde. O que muda agora é ter um sistema inteiro orquestrado para o seu resultado.</p>' +
+        '</div></div>' +
+        '<div class="comparativo">' +
+        '<div class="col left"><h4>Atendimento Convencional</h4><ul class="col-list">' +
+        '<li>Diagnóstico via secretária, espera de semanas</li>' +
+        '<li>Exames lidos como números, sem contexto clínico</li>' +
+        '<li>Perda de peso inicial seguida de platô e efeito rebote</li>' +
+        '<li>Solidão após a consulta — você sai com a prescrição e segue sozinho</li>' +
+        '<li>Resultados parciais ou temporários</li>' +
+        '</ul></div>' +
+        '<div class="col right"><h4>Protocolo Vital Slim</h4><ul class="col-list">' +
+        '<li>Bateria avançada de biomarcadores com leitura individualizada</li>' +
+        '<li>Médica que lê os dados, não apenas os números</li>' +
+        '<li>Protocolo construído para o seu perfil específico</li>' +
+        '<li>Acesso direto à Dra. e equipe, suporte semanal durante o programa</li>' +
+        '<li>Transformação metabólica sustentada</li>' +
+        '</ul></div>' +
+        '</div>' +
+        '<div class="pilares">' +
+        '<div class="pilar"><div class="num">01</div><h4>Diagnóstico Avançado de Biomarcadores</h4>' +
+        '<p>Bateria avançada de biomarcadores. Leitura clínica individualizada de cada resultado. A médica lê os dados, não apenas os números.</p></div>' +
+        '<div class="pilar"><div class="num">02</div><h4>Modulação Hormonal Individualizada</h4>' +
+        '<p>Sincronizamos receptores, não apenas números de laboratório. O objetivo é devolver a resposta hormonal estável sem "forçar" o seu organismo.</p></div>' +
+        '<div class="pilar"><div class="num">03</div><h4>Protocolo Farmacológico Estratégico</h4>' +
+        '<p>Acesso a tecnologia de ponta de medicamentos duplo agonista de GLP-1 e GIP com custo otimizado. A medicação é um acelerador, não a única solução.</p></div>' +
+        '<div class="pilar"><div class="num">04</div><h4>Acompanhamento Contínuo</h4>' +
+        '<p>Acesso direto à Dra. Daniely Freitas e toda a sua equipe (nutricionista, preparador físico e enfermeira) com acompanhamento semanal e ajuste de tratamento baseado nos seus resultados.</p></div>' +
+        '</div></div>'
+    )
+
+
+def render_spin(paciente, questionario, exames, biblioteca):
+    return (
+        '<section id="spin"><div class="wrap">' +
+        '<div class="section-header" data-reveal>' +
+        '<p class="eyebrow">03 — Análise clínica</p>' +
+        '<h2>O que isso significa para você</h2>' +
+        '<p class="lead">Quatro perguntas que determinam tudo: onde você está, o que está acontecendo, para onde vai, e o que precisa mudar.</p>' +
+        '</div>' +
+        render_spin_situacao(paciente, questionario, exames) +
+        render_spin_problema(paciente, questionario, exames) +
+        render_spin_implicacao(paciente, exames, biblioteca) +
+        render_spin_necessidade() +
+        '</div></section>'
+    )
+
+
+def render_resultados() -> str:
+    return """
+<section id="resultados">
+  <div class="wrap"><div class="section-header" data-reveal>
+    <p class="eyebrow">04 — Resultados Reais</p>
+    <h2>O que muda quando o protocolo é correto</h2>
+    <p class="lead">[Parte 3: Tiaro / Silvana / Darilene com slider antes/depois]</p>
+  </div></div>
+</section>
+"""
+
+
+def render_programa() -> str:
+    return """
+<section id="programa">
+  <div class="wrap"><div class="section-header" data-reveal>
+    <p class="eyebrow">05 — Sua Solução</p>
+    <h2>Programa de Acompanhamento 180 dias</h2>
+    <p class="lead">[Parte 3: 10 cards com itens do programa]</p>
+  </div></div>
+</section>
+"""
+
+
+def render_cta() -> str:
+    return """
+<section id="cta">
+  <div class="wrap"><div class="section-header" data-reveal>
+    <p class="eyebrow">06 — Decisão</p>
+    <h2>Você já fez o mais difícil</h2>
+    <p class="lead">[Parte 3: CTA cinematic]</p>
+  </div></div>
+</section>
+"""
+
+
+# ---------------------------------------------------------------------------
+# Main render
+# ---------------------------------------------------------------------------
+def render_apresentacao_v9(
+    paciente: dict,
+    questionario: dict | None = None,
+    exames: list | None = None,
+    output_dir: str | None = None
+) -> str:
+    """Renderiza apresentação v9 completa em HTML standalone."""
+    output_dir = Path(output_dir) if output_dir else Path("/root/cerebro-vital-slim/deliverables")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Load assets
+    logo_b64 = img_b64(SITE_IMAGES / "logo-ivs-transparente.png")
+    dra_b64 = img_b64(SITE_IMAGES / "dra-daniely-hero.png")
+
+    # Load biblioteca
+    biblioteca = {}
+    if BIBLIOTECA_PATH.exists():
+        try:
+            biblioteca = json.loads(BIBLIOTECA_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            biblioteca = {}
+
+    # Build sections
+    nome_completo = paciente.get("nome", "Paciente")
+    primeiro_nome = nome_completo.split()[0] if nome_completo else "Paciente"
+
+    html = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{safe_html(nome_completo)} · Instituto Vital Slim</title>
+<meta name="description" content="Apresentação clínica — Dra. Daniely Freitas, CRM-BA 27.588">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+{CSS}
+</style>
+</head>
+<body>
+{render_topbar(logo_b64)}
+{render_hero({**paciente, "idade": paciente.get("idade") or calcular_idade(paciente.get("dataNascimento"))}, dra_b64)}
+{render_questionario(questionario or {})}
+{render_exames(process_exames_input(exames or []))}
+{render_spin(paciente, questionario or {}, process_exames_input(exames or []), biblioteca)}
+{render_resultados()}
+{render_programa()}
+{render_cta()}
+<script>
+{JS}
+</script>
+</body>
+</html>
+"""
+
+    # Save
+    import re
+    nome_slug = re.sub(r"[^a-z0-9-]", "", nome_completo.lower().replace(" ", "-").replace(".", ""))
+    from datetime import datetime
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_path = output_dir / f"apresentacao-{nome_slug}-v9-{ts}.html"
+    output_path.write_text(html, encoding="utf-8")
+    return str(output_path)
+
+
+if __name__ == "__main__":
+    # Test render with mock Tiaro data
+    paciente = {
+        "nome": "Tiaro Fernandes Neves",
+        "dataNascimento": 350870400000,
+        "data_consulta": "04.05.2026",
+    }
+    questionario = {
+        "pre-consulta": {
+            "dados": {
+                "pesoAtual": "112",
+                "altura": "1.85",
+                "queixaPrincipal": "Cansaço, dificuldade pra emagrecer mesmo fazendo dieta e academia",
+                "spin_s_tempoLuta": "5+ anos",
+                "qualidadeSono": "3",
+                "alimentacaoFimSemana": ["Mais flexível, comendo fora"],
+                "spin_n_vidaResolvida": "Voltar a sentir energia, libido e disposição como antes",
+                "tentativasAnteriores": ["Dieta low-carb", "Academia 5x/semana", "Suplementos avulsos", "Endocrino convencional"],
+            }
+        }
+    }
+    exames = []
+    output = render_apresentacao_v9(paciente, questionario, exames)
+    print(f"✅ Rendered: {output}")
+    print(f"   Size: {Path(output).stat().st_size:,} bytes")

@@ -20,6 +20,7 @@ Uso:
 import sys
 import os
 import json
+import time
 import subprocess
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
@@ -454,6 +455,224 @@ def gerar_references_section():
 # Extração de exames dos PDFs
 # ---------------------------------------------------------------------------
 
+
+# ---------------------------------------------------------------------------
+# Pipeline LLM-based: PDF → LLM extrai → Validador classifica → formato legacy
+# ---------------------------------------------------------------------------
+
+def extrair_todos_exames_llm(lista_pdfs, paciente):
+    """
+    Extrai exames via LLM (gpt-4o) + validador multi-layer (sex+age aware).
+
+    REGRA CANÔNICA RC-01: paciente DEVE conter 'sexo' (M ou F).
+    A idade é calculada de paciente['dataNascimento'] se não fornecida.
+
+    Args:
+        lista_pdfs: lista de dicts {id, nome} do Drive
+        paciente: dict com nome, sexo, dataNascimento
+
+    Returns:
+        dict legacy {grupos, hero_alerts, stats, _audit} para gerar_html_apresentacao
+    """
+    if not lista_pdfs:
+        return None
+
+    # Idade
+    idade = paciente.get("idade") or calcular_idade(paciente.get("dataNascimento"))
+    sexo = str(paciente.get("sexo", "")).upper()[:1]
+
+    todos_grupos = {}
+    todos_hero = []
+    stats_total = {"total": 0, "criticos": 0, "alertas": 0, "atencao": 0, "normais": 0}
+    audit = {
+        "paciente_nome": paciente.get("nome", ""),
+        "sexo": sexo,
+        "idade": idade,
+        "pdfs_processados": [],
+        "exames_validados": 0,
+        "exames_revisao_manual": [],
+        "cross_check_warnings": [],
+    }
+
+    for pdf in lista_pdfs:
+        pdf_id = pdf.get("id")
+        pdf_nome = pdf.get("nome", "exame.pdf")
+        if not pdf_id:
+            continue
+
+        # Baixa PDF do Drive para arquivo temporário
+        with tempfile.TemporaryDirectory() as tmpdir:
+            local_pdf = os.path.join(tmpdir, pdf_nome)
+            print(f"  [LLM] Baixando {pdf_nome}...", file=sys.stderr)
+            try:
+                ok = _baixar_pdf_drive(pdf_id, local_pdf)
+            except Exception as e:
+                print(f"  [LLM] Erro download: {e}", file=sys.stderr)
+                continue
+            if not ok or not os.path.exists(local_pdf):
+                print(f"  [LLM] Falha download {pdf_nome}", file=sys.stderr)
+                continue
+
+            # LLM extrai
+            print(f"  [LLM] Extraindo via gpt-4o (sexo={sexo}, idade={idade})...", file=sys.stderr)
+            extracao = extrair_exames_via_llm(local_pdf, paciente_meta={"sexo": sexo, "idade": idade})
+            if "erro" in extracao:
+                print(f"  [LLM] Erro extração: {extracao['erro']}", file=sys.stderr)
+                continue
+
+            print(f"  [LLM] {len(extracao.get('exames', []))} exames extraídos", file=sys.stderr)
+
+            # Validador classifica usando refs canônicas (sex+age) + L10 anti-alucinação
+            texto_pdf = extracao.get("_texto_pdf", "")
+            val = validar_exames(extracao, {"sexo": sexo, "idade": idade}, texto_pdf=texto_pdf)
+            print(f"  [LLM] {len(val['validados'])} validados / {len(val['revisao_manual'])} revisão manual",
+                  file=sys.stderr)
+
+            # Acumula auditoria
+            audit["pdfs_processados"].append({
+                "nome": pdf_nome,
+                "extraidos_pelo_llm": len(extracao.get("exames", [])),
+                "validados": len(val["validados"]),
+                "lab_origem": extracao.get("lab_origem", ""),
+                "data_coleta": extracao.get("data_coleta", ""),
+            })
+            audit["exames_validados"] += len(val["validados"])
+            audit["exames_revisao_manual"].extend(val.get("revisao_manual", []))
+            audit["cross_check_warnings"].extend(val.get("cross_check_warnings", []))
+
+            # Converte exames validados para o formato legacy (grupos, hero_alerts, stats)
+            for ex in val["validados"]:
+                gid = ex.get("grupo", "outros")
+                if gid not in todos_grupos:
+                    titulo, hint = _GRUPO_TITULOS.get(gid, (gid.capitalize(), ""))
+                    todos_grupos[gid] = {"id": gid, "nome": titulo, "hint": hint, "exames": []}
+
+                # Formato legacy do exame
+                rmin = ex.get("ref_min_final")
+                rmax = ex.get("ref_max_final")
+                ref_str = _formatar_ref(rmin, rmax)
+                exame_legacy = {
+                    "nome": ex["nome_canonico"],
+                    "valor": _formatar_num(ex["valor_f"]),
+                    "valor_f": ex["valor_f"],
+                    "unidade": ex.get("unidade", "") or ex.get("unidade_canonica", ""),
+                    "referencia": ref_str,
+                    "status": ex["status_final"],
+                    "tag_label": ex["status_final"].upper(),
+                    "tag_class": ex["status_final"],
+                    "alterado": ex["status_final"] != "normal",
+                    "grupo": gid,
+                }
+
+                # Evita duplicar (mesmo nome canônico, último ganha)
+                existente = next((e for e in todos_grupos[gid]["exames"]
+                                  if e["nome"] == exame_legacy["nome"]), None)
+                if existente:
+                    todos_grupos[gid]["exames"].remove(existente)
+                todos_grupos[gid]["exames"].append(exame_legacy)
+
+                # Stats
+                s = ex["status_final"]
+                stats_total["total"] += 1
+                if s == "crit":
+                    stats_total["criticos"] += 1
+                elif s in ("alert", "low"):
+                    stats_total["alertas"] += 1
+                elif s == "attn":
+                    stats_total["atencao"] += 1
+                else:
+                    stats_total["normais"] += 1
+
+            # Hero alerts: top 4 alterados
+            for ex in val["validados"]:
+                if ex["status_final"] != "normal":
+                    todos_hero.append({
+                        "nome": ex["nome_canonico"],
+                        "valor": _formatar_num(ex["valor_f"]),
+                        "unidade": ex.get("unidade", "") or ex.get("unidade_canonica", ""),
+                        "referencia": _formatar_ref(ex.get("ref_min_final"), ex.get("ref_max_final")),
+                        "status": ex["status_final"],
+                        "tag_label": ex["status_final"].upper(),
+                        "tag_class": ex["status_final"],
+                    })
+
+    if not todos_grupos:
+        return None
+
+    # Ordena hero alerts por severidade (crit primeiro)
+    rank = {"crit": 0, "alert": 1, "low": 1, "attn": 2}
+    todos_hero.sort(key=lambda h: rank.get(h["status"], 9))
+    todos_hero = todos_hero[:4]
+
+    # Ordena grupos por prioridade clínica
+    PRIO = ["glicidico", "lipidico", "hormonal", "inflamatorio", "vitaminas",
+            "tireoide", "hepatico", "renal", "adrenal", "hemograma", "outros"]
+    grupos_ordenados = []
+    for g in PRIO:
+        if g in todos_grupos:
+            grupos_ordenados.append(todos_grupos[g])
+    for g, val_g in todos_grupos.items():
+        if g not in PRIO:
+            grupos_ordenados.append(val_g)
+
+    # Salva log de auditoria
+    _salvar_audit(audit, paciente)
+
+    return {
+        "grupos": grupos_ordenados,
+        "hero_alerts": todos_hero,
+        "stats": stats_total,
+        "_audit": audit,
+    }
+
+
+_GRUPO_TITULOS = {
+    "hemograma":     ("Hemograma", "Avalia hemácias, hemoglobina, leucócitos, plaquetas."),
+    "glicidico":     ("Perfil Glicídico", "Glicose, insulina, HbA1c, HOMA-IR."),
+    "lipidico":      ("Perfil Lipídico", "Colesterol, HDL, LDL, triglicérides."),
+    "hepatico":      ("Função Hepática", "TGO, TGP, GGT, fosfatase alcalina."),
+    "renal":         ("Função Renal", "Ureia, creatinina, ácido úrico."),
+    "tireoide":      ("Tireoide", "TSH, T4 Livre, T3 Livre."),
+    "hormonal":      ("Hormonal Sexual", "Testosterona, estradiol, FSH, LH, prolactina."),
+    "inflamatorio":  ("Marcadores Inflamatórios", "PCR-us, homocisteína, VHS."),
+    "vitaminas":     ("Vitaminas e Minerais", "Vit D, B12, ferro, ferritina, magnésio."),
+    "adrenal":       ("Adrenal", "Cortisol, IGF-1."),
+}
+
+
+def _formatar_num(n):
+    if n is None:
+        return "—"
+    if abs(n - int(n)) < 0.001:
+        return str(int(n))
+    return f"{n:.2f}".rstrip("0").rstrip(".").replace(".", ",")
+
+
+def _formatar_ref(rmin, rmax):
+    if rmin is not None and rmax is not None:
+        return f"{_formatar_num(rmin)} a {_formatar_num(rmax)}"
+    if rmax is not None:
+        return f"<{_formatar_num(rmax)}"
+    if rmin is not None:
+        return f">{_formatar_num(rmin)}"
+    return "—"
+
+
+def _salvar_audit(audit, paciente):
+    """Salva log de auditoria do pipeline LLM+validador por paciente."""
+    audit_dir = os.path.join(SKILL_DIR, "state", "auditoria")
+    os.makedirs(audit_dir, exist_ok=True)
+    nome_slug = re.sub(r"[^a-z0-9-]", "", paciente.get("nome", "?").lower().replace(" ", "-"))
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    path = os.path.join(audit_dir, f"{nome_slug}_{ts}.json")
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(audit, f, indent=2, ensure_ascii=False, default=str)
+        print(f"  [LLM] Audit log: {path}", file=sys.stderr)
+    except Exception as e:
+        print(f"  [LLM] Erro salvando audit: {e}", file=sys.stderr)
+
+
 def extrair_todos_exames(lista_pdfs):
     """
     Extrai exames de todos os PDFs de um paciente e mescla os resultados.
@@ -560,12 +779,161 @@ def gerar_resumo_clinico(exames_parsed, questionarios):
     return " · ".join(partes) if partes else "Perfil metabólico em análise."
 
 
+
+# ---------------------------------------------------------------------------
+# RC-06: Envio canônico para tópico Pacientes no Telegram
+# ---------------------------------------------------------------------------
+
+# Canônica IVS — confirmado em painel-unico-backlog 2026-05-03:
+#   group_id: -1003803476669 (AI Vital Slim)
+#   topic_id Pacientes: 271
+TELEGRAM_GROUP_ID = "-1003803476669"
+TELEGRAM_TOPIC_PACIENTES = 271
+
+
+def enviar_apresentacao_para_topico_pacientes(html_path, paciente, exames_parsed=None):
+    """
+    REGRA CANÔNICA RC-06: toda apresentação gerada DEVE ser enviada ao
+    tópico Pacientes (group_id -1003803476669, topic_id 271) via Telegram.
+
+    Returns:
+        dict com {ok: bool, message_id: int|None, erro: str|None}
+    """
+    import urllib.request, urllib.parse, json as _json, mimetypes, uuid
+
+    # Carrega TELEGRAM_BOT_TOKEN
+    token = ""
+    for env_path in ["/root/.openclaw/.env.runtime", "/root/.openclaw/.env"]:
+        if not os.path.exists(env_path):
+            continue
+        with open(env_path) as fh:
+            for line in fh:
+                line = line.strip()
+                if line.startswith("TELEGRAM_BOT_TOKEN="):
+                    val = line.split("=", 1)[1]
+                    if val and not val.startswith("op://"):
+                        token = val
+                        break
+        if token:
+            break
+    if not token:
+        return {"ok": False, "erro": "TELEGRAM_BOT_TOKEN não encontrado"}
+
+    # Caption: resumo clínico curto
+    nome = paciente.get("nome", "Paciente")
+    sexo = paciente.get("sexo", "?")
+    idade = paciente.get("idade") or calcular_idade(paciente.get("dataNascimento"))
+    stats = (exames_parsed or {}).get("stats", {})
+
+    caption_lines = [f"Apresentação {nome} — {idade}a {sexo}"]
+    if stats:
+        crit = stats.get("criticos", 0)
+        alert = stats.get("alertas", 0)
+        normal = stats.get("normais", 0)
+        total = stats.get("total", 0)
+        caption_lines.append(f"Exames: {total} | {crit} crit | {alert} alert | {normal} normal")
+    caption_lines.append(f"Gerada em {time.strftime('%d/%m/%Y %H:%M')}")
+    caption = "\n".join(caption_lines)
+    if len(caption) > 1000:
+        caption = caption[:1000]
+
+    # Multipart upload via curl (mais confiável que urllib pra arquivos grandes)
+    cmd = [
+        "curl", "-s", "-X", "POST",
+        f"https://api.telegram.org/bot{token}/sendDocument",
+        "-F", f"chat_id={TELEGRAM_GROUP_ID}",
+        "-F", f"message_thread_id={TELEGRAM_TOPIC_PACIENTES}",
+        "-F", f"document=@{html_path}",
+        "-F", f"caption={caption}",
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        resp = _json.loads(result.stdout) if result.stdout else {}
+        if resp.get("ok"):
+            mid = resp.get("result", {}).get("message_id")
+            print(f"  [TG] Enviado para tópico Pacientes — message_id={mid}", file=sys.stderr)
+            return {"ok": True, "message_id": mid}
+        return {"ok": False, "erro": resp.get("description", "envio falhou")}
+    except Exception as e:
+        return {"ok": False, "erro": str(e)}
+
+
+def _flatten_exames_v9(exames_parsed):
+    """Achata exames_parsed (com grupos) numa lista compatível com v9."""
+    if not exames_parsed:
+        return []
+    flat = []
+    for grupo in exames_parsed.get("grupos", []):
+        for ex in grupo.get("exames", []):
+            flat.append({
+                "nome": ex.get("nome", ""),
+                "valor": ex.get("valor", "—"),
+                "unit": ex.get("unidade", ""),
+                "ref": ex.get("referencia", "—"),
+                "status": ex.get("status", "normal"),
+            })
+    return flat
+
+
 def gerar_html_apresentacao(paciente, exames_parsed, questionarios):
     """
-    Gera o arquivo HTML da apresentação do paciente.
+    Gera o arquivo HTML da apresentação do paciente — agora via v9 renderer.
     """
+    # REGRA CANÔNICA RC-01: sexo é OBRIGATÓRIO
+    sexo_paciente = paciente.get("sexo") or paciente.get("gender") or ""
+    if not sexo_paciente or str(sexo_paciente).upper()[:1] not in {"M", "F"}:
+        # Default seguro: pula geração e loga
+        log_path = os.path.join(SKILL_DIR, "state", "sem_sexo.log")
+        os.makedirs(os.path.dirname(log_path), exist_ok=True)
+        with open(log_path, "a", encoding="utf-8") as fh:
+            fh.write(f"{datetime.now().isoformat()}\t{paciente.get('nome','?')}\tsexo={sexo_paciente!r}\n")
+        raise ValueError(
+            f"REGRA CANÔNICA RC-01: sexo do paciente '{paciente.get('nome')}' é obrigatório "
+            f"(recebido: {sexo_paciente!r}). Veja REGRAS_CANONICAS.md."
+        )
+    paciente_v9 = {
+        "nome": paciente.get("nome", "Paciente"),
+        "dataNascimento": paciente.get("dataNascimento"),
+        "idade": paciente.get("idade"),
+        "sexo": str(sexo_paciente).upper()[:1],
+        "data_consulta": time.strftime("%d.%m.%Y"),
+    }
+    exames_v9 = _flatten_exames_v9(exames_parsed)
+
+    # V2.7 — Gera 2 versoes:
+    # 1. interna (com Medica/objecoes/botao WA) p/ uso da equipe
+    # 2. paciente (sem objecoes/botao) p/ envio direto ao paciente
+    output_path = render_apresentacao_v10(
+        paciente_v9, questionarios or {}, exames_v9,
+        output_dir=DELIVERABLES_DIR,
+        versao_paciente=False,
+    )
+    output_path = str(output_path)
+    output_path_paciente = render_apresentacao_v10(
+        paciente_v9, questionarios or {}, exames_v9,
+        output_dir=DELIVERABLES_DIR,
+        versao_paciente=True,
+    )
+    output_path_paciente = str(output_path_paciente)
+    print(f'  [V2.7] Versao paciente: {output_path_paciente}', file=sys.stderr)
+
+    # REGRA CANONICA RC-06: envio automatico para topico Pacientes (versao interna)
+    try:
+        envio = enviar_apresentacao_para_topico_pacientes(output_path, paciente_v9, exames_parsed)
+        if envio.get('ok'):
+            print(f'  [RC-06] Enviado ao topico Pacientes (msg_id={envio["message_id"]})', file=sys.stderr)
+        else:
+            print(f'  [RC-06] WARN: envio falhou — {envio.get("erro")}', file=sys.stderr)
+    except Exception as e:
+        print(f'  [RC-06] ERRO no envio (HTML gerado normalmente): {e}', file=sys.stderr)
+
+    return output_path
+
+
+def _gerar_html_apresentacao_v8_legacy(paciente, exames_parsed, questionarios):
+    """Render v8 (legacy) — preservado para fallback se necessário."""
     env = Environment(loader=FileSystemLoader(ASSETS_DIR))
-    template = env.get_template("template-apresentacao.html")
+    template = env.get_template("template-apresentacao-v8.html")
 
     idade = calcular_idade(paciente.get("dataNascimento"))
     nome = paciente.get("nome", "Paciente")
@@ -577,7 +945,22 @@ def gerar_html_apresentacao(paciente, exames_parsed, questionarios):
     imc = calcular_imc(peso, altura)
     imc_label, _ = classificar_imc(imc)
 
+    # Compat v8: placeholders novos + antigos
+    primeiro_nome = nome.split()[0] if nome else "Paciente"
+    nome_slug_data = re.sub(r"[^a-zA-Z0-9-]", "", nome.lower().replace(" ", "-"))
+    paciente_dict = {
+        "nome_completo": nome,
+        "primeiro_nome": primeiro_nome,
+        "idade": idade if idade else "—",
+    }
     context = {
+        # === v8 placeholders ===
+        "paciente": paciente_dict,
+        "exames": {
+            "data_mais_recente": time.strftime("%d/%m/%Y") if not exames_parsed else "—",
+            "data_extenso": "",
+        },
+        # === legacy placeholders (mantidos por compat) ===
         "nome_paciente": nome,
         "idade_paciente": idade if idade else "—",
         "crm_medico": "27.588",
@@ -615,6 +998,27 @@ def gerar_html_apresentacao(paciente, exames_parsed, questionarios):
 
 
 import re  # usado em gerar_html_apresentacao
+
+# v9 renderer (Light cream luxury, 7 secoes, SPIN selling, biblioteca PubMed)
+import importlib.util as _ilu
+_v9_spec = _ilu.spec_from_file_location("v9_render", os.path.join(SCRIPTS_DIR, "gerar_apresentacao_v9.py"))
+_v9_mod = _ilu.module_from_spec(_v9_spec)
+_v9_spec.loader.exec_module(_v9_mod)
+render_apresentacao_v9 = _v9_mod.render_apresentacao_v9
+
+# v10 — Apresentacao V2 conforme briefing Conselho Growth (premium executive)
+_v10_spec = _ilu.spec_from_file_location("v10_render", os.path.join(SCRIPTS_DIR, "gerar_apresentacao_v10.py"))
+_v10_mod = _ilu.module_from_spec(_v10_spec)
+_v10_spec.loader.exec_module(_v10_mod)
+render_apresentacao_v10 = _v10_mod.render_apresentacao_v10
+
+# Pipeline LLM + Validador (substitui regex parser frágil)
+from extrair_exames_llm import extrair_exames_via_llm
+from validador_exames import validar_exames
+import tempfile
+
+# Drive download (reuso do código existente em extrair_exames_pdf)
+from extrair_exames_pdf import baixar_pdf as _baixar_pdf_drive
 
 
 # ---------------------------------------------------------------------------
@@ -787,7 +1191,7 @@ def main():
         exames_parsed = None
         if tem_exames:
             print(f"  Extraindo dados de {exames_drive['total_pdfs']} PDF(s)...")
-            exames_parsed = extrair_todos_exames(exames_drive.get("pdfs", []))
+            exames_parsed = extrair_todos_exames_llm(exames_drive.get("pdfs", []), paciente)
             if exames_parsed:
                 stats = exames_parsed.get("stats", {})
                 print(f"  ✅ {stats.get('total', 0)} exames extraídos "

@@ -1,0 +1,260 @@
+{
+  "nodes": [
+    {
+      "id": "prompt_master_repo",
+      "label": "nidhinjs/prompt-master",
+      "type": "external_reference",
+      "source_file": "https://github.com/nidhinjs/prompt-master",
+      "file_type": "document"
+    },
+    {
+      "id": "prompt_master_selective_adaptation",
+      "label": "Adoção seletiva do prompt-master no IVS",
+      "type": "decision",
+      "source_file": "memory/2026-05-04.md",
+      "file_type": "document"
+    },
+    {
+      "id": "joao_prompts_web",
+      "label": "JOAO-PROMPTS-PARA-FERRAMENTAS-WEB.md",
+      "type": "canonical_doc",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-PROMPTS-PARA-FERRAMENTAS-WEB.md",
+      "file_type": "document"
+    },
+    {
+      "id": "joao_regras_operacao",
+      "label": "JOAO-REGRAS-DE-OPERACAO.md",
+      "type": "canonical_doc",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-REGRAS-DE-OPERACAO.md",
+      "file_type": "document"
+    },
+    {
+      "id": "joao_fontes_ferramentas",
+      "label": "JOAO-FONTES-E-FERRAMENTAS.md",
+      "type": "canonical_doc",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-FONTES-E-FERRAMENTAS.md",
+      "file_type": "document"
+    },
+    {
+      "id": "prompt_base_joao",
+      "label": "PROMPT-BASE.md",
+      "type": "agent_prompt",
+      "source_file": "cerebro/areas/marketing/agentes/agente-reels-intel/PROMPT-BASE.md",
+      "file_type": "document"
+    },
+    {
+      "id": "prompt_imagens_skill",
+      "label": "prompt-imagens/SKILL.md",
+      "type": "skill",
+      "source_file": "/root/.openclaw/workspace/skills/prompt-imagens/SKILL.md",
+      "file_type": "document"
+    },
+    {
+      "id": "replit_agent",
+      "label": "Replit Agent",
+      "type": "tool",
+      "file_type": "document"
+    },
+    {
+      "id": "bolt_new",
+      "label": "Bolt.new",
+      "type": "tool",
+      "file_type": "document"
+    },
+    {
+      "id": "v0",
+      "label": "v0",
+      "type": "tool",
+      "file_type": "document"
+    },
+    {
+      "id": "lovable",
+      "label": "Lovable",
+      "type": "tool",
+      "file_type": "document"
+    },
+    {
+      "id": "openclaw_browser_agent",
+      "label": "OpenClaw/browser agent",
+      "type": "tool",
+      "file_type": "document"
+    },
+    {
+      "id": "prompt_web_blocks",
+      "label": "Blocos obrigatórios de briefing web",
+      "type": "process",
+      "file_type": "document"
+    },
+    {
+      "id": "stop_conditions",
+      "label": "Stop conditions e aprovação humana",
+      "type": "guardrail",
+      "file_type": "document"
+    },
+    {
+      "id": "nao_fazer",
+      "label": "Lista de não fazer",
+      "type": "guardrail",
+      "file_type": "document"
+    },
+    {
+      "id": "html_topic_delivery_pending",
+      "label": "Pendência HTML direto no tópico Telegram",
+      "type": "pending",
+      "file_type": "document"
+    },
+    {
+      "id": "dev21_pending",
+      "label": "21st.dev pendente até API key + teste magic21st",
+      "type": "pending",
+      "file_type": "document"
+    },
+    {
+      "id": "dra_face_lock",
+      "label": "Dra. Daniely: foto-mãe, face lock, sem jaleco por padrão",
+      "type": "guardrail",
+      "file_type": "document"
+    },
+    {
+      "id": "positive_negative_image_prompt",
+      "label": "Prompt visual positivo/negativo estruturado",
+      "type": "process",
+      "file_type": "document"
+    }
+  ],
+  "edges": [
+    {
+      "source": "prompt_master_repo",
+      "target": "prompt_master_selective_adaptation",
+      "label": "inspirou",
+      "kind": "EXTRACTED",
+      "type": "inspirou"
+    },
+    {
+      "source": "prompt_master_selective_adaptation",
+      "target": "joao_prompts_web",
+      "label": "gerou documento canônico",
+      "kind": "EXTRACTED",
+      "type": "gerou documento canônico"
+    },
+    {
+      "source": "joao_prompts_web",
+      "target": "replit_agent",
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para"
+    },
+    {
+      "source": "joao_prompts_web",
+      "target": "bolt_new",
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para"
+    },
+    {
+      "source": "joao_prompts_web",
+      "target": "v0",
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para"
+    },
+    {
+      "source": "joao_prompts_web",
+      "target": "lovable",
+      "label": "define modelo contingencial para",
+      "kind": "EXTRACTED",
+      "type": "define modelo contingencial para"
+    },
+    {
+      "source": "joao_prompts_web",
+      "target": "openclaw_browser_agent",
+      "label": "define modelo para",
+      "kind": "EXTRACTED",
+      "type": "define modelo para"
+    },
+    {
+      "source": "joao_prompts_web",
+      "target": "prompt_web_blocks",
+      "label": "exige",
+      "kind": "EXTRACTED",
+      "type": "exige"
+    },
+    {
+      "source": "prompt_web_blocks",
+      "target": "stop_conditions",
+      "label": "inclui",
+      "kind": "EXTRACTED",
+      "type": "inclui"
+    },
+    {
+      "source": "prompt_web_blocks",
+      "target": "nao_fazer",
+      "label": "inclui",
+      "kind": "EXTRACTED",
+      "type": "inclui"
+    },
+    {
+      "source": "joao_regras_operacao",
+      "target": "joao_prompts_web",
+      "label": "passa a referenciar",
+      "kind": "EXTRACTED",
+      "type": "passa a referenciar"
+    },
+    {
+      "source": "joao_fontes_ferramentas",
+      "target": "joao_prompts_web",
+      "label": "registra como fonte",
+      "kind": "EXTRACTED",
+      "type": "registra como fonte"
+    },
+    {
+      "source": "prompt_base_joao",
+      "target": "joao_prompts_web",
+      "label": "carrega como fonte canônica",
+      "kind": "EXTRACTED",
+      "type": "carrega como fonte canônica"
+    },
+    {
+      "source": "prompt_imagens_skill",
+      "target": "positive_negative_image_prompt",
+      "label": "incorpora estrutura",
+      "kind": "EXTRACTED",
+      "type": "incorpora estrutura"
+    },
+    {
+      "source": "prompt_imagens_skill",
+      "target": "dra_face_lock",
+      "label": "preserva regra absoluta",
+      "kind": "EXTRACTED",
+      "type": "preserva regra absoluta"
+    },
+    {
+      "source": "positive_negative_image_prompt",
+      "target": "dra_face_lock",
+      "label": "subordinado a",
+      "kind": "EXTRACTED",
+      "type": "subordinado a"
+    },
+    {
+      "source": "joao_regras_operacao",
+      "target": "html_topic_delivery_pending",
+      "label": "registra pendência",
+      "kind": "EXTRACTED",
+      "type": "registra pendência"
+    },
+    {
+      "source": "joao_prompts_web",
+      "target": "dev21_pending",
+      "label": "mantém pendência",
+      "kind": "EXTRACTED",
+      "type": "mantém pendência"
+    },
+    {
+      "source": "joao_regras_operacao",
+      "target": "dev21_pending",
+      "label": "mantém fora do stack canônico",
+      "kind": "EXTRACTED",
+      "type": "mantém fora do stack canônico"
+    }
+  ]
+}

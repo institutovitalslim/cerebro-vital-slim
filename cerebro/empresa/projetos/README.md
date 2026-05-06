@@ -1,36 +1,17 @@
-# Projetos — Empresa
+# Projetos — camada operacional
 
-> Projetos estratégicos cross-área. Mais recentes primeiro.
+## Papel deste diretório
+Registrar projetos ativos, pendências e frentes em andamento da empresa.
 
----
+## Regra de leitura
+- usar como backlog e acompanhamento executivo
+- não confundir com contexto canônico
+- toda frente estável e consolidada deve refletir também na camada canônica ou operacional correspondente
 
-## Em andamento
+## Arquivos
+- `projetos.md` → visão resumida de frentes ativas
+- `pendencias.md` → pendências transversais
 
-### Documentação de Processos (Fase 1)
-- **Status:** Em andamento
-- **Prazo:** 30/03/2026
-- **Responsável:** André Costa
-- **Objetivo:** Documentar 80% dos processos recorrentes da empresa
 
-### Implementação de Agente IA
-- **Status:** Em andamento
-- **Prazo:** 31/03/2026
-- **Responsável:** André Costa
-- **Objetivo:** Agente operacional conectado a dados e rotinas
-
-### Atualização FAQ de Suporte
-- **Status:** Planejado
-- **Prazo:** 25/03/2026
-- **Responsável:** Juliana
-- **Objetivo:** Expandir base de conhecimento de 10 para 30 perguntas
-
-## Concluídos
-
-### Migração para Hotmart
-- **Status:** ✅ Concluído em 05/03/2026
-- **Responsável:** Felipe Santos + Ricardo Mendes
-- **Resultado:** Todos os cursos migrados, checkout funcionando
-
----
-
-_Atualizado: março 2026_
+## Observação de recuperabilidade
+Este diretório também deve ser usado para resgatar backlog esquecível quando demandas se perdem entre tópicos ou interrupções.

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sugestão de Agentes Agency Agents para IVS</title>
+  <style>
+    :root{--bg:#0b1117;--panel:#111b24;--panel2:#162333;--text:#ecf2f8;--muted:#a9b8c8;--brand:#21d6a3;--warn:#f2b84b;--danger:#ff6b6b;--line:#263849;--blue:#66b8ff}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#071017,#111827);color:var(--text);font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5}
+    .wrap{max-width:1180px;margin:0 auto;padding:36px 22px 60px}.hero{border:1px solid var(--line);background:rgba(17,27,36,.92);border-radius:22px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
+    h1{margin:0 0 10px;font-size:34px;letter-spacing:-.02em}.subtitle{color:var(--muted);font-size:16px;max-width:880px}.badge{display:inline-block;padding:6px 10px;border:1px solid var(--brand);color:var(--brand);border-radius:999px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+    h2{margin:32px 0 14px;font-size:23px} h3{margin:18px 0 8px;font-size:18px;color:#fff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.card strong{color:#fff}.muted{color:var(--muted)}
+    table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}th,td{padding:12px 13px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--panel2);text-align:left;color:#dcecff;font-size:13px;text-transform:uppercase;letter-spacing:.04em}tr:last-child td{border-bottom:0}.ok{color:var(--brand);font-weight:700}.warn{color:var(--warn);font-weight:700}.no{color:var(--danger);font-weight:700}.blue{color:var(--blue);font-weight:700}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}.callout{border-left:4px solid var(--brand);background:rgba(33,214,163,.08);padding:14px 16px;border-radius:12px}.dangerbox{border-left:4px solid var(--danger);background:rgba(255,107,107,.08);padding:14px 16px;border-radius:12px}.footer{margin-top:34px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
+    code{background:#071017;border:1px solid var(--line);border-radius:7px;padding:2px 6px;color:#b8ffe9}.small{font-size:13px}@media(max-width:900px){.grid,.cols{grid-template-columns:1fr}h1{font-size:28px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="badge">Instituto Vital Slim · Governança de Agentes</div>
+      <h1>Sugestão de agentes do <code>agency-agents</code> para o IVS</h1>
+      <p class="subtitle">Recomendação gerencial para instalar apenas um piloto seletivo, com camada de adaptação IVS, sem importar o repositório inteiro cru. Objetivo: fortalecer João/web, marketing e QA sem criar ruído operacional nem conflito com Maria, Clara, João e regras canônicas do cérebro.</p>
+    </section>
+
+    <h2>1. Veredito executivo</h2>
+    <div class="grid">
+      <div class="card"><strong>Instalação total</strong><br><span class="no">Não recomendada</span><br><span class="muted">O repo gera 184 agentes OpenClaw. Excesso de agentes aumenta conflito, custo cognitivo e risco de sobrepor regras IVS.</span></div>
+      <div class="card"><strong>Instalação seletiva</strong><br><span class="ok">Recomendada</span><br><span class="muted">Escolher 10–15 agentes, adaptar escopo e registrar governança no cérebro via graphify.</span></div>
+      <div class="card"><strong>Formato ideal</strong><br><span class="blue">Pacote IVS</span><br><span class="muted">Namespace próprio: <code>ivs-agency-*</code>, com SOUL/AGENTS/IDENTITY subordinados ao cérebro.</span></div>
+    </div>
+
+    <h2>2. Estrutura recomendada</h2>
+    <div class="callout">
+      <strong>Modelo:</strong> criar uma camada IVS acima dos agentes importados. O agente externo vira especialista subordinado, não autoridade operacional. Toda decisão sobre paciente, clínica, compliance, marca e processos continua no cérebro Vital Slim.
+    </div>
+    <table style="margin-top:14px">
+      <thead><tr><th>Camada</th><th>Local sugerido</th><th>Função</th></tr></thead>
+      <tbody>
+        <tr><td>Fonte externa auditada</td><td><code>/root/cerebro-vital-slim/referencias/agency-agents/</code></td><td>Snapshot do repo ou resumo auditado, sem ativação automática.</td></tr>
+        <tr><td>Pacote OpenClaw IVS</td><td><code>~/.openclaw/agency-agents-ivs/ivs-agency-*/</code></td><td>Workspaces adaptados com <code>SOUL.md</code>, <code>AGENTS.md</code>, <code>IDENTITY.md</code>.</td></tr>
+        <tr><td>Governança canônica</td><td><code>cerebro/empresa/skills/GOVERNANCA-SKILLS.md</code></td><td>Registro de que agentes externos só operam como especialistas subordinados.</td></tr>
+        <tr><td>Memória do João</td><td><code>cerebro/areas/marketing/agentes/agente-reels-intel/</code></td><td>Lista de agentes permitidos para web, marketing e QA.</td></tr>
+        <tr><td>Registro graphify</td><td><code>graphify-YYYY-MM-DD-agency-agents-ivs/</code></td><td>Grafo, auditoria e relatório da instalação seletiva.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Piloto recomendado: 12 agentes</h2>
+    <table>
+      <thead><tr><th>Agente IVS</th><th>Origem no repo</th><th>Uso no IVS</th><th>Dono operacional</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ivs-agency-frontend-developer</strong></td><td>engineering/frontend-developer</td><td>Implementação web, React/Vue, páginas, componentes, performance inicial.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-ui-designer</strong></td><td>design/ui-designer</td><td>Direção visual, layout premium, consistência de interface e design system.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-ux-architect</strong></td><td>design/ux-architect</td><td>Arquitetura de UX, fluxos, wireframe lógico e estrutura de navegação.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-accessibility-auditor</strong></td><td>testing/accessibility-auditor</td><td>Checagem de acessibilidade, responsividade e problemas de usabilidade.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-performance-benchmarker</strong></td><td>testing/performance-benchmarker</td><td>Performance, Lighthouse, carregamento, Core Web Vitals.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-api-tester</strong></td><td>testing/api-tester</td><td>Teste de endpoints, integrações e contratos técnicos.</td><td>João / técnica</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-reality-checker</strong></td><td>testing/reality-checker</td><td>Evitar “aprovado fantasia”; exigir evidência visual e teste real antes de dizer que está pronto.</td><td>Maria / João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-tool-evaluator</strong></td><td>testing/tool-evaluator</td><td>Avaliar Replit, Bolt, v0, Lovable, 21st.dev e outras ferramentas com critérios objetivos.</td><td>Maria / João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-project-shepherd</strong></td><td>project-management/project-shepherd</td><td>Quebrar projetos em etapas, dependências, responsáveis, riscos e status.</td><td>Maria</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-social-media-strategist</strong></td><td>marketing/social-media-strategist</td><td>Estratégia de conteúdo, calendário, canais e coerência de campanha.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-instagram-curator</strong></td><td>marketing/instagram-curator</td><td>Curadoria de Instagram, grid, Reels, estética e consistência visual.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+        <tr><td><strong>ivs-agency-short-video-coach</strong></td><td>marketing/short-video-editing-coach</td><td>Estrutura de vídeos curtos, retenção, cortes, ganchos e edição.</td><td>João</td><td class="ok">Instalar piloto</td></tr>
+      </tbody>
+    </table>
+
+    <h2>4. Agentes úteis, mas fase 2</h2>
+    <table>
+      <thead><tr><th>Agente</th><th>Por que não no piloto?</th><th>Quando entrar</th></tr></thead>
+      <tbody>
+        <tr><td>seo-specialist</td><td>Útil, mas João ainda precisa primeiro estabilizar web/páginas e processo de QA.</td><td>Após primeiro piloto Replit/Bolt.</td></tr>
+        <tr><td>content-creator</td><td>Pode sobrepor a voz do João se entrar cru.</td><td>Após adaptação ao tom IVS.</td></tr>
+        <tr><td>growth-hacker</td><td>Tende a propor experimentos agressivos.</td><td>Somente com guardrails de compliance e aprovação.</td></tr>
+        <tr><td>brand-guardian</td><td>Útil para marca, mas precisa ser alimentado com brand book IVS real.</td><td>Após consolidar identidade visual oficial.</td></tr>
+        <tr><td>technical-writer</td><td>Bom para documentação interna.</td><td>Quando houver volume de sistemas/processos a documentar.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>5. Agentes que eu barraria agora</h2>
+    <div class="dangerbox"><strong>Regra:</strong> qualquer agente que tente orquestrar tudo, atuar em saúde/paciente, jurídico, financeiro ou compliance sem adaptação brasileira deve ficar fora do runtime.</div>
+    <table style="margin-top:14px">
+      <thead><tr><th>Agente</th><th>Motivo</th><th>Decisão</th></tr></thead>
+      <tbody>
+        <tr><td>agents-orchestrator</td><td>Autonomia excessiva. Pode conflitar com Maria e com a governança do OpenClaw/IVS.</td><td class="no">Não instalar cru</td></tr>
+        <tr><td>healthcare-marketing-compliance</td><td>Foco regulatório em China, não Brasil. Pode induzir regra errada.</td><td class="no">Aproveitar só estrutura</td></tr>
+        <tr><td>legal-* / finance-* / tax-*</td><td>Risco jurídico/financeiro. Exige validação humana e contexto local.</td><td class="no">Não instalar agora</td></tr>
+        <tr><td>customer-service / healthcare-customer-service</td><td>Pode colidir com Clara e atendimento de pacientes.</td><td class="no">Não instalar</td></tr>
+        <tr><td>autonomous-optimization-architect</td><td>Propõe otimização autônoma de LLM/custos; perigoso em produção sem governança.</td><td class="warn">Somente leitura futura</td></tr>
+      </tbody>
+    </table>
+
+    <h2>6. Guardrails obrigatórios para cada agente instalado</h2>
+    <div class="cols">
+      <div class="card">
+        <h3>Subordinação</h3>
+        <p class="muted">Todo agente instalado deve declarar: “sou especialista auxiliar; não substituo Maria, João, Clara, Dra. Daniely nem regras do cérebro Vital Slim”.</p>
+      </div>
+      <div class="card">
+        <h3>Sem paciente</h3>
+        <p class="muted">Nenhum agente do pacote pode falar com lead/paciente. Se surgir caso individual, encaminhar para Clara/Dra. Daniely.</p>
+      </div>
+      <div class="card">
+        <h3>Sem decisão estratégica</h3>
+        <p class="muted">Decisões de investimento, contratação, mudança de stack e compliance sobem para Maria/Tiaro.</p>
+      </div>
+      <div class="card">
+        <h3>Sem instalar dependências sozinho</h3>
+        <p class="muted">Agentes técnicos podem recomendar; execução que altera runtime, custos ou produção precisa validação.</p>
+      </div>
+      <div class="card">
+        <h3>Fonte canônica</h3>
+        <p class="muted">Antes de afirmar regra do IVS, consultar cérebro. O repo externo não vira fonte de verdade.</p>
+      </div>
+      <div class="card">
+        <h3>Graphify</h3>
+        <p class="muted">Qualquer instalação ou adaptação permanente precisa registro RC-25 via graphify.</p>
+      </div>
+    </div>
+
+    <h2>7. Estrutura de instalação sugerida</h2>
+    <table>
+      <thead><tr><th>Etapa</th><th>Ação</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Gerar OpenClaw workspaces apenas dos 12 agentes escolhidos.</td><td>Pacote enxuto, sem ruído.</td></tr>
+        <tr><td>2</td><td>Prefixar todos com <code>ivs-agency-</code>.</td><td>Evita colisão com agentes nativos e deixa claro que são adaptados.</td></tr>
+        <tr><td>3</td><td>Inserir cabeçalho IVS em <code>SOUL.md</code> e <code>AGENTS.md</code>.</td><td>Subordinação ao cérebro e às regras operacionais.</td></tr>
+        <tr><td>4</td><td>Registrar uso permitido em arquivos do João e governança de skills.</td><td>João sabe quando acionar cada agente.</td></tr>
+        <tr><td>5</td><td>Rodar graphify.</td><td>Memória durável e auditoria.</td></tr>
+        <tr><td>6</td><td>Teste piloto com um projeto web simples.</td><td>Validar se ajuda antes de expandir.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>8. Recomendação final</h2>
+    <div class="callout">
+      <strong>Minha recomendação:</strong> instalar um piloto com 12 agentes IVS-adaptados, voltado para João/web + QA + gestão leve. Não instalar o pacote inteiro. Depois de 7 a 14 dias de uso real, expandimos para marketing/conteúdo se houver ganho operacional comprovado.
+    </div>
+
+    <div class="footer">
+      Documento preparado para Tiaro · Instituto Vital Slim · Análise do repositório <code>msitarzewski/agency-agents</code> · Observação: token presente no link original não foi usado na análise; recomenda-se revogar/rotacionar se tiver permissão real.
+    </div>
+  </main>
+</body>
+</html>

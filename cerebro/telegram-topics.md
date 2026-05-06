@@ -13,9 +13,11 @@ Regra reforçada novamente por Tiaro em 2026-04-21: **todos os tópicos devem es
 ## Mapa atual de tópicos conhecidos
 
 ### Topic 271
-- Papel observado: **operação transversal / comando geral / memória operacional**
-- Uso real já visto: Quarkclinic, agenda, GitHub/cérebro, WhatsApp/Z-API, estrutura de memória, regras operacionais
-- Status: **tópico fortemente canônico**; várias decisões estruturais importantes nasceram aqui
+- Nome do tópico: **Pacientes**
+- Papel observado: **pacientes / apresentações de casos / operação clínica individual no grupo**
+- Uso real já visto: apresentações clínicas HTML por paciente, follow-up de caso, conversas relacionadas a pacientes específicos
+- Confirmação factual: Tiaro confirmou em 2026-05-03 que o `topic_id` de **Pacientes** é **271**
+- Status: **tópico confirmado canonicamente**
 
 ### Topic 3
 - Área provável: **📢 Marketing**
@@ -41,11 +43,6 @@ Regra reforçada novamente por Tiaro em 2026-04-21: **todos os tópicos devem es
 - Área provável: **Pessoas / RH**
 - Evidência: rotinas de clima, contratos vencendo e onboarding apontam para `topic_id: 8`
 
-### Tópico "Pacientes" (topic_id a confirmar)
-- Nome do tópico: **Pacientes**
-- Volume observado em 2026-04-23: 589 mensagens
-- Contexto: usado para conversas/apresentações relacionadas a pacientes específicos (ex.: apresentação clínica HTML por paciente, follow-up de caso)
-- **Pendente:** confirmar `topic_id` numérico no Telegram e mapear para a área canônica (provavelmente Atendimento ou Operação Clínica)
 - **Identidade neste tópico:** quando perguntarem "qual seu nome" / "você é a Clara" aqui, a resposta canônica é **"Sou a Clara, assistente digital do Instituto Vital Slim"**. Em 2026-04-23 a Clara respondeu "ainda não tenho um nome fixo, pode me chamar como quiser" neste tópico — bug de identidade (carregava só `IDENTITY.md` template em vez de `cerebro/CLAUDE.md`). Corrigido preenchendo `IDENTITY.md` e adicionando regra de precedência em `AGENTS.md`.
 
 ## Regra de promoção entre tópicos
@@ -62,3 +59,17 @@ Antes de responder algo importante em qualquer tópico:
 2. consultar o arquivo canônico do domínio;
 3. consultar este mapa se houver chance de a origem ter sido outro tópico;
 4. só então responder.
+
+### Topic 5782
+- Nome do tópico: **Reels**
+- Link interno observado: `https://t.me/c/3803476669/5782`
+- Papel operacional: cockpit do operador de inteligência de conteúdo / engenharia reversa de reels
+- Agente associado: `agente-reels-intel`
+- Nome humano interno do agente: **João**
+- Regra de interface: dentro deste tópico, o agente especializado de reels pode responder diretamente; fora dele, a Clara segue como interface principal.
+- Estado de runtime em 2026-04-29: suporte nativo `topic -> agentId` implementado no OpenClaw para este tópico.
+- Mapa operacional vivo: `/root/.openclaw/topic-agent-routing.json`
+- Espelho canônico do mapa: `cerebro/telegram-topic-agent-routing.json`
+- Correção importante em 2026-04-30: o identificador correto do tópico de Reels é **5782**. O número **768** apareceu no contexto da conversa, mas não é o `topic_id` real usado no roteamento.
+- Status honesto atual: **território comprovado**. Tiaro validou em 2026-05-01 que o João está respondendo corretamente no tópico 5782.
+- Regra adicional de robustez: manter o tópico 5782 tratado como referência canônica do João e evitar qualquer documentação, contexto de conversa ou parâmetro solto que volte a misturar `768` com `5782`.

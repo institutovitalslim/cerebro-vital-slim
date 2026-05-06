@@ -1,32 +1,77 @@
 {
-  "generatedAt": "2026-04-27T16:01:11.867376-03:00",
+  "generatedAt": "2026-05-06T16:00:10.403512-03:00",
   "lastRunMode": "next-morning",
-  "lastRunDate": "28-04-2026",
+  "lastRunDate": "07-05-2026",
   "items": [
-    {
-      "phone": "5571991583056",
-      "nome": "Lorena Carvalho Ramos Melo",
-      "agendamentoId": 456409460,
-      "dataHoraInicio": "27-04-2026T17:00",
-      "messageId": "3EB07D529D2CE8DE473EC8",
-      "status": "sent",
-      "turno": "afternoon"
-    },
-    {
-      "phone": "5571991583056",
-      "nome": "Marize de Jesus Carvalho",
-      "agendamentoId": 456459079,
-      "dataHoraInicio": "27-04-2026T17:10",
-      "messageId": "B409A2882D8BB3505FA7",
-      "status": "sent",
-      "turno": "afternoon"
-    },
     {
       "phone": "5571993245545",
       "nome": "FRANCISCO DE ASSIS DE LIMA",
-      "agendamentoId": 456478480,
-      "dataHoraInicio": "28-04-2026T08:30",
-      "messageId": "5B6B0EF4CB2AFBDE42F5",
+      "agendamentoId": 458745249,
+      "dataHoraInicio": "05-05-2026T09:00",
+      "messageId": "713581ACCDA750755AE8",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571995583056",
+      "nome": "DAVI CARVALHO RAMOS MELO",
+      "agendamentoId": 458743954,
+      "dataHoraInicio": "05-05-2026T14:00",
+      "messageId": "A727F4CB2BD043CD5A2A",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571999543781",
+      "nome": "JOYCE ANDREA SANTOS PARENTE BEZERRA ",
+      "agendamentoId": 458326978,
+      "dataHoraInicio": "05-05-2026T17:00",
+      "messageId": "3EB048274ED24AA3AA2F99",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571996800509",
+      "nome": "MARIO GOMES DE ABREU FILHO",
+      "agendamentoId": 458945647,
+      "dataHoraInicio": "06-05-2026T17:00",
+      "messageId": "B84FE8D7EF514513BC16",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "5571997256868",
+      "nome": "Larissa Correia de Souza ",
+      "agendamentoId": 458042971,
+      "dataHoraInicio": "06-05-2026T17:30",
+      "messageId": "3EB048F5E8AC5475A3494C",
+      "status": "sent",
+      "turno": "afternoon"
+    },
+    {
+      "phone": "557193873221",
+      "nome": "Diogo de Jesus Melo",
+      "agendamentoId": 459301290,
+      "dataHoraInicio": "07-05-2026T09:00",
+      "messageId": "3EB0F4349EAD83BBA73339",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571988762126",
+      "nome": "IVANA SOUZA LOPES",
+      "agendamentoId": 459403323,
+      "dataHoraInicio": "07-05-2026T10:00",
+      "messageId": "3EB025685FFED77372D5B4",
+      "status": "sent",
+      "turno": "morning"
+    },
+    {
+      "phone": "5571991896551",
+      "nome": "SILVANA MODESTO RODRIGUES",
+      "agendamentoId": 459403579,
+      "dataHoraInicio": "07-05-2026T11:00",
+      "messageId": "04C1080DCA9D4807504D",
       "status": "sent",
       "turno": "morning"
     }

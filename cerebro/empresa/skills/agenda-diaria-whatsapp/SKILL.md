@@ -79,9 +79,9 @@ Se não houver atendimentos: "Bom dia! Não há atendimentos agendados para hoje
 Para **CADA** destinatário, executar via exec:
 
 ```bash
-curl -s -X POST "https://api.z-api.io/instances/3CF367BB00EB205F87468A74AFBCE7F1/token/C26CFC41175FD987513C3202/send-text" \
+curl -s -X POST "https://api.z-api.io/instances/[REDACTED_ZAPI_INSTANCE_ID]/token/[REDACTED_ZAPI_TOKEN]/send-text" \
   -H "Content-Type: application/json" \
-  -H "Client-Token: F277815dcf4e94be7bc2861e8ae9fc369S" \
+  -H "Client-Token: [REDACTED_ZAPI_CLIENT_TOKEN]" \
   -d '{"phone": "NUMERO", "message": "TEXTO_DA_AGENDA"}'
 ```
 
@@ -97,11 +97,11 @@ curl -s -X POST "https://api.z-api.io/instances/3CF367BB00EB205F87468A74AFBCE7F1
 
 | Campo | Valor |
 |-------|-------|
-| **Instance ID** | 3CF367BB00EB205F87468A74AFBCE7F1 |
-| **Token** | C26CFC41175FD987513C3202 |
-| **Client Token** | F277815dcf4e94be7bc2861e8ae9fc369S |
+| **Instance ID** | [REDACTED_ZAPI_INSTANCE_ID] |
+| **Token** | [REDACTED_ZAPI_TOKEN] |
+| **Client Token** | [REDACTED_ZAPI_CLIENT_TOKEN] |
 | **Número conectado** | 7138388708 |
-| **Base URL** | https://api.z-api.io/instances/3CF367BB00EB205F87468A74AFBCE7F1/token/C26CFC41175FD987513C3202 |
+| **Base URL** | https://api.z-api.io/instances/[REDACTED_ZAPI_INSTANCE_ID]/token/[REDACTED_ZAPI_TOKEN] |
 
 ## Execução manual
 

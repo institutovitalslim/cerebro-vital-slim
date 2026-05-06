@@ -1,0 +1,756 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d14" for="edge" attr.name="_tgt" attr.type="string"/>
+<key id="d13" for="edge" attr.name="_src" attr.type="string"/>
+<key id="d12" for="edge" attr.name="source_file" attr.type="string"/>
+<key id="d11" for="edge" attr.name="relation" attr.type="string"/>
+<key id="d10" for="edge" attr.name="confidence" attr.type="string"/>
+<key id="d9" for="edge" attr.name="evidence" attr.type="string"/>
+<key id="d8" for="edge" attr.name="evidence_type" attr.type="string"/>
+<key id="d7" for="edge" attr.name="type" attr.type="string"/>
+<key id="d6" for="edge" attr.name="relationship" attr.type="string"/>
+<key id="d5" for="node" attr.name="community" attr.type="long"/>
+<key id="d4" for="node" attr.name="summary" attr.type="string"/>
+<key id="d3" for="node" attr.name="source_file" attr.type="string"/>
+<key id="d2" for="node" attr.name="file_type" attr.type="string"/>
+<key id="d1" for="node" attr.name="type" attr.type="string"/>
+<key id="d0" for="node" attr.name="label" attr.type="string"/>
+<graph edgedefault="undirected"><node id="joao_agente_principal">
+  <data key="d0">João como agente principal</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">João permanece responsável por classificar demanda, acionar especialidades, validar e consolidar.</data>
+  <data key="d5">1</data>
+</node>
+<node id="modelo_subagentes_sob_demanda">
+  <data key="d0">Modelo de subagentes sob demanda</data>
+  <data key="d1">rationale</data>
+  <data key="d2">rationale</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">Decisão de incorporar o soul dos perfis ao João em vez de criar 12 agentes fixos.</data>
+  <data key="d5">0</data>
+</node>
+<node id="fluxo_tiaro_joao_subagente">
+  <data key="d0">Fluxo Tiaro → João → subagente → João → Tiaro</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">Fluxo Tiaro → João → subagente → João → Tiaro</data>
+  <data key="d5">2</data>
+</node>
+<node id="nao_criar_12_agentes_fixos">
+  <data key="d0">Não criar 12 agentes fixos agora</data>
+  <data key="d1">rationale</data>
+  <data key="d2">rationale</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">Não criar 12 agentes fixos agora</data>
+  <data key="d5">2</data>
+</node>
+<node id="criterio_promocao_agente_fixo">
+  <data key="d0">Critério de promoção para agente fixo</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">Critério de promoção para agente fixo</data>
+  <data key="d5">2</data>
+</node>
+<node id="guardrails_ivs_subagentes">
+  <data key="d0">Guardrails IVS para subagentes</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">Guardrails IVS para subagentes</data>
+  <data key="d5">2</data>
+</node>
+<node id="briefing_subagente">
+  <data key="d0">Briefing canônico para subagente</data>
+  <data key="d1">document</data>
+  <data key="d2">document</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">Briefing canônico para subagente</data>
+  <data key="d5">1</data>
+</node>
+<node id="frontend_developer">
+  <data key="d0">frontend-developer</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">frontend-developer</data>
+  <data key="d5">0</data>
+</node>
+<node id="ui_designer">
+  <data key="d0">ui-designer</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">ui-designer</data>
+  <data key="d5">0</data>
+</node>
+<node id="ux_architect">
+  <data key="d0">ux-architect</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">ux-architect</data>
+  <data key="d5">0</data>
+</node>
+<node id="accessibility_auditor">
+  <data key="d0">accessibility-auditor</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">accessibility-auditor</data>
+  <data key="d5">1</data>
+</node>
+<node id="performance_benchmarker">
+  <data key="d0">performance-benchmarker</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">performance-benchmarker</data>
+  <data key="d5">1</data>
+</node>
+<node id="api_tester">
+  <data key="d0">api-tester</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">api-tester</data>
+  <data key="d5">1</data>
+</node>
+<node id="reality_checker">
+  <data key="d0">reality-checker</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">reality-checker</data>
+  <data key="d5">1</data>
+</node>
+<node id="tool_evaluator">
+  <data key="d0">tool-evaluator</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">tool-evaluator</data>
+  <data key="d5">1</data>
+</node>
+<node id="project_shepherd">
+  <data key="d0">project-shepherd</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">project-shepherd</data>
+  <data key="d5">0</data>
+</node>
+<node id="social_media_strategist">
+  <data key="d0">social-media-strategist</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">social-media-strategist</data>
+  <data key="d5">3</data>
+</node>
+<node id="instagram_curator">
+  <data key="d0">instagram-curator</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">instagram-curator</data>
+  <data key="d5">3</data>
+</node>
+<node id="short_video_coach">
+  <data key="d0">short-video-coach</data>
+  <data key="d1">concept</data>
+  <data key="d2">concept</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">short-video-coach</data>
+  <data key="d5">3</data>
+</node>
+<node id="prompt_base_joao">
+  <data key="d0">PROMPT-BASE do João</data>
+  <data key="d1">document</data>
+  <data key="d2">document</data>
+  <data key="d3">raw/PROMPT-BASE.md</data>
+  <data key="d4">PROMPT-BASE do João</data>
+  <data key="d5">0</data>
+</node>
+<node id="regras_operacao_joao">
+  <data key="d0">Regras de Operação do João</data>
+  <data key="d1">document</data>
+  <data key="d2">document</data>
+  <data key="d3">raw/JOAO-REGRAS-DE-OPERACAO.md</data>
+  <data key="d4">Regras de Operação do João</data>
+  <data key="d5">0</data>
+</node>
+<node id="fontes_ferramentas_joao">
+  <data key="d0">Fontes e Ferramentas do João</data>
+  <data key="d1">document</data>
+  <data key="d2">document</data>
+  <data key="d3">raw/JOAO-FONTES-E-FERRAMENTAS.md</data>
+  <data key="d4">Fontes e Ferramentas do João</data>
+  <data key="d5">0</data>
+</node>
+<node id="memoria_2026_05_05">
+  <data key="d0">Memória 2026-05-05</data>
+  <data key="d1">document</data>
+  <data key="d2">document</data>
+  <data key="d3">raw/2026-05-05.md</data>
+  <data key="d4">Memória 2026-05-05 com decisão, graphify e auditoria de sincronização runtime/cérebro.</data>
+  <data key="d5">2</data>
+</node>
+<node id="agency_agents_referencia">
+  <data key="d0">agency-agents como referência adaptada</data>
+  <data key="d1">document</data>
+  <data key="d2">document</data>
+  <data key="d3">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d4">agency-agents como referência adaptada</data>
+  <data key="d5">0</data>
+</node>
+<node id="runtime_prompt_joao_subagentes">
+  <data key="d0">Runtime prompt João — regra de subagentes sob demanda</data>
+  <data key="d1">document</data>
+  <data key="d2">document</data>
+  <data key="d3">raw/RUNTIME-JOAO-SUBAGENTES.md</data>
+  <data key="d4">Regra carregada no systemPromptOverride do agente-reels-intel para uso operacional dos subagentes sob demanda.</data>
+  <data key="d5">2</data>
+</node>
+<edge source="joao_agente_principal" target="modelo_subagentes_sob_demanda">
+  <data key="d6">centraliza_em</data>
+  <data key="d7">centraliza_em</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">centraliza_em</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">centraliza_em</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">joao_agente_principal</data>
+</edge>
+<edge source="joao_agente_principal" target="fluxo_tiaro_joao_subagente">
+  <data key="d6">opera_fluxo</data>
+  <data key="d7">opera_fluxo</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">opera_fluxo</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">opera_fluxo</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">fluxo_tiaro_joao_subagente</data>
+</edge>
+<edge source="joao_agente_principal" target="briefing_subagente">
+  <data key="d6">monta</data>
+  <data key="d7">monta</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">monta</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">monta</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">briefing_subagente</data>
+</edge>
+<edge source="joao_agente_principal" target="criterio_promocao_agente_fixo">
+  <data key="d6">avalia_promocao</data>
+  <data key="d7">avalia_promocao</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">avalia_promocao</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">avalia_promocao</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">criterio_promocao_agente_fixo</data>
+</edge>
+<edge source="joao_agente_principal" target="frontend_developer">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">frontend_developer</data>
+</edge>
+<edge source="joao_agente_principal" target="ui_designer">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">ui_designer</data>
+</edge>
+<edge source="joao_agente_principal" target="ux_architect">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">ux_architect</data>
+</edge>
+<edge source="joao_agente_principal" target="accessibility_auditor">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">accessibility_auditor</data>
+</edge>
+<edge source="joao_agente_principal" target="performance_benchmarker">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">performance_benchmarker</data>
+</edge>
+<edge source="joao_agente_principal" target="api_tester">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">api_tester</data>
+</edge>
+<edge source="joao_agente_principal" target="reality_checker">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">reality_checker</data>
+</edge>
+<edge source="joao_agente_principal" target="tool_evaluator">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">tool_evaluator</data>
+</edge>
+<edge source="joao_agente_principal" target="project_shepherd">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">project_shepherd</data>
+</edge>
+<edge source="joao_agente_principal" target="social_media_strategist">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">social_media_strategist</data>
+</edge>
+<edge source="joao_agente_principal" target="instagram_curator">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">instagram_curator</data>
+</edge>
+<edge source="joao_agente_principal" target="short_video_coach">
+  <data key="d6">pode_acionar_sob_demanda</data>
+  <data key="d7">pode_acionar_sob_demanda</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">pode_acionar_sob_demanda</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">pode_acionar_sob_demanda</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">joao_agente_principal</data>
+  <data key="d14">short_video_coach</data>
+</edge>
+<edge source="joao_agente_principal" target="runtime_prompt_joao_subagentes">
+  <data key="d6">governa_execucao</data>
+  <data key="d7">governa_execucao</data>
+  <data key="d11">governa_execucao</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d12">raw/RUNTIME-JOAO-SUBAGENTES.md</data>
+  <data key="d9">governa_execucao</data>
+  <data key="d13">runtime_prompt_joao_subagentes</data>
+  <data key="d14">joao_agente_principal</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="nao_criar_12_agentes_fixos">
+  <data key="d6">substitui_instalacao_total</data>
+  <data key="d7">substitui_instalacao_total</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">substitui_instalacao_total</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">substitui_instalacao_total</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">nao_criar_12_agentes_fixos</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="agency_agents_referencia">
+  <data key="d6">adapta_referencia</data>
+  <data key="d7">adapta_referencia</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">adapta_referencia</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">adapta_referencia</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">agency_agents_referencia</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="prompt_base_joao">
+  <data key="d6">referencia</data>
+  <data key="d7">referencia</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">referencia</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">referencia</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">prompt_base_joao</data>
+  <data key="d14">modelo_subagentes_sob_demanda</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="regras_operacao_joao">
+  <data key="d6">governa</data>
+  <data key="d7">governa</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">governa</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">governa</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">regras_operacao_joao</data>
+  <data key="d14">modelo_subagentes_sob_demanda</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="fontes_ferramentas_joao">
+  <data key="d6">lista_biblioteca</data>
+  <data key="d7">lista_biblioteca</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">lista_biblioteca</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">lista_biblioteca</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">fontes_ferramentas_joao</data>
+  <data key="d14">modelo_subagentes_sob_demanda</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="memoria_2026_05_05">
+  <data key="d6">registra_decisao</data>
+  <data key="d7">registra_decisao</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">registra_decisao</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">registra_decisao</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">memoria_2026_05_05</data>
+  <data key="d14">modelo_subagentes_sob_demanda</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="frontend_developer">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">frontend_developer</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="ui_designer">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">ui_designer</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="ux_architect">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">ux_architect</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="accessibility_auditor">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">accessibility_auditor</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="performance_benchmarker">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">performance_benchmarker</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="api_tester">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">api_tester</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="reality_checker">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">reality_checker</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="tool_evaluator">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">tool_evaluator</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="project_shepherd">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">project_shepherd</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="social_media_strategist">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">social_media_strategist</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="instagram_curator">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">instagram_curator</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="short_video_coach">
+  <data key="d6">inclui_especialidade</data>
+  <data key="d7">inclui_especialidade</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">inclui_especialidade</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">inclui_especialidade</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">modelo_subagentes_sob_demanda</data>
+  <data key="d14">short_video_coach</data>
+</edge>
+<edge source="modelo_subagentes_sob_demanda" target="runtime_prompt_joao_subagentes">
+  <data key="d6">carrega_regra_runtime</data>
+  <data key="d7">carrega_regra_runtime</data>
+  <data key="d11">carrega_regra_runtime</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d12">raw/RUNTIME-JOAO-SUBAGENTES.md</data>
+  <data key="d9">carrega_regra_runtime</data>
+  <data key="d13">runtime_prompt_joao_subagentes</data>
+  <data key="d14">modelo_subagentes_sob_demanda</data>
+</edge>
+<edge source="fluxo_tiaro_joao_subagente" target="guardrails_ivs_subagentes">
+  <data key="d6">respeita</data>
+  <data key="d7">respeita</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">respeita</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">respeita</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">fluxo_tiaro_joao_subagente</data>
+  <data key="d14">guardrails_ivs_subagentes</data>
+</edge>
+<edge source="nao_criar_12_agentes_fixos" target="criterio_promocao_agente_fixo">
+  <data key="d6">limita_expansao</data>
+  <data key="d7">limita_expansao</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">limita_expansao</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">limita_expansao</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">criterio_promocao_agente_fixo</data>
+  <data key="d14">nao_criar_12_agentes_fixos</data>
+</edge>
+<edge source="nao_criar_12_agentes_fixos" target="guardrails_ivs_subagentes">
+  <data key="d6">reduz_risco_de_governanca</data>
+  <data key="d7">reduz_risco_de_governanca</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d9">reduz_risco_de_governanca</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d11">reduz_risco_de_governanca</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">guardrails_ivs_subagentes</data>
+  <data key="d14">nao_criar_12_agentes_fixos</data>
+</edge>
+<edge source="guardrails_ivs_subagentes" target="runtime_prompt_joao_subagentes">
+  <data key="d6">reforca_guardrails</data>
+  <data key="d7">reforca_guardrails</data>
+  <data key="d11">reforca_guardrails</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d12">raw/RUNTIME-JOAO-SUBAGENTES.md</data>
+  <data key="d9">reforca_guardrails</data>
+  <data key="d13">runtime_prompt_joao_subagentes</data>
+  <data key="d14">guardrails_ivs_subagentes</data>
+</edge>
+<edge source="frontend_developer" target="ui_designer">
+  <data key="d6">colabora_em_landing_pages</data>
+  <data key="d7">colabora_em_landing_pages</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">colabora_em_landing_pages</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">colabora_em_landing_pages</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">frontend_developer</data>
+  <data key="d14">ui_designer</data>
+</edge>
+<edge source="frontend_developer" target="project_shepherd">
+  <data key="d6">organiza_entrega_web</data>
+  <data key="d7">organiza_entrega_web</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">organiza_entrega_web</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">organiza_entrega_web</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">project_shepherd</data>
+  <data key="d14">frontend_developer</data>
+</edge>
+<edge source="ui_designer" target="ux_architect">
+  <data key="d6">colabora_em_interface</data>
+  <data key="d7">colabora_em_interface</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">colabora_em_interface</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">colabora_em_interface</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">ui_designer</data>
+  <data key="d14">ux_architect</data>
+</edge>
+<edge source="accessibility_auditor" target="performance_benchmarker">
+  <data key="d6">audita_qualidade_web</data>
+  <data key="d7">audita_qualidade_web</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">audita_qualidade_web</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">audita_qualidade_web</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">accessibility_auditor</data>
+  <data key="d14">performance_benchmarker</data>
+</edge>
+<edge source="api_tester" target="reality_checker">
+  <data key="d6">fornece_evidencia_tecnica</data>
+  <data key="d7">fornece_evidencia_tecnica</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">fornece_evidencia_tecnica</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">fornece_evidencia_tecnica</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">api_tester</data>
+  <data key="d14">reality_checker</data>
+</edge>
+<edge source="reality_checker" target="tool_evaluator">
+  <data key="d6">valida_homologacao</data>
+  <data key="d7">valida_homologacao</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">valida_homologacao</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">valida_homologacao</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">reality_checker</data>
+  <data key="d14">tool_evaluator</data>
+</edge>
+<edge source="social_media_strategist" target="instagram_curator">
+  <data key="d6">coordena_conteudo_instagram</data>
+  <data key="d7">coordena_conteudo_instagram</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">coordena_conteudo_instagram</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">coordena_conteudo_instagram</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">social_media_strategist</data>
+  <data key="d14">instagram_curator</data>
+</edge>
+<edge source="instagram_curator" target="short_video_coach">
+  <data key="d6">otimiza_reels</data>
+  <data key="d7">otimiza_reels</data>
+  <data key="d8">INFERRED</data>
+  <data key="d9">otimiza_reels</data>
+  <data key="d10">INFERRED</data>
+  <data key="d11">otimiza_reels</data>
+  <data key="d12">raw/JOAO-SUBAGENTES-SOB-DEMANDA.md</data>
+  <data key="d13">instagram_curator</data>
+  <data key="d14">short_video_coach</data>
+</edge>
+<edge source="memoria_2026_05_05" target="runtime_prompt_joao_subagentes">
+  <data key="d6">registra_correcao_runtime</data>
+  <data key="d7">registra_correcao_runtime</data>
+  <data key="d11">registra_correcao_runtime</data>
+  <data key="d8">EXTRACTED</data>
+  <data key="d10">EXTRACTED</data>
+  <data key="d12">raw/2026-05-05.md</data>
+  <data key="d9">registra_correcao_runtime</data>
+  <data key="d13">memoria_2026_05_05</data>
+  <data key="d14">runtime_prompt_joao_subagentes</data>
+</edge>
+</graph></graphml>

@@ -9,6 +9,13 @@ description: >
 
 # Criação de Vídeo — IVS
 
+## Regra de Ouro
+- Pipeline obrigatório: **1 cena = 1 clip = 1 fala = 1 legenda**.
+- Não usar uma legenda corrida única sobre o vídeo inteiro.
+- Todo reel deve respeitar o Avatar Mestre da clínica: **"A Mulher Que Não Se Reconhece Mais no Espelho"**.
+- A promessa emocional é reconexão com identidade feminina, não apenas emagrecimento.
+- Antes de escolher provider, consultar `cerebro/areas/marketing/providers-midia-mapa-e-playbook-2026-04-28.md`.
+
 ## Origem
 Conteúdo adaptado de **"The Claude Video Cheat Code"** (Notion, 2026).
 Original focado em **Remotion** (programmatic video via React/Node.js) + Claude Code.
@@ -33,15 +40,25 @@ Original focado em **Remotion** (programmatic video via React/Node.js) + Claude 
 | Curva de aprendizado React | Time não tem dev frontend disponível |
 
 ### 🎯 Decisão
-**NÃO instalar Remotion/Claude Code.** Em vez disso, criar framework de **geração de conteúdo de vídeo** usando:
-- `video_generate` (AI video generation)
-- `image_generate` (frames estáticos)
-- Scripts Python para montagem simples (FFMPEG)
+**NÃO instalar Remotion/Claude Code.** Em vez disso, operar um pipeline de produção real usando:
+- `video_generate` (clips com movimento real)
+- ElevenLabs (narração natural)
+- `music_generate` (trilha ambiente)
+- Scripts Python + FFMPEG para montagem e sincronização
 - Roteiros otimizados para reels Instagram
 
 ---
 
 ## Framework IVS de Criação de Vídeo
+
+### Fluxo oficial
+1. Definir tema e dor do Avatar Mestre
+2. Quebrar o roteiro em blocos curtos de fala
+3. Gerar 1 clip por bloco
+4. Gerar 1 narração por bloco via ElevenLabs
+5. Renderizar 1 legenda por bloco, sincronizada com a fala
+6. Concatenar os blocos
+7. Mixar música de fundo abaixo da voz
 
 ### 1. Input
 - **Tema:** assunto médico/comercial (ex: "lipedema", "magnésio", "GLP-1")
@@ -116,13 +133,21 @@ Mesmo corpo do vídeo, apenas o hook muda. Ideal para teste em Meta Ads.
 ---
 
 ## Dependências
-- `video_generate` (OpenClaw nativo)
-- `image_generate` (OpenClaw nativo)
-- `ffmpeg` (para montagem simples, se necessário)
+- `video_generate` (OpenClaw nativo, preferir Qwen/Wan para clips)
+- ElevenLabs (narração natural)
+- `music_generate` (OpenClaw nativo)
+- `ffmpeg` (montagem e sincronização)
+
+## Regra de escolha de provider
+- **Qwen/Wan** = padrão para clips de vídeo do pipeline oficial
+- **ElevenLabs** = padrão para voz final
+- Providers premium alternativos só entram quando houver motivo concreto de qualidade, disponibilidade e ganho real
 
 ## Scripts
 - `scripts/gerar_roteiro.py` — gera roteiro completo a partir de tema
 - `scripts/gerar_variacoes.py` — gera N variações de hook para mesmo vídeo
+- `scripts/produzir_reel.py` — pipeline principal de montagem
+- `scripts/elevenlabs_tts.py` — TTS natural para locução
 
 ## Segurança / Compliance
 - Todo conteúdo médico passa por filtro CFM/CRM-BA
@@ -133,5 +158,8 @@ Mesmo corpo do vídeo, apenas o hook muda. Ideal para teste em Meta Ads.
 ---
 
 ## Status
-🟡 **Skill instalada. Aguardando validação de primeiro roteiro.**
-Próximo passo: gerar roteiro de reel sobre tema real da IVS e validar com Tiaro.
+🟢 **Pipeline funcional e corrigido.**
+- Qwen validado para clips com movimento
+- ElevenLabs configurado para voz natural
+- Regra de sincronização validada: 1 cena = 1 clip = 1 fala = 1 legenda
+- Bug de tela preta identificado e contornado

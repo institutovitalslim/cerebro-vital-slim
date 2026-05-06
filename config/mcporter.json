@@ -1,11 +1,9 @@
 {
   "mcpServers": {
     "stitch": {
-      "command": "npx",
-      "args": ["-y", "stitch-mcp"],
+      "command": "node /root/.openclaw/workspace/tools/stitch-mcp-server/dist/index.js",
       "env": {
-        "GOOGLE_CLOUD_PROJECT": "gog-cli-openclaw-489318",
-        "GOOGLE_APPLICATION_CREDENTIALS": "/root/.config/gcloud/application_default_credentials.json"
+        "GOOGLE_CLOUD_PROJECT": ""
       }
     }
   },

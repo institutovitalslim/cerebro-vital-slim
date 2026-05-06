@@ -1,0 +1,747 @@
+{
+  "nodes": [
+    {
+      "id": "joao_agente_principal",
+      "label": "João como agente principal",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "João permanece responsável por classificar demanda, acionar especialidades, validar e consolidar."
+    },
+    {
+      "id": "modelo_subagentes_sob_demanda",
+      "label": "Modelo de subagentes sob demanda",
+      "type": "rationale",
+      "file_type": "rationale",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "Decisão de incorporar o soul dos perfis ao João em vez de criar 12 agentes fixos."
+    },
+    {
+      "id": "fluxo_tiaro_joao_subagente",
+      "label": "Fluxo Tiaro → João → subagente → João → Tiaro",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "Fluxo Tiaro → João → subagente → João → Tiaro"
+    },
+    {
+      "id": "nao_criar_12_agentes_fixos",
+      "label": "Não criar 12 agentes fixos agora",
+      "type": "rationale",
+      "file_type": "rationale",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "Não criar 12 agentes fixos agora"
+    },
+    {
+      "id": "criterio_promocao_agente_fixo",
+      "label": "Critério de promoção para agente fixo",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "Critério de promoção para agente fixo"
+    },
+    {
+      "id": "guardrails_ivs_subagentes",
+      "label": "Guardrails IVS para subagentes",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "Guardrails IVS para subagentes"
+    },
+    {
+      "id": "briefing_subagente",
+      "label": "Briefing canônico para subagente",
+      "type": "document",
+      "file_type": "document",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "Briefing canônico para subagente"
+    },
+    {
+      "id": "frontend_developer",
+      "label": "frontend-developer",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "frontend-developer"
+    },
+    {
+      "id": "ui_designer",
+      "label": "ui-designer",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "ui-designer"
+    },
+    {
+      "id": "ux_architect",
+      "label": "ux-architect",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "ux-architect"
+    },
+    {
+      "id": "accessibility_auditor",
+      "label": "accessibility-auditor",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "accessibility-auditor"
+    },
+    {
+      "id": "performance_benchmarker",
+      "label": "performance-benchmarker",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "performance-benchmarker"
+    },
+    {
+      "id": "api_tester",
+      "label": "api-tester",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "api-tester"
+    },
+    {
+      "id": "reality_checker",
+      "label": "reality-checker",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "reality-checker"
+    },
+    {
+      "id": "tool_evaluator",
+      "label": "tool-evaluator",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "tool-evaluator"
+    },
+    {
+      "id": "project_shepherd",
+      "label": "project-shepherd",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "project-shepherd"
+    },
+    {
+      "id": "social_media_strategist",
+      "label": "social-media-strategist",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "social-media-strategist"
+    },
+    {
+      "id": "instagram_curator",
+      "label": "instagram-curator",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "instagram-curator"
+    },
+    {
+      "id": "short_video_coach",
+      "label": "short-video-coach",
+      "type": "concept",
+      "file_type": "concept",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "short-video-coach"
+    },
+    {
+      "id": "prompt_base_joao",
+      "label": "PROMPT-BASE do João",
+      "type": "document",
+      "file_type": "document",
+      "source_file": "raw/PROMPT-BASE.md",
+      "summary": "PROMPT-BASE do João"
+    },
+    {
+      "id": "regras_operacao_joao",
+      "label": "Regras de Operação do João",
+      "type": "document",
+      "file_type": "document",
+      "source_file": "raw/JOAO-REGRAS-DE-OPERACAO.md",
+      "summary": "Regras de Operação do João"
+    },
+    {
+      "id": "fontes_ferramentas_joao",
+      "label": "Fontes e Ferramentas do João",
+      "type": "document",
+      "file_type": "document",
+      "source_file": "raw/JOAO-FONTES-E-FERRAMENTAS.md",
+      "summary": "Fontes e Ferramentas do João"
+    },
+    {
+      "id": "memoria_2026_05_05",
+      "label": "Memória 2026-05-05",
+      "type": "document",
+      "file_type": "document",
+      "source_file": "raw/2026-05-05.md",
+      "summary": "Memória 2026-05-05 com decisão, graphify e auditoria de sincronização runtime/cérebro."
+    },
+    {
+      "id": "agency_agents_referencia",
+      "label": "agency-agents como referência adaptada",
+      "type": "document",
+      "file_type": "document",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "summary": "agency-agents como referência adaptada"
+    },
+    {
+      "id": "runtime_prompt_joao_subagentes",
+      "label": "Runtime prompt João — regra de subagentes sob demanda",
+      "type": "document",
+      "file_type": "document",
+      "source_file": "raw/RUNTIME-JOAO-SUBAGENTES.md",
+      "summary": "Regra carregada no systemPromptOverride do agente-reels-intel para uso operacional dos subagentes sob demanda."
+    }
+  ],
+  "edges": [
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "joao_agente_principal",
+      "relationship": "centraliza_em",
+      "type": "centraliza_em",
+      "evidence_type": "EXTRACTED",
+      "evidence": "centraliza_em",
+      "confidence": "EXTRACTED",
+      "relation": "centraliza_em",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "nao_criar_12_agentes_fixos",
+      "relationship": "substitui_instalacao_total",
+      "type": "substitui_instalacao_total",
+      "evidence_type": "EXTRACTED",
+      "evidence": "substitui_instalacao_total",
+      "confidence": "EXTRACTED",
+      "relation": "substitui_instalacao_total",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "agency_agents_referencia",
+      "relationship": "adapta_referencia",
+      "type": "adapta_referencia",
+      "evidence_type": "EXTRACTED",
+      "evidence": "adapta_referencia",
+      "confidence": "EXTRACTED",
+      "relation": "adapta_referencia",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "fluxo_tiaro_joao_subagente",
+      "relationship": "opera_fluxo",
+      "type": "opera_fluxo",
+      "evidence_type": "EXTRACTED",
+      "evidence": "opera_fluxo",
+      "confidence": "EXTRACTED",
+      "relation": "opera_fluxo",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "fluxo_tiaro_joao_subagente",
+      "target": "guardrails_ivs_subagentes",
+      "relationship": "respeita",
+      "type": "respeita",
+      "evidence_type": "EXTRACTED",
+      "evidence": "respeita",
+      "confidence": "EXTRACTED",
+      "relation": "respeita",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "briefing_subagente",
+      "relationship": "monta",
+      "type": "monta",
+      "evidence_type": "EXTRACTED",
+      "evidence": "monta",
+      "confidence": "EXTRACTED",
+      "relation": "monta",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "criterio_promocao_agente_fixo",
+      "relationship": "avalia_promocao",
+      "type": "avalia_promocao",
+      "evidence_type": "EXTRACTED",
+      "evidence": "avalia_promocao",
+      "confidence": "EXTRACTED",
+      "relation": "avalia_promocao",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "criterio_promocao_agente_fixo",
+      "target": "nao_criar_12_agentes_fixos",
+      "relationship": "limita_expansao",
+      "type": "limita_expansao",
+      "evidence_type": "EXTRACTED",
+      "evidence": "limita_expansao",
+      "confidence": "EXTRACTED",
+      "relation": "limita_expansao",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "guardrails_ivs_subagentes",
+      "target": "nao_criar_12_agentes_fixos",
+      "relationship": "reduz_risco_de_governanca",
+      "type": "reduz_risco_de_governanca",
+      "evidence_type": "EXTRACTED",
+      "evidence": "reduz_risco_de_governanca",
+      "confidence": "EXTRACTED",
+      "relation": "reduz_risco_de_governanca",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "prompt_base_joao",
+      "target": "modelo_subagentes_sob_demanda",
+      "relationship": "referencia",
+      "type": "referencia",
+      "evidence_type": "EXTRACTED",
+      "evidence": "referencia",
+      "confidence": "EXTRACTED",
+      "relation": "referencia",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "regras_operacao_joao",
+      "target": "modelo_subagentes_sob_demanda",
+      "relationship": "governa",
+      "type": "governa",
+      "evidence_type": "EXTRACTED",
+      "evidence": "governa",
+      "confidence": "EXTRACTED",
+      "relation": "governa",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "fontes_ferramentas_joao",
+      "target": "modelo_subagentes_sob_demanda",
+      "relationship": "lista_biblioteca",
+      "type": "lista_biblioteca",
+      "evidence_type": "EXTRACTED",
+      "evidence": "lista_biblioteca",
+      "confidence": "EXTRACTED",
+      "relation": "lista_biblioteca",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "memoria_2026_05_05",
+      "target": "modelo_subagentes_sob_demanda",
+      "relationship": "registra_decisao",
+      "type": "registra_decisao",
+      "evidence_type": "EXTRACTED",
+      "evidence": "registra_decisao",
+      "confidence": "EXTRACTED",
+      "relation": "registra_decisao",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "frontend_developer",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "frontend_developer",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "ui_designer",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "ui_designer",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "ux_architect",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "ux_architect",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "accessibility_auditor",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "accessibility_auditor",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "performance_benchmarker",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "performance_benchmarker",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "api_tester",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "api_tester",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "reality_checker",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "reality_checker",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "tool_evaluator",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "tool_evaluator",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "project_shepherd",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "project_shepherd",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "social_media_strategist",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "social_media_strategist",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "instagram_curator",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "instagram_curator",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "modelo_subagentes_sob_demanda",
+      "target": "short_video_coach",
+      "relationship": "inclui_especialidade",
+      "type": "inclui_especialidade",
+      "evidence_type": "EXTRACTED",
+      "evidence": "inclui_especialidade",
+      "confidence": "EXTRACTED",
+      "relation": "inclui_especialidade",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "joao_agente_principal",
+      "target": "short_video_coach",
+      "relationship": "pode_acionar_sob_demanda",
+      "type": "pode_acionar_sob_demanda",
+      "evidence_type": "EXTRACTED",
+      "evidence": "pode_acionar_sob_demanda",
+      "confidence": "EXTRACTED",
+      "relation": "pode_acionar_sob_demanda",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "frontend_developer",
+      "target": "ui_designer",
+      "relationship": "colabora_em_landing_pages",
+      "type": "colabora_em_landing_pages",
+      "evidence_type": "INFERRED",
+      "evidence": "colabora_em_landing_pages",
+      "confidence": "INFERRED",
+      "relation": "colabora_em_landing_pages",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "ui_designer",
+      "target": "ux_architect",
+      "relationship": "colabora_em_interface",
+      "type": "colabora_em_interface",
+      "evidence_type": "INFERRED",
+      "evidence": "colabora_em_interface",
+      "confidence": "INFERRED",
+      "relation": "colabora_em_interface",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "reality_checker",
+      "target": "tool_evaluator",
+      "relationship": "valida_homologacao",
+      "type": "valida_homologacao",
+      "evidence_type": "INFERRED",
+      "evidence": "valida_homologacao",
+      "confidence": "INFERRED",
+      "relation": "valida_homologacao",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "api_tester",
+      "target": "reality_checker",
+      "relationship": "fornece_evidencia_tecnica",
+      "type": "fornece_evidencia_tecnica",
+      "evidence_type": "INFERRED",
+      "evidence": "fornece_evidencia_tecnica",
+      "confidence": "INFERRED",
+      "relation": "fornece_evidencia_tecnica",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "accessibility_auditor",
+      "target": "performance_benchmarker",
+      "relationship": "audita_qualidade_web",
+      "type": "audita_qualidade_web",
+      "evidence_type": "INFERRED",
+      "evidence": "audita_qualidade_web",
+      "confidence": "INFERRED",
+      "relation": "audita_qualidade_web",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "social_media_strategist",
+      "target": "instagram_curator",
+      "relationship": "coordena_conteudo_instagram",
+      "type": "coordena_conteudo_instagram",
+      "evidence_type": "INFERRED",
+      "evidence": "coordena_conteudo_instagram",
+      "confidence": "INFERRED",
+      "relation": "coordena_conteudo_instagram",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "instagram_curator",
+      "target": "short_video_coach",
+      "relationship": "otimiza_reels",
+      "type": "otimiza_reels",
+      "evidence_type": "INFERRED",
+      "evidence": "otimiza_reels",
+      "confidence": "INFERRED",
+      "relation": "otimiza_reels",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "project_shepherd",
+      "target": "frontend_developer",
+      "relationship": "organiza_entrega_web",
+      "type": "organiza_entrega_web",
+      "evidence_type": "INFERRED",
+      "evidence": "organiza_entrega_web",
+      "confidence": "INFERRED",
+      "relation": "organiza_entrega_web",
+      "source_file": "raw/JOAO-SUBAGENTES-SOB-DEMANDA.md"
+    },
+    {
+      "source": "runtime_prompt_joao_subagentes",
+      "target": "modelo_subagentes_sob_demanda",
+      "relationship": "carrega_regra_runtime",
+      "type": "carrega_regra_runtime",
+      "relation": "carrega_regra_runtime",
+      "evidence_type": "EXTRACTED",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/RUNTIME-JOAO-SUBAGENTES.md",
+      "evidence": "carrega_regra_runtime"
+    },
+    {
+      "source": "runtime_prompt_joao_subagentes",
+      "target": "joao_agente_principal",
+      "relationship": "governa_execucao",
+      "type": "governa_execucao",
+      "relation": "governa_execucao",
+      "evidence_type": "EXTRACTED",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/RUNTIME-JOAO-SUBAGENTES.md",
+      "evidence": "governa_execucao"
+    },
+    {
+      "source": "runtime_prompt_joao_subagentes",
+      "target": "guardrails_ivs_subagentes",
+      "relationship": "reforca_guardrails",
+      "type": "reforca_guardrails",
+      "relation": "reforca_guardrails",
+      "evidence_type": "EXTRACTED",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/RUNTIME-JOAO-SUBAGENTES.md",
+      "evidence": "reforca_guardrails"
+    },
+    {
+      "source": "memoria_2026_05_05",
+      "target": "runtime_prompt_joao_subagentes",
+      "relationship": "registra_correcao_runtime",
+      "type": "registra_correcao_runtime",
+      "relation": "registra_correcao_runtime",
+      "evidence_type": "EXTRACTED",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/2026-05-05.md",
+      "evidence": "registra_correcao_runtime"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

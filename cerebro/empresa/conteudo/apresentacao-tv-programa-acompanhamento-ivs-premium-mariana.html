@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programa de Acompanhamento IVS — Mariana Souza Andrade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4efe8;
+      --surface: #fffdf9;
+      --surface-2: #fbf6f0;
+      --ink: #2d241d;
+      --muted: #76685b;
+      --line: #eadfce;
+      --gold: #b18a49;
+      --gold-soft: #d7ba7f;
+      --gold-pale: #f5ecd9;
+      --brown: #4f3a29;
+      --brown-deep: #342418;
+      --green: #5d7e68;
+      --red: #b35d50;
+      --shadow: 0 20px 60px rgba(61, 45, 31, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1240px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(215,186,127,.14), transparent 24%),
+        radial-gradient(circle at top right, rgba(177,138,73,.08), transparent 22%),
+        linear-gradient(180deg, #f7f2eb 0%, #f3ede6 100%);
+      line-height: 1.65;
+    }
+    .wrap { width: min(100%, 1480px); margin: 0 auto; padding: 28px; }
+    .section {
+      width: min(100%, var(--max)); margin: 0 auto 26px; background: var(--surface);
+      border: 1px solid rgba(177,138,73,.14); border-radius: var(--radius-xl); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .inner { padding: 60px; }
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(52,36,24,.98), rgba(79,58,41,.96)),
+        var(--brown-deep);
+      color: #fff; position: relative;
+    }
+    .hero:before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 14%, rgba(215,186,127,.18), transparent 22%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.08);
+      color: var(--gold-soft); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .14em;
+    }
+    h1,h2,h3 { font-family: 'Playfair Display', serif; margin: 0 0 14px; line-height: 1.08; }
+    h1 { font-size: clamp(38px, 5vw, 70px); max-width: 860px; }
+    h2 { font-size: clamp(28px, 3.2vw, 44px); color: var(--brown); }
+    h3 { font-size: 22px; color: var(--brown); }
+    p { margin: 0 0 14px; }
+    .lead { font-size: 20px; color: rgba(255,255,255,.86); max-width: 760px; }
+    .lead-dark { font-size: 18px; color: var(--muted); max-width: 860px; }
+    .gold { color: var(--gold); }
+    .small { font-size: 14px; color: var(--muted); }
+    .hero-grid, .grid-2, .grid-3, .stats { display: grid; gap: 20px; }
+    .hero-grid { grid-template-columns: 1.4fr .9fr; position: relative; z-index: 1; align-items: end; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .stats { grid-template-columns: repeat(4, minmax(0,1fr)); margin-top: 30px; }
+    .hero-card, .card, .metric, .quote, .data-card, .step, .focus-box {
+      border-radius: var(--radius-lg); border: 1px solid var(--line); background: var(--surface-2);
+    }
+    .hero-card {
+      background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); padding: 28px; backdrop-filter: blur(6px);
+    }
+    .card, .metric, .quote, .data-card, .focus-box { padding: 24px; }
+    .section-label {
+      display: block; margin-bottom: 16px; color: var(--gold); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800;
+    }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .pill { padding: 10px 14px; border-radius: 999px; background: rgba(215,186,127,.14); color: #fff; border: 1px solid rgba(215,186,127,.18); font-size: 14px; font-weight: 700; }
+    .patient-name { font-size: 30px; font-weight: 800; margin-bottom: 8px; }
+    .metric-title { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 800; }
+    .metric-value { font-size: 34px; color: var(--brown); font-weight: 800; margin: 6px 0 8px; }
+    .quote {
+      background: linear-gradient(180deg, rgba(177,138,73,.10), rgba(177,138,73,.04));
+      border-left: 5px solid var(--gold); color: var(--brown);
+    }
+    .badge {
+      display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px;
+    }
+    .alert { background: rgba(179,93,80,.12); color: var(--red); }
+    .warn { background: rgba(177,138,73,.16); color: var(--brown); }
+    .ok { background: rgba(93,126,104,.12); color: var(--green); }
+    .data-value { font-size: 32px; font-weight: 800; color: var(--brown); margin: 8px 0; }
+    ul.clean { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    ul.clean li { position: relative; padding-left: 22px; }
+    ul.clean li:before { content: '•'; position: absolute; left: 0; color: var(--gold); font-weight: 900; }
+    .steps { display: grid; gap: 16px; margin-top: 20px; }
+    .step {
+      display: grid; grid-template-columns: 58px 1fr; gap: 18px; padding: 20px; background: #fff;
+    }
+    .step-num {
+      width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft)); color: #fff; font-weight: 800; font-size: 18px;
+      box-shadow: 0 12px 28px rgba(177,138,73,.24);
+    }
+    .cta {
+      background: linear-gradient(135deg, #4c3828, #352419); color: #fff;
+    }
+    .cta h2, .cta h3 { color: #fff; }
+    .cta-box {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-lg); padding: 22px;
+    }
+    .divider { height: 1px; background: linear-gradient(90deg, rgba(177,138,73,.26), transparent); margin: 20px 0 0; }
+    @media (max-width: 980px) {
+      .hero-grid, .grid-2, .grid-3, .stats { grid-template-columns: 1fr; }
+      .inner { padding: 34px 24px; }
+      .wrap { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="section hero">
+      <div class="inner">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Instituto Vital Slim · apresentação personalizada</span>
+            <h1>Mariana, o que você está vivendo hoje <span class="gold">não é só excesso de peso</span>.</h1>
+            <p class="lead">Existe um contexto físico, emocional e metabólico por trás do seu cansaço, da sua dificuldade de manter resultado e da sensação de não se reconhecer mais no espelho.</p>
+            <div class="pill-row">
+              <div class="pill">43 anos</div>
+              <div class="pill">Rotina intensa</div>
+              <div class="pill">Já tentou várias vezes</div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="small" style="color:rgba(255,255,255,.74);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;">Resumo do caso</div>
+            <div class="patient-name">Mariana Souza Andrade</div>
+            <p><strong>Objetivo principal:</strong><br>Emagrecer, voltar a ter energia e se sentir bem no próprio corpo.</p>
+            <p><strong>Frase de acolhimento:</strong><br>Você não chegou até aqui por falta de esforço. Você chegou porque tentou muitas vezes sem o acompanhamento certo.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="metric"><div class="metric-title">Peso atual</div><div class="metric-value">84 kg</div><div class="small">Altura: 162 cm</div></div>
+          <div class="metric"><div class="metric-title">Peso ideal percebido</div><div class="metric-value">64 kg</div><div class="small">Peso máximo: 88 kg</div></div>
+          <div class="metric"><div class="metric-title">Energia</div><div class="metric-value">Baixa</div><div class="small">Sono ruim · 5 a 6h/noite</div></div>
+          <div class="metric"><div class="metric-title">Maior barreira</div><div class="metric-value" style="font-size:24px;line-height:1.25;">Falta de tempo e cansaço</div><div class="small">Rotina intensa, sem constância</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Situation · o que te trouxe até aqui</span>
+        <h2>Você não está incomodada só com o corpo. <span class="gold">Está cansada de recomeçar.</span></h2>
+        <p class="lead-dark">No seu questionário, fica claro que o peso é só a ponta visível. O que mais pesa hoje é a frustração de já ter tentado várias estratégias, conseguido algum resultado no começo e depois voltado ao mesmo ponto.</p>
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="card">
+            <h3>Seu principal incômodo hoje</h3>
+            <p><strong>“Não me reconheço mais no espelho e me sinto travada.”</strong></p>
+          </div>
+          <div class="card">
+            <h3>O que isso já afeta</h3>
+            <p>Autoestima, disposição, confiança, vontade de tirar fotos, vida social e até a relação com o marido.</p>
+          </div>
+          <div class="card">
+            <h3>O que você já tentou</h3>
+            <p>Low carb, jejum intermitente, nutricionista, academia, sibutramina e Ozempic por pouco tempo.</p>
+          </div>
+          <div class="card">
+            <h3>O que você quer agora</h3>
+            <p>Um caminho prático, possível, personalizado e que não dependa de começar de novo toda segunda-feira.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:20px;">Seu caso não pede mais uma tentativa solta. Pede uma estratégia que converse com sua vida real.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Situation → Problem · contexto da rotina</span>
+        <h2>Hoje, sua rotina está organizada para <span class="gold">sobreviver</span>, não para evoluir.</h2>
+        <div class="grid-3" style="margin-top:22px;">
+          <div class="card">
+            <h3>Trabalho e rotina</h3>
+            <p>Empresária, muito tempo sentada, resolvendo tudo pelo celular, com pouco espaço mental para cuidar de si.</p>
+          </div>
+          <div class="card">
+            <h3>Energia e sono</h3>
+            <p>Nível de energia baixo, sono ruim, 5 a 6 horas por noite, cansaço forte principalmente à tarde.</p>
+          </div>
+          <div class="card">
+            <h3>Alimentação real</h3>
+            <p>Mais desejo por doces à noite, refeições com pressa, açúcar no café, fim de semana mais desorganizado.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:20px;">Isso mostra que o problema não é “falta de vergonha na cara”. É um ambiente interno e externo empurrando você para o mesmo ciclo.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Problem · o corpo também está falando</span>
+        <h2>Além do que você sente, seu próprio corpo já mostra <span class="gold">sinais de alerta</span>.</h2>
+        <p class="lead-dark">Mesmo antes dos exames, seu questionário já revela sinais clínicos e hormonais relevantes que ajudam a explicar por que o emagrecimento não sustenta como você gostaria.</p>
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="data-card">
+            <div class="badge warn">Sinal hormonal</div>
+            <h3>Ciclo menstrual irregular</h3>
+            <div class="data-value">Mudança de padrão</div>
+            <p>Associado a inchaço, irritabilidade e muita vontade de doce. Isso sugere que sua fisiologia já pode estar exigindo uma leitura hormonal mais cuidadosa.</p>
+          </div>
+          <div class="data-card">
+            <div class="badge warn">Sinal funcional</div>
+            <h3>Queda de energia</h3>
+            <div class="data-value">Constante</div>
+            <p>Você não acorda disposta e termina o dia esgotada. Isso afeta constância, exercício, alimentação e resposta emocional à rotina.</p>
+          </div>
+          <div class="data-card">
+            <div class="badge alert">Sinal metabólico</div>
+            <h3>Ganho de peso persistente</h3>
+            <div class="data-value">84 kg</div>
+            <p>Com histórico de já ter chegado a 88 kg e múltiplas tentativas anteriores, fica claro que existe dificuldade de sustentação e não só de perda inicial.</p>
+          </div>
+          <div class="data-card">
+            <div class="badge warn">Sinal periférico</div>
+            <h3>Cabelo, pele e unhas</h3>
+            <div class="data-value">Alterados</div>
+            <p>Queda de cabelo, pele mais opaca e unhas fracas reforçam que o corpo pode estar sinalizando desequilíbrio além da estética.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:20px;">Ou seja: o que você sente tem coerência. Não é exagero, nem fraqueza. Seu corpo já está comunicando que precisa de suporte.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Problem · o que está travando o resultado</span>
+        <h2>No seu caso, o travamento não vem de um único ponto. <span class="gold">Vem do conjunto.</span></h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card">
+            <h3>Principais fatores que travam hoje</h3>
+            <ul class="clean">
+              <li>Rotina intensa e pouco espaço para constância</li>
+              <li>Sono ruim e energia baixa</li>
+              <li>Desejo aumentado por doces e carboidratos simples</li>
+              <li>Finais de semana desorganizados</li>
+              <li>Histórico de várias tentativas sem sustentação</li>
+              <li>Sinais hormonais e metabólicos que merecem investigação</li>
+            </ul>
+          </div>
+          <div class="focus-box">
+            <h3>Reframe importante</h3>
+            <p>Isso tira um peso desnecessário das suas costas: o problema não é apenas “se esforçar mais”. O problema é tentar sustentar sozinha um processo que precisa de leitura clínica, estratégia e ajuste.</p>
+            <div class="divider"></div>
+            <p class="small" style="margin-top:14px;">Quebra de objeção embutida: não é falta de força de vontade. É contexto + fisiologia + ausência de acompanhamento adequado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Implication · o custo de manter como está</span>
+        <h2>Se nada mudar, o cenário não tende a ficar igual. <span class="gold">Tende a pesar mais.</span></h2>
+        <div class="grid-3" style="margin-top:22px;">
+          <div class="card">
+            <h3>Na rotina</h3>
+            <p>Menos disposição, mais cansaço, mais dificuldade de sustentar atividade física e mais sensação de estar sempre correndo atrás.</p>
+          </div>
+          <div class="card">
+            <h3>Na autoestima</h3>
+            <p>Mais desconexão com o espelho, mais insegurança em fotos, viagens, praia, eventos e intimidade.</p>
+          </div>
+          <div class="card">
+            <h3>Na saúde futura</h3>
+            <p>Maior risco de aprofundar um quadro metabólico, aumentar peso, manter inflamação e piorar ainda mais energia e qualidade de vida.</p>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:18px;">
+          <div class="card">
+            <h3>Como você mesma enxerga 1 ano à frente</h3>
+            <p><strong>“Mais pesada, mais frustrada e com medo da minha saúde piorar.”</strong></p>
+          </div>
+          <div class="card">
+            <h3>O que já foi perdido no caminho</h3>
+            <p>Viagens, praia, eventos, exposição, leveza no social e oportunidades de viver com mais confiança.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:20px;">Adiar esse cuidado normalmente não preserva o presente. Normalmente aprofunda a dificuldade.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Implication → Need-payoff · por que sozinho falha</span>
+        <h2>Você não precisa de mais uma tentativa. Precisa de um processo que <span class="gold">não dependa só da sua força</span>.</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card">
+            <h3>Por que tentar sozinha tende a falhar</h3>
+            <p>Porque a rotina te engole, o cansaço desorganiza a alimentação, o fim de semana bagunça a estrutura e o emocional vai sendo desgastado por recomeços sem sustentação.</p>
+          </div>
+          <div class="card">
+            <h3>Barreiras invisíveis de constância</h3>
+            <p>Ansiedade, energia baixa, pouca previsibilidade na rotina e ausência de alguém ajustando a rota quando a vida real interfere no plano.</p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:20px;">O maior risco não é começar errado. É continuar tentando do mesmo jeito e esperar um desfecho diferente.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Need-payoff · onde o IVS entra</span>
+        <h2>É aqui que o Programa IVS deixa de ser “mais um tratamento” e vira uma <span class="gold">resposta lógica para o seu caso</span>.</h2>
+        <div class="focus-box" style="margin-top:20px;">
+          <h3>Conexão com o programa</h3>
+          <p>No seu cenário, o acompanhamento faz sentido porque ele organiza o que hoje está desorganizado: investiga o que está travando seu metabolismo, cria uma estratégia possível para sua rotina, acompanha sua resposta e ajusta o caminho para que você não precise recomeçar sozinha.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div><h3>Entender seu cenário real</h3><p>Rotina, sintomas, sinais hormonais, histórico de tentativas, relação com comida, sono, energia, exames e objetivos.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div><h3>Montar um plano individualizado</h3><p>Não um plano de internet, nem um protocolo genérico. Uma estratégia desenhada para a sua realidade.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div><h3>Acompanhar e ajustar</h3><p>Seu corpo responde em fases. O plano precisa acompanhar essa resposta e a sua rotina também.</p></div></div>
+          <div class="step"><div class="step-num">4</div><div><h3>Sustentar o resultado</h3><p>O foco não é só perder peso. É voltar a se reconhecer com segurança, direção e constância.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Need-payoff · valor percebido</span>
+        <h2>O que você compra aqui não é só consulta. É <span class="gold">clareza, segurança e acompanhamento real</span>.</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card">
+            <h3>Entregáveis visíveis</h3>
+            <ul class="clean">
+              <li>Avaliação estruturada do seu caso</li>
+              <li>Plano personalizado</li>
+              <li>Monitoramento da evolução</li>
+              <li>Ajustes ao longo do processo</li>
+              <li>Leitura clínica dos sinais do corpo</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Benefícios invisíveis</h3>
+            <ul class="clean">
+              <li>Mais confiança para seguir</li>
+              <li>Menos chance de recomeçar do zero</li>
+              <li>Mais clareza sobre o que fazer</li>
+              <li>Mais segurança emocional e clínica</li>
+              <li>Mais constância mesmo com vida corrida</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <span class="section-label">Need-payoff · evolução esperada</span>
+        <h2>O resultado que importa não é só a balança. É voltar a sentir que <span class="gold">seu corpo responde a favor</span>.</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card">
+            <h3>O que queremos acompanhar</h3>
+            <p>Peso, medidas, energia, sono, constância, desejo por doces, disposição, organização da rotina e sinais clínicos ao longo do processo.</p>
+          </div>
+          <div class="card">
+            <h3>O que você quer ver em 3 meses</h3>
+            <p>Desinchar, reduzir medidas e sair do ciclo de recomeçar toda segunda-feira.</p>
+          </div>
+          <div class="card">
+            <h3>Como seria sua vida ao atingir o objetivo</h3>
+            <p>“Eu voltaria a me sentir eu mesma, com energia, autoestima e leveza.”</p>
+          </div>
+          <div class="card">
+            <h3>Nota de segurança</h3>
+            <p>Cada organismo responde de uma forma. Por isso o processo precisa ser acompanhado e ajustado com critério.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="inner">
+        <span class="eyebrow">Fechamento consultivo</span>
+        <h2>O próximo passo</h2>
+        <p class="lead">Hoje, a sua decisão não é apenas sobre emagrecer. É sobre escolher entre continuar tentando sozinha ou iniciar um acompanhamento que respeite sua fisiologia, sua rotina e o momento que você está vivendo.</p>
+        <div class="grid-2" style="margin-top:24px;">
+          <div class="cta-box">
+            <h3>Síntese final do caso</h3>
+            <p>Você é uma mulher que já se esforçou, mas vem tentando sustentar sozinha um processo que hoje exige investigação, método e acompanhamento de verdade.</p>
+          </div>
+          <div class="cta-box">
+            <h3>Risco de adiar</h3>
+            <p>Seguir no mesmo ciclo de cansaço, frustração, ganho de peso, baixa autoestima e medo crescente de piora da saúde.</p>
+          </div>
+          <div class="cta-box">
+            <h3>Momento de agir</h3>
+            <p>Você já deixou claro que não quer continuar assim. E também já mostrou que está aberta a um programa mensal se sentir segurança e personalização.</p>
+          </div>
+          <div class="cta-box">
+            <h3>Convite final</h3>
+            <p><strong>Se o que você precisa é de um caminho claro, acompanhado e realmente desenhado para o seu caso, este pode ser o momento de parar de recomeçar e começar a ser conduzida.</strong></p>
+          </div>
+        </div>
+        <p class="small" style="color:rgba(255,255,255,.74);margin-top:18px;">Simulação premium de apresentação TV para paciente nova do IVS, baseada em avatar realista do instituto e estruturada em lógica SPIN Selling.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

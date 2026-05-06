@@ -1,0 +1,668 @@
+{
+  "request": {
+    "url": "https://www.instagram.com/reel/DXWyuCIkqiY/?igsh=MTlpY2phZ3Nlbmtw",
+    "objetivo": "todos",
+    "tema": "automação e agentes",
+    "avatar": "A Mulher Que Não Se Reconhece Mais no Espelho"
+  },
+  "response": {
+    "id": "3879511194739058840",
+    "shortcode": "DXWyuCIkqiY",
+    "thumbnail_src": "https://scontent-lhr8-2.cdninstagram.com/v/t51.71878-15/670545476_957569020155387_5957119468832607710_n.jpg?stp=c0.248.640.640a_dst-jpg_e15_tt6&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=m3QLsG0XXoMQ7kNvwHs-yiU&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af1Mdp223M0A3GHztMdVuot5_fwkAlLZCgZbzfCyebeL3w&oe=69F71A62&_nc_sid=d885a2",
+    "dimensions": {
+      "height": 1136,
+      "width": 640
+    },
+    "gating_info": null,
+    "fact_check_overall_rating": null,
+    "fact_check_information": null,
+    "sensitivity_friction_info": null,
+    "sharing_friction_info": {
+      "should_have_sharing_friction": false,
+      "bloks_app_url": null
+    },
+    "media_overlay_info": null,
+    "media_preview": "ABgq5wISAex9/SmkYOKeNv8An/8AXTioHUEZ/wA+tAENFPIHaigAAJ6c1emDTIueCo4HPtVJTg/4HFTtKWHJOT70DK5BHXiilJz1OaKYiOiiikAUUUUAf//Z",
+    "display_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.71878-15/670545476_957569020155387_5957119468832607710_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=m3QLsG0XXoMQ7kNvwHs-yiU&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af32pR1bUSSKkvvC0B1sr3my2bto0CR2v_MA2o4ZP7h7VA&oe=69F71A62&_nc_sid=d885a2",
+    "display_resources": [
+      {
+        "src": "https://scontent-lhr8-2.cdninstagram.com/v/t51.71878-15/670545476_957569020155387_5957119468832607710_n.jpg?stp=dst-jpg_e15_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi42NDB4MTEzNi5zZHIuZjcxODc4Lm5mcmFtZV9jb3Zlcl9mcmFtZS5jMiJ9&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=m3QLsG0XXoMQ7kNvwHs-yiU&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af32pR1bUSSKkvvC0B1sr3my2bto0CR2v_MA2o4ZP7h7VA&oe=69F71A62&_nc_sid=d885a2",
+        "config_width": 640,
+        "config_height": 1136
+      },
+      {
+        "src": "https://scontent-lhr8-2.cdninstagram.com/v/t51.71878-15/670545476_957569020155387_5957119468832607710_n.jpg?stp=dst-jpg_e15_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi42NDB4MTEzNi5zZHIuZjcxODc4Lm5mcmFtZV9jb3Zlcl9mcmFtZS5jMiJ9&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=m3QLsG0XXoMQ7kNvwHs-yiU&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af32pR1bUSSKkvvC0B1sr3my2bto0CR2v_MA2o4ZP7h7VA&oe=69F71A62&_nc_sid=d885a2",
+        "config_width": 750,
+        "config_height": 1331
+      },
+      {
+        "src": "https://scontent-lhr8-2.cdninstagram.com/v/t51.71878-15/670545476_957569020155387_5957119468832607710_n.jpg?stp=dst-jpg_e15_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi42NDB4MTEzNi5zZHIuZjcxODc4Lm5mcmFtZV9jb3Zlcl9mcmFtZS5jMiJ9&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=m3QLsG0XXoMQ7kNvwHs-yiU&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af32pR1bUSSKkvvC0B1sr3my2bto0CR2v_MA2o4ZP7h7VA&oe=69F71A62&_nc_sid=d885a2",
+        "config_width": 1080,
+        "config_height": 1917
+      }
+    ],
+    "accessibility_caption": null,
+    "has_audio": true,
+    "video_url": "https://scontent-lhr8-1.cdninstagram.com/o1/v/t16/f2/m86/AQPjWzccHuX7wb3No54jGDFFYIIlmB1y2qtRmv-F_dYW1RT7CYz0Eotu-eiNoSFkkAB33ideI2aC-YoLeHGywR2i4NWDrltqZydo6iE.mp4?stp=dst-mp4&efg=eyJxZV9ncm91cHMiOiJbXCJpZ193ZWJfZGVsaXZlcnlfdnRzX290ZlwiXSIsInZlbmNvZGVfdGFnIjoidnRzX3ZvZF91cmxnZW4uY2xpcHMuYzIuNzIwLmJhc2VsaW5lIn0&_nc_cat=111&vs=905695379110529_3106188194&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC82NzQ0RTlDQkMzQzEyNzBGQzc1Mzc5ODg5OTRGMTM5MV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0VFNEQwMzQwQUQwODA3RDNFNTA4NTU0QkJGNkE2RUIzX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwAVAAAmvrrxn9nnxD8VAigCQzMsF0BY%2B7ZFocrBGBJkYXNoX2Jhc2VsaW5lXzFfdjERAHX%2BB2XmnQEA&_nc_rid=f9094b5a9e&ccb=9-4&oh=00_Af3y-fFf4R_t5gVGsgsIwIlm0_cVhIcJuOUigOHowgM6Qw&oe=69F31A81&_nc_sid=d885a2",
+    "video_view_count": 40494,
+    "video_play_count": 74401,
+    "encoding_status": null,
+    "is_published": true,
+    "product_type": "clips",
+    "title": "",
+    "video_duration": 99.939,
+    "clips_music_attribution_info": {
+      "artist_name": "ai.rise.co",
+      "song_name": "Original audio",
+      "uses_original_audio": true,
+      "should_mute_audio": false,
+      "should_mute_audio_reason": "",
+      "audio_id": "26774912995528952"
+    },
+    "is_video": true,
+    "upcoming_event": null,
+    "edge_media_to_tagged_user": {
+      "edges": []
+    },
+    "owner": {
+      "id": "74491911902",
+      "username": "ai.rise.co",
+      "is_verified": false,
+      "profile_pic_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.2885-19/497754762_17843186487487903_8936164460331872187_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=E95dzrN9OaUQ7kNvwEmY_Md&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af2go-g_GWmqqw5IBPaPiOY9S-g4N90FWqPhKR1ijTpqNQ&oe=69F72279&_nc_sid=d885a2",
+      "blocked_by_viewer": false,
+      "restricted_by_viewer": false,
+      "followed_by_viewer": false,
+      "full_name": "AI Rise",
+      "has_blocked_viewer": false,
+      "is_embeds_disabled": false,
+      "is_private": false,
+      "is_unpublished": false,
+      "requested_by_viewer": false,
+      "pass_tiering_recommendation": true,
+      "edge_owner_to_timeline_media": {
+        "count": 87
+      },
+      "edge_followed_by": {
+        "count": 145445
+      }
+    },
+    "edge_media_to_caption": {
+      "edges": [
+        {
+          "node": {
+            "created_at": "1776693969",
+            "text": "Nvidia CEO Jensen Huang unveiled NemoClaw at GTC 2026, marking a strategic move to transform the viral OpenClaw project into a secure, enterprise-ready platform. Described by Huang as the \"operating system for personal AI,\" the stack allows businesses to deploy autonomous agents that can navigate complex workflows using a single terminal command. Unlike basic chatbots, these \"claws\" use a new runtime called OpenShell to operate within isolated sandboxes, ensuring that sensitive corporate data stays protected while the agents perform multi-step tasks like troubleshooting API failures or managing customer billing.\n\nThe launch is supported by a broad coalition of partners, including Salesforce, Adobe, and SAP, who are integrating NemoClaw into their own business ecosystems. By pairing these agents with Nvidia’s new DGX Spark \"desktop supercomputers,\" companies can run high-reasoning tasks locally to avoid the latency and high costs of cloud-based inference. This infrastructure shift signals Nvidia's intent to become the foundational layer for a \"digital workforce\" where autonomous agents don't just answer questions, but actively execute the administrative and technical labor of a global enterprise.\n\nWill your next coworker be an autonomous claw running on your desk?\n\nFollow @ai.rise.co\n\n#fyp #life #ai",
+            "id": "18181321069376935"
+          }
+        }
+      ]
+    },
+    "can_see_insights_as_brand": false,
+    "caption_is_edited": false,
+    "has_ranked_comments": true,
+    "like_and_view_counts_disabled": false,
+    "edge_media_to_parent_comment": {
+      "count": 49,
+      "page_info": {
+        "has_next_page": true,
+        "end_cursor": "{\"bifilter_token\": \"KGEAgdBTVeRKQAAlO826eURAAOdXc1UtqkAABwUlblsHQACJ5euHnrVAAGzRn6qzQUAADppwtN07QADvTC8RwVtAAK_61AD0Y0AAEdaUcGODPwD1L0BTSixAAPb_hCbFpT8AAA==\"}"
+      },
+      "edges": [
+        {
+          "node": {
+            "id": "18063096245399541",
+            "text": "Replacing complex workflows with a single terminal command? That’s the dream. It’s less about replacing coworkers and more about removing the administrative friction we all hate.",
+            "created_at": 1776787687,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "1627048319",
+              "is_verified": true,
+              "profile_pic_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.2885-19/437204348_982081340246594_8218486669591683164_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby42MDAuYzIifQ&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=102&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=ColwgmOWuGIQ7kNvwFjsWqt&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af2mKamGxuh5AoGON4bwjdBX2jB10JT0VULnH1xVFGUtoQ&oe=69F72767&_nc_sid=d885a2",
+              "username": "cathitarbox"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 14
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 1,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": [
+                {
+                  "node": {
+                    "id": "18123184156536550",
+                    "text": "@cathitarbox it’s about replacing coworkers",
+                    "created_at": 1777406567,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "1562604789",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.2885-19/56414159_2087186171579907_6421051398296698880_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=BiCErOH2szcQ7kNvwFi2Hbg&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af02QNzoUGHllt4EC8A1FCZHADIjaq-lyevhCUANHFNaoQ&oe=69F722DD&_nc_sid=d885a2",
+                      "username": "gnarshiptrooper"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 0
+                    },
+                    "is_restricted_pending": false
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18086638427033964",
+            "text": "Trojan Horse at its best !!!!",
+            "created_at": 1776836257,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "7370651364",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.2885-19/29092855_592180561135849_6127363390022090752_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=101&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=FV12oafsal0Q7kNvwGxj_oo&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af2VUYFJrRpruP8Qeum5hAWdtMaqZQj_FKnTN6vhd2t6KA&oe=69F70620&_nc_sid=d885a2",
+              "username": "stefansahling"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 7
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 0,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "17915189706162166",
+            "text": "So quantum computing is the next level?",
+            "created_at": 1776851050,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "53421573423",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr6-2.cdninstagram.com/v/t51.82787-19/652455518_18035813024781424_2582204033170662722_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4zMjAuYzIifQ&_nc_ht=scontent-lhr6-2.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=Idre1zuIznkQ7kNvwGl19jA&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0RKmP59BeeEOMhlDoaYyR2sA2E5UX208Ha13mEmgIX_g&oe=69F7074D&_nc_sid=d885a2",
+              "username": "success.secrets.ai"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 3
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 1,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": [
+                {
+                  "node": {
+                    "id": "18110465179847111",
+                    "text": "@success.secrets.ai we're still dealing with that too. Qsr and quantum readiness. It's like a big fear and I thought quantum computing was the big breakthrough. It was going to solve all the problems and obsolete encryption and it computes everything in picosecond and like where is that? Where's hyperledger you know 10 years ago. That's all you heard hyperledger all the things or you're out of business",
+                    "created_at": 1776901113,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "12101732561",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr6-2.cdninstagram.com/v/t51.2885-19/350093538_2170001566530768_2114263671881301003_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby45NTcuYzIifQ&_nc_ht=scontent-lhr6-2.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=cBlgKJbU_-8Q7kNvwFjMHQr&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0wqLWuobAUVJUT6qej_d68E-HCtw_5S-7v7by2_iDBaQ&oe=69F72843&_nc_sid=d885a2",
+                      "username": "lordalamar"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 1
+                    },
+                    "is_restricted_pending": false
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "17877386646574609",
+            "text": "None of their stuff works as advertised",
+            "created_at": 1776703799,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "55010862",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr8-1.cdninstagram.com/v/t51.82787-19/587211252_18546385063034863_9086450405551752449_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_cat=107&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=cS72WDJ1e_MQ7kNvwE_CP9S&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0qBnNlfioTR0OGRBmnoOSbo68wm3mSniRZe3S6Wd94QA&oe=69F6FE70&_nc_sid=d885a2",
+              "username": "alan_korgav"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 10
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 0,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18201510193354727",
+            "text": "Everyday technology is changing …..how do we keep up",
+            "created_at": 1776853952,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "1426730568",
+              "is_verified": true,
+              "profile_pic_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/670890225_18593287879042569_7579483329865541944_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=N8rJQOLHEaAQ7kNvwF2NjEo&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af17gSCLcG_MnaWuQYIEuowL8IxNUb4YDv7TluGex43Fdw&oe=69F7185E&_nc_sid=d885a2",
+              "username": "dufflebagtone"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 1
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 1,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": [
+                {
+                  "node": {
+                    "id": "18100266088815605",
+                    "text": "@dufflebagtone follow us.",
+                    "created_at": 1777338569,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "32901744058",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr8-1.cdninstagram.com/v/t51.82787-19/658910846_18081628076096059_7787242877344544627_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby42ODEuYzIifQ&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_cat=107&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=WtAZG9BQw5MQ7kNvwGZt-LD&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af1u_t3n-u6aeej-R2V0H4Qo7pwG1z6bIUZBbJe0OZ80hg&oe=69F7201D&_nc_sid=d885a2",
+                      "username": "richoffbots.ai"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 0
+                    },
+                    "is_restricted_pending": false
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18022487780820231",
+            "text": "Ive replaced 12 offshore developers with an automated agent pipeline in the last 18 months, its def here if you know how to use it. I literally go from room to room talking to agents on different computers now Lol. Best employees I’ve ever had.",
+            "created_at": 1776884285,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "13346596100",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/671213207_18159289084444101_8870087932309911175_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=5ZRdsmrj1rIQ7kNvwFFkGcU&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af1hNCZmDXWjVuxyVzUVL71AtlHbfcnvI5CD_O_Zk4sbvQ&oe=69F72ADB&_nc_sid=d885a2",
+              "username": "rofsky"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 0
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 2,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": [
+                {
+                  "node": {
+                    "id": "18103180466314382",
+                    "text": "@rofsky wait until you can't afford the tokens. And that cost is more than the the 12 developers you just canned to put more profit in your pockets. You are a sorry excuse of a human being",
+                    "created_at": 1777081244,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "303152258",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr8-1.cdninstagram.com/v/t51.82787-19/571802026_18537160621048259_8307614356516544681_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_cat=111&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=-KdYeWpeJTsQ7kNvwGTxqbw&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af114U0x6zqUWmAHZdakqq9J5f23ii7GThPy9-Wl4eESUA&oe=69F70F66&_nc_sid=d885a2",
+                      "username": "mannypetty2013"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 0
+                    },
+                    "is_restricted_pending": false
+                  }
+                },
+                {
+                  "node": {
+                    "id": "18084239402384957",
+                    "text": "@mannypetty2013 hahahahahah comedy 🤡",
+                    "created_at": 1777086750,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "13346596100",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.82787-19/671213207_18159289084444101_8870087932309911175_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=5ZRdsmrj1rIQ7kNvwFFkGcU&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af1hNCZmDXWjVuxyVzUVL71AtlHbfcnvI5CD_O_Zk4sbvQ&oe=69F72ADB&_nc_sid=d885a2",
+                      "username": "rofsky"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 0
+                    },
+                    "is_restricted_pending": false
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18080221910571534",
+            "text": "Just focus on hardware and surpassing quantum",
+            "created_at": 1776703160,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "175355201",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr6-2.cdninstagram.com/v/t51.2885-19/274296555_1107533523403200_5856212469219678486_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby45NTkuYzIifQ&_nc_ht=scontent-lhr6-2.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=E-v7v08ZW6wQ7kNvwESHEbA&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af1U4pLlmnRYhZy0Yix3YDwmQv1C8L58aQrhKyuUJYnCnw&oe=69F704BD&_nc_sid=d885a2",
+              "username": "d.puert.o"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 3
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 1,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": [
+                {
+                  "node": {
+                    "id": "17886409596375663",
+                    "text": "@d.puert.o agreed. Guy has no idea what he’s talking about 🤣",
+                    "created_at": 1776856412,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "21942332",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.82787-19/683632927_18580124893054333_78344710420831272_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=101&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=7DLwuFGvY3QQ7kNvwENX9ha&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af1O7dUCbQqdEHRIzjb6cED8y8T0Yp6ThhV5yiguPYULlg&oe=69F7037A&_nc_sid=d885a2",
+                      "username": "tevv.f"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 0
+                    },
+                    "is_restricted_pending": false
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18096743054037121",
+            "text": "Which Peter is he referring to?",
+            "created_at": 1776764766,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "37582341572",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-ams2-1.cdninstagram.com/v/t51.2885-19/573323465_1219825463302212_7278921664109726296_n.png?stp=dst-jpg_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xNTAuYzIifQ&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2gHEcRMBzBWJrA3DGE9UwlnGpojHM-au6D-a0w3Mr0E2VvVVaqG3_j3ESXuN9kdei7nFtCZfJNEDCiKLt8zyDjcR&_nc_ohc=1L2SJuAwzFgQ7kNvwGP3l-v&_nc_gid=IJiIf-EAlpJSCzwmfkWHGw&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.3-ccb7-5&oh=00_Af2F4u4RGP6wT1B7QVmsgREvuWHvQOj_kE8isW4oGRjT_g&oe=69F704EA&_nc_sid=10d13b",
+              "username": "bro_etwtts"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 0
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 2,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": [
+                {
+                  "node": {
+                    "id": "18130122082577330",
+                    "text": "@bro_etwtts Thiel",
+                    "created_at": 1776946458,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "4023894331",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr8-1.cdninstagram.com/v/t51.2885-19/28430814_191594248239139_4982497457356144640_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby42MDAuYzIifQ&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_cat=107&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=QgJUI3XWj7oQ7kNvwGRhimk&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0BLF_mbL1auek84payFIP5KH3nyTom1uhKChK3s0npQQ&oe=69F72C00&_nc_sid=d885a2",
+                      "username": "sundazeglory"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 0
+                    },
+                    "is_restricted_pending": false
+                  }
+                },
+                {
+                  "node": {
+                    "id": "18081640817622128",
+                    "text": "@bro_etwtts Peter Steinberger, creator of OpenClaw",
+                    "created_at": 1777054238,
+                    "did_report_as_spam": false,
+                    "owner": {
+                      "id": "13342654",
+                      "is_verified": false,
+                      "profile_pic_url": "https://scontent-lhr6-2.cdninstagram.com/v/t51.2885-19/470476913_950520656961048_5730477101510046335_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr6-2.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=pPxfmr1wKPYQ7kNvwHNeM_D&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0tDMDIHYKeMp4S2QXcH2exphHC2LOYv1GySCx644G16w&oe=69F72FB8&_nc_sid=d885a2",
+                      "username": "orasul"
+                    },
+                    "viewer_has_liked": false,
+                    "edge_liked_by": {
+                      "count": 0
+                    },
+                    "is_restricted_pending": false
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18115283284610287",
+            "text": "Business that trust this will be under government control. They give governments the ability to shut down your business if you post something online they don’t like… just wait till we move to a a digital dollar.. they’re using AI products to gain control of our lives. Wake up people. Yes it’s awesome, but you’re trading your freedom for it",
+            "created_at": 1776849685,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "206982795",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr8-1.cdninstagram.com/v/t51.82787-19/553488899_18523162087006796_7767411792679055845_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_cat=108&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=wLWUk4ifdqYQ7kNvwHV9Fah&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af1zuOU5X0KMKCxSkIdwl9us0f1OnBC9U1LM7WYHw9Ohcw&oe=69F71EB9&_nc_sid=d885a2",
+              "username": "ad_stevens"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 1
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 0,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18124298146609839",
+            "text": "These companies want to create everything leaving all of us as mere consumers.....They should stick their hardware and leave room for developers to come up with innovation but instead they want to make everything....soon idea of developing owns agents will be useless as they will develop everything...so every one of us will just be paying for these services instead of developing these systems ourselves....",
+            "created_at": 1776783630,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "41136944147",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.2885-19/118707756_229306375174081_190644581374325743_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=101&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=pzmfrDog8C0Q7kNvwElnLyL&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af27c5F2Su1Hg7NNjHj6gQrnu0HzNCQu_CY4S0K--OOpFQ&oe=69F704C6&_nc_sid=d885a2",
+              "username": "sinocent98"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 2
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 0,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18089688125225765",
+            "text": "AKA \"we just created the means for getting rid of most jobs all so we can claw more money and buoy our stock\".",
+            "created_at": 1776703894,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "1413392280",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.2885-19/10502548_246560418873562_333782631_a.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xNTAuYzIifQ&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=110&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=t5aCLxt80rkQ7kNvwHp72L0&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0ADFu-rnfpDRFJ5XjewqbSpqLOt5__fbx7L0oMHMDoHw&oe=69F71DBC&_nc_sid=d885a2",
+              "username": "forrealmg"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 2
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 0,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": []
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "18214090999326089",
+            "text": "Great business leader. Poor story teller.",
+            "created_at": 1776695203,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "2462641506",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr8-1.cdninstagram.com/v/t51.2885-19/504570455_18350342701081507_5864906932074012537_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_cat=107&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=R8iB-M9hmOgQ7kNvwEPZ895&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0Sc4nicAZKSUdBctyAYWGDoJif-9vJJR7a3Tm9VweuIQ&oe=69F71FD1&_nc_sid=d885a2",
+              "username": "ginokels"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 1
+            },
+            "is_restricted_pending": false,
+            "edge_threaded_comments": {
+              "count": 0,
+              "page_info": {
+                "has_next_page": false,
+                "end_cursor": null
+              },
+              "edges": []
+            }
+          }
+        }
+      ]
+    },
+    "edge_media_to_hoisted_comment": {
+      "edges": []
+    },
+    "edge_media_preview_comment": {
+      "count": 49,
+      "edges": [
+        {
+          "node": {
+            "id": "18086860307202210",
+            "text": "He doesn’t even understand it",
+            "created_at": 1777351711,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "1655497500",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.2885-19/15877158_1797336343864737_1000603607600463872_a.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=109&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=UHc9GudVOpkQ7kNvwHYktve&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af0tIMVxPOAAmDoRl6kWN1ei_Au9Ead7xt9xURn67E8G_w&oe=69F70A71&_nc_sid=d885a2",
+              "username": "ninjagm"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 0
+            },
+            "is_restricted_pending": false
+          }
+        },
+        {
+          "node": {
+            "id": "18123184156536550",
+            "text": "@cathitarbox it’s about replacing coworkers",
+            "created_at": 1777406567,
+            "did_report_as_spam": false,
+            "owner": {
+              "id": "1562604789",
+              "is_verified": false,
+              "profile_pic_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.2885-19/56414159_2087186171579907_6421051398296698880_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2gE-RMtEnYqD_7xChNwUoiCcmNoNg7M8g8HQ4QZgnBLotVWPJFTIkaQfzl1iWTXfi_w&_nc_ohc=BiCErOH2szcQ7kNvwFi2Hbg&_nc_gid=mkwE6iUgIHI1kAK3XmyH6A&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_Af02QNzoUGHllt4EC8A1FCZHADIjaq-lyevhCUANHFNaoQ&oe=69F722DD&_nc_sid=d885a2",
+              "username": "gnarshiptrooper"
+            },
+            "viewer_has_liked": false,
+            "edge_liked_by": {
+              "count": 0
+            },
+            "is_restricted_pending": false
+          }
+        }
+      ]
+    },
+    "comments_disabled": false,
+    "commenting_disabled_for_viewer": false,
+    "taken_at_timestamp": 1776693968,
+    "edge_media_preview_like": {
+      "count": 1783,
+      "edges": []
+    },
+    "edge_media_to_sponsor_user": {
+      "edges": []
+    },
+    "is_affiliate": false,
+    "is_paid_partnership": false,
+    "location": null,
+    "nft_asset_info": null,
+    "viewer_has_liked": false,
+    "viewer_has_saved": false,
+    "viewer_has_saved_to_collection": false,
+    "viewer_in_photo_of_you": false,
+    "viewer_can_reshare": true,
+    "is_ad": false,
+    "edge_web_media_to_related_media": {
+      "edges": []
+    },
+    "coauthor_producers": [],
+    "pinned_for_users": [],
+    "audio_url": "https://www.instagram.com/reels/audio/26774912995528952/"
+  }
+}

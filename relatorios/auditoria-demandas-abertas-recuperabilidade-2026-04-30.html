@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria de Demandas Abertas</title>
+  <style>
+    body{font-family:Inter,Arial,sans-serif;background:#08101f;color:#eef2ff;margin:0;padding:32px;line-height:1.55}
+    .wrap{max-width:1100px;margin:0 auto}.card{background:#101935;border:1px solid #2c396d;border-radius:20px;padding:24px;margin-bottom:18px}
+    h1,h2{margin:0 0 12px}.muted{color:#b9c2e6}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.35);color:#f3df9b;font-size:12px;font-weight:700}
+    ul{margin:8px 0 0;padding-left:20px} li+li{margin-top:6px} code{color:#f3df9b}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="pill">Auditoria</div>
+    <h1>Demandas abertas e risco de esquecimento por troca de contexto</h1>
+    <p class="muted">Consolidado em 30/04/2026 a partir do padrão real de operação do Tiaro.</p>
+  </div>
+  <div class="card">
+    <h2>Leitura do problema</h2>
+    <ul>
+      <li>Muitas demandas podem abrir em paralelo e se perder por erro, interrupção ou mudança de foco.</li>
+      <li>O problema não é só backlog; é também <strong>recuperabilidade de backlog</strong>.</li>
+      <li>Isso exige índice operacional + pendências explícitas + memória atualizada.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Correções aplicadas</h2>
+    <ul>
+      <li>Novos pedidos recorrentes adicionados ao índice operacional.</li>
+      <li>Camada de pendências atualizada com foco em demandas esquecíveis.</li>
+      <li>Backlog de governança e recuperabilidade explicitado em <code>pendencias.md</code>.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Resultado prático</h2>
+    <ul>
+      <li>Fica mais fácil resgatar tarefas abertas que sumiram entre tópicos.</li>
+      <li>Diminui a chance de repetir "isso já tinha sido pedido".</li>
+      <li>Melhora a capacidade da Clara de retomar frentes interrompidas.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

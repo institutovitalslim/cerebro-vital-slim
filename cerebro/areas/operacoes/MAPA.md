@@ -29,3 +29,11 @@ operacoes/
 | `rotinas/` | Crons configurados (heartbeat 6h, sync GitHub 00h) |
 | `skills/` | Skills da área (ver `_index.md`) |
 | `projetos/` | Projetos ativos e concluídos |
+
+
+## Leitura estrutural da área
+- `contexto/` = camada canônica
+- `rotinas/` = camada operacional recorrente
+- `skills/` = camada operacional especializada
+- `projetos/` = frentes e backlog da área
+- materiais fora desse padrão devem ser tratados como experimental/teste ou histórico/log
