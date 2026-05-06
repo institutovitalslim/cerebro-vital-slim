@@ -33,6 +33,7 @@ ZAPI_BASE_URL = os.getenv("ZAPI_BASE_URL", "").strip() or (
 )
 ZAPI_SEND_TEXT_PATH = os.getenv("ZAPI_SEND_TEXT_PATH", "/send-text")
 CLARA_NOTIFY_PHONE = os.getenv("CLARA_NOTIFY_PHONE", "5571986968887")  # Tiaro
+CLARA_NOTIFY_PHONES = [p.strip() for p in os.getenv("CLARA_NOTIFY_PHONES", "5571986968887,5571991574827").split(",") if p.strip()]
 BRIDGE_SHARED_SECRET = os.getenv("BRIDGE_SHARED_SECRET", "")
 WEBHOOK_PATH_TOKEN = os.getenv("WEBHOOK_PATH_TOKEN", "")
 DEDUP_TTL_SECONDS = int(os.getenv("DEDUP_TTL_SECONDS", "600"))
@@ -725,11 +726,41 @@ def call_clara(phone: str, text: str, sender_name: Optional[str] = None) -> str:
 
 
 
+
+
+def enforce_allowed_scheduling_scope(reply: str) -> str:
+    """Clara só pode agendar Consulta ou Exame de Bioimpedância."""
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    lower = text.lower()
+    scheduling_context = any(token in lower for token in (
+        "agend", "marc", "reserv", "horário", "horario", "agenda", "encaixe", "consulta ficou", "consulta está", "consulta esta"
+    ))
+    if not scheduling_context:
+        return text
+    allowed = any(token in lower for token in (
+        "consulta", "avaliação", "avaliacao", "bioimpedância", "bioimpedancia", "exame de bio"
+    ))
+    forbidden = any(token in lower for token in (
+        "procedimento", "aplicação", "aplicacao", "injetável", "injetavel", "injetáveis", "injetaveis",
+        "soro", "soroterapia", "implante", "hormonal", "tirzepatida", "medicação", "medicacao",
+        "programa", "acompanhamento", "retorno", "botox", "preenchimento", "fórmula", "formula"
+    ))
+    if forbidden and not allowed:
+        return (
+            "Para organizar corretamente, pela Clara eu consigo te ajudar com o agendamento de Consulta ou Exame de Bioimpedância. "
+            "Outros procedimentos precisam ser alinhados pela equipe após avaliação. "
+            "Você quer que eu veja Consulta ou Bioimpedância?"
+        )
+    return text
+
 def enforce_agendamento_reply_quality(reply: str) -> str:
     """Remove fechamento passivo e bloqueia oferta de agenda para D0/D1."""
     text = (reply or "").strip()
     if not text or text == "NO_REPLY":
         return text or "NO_REPLY"
+    text = enforce_allowed_scheduling_scope(text)
     lower = text.lower()
 
     same_day_or_tomorrow = ("hoje" in lower) or ("amanhã" in lower) or ("amanha" in lower)
@@ -746,9 +777,9 @@ def enforce_agendamento_reply_quality(reply: str) -> str:
     ))
     if same_day_or_tomorrow and scheduling_context and positive_offer_markers and not explicit_block:
         return (
-            "Para garantir que tudo fique bem organizado para você, nós não marcamos para o mesmo dia nem para o dia seguinte. "
-            "O ideal é reservar a partir de D+2, assim a equipe consegue preparar sua pré-consulta e todos os detalhes com cuidado. "
-            "Prefere que eu veja um horário pela manhã ou pela tarde?"
+            "Hoje e amanhã não temos disponibilidade. "
+            "Consigo verificar para você a partir de D+2. "
+            "Prefere manhã ou tarde?"
         )
     passive_markers = (
         "fico à disposição", "fico a disposição", "qualquer coisa",
@@ -763,6 +794,49 @@ def enforce_agendamento_reply_quality(reply: str) -> str:
     elif has_passive_close and "?" not in text:
         text = text.rstrip(" .") + ".\n\nQual seria o melhor próximo passo para você agora: entender a avaliação ou ver um horário?"
     return text
+
+
+
+def is_agendamento_event(reply: str) -> bool:
+    """Detecta quando Clara avançou para agendamento/reserva/pré-consulta."""
+    text = (reply or "").strip().lower()
+    if not text or text == "no_reply":
+        return False
+    scheduling_tokens = (
+        "agendamento", "agendada", "agendado", "marcada", "marcado",
+        "consulta ficou", "consulta está", "consulta esta", "horário reservado", "horario reservado",
+        "reserva", "pré-reserva", "pre-reserva", "vou solicitar o link", "link à equipe financeira",
+        "link a equipe financeira", "pré-consulta", "pre-consulta", "sua consulta"
+    )
+    action_tokens = (
+        "confirm", "reserv", "marc", "agend", "solicitar o link", "envio aqui em seguida",
+        "dados para", "pré-consulta", "pre-consulta"
+    )
+    # Evita notificar mera pergunta aberta muito genérica, mas captura pré-reserva e link.
+    return any(t in text for t in scheduling_tokens) and any(t in text for t in action_tokens)
+
+
+def notify_internal_agendamento(phone: str, sender_name: Optional[str], inbound_text: str, reply: str) -> None:
+    """Notifica Tiaro e Liane por WhatsApp quando Clara agenda/avança agendamento."""
+    if not CLARA_NOTIFY_PHONES:
+        return
+    name = (sender_name or "Nome não identificado").strip()
+    msg = (
+        "AVISO INTERNO — Clara avançou um agendamento\n\n"
+        f"Lead: {name}\n"
+        f"Telefone: {phone}\n"
+        "Etapa: agendamento/reserva/pré-consulta detectado pelo runtime\n"
+        "Próxima ação: conferir agenda, pagamento/pré-consulta e preparo operacional.\n\n"
+        f"Mensagem Clara: {(reply or '')[:700]}"
+    )
+    for target in CLARA_NOTIFY_PHONES:
+        try:
+            if normalize_phone(target) == normalize_phone(phone):
+                continue
+            status, body = send_zapi_text(target, msg)
+            log(f"internal_agendamento_notify target={target} status={status} body={body[:160]}")
+        except Exception as err:
+            log(f"internal_agendamento_notify failed target={target}: {err}")
 
 def send_zapi_text(phone: str, message: str) -> Tuple[int, str]:
     if not ZAPI_BASE_URL:
@@ -924,6 +998,8 @@ class Handler(BaseHTTPRequestHandler):
                 status, body = send_zapi_text(phone, reply)
                 if 200 <= int(status) < 300:
                     mark_lead_replied(phone, reply)
+                    if is_agendamento_event(reply):
+                        notify_internal_agendamento(phone, sender_name, text, reply)
                 log(f"sent phone={phone} zapiStatus={status} replyPreview={reply[:120]!r} zapiBody={body[:200]}")
             except Exception as err:
                 log(f"bridge error phone={phone}: {err}")

@@ -777,9 +777,9 @@ def enforce_agendamento_reply_quality(reply: str) -> str:
     ))
     if same_day_or_tomorrow and scheduling_context and positive_offer_markers and not explicit_block:
         return (
-            "Para garantir que tudo fique bem organizado para você, nós não marcamos para o mesmo dia nem para o dia seguinte. "
-            "O ideal é reservar a partir de D+2, assim a equipe consegue preparar sua pré-consulta e todos os detalhes com cuidado. "
-            "Prefere que eu veja um horário pela manhã ou pela tarde?"
+            "Hoje e amanhã não temos disponibilidade. "
+            "Consigo verificar para você a partir de D+2. "
+            "Prefere manhã ou tarde?"
         )
     passive_markers = (
         "fico à disposição", "fico a disposição", "qualquer coisa",
