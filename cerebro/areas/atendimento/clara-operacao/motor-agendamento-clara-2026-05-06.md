@@ -44,3 +44,11 @@ Clara deve conduzir toda conversa para um destes desfechos:
 - objeção real identificada;
 - follow-up com data;
 - handoff humano quando obrigatório.
+
+## QA recorrente adicionada
+
+Cron criado:
+- Nome: `Clara Agendamento — QA diário de conversão`
+- ID: `13141b04-2bdc-44da-9967-350328c33911`
+- Agenda: `30 22 * * *`, TZ `America/Bahia`
+- Objetivo: revisar diariamente sinais de agendamento, objeção e silêncio, sem expor PII, e propor melhorias práticas para Clara.
