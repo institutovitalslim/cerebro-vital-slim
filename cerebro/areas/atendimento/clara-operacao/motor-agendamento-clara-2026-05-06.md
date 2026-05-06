@@ -52,3 +52,39 @@ Cron criado:
 - ID: `13141b04-2bdc-44da-9967-350328c33911`
 - Agenda: `30 22 * * *`, TZ `America/Bahia`
 - Objetivo: revisar diariamente sinais de agendamento, objeção e silêncio, sem expor PII, e propor melhorias práticas para Clara.
+
+## Acompanhamento próximo — decisão Tiaro (2026-05-06)
+
+Tiaro determinou: Maria deve acompanhar a evolução da Clara de perto, fazendo tudo que for necessário para que ela se torne uma máquina de agendamento de pacientes.
+
+### Cadência operacional criada
+
+1. **Health check matinal**
+   - Nome: `Clara Guardrail Health — manhã`
+   - ID: `ce9ea71e-ec78-496e-ab73-4fe2d00319a2`
+   - Agenda: `50 7 * * *`, TZ `America/Bahia`
+   - Objetivo: validar bridge ativo, Clara não pausada, overrides e falhas de crons antes do expediente.
+
+2. **Pulse 2/2h em horário comercial**
+   - Nome: `Maria Pulse — Clara máquina de agendamento 2/2h`
+   - ID: `535f3616-8621-483d-a895-6f1d57d81222`
+   - Agenda: `55 8-22/2 * * *`, TZ `America/Bahia`
+   - Objetivo: acompanhar saúde, volume recente, qualidade de sinal, riscos e ação tática a cada ciclo.
+
+3. **QA diário de conversão**
+   - Nome: `Clara Agendamento — QA diário de conversão`
+   - ID: `13141b04-2bdc-44da-9967-350328c33911`
+   - Agenda: `30 22 * * *`, TZ `America/Bahia`
+   - Objetivo: revisar sinais de agendamento, objeção e silêncio e promover melhoria via Graphify/RC-25 quando estrutural.
+
+4. **Revisão estratégica semanal**
+   - Nome: `Clara Strategy Review — semanal agendamento`
+   - ID: `79822d71-e7f8-410c-bbfe-0a3021eb09fd`
+   - Agenda: `0 7 * * 1`, TZ `America/Bahia`
+   - Objetivo: identificar gargalos, desenhar testes A/B, ajustar playbook/prompt e consolidar aprendizados no cérebro.
+
+### Regras de acompanhamento
+- Maria não pausa Clara sem ordem explícita de Tiaro.
+- Maria não expõe PII em relatórios.
+- Toda mudança estrutural deve ir para cérebro via Graphify/RC-25 e GitHub com commit+push.
+- O objetivo operacional da Clara é agendamento qualificado, preservando guardrails clínicos.
