@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {"id": "regra_canonica_nao_executar_por_agentes", "label": "Regra canônica: Maria não executa no lugar dos agentes", "type": "operational_rule"},
+    {"id": "maria_gerente", "label": "Maria Gerente", "type": "role"},
+    {"id": "joao_marketing", "label": "João Marketing", "type": "agent"},
+    {"id": "agentes_especializados", "label": "Agentes especializados", "type": "agent_group"},
+    {"id": "governanca_operacional", "label": "Governança operacional", "type": "process"},
+    {"id": "execucao_substitutiva", "label": "Execução substitutiva", "type": "prohibited_behavior"},
+    {"id": "tiaro", "label": "Tiaro", "type": "authority"}
+  ],
+  "edges": [
+    {"source": "tiaro", "target": "regra_canonica_nao_executar_por_agentes", "label": "DETERMINOU", "evidence": "determinação direta em Telegram", "kind": "EXTRACTED"},
+    {"source": "regra_canonica_nao_executar_por_agentes", "target": "maria_gerente", "label": "APLICA_SE_A", "evidence": "Maria não deve executar tarefas no lugar de João ou de outro agente", "kind": "EXTRACTED"},
+    {"source": "maria_gerente", "target": "governanca_operacional", "label": "PODE_REALIZAR", "evidence": "Maria pode coordenar, cobrar, acompanhar, destravar e escalar", "kind": "EXTRACTED"},
+    {"source": "maria_gerente", "target": "execucao_substitutiva", "label": "NAO_DEVE_REALIZAR", "evidence": "Maria não deve produzir entregáveis substitutivos do escopo de outros agentes", "kind": "EXTRACTED"},
+    {"source": "joao_marketing", "target": "execucao_substitutiva", "label": "NAO_DEVE_SER_SUBSTITUIDO_POR_MARIA", "evidence": "No redesign Erick, João deve executar e Maria deve cobrar evidência", "kind": "EXTRACTED"},
+    {"source": "agentes_especializados", "target": "execucao_substitutiva", "label": "NAO_DEVEM_SER_SUBSTITUIDOS_POR_MARIA", "evidence": "Regra vale para João e qualquer outro agente especializado", "kind": "EXTRACTED"}
+  ],
+  "metadata": {
+    "date": "2026-05-06",
+    "rc": "RC-25",
+    "status": "canonical",
+    "source_file": "raw/regra-canonica-nao-executar-por-agentes.md"
+  }
+}
