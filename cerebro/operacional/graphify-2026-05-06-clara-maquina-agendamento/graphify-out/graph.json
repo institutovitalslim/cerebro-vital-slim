@@ -1,0 +1,170 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 1,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "agendamento",
+      "label": "M\u00e1quina de agendamento de pacientes",
+      "type": "capability",
+      "community": 0,
+      "norm_label": "maquina de agendamento de pacientes"
+    },
+    {
+      "id": "lead_window",
+      "label": "Janela ativa de lead",
+      "type": "guardrail",
+      "community": 0,
+      "norm_label": "janela ativa de lead"
+    },
+    {
+      "id": "quark_block",
+      "label": "Bloqueio de paciente QuarkClinic RC-12",
+      "type": "guardrail",
+      "community": 1,
+      "norm_label": "bloqueio de paciente quarkclinic rc-12"
+    },
+    {
+      "id": "prompt_patch",
+      "label": "Patch de prompt: pr\u00f3ximo passo obrigat\u00f3rio",
+      "type": "prompt_rule",
+      "community": 0,
+      "norm_label": "patch de prompt: proximo passo obrigatorio"
+    },
+    {
+      "id": "reply_linter",
+      "label": "Filtro anti-fechamento passivo",
+      "type": "runtime_guardrail",
+      "community": 0,
+      "norm_label": "filtro anti-fechamento passivo"
+    },
+    {
+      "id": "manual_takeover",
+      "label": "Manual takeover humano preservado",
+      "type": "guardrail",
+      "community": 1,
+      "norm_label": "manual takeover humano preservado"
+    },
+    {
+      "id": "github",
+      "label": "GitHub c\u00e9rebro principal",
+      "type": "replication",
+      "community": 0,
+      "norm_label": "github cerebro principal"
+    },
+    {
+      "id": "file_motor_agendamento_clara_2026_05_06_md",
+      "label": "motor-agendamento-clara-2026-05-06.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-maquina-agendamento/raw/motor-agendamento-clara-2026-05-06.md",
+      "community": 0,
+      "norm_label": "motor-agendamento-clara-2026-05-06.md"
+    },
+    {
+      "id": "file_clara_system_prompt_md",
+      "label": "clara_system_prompt.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-maquina-agendamento/raw/clara_system_prompt.md",
+      "community": 0,
+      "norm_label": "clara_system_prompt.md"
+    },
+    {
+      "id": "file_zapi_clara_bridge_py",
+      "label": "zapi_clara_bridge.py",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-maquina-agendamento/raw/zapi_clara_bridge.py",
+      "community": 0,
+      "norm_label": "zapi_clara_bridge.py"
+    }
+  ],
+  "links": [
+    {
+      "type": "must_optimize",
+      "relationship": "must_optimize",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "agendamento",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "must_respect",
+      "relationship": "must_respect",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "quark_block",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "must_respect",
+      "relationship": "must_respect",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "manual_takeover",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "requires_continuity",
+      "relationship": "requires_continuity",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "lead_window",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses",
+      "relationship": "uses",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "prompt_patch",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses",
+      "relationship": "uses",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "reply_linter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "must_replicate",
+      "relationship": "must_replicate",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "github",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "documented_by",
+      "relationship": "documented_by",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "file_motor_agendamento_clara_2026_05_06_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "documented_by",
+      "relationship": "documented_by",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "file_clara_system_prompt_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "documented_by",
+      "relationship": "documented_by",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "file_zapi_clara_bridge_py",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}
