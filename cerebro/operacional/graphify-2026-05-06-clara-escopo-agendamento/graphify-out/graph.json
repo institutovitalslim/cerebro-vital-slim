@@ -1,0 +1,140 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 0,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "escopo",
+      "label": "Escopo can\u00f4nico de agendamento",
+      "type": "canonical_rule",
+      "community": 0,
+      "norm_label": "escopo canonico de agendamento"
+    },
+    {
+      "id": "consulta",
+      "label": "Consulta",
+      "type": "allowed_service",
+      "community": 0,
+      "norm_label": "consulta"
+    },
+    {
+      "id": "bio",
+      "label": "Exame de Bioimped\u00e2ncia",
+      "type": "allowed_service",
+      "community": 0,
+      "norm_label": "exame de bioimpedancia"
+    },
+    {
+      "id": "forbidden",
+      "label": "Procedimentos/aplica\u00e7\u00f5es/programa/retornos",
+      "type": "forbidden_scope",
+      "community": 0,
+      "norm_label": "procedimentos/aplicacoes/programa/retornos"
+    },
+    {
+      "id": "runtime",
+      "label": "Guardrail runtime de escopo",
+      "type": "guardrail",
+      "community": 0,
+      "norm_label": "guardrail runtime de escopo"
+    },
+    {
+      "id": "file_regra_canonica_escopo_agendamento_clara_2026_05_06_md",
+      "label": "regra-canonica-escopo-agendamento-clara-2026-05-06.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-escopo-agendamento/raw/regra-canonica-escopo-agendamento-clara-2026-05-06.md",
+      "community": 0,
+      "norm_label": "regra-canonica-escopo-agendamento-clara-2026-05-06.md"
+    },
+    {
+      "id": "file_clara_system_prompt_md",
+      "label": "clara_system_prompt.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-escopo-agendamento/raw/clara_system_prompt.md",
+      "community": 0,
+      "norm_label": "clara_system_prompt.md"
+    },
+    {
+      "id": "file_zapi_clara_bridge_py",
+      "label": "zapi_clara_bridge.py",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-escopo-agendamento/raw/zapi_clara_bridge.py",
+      "community": 0,
+      "norm_label": "zapi_clara_bridge.py"
+    }
+  ],
+  "links": [
+    {
+      "type": "must_follow",
+      "relationship": "must_follow",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "escopo",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "allows",
+      "relationship": "allows",
+      "confidence": "EXTRACTED",
+      "source": "escopo",
+      "target": "consulta",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "allows",
+      "relationship": "allows",
+      "confidence": "EXTRACTED",
+      "source": "escopo",
+      "target": "bio",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "blocks",
+      "relationship": "blocks",
+      "confidence": "EXTRACTED",
+      "source": "escopo",
+      "target": "forbidden",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "enforced_by",
+      "relationship": "enforced_by",
+      "confidence": "EXTRACTED",
+      "source": "escopo",
+      "target": "runtime",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "escopo",
+      "target": "file_regra_canonica_escopo_agendamento_clara_2026_05_06_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "escopo",
+      "target": "file_clara_system_prompt_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "escopo",
+      "target": "file_zapi_clara_bridge_py",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

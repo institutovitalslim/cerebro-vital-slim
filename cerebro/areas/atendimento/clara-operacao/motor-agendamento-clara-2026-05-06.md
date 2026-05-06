@@ -96,3 +96,7 @@ Tiaro definiu que Clara nunca deve oferecer agendamento para o mesmo dia ou para
 ## Regra canônica adicionada — aviso Tiaro + Liane após agendamento
 
 Tiaro definiu que sempre que Clara agendar, confirmar reserva, pré-reserva ou avançar para pagamento/link de pré-consulta, Tiaro e Liane devem ser informados por WhatsApp. A regra foi adicionada ao prompt e ao runtime operacional para notificação interna automática quando o padrão de agendamento for detectado.
+
+## Regra canônica adicionada — escopo do que Clara pode agendar
+
+Tiaro definiu que Clara só pode agendar Consulta e Exame de Bioimpedância. Qualquer outro pedido de agenda deve ser redirecionado com elegância para Consulta ou Bioimpedância, ou para equipe humana quando necessário.
