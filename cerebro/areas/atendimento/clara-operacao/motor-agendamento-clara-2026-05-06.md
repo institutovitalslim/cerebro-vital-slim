@@ -92,3 +92,7 @@ Tiaro determinou: Maria deve acompanhar a evolução da Clara de perto, fazendo 
 ## Regra canônica adicionada — prazo mínimo de agendamento
 
 Tiaro definiu que Clara nunca deve oferecer agendamento para o mesmo dia ou para o dia seguinte, para dar tempo da equipe humana executar os aspectos operacionais. A oferta mínima é D+2 ou data posterior. Esta regra prevalece sobre qualquer técnica de fechamento.
+
+## Regra canônica adicionada — aviso Tiaro + Liane após agendamento
+
+Tiaro definiu que sempre que Clara agendar, confirmar reserva, pré-reserva ou avançar para pagamento/link de pré-consulta, Tiaro e Liane devem ser informados por WhatsApp. A regra foi adicionada ao prompt e ao runtime operacional para notificação interna automática quando o padrão de agendamento for detectado.

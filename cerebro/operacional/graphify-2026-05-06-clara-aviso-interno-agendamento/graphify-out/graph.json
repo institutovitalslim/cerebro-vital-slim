@@ -1,0 +1,140 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 1,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "agendamento",
+      "label": "Agendamento iniciado/confirmado",
+      "type": "event",
+      "community": 1,
+      "norm_label": "agendamento iniciado/confirmado"
+    },
+    {
+      "id": "aviso",
+      "label": "Aviso interno obrigat\u00f3rio",
+      "type": "canonical_rule",
+      "community": 0,
+      "norm_label": "aviso interno obrigatorio"
+    },
+    {
+      "id": "tiaro",
+      "label": "Tiaro",
+      "type": "internal_stakeholder",
+      "community": 0,
+      "norm_label": "tiaro"
+    },
+    {
+      "id": "liane",
+      "label": "Liane",
+      "type": "internal_stakeholder",
+      "community": 0,
+      "norm_label": "liane"
+    },
+    {
+      "id": "runtime",
+      "label": "Detector runtime de agendamento",
+      "type": "guardrail",
+      "community": 0,
+      "norm_label": "detector runtime de agendamento"
+    },
+    {
+      "id": "file_regra_canonica_aviso_interno_agendamento_2026_05_06_md",
+      "label": "regra-canonica-aviso-interno-agendamento-2026-05-06.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-aviso-interno-agendamento/raw/regra-canonica-aviso-interno-agendamento-2026-05-06.md",
+      "community": 0,
+      "norm_label": "regra-canonica-aviso-interno-agendamento-2026-05-06.md"
+    },
+    {
+      "id": "file_clara_system_prompt_md",
+      "label": "clara_system_prompt.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-aviso-interno-agendamento/raw/clara_system_prompt.md",
+      "community": 0,
+      "norm_label": "clara_system_prompt.md"
+    },
+    {
+      "id": "file_zapi_clara_bridge_py",
+      "label": "zapi_clara_bridge.py",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-aviso-interno-agendamento/raw/zapi_clara_bridge.py",
+      "community": 0,
+      "norm_label": "zapi_clara_bridge.py"
+    }
+  ],
+  "links": [
+    {
+      "type": "creates",
+      "relationship": "creates",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "agendamento",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "triggers",
+      "relationship": "triggers",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "aviso",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "notifies",
+      "relationship": "notifies",
+      "confidence": "EXTRACTED",
+      "source": "aviso",
+      "target": "tiaro",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "notifies",
+      "relationship": "notifies",
+      "confidence": "EXTRACTED",
+      "source": "aviso",
+      "target": "liane",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "enforced_by",
+      "relationship": "enforced_by",
+      "confidence": "EXTRACTED",
+      "source": "aviso",
+      "target": "runtime",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "aviso",
+      "target": "file_regra_canonica_aviso_interno_agendamento_2026_05_06_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "aviso",
+      "target": "file_clara_system_prompt_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "aviso",
+      "target": "file_zapi_clara_bridge_py",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}
