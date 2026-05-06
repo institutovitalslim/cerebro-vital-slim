@@ -1,0 +1,125 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 0,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "prazo",
+      "label": "Prazo m\u00ednimo D+2 para agendamento",
+      "type": "canonical_rule",
+      "community": 0,
+      "norm_label": "prazo minimo d+2 para agendamento"
+    },
+    {
+      "id": "operacao",
+      "label": "Tempo operacional equipe humana",
+      "type": "reason",
+      "community": 0,
+      "norm_label": "tempo operacional equipe humana"
+    },
+    {
+      "id": "runtime",
+      "label": "Guardrail runtime anti D0/D1",
+      "type": "guardrail",
+      "community": 0,
+      "norm_label": "guardrail runtime anti d0/d1"
+    },
+    {
+      "id": "prompt",
+      "label": "Prompt Clara",
+      "type": "prompt",
+      "community": 0,
+      "norm_label": "prompt clara"
+    },
+    {
+      "id": "file_regra_canonica_prazo_minimo_agendamento_2026_05_06_md",
+      "label": "regra-canonica-prazo-minimo-agendamento-2026-05-06.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-prazo-minimo-agendamento/raw/regra-canonica-prazo-minimo-agendamento-2026-05-06.md",
+      "community": 0,
+      "norm_label": "regra-canonica-prazo-minimo-agendamento-2026-05-06.md"
+    },
+    {
+      "id": "file_clara_system_prompt_md",
+      "label": "clara_system_prompt.md",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-prazo-minimo-agendamento/raw/clara_system_prompt.md",
+      "community": 0,
+      "norm_label": "clara_system_prompt.md"
+    },
+    {
+      "id": "file_zapi_clara_bridge_py",
+      "label": "zapi_clara_bridge.py",
+      "type": "source_file",
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-clara-prazo-minimo-agendamento/raw/zapi_clara_bridge.py",
+      "community": 0,
+      "norm_label": "zapi_clara_bridge.py"
+    }
+  ],
+  "links": [
+    {
+      "type": "must_follow",
+      "relationship": "must_follow",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "prazo",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "because",
+      "relationship": "because",
+      "confidence": "EXTRACTED",
+      "source": "prazo",
+      "target": "operacao",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "enforced_by",
+      "relationship": "enforced_by",
+      "confidence": "EXTRACTED",
+      "source": "prazo",
+      "target": "runtime",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "documented_in",
+      "relationship": "documented_in",
+      "confidence": "EXTRACTED",
+      "source": "prazo",
+      "target": "prompt",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "prazo",
+      "target": "file_regra_canonica_prazo_minimo_agendamento_2026_05_06_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "prazo",
+      "target": "file_clara_system_prompt_md",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "source",
+      "relationship": "source",
+      "confidence": "EXTRACTED",
+      "source": "prazo",
+      "target": "file_zapi_clara_bridge_py",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

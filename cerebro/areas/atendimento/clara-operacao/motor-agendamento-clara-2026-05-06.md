@@ -88,3 +88,7 @@ Tiaro determinou: Maria deve acompanhar a evolução da Clara de perto, fazendo 
 - Maria não expõe PII em relatórios.
 - Toda mudança estrutural deve ir para cérebro via Graphify/RC-25 e GitHub com commit+push.
 - O objetivo operacional da Clara é agendamento qualificado, preservando guardrails clínicos.
+
+## Regra canônica adicionada — prazo mínimo de agendamento
+
+Tiaro definiu que Clara nunca deve oferecer agendamento para o mesmo dia ou para o dia seguinte, para dar tempo da equipe humana executar os aspectos operacionais. A oferta mínima é D+2 ou data posterior. Esta regra prevalece sobre qualquer técnica de fechamento.
