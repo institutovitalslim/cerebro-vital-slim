@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    {"id": "regra_maria_corrige_execucao_agentes", "label": "Regra: Maria corrige problemas de execução dos agentes", "type": "operational_rule"},
+    {"id": "regra_maria_nao_executa_por_agentes", "label": "Regra: Maria não executa no lugar dos agentes", "type": "operational_rule"},
+    {"id": "maria_gerente", "label": "Maria Gerente", "type": "role"},
+    {"id": "joao_marketing", "label": "João Marketing", "type": "agent"},
+    {"id": "agentes_especializados", "label": "Agentes especializados", "type": "agent_group"},
+    {"id": "problema_execucao", "label": "Problema de execução", "type": "operational_issue"},
+    {"id": "correcao_operacional", "label": "Correção operacional", "type": "process"},
+    {"id": "execucao_substitutiva", "label": "Execução substitutiva", "type": "prohibited_behavior"},
+    {"id": "tiaro", "label": "Tiaro", "type": "authority"}
+  ],
+  "edges": [
+    {"source": "tiaro", "target": "regra_maria_corrige_execucao_agentes", "label": "DETERMINOU", "kind": "EXTRACTED"},
+    {"source": "regra_maria_corrige_execucao_agentes", "target": "maria_gerente", "label": "ATRIBUI_RESPONSABILIDADE", "kind": "EXTRACTED"},
+    {"source": "maria_gerente", "target": "problema_execucao", "label": "DIAGNOSTICA", "kind": "EXTRACTED"},
+    {"source": "maria_gerente", "target": "correcao_operacional", "label": "EXECUTA", "kind": "EXTRACTED"},
+    {"source": "correcao_operacional", "target": "joao_marketing", "label": "RESTAURA_FLUXO_DE", "kind": "EXTRACTED"},
+    {"source": "correcao_operacional", "target": "agentes_especializados", "label": "RESTAURA_FLUXO_DE", "kind": "EXTRACTED"},
+    {"source": "regra_maria_corrige_execucao_agentes", "target": "regra_maria_nao_executa_por_agentes", "label": "COMPLEMENTA", "kind": "EXTRACTED"},
+    {"source": "maria_gerente", "target": "execucao_substitutiva", "label": "NAO_DEVE_REALIZAR", "kind": "EXTRACTED"}
+  ],
+  "metadata": {"date":"2026-05-06","rc":"RC-25","status":"canonical"}
+}
