@@ -1,0 +1,92 @@
+[
+  {
+    "id": "x-profile-endpoint",
+    "desc": "RapidAPI Social Learning tem endpoint x-profile para timelines do X",
+    "ok": true,
+    "evidence": "social_learning.py contém def x_profile e timeline.php"
+  },
+  {
+    "id": "x-profile-seeds",
+    "desc": "Lista priorizada de perfis X foi colocada no learning da Clara",
+    "ok": true,
+    "evidence": "clara_learning.py contém X_PROFILES com Gong_io, close, Outreach_io, Patrick Dang, Hormozi, Hyken, Salesforce, Zocdoc"
+  },
+  {
+    "id": "whatsapp-current-script",
+    "desc": "Script de estudo de conversas atuais do WhatsApp existe",
+    "ok": true,
+    "evidence": "whatsapp_clara_learning.py suporta --mode current"
+  },
+  {
+    "id": "whatsapp-historical-script",
+    "desc": "Script de estudo histórico do WhatsApp existe",
+    "ok": true,
+    "evidence": "whatsapp_clara_learning.py suporta --mode historical e janela de 180 dias"
+  },
+  {
+    "id": "whatsapp-current-output",
+    "desc": "Aprendizado WhatsApp atual gerou JSON latest",
+    "ok": true,
+    "evidence": "{'total_messages': 8, 'unique_leads': 4, 'total_inbound': 8, 'total_outbound': 0, 'wins': 0, 'drops': 0}"
+  },
+  {
+    "id": "whatsapp-historical-output",
+    "desc": "Aprendizado WhatsApp histórico gerou JSON latest",
+    "ok": true,
+    "evidence": "{'total_messages': 5060, 'unique_leads': 322, 'total_inbound': 2150, 'total_outbound': 2910, 'wins': 23, 'drops': 5}"
+  },
+  {
+    "id": "cerebro-whatsapp-current",
+    "desc": "Relatório atual está no cérebro",
+    "ok": true,
+    "evidence": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/latest-whatsapp-current.md"
+  },
+  {
+    "id": "cerebro-whatsapp-historical",
+    "desc": "Relatório histórico está no cérebro",
+    "ok": true,
+    "evidence": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/latest-whatsapp-historical.md"
+  },
+  {
+    "id": "graphify-daily-script",
+    "desc": "Pipeline Graphify diário da Clara existe",
+    "ok": true,
+    "evidence": "graphify_clara_learning.py gera graph.json/html/GRAPH_REPORT.md"
+  },
+  {
+    "id": "graphify-cerebro-output",
+    "desc": "Graphify diário de hoje está no cérebro",
+    "ok": true,
+    "evidence": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-06/graphify-out/graph.json"
+  },
+  {
+    "id": "graphify-includes-whatsapp",
+    "desc": "Graphify diário inclui slots WhatsApp atual e histórico",
+    "ok": true,
+    "evidence": "labels do graph.json contêm whatsapp-current e whatsapp-historical"
+  },
+  {
+    "id": "graphify-audit-in-cerebro",
+    "desc": "Esta auditoria Graphify está sendo gravada no cérebro",
+    "ok": true,
+    "evidence": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-auditoria-implementacao-clara"
+  },
+  {
+    "id": "cron-whatsapp-current",
+    "desc": "Cron WhatsApp atual 2/2h está ativo no OpenClaw",
+    "ok": true,
+    "evidence": "375d74ed — 15 8-22/2 * * * America/Bahia"
+  },
+  {
+    "id": "cron-whatsapp-historical",
+    "desc": "Cron WhatsApp histórico semanal está ativo no OpenClaw",
+    "ok": true,
+    "evidence": "cba17d20 — 30 6 * * 1 America/Bahia"
+  },
+  {
+    "id": "cron-graphify-daily",
+    "desc": "Cron Graphify RC-25 diário está ativo no OpenClaw",
+    "ok": true,
+    "evidence": "0161e7ec — 5 22 * * * America/Bahia"
+  }
+]

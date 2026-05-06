@@ -1,0 +1,706 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "Auditoria Graphify implementa\u00e7\u00e3o Clara 2026-05-06",
+      "type": "audit",
+      "community": 0,
+      "norm_label": "auditoria graphify implementacao clara 2026-05-06",
+      "id": "auditoria"
+    },
+    {
+      "label": "C\u00e9rebro Vital Slim",
+      "type": "knowledge_base",
+      "community": 0,
+      "norm_label": "cerebro vital slim",
+      "id": "cerebro"
+    },
+    {
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 4,
+      "norm_label": "clara whatsapp",
+      "id": "clara"
+    },
+    {
+      "label": "rapidapi-social-learning/social_learning.py",
+      "type": "artifact",
+      "community": 0,
+      "norm_label": "rapidapi-social-learning/social_learning.py",
+      "id": "social_learning"
+    },
+    {
+      "label": "clara-learning-orchestrator/clara_learning.py",
+      "type": "artifact",
+      "community": 0,
+      "norm_label": "clara-learning-orchestrator/clara_learning.py",
+      "id": "clara_learning"
+    },
+    {
+      "label": "zapi_bridge/whatsapp_clara_learning.py",
+      "type": "artifact",
+      "community": 2,
+      "norm_label": "zapi_bridge/whatsapp_clara_learning.py",
+      "id": "whatsapp_learning"
+    },
+    {
+      "label": "clara-learning-orchestrator/graphify_clara_learning.py",
+      "type": "artifact",
+      "community": 1,
+      "norm_label": "clara-learning-orchestrator/graphify_clara_learning.py",
+      "id": "graphify_learning"
+    },
+    {
+      "label": "latest-whatsapp-current.json",
+      "type": "artifact",
+      "community": 2,
+      "norm_label": "latest-whatsapp-current.json",
+      "id": "wpp_current_json"
+    },
+    {
+      "label": "latest-whatsapp-historical.json",
+      "type": "artifact",
+      "community": 3,
+      "norm_label": "latest-whatsapp-historical.json",
+      "id": "wpp_historical_json"
+    },
+    {
+      "label": "cerebro/logs/clara-whatsapp-learning",
+      "type": "artifact",
+      "community": 0,
+      "norm_label": "cerebro/logs/clara-whatsapp-learning",
+      "id": "cerebro_wpp_logs"
+    },
+    {
+      "label": "cerebro/operacional/clara-learning-graphify/2026-05-06",
+      "type": "artifact",
+      "community": 1,
+      "norm_label": "cerebro/operacional/clara-learning-graphify/2026-05-06",
+      "id": "cerebro_graphify_daily"
+    },
+    {
+      "label": "Clara aprende com perfis X/Twitter priorizados",
+      "type": "requirement",
+      "community": 0,
+      "norm_label": "clara aprende com perfis x/twitter priorizados",
+      "id": "req_x_profiles"
+    },
+    {
+      "label": "Clara estuda conversas atuais do WhatsApp",
+      "type": "requirement",
+      "community": 2,
+      "norm_label": "clara estuda conversas atuais do whatsapp",
+      "id": "req_whatsapp_current"
+    },
+    {
+      "label": "Clara estuda conversas antigas do WhatsApp",
+      "type": "requirement",
+      "community": 3,
+      "norm_label": "clara estuda conversas antigas do whatsapp",
+      "id": "req_whatsapp_historical"
+    },
+    {
+      "label": "Aprendizados entram no c\u00e9rebro via Graphify/RC-25",
+      "type": "requirement",
+      "community": 1,
+      "norm_label": "aprendizados entram no cerebro via graphify/rc-25",
+      "id": "req_graphify_rc25"
+    },
+    {
+      "label": "RapidAPI Social Learning tem endpoint x-profile para timelines do X",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "social_learning.py cont\u00e9m def x_profile e timeline.php",
+      "community": 0,
+      "norm_label": "rapidapi social learning tem endpoint x-profile para timelines do x",
+      "id": "check_x_profile_endpoint"
+    },
+    {
+      "label": "Lista priorizada de perfis X foi colocada no learning da Clara",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "clara_learning.py cont\u00e9m X_PROFILES com Gong_io, close, Outreach_io, Patrick Dang, Hormozi, Hyken, Salesforce, Zocdoc",
+      "community": 0,
+      "norm_label": "lista priorizada de perfis x foi colocada no learning da clara",
+      "id": "check_x_profile_seeds"
+    },
+    {
+      "label": "Script de estudo de conversas atuais do WhatsApp existe",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "whatsapp_clara_learning.py suporta --mode current",
+      "community": 2,
+      "norm_label": "script de estudo de conversas atuais do whatsapp existe",
+      "id": "check_whatsapp_current_script"
+    },
+    {
+      "label": "Script de estudo hist\u00f3rico do WhatsApp existe",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "whatsapp_clara_learning.py suporta --mode historical e janela de 180 dias",
+      "community": 3,
+      "norm_label": "script de estudo historico do whatsapp existe",
+      "id": "check_whatsapp_historical_script"
+    },
+    {
+      "label": "Aprendizado WhatsApp atual gerou JSON latest",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "{'total_messages': 8, 'unique_leads': 4, 'total_inbound': 8, 'total_outbound': 0, 'wins': 0, 'drops': 0}",
+      "community": 2,
+      "norm_label": "aprendizado whatsapp atual gerou json latest",
+      "id": "check_whatsapp_current_output"
+    },
+    {
+      "label": "Aprendizado WhatsApp hist\u00f3rico gerou JSON latest",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "{'total_messages': 5060, 'unique_leads': 322, 'total_inbound': 2150, 'total_outbound': 2910, 'wins': 23, 'drops': 5}",
+      "community": 3,
+      "norm_label": "aprendizado whatsapp historico gerou json latest",
+      "id": "check_whatsapp_historical_output"
+    },
+    {
+      "label": "Relat\u00f3rio atual est\u00e1 no c\u00e9rebro",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/latest-whatsapp-current.md",
+      "community": 2,
+      "norm_label": "relatorio atual esta no cerebro",
+      "id": "check_cerebro_whatsapp_current"
+    },
+    {
+      "label": "Relat\u00f3rio hist\u00f3rico est\u00e1 no c\u00e9rebro",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/latest-whatsapp-historical.md",
+      "community": 3,
+      "norm_label": "relatorio historico esta no cerebro",
+      "id": "check_cerebro_whatsapp_historical"
+    },
+    {
+      "label": "Pipeline Graphify di\u00e1rio da Clara existe",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "graphify_clara_learning.py gera graph.json/html/GRAPH_REPORT.md",
+      "community": 1,
+      "norm_label": "pipeline graphify diario da clara existe",
+      "id": "check_graphify_daily_script"
+    },
+    {
+      "label": "Graphify di\u00e1rio de hoje est\u00e1 no c\u00e9rebro",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-06/graphify-out/graph.json",
+      "community": 1,
+      "norm_label": "graphify diario de hoje esta no cerebro",
+      "id": "check_graphify_cerebro_output"
+    },
+    {
+      "label": "Graphify di\u00e1rio inclui slots WhatsApp atual e hist\u00f3rico",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "labels do graph.json cont\u00eam whatsapp-current e whatsapp-historical",
+      "community": 1,
+      "norm_label": "graphify diario inclui slots whatsapp atual e historico",
+      "id": "check_graphify_includes_whatsapp"
+    },
+    {
+      "label": "Esta auditoria Graphify est\u00e1 sendo gravada no c\u00e9rebro",
+      "type": "check",
+      "status": "PASS",
+      "evidence": "/root/cerebro-vital-slim/cerebro/operacional/graphify-2026-05-06-auditoria-implementacao-clara",
+      "community": 1,
+      "norm_label": "esta auditoria graphify esta sendo gravada no cerebro",
+      "id": "check_graphify_audit_in_cerebro"
+    },
+    {
+      "label": "Clara Learning \u2014 WhatsApp atual 2/2h",
+      "type": "cron_job",
+      "schedule": "15 8-22/2 * * * America/Bahia",
+      "enabled": true,
+      "id": "cron_whatsapp_current",
+      "community": 4,
+      "norm_label": "clara learning \u2014 whatsapp atual 2/2h"
+    },
+    {
+      "label": "Clara Learning \u2014 WhatsApp hist\u00f3rico semanal",
+      "type": "cron_job",
+      "schedule": "30 6 * * 1 America/Bahia",
+      "enabled": true,
+      "id": "cron_whatsapp_historical",
+      "community": 4,
+      "norm_label": "clara learning \u2014 whatsapp historico semanal"
+    },
+    {
+      "label": "Clara Learning \u2014 Graphify RC-25 di\u00e1rio",
+      "type": "cron_job",
+      "schedule": "5 22 * * * America/Bahia",
+      "enabled": true,
+      "id": "cron_graphify_daily",
+      "community": 4,
+      "norm_label": "clara learning \u2014 graphify rc-25 diario"
+    }
+  ],
+  "links": [
+    {
+      "type": "stored_in",
+      "relationship": "stored_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "cerebro"
+    },
+    {
+      "type": "audits",
+      "relationship": "audits",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "clara"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "social_learning"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "clara_learning"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "whatsapp_learning"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "graphify_learning"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "wpp_current_json"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "wpp_historical_json"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "cerebro_wpp_logs"
+    },
+    {
+      "type": "checks",
+      "relationship": "checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "cerebro_graphify_daily"
+    },
+    {
+      "type": "verifies",
+      "relationship": "verifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "req_x_profiles"
+    },
+    {
+      "type": "verifies",
+      "relationship": "verifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "req_whatsapp_current"
+    },
+    {
+      "type": "verifies",
+      "relationship": "verifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "req_whatsapp_historical"
+    },
+    {
+      "type": "verifies",
+      "relationship": "verifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "req_graphify_rc25"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_x_profile_endpoint"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_x_profile_seeds"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_whatsapp_current_script"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_whatsapp_historical_script"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_whatsapp_current_output"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_whatsapp_historical_output"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_cerebro_whatsapp_current"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_cerebro_whatsapp_historical"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_graphify_daily_script"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_graphify_cerebro_output"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_graphify_includes_whatsapp"
+    },
+    {
+      "type": "has_check",
+      "relationship": "has_check",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "auditoria",
+      "target": "check_graphify_audit_in_cerebro"
+    },
+    {
+      "type": "verified_cron",
+      "relationship": "verified_cron",
+      "confidence": "EXTRACTED",
+      "source": "auditoria",
+      "target": "cron_whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "verified_cron",
+      "relationship": "verified_cron",
+      "confidence": "EXTRACTED",
+      "source": "auditoria",
+      "target": "cron_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "verified_cron",
+      "relationship": "verified_cron",
+      "confidence": "EXTRACTED",
+      "source": "auditoria",
+      "target": "cron_graphify_daily",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "trains",
+      "relationship": "trains",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "cron_whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "trains",
+      "relationship": "trains",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "cron_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "trains",
+      "relationship": "trains",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "cron_graphify_daily",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "social_learning",
+      "target": "req_x_profiles"
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "clara_learning",
+      "target": "req_x_profiles"
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "whatsapp_learning",
+      "target": "req_whatsapp_current"
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "whatsapp_learning",
+      "target": "req_whatsapp_historical"
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "graphify_learning",
+      "target": "req_graphify_rc25"
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "wpp_current_json",
+      "target": "req_whatsapp_current"
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "wpp_historical_json",
+      "target": "req_whatsapp_historical"
+    },
+    {
+      "type": "implemented_by",
+      "relationship": "implemented_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "cerebro_graphify_daily",
+      "target": "req_graphify_rc25"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_x_profiles",
+      "target": "check_x_profile_endpoint"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_x_profiles",
+      "target": "check_x_profile_seeds"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_whatsapp_current",
+      "target": "check_whatsapp_current_script"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_whatsapp_current",
+      "target": "check_whatsapp_current_output"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_whatsapp_current",
+      "target": "check_cerebro_whatsapp_current"
+    },
+    {
+      "type": "automates",
+      "relationship": "automates",
+      "confidence": "EXTRACTED",
+      "source": "req_whatsapp_current",
+      "target": "cron_whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_whatsapp_historical",
+      "target": "check_whatsapp_historical_script"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_whatsapp_historical",
+      "target": "check_whatsapp_historical_output"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_whatsapp_historical",
+      "target": "check_cerebro_whatsapp_historical"
+    },
+    {
+      "type": "automates",
+      "relationship": "automates",
+      "confidence": "EXTRACTED",
+      "source": "req_whatsapp_historical",
+      "target": "cron_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_graphify_rc25",
+      "target": "check_cerebro_whatsapp_current"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_graphify_rc25",
+      "target": "check_cerebro_whatsapp_historical"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_graphify_rc25",
+      "target": "check_graphify_daily_script"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_graphify_rc25",
+      "target": "check_graphify_cerebro_output"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_graphify_rc25",
+      "target": "check_graphify_includes_whatsapp"
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source": "req_graphify_rc25",
+      "target": "check_graphify_audit_in_cerebro"
+    },
+    {
+      "type": "automates",
+      "relationship": "automates",
+      "confidence": "EXTRACTED",
+      "source": "req_graphify_rc25",
+      "target": "cron_graphify_daily",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

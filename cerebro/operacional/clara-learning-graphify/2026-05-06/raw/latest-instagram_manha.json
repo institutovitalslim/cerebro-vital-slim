@@ -1,0 +1,16 @@
+{
+  "slot": "instagram_manha",
+  "date": "2026-05-06T21:07:40.626486",
+  "weekday": "Wednesday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "Instagram",
+  "perfil": "thiagoconcer",
+  "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+  "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username thiagoconcer --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": false,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210743-instagram-profile-thiagoconcer.json\",\n  \"error\": \"HTTP Error 500: Internal Server Error\"\n}\n",
+    "stderr": ""
+  }
+}

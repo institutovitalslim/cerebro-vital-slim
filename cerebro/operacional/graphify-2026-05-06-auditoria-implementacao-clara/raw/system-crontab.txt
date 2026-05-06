@@ -1,0 +1,13 @@
+root crontab:
+0 3 * * * /root/backup-openclaw/scripts/run-backup-and-push-linux-cron.sh
+30 4 * * * /root/backup-openclaw/scripts/check-backup-health.sh >/dev/null 2>&1
+0 3 * * * /root/.acme.sh/acme.sh --cron --home /root/.acme.sh > /dev/null 2>&1
+*/15 * * * * export GOG_ACCOUNT=institutovitalslim@gmail.com GOG_KEYRING_PASSWORD='Tf100314@!' && /usr/bin/python3 /root/.openclaw/workspace/ops/zapi_bridge/sync_bridge_patient_exclusions.py >/root/.openclaw/workspace/ops/zapi_bridge/sync_bridge_patient_exclusions.log 2>&1
+*/20 * * * * /root/.openclaw/workspace/ops/llm-audit/run_audit_with_telegram_alert.sh
+5 3 * * * /root/.openclaw/workspace/ops/zapi_bridge/run_daily_clara_analysis.sh
+
+# === Geração de Apresentação de Pacientes ===
+# 40 6 * * * export GOG_KEYRING_PASSWORD='Tf100314@!' && /usr/bin/python3 /root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py $(date +\%d-\%m-\%Y) tarde >> /root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/logs/cron-morning.log 2>&1
+# 0 12 * * * export GOG_KEYRING_PASSWORD='Tf100314@!' && /usr/bin/python3 /root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py $(date -d '+1 day' +\%d-\%m-\%Y) manha >> /root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/logs/cron-noon.log 2>&1
+*/5 * * * * /usr/bin/python3 /root/.openclaw/workspace/ops/zapi_bridge/monitor_clara_pause.py >/dev/null 2>&1
+

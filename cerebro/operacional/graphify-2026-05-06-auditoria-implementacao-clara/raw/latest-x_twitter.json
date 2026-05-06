@@ -1,0 +1,16 @@
+{
+  "slot": "x_twitter",
+  "date": "2026-05-06T21:19:08.816664",
+  "weekday": "Wednesday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "X/Twitter",
+  "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+  "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+  "perfil": "Salesforce",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-profile --screenname Salesforce --limit 5",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-211915-x-profile-Salesforce.json\",\n  \"screenname\": \"Salesforce\",\n  \"count\": 5,\n  \"sample\": [\n    {\n      \"tweet_id\": \"2052058730435576304\",\n      \"screen_name\": null,\n      \"text\": \"⚠️ DO NOT POST YET\\n\\nHOLD: Announce Connections 2026 musical guest on X\\n\\nStatus: PENDING APPROVAL\\nBand Handle: CONFIDENTIAL\\nPublish time: 5/5 early a.m. PT\",\n      \"favorites\": 18,\n      \"retweets\": 3,\n      \"created_at\": \"Wed May 06 16:11:41 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052058826195820947\",\n      \"screen_name\": null,\n      \"text\": \"Oops?\\n\\nGuess who it is. 😉\",\n      \"favorites\": 3,\n      \"retweets\": null,\n      \"created_at\": \"Wed May 06 16:12:04 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052029508689989740\",\n      \"screen_name\": null,\n      \"text\": \"RT @tableau: https://t.co/cRGlBoLc1P\",\n      \"favorites\": null,\n      \"retweets\": 2,\n      \"created_at\": \"Wed May 06 14:15:34 +0000 2026\",\n      \"lang\": \"zxx\"\n    },\n    {\n      \"tweet_id\": \"2052011547438776507\",\n      \"screen_name\": null,\n      \"text\": \"RT @tableau: https://t.co/d6UwcSRq96\",\n      \"favorites\": null,\n      \"retweets\": 7,\n      \"created_at\": \"Wed May 06 13:04:12 +0000 2026\",\n      \"lang\": \"zxx\"\n    },\n    {\n      \"tweet_id\": \"2049973985140433264\",\n      \"screen_name\": null,\n      \"text\": \"Software was always created by humans, for humans.\\n\\nNow it's created by humans and agents.\\n\\nFor humans and agents.\\n\\nAnd you may never have to log in to use it.\\n\\nNot even Salesforce—which is now open to every human, agent, and platform with Headless 360. https://t.co/sQxUmDPq3Z\",\n      \"favorites\": 57,\n      \"retweets\": 12,\n      \"created_at\": \"Thu Apr 30 22:07:39 +0000 2026\",\n      \"lang\": \"en\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  }
+}

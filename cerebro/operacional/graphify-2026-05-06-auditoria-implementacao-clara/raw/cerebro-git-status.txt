@@ -1,0 +1,249 @@
+ M AGENTS.md
+ M MEMORY.md
+ M MEMORY_MASTER_INDEX.md
+ M OPERATING_RULES.md
+ M cerebro/areas/atendimento/MAPA.md
+ M cerebro/areas/atendimento/arvore-decisao-15s-whatsapp-clara.md
+ M cerebro/areas/atendimento/checklist-atendimento-clara.md
+ M cerebro/areas/atendimento/clara-quick-reference.md
+ M cerebro/areas/atendimento/mensagens-modelo-recuperacao-whatsapp.md
+ M cerebro/areas/atendimento/skills/_index.md
+ M cerebro/areas/governanca/MAPA.md
+ M cerebro/areas/governanca/projetos/README.md
+ M cerebro/areas/governanca/skills/_index.md
+ M cerebro/areas/marketing/MAPA.md
+ M cerebro/areas/marketing/mapa-conteudo-ivs-2026.md
+ M cerebro/areas/marketing/projetos/README.md
+ M cerebro/areas/marketing/skills/_index.md
+ M cerebro/areas/marketing/skills/criacao-carrossel/SKILL.md
+ M cerebro/areas/marketing/skills/criacao-reels/SKILL.md
+ M cerebro/areas/marketing/skills/criacao-video-ivs/SKILL.md
+ M cerebro/areas/operacoes/MAPA.md
+ M cerebro/areas/operacoes/skills/_index.md
+ M cerebro/areas/vendas/MAPA.md
+ M cerebro/areas/vendas/skills/_index.md
+ M cerebro/empresa/MAPA.md
+ M cerebro/empresa/conhecimento/README.md
+ D cerebro/empresa/conteudo/analise-perfil-dr.marlonbatista-2026-04-22-producao.html
+ D cerebro/empresa/conteudo/analise-perfil-dr.marlonbatista-2026-04-22.html
+ D cerebro/empresa/conteudo/analise-perfil-dr.marlonbatista-2026-04-22.md
+ D cerebro/empresa/conteudo/analise-perfil-dra.camilapaes-2026-04-23-producao.html
+ D cerebro/empresa/conteudo/analise-perfil-dra.camilapaes-2026-04-23.html
+ D cerebro/empresa/conteudo/analise-perfil-dra.camilapaes-2026-04-23.md
+ M cerebro/empresa/contexto/decisions.md
+ M cerebro/empresa/projetos/PAINEL-UNICO-BACKLOG-STATUS-IVS-V1.md
+ M cerebro/empresa/projetos/README.md
+ M cerebro/empresa/projetos/pendencias.md
+ M cerebro/empresa/projetos/projetos.md
+ M cerebro/empresa/skills/_index.md
+ M cerebro/empresa/skills/agenda-diaria-whatsapp/SKILL.md
+ M cerebro/empresa/skills/omie-boletos/SKILL.md
+ M cerebro/learning-ledger.md
+ M cerebro/operacional/ITENS-AMBIGUOS-A-AUDITAR.md
+ M cerebro/telegram-topics.md
+ M cerebro/verdades-operacionais-clara.md
+ M cerebro/verdades-operacionais.md
+ M config/mcporter.json
+ M memory/.dreams/events.jsonl
+ M memory/.dreams/short-term-recall.json
+ M memory/2026-04-09.md
+ M memory/2026-04-27.md
+ M memory/2026-04-29.md
+ M ops/quarkclinic_confirmations/logs/send_28-04-2026.json
+ M ops/quarkclinic_confirmations/state/pending_confirmations.json
+ M skills/geracao-apresentacao-paciente/SKILL.md
+ M skills/geracao-apresentacao-paciente/assets/template-apresentacao.html
+ M skills/geracao-apresentacao-paciente/scripts/extrair_exames_pdf.py
+ M skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py
+?? backup/
+?? cerebro/areas/_governanca/
+?? cerebro/areas/governanca/README.md
+?? cerebro/areas/marketing/README-ESTRUTURAL.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/CHECKLIST.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/CLASSIFICACAO-IVS.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/INPUT-TEMPLATE.json
+?? cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-BASE-DE-CONHECIMENTO.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-FONTES-E-FERRAMENTAS.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-PROMPTS-PARA-FERRAMENTAS-WEB.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-REGRAS-DE-OPERACAO.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/OUTPUT-TEMPLATE.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/PROMPT-BASE.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/README.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/RUNTIME-MVP.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/SPEC.md
+?? cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-04-prompt-master/
+?? cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/
+?? cerebro/areas/marketing/agentes/agente-reels-intel/inputs/
+?? cerebro/areas/marketing/agentes/agente-reels-intel/outputs/
+?? cerebro/areas/marketing/agentes/agente-reels-intel/run_reels_intel.py
+?? cerebro/areas/marketing/checklist-curto-producao-video-ivs.md
+?? cerebro/areas/marketing/fluxo-unico-producao-video-ivs.md
+?? cerebro/areas/marketing/governanca-visual-ivs-index.md
+?? cerebro/areas/marketing/projetos/bunker-roteiros-ivs/
+?? cerebro/areas/marketing/providers-midia-checklist-rapido.md
+?? cerebro/areas/marketing/providers-midia-mapa-e-playbook-2026-04-28.md
+?? cerebro/areas/marketing/reels-sistema-aprendizados-varredura-instagram-2026-04-27.md
+?? cerebro/areas/tecnologia/
+?? cerebro/areas/vendas/README-ESTRUTURAL.md
+?? cerebro/empresa/_governanca/
+?? cerebro/empresa/conhecimento/logs/LICOES_SESSAO_2026-05-04-v9-apresentacao.md
+?? cerebro/empresa/conhecimento/logs/README.md
+?? cerebro/empresa/conhecimento/operacional/boletos-omie-processo.md
+?? cerebro/empresa/conteudo/README.md
+?? cerebro/empresa/conteudo/apresentacao-tv-programa-acompanhamento-ivs-premium-mariana.html
+?? cerebro/empresa/conteudo/apresentacao-tv-programa-acompanhamento-ivs-premium-tatiane-com-exames-completos.html
+?? cerebro/empresa/conteudo/apresentacao-tv-programa-acompanhamento-ivs-premium-tatiane-com-exames.html
+?? cerebro/empresa/conteudo/apresentacao-tv-programa-acompanhamento-ivs-tatiane-questionario-exames-completa.html
+?? cerebro/empresa/conteudo/apresentacao-tv-programa-acompanhamento-ivs-template.html
+?? cerebro/empresa/conteudo/calendario-editorial-semanas-1-4.html
+?? cerebro/empresa/conteudo/mapa-conteudo-ivs-2026.html
+?? cerebro/empresa/conteudo/projeto-bunker-roteiros-ivs-arquitetura.html
+?? cerebro/empresa/conteudo/projeto-bunker-roteiros-ivs-operacao.html
+?? cerebro/empresa/conteudo/v9-test.html
+?? cerebro/empresa/pacientes/README.md
+?? cerebro/empresa/projetos/PAINEL-UNICO-BACKLOG-STATUS-IVS.md
+?? cerebro/empresa/skills/DEPENDENCIAS-SKILLS.md
+?? cerebro/empresa/skills/GOVERNANCA-SKILLS.md
+?? cerebro/empresa/skills/README-ESTRUTURAL.md
+?? cerebro/empresa/skills/TEMPLATE-SKILL-IVS.md
+?? cerebro/empresa/skills/_governanca/
+?? cerebro/logs/clara-whatsapp-learning/
+?? cerebro/manutencao/
+?? cerebro/operacional/CHECKLIST-RECUPERABILIDADE.md
+?? cerebro/operacional/INDEX-PEDIDOS-RECORRENTES.md
+?? cerebro/operacional/PORTAS-UNICAS-DE-EXECUCAO.md
+?? cerebro/operacional/README.md
+?? cerebro/operacional/VARREDURA-TOTAL.md
+?? cerebro/operacional/clara-learning-graphify/
+?? cerebro/operacional/graphify-2026-05-05-auditoria-clara-execucao/
+?? cerebro/operacional/graphify-2026-05-06-auditoria-implementacao-clara/
+?? cerebro/telegram-topic-agent-routing.json
+?? cerebro/telegram-topic-agent-routing.json.bak-topic-fix-20260429-190433
+?? comparativo-plataformas-joao-ivs.html
+?? "deliverables/Boletos de Pacientes/2026-04-29/"
+?? deliverables/apresentacao-diogo-melo-inline.html
+?? "deliverables/apresentacao-erick-magalhaes-santos-paciente-v10-\001.html"
+?? deliverables/apresentacao-erick-magalhaes-santos-paciente-v10-20260506_194639.html
+?? deliverables/apresentacao-erick-magalhaes-santos-paciente-v10-20260506_200316.html
+?? deliverables/apresentacao-erick-magalhaes-santos-paciente-v10-20260506_201103.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260505_211438.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260505_214049.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260505_215057.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260505_220149.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260505_220520.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260505_220842.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_175341.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_181111.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_182841.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_185245.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_191525.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_191647.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_193941.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_194639.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_200316.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v10-20260506_201103.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_145158.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_173600.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_180436.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_182047.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_184235.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_184848.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_185743.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_194058.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_195405.html
+?? deliverables/apresentacao-erick-magalhaes-santos-v9-20260505_204654.html
+?? deliverables/apresentacao-smoke-test-final-v9-20260505_144422.html
+?? deliverables/apresentacao-smoke-test-paciente-v9-20260505_144122.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-20260504_174131.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_184734.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_185220.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_185252.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_190417.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_191038.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_192146.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_192816.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_193803.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_195446.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_201920.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_203027.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260504_203646.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260505_140549.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260505_141136.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260505_141509.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260505_143112.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260505_143719.html
+?? deliverables/apresentacao-tiaro-fernandes-neves-v9-20260505_144436.html
+?? deliverables/playbooks/
+?? fluxo-unico-producao-video-ivs-2026-05-01.md
+?? graphify-out/
+?? memory/2026-04-30.md
+?? memory/2026-05-02.md
+?? memory/2026-05-03.md
+?? memory/2026-05-04.md
+?? memory/2026-05-05.md
+?? memory/2026-05-05.md.bak-dedupe-20260506-0100
+?? ops/quarkclinic_confirmations/logs/send_01-05-2026.json
+?? ops/quarkclinic_confirmations/logs/send_02-05-2026.json
+?? ops/quarkclinic_confirmations/logs/send_03-05-2026.json
+?? ops/quarkclinic_confirmations/logs/send_04-05-2026.json
+?? ops/quarkclinic_confirmations/logs/send_05-05-2026.json
+?? ops/quarkclinic_confirmations/logs/send_06-05-2026.json
+?? ops/quarkclinic_confirmations/logs/send_07-05-2026.json
+?? ops/quarkclinic_confirmations/logs/send_29-04-2026.json
+?? ops/quarkclinic_confirmations/logs/send_30-04-2026.json
+?? plano-migracao-joao-replit-agent.html
+?? relatorio-arquitetura-funcional-super-joao-2026-04-30.html
+?? relatorio-matriz-super-joao-2026-04-30.html
+?? relatorio-soul-super-joao-2026-04-30-v2.html
+?? relatorio-soul-super-joao-2026-04-30.html
+?? relatorios/
+?? skills/geracao-apresentacao-paciente/REGRAS_CANONICAS.md
+?? skills/geracao-apresentacao-paciente/assets/biblioteca_implicacoes.json
+?? skills/geracao-apresentacao-paciente/assets/biblioteca_implicacoes.json.bak-v99-20260505-140540
+?? skills/geracao-apresentacao-paciente/assets/disc_textos.json
+?? skills/geracao-apresentacao-paciente/assets/refs_canonicas.json
+?? skills/geracao-apresentacao-paciente/assets/site-images/
+?? skills/geracao-apresentacao-paciente/assets/template-apresentacao-v8.html
+?? skills/geracao-apresentacao-paciente/scripts/extrair_exames_llm.py
+?? skills/geracao-apresentacao-paciente/scripts/extrair_exames_pdf.py.bak-v2-20260505-164205
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py.bak-llm-integ-20260505-190329
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py.bak-pre-v8-20260504-174024
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py.bak-promote-20260505-143709
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao.py.bak-rc06-20260505-193741
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-conselho-r2-20260505-213936
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-fixmodal-20260506-200949
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-incl8-20260506-191407
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-premium-20260505-211259
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-spin-uniq-20260505-215712
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v21-20260505-214951
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v22-20260505-220010
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v23-20260506-175122
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v24-20260506-180957
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v25-20260506-182645
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v27b-20260506-194235
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v28-20260506-195757
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v10.py.bak-v28-20260506-200107
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-css-fix-20260504-190417
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-disc-20260505-200749
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-inject-20260504-193707
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-mockexames-20260504-193803
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-p3-20260505-142543
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-p3fix-20260505-144357
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-promote-20260505-143709
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-pt2-20260504-193201
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v92-20260504-191038
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v93-20260504-192146
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v94-20260504-192816
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v95-20260504-195426
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v96-20260504-201913
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v97-20260504-203027
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v98-20260504-203646
+?? skills/geracao-apresentacao-paciente/scripts/gerar_apresentacao_v9.py.bak-v99-20260505-140540
+?? skills/geracao-apresentacao-paciente/scripts/validador_exames.py
+?? skills/stitch-mcp-operacao/
+?? sugestao-agentes-agency-agents-ivs-curto.html
+?? sugestao-agentes-agency-agents-ivs.html
+?? super-joao-SOUL-2026-04-30.md

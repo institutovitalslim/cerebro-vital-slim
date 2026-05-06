@@ -1,0 +1,4 @@
+2026-05-06 21:23 3174 /root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-212346-whatsapp-historical.md
+2026-05-06 21:23 3174 /root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/latest-whatsapp-historical.md
+2026-05-06 21:23 625 /root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-212300-whatsapp-current.md
+2026-05-06 21:23 625 /root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/latest-whatsapp-current.md
