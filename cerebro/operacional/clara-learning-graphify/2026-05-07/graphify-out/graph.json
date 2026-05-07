@@ -1,0 +1,710 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 0,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "conselho_growth",
+      "label": "Conselho Growth",
+      "type": "council",
+      "community": 0,
+      "norm_label": "conselho growth"
+    },
+    {
+      "id": "agendamento_premium",
+      "label": "Agendamento premium de pacientes/leads",
+      "type": "capability",
+      "community": 0,
+      "norm_label": "agendamento premium de pacientes/leads"
+    },
+    {
+      "id": "slot_instagram_manha",
+      "label": "instagram_manha",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-instagram_manha.json",
+      "community": 0,
+      "norm_label": "instagram_manha"
+    },
+    {
+      "id": "fonte_instagram",
+      "label": "Instagram",
+      "type": "source",
+      "community": 0,
+      "norm_label": "instagram"
+    },
+    {
+      "id": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "label": "vendas consultivas, WhatsApp, atendimento premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "vendas consultivas, whatsapp, atendimento premium"
+    },
+    {
+      "id": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida"
+    },
+    {
+      "id": "slot_instagram_tarde",
+      "label": "instagram_tarde",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-instagram_tarde.json",
+      "community": 0,
+      "norm_label": "instagram_tarde"
+    },
+    {
+      "id": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "label": "SPIN, negocia\u00e7\u00e3o, social selling ou cl\u00ednica premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "spin, negociacao, social selling ou clinica premium"
+    },
+    {
+      "id": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "label": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avan\u00e7o",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 resposta ruim + 1 resposta clara premium + 1 pergunta de avanco"
+    },
+    {
+      "id": "slot_revisao",
+      "label": "revisao",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-revisao.json",
+      "community": 3,
+      "norm_label": "revisao"
+    },
+    {
+      "id": "fonte_revis_o_interna",
+      "label": "Revis\u00e3o interna",
+      "type": "source",
+      "community": 3,
+      "norm_label": "revisao interna"
+    },
+    {
+      "id": "tema_aprendizados_do_dia",
+      "label": "aprendizados do dia",
+      "type": "topic",
+      "community": 3,
+      "norm_label": "aprendizados do dia"
+    },
+    {
+      "id": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria",
+      "label": "classificar aplicar amanh\u00e3 / descartar / testar 3 dias / propor mem\u00f3ria",
+      "type": "deliverable",
+      "community": 3,
+      "norm_label": "classificar aplicar amanha / descartar / testar 3 dias / propor memoria"
+    },
+    {
+      "id": "slot_whatsapp_current",
+      "label": "whatsapp-current",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-whatsapp-current.json",
+      "community": 2,
+      "norm_label": "whatsapp-current"
+    },
+    {
+      "id": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "label": "WhatsApp IVS via planilha de conversas",
+      "type": "source",
+      "community": 2,
+      "norm_label": "whatsapp ivs via planilha de conversas"
+    },
+    {
+      "id": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "label": "obje\u00e7\u00f5es, vit\u00f3rias, quedas, timing de convite para agenda, linguagem premium e follow-up",
+      "type": "topic",
+      "community": 2,
+      "norm_label": "objecoes, vitorias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "id": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "label": "padr\u00f5es de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "type": "deliverable",
+      "community": 2,
+      "norm_label": "padroes de conversa reais para melhorar agendamento da clara sem expor pii"
+    },
+    {
+      "id": "slot_whatsapp_historical",
+      "label": "whatsapp-historical",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-whatsapp-historical.json",
+      "community": 2,
+      "norm_label": "whatsapp-historical"
+    },
+    {
+      "id": "slot_x_twitter",
+      "label": "x_twitter",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-x_twitter.json",
+      "community": 4,
+      "norm_label": "x_twitter"
+    },
+    {
+      "id": "fonte_x_twitter",
+      "label": "X/Twitter",
+      "type": "source",
+      "community": 4,
+      "norm_label": "x/twitter"
+    },
+    {
+      "id": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "label": "posts de alto engajamento sobre persuas\u00e3o, obje\u00e7\u00f5es, atendimento, neg\u00f3cios locais ou experi\u00eancia do cliente",
+      "type": "topic",
+      "community": 4,
+      "norm_label": "posts de alto engajamento sobre persuasao, objecoes, atendimento, negocios locais ou experiencia do cliente"
+    },
+    {
+      "id": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "label": "1 frase curta + 1 \u00e2ngulo de obje\u00e7\u00e3o + 1 cuidado contra agressividade",
+      "type": "deliverable",
+      "community": 4,
+      "norm_label": "1 frase curta + 1 angulo de objecao + 1 cuidado contra agressividade"
+    },
+    {
+      "id": "item_do_not_post_yet_hold_announce_connections_2026_musical_guest_on_x_status",
+      "label": "\u26a0\ufe0f DO NOT POST YET\n\nHOLD: Announce Connections 2026 musical guest on X\n\nStatus: PENDING APPROVAL\nBand Handle: CONFIDENTIAL\nPublish time: 5/5 early a.m. PT",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 5,
+      "norm_label": "\u26a0\ufe0f do not post yet\n\nhold: announce connections 2026 musical guest on x\n\nstatus: pending approval\nband handle: confidential\npublish time: 5/5 early a.m. pt"
+    },
+    {
+      "id": "conceito_do_not_post_yet_hold_announce_connections_2026_musical_guest_on_x",
+      "label": "\u26a0\ufe0f DO NOT POST YET\n\nHOLD: Announce Connections 2026 musical guest on X\n\nStatus: PENDING APPROVAL\nBand Handle: CONFIDENTIAL\nPublish time: 5/5 early a.m. PT",
+      "type": "concept",
+      "community": 5,
+      "norm_label": "\u26a0\ufe0f do not post yet\n\nhold: announce connections 2026 musical guest on x\n\nstatus: pending approval\nband handle: confidential\npublish time: 5/5 early a.m. pt"
+    },
+    {
+      "id": "item_oops_guess_who_it_is",
+      "label": "Oops?\n\nGuess who it is. \ud83d\ude09",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 9,
+      "norm_label": "oops?\n\nguess who it is. \ud83d\ude09"
+    },
+    {
+      "id": "conceito_oops_guess_who_it_is",
+      "label": "Oops?\n\nGuess who it is. \ud83d\ude09",
+      "type": "concept",
+      "community": 9,
+      "norm_label": "oops?\n\nguess who it is. \ud83d\ude09"
+    },
+    {
+      "id": "item_rt_tableau_https_t_co_crglbolc1p",
+      "label": "RT @tableau: https://t.co/cRGlBoLc1P",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 7,
+      "norm_label": "rt @tableau: https://t.co/crglbolc1p"
+    },
+    {
+      "id": "conceito_rt_tableau_https_t_co_crglbolc1p",
+      "label": "RT @tableau: https://t.co/cRGlBoLc1P",
+      "type": "concept",
+      "community": 7,
+      "norm_label": "rt @tableau: https://t.co/crglbolc1p"
+    },
+    {
+      "id": "item_rt_tableau_https_t_co_d6uwcsrq96",
+      "label": "RT @tableau: https://t.co/d6UwcSRq96",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 8,
+      "norm_label": "rt @tableau: https://t.co/d6uwcsrq96"
+    },
+    {
+      "id": "conceito_rt_tableau_https_t_co_d6uwcsrq96",
+      "label": "RT @tableau: https://t.co/d6UwcSRq96",
+      "type": "concept",
+      "community": 8,
+      "norm_label": "rt @tableau: https://t.co/d6uwcsrq96"
+    },
+    {
+      "id": "item_software_was_always_created_by_humans_for_humans_now_it_s_created_by_humans_a",
+      "label": "Software was always created by humans, for humans.\n\nNow it's created by humans and agents.\n\nFor humans and agents.\n\nAnd you may never have to log in to use it.\n\nNot even Salesforce",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 6,
+      "norm_label": "software was always created by humans, for humans.\n\nnow it's created by humans and agents.\n\nfor humans and agents.\n\nand you may never have to log in to use it.\n\nnot even salesforce"
+    },
+    {
+      "id": "conceito_software_was_always_created_by_humans_for_humans_now_it_s_created_b",
+      "label": "Software was always created by humans, for humans.\n\nNow it's created by humans and agents.\n\nFor humans and agents.\n\nAnd you may never have to log in to use it.\n",
+      "type": "concept",
+      "community": 6,
+      "norm_label": "software was always created by humans, for humans.\n\nnow it's created by humans and agents.\n\nfor humans and agents.\n\nand you may never have to log in to use it.\n"
+    },
+    {
+      "id": "slot_youtube",
+      "label": "youtube",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-youtube.json",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "fonte_youtube",
+      "label": "YouTube",
+      "type": "source",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "tema_objection_handling_sales_call_review_discovery_questions",
+      "label": "objection handling sales call review discovery questions",
+      "type": "topic",
+      "community": 1,
+      "norm_label": "objection handling sales call review discovery questions"
+    },
+    {
+      "id": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "label": "ideia central + aplica\u00e7\u00e3o WhatsApp + script antes/depois + m\u00e9trica + risco",
+      "type": "deliverable",
+      "community": 1,
+      "norm_label": "ideia central + aplicacao whatsapp + script antes/depois + metrica + risco"
+    },
+    {
+      "id": "item_5_sales_questions_that_will_dramatically_increase_your_close_rates",
+      "label": "5 Sales Questions That Will Dramatically Increase Your Close Rates",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=3-0UVSuekrQ",
+      "profile": "Gong.io",
+      "community": 1,
+      "norm_label": "5 sales questions that will dramatically increase your close rates"
+    },
+    {
+      "id": "conceito_first_up_is_is_that_fair_this_is_a_great_question_to_use_when_you_re_s",
+      "label": "First up is is that fair this is a great question to use when you're starting your discovery call with an upfront contract created by\u00a0...",
+      "type": "concept",
+      "community": 1,
+      "norm_label": "first up is is that fair this is a great question to use when you're starting your discovery call with an upfront contract created by ..."
+    },
+    {
+      "id": "item_how_the_most_successful_salespeople_handle_objections_gong_labs_live_episode_3",
+      "label": "How the Most Successful Salespeople Handle Objections: Gong Labs Live Episode 3",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=ALlnBsVlPhE",
+      "profile": "Gong.io",
+      "community": 1,
+      "norm_label": "how the most successful salespeople handle objections: gong labs live episode 3"
+    },
+    {
+      "id": "conceito_tanner_robinson_co_founder_of_sdr_huddle_gong_ae_explains_how_he_h",
+      "label": "Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections.\n\nFollow us on LinkedIn for more tips and tricks: https://www.linkedin.c",
+      "type": "concept",
+      "community": 1,
+      "norm_label": "tanner robinson, co-founder of sdr huddle & gong ae, explains how he handles objections.\n\nfollow us on linkedin for more tips and tricks: https://www.linkedin.c"
+    },
+    {
+      "id": "item_objection_handling_7_steps_for_overcoming_any_objection_in_sales",
+      "label": "Objection Handling: 7 Steps for Overcoming Any Objection In Sales",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-07/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=DBpLFAS2s3w",
+      "profile": "Gong.io",
+      "community": 1,
+      "norm_label": "objection handling: 7 steps for overcoming any objection in sales"
+    },
+    {
+      "id": "conceito_objection_handling_7_steps_for_overcoming_any_objection_in_sales_t",
+      "label": "Objection Handling: 7 Steps for Overcoming Any Objection In Sales  - This is an sales training course on objection handling. Objection handling is one of the hi",
+      "type": "concept",
+      "community": 1,
+      "norm_label": "objection handling: 7 steps for overcoming any objection in sales  - this is an sales training course on objection handling. objection handling is one of the hi"
+    }
+  ],
+  "links": [
+    {
+      "type": "must_master",
+      "relationship": "must_master",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "agendamento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "sabatina",
+      "relationship": "sabatina",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "conselho_growth",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_manha",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_revisao",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "fonte_instagram",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_instagram",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "fonte_revis_o_interna",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "tema_aprendizados_do_dia",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "fonte_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_do_not_post_yet_hold_announce_connections_2026_musical_guest_on_x_status",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_oops_guess_who_it_is",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_rt_tableau_https_t_co_crglbolc1p",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_rt_tableau_https_t_co_d6uwcsrq96",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_software_was_always_created_by_humans_for_humans_now_it_s_created_by_humans_a",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_do_not_post_yet_hold_announce_connections_2026_musical_guest_on_x_status",
+      "target": "conceito_do_not_post_yet_hold_announce_connections_2026_musical_guest_on_x",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_oops_guess_who_it_is",
+      "target": "conceito_oops_guess_who_it_is",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_rt_tableau_https_t_co_crglbolc1p",
+      "target": "conceito_rt_tableau_https_t_co_crglbolc1p",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_rt_tableau_https_t_co_d6uwcsrq96",
+      "target": "conceito_rt_tableau_https_t_co_d6uwcsrq96",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_software_was_always_created_by_humans_for_humans_now_it_s_created_by_humans_a",
+      "target": "conceito_software_was_always_created_by_humans_for_humans_now_it_s_created_b",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "fonte_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "tema_objection_handling_sales_call_review_discovery_questions",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_5_sales_questions_that_will_dramatically_increase_your_close_rates",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_how_the_most_successful_salespeople_handle_objections_gong_labs_live_episode_3",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_objection_handling_7_steps_for_overcoming_any_objection_in_sales",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_5_sales_questions_that_will_dramatically_increase_your_close_rates",
+      "target": "conceito_first_up_is_is_that_fair_this_is_a_great_question_to_use_when_you_re_s",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_how_the_most_successful_salespeople_handle_objections_gong_labs_live_episode_3",
+      "target": "conceito_tanner_robinson_co_founder_of_sdr_huddle_gong_ae_explains_how_he_h",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_objection_handling_7_steps_for_overcoming_any_objection_in_sales",
+      "target": "conceito_objection_handling_7_steps_for_overcoming_any_objection_in_sales_t",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

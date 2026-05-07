@@ -1,11 +1,11 @@
 # Clara WhatsApp Learning — current — últimas 6h
 
-> Gerado em 2026-05-07T01:15:20.226265+00:00
+> Gerado em 2026-05-06T23:15:20.911569+00:00
 
 ## Contadores agregados
-- Mensagens analisadas: **1**
-- Leads/conversas únicas: **1**
-- Recebidas: 1 | Enviadas: 0
+- Mensagens analisadas: **6**
+- Leads/conversas únicas: **3**
+- Recebidas: 6 | Enviadas: 0
 - Sinais de agendamento/vitória: **0**
 - Sinais de queda/objeção: **0**
 

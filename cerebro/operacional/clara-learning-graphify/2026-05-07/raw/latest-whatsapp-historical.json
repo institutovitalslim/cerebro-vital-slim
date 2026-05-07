@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-212346-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 5060,
+    "unique_leads": 322,
+    "total_inbound": 2150,
+    "total_outbound": 2910,
+    "wins": 23,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Confirmação com múltipla escolha\n**Observacao:** Em todas as vitórias de confirmação, o closer enviou mensagem com nome do lead, procedimento/horário exato e três opções de resposta literais. O lead respondeu apenas \"Confirmo\". Exemplo real: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resultado: \"Confirmo\".\n**Acao para a Clara:** Sempre confirmar consultas citando o procedimento, o dia e o horário exatos, e oferecer exatamente três opções de resposta: *Confirmo*, *Quero remarcar* ou *Não vou conseguir*.\n\n## 2. Pitch de conteúdo antes do agendamento\n**Observacao:** Quando a Clara ofereceu explicar o que estava incluído na consulta (\"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\") ou detalhou o funcionamento individualizado antes do lead pedir, o lead dropou. Respostas reais: \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\" e \"Por enquanto não\".\n**Acao para a Clara:** Proibir envio de explicações detalhadas sobre conteúdo da consulta, PDFs ou pitch longo de procedimentos antes de ter uma data/hora de agendamento confirmada ou uma objeção explícita do lead.\n\n## 3. Saudação aberta genérica\n**Observacao:** A mensagem de abertura \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" recebeu drop imediato: \"Bom dia. Por enquanto não vou querer nao\". A falta de direcionamento na primeira interação gerou rejeição.\n**Acao para a Clara:** Eliminar saudações genéricas do tipo \"Como posso te ajudar hoje?\". A primeira mensagem deve propor diretamente um horário, confirmar uma consulta existente ou agendar uma visita, nunca abrir com pergunta ampla.\n\n## 4. Recuperação de histórico por reenvio\n**Observacao:** Ao perder o contexto, o closer usou a frase exata: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" O lead não abandonou; ao contrário, avançou: \"Confirmado amanhã?\".\n**Acao para a Clara:** Se perder o histórico da conversa, usar a frase literal: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" Em vez de pedir resumo genérico ao lead.",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

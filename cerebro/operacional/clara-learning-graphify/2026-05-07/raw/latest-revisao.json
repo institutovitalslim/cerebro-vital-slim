@@ -1,0 +1,214 @@
+{
+  "slot": "revisao",
+  "date": "2026-05-07T00:20:07.285051",
+  "weekday": "Thursday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "Revisão interna",
+  "buscar": "aprendizados do dia",
+  "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+  "latest": [
+    {
+      "slot": "instagram_manha",
+      "date": "2026-05-06T21:07:40.626486",
+      "weekday": "Wednesday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "Instagram",
+      "perfil": "thiagoconcer",
+      "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+      "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username thiagoconcer --limit 3",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": false,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210743-instagram-profile-thiagoconcer.json\",\n  \"error\": \"HTTP Error 500: Internal Server Error\"\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "slot": "instagram_tarde",
+      "date": "2026-05-06T21:07:52.688989",
+      "weekday": "Wednesday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "Instagram",
+      "perfil": "leandroladeira",
+      "buscar": "SPIN, negociação, social selling ou clínica premium",
+      "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username leandroladeira --limit 3",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210753-instagram-profile-leandroladeira.json\",\n  \"items\": []\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "slot": "revisao",
+      "date": "2026-05-06T21:07:53.472332",
+      "weekday": "Wednesday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "Revisão interna",
+      "buscar": "aprendizados do dia",
+      "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+      "latest": [
+        {
+          "slot": "instagram_manha",
+          "date": "2026-05-06T21:07:40.626486",
+          "weekday": "Wednesday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "Instagram",
+          "perfil": "thiagoconcer",
+          "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+          "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username thiagoconcer --limit 3",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": false,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210743-instagram-profile-thiagoconcer.json\",\n  \"error\": \"HTTP Error 500: Internal Server Error\"\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "slot": "instagram_tarde",
+          "date": "2026-05-06T21:07:52.688989",
+          "weekday": "Wednesday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "Instagram",
+          "perfil": "leandroladeira",
+          "buscar": "SPIN, negociação, social selling ou clínica premium",
+          "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username leandroladeira --limit 3",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210753-instagram-profile-leandroladeira.json\",\n  \"items\": []\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "slot": "revisao",
+          "date": "2026-05-06T00:20:15.742413",
+          "weekday": "Wednesday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "Revisão interna",
+          "buscar": "aprendizados do dia",
+          "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+          "latest": [
+            {
+              "slot": "youtube",
+              "date": "2026-05-05T21:21:45.196640",
+              "weekday": "Tuesday",
+              "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+              "fonte": "YouTube",
+              "canal_ou_busca": "Alex Hormozi",
+              "buscar": "value proposition offer sales objections",
+              "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+              "coleta": {
+                "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Alex Hormozi value proposition offer sales objections --limit 3",
+                "returncode": 0,
+                "stdout": "{\n  \"ok\": false,\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260505-212149-search.json\",\n  \"items\": [],\n  \"stderr\": \"utube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\\nERROR: [youtube] CojS0DwflXc: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies\\n\"\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "slot": "x_twitter",
+          "date": "2026-05-06T21:07:49.265759",
+          "weekday": "Wednesday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "X/Twitter",
+          "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+          "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-top --period Daily --type Likes",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-top\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210752-x-top-posts.json\",\n  \"count\": 0,\n  \"sample\": []\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "slot": "youtube",
+          "date": "2026-05-06T21:07:43.378305",
+          "weekday": "Wednesday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "YouTube",
+          "canal_ou_busca": "Gong",
+          "buscar": "objection handling sales call review discovery questions",
+          "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Gong objection handling sales call review discovery questions --limit 3",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": true,\n  \"source\": \"rapidapi-yt-api\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260506-210749-search.json\",\n  \"items\": [\n    {\n      \"title\": \"5 Sales Questions That Will Dramatically Increase Your Close Rates\",\n      \"url\": \"https://www.youtube.com/watch?v=3-0UVSuekrQ\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"6:17\",\n      \"view_count\": \"7760\",\n      \"published\": \"6 years ago\",\n      \"description\": \"First up is is that fair this is a great question to use when you're starting your discovery call with an upfront contract created by ...\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"376\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"How the Most Successful Salespeople Handle Objections: Gong Labs Live Episode 3\",\n      \"url\": \"https://www.youtube.com/watch?v=ALlnBsVlPhE\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"18:29\",\n      \"view_count\": \"2642\",\n      \"published\": \"6 years ago\",\n      \"description\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections. Follow us on LinkedIn for more ...\",\n      \"description_full\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections.\\n\\nFollow us on LinkedIn for more tips and tricks: https://www.linkedin.com/company/gong-io\\n\\nCheck out more Gong Labs Live episodes: https://www.youtube.com/playlist?list=PLctD8gzD0Q8r6G5g9mKucJmoaK8mtQiPH\\n\\nAbout Gong:\\nThe patented Gong Revenue Intelligence Platform captures and understands every customer interaction then delivers insights at scale, empowering revenue teams to make decisions based on data instead of opinions. \\n\\nSee more at www.gong.io/ri\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1109\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales\",\n      \"url\": \"https://www.youtube.com/watch?v=DBpLFAS2s3w\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"28:31\",\n      \"view_count\": \"40677\",\n      \"published\": \"7 years ago\",\n      \"description\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales - This is an sales training course on objection handling.\",\n      \"description_full\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales  - This is an sales training course on objection handling. Objection handling is one of the highest paid skills you can master in sales. Follow these 7 steps, and watch your income grow. You will learn some of the most powerful ways of overcoming and handling objections so you can close more deals.\\n\\nDownload the Slide Deck + Cheat Sheet and FULL Video course: https://pages.gong.io/objection-handling-masterclass-course/\\n\\nLearn how Gong.io can help you have better sales conversations and close more deals by understanding what works and what doesn’t work in your sales calls. Click here to get a free live demo: https://www.gong.io/demo/ \\n\\nFollow us on the social web:\\nTwitter: https://twitter.com/gong_io\\nLinkedIn: https://www.linkedin.com/company/gong-io\\nFacebook: https://www.facebook.com/To.GongIO/\",\n      \"keywords\": [\n        \"sales\",\n        \"sales skills\",\n        \"objection handling\",\n        \"handling objections\",\n        \"sales tips\",\n        \"sales techniques\",\n        \"persuasion\",\n        \"handling sales objections\",\n        \"sales training\",\n        \"sales process\",\n        \"sales call\",\n        \"objection handling script\",\n        \"sales call script\",\n        \"objection handling techniques\",\n        \"objection handling tips\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1710\",\n      \"channelTitle\": \"Gong.io\"\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    },
+    {
+      "ok": true,
+      "slot": "whatsapp-current",
+      "fonte": "WhatsApp IVS via planilha de conversas",
+      "modo": "current",
+      "periodo": "últimas 6h",
+      "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-231520-whatsapp-current.md",
+      "contadores": {
+        "total_messages": 6,
+        "unique_leads": 3,
+        "total_inbound": 6,
+        "total_outbound": 0,
+        "wins": 0,
+        "drops": 0
+      },
+      "aprendizados": "SEM_APRENDIZADOS_NOVOS - volume insuficiente",
+      "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "ok": true,
+      "slot": "whatsapp-historical",
+      "fonte": "WhatsApp IVS via planilha de conversas",
+      "modo": "historical",
+      "periodo": "últimos 180 dias",
+      "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-212346-whatsapp-historical.md",
+      "contadores": {
+        "total_messages": 5060,
+        "unique_leads": 322,
+        "total_inbound": 2150,
+        "total_outbound": 2910,
+        "wins": 23,
+        "drops": 5
+      },
+      "aprendizados": "## 1. Confirmação com múltipla escolha\n**Observacao:** Em todas as vitórias de confirmação, o closer enviou mensagem com nome do lead, procedimento/horário exato e três opções de resposta literais. O lead respondeu apenas \"Confirmo\". Exemplo real: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resultado: \"Confirmo\".\n**Acao para a Clara:** Sempre confirmar consultas citando o procedimento, o dia e o horário exatos, e oferecer exatamente três opções de resposta: *Confirmo*, *Quero remarcar* ou *Não vou conseguir*.\n\n## 2. Pitch de conteúdo antes do agendamento\n**Observacao:** Quando a Clara ofereceu explicar o que estava incluído na consulta (\"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\") ou detalhou o funcionamento individualizado antes do lead pedir, o lead dropou. Respostas reais: \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\" e \"Por enquanto não\".\n**Acao para a Clara:** Proibir envio de explicações detalhadas sobre conteúdo da consulta, PDFs ou pitch longo de procedimentos antes de ter uma data/hora de agendamento confirmada ou uma objeção explícita do lead.\n\n## 3. Saudação aberta genérica\n**Observacao:** A mensagem de abertura \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" recebeu drop imediato: \"Bom dia. Por enquanto não vou querer nao\". A falta de direcionamento na primeira interação gerou rejeição.\n**Acao para a Clara:** Eliminar saudações genéricas do tipo \"Como posso te ajudar hoje?\". A primeira mensagem deve propor diretamente um horário, confirmar uma consulta existente ou agendar uma visita, nunca abrir com pergunta ampla.\n\n## 4. Recuperação de histórico por reenvio\n**Observacao:** Ao perder o contexto, o closer usou a frase exata: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" O lead não abandonou; ao contrário, avançou: \"Confirmado amanhã?\".\n**Acao para a Clara:** Se perder o histórico da conversa, usar a frase literal: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" Em vez de pedir resumo genérico ao lead.",
+      "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "slot": "x_twitter",
+      "date": "2026-05-06T21:19:08.816664",
+      "weekday": "Wednesday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "X/Twitter",
+      "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+      "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+      "perfil": "Salesforce",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-profile --screenname Salesforce --limit 5",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-211915-x-profile-Salesforce.json\",\n  \"screenname\": \"Salesforce\",\n  \"count\": 5,\n  \"sample\": [\n    {\n      \"tweet_id\": \"2052058730435576304\",\n      \"screen_name\": null,\n      \"text\": \"⚠️ DO NOT POST YET\\n\\nHOLD: Announce Connections 2026 musical guest on X\\n\\nStatus: PENDING APPROVAL\\nBand Handle: CONFIDENTIAL\\nPublish time: 5/5 early a.m. PT\",\n      \"favorites\": 18,\n      \"retweets\": 3,\n      \"created_at\": \"Wed May 06 16:11:41 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052058826195820947\",\n      \"screen_name\": null,\n      \"text\": \"Oops?\\n\\nGuess who it is. 😉\",\n      \"favorites\": 3,\n      \"retweets\": null,\n      \"created_at\": \"Wed May 06 16:12:04 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052029508689989740\",\n      \"screen_name\": null,\n      \"text\": \"RT @tableau: https://t.co/cRGlBoLc1P\",\n      \"favorites\": null,\n      \"retweets\": 2,\n      \"created_at\": \"Wed May 06 14:15:34 +0000 2026\",\n      \"lang\": \"zxx\"\n    },\n    {\n      \"tweet_id\": \"2052011547438776507\",\n      \"screen_name\": null,\n      \"text\": \"RT @tableau: https://t.co/d6UwcSRq96\",\n      \"favorites\": null,\n      \"retweets\": 7,\n      \"created_at\": \"Wed May 06 13:04:12 +0000 2026\",\n      \"lang\": \"zxx\"\n    },\n    {\n      \"tweet_id\": \"2049973985140433264\",\n      \"screen_name\": null,\n      \"text\": \"Software was always created by humans, for humans.\\n\\nNow it's created by humans and agents.\\n\\nFor humans and agents.\\n\\nAnd you may never have to log in to use it.\\n\\nNot even Salesforce—which is now open to every human, agent, and platform with Headless 360. https://t.co/sQxUmDPq3Z\",\n      \"favorites\": 57,\n      \"retweets\": 12,\n      \"created_at\": \"Thu Apr 30 22:07:39 +0000 2026\",\n      \"lang\": \"en\"\n    }\n  ]\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "slot": "youtube",
+      "date": "2026-05-06T21:07:43.378305",
+      "weekday": "Wednesday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "YouTube",
+      "canal_ou_busca": "Gong",
+      "buscar": "objection handling sales call review discovery questions",
+      "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Gong objection handling sales call review discovery questions --limit 3",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"source\": \"rapidapi-yt-api\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260506-210749-search.json\",\n  \"items\": [\n    {\n      \"title\": \"5 Sales Questions That Will Dramatically Increase Your Close Rates\",\n      \"url\": \"https://www.youtube.com/watch?v=3-0UVSuekrQ\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"6:17\",\n      \"view_count\": \"7760\",\n      \"published\": \"6 years ago\",\n      \"description\": \"First up is is that fair this is a great question to use when you're starting your discovery call with an upfront contract created by ...\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"376\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"How the Most Successful Salespeople Handle Objections: Gong Labs Live Episode 3\",\n      \"url\": \"https://www.youtube.com/watch?v=ALlnBsVlPhE\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"18:29\",\n      \"view_count\": \"2642\",\n      \"published\": \"6 years ago\",\n      \"description\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections. Follow us on LinkedIn for more ...\",\n      \"description_full\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections.\\n\\nFollow us on LinkedIn for more tips and tricks: https://www.linkedin.com/company/gong-io\\n\\nCheck out more Gong Labs Live episodes: https://www.youtube.com/playlist?list=PLctD8gzD0Q8r6G5g9mKucJmoaK8mtQiPH\\n\\nAbout Gong:\\nThe patented Gong Revenue Intelligence Platform captures and understands every customer interaction then delivers insights at scale, empowering revenue teams to make decisions based on data instead of opinions. \\n\\nSee more at www.gong.io/ri\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1109\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales\",\n      \"url\": \"https://www.youtube.com/watch?v=DBpLFAS2s3w\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"28:31\",\n      \"view_count\": \"40677\",\n      \"published\": \"7 years ago\",\n      \"description\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales - This is an sales training course on objection handling.\",\n      \"description_full\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales  - This is an sales training course on objection handling. Objection handling is one of the highest paid skills you can master in sales. Follow these 7 steps, and watch your income grow. You will learn some of the most powerful ways of overcoming and handling objections so you can close more deals.\\n\\nDownload the Slide Deck + Cheat Sheet and FULL Video course: https://pages.gong.io/objection-handling-masterclass-course/\\n\\nLearn how Gong.io can help you have better sales conversations and close more deals by understanding what works and what doesn’t work in your sales calls. Click here to get a free live demo: https://www.gong.io/demo/ \\n\\nFollow us on the social web:\\nTwitter: https://twitter.com/gong_io\\nLinkedIn: https://www.linkedin.com/company/gong-io\\nFacebook: https://www.facebook.com/To.GongIO/\",\n      \"keywords\": [\n        \"sales\",\n        \"sales skills\",\n        \"objection handling\",\n        \"handling objections\",\n        \"sales tips\",\n        \"sales techniques\",\n        \"persuasion\",\n        \"handling sales objections\",\n        \"sales training\",\n        \"sales process\",\n        \"sales call\",\n        \"objection handling script\",\n        \"sales call script\",\n        \"objection handling techniques\",\n        \"objection handling tips\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1710\",\n      \"channelTitle\": \"Gong.io\"\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+        "stderr": ""
+      }
+    }
+  ]
+}
