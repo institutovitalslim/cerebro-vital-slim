@@ -1,0 +1,319 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "Clara",
+      "type": "agent",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "clara",
+      "community": 3,
+      "norm_label": "clara"
+    },
+    {
+      "label": "M\u00e1quina de agendamento",
+      "type": "capability",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "maquina_agendamento",
+      "community": 0,
+      "norm_label": "maquina de agendamento"
+    },
+    {
+      "label": "QA di\u00e1rio de convers\u00e3o 2026-05-08",
+      "type": "report",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "qa_diario_conversao_2026_05_08",
+      "community": 1,
+      "norm_label": "qa diario de conversao 2026-05-08"
+    },
+    {
+      "label": "WhatsApp current \u00faltimas 6h",
+      "type": "dataset",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "whatsapp_current_ultimas_6h",
+      "community": 1,
+      "norm_label": "whatsapp current ultimas 6h"
+    },
+    {
+      "label": "WhatsApp historical 180 dias",
+      "type": "dataset",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "whatsapp_historical_180d",
+      "community": 1,
+      "norm_label": "whatsapp historical 180 dias"
+    },
+    {
+      "label": "Triagem de fornecedor/B2B",
+      "type": "operational_learning",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "triagem_b2b_fornecedor",
+      "community": 0,
+      "norm_label": "triagem de fornecedor/b2b"
+    },
+    {
+      "label": "Log\u00edstica presencial aciona recep\u00e7\u00e3o",
+      "type": "operational_learning",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "logistica_presencial_recepcao",
+      "community": 0,
+      "norm_label": "logistica presencial aciona recepcao"
+    },
+    {
+      "label": "Sauda\u00e7\u00e3o vazia com dire\u00e7\u00e3o objetiva",
+      "type": "operational_learning",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "saudacao_vazia_direcionadora",
+      "community": 4,
+      "norm_label": "saudacao vazia com direcao objetiva"
+    },
+    {
+      "label": "Obje\u00e7\u00e3o familiar com resumo de apoio",
+      "type": "operational_learning",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "objecao_familiar_resumo_apoio",
+      "community": 2,
+      "norm_label": "objecao familiar com resumo de apoio"
+    },
+    {
+      "label": "Confirma\u00e7\u00e3o com m\u00faltipla escolha",
+      "type": "conversion_pattern",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "confirmacao_multipla_escolha",
+      "community": 0,
+      "norm_label": "confirmacao com multipla escolha"
+    },
+    {
+      "label": "Evitar pitch longo antes de agenda",
+      "type": "conversion_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "evitar_pitch_pre_agenda",
+      "community": 2,
+      "norm_label": "evitar pitch longo antes de agenda"
+    },
+    {
+      "label": "Evitar abertura gen\u00e9rica ampla",
+      "type": "conversion_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "evitar_abertura_generica",
+      "community": 4,
+      "norm_label": "evitar abertura generica ampla"
+    },
+    {
+      "label": "Recupera\u00e7\u00e3o objetiva de hist\u00f3rico",
+      "type": "operational_learning",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "recuperacao_historico_objetiva",
+      "community": 0,
+      "norm_label": "recuperacao objetiva de historico"
+    },
+    {
+      "label": "Guardrails cl\u00ednicos",
+      "type": "guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "guardrails_clinicos",
+      "community": 2,
+      "norm_label": "guardrails clinicos"
+    },
+    {
+      "label": "Sem PII",
+      "type": "privacy_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "sem_pii",
+      "community": 0,
+      "norm_label": "sem pii"
+    },
+    {
+      "label": "N\u00e3o pausar Clara sem Tiaro",
+      "type": "operational_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "id": "nao_pausar_sem_tiaro",
+      "community": 3,
+      "norm_label": "nao pausar clara sem tiaro"
+    }
+  ],
+  "links": [
+    {
+      "relation": "operates_as",
+      "relationship": "operates_as",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "clara",
+      "_tgt": "maquina_agendamento",
+      "source": "clara",
+      "target": "maquina_agendamento"
+    },
+    {
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "clara",
+      "_tgt": "nao_pausar_sem_tiaro",
+      "source": "clara",
+      "target": "nao_pausar_sem_tiaro"
+    },
+    {
+      "relation": "requires",
+      "relationship": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "maquina_agendamento",
+      "_tgt": "triagem_b2b_fornecedor",
+      "source": "maquina_agendamento",
+      "target": "triagem_b2b_fornecedor"
+    },
+    {
+      "relation": "requires",
+      "relationship": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "maquina_agendamento",
+      "_tgt": "logistica_presencial_recepcao",
+      "source": "maquina_agendamento",
+      "target": "logistica_presencial_recepcao"
+    },
+    {
+      "relation": "requires",
+      "relationship": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "maquina_agendamento",
+      "_tgt": "saudacao_vazia_direcionadora",
+      "source": "maquina_agendamento",
+      "target": "saudacao_vazia_direcionadora"
+    },
+    {
+      "relation": "requires",
+      "relationship": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "maquina_agendamento",
+      "_tgt": "objecao_familiar_resumo_apoio",
+      "source": "maquina_agendamento",
+      "target": "objecao_familiar_resumo_apoio"
+    },
+    {
+      "relation": "improves",
+      "relationship": "improves",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "confirmacao_multipla_escolha",
+      "_tgt": "maquina_agendamento",
+      "source": "maquina_agendamento",
+      "target": "confirmacao_multipla_escolha"
+    },
+    {
+      "relation": "protects_continuity",
+      "relationship": "protects_continuity",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "recuperacao_historico_objetiva",
+      "_tgt": "maquina_agendamento",
+      "source": "maquina_agendamento",
+      "target": "recuperacao_historico_objetiva"
+    },
+    {
+      "relation": "uses_dataset",
+      "relationship": "uses_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "qa_diario_conversao_2026_05_08",
+      "_tgt": "whatsapp_current_ultimas_6h",
+      "source": "qa_diario_conversao_2026_05_08",
+      "target": "whatsapp_current_ultimas_6h"
+    },
+    {
+      "relation": "uses_dataset",
+      "relationship": "uses_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "qa_diario_conversao_2026_05_08",
+      "_tgt": "whatsapp_historical_180d",
+      "source": "qa_diario_conversao_2026_05_08",
+      "target": "whatsapp_historical_180d"
+    },
+    {
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "triagem_b2b_fornecedor",
+      "_tgt": "sem_pii",
+      "source": "triagem_b2b_fornecedor",
+      "target": "sem_pii"
+    },
+    {
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "logistica_presencial_recepcao",
+      "_tgt": "sem_pii",
+      "source": "logistica_presencial_recepcao",
+      "target": "sem_pii"
+    },
+    {
+      "relation": "reinforces",
+      "relationship": "reinforces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "evitar_abertura_generica",
+      "_tgt": "saudacao_vazia_direcionadora",
+      "source": "saudacao_vazia_direcionadora",
+      "target": "evitar_abertura_generica"
+    },
+    {
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "objecao_familiar_resumo_apoio",
+      "_tgt": "guardrails_clinicos",
+      "source": "objecao_familiar_resumo_apoio",
+      "target": "guardrails_clinicos"
+    },
+    {
+      "relation": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-08.md",
+      "_src": "evitar_pitch_pre_agenda",
+      "_tgt": "guardrails_clinicos",
+      "source": "evitar_pitch_pre_agenda",
+      "target": "guardrails_clinicos"
+    }
+  ],
+  "hyperedges": []
+}
