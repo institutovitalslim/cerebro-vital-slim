@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "generated_at": 1778365411,
+  "mode": "external_backup_intake_packet_no_export",
+  "destination": null,
+  "destination_validation": {
+    "ok": true,
+    "findings": [
+      {
+        "severity": "LOW",
+        "code": "destination_missing",
+        "detail": "fornecer destino rclone, ex: remote:ivs-agent-os-backups"
+      }
+    ]
+  },
+  "required_inputs": [
+    {
+      "field": "rclone_remote_name",
+      "example": "remote",
+      "required": true
+    },
+    {
+      "field": "remote_path",
+      "example": "ivs-agent-os-backups",
+      "required": true
+    },
+    {
+      "field": "credential_review",
+      "description": "confirmar que rclone já está configurado fora do cérebro e sem versionar token",
+      "required": true
+    },
+    {
+      "field": "retention_policy",
+      "example": "manter últimos 7 diários + 4 semanais",
+      "required": true
+    },
+    {
+      "field": "approval_phrase",
+      "example": "Autorizo exportar backup Agent OS via rclone para remote:ivs-agent-os-backups agora",
+      "required": true
+    }
+  ],
+  "blocked_by_design": [
+    "não chama rclone",
+    "não exporta backup",
+    "não cria credencial",
+    "não grava token no cérebro",
+    "não registra approval"
+  ]
+}

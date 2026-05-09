@@ -20,6 +20,7 @@ def main():
     checks.append(cmd('cockpit_service_status',['python3',str(BASE/'scripts/agent_os_cockpit_service.py'),'status']))
     checks.append(cmd('offsite_backup_readiness',['python3',str(BASE/'scripts/agent_os_offsite_backup.py'),'--json']))
     checks.append(cmd('offsite_destination_packet',['python3',str(BASE/'scripts/generate_offsite_destination_packet.py'),'--json']))
+    checks.append(cmd('external_backup_intake',['python3',str(BASE/'scripts/generate_external_backup_intake_packet.py'),'--json']))
     checks.append(cmd('production_activation_plan',['python3',str(BASE/'scripts/agent_os_activation_plan.py'),'--json','--skip-ci']))
     checks.append(cmd('clara_action_gate_shadow',['python3',str(BASE/'scripts/clara_action_gate_shadow.py'),'--json']))
     checks.append(cmd('clara_enforcement_phase2_preflight',['python3',str(BASE/'scripts/clara_enforcement_preflight.py'),'--json']))

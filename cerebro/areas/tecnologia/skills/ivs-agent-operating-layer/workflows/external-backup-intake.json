@@ -1,0 +1,20 @@
+{
+  "id": "external-backup-intake",
+  "name": "External Backup Intake",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar intake de destino externo/rclone para backup Agent OS sem exportar dados, sem chamar rclone e sem criar credenciais.",
+  "mode": "read-only external backup intake",
+  "entry_criteria": ["offsite local mirror verificado", "backup externo ainda sem destino aprovado"],
+  "preflight": ["validar formato remote:path", "exigir credential review", "exigir retention policy", "manter export bloqueado"],
+  "allowed_actions": ["gerar packet JSON/HTML", "validar formato do destino", "listar inputs obrigatórios"],
+  "blocked_actions": ["chamar rclone", "exportar backup", "criar credencial", "versionar token", "registrar approval"],
+  "outputs": ["external-backup-intake-packet.json", "external-backup-intake-packet.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_external_backup_intake_packet.py"],
+  "severity_rules": {
+    "HIGH": ["destino contém possível segredo", "formato inválido usado para execução"],
+    "MEDIUM": ["credential review ausente"],
+    "LOW": ["destino externo pendente"],
+    "OK": ["intake gerado sem exportação"]
+  }
+}

@@ -631,3 +631,14 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `agent-os-operations-runbook`.
+
+## External Backup Intake
+
+Pacote read-only para definir destino externo/rclone de backup. Não chama rclone, não exporta backup e não cria credenciais.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_external_backup_intake_packet.py --json
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_external_backup_intake_packet.py --destination remote:ivs-agent-os-backups --json
+```
+
+Workflow: `external-backup-intake`.
