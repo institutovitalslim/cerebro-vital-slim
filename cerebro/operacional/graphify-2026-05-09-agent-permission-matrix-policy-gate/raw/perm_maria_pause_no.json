@@ -1,0 +1,15 @@
+{
+  "ok": false,
+  "decision": "write_with_approval",
+  "requires_approval": true,
+  "reason": "approval_required",
+  "agent": "maria-gerente",
+  "action": "pause_clara",
+  "sensitivity": "pause_clara",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "code": "tiaro_explicit_approval_required"
+    }
+  ]
+}

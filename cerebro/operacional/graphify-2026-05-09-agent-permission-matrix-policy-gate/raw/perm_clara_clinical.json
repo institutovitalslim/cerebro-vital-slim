@@ -1,0 +1,18 @@
+{
+  "ok": false,
+  "decision": "forbidden",
+  "requires_approval": false,
+  "approved": false,
+  "agent": "clara-whatsapp",
+  "action": "clinical_diagnosis",
+  "sensitivity": "clinical",
+  "evidence": [],
+  "findings": [
+    {
+      "severity": "HIGH",
+      "code": "clara_patient_clinical_block"
+    }
+  ],
+  "generated_at": 1778357008,
+  "mode": "permission_evaluation_no_execution"
+}

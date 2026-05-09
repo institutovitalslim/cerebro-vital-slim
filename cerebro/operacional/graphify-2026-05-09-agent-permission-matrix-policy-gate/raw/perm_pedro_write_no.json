@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "decision": "write_with_approval",
+  "requires_approval": true,
+  "reason": "approval_required",
+  "agent": "pedro-controller-ivs",
+  "action": "omie_write",
+  "sensitivity": "financial",
+  "findings": []
+}

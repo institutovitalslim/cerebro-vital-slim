@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "decision": "write_with_approval",
+  "requires_approval": true,
+  "reason": "approval_required",
+  "agent": "clara-whatsapp",
+  "action": "followup_whatsapp",
+  "sensitivity": "lead",
+  "findings": []
+}

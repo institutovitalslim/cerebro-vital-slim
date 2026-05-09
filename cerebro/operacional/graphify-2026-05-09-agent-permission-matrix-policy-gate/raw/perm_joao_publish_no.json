@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "decision": "write_with_approval",
+  "requires_approval": true,
+  "reason": "approval_required",
+  "agent": "agente-reels-intel",
+  "action": "publish_external_content",
+  "sensitivity": "external_send",
+  "findings": []
+}

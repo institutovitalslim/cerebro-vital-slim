@@ -1,0 +1,56 @@
+{
+  "run_id": "ivr-20260509-200254-b2be2607",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778356974,
+  "updated_at": 1778357008,
+  "subject": "Implementar Agent Permission Matrix + Policy Gate",
+  "context": "Próxima etapa após Workflow Runner: transformar governança em checagem objetiva read-only/dry-run/write-with-approval/forbidden.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778356974,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778357008,
+      "message": "Matriz de permissões, policy gate e workflow permission-governance criados.",
+      "evidence": [
+        "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies/agent-permission-matrix.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778357008,
+      "message": "Policy gate validado em casos críticos: Clara lead/clínico, Maria pausa Clara, Pedro Omie write, João publicação externa.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-permission-gate.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies/agent-permission-matrix.json",
+    "/root/deliverables/workflow-registry-after-permission-gate.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778357008
+}

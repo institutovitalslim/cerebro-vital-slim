@@ -297,3 +297,21 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Estados aceitos: `started`, `in_progress`, `blocked`, `completed`, `failed`, `cancelled`.
+
+## Agent Permission Matrix + Policy Gate
+
+Matriz objetiva de permissões por agente e ação: `read_only`, `dry_run`, `write_with_approval` ou `forbidden`.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/permission_gate.py \
+  --agent clara-whatsapp \
+  --action followup_whatsapp \
+  --sensitivity lead
+```
+
+Arquivos:
+- `/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies/agent-permission-matrix.json`
+- `/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/permission_gate.py`
+- workflow: `permission-governance`
+
+Regra: o policy gate avalia, mas não executa a ação. Ações `write_with_approval` continuam exigindo autorização explícita e evidência.

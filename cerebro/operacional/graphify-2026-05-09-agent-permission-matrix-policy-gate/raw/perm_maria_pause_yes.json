@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "decision": "write_with_approval",
+  "requires_approval": true,
+  "approved": true,
+  "agent": "maria-gerente",
+  "action": "pause_clara",
+  "sensitivity": "pause_clara",
+  "evidence": [
+    "Ordem explícita do Tiaro registrada no Telegram"
+  ],
+  "findings": [],
+  "generated_at": 1778357008,
+  "mode": "permission_evaluation_no_execution"
+}

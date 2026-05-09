@@ -1,0 +1,90 @@
+{
+  "version": "2026-05-09",
+  "levels": {
+    "read_only": "Pode consultar, auditar, gerar relatório e recomendar; não altera produção nem envia mensagem externa.",
+    "dry_run": "Pode simular execução e validar payload; não envia mensagem real nem grava em sistemas externos.",
+    "write_with_approval": "Pode executar escrita/envio somente com autorização explícita do Tiaro/Maria e evidência registrada.",
+    "forbidden": "Bloqueado para o agente/escopo, mesmo com automação disponível; exige handoff ou decisão humana."
+  },
+  "global_rules": [
+    "Paciente, do_not_reply e patient_bridge_known bloqueiam WhatsApp externo salvo exceção explícita de lead autorizada.",
+    "Clara não diagnostica, não prescreve e não expõe ferramentas/bastidores para lead/paciente.",
+    "Pausa/despausa da Clara exige ordem explícita do Tiaro.",
+    "Financeiro com escrita exige aprovação e gate específico.",
+    "Mudança canônica exige RC-25/graphify."
+  ],
+  "agents": {
+    "maria-gerente": {
+      "default": "read_only",
+      "permissions": {
+        "audit_operation": "read_only",
+        "generate_cockpit": "read_only",
+        "handoff_agent": "dry_run",
+        "send_internal_telegram": "write_with_approval",
+        "send_external_whatsapp": "forbidden",
+        "pause_clara": "write_with_approval",
+        "unpause_clara": "write_with_approval",
+        "edit_agent_config": "write_with_approval",
+        "canonical_memory_update": "write_with_approval"
+      }
+    },
+    "clara-whatsapp": {
+      "default": "forbidden",
+      "permissions": {
+        "respond_lead_whatsapp": "write_with_approval",
+        "followup_whatsapp": "write_with_approval",
+        "handoff_agent": "dry_run",
+        "ask_council_internal": "dry_run",
+        "clinical_diagnosis": "forbidden",
+        "prescription": "forbidden",
+        "send_internal_telegram": "forbidden",
+        "pause_clara": "forbidden",
+        "edit_agent_config": "forbidden"
+      }
+    },
+    "agente-reels-intel": {
+      "default": "read_only",
+      "permissions": {
+        "research_public_content": "read_only",
+        "generate_marketing_asset": "dry_run",
+        "analyze_repo": "read_only",
+        "generate_html_deliverable": "dry_run",
+        "publish_external_content": "write_with_approval",
+        "clinical_claim": "forbidden",
+        "send_external_whatsapp": "forbidden",
+        "edit_agent_config": "forbidden"
+      }
+    },
+    "pedro-controller-ivs": {
+      "default": "read_only",
+      "permissions": {
+        "read_financial_data": "read_only",
+        "generate_financial_draft": "dry_run",
+        "omie_write": "write_with_approval",
+        "pay_bill": "forbidden",
+        "send_external_whatsapp": "forbidden",
+        "edit_agent_config": "forbidden"
+      }
+    },
+    "conselho-growth-vital-slim": {
+      "default": "read_only",
+      "permissions": {
+        "internal_analysis": "read_only",
+        "recommend_action": "read_only",
+        "publish_external_content": "forbidden",
+        "send_external_whatsapp": "forbidden",
+        "edit_agent_config": "forbidden"
+      }
+    },
+    "llm-council": {
+      "default": "read_only",
+      "permissions": {
+        "internal_analysis": "read_only",
+        "recommend_action": "read_only",
+        "publish_external_content": "forbidden",
+        "send_external_whatsapp": "forbidden",
+        "edit_agent_config": "forbidden"
+      }
+    }
+  }
+}

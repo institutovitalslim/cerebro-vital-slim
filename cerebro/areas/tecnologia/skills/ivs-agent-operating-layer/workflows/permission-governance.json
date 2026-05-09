@@ -1,0 +1,48 @@
+{
+  "id": "permission-governance",
+  "name": "Matriz de Permissões e Policy Gate IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Avaliar se uma ação de agente é read-only, dry-run, write-with-approval ou forbidden antes da execução operacional.",
+  "mode": "read-only permission evaluation",
+  "entry_criteria": [
+    "Antes de ação sensível: WhatsApp real, pausa Clara, escrita financeira, publicação externa ou alteração de config",
+    "Ao adicionar nova skill/capacidade a agente",
+    "Ao delegar tarefa com risco clínico, financeiro ou produção"
+  ],
+  "preflight": [
+    "Classificar agente e ação",
+    "Classificar sensibilidade",
+    "Executar permission_gate.py",
+    "Se write_with_approval, registrar autorização/evidência",
+    "Se forbidden, fazer handoff ou pedir decisão humana"
+  ],
+  "allowed_actions": [
+    "avaliar permissão",
+    "bloquear ação insegura",
+    "exigir aprovação explícita",
+    "registrar evidência no Workflow Runner"
+  ],
+  "blocked_actions": [
+    "executar a ação avaliada",
+    "usar policy gate como aprovação automática",
+    "contornar bloqueio de paciente/exclusão",
+    "pausar/despausar Clara sem Tiaro"
+  ],
+  "outputs": [
+    "decisão de permissão",
+    "nível da ação",
+    "exigência de aprovação",
+    "achados de severidade"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies/agent-permission-matrix.json",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/permission_gate.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["ação forbidden solicitada", "pausar Clara sem aprovação explícita", "risco clínico/paciente fora do escopo"],
+    "MEDIUM": ["write_with_approval sem evidência", "sensibilidade não classificada"],
+    "LOW": ["ação dry-run sem evidência complementar"],
+    "OK": ["ação read-only/dry-run segura ou escrita com aprovação registrada"]
+  }
+}
