@@ -1,0 +1,92 @@
+{
+  "ok": false,
+  "generated_at": 1778360542,
+  "mode": "read_only_drift_detector",
+  "totals": {
+    "skills": 5,
+    "findings": 6
+  },
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "skill": "ivs-agent-operating-layer",
+      "code": "hash_mismatch",
+      "file": "SKILL.md"
+    },
+    {
+      "severity": "MEDIUM",
+      "skill": "ivs-agent-operating-layer",
+      "code": "missing_in_canonical",
+      "file": "scripts/agent_os_drift_detector.py"
+    },
+    {
+      "severity": "MEDIUM",
+      "skill": "ivs-agent-operating-layer",
+      "code": "missing_in_canonical",
+      "file": "scripts/agent_os_rc25_pipeline.py"
+    },
+    {
+      "severity": "MEDIUM",
+      "skill": "ivs-agent-operating-layer",
+      "code": "missing_in_canonical",
+      "file": "scripts/generate_agent_os_artifact_index.py"
+    },
+    {
+      "severity": "MEDIUM",
+      "skill": "ivs-agent-operating-layer",
+      "code": "missing_in_canonical",
+      "file": "workflows/agent-os-drift-detection.json"
+    },
+    {
+      "severity": "MEDIUM",
+      "skill": "ivs-agent-operating-layer",
+      "code": "missing_in_canonical",
+      "file": "workflows/agent-os-rc25-pipeline.json"
+    }
+  ],
+  "details": {
+    "ivs-agent-operating-layer": {
+      "runtime_files": 70,
+      "canonical_files": 65,
+      "missing_in_canonical": [
+        "scripts/agent_os_drift_detector.py",
+        "scripts/agent_os_rc25_pipeline.py",
+        "scripts/generate_agent_os_artifact_index.py",
+        "workflows/agent-os-drift-detection.json",
+        "workflows/agent-os-rc25-pipeline.json"
+      ],
+      "missing_in_runtime": [],
+      "changed": [
+        "SKILL.md"
+      ]
+    },
+    "ivs-agent-capability-registry": {
+      "runtime_files": 2,
+      "canonical_files": 2,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    },
+    "ivs-agent-handoff-guard": {
+      "runtime_files": 3,
+      "canonical_files": 3,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    },
+    "ivs-agent-observability-events": {
+      "runtime_files": 2,
+      "canonical_files": 2,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    },
+    "pedro-controller-ivs": {
+      "runtime_files": 8,
+      "canonical_files": 8,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    }
+  }
+}

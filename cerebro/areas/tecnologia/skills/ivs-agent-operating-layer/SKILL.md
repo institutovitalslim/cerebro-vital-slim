@@ -418,3 +418,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflows: `agent-os-protected-cockpit-server`, `agent-os-local-ci`.
+
+## Drift Detection e Pipeline RC-25
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_drift_detector.py --json
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_artifact_index.py
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_rc25_pipeline.py --json
+```
+
+Workflows: `agent-os-drift-detection`, `agent-os-rc25-pipeline`.

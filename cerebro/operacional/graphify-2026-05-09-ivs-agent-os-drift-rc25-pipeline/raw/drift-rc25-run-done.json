@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-210144-bfbb584f",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778360504,
+  "updated_at": 1778360553,
+  "subject": "Drift detector e pipeline RC-25 IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar detecção de drift runtime/cérebro, índice de artefatos e pipeline RC-25 seguro sem ações externas.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778360504,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778360552,
+      "message": "Drift detector, artifact index e pipeline RC-25 implementados.",
+      "evidence": [
+        "/root/deliverables/agent-os-artifact-index.json",
+        "/root/deliverables/agent-os-rc25-pipeline-run.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778360553,
+      "message": "Drift/RC-25 pipeline concluído: drift 0, 26 workflows/0 findings, cockpit OK.",
+      "evidence": [
+        "/root/deliverables/agent-os-drift-report.json",
+        "/root/deliverables/workflow-registry-after-drift-rc25.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-artifact-index.json",
+    "/root/deliverables/agent-os-rc25-pipeline-run.json",
+    "/root/deliverables/agent-os-drift-report.json",
+    "/root/deliverables/workflow-registry-after-drift-rc25.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778360553
+}
