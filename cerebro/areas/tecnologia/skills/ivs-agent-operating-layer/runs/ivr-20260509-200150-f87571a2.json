@@ -1,0 +1,56 @@
+{
+  "run_id": "ivr-20260509-200150-f87571a2",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778356910,
+  "updated_at": 1778356911,
+  "subject": "Implementar Workflow Runner + Event Store",
+  "context": "Tiaro autorizou seguir com próxima camada Agent OS IVS.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778356910,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778356910,
+      "message": "Scripts workflow_runner.py e generate_workflow_runs_cockpit.py criados.",
+      "evidence": [
+        "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778356911,
+      "message": "Runner validado com execução real e workflow registry OK.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-runner.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py",
+    "/root/deliverables/workflow-registry-after-runner.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778356911
+}

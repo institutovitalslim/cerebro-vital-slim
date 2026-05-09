@@ -1,0 +1,50 @@
+{
+  "id": "workflow-runner",
+  "name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Registrar execução de workflows IVS com estado, evidências, achados, bloqueios e eventos redigidos.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "entry_criteria": [
+    "Qualquer workflow operacional com mais de uma etapa",
+    "Delegação entre agentes que precise de trilha",
+    "Correção de produção que precise de evidência",
+    "Pedido de Tiaro para seguir sequência ou implementação"
+  ],
+  "preflight": [
+    "Confirmar workflow registrado",
+    "Iniciar run com workflow_runner.py start",
+    "Atualizar estado a cada marco relevante",
+    "Registrar evidências e achados",
+    "Finalizar como completed, blocked ou failed"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "outputs": [
+    "run JSON",
+    "event JSONL redigido",
+    "cockpit HTML/JSON",
+    "histórico de estados"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_workflow_runs_cockpit.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["run failed", "run blocked em ação crítica", "tentativa de usar runner para autorizar ação proibida"],
+    "MEDIUM": ["run sem atualização por período prolongado", "evidência ausente em mudança sensível"],
+    "LOW": ["run informativo", "documentação complementar pendente"],
+    "OK": ["run concluído com evidências"]
+  }
+}

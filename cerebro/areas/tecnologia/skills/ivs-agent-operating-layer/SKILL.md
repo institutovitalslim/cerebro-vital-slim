@@ -267,3 +267,33 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-observability-events/scripts/
 ```
 
 Workflow canônico: `observability-events`.
+
+## Workflow Runner + Event Store
+
+Camada de execução rastreável para workflows operacionais. Não executa ações sensíveis; registra estado, evidência, bloqueios e eventos redigidos.
+
+```bash
+# iniciar execução
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py start \
+  --workflow handoff-operacional \
+  --subject "Retomada de lead" \
+  --context "Lead respondeu ao follow-up" \
+  --sensitivity lead
+
+# atualizar estado
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py update \
+  --run-id RUN_ID \
+  --state completed \
+  --message "Handoff validado"
+
+# listar runs/eventos
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py show
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py events
+
+# cockpit
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_workflow_runs_cockpit.py \
+  --out /root/deliverables/cockpit-workflow-runs-ivs.html \
+  --json-out /root/deliverables/cockpit-workflow-runs-ivs.json
+```
+
+Estados aceitos: `started`, `in_progress`, `blocked`, `completed`, `failed`, `cancelled`.

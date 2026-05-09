@@ -1,0 +1,335 @@
+{
+  "ok": true,
+  "generated_at": 1778356903,
+  "mode": "read_only_registry_validation",
+  "totals": {
+    "workflows": 11,
+    "findings": 0
+  },
+  "workflows": [
+    {
+      "id": "agent-layer-audit",
+      "name": "IVS Agent Operating Layer Audit",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only consolidated audit",
+      "scope": "Consolidar Clara/Z-API, Pré-consulta e Marketing OS/João em uma visão executiva única.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-layer-audit.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "qualquer área com HIGH",
+          "monitor crítico falhou"
+        ],
+        "MEDIUM": [
+          "qualquer área com MEDIUM sem HIGH"
+        ],
+        "LOW": [
+          "somente achados LOW"
+        ],
+        "OK": [
+          "sem achados"
+        ]
+      }
+    },
+    {
+      "id": "agent-learning-autonomy",
+      "name": "Autonomia Evolutiva dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria + agentes IVS + conselhos",
+      "mode": "autonomous learning with guarded promotion; no external content becomes rule without validation",
+      "scope": "Garantir que Maria, Clara, João, Pedro e agentes do conselho evoluam continuamente com aprendizado externo de pesquisas, perfis de Instagram/X e canais do YouTube, sempre com governança IVS.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-learning-autonomy.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 5,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "aprendizado externo virou regra sensível sem validação",
+          "conteúdo clínico/financeiro aplicado como prescrição/decisão"
+        ],
+        "MEDIUM": [
+          "fonte falhou repetidamente",
+          "aprendizado sem métrica",
+          "conteúdo com tom incompatível com IVS"
+        ],
+        "LOW": [
+          "brief gerado e aguardando teste"
+        ],
+        "OK": [
+          "aprendizado classificado com fonte, aplicação, métrica e risco"
+        ]
+      }
+    },
+    {
+      "id": "capability-governance",
+      "name": "Governança de Capacidades dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only capability registry",
+      "scope": "Inventariar agentes, skills, subagentes, workflows e riscos operacionais antes de ampliar autonomia ou corrigir bloqueios.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/capability-governance.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "skill externa crítica em Clara sem guardrail",
+          "configuração inválida que exponha paciente/lead"
+        ],
+        "MEDIUM": [
+          "skill esperada ausente",
+          "handoff financeiro/clínico sem dono"
+        ],
+        "LOW": [
+          "skill sem SKILL.md",
+          "documentação incompleta"
+        ],
+        "OK": [
+          "inventário íntegro e sem achados relevantes"
+        ]
+      }
+    },
+    {
+      "id": "cron-governance",
+      "name": "Cron Governance IVS",
+      "owner": "Maria",
+      "executor": "Maria + IVS Agent Operating Layer",
+      "mode": "state-changing only for cron lifecycle after operational review; no patient contact and no production mutation beyond cron removal/update",
+      "scope": "Governar crons ativos: inventariar, classificar por workflow, cancelar redundâncias e manter apenas rotinas com função operacional clara.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/cron-governance.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "cron ativo executa ação sensível sem guardrail",
+          "cron de paciente removido sem evidência"
+        ],
+        "MEDIUM": [
+          "cron duplicado",
+          "cron com falhas recorrentes",
+          "cron sem workflow claro"
+        ],
+        "LOW": [
+          "cron rastreado e classificado"
+        ],
+        "OK": [
+          "inventário validado sem pendências"
+        ]
+      }
+    },
+    {
+      "id": "followup-seguro",
+      "name": "Follow-up Seguro Clara/Z-API",
+      "owner": "Maria",
+      "executor": "Clara-WhatsApp",
+      "mode": "state-changing only with explicit Tiaro authorization for real sends",
+      "scope": "Envio seguro de follow-up para leads pelo Z-API, com bloqueio conservador para pacientes conhecidos e do_not_reply.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/followup-seguro.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "tentativa de envio para patient_do_not_reply",
+          "envio real sem autorização explícita"
+        ],
+        "MEDIUM": [
+          "lead ativo bloqueado como patient-like",
+          "override manual ativo"
+        ],
+        "LOW": [
+          "dry_run aprovado sem envio real"
+        ]
+      }
+    },
+    {
+      "id": "handoff-operacional",
+      "name": "Handoff Operacional Seguro entre Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "handoff packet no-delivery",
+      "scope": "Transferir contexto e próxima ação entre Maria, Clara, João, Pedro e conselhos sem vazamento de bastidores e sem perda de guardrails.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/handoff-operacional.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "Clara recebendo paciente/clínico para resposta direta",
+          "prescrição/diagnóstico no pacote"
+        ],
+        "MEDIUM": [
+          "financeiro indo para agente não financeiro",
+          "agente desconhecido"
+        ],
+        "LOW": [
+          "evidência ausente",
+          "deadline ausente"
+        ],
+        "OK": [
+          "handoff classificado e seguro"
+        ]
+      }
+    },
+    {
+      "id": "marketing-os",
+      "name": "Marketing OS João",
+      "owner": "Maria",
+      "executor": "João",
+      "mode": "read-only monitor; Maria corrige execução, João executa marketing",
+      "scope": "Monitorar continuidade operacional do João em marketing, reels, HTMLs, backlog e regras canônicas.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/marketing-os.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "regra canônica ausente",
+          "falha estrutural de entrega crítica"
+        ],
+        "MEDIUM": [
+          "HTML não enviado no outbound",
+          "marcador de sessão travada",
+          "erro de mídia"
+        ],
+        "LOW": [
+          "backlog ativo monitorado"
+        ]
+      }
+    },
+    {
+      "id": "observability-events",
+      "name": "Observabilidade de Eventos Operacionais IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only redacted events",
+      "scope": "Normalizar eventos de agentes, Z-API, workflows e entregáveis em feed seguro para diagnóstico e cockpit.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/observability-events.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "pausa global Clara",
+          "auto-pause",
+          "evento crítico de produção"
+        ],
+        "MEDIUM": [
+          "bloqueio de lead",
+          "falha de script",
+          "erro recorrente"
+        ],
+        "LOW": [
+          "documentação incompleta",
+          "evento informativo"
+        ],
+        "OK": [
+          "feed sem achados críticos"
+        ]
+      }
+    },
+    {
+      "id": "preconsulta-safety",
+      "name": "Pré-consulta Safety",
+      "owner": "Maria",
+      "executor": "Sistema de pré-consulta",
+      "mode": "read-only monitor by default",
+      "scope": "Garantir que submissões e drafts da pré-consulta não sejam perdidos e que ninguém peça novo preenchimento sem validação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/preconsulta-safety.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "submissão sem markdown",
+          "JSON inválido",
+          "app indisponível"
+        ],
+        "MEDIUM": [
+          "draft antigo",
+          "registro incompleto",
+          "fallback Telegram pendente"
+        ],
+        "LOW": [
+          "baseline sem mudança"
+        ]
+      }
+    },
+    {
+      "id": "sequencia-operacional",
+      "name": "Sequência Operacional Tiaro → Maria",
+      "owner": "Maria",
+      "executor": "Maria + workflows do IVS Agent Operating Layer",
+      "mode": "orquestração operacional com guardrails; ações sensíveis exigem autorização explícita",
+      "scope": "Quando Tiaro enviar uma sequência de atividades, Maria deve usar as skills/workflows novos do IVS Agent Operating Layer para organizar, validar, executar e reportar a sequência.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/sequencia-operacional.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 5,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "sequência contém ação sensível sem autorização explícita",
+          "risco de contato indevido com paciente/lead",
+          "mudança de produção sem guardrail"
+        ],
+        "MEDIUM": [
+          "etapa sem workflow claro",
+          "dependência de João/Clara travada",
+          "evidência insuficiente"
+        ],
+        "LOW": [
+          "sequência read-only com checks concluídos"
+        ],
+        "OK": [
+          "sequência executada com workflows mapeados e sem bloqueios"
+        ]
+      }
+    },
+    {
+      "id": "workflow-runner",
+      "name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "scope": "Registrar execução de workflows IVS com estado, evidências, achados, bloqueios e eventos redigidos.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/workflow-runner.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "run failed",
+          "run blocked em ação crítica",
+          "tentativa de usar runner para autorizar ação proibida"
+        ],
+        "MEDIUM": [
+          "run sem atualização por período prolongado",
+          "evidência ausente em mudança sensível"
+        ],
+        "LOW": [
+          "run informativo",
+          "documentação complementar pendente"
+        ],
+        "OK": [
+          "run concluído com evidências"
+        ]
+      }
+    }
+  ],
+  "findings": []
+}
