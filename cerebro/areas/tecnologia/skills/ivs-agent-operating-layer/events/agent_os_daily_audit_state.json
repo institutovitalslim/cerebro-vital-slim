@@ -5,7 +5,7 @@
       "ok": true,
       "error": null,
       "totals": {
-        "workflows": 40,
+        "workflows": 41,
         "findings": 0
       }
     },
@@ -15,7 +15,7 @@
       "totals": {
         "agents": 6,
         "core_agents": 6,
-        "workflows": 40,
+        "workflows": 41,
         "findings": 0
       }
     },
@@ -23,8 +23,8 @@
       "ok": true,
       "error": null,
       "totals": {
-        "events": 67,
-        "OK": 67
+        "events": 68,
+        "OK": 68
       }
     },
     "workflow_runs": {
@@ -38,5 +38,5 @@
       "agents": 6
     }
   },
-  "updated_at": 1778362774
+  "updated_at": 1778363491
 }

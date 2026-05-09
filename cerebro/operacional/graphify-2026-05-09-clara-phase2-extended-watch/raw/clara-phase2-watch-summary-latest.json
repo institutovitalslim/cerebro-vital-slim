@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "generated_at": 1778363490,
+  "mode": "read_only_clara_phase2_watch_summary",
+  "totals": {
+    "snapshots": 12,
+    "findings": 2,
+    "high": 0,
+    "medium": 1
+  },
+  "latest_ok": true,
+  "latest_counts": {
+    "action_gate_blocks": 4,
+    "admin_send_success": 0,
+    "admin_send_failed": 0,
+    "patient_block": 0,
+    "traceback": 0,
+    "health_errors": 0
+  },
+  "recommendation": "continue_watch",
+  "actions_taken": []
+}

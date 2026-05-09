@@ -1,0 +1,20 @@
+{
+  "id": "clara-phase2-extended-watch",
+  "name": "Clara Phase 2 Extended Watch",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Acompanhar a estabilidade da Clara após ativação Phase 2 em modo read-only, sem pausar, sem alterar env e sem enviar WhatsApp.",
+  "mode": "read-only temporal watch",
+  "entry_criteria": ["Clara Phase 2 ativada", "pedido do Tiaro para acompanhar", "watch script disponível"],
+  "preflight": ["rodar clara_phase2_watch", "consolidar summary", "reportar HIGH/MEDIUM relevante", "não executar correção automática"],
+  "allowed_actions": ["healthcheck", "scan de logs", "gerar summary", "reportar"],
+  "blocked_actions": ["pausar Clara", "alterar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE", "enviar WhatsApp", "desbloquear paciente"],
+  "outputs": ["clara-phase2-watch-latest.json", "clara-phase2-watch-summary-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_phase2_watch.py", "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_phase2_watch_summary.py"],
+  "severity_rules": {
+    "HIGH": ["status phase2 not ok", "bridge down", "patient block bypass"],
+    "MEDIUM": ["admin_send failures", "recent traceback"],
+    "LOW": ["admin_send success detectado"],
+    "OK": ["watch sem HIGH"]
+  }
+}

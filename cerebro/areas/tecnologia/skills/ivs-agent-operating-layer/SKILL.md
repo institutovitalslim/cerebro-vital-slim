@@ -561,3 +561,14 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara
 ```
 
 Workflow: `clara-enforcement-phase2-activation`.
+
+## Clara Phase 2 Extended Watch
+
+Monitor read-only pós-ativação da Clara Phase 2. Não pausa Clara, não altera env, não envia WhatsApp.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_phase2_watch.py --json --since-minutes 20
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_phase2_watch_summary.py --json
+```
+
+Workflow: `clara-phase2-extended-watch`.

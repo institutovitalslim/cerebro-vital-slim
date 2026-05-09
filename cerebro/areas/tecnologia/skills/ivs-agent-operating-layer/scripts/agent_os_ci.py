@@ -23,6 +23,7 @@ def main():
     checks.append(cmd('clara_action_gate_shadow',['python3',str(BASE/'scripts/clara_action_gate_shadow.py'),'--json']))
     checks.append(cmd('clara_enforcement_phase2_preflight',['python3',str(BASE/'scripts/clara_enforcement_preflight.py'),'--json']))
     checks.append(cmd('clara_enforcement_phase2_status',['python3',str(BASE/'scripts/clara_enforcement_phase2_status.py'),'--json']))
+    checks.append(cmd('clara_phase2_watch_summary',['python3',str(BASE/'scripts/clara_phase2_watch_summary.py'),'--json']))
     checks.append(cmd('pedro_omie_write_preflight',['python3',str(BASE/'scripts/pedro_omie_write_preflight.py'),'--json']))
     checks.append(cmd('approval_queue',['python3',str(BASE/'scripts/generate_approval_queue.py'),'--json']))
     checks.append(cmd('activation_dossier',['python3',str(BASE/'scripts/generate_activation_dossier.py'),'--json']))
