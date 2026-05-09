@@ -511,3 +511,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara
 ```
 
 Workflow: `clara-action-gate-shadow`.
+
+## Clara Enforcement Phase 2 Preflight
+
+Prepara a ativação do `CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1` com pacote de aprovação e rollback. Não altera o toggle.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_enforcement_preflight.py --json
+```
+
+Workflow: `clara-enforcement-phase2-preflight`.

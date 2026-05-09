@@ -1,0 +1,20 @@
+{
+  "id": "clara-enforcement-phase2-preflight",
+  "name": "Clara Enforcement Phase 2 Preflight",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar aprovação, passos e rollback para ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 sem executar a ativação automaticamente.",
+  "mode": "preflight/no-toggle-change",
+  "entry_criteria": ["Phase 1 shadow OK", "pedido do Tiaro para seguir", "Z-API bridge saudável"],
+  "preflight": ["validar plano de ativação", "rodar clara_action_gate_shadow", "confirmar enforcement desligado", "gerar approval packet", "gerar rollback checklist"],
+  "allowed_actions": ["validar readiness", "gerar pacote de aprovação", "documentar rollback"],
+  "blocked_actions": ["ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 sem frase explícita", "pausar Clara", "enviar WhatsApp real", "desbloquear paciente"],
+  "outputs": ["clara-enforcement-phase2-preflight-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_enforcement_preflight.py"],
+  "severity_rules": {
+    "HIGH": ["toggle ativado sem aprovação", "mensagem externa enviada no preflight"],
+    "MEDIUM": ["shadow falhou", "rollback ausente"],
+    "LOW": ["aguardando aprovação explícita"],
+    "OK": ["preflight pronto para aprovação explícita"]
+  }
+}

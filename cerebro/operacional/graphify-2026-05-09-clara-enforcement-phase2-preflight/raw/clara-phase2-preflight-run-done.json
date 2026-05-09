@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-212301-42bddc2c",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778361781,
+  "updated_at": 1778361820,
+  "subject": "Phase 2 Clara Enforcement Preflight IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Preparar pré-flight, pacote de aprovação e rollback para Clara enforcement sem ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 automaticamente.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "atendimento",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778361781,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778361820,
+      "message": "Preflight Phase 2 Clara implementado: approval packet e rollback gerados; toggle não alterado.",
+      "evidence": [
+        "/root/deliverables/clara-enforcement-phase2-preflight-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778361820,
+      "message": "Phase 2 preflight concluído: 36 workflows/0 findings; CI 13 checks OK; readiness READY 100/100; pronto para aprovação explícita, sem execução.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-clara-phase2-preflight.json",
+        "/root/deliverables/agent-os-ci-after-clara-phase2-preflight.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/clara-enforcement-phase2-preflight-latest.json",
+    "/root/deliverables/workflow-registry-after-clara-phase2-preflight.json",
+    "/root/deliverables/agent-os-ci-after-clara-phase2-preflight.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778361820
+}

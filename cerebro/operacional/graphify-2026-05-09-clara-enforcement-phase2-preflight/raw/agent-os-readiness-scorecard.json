@@ -1,0 +1,58 @@
+{
+  "ok": true,
+  "status": "READY",
+  "score": 100,
+  "max_score": 100,
+  "generated_at": 1778361814,
+  "criteria": [
+    {
+      "name": "CI local verde",
+      "ok": true,
+      "weight": 20,
+      "detail": ""
+    },
+    {
+      "name": "Workflow Registry sem findings",
+      "ok": true,
+      "weight": 15,
+      "detail": ""
+    },
+    {
+      "name": "Drift zero",
+      "ok": true,
+      "weight": 15,
+      "detail": ""
+    },
+    {
+      "name": "Secrets scan zero",
+      "ok": true,
+      "weight": 15,
+      "detail": ""
+    },
+    {
+      "name": "Backup verificado",
+      "ok": true,
+      "weight": 10,
+      "detail": ""
+    },
+    {
+      "name": "Restore dry-run OK",
+      "ok": true,
+      "weight": 10,
+      "detail": ""
+    },
+    {
+      "name": "Alertas críticos zerados",
+      "ok": true,
+      "weight": 10,
+      "detail": ""
+    },
+    {
+      "name": "Cockpit protegido disponível",
+      "ok": true,
+      "weight": 5,
+      "detail": ""
+    }
+  ],
+  "mode": "read_only_readiness_scorecard"
+}
