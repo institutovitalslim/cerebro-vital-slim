@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "url": "https://backup.institutovitalslim.com.br/agent-os/agent-os-backup-20260509-220510.tar.gz.enc",
+  "checksum_url": "https://backup.institutovitalslim.com.br/agent-os/agent-os-backup-20260509-220510.tar.gz.enc.sha256",
+  "unauth_code": "401",
+  "auth_code": "200",
+  "checksum_auth_code": "200",
+  "root_code": "403",
+  "checksum_ok": true,
+  "raw_backup_public": false,
+  "encrypted_publication": true,
+  "auth_required": true
+}

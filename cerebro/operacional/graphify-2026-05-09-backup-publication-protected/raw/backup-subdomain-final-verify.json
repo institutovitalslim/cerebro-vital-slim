@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "generated_at": 1778369060,
+  "fqdn": "backup.institutovitalslim.com.br",
+  "dns_A": [
+    "187.77.58.193"
+  ],
+  "health_code": "200",
+  "root_code": "403",
+  "tls": [
+    "subject=CN=backup.institutovitalslim.com.br",
+    "notBefore=May  9 22:25:37 2026 GMT",
+    "notAfter=Aug  7 22:25:36 2026 GMT"
+  ],
+  "guardrail": "root returns 403; only /__backup_alive public; no backup files exposed"
+}

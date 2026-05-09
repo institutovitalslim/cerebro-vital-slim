@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-05-09T23:26:13Z",
+  "fqdn": "backup.institutovitalslim.com.br",
+  "url": "https://backup.institutovitalslim.com.br/agent-os/agent-os-backup-20260509-220510.tar.gz.enc",
+  "checksum_url": "https://backup.institutovitalslim.com.br/agent-os/agent-os-backup-20260509-220510.tar.gz.enc.sha256",
+  "basic_user": "tiaro",
+  "basic_password": "***REDACTED***",
+  "encryption": "openssl enc -aes-256-cbc -salt -pbkdf2 -iter 310000",
+  "encryption_passphrase": "***REDACTED***",
+  "source_backup": "/root/agent-os-offsite/ivs-agent-os/agent-os-backup-20260509-220510.tar.gz",
+  "encrypted_path": "/srv/ivs-agent-os-backups/agent-os/agent-os-backup-20260509-220510.tar.gz.enc"
+}
