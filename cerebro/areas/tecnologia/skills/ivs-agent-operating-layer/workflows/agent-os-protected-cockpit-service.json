@@ -1,0 +1,20 @@
+{
+  "id": "agent-os-protected-cockpit-service",
+  "name": "Serviço Cockpit Protegido IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Gerenciar o servidor local protegido do cockpit Agent OS com start/stop/status/restart em localhost.",
+  "mode": "localhost protected service manager",
+  "entry_criteria": ["precisar acessar cockpit por URL local", "após reboot", "validação operacional"],
+  "preflight": ["confirmar bind 127.0.0.1", "validar token obrigatório", "validar allowlist", "registrar PID"],
+  "allowed_actions": ["start localhost", "stop", "restart", "status", "validar HTTP 403 sem token e 200 com token"],
+  "blocked_actions": ["bind público", "imprimir token", "servir diretório livre", "expor arquivos fora de /root/deliverables"],
+  "outputs": ["cockpit-service-status.json", "cockpit-service-http-validation.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cockpit_service.py"],
+  "severity_rules": {
+    "HIGH": ["servidor público", "acesso sem token retorna 200"],
+    "MEDIUM": ["serviço parado"],
+    "LOW": ["log ausente"],
+    "OK": ["localhost protegido ativo"]
+  }
+}

@@ -469,3 +469,15 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflow: `agent-os-cron-governance-final`.
+
+## Serviço do Cockpit Protegido
+
+Gerenciador local do servidor protegido do cockpit. Não imprime token e mantém bind em `127.0.0.1`.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cockpit_service.py status
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cockpit_service.py start
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cockpit_service.py restart
+```
+
+Workflow: `agent-os-protected-cockpit-service`.

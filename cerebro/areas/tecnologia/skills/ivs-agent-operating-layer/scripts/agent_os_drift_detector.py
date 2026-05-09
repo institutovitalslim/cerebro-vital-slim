@@ -7,7 +7,7 @@ from pathlib import Path
 RUNTIME=Path('/root/.openclaw/workspace/skills')
 CANON=Path('/root/cerebro-vital-slim/cerebro/areas/tecnologia/skills')
 SKILLS=['ivs-agent-operating-layer','ivs-agent-capability-registry','ivs-agent-handoff-guard','ivs-agent-observability-events','pedro-controller-ivs']
-IGNORE={'server/cockpit-token.txt','backups','.DS_Store'}
+IGNORE={'server/cockpit-token.txt','server/cockpit-service-state.json','server/cockpit-server.log','backups','.DS_Store'}
 IGNORE_PREFIXES=('runs/','events/','backups/','alerts/','approvals/approval-ledger.jsonl')
 def files(root):
     out={}

@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-211153-2752fc22",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778361113,
+  "updated_at": 1778361216,
+  "subject": "Service manager do cockpit protegido IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar gerenciador local do servidor protegido do cockpit, com status/start/stop/restart e validação localhost.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778361113,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778361216,
+      "message": "Service manager do cockpit protegido implementado, servidor iniciado em localhost e validado com 403 sem token / 200 com token.",
+      "evidence": [
+        "/root/deliverables/cockpit-service-status.json",
+        "/root/deliverables/cockpit-service-http-validation.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778361216,
+      "message": "Cockpit service concluído: 32 workflows/0 findings; CI 9 checks OK; readiness READY 100/100.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-cockpit-service.json",
+        "/root/deliverables/agent-os-ci-after-cockpit-service.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/cockpit-service-status.json",
+    "/root/deliverables/cockpit-service-http-validation.json",
+    "/root/deliverables/workflow-registry-after-cockpit-service.json",
+    "/root/deliverables/agent-os-ci-after-cockpit-service.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778361216
+}

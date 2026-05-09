@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "pid": 490828,
+  "url": "http://127.0.0.1:8791/",
+  "state_file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/server/cockpit-service-state.json",
+  "log": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/server/cockpit-server.log",
+  "mode": "localhost_protected_service"
+}
