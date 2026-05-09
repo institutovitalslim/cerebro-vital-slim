@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "generated_at": 1778362881,
+  "mode": "read_only_clara_phase2_watch",
+  "since_minutes": 5,
+  "status": {
+    "ok": true,
+    "generated_at": 1778362881,
+    "mode": "clara_phase2_enforcement_status_read_only",
+    "checks": [
+      {
+        "name": "healthz",
+        "ok": true,
+        "detail": {
+          "ok": true,
+          "service": "zapi-clara-bridge"
+        }
+      },
+      {
+        "name": "process_toggle_loaded",
+        "ok": true,
+        "detail": "CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1"
+      },
+      {
+        "name": "strict_approval_id_patch_present",
+        "ok": true
+      },
+      {
+        "name": "action_gate_without_approval_blocks",
+        "ok": true,
+        "detail": "BLOCK_APPROVAL_REQUIRED"
+      }
+    ],
+    "external_messages_sent": 0
+  },
+  "log_counts": {
+    "action_gate_blocks": 4,
+    "admin_send_success": 0,
+    "admin_send_failed": 0,
+    "patient_block": 0,
+    "traceback": 0,
+    "health_errors": 0
+  },
+  "findings": [],
+  "actions_taken": [],
+  "guardrails": [
+    "no pause",
+    "no env change",
+    "no WhatsApp send",
+    "report only"
+  ]
+}
