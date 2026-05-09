@@ -682,3 +682,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `rclone-provider-decision-matrix`.
+
+## Domain Backup Architecture
+
+Pacote read-only para uso seguro do domínio/subdomínio IVS em backup/cockpit. Não altera DNS, não publica backup e não abre cockpit publicamente.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_domain_backup_architecture_packet.py --json
+```
+
+Workflow: `domain-backup-architecture`.

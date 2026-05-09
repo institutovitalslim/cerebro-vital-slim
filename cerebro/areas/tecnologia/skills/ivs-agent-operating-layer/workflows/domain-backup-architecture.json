@@ -1,0 +1,20 @@
+{
+  "id": "domain-backup-architecture",
+  "name": "Domain Backup Architecture",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Definir arquitetura segura para uso do domínio institutovitalslim.com.br em backup/cockpit, sem alterar DNS e sem publicar dados.",
+  "mode": "read-only architecture packet no DNS change",
+  "entry_criteria": ["Tiaro autorizou considerar domínio/subdomínio", "backup externo ainda sem destino real"],
+  "preflight": ["avaliar subdomínios", "bloquear publicação em www", "listar inputs DNS/hosting", "manter backup privado"],
+  "allowed_actions": ["gerar pacote arquitetural", "resolver host read-only", "propor registros DNS"],
+  "blocked_actions": ["alterar DNS", "publicar backup", "abrir cockpit publicamente", "gravar credenciais"],
+  "outputs": ["domain-backup-architecture-packet.json", "domain-backup-architecture-packet.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_domain_backup_architecture_packet.py"],
+  "severity_rules": {
+    "HIGH": ["backup exposto publicamente", "cockpit aberto sem auth", "DNS alterado sem aprovação"],
+    "MEDIUM": ["subdomínio sem TLS/auth"],
+    "LOW": ["inputs DNS pendentes"],
+    "OK": ["arquitetura gerada sem alteração"]
+  }
+}

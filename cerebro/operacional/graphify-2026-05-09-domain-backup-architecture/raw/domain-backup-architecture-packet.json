@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "generated_at": 1778367872,
+  "mode": "domain_backup_architecture_packet_no_dns_change",
+  "domain": "institutovitalslim.com.br",
+  "www_lookup": "192.185.217.23  www.institutovitalslim.com.br",
+  "recommendation": "usar subdomínio separado backup.institutovitalslim.com.br apontando para storage/proxy privado; não usar www para hospedar arquivos de backup",
+  "options": [
+    {
+      "id": "recommended_private_backup",
+      "subdomain": "backup.institutovitalslim.com.br",
+      "purpose": "endpoint privado para backup externo ou gateway reverso autenticado",
+      "public_access": "não",
+      "notes": "não hospedar tarball publicamente; usar auth forte, allowlist/VPN ou storage privado atrás do subdomínio"
+    },
+    {
+      "id": "operations_cockpit",
+      "subdomain": "ops.institutovitalslim.com.br",
+      "purpose": "cockpit protegido do Agent OS",
+      "public_access": "não, apenas via token + allowlist/VPN",
+      "notes": "cockpit atual deve continuar local até proxy seguro estar pronto"
+    },
+    {
+      "id": "status_readonly",
+      "subdomain": "status.institutovitalslim.com.br",
+      "purpose": "status sanitizado/read-only, sem dados sensíveis",
+      "public_access": "possível",
+      "notes": "somente métricas agregadas; sem backups, tokens, pacientes ou logs"
+    },
+    {
+      "id": "not_recommended_public_backup",
+      "subdomain": "www.institutovitalslim.com.br/backups",
+      "purpose": "servir backups pelo site principal",
+      "public_access": "sim",
+      "notes": "não recomendado: risco de exposição de dados e indexação"
+    }
+  ],
+  "required_inputs": [
+    "provedor DNS atual do domínio",
+    "acesso para criar CNAME/A record",
+    "destino privado real do backup/storage",
+    "política de autenticação: VPN/allowlist/token",
+    "confirmação de que nada será público/indexável"
+  ],
+  "blocked_by_design": [
+    "não altera DNS",
+    "não cria subdomínio",
+    "não publica backup",
+    "não abre cockpit publicamente",
+    "não grava credenciais"
+  ]
+}
