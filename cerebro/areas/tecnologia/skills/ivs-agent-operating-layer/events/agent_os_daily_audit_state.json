@@ -1,0 +1,42 @@
+{
+  "status": "OK",
+  "sources": {
+    "workflow_registry": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "workflows": 14,
+        "findings": 0
+      }
+    },
+    "capability_registry": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "agents": 6,
+        "core_agents": 6,
+        "workflows": 14,
+        "findings": 0
+      }
+    },
+    "observability_events": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "events": 41,
+        "OK": 41
+      }
+    },
+    "workflow_runs": {
+      "error": null,
+      "totals": {
+        "runs": 4
+      }
+    },
+    "permission_matrix": {
+      "version": "2026-05-09",
+      "agents": 6
+    }
+  },
+  "updated_at": 1778357299
+}

@@ -44,3 +44,11 @@ Cancelados na limpeza anterior: **10**
 - A rotina consolidada `IVS Agent Operating Layer Audit` fica como auditoria diária principal.
 - A rotina `IVS Agent Learning Autonomy` gera briefs diários de evolução para todos os agentes.
 - Crons de produção/paciente externos à skill são apenas rastreados, não alterados sem revisão específica.
+
+## IVS Agent OS Daily Audit — cockpit único
+- ID: `c677df82-01ce-40fd-b97d-5569586514b6`
+- Workflow: `agent-os-daily-audit`
+- Schedule: `55 8 * * *` — `America/Bahia`
+- Agente: `maria-gerente`
+- Modo: read-only
+- Entrega: `none`; anunciar Tiaro somente em HIGH/MEDIUM ou mudança operacional relevante.

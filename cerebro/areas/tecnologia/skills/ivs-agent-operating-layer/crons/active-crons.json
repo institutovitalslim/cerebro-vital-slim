@@ -473,5 +473,17 @@
       "não expor PII em entregas",
       "usar IVS Agent Operating Layer para auditorias consolidadas e aprendizado governado"
     ]
-  }
+  },
+  "jobs": [
+    {
+      "id": "c677df82-01ce-40fd-b97d-5569586514b6",
+      "name": "IVS Agent OS Daily Audit — cockpit único",
+      "schedule": "55 8 * * * America/Bahia",
+      "agentId": "maria-gerente",
+      "workflow": "agent-os-daily-audit",
+      "mode": "read-only",
+      "updated_at": 1778357322
+    }
+  ],
+  "updated_at": 1778357322
 }

@@ -1,0 +1,47 @@
+{
+  "id": "agent-os-daily-audit",
+  "name": "Auditoria Diária IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Executar auditoria consolidada diária do Agent OS IVS, gerar cockpit único e detectar mudanças de estado.",
+  "mode": "read-only daily audit",
+  "entry_criteria": [
+    "Rotina diária programada",
+    "Após mudanças em skills/workflows/permissões",
+    "Pedido do Tiaro por status do Agent OS"
+  ],
+  "preflight": [
+    "Executar generate_agent_os_cockpit.py",
+    "Comparar status/fontes com baseline anterior",
+    "Gerar markdown de auditoria",
+    "Reportar somente se HIGH/MEDIUM ou mudança relevante"
+  ],
+  "allowed_actions": [
+    "gerar cockpit único",
+    "gerar relatório markdown",
+    "registrar baseline",
+    "sugerir próxima etapa"
+  ],
+  "blocked_actions": [
+    "enviar WhatsApp/Telegram externo",
+    "alterar produção",
+    "pausar/despausar Clara",
+    "executar ações sensíveis detectadas"
+  ],
+  "outputs": [
+    "cockpit HTML/JSON",
+    "relatório daily audit markdown/json",
+    "baseline atualizado",
+    "mudanças detectadas"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_daily_audit.py",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["cockpit status HIGH", "erro crítico de coleta"],
+    "MEDIUM": ["cockpit status MEDIUM", "mudança relevante em fonte crítica"],
+    "LOW": ["status LOW por documentação/achado informativo"],
+    "OK": ["cockpit OK e sem mudança relevante"]
+  }
+}

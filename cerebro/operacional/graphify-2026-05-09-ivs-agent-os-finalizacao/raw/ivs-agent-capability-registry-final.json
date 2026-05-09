@@ -1,0 +1,766 @@
+{
+  "ok": true,
+  "generated_at": 1778357277,
+  "mode": "read_only_capability_registry",
+  "totals": {
+    "agents": 6,
+    "core_agents": 6,
+    "workflows": 13,
+    "findings": 0
+  },
+  "agents": [
+    {
+      "id": "maria-gerente",
+      "name": "Maria",
+      "is_core": true,
+      "skills_count": 6,
+      "local_skills_count": 6,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [
+        "maria-gerente",
+        "conselho-growth-vital-slim",
+        "llm-council",
+        "clara-whatsapp",
+        "agente-reels-intel"
+      ],
+      "risk_hints": [
+        "production_coordination",
+        "pausing_guardrails",
+        "rc25_required"
+      ]
+    },
+    {
+      "id": "agente-reels-intel",
+      "name": "João",
+      "is_core": true,
+      "skills_count": 45,
+      "local_skills_count": 35,
+      "builtin_or_legacy_count": 10,
+      "skills": [
+        {
+          "name": "graphify",
+          "path": "/root/.openclaw/skills/graphify",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "any input (code, docs, papers, images) → knowledge graph → clustered communities → HTML + JSON + audit report"
+        },
+        {
+          "name": "social-content-vitalslim",
+          "path": "/root/.openclaw/skills/social-content-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser criar, planejar ou otimizar conteudo para Instagram, WhatsApp Status, Stories, Reels ou carrosseis. Use tambem para 'post do Instagram', 'conteudo para stories', 'carrossel', 'reels', 'calendario de conteudo', 'o que postar', 'ideias de posts', 'engajamento no Instagram'.\""
+        },
+        {
+          "name": "content-strategy-vitalslim",
+          "path": "/root/.openclaw/skills/content-strategy-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser planejar estrategia de conteudo, decidir o que criar, montar calendario editorial, definir pilares de conteudo, ou escolher temas. Use tambem para 'plano de conteudo', 'calendario', 'o que postar este mes', 'temas para Instagram', 'estrategia de marketing de conteudo'.\""
+        },
+        {
+          "name": "copywriting-vitalslim",
+          "path": "/root/.openclaw/skills/copywriting-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario pedir para escrever, revisar ou melhorar copy para qualquer canal — posts Instagram, carrosseis, landing pages, anuncios, emails, scripts de atendimento. Tambem use quando o usuario disser 'escreve copy', 'melhora este texto', 'headline para', 'CTA', 'proposta de valor', 'texto da Clara', ou qualquer conteudo persuasivo para o Instituto Vital Slim.\""
+        },
+        {
+          "name": "customer-research-vitalslim",
+          "path": "/root/.openclaw/skills/customer-research-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser entender melhor os pacientes, analisar depoimentos, pesquisar objecoes, mapear a jornada do paciente, ou extrair insights de reviews Google Maps. Use tambem para 'voice of customer', 'por que pacientes desistem', 'o que pacientes mais valorizam', 'objecoes de venda', 'linguagem dos pacientes'.\""
+        },
+        {
+          "name": "medical-content",
+          "path": "/root/.openclaw/skills/medical-content",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser criar, revisar ou verificar conteudo medico para compliance, adicionar disclaimers, referenciar estudos, ou garantir que copy respeite o Codigo de Etica Medica. Use tambem para 'disclaimer medico', 'referencia cientifica', 'compliance', 'etica medica', 'posso dizer isso', 'isso e permitido', 'CFM', 'conselho de medicina'.\""
+        },
+        {
+          "name": "tweet-carrossel",
+          "path": "/root/.openclaw/workspace/skills/tweet-carrossel",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "video-frames",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "summarize",
+          "path": "/root/.openclaw/skills/summarize",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Summarize URLs or files with a local CLI that uses OpenAI for abstractive summaries (fallback extractive) if OPENAI_API_KEY is set."
+        },
+        {
+          "name": "gog",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "notion-api",
+          "path": "/root/.openclaw/workspace/skills/notion-api",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "notion",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "stitch-mcp-operacao",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-gamecoach",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-qa",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-use",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-sequential-thinking",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "web-search",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "deep-research",
+          "path": "/root/.openclaw/workspace/skills/deep-research",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "repo-reverse-ivs",
+          "path": "/root/.openclaw/workspace/skills/repo-reverse-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Analisa repositórios públicos sem instalar/clonar tudo e transforma em spec, prompt e plano para criar uma versão própria segura para o IVS."
+        },
+        {
+          "name": "reverse-engineering",
+          "path": "/root/.openclaw/workspace/skills/reverse-engineering",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Reverse engineer binaries, APIs, protocols, and workflows with evidence ladders, interface maps, and falsifiable hypotheses."
+        },
+        {
+          "name": "software-architect",
+          "path": "/root/.openclaw/workspace/skills/software-architect",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Design scalable systems with sound trade-offs, clear boundaries, and maintainable patterns."
+        },
+        {
+          "name": "software-engineer",
+          "path": "/root/.openclaw/workspace/skills/software-engineer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Write production-ready code with clean architecture, proper error handling, and pragmatic trade-offs between shipping fast and building right."
+        },
+        {
+          "name": "quality-driven-dev",
+          "path": "/root/.openclaw/workspace/skills/quality-driven-dev",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quality-driven development with automatic TDD/DDD methodology selection and TRUST 5 quality framework. Use when building features, refactoring code, fixing bugs, or any coding task that needs structured quality assurance.\""
+        },
+        {
+          "name": "quality-gates",
+          "path": "/root/.openclaw/workspace/skills/quality-gates",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Quality checkpoints at every development stage — pre-commit through post-deploy — with configuration examples, threshold tables, bypass protocols, and CI/CD integration. Use when setting up quality automation, configuring CI pipelines, establishing coverage thresholds, or defining deployment requirements."
+        },
+        {
+          "name": "validacao-qa",
+          "path": "/root/.openclaw/workspace/skills/validacao-qa",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "openclaw-marketing-os",
+          "path": "/root/.openclaw/workspace/skills/openclaw-marketing-os",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Run, audit, or improve an OpenClaw/ClawLite-style multi-agent marketing operating system. Use when the task is to operate or package a full marketing engine across Hunter research intel, marketing-assets synchronization, JK content packaging, Elon social publishing, Tony blog publishing, Jenny lifecycle/activation, Peter blog QA, Karen truth-gate QA, Mission Control state management, and same-day delivery/receipt discipline. Also use when open-sourcing or documenting the system as a reusable growth operating system for AI-agent teams."
+        },
+        {
+          "name": "marketing-demand-acquisition",
+          "path": "/root/.openclaw/workspace/skills/marketing-demand-acquisition",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Creates demand generation campaigns, optimizes paid ad spend across LinkedIn, Google, and Meta, develops SEO strategies, and structures partnership programs for Series A+ startups scaling internationally. Use when planning marketing strategy, growth marketing, advertising campaigns, PPC optimization, lead generation, pipeline generation, or startup marketing budgets. Covers multi-channel acquisition (Google Ads, LinkedIn Ads, Meta Ads), CAC analysis, MQL/SQL workflows, attribution modeling, technical SEO, and co-marketing partnerships for hybrid PLG/Sales-Led motions in EU/US/Canada markets."
+        },
+        {
+          "name": "marketing-analytics",
+          "path": "/root/.openclaw/workspace/skills/marketing-analytics",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Analyze marketing campaign data to generate performance reports and optimization recommendations\""
+        },
+        {
+          "name": "product-manager-toolkit",
+          "path": "/root/.openclaw/workspace/skills/product-manager-toolkit",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market strategies. Use for feature prioritization, user research synthesis, requirement documentation, and product strategy development."
+        },
+        {
+          "name": "saas-decomposer",
+          "path": "/root/.openclaw/workspace/skills/saas-decomposer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Web SaaS service decomposition and AI internalization development plan generation. Analyze existing SaaS to identify functions replaceable by AI agents and establish skill-based internalization roadmap. Triggered by 'SaaS analysis', 'service decomposition', 'internalization', 'decompose', 'SaaS replacement', 'build this service with AI', etc.\""
+        },
+        {
+          "name": "design-premium-ivs",
+          "path": "/root/.openclaw/workspace/skills/design-premium-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Use para criar, revisar ou polir interfaces HTML, landing pages, cockpit, pré-consulta, dashboards e apresentações executivas do Instituto Vital Slim com padrão premium, evitando frontend genérico de IA. Orquestra design-impeccable, Taste Skill seletivo e motion sutil."
+        },
+        {
+          "name": "taste-skill",
+          "path": "/root/.openclaw/workspace/skills/taste-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Senior UI/UX Engineer. Architect digital interfaces overriding default LLM biases. Enforces metric-based rules, strict component architecture, CSS hardware acceleration, and balanced design engineering."
+        },
+        {
+          "name": "gpt-tasteskill",
+          "path": "/root/.openclaw/workspace/skills/gpt-tasteskill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing."
+        },
+        {
+          "name": "redesign-skill",
+          "path": "/root/.openclaw/workspace/skills/redesign-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS."
+        },
+        {
+          "name": "output-skill",
+          "path": "/root/.openclaw/workspace/skills/output-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output."
+        },
+        {
+          "name": "image-to-code-skill",
+          "path": "/root/.openclaw/workspace/skills/image-to-code-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In Codex, it must prefer large, readable, section-specific images instead of tiny compressed boards, generate fresh standalone images for sections or detail views instead of cropping old ones, avoid lazy under-generation, avoid cards-inside-cards-inside-cards UI, and keep the hero clean, spacious, readable, and visible on a small laptop."
+        },
+        {
+          "name": "design-impeccable",
+          "path": "/root/.openclaw/workspace/skills/design-impeccable",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "|"
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [
+        "conselho-growth-vital-slim",
+        "llm-council"
+      ],
+      "risk_hints": [
+        "public_marketing",
+        "brand_claims",
+        "clinical_promise_risk"
+      ]
+    },
+    {
+      "id": "clara-whatsapp",
+      "name": "Clara",
+      "is_core": true,
+      "skills_count": 6,
+      "local_skills_count": 6,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "conselho-growth-vital-slim",
+          "path": "/root/.openclaw/workspace/skills/conselho-growth-vital-slim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Conselho estratégico de growth do Instituto Vital Slim. Acione quando Tiaro pedir conselho, board, visão dos especialistas, guerra, validação, decisão de crescimento, oferta, vendas, marketing, posicionamento, funil, operação, experiência do paciente ou expansão. Todos os especialistas dão uma visão; no final, o bilionário/especialista responsável pela área principal decide o direcionamento, e a equipe IVS fica como dona operacional da execução.\""
+        },
+        {
+          "name": "llm-council",
+          "path": "/root/.openclaw/workspace/skills/llm-council",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Run any question, idea, or decision through a council of 5 AI advisors who independently analyze it, peer-review each other anonymously, and synthesize a final verdict. Based on Karpathy's LLM Council methodology. MANDATORY TRIGGERS: 'council this', 'run the council', 'war room this', 'pressure-test this', 'stress-test this', 'debate this'. STRONG TRIGGERS (use when combined with a real decision or tradeoff): 'should I X or Y', 'which option', 'what would you do', 'is this the right move', 'validate this', 'get multiple perspectives', 'I can't decide', 'I'm torn between'. Do NOT trigger on simple yes/no questions, factual lookups, or casual 'should I' without a meaningful tradeoff (e.g. 'should I use markdown' is not a council question). DO trigger when the user presents a genuine decision with stakes, multiple options, and context that suggests they want it pressure-tested from multiple angles.\""
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        }
+      ],
+      "subagents": [
+        "conselho-growth-vital-slim",
+        "llm-council"
+      ],
+      "risk_hints": [
+        "whatsapp_real",
+        "lead_patient_boundary",
+        "patient_safety"
+      ]
+    },
+    {
+      "id": "pedro-controller-ivs",
+      "name": "Pedro",
+      "is_core": true,
+      "skills_count": 6,
+      "local_skills_count": 6,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [],
+      "risk_hints": [
+        "financial_write_gate",
+        "omie",
+        "approval_required"
+      ]
+    },
+    {
+      "id": "conselho-growth-vital-slim",
+      "name": "Conselho Growth Vital Slim",
+      "is_core": true,
+      "skills_count": 8,
+      "local_skills_count": 8,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "conselho-growth-vital-slim",
+          "path": "/root/.openclaw/workspace/skills/conselho-growth-vital-slim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Conselho estratégico de growth do Instituto Vital Slim. Acione quando Tiaro pedir conselho, board, visão dos especialistas, guerra, validação, decisão de crescimento, oferta, vendas, marketing, posicionamento, funil, operação, experiência do paciente ou expansão. Todos os especialistas dão uma visão; no final, o bilionário/especialista responsável pela área principal decide o direcionamento, e a equipe IVS fica como dona operacional da execução.\""
+        },
+        {
+          "name": "graphify",
+          "path": "/root/.openclaw/skills/graphify",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "any input (code, docs, papers, images) → knowledge graph → clustered communities → HTML + JSON + audit report"
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [],
+      "risk_hints": [
+        "internal_only",
+        "recommendation_not_execution"
+      ]
+    },
+    {
+      "id": "llm-council",
+      "name": "LLM Council",
+      "is_core": true,
+      "skills_count": 8,
+      "local_skills_count": 8,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "llm-council",
+          "path": "/root/.openclaw/workspace/skills/llm-council",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Run any question, idea, or decision through a council of 5 AI advisors who independently analyze it, peer-review each other anonymously, and synthesize a final verdict. Based on Karpathy's LLM Council methodology. MANDATORY TRIGGERS: 'council this', 'run the council', 'war room this', 'pressure-test this', 'stress-test this', 'debate this'. STRONG TRIGGERS (use when combined with a real decision or tradeoff): 'should I X or Y', 'which option', 'what would you do', 'is this the right move', 'validate this', 'get multiple perspectives', 'I can't decide', 'I'm torn between'. Do NOT trigger on simple yes/no questions, factual lookups, or casual 'should I' without a meaningful tradeoff (e.g. 'should I use markdown' is not a council question). DO trigger when the user presents a genuine decision with stakes, multiple options, and context that suggests they want it pressure-tested from multiple angles.\""
+        },
+        {
+          "name": "graphify",
+          "path": "/root/.openclaw/skills/graphify",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "any input (code, docs, papers, images) → knowledge graph → clustered communities → HTML + JSON + audit report"
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [],
+      "risk_hints": [
+        "internal_only",
+        "recommendation_not_execution"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "agent-layer-audit",
+      "name": "IVS Agent Operating Layer Audit",
+      "owner": "Maria",
+      "executor": "Maria",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-layer-audit.json"
+    },
+    {
+      "id": "agent-learning-autonomy",
+      "name": "Autonomia Evolutiva dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria + agentes IVS + conselhos",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-learning-autonomy.json"
+    },
+    {
+      "id": "agent-os-cockpit",
+      "name": "Cockpit Único IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-cockpit.json"
+    },
+    {
+      "id": "capability-governance",
+      "name": "Governança de Capacidades dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/capability-governance.json"
+    },
+    {
+      "id": "cron-governance",
+      "name": "Cron Governance IVS",
+      "owner": "Maria",
+      "executor": "Maria + IVS Agent Operating Layer",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/cron-governance.json"
+    },
+    {
+      "id": "followup-seguro",
+      "name": "Follow-up Seguro Clara/Z-API",
+      "owner": "Maria",
+      "executor": "Clara-WhatsApp",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/followup-seguro.json"
+    },
+    {
+      "id": "handoff-operacional",
+      "name": "Handoff Operacional Seguro entre Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/handoff-operacional.json"
+    },
+    {
+      "id": "marketing-os",
+      "name": "Marketing OS João",
+      "owner": "Maria",
+      "executor": "João",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/marketing-os.json"
+    },
+    {
+      "id": "observability-events",
+      "name": "Observabilidade de Eventos Operacionais IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/observability-events.json"
+    },
+    {
+      "id": "permission-governance",
+      "name": "Matriz de Permissões e Policy Gate IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/permission-governance.json"
+    },
+    {
+      "id": "preconsulta-safety",
+      "name": "Pré-consulta Safety",
+      "owner": "Maria",
+      "executor": "Sistema de pré-consulta",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/preconsulta-safety.json"
+    },
+    {
+      "id": "sequencia-operacional",
+      "name": "Sequência Operacional Tiaro → Maria",
+      "owner": "Maria",
+      "executor": "Maria + workflows do IVS Agent Operating Layer",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/sequencia-operacional.json"
+    },
+    {
+      "id": "workflow-runner",
+      "name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/workflow-runner.json"
+    }
+  ],
+  "findings": []
+}

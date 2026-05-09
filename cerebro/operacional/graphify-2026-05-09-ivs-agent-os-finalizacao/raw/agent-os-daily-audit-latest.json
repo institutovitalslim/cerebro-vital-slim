@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "status": "OK",
+  "generated_at": 1778357299,
+  "mode": "daily_read_only_agent_os_audit",
+  "changes": [],
+  "sources": {
+    "workflow_registry": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "workflows": 14,
+        "findings": 0
+      }
+    },
+    "capability_registry": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "agents": 6,
+        "core_agents": 6,
+        "workflows": 14,
+        "findings": 0
+      }
+    },
+    "observability_events": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "events": 41,
+        "OK": 41
+      }
+    },
+    "workflow_runs": {
+      "error": null,
+      "totals": {
+        "runs": 4
+      }
+    },
+    "permission_matrix": {
+      "version": "2026-05-09",
+      "agents": 6
+    }
+  },
+  "cockpit_html": "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+  "cockpit_json": "/root/deliverables/cockpit-unico-ivs-agent-os.json",
+  "markdown": "/root/deliverables/agent-os-daily-audit-latest.md"
+}

@@ -1,0 +1,67 @@
+{
+  "run_id": "ivr-20260509-200733-44933237",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778357253,
+  "updated_at": 1778357322,
+  "subject": "Implementação final IVS Agent OS",
+  "context": "Tiaro autorizou seguir até implementação final sem parar, salvo necessidade real.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778357253,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778357306,
+      "message": "Capability Registry normalizado: built-ins/aliases legados não contam como falha; findings zerados.",
+      "evidence": [
+        "/root/deliverables/ivs-agent-capability-registry-final.json"
+      ]
+    },
+    {
+      "state": "in_progress",
+      "at": 1778357306,
+      "message": "Auditoria diária Agent OS e cockpit final implementados; Workflow Registry 14/0; Cockpit OK.",
+      "evidence": [
+        "/root/deliverables/agent-os-daily-audit-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778357322,
+      "message": "Implementação final concluída: capability registry limpo, auditoria diária, cockpit OK, cron configurado.",
+      "evidence": [
+        "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+        "/root/deliverables/workflow-registry-final-agent-os.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/ivs-agent-capability-registry-final.json",
+    "/root/deliverables/agent-os-daily-audit-latest.json",
+    "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+    "/root/deliverables/workflow-registry-final-agent-os.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778357322
+}

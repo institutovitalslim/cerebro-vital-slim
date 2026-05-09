@@ -327,3 +327,18 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Regra: read-only. O cockpit não envia mensagens, não altera produção e não substitui autorização explícita para ações sensíveis.
+
+## Auditoria Diária IVS Agent OS
+
+Executa o cockpit único, compara com baseline anterior e gera relatório diário read-only.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_daily_audit.py --json
+```
+
+Saídas:
+- `/root/deliverables/cockpit-unico-ivs-agent-os.html`
+- `/root/deliverables/cockpit-unico-ivs-agent-os.json`
+- `/root/deliverables/agent-os-daily-audit-latest.md`
+
+Workflow: `agent-os-daily-audit`.
