@@ -1,0 +1,48 @@
+{
+  "id": "observability-events",
+  "name": "Observabilidade de Eventos Operacionais IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Normalizar eventos de agentes, Z-API, workflows e entregáveis em feed seguro para diagnóstico e cockpit.",
+  "mode": "read-only redacted events",
+  "entry_criteria": [
+    "Erro operacional sem causa clara",
+    "Pedido do Tiaro por continuidade de execução",
+    "Antes de auditoria consolidada do Agent Operating Layer",
+    "Após mudanças em bridge, crons, skills ou agentes"
+  ],
+  "preflight": [
+    "Executar agent_events.py",
+    "Redigir telefones e trechos sensíveis",
+    "Classificar severidade",
+    "Separar eventos de produção de eventos de documentação"
+  ],
+  "allowed_actions": [
+    "gerar feed de eventos read-only",
+    "gerar relatório Markdown",
+    "apontar padrões de falha",
+    "encaminhar achados para workflow correto"
+  ],
+  "blocked_actions": [
+    "enviar mensagens externas",
+    "alterar produção automaticamente",
+    "expor telefone completo em relatório para canal externo",
+    "usar log como fonte clínica"
+  ],
+  "outputs": [
+    "event feed JSON",
+    "relatório Markdown redigido",
+    "totais por severidade",
+    "próximo workflow recomendado"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-observability-events/SKILL.md",
+    "/root/.openclaw/workspace/skills/ivs-agent-observability-events/scripts/agent_events.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["pausa global Clara", "auto-pause", "evento crítico de produção"],
+    "MEDIUM": ["bloqueio de lead", "falha de script", "erro recorrente"],
+    "LOW": ["documentação incompleta", "evento informativo"],
+    "OK": ["feed sem achados críticos"]
+  }
+}

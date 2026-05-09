@@ -1,0 +1,48 @@
+{
+  "id": "handoff-operacional",
+  "name": "Handoff Operacional Seguro entre Agentes IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Transferir contexto e próxima ação entre Maria, Clara, João, Pedro e conselhos sem vazamento de bastidores e sem perda de guardrails.",
+  "mode": "handoff packet no-delivery",
+  "entry_criteria": [
+    "Lead precisa ser retomado pela Clara",
+    "João precisa receber direção operacional de marketing",
+    "Pedro precisa receber assunto financeiro",
+    "Conselho precisa analisar tema interno"
+  ],
+  "preflight": [
+    "Identificar agente origem e destino",
+    "Classificar sensibilidade: internal, lead, patient, clinical, financial, marketing ou tech",
+    "Executar handoff_packet.py",
+    "Bloquear handoff clínico/paciente para Clara sem revisão humana"
+  ],
+  "allowed_actions": [
+    "gerar pacote JSON/Markdown",
+    "incluir evidências internas",
+    "definir próximo passo e deadline",
+    "orientar agente destino dentro do escopo"
+  ],
+  "blocked_actions": [
+    "enviar o pacote diretamente ao lead/paciente",
+    "expor ferramentas, logs, raciocínio ou bastidores",
+    "diagnosticar ou prescrever",
+    "executar envio real sem autorização explícita"
+  ],
+  "outputs": [
+    "handoff packet",
+    "guardrails do destino",
+    "achados de severidade",
+    "próxima ação operacional"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard/SKILL.md",
+    "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard/scripts/handoff_packet.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["Clara recebendo paciente/clínico para resposta direta", "prescrição/diagnóstico no pacote"],
+    "MEDIUM": ["financeiro indo para agente não financeiro", "agente desconhecido"],
+    "LOW": ["evidência ausente", "deadline ausente"],
+    "OK": ["handoff classificado e seguro"]
+  }
+}

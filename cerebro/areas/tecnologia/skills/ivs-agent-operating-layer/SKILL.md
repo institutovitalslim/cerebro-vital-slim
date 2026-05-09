@@ -228,3 +228,42 @@ Governança:
 - classificação obrigatória: aplicar amanhã, testar 3 dias, descartar ou propor RC-25;
 - regra fixa/memória estrutural exige Maria/Tiaro e graphify/RC-25;
 - nunca copiar literalmente, prometer resultado ou transformar conteúdo externo em decisão clínica/financeira/jurídica.
+
+## Skills OpenFang-inspired adicionadas
+
+A partir da análise do OpenFang como referência de Agent Operating System, foram adicionadas três skills IVS-first, sem copiar código externo:
+
+### IVS Agent Capability Registry
+
+Inventário read-only de agentes, skills, subagentes, workflows e riscos.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-capability-registry/scripts/capability_registry.py --json
+```
+
+Workflow canônico: `capability-governance`.
+
+### IVS Agent Handoff Guard
+
+Gera pacotes seguros de transferência entre Maria, Clara, João, Pedro e conselhos.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-handoff-guard/scripts/handoff_packet.py \
+  --from maria-gerente --to clara-whatsapp \
+  --subject "Assunto" \
+  --context "Contexto" \
+  --next-action "Próxima ação" \
+  --sensitivity lead
+```
+
+Workflow canônico: `handoff-operacional`.
+
+### IVS Agent Observability Events
+
+Normaliza logs e eventos de Z-API, workflows e entregáveis em feed redigido/read-only.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-observability-events/scripts/agent_events.py --json
+```
+
+Workflow canônico: `observability-events`.

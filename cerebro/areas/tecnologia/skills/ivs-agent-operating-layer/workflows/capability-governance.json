@@ -1,0 +1,47 @@
+{
+  "id": "capability-governance",
+  "name": "Governança de Capacidades dos Agentes IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Inventariar agentes, skills, subagentes, workflows e riscos operacionais antes de ampliar autonomia ou corrigir bloqueios.",
+  "mode": "read-only capability registry",
+  "entry_criteria": [
+    "Tiaro pedir nova skill, novo agente ou ampliação de autonomia",
+    "Antes de adicionar skills a Clara, João, Maria, Pedro ou conselhos",
+    "Após mudança estrutural em OpenClaw/configuração de agentes"
+  ],
+  "preflight": [
+    "Executar ivs-agent-capability-registry/scripts/capability_registry.py",
+    "Verificar skills sem SKILL.md",
+    "Verificar guardrails esperados por agente",
+    "Mapear riscos por escopo: paciente, financeiro, marketing, produção"
+  ],
+  "allowed_actions": [
+    "gerar inventário read-only",
+    "apontar lacunas de skill/configuração",
+    "recomendar adição ou remoção de capacidades",
+    "preparar RC-25 para mudança canônica"
+  ],
+  "blocked_actions": [
+    "pausar/despausar Clara",
+    "alterar agentes automaticamente sem autorização",
+    "enviar mensagens externas",
+    "remover skills críticas sem validação do Tiaro/Maria"
+  ],
+  "outputs": [
+    "capability registry JSON/Markdown",
+    "lista de achados por severidade",
+    "mapa de agentes e skills",
+    "próximo passo de governança"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-capability-registry/SKILL.md",
+    "/root/.openclaw/workspace/skills/ivs-agent-capability-registry/scripts/capability_registry.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["skill externa crítica em Clara sem guardrail", "configuração inválida que exponha paciente/lead"],
+    "MEDIUM": ["skill esperada ausente", "handoff financeiro/clínico sem dono"],
+    "LOW": ["skill sem SKILL.md", "documentação incompleta"],
+    "OK": ["inventário íntegro e sem achados relevantes"]
+  }
+}

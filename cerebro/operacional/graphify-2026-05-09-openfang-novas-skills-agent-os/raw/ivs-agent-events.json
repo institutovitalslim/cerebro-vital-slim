@@ -1,0 +1,350 @@
+{
+  "ok": true,
+  "generated_at": 1778356713,
+  "mode": "read_only_redacted_events",
+  "totals": {
+    "events": 37,
+    "OK": 37
+  },
+  "events": [
+    {
+      "ts": 1778356713,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:14:14] ignored phone=264802014335194 reason=non_text_or_empty payload_keys=instanceId,lastSeen,phone,status,type"
+    },
+    {
+      "ts": 1778356713,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:14:34] ignored phone=264802014335194 reason=non_text_or_empty payload_keys=instanceId,lastSeen,phone,status,type"
+    },
+    {
+      "ts": 1778356713,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:14:50] ignored phone=264802014335194 reason=non_text_or_empty payload_keys=instanceId,lastSeen,phone,status,type"
+    },
+    {
+      "ts": 1778356713,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:27:13] admin_send phone=5571***96 status=200 preview='Oi, Cinthya! Tudo bem?\\n\\nEstou retomando seu atendimento por aqui. Vi que você chegou a agendar sua avaliação em abril, e' body={\"zaapId\":\"019E0CEBB31A7AB1A5C7C8DAF39AA0F1\",\"messageId\":\"3412730D30C88B9D1D79\",\"id\":\"3412730D30C88B9D1D79\"}"
+    },
+    {
+      "ts": 1778356713,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:27:18] ignored phone=5571***96 reason=from_api_outbound payload_keys=broadcast,chatLid,chatName,connectedPhone,forwarded,fromApi,fromMe,instanceId,isEdit,isGroup,isNewsletter,isStatusReply,messageId,momment,participantLid,phone,photo,senderName,senderPhoto,status,text,type,waitingMessage"
+    },
+    {
+      "ts": 1778356713,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:28:15] ignored phone=85143834341566 reason=from_me payload_keys=broadcast,chatLid,chatName,connectedPhone,forwarded,fromApi,fromMe,instanceId,isEdit,isGroup,isNewsletter,isStatusReply,messageId,momment,participantLid,phone,photo,senderName,senderPhoto,status,text,type,waitingMessage"
+    },
+    {
+      "ts": 1778356713,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:28:17] ignored phone=85143834341566 reason=from_me payload_keys=broadcast,chatLid,chatName,connectedPhone,document,forwarded,fromApi,fromMe,instanceId,isEdit,isGroup,isNewsletter,isStatusReply,messageExpirationSeconds,messageId,momment,participantLid,phone,photo,senderName,senderPhoto,status,type,waitingMessage"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "IVS Agent Operating Layer Audit",
+      "id": "agent-layer-audit",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Autonomia Evolutiva dos Agentes IVS",
+      "id": "agent-learning-autonomy",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Governança de Capacidades dos Agentes IVS",
+      "id": "capability-governance",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Cron Governance IVS",
+      "id": "cron-governance",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Follow-up Seguro Clara/Z-API",
+      "id": "followup-seguro",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Handoff Operacional Seguro entre Agentes IVS",
+      "id": "handoff-operacional",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Marketing OS João",
+      "id": "marketing-os",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Observabilidade de Eventos Operacionais IVS",
+      "id": "observability-events",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Pré-consulta Safety",
+      "id": "preconsulta-safety",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Sequência Operacional Tiaro → Maria",
+      "id": "sequencia-operacional",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "ivs-agent-events.json",
+      "path": "/root/deliverables/ivs-agent-events.json",
+      "mtime": 1778356713,
+      "size": 0
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "ivs-agent-capability-registry.json",
+      "path": "/root/deliverables/ivs-agent-capability-registry.json",
+      "mtime": 1778356713,
+      "size": 32873
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "ivs-agent-capability-registry.md",
+      "path": "/root/deliverables/ivs-agent-capability-registry.md",
+      "mtime": 1778356713,
+      "size": 1495
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "workflow-registry-ivs-agent-operating-layer.json",
+      "path": "/root/deliverables/workflow-registry-ivs-agent-operating-layer.json",
+      "mtime": 1778355719,
+      "size": 7454
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "workflow-registry-ivs-agent-operating-layer.html",
+      "path": "/root/deliverables/workflow-registry-ivs-agent-operating-layer.html",
+      "mtime": 1778355719,
+      "size": 6202
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "ivs-agent-layer-daily-audit-latest.md",
+      "path": "/root/deliverables/ivs-agent-layer-daily-audit-latest.md",
+      "mtime": 1778355016,
+      "size": 1019
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-geral-ivs-agent-operating-layer.json",
+      "path": "/root/deliverables/cockpit-geral-ivs-agent-operating-layer.json",
+      "mtime": 1778355003,
+      "size": 52523
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-geral-ivs-agent-operating-layer.html",
+      "path": "/root/deliverables/cockpit-geral-ivs-agent-operating-layer.html",
+      "mtime": 1778355003,
+      "size": 5321
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "marketing-os-daily-audit-latest.md",
+      "path": "/root/deliverables/marketing-os-daily-audit-latest.md",
+      "mtime": 1778354513,
+      "size": 821
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-marketing-os-joao-ivs.json",
+      "path": "/root/deliverables/cockpit-marketing-os-joao-ivs.json",
+      "mtime": 1778354513,
+      "size": 22900
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-marketing-os-joao-ivs.html",
+      "path": "/root/deliverables/cockpit-marketing-os-joao-ivs.html",
+      "mtime": 1778354513,
+      "size": 8401
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "preconsulta-daily-audit-latest.md",
+      "path": "/root/deliverables/preconsulta-daily-audit-latest.md",
+      "mtime": 1778354217,
+      "size": 742
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-preconsulta-ivs.json",
+      "path": "/root/deliverables/cockpit-preconsulta-ivs.json",
+      "mtime": 1778354202,
+      "size": 1771
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-preconsulta-ivs.html",
+      "path": "/root/deliverables/cockpit-preconsulta-ivs.html",
+      "mtime": 1778354202,
+      "size": 4485
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "clara-daily-audit-latest.md",
+      "path": "/root/deliverables/clara-daily-audit-latest.md",
+      "mtime": 1778353971,
+      "size": 664
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-clara-zapi-ivs.json",
+      "path": "/root/deliverables/cockpit-clara-zapi-ivs.json",
+      "mtime": 1778353808,
+      "size": 18377
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-clara-zapi-ivs.html",
+      "path": "/root/deliverables/cockpit-clara-zapi-ivs.html",
+      "mtime": 1778353808,
+      "size": 10028
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "blueprint-sistema-marketing-ivs-joao.html",
+      "path": "/root/deliverables/blueprint-sistema-marketing-ivs-joao.html",
+      "mtime": 1778341524,
+      "size": 22391
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "dados-taina-japiassu-teles-20260509_1110.json",
+      "path": "/root/deliverables/dados-taina-japiassu-teles-20260509_1110.json",
+      "mtime": 1778326401,
+      "size": 30891
+    },
+    {
+      "ts": 1778356713,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "apresentacao-tain-japiassu-teles-paciente-v10-20260509_111040.html",
+      "path": "/root/deliverables/apresentacao-tain-japiassu-teles-paciente-v10-20260509_111040.html",
+      "mtime": 1778326401,
+      "size": 2911282
+    }
+  ]
+}
