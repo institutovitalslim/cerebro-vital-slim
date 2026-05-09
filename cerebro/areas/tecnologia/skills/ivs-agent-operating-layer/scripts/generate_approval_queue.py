@@ -17,7 +17,9 @@ def load(p):
 
 def item_clara(d):
     ap=d.get('approval_packet',{})
-    return {'id':'clara_phase2_enforcement','title':'Ativar Clara Action Gate Enforcement','status':'pending_explicit_approval' if d.get('ok') and not d.get('approved_to_execute') else 'not_ready','risk':'atendimento externo / bloqueio indevido de follow-up administrativo','required_phrase':ap.get('required_phrase'),'scope':ap.get('required_approval_scope'),'preflight_ok':d.get('ok'), 'execution_performed':d.get('execution_performed'), 'source':'clara-enforcement-phase2-preflight-latest.json'}
+    status_doc=load('/root/deliverables/clara-enforcement-phase2-status-latest.json')
+    activated=bool(status_doc.get('ok'))
+    return {'id':'clara_phase2_enforcement','title':'Ativar Clara Action Gate Enforcement','status':'activated' if activated else ('pending_explicit_approval' if d.get('ok') and not d.get('approved_to_execute') else 'not_ready'),'risk':'atendimento externo / bloqueio indevido de follow-up administrativo','required_phrase':ap.get('required_phrase'),'scope':ap.get('required_approval_scope'),'preflight_ok':d.get('ok'), 'execution_performed':activated, 'source':'clara-enforcement-phase2-preflight-latest.json'}
 
 def item_pedro(d):
     ap=d.get('approval_packet',{})

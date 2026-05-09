@@ -1,0 +1,20 @@
+{
+  "id": "clara-enforcement-phase2-activation",
+  "name": "Clara Enforcement Phase 2 Activation",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 após autorização do Tiaro, com approval, restart controlado, validação e rollback documentado.",
+  "mode": "controlled activation with no real WhatsApp validation",
+  "entry_criteria": ["Tiaro autorizou ativação", "Phase 2 preflight OK", "Approval Ledger registrado", "rollback definido"],
+  "preflight": ["registrar approval", "backup zapi_bridge.env", "setar toggle", "restart bridge", "validar healthz", "validar bloqueio sem approval_id", "validar patient block"],
+  "allowed_actions": ["alterar env do bridge", "restart bridge", "validar bloqueios", "registrar evidências"],
+  "blocked_actions": ["enviar WhatsApp real em validação", "pausar Clara", "desbloquear paciente", "aceitar approval genérico sem approval_id"],
+  "outputs": ["clara-phase2-approval.json", "clara-phase2-restart-health.json", "clara-phase2-admin-send-validation.json", "clara-enforcement-phase2-status-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/ops/zapi_bridge/zapi_clara_bridge.py", "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_enforcement_phase2_status.py"],
+  "severity_rules": {
+    "HIGH": ["env ativado sem approval", "approval_id omitido aceitou envio", "paciente bloqueado liberado"],
+    "MEDIUM": ["healthz falhou", "rollback ausente"],
+    "LOW": ["monitoramento pós-ativação pendente"],
+    "OK": ["enforcement ativo e bloqueando sem approval_id"]
+  }
+}

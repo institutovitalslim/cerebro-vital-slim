@@ -13,7 +13,7 @@ def j(cmd):
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--agent',required=True); ap.add_argument('--action',required=True); ap.add_argument('--sensitivity'); ap.add_argument('--approval-id'); ap.add_argument('--evidence', action='append', default=[])
     args=ap.parse_args()
-    approval=j(['python3',str(APP),'verify','--agent',args.agent,'--action',args.action]+(['--approval-id',args.approval_id] if args.approval_id else []))
+    approval={'ok': False, 'matches': [], 'checked_at': int(time.time()), 'reason': 'approval_id_required'} if not args.approval_id else j(['python3',str(APP),'verify','--agent',args.agent,'--action',args.action,'--approval-id',args.approval_id])
     perm=j(['python3',str(PERM),'--agent',args.agent,'--action',args.action]+(['--sensitivity',args.sensitivity] if args.sensitivity else [])+(['--approved'] if approval.get('ok') else [])+sum([['--evidence',e] for e in args.evidence],[]))
     decision={'ok':bool(perm.get('ok')),'agent':args.agent,'action':args.action,'sensitivity':args.sensitivity,'permission':perm,'approval':approval,'generated_at':int(time.time()),'mode':'action_gate_evaluation_no_execution'}
     if perm.get('decision')=='forbidden': decision['final']='BLOCK_FORBIDDEN'

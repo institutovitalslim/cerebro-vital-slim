@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "pid": "495921",
+  "health": {
+    "ok": true,
+    "service": "zapi-clara-bridge"
+  },
+  "toggle_loaded": "CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1"
+}

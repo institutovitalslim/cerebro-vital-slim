@@ -1,0 +1,11 @@
+{
+  "approval_id": "appr-f773aaddf3b3",
+  "agent": "clara-whatsapp",
+  "action": "followup_whatsapp",
+  "approved_by": "Tiaro F. Neves",
+  "evidence": "Tiaro respondeu: Eu autorizo. Pode seguir — contexto imediato: liberar somente Clara Phase 2 enforcement.",
+  "scope": "clara_enforcement_phase2_enable_action_gate",
+  "created_at": 1778362594,
+  "expires_at": 1778373394,
+  "mode": "approval_record_no_execution"
+}

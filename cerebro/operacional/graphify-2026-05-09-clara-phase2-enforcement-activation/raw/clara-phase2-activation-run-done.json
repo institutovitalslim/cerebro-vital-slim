@@ -1,0 +1,71 @@
+{
+  "run_id": "ivr-20260509-213634-72bd3dbb",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778362594,
+  "updated_at": 1778362789,
+  "subject": "Ativação Clara Enforcement Phase 2",
+  "context": "Tiaro autorizou em resposta à recomendação de liberar somente Clara Phase 2. Registrar approval, ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1, reiniciar bridge e validar sem envio real.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "atendimento",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778362594,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778362789,
+      "message": "Clara Phase 2 ativada com approval; bridge reiniciado com CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1; patch strict approval_id aplicado após detectar approval amplo.",
+      "evidence": [
+        "/root/deliverables/clara-phase2-approval.json",
+        "/root/deliverables/clara-phase2-restart-health.json"
+      ]
+    },
+    {
+      "state": "in_progress",
+      "at": 1778362789,
+      "message": "Validação final: sem approval_id bloqueia 403; patient_do_not_reply bloqueia; Action Gate com approval_id libera avaliação; 0 mensagens externas após patch strict.",
+      "evidence": [
+        "/root/deliverables/clara-phase2-admin-send-validation.json",
+        "/root/deliverables/clara-enforcement-phase2-status-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778362789,
+      "message": "Clara Phase 2 activation concluída: 40 workflows/0 findings; CI 17 checks OK; readiness READY 100/100. Incidente de validação sintética pré-patch documentado.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-clara-phase2-activation.json",
+        "/root/deliverables/agent-os-ci-after-clara-phase2-activation.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/clara-phase2-approval.json",
+    "/root/deliverables/clara-phase2-restart-health.json",
+    "/root/deliverables/clara-phase2-admin-send-validation.json",
+    "/root/deliverables/clara-enforcement-phase2-status-latest.json",
+    "/root/deliverables/workflow-registry-after-clara-phase2-activation.json",
+    "/root/deliverables/agent-os-ci-after-clara-phase2-activation.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778362789
+}

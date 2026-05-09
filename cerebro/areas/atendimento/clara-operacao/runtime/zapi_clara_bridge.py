@@ -1447,6 +1447,8 @@ def evaluate_admin_send_action_gate(payload: Dict[str, Any]) -> Tuple[bool, Dict
     if not CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE:
         return True, {"mode": "action_gate_not_enforced"}
     approval_id = str(payload.get("approval_id") or "").strip()
+    if not approval_id:
+        return False, {"mode": "action_gate_enforced", "error": "missing_approval_id", "final": "BLOCK_APPROVAL_ID_REQUIRED"}
     evidence = str(payload.get("approval_evidence") or payload.get("reason") or "admin_send").strip()
     cmd = [
         "python3",

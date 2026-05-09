@@ -551,3 +551,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `activation-dossier-governance`.
+
+## Clara Enforcement Phase 2 Activation
+
+Ativação controlada do `CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1` após autorização. Validação sem envio real: exige `approval_id` explícito, mantém patient block e registra rollback.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_enforcement_phase2_status.py --json
+```
+
+Workflow: `clara-enforcement-phase2-activation`.

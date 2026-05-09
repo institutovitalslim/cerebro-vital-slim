@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "generated_at": 1778362777,
+  "mode": "clara_phase2_enforcement_status_read_only",
+  "checks": [
+    {
+      "name": "healthz",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "service": "zapi-clara-bridge"
+      }
+    },
+    {
+      "name": "process_toggle_loaded",
+      "ok": true,
+      "detail": "CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1"
+    },
+    {
+      "name": "strict_approval_id_patch_present",
+      "ok": true
+    },
+    {
+      "name": "action_gate_without_approval_blocks",
+      "ok": true,
+      "detail": "BLOCK_APPROVAL_REQUIRED"
+    }
+  ],
+  "external_messages_sent": 0
+}

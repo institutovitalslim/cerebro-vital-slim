@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "external_messages_sent_after_strict_patch": 0,
+  "incident_before_strict_patch": {
+    "synthetic_phone": "5599999999999",
+    "zapi_accepted": true,
+    "message_id": "6F159B0F41197D1EABCD",
+    "cause": "Action Gate accepted broad valid approval when approval_id was omitted; strict approval_id patch applied immediately."
+  },
+  "no_approval_block": {
+    "http": 403,
+    "ok": false,
+    "json": {
+      "ok": false,
+      "phone": "5599999999998",
+      "blocked": "action_gate",
+      "decision": {
+        "mode": "action_gate_enforced",
+        "error": "missing_approval_id",
+        "final": "BLOCK_APPROVAL_ID_REQUIRED"
+      }
+    }
+  },
+  "patient_block": {
+    "http": 409,
+    "ok": false,
+    "json": {
+      "ok": false,
+      "phone": "5571991927242",
+      "blocked": true,
+      "reason": "patient_do_not_reply"
+    }
+  },
+  "action_gate_with_approval_id": {
+    "ok": true,
+    "agent": "clara-whatsapp",
+    "action": "followup_whatsapp",
+    "sensitivity": "lead",
+    "permission": {
+      "ok": true,
+      "decision": "write_with_approval",
+      "requires_approval": true,
+      "approved": true,
+      "agent": "clara-whatsapp",
+      "action": "followup_whatsapp",
+      "sensitivity": "lead",
+      "evidence": [],
+      "findings": [
+        {
+          "severity": "MEDIUM",
+          "code": "approval_without_evidence"
+        }
+      ],
+      "generated_at": 1778362733,
+      "mode": "permission_evaluation_no_execution"
+    },
+    "approval": {
+      "ok": true,
+      "matches": [
+        {
+          "approval_id": "appr-f773aaddf3b3",
+          "agent": "clara-whatsapp",
+          "action": "followup_whatsapp",
+          "approved_by": "Tiaro F. Neves",
+          "evidence": "Tiaro respondeu: Eu autorizo. Pode seguir — contexto imediato: liberar somente Clara Phase 2 enforcement.",
+          "scope": "clara_enforcement_phase2_enable_action_gate",
+          "created_at": 1778362594,
+          "expires_at": 1778373394,
+          "mode": "approval_record_no_execution"
+        }
+      ],
+      "checked_at": 1778362733
+    },
+    "generated_at": 1778362733,
+    "mode": "action_gate_evaluation_no_execution",
+    "final": "ALLOW_BY_POLICY_BUT_NO_EXECUTION"
+  }
+}

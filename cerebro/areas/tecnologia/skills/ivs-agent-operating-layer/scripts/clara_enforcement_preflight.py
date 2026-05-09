@@ -29,7 +29,7 @@ def main():
     checks.append({'name':'enforcement_currently_off','ok':env!='1','detail':f'CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE={env}'})
     approval_status={'ok':False,'reason':'not_supplied'}
     if args.approval_id:
-        approval_status=run(['python3',str(APPROVAL),'check','--approval-id',args.approval_id,'--json'],timeout=30)
+        approval_status=run(['python3',str(APPROVAL),'verify','--agent','clara-whatsapp','--action','followup_whatsapp','--approval-id',args.approval_id,'--json'],timeout=30)
     checks.append({'name':'explicit_approval_present_for_activation','ok':bool(args.approval_id and approval_status.get('ok')), 'detail':approval_status})
     phase2_ready_without_execution=all(c['ok'] for c in checks if c['name']!='explicit_approval_present_for_activation')
     approved=checks[-1]['ok']
