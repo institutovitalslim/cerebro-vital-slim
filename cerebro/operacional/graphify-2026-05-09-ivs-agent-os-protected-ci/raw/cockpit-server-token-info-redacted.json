@@ -1,0 +1,5 @@
+{
+  "ok": true,
+  "url": "http://127.0.0.1:8791/?token=<redacted>",
+  "token_file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/server/cockpit-token.txt"
+}

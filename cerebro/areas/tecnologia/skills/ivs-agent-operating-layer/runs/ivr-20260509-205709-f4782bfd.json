@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-205709-f4782bfd",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778360229,
+  "updated_at": 1778360283,
+  "subject": "Cockpit interno protegido e CI local IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar publicação local protegida do cockpit e CI local automático sem expor publicamente.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778360229,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778360283,
+      "message": "Servidor interno protegido e CI local implementados; cron CI criado.",
+      "evidence": [
+        "/root/deliverables/cockpit-server-token-info.json",
+        "/root/deliverables/agent-os-ci-run.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778360283,
+      "message": "Cockpit protegido/CI concluídos: 24 workflows/0 findings; CI verde; cockpit OK.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-protected-ci.json",
+        "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/cockpit-server-token-info.json",
+    "/root/deliverables/agent-os-ci-run.json",
+    "/root/deliverables/workflow-registry-after-protected-ci.json",
+    "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778360283
+}

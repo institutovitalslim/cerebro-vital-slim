@@ -401,3 +401,20 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflow: `agent-os-command-center`.
+
+## Cockpit interno protegido e CI local
+
+Servidor local protegido por token, bind padrão em `127.0.0.1`:
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cockpit_server.py --print-token
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cockpit_server.py
+```
+
+CI local:
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_ci.py --json
+```
+
+Workflows: `agent-os-protected-cockpit-server`, `agent-os-local-ci`.

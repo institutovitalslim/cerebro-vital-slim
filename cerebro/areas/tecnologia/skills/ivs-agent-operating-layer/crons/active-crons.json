@@ -501,7 +501,16 @@
       "workflow": "agent-os-retention-backup",
       "mode": "read-only backup no-prune",
       "updated_at": 1778359696
+    },
+    {
+      "id": "75a256e4-28f0-437c-8c28-dc726d7343cd",
+      "name": "IVS Agent OS Local CI — daily",
+      "schedule": "40 8 * * * America/Bahia",
+      "agentId": "maria-gerente",
+      "workflow": "agent-os-local-ci",
+      "mode": "read-only ci",
+      "updated_at": 1778360282
     }
   ],
-  "updated_at": 1778359696
+  "updated_at": 1778360282
 }

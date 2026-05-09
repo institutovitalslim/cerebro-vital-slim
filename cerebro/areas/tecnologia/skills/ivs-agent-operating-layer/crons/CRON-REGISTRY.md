@@ -64,3 +64,9 @@ Cancelados na limpeza anterior: **10**
 - Workflow: `agent-os-retention-backup`
 - Schedule: `30 3 * * 0` — `America/Bahia`
 - Modo: backup read-only; sem `--prune`.
+
+## IVS Agent OS Local CI — daily
+- ID: `75a256e4-28f0-437c-8c28-dc726d7343cd`
+- Workflow: `agent-os-local-ci`
+- Schedule: `40 8 * * *` — `America/Bahia`
+- Modo: read-only CI; anunciar somente se falhar.
