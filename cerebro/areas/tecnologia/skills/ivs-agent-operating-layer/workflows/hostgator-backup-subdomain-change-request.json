@@ -1,0 +1,20 @@
+{
+  "id": "hostgator-backup-subdomain-change-request",
+  "name": "HostGator Backup Subdomain Change Request",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar mudança DNS para backup.institutovitalslim.com.br na HostGator sem alterar DNS quando target/acesso não estão disponíveis.",
+  "mode": "dns change request no dns change",
+  "entry_criteria": ["Tiaro autorizou criar backup.institutovitalslim.com.br", "HostGator informado como DNS provider"],
+  "preflight": ["validar DNS atual", "gerar registro recomendado", "bloquear execução sem target", "preservar guardrails"],
+  "allowed_actions": ["consulta DNS read-only", "gerar change request", "documentar CNAME/A recomendado"],
+  "blocked_actions": ["alterar DNS sem target", "apontar para www", "publicar backup", "gravar credenciais"],
+  "outputs": ["hostgator-backup-subdomain-change-request.json", "backup-subdomain-dns-current.txt"],
+  "evidence": ["/root/deliverables/hostgator-backup-subdomain-change-request.json"],
+  "severity_rules": {
+    "HIGH": ["DNS alterado sem target aprovado", "backup público"],
+    "MEDIUM": ["target ausente"],
+    "LOW": ["aguardando acesso HostGator"],
+    "OK": ["change request gerado sem alteração"]
+  }
+}

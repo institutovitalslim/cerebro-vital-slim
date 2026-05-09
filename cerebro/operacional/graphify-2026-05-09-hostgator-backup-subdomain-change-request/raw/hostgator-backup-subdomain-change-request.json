@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "generated_at": 1778368142,
+  "mode": "hostgator_dns_change_request_no_dns_change",
+  "authorization": "Tiaro autorizou criar backup.institutovitalslim.com.br",
+  "fqdn": "backup.institutovitalslim.com.br",
+  "current_dns": {
+    "A": [],
+    "CNAME": [],
+    "exists": false
+  },
+  "recommended_record": {
+    "type": "CNAME",
+    "name": "backup",
+    "fqdn": "backup.institutovitalslim.com.br",
+    "target": "<storage-ou-proxy-privado>",
+    "ttl": "300/automatico",
+    "proxy_public": "no",
+    "indexable": "no"
+  },
+  "alternative_record": {
+    "type": "A",
+    "name": "backup",
+    "fqdn": "backup.institutovitalslim.com.br",
+    "target": "<IP-fixo-do-proxy-privado>",
+    "ttl": "300/automatico"
+  },
+  "execution_performed": false,
+  "blocked_reason": "target real e acesso HostGator não disponíveis nesta sessão",
+  "needed_to_execute": [
+    "target CNAME ou IP fixo",
+    "acesso ao painel HostGator/DNS",
+    "confirmação de TLS/auth no destino"
+  ],
+  "guardrails": [
+    "não apontar para www",
+    "não publicar backup em diretório público",
+    "não abrir cockpit sem auth",
+    "não gravar credenciais no cérebro"
+  ]
+}

@@ -1,0 +1,5 @@
+timestamp=2026-05-09T23:09:00Z
+fqdn=backup.institutovitalslim.com.br
+getent:
+dig A:
+dig CNAME:
