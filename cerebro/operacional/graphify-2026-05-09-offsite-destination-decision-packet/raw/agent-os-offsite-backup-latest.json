@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "generated_at": 1778363644,
+  "mode": "offsite_backup_readiness_no_export",
+  "backup": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/backups/agent-os-backup-20260509-215404.tar.gz",
+  "backup_verified": true,
+  "destination_configured": false,
+  "destination_mode": "readiness",
+  "destination_preview": null,
+  "apply_requested": false,
+  "exported": false,
+  "plan": [
+    "configure IVS_AGENT_OS_OFFSITE_MODE and IVS_AGENT_OS_OFFSITE_DEST",
+    "register approval for offsite_backup_export",
+    "run with --apply --approval-id",
+    "verify remote/local copy checksum"
+  ]
+}

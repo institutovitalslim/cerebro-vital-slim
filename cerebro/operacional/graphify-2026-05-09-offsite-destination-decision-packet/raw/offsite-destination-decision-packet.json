@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "generated_at": 1778363644,
+  "mode": "read_only_offsite_destination_decision_packet",
+  "decision_required": "Escolher destino e autorizar explicitamente antes de qualquer exportação",
+  "options": [
+    {
+      "id": "local_mirror",
+      "label": "Local mirror controlado",
+      "destination_example": "/root/agent-os-offsite/ivs-agent-os",
+      "requires": "approval_id + --apply + destino sob /root/agent-os-offsite",
+      "risk": "baixo/médio: cópia local no servidor, sem saída externa",
+      "recommendation": "bom primeiro passo para testar restore sem expor dados"
+    },
+    {
+      "id": "rclone",
+      "label": "Storage externo via rclone",
+      "destination_example": "remote:ivs-agent-os-backups",
+      "requires": "rclone configurado + revisão de credenciais + approval explícito",
+      "risk": "médio/alto: exporta artefatos para fora do runtime",
+      "recommendation": "usar depois que destino e retenção forem definidos"
+    },
+    {
+      "id": "defer",
+      "label": "Manter readiness somente",
+      "destination_example": null,
+      "requires": "nenhuma ação",
+      "risk": "baixo: sem backup offsite real",
+      "recommendation": "seguro, mas não fecha DR offsite"
+    }
+  ],
+  "blocked_by_design": [
+    "não exporta backup",
+    "não cria credencial",
+    "não escreve Approval Ledger",
+    "não chama rclone",
+    "não copia para destino"
+  ]
+}

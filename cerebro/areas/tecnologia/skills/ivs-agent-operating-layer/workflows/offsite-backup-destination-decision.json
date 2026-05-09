@@ -1,0 +1,20 @@
+{
+  "id": "offsite-backup-destination-decision",
+  "name": "Offsite Backup Destination Decision",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar pacote de decisão para destino do backup offsite do Agent OS sem exportar dados nem registrar aprovação.",
+  "mode": "read-only decision packet",
+  "entry_criteria": ["readiness offsite OK", "nenhum destino externo aprovado", "necessidade de decisão de Tiaro"],
+  "preflight": ["gerar readiness", "listar opções de destino", "atualizar fila de aprovações", "não exportar"],
+  "allowed_actions": ["gerar pacote HTML/JSON", "validar backup local", "atualizar dossiê read-only"],
+  "blocked_actions": ["exportar backup", "criar credencial", "chamar rclone apply", "registrar approval sem frase explícita"],
+  "outputs": ["offsite-destination-decision-packet.json", "offsite-destination-decision-packet.html", "agent-os-offsite-backup-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_offsite_destination_packet.py"],
+  "severity_rules": {
+    "HIGH": ["backup exportado sem approval", "credencial gravada no cérebro"],
+    "MEDIUM": ["backup readiness falhou"],
+    "LOW": ["destino pendente"],
+    "OK": ["pacote gerado sem exportação"]
+  }
+}

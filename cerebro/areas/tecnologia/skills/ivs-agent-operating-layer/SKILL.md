@@ -572,3 +572,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara
 ```
 
 Workflow: `clara-phase2-extended-watch`.
+
+## Offsite Backup Destination Decision
+
+Pacote read-only para Tiaro escolher destino de backup offsite. Não exporta, não cria credencial, não registra approval.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_offsite_destination_packet.py --json
+```
+
+Workflow: `offsite-backup-destination-decision`.
