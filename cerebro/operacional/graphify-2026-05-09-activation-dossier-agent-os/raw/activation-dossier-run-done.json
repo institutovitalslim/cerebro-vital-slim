@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-212942-6c01d1e9",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778362182,
+  "updated_at": 1778362232,
+  "subject": "Dossier Executivo de Ativação IVS Agent OS",
+  "context": "Tiaro disse pode seguir, sem frases explícitas para ações sensíveis. Consolidar dossier executivo read-only com readiness, fila de aprovações, rollback e próximos comandos seguros.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778362182,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778362232,
+      "message": "Dossier executivo de ativação gerado: READY 100, 3 aprovações pendentes, 0 ações sensíveis executadas.",
+      "evidence": [
+        "/root/deliverables/activation-dossier-ivs-agent-os.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778362232,
+      "message": "Activation Dossier concluído: 39 workflows/0 findings; CI 16 checks OK; readiness READY 100/100.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-activation-dossier.json",
+        "/root/deliverables/agent-os-ci-after-activation-dossier.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/activation-dossier-ivs-agent-os.json",
+    "/root/deliverables/workflow-registry-after-activation-dossier.json",
+    "/root/deliverables/agent-os-ci-after-activation-dossier.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778362232
+}

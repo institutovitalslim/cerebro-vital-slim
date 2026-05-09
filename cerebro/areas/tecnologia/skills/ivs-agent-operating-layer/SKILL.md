@@ -541,3 +541,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `approval-queue-governance`.
+
+## Dossier Executivo de Ativação
+
+Consolida readiness, fila de aprovações, riscos e recomendações em HTML/JSON. Read-only: não aprova e não executa.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_activation_dossier.py --json
+```
+
+Workflow: `activation-dossier-governance`.

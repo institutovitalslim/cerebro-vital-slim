@@ -24,6 +24,7 @@ def main():
     checks.append(cmd('clara_enforcement_phase2_preflight',['python3',str(BASE/'scripts/clara_enforcement_preflight.py'),'--json']))
     checks.append(cmd('pedro_omie_write_preflight',['python3',str(BASE/'scripts/pedro_omie_write_preflight.py'),'--json']))
     checks.append(cmd('approval_queue',['python3',str(BASE/'scripts/generate_approval_queue.py'),'--json']))
+    checks.append(cmd('activation_dossier',['python3',str(BASE/'scripts/generate_activation_dossier.py'),'--json']))
     checks.append(cmd('gate_blocks_pedro_without_approval',['python3',str(BASE/'scripts/sensitive_action_guard.py'),'--agent','pedro-controller-ivs','--action','omie_write','--sensitivity','financial'], allow_fail=True))
     # guard smoke is expected to exit non-zero. OK only if it blocked.
     if checks[-1]['exit_code']==0: checks[-1]['ok']=False; checks[-1]['log']+='\nExpected block did not happen.'

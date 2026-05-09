@@ -1,0 +1,20 @@
+{
+  "id": "activation-dossier-governance",
+  "name": "Dossier Executivo de Ativação IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Consolidar readiness, aprovações pendentes, riscos e rollback em dossier read-only para decisão do Tiaro.",
+  "mode": "read-only executive dossier",
+  "entry_criteria": ["approval queue criada", "preflights concluídos", "pedido de continuidade sem aprovação explícita"],
+  "preflight": ["ler readiness", "ler approval queue", "ler drift", "consolidar recomendações", "gerar HTML/JSON"],
+  "allowed_actions": ["gerar dossier", "resumir pendências", "listar frases exigidas"],
+  "blocked_actions": ["aprovar", "executar", "alterar toggle", "chamar sistema externo"],
+  "outputs": ["activation-dossier-ivs-agent-os.json", "activation-dossier-ivs-agent-os.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_activation_dossier.py"],
+  "severity_rules": {
+    "HIGH": ["dossier executou ação sensível"],
+    "MEDIUM": ["fonte crítica ausente"],
+    "LOW": ["aprovação pendente"],
+    "OK": ["dossier gerado com readiness READY"]
+  }
+}
