@@ -1,0 +1,30 @@
+DNS:
+187.77.58.193
+HTTPS health:
+HTTP/1.1 200 OK
+Server: nginx/1.28.0 (Ubuntu)
+Date: Sat, 09 May 2026 23:24:20 GMT
+Content-Type: application/octet-stream
+Content-Length: 3
+Connection: keep-alive
+Content-Type: text/plain
+
+ok
+Root:
+HTTP/1.1 403 Forbidden
+Server: nginx/1.28.0 (Ubuntu)
+Date: Sat, 09 May 2026 23:24:20 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+X-Robots-Tag: noindex, nofollow, noarchive
+X-Content-Type-Options: nosniff
+
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx/1.28.0 (Ubuntu)</center>
+</body>
+</html>
+Typo host:

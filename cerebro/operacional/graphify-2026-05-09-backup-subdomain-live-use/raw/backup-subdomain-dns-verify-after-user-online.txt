@@ -1,0 +1,15 @@
+timestamp=2026-05-09T23:22:57Z
+--- backup.intitutovitalslim.com.br
+A:
+CNAME:
+--- backup.institutovitalslim.com.br
+A:
+187.77.58.193
+CNAME:
+--- institutovitalslim.com.br
+A:
+192.185.217.23
+CNAME:
+--- intitutovitalslim.com.br
+A:
+CNAME:

@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "generated_at": 1778368978,
+  "user_reported": "backup.intitutovitalslim.com.br já está no ar. Use",
+  "dns": {
+    "backup.intitutovitalslim.com.br": {
+      "A": [],
+      "CNAME": []
+    },
+    "backup.institutovitalslim.com.br": {
+      "A": [
+        "187.77.58.193"
+      ],
+      "CNAME": []
+    },
+    "institutovitalslim.com.br": {
+      "A": [
+        "192.185.217.23"
+      ],
+      "CNAME": []
+    },
+    "intitutovitalslim.com.br": {
+      "A": [],
+      "CNAME": []
+    }
+  },
+  "assessment": {
+    "reported_host_has_dns": false,
+    "intended_host_has_dns": true,
+    "possible_typo": "intitutovitalslim.com.br != institutovitalslim.com.br"
+  }
+}

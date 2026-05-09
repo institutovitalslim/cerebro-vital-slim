@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Server: nginx/1.28.0 (Ubuntu)
+Date: Sat, 09 May 2026 23:23:40 GMT
+Content-Type: application/octet-stream
+Content-Length: 3
+Connection: keep-alive
+Content-Type: text/plain
+
+ok
