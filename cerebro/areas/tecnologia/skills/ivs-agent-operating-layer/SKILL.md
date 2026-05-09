@@ -387,3 +387,17 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflows: `agent-os-trends`, `approval-console`.
+
+## Command Center CLI
+
+Entrada única segura para rotinas do Agent OS:
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py status
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py refresh-all
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py test
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py backup
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py gate --agent pedro-controller-ivs --action omie_write --sensitivity financial
+```
+
+Workflow: `agent-os-command-center`.

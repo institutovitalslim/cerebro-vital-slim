@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-205114-cf738270",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778359874,
+  "updated_at": 1778359913,
+  "subject": "Command Center e runbook final IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar CLI operacional único, runbook e índice de artefatos sem ações sensíveis.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778359874,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778359913,
+      "message": "Command Center CLI e runbook implementados.",
+      "evidence": [
+        "/root/deliverables/agent-os-cli-status.json",
+        "/root/deliverables/runbook-ivs-agent-os.md"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778359913,
+      "message": "Command Center concluído: 22 workflows/0 findings; CLI test OK; cockpit OK.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-command-center.json",
+        "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-cli-status.json",
+    "/root/deliverables/runbook-ivs-agent-os.md",
+    "/root/deliverables/workflow-registry-after-command-center.json",
+    "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778359913
+}

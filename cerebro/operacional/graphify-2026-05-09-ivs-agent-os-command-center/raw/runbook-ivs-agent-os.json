@@ -1,0 +1,65 @@
+{
+  "ok": true,
+  "generated_at": 1778359907,
+  "artifacts": [
+    {
+      "name": "Cockpit Único",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+      "exists": true
+    },
+    {
+      "name": "Cockpit Vivo",
+      "path": "/root/deliverables/cockpit-vivo-ivs-agent-os.html",
+      "exists": true
+    },
+    {
+      "name": "Workflow Runs",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.html",
+      "exists": true
+    },
+    {
+      "name": "Trends",
+      "path": "/root/deliverables/agent-os-trends.html",
+      "exists": true
+    },
+    {
+      "name": "Approval Console",
+      "path": "/root/deliverables/approval-console-ivs-agent-os.html",
+      "exists": true
+    },
+    {
+      "name": "Critical Alerts",
+      "path": "/root/deliverables/agent-os-critical-alerts-latest.json",
+      "exists": true
+    }
+  ],
+  "commands": [
+    {
+      "name": "Status completo",
+      "command": "python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py status"
+    },
+    {
+      "name": "Atualizar painéis",
+      "command": "python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py refresh-all"
+    },
+    {
+      "name": "Rodar testes",
+      "command": "python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py test"
+    },
+    {
+      "name": "Backup read-only",
+      "command": "python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py backup"
+    },
+    {
+      "name": "Avaliar gate Omie",
+      "command": "python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py gate --agent pedro-controller-ivs --action omie_write --sensitivity financial"
+    }
+  ],
+  "guardrails": [
+    "read-only por padrão",
+    "Action Gate não executa ação",
+    "Approval Console estático não cria aprovação",
+    "Clara/Z-API enforcement forte é opt-in",
+    "backup não poda sem --prune"
+  ]
+}
