@@ -1,0 +1,20 @@
+{
+  "id": "pedro-omie-guarded-write-preflight",
+  "name": "Pedro/Omie Guarded Write Preflight",
+  "owner": "Maria",
+  "executor": "Maria + Pedro",
+  "scope": "Preparar escrita real no Omie com Pedro apenas mediante Approval Ledger, Action Gate, revisão de payload e credenciais.",
+  "mode": "preflight/no-omie-call",
+  "entry_criteria": ["pedido de avanço da fase 3", "necessidade de escrita financeira", "payload financeiro definido"],
+  "preflight": ["validar Pedro guard", "validar Action Gate bloqueia sem approval", "validar credenciais mascaradas", "gerar approval packet", "definir rollback manual"],
+  "allowed_actions": ["preflight", "dry-run", "validar approval", "gerar pacote de aprovação"],
+  "blocked_actions": ["chamar Omie real sem approval", "criar cobrança sem payload revisado", "expor credenciais", "rollback automático financeiro sem Tiaro"],
+  "outputs": ["pedro-omie-write-preflight-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/pedro_omie_write_preflight.py"],
+  "severity_rules": {
+    "HIGH": ["Omie write sem approval", "credencial exposta"],
+    "MEDIUM": ["payload sem idempotency key", "approval ausente"],
+    "LOW": ["preflight pronto aguardando aprovação"],
+    "OK": ["guards bloqueiam sem approval"]
+  }
+}

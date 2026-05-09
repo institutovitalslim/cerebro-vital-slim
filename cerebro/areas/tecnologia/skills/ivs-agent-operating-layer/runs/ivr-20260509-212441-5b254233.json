@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-212441-5b254233",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778361881,
+  "updated_at": 1778361925,
+  "subject": "Pedro Omie Guarded Write Preflight IVS Agent OS",
+  "context": "Tiaro disse pode seguir, mas não usou frase explícita para ativar Clara Phase 2. Seguir para Phase 3 preflight: Pedro/Omie escrita real gated, sem executar Omie write.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "financial",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778361881,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778361925,
+      "message": "Pedro/Omie guarded write preflight implementado: guards bloqueiam sem approval, Omie não foi chamado.",
+      "evidence": [
+        "/root/deliverables/pedro-omie-write-preflight-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778361925,
+      "message": "Pedro/Omie preflight concluído: 37 workflows/0 findings; CI 14 checks OK; readiness READY 100/100; pronto apenas para approval explícito + revisão de credenciais/payload.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-pedro-omie-preflight.json",
+        "/root/deliverables/agent-os-ci-after-pedro-omie-preflight.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/pedro-omie-write-preflight-latest.json",
+    "/root/deliverables/workflow-registry-after-pedro-omie-preflight.json",
+    "/root/deliverables/agent-os-ci-after-pedro-omie-preflight.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778361925
+}

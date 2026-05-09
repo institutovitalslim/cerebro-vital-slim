@@ -521,3 +521,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara
 ```
 
 Workflow: `clara-enforcement-phase2-preflight`.
+
+## Pedro/Omie Guarded Write Preflight
+
+Prepara escrita real no Omie sem chamar Omie. Exige Approval Ledger, Action Gate, revisão de payload e credenciais.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/pedro_omie_write_preflight.py --json
+```
+
+Workflow: `pedro-omie-guarded-write-preflight`.

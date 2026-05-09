@@ -1,0 +1,101 @@
+{
+  "ok": true,
+  "approved_to_execute": false,
+  "execution_performed": false,
+  "generated_at": 1778361917,
+  "mode": "pedro_omie_guarded_write_preflight_no_omie_call",
+  "checks": [
+    {
+      "name": "pedro_guard_exists",
+      "ok": true,
+      "detail": "/root/.openclaw/workspace/skills/pedro-controller-ivs/scripts/pedro_omie_action_guard.py"
+    },
+    {
+      "name": "action_gate_blocks_without_approval",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "exit_code": 0,
+        "json": {
+          "ok": false,
+          "agent": "pedro-controller-ivs",
+          "action": "omie_write",
+          "sensitivity": "financial",
+          "permission": {
+            "ok": false,
+            "decision": "write_with_approval",
+            "requires_approval": true,
+            "reason": "approval_required",
+            "agent": "pedro-controller-ivs",
+            "action": "omie_write",
+            "sensitivity": "financial",
+            "findings": []
+          },
+          "approval": {
+            "ok": false,
+            "matches": [],
+            "checked_at": 1778361916
+          },
+          "generated_at": 1778361917,
+          "mode": "action_gate_evaluation_no_execution",
+          "final": "BLOCK_APPROVAL_REQUIRED"
+        }
+      }
+    },
+    {
+      "name": "pedro_guard_blocks_without_approval",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "exit_code": 2,
+        "json": {
+          "raw": "usage: pedro_omie_action_guard.py [-h] [--approval-id APPROVAL_ID]\n                                  [--evidence EVIDENCE]\n                                  [--operation OPERATION]\n                                  [--mode {enforce,report}]\npedro_omie_action_guard.py: error: unrecognized arguments: --action omie_write --json\n"
+        }
+      }
+    },
+    {
+      "name": "omie_credentials_not_required_for_preflight",
+      "ok": true,
+      "detail": {
+        "present_masked": {
+          "OMIE_APP_KEY": false,
+          "OMIE_APP_SECRET": false
+        }
+      }
+    },
+    {
+      "name": "explicit_approval_present_for_write",
+      "ok": false,
+      "detail": {
+        "ok": false,
+        "reason": "not_supplied"
+      }
+    }
+  ],
+  "approval_packet": {
+    "action": "pedro_omie_write",
+    "required_phrase": "Autorizo Pedro executar escrita Omie com este payload aprovado agora",
+    "required_scope": "pedro_omie_write",
+    "payload_requirements": [
+      "tipo de operação",
+      "valor/cliente/documento quando aplicável",
+      "idempotency key",
+      "rollback/manual correction plan"
+    ],
+    "risk": "Escrita financeira real no Omie; pode gerar cobrança/lançamento incorreto se payload estiver errado."
+  },
+  "activation_steps_when_approved": [
+    "registrar approval no Approval Ledger",
+    "validar payload e idempotency key",
+    "rodar Pedro/Omie guard com approval",
+    "executar conector Omie apenas se guard liberar",
+    "registrar resposta Omie redigida",
+    "gerar RC-25"
+  ],
+  "rollback_steps": [
+    "não há rollback automático universal em financeiro",
+    "se escrita indevida, acionar Pedro/Tiaro para correção manual no Omie",
+    "registrar ocorrência e bloqueio preventivo do payload"
+  ],
+  "recommendation": "ready_for_explicit_approval_and_credential_review"
+}
