@@ -1,0 +1,196 @@
+{
+  "leads": {
+    "557193693078": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777414640
+    },
+    "557188067626": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777546597
+    },
+    "557196800509": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777463084
+    },
+    "557197256868": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777463191
+    },
+    "557599406785": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777465782
+    },
+    "557185040263": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777471313
+    },
+    "557199543781": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777571069
+    },
+    "557191151585": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777554322
+    },
+    "5521996677266": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777554526
+    },
+    "557191465748": {
+      "active": true,
+      "source": "existing_lead",
+      "updated_at": 1777570927
+    },
+    "557182381160": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777898159
+    },
+    "557188071337": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777898332
+    },
+    "557196319470": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777898508
+    },
+    "557581492991": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777898754
+    },
+    "557188225047": {
+      "active": true,
+      "source": "zapi_from_api_outbound",
+      "updated_at": 1778356453,
+      "first_seen_at": 1778356449,
+      "last_inbound_at": 1778356453,
+      "active_until": 1779566053,
+      "inbound_count": 3
+    },
+    "557582456631": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777899533
+    },
+    "557192931078": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777902357
+    },
+    "557199646264": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777912755
+    },
+    "557191029734": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777921591
+    },
+    "557188762126": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1777982630
+    },
+    "557191927242": {
+      "active": true,
+      "source": "new_contact",
+      "updated_at": 1778079496
+    },
+    "557197169258": {
+      "first_seen_at": 1778155480,
+      "active": true,
+      "source": "backfill_recent_zapi_outbound",
+      "last_inbound_at": 1778356154,
+      "active_until": 1779565754,
+      "inbound_count": 19,
+      "updated_at": 1778356154,
+      "last_reply_at": 1778331844,
+      "last_reply_preview": "Entendo, sem problema.\n\nFamília muitas vezes fica preocupada quando ainda não entende bem como funciona a avaliação.\n\nSó para eu te orientar com cuidado: a preo",
+      "reply_count": 11,
+      "internal_note": "Última mensagem enviada ao Vitor foi: solicitar link da pré-consulta e confirmar nome completo dele e da esposa. Não enviar novo follow-up proativo sem resposta dele; quando ele responder, continuar a partir desse contexto e não repetir a mensagem anterior."
+    },
+    "557199578879": {
+      "first_seen_at": 1778157210,
+      "active": true,
+      "source": "tiaro_requested_followup_maria_gabriela",
+      "last_inbound_at": 1778165368,
+      "active_until": 1779461613,
+      "inbound_count": 16,
+      "updated_at": 1778252013,
+      "last_reply_at": 1778252013,
+      "last_reply_preview": "Oi, Maria Gabriela. Passando para dar sequência ao seu atendimento por aqui.\n\nVocê conseguiu ver as informações da avaliação com a Dra. Daniely? A avaliação é o",
+      "reply_count": 12,
+      "do_not_reply": false
+    },
+    "5571995788879": {
+      "first_seen_at": 1778163677,
+      "active": true,
+      "source": "active_lead_window",
+      "last_inbound_at": 1778164187,
+      "active_until": 1779373790,
+      "inbound_count": 3,
+      "updated_at": 1778164190,
+      "last_reply_at": 1778164190,
+      "last_reply_preview": "Bom dia! Que bom te receber por aqui.\n\nO atendimento aqui é particular. Em alguns casos, Bradesco, SulAmérica e Amil podem funcionar via reembolso, e a nossa eq",
+      "reply_count": 2
+    },
+    "5516981852523": {
+      "first_seen_at": 1778185166,
+      "active": false,
+      "source": "tiaro_marked_not_lead",
+      "last_inbound_at": 1778251217,
+      "active_until": 0,
+      "inbound_count": 5,
+      "updated_at": 1778251879,
+      "last_reply_at": 1778251221,
+      "last_reply_preview": "Raony, não consigo te passar informações internas de parceiros ou fluxos operacionais da clínica por aqui.\n\nSe você quiser, pode deixar seu material e contato c",
+      "reply_count": 5,
+      "do_not_reply": true,
+      "note": "Raony/Onkos não é lead; Clara não deve responder."
+    },
+    "557188377569": {
+      "first_seen_at": 1778241356,
+      "active": true,
+      "source": "active_lead_window",
+      "last_inbound_at": 1778244224,
+      "active_until": 1779453830,
+      "inbound_count": 3,
+      "updated_at": 1778244230,
+      "last_reply_at": 1778244230,
+      "last_reply_preview": "Combinado.  por aqui\n\nPara deixar isso bem encaminhado: prefere que eu veja o próximo horário pela manhã ou pela tarde?",
+      "reply_count": 3
+    },
+    "557191749596": {
+      "first_seen_at": 1778356154,
+      "active": true,
+      "source": "backfill_recent_zapi_outbound",
+      "last_inbound_at": 1778356154,
+      "active_until": 1779565754,
+      "inbound_count": 1,
+      "updated_at": 1778356154
+    },
+    "5571991749596": {
+      "first_seen_at": 1778356154,
+      "active": true,
+      "source": "backfill_recent_zapi_outbound",
+      "last_inbound_at": 1778356154,
+      "active_until": 1779565754,
+      "inbound_count": 1,
+      "updated_at": 1778356154
+    }
+  },
+  "updated_at": 1778356453
+}
