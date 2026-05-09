@@ -662,3 +662,13 @@ Artefatos:
 - `/root/deliverables/external-backup-four-inputs-review.json`
 
 Workflow: `rclone-binary-install-governance`.
+
+## Rclone Remote Intake
+
+Pacote read-only para configurar remote rclone com governança. Não cria remote, não grava credenciais e não exporta backup.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_rclone_remote_intake_packet.py --json
+```
+
+Workflow: `rclone-remote-intake`.

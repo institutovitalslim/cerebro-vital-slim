@@ -1,0 +1,20 @@
+{
+  "id": "rclone-remote-intake",
+  "name": "Rclone Remote Intake",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar configuração governada de remote rclone sem criar credenciais, sem gravar tokens e sem exportar backup.",
+  "mode": "read-only remote intake no credentials",
+  "entry_criteria": ["rclone instalado", "remote ainda não configurado", "Tiaro pediu seguir"],
+  "preflight": ["verificar rclone listremotes", "gerar campos obrigatórios", "listar comandos seguros pós-configuração", "bloquear export real"],
+  "allowed_actions": ["rclone listremotes", "gerar packet JSON/HTML", "validar nome do remote"],
+  "blocked_actions": ["rclone config create", "armazenar token", "exportar backup", "registrar approval"],
+  "outputs": ["rclone-remote-intake-packet.json", "rclone-remote-intake-packet.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_rclone_remote_intake_packet.py"],
+  "severity_rules": {
+    "HIGH": ["token em artefato", "remote criado sem autorização", "backup exportado"],
+    "MEDIUM": ["tipo de remote indefinido"],
+    "LOW": ["aguardando configuração manual"],
+    "OK": ["packet gerado sem credenciais"]
+  }
+}

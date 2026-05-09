@@ -1,0 +1,68 @@
+{
+  "ok": true,
+  "generated_at": 1778367614,
+  "mode": "rclone_remote_intake_no_credentials_no_export",
+  "remote_name": "remote",
+  "remote_type": null,
+  "rclone": {
+    "installed": true,
+    "remotes": []
+  },
+  "recommended_remote_types": [
+    "s3",
+    "drive",
+    "b2",
+    "sftp",
+    "webdav"
+  ],
+  "required_inputs": [
+    {
+      "field": "remote_type",
+      "examples": [
+        "s3",
+        "drive",
+        "b2",
+        "sftp",
+        "webdav"
+      ],
+      "required": true
+    },
+    {
+      "field": "provider/account",
+      "description": "qual storage será usado; sem colar tokens no Telegram/cérebro",
+      "required": true
+    },
+    {
+      "field": "credential_setup_method",
+      "examples": [
+        "rclone config no terminal seguro",
+        "env vars fora do cérebro",
+        "arquivo config fora do repositório"
+      ],
+      "required": true
+    },
+    {
+      "field": "test_command_expected",
+      "example": "rclone lsd remote:",
+      "required": true
+    },
+    {
+      "field": "destination_path",
+      "example": "remote:ivs-agent-os-backups",
+      "required": true
+    }
+  ],
+  "safe_commands_after_credentials_configured": [
+    "rclone listremotes",
+    "rclone lsd remote:",
+    "rclone copy --dry-run /root/agent-os-offsite/ivs-agent-os remote:ivs-agent-os-backups"
+  ],
+  "blocked_by_design": [
+    "não executa rclone config create",
+    "não pede token no chat",
+    "não grava credencial no cérebro",
+    "não executa rclone copy real",
+    "não registra approval"
+  ],
+  "findings": []
+}
