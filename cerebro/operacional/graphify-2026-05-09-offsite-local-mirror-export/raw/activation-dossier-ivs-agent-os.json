@@ -1,0 +1,71 @@
+{
+  "ok": true,
+  "generated_at": 1778364448,
+  "mode": "read_only_executive_activation_dossier",
+  "summary": {
+    "readiness_status": "READY",
+    "readiness_score": 100,
+    "pending_approvals": 1,
+    "executed_sensitive_actions": 2,
+    "drift_findings": 0,
+    "recommendation": "operate_shadow_and_wait_explicit_approvals"
+  },
+  "pending_approvals": [
+    {
+      "id": "clara_phase2_enforcement",
+      "title": "Ativar Clara Action Gate Enforcement",
+      "status": "activated",
+      "risk": "atendimento externo / bloqueio indevido de follow-up administrativo",
+      "required_phrase": "Autorizo ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 na Clara agora",
+      "scope": "clara_enforcement_phase2",
+      "preflight_ok": true,
+      "execution_performed": true,
+      "source": "clara-enforcement-phase2-preflight-latest.json"
+    },
+    {
+      "id": "pedro_omie_write",
+      "title": "Pedro executar escrita real no Omie",
+      "status": "pending_payload_and_explicit_approval",
+      "risk": "escrita financeira real no Omie",
+      "required_phrase": "Autorizo Pedro executar escrita Omie com este payload aprovado agora",
+      "scope": "pedro_omie_write",
+      "preflight_ok": true,
+      "execution_performed": false,
+      "source": "pedro-omie-write-preflight-latest.json"
+    },
+    {
+      "id": "offsite_backup_export",
+      "title": "Exportar backup Agent OS para destino externo/local mirror",
+      "status": "executed_local_mirror",
+      "risk": "movimentação de artefatos para fora do runtime local",
+      "required_phrase": "Autorizo exportar o backup Agent OS para este destino aprovado agora",
+      "scope": "offsite_backup_export",
+      "preflight_ok": true,
+      "execution_performed": true,
+      "source": "agent-os-offsite-backup-latest.json"
+    }
+  ],
+  "recommendations": [
+    "Clara Phase 2 enforcement ativada; manter watch por 24h.",
+    "Não executar Pedro/Omie write sem payload revisado, approval e credenciais conferidas.",
+    "Offsite local_mirror executado; manter export externo/rclone bloqueado sem novo destino explícito e approval.",
+    "Usar Approval Queue como painel de pendências; ela não registra aprovação."
+  ],
+  "source_files": {
+    "readiness": "/root/deliverables/agent-os-readiness-scorecard.json",
+    "ci": "/root/deliverables/agent-os-ci-latest.json",
+    "registry": "/root/deliverables/workflow-registry-after-approval-queue.json",
+    "queue": "/root/deliverables/approval-queue-ivs-agent-os.json",
+    "clara_shadow": "/root/deliverables/clara-action-gate-shadow-latest.json",
+    "clara_phase2": "/root/deliverables/clara-enforcement-phase2-preflight-latest.json",
+    "pedro_omie": "/root/deliverables/pedro-omie-write-preflight-latest.json",
+    "offsite": "/root/deliverables/agent-os-offsite-backup-latest.json",
+    "drift": "/root/deliverables/agent-os-drift-report.json"
+  },
+  "guardrails": [
+    "read-only dossier",
+    "does not approve",
+    "does not execute",
+    "does not expose secrets"
+  ]
+}

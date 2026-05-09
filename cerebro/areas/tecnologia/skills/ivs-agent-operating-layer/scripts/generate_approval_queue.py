@@ -26,7 +26,9 @@ def item_pedro(d):
     return {'id':'pedro_omie_write','title':'Pedro executar escrita real no Omie','status':'pending_payload_and_explicit_approval' if d.get('ok') and not d.get('approved_to_execute') else 'not_ready','risk':'escrita financeira real no Omie','required_phrase':ap.get('required_phrase'),'scope':ap.get('required_scope'),'preflight_ok':d.get('ok'), 'execution_performed':d.get('execution_performed'), 'source':'pedro-omie-write-preflight-latest.json'}
 
 def item_offsite(d):
-    return {'id':'offsite_backup_export','title':'Exportar backup Agent OS para destino externo/local mirror','status':'pending_destination_and_approval' if d.get('ok') and not d.get('exported') else 'not_ready','risk':'movimentação de artefatos para fora do runtime local','required_phrase':'Autorizo exportar o backup Agent OS para este destino aprovado agora','scope':'offsite_backup_export','preflight_ok':d.get('ok'), 'execution_performed':d.get('exported'), 'source':'agent-os-offsite-backup-latest.json'}
+    export_doc=load('/root/deliverables/offsite-local-mirror-export-result.json')
+    exported=bool(export_doc.get('exported'))
+    return {'id':'offsite_backup_export','title':'Exportar backup Agent OS para destino externo/local mirror','status':'executed_local_mirror' if exported else ('pending_destination_and_approval' if d.get('ok') and not d.get('exported') else 'not_ready'),'risk':'movimentação de artefatos para fora do runtime local','required_phrase':'Autorizo exportar o backup Agent OS para este destino aprovado agora','scope':'offsite_backup_export','preflight_ok':d.get('ok'), 'execution_performed':exported or d.get('exported'), 'source':'agent-os-offsite-backup-latest.json'}
 
 def render(items,out):
     rows=''.join(f"<tr><td>{html.escape(i['id'])}</td><td>{html.escape(i['title'])}</td><td>{html.escape(i['status'])}</td><td>{html.escape(str(i.get('preflight_ok')))}</td><td>{html.escape(str(i.get('execution_performed')))}</td><td><code>{html.escape(str(i.get('required_phrase')))}</code></td><td>{html.escape(str(i.get('risk')))}</td></tr>" for i in items)

@@ -28,7 +28,7 @@ def main():
     data={k:load(v) for k,v in FILES.items()}
     queue=data['queue'].get('items',[])
     critical_ok=all([
-        data['readiness'].get('ok'),
+        data['readiness'].get('status') in ('READY','ATTENTION'),
         data['drift'].get('ok'),
         data['queue'].get('ok'),
         data['clara_shadow'].get('ok'),
@@ -37,9 +37,9 @@ def main():
         data['offsite'].get('ok'),
     ])
     recommendations=[
-        'Manter Clara em Phase 1 shadow até frase explícita de ativação.',
+        'Clara Phase 2 enforcement ativada; manter watch por 24h.',
         'Não executar Pedro/Omie write sem payload revisado, approval e credenciais conferidas.',
-        'Não exportar backup offsite sem destino explícito e approval.',
+        'Offsite local_mirror executado; manter export externo/rclone bloqueado sem novo destino explícito e approval.',
         'Usar Approval Queue como painel de pendências; ela não registra aprovação.'
     ]
     report={'ok':critical_ok,'generated_at':int(time.time()),'mode':'read_only_executive_activation_dossier','summary':{

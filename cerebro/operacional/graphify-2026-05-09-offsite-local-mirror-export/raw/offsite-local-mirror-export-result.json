@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "generated_at": 1778364310,
+  "mode": "offsite_backup_local_mirror",
+  "backup": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/backups/agent-os-backup-20260509-220510.tar.gz",
+  "backup_verified": true,
+  "destination_configured": true,
+  "destination_mode": "local_mirror",
+  "destination_preview": "/root/ag***",
+  "apply_requested": true,
+  "exported": true,
+  "gate": {
+    "ok": true,
+    "agent": "maria-gerente",
+    "action": "offsite_backup_export",
+    "sensitivity": "tech",
+    "permission": {
+      "ok": true,
+      "decision": "read_only",
+      "requires_approval": false,
+      "approved": true,
+      "agent": "maria-gerente",
+      "action": "offsite_backup_export",
+      "sensitivity": "tech",
+      "evidence": [],
+      "findings": [],
+      "generated_at": 1778364310,
+      "mode": "permission_evaluation_no_execution"
+    },
+    "approval": {
+      "ok": true,
+      "matches": [
+        {
+          "approval_id": "appr-492641c02baa",
+          "agent": "maria-gerente",
+          "action": "offsite_backup_export",
+          "approved_by": "Tiaro F. Neves",
+          "evidence": "Telegram: Tiaro respondeu \"Eu autorizo\" em sequência ao pedido de autorização para exportar o backup Agent OS para /root/agent-os-offsite/ivs-agent-os agora.",
+          "scope": "offsite_backup_export local_mirror destination=/root/agent-os-offsite/ivs-agent-os",
+          "created_at": 1778364310,
+          "expires_at": 1778366110,
+          "mode": "approval_record_no_execution"
+        }
+      ],
+      "checked_at": 1778364310
+    },
+    "generated_at": 1778364310,
+    "mode": "action_gate_evaluation_no_execution",
+    "final": "ALLOW_BY_POLICY_BUT_NO_EXECUTION"
+  },
+  "export_path": "/root/agent-os-offsite/ivs-agent-os/agent-os-backup-20260509-220510.tar.gz"
+}

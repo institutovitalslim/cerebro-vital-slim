@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "backup": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/backups/agent-os-backup-20260509-220510.tar.gz",
+  "export_path": "/root/agent-os-offsite/ivs-agent-os/agent-os-backup-20260509-220510.tar.gz",
+  "backup_sha256": "0e3a701ae67927bf6a8234e894be16028bfb501ea6fb62b4866f000a0fea722e",
+  "export_sha256": "0e3a701ae67927bf6a8234e894be16028bfb501ea6fb62b4866f000a0fea722e",
+  "backup_size": 32623,
+  "export_size": 32623
+}

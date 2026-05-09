@@ -1,0 +1,20 @@
+{
+  "id": "offsite-local-mirror-export",
+  "name": "Offsite Local Mirror Export",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Exportar backup Agent OS para local mirror aprovado sob /root/agent-os-offsite, com approval ledger, Action Gate e verificação de checksum.",
+  "mode": "sensitive approved local export",
+  "entry_criteria": ["Tiaro autorizou explicitamente", "destino local_mirror definido", "approval ledger registrado", "backup readiness OK"],
+  "preflight": ["rodar Clara watch", "registrar approval", "executar agent_os_offsite_backup --apply", "verificar checksum", "atualizar fila e dossiê"],
+  "allowed_actions": ["copiar backup para /root/agent-os-offsite", "verificar checksum", "registrar evidências"],
+  "blocked_actions": ["usar rclone", "exportar para fora do allowed_prefix", "criar credencial", "exportar sem approval_id"],
+  "outputs": ["offsite-local-mirror-approval.json", "offsite-local-mirror-export-result.json", "offsite-local-mirror-export-verify.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_offsite_backup.py"],
+  "severity_rules": {
+    "HIGH": ["checksum divergente", "exportação fora do allowed_prefix", "exportação sem approval"],
+    "MEDIUM": ["backup verify falhou"],
+    "LOW": ["export local concluído; offsite externo ainda pendente"],
+    "OK": ["export local_mirror verificado"]
+  }
+}

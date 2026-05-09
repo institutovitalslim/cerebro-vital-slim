@@ -590,3 +590,13 @@ Preflight read-only para exportar backup Agent OS para `/root/agent-os-offsite/i
 Artefato: `/root/deliverables/offsite-local-mirror-approval-packet.json`.
 
 Workflow: `offsite-local-mirror-approval-preflight`.
+
+## Offsite Local Mirror Export
+
+Exportação sensível aprovada para `/root/agent-os-offsite/ivs-agent-os`, com Approval Ledger, Action Gate e verificação de checksum.
+
+Artefatos:
+- `/root/deliverables/offsite-local-mirror-export-result.json`
+- `/root/deliverables/offsite-local-mirror-export-verify.json`
+
+Workflow: `offsite-local-mirror-export`.

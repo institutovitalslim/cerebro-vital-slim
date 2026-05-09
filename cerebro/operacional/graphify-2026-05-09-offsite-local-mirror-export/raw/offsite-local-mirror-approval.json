@@ -1,0 +1,11 @@
+{
+  "approval_id": "appr-492641c02baa",
+  "agent": "maria-gerente",
+  "action": "offsite_backup_export",
+  "approved_by": "Tiaro F. Neves",
+  "evidence": "Telegram: Tiaro respondeu \"Eu autorizo\" em sequência ao pedido de autorização para exportar o backup Agent OS para /root/agent-os-offsite/ivs-agent-os agora.",
+  "scope": "offsite_backup_export local_mirror destination=/root/agent-os-offsite/ivs-agent-os",
+  "created_at": 1778364310,
+  "expires_at": 1778366110,
+  "mode": "approval_record_no_execution"
+}

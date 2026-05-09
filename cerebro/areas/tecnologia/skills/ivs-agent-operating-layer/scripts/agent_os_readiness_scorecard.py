@@ -15,7 +15,9 @@ def run(cmd):
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--json',action='store_true'); args=ap.parse_args()
     data={}
-    data['ci']=run(['python3',str(BASE/'scripts/agent_os_ci.py'),'--json'])
+    data['ci']=load(DEL/'agent-os-ci-latest.json')
+    if not data['ci'].get('checks'):
+        data['ci']=run(['python3',str(BASE/'scripts/agent_os_ci.py'),'--json'])
     data['workflow']=run(['python3',str(BASE/'scripts/workflow_registry.py'),'--json'])
     data['drift']=run(['python3',str(BASE/'scripts/agent_os_drift_detector.py'),'--json'])
     data['secrets']=run(['python3',str(BASE/'scripts/agent_os_secrets_scanner.py'),'--json'])

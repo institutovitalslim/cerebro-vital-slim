@@ -1,0 +1,1267 @@
+{
+  "ok": true,
+  "generated_at": 1778364442,
+  "mode": "read_only_registry_validation",
+  "totals": {
+    "workflows": 44,
+    "findings": 0
+  },
+  "workflows": [
+    {
+      "id": "action-gate-approval",
+      "name": "Action Gate + Approval Ledger IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "approval ledger and no-execution gate",
+      "scope": "Registrar aprovações explícitas e avaliar ações sensíveis combinando policy gate e approval ledger, sem executar a ação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/action-gate-approval.json",
+      "entry_count": 5,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "ação forbidden",
+          "write sem aprovação"
+        ],
+        "MEDIUM": [
+          "aprovação sem evidência robusta"
+        ],
+        "LOW": [
+          "aprovação expirada"
+        ],
+        "OK": [
+          "aprovação vigente e policy ok"
+        ]
+      }
+    },
+    {
+      "id": "activation-dossier-governance",
+      "name": "Dossier Executivo de Ativação IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only executive dossier",
+      "scope": "Consolidar readiness, aprovações pendentes, riscos e rollback em dossier read-only para decisão do Tiaro.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/activation-dossier-governance.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "dossier executou ação sensível"
+        ],
+        "MEDIUM": [
+          "fonte crítica ausente"
+        ],
+        "LOW": [
+          "aprovação pendente"
+        ],
+        "OK": [
+          "dossier gerado com readiness READY"
+        ]
+      }
+    },
+    {
+      "id": "agent-layer-audit",
+      "name": "IVS Agent Operating Layer Audit",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only consolidated audit",
+      "scope": "Consolidar Clara/Z-API, Pré-consulta e Marketing OS/João em uma visão executiva única.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-layer-audit.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "qualquer área com HIGH",
+          "monitor crítico falhou"
+        ],
+        "MEDIUM": [
+          "qualquer área com MEDIUM sem HIGH"
+        ],
+        "LOW": [
+          "somente achados LOW"
+        ],
+        "OK": [
+          "sem achados"
+        ]
+      }
+    },
+    {
+      "id": "agent-learning-autonomy",
+      "name": "Autonomia Evolutiva dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria + agentes IVS + conselhos",
+      "mode": "autonomous learning with guarded promotion; no external content becomes rule without validation",
+      "scope": "Garantir que Maria, Clara, João, Pedro e agentes do conselho evoluam continuamente com aprendizado externo de pesquisas, perfis de Instagram/X e canais do YouTube, sempre com governança IVS.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-learning-autonomy.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 5,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "aprendizado externo virou regra sensível sem validação",
+          "conteúdo clínico/financeiro aplicado como prescrição/decisão"
+        ],
+        "MEDIUM": [
+          "fonte falhou repetidamente",
+          "aprendizado sem métrica",
+          "conteúdo com tom incompatível com IVS"
+        ],
+        "LOW": [
+          "brief gerado e aguardando teste"
+        ],
+        "OK": [
+          "aprendizado classificado com fonte, aplicação, métrica e risco"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-cockpit",
+      "name": "Cockpit Único IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only unified cockpit",
+      "scope": "Consolidar capacidades, workflows, runs, eventos e matriz de permissões em uma visão executiva única.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-cockpit.json",
+      "entry_count": 3,
+      "preflight_count": 6,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "fonte crítica com HIGH",
+          "erro que impeça visão operacional"
+        ],
+        "MEDIUM": [
+          "erro parcial de coleta",
+          "achado MEDIUM em permissões/capacidades"
+        ],
+        "LOW": [
+          "achados informativos",
+          "documentação incompleta"
+        ],
+        "OK": [
+          "todas as fontes coletadas sem achados relevantes"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-command-center",
+      "name": "Command Center IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "safe CLI, no sensitive execution",
+      "scope": "Ponto único seguro para status, refresh de cockpits, backup, alertas, testes e avaliação de gates.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-command-center.json",
+      "entry_count": 3,
+      "preflight_count": 3,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "CLI executa ação sensível"
+        ],
+        "MEDIUM": [
+          "teste falhou"
+        ],
+        "LOW": [
+          "artefato faltante"
+        ],
+        "OK": [
+          "comando seguro concluído"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-critical-alerts",
+      "name": "Alertas Críticos IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only alert evaluator",
+      "scope": "Avaliar sinais críticos do Agent OS sem enviar mensagens automaticamente.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-critical-alerts.json",
+      "entry_count": 3,
+      "preflight_count": 3,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "cockpit HIGH",
+          "coleta crítica quebrada"
+        ],
+        "MEDIUM": [
+          "run failed/blocked"
+        ],
+        "LOW": [
+          "mudança menor"
+        ],
+        "OK": [
+          "sem alertas"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-cron-governance-final",
+      "name": "Cron Governance Final IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only cron reconciliation",
+      "scope": "Auditar crons reais do Gateway contra o registry operacional do Agent OS, sem alterar agendamentos.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-cron-governance-final.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "cron sensível órfão com ação externa"
+        ],
+        "MEDIUM": [
+          "cron Agent OS sem registry",
+          "workflow referenciado inexistente"
+        ],
+        "LOW": [
+          "nome duplicado",
+          "cron desabilitado presente"
+        ],
+        "OK": [
+          "gateway e registry reconciliados"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-daily-audit",
+      "name": "Auditoria Diária IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only daily audit",
+      "scope": "Executar auditoria consolidada diária do Agent OS IVS, gerar cockpit único e detectar mudanças de estado.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-daily-audit.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "cockpit status HIGH",
+          "erro crítico de coleta"
+        ],
+        "MEDIUM": [
+          "cockpit status MEDIUM",
+          "mudança relevante em fonte crítica"
+        ],
+        "LOW": [
+          "status LOW por documentação/achado informativo"
+        ],
+        "OK": [
+          "cockpit OK e sem mudança relevante"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-disaster-recovery",
+      "name": "Disaster Recovery IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only verify and dry-run restore plan",
+      "scope": "Verificar backups e gerar plano de restauração seguro do Agent OS sem restauração automática.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-disaster-recovery.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "backup inválido",
+          "path traversal",
+          "restore apply solicitado"
+        ],
+        "MEDIUM": [
+          "backup sem diretórios obrigatórios"
+        ],
+        "LOW": [
+          "backup antigo"
+        ],
+        "OK": [
+          "backup verificado e plano dry-run gerado"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-drift-detection",
+      "name": "Drift Detection IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only hash comparison",
+      "scope": "Detectar divergência entre runtime skills e cópias canônicas do cérebro.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-drift-detection.json",
+      "entry_count": 3,
+      "preflight_count": 3,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "skill crítico ausente"
+        ],
+        "MEDIUM": [
+          "hash mismatch ou arquivo runtime não canônico"
+        ],
+        "LOW": [
+          "arquivo canônico não usado"
+        ],
+        "OK": [
+          "sem drift"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-live-cockpit",
+      "name": "Cockpit Vivo IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only auto-refresh html",
+      "scope": "Gerar HTML autoatualizável do Agent OS com link para cockpit detalhado.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-live-cockpit.json",
+      "entry_count": 2,
+      "preflight_count": 3,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "exposição de secret"
+        ],
+        "MEDIUM": [
+          "fonte quebrada"
+        ],
+        "LOW": [
+          "refresh desatualizado"
+        ],
+        "OK": [
+          "HTML gerado"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-local-ci",
+      "name": "CI Local IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "local CI no external side effects",
+      "scope": "Rodar testes e validações locais antes/depois de mudanças em workflows, skills e guards.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-local-ci.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "teste crítico falhou"
+        ],
+        "MEDIUM": [
+          "cockpit não gera"
+        ],
+        "LOW": [
+          "warning não bloqueante"
+        ],
+        "OK": [
+          "CI verde"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-offsite-backup-readiness",
+      "name": "Offsite Backup Readiness IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "readiness by default; apply requires approval",
+      "scope": "Preparar e validar exportação offsite de backups do Agent OS sem enviar dados para fora por padrão.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-offsite-backup-readiness.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "export sem approval",
+          "credencial exposta"
+        ],
+        "MEDIUM": [
+          "backup inválido",
+          "destino não configurado quando apply solicitado"
+        ],
+        "LOW": [
+          "readiness sem destino configurado"
+        ],
+        "OK": [
+          "readiness OK ou export local allowlistado com approval"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-production-activation-plan",
+      "name": "Production Activation Plan IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only plan validation; activation requires explicit approval",
+      "scope": "Planejar e validar ativação faseada de enforcement/produção do IVS Agent OS sem executar ações sensíveis automaticamente.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-production-activation-plan.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "toggle sensível ativado sem approval",
+          "ação externa executada pelo plano"
+        ],
+        "MEDIUM": [
+          "CI falhou",
+          "cockpit service parado"
+        ],
+        "LOW": [
+          "fase 1 shadow pendente"
+        ],
+        "OK": [
+          "fase 0 e 1 shadow prontas"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-protected-cockpit-server",
+      "name": "Cockpit Interno Protegido IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "local protected server",
+      "scope": "Servir cockpits e artefatos allowlistados em HTTP local protegido por token.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-protected-cockpit-server.json",
+      "entry_count": 2,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "servidor público sem token",
+          "path traversal"
+        ],
+        "MEDIUM": [
+          "token exposto em log público"
+        ],
+        "LOW": [
+          "arquivo allowlistado ausente"
+        ],
+        "OK": [
+          "servidor local protegido"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-protected-cockpit-service",
+      "name": "Serviço Cockpit Protegido IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "localhost protected service manager",
+      "scope": "Gerenciar o servidor local protegido do cockpit Agent OS com start/stop/status/restart em localhost.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-protected-cockpit-service.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "servidor público",
+          "acesso sem token retorna 200"
+        ],
+        "MEDIUM": [
+          "serviço parado"
+        ],
+        "LOW": [
+          "log ausente"
+        ],
+        "OK": [
+          "localhost protegido ativo"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-rc25-pipeline",
+      "name": "Pipeline RC-25 IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "preflight no external side effects",
+      "scope": "Rodar preflight de CI, índice de artefatos e drift antes de registrar mudança canônica.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-rc25-pipeline.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "CI falhou"
+        ],
+        "MEDIUM": [
+          "drift detectado"
+        ],
+        "LOW": [
+          "artefato faltante"
+        ],
+        "OK": [
+          "preflight verde"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-readiness-scorecard",
+      "name": "Readiness Scorecard IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only readiness scoring",
+      "scope": "Calcular pontuação de prontidão do Agent OS com base em CI, drift, secrets, backup, restore, alertas e cockpit.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-readiness-scorecard.json",
+      "entry_count": 3,
+      "preflight_count": 6,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "score < 80"
+        ],
+        "MEDIUM": [
+          "score 80-94"
+        ],
+        "LOW": [
+          "critério menor falhou"
+        ],
+        "OK": [
+          "score >= 95"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-release-bundle",
+      "name": "Release Bundle IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "sanitized bundle no secrets",
+      "scope": "Gerar pacote sanitizado de release do Agent OS sem secrets, backups ou token local.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-release-bundle.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "secret no bundle"
+        ],
+        "MEDIUM": [
+          "bundle incompleto"
+        ],
+        "LOW": [
+          "artefato opcional ausente"
+        ],
+        "OK": [
+          "bundle gerado com hash"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-retention-backup",
+      "name": "Retention e Backup IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "backup read-only; prune only explicit",
+      "scope": "Backup e retenção dos runs, eventos, aprovações, políticas e workflows do Agent OS.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-retention-backup.json",
+      "entry_count": 2,
+      "preflight_count": 3,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "backup falhou"
+        ],
+        "MEDIUM": [
+          "prune removeu arquivos"
+        ],
+        "LOW": [
+          "backup vazio"
+        ],
+        "OK": [
+          "backup gerado"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-security-compliance",
+      "name": "Security Compliance IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only security audit",
+      "scope": "Auditar vazamento de secrets e gerar manifest de integridade dos artefatos/skills do Agent OS.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-security-compliance.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "secret real detectado",
+          "token em deliverable"
+        ],
+        "MEDIUM": [
+          "assignment suspeito"
+        ],
+        "LOW": [
+          "placeholder suspeito"
+        ],
+        "OK": [
+          "0 findings e manifest gerado"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-trends",
+      "name": "Tendências IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only analytics",
+      "scope": "Gerar análise histórica de runs, eventos e aprovações para evolução operacional.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-trends.json",
+      "entry_count": 3,
+      "preflight_count": 3,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "falha massiva"
+        ],
+        "MEDIUM": [
+          "runs failed/blocked recorrentes"
+        ],
+        "LOW": [
+          "aprovações expiradas"
+        ],
+        "OK": [
+          "dashboard gerado"
+        ]
+      }
+    },
+    {
+      "id": "approval-console",
+      "name": "Approval Console IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "static read-only console",
+      "scope": "Gerar console estático de aprovações para orientar registros explícitos sem executar ações.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/approval-console.json",
+      "entry_count": 2,
+      "preflight_count": 3,
+      "blocked_count": 3,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "aprovação falsa"
+        ],
+        "MEDIUM": [
+          "aprovação expirada usada"
+        ],
+        "LOW": [
+          "ledger vazio"
+        ],
+        "OK": [
+          "console gerado"
+        ]
+      }
+    },
+    {
+      "id": "approval-queue-governance",
+      "name": "Fila de Aprovações IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only no-execution",
+      "scope": "Consolidar aprovações pendentes de ações sensíveis em console read-only, sem registrar aprovação nem executar ação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/approval-queue-governance.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "approval criado pelo console",
+          "ação sensível executada"
+        ],
+        "MEDIUM": [
+          "preflight ausente"
+        ],
+        "LOW": [
+          "pendência aguardando Tiaro"
+        ],
+        "OK": [
+          "fila read-only gerada"
+        ]
+      }
+    },
+    {
+      "id": "capability-governance",
+      "name": "Governança de Capacidades dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only capability registry",
+      "scope": "Inventariar agentes, skills, subagentes, workflows e riscos operacionais antes de ampliar autonomia ou corrigir bloqueios.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/capability-governance.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "skill externa crítica em Clara sem guardrail",
+          "configuração inválida que exponha paciente/lead"
+        ],
+        "MEDIUM": [
+          "skill esperada ausente",
+          "handoff financeiro/clínico sem dono"
+        ],
+        "LOW": [
+          "skill sem SKILL.md",
+          "documentação incompleta"
+        ],
+        "OK": [
+          "inventário íntegro e sem achados relevantes"
+        ]
+      }
+    },
+    {
+      "id": "clara-action-gate-shadow",
+      "name": "Clara Action Gate Shadow — Phase 1",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only dry-run; no WhatsApp real; no env toggle",
+      "scope": "Validar shadow/read-only do Action Gate da Clara antes de qualquer enforcement em produção.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/clara-action-gate-shadow.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "mensagem real enviada",
+          "paciente bloqueado liberado",
+          "enforcement ativado sem aprovação"
+        ],
+        "MEDIUM": [
+          "healthz falhou",
+          "Action Gate indisponível"
+        ],
+        "LOW": [
+          "shadow pendente"
+        ],
+        "OK": [
+          "shadow validado sem envio externo"
+        ]
+      }
+    },
+    {
+      "id": "clara-enforcement-phase2-activation",
+      "name": "Clara Enforcement Phase 2 Activation",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "controlled activation with no real WhatsApp validation",
+      "scope": "Ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 após autorização do Tiaro, com approval, restart controlado, validação e rollback documentado.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/clara-enforcement-phase2-activation.json",
+      "entry_count": 4,
+      "preflight_count": 7,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "env ativado sem approval",
+          "approval_id omitido aceitou envio",
+          "paciente bloqueado liberado"
+        ],
+        "MEDIUM": [
+          "healthz falhou",
+          "rollback ausente"
+        ],
+        "LOW": [
+          "monitoramento pós-ativação pendente"
+        ],
+        "OK": [
+          "enforcement ativo e bloqueando sem approval_id"
+        ]
+      }
+    },
+    {
+      "id": "clara-enforcement-phase2-preflight",
+      "name": "Clara Enforcement Phase 2 Preflight",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "preflight/no-toggle-change",
+      "scope": "Preparar aprovação, passos e rollback para ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 sem executar a ativação automaticamente.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/clara-enforcement-phase2-preflight.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "toggle ativado sem aprovação",
+          "mensagem externa enviada no preflight"
+        ],
+        "MEDIUM": [
+          "shadow falhou",
+          "rollback ausente"
+        ],
+        "LOW": [
+          "aguardando aprovação explícita"
+        ],
+        "OK": [
+          "preflight pronto para aprovação explícita"
+        ]
+      }
+    },
+    {
+      "id": "clara-phase2-extended-watch",
+      "name": "Clara Phase 2 Extended Watch",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only temporal watch",
+      "scope": "Acompanhar a estabilidade da Clara após ativação Phase 2 em modo read-only, sem pausar, sem alterar env e sem enviar WhatsApp.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/clara-phase2-extended-watch.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "status phase2 not ok",
+          "bridge down",
+          "patient block bypass"
+        ],
+        "MEDIUM": [
+          "admin_send failures",
+          "recent traceback"
+        ],
+        "LOW": [
+          "admin_send success detectado"
+        ],
+        "OK": [
+          "watch sem HIGH"
+        ]
+      }
+    },
+    {
+      "id": "cron-governance",
+      "name": "Cron Governance IVS",
+      "owner": "Maria",
+      "executor": "Maria + IVS Agent Operating Layer",
+      "mode": "state-changing only for cron lifecycle after operational review; no patient contact and no production mutation beyond cron removal/update",
+      "scope": "Governar crons ativos: inventariar, classificar por workflow, cancelar redundâncias e manter apenas rotinas com função operacional clara.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/cron-governance.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "cron ativo executa ação sensível sem guardrail",
+          "cron de paciente removido sem evidência"
+        ],
+        "MEDIUM": [
+          "cron duplicado",
+          "cron com falhas recorrentes",
+          "cron sem workflow claro"
+        ],
+        "LOW": [
+          "cron rastreado e classificado"
+        ],
+        "OK": [
+          "inventário validado sem pendências"
+        ]
+      }
+    },
+    {
+      "id": "followup-seguro",
+      "name": "Follow-up Seguro Clara/Z-API",
+      "owner": "Maria",
+      "executor": "Clara-WhatsApp",
+      "mode": "state-changing only with explicit Tiaro authorization for real sends",
+      "scope": "Envio seguro de follow-up para leads pelo Z-API, com bloqueio conservador para pacientes conhecidos e do_not_reply.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/followup-seguro.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "tentativa de envio para patient_do_not_reply",
+          "envio real sem autorização explícita"
+        ],
+        "MEDIUM": [
+          "lead ativo bloqueado como patient-like",
+          "override manual ativo"
+        ],
+        "LOW": [
+          "dry_run aprovado sem envio real"
+        ]
+      }
+    },
+    {
+      "id": "handoff-operacional",
+      "name": "Handoff Operacional Seguro entre Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "handoff packet no-delivery",
+      "scope": "Transferir contexto e próxima ação entre Maria, Clara, João, Pedro e conselhos sem vazamento de bastidores e sem perda de guardrails.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/handoff-operacional.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "Clara recebendo paciente/clínico para resposta direta",
+          "prescrição/diagnóstico no pacote"
+        ],
+        "MEDIUM": [
+          "financeiro indo para agente não financeiro",
+          "agente desconhecido"
+        ],
+        "LOW": [
+          "evidência ausente",
+          "deadline ausente"
+        ],
+        "OK": [
+          "handoff classificado e seguro"
+        ]
+      }
+    },
+    {
+      "id": "marketing-os",
+      "name": "Marketing OS João",
+      "owner": "Maria",
+      "executor": "João",
+      "mode": "read-only monitor; Maria corrige execução, João executa marketing",
+      "scope": "Monitorar continuidade operacional do João em marketing, reels, HTMLs, backlog e regras canônicas.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/marketing-os.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "regra canônica ausente",
+          "falha estrutural de entrega crítica"
+        ],
+        "MEDIUM": [
+          "HTML não enviado no outbound",
+          "marcador de sessão travada",
+          "erro de mídia"
+        ],
+        "LOW": [
+          "backlog ativo monitorado"
+        ]
+      }
+    },
+    {
+      "id": "observability-events",
+      "name": "Observabilidade de Eventos Operacionais IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only redacted events",
+      "scope": "Normalizar eventos de agentes, Z-API, workflows e entregáveis em feed seguro para diagnóstico e cockpit.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/observability-events.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "pausa global Clara",
+          "auto-pause",
+          "evento crítico de produção"
+        ],
+        "MEDIUM": [
+          "bloqueio de lead",
+          "falha de script",
+          "erro recorrente"
+        ],
+        "LOW": [
+          "documentação incompleta",
+          "evento informativo"
+        ],
+        "OK": [
+          "feed sem achados críticos"
+        ]
+      }
+    },
+    {
+      "id": "offsite-backup-destination-decision",
+      "name": "Offsite Backup Destination Decision",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only decision packet",
+      "scope": "Preparar pacote de decisão para destino do backup offsite do Agent OS sem exportar dados nem registrar aprovação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/offsite-backup-destination-decision.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "backup exportado sem approval",
+          "credencial gravada no cérebro"
+        ],
+        "MEDIUM": [
+          "backup readiness falhou"
+        ],
+        "LOW": [
+          "destino pendente"
+        ],
+        "OK": [
+          "pacote gerado sem exportação"
+        ]
+      }
+    },
+    {
+      "id": "offsite-local-mirror-approval-preflight",
+      "name": "Offsite Local Mirror Approval Preflight",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "approval preflight no export",
+      "scope": "Preparar aprovação explícita para exportar backup Agent OS para local mirror sob /root/agent-os-offsite, sem executar exportação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/offsite-local-mirror-approval-preflight.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "exportado sem approval",
+          "destino fora do allowed_prefix"
+        ],
+        "MEDIUM": [
+          "readiness falhou"
+        ],
+        "LOW": [
+          "aguardando frase explícita"
+        ],
+        "OK": [
+          "approval packet gerado sem exportação"
+        ]
+      }
+    },
+    {
+      "id": "offsite-local-mirror-export",
+      "name": "Offsite Local Mirror Export",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "sensitive approved local export",
+      "scope": "Exportar backup Agent OS para local mirror aprovado sob /root/agent-os-offsite, com approval ledger, Action Gate e verificação de checksum.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/offsite-local-mirror-export.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "checksum divergente",
+          "exportação fora do allowed_prefix",
+          "exportação sem approval"
+        ],
+        "MEDIUM": [
+          "backup verify falhou"
+        ],
+        "LOW": [
+          "export local concluído; offsite externo ainda pendente"
+        ],
+        "OK": [
+          "export local_mirror verificado"
+        ]
+      }
+    },
+    {
+      "id": "pedro-omie-guarded-write-preflight",
+      "name": "Pedro/Omie Guarded Write Preflight",
+      "owner": "Maria",
+      "executor": "Maria + Pedro",
+      "mode": "preflight/no-omie-call",
+      "scope": "Preparar escrita real no Omie com Pedro apenas mediante Approval Ledger, Action Gate, revisão de payload e credenciais.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/pedro-omie-guarded-write-preflight.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "Omie write sem approval",
+          "credencial exposta"
+        ],
+        "MEDIUM": [
+          "payload sem idempotency key",
+          "approval ausente"
+        ],
+        "LOW": [
+          "preflight pronto aguardando aprovação"
+        ],
+        "OK": [
+          "guards bloqueiam sem approval"
+        ]
+      }
+    },
+    {
+      "id": "permission-governance",
+      "name": "Matriz de Permissões e Policy Gate IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only permission evaluation",
+      "scope": "Avaliar se uma ação de agente é read-only, dry-run, write-with-approval ou forbidden antes da execução operacional.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/permission-governance.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "ação forbidden solicitada",
+          "pausar Clara sem aprovação explícita",
+          "risco clínico/paciente fora do escopo"
+        ],
+        "MEDIUM": [
+          "write_with_approval sem evidência",
+          "sensibilidade não classificada"
+        ],
+        "LOW": [
+          "ação dry-run sem evidência complementar"
+        ],
+        "OK": [
+          "ação read-only/dry-run segura ou escrita com aprovação registrada"
+        ]
+      }
+    },
+    {
+      "id": "preconsulta-safety",
+      "name": "Pré-consulta Safety",
+      "owner": "Maria",
+      "executor": "Sistema de pré-consulta",
+      "mode": "read-only monitor by default",
+      "scope": "Garantir que submissões e drafts da pré-consulta não sejam perdidos e que ninguém peça novo preenchimento sem validação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/preconsulta-safety.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "submissão sem markdown",
+          "JSON inválido",
+          "app indisponível"
+        ],
+        "MEDIUM": [
+          "draft antigo",
+          "registro incompleto",
+          "fallback Telegram pendente"
+        ],
+        "LOW": [
+          "baseline sem mudança"
+        ]
+      }
+    },
+    {
+      "id": "sensitive-action-enforcement",
+      "name": "Enforcement de Ações Sensíveis IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "guarded enforcement, no implicit execution",
+      "scope": "Aplicar guard reutilizável antes de ações sensíveis em Clara/Z-API, Pedro/Omie e futuras integrações.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/sensitive-action-enforcement.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "ação sensível executada sem guard",
+          "paciente bloqueado recebeu mensagem"
+        ],
+        "MEDIUM": [
+          "approval ausente",
+          "gate indisponível"
+        ],
+        "LOW": [
+          "dry-run sem evidência"
+        ],
+        "OK": [
+          "guard permitiu/bloqueou conforme policy"
+        ]
+      }
+    },
+    {
+      "id": "sequencia-operacional",
+      "name": "Sequência Operacional Tiaro → Maria",
+      "owner": "Maria",
+      "executor": "Maria + workflows do IVS Agent Operating Layer",
+      "mode": "orquestração operacional com guardrails; ações sensíveis exigem autorização explícita",
+      "scope": "Quando Tiaro enviar uma sequência de atividades, Maria deve usar as skills/workflows novos do IVS Agent Operating Layer para organizar, validar, executar e reportar a sequência.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/sequencia-operacional.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 5,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "sequência contém ação sensível sem autorização explícita",
+          "risco de contato indevido com paciente/lead",
+          "mudança de produção sem guardrail"
+        ],
+        "MEDIUM": [
+          "etapa sem workflow claro",
+          "dependência de João/Clara travada",
+          "evidência insuficiente"
+        ],
+        "LOW": [
+          "sequência read-only com checks concluídos"
+        ],
+        "OK": [
+          "sequência executada com workflows mapeados e sem bloqueios"
+        ]
+      }
+    },
+    {
+      "id": "workflow-runner",
+      "name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "scope": "Registrar execução de workflows IVS com estado, evidências, achados, bloqueios e eventos redigidos.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/workflow-runner.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "run failed",
+          "run blocked em ação crítica",
+          "tentativa de usar runner para autorizar ação proibida"
+        ],
+        "MEDIUM": [
+          "run sem atualização por período prolongado",
+          "evidência ausente em mudança sensível"
+        ],
+        "LOW": [
+          "run informativo",
+          "documentação complementar pendente"
+        ],
+        "OK": [
+          "run concluído com evidências"
+        ]
+      }
+    }
+  ],
+  "findings": []
+}
