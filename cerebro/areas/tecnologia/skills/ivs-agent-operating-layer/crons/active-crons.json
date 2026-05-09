@@ -510,7 +510,16 @@
       "workflow": "agent-os-local-ci",
       "mode": "read-only ci",
       "updated_at": 1778360282
+    },
+    {
+      "id": "9efa98c4-1d2a-4c97-95d3-9c07da4133f3",
+      "name": "IVS Agent OS Backup Verify — weekly",
+      "schedule": "45 3 * * 0 America/Bahia",
+      "agentId": "maria-gerente",
+      "workflow": "agent-os-disaster-recovery",
+      "mode": "read-only verify/dry-run restore",
+      "updated_at": 1778360641
     }
   ],
-  "updated_at": 1778360282
+  "updated_at": 1778360641
 }

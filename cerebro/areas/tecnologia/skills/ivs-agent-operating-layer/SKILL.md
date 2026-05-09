@@ -428,3 +428,14 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflows: `agent-os-drift-detection`, `agent-os-rc25-pipeline`.
+
+## Disaster Recovery
+
+Verificação de backup e plano de restore dry-run. Não restaura automaticamente.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_backup_verify.py --json
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_restore_planner.py --json
+```
+
+Workflow: `agent-os-disaster-recovery`.

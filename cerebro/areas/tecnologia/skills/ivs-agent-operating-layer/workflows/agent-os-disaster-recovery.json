@@ -1,0 +1,23 @@
+{
+  "id": "agent-os-disaster-recovery",
+  "name": "Disaster Recovery IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Verificar backups e gerar plano de restauração seguro do Agent OS sem restauração automática.",
+  "mode": "read-only verify and dry-run restore plan",
+  "entry_criteria": ["após backup semanal", "antes de mudança estrutural", "suspeita de corrupção/perda de runtime"],
+  "preflight": ["gerar backup", "verificar tar.gz", "validar path traversal", "gerar restore plan dry-run"],
+  "allowed_actions": ["verificar backup", "inspecionar membros do arquivo", "gerar plano de restore", "bloquear apply"],
+  "blocked_actions": ["restaurar automaticamente", "sobrescrever runtime", "apagar dados", "executar restore sem aprovação e janela de manutenção"],
+  "outputs": ["agent-os-backup-verify-latest.json", "agent-os-restore-plan-latest.json"],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_backup_verify.py",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_restore_planner.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["backup inválido", "path traversal", "restore apply solicitado"],
+    "MEDIUM": ["backup sem diretórios obrigatórios"],
+    "LOW": ["backup antigo"],
+    "OK": ["backup verificado e plano dry-run gerado"]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "archive": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/backups/agent-os-backup-20260509-210338.tar.gz",
+  "inspection": {
+    "files": 43,
+    "unsafe": [],
+    "top_level": [
+      "approvals",
+      "events",
+      "policies",
+      "runs",
+      "workflows"
+    ]
+  },
+  "mode": "dry_run_restore_plan",
+  "generated_at": 1778360618,
+  "plan": [
+    "verify archive",
+    "stop dependent writers manually if needed",
+    "restore to staging temp dir",
+    "diff staging vs runtime",
+    "apply only with explicit approval and maintenance window"
+  ]
+}

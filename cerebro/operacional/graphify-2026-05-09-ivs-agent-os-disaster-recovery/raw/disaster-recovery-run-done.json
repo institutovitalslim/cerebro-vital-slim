@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-210320-366b2aff",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778360600,
+  "updated_at": 1778360641,
+  "subject": "Disaster Recovery IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar verificação de backup e restore dry-run protegido, sem restauração real automática.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778360600,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778360641,
+      "message": "Backup verify e restore planner dry-run implementados; cron semanal criado.",
+      "evidence": [
+        "/root/deliverables/agent-os-backup-verify-latest.json",
+        "/root/deliverables/agent-os-restore-plan-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778360641,
+      "message": "Disaster Recovery concluído: backup verify OK; restore dry-run OK; 27 workflows/0 findings; CI OK.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-disaster-recovery.json",
+        "/root/deliverables/agent-os-ci-after-disaster-recovery.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-backup-verify-latest.json",
+    "/root/deliverables/agent-os-restore-plan-latest.json",
+    "/root/deliverables/workflow-registry-after-disaster-recovery.json",
+    "/root/deliverables/agent-os-ci-after-disaster-recovery.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778360641
+}

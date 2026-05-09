@@ -70,3 +70,9 @@ Cancelados na limpeza anterior: **10**
 - Workflow: `agent-os-local-ci`
 - Schedule: `40 8 * * *` — `America/Bahia`
 - Modo: read-only CI; anunciar somente se falhar.
+
+## IVS Agent OS Backup Verify — weekly
+- ID: `9efa98c4-1d2a-4c97-95d3-9c07da4133f3`
+- Workflow: `agent-os-disaster-recovery`
+- Schedule: `45 3 * * 0` — `America/Bahia`
+- Modo: read-only verify + restore plan dry-run; anunciar somente se falhar.

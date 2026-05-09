@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "archive": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/backups/agent-os-backup-20260509-210338.tar.gz",
+  "files": 48,
+  "required_present": {
+    "runs/": true,
+    "events/": true,
+    "policies/": true,
+    "workflows/": true
+  },
+  "errors": [],
+  "generated_at": 1778360618,
+  "mode": "read_only_backup_verify"
+}
