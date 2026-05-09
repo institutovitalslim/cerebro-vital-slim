@@ -459,3 +459,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflows: `agent-os-readiness-scorecard`, `agent-os-release-bundle`.
+
+## Cron Governance Final
+
+Auditoria read-only dos crons reais do Gateway contra o registry operacional do Agent OS.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cron_auditor.py --json
+```
+
+Workflow: `agent-os-cron-governance-final`.

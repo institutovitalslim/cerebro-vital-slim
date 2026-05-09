@@ -1,0 +1,20 @@
+{
+  "id": "agent-os-cron-governance-final",
+  "name": "Cron Governance Final IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Auditar crons reais do Gateway contra o registry operacional do Agent OS, sem alterar agendamentos.",
+  "mode": "read-only cron reconciliation",
+  "entry_criteria": ["após criar/remover cron", "CI diário", "pedido do Tiaro", "auditoria operacional"],
+  "preflight": ["listar crons do Gateway", "ler active-crons.json", "validar workflows referenciados", "classificar achados"],
+  "allowed_actions": ["listar crons", "comparar registry", "gerar relatório", "sugerir remoção/ajuste"],
+  "blocked_actions": ["remover cron automaticamente", "desabilitar cron automaticamente", "alterar schedule sem approval", "executar payload"],
+  "outputs": ["agent-os-cron-audit-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cron_auditor.py"],
+  "severity_rules": {
+    "HIGH": ["cron sensível órfão com ação externa"],
+    "MEDIUM": ["cron Agent OS sem registry", "workflow referenciado inexistente"],
+    "LOW": ["nome duplicado", "cron desabilitado presente"],
+    "OK": ["gateway e registry reconciliados"]
+  }
+}

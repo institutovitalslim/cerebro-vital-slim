@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "generated_at": 1778361048,
+  "mode": "read_only_cron_audit",
+  "totals": {
+    "gateway_jobs": 26,
+    "enabled": 26,
+    "disabled": 0,
+    "registry_jobs": 6,
+    "findings": 0
+  },
+  "findings": [],
+  "agent_os_crons": [
+    {
+      "id": "43d91783-a1dc-46a0-8fdf-fd9d2d019a00",
+      "name": "IVS Agent OS Weekly Backup — read-only",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 3 * * 0",
+        "tz": "America/Bahia"
+      }
+    },
+    {
+      "id": "9efa98c4-1d2a-4c97-95d3-9c07da4133f3",
+      "name": "IVS Agent OS Backup Verify — weekly",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 3 * * 0",
+        "tz": "America/Bahia"
+      }
+    },
+    {
+      "id": "75a256e4-28f0-437c-8c28-dc726d7343cd",
+      "name": "IVS Agent OS Local CI — daily",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "40 8 * * *",
+        "tz": "America/Bahia"
+      }
+    },
+    {
+      "id": "8f514c54-0c58-49a6-b07d-df5a0cdbd276",
+      "name": "IVS Agent OS Security Compliance — daily",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "50 8 * * *",
+        "tz": "America/Bahia"
+      }
+    },
+    {
+      "id": "c677df82-01ce-40fd-b97d-5569586514b6",
+      "name": "IVS Agent OS Daily Audit — cockpit único",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "55 8 * * *",
+        "tz": "America/Bahia"
+      }
+    },
+    {
+      "id": "fae296ed-b4a9-4411-bd3a-8a125f1b63cb",
+      "name": "IVS Agent OS Critical Alerts — read-only",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 9 * * *",
+        "tz": "America/Bahia"
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-210941-fcf70bfb",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778360981,
+  "updated_at": 1778361055,
+  "subject": "Cron Governance final IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar auditoria/reconciliação dos crons reais vs registry, read-only.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778360981,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778361055,
+      "message": "Cron auditor implementado e incluído no CI local.",
+      "evidence": [
+        "/root/deliverables/agent-os-cron-audit-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778361055,
+      "message": "Cron governance final concluído: 31 workflows/0 findings; CI 8 checks OK; readiness READY 100/100.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-cron-governance-final.json",
+        "/root/deliverables/agent-os-ci-after-cron-governance-final.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-cron-audit-latest.json",
+    "/root/deliverables/workflow-registry-after-cron-governance-final.json",
+    "/root/deliverables/agent-os-ci-after-cron-governance-final.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778361055
+}
