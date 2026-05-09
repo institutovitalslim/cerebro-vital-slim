@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "generated_at": 1778360733,
+  "totals": {
+    "files": 206
+  },
+  "root_hash": "2059e412a5c31ec4d787853df772b253a7a07f63238880df0fd58dd7aeeaaed3",
+  "out": "/root/deliverables/agent-os-integrity-manifest.json"
+}

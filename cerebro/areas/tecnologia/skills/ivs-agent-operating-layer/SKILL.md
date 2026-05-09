@@ -439,3 +439,14 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflow: `agent-os-disaster-recovery`.
+
+## Security Compliance
+
+Scanner read-only de secrets e manifest de integridade.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_secrets_scanner.py --json
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_integrity_manifest.py
+```
+
+Workflow: `agent-os-security-compliance`.

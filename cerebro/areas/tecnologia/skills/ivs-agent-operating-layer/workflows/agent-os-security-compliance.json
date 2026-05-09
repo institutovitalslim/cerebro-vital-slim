@@ -1,0 +1,23 @@
+{
+  "id": "agent-os-security-compliance",
+  "name": "Security Compliance IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Auditar vazamento de secrets e gerar manifest de integridade dos artefatos/skills do Agent OS.",
+  "mode": "read-only security audit",
+  "entry_criteria": ["após gerar cockpit protegido", "antes de RC-25", "CI diário", "suspeita de exposição de token"],
+  "preflight": ["rodar secrets scanner", "redigir/remover artefatos com token", "gerar integrity manifest", "registrar root hash"],
+  "allowed_actions": ["varrer arquivos texto", "mascarar previews", "gerar manifesto", "bloquear CI se secret HIGH"],
+  "blocked_actions": ["imprimir secret completo", "enviar token em mensagem", "corrigir produção automaticamente", "alterar arquivo sem RC-25"],
+  "outputs": ["agent-os-secrets-scan-latest.json", "agent-os-integrity-manifest.json"],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_secrets_scanner.py",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_integrity_manifest.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["secret real detectado", "token em deliverable"],
+    "MEDIUM": ["assignment suspeito"],
+    "LOW": ["placeholder suspeito"],
+    "OK": ["0 findings e manifest gerado"]
+  }
+}

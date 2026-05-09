@@ -76,3 +76,9 @@ Cancelados na limpeza anterior: **10**
 - Workflow: `agent-os-disaster-recovery`
 - Schedule: `45 3 * * 0` — `America/Bahia`
 - Modo: read-only verify + restore plan dry-run; anunciar somente se falhar.
+
+## IVS Agent OS Security Compliance — daily
+- ID: `8f514c54-0c58-49a6-b07d-df5a0cdbd276`
+- Workflow: `agent-os-security-compliance`
+- Schedule: `50 8 * * *` — `America/Bahia`
+- Modo: read-only secrets scan + integrity manifest; anunciar somente se houver finding/falha.

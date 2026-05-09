@@ -1,0 +1,1715 @@
+{
+  "ok": true,
+  "generated_at": 1778360753,
+  "mode": "integrity_manifest",
+  "totals": {
+    "files": 213
+  },
+  "root_hash": "2a28566294f6627812f69cf30cb649f05fe7d4bf7f701a937877a997c589d0c0",
+  "files": [
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "SKILL.md",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/SKILL.md",
+      "sha256": "72fc2bf297d7685491096a8784696f2be34bc4e5ad03201a9456b78d76733a0e",
+      "size": 18078,
+      "mtime": 1778360751
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "alerts/latest-critical-alerts.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/alerts/latest-critical-alerts.json",
+      "sha256": "2fa0d4a95f377bcc5e3034a71b2e946291ba0fa983ffb2023e102f3f3de32d8a",
+      "size": 102,
+      "mtime": 1778360753
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "approvals/approval-ledger.jsonl",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/approvals/approval-ledger.jsonl",
+      "sha256": "f5e42fa319d059d3a9d99dd3c8c421a925ef005161d6cbd2fd23c1d2f9f1e2ab",
+      "size": 291,
+      "mtime": 1778358996
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "crons/CRON-REGISTRY.md",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/crons/CRON-REGISTRY.md",
+      "sha256": "6a073111a6f3e1ad38475d58cf2f39ef9f13b4b22ebb45ebacd0be25e6db3767",
+      "size": 7674,
+      "mtime": 1778360641
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "crons/active-crons.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/crons/active-crons.json",
+      "sha256": "5fbbe46cde0c0bcc0ae42dd660f30485c5a5854f3b2bfd6e784f8a989b8e06a9",
+      "size": 18378,
+      "mtime": 1778360641
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "crons/removed-crons.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/crons/removed-crons.json",
+      "sha256": "93af9fdc96239229a50a24c88e32f7b7e7ad80e2a14ebc939a4047cb1df88852",
+      "size": 2301,
+      "mtime": 1778355488
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "events/20260509.jsonl",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/events/20260509.jsonl",
+      "sha256": "ddf8bf5d428504e13999a7e106ad8e95deec0988c98eb62e6c43333c4a2e461a",
+      "size": 12422,
+      "mtime": 1778360714
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "events/agent_os_daily_audit_state.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/events/agent_os_daily_audit_state.json",
+      "sha256": "77729a6cff9f64cc128c3c9eebdcda24867c3bb08a2d221dc331b9465230306f",
+      "size": 728,
+      "mtime": 1778360753
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "learning/agent-learning-registry.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/learning/agent-learning-registry.json",
+      "sha256": "1bceadf89c26989a326cf9edf059a46faf48d5255e04a85200b08f0095d847d3",
+      "size": 5268,
+      "mtime": 1778355644
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "policies/agent-permission-matrix.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies/agent-permission-matrix.json",
+      "sha256": "567c63089f3f27a9cf7d15f35cbf641614aecabdcb364fe1bc66fa74225a0e2c",
+      "size": 3449,
+      "mtime": 1778357000
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-200150-f87571a2.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-200150-f87571a2.json",
+      "sha256": "0b64c00e6a447da544f71c97065f2ecb0eaa44a3a1e73dec23ce9d537ff6d467",
+      "size": 1712,
+      "mtime": 1778356911
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-200254-b2be2607.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-200254-b2be2607.json",
+      "sha256": "5b689a6ab4879138825dbb8a66274b02f40da325c896fdfba3d6567cb87b9398",
+      "size": 1907,
+      "mtime": 1778357008
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-200600-146402c3.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-200600-146402c3.json",
+      "sha256": "ed1c60a329f038e0818dc833e130f9cbe27ae4c5c0607e76cc8c3aaa224b6b12",
+      "size": 1918,
+      "mtime": 1778357196
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-200733-44933237.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-200733-44933237.json",
+      "sha256": "9c92529bf2b5e5746d502ee8feba9fc1ac0440451541ea92699f0cf40832b83e",
+      "size": 2214,
+      "mtime": 1778357322
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-203604-d3740234.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-203604-d3740234.json",
+      "sha256": "7b3e4a56bccbc08f054eb81279e6aad6523bbe5127b216d7cebe5c38a5fe7eed",
+      "size": 2147,
+      "mtime": 1778359003
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-204042-49d6672f.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-204042-49d6672f.json",
+      "sha256": "e7bc390ee24f3c287f8a9c7ed2aaa1f9f318fd76f5329ec8eccf4c1c38171ab0",
+      "size": 2380,
+      "mtime": 1778359416
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-204727-fc832e6e.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-204727-fc832e6e.json",
+      "sha256": "0e4c1d2ea96ca67cd5f67c494a023578712cf667b90c664446bbdc2cec4e50e6",
+      "size": 2086,
+      "mtime": 1778359696
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-204928-7d21898f.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-204928-7d21898f.json",
+      "sha256": "56cfd43a294ef087a9aabdfca67942342a77057da463afee8c2151280672836f",
+      "size": 1950,
+      "mtime": 1778359805
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-205114-cf738270.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-205114-cf738270.json",
+      "sha256": "ae8003378ce89fed6e58ba0aef99295daae40cc75a666e5b04332ae41b91cef7",
+      "size": 1917,
+      "mtime": 1778359913
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-205709-f4782bfd.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-205709-f4782bfd.json",
+      "sha256": "60732b75d2e3545425114b75b8e0085a33eb0be81e49c0f209470229f904160f",
+      "size": 1962,
+      "mtime": 1778360283
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-210144-bfbb584f.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-210144-bfbb584f.json",
+      "sha256": "39b46220f958556fd46962de830fd4110845211834ef6d71261a80df04d056bf",
+      "size": 1971,
+      "mtime": 1778360553
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-210320-366b2aff.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-210320-366b2aff.json",
+      "sha256": "dbec5db5a4afcacc100d461af81c42283241a2fb60d8713c8c9e2a65aa8afaf2",
+      "size": 2033,
+      "mtime": 1778360641
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "runs/ivr-20260509-210514-312e2960.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs/ivr-20260509-210514-312e2960.json",
+      "sha256": "3227bd39ffdd040afd69933295bf7b42a17de5d292e21111735608c00e793355",
+      "size": 1036,
+      "mtime": 1778360714
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/action_gate.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/action_gate.py",
+      "sha256": "d496fd1df56cc5613278b54dd9ecd94985a80f8a458b6dde528630ef7fc0a5fc",
+      "size": 1793,
+      "mtime": 1778358983
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_learning_autonomy.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_learning_autonomy.py",
+      "sha256": "d2d2aec60133232dbb7237dd9dd097351766cbfffae25035096dba0327f652a5",
+      "size": 4532,
+      "mtime": 1778355658
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_backup_verify.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_backup_verify.py",
+      "sha256": "3fd0e054323615f61b910e77ac740034e512c6e295bb5a61b2fdfa339d9650b4",
+      "size": 1776,
+      "mtime": 1778360618
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_ci.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_ci.py",
+      "sha256": "c988bb6f4cb507a091f2d57dfba2e3b2e438ac61b7fd521f8e6ab2685d825182",
+      "size": 2409,
+      "mtime": 1778360751
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_cli.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cli.py",
+      "sha256": "08d9347845a5e8e477adb69f16b60937b50cd78a48d5143c04ed7f62dcd31994",
+      "size": 3214,
+      "mtime": 1778359891
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_cockpit_server.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_cockpit_server.py",
+      "sha256": "ff977841f66c61d781ba56c0c6333b915cc38ceb071ab25e8e55f7297ff2a851",
+      "size": 3757,
+      "mtime": 1778360256
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_critical_alerts.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_critical_alerts.py",
+      "sha256": "b6346866e5d0a2f9f63e3d4a121e12fa9305c97ce154db5799925098337097d5",
+      "size": 1708,
+      "mtime": 1778359664
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_daily_audit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_daily_audit.py",
+      "sha256": "c4a713826bc2b235dc55fbe8930e436015a8c22c99fffcb908bb11752d8701c6",
+      "size": 2678,
+      "mtime": 1778357299
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_drift_detector.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_drift_detector.py",
+      "sha256": "3b606697230827d2d0ddd0274fab6348737f85970870f6678d3c420fc9cec463",
+      "size": 2479,
+      "mtime": 1778360525
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_integrity_manifest.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_integrity_manifest.py",
+      "sha256": "29c870f9151c3c112b9978854356aab6680d2637b11c08ef1c589086d8cb91d9",
+      "size": 1634,
+      "mtime": 1778360733
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_rc25_pipeline.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_rc25_pipeline.py",
+      "sha256": "110f13781058a9f7b1b7883b6acfebc6a51416de792966300c0fa5b56679de62",
+      "size": 2436,
+      "mtime": 1778360540
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_restore_planner.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_restore_planner.py",
+      "sha256": "63afd24e243b728be39103fb2278950419a06153d7c19ba7201ac4b37776e0b6",
+      "size": 2432,
+      "mtime": 1778360618
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_retention_backup.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_retention_backup.py",
+      "sha256": "7f2e68d1d9dfc8d9da1fa247fb24ab348097fc611dcc62be41e0a35e4ac5f824",
+      "size": 1496,
+      "mtime": 1778359664
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/agent_os_secrets_scanner.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_secrets_scanner.py",
+      "sha256": "8be967ae356ec1d3ccb750eb4e5aa19c02a75c96bdddf1519019d5368f8eed98",
+      "size": 2693,
+      "mtime": 1778360741
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/approval_ledger.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/approval_ledger.py",
+      "sha256": "72e28f1a1a5f7c25bab5406c52af2dc8b3cededa90fa33520cd3ded511081f21",
+      "size": 2390,
+      "mtime": 1778358983
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/clara_daily_audit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_daily_audit.py",
+      "sha256": "3e991218439e135f6243c406215913c9179c89809c3cd410e6a4b5338727e16f",
+      "size": 7927,
+      "mtime": 1778353971
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/clara_safety_monitor.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_safety_monitor.py",
+      "sha256": "f72cb975ed5b87495e3ae28029f42c676508a69324588f51855ee0f721404ca6",
+      "size": 9010,
+      "mtime": 1778353207
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/followup_safety_check.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/followup_safety_check.py",
+      "sha256": "b0b26eb91c1af50ff0ed6ec85d7519a0ffd920e2d7228ec8e519357981a67993",
+      "size": 5036,
+      "mtime": 1778353274
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_agent_os_artifact_index.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_artifact_index.py",
+      "sha256": "427c30f5cf8d8bdcba6c991cd98d84930d5b28ba17ba5389b63f421182321acf",
+      "size": 1407,
+      "mtime": 1778360516
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_agent_os_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py",
+      "sha256": "523a38cb70af4128f7b278e01764a627263d53903ae51f83bd5c1e9f489a7b1b",
+      "size": 7780,
+      "mtime": 1778357189
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_agent_os_runbook.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_runbook.py",
+      "sha256": "9dab3bc72680a308d109e0953458534a97aa55234f7dbc76f5c36bb9ebacbeed",
+      "size": 2877,
+      "mtime": 1778359907
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_agent_os_trends.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_trends.py",
+      "sha256": "22a6f91239eb18a41d37f7cfa2c90a54b5ddaa02535dfe4535d1a855c060d4bf",
+      "size": 4106,
+      "mtime": 1778359787
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_approval_console.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_approval_console.py",
+      "sha256": "c3c6e5645e7c3972e395a1c2598c09a7d10e02b4071052951afe9c858e7183c2",
+      "size": 3108,
+      "mtime": 1778359787
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_clara_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_clara_cockpit.py",
+      "sha256": "785ffe425a0cf17a7794408ed666b92da2ae1c73c101551e32ddbdf88112dba2",
+      "size": 8665,
+      "mtime": 1778353808
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_ivs_agent_layer_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_ivs_agent_layer_cockpit.py",
+      "sha256": "9959aac465c5f3218127a826dac1de4e884743fd1ac9c424cb0ab61da2730211",
+      "size": 6264,
+      "mtime": 1778355002
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_live_agent_os_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_live_agent_os_cockpit.py",
+      "sha256": "522f6d4bec0410b88580b0caad96fc87df105c1b432523485a1274ea38ad84b5",
+      "size": 2313,
+      "mtime": 1778359664
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_marketing_os_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_marketing_os_cockpit.py",
+      "sha256": "e9838fa9a405665125a99b02219f1681fa5573b572730b11158b2b2c8eb64497",
+      "size": 7491,
+      "mtime": 1778354465
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_preconsulta_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_preconsulta_cockpit.py",
+      "sha256": "ba0fb021046c8c73fcf42214a207f202d341e52209e5a92dcfb66a4a1cf8a5e8",
+      "size": 6582,
+      "mtime": 1778354202
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_workflow_registry_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_workflow_registry_cockpit.py",
+      "sha256": "0f9b06ec368105ea1694eb85703625918d0436660731c2cfec3efa6deffebe65",
+      "size": 5050,
+      "mtime": 1778355174
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/generate_workflow_runs_cockpit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_workflow_runs_cockpit.py",
+      "sha256": "b8d640dbafac9393b0c4e8b0282f3922c12b5e5d71fe6ae9f67e44245daf6d81",
+      "size": 2186,
+      "mtime": 1778356892
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/ivs_agent_layer_daily_audit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/ivs_agent_layer_daily_audit.py",
+      "sha256": "97c095f0f50564fe76a0c878038d32f82736d5b4a78e67ec33d6765a398ad393",
+      "size": 3692,
+      "mtime": 1778355016
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/ivs_agent_layer_monitor.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/ivs_agent_layer_monitor.py",
+      "sha256": "077d112afdd15332b777e191e7c5125bebccce5dcb78518e926888606418c3ce",
+      "size": 5094,
+      "mtime": 1778354976
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/marketing_os_daily_audit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/marketing_os_daily_audit.py",
+      "sha256": "003605ac078a8de94aa075e02b14bce2cb19bc1d06c9b3191744f1f191533a67",
+      "size": 4246,
+      "mtime": 1778354478
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/marketing_os_monitor.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/marketing_os_monitor.py",
+      "sha256": "e4bcfa28885d412ca6f9b482ce0a2ebab1d91044f9ae5a3f6bd794a2d6abc108",
+      "size": 8012,
+      "mtime": 1778354513
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/permission_gate.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/permission_gate.py",
+      "sha256": "6e8cb57f5f345520fcba8baeaf59c14ea5c29b8c5d2fec51d82e2e6be03cba40",
+      "size": 2596,
+      "mtime": 1778357000
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/preconsulta_daily_audit.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/preconsulta_daily_audit.py",
+      "sha256": "3ee50ab54f721fc7396516d0ade6cf5c6dab7bc7f1b4c3123cbf4d9c79e1a982",
+      "size": 4410,
+      "mtime": 1778354217
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/preconsulta_safety_monitor.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/preconsulta_safety_monitor.py",
+      "sha256": "6edf17f267349fc5a8f8bee10bd6a9737900db09145501f8e045c0b70d3b316f",
+      "size": 7236,
+      "mtime": 1778354982
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/sensitive_action_guard.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/sensitive_action_guard.py",
+      "sha256": "6ca63051caf98ab5cd79a5ca7a2ea8c801a281218d62dbb6b32e7d92e6122ebe",
+      "size": 1777,
+      "mtime": 1778359268
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/workflow_registry.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_registry.py",
+      "sha256": "e3f34da5f43a91f78202ce0ede665e34916a38a8c95ac8e5fc49521876b82dfc",
+      "size": 2866,
+      "mtime": 1778355159
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "scripts/workflow_runner.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py",
+      "sha256": "dbafcfb264906ccb6270482aa3e5f024b0a440715ba107f185ab1b641418e610",
+      "size": 5625,
+      "mtime": 1778356892
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "tests/test_agent_os_regression.py",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/tests/test_agent_os_regression.py",
+      "sha256": "9af2ee4eaaea956055aae3a41d156841e35ac52758779974359ed0629ccc4de2",
+      "size": 3173,
+      "mtime": 1778359398
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/README.md",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/README.md",
+      "sha256": "b9498a75cdc7f3809bde8b8f16ece11c995bd50848bd97ab0b330c73c59d680d",
+      "size": 614,
+      "mtime": 1778355147
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/action-gate-approval.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/action-gate-approval.json",
+      "sha256": "a07416294f9aa13f4c4b6f6b81683e451221e8fdb2d8112ad404a2ab6cf18e30",
+      "size": 1466,
+      "mtime": 1778358983
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-layer-audit.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-layer-audit.json",
+      "sha256": "6946c555bb4bb68ca727c36f3d97b7d4c8395ea5af3b85afc9b3bee27473dafe",
+      "size": 1765,
+      "mtime": 1778355147
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-learning-autonomy.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-learning-autonomy.json",
+      "sha256": "7fb8fa0e272fc4c907fcdf75626c7354efc9c6da67c996994e1844042632e2b4",
+      "size": 2946,
+      "mtime": 1778355644
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-cockpit.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-cockpit.json",
+      "sha256": "98546e83a9a3b1b3eadc6bad36e7c6e0021b095d4c9db609d8d6d2aa5cd06d94",
+      "size": 1601,
+      "mtime": 1778357189
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-command-center.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-command-center.json",
+      "sha256": "c28baaafba109e11256f0e7f3f03874d86868b41d7083880fc1ee6377c32d323",
+      "size": 1014,
+      "mtime": 1778359891
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-critical-alerts.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-critical-alerts.json",
+      "sha256": "5c5cab786ee3dd35d64631154864e2a29a3ebfecf0ca003c0455bf8c6912c9f7",
+      "size": 879,
+      "mtime": 1778359677
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-daily-audit.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-daily-audit.json",
+      "sha256": "2be90f458af9cfe78c0efaf50e6936b3680b7e1ca02cfa2f415df7cada8848a8",
+      "size": 1618,
+      "mtime": 1778357293
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-disaster-recovery.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-disaster-recovery.json",
+      "sha256": "85fe179685c87d461e45e8aff96dab36020e607e517681b85e990d4bb75cdb53",
+      "size": 1361,
+      "mtime": 1778360627
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-drift-detection.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-drift-detection.json",
+      "sha256": "0100a6427f85b5f1104c8a9074b1627918efa93ad89e9472e69793a8798076bd",
+      "size": 874,
+      "mtime": 1778360540
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-live-cockpit.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-live-cockpit.json",
+      "sha256": "911c041a465388aba01e4f165ff40090e8f30c74fa25862656b5511722150e4f",
+      "size": 842,
+      "mtime": 1778359677
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-local-ci.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-local-ci.json",
+      "sha256": "cec8faac4185a5d2fa53c9375b7b1e45b37afbfcd0ca9d000b90c1de8a7c459e",
+      "size": 899,
+      "mtime": 1778360268
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-protected-cockpit-server.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-protected-cockpit-server.json",
+      "sha256": "1acf47645d56f65c127b2d2fe250e6c0762f66cf09f4178b06cf3f38f52b1ca1",
+      "size": 1054,
+      "mtime": 1778360268
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-rc25-pipeline.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-rc25-pipeline.json",
+      "sha256": "97e5586ad8bc9eebc407e5b6425a9f53becd65b5b02a15d450f17c655b5a925b",
+      "size": 920,
+      "mtime": 1778360540
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-retention-backup.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-retention-backup.json",
+      "sha256": "c3121c78dbebb97e0d89d4e14a82370605d2ad8be28fe997738e0435ca9bda7d",
+      "size": 896,
+      "mtime": 1778359677
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-security-compliance.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-security-compliance.json",
+      "sha256": "61e90e3cb516aa0492900f477a4187af471464cb7a94370b2b394ee4b57119f6",
+      "size": 1323,
+      "mtime": 1778360751
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/agent-os-trends.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-trends.json",
+      "sha256": "05dfe6ad7a4fd470b47e282c56b424f8914db72e3f9181905b5bd0b7761b3ae1",
+      "size": 899,
+      "mtime": 1778359797
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/approval-console.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/approval-console.json",
+      "sha256": "0b9569dd4265cd8214b738b8265f1e7f8485b0923e8f48b01574f79894b6021b",
+      "size": 958,
+      "mtime": 1778359797
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/capability-governance.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/capability-governance.json",
+      "sha256": "3aaf3ac630ef8b1f3845fbda62351ca129e730c5e0d9bf4b21e4a9687fd6e4f2",
+      "size": 1957,
+      "mtime": 1778356678
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/cron-governance.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/cron-governance.json",
+      "sha256": "13d9727bebffa08d319f952df52928480bf95c488ee2104ce2bd2c901f669391",
+      "size": 2436,
+      "mtime": 1778355503
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/followup-seguro.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/followup-seguro.json",
+      "sha256": "03531259034b4be74ecf964c3aeafe5e63c3dd28bc2911870bf8819569c98078",
+      "size": 1989,
+      "mtime": 1778355147
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/handoff-operacional.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/handoff-operacional.json",
+      "sha256": "586cad24c49374a495c3b2d6ef7af69b91751b0e024e1d5f5e29ab65d55c2b70",
+      "size": 1877,
+      "mtime": 1778356678
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/marketing-os.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/marketing-os.json",
+      "sha256": "979381aa5145ef29c4fa8d22adae16412c25b0fb6cf3fe2a278feefc8a669619",
+      "size": 2084,
+      "mtime": 1778355147
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/observability-events.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/observability-events.json",
+      "sha256": "befecc66bc600172e208df84c971df787f8993607f663794c2ae51c13a8363c7",
+      "size": 1742,
+      "mtime": 1778356678
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/permission-governance.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/permission-governance.json",
+      "sha256": "ec024db504b17a549ec443f673ba4773c4deec3302283fbc208b4040b221f682",
+      "size": 1949,
+      "mtime": 1778357000
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/preconsulta-safety.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/preconsulta-safety.json",
+      "sha256": "7f5dc4f81e9f5806ff2b814ea04e3374fde8229f5bc15e74874fbe322d29e583",
+      "size": 1927,
+      "mtime": 1778355147
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/sensitive-action-enforcement.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/sensitive-action-enforcement.json",
+      "sha256": "79a814b207be2c9b3be83cac4ca51a3d78a9e93b1011fbb4d2f26fee93c9233c",
+      "size": 1754,
+      "mtime": 1778359408
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/sequencia-operacional.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/sequencia-operacional.json",
+      "sha256": "5527623cce2845612201b921e9ca618b7e49547d8cfc46eded0b9eb562a640a6",
+      "size": 3006,
+      "mtime": 1778355229
+    },
+    {
+      "root": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+      "rel": "workflows/workflow-runner.json",
+      "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/workflow-runner.json",
+      "sha256": "e766df1401889874bf5cbd54170abe36eae8675d674af86d2949331c663fd98c",
+      "size": 1880,
+      "mtime": 1778356903
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "action-gate-test.json",
+      "path": "/root/deliverables/action-gate-test.json",
+      "sha256": "822ccede7343c54ef7b45e8dad79baadaab9d9ea072da82ac0970e4430250a4b",
+      "size": 1137,
+      "mtime": 1778358996
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-artifact-index.json",
+      "path": "/root/deliverables/agent-os-artifact-index.json",
+      "sha256": "0d93332f53a7ceec8100602d1e2a7c377416c3afe609a5d0092dd6a72d51249c",
+      "size": 15194,
+      "mtime": 1778360542
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-artifact-index.md",
+      "path": "/root/deliverables/agent-os-artifact-index.md",
+      "sha256": "acb5139277f90a901d7062b4dd7a34b6577675318c71ee9832c3ecc40ed1e3c0",
+      "size": 6620,
+      "mtime": 1778360542
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-artifact-index.run.json",
+      "path": "/root/deliverables/agent-os-artifact-index.run.json",
+      "sha256": "375d46334bcba5b22ffc4904117dbb6f363dda4c1e71ed713c3d22fd903727ad",
+      "size": 14581,
+      "mtime": 1778360516
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-backup-verify-latest.json",
+      "path": "/root/deliverables/agent-os-backup-verify-latest.json",
+      "sha256": "ac4e52ec0916603a639397179ffb60bd8d22da12d41b4405584752a904f27f45",
+      "size": 351,
+      "mtime": 1778360618
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-backup-verify-run.json",
+      "path": "/root/deliverables/agent-os-backup-verify-run.json",
+      "sha256": "e6e3ea47738140ea8a345d2c723d8734d1d4bddd341b0c1dcb6c63f390feef7d",
+      "size": 352,
+      "mtime": 1778360618
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-ci-after-disaster-recovery.json",
+      "path": "/root/deliverables/agent-os-ci-after-disaster-recovery.json",
+      "sha256": "9a28688a81f9d9c64e0c53196646d694fc3f29d6e4ea0dc012f8cc67db2f207e",
+      "size": 14839,
+      "mtime": 1778360629
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-ci-after-security-compliance.json",
+      "path": "/root/deliverables/agent-os-ci-after-security-compliance.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mtime": 1778360752
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-ci-latest.json",
+      "path": "/root/deliverables/agent-os-ci-latest.json",
+      "sha256": "b21c050b3f99ed7a2eb251eaeba46df11bb9fdb34ac22d2b7c1d9d1b138bbc5f",
+      "size": 14838,
+      "mtime": 1778360629
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-ci-latest.log",
+      "path": "/root/deliverables/agent-os-ci-latest.log",
+      "sha256": "e4d92e82157835eba14f808c8c2a63e24fd5bab574fc5d5b32fdc4571b31a984",
+      "size": 13108,
+      "mtime": 1778360629
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-ci-run.json",
+      "path": "/root/deliverables/agent-os-ci-run.json",
+      "sha256": "3f6ddfe372bc3f2886ee34d2924b554de52675dbb1488a4fc81af8ec2f47215f",
+      "size": 14862,
+      "mtime": 1778360257
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-cli-refresh-all.json",
+      "path": "/root/deliverables/agent-os-cli-refresh-all.json",
+      "sha256": "6885b19d9eb3f9e683b34761ff5c0cbeb8b0b6024b24d10659bde7cff6885bee",
+      "size": 116808,
+      "mtime": 1778359892
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-cli-status.json",
+      "path": "/root/deliverables/agent-os-cli-status.json",
+      "sha256": "e09335aedfdfaf437d00fabef243aed458b7a8729225ac4507c22da20ec473dd",
+      "size": 117410,
+      "mtime": 1778359893
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-cli-test.json",
+      "path": "/root/deliverables/agent-os-cli-test.json",
+      "sha256": "5699fb8bdc51caf540315f8ff4dd1105d16fbf8171acf5c8c2ee1b7a9d179ec5",
+      "size": 160,
+      "mtime": 1778359893
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-critical-alerts-latest.json",
+      "path": "/root/deliverables/agent-os-critical-alerts-latest.json",
+      "sha256": "2fa0d4a95f377bcc5e3034a71b2e946291ba0fa983ffb2023e102f3f3de32d8a",
+      "size": 102,
+      "mtime": 1778360753
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-daily-audit-after-action-gate.json",
+      "path": "/root/deliverables/agent-os-daily-audit-after-action-gate.json",
+      "sha256": "0de9b87e5320b98910ee81d46e8905eb6f213c841c28252d6b17d57ad17c2998",
+      "size": 1959,
+      "mtime": 1778359003
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-daily-audit-after-sensitive-enforcement.json",
+      "path": "/root/deliverables/agent-os-daily-audit-after-sensitive-enforcement.json",
+      "sha256": "7c1b997eb5179b267893ab0506a5fc0aadb87c988832b5a2401c40d34e69ea2d",
+      "size": 1959,
+      "mtime": 1778359409
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-daily-audit-latest.json",
+      "path": "/root/deliverables/agent-os-daily-audit-latest.json",
+      "sha256": "742b6a9feedbde4d5384cf9934c24b83eca8e93f5f8f391646c1767abc434fa2",
+      "size": 1016,
+      "mtime": 1778357299
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-daily-audit-latest.md",
+      "path": "/root/deliverables/agent-os-daily-audit-latest.md",
+      "sha256": "7b51994e51cf6485ec38dcaca1dde03b1e2034304784dbe815e6ba0a24bde6d5",
+      "size": 1156,
+      "mtime": 1778360753
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-drift-report-final.json",
+      "path": "/root/deliverables/agent-os-drift-report-final.json",
+      "sha256": "0a1e0784b57966ceacc93a736b9ee2321fefc4444f1174584c934f3064e07bb1",
+      "size": 1090,
+      "mtime": 1778360547
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-drift-report.json",
+      "path": "/root/deliverables/agent-os-drift-report.json",
+      "sha256": "7046da6f877be6e4d87945848c51c6f1125191fb319aab961c1a06b971e53735",
+      "size": 1089,
+      "mtime": 1778360547
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-drift-report.run.json",
+      "path": "/root/deliverables/agent-os-drift-report.run.json",
+      "sha256": "945b6af2dc3866e84bce12196d66ddefc841a2a13618f5a0f49effdbbfbf90c9",
+      "size": 1557,
+      "mtime": 1778360525
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-integrity-manifest.json",
+      "path": "/root/deliverables/agent-os-integrity-manifest.json",
+      "sha256": "29fafb297646bfb90d7666c22ae02e593c64df546143ff046f9b14e6301c0aac",
+      "size": 69516,
+      "mtime": 1778360733
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-integrity-manifest.run.json",
+      "path": "/root/deliverables/agent-os-integrity-manifest.run.json",
+      "sha256": "68feb46dfb6027b5d252bf883f91691e30785d0ee0d80d2606f5db39b049f0b2",
+      "size": 230,
+      "mtime": 1778360733
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-rc25-pipeline-latest.json",
+      "path": "/root/deliverables/agent-os-rc25-pipeline-latest.json",
+      "sha256": "59370e8603d6ecef8635ea7876e63566caa54b0b925e5e534180567906b01376",
+      "size": 14563,
+      "mtime": 1778360542
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-rc25-pipeline-run.json",
+      "path": "/root/deliverables/agent-os-rc25-pipeline-run.json",
+      "sha256": "ee0880af080eb87af7e9e08cbd6d5e2714eb694de3d95392218217f7bfa5eb78",
+      "size": 14564,
+      "mtime": 1778360542
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-regression-tests-final.log",
+      "path": "/root/deliverables/agent-os-regression-tests-final.log",
+      "sha256": "b10eb760ca91044692776ff03c7d4dc961a6f0b0c2efcfb24377574bb3908e41",
+      "size": 107,
+      "mtime": 1778359399
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-regression-tests.log",
+      "path": "/root/deliverables/agent-os-regression-tests.log",
+      "sha256": "52f71f740f285bba0652c149a940ace2b11d022f192d9411a1176fd21640213e",
+      "size": 105,
+      "mtime": 1778359277
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-restore-plan-latest.json",
+      "path": "/root/deliverables/agent-os-restore-plan-latest.json",
+      "sha256": "581c4b32833044787e2d3c926d784cce5936eef36e040dbef4940dfb118708a5",
+      "size": 587,
+      "mtime": 1778360618
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-restore-plan-run.json",
+      "path": "/root/deliverables/agent-os-restore-plan-run.json",
+      "sha256": "103e26a5f5e368abee19e42ab934a7a3f877e42a7e1627fb30c0856f0f9cae42",
+      "size": 588,
+      "mtime": 1778360618
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-retention-backup-dr.json",
+      "path": "/root/deliverables/agent-os-retention-backup-dr.json",
+      "sha256": "bb080dce0909d61d2a9195c6b46ddf5ac0329f279fdff719520323984abeaaef",
+      "size": 630,
+      "mtime": 1778360618
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-retention-backup-latest.json",
+      "path": "/root/deliverables/agent-os-retention-backup-latest.json",
+      "sha256": "5b6c1443a475a991ad5c7829ffa6183bf999727e4e6dc0d98309f58df210cb44",
+      "size": 630,
+      "mtime": 1778359677
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-secrets-scan-latest.json",
+      "path": "/root/deliverables/agent-os-secrets-scan-latest.json",
+      "sha256": "400bc43654e733923f99772d210b11caafc65c03415126a16684e2a5fcd3e595",
+      "size": 163,
+      "mtime": 1778360753
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-secrets-scan.run.json",
+      "path": "/root/deliverables/agent-os-secrets-scan.run.json",
+      "sha256": "de54c1bf4b0bc6cd71578bc14dde98557bd168eacb395c446a51900b8d6b8a64",
+      "size": 1041,
+      "mtime": 1778360733
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-secrets-scan.run2.json",
+      "path": "/root/deliverables/agent-os-secrets-scan.run2.json",
+      "sha256": "1d184fa95a3c56d456be9d199ab536a6f6c2f2ab9fe0d700bae0983732b1b1f4",
+      "size": 164,
+      "mtime": 1778360741
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-trends.html",
+      "path": "/root/deliverables/agent-os-trends.html",
+      "sha256": "568a730982b0c536d433265a3f9edffe5a4d655c5d3ae44497512e34e9819ff6",
+      "size": 1356,
+      "mtime": 1778359892
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-trends.json",
+      "path": "/root/deliverables/agent-os-trends.json",
+      "sha256": "1a0a0a6cb6bcd192d286f27cfe93ced2839e86cf91599d22a4339381ac5b24e3",
+      "size": 389,
+      "mtime": 1778359892
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "agent-os-trends.report.json",
+      "path": "/root/deliverables/agent-os-trends.report.json",
+      "sha256": "1fdb55cd5bdc063e9af0b775055a5a8c77d50f51fa872562c8c23fb9deadf90e",
+      "size": 390,
+      "mtime": 1778359787
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "approval-console-ivs-agent-os.html",
+      "path": "/root/deliverables/approval-console-ivs-agent-os.html",
+      "sha256": "69ed97fcbd660abce49758ae33868bb3ac0ddf406ecbd19f39866afb5000e945",
+      "size": 1347,
+      "mtime": 1778359892
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "approval-console-ivs-agent-os.json",
+      "path": "/root/deliverables/approval-console-ivs-agent-os.json",
+      "sha256": "366ee618e8fb08b6a244bbe0329207a4500e5db2292aaa801d17402f51a72892",
+      "size": 396,
+      "mtime": 1778359892
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "approval-console-ivs-agent-os.report.json",
+      "path": "/root/deliverables/approval-console-ivs-agent-os.report.json",
+      "sha256": "db2b98c9cd6305c340ef1f62bbe245c54b1bfb48e6237017616508aa458f48da",
+      "size": 397,
+      "mtime": 1778359787
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "approval-ledger-test.json",
+      "path": "/root/deliverables/approval-ledger-test.json",
+      "sha256": "774f4ea44c18b65e8ce772170aca8b39fa35f1212a1224e70957e57eaeb4894c",
+      "size": 311,
+      "mtime": 1778358996
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "apresentacao-diogo-melo-inline.html",
+      "path": "/root/deliverables/apresentacao-diogo-melo-inline.html",
+      "sha256": "2620d4a7ab23f26f24c607f989430f7060b1a8799ad64e5e8cbb663a58c25c50",
+      "size": 2161928,
+      "mtime": 1777553752
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "apresentacao-diogo-melo-pacote.zip",
+      "path": "/root/deliverables/apresentacao-diogo-melo-pacote.zip",
+      "sha256": "8e2036fd141ff94c58d857381d753402137e529272f30b2fa5055513c0f017c6",
+      "size": 1568365,
+      "mtime": 1777552858
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "apresentacao-diogo-melo.html",
+      "path": "/root/deliverables/apresentacao-diogo-melo.html",
+      "sha256": "6ad1d6eca95f07324346545235469f75f955243a56e5e43f53bd8a2d58ccf2e3",
+      "size": 16893,
+      "mtime": 1777552852
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "apresentacao-tain-japiassu-teles-paciente-v10-20260509_111040.html",
+      "path": "/root/deliverables/apresentacao-tain-japiassu-teles-paciente-v10-20260509_111040.html",
+      "sha256": "0389b3ea185056d987f313350bd97a90d9c6add25e9c769f3106a24b1eea62a7",
+      "size": 2911282,
+      "mtime": 1778326401
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "apresentacao-tain-japiassu-teles-v10-20260509_111040.html",
+      "path": "/root/deliverables/apresentacao-tain-japiassu-teles-v10-20260509_111040.html",
+      "sha256": "b4599cbf239abe066523a39eec8f9a45c910fffbd84482ef9476252e1763893e",
+      "size": 2933597,
+      "mtime": 1778326401
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "blueprint-sistema-marketing-ivs-joao.html",
+      "path": "/root/deliverables/blueprint-sistema-marketing-ivs-joao.html",
+      "sha256": "d753841d4dfe4355563d7e5a1c99687d3dd6b7e4b65f4471452c8fba6b5693dd",
+      "size": 22391,
+      "mtime": 1778341524
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "clara-admin-send-dryrun-guard-test.json",
+      "path": "/root/deliverables/clara-admin-send-dryrun-guard-test.json",
+      "sha256": "7d29157c300ba1108b165f121453b13bc2a7afa304bb57ef72e8785086a71bab",
+      "size": 97,
+      "mtime": 1778359372
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "clara-daily-audit-latest.md",
+      "path": "/root/deliverables/clara-daily-audit-latest.md",
+      "sha256": "e3390058814b79f7779e16406f5d6b631736de07939e4fcd49e92c0f795e975b",
+      "size": 664,
+      "mtime": 1778353971
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-after-analytics-ui.report.json",
+      "path": "/root/deliverables/cockpit-after-analytics-ui.report.json",
+      "sha256": "9771e8bf31520a6b72b1248d1d4f3b8f1da9a4ca010e6a1c05b3a1893b154f7a",
+      "size": 87104,
+      "mtime": 1778359797
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-after-command-center.report.json",
+      "path": "/root/deliverables/cockpit-after-command-center.report.json",
+      "sha256": "9b30f516928cc9e1200861037b777ac27e6939d3b35ba2355a0537b1aebd5784",
+      "size": 90158,
+      "mtime": 1778359913
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-after-disaster-recovery.report.json",
+      "path": "/root/deliverables/cockpit-after-disaster-recovery.report.json",
+      "sha256": "4856d2641a62ced3f0d32bd27d78d8fa7aa7889638d278e7ce93cf5d9059c04b",
+      "size": 102162,
+      "mtime": 1778360629
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-after-drift-rc25.report.json",
+      "path": "/root/deliverables/cockpit-after-drift-rc25.report.json",
+      "sha256": "f16d039716e24c9e00a274544621ca0594d4089a0707fd63c97c06aeb47a3065",
+      "size": 98769,
+      "mtime": 1778360547
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-after-protected-ci.report.json",
+      "path": "/root/deliverables/cockpit-after-protected-ci.report.json",
+      "sha256": "18851b83ae6fb48e35f05912dcd593801241cccc62ef1b6adb01a7a44963541b",
+      "size": 94445,
+      "mtime": 1778360268
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-after-sensitive-enforcement.report.json",
+      "path": "/root/deliverables/cockpit-after-sensitive-enforcement.report.json",
+      "sha256": "a5a88cbbefef5ad05487a75b5c06ff3c9c8dcd9bc8de2411b1324fb73c118d90",
+      "size": 77119,
+      "mtime": 1778359409
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-clara-zapi-ivs.html",
+      "path": "/root/deliverables/cockpit-clara-zapi-ivs.html",
+      "sha256": "507087aa067cacaa2df423029a563d946b2b857fa7e309597822ca7abcbf741d",
+      "size": 10028,
+      "mtime": 1778353808
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-clara-zapi-ivs.json",
+      "path": "/root/deliverables/cockpit-clara-zapi-ivs.json",
+      "sha256": "59eba928621fa6c5ce24fe14c8fef1e946644e88193fa1e7a4b8605695304718",
+      "size": 18377,
+      "mtime": 1778353808
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-geral-ivs-agent-operating-layer.html",
+      "path": "/root/deliverables/cockpit-geral-ivs-agent-operating-layer.html",
+      "sha256": "ec58b51e160492cbcf9a35fea201dee1dc14e8a46a4c907d7428a44b57a9aab1",
+      "size": 5321,
+      "mtime": 1778355003
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-geral-ivs-agent-operating-layer.json",
+      "path": "/root/deliverables/cockpit-geral-ivs-agent-operating-layer.json",
+      "sha256": "838e61a2704c332d2b241512f99ba279a6cdcfdb6225fe05106c2798ab1e9566",
+      "size": 52523,
+      "mtime": 1778355003
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-marketing-os-joao-ivs.html",
+      "path": "/root/deliverables/cockpit-marketing-os-joao-ivs.html",
+      "sha256": "78bd0a575158ecb3809a5b94f648c8a8b12686ba8961fc26ac440f7602936fa3",
+      "size": 8401,
+      "mtime": 1778354513
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-marketing-os-joao-ivs.json",
+      "path": "/root/deliverables/cockpit-marketing-os-joao-ivs.json",
+      "sha256": "abc16920fe462803c0e5fb6b911fe32f79e66e296add5eed131461118e7d5809",
+      "size": 22900,
+      "mtime": 1778354513
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-preconsulta-ivs.html",
+      "path": "/root/deliverables/cockpit-preconsulta-ivs.html",
+      "sha256": "cdda1c1fbd49d04af91bfc1c1ddd972bce2b60eb00d785db42fdad0093709509",
+      "size": 4485,
+      "mtime": 1778354202
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-preconsulta-ivs.json",
+      "path": "/root/deliverables/cockpit-preconsulta-ivs.json",
+      "sha256": "ec0792058530aa71b384bb880e0dc4fbe414e61b495220ceaa20dd533fab6702",
+      "size": 1771,
+      "mtime": 1778354202
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-server-token-info.json",
+      "path": "/root/deliverables/cockpit-server-token-info.json",
+      "sha256": "08369b2bce0180dbce5389531d110a1a8dd43b6bb387c000bf1fcb618b5c92ea",
+      "size": 171,
+      "mtime": 1778360741
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-unico-ivs-agent-os.after-action-gate.report.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.after-action-gate.report.json",
+      "sha256": "cb6748888eff310d9e1c58b63df49859268aeb1cf2279a3e5ddf868988b8d5db",
+      "size": 73367,
+      "mtime": 1778359003
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-unico-ivs-agent-os.html",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+      "sha256": "a0f60333b8588592e0cec01ef91896c196a5b1790d7aefd174a191f9601ada3a",
+      "size": 15087,
+      "mtime": 1778360753
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-unico-ivs-agent-os.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.json",
+      "sha256": "9f191ce3a6916dd101ccbe317d694bb2947a5c34efadedfc390d33ee778c34bc",
+      "size": 105554,
+      "mtime": 1778360753
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-unico-ivs-agent-os.report.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.report.json",
+      "sha256": "73d6808750208f31353365c925d80ac705b417ead3213ffd649956fbb6404b04",
+      "size": 60772,
+      "mtime": 1778357196
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-vivo-ivs-agent-os.html",
+      "path": "/root/deliverables/cockpit-vivo-ivs-agent-os.html",
+      "sha256": "c74296d0a8681334ce228073df56d731e2942a661f3249b6a929c263996303e8",
+      "size": 1591,
+      "mtime": 1778359892
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-vivo-ivs-agent-os.report.json",
+      "path": "/root/deliverables/cockpit-vivo-ivs-agent-os.report.json",
+      "sha256": "d546d3ee73f65a0ca8745f5a19a4731640315e29cd8dfe63914bdde20507dcdd",
+      "size": 193,
+      "mtime": 1778359677
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-workflow-runs-ivs.html",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.html",
+      "sha256": "83d6294adb87181c99c6a71e1d63e83a7e43bf6f8a1e777ba39c1ea5c58bc199",
+      "size": 2623,
+      "mtime": 1778360641
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-workflow-runs-ivs.json",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.json",
+      "sha256": "909e4e01fc3f80b3e3094cab98038bbcb5ffedec00f238929bc316a97b4168c4",
+      "size": 27256,
+      "mtime": 1778360641
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "cockpit-workflow-runs-ivs.report.json",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.report.json",
+      "sha256": "935764de506b0a1dd490307bab19e94956500944bb417a63306a706de2ba1b0d",
+      "size": 2040,
+      "mtime": 1778356911
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "dados-taina-japiassu-teles-20260509_1110.json",
+      "path": "/root/deliverables/dados-taina-japiassu-teles-20260509_1110.json",
+      "sha256": "874812ab458e0a50b49713e67f5c20ddd9aa47db3ce30c96ab8e2376c0dc34ec",
+      "size": 30891,
+      "mtime": 1778326401
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "diogo-exames/exame-marco-1.pdf",
+      "path": "/root/deliverables/diogo-exames/exame-marco-1.pdf",
+      "sha256": "ca54569f2ed5ba60d1a1b1662fe934c17db5a5b12d18db971be2b0cad4bb76fd",
+      "size": 724873,
+      "mtime": 1777552449
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "diogo-exames/exame-marco-2.pdf",
+      "path": "/root/deliverables/diogo-exames/exame-marco-2.pdf",
+      "sha256": "3722edc4bb33d1261245f15e09aa02e5df572691d7f8a85920b38b7a377face4",
+      "size": 364665,
+      "mtime": 1777552449
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "diogo-fotos/antes-frente.jpeg",
+      "path": "/root/deliverables/diogo-fotos/antes-frente.jpeg",
+      "sha256": "1b182fabb25983884aabd1e7c096bb56c252a3dcfd25efa0b6363a324c04ff20",
+      "size": 82285,
+      "mtime": 1777552684
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "diogo-fotos/depois-frente.jpeg",
+      "path": "/root/deliverables/diogo-fotos/depois-frente.jpeg",
+      "sha256": "a1adaf466515a507f4db560b5f39b32b60360e16ac01f708d9c07a53bdb0b860",
+      "size": 79155,
+      "mtime": 1777552684
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "dra-daniely.png",
+      "path": "/root/deliverables/dra-daniely.png",
+      "sha256": "10ab0933d24266fb63129529a6db61cfb4a5dae0905580d7fe863d5280faff57",
+      "size": 1346999,
+      "mtime": 1777552698
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "handoff-dispatcher-test.json",
+      "path": "/root/deliverables/handoff-dispatcher-test.json",
+      "sha256": "3b32fed6003134a0420176e1852c96dcc95f31c80c436a29125f8f0def69fd6e",
+      "size": 693,
+      "mtime": 1778358996
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-agent-capability-registry-final.json",
+      "path": "/root/deliverables/ivs-agent-capability-registry-final.json",
+      "sha256": "e78291e2f3b6a88066c54e275765fc082552934de47838a1f6370c004638cf42",
+      "size": 38305,
+      "mtime": 1778357277
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-agent-capability-registry.json",
+      "path": "/root/deliverables/ivs-agent-capability-registry.json",
+      "sha256": "b2b9a4a341478ac3ff8635bb575f5e9cadc69eb427c40a20e503bce6097ffd56",
+      "size": 32873,
+      "mtime": 1778356713
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-agent-capability-registry.md",
+      "path": "/root/deliverables/ivs-agent-capability-registry.md",
+      "sha256": "7b3cf879ccf3d33eaa05f11cdd213cebd5cfd9c11a4dd27088087faf19fa48cd",
+      "size": 1495,
+      "mtime": 1778356713
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-agent-events.json",
+      "path": "/root/deliverables/ivs-agent-events.json",
+      "sha256": "9611b606703e38ba0fd1bd1cd6b7bea43a6c7bb7972da7a2fcca7779f00fb9db",
+      "size": 10897,
+      "mtime": 1778356713
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-agent-events.md",
+      "path": "/root/deliverables/ivs-agent-events.md",
+      "sha256": "fd6d349ab8ecfbfa71e6c94902e3b48354fbee9ab9157febc5fb9cca538af60e",
+      "size": 3975,
+      "mtime": 1778356713
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-agent-layer-daily-audit-latest.md",
+      "path": "/root/deliverables/ivs-agent-layer-daily-audit-latest.md",
+      "sha256": "d6df54feb83e3e7a30a06b3029e14fb4a8051b5c876cbd9025fa83cf33984661",
+      "size": 1019,
+      "mtime": 1778355016
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-handoff-modelo-clara-lead.json",
+      "path": "/root/deliverables/ivs-handoff-modelo-clara-lead.json",
+      "sha256": "e03569d07bdaf40e1c788bbdfa9c45543cdbe688cbb3074c4873d5d2f1346c15",
+      "size": 734,
+      "mtime": 1778356714
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "ivs-handoff-modelo-clara-lead.md",
+      "path": "/root/deliverables/ivs-handoff-modelo-clara-lead.md",
+      "sha256": "c775a9fcffeb7c1b1313ce7a98863a379a24c525baae10db62a780ff4f656ce8",
+      "size": 584,
+      "mtime": 1778356714
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "logo-vital-slim.png",
+      "path": "/root/deliverables/logo-vital-slim.png",
+      "sha256": "1c2660ec717363595093a4d784ad5d271a871aceb2a49178e4110f7f51fac2c1",
+      "size": 82751,
+      "mtime": 1777552698
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "marketing-os-daily-audit-latest.md",
+      "path": "/root/deliverables/marketing-os-daily-audit-latest.md",
+      "sha256": "46952953fa98cc004d5a2b310744ef5246939200e70f18733539fc2492a43a2c",
+      "size": 821,
+      "mtime": 1778354513
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "pedro-omie-guard-block-test.json",
+      "path": "/root/deliverables/pedro-omie-guard-block-test.json",
+      "sha256": "2faf0d9da50614b15003ff8007723d382d0fcd8b2e2f9e31ece35b4c31ea95ed",
+      "size": 830,
+      "mtime": 1778359380
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "perm_clara_clinical.json",
+      "path": "/root/deliverables/perm_clara_clinical.json",
+      "sha256": "ee48fd17eaac1408ea111fb79c98c0d717d0d0c50cd9c47df79c4929c3b17bfd",
+      "size": 388,
+      "mtime": 1778357008
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "perm_clara_no_approval.json",
+      "path": "/root/deliverables/perm_clara_no_approval.json",
+      "sha256": "ebf947620a6992a40934ea6f5879e4321120f081d2ce6e0a960e57a18fae5a8e",
+      "size": 222,
+      "mtime": 1778357008
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "perm_joao_publish_no.json",
+      "path": "/root/deliverables/perm_joao_publish_no.json",
+      "sha256": "c0413be59f0123b02533c7434fbba22dd81c2fd7b3a1b3438ab9a7e02601e81e",
+      "size": 242,
+      "mtime": 1778357008
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "perm_maria_pause_no.json",
+      "path": "/root/deliverables/perm_maria_pause_no.json",
+      "sha256": "3a281e7239ee803373d524df16d45b575acf839fdaf639f77a453477dd114a56",
+      "size": 312,
+      "mtime": 1778357008
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "perm_maria_pause_yes.json",
+      "path": "/root/deliverables/perm_maria_pause_yes.json",
+      "sha256": "f415b708571d73c03fcd98938702555fa34e3a9a893d11943ddb29735b058a6d",
+      "size": 362,
+      "mtime": 1778357008
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "perm_pedro_write_no.json",
+      "path": "/root/deliverables/perm_pedro_write_no.json",
+      "sha256": "662c21200f9d8132d7db2cae55196a04d786e82e8134281167c9a0f049a9041b",
+      "size": 226,
+      "mtime": 1778357008
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "preconsulta-daily-audit-latest.md",
+      "path": "/root/deliverables/preconsulta-daily-audit-latest.md",
+      "sha256": "2e915721e52d47f26439e82d8957604dba838b9c9569940914a749ead3063ca6",
+      "size": 742,
+      "mtime": 1778354217
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "runbook-ivs-agent-os.json",
+      "path": "/root/deliverables/runbook-ivs-agent-os.json",
+      "sha256": "25a310efb429e62ae4b55f9e3b09ee9d606ba7a5b3e974f36de2bd8872c3bfbe",
+      "size": 1999,
+      "mtime": 1778359907
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "runbook-ivs-agent-os.md",
+      "path": "/root/deliverables/runbook-ivs-agent-os.md",
+      "sha256": "98e301d5f124d2013f8fe499dd3b753612a160e5c349ac7245982c274fd82d81",
+      "size": 1754,
+      "mtime": 1778359907
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "runbook-ivs-agent-os.report.json",
+      "path": "/root/deliverables/runbook-ivs-agent-os.report.json",
+      "sha256": "363b9bcfc33e7084a3aaa73924ea13d22aef6481048ca4444aa178c35ac40ef1",
+      "size": 2000,
+      "mtime": 1778359907
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-action-gate.json",
+      "path": "/root/deliverables/workflow-registry-after-action-gate.json",
+      "sha256": "d9a4a913957ae5a11add0aaa62f30f2431e7f7101d84d6318bef56932d9aa605",
+      "size": 15434,
+      "mtime": 1778358983
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-analytics-ui.json",
+      "path": "/root/deliverables/workflow-registry-after-analytics-ui.json",
+      "sha256": "188a9e84c128e61c0c116bdfafe6ead27898fa9accee04989ee66186d1184eb2",
+      "size": 20281,
+      "mtime": 1778359797
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-command-center.json",
+      "path": "/root/deliverables/workflow-registry-after-command-center.json",
+      "sha256": "efa4428618bdd8e1a9aac11ba33629f80502a2e67444367fba966806b89ac5d4",
+      "size": 21094,
+      "mtime": 1778359907
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-disaster-recovery.json",
+      "path": "/root/deliverables/workflow-registry-after-disaster-recovery.json",
+      "sha256": "f62f9619cab3bfa50750f03cb6becc63892e54aca4ca251db7c75b00250124bb",
+      "size": 25231,
+      "mtime": 1778360627
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-drift-rc25.json",
+      "path": "/root/deliverables/workflow-registry-after-drift-rc25.json",
+      "sha256": "e68ac1f6ff58368c332dec339bec19dc9bb9130de8f5f34f76b51c5fcfab4bec",
+      "size": 24314,
+      "mtime": 1778360547
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-hardening-final.json",
+      "path": "/root/deliverables/workflow-registry-after-hardening-final.json",
+      "sha256": "51d820e86220c046e05c9c1e2c8778649a68d55546d1890f8a0fe7940a8a93f1",
+      "size": 18739,
+      "mtime": 1778359677
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-openfang-skills.json",
+      "path": "/root/deliverables/workflow-registry-after-openfang-skills.json",
+      "sha256": "fccc74b3641bee718c780111291e313a2b75430a2e2958cc0139c40250367c87",
+      "size": 10506,
+      "mtime": 1778356714
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-permission-gate.json",
+      "path": "/root/deliverables/workflow-registry-after-permission-gate.json",
+      "sha256": "db9a604ae7249c14cba9e9d95e0db8ecc6b7a20d1b4774c57876b8803267c7d7",
+      "size": 12633,
+      "mtime": 1778357000
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-protected-ci.json",
+      "path": "/root/deliverables/workflow-registry-after-protected-ci.json",
+      "sha256": "3899e8aa893192fd5da7e2cb18c294cb7633425debe67ea7e035bc4b2cfcefa5",
+      "size": 22730,
+      "mtime": 1778360268
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-runner.json",
+      "path": "/root/deliverables/workflow-registry-after-runner.json",
+      "sha256": "40d9f4dccc7fb53cb6ede27e8747717b1794a9ac175638fe62e4a4a5408d3b41",
+      "size": 11554,
+      "mtime": 1778356903
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-security-compliance.json",
+      "path": "/root/deliverables/workflow-registry-after-security-compliance.json",
+      "sha256": "1aaa3cb62327a4439269506a904913656e854fd82b44495542d2f3f1c292c067",
+      "size": 26084,
+      "mtime": 1778360752
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-sensitive-enforcement.json",
+      "path": "/root/deliverables/workflow-registry-after-sensitive-enforcement.json",
+      "sha256": "1eb79c4f12e3b50988df519201ef4c850e704fa27274a5f2d539ef3398b0ce43",
+      "size": 16395,
+      "mtime": 1778359408
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-after-unified-cockpit.json",
+      "path": "/root/deliverables/workflow-registry-after-unified-cockpit.json",
+      "sha256": "163d01e5791cf6165ee9c1b64f49428803f7b7550a30d91bc362dc87feef1e08",
+      "size": 13601,
+      "mtime": 1778357189
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-final-agent-os.json",
+      "path": "/root/deliverables/workflow-registry-final-agent-os.json",
+      "sha256": "4cdaa4001a9a9849d09ea46416eb2182621822080ef05ec175b59825cd17b591",
+      "size": 14535,
+      "mtime": 1778357293
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-ivs-agent-operating-layer.html",
+      "path": "/root/deliverables/workflow-registry-ivs-agent-operating-layer.html",
+      "sha256": "4478cea063a444f9dce40957074c11c85e7c72f6a32b59b178b9a6615fdbf6fe",
+      "size": 6202,
+      "mtime": 1778355719
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-registry-ivs-agent-operating-layer.json",
+      "path": "/root/deliverables/workflow-registry-ivs-agent-operating-layer.json",
+      "sha256": "98dbe0ffc44268a1571ae87e3c4b5c905742897eacd75f9a4790257db81edc00",
+      "size": 7454,
+      "mtime": 1778355719
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "workflow-runner-events-latest.json",
+      "path": "/root/deliverables/workflow-runner-events-latest.json",
+      "sha256": "be454a3b7cb3c382ba2f13425824ed1ed7d75d883f6b1669432836a3f07e2efd",
+      "size": 1133,
+      "mtime": 1778356911
+    },
+    {
+      "root": "/root/deliverables",
+      "rel": "zapi-health-after-guard-restart.json",
+      "path": "/root/deliverables/zapi-health-after-guard-restart.json",
+      "sha256": "133f03e3cbbcfa5b11f9b5da6159e5d63ad0d4e9875fa001b834078892a04ffc",
+      "size": 44,
+      "mtime": 1778359392
+    }
+  ]
+}

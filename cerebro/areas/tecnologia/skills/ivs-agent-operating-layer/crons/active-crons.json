@@ -519,7 +519,16 @@
       "workflow": "agent-os-disaster-recovery",
       "mode": "read-only verify/dry-run restore",
       "updated_at": 1778360641
+    },
+    {
+      "id": "8f514c54-0c58-49a6-b07d-df5a0cdbd276",
+      "name": "IVS Agent OS Security Compliance — daily",
+      "schedule": "50 8 * * * America/Bahia",
+      "agentId": "maria-gerente",
+      "workflow": "agent-os-security-compliance",
+      "mode": "read-only secrets/integrity",
+      "updated_at": 1778360767
     }
   ],
-  "updated_at": 1778360641
+  "updated_at": 1778360767
 }
