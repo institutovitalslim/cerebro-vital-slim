@@ -1,0 +1,20 @@
+{
+  "id": "external-backup-four-inputs-review",
+  "name": "External Backup Four Inputs Review",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Revisar os quatro inputs necessários para export externo/rclone: destino, credenciais, retenção e frase de aprovação, sem exportar e sem criar credenciais.",
+  "mode": "read-only input review no export",
+  "entry_criteria": ["Tiaro pediu seguir com os 4 inputs", "external-backup-intake criado"],
+  "preflight": ["inspecionar rclone sem imprimir segredos", "propor destino", "propor retenção", "montar frase de aprovação"],
+  "allowed_actions": ["rclone version/listremotes read-only", "gerar review JSON", "reportar bloqueio"],
+  "blocked_actions": ["instalar rclone sem autorização", "criar credencial", "executar rclone copy", "registrar approval"],
+  "outputs": ["external-backup-four-inputs-review.json", "rclone-readonly-inspection.txt"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_external_backup_inputs_review.py"],
+  "severity_rules": {
+    "HIGH": ["rclone não instalado", "remote não configurado", "destino inválido"],
+    "MEDIUM": ["retenção ausente"],
+    "LOW": ["aguardando aprovação"],
+    "OK": ["4 inputs prontos e credencial revisada sem export"]
+  }
+}

@@ -642,3 +642,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `external-backup-intake`.
+
+## External Backup Four Inputs Review
+
+Revisão read-only dos quatro inputs para backup externo/rclone: destino, credenciais, retenção e frase de aprovação. Não instala rclone, não cria credenciais e não exporta.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_external_backup_inputs_review.py --json
+```
+
+Workflow: `external-backup-four-inputs-review`.
