@@ -582,3 +582,11 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `offsite-backup-destination-decision`.
+
+## Offsite Local Mirror Approval Preflight
+
+Preflight read-only para exportar backup Agent OS para `/root/agent-os-offsite/ivs-agent-os`. Não exporta sem approval explícito e `approval_id`.
+
+Artefato: `/root/deliverables/offsite-local-mirror-approval-packet.json`.
+
+Workflow: `offsite-local-mirror-approval-preflight`.

@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "generated_at": 1778363686,
+  "mode": "offsite_local_mirror_approval_packet_no_export",
+  "destination_mode": "local_mirror",
+  "destination": "/root/agent-os-offsite/ivs-agent-os",
+  "action": "offsite_backup_export",
+  "agent": "maria-gerente",
+  "sensitivity": "tech",
+  "approval_required": true,
+  "required_phrase": "Autorizo exportar o backup Agent OS para /root/agent-os-offsite/ivs-agent-os agora",
+  "execution_performed": false,
+  "blocked_by_design": [
+    "não exporta sem approval_id",
+    "não cria credencial",
+    "não usa rclone",
+    "não escreve fora de /root/agent-os-offsite"
+  ]
+}

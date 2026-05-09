@@ -1,0 +1,20 @@
+{
+  "id": "offsite-local-mirror-approval-preflight",
+  "name": "Offsite Local Mirror Approval Preflight",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar aprovação explícita para exportar backup Agent OS para local mirror sob /root/agent-os-offsite, sem executar exportação.",
+  "mode": "approval preflight no export",
+  "entry_criteria": ["Tiaro indicou seguir com recomendação local_mirror", "destino definido", "backup readiness OK"],
+  "preflight": ["validar backup local", "definir destino permitido", "gerar approval packet", "não exportar"],
+  "allowed_actions": ["gerar pacote de aprovação", "validar readiness", "atualizar dossiê read-only"],
+  "blocked_actions": ["copiar backup sem approval_id", "exportar para destino fora do allowed_prefix", "criar credenciais", "usar rclone"],
+  "outputs": ["offsite-local-mirror-preflight.json", "offsite-local-mirror-approval-packet.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_offsite_backup.py"],
+  "severity_rules": {
+    "HIGH": ["exportado sem approval", "destino fora do allowed_prefix"],
+    "MEDIUM": ["readiness falhou"],
+    "LOW": ["aguardando frase explícita"],
+    "OK": ["approval packet gerado sem exportação"]
+  }
+}
