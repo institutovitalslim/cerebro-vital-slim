@@ -1,0 +1,50 @@
+{
+  "id": "preconsulta-safety",
+  "name": "Pré-consulta Safety",
+  "owner": "Maria",
+  "executor": "Sistema de pré-consulta",
+  "scope": "Garantir que submissões e drafts da pré-consulta não sejam perdidos e que ninguém peça novo preenchimento sem validação.",
+  "mode": "read-only monitor by default",
+  "entry_criteria": [
+    "Dúvida sobre formulário preenchido",
+    "Reclamação de perda de pré-consulta",
+    "Auditoria diária automática",
+    "Antes de afirmar que dados existem ou não existem"
+  ],
+  "preflight": [
+    "Auditar /root/ivs-preconsulta-data",
+    "Comparar submissões com markdown em /root/cerebro-vital-slim/cerebro/empresa/pacientes",
+    "Verificar drafts antigos",
+    "Verificar JSON inválido ou incompleto",
+    "Verificar fallback Telegram quando aplicável"
+  ],
+  "allowed_actions": [
+    "gerar relatório read-only",
+    "gerar cockpit HTML",
+    "reportar inconsistência ao Tiaro",
+    "corrigir bug técnico mediante autorização operacional quando não alterar dado de paciente"
+  ],
+  "blocked_actions": [
+    "pedir ao paciente para preencher novamente antes da validação completa",
+    "fabricar markdown retroativo sem validação",
+    "alterar JSON de paciente sem autorização",
+    "contatar paciente diretamente"
+  ],
+  "outputs": [
+    "status do app",
+    "contagem de JSONs, submissões e drafts",
+    "lista de submissões sem markdown",
+    "lista de drafts antigos",
+    "próxima ação operacional"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/preconsulta_safety_monitor.py",
+    "/root/ivs-preconsulta-data",
+    "/root/cerebro-vital-slim/cerebro/empresa/pacientes"
+  ],
+  "severity_rules": {
+    "HIGH": ["submissão sem markdown", "JSON inválido", "app indisponível"],
+    "MEDIUM": ["draft antigo", "registro incompleto", "fallback Telegram pendente"],
+    "LOW": ["baseline sem mudança"]
+  }
+}

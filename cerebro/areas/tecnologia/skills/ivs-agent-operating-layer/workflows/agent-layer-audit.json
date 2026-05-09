@@ -1,0 +1,50 @@
+{
+  "id": "agent-layer-audit",
+  "name": "IVS Agent Operating Layer Audit",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Consolidar Clara/Z-API, Pré-consulta e Marketing OS/João em uma visão executiva única.",
+  "mode": "read-only consolidated audit",
+  "entry_criteria": [
+    "Auditoria diária consolidada",
+    "Pedido do Tiaro por visão geral da operação assistida",
+    "Antes de priorizar correção operacional entre Clara, pré-consulta e João"
+  ],
+  "preflight": [
+    "Executar clara_safety_monitor.py",
+    "Executar preconsulta_safety_monitor.py",
+    "Executar marketing_os_monitor.py",
+    "Normalizar severidades e achados",
+    "Comparar baseline/delta consolidado"
+  ],
+  "allowed_actions": [
+    "gerar cockpit geral HTML",
+    "gerar relatório consolidado",
+    "notificar Tiaro em ALTA/MÉDIA ou mudança relevante",
+    "recomendar prioridade de correção"
+  ],
+  "blocked_actions": [
+    "pausar/despausar Clara",
+    "enviar WhatsApp",
+    "publicar externamente",
+    "alterar produção automaticamente"
+  ],
+  "outputs": [
+    "severidade consolidada",
+    "resumo por área",
+    "achados normalizados",
+    "estado de baselines",
+    "próxima ação executiva"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/ivs_agent_layer_monitor.py",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_ivs_agent_layer_cockpit.py",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/ivs_agent_layer_daily_audit.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["qualquer área com HIGH", "monitor crítico falhou"],
+    "MEDIUM": ["qualquer área com MEDIUM sem HIGH"],
+    "LOW": ["somente achados LOW"],
+    "OK": ["sem achados"]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "severity": "MÉDIA",
+  "changes": [
+    "Sem mudanças relevantes desde a última execução."
+  ],
+  "snapshot": {
+    "generated_at": 1778354513,
+    "marketing_backlog_items": 7,
+    "recent_html_deliverables": 2,
+    "recent_outbound_files": 4,
+    "html_not_outbound": 0,
+    "session_risks": 11,
+    "rule_missing": 0,
+    "findings": [
+      "joao_session_risk_markers",
+      "marketing_backlog_active"
+    ]
+  },
+  "report": "/root/deliverables/marketing-os-daily-audit-latest.md",
+  "state": "/root/.openclaw/workspace/ops/marketing_os/marketing_os_audit_state.json",
+  "saved": true
+}

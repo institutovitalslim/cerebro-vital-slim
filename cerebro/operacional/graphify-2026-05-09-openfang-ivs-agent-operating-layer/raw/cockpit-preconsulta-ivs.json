@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "generated_at": 1778354202,
+  "mode": "read_only_no_patient_contact",
+  "app_probe": {
+    "ok": true,
+    "status": 200,
+    "preview": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" href=\"/_"
+  },
+  "totals": {
+    "json_files": 1,
+    "valid_records": 1,
+    "submissions": 1,
+    "drafts": 0,
+    "invalid": 0
+  },
+  "latest_records": [
+    {
+      "file": "2026-04-24T21-07-12-692Z-tiaro-fernandes-neves.json",
+      "nome": "Tiaro Fernandes Neves",
+      "phone": "71986968887",
+      "draft": false,
+      "ts": 1777064832,
+      "updated_or_submitted": "2026-04-24T21:07:12.692Z"
+    }
+  ],
+  "stale_drafts_count": 0,
+  "stale_drafts_sample": [],
+  "incomplete_count": 0,
+  "incomplete_sample": [],
+  "missing_markdown_count": 1,
+  "missing_markdown_sample": [
+    {
+      "file": "2026-04-24T21-07-12-692Z-tiaro-fernandes-neves.json",
+      "nome": "Tiaro Fernandes Neves",
+      "phone": "71986968887",
+      "draft": false,
+      "ts": 1777064832,
+      "updated_or_submitted": "2026-04-24T21:07:12.692Z",
+      "expected": "preconsulta-tiaro-fernandes-neves-2026-04-24.md"
+    }
+  ],
+  "duplicates_count": 0,
+  "duplicates_sample": [],
+  "fallback_queue": {
+    "exists": false,
+    "count": 0,
+    "latest": null
+  },
+  "findings": [
+    {
+      "severity": "HIGH",
+      "code": "submission_without_markdown",
+      "count": 1
+    }
+  ],
+  "next_actions": [
+    "Não pedir paciente para preencher novamente sem validação humana.",
+    "Investigar missing_markdown/invalid_json antes de prometer dados.",
+    "Drafts antigos devem ser tratados como oportunidade de recuperação interna, não contato automático."
+  ]
+}

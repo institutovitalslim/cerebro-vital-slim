@@ -1,0 +1,38 @@
+{
+  "ok": true,
+  "severity": "ALTA",
+  "changes": [
+    "Primeira execução: baseline consolidado criado."
+  ],
+  "snapshot": {
+    "generated_at": 1778355016,
+    "overall_severity": "ALTA",
+    "findings_total": 4,
+    "high": 1,
+    "medium": 2,
+    "low": 1,
+    "areas": {
+      "clara": {
+        "severity": "MEDIUM",
+        "findings_count": 1
+      },
+      "preconsulta": {
+        "severity": "HIGH",
+        "findings_count": 1
+      },
+      "marketing_os": {
+        "severity": "MEDIUM",
+        "findings_count": 2
+      }
+    },
+    "codes": [
+      "clara:active_leads_blocked_as_patient_like",
+      "marketing_os:joao_session_risk_markers",
+      "marketing_os:marketing_backlog_active",
+      "preconsulta:submission_without_markdown"
+    ]
+  },
+  "report": "/root/deliverables/ivs-agent-layer-daily-audit-latest.md",
+  "state": "/root/.openclaw/workspace/ops/ivs_agent_layer/ivs_agent_layer_audit_state.json",
+  "saved": true
+}

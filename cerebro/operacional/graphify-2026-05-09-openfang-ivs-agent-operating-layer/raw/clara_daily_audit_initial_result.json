@@ -1,0 +1,56 @@
+{
+  "ok": true,
+  "severity": "BAIXA",
+  "changes": [
+    "Primeira execução: baseline criado."
+  ],
+  "snapshot": {
+    "generated_at": 1778353971,
+    "bridge_health_ok": true,
+    "paused": false,
+    "paused_reason": null,
+    "patient_like_collision_count": 25,
+    "collision_phones": [
+      "5521996677266",
+      "557182381160",
+      "557185040263",
+      "557188067626",
+      "557188071337",
+      "557188225047",
+      "557188377569",
+      "557188762126",
+      "557191029734",
+      "557191151585",
+      "557191465748",
+      "557191927242",
+      "557192931078",
+      "557193693078",
+      "557196319470",
+      "557196800509",
+      "557197169258",
+      "557197256868",
+      "557199543781",
+      "557199578879",
+      "5571995788879",
+      "557199646264",
+      "557581492991",
+      "557582456631",
+      "557599406785"
+    ],
+    "manual_override_active_count": 3,
+    "manual_override_phones": [
+      "103263965818937",
+      "159682656235682",
+      "85143834341566"
+    ],
+    "exclusions_total": 396,
+    "patient_do_not_reply_count": 6,
+    "patient_bridge_known_count": 390,
+    "findings_codes": [
+      "active_leads_blocked_as_patient_like"
+    ]
+  },
+  "report": "/root/deliverables/clara-daily-audit-latest.md",
+  "state": "/root/.openclaw/workspace/ops/zapi_bridge/clara_safety_audit_state.json",
+  "saved": true
+}

@@ -1,0 +1,47 @@
+{
+  "id": "followup-seguro",
+  "name": "Follow-up Seguro Clara/Z-API",
+  "owner": "Maria",
+  "executor": "Clara-WhatsApp",
+  "scope": "Envio seguro de follow-up para leads pelo Z-API, com bloqueio conservador para pacientes conhecidos e do_not_reply.",
+  "mode": "state-changing only with explicit Tiaro authorization for real sends",
+  "entry_criteria": [
+    "Pedido explícito de follow-up para lead específico ou lista de leads",
+    "Telefone normalizado disponível",
+    "Mensagem aprovada ou gerada pela Clara dentro do escopo comercial"
+  ],
+  "preflight": [
+    "Executar followup_safety_check.py em modo dry-run/local quando aplicável",
+    "Verificar clara_exclusions.json",
+    "Verificar clara_leads_state.json",
+    "Bloquear patient_do_not_reply e patient_bridge_known por padrão",
+    "Permitir bypass somente com lead_exception* ou source == tiaro_lead_exception"
+  ],
+  "allowed_actions": [
+    "dry_run da rota /admin/send",
+    "envio real somente quando Tiaro determinar explicitamente",
+    "registro de evidência operacional"
+  ],
+  "blocked_actions": [
+    "enviar WhatsApp por Telegram message",
+    "liberar paciente conhecido por iniciativa própria",
+    "pausar Clara sem ordem explícita do Tiaro",
+    "contatar lead/paciente diretamente pela Maria"
+  ],
+  "outputs": [
+    "status do preflight",
+    "status dry_run ou envio real autorizado",
+    "bloqueios e motivo",
+    "pendência de limpeza de override quando existir"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/followup_safety_check.py",
+    "/root/.openclaw/workspace/ops/zapi_bridge/zapi_clara_bridge.py",
+    "/root/.openclaw/workspace/ops/zapi_bridge/clara_exclusions.json"
+  ],
+  "severity_rules": {
+    "HIGH": ["tentativa de envio para patient_do_not_reply", "envio real sem autorização explícita"],
+    "MEDIUM": ["lead ativo bloqueado como patient-like", "override manual ativo"],
+    "LOW": ["dry_run aprovado sem envio real"]
+  }
+}

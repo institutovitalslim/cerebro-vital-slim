@@ -1,0 +1,587 @@
+{
+  "ok": true,
+  "generated_at": 1778353207,
+  "mode": "read_only_no_send_no_pause",
+  "paths": {
+    "base": "/root/.openclaw/workspace/ops/zapi_bridge"
+  },
+  "read_errors": [],
+  "bridge_health": {
+    "ok": true,
+    "status": 200,
+    "body": {
+      "ok": true,
+      "service": "zapi-clara-bridge"
+    }
+  },
+  "bridge_admin_status": {
+    "ok": true,
+    "status": 200,
+    "body": {
+      "ok": true,
+      "paused": false,
+      "paused_at": null,
+      "paused_until": null,
+      "remaining_seconds": null,
+      "paused_reason": null,
+      "paused_by": null
+    }
+  },
+  "exclusions": {
+    "total": 396,
+    "by_reason": {
+      "patient_bridge_known": 390,
+      "patient_do_not_reply": 6
+    },
+    "lead_exceptions_count": 0,
+    "lead_exceptions_sample": [],
+    "patient_do_not_reply_count": 6,
+    "patient_do_not_reply_sample": [
+      {
+        "phone": "5571999543781",
+        "name": "Joyce",
+        "reason": "patient_do_not_reply",
+        "source": "manual"
+      },
+      {
+        "phone": "557196562443",
+        "name": "Flávia Lima",
+        "reason": "patient_do_not_reply",
+        "source": "manual"
+      },
+      {
+        "phone": "5571996562443",
+        "name": "Flávia Lima",
+        "reason": "patient_do_not_reply",
+        "source": "manual"
+      },
+      {
+        "phone": "5561998025591",
+        "name": "Mara - Lead evento Instagram",
+        "reason": "patient_do_not_reply",
+        "source": "manual"
+      },
+      {
+        "phone": "5571991927242",
+        "name": "Suely Dalmondez Castro",
+        "reason": "patient_do_not_reply",
+        "source": "manual_tiaro_patient_safety_suely_2026-05-09"
+      },
+      {
+        "phone": "5538991054179",
+        "name": "Sueli Teixeira de Freitas Oliveira",
+        "reason": "patient_do_not_reply",
+        "source": "manual_tiaro_patient_safety_suely_2026-05-09"
+      }
+    ],
+    "patient_bridge_known_count": 390
+  },
+  "leads": {
+    "total": 26,
+    "active_total": 25
+  },
+  "events": {
+    "total": 39
+  },
+  "manual_overrides": {
+    "active_count": 8,
+    "active_sample": [
+      {
+        "phone": "85143834341566",
+        "until": 1778354897.8862424,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778333297
+      },
+      {
+        "phone": "127234228674693",
+        "until": 1778353522.8076,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778331922
+      },
+      {
+        "phone": "557138388708",
+        "until": 1778353964.9509895,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778332364
+      },
+      {
+        "phone": "103263965818937",
+        "until": 1778363176.5192463,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778341576
+      },
+      {
+        "phone": "159682656235682",
+        "until": 1778362701.1790178,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778341101
+      },
+      {
+        "phone": "97959731536063",
+        "until": 1778353577.7421412,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778331977
+      },
+      {
+        "phone": "271025489092672",
+        "until": 1778353594.1722124,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778331994
+      },
+      {
+        "phone": "263084027429080",
+        "until": 1778353606.0217934,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778332006
+      }
+    ],
+    "expired_count": 9,
+    "expired_sample": [
+      {
+        "phone": "557191583056",
+        "until": 1778171429.541109,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778149829
+      },
+      {
+        "phone": "557188067626",
+        "until": 1778171417.303557,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778149817
+      },
+      {
+        "phone": "229012085436617",
+        "until": 1778185740.575818,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778164140
+      },
+      {
+        "phone": "165768775868614",
+        "until": 1778187269.7905612,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778165669
+      },
+      {
+        "phone": "55757886226537",
+        "until": 1778273141.577621,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778251541
+      },
+      {
+        "phone": "124240669978685",
+        "until": 1778206609.5631812,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778185009
+      },
+      {
+        "phone": "137156089663565",
+        "until": 1778210196.1823804,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778188596
+      },
+      {
+        "phone": "253772521558219",
+        "until": 1778266358.7124605,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778244758
+      },
+      {
+        "phone": "38070741168234",
+        "until": 1778352307.6121237,
+        "note": "from_me_outbound_detected",
+        "owner": "human",
+        "set_at": 1778330707
+      }
+    ]
+  },
+  "collisions": {
+    "active_leads_with_blocking_exclusion_count": 25,
+    "active_leads_with_blocking_exclusion_sample": [
+      {
+        "phone": "557193693078",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Giulia Santos"
+      },
+      {
+        "phone": "557188067626",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Lígia Paciente Dra Daniely"
+      },
+      {
+        "phone": "557196800509",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "VIP - Mário Abreu Gomes Filho"
+      },
+      {
+        "phone": "557197256868",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "VIP - DEZEMBRO - Larissa Correia - Particular - Programa 27-12-25 - Agen - Larissa - Particular - Programa"
+      },
+      {
+        "phone": "557599406785",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Darilene Esposa Raniel"
+      },
+      {
+        "phone": "557185040263",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "07-10-24 - Pac - Josefa - Particular"
+      },
+      {
+        "phone": "557199543781",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "24-02-25 - Pct. Joyce Esposa - Bradesco"
+      },
+      {
+        "phone": "557191151585",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "ABRIL A - Lorena Paim"
+      },
+      {
+        "phone": "5521996677266",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "ABRIL A - Neuma Lucena"
+      },
+      {
+        "phone": "557191465748",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "09-06-25 - LEAD - Raphaela Espíndola - Bradesco"
+      },
+      {
+        "phone": "557182381160",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Essentia Saúde e consultoria"
+      },
+      {
+        "phone": "557188071337",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Milla"
+      },
+      {
+        "phone": "557196319470",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Farah Cohim"
+      },
+      {
+        "phone": "557581492991",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Rose"
+      },
+      {
+        "phone": "557188225047",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "16-10-24 - Lead - Joceane"
+      },
+      {
+        "phone": "557582456631",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "marinapereiragsell"
+      },
+      {
+        "phone": "557192931078",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Louise 🌷"
+      },
+      {
+        "phone": "557199646264",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Regina Madrinha"
+      },
+      {
+        "phone": "557191029734",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "19-02-25 - Agen - Carla Elaine - Particular"
+      },
+      {
+        "phone": "557188762126",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "VIP - 03-09-25 - Ivana Souza Lopes - Particular"
+      },
+      {
+        "phone": "557191927242",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Suely Estacao Villas Shopping"
+      },
+      {
+        "phone": "557197169258",
+        "lead_source": "active_lead_window",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "FEVEREIRO - Vitor Lira"
+      },
+      {
+        "phone": "557199578879",
+        "lead_source": "tiaro_requested_followup_maria_gabriela",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Maria Gabriela Amaral"
+      },
+      {
+        "phone": "5571995788879",
+        "lead_source": "active_lead_window",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Lead"
+      },
+      {
+        "phone": "557188377569",
+        "lead_source": "active_lead_window",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Elisenilda Mae Evelyn - Particular"
+      }
+    ],
+    "explicit_lead_exceptions_count": 0,
+    "explicit_lead_exceptions_sample": [],
+    "patient_like_active_lead_collision_count": 25,
+    "patient_like_active_lead_collision_sample": [
+      {
+        "phone": "557193693078",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Giulia Santos"
+      },
+      {
+        "phone": "557188067626",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Lígia Paciente Dra Daniely"
+      },
+      {
+        "phone": "557196800509",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "VIP - Mário Abreu Gomes Filho"
+      },
+      {
+        "phone": "557197256868",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "VIP - DEZEMBRO - Larissa Correia - Particular - Programa 27-12-25 - Agen - Larissa - Particular - Programa"
+      },
+      {
+        "phone": "557599406785",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Darilene Esposa Raniel"
+      },
+      {
+        "phone": "557185040263",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "07-10-24 - Pac - Josefa - Particular"
+      },
+      {
+        "phone": "557199543781",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "24-02-25 - Pct. Joyce Esposa - Bradesco"
+      },
+      {
+        "phone": "557191151585",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "ABRIL A - Lorena Paim"
+      },
+      {
+        "phone": "5521996677266",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "ABRIL A - Neuma Lucena"
+      },
+      {
+        "phone": "557191465748",
+        "lead_source": "existing_lead",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "09-06-25 - LEAD - Raphaela Espíndola - Bradesco"
+      },
+      {
+        "phone": "557182381160",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Essentia Saúde e consultoria"
+      },
+      {
+        "phone": "557188071337",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Milla"
+      },
+      {
+        "phone": "557196319470",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Farah Cohim"
+      },
+      {
+        "phone": "557581492991",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Rose"
+      },
+      {
+        "phone": "557188225047",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "16-10-24 - Lead - Joceane"
+      },
+      {
+        "phone": "557582456631",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "marinapereiragsell"
+      },
+      {
+        "phone": "557192931078",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Louise 🌷"
+      },
+      {
+        "phone": "557199646264",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Regina Madrinha"
+      },
+      {
+        "phone": "557191029734",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "19-02-25 - Agen - Carla Elaine - Particular"
+      },
+      {
+        "phone": "557188762126",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "VIP - 03-09-25 - Ivana Souza Lopes - Particular"
+      },
+      {
+        "phone": "557191927242",
+        "lead_source": "new_contact",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Suely Estacao Villas Shopping"
+      },
+      {
+        "phone": "557197169258",
+        "lead_source": "active_lead_window",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "FEVEREIRO - Vitor Lira"
+      },
+      {
+        "phone": "557199578879",
+        "lead_source": "tiaro_requested_followup_maria_gabriela",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Maria Gabriela Amaral"
+      },
+      {
+        "phone": "5571995788879",
+        "lead_source": "active_lead_window",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Lead"
+      },
+      {
+        "phone": "557188377569",
+        "lead_source": "active_lead_window",
+        "exclusion_reason": "patient_bridge_known",
+        "exclusion_source": "bridge_contexto_paciente",
+        "name": "Elisenilda Mae Evelyn - Particular"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "code": "active_leads_blocked_as_patient_like",
+      "detail": {
+        "count": 25
+      }
+    }
+  ],
+  "next_actions": [
+    "Revisar colisões active_leads_blocked_as_patient_like antes de liberar qualquer exceção.",
+    "Manter patient_do_not_reply e patient_bridge_known bloqueados por padrão.",
+    "Usar /admin/send apenas com dry_run:true em testes."
+  ]
+}

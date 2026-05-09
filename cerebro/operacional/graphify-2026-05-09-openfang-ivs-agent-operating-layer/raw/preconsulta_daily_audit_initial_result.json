@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "severity": "ALTA",
+  "changes": [
+    "Primeira execução: baseline criado."
+  ],
+  "snapshot": {
+    "generated_at": 1778354217,
+    "app_ok": true,
+    "json_files": 1,
+    "submissions": 1,
+    "drafts": 0,
+    "invalid": 0,
+    "stale_drafts": 0,
+    "missing_markdown": 1,
+    "incomplete": 0,
+    "fallback_count": 0,
+    "findings": [
+      "submission_without_markdown"
+    ]
+  },
+  "report": "/root/deliverables/preconsulta-daily-audit-latest.md",
+  "state": "/root/ivs-preconsulta-data/.preconsulta_safety_audit_state.json",
+  "saved": true
+}

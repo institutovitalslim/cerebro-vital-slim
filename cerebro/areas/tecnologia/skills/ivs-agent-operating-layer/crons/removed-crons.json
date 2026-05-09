@@ -1,0 +1,55 @@
+{
+  "generated_at": 1778355488,
+  "removed": [
+    {
+      "id": "6bbea434-eefb-41dc-b8f9-802d35cd03cf",
+      "name": "Clara/Z-API daily audit",
+      "reason": "substituído pelo audit consolidado do IVS Agent Operating Layer; evita duplicidade de auditoria diária"
+    },
+    {
+      "id": "a608fe14-c009-49a7-82b2-b2c8152d9a59",
+      "name": "Pré-consulta daily audit",
+      "reason": "substituído pelo audit consolidado do IVS Agent Operating Layer; monitor continua disponível sob demanda"
+    },
+    {
+      "id": "9e37d4c8-fc40-4413-9c58-e86576ca3e63",
+      "name": "Marketing OS/João daily audit",
+      "reason": "substituído pelo audit consolidado do IVS Agent Operating Layer; monitor continua disponível sob demanda"
+    },
+    {
+      "id": "ce9ea71e-ec78-496e-ab73-4fe2d00319a2",
+      "name": "cron legado de auditoria/learning Clara",
+      "reason": "redundante com rotina consolidada noturna e registry atual"
+    },
+    {
+      "id": "76926327-93e3-456f-a118-ba54b6aa9ee6",
+      "name": "cron legado silencioso Clara Learning",
+      "reason": "sem entrega operacional independente; substituído por WhatsApp atual + auditoria diária"
+    },
+    {
+      "id": "39eae6cc-2d31-4a01-aa9f-c1a3d624dbf7",
+      "name": "Clara Learning — Instagram manhã",
+      "reason": "slot externo com falhas recorrentes/baixo valor; consolidado na auditoria diária sem cron próprio"
+    },
+    {
+      "id": "a4935d7e-2237-45c9-9420-21878d85347f",
+      "name": "Clara Learning — Instagram tarde",
+      "reason": "slot externo com falhas recorrentes/baixo valor; consolidado na auditoria diária sem cron próprio"
+    },
+    {
+      "id": "f086ac46-a2af-4965-91d8-02698fb75d6e",
+      "name": "Clara Learning — YouTube",
+      "reason": "slot externo com falhas recorrentes; auditoria diária pode consultar quando fizer sentido"
+    },
+    {
+      "id": "bbe92ffa-85f3-4840-953d-72ae4abbfab0",
+      "name": "Clara Learning — X/Twitter",
+      "reason": "slot externo com falhas recorrentes/baixo valor; consolidado na auditoria diária sem cron próprio"
+    },
+    {
+      "id": "66eedfbf-8de5-40d4-b537-102e99d3693e",
+      "name": "Clara Learning — Revisão 21:20",
+      "reason": "redundante com Auditoria diária da Clara 21:30 e Graphify RC-25 22:05"
+    }
+  ]
+}

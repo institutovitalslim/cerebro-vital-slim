@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cockpit Clara/Z-API — IVS</title>
+<style>
+:root {
+  --bg:#f7f3ec; --ink:#1f2a24; --muted:#68746c; --card:#fffaf2; --line:#e8dccb;
+  --green:#244234; --gold:#b78a42; --warn:#a86b00; --danger:#9c2f2f; --soft:#efe5d6;
+}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 20% 0%,#fffaf2 0,#f7f3ec 42%,#efe5d6 100%);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:42px 24px 64px}
+.hero{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;border:1px solid var(--line);background:rgba(255,250,242,.82);backdrop-filter:blur(10px);border-radius:28px;padding:30px;box-shadow:0 22px 70px rgba(44,35,22,.10)}
+.kicker{color:var(--gold);font-weight:800;letter-spacing:.11em;text-transform:uppercase;font-size:12px} h1{font-size:38px;line-height:1.02;margin:10px 0 12px;color:var(--green)} .sub{color:var(--muted);font-size:16px;max-width:720px}
+.badge{border-radius:999px;padding:10px 14px;font-weight:800;border:1px solid var(--line);background:#fff} .badge.ok{color:var(--green)} .badge.warn{color:var(--warn)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0} .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 14px 42px rgba(44,35,22,.06)}
+.metric{font-size:34px;font-weight:900;color:var(--green);letter-spacing:-.03em} .label{color:var(--muted);font-size:13px;margin-top:4px} .section{margin-top:22px} h2{font-size:22px;color:var(--green);margin:0 0 12px}
+table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#fffaf2} th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top} th{background:#efe5d6;color:var(--green);font-size:12px;text-transform:uppercase;letter-spacing:.05em} tr:last-child td{border-bottom:none} .muted{color:var(--muted)}
+.finding{border-radius:18px;padding:16px;margin:10px 0;border:1px solid var(--line);background:#fff} .finding pre{white-space:pre-wrap;font-size:12px;color:var(--muted);margin:8px 0 0} .finding.warn{border-color:#e2b86d;background:#fff7e8} .finding.danger{border-color:#e6a0a0;background:#fff0f0} .finding.info{border-color:#cdded4;background:#f3faf5}
+.footer{margin-top:28px;color:var(--muted);font-size:12px;line-height:1.5}
+@media(max-width:900px){.hero{display:block}.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:560px){.grid{grid-template-columns:1fr} h1{font-size:30px}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero"><div><div class="kicker">Instituto Vital Slim · Operação</div><h1>Cockpit Clara/Z-API</h1><p class="sub">Painel read-only para segurança operacional da Clara: bloqueios de pacientes, colisões com leads, saúde do bridge, pausas e overrides. Não envia mensagem e não altera produção.</p></div><div class="badge ok">Saudável</div></section>
+<section class="grid">
+  <div class="card"><div class="metric">OK</div><div class="label">Bridge Z-API</div></div>
+  <div class="card"><div class="metric">Não</div><div class="label">Pausa global Clara</div></div>
+  <div class="card"><div class="metric">25</div><div class="label">Leads ativos rastreados</div></div>
+  <div class="card"><div class="metric">25</div><div class="label">Colisões lead + paciente-like</div></div>
+  <div class="card"><div class="metric">396</div><div class="label">Exclusões totais</div></div>
+  <div class="card"><div class="metric">6</div><div class="label">patient_do_not_reply</div></div>
+  <div class="card"><div class="metric">390</div><div class="label">patient_bridge_known</div></div>
+  <div class="card"><div class="metric">4</div><div class="label">Overrides manuais ativos</div></div>
+</section>
+<section class="section card"><h2>Achados</h2><div class="finding warn"><strong>MEDIUM · active_leads_blocked_as_patient_like</strong><pre>{
+  &quot;count&quot;: 25
+}</pre></div></section>
+<section class="section card"><h2>Colisões para revisão</h2><table><thead><tr><th>Telefone</th><th>Nome</th><th>Lead source</th><th>Bloqueio</th><th>Origem bloqueio</th></tr></thead><tbody><tr><td>557193693078</td><td>Giulia Santos</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557188067626</td><td>Lígia Paciente Dra Daniely</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557196800509</td><td>VIP - Mário Abreu Gomes Filho</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557197256868</td><td>VIP - DEZEMBRO - Larissa Correia - Particular - Programa 27-12-25 - Agen - Larissa - Particular - Programa</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557599406785</td><td>Darilene Esposa Raniel</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557185040263</td><td>07-10-24 - Pac - Josefa - Particular</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557199543781</td><td>24-02-25 - Pct. Joyce Esposa - Bradesco</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557191151585</td><td>ABRIL A - Lorena Paim</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>5521996677266</td><td>ABRIL A - Neuma Lucena</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557191465748</td><td>09-06-25 - LEAD - Raphaela Espíndola - Bradesco</td><td>existing_lead</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557182381160</td><td>Essentia Saúde e consultoria</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557188071337</td><td>Milla</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557196319470</td><td>Farah Cohim</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557581492991</td><td>Rose</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557188225047</td><td>16-10-24 - Lead - Joceane</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557582456631</td><td>marinapereiragsell</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557192931078</td><td>Louise 🌷</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557199646264</td><td>Regina Madrinha</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557191029734</td><td>19-02-25 - Agen - Carla Elaine - Particular</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557188762126</td><td>VIP - 03-09-25 - Ivana Souza Lopes - Particular</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557191927242</td><td>Suely Estacao Villas Shopping</td><td>new_contact</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557197169258</td><td>FEVEREIRO - Vitor Lira</td><td>active_lead_window</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557199578879</td><td>Maria Gabriela Amaral</td><td>tiaro_requested_followup_maria_gabriela</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>5571995788879</td><td>Lead</td><td>active_lead_window</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr>
+<tr><td>557188377569</td><td>Elisenilda Mae Evelyn - Particular</td><td>active_lead_window</td><td>patient_bridge_known</td><td>bridge_contexto_paciente</td></tr></tbody></table></section>
+<section class="section card"><h2>Patient do not reply — amostra</h2><table><thead><tr><th>Telefone</th><th>Nome</th><th>Motivo</th><th>Origem</th></tr></thead><tbody><tr><td>5571999543781</td><td>Joyce</td><td>patient_do_not_reply</td><td>manual</td></tr>
+<tr><td>557196562443</td><td>Flávia Lima</td><td>patient_do_not_reply</td><td>manual</td></tr>
+<tr><td>5571996562443</td><td>Flávia Lima</td><td>patient_do_not_reply</td><td>manual</td></tr>
+<tr><td>5561998025591</td><td>Mara - Lead evento Instagram</td><td>patient_do_not_reply</td><td>manual</td></tr>
+<tr><td>5571991927242</td><td>Suely Dalmondez Castro</td><td>patient_do_not_reply</td><td>manual_tiaro_patient_safety_suely_2026-05-09</td></tr>
+<tr><td>5538991054179</td><td>Sueli Teixeira de Freitas Oliveira</td><td>patient_do_not_reply</td><td>manual_tiaro_patient_safety_suely_2026-05-09</td></tr></tbody></table></section>
+<section class="section card"><h2>Overrides manuais ativos</h2><table><thead><tr><th>Telefone</th><th>Nota</th><th>Dono</th><th>Definido em</th><th>Até</th></tr></thead><tbody><tr><td>85143834341566</td><td>from_me_outbound_detected</td><td>human</td><td>1778333297</td><td>1778354897.8862424</td></tr>
+<tr><td>557138388708</td><td>from_me_outbound_detected</td><td>human</td><td>1778332364</td><td>1778353964.9509895</td></tr>
+<tr><td>103263965818937</td><td>from_me_outbound_detected</td><td>human</td><td>1778341576</td><td>1778363176.5192463</td></tr>
+<tr><td>159682656235682</td><td>from_me_outbound_detected</td><td>human</td><td>1778341101</td><td>1778362701.1790178</td></tr></tbody></table></section>
+<div class="footer">Gerado em 09/05/2026 19:10 UTC. Fonte: Clara Safety Monitor. Regra operacional: paciente e do_not_reply permanecem bloqueados por padrão; exceções só com autorização explícita.</div>
+</main></body></html>

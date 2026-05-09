@@ -1,0 +1,71 @@
+{
+  "version": "2026-05-09-agent-learning-autonomy-v1",
+  "governance": {
+    "principle": "Todo agente IVS pode aprender de fontes externas, mas aprendizado externo vira hipótese, não regra canônica automática.",
+    "promotion_rule": "Regra fixa, memória ou mudança estrutural exige Maria/Tiaro e RC-25/graphify.",
+    "filters": [
+      "não copiar literalmente",
+      "não usar promessa de resultado",
+      "não transformar opinião externa em regra clínica/financeira/jurídica",
+      "não expor bastidores para pacientes/leads",
+      "não reduzir o posicionamento premium do IVS"
+    ],
+    "classification": ["aplicar amanhã", "testar 3 dias", "descartar", "propor RC-25"]
+  },
+  "agents": [
+    {
+      "id": "maria-gerente",
+      "name": "Maria",
+      "domain": "gestão geral, operação, coordenação, segurança operacional e qualidade",
+      "learning_goals": ["gestão de clínica premium", "SOPs", "agent operations", "hospitalidade", "liderança operacional", "indicadores e auditoria"],
+      "instagram_x_topics": ["healthcare operations", "customer experience", "premium service", "AI agents operations", "clinic management"],
+      "youtube_channels_or_queries": ["Will Guidara unreasonable hospitality", "Shep Hyken customer service", "G4 Educação gestão", "HubSpot operations customer experience", "McKinsey healthcare operations"],
+      "output_use": "converter em processos, checklists, auditorias e decisões operacionais seguras"
+    },
+    {
+      "id": "clara-whatsapp",
+      "name": "Clara",
+      "domain": "concierge comercial WhatsApp, conversão, SPIN, objeções, follow-up e experiência premium",
+      "learning_goals": ["abertura de conversa", "objeções", "follow-up", "vendas consultivas", "atendimento premium", "linguagem curta para WhatsApp"],
+      "instagram_x_topics": ["SPIN Selling", "social selling", "WhatsApp vendas", "negociação", "clínica premium"],
+      "youtube_channels_or_queries": ["Patrick Dang sales scripts", "Alex Hormozi sales objections", "Gong discovery questions", "Chris Voss negotiation", "Camila Porto WhatsApp vendas", "Thiago Concer vendas consultivas"],
+      "output_use": "converter em comportamento de atendimento: pergunta melhor, frase curta, follow-up premium e métrica de conversão"
+    },
+    {
+      "id": "agente-reels-intel",
+      "name": "João",
+      "domain": "marketing, reels, conteúdo, sistema de demanda, design e engenharia de ferramentas web",
+      "learning_goals": ["reels de clínica premium", "growth", "criativos", "copy", "design", "funil", "produto e engenharia de marketing"],
+      "instagram_x_topics": ["marketing médico", "reels saúde premium", "copywriting", "design premium", "growth clinic", "produto SaaS"],
+      "youtube_channels_or_queries": ["Pedro Sobral tráfego para WhatsApp", "Leandro Ladeira oferta", "Alex Hormozi offer", "G4 Educação growth", "Camila Porto Instagram vendas", "Taste design frontend", "Vercel design engineering"],
+      "output_use": "converter em backlog, criativos, hipóteses de campanha, melhoria de landing/cockpit e QA visual"
+    },
+    {
+      "id": "pedro-controller-ivs",
+      "name": "Pedro",
+      "domain": "financeiro, controladoria, DRE, caixa, auditoria e investimento",
+      "learning_goals": ["FP&A", "cashflow", "DRE gerencial", "auditoria", "controles internos", "receita recuperável", "análise de investimento"],
+      "instagram_x_topics": ["controller financeiro", "FP&A", "cash flow management", "small business finance", "healthcare finance"],
+      "youtube_channels_or_queries": ["FP&A explained", "cash flow management business", "DRE gerencial", "controladoria para clínicas", "Omie financeiro", "controles internos financeiro"],
+      "output_use": "converter em checklists financeiros, indicadores, auditorias, cenários e alertas para Maria/Tiaro"
+    },
+    {
+      "id": "conselho-growth-vital-slim",
+      "name": "Conselho Growth Vital Slim",
+      "domain": "estratégia, crescimento, vendas, oferta, experiência e posicionamento",
+      "learning_goals": ["growth loops", "oferta premium", "posicionamento", "conversão", "experiência", "ética comercial"],
+      "instagram_x_topics": ["growth strategy", "healthcare marketing", "premium offer", "customer experience", "sales systems"],
+      "youtube_channels_or_queries": ["Alex Hormozi offer", "HubSpot sales process", "G4 Educação growth", "Will Guidara hospitality", "Gong sales process"],
+      "output_use": "avaliar decisões e gerar recomendações estratégicas com riscos, trade-offs e testes"
+    },
+    {
+      "id": "llm-council",
+      "name": "LLM Council",
+      "domain": "revisão crítica multi-perspectiva, riscos, trade-offs e decisões complexas",
+      "learning_goals": ["raciocínio crítico", "governança de IA", "segurança", "produto", "operações", "ética"],
+      "instagram_x_topics": ["AI governance", "agentic workflows", "risk management", "product strategy", "healthcare AI safety"],
+      "youtube_channels_or_queries": ["AI agent governance", "product strategy", "risk management frameworks", "healthcare AI safety", "LLM evaluation"],
+      "output_use": "stress-test de decisões, identificação de riscos e validação de governança"
+    }
+  ]
+}

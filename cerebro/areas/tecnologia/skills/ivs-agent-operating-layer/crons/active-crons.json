@@ -1,0 +1,477 @@
+{
+  "generated_at": 1778355707,
+  "active_total": 20,
+  "removed_total": 10,
+  "active": [
+    {
+      "id": "032fd036-6a69-4088-bae2-8db5a4a31f10",
+      "name": "monthly-feedback-consolidation",
+      "description": "",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 3 1 * *",
+        "tz": "America/Sao_Paulo"
+      },
+      "sessionTarget": "main",
+      "delivery": {},
+      "workflow": "memoria-operacional",
+      "registry_status": "tracked_platform_memory",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "3dab666d-ed37-4675-8ddd-94614f5bbe9e",
+      "name": "biweekly-memory-review",
+      "description": "",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 4 1,16 * *",
+        "tz": "America/Sao_Paulo"
+      },
+      "sessionTarget": "main",
+      "delivery": {},
+      "workflow": "memoria-operacional",
+      "registry_status": "tracked_platform_memory",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "7f3835ec-e53c-40bb-93cb-13839cb8f953",
+      "name": "Lembrete diário de oração financeira - tópico Marketing João",
+      "description": "",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 6 * * *",
+        "tz": "America/Sao_Paulo"
+      },
+      "sessionTarget": "session:agent:main:telegram:group:-1003803476669:topic:848",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "-1003803476669:topic:848"
+      },
+      "workflow": "marketing-os",
+      "registry_status": "tracked_marketing_ops",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "2ba465d4-3dd0-435b-bb12-1576ed6c0403",
+      "name": "agenda-diaria-whatsapp",
+      "description": "Executa agenda diária WhatsApp pela Clara via script seguro; credenciais fora do prompt e sem anúncio Telegram para evitar falha de delivery.",
+      "agentId": "clara-whatsapp",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 6 * * *",
+        "tz": "America/Sao_Paulo",
+        "staggerMs": 0
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none",
+        "channel": "last"
+      },
+      "workflow": "agenda-operacional",
+      "registry_status": "tracked_external_admin_ops",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "18833ac7-30c8-4d56-917a-be9665993b78",
+      "name": "whatsapp-confirmacoes-manha-seguinte",
+      "description": "Todos os dias às 16:00 envia confirmações por WhatsApp para pacientes agendados na manhã seguinte e registra pendências para retorno automático no Quarkclinic.",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 16 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "to": "-1003803476669:topic:271",
+        "channel": "telegram"
+      },
+      "workflow": "confirmacoes-quarkclinic",
+      "registry_status": "tracked_external_patient_ops",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "bf264980-0e69-48aa-8c47-46c0caa4f387",
+      "name": "whatsapp-confirmacoes-tarde-mesmo-dia",
+      "description": "Todos os dias às 07:30 envia confirmações por WhatsApp para pacientes agendados na tarde do mesmo dia e registra pendências para retorno automático no Quarkclinic.",
+      "agentId": "main",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 7 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "to": "-1003803476669:topic:271",
+        "channel": "telegram"
+      },
+      "workflow": "confirmacoes-quarkclinic",
+      "registry_status": "tracked_external_patient_ops",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "54fb064e-175d-490e-bf0e-9c57592d6642",
+      "name": "manutencao-diaria-cerebro-memoria-clara-0100",
+      "description": "",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 1 * * *",
+        "tz": "UTC"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "to": "-1003803476669:topic:768",
+        "channel": "telegram"
+      },
+      "workflow": "memoria-operacional",
+      "registry_status": "tracked_platform_memory",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "30f7e41b-ad7d-4369-815e-294b313b68e4",
+      "name": "Treino diário da Clara — Conversão Premium WhatsApp",
+      "description": "Gera diariamente um microtreinamento prático para evolução da Clara em conversão premium no WhatsApp.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "20 7 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "971050173",
+        "bestEffort": true
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "cac7dc66-577a-426a-8acc-dd5517b26b5f",
+      "name": "Auditoria diária da Clara — WhatsApp Growth Review",
+      "description": "Auditoria diária de conversas e padrões para melhorar conversão premium da Clara no WhatsApp.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 21 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "971050173",
+        "bestEffort": true
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "9beaab69-4c81-4b6b-9b18-31f6f212087b",
+      "name": "Clara Q&A Diário — Sabatina Conselho Growth",
+      "description": "Sessão diária em que o Conselho Growth sabatina a Clara para evolução em agendamento de pacientes/leads, com foco em conversão premium, objeções e condução para avaliação.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 21 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "971050173",
+        "bestEffort": true
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "0161e7ec-7e77-4352-a596-9579d0d9259b",
+      "name": "Clara Learning — Graphify RC-25 diário",
+      "description": "Armazena aprendizados diários da Clara no cérebro via Graphify/RC-25, gerando raw corpus, graph.json, HTML e GRAPH_REPORT.md.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "5 22 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "971050173",
+        "bestEffort": true
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "375d74ed-1fb1-43de-924a-9d8aafc856b4",
+      "name": "Clara Learning — WhatsApp atual 2/2h",
+      "description": "Analisa conversas recentes do WhatsApp para aprendizado operacional da Clara, sem expor PII, gerando latest-whatsapp-current.json para Graphify/RC-25.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 8-22/2 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "cba17d20-3467-4f8c-8f6d-860a4b25a6c0",
+      "name": "Clara Learning — WhatsApp histórico semanal",
+      "description": "Reprocessa base histórica de conversas WhatsApp para identificar padrões duráveis de agendamento, objeção e follow-up da Clara.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 6 * * 1",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "13141b04-2bdc-44da-9967-350328c33911",
+      "name": "Clara Agendamento — QA diário de conversão",
+      "description": "",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 22 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "971050173",
+        "bestEffort": true
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "535f3616-8621-483d-a895-6f1d57d81222",
+      "name": "Maria Pulse — Clara máquina de agendamento 2/2h",
+      "description": "Acompanhamento próximo da Clara durante horário comercial: saúde do bridge, relatórios recentes, sinais de agendamento/objeção/silêncio e ação corretiva proposta.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "55 8-22/2 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "971050173",
+        "bestEffort": true
+      },
+      "workflow": "followup-seguro",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "79822d71-e7f8-410c-bbfe-0a3021eb09fd",
+      "name": "Clara Strategy Review — semanal agendamento",
+      "description": "Revisão estratégica semanal da Clara: padrões históricos, taxa de avanço, objeções prioritárias, backlog de melhorias e promoção via Graphify/RC-25.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 7 * * 1",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "971050173",
+        "bestEffort": true
+      },
+      "workflow": "clara-growth-learning",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "ded8e70d-e351-44d1-9203-58ab672492bd",
+      "name": "Watchdog Clara — validação operacional do modelo",
+      "description": "Valida periodicamente se o modelo configurado da Clara responde. Se falhar, troca para fallback operacional e reinicia o bridge. Alertas em falha.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 600000,
+        "anchorMs": 1778164152513
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "workflow": "followup-seguro",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "dc9e1efc-1639-4b5f-b4a6-04537da33e5e",
+      "name": "Champion Kit IVS — revisão semanal João + Clara",
+      "description": "Consolidar wins semanais da Onda 1 do Champion Kit IVS com João e Clara.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 17 * * 5",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce",
+        "to": "telegram:971050173",
+        "channel": "telegram",
+        "accountId": "default",
+        "bestEffort": true
+      },
+      "workflow": "marketing-os",
+      "registry_status": "tracked_marketing_ops",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "4b645967-fc1a-4967-81bf-b424f2e301cc",
+      "name": "IVS Agent Operating Layer Audit consolidado diário",
+      "description": "Auditoria consolidada read-only de Clara/Z-API, Pré-consulta e Marketing OS/João.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 8 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "main",
+      "delivery": {},
+      "workflow": "agent-layer-audit",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    },
+    {
+      "id": "bb73a900-3b75-47e9-bcb9-e43620a758ab",
+      "name": "IVS Agent Learning Autonomy — diário",
+      "description": "Gera briefs diários de aprendizado autônomo para Maria, Clara, João, Pedro e conselhos, usando registry governado do IVS Agent Operating Layer e fontes externas permitidas.",
+      "agentId": "maria-gerente",
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 6 * * *",
+        "tz": "America/Bahia"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "none"
+      },
+      "workflow": "agent-learning-autonomy",
+      "registry_status": "managed_by_ivs_agent_operating_layer",
+      "lastRunStatus": null,
+      "consecutiveErrors": 0
+    }
+  ],
+  "removed": [
+    {
+      "id": "6bbea434-eefb-41dc-b8f9-802d35cd03cf",
+      "name": "Clara/Z-API daily audit",
+      "reason": "substituído pelo audit consolidado do IVS Agent Operating Layer; evita duplicidade de auditoria diária"
+    },
+    {
+      "id": "a608fe14-c009-49a7-82b2-b2c8152d9a59",
+      "name": "Pré-consulta daily audit",
+      "reason": "substituído pelo audit consolidado do IVS Agent Operating Layer; monitor continua disponível sob demanda"
+    },
+    {
+      "id": "9e37d4c8-fc40-4413-9c58-e86576ca3e63",
+      "name": "Marketing OS/João daily audit",
+      "reason": "substituído pelo audit consolidado do IVS Agent Operating Layer; monitor continua disponível sob demanda"
+    },
+    {
+      "id": "ce9ea71e-ec78-496e-ab73-4fe2d00319a2",
+      "name": "cron legado de auditoria/learning Clara",
+      "reason": "redundante com rotina consolidada noturna e registry atual"
+    },
+    {
+      "id": "76926327-93e3-456f-a118-ba54b6aa9ee6",
+      "name": "cron legado silencioso Clara Learning",
+      "reason": "sem entrega operacional independente; substituído por WhatsApp atual + auditoria diária"
+    },
+    {
+      "id": "39eae6cc-2d31-4a01-aa9f-c1a3d624dbf7",
+      "name": "Clara Learning — Instagram manhã",
+      "reason": "slot externo com falhas recorrentes/baixo valor; consolidado na auditoria diária sem cron próprio"
+    },
+    {
+      "id": "a4935d7e-2237-45c9-9420-21878d85347f",
+      "name": "Clara Learning — Instagram tarde",
+      "reason": "slot externo com falhas recorrentes/baixo valor; consolidado na auditoria diária sem cron próprio"
+    },
+    {
+      "id": "f086ac46-a2af-4965-91d8-02698fb75d6e",
+      "name": "Clara Learning — YouTube",
+      "reason": "slot externo com falhas recorrentes; auditoria diária pode consultar quando fizer sentido"
+    },
+    {
+      "id": "bbe92ffa-85f3-4840-953d-72ae4abbfab0",
+      "name": "Clara Learning — X/Twitter",
+      "reason": "slot externo com falhas recorrentes/baixo valor; consolidado na auditoria diária sem cron próprio"
+    },
+    {
+      "id": "66eedfbf-8de5-40d4-b537-102e99d3693e",
+      "name": "Clara Learning — Revisão 21:20",
+      "reason": "redundante com Auditoria diária da Clara 21:30 e Graphify RC-25 22:05"
+    }
+  ],
+  "policy": {
+    "default": "registrar crons ativos na skill; manter apenas rotinas com função operacional clara",
+    "sensitive_guardrails": [
+      "não pausar Clara via cron",
+      "não enviar WhatsApp real sem script/autoridade explícita",
+      "não expor PII em entregas",
+      "usar IVS Agent Operating Layer para auditorias consolidadas e aprendizado governado"
+    ]
+  }
+}

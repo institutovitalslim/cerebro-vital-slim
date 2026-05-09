@@ -1,0 +1,51 @@
+{
+  "id": "cron-governance",
+  "name": "Cron Governance IVS",
+  "owner": "Maria",
+  "executor": "Maria + IVS Agent Operating Layer",
+  "scope": "Governar crons ativos: inventariar, classificar por workflow, cancelar redundâncias e manter apenas rotinas com função operacional clara.",
+  "mode": "state-changing only for cron lifecycle after operational review; no patient contact and no production mutation beyond cron removal/update",
+  "entry_criteria": [
+    "Tiaro pedir revisão de crons",
+    "Novo workflow consolidado substituir crons específicos",
+    "Cron apresentar falhas recorrentes ou baixa utilidade operacional",
+    "Rotina duplicada gerar ruído ou custo sem ganho claro"
+  ],
+  "preflight": [
+    "Listar crons ativos no scheduler",
+    "Comparar com Cron Registry da skill",
+    "Classificar cada cron por workflow e função operacional",
+    "Identificar duplicidade, falha recorrente ou obsolescência",
+    "Preservar crons de produção/paciente quando não houver análise específica"
+  ],
+  "allowed_actions": [
+    "registrar inventário de crons ativos na skill",
+    "remover crons redundantes, obsoletos ou substituídos por workflow consolidado",
+    "manter crons externos apenas rastreados quando não forem domínio direto da skill",
+    "atualizar RC-25 com decisões de governança"
+  ],
+  "blocked_actions": [
+    "cancelar rotina de paciente/produção sem motivo operacional claro",
+    "alterar conteúdo de mensagens de paciente sem autorização específica",
+    "usar cron para pausar/despausar Clara",
+    "usar cron para enviar WhatsApp real fora dos scripts já autorizados"
+  ],
+  "outputs": [
+    "CRON-REGISTRY.md",
+    "active-crons.json",
+    "removed-crons.json",
+    "lista de cancelamentos com motivo",
+    "próxima recomendação de consolidação"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/crons/CRON-REGISTRY.md",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/crons/active-crons.json",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/crons/removed-crons.json"
+  ],
+  "severity_rules": {
+    "HIGH": ["cron ativo executa ação sensível sem guardrail", "cron de paciente removido sem evidência"],
+    "MEDIUM": ["cron duplicado", "cron com falhas recorrentes", "cron sem workflow claro"],
+    "LOW": ["cron rastreado e classificado"],
+    "OK": ["inventário validado sem pendências"]
+  }
+}

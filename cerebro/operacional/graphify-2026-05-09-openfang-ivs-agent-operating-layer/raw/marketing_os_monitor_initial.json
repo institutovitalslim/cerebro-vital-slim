@@ -1,0 +1,621 @@
+{
+  "ok": true,
+  "generated_at": 1778354513,
+  "mode": "read_only_no_external_posting",
+  "totals": {
+    "marketing_backlog_items": 7,
+    "recent_deliverables": 4,
+    "recent_html_deliverables": 2,
+    "recent_outbound_files": 4,
+    "recent_marketing_docs": 42,
+    "joao_session_files": 40
+  },
+  "rule_health": {
+    "rules_file_exists": true,
+    "checks": {
+      "preserva_estrutura_validada": true,
+      "html_anexo": true,
+      "subagentes_sob_demanda": true,
+      "design_impeccable": true,
+      "tribe_v2_canonico": true,
+      "nome_publico_instituto_canonico": true
+    },
+    "missing": []
+  },
+  "marketing_backlog": [
+    {
+      "code": "A4",
+      "title": "Notion — governança de uso e canonização dos bunkers",
+      "status": "monitoramento contínuo após validação real",
+      "next_step": "manter mapa oficial dos bunkers, registrar IDs canônicos e decidir se páginas variantes devem ser mantidas ou arquivadas",
+      "source": "`cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-FONTES-E-FERRAMENTAS.md`"
+    },
+    {
+      "code": "A5",
+      "title": "Entrega de HTML no Telegram sem workaround inadequado",
+      "status": "aberto operacional",
+      "next_step": "corrigir rota/conector de envio de HTML no tópico correto e validar entrega real.",
+      "source": "`memory/2026-05-04.md` + `cerebro/empresa/projetos/pendencias.md`"
+    },
+    {
+      "code": "A6",
+      "title": "21st.dev / MCP magic21st ainda não homologado",
+      "status": "aberto/bloqueado por credencial e teste real",
+      "next_step": "obter credencial válida, testar em sandbox e só então decidir homologação.",
+      "source": "`memory/2026-05-04.md`"
+    },
+    {
+      "code": "A7",
+      "title": "Hyperframes/HeyGen — piloto controlado antes de adoção",
+      "status": "aprovado apenas para teste em sandbox",
+      "next_step": "executar piloto em sandbox com 1 Reel vertical 1080x1920 de 15s, sem dados de paciente, medindo qualidade, tempo, ajuste, peso e reaproveitamento.",
+      "source": "`memory/2026-05-05.md`"
+    },
+    {
+      "code": "A12",
+      "title": "Clara — aplicação prática dos aprendizados Vitor Oliveira",
+      "status": "monitoramento operacional contínuo",
+      "next_step": "acompanhar QA, mensagens reais e regressões do bridge; qualquer ajuste estrutural deve respeitar Graphify/RC-25.",
+      "source": "`cerebro/areas/atendimento/clara/aprendizados/2026-05-07-vitor-oliveira-videos-reais.md`"
+    },
+    {
+      "code": "A16",
+      "title": "Marketing — validação Tribe V2 antes de gravação",
+      "status": "monitoramento operacional contínuo",
+      "next_step": "conferir nas próximas entregas se João cumpre a validação antes de apresentar roteiro como pronto.",
+      "source": "`cerebro/areas/marketing/skills/validacao-reels-tribe-v2/SKILL.md`"
+    },
+    {
+      "code": "A17",
+      "title": "Media Reference Ingest — biblioteca e aprendizado externo",
+      "status": "monitoramento operacional contínuo",
+      "next_step": "usar como rota canônica para referências de vídeo e promover aprendizados apenas quando validados.",
+      "source": "`cerebro/areas/marketing/skills/media-reference-ingest-ivs/`"
+    }
+  ],
+  "recent_html_deliverables": [
+    {
+      "path": "/root/deliverables/cockpit-marketing-os-joao-ivs.html",
+      "name": "cockpit-marketing-os-joao-ivs.html",
+      "size": 8402,
+      "mtime": 1778354505,
+      "age_hours": 0.0
+    },
+    {
+      "path": "/root/deliverables/blueprint-sistema-marketing-ivs-joao.html",
+      "name": "blueprint-sistema-marketing-ivs-joao.html",
+      "size": 22391,
+      "mtime": 1778341524,
+      "age_hours": 3.6
+    }
+  ],
+  "html_deliverables_not_in_outbound": [],
+  "recent_outbound": [
+    {
+      "path": "/root/.openclaw/media/outbound/cockpit-marketing-os-joao-ivs.html",
+      "name": "cockpit-marketing-os-joao-ivs.html",
+      "size": 8402,
+      "mtime": 1778354505,
+      "age_hours": 0.0
+    },
+    {
+      "path": "/root/.openclaw/media/outbound/blueprint-sistema-marketing-ivs-joao.html",
+      "name": "blueprint-sistema-marketing-ivs-joao.html",
+      "size": 22391,
+      "mtime": 1778341534,
+      "age_hours": 3.6
+    },
+    {
+      "path": "/root/.openclaw/media/outbound/notion-bunkers-joao-fechamento-2026-05-04.html",
+      "name": "notion-bunkers-joao-fechamento-2026-05-04.html",
+      "size": 2513,
+      "mtime": 1777900633,
+      "age_hours": 126.1
+    },
+    {
+      "path": "/root/.openclaw/media/outbound/painel-unico-backlog-status-ivs-v2-2026-05-03.html",
+      "name": "painel-unico-backlog-status-ivs-v2-2026-05-03.html",
+      "size": 8047,
+      "mtime": 1777801055,
+      "age_hours": 153.7
+    }
+  ],
+  "recent_marketing_docs": [
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/skills/design-premium-ivs/SKILL.md",
+      "name": "SKILL.md",
+      "size": 3646,
+      "mtime": 1778352506,
+      "age_hours": 0.6
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/projetos/bunker-roteiros-ivs/README.md",
+      "name": "README.md",
+      "size": 6199,
+      "mtime": 1778341811,
+      "age_hours": 3.5
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/mapa-conteudo-ivs-2026.md",
+      "name": "mapa-conteudo-ivs-2026.md",
+      "size": 14356,
+      "mtime": 1778260649,
+      "age_hours": 26.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-BASE-DE-CONHECIMENTO.md",
+      "name": "JOAO-BASE-DE-CONHECIMENTO.md",
+      "size": 5841,
+      "mtime": 1778260649,
+      "age_hours": 26.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/skills/media-reference-ingest-ivs/SKILL.md",
+      "name": "SKILL.md",
+      "size": 5167,
+      "mtime": 1778251086,
+      "age_hours": 28.7
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/skills/validacao-reels-tribe-v2/SKILL.md",
+      "name": "SKILL.md",
+      "size": 6793,
+      "mtime": 1778244969,
+      "age_hours": 30.4
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/skills/criacao-reels/SKILL.md",
+      "name": "SKILL.md",
+      "size": 5433,
+      "mtime": 1778244969,
+      "age_hours": 30.4
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/skills/_index.md",
+      "name": "_index.md",
+      "size": 554,
+      "mtime": 1778244819,
+      "age_hours": 30.5
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/REGRA-ENTREGA-TELEGRAM.md",
+      "name": "REGRA-ENTREGA-TELEGRAM.md",
+      "size": 972,
+      "mtime": 1778181219,
+      "age_hours": 48.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/regra-canonica-nomenclatura-instituto-vital-slim-2026-05-07.md",
+      "name": "regra-canonica-nomenclatura-instituto-vital-slim-2026-05-07.md",
+      "size": 710,
+      "mtime": 1778171738,
+      "age_hours": 50.8
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/regra-canonica-geracao-imagens-nanobana-pro-2-2026-05-07.md",
+      "name": "regra-canonica-geracao-imagens-nanobana-pro-2-2026-05-07.md",
+      "size": 1437,
+      "mtime": 1778171031,
+      "age_hours": 51.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/regra-canonica-cores-premium-apresentacoes-ivs-2026-05-07.md",
+      "name": "regra-canonica-cores-premium-apresentacoes-ivs-2026-05-07.md",
+      "size": 1949,
+      "mtime": 1778159359,
+      "age_hours": 54.2
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/governanca-visual-ivs-index.md",
+      "name": "governanca-visual-ivs-index.md",
+      "size": 3126,
+      "mtime": 1778159359,
+      "age_hours": 54.2
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/checklist-curto-producao-video-ivs.md",
+      "name": "checklist-curto-producao-video-ivs.md",
+      "size": 1245,
+      "mtime": 1778147492,
+      "age_hours": 57.5
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/fluxo-unico-producao-video-ivs.md",
+      "name": "fluxo-unico-producao-video-ivs.md",
+      "size": 4170,
+      "mtime": 1778147492,
+      "age_hours": 57.5
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/regra-canonica-preservacao-estrutura-validada-reels-2026-05-07.md",
+      "name": "regra-canonica-preservacao-estrutura-validada-reels-2026-05-07.md",
+      "size": 2399,
+      "mtime": 1778147492,
+      "age_hours": 57.5
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-REGRAS-DE-OPERACAO.md",
+      "name": "JOAO-REGRAS-DE-OPERACAO.md",
+      "size": 12718,
+      "mtime": 1778110173,
+      "age_hours": 67.9
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/raw/2026-05-05.md",
+      "name": "2026-05-05.md",
+      "size": 3785,
+      "mtime": 1777940514,
+      "age_hours": 115.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/extraction.json",
+      "name": "extraction.json",
+      "size": 25677,
+      "mtime": 1777940497,
+      "age_hours": 115.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/graphify-out/graph.json",
+      "name": "graph.json",
+      "size": 33072,
+      "mtime": 1777940497,
+      "age_hours": 115.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/graphify-out/GRAPH_REPORT.md",
+      "name": "GRAPH_REPORT.md",
+      "size": 2925,
+      "mtime": 1777940497,
+      "age_hours": 115.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/graphify-out/AUDIT.md",
+      "name": "AUDIT.md",
+      "size": 935,
+      "mtime": 1777940497,
+      "age_hours": 115.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/graphify-out/graph.html",
+      "name": "graph.html",
+      "size": 33950,
+      "mtime": 1777940497,
+      "age_hours": 115.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/raw/RUNTIME-JOAO-SUBAGENTES.md",
+      "name": "RUNTIME-JOAO-SUBAGENTES.md",
+      "size": 1087,
+      "mtime": 1777940477,
+      "age_hours": 115.0
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/.graphify_detect.json",
+      "name": ".graphify_detect.json",
+      "size": 1001,
+      "mtime": 1777940124,
+      "age_hours": 115.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/raw/JOAO-FONTES-E-FERRAMENTAS.md",
+      "name": "JOAO-FONTES-E-FERRAMENTAS.md",
+      "size": 17195,
+      "mtime": 1777940119,
+      "age_hours": 115.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/raw/PROMPT-BASE.md",
+      "name": "PROMPT-BASE.md",
+      "size": 3567,
+      "mtime": 1777940119,
+      "age_hours": 115.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/raw/JOAO-REGRAS-DE-OPERACAO.md",
+      "name": "JOAO-REGRAS-DE-OPERACAO.md",
+      "size": 11253,
+      "mtime": 1777940119,
+      "age_hours": 115.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-05-subagentes-joao/raw/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "name": "JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "size": 7963,
+      "mtime": 1777940119,
+      "age_hours": 115.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-FONTES-E-FERRAMENTAS.md",
+      "name": "JOAO-FONTES-E-FERRAMENTAS.md",
+      "size": 17195,
+      "mtime": 1777939982,
+      "age_hours": 115.1
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/PROMPT-BASE.md",
+      "name": "PROMPT-BASE.md",
+      "size": 3567,
+      "mtime": 1777939968,
+      "age_hours": 115.2
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "name": "JOAO-SUBAGENTES-SOB-DEMANDA.md",
+      "size": 7963,
+      "mtime": 1777939960,
+      "age_hours": 115.2
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-04-prompt-master/graph.json",
+      "name": "graph.json",
+      "size": 10522,
+      "mtime": 1777937549,
+      "age_hours": 115.8
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-04-prompt-master/GRAPH_REPORT.md",
+      "name": "GRAPH_REPORT.md",
+      "size": 2756,
+      "mtime": 1777937549,
+      "age_hours": 115.8
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-04-prompt-master/AUDIT.md",
+      "name": "AUDIT.md",
+      "size": 675,
+      "mtime": 1777937549,
+      "age_hours": 115.8
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-04-prompt-master/extraction.json",
+      "name": "extraction.json",
+      "size": 7018,
+      "mtime": 1777937549,
+      "age_hours": 115.8
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/graphify-2026-05-04-prompt-master/graph.html",
+      "name": "graph.html",
+      "size": 23316,
+      "mtime": 1777937549,
+      "age_hours": 115.8
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-PROMPTS-PARA-FERRAMENTAS-WEB.md",
+      "name": "JOAO-PROMPTS-PARA-FERRAMENTAS-WEB.md",
+      "size": 9828,
+      "mtime": 1777937342,
+      "age_hours": 115.9
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/MAPA.md",
+      "name": "MAPA.md",
+      "size": 2072,
+      "mtime": 1777913270,
+      "age_hours": 122.6
+    },
+    {
+      "path": "/root/cerebro-vital-slim/cerebro/areas/marketing/projetos/README.md",
+      "name": "README.md",
+      "size": 2290,
+      "mtime": 1777913270,
+      "age_hours": 122.6
+    }
+  ],
+  "joao_sessions": [
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/2ea545ab-ac6a-48ea-9018-5bb0fe026c29.jsonl",
+      "name": "2ea545ab-ac6a-48ea-9018-5bb0fe026c29.jsonl",
+      "size": 53164,
+      "mtime": 1778341425,
+      "age_hours": 3.6
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/605b14a7-a3e4-46bf-b348-945661d47e7d.jsonl",
+      "name": "605b14a7-a3e4-46bf-b348-945661d47e7d.jsonl",
+      "size": 3399,
+      "mtime": 1778341123,
+      "age_hours": 3.7
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/d621a40d-bffc-4603-be64-2e71ae6c9e1f-topic-5782.jsonl",
+      "name": "d621a40d-bffc-4603-be64-2e71ae6c9e1f-topic-5782.jsonl",
+      "size": 2321654,
+      "mtime": 1778338565,
+      "age_hours": 4.4
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/d621a40d-bffc-4603-be64-2e71ae6c9e1f-topic-5782.checkpoint.8ecd5832-4f30-43f1-89ec-17817a8da2d0.jsonl",
+      "name": "d621a40d-bffc-4603-be64-2e71ae6c9e1f-topic-5782.checkpoint.8ecd5832-4f30-43f1-89ec-17817a8da2d0.jsonl",
+      "size": 1323151,
+      "mtime": 1778327713,
+      "age_hours": 7.4
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/a579e5ab-c8b2-4c9f-9cc4-aadf4678a1b9.jsonl",
+      "name": "a579e5ab-c8b2-4c9f-9cc4-aadf4678a1b9.jsonl",
+      "size": 774283,
+      "mtime": 1778245707,
+      "age_hours": 30.2
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/a579e5ab-c8b2-4c9f-9cc4-aadf4678a1b9.checkpoint.01c6296c-0b85-44d3-bb85-94218b2ecf05.jsonl",
+      "name": "a579e5ab-c8b2-4c9f-9cc4-aadf4678a1b9.checkpoint.01c6296c-0b85-44d3-bb85-94218b2ecf05.jsonl",
+      "size": 377499,
+      "mtime": 1778240023,
+      "age_hours": 31.8
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/a7f0546e-8a6b-42ab-bcb6-9f6c8ba42e31.jsonl",
+      "name": "a7f0546e-8a6b-42ab-bcb6-9f6c8ba42e31.jsonl",
+      "size": 331301,
+      "mtime": 1778239564,
+      "age_hours": 31.9
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/20ac06bd-f72f-41f8-ae22-7543a600996c.jsonl",
+      "name": "20ac06bd-f72f-41f8-ae22-7543a600996c.jsonl",
+      "size": 18897,
+      "mtime": 1778147367,
+      "age_hours": 57.5
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/008eaff5-8b8b-48f3-a18c-65a58c0885c6.jsonl",
+      "name": "008eaff5-8b8b-48f3-a18c-65a58c0885c6.jsonl",
+      "size": 212859,
+      "mtime": 1778029414,
+      "age_hours": 90.3
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/47b67e81-c6c7-4709-805a-47ccc29ea750-topic-5782.jsonl",
+      "name": "47b67e81-c6c7-4709-805a-47ccc29ea750-topic-5782.jsonl",
+      "size": 2907,
+      "mtime": 1778022368,
+      "age_hours": 92.3
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/9a0eee37-9882-4165-8038-f985aa3c3d99.jsonl",
+      "name": "9a0eee37-9882-4165-8038-f985aa3c3d99.jsonl",
+      "size": 40474,
+      "mtime": 1778016607,
+      "age_hours": 93.9
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/1bb8d8b3-3bb1-4b7d-be04-08d2b30a43ae.jsonl",
+      "name": "1bb8d8b3-3bb1-4b7d-be04-08d2b30a43ae.jsonl",
+      "size": 188827,
+      "mtime": 1777943025,
+      "age_hours": 114.3
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/d08ec1ce-6909-448e-98c7-8cb0e680f4f7.jsonl",
+      "name": "d08ec1ce-6909-448e-98c7-8cb0e680f4f7.jsonl",
+      "size": 204733,
+      "mtime": 1777856497,
+      "age_hours": 138.3
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/70ca2092-d129-4525-a778-9a8326ecc5d2-topic-5782.checkpoint.c81a0b09-37ba-4d4c-b3d7-f4b4e0dc5e4a.jsonl",
+      "name": "70ca2092-d129-4525-a778-9a8326ecc5d2-topic-5782.checkpoint.c81a0b09-37ba-4d4c-b3d7-f4b4e0dc5e4a.jsonl",
+      "size": 769005,
+      "mtime": 1777835018,
+      "age_hours": 144.3
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/43a49f88-7269-42c4-911c-07db7074cb6b.jsonl",
+      "name": "43a49f88-7269-42c4-911c-07db7074cb6b.jsonl",
+      "size": 231298,
+      "mtime": 1777770330,
+      "age_hours": 162.3
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/9c0762e5-049c-4640-9dea-27cd8a325760.jsonl",
+      "name": "9c0762e5-049c-4640-9dea-27cd8a325760.jsonl",
+      "size": 3715,
+      "mtime": 1777683644,
+      "age_hours": 186.4
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/65bcfa8f-8bf2-4cfc-94e6-4bb5728ff6b7.jsonl",
+      "name": "65bcfa8f-8bf2-4cfc-94e6-4bb5728ff6b7.jsonl",
+      "size": 306194,
+      "mtime": 1777597912,
+      "age_hours": 210.2
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/3ae81ed4-8237-4340-91de-78197ad5bc37-topic-5782.checkpoint.93a76169-2cd3-4a55-ad26-6964c1d2223c.jsonl",
+      "name": "3ae81ed4-8237-4340-91de-78197ad5bc37-topic-5782.checkpoint.93a76169-2cd3-4a55-ad26-6964c1d2223c.jsonl",
+      "size": 2189357,
+      "mtime": 1777576052,
+      "age_hours": 216.2
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/3ae81ed4-8237-4340-91de-78197ad5bc37-topic-5782.checkpoint.bea4cb25-a7e8-49d6-9e36-3a0dea1b1d46.jsonl",
+      "name": "3ae81ed4-8237-4340-91de-78197ad5bc37-topic-5782.checkpoint.bea4cb25-a7e8-49d6-9e36-3a0dea1b1d46.jsonl",
+      "size": 685521,
+      "mtime": 1777568327,
+      "age_hours": 218.4
+    },
+    {
+      "path": "/root/.openclaw/agents/agente-reels-intel/sessions/6238c4f1-7cd8-4b4f-8d10-d1f531de8dc5-topic-768.checkpoint.8538c171-0117-40eb-874d-1eba057199d3.jsonl",
+      "name": "6238c4f1-7cd8-4b4f-8d10-d1f531de8dc5-topic-768.checkpoint.8538c171-0117-40eb-874d-1eba057199d3.jsonl",
+      "size": 1013949,
+      "mtime": 1777513146,
+      "age_hours": 233.7
+    }
+  ],
+  "session_risks": [
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "2ea545ab-ac6a-48ea-9018-5bb0fe026c29.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "d621a40d-bffc-4603-be64-2e71ae6c9e1f-topic-5782.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "d621a40d-bffc-4603-be64-2e71ae6c9e1f-topic-5782.checkpoint.8ecd5832-4f30-43f1-89ec-17817a8da2d0.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "a579e5ab-c8b2-4c9f-9cc4-aadf4678a1b9.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "a579e5ab-c8b2-4c9f-9cc4-aadf4678a1b9.checkpoint.01c6296c-0b85-44d3-bb85-94218b2ecf05.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "a7f0546e-8a6b-42ab-bcb6-9f6c8ba42e31.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "20ac06bd-f72f-41f8-ae22-7543a600996c.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "008eaff5-8b8b-48f3-a18c-65a58c0885c6.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "9a0eee37-9882-4165-8038-f985aa3c3d99.jsonl",
+      "severity": "LOW"
+    },
+    {
+      "code": "joao_media_delivery_error_seen",
+      "file": "1bb8d8b3-3bb1-4b7d-be04-08d2b30a43ae.jsonl",
+      "severity": "MEDIUM"
+    },
+    {
+      "code": "joao_recent_error_terms_seen",
+      "file": "1bb8d8b3-3bb1-4b7d-be04-08d2b30a43ae.jsonl",
+      "severity": "LOW"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "code": "joao_session_risk_markers",
+      "count": 1
+    },
+    {
+      "severity": "LOW",
+      "code": "marketing_backlog_active",
+      "count": 7
+    }
+  ],
+  "next_actions": [
+    "Cobrar João por backlog A16/A17 nas próximas entregas.",
+    "Manter HTML importante como anexo direto no Telegram.",
+    "Se houver risco de sessão travada, resetar apenas mapeamento/sessão alvo preservando histórico."
+  ]
+}

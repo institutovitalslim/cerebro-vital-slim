@@ -1,0 +1,56 @@
+{
+  "id": "agent-learning-autonomy",
+  "name": "Autonomia Evolutiva dos Agentes IVS",
+  "owner": "Maria",
+  "executor": "Maria + agentes IVS + conselhos",
+  "scope": "Garantir que Maria, Clara, João, Pedro e agentes do conselho evoluam continuamente com aprendizado externo de pesquisas, perfis de Instagram/X e canais do YouTube, sempre com governança IVS.",
+  "mode": "autonomous learning with guarded promotion; no external content becomes rule without validation",
+  "entry_criteria": [
+    "Tiaro solicitar evolução autônoma dos agentes",
+    "Agente precisar melhorar repertório, processo, atendimento, marketing, finanças ou decisões de conselho",
+    "Rotina diária/semanal de aprendizado operacional",
+    "Antes de promover aprendizado para regra canônica"
+  ],
+  "preflight": [
+    "Identificar agente e escopo do aprendizado",
+    "Consultar registry de fontes por agente",
+    "Coletar conteúdo público de pesquisa, Instagram/X e YouTube quando disponível",
+    "Converter conteúdo em hipótese operacional, não regra automática",
+    "Classificar: aplicar amanhã, testar 3 dias, descartar ou propor RC-25"
+  ],
+  "allowed_actions": [
+    "gerar briefs de aprendizado por agente",
+    "executar coletas read-only em fontes públicas aprovadas",
+    "criar hipóteses, scripts, checklists e métricas de teste",
+    "acionar conselhos para avaliar aprendizados de alto impacto",
+    "propor atualização de memória via graphify/RC-25"
+  ],
+  "blocked_actions": [
+    "copiar conteúdo externo literalmente",
+    "transformar opinião externa em regra clínica, financeira ou jurídica",
+    "aplicar aprendizado externo em paciente sem validação clínica/operacional",
+    "expor bastidores, fontes internas ou ferramentas para leads/pacientes",
+    "usar urgência falsa, promessa de resultado ou agressividade comercial"
+  ],
+  "outputs": [
+    "brief diário por agente",
+    "fontes consultadas",
+    "hipótese operacional",
+    "aplicação prática no escopo do agente",
+    "métrica de teste",
+    "risco de uso errado",
+    "candidato RC-25 quando houver padrão recorrente"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/learning/agent-learning-registry.json",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_learning_autonomy.py",
+    "/root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py",
+    "/root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["aprendizado externo virou regra sensível sem validação", "conteúdo clínico/financeiro aplicado como prescrição/decisão"],
+    "MEDIUM": ["fonte falhou repetidamente", "aprendizado sem métrica", "conteúdo com tom incompatível com IVS"],
+    "LOW": ["brief gerado e aguardando teste"],
+    "OK": ["aprendizado classificado com fonte, aplicação, métrica e risco"]
+  }
+}

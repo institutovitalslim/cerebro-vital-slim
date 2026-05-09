@@ -1,0 +1,50 @@
+{
+  "id": "marketing-os",
+  "name": "Marketing OS João",
+  "owner": "Maria",
+  "executor": "João",
+  "scope": "Monitorar continuidade operacional do João em marketing, reels, HTMLs, backlog e regras canônicas.",
+  "mode": "read-only monitor; Maria corrige execução, João executa marketing",
+  "entry_criteria": [
+    "Pedido sobre reels, marketing, HTML, ferramenta web ou produção visual",
+    "Falha de resposta/continuidade do João",
+    "Auditoria diária automática",
+    "Entrega HTML importante"
+  ],
+  "preflight": [
+    "Consultar painel único/backlog de marketing",
+    "Verificar regras canônicas do João",
+    "Verificar entregáveis HTML recentes e outbound",
+    "Checar marcadores de sessão travada ou erro de mídia",
+    "Preservar tópico Reels 5782 como domínio do João"
+  ],
+  "allowed_actions": [
+    "diagnosticar roteamento/sessão/prompt/acesso",
+    "resetar apenas sessão/mapeamento alvo quando necessário, preservando histórico",
+    "cobrar status e evidência do João",
+    "gerar relatório/cockpit operacional"
+  ],
+  "blocked_actions": [
+    "Maria executar tarefa criativa no lugar do João sem autorização",
+    "copiar referência externa literalmente",
+    "entregar HTML colado como texto quando anexo é exigido",
+    "alterar regra canônica sem RC-25"
+  ],
+  "outputs": [
+    "status do backlog",
+    "status de entregáveis HTML/outbound",
+    "saúde de regras canônicas",
+    "sinais de risco de sessão",
+    "próximo bloqueio operacional"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/marketing_os_monitor.py",
+    "/root/cerebro-vital-slim/cerebro/areas/marketing/agentes/agente-reels-intel/JOAO-REGRAS-DE-OPERACAO.md",
+    "/root/cerebro-vital-slim/cerebro/empresa/projetos/PAINEL-UNICO-BACKLOG-STATUS-IVS-V1.md"
+  ],
+  "severity_rules": {
+    "HIGH": ["regra canônica ausente", "falha estrutural de entrega crítica"],
+    "MEDIUM": ["HTML não enviado no outbound", "marcador de sessão travada", "erro de mídia"],
+    "LOW": ["backlog ativo monitorado"]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "sequencia-operacional",
+  "name": "Sequência Operacional Tiaro → Maria",
+  "owner": "Maria",
+  "executor": "Maria + workflows do IVS Agent Operating Layer",
+  "scope": "Quando Tiaro enviar uma sequência de atividades, Maria deve usar as skills/workflows novos do IVS Agent Operating Layer para organizar, validar, executar e reportar a sequência.",
+  "mode": "orquestração operacional com guardrails; ações sensíveis exigem autorização explícita",
+  "entry_criteria": [
+    "Tiaro enviar lista, sequência, lote, checklist ou múltiplas atividades a executar",
+    "Pedido envolver Clara/Z-API, pré-consulta, João/Marketing OS, auditoria, cockpit, follow-up ou operação assistida",
+    "Pedido exigir continuidade, priorização, validação ou relatório executivo"
+  ],
+  "preflight": [
+    "Converter a sequência em plano curto com etapas e responsáveis",
+    "Mapear cada etapa para workflow aplicável: followup-seguro, preconsulta-safety, marketing-os, agent-layer-audit ou workflow futuro",
+    "Executar check/read-only antes de qualquer ação com risco operacional",
+    "Separar ações read-only de ações state-changing",
+    "Pedir autorização explícita quando houver envio real, pausa/despausa, alteração de produção, contato com paciente/lead ou mudança de regra canônica"
+  ],
+  "allowed_actions": [
+    "usar os scripts/skills do ivs-agent-operating-layer como camada padrão de execução",
+    "gerar plano, checklist, cockpit, relatório e auditoria",
+    "orquestrar Clara, João e sistemas internos sem assumir escopo indevido",
+    "corrigir continuidade operacional quando for roteamento, sessão, acesso, prompt ou evidência"
+  ],
+  "blocked_actions": [
+    "executar envio real de WhatsApp sem autorização explícita",
+    "pausar/despausar Clara sem ordem explícita do Tiaro",
+    "contatar paciente/lead diretamente pela Maria",
+    "executar tarefa criativa do João no lugar dele sem autorização",
+    "alterar produção ou regra canônica sem RC-25/Graphify quando estrutural"
+  ],
+  "outputs": [
+    "plano de execução atualizado",
+    "workflow usado em cada etapa",
+    "evidência do check/auditoria quando houver",
+    "bloqueios e decisões necessárias",
+    "resumo executivo final com próximos passos"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/SKILL.md",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_registry.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["sequência contém ação sensível sem autorização explícita", "risco de contato indevido com paciente/lead", "mudança de produção sem guardrail"],
+    "MEDIUM": ["etapa sem workflow claro", "dependência de João/Clara travada", "evidência insuficiente"],
+    "LOW": ["sequência read-only com checks concluídos"],
+    "OK": ["sequência executada com workflows mapeados e sem bloqueios"]
+  }
+}

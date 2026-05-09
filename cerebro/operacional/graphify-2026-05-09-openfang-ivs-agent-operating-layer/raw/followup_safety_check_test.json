@@ -1,0 +1,25 @@
+{
+  "ok": false,
+  "mode": "dry_run",
+  "decision": "blocked_by_exclusion",
+  "phone": "5500000000000",
+  "message_preview": "Teste seguro de rota. Não enviar.",
+  "lead": null,
+  "exclusion": {
+    "blocked": true,
+    "explicit_exception": false,
+    "entry": {
+      "name": "QA Test",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778353204
+    }
+  },
+  "blocked": true,
+  "reasons": [
+    "patient_bridge_known"
+  ],
+  "admin_send_status": null,
+  "admin_send_body": null,
+  "guardrail": "Paciente/do_not_reply bloqueia por padrão. Envio real exige autorização explícita."
+}
