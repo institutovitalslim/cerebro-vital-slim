@@ -1,0 +1,48 @@
+{
+  "id": "sensitive-action-enforcement",
+  "name": "Enforcement de Ações Sensíveis IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Aplicar guard reutilizável antes de ações sensíveis em Clara/Z-API, Pedro/Omie e futuras integrações.",
+  "mode": "guarded enforcement, no implicit execution",
+  "entry_criteria": [
+    "Envio externo controlado por /admin/send",
+    "Escrita financeira Omie",
+    "Publicação externa",
+    "Qualquer ação write_with_approval"
+  ],
+  "preflight": [
+    "Executar sensitive_action_guard.py",
+    "Exigir Approval Ledger quando policy exigir",
+    "Registrar evidência no Workflow Runner",
+    "Executar ação real apenas pela ferramenta autorizada e após gate permitir"
+  ],
+  "allowed_actions": [
+    "bloquear sem aprovação",
+    "validar aprovação vigente",
+    "permitir continuidade controlada",
+    "gerar log de decisão"
+  ],
+  "blocked_actions": [
+    "executar ação sensível dentro do guard",
+    "forçar envio a paciente/lead bloqueado",
+    "ignorar paciente_do_not_reply",
+    "escrever Omie sem aprovação"
+  ],
+  "outputs": [
+    "guard decision",
+    "teste automatizado",
+    "log de bloqueio/permissão"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/sensitive_action_guard.py",
+    "/root/.openclaw/workspace/skills/pedro-controller-ivs/scripts/pedro_omie_action_guard.py",
+    "/root/.openclaw/workspace/ops/zapi_bridge/zapi_clara_bridge.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["ação sensível executada sem guard", "paciente bloqueado recebeu mensagem"],
+    "MEDIUM": ["approval ausente", "gate indisponível"],
+    "LOW": ["dry-run sem evidência"],
+    "OK": ["guard permitiu/bloqueou conforme policy"]
+  }
+}

@@ -1,0 +1,3 @@
+data,descricao,valor,natureza,tipo_pagamento,categoria_omie,conta_corrente_omie,cliente_fornecedor,documento,comprovante,cod_titulo_omie,status_conferencia,observacao
+2026-01-02,EXEMPLO RECEBIMENTO PIX,1000.00,R,PIX,,,,,pendente,,pendente,Substituir por dados reais
+2026-01-03,EXEMPLO PAGAMENTO FORNECEDOR,250.00,P,TRANSFERENCIA,,,,,pendente,,pendente,Substituir por dados reais

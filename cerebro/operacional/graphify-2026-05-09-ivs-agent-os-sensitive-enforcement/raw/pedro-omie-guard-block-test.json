@@ -1,0 +1,33 @@
+{
+  "ok": false,
+  "operation": "omie_write",
+  "guard": {
+    "ok": false,
+    "guard": "blocked",
+    "decision": {
+      "ok": false,
+      "agent": "pedro-controller-ivs",
+      "action": "omie_write",
+      "sensitivity": "financial",
+      "permission": {
+        "ok": false,
+        "decision": "write_with_approval",
+        "requires_approval": true,
+        "reason": "approval_required",
+        "agent": "pedro-controller-ivs",
+        "action": "omie_write",
+        "sensitivity": "financial",
+        "findings": []
+      },
+      "approval": {
+        "ok": false,
+        "matches": [],
+        "checked_at": 1778359380
+      },
+      "generated_at": 1778359380,
+      "mode": "action_gate_evaluation_no_execution",
+      "final": "BLOCK_APPROVAL_REQUIRED"
+    }
+  },
+  "mode": "pedro_omie_guard_no_execution"
+}

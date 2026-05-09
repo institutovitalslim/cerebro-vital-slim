@@ -49,6 +49,7 @@ ELEVENLABS_URL = "https://api.elevenlabs.io/v1/text-to-speech"
 CLARA_AUDIO_MIRRORING = os.getenv("CLARA_AUDIO_MIRRORING", "1").strip().lower() not in ("0", "false", "no", "off")
 CLARA_NOTIFY_PHONE = os.getenv("CLARA_NOTIFY_PHONE", "5571986968887")  # Tiaro
 CLARA_NOTIFY_PHONES = [p.strip() for p in os.getenv("CLARA_NOTIFY_PHONES", "5571986968887,5571991574827").split(",") if p.strip()]
+CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE = os.getenv("CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE", "0").strip().lower() in ("1", "true", "yes", "on")
 BRIDGE_SHARED_SECRET = os.getenv("BRIDGE_SHARED_SECRET", "")
 WEBHOOK_PATH_TOKEN = os.getenv("WEBHOOK_PATH_TOKEN", "")
 DEDUP_TTL_SECONDS = int(os.getenv("DEDUP_TTL_SECONDS", "600"))
@@ -1434,6 +1435,37 @@ def send_zapi_audio(phone: str, audio_bytes: bytes) -> Tuple[int, str]:
     return post_json(url, payload, headers=headers, timeout=60)
 
 
+
+def evaluate_admin_send_action_gate(payload: Dict[str, Any]) -> Tuple[bool, Dict[str, Any]]:
+    """Optional enforcement for manual/admin WhatsApp sends.
+
+    Default is off to avoid breaking Clara production continuity. When
+    CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1, /admin/send must include
+    approval_id for the Action Gate. This guard never sends by itself; it only
+    blocks/permits the existing send path.
+    """
+    if not CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE:
+        return True, {"mode": "action_gate_not_enforced"}
+    approval_id = str(payload.get("approval_id") or "").strip()
+    evidence = str(payload.get("approval_evidence") or payload.get("reason") or "admin_send").strip()
+    cmd = [
+        "python3",
+        "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/action_gate.py",
+        "--agent", "clara-whatsapp",
+        "--action", "followup_whatsapp",
+        "--sensitivity", "lead",
+    ]
+    if approval_id:
+        cmd += ["--approval-id", approval_id]
+    if evidence:
+        cmd += ["--evidence", evidence]
+    try:
+        out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, text=True, timeout=20)
+        decision = json.loads(out)
+    except Exception as err:
+        return False, {"mode": "action_gate_error", "error": str(err)}
+    return decision.get("final") == "ALLOW_BY_POLICY_BUT_NO_EXECUTION", decision
+
 def send_zapi_text(phone: str, message: str) -> Tuple[int, str]:
     if not ZAPI_BASE_URL:
         raise RuntimeError("ZAPI_BASE_URL is empty")
@@ -1677,6 +1709,11 @@ class Handler(BaseHTTPRequestHandler):
                 return
 
             try:
+                gate_ok, gate_decision = evaluate_admin_send_action_gate(payload)
+                if not gate_ok:
+                    log(f"admin_send blocked_by_action_gate phone={phone} decision={str(gate_decision)[:300]}")
+                    self._send_json(403, {"ok": False, "phone": phone, "blocked": "action_gate", "decision": gate_decision})
+                    return
                 zapi_status, zapi_body = send_zapi_text(phone, message)
                 if 200 <= zapi_status < 300:
                     mark_followup_outbound(phone, "admin_send_followup")
@@ -1686,6 +1723,7 @@ class Handler(BaseHTTPRequestHandler):
                     "phone": phone,
                     "zapiStatus": zapi_status,
                     "zapiBody": zapi_body[:1000],
+                    "actionGate": gate_decision,
                 })
             except Exception as err:
                 log(f"admin_send failed phone={phone}: {err}")

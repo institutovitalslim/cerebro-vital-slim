@@ -357,3 +357,14 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/actio
 ```
 
 Workflow: `action-gate-approval`.
+
+## Sensitive Action Enforcement
+
+Guard reutilizável para scripts que possam acionar ações sensíveis. Ele consulta o Action Gate e falha fechado quando a política exige aprovação.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/sensitive_action_guard.py \
+  --agent pedro-controller-ivs --action omie_write --sensitivity financial --mode enforce
+```
+
+Workflow: `sensitive-action-enforcement`.

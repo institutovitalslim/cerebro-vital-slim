@@ -1,0 +1,69 @@
+{
+  "run_id": "ivr-20260509-204042-49d6672f",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778359242,
+  "updated_at": 1778359416,
+  "subject": "Testes automatizados e enforcement sensível IVS Agent OS",
+  "context": "Implementar suíte de regressão e guard reutilizável para Clara/Z-API e Pedro/Omie sem quebrar produção.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778359242,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778359416,
+      "message": "Suíte automatizada Agent OS criada e validada: 9 testes OK.",
+      "evidence": [
+        "/root/deliverables/agent-os-regression-tests-final.log"
+      ]
+    },
+    {
+      "state": "in_progress",
+      "at": 1778359416,
+      "message": "Sensitive Action Guard, Pedro Omie Guard e Clara admin_send optional Action Gate implementados.",
+      "evidence": [
+        "/root/deliverables/pedro-omie-guard-block-test.json",
+        "/root/deliverables/clara-admin-send-dryrun-guard-test.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778359416,
+      "message": "Testes e enforcement concluídos: Workflow Registry 16/0; Cockpit OK; Z-API bridge reiniciado saudável.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-sensitive-enforcement.json",
+        "/root/deliverables/zapi-health-after-guard-restart.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-regression-tests-final.log",
+    "/root/deliverables/pedro-omie-guard-block-test.json",
+    "/root/deliverables/clara-admin-send-dryrun-guard-test.json",
+    "/root/deliverables/workflow-registry-after-sensitive-enforcement.json",
+    "/root/deliverables/zapi-health-after-guard-restart.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778359416
+}

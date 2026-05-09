@@ -5,7 +5,7 @@
       "ok": true,
       "error": null,
       "totals": {
-        "workflows": 15,
+        "workflows": 16,
         "findings": 0
       }
     },
@@ -15,7 +15,7 @@
       "totals": {
         "agents": 6,
         "core_agents": 6,
-        "workflows": 15,
+        "workflows": 16,
         "findings": 0
       }
     },
@@ -23,14 +23,14 @@
       "ok": true,
       "error": null,
       "totals": {
-        "events": 42,
-        "OK": 42
+        "events": 43,
+        "OK": 43
       }
     },
     "workflow_runs": {
       "error": null,
       "totals": {
-        "runs": 5
+        "runs": 6
       }
     },
     "permission_matrix": {
@@ -38,5 +38,5 @@
       "agents": 6
     }
   },
-  "updated_at": 1778359003
+  "updated_at": 1778359409
 }
