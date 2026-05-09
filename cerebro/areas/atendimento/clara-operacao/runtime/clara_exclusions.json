@@ -1,0 +1,2381 @@
+{
+  "phones": {
+    "5571999543781": {
+      "name": "Joyce",
+      "reason": "patient_do_not_reply",
+      "source": "manual",
+      "updated_at": 1775732700
+    },
+    "211956753522895": {
+      "name": "Tiaro F. Neves",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186968887": {
+      "name": "Tiaro F. Neves",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557138388708": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363406728152962": {
+      "name": "Programa de Acomp. - 3M - Ana Clara Cedraz",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363423672659336": {
+      "name": "VIP - Tatiane Leão - Acompanhamento 3m",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363408757594641": {
+      "name": "Programa de Acomp. - 3M - Tainara Japiassu",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363425340346251": {
+      "name": "Programa de Acomp. 3M - Maria Cedraz",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363423374158230": {
+      "name": "Programa de Acomp. 3M - Catarina Cedraz",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363422684417013": {
+      "name": "Programa de Acomp. 3M - Tainá Japiassu",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188377569": {
+      "name": "Elisenilda Mae Evelyn - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557197383811": {
+      "name": "Tais Naiane",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363422056030075": {
+      "name": "VIP - Acompanhamento Diogo - 6m",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363421399368392": {
+      "name": "VIP - Francisco - Acompanhamento Anual",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363421331488043": {
+      "name": "VIP - Daniel Rodrigo 44a - Acompanhamento 3m",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363422697638490": {
+      "name": "VIP - Acompanhamento Ivana",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363419983841258": {
+      "name": "VIP - Silvana Modesto - Acompanhamento 6m",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363420643237162": {
+      "name": "VIP - Lorena Melo - Acompanhamento 6m",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363403982862900": {
+      "name": "VIP - Felipe Alencar - Acompanhamento 6m - 32a - 14.10.25",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363423315370401": {
+      "name": "VIP - Acompanhamento Daniela - 3m",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181081051": {
+      "name": "MARCO - Ana Sueli",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "35102918725720": {
+      "name": "MARCO - Ana Sueli",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "224300388880492": {
+      "name": "Tais Naiane",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188735265": {
+      "name": "21-10-24 - Pac - Tayala Esposa Francisco - Amil Carvalho",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199391771": {
+      "name": "06-06-25 - Lead - Calina - Sulamerica",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191946285": {
+      "name": "Gustavo Vilas Boas",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "274719009960036": {
+      "name": "Gustavo Vilas Boas",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557185228270": {
+      "name": "Tais",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "133453307728003": {
+      "name": "Tais",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181892298": {
+      "name": "milly Santana",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "248223423807625": {
+      "name": "milly Santana",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "60408866033828": {
+      "name": "Lissandre Brandão",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199852959": {
+      "name": "JANEIRO - Aristoteles da Costa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "195705167736861": {
+      "name": "JANEIRO - Aristoteles da Costa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196432486": {
+      "name": "Chay",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "215689046585346": {
+      "name": "Chay",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188196058": {
+      "name": "Lissandre Brandão",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192173660": {
+      "name": "Taisa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "277656968900673": {
+      "name": "Taisa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186967425": {
+      "name": "09-05-24 - Pac - Fatima Irma De Catia",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188322589": {
+      "name": "Adriana Enfermeira",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181018732": {
+      "name": "MARCO - Tonieta",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "11613591572509": {
+      "name": "Adriana Enfermeira",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "228612536012802": {
+      "name": "Tonieta",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "37276105060549": {
+      "name": "MARCO - Isabella",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196167019": {
+      "name": "MARCO - Isabella",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "232487015997628": {
+      "name": "Vivi Nascimento 🎀",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188570694": {
+      "name": "Sueide Souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182844600": {
+      "name": "MARÇO - Cassius Gaspar",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557581428882": {
+      "name": "MARÇO - Fabiana",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "210801424089266": {
+      "name": "Sueide Souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "52342816817227": {
+      "name": "MARÇO - Fabiana",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "109543224770639": {
+      "name": "MARÇO - Cassius Gaspar",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "642040640839": {
+      "name": "MARÇO - Alesson",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "241261416046688": {
+      "name": "Alesson",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192041886": {
+      "name": "Nanda Sátyro | Corretora de Seguros e Imóveis",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "62504726208738": {
+      "name": "Nanda Sátyro | Corretora de Seguros e Imóveis",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196234077": {
+      "name": "Pac- Rejane Nobre- Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182765316": {
+      "name": "VIP - Daniel Rodrigo - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192106860": {
+      "name": "Telles❤️",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "96658859798780": {
+      "name": "Telles❤️",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "123042290221303": {
+      "name": "VIP - Daniel Rodrigo - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199543781": {
+      "name": "24-02-25 - Pct. Joyce Esposa - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188365569": {
+      "name": "01-07-25 - Pac - Cíntia Japiassu - Amil",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193559430": {
+      "name": "Lena De Jesus 🇧🇷❤️🇦🇷",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "43366972678224": {
+      "name": "Lena De Jesus 🇧🇷❤️🇦🇷",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557197098879": {
+      "name": "03-08-24 - Pac - Gleice Souza - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "556181640792": {
+      "name": "31-10-25 - Agen - Erick - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "105862437855403": {
+      "name": "01-07-25 - Pac - Cíntia Japiassu - Amil",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191951878": {
+      "name": "Fernanda Castro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "180655082217545": {
+      "name": "Fernanda Castro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "131761006719165": {
+      "name": "Erica - Indicação Tainá Japiassu",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "15517868406": {
+      "name": "WhatsApp Support",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "243799792062487": {
+      "name": "243799792062487@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "262689427292396": {
+      "name": "Suporte Waseller",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "558496516964": {
+      "name": "Suporte Waseller",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182562717": {
+      "name": "❤️✨🌹",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557185242700": {
+      "name": "Erica - Indicação Tainá Japiassu",
+      "reason": "lead_exception_patient_bridge_known",
+      "source": "tiaro_lead_exception",
+      "updated_at": 1778332276
+    },
+    "251325027725351": {
+      "name": "❤️✨🌹",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191574827": {
+      "name": "Liane Enfermagem Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "1718104416284": {
+      "name": "1718104416284@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199344494": {
+      "name": "MARÇO - Juliana Emanuele Souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "118429545705497": {
+      "name": "MARÇO - Juliana Emanuele Souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191074044": {
+      "name": "MARCO - Ricardo Martins",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "60524846960853": {
+      "name": "MARÇO - Ricardo Martins",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "124240669978685": {
+      "name": "24-02-25 - Pct. Joyce Esposa - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193835223": {
+      "name": "MARÇO - Janaina Bispo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "152424295706870": {
+      "name": "MARÇO - Janaina Bispo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192526410": {
+      "name": "Binha",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "9045301846258": {
+      "name": "Binha",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "41334815649890": {
+      "name": "Jose Ricardo - Marido Rejane",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196460658": {
+      "name": "Jose Ricardo - Marido Rejane",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "9586518036551": {
+      "name": "Pac- Rejane Nobre- Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557185125868": {
+      "name": "Sara Costal Nutricionista",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191262370": {
+      "name": "DEZEMBRO - Tainá Japiassu",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "159682656235682": {
+      "name": "DEZEMBRO - Tainá Japiassu",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199551819": {
+      "name": "Nady",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192161942": {
+      "name": "🌼~Sandra Cordeiro~🌸",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "266949548347555": {
+      "name": "🌼~Sandra Cordeiro~🌸",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "256874075144368": {
+      "name": "Nady",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181383611": {
+      "name": "Valter Almeida",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "206811751784525": {
+      "name": "Valter Almeida",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199081704": {
+      "name": "Jc",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "38268158660680": {
+      "name": "Jc",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181275617": {
+      "name": "Carmona ARQUITETURA",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557185540497": {
+      "name": "Iris Kaiala.🌻",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "181505351540917": {
+      "name": "Iris Kaiala.🌻",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "227878180487204": {
+      "name": "Carmona ARQUITETURA",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196130663": {
+      "name": "MARÇO - Isabela - Amil",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "219816476569769": {
+      "name": "MARÇO - Isabela - Amil",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188874453": {
+      "name": "A.Medeiros",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "246441079513319": {
+      "name": "MARÇO - Admilton Medeiros",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191548864": {
+      "name": "Stephany Coutrim Salao Ensaio Fotográfico e Maquiagem",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "205415501537513": {
+      "name": "Stephany Coutrim Salao Ensaio Fotográfico e Maquiagem",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186895579": {
+      "name": "vania",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363404151339494": {
+      "name": "VIP - Junior - Acompanhamento 3M",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188762126": {
+      "name": "VIP - 03-09-25 - Ivana Souza Lopes - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "60949897699356": {
+      "name": "MARÇO - Vania",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186567535": {
+      "name": "17-06-24 - Pac - Adileon Oliveira - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191037639": {
+      "name": "Elmo Pai Davi",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191360918": {
+      "name": "Arilma",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "63660189855985": {
+      "name": "Arilma",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "232791673413675": {
+      "name": "232791673413675@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182562503": {
+      "name": "ABRIL - Rodrigo Oliveira",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182108418": {
+      "name": "Ian George",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "108542514204800": {
+      "name": "ABRIL - Rodrigo Oliveira",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "11493466738889": {
+      "name": "Ian George",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192466064": {
+      "name": "karine🦋",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "253021338493135": {
+      "name": "karine🦋",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199692053": {
+      "name": "Susi . Gerontologia.",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "100764261314767": {
+      "name": "VIP - 03-09-25 - Ivana Souza Lopes - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "13305875804222": {
+      "name": "Renata Souza - Pac",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "38830916784276": {
+      "name": "Susi . Gerontologia.",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "77696042291392": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "16144933089472": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "142142043369702": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "108121590632673": {
+      "name": "07-07-25 - VIP - Lorena Carvalho - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191479328": {
+      "name": "LH",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557197280381": {
+      "name": "Anderson",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "169256155095210": {
+      "name": "Anderson",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193208693": {
+      "name": "ABRIL - Fernanda Assuncão",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182199450": {
+      "name": "João Lucas",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "108426499780809": {
+      "name": "108426499780809",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5511942504540": {
+      "name": "Gabi 💕",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571999999999": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199999999": {
+      "name": "557199999999",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "169526738030797": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "551138586058": {
+      "name": "Operação até às 17h - Comercial@LNfomento.com.br",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "245646930010167": {
+      "name": "245646930010167@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181270613": {
+      "name": "ABRIL - Ângela Macedo",
+      "reason": "lead_exception_patient_bridge_known",
+      "source": "tiaro_lead_exception",
+      "updated_at": 1778332276
+    },
+    "557196309675": {
+      "name": "Edla Silva",
+      "reason": "lead_exception_patient_bridge_known",
+      "source": "tiaro_lead_exception",
+      "updated_at": 1778332276
+    },
+    "240385360146471": {
+      "name": "ABRIL - Ângela Macedo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "64991730380924": {
+      "name": "64991730380924@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "169904812621829": {
+      "name": "Edla Silva",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199758320": {
+      "name": "Maria ",
+      "reason": "lead_exception_patient_bridge_known",
+      "source": "tiaro_lead_exception",
+      "updated_at": 1778332276
+    },
+    "5571986968887": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "274689029095443": {
+      "name": "274689029095443@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "85143834341566": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "103263965818937": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571988561651": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571991541545": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "14921320394764": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "270003588833356": {
+      "name": "Picareta - 04-08-25 - Pac - Auleni - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "55071988561651": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "71988561651": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196962059": {
+      "name": "Amor",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "38070741168234": {
+      "name": "Daniely",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "137156089663565": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182328409": {
+      "name": "A luz dos olhos seus",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "144405407211618": {
+      "name": "A luz dos olhos seus",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199206261": {
+      "name": "😁😁",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "241974363836521": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557183857801": {
+      "name": "ABRIL A - Mariana Nascimento",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "216736968237119": {
+      "name": "ABRIL - Mariana Nascimento",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199855322": {
+      "name": "Jesus",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "39664526344221": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "49452354171050": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557599406785": {
+      "name": "Darilene Esposa Raniel",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "64952857579557": {
+      "name": "ABRIL - Ana Naija Souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188502077": {
+      "name": "ana naija souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192378693": {
+      "name": "Jailza Lopes 🥰🥰🥰🥰🥳🥳",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "102181986410730": {
+      "name": "Jailza Lopes 🥰🥰🥰🥰🥳🥳",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "229012085436617": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191749596": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557185040263": {
+      "name": "07-10-24 - Pac - Josefa - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "162873783414810": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "264411189084197": {
+      "name": "😇 Família Meu Tudo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196524367": {
+      "name": "😇 Família Meu Tudo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192501702": {
+      "name": "JANAINA",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "85658827755636": {
+      "name": "JANAINA",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "71086137938092": {
+      "name": "luciana_batista73",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557185096375": {
+      "name": "luciana_batista73",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "3440285638743": {
+      "name": "Ely",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5511954439611": {
+      "name": "Ely",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "49886649172142": {
+      "name": "ABRIL - Verena",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196847624": {
+      "name": "ABRIL - Verena",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557187301217": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199510709": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191761360": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557184400803": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188029323": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "195545700294837": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "277575247073482": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "31005385748697": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "71829368664278": {
+      "name": "ABRIL A - Joyce Bispo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557599738645": {
+      "name": "joyce Bispo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188170127": {
+      "name": "ABRIL - Sueli Raissa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "36223770972409": {
+      "name": "ABRIL - Sueli Raissa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "35656902377528": {
+      "name": "ABRIL A - Amanda Bomfim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186083013": {
+      "name": "🥰AeAeF💙💙🥰",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186021226": {
+      "name": "Nubia",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "200184147529737": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "79912245403775": {
+      "name": "Cintia",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192063160": {
+      "name": "Cintia",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "43607071445173": {
+      "name": "Ângela",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557798236854": {
+      "name": "Ângela",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "253772521558219": {
+      "name": "Elisenilda Mae Evelyn - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191927242": {
+      "name": "Suely Estacao Villas Shopping",
+      "reason": "patient_do_not_reply",
+      "source": "manual_tiaro_patient_safety_suely_2026-05-09",
+      "updated_at": 1778332276
+    },
+    "557196044117": {
+      "name": "Ruan Pataro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557194181820": {
+      "name": "Tatiane Leão Advogada Estação Villas Shopping",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193873221": {
+      "name": "VIP - Diogo - Esposo Lorena Carvalho",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199611029": {
+      "name": "Major Cleiton Dono Lysceg",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "108233595310085": {
+      "name": "Ruan Pataro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "220087294382200": {
+      "name": "Major Cleiton Dono Lysceg",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191175387": {
+      "name": "09-05-25 - Pac- Roberta Pinho - Sulamerica",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "263084027429080": {
+      "name": "Suely Estacao Villas Shopping @lid",
+      "reason": "patient_do_not_reply",
+      "source": "manual_tiaro_patient_safety_suely_2026-05-09",
+      "updated_at": 1778332276
+    },
+    "557191583056": {
+      "name": "VIP - Lorena Carvalho - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "214224479506576": {
+      "name": "VIP - Diogo - Esposo Lorena Carvalho",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "163238872375483": {
+      "name": "09-05-25 - Pac- Roberta Pinho - Sulamerica",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "194832651837451": {
+      "name": "Tatiane Leão Advogada Estação Villas Shopping",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "127393142448306": {
+      "name": "ABRIL - Mirian Pereira",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186115226": {
+      "name": "Mirian Pereira",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "141772810391725": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188654416": {
+      "name": "Naildes Santos",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181763039": {
+      "name": "Rosana Gazineo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "257457704157431": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557582814955": {
+      "name": "Keu Utilidades",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "229707803058269": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557599311244": {
+      "name": "Juci",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "10119379169406": {
+      "name": "Juci",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "125361639678086": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557187559250": {
+      "name": "Elisangela Monteiro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557798386730": {
+      "name": "ABRIL A - ÇiDA SANTOS",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "84529788264450": {
+      "name": "ÇiDA SANTOS 👩🏻‍🦽",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199968175": {
+      "name": "Marieta Rodrigues Santos",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "42017799319737": {
+      "name": "Marieta Rodrigues Santos",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181234090": {
+      "name": "Fernanda Alves",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "257333032710166": {
+      "name": "Fernanda Alves",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "556784212231": {
+      "name": "Karina Sijanas",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "71429701763080": {
+      "name": "Karina Sijanas",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "249962986262653": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181627860": {
+      "name": "Sula",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "105931224408099": {
+      "name": "marinapereiragsell",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557582456631": {
+      "name": "marinapereiragsell",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "204663798386690": {
+      "name": "Karine Araújo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557599004496": {
+      "name": "Karine Araújo",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191029734": {
+      "name": "19-02-25 - Agen - Carla Elaine - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "200613694595115": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191896551": {
+      "name": "VIP - Silvana Modesto - 56a - Acomp 6m - 28-05-25",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557599418265": {
+      "name": "Raniel",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "249718038859910": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193245545": {
+      "name": "VIP - 06-05-25 - Pac - Francisco Lima - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "83940924743747": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "147905839140912": {
+      "name": "VIP - 06-05-25 - Pac - Francisco Lima - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188771009": {
+      "name": "Cleany",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193122244": {
+      "name": "Sergio Vizinho Estacao Villas 306",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188067626": {
+      "name": "Lígia Paciente Dra Daniely",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "216994783690784": {
+      "name": "216994783690784@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "112957740548301": {
+      "name": "Sergio Vizinho Estacao Villas 306",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "164849501864171": {
+      "name": "Instituto Vital Slim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "70368794554442": {
+      "name": "Graziela",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188429591": {
+      "name": "Graziela",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "174285561815191": {
+      "name": "🏕️🏃🏻‍♂️🚴🥾",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193403712": {
+      "name": "VIP - 08-10-25 - Felipe Cedraz - Amigo Raniel - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "223025354031337": {
+      "name": "VIP - 08-10-25 - Felipe Cedraz - Amigo Raniel - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557591067188": {
+      "name": "Maria Cedraz Irmã Felipe",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188043788": {
+      "name": "Ana Cedraz",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181934519": {
+      "name": "Catarina Cedraz",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557197256868": {
+      "name": "VIP - DEZEMBRO - Larissa Correia - Particular - Programa 27-12-25 - Agen - Larissa - Particular - Programa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "268259781820584": {
+      "name": "Ana Cedraz",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "173731578134616": {
+      "name": "Catarina Cedraz",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "188308781023395": {
+      "name": "Maria Cedraz Irmã Felipe",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "75312352219187": {
+      "name": "VIP - DEZEMBRO - Larissa Correia - Particular - Programa 27-12-25 - Agen - Larissa - Particular - Programa",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "216410701746352": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557184417227": {
+      "name": "03-11-25 - LEAD - Vania Rehm",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "203315782676618": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5511977386633": {
+      "name": "ABRIL - Juliete Lopes",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "100837544165518": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191811697": {
+      "name": "Rita Braga",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "49461027975287": {
+      "name": "Rita Braga",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193652820": {
+      "name": "Tainara Japiassú",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571995583056": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "210647157579874": {
+      "name": "Tainara Japiassú",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "182781611122715": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5527999891242": {
+      "name": "Thalys Thebaldi",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "556193704479": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "12369975615697": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "39917593850007": {
+      "name": "Cyntia Câmara Nutricionista",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199194915": {
+      "name": "Cyntia Câmara Nutricionista",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "143143190171868": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196562443": {
+      "name": "Flávia Lima",
+      "reason": "patient_do_not_reply",
+      "source": "manual",
+      "updated_at": 1776427130
+    },
+    "228470802128927": {
+      "name": "ABRIL A - Dora Ribeiro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188277673": {
+      "name": "ABRIL A - Dora Ribeiro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196620149": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571996562443": {
+      "name": "Flávia Lima",
+      "reason": "patient_do_not_reply",
+      "source": "manual",
+      "updated_at": 1776427130
+    },
+    "271025489092672": {
+      "name": "ABRIL - Rose",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557581492991": {
+      "name": "Rose",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557183377598": {
+      "name": "Laís Gonçalves",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "170802393706687": {
+      "name": "Laís Gonçalves",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193892100": {
+      "name": "Diego Souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "253952960548906": {
+      "name": "Diego Souza",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "183953499631753": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "213361778262037": {
+      "name": "Luciene Santana",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181863332": {
+      "name": "Luciene Santana",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191100377": {
+      "name": "dennethy",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "135176059367451": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196331956": {
+      "name": "Augusto",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "60022285439222": {
+      "name": "Augusto",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557183770407": {
+      "name": "Lidiane Secretaria Francisco Lima - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "162101058375705": {
+      "name": "Cbs",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557181572590": {
+      "name": "Cbs",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196319470": {
+      "name": "Farah Cohim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "23970363519096": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "198668141461642": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "3710885306448": {
+      "name": "Bárbara",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186326277": {
+      "name": "Bárbara",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557186270338": {
+      "name": "🥳🥳",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "134153353871415": {
+      "name": "🥳🥳",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "102112964927601": {
+      "name": "102112964927601@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191025202": {
+      "name": "ABRIL - Dalila Esposa MARIO GOMES",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "140686049448187": {
+      "name": "140686049448187@lid",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557196800509": {
+      "name": "VIP - Mário Abreu Gomes Filho",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193737797": {
+      "name": "Rocha",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "195537127108839": {
+      "name": "Rocha",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5561998025591": {
+      "name": "Mara - Lead evento Instagram",
+      "reason": "patient_do_not_reply",
+      "source": "manual",
+      "updated_at": 1776988440
+    },
+    "5500000000000": {
+      "name": "QA Test",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5500000000123": {
+      "name": "QA",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5500000000999": {
+      "name": "QA Hist",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5500000099001": {
+      "name": "QA V2",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5500000077701": {
+      "name": "QA Canned",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5500000077702": {
+      "name": "QA JaTentei",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191623121": {
+      "name": "Rafael Ribeiro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "35437842272451": {
+      "name": "Rafael Ribeiro",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191190212": {
+      "name": "01-04-25 - Daniela Mae Davi - Bradesco ARAÚJO",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "24928191561869": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "176927084126264": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191760856": {
+      "name": "João Caldas",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "113722244743249": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "120363426451757286": {
+      "name": "Programa de Acomp. Mario - 6M",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "556198025591": {
+      "name": "Mara",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "68947126788232": {
+      "name": "ABRIL - Mara",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "178322965295250": {
+      "name": "Regina Madrinha",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "189347945013392": {
+      "name": "Pac- Clarice Nobre - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199646264": {
+      "name": "Regina Madrinha",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "280070572785792": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "558192347256": {
+      "name": "29-10-24 - Pac - Paola - Particular",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "232740184137890": {
+      "name": "Ervania",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557183583728": {
+      "name": "Ervania",
+      "reason": "lead_exception_patient_bridge_known",
+      "source": "tiaro_lead_exception",
+      "updated_at": 1778332276
+    },
+    "39591058923686": {
+      "name": "Giulia Santos",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557193693078": {
+      "name": "Giulia Santos",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "52974629945472": {
+      "name": "Louise 🌷",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557192931078": {
+      "name": "Louise 🌷",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557197254844": {
+      "name": "03-05-24 - Pac - Rita Neiva - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "81368289673436": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199112660": {
+      "name": "20-05-24 - Pac - Erica - Sulamerica",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "136945149726937": {
+      "name": "20-05-24 - Pac - Erica - Sulamerica",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191151585": {
+      "name": "ABRIL A - Lorena Paim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "262517158863085": {
+      "name": "ABRIL A - Lorena Paim",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5521996677266": {
+      "name": "ABRIL A - Neuma Lucena",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "242356532047877": {
+      "name": "ABRIL A - Neuma Lucena",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "55719911151585": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571888888888": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557191465748": {
+      "name": "09-06-25 - LEAD - Raphaela Espíndola - Bradesco",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "97959731536063": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571990001111": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "209280905003018": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199632646": {
+      "name": "Rosangela",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571990002222": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571990003333": {
+      "name": "Teste Handoff",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188071337": {
+      "name": "Milla",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "102856011075721": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557182381160": {
+      "name": "Essentia Saúde e consultoria",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "172885889048709": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557188225047": {
+      "name": "16-10-24 - Lead - Joceane",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "264802014335194": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "553184696079": {
+      "name": "Janaina",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "219382735196292": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557197169258": {
+      "name": "FEVEREIRO - Vitor Lira",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "127234228674693": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "557199578879": {
+      "name": "Maria Gabriela Amaral",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "165768775868614": {
+      "name": "",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571995788879": {
+      "name": "Lead",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5516981852523": {
+      "name": "Gabriel Borges",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "55757886226537": {
+      "name": "Gabriel Borges",
+      "reason": "patient_bridge_known",
+      "source": "bridge_contexto_paciente",
+      "updated_at": 1778331604
+    },
+    "5571991927242": {
+      "name": "Suely Dalmondez Castro",
+      "reason": "patient_do_not_reply",
+      "source": "manual_tiaro_patient_safety_suely_2026-05-09",
+      "updated_at": 1778332276
+    },
+    "5538991054179": {
+      "name": "Sueli Teixeira de Freitas Oliveira",
+      "reason": "patient_do_not_reply",
+      "source": "manual_tiaro_patient_safety_suely_2026-05-09",
+      "updated_at": 1778332276
+    }
+  },
+  "updated_at": 1778332276
+}
