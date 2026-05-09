@@ -1,0 +1,58 @@
+{
+  "id": "ivs-agent-os-production-activation-plan",
+  "version": "2026-05-09",
+  "owner": "Maria",
+  "approver": "Tiaro",
+  "mode": "phased_activation_with_no_implicit_sensitive_execution",
+  "principles": [
+    "Nenhum toggle sensível é ativado automaticamente pelo plano.",
+    "Toda escrita externa exige Approval Ledger/Action Gate quando aplicável.",
+    "Ativação deve começar em dry-run/shadow mode quando existir.",
+    "Rollback precisa ser simples, explícito e documentado.",
+    "Paciente/do_not_reply/patient_bridge_known continuam bloqueando Clara."
+  ],
+  "phases": [
+    {
+      "id": "phase_0_baseline",
+      "name": "Baseline e evidências",
+      "required_before": [],
+      "checks": ["agent_os_ci ok", "workflow_registry ok", "readiness READY", "cron_audit ok", "secrets_scan ok"],
+      "allowed_actions": ["auditar", "gerar relatório", "simular gates"],
+      "blocked_actions": ["ativar enforcement", "enviar WhatsApp real", "executar Omie write"]
+    },
+    {
+      "id": "phase_1_shadow_clara",
+      "name": "Clara Action Gate shadow/read-only",
+      "required_before": ["phase_0_baseline"],
+      "toggle": "CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=0",
+      "checks": ["testar /admin/send dry_run", "validar Action Gate separadamente", "confirmar patient blocks"],
+      "allowed_actions": ["dry_run", "auditar decisão do gate"],
+      "blocked_actions": ["ativar env em produção sem aprovação Tiaro"]
+    },
+    {
+      "id": "phase_2_clara_enforcement",
+      "name": "Clara Action Gate enforcement opt-in",
+      "required_before": ["phase_1_shadow_clara", "approval_tiaro"],
+      "toggle": "CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1",
+      "checks": ["approval ledger válido", "restart controlado do zapi bridge", "healthz ok", "dry_run aprovado", "rollback documentado"],
+      "rollback": ["set CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=0", "restart zapi bridge", "validar /healthz"],
+      "blocked_actions": ["pausar Clara sem ordem explícita", "liberar pacientes bloqueados"]
+    },
+    {
+      "id": "phase_3_pedro_omie_guarded_write",
+      "name": "Pedro/Omie escrita real gated",
+      "required_before": ["approval_tiaro", "omie_credentials_reviewed"],
+      "checks": ["pedro_omie_action_guard block sem approval", "approval ledger válido", "dry-run financeiro", "limites e evidências"],
+      "allowed_actions": ["execução financeira apenas com approval e payload auditável"],
+      "blocked_actions": ["omie write sem approval", "contrato/financeiro complexo sem Tiaro"]
+    },
+    {
+      "id": "phase_4_cockpit_supervised",
+      "name": "Cockpit protegido supervisionado",
+      "required_before": ["cockpit_service_status ok"],
+      "checks": ["bind 127.0.0.1", "403 sem token", "200 com token", "CI inclui status"],
+      "allowed_actions": ["status", "restart local"],
+      "blocked_actions": ["bind público", "token em RC/cérebro"]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "agent-os-production-activation-plan",
+  "name": "Production Activation Plan IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Planejar e validar ativação faseada de enforcement/produção do IVS Agent OS sem executar ações sensíveis automaticamente.",
+  "mode": "read-only plan validation; activation requires explicit approval",
+  "entry_criteria": ["Agent OS readiness READY", "CI verde", "pedido de ativação do Tiaro"],
+  "preflight": ["validar plano JSON", "rodar CI", "confirmar Clara enforcement não ativado automaticamente", "validar cockpit service", "confirmar offsite sem export"],
+  "allowed_actions": ["gerar plano", "validar readiness", "simular gates", "recomendar fase"],
+  "blocked_actions": ["ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE sem aprovação", "executar Omie write", "exportar offsite", "bind público do cockpit"],
+  "outputs": ["agent-os-production-activation-plan-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/activation/production-activation-plan.json", "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_activation_plan.py"],
+  "severity_rules": {
+    "HIGH": ["toggle sensível ativado sem approval", "ação externa executada pelo plano"],
+    "MEDIUM": ["CI falhou", "cockpit service parado"],
+    "LOW": ["fase 1 shadow pendente"],
+    "OK": ["fase 0 e 1 shadow prontas"]
+  }
+}

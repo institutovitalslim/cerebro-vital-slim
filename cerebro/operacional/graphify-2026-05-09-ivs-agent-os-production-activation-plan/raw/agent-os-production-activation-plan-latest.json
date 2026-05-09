@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "generated_at": 1778361640,
+  "mode": "read_only_activation_plan_validation",
+  "plan": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/activation/production-activation-plan.json",
+  "phase_count": 5,
+  "checks": [
+    {
+      "name": "plan_parse",
+      "ok": true,
+      "detail": "5 phases"
+    },
+    {
+      "name": "agent_os_ci",
+      "ok": true,
+      "detail": "skipped_inside_ci"
+    },
+    {
+      "name": "workflow_registry_previous",
+      "ok": true
+    },
+    {
+      "name": "clara_enforcement_not_auto_enabled",
+      "ok": true,
+      "detail": "CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=0"
+    },
+    {
+      "name": "cockpit_service_status",
+      "ok": true
+    },
+    {
+      "name": "offsite_no_export_default",
+      "ok": true
+    }
+  ],
+  "recommendation": "ready_for_phase_0_and_phase_1_shadow_only",
+  "blocked_by_design": [
+    "phase_2_clara_enforcement requires explicit Tiaro approval",
+    "phase_3_pedro_omie_guarded_write requires approval and credential review",
+    "no external/offsite export without approval and destination"
+  ]
+}

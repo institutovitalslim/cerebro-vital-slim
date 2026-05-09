@@ -491,3 +491,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflow: `agent-os-offsite-backup-readiness`.
+
+## Production Activation Plan
+
+Plano faseado para ativar produção/enforcement do IVS Agent OS. Por padrão é read-only: valida readiness e recomenda a fase segura. Não ativa toggles sensíveis.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_activation_plan.py --json
+```
+
+Workflow: `agent-os-production-activation-plan`.
