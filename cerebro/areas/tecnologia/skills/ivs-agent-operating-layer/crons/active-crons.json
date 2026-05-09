@@ -483,7 +483,25 @@
       "workflow": "agent-os-daily-audit",
       "mode": "read-only",
       "updated_at": 1778357322
+    },
+    {
+      "id": "fae296ed-b4a9-4411-bd3a-8a125f1b63cb",
+      "name": "IVS Agent OS Critical Alerts — read-only",
+      "schedule": "10 9 * * * America/Bahia",
+      "agentId": "maria-gerente",
+      "workflow": "agent-os-critical-alerts",
+      "mode": "read-only",
+      "updated_at": 1778359696
+    },
+    {
+      "id": "43d91783-a1dc-46a0-8fdf-fd9d2d019a00",
+      "name": "IVS Agent OS Weekly Backup — read-only",
+      "schedule": "30 3 * * 0 America/Bahia",
+      "agentId": "maria-gerente",
+      "workflow": "agent-os-retention-backup",
+      "mode": "read-only backup no-prune",
+      "updated_at": 1778359696
     }
   ],
-  "updated_at": 1778357322
+  "updated_at": 1778359696
 }

@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-204727-fc832e6e",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778359647,
+  "updated_at": 1778359696,
+  "subject": "Hardening final IVS Agent OS: retention, live cockpit e alertas",
+  "context": "Tiaro autorizou seguir. Implementar backup/retention, cockpit auto-refresh e alertas críticos read-only sem ações externas reais.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778359647,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778359696,
+      "message": "Retention/backup, cockpit vivo e alertas críticos implementados e validados.",
+      "evidence": [
+        "/root/deliverables/agent-os-retention-backup-latest.json",
+        "/root/deliverables/cockpit-vivo-ivs-agent-os.report.json",
+        "/root/deliverables/agent-os-critical-alerts-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778359696,
+      "message": "Hardening final concluído: 19 workflows/0 findings; alertas OK; backup OK; cockpit vivo OK; crons criados.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-hardening-final.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-retention-backup-latest.json",
+    "/root/deliverables/cockpit-vivo-ivs-agent-os.report.json",
+    "/root/deliverables/agent-os-critical-alerts-latest.json",
+    "/root/deliverables/workflow-registry-after-hardening-final.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778359696
+}

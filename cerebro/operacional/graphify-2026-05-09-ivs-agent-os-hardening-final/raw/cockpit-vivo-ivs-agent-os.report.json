@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "out": "/root/deliverables/cockpit-vivo-ivs-agent-os.html",
+  "source_json": "/root/deliverables/cockpit-unico-ivs-agent-os.json",
+  "refresh_seconds": 60,
+  "status": "OK"
+}

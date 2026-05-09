@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "mode": "backup_read_only",
+  "archive": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/backups/agent-os-backup-20260509-204757.tar.gz",
+  "included": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/runs",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/events",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/approvals",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies",
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows"
+  ],
+  "retention_days": 90,
+  "pruned": [],
+  "generated_at": 1778359677
+}

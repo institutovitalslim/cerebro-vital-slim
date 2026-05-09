@@ -52,3 +52,15 @@ Cancelados na limpeza anterior: **10**
 - Agente: `maria-gerente`
 - Modo: read-only
 - Entrega: `none`; anunciar Tiaro somente em HIGH/MEDIUM ou mudança operacional relevante.
+
+## IVS Agent OS Critical Alerts — read-only
+- ID: `fae296ed-b4a9-4411-bd3a-8a125f1b63cb`
+- Workflow: `agent-os-critical-alerts`
+- Schedule: `10 9 * * *` — `America/Bahia`
+- Entrega: none; anunciar somente se HIGH/MEDIUM.
+
+## IVS Agent OS Weekly Backup — read-only
+- ID: `43d91783-a1dc-46a0-8fdf-fd9d2d019a00`
+- Workflow: `agent-os-retention-backup`
+- Schedule: `30 3 * * 0` — `America/Bahia`
+- Modo: backup read-only; sem `--prune`.

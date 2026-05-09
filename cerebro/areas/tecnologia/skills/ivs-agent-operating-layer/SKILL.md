@@ -368,3 +368,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/sensi
 ```
 
 Workflow: `sensitive-action-enforcement`.
+
+## Hardening Final: backup, cockpit vivo e alertas
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_retention_backup.py --json
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_live_agent_os_cockpit.py
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_critical_alerts.py --json
+```
+
+Workflows: `agent-os-retention-backup`, `agent-os-live-cockpit`, `agent-os-critical-alerts`.
