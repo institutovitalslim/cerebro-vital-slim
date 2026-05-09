@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "generated_at": 1778367497,
+  "mode": "rclone_binary_install_no_credentials_no_export",
+  "rclone_path": "/usr/bin/rclone",
+  "version": "rclone v1.60.1-DEV",
+  "remotes_configured": [],
+  "credential_created": false,
+  "export_performed": false,
+  "next_blocker": "rclone remote credentials not configured",
+  "four_inputs_review": {
+    "ok": false,
+    "generated_at": 1778367497,
+    "mode": "external_backup_four_inputs_review_no_export",
+    "inputs": {
+      "destination": "remote:ivs-agent-os-backups",
+      "credential_review": "not_ready",
+      "retention_policy": "7 daily + 4 weekly + 6 monthly",
+      "approval_phrase": "Autorizo exportar backup Agent OS via rclone para remote:ivs-agent-os-backups agora"
+    },
+    "rclone_inspection": {
+      "installed": true,
+      "remotes": []
+    },
+    "findings": [
+      {
+        "severity": "HIGH",
+        "code": "rclone_remote_not_configured",
+        "remote": "remote",
+        "available_remotes": []
+      }
+    ],
+    "execution_performed": false,
+    "blocked_by_design": [
+      "no rclone copy",
+      "no credential creation",
+      "no token print",
+      "no approval write"
+    ]
+  }
+}

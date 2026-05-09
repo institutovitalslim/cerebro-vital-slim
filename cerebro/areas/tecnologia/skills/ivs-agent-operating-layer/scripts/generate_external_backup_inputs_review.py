@@ -10,7 +10,7 @@ def remotes():
         return {'installed':False,'remotes':[],'error':'rclone_not_installed'}
     try:
         out=subprocess.check_output(['rclone','listremotes'],text=True,stderr=subprocess.STDOUT,timeout=20)
-        return {'installed':True,'remotes':[x.strip().rstrip(':') for x in out.splitlines() if x.strip()]}
+        return {'installed':True,'remotes':[x.strip().rstrip(':') for x in out.splitlines() if x.strip() and not x.startswith('<')]}
     except Exception as e:
         return {'installed':True,'remotes':[],'error':str(e)[:500]}
 

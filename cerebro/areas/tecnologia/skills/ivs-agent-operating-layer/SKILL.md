@@ -652,3 +652,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `external-backup-four-inputs-review`.
+
+## Rclone Binary Install Governance
+
+Governança da instalação do binário `rclone` para backup externo. Não cria remote, não grava credencial e não exporta backup.
+
+Artefatos:
+- `/root/deliverables/rclone-install-governed-result.json`
+- `/root/deliverables/external-backup-four-inputs-review.json`
+
+Workflow: `rclone-binary-install-governance`.

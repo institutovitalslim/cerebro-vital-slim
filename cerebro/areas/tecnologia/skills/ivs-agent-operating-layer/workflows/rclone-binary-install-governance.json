@@ -1,0 +1,20 @@
+{
+  "id": "rclone-binary-install-governance",
+  "name": "Rclone Binary Install Governance",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Instalar apenas o binário rclone para preparar backup externo, sem criar credenciais, sem configurar remote e sem exportar backup.",
+  "mode": "tool install no credentials no export",
+  "entry_criteria": ["Tiaro autorizou seguir após bloqueio rclone_not_installed", "backup externo ainda sem remote configurado"],
+  "preflight": ["rodar Clara watch", "verificar rclone ausente", "instalar pacote rclone", "validar version/listremotes"],
+  "allowed_actions": ["apt-get install rclone", "rclone version", "rclone listremotes"],
+  "blocked_actions": ["rclone config com segredos", "rclone copy", "criar remote", "exportar backup externo"],
+  "outputs": ["rclone-install-precheck.txt", "rclone-install-result.txt", "rclone-install-governed-result.json", "external-backup-four-inputs-review.json"],
+  "evidence": ["/usr/bin/rclone"],
+  "severity_rules": {
+    "HIGH": ["remote criado sem aprovação", "backup externo exportado", "token impresso/versionado"],
+    "MEDIUM": ["instalação falhou"],
+    "LOW": ["remote ainda não configurado"],
+    "OK": ["binário instalado sem credenciais e sem export"]
+  }
+}

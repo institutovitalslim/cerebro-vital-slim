@@ -1,0 +1,11 @@
+after:
+/usr/bin/rclone
+rclone v1.60.1-DEV
+- os/version: ubuntu 25.10 (64 bit)
+- os/kernel: 6.17.0-22-generic (x86_64)
+- os/type: linux
+- os/arch: amd64
+- go/version: go1.24.4
+- go/linking: dynamic
+- go/tags: none
+remotes:
