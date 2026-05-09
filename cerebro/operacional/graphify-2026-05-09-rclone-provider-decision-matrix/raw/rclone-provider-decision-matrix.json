@@ -1,0 +1,95 @@
+{
+  "ok": true,
+  "generated_at": 1778367709,
+  "mode": "rclone_provider_decision_matrix_no_credentials_no_export",
+  "recommended": {
+    "id": "s3_compatible",
+    "rclone_type": "s3",
+    "fit": "recommended",
+    "why": "bom para backup versionado, lifecycle/retention, baixo acoplamento",
+    "requires": [
+      "bucket",
+      "endpoint/region",
+      "access_key_id e secret configurados fora do cérebro"
+    ],
+    "test": "rclone lsd remote:",
+    "destination": "remote:ivs-agent-os-backups"
+  },
+  "options": [
+    {
+      "id": "s3_compatible",
+      "rclone_type": "s3",
+      "fit": "recommended",
+      "why": "bom para backup versionado, lifecycle/retention, baixo acoplamento",
+      "requires": [
+        "bucket",
+        "endpoint/region",
+        "access_key_id e secret configurados fora do cérebro"
+      ],
+      "test": "rclone lsd remote:",
+      "destination": "remote:ivs-agent-os-backups"
+    },
+    {
+      "id": "backblaze_b2",
+      "rclone_type": "b2",
+      "fit": "recommended",
+      "why": "custo previsível para backup frio",
+      "requires": [
+        "account id",
+        "application key fora do cérebro",
+        "bucket"
+      ],
+      "test": "rclone lsd remote:",
+      "destination": "remote:ivs-agent-os-backups"
+    },
+    {
+      "id": "sftp",
+      "rclone_type": "sftp",
+      "fit": "acceptable",
+      "why": "simples se já houver servidor backup",
+      "requires": [
+        "host",
+        "user",
+        "ssh key fora do cérebro",
+        "path"
+      ],
+      "test": "rclone lsd remote:",
+      "destination": "remote:/ivs-agent-os-backups"
+    },
+    {
+      "id": "google_drive",
+      "rclone_type": "drive",
+      "fit": "acceptable_with_care",
+      "why": "fácil, mas OAuth/quotas e organização exigem cuidado",
+      "requires": [
+        "OAuth em terminal seguro",
+        "shared drive/pasta"
+      ],
+      "test": "rclone lsd remote:",
+      "destination": "remote:ivs-agent-os-backups"
+    },
+    {
+      "id": "webdav",
+      "rclone_type": "webdav",
+      "fit": "fallback",
+      "why": "útil com Nextcloud/servidor existente, menos ideal para retenção pesada",
+      "requires": [
+        "url",
+        "user",
+        "password/app token fora do cérebro"
+      ],
+      "test": "rclone lsd remote:",
+      "destination": "remote:ivs-agent-os-backups"
+    }
+  ],
+  "proposed_remote_name": "remote",
+  "proposed_retention": "7 daily + 4 weekly + 6 monthly",
+  "required_decision": "Tiaro escolher provider/conta antes de configurar credenciais",
+  "blocked_by_design": [
+    "não cria remote",
+    "não grava token",
+    "não chama rclone config",
+    "não exporta backup",
+    "não registra approval"
+  ]
+}

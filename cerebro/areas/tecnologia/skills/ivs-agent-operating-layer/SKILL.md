@@ -672,3 +672,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `rclone-remote-intake`.
+
+## Rclone Provider Decision Matrix
+
+Matriz read-only para escolher provedor do backup externo via rclone. Não cria remote, não grava credenciais e não exporta.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_rclone_provider_decision_matrix.py --json
+```
+
+Workflow: `rclone-provider-decision-matrix`.

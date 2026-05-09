@@ -1,0 +1,20 @@
+{
+  "id": "rclone-provider-decision-matrix",
+  "name": "Rclone Provider Decision Matrix",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar matriz de decisão de provedor rclone para backup externo sem criar remote, credenciais ou exportação.",
+  "mode": "read-only provider decision",
+  "entry_criteria": ["rclone instalado", "remote intake pronto", "provider/conta ainda indefinidos"],
+  "preflight": ["listar opções seguras", "recomendar provider", "manter credenciais bloqueadas", "manter export bloqueado"],
+  "allowed_actions": ["gerar matriz JSON/HTML", "propor retenção", "propor destino lógico"],
+  "blocked_actions": ["criar remote", "configurar credencial", "executar rclone copy", "registrar approval"],
+  "outputs": ["rclone-provider-decision-matrix.json", "rclone-provider-decision-matrix.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_rclone_provider_decision_matrix.py"],
+  "severity_rules": {
+    "HIGH": ["credencial criada", "remote criado", "backup exportado"],
+    "MEDIUM": ["provider escolhido sem conta/provedor"],
+    "LOW": ["decisão pendente"],
+    "OK": ["matriz gerada sem execução"]
+  }
+}
