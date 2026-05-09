@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "latest_url": "https://backup.institutovitalslim.com.br/agent-os/agent-os-backup-20260509-232838.tar.gz.enc",
+  "checksum_url": "https://backup.institutovitalslim.com.br/agent-os/agent-os-backup-20260509-232838.tar.gz.enc.sha256",
+  "manifest_url": "https://backup.institutovitalslim.com.br/agent-os/manifest.json",
+  "unauth_code": "401",
+  "auth_code": "200",
+  "checksum_code": "200",
+  "manifest_code": "200",
+  "checksum_ok": true,
+  "cron": "/etc/cron.d/ivs-agent-os-protected-backup",
+  "schedule": "10 5 * * * UTC"
+}

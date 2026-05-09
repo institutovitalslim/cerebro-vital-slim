@@ -1,0 +1,20 @@
+{
+  "id": "protected-backup-publication-automation",
+  "name": "Protected Backup Publication Automation",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Gerar backup Agent OS, criptografar, publicar somente arquivo .enc atrás de HTTP Basic e manter retenção curta no subdomínio backup.institutovitalslim.com.br.",
+  "mode": "write guarded encrypted publication",
+  "entry_criteria": ["Tiaro autorizou publicar backup", "subdomínio backup.institutovitalslim.com.br ativo com HTTPS", "segredo local disponível fora do cérebro"],
+  "preflight": ["gerar backup local", "verificar tar.gz", "criptografar com passphrase local", "publicar somente .enc", "validar 401 sem auth e 200 com auth"],
+  "allowed_actions": ["criar arquivo .enc", "criar .sha256", "atualizar manifest autenticado", "rotacionar retenção", "agendar cron local"],
+  "blocked_actions": ["expor tar.gz bruto", "versionar credenciais", "publicar passphrase", "abrir listagem de diretório", "remover autenticação"],
+  "outputs": ["protected-backup-publication-latest.json", "protected-backup-automation-verify.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/publish_protected_agent_os_backup.py", "/etc/cron.d/ivs-agent-os-protected-backup"],
+  "severity_rules": {
+    "HIGH": ["backup bruto público", "sem autenticação", "checksum inválido"],
+    "MEDIUM": ["cron falhou", "retenção não aplicada"],
+    "LOW": ["manifest desatualizado"],
+    "OK": ["401 sem auth, 200 com auth, checksum OK"]
+  }
+}

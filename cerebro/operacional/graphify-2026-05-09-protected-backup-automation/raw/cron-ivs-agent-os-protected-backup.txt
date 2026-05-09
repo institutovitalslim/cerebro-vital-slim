@@ -1,0 +1,5 @@
+# IVS Agent OS protected encrypted backup publication
+# Runs daily 02:10 BRT (05:10 UTC). No raw backup is exposed.
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+10 5 * * * root flock -n /var/lock/ivs-agent-os-protected-backup.lock /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/publish_protected_agent_os_backup.py --json --retain 7 >> /var/log/ivs-agent-os-protected-backup.log 2>&1

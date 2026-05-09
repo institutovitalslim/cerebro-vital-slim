@@ -1,0 +1,16 @@
+{
+  "generated_at": 1778369318,
+  "fqdn": "backup.institutovitalslim.com.br",
+  "latest": "agent-os-backup-20260509-232838.tar.gz.enc",
+  "latest_url": "https://backup.institutovitalslim.com.br/agent-os/agent-os-backup-20260509-232838.tar.gz.enc",
+  "latest_sha256": "2cd8893877a61b1e878d2ff86c6581e4acec75d7c10adb1ce9089d7bb0a4033b",
+  "encryption": "openssl enc -aes-256-cbc -salt -pbkdf2 -iter 310000",
+  "auth_required": true,
+  "raw_backup_public": false,
+  "ok": true,
+  "source_backup": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/backups/agent-os-backup-20260509-232838.tar.gz",
+  "encrypted_path": "/srv/ivs-agent-os-backups/agent-os/agent-os-backup-20260509-232838.tar.gz.enc",
+  "checksum_path": "/srv/ivs-agent-os-backups/agent-os/agent-os-backup-20260509-232838.tar.gz.enc.sha256",
+  "removed": [],
+  "retain": 7
+}

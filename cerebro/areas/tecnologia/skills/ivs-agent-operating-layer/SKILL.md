@@ -702,3 +702,14 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `hostgator-dns-runbook`.
+
+## Protected Backup Publication Automation
+
+Publica backup Agent OS criptografado em `backup.institutovitalslim.com.br`, atrás de HTTP Basic. Nunca expõe `.tar.gz` bruto nem credenciais no cérebro.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/publish_protected_agent_os_backup.py --json --retain 7
+```
+
+Cron local: `/etc/cron.d/ivs-agent-os-protected-backup`.
+Workflow: `protected-backup-publication-automation`.
