@@ -1,0 +1,48 @@
+{
+  "id": "agent-os-cockpit",
+  "name": "Cockpit Único IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Consolidar capacidades, workflows, runs, eventos e matriz de permissões em uma visão executiva única.",
+  "mode": "read-only unified cockpit",
+  "entry_criteria": [
+    "Pedido do Tiaro por status geral da camada de agentes",
+    "Após implementação de nova skill, workflow ou policy",
+    "Antes de priorizar próxima melhoria de Agent OS IVS"
+  ],
+  "preflight": [
+    "Executar capability registry",
+    "Executar workflow registry",
+    "Ler workflow runs recentes",
+    "Ler observability events",
+    "Carregar permission matrix",
+    "Gerar HTML/JSON consolidado"
+  ],
+  "allowed_actions": [
+    "gerar cockpit HTML",
+    "gerar JSON consolidado",
+    "apontar status e erros de coleta",
+    "recomendar próxima etapa"
+  ],
+  "blocked_actions": [
+    "enviar WhatsApp/Telegram",
+    "alterar produção",
+    "pausar/despausar Clara",
+    "usar cockpit como autorização de ação sensível"
+  ],
+  "outputs": [
+    "cockpit HTML",
+    "cockpit JSON",
+    "status consolidado",
+    "fontes e erros de coleta"
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py"
+  ],
+  "severity_rules": {
+    "HIGH": ["fonte crítica com HIGH", "erro que impeça visão operacional"],
+    "MEDIUM": ["erro parcial de coleta", "achado MEDIUM em permissões/capacidades"],
+    "LOW": ["achados informativos", "documentação incompleta"],
+    "OK": ["todas as fontes coletadas sem achados relevantes"]
+  }
+}

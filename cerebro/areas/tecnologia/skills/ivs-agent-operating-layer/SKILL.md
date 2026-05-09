@@ -315,3 +315,15 @@ Arquivos:
 - workflow: `permission-governance`
 
 Regra: o policy gate avalia, mas não executa a ação. Ações `write_with_approval` continuam exigindo autorização explícita e evidência.
+
+## Cockpit Único IVS Agent OS
+
+Visão executiva consolidada de capacidades, workflows, runs, eventos e matriz de permissões.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py \
+  --out /root/deliverables/cockpit-unico-ivs-agent-os.html \
+  --json-out /root/deliverables/cockpit-unico-ivs-agent-os.json
+```
+
+Regra: read-only. O cockpit não envia mensagens, não altera produção e não substitui autorização explícita para ações sensíveis.

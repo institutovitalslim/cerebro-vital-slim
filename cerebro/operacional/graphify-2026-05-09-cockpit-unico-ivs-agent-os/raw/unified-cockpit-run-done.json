@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-200600-146402c3",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778357160,
+  "updated_at": 1778357196,
+  "subject": "Implementar Cockpit Único IVS Agent OS",
+  "context": "Próxima etapa: consolidar capabilities, workflows, runs, eventos e permissões em uma visão executiva única.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778357160,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778357196,
+      "message": "Gerador de cockpit único e workflow agent-os-cockpit criados.",
+      "evidence": [
+        "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778357196,
+      "message": "Cockpit único validado com HTML/JSON e Workflow Registry 13/0.",
+      "evidence": [
+        "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+        "/root/deliverables/workflow-registry-after-unified-cockpit.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py",
+    "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+    "/root/deliverables/workflow-registry-after-unified-cockpit.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778357196
+}
