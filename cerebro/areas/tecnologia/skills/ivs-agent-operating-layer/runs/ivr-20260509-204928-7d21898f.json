@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-204928-7d21898f",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778359768,
+  "updated_at": 1778359805,
+  "subject": "Analytics e Approval Console IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar dashboard de tendências e console estático de aprovações sem executar ações sensíveis.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778359768,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778359805,
+      "message": "Dashboard de tendências e approval console estático implementados.",
+      "evidence": [
+        "/root/deliverables/agent-os-trends.html",
+        "/root/deliverables/approval-console-ivs-agent-os.html"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778359805,
+      "message": "Analytics/UI concluído: 21 workflows/0 findings; cockpit OK.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-analytics-ui.json",
+        "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-trends.html",
+    "/root/deliverables/approval-console-ivs-agent-os.html",
+    "/root/deliverables/workflow-registry-after-analytics-ui.json",
+    "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778359805
+}

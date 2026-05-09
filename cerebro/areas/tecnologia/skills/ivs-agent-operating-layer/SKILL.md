@@ -378,3 +378,12 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflows: `agent-os-retention-backup`, `agent-os-live-cockpit`, `agent-os-critical-alerts`.
+
+## Analytics e Approval Console
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_trends.py
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_approval_console.py
+```
+
+Workflows: `agent-os-trends`, `approval-console`.

@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "generated_at": 1778359787,
+  "totals": {
+    "approvals": 1,
+    "active": 0,
+    "expired": 1
+  },
+  "mode": "static_console_no_execution",
+  "allowed_actions": [
+    "pause_clara",
+    "followup_whatsapp",
+    "omie_write",
+    "publish_external_content"
+  ],
+  "agents": [
+    "maria-gerente",
+    "clara-whatsapp",
+    "pedro-controller-ivs",
+    "agente-reels-intel"
+  ]
+}
