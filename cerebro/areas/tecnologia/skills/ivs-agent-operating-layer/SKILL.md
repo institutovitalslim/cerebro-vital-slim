@@ -692,3 +692,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `domain-backup-architecture`.
+
+## HostGator DNS Runbook
+
+Runbook read-only para criar subdomínios IVS na HostGator com segurança. Não altera DNS, não publica backup e não cria credenciais.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_hostgator_dns_runbook.py --json
+```
+
+Workflow: `hostgator-dns-runbook`.

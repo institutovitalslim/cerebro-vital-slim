@@ -1,0 +1,20 @@
+{
+  "id": "hostgator-dns-runbook",
+  "name": "HostGator DNS Runbook",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar runbook de DNS HostGator para subdomínios IVS sem alterar DNS, sem publicar backup e sem criar credenciais.",
+  "mode": "read-only dns runbook no changes",
+  "entry_criteria": ["Tiaro informou que domínio está na HostGator", "arquitetura de subdomínio definida"],
+  "preflight": ["gerar registros propostos", "bloquear uso do www para backup", "listar passos HostGator", "manter DNS sem alteração"],
+  "allowed_actions": ["gerar JSON/HTML", "propor CNAME/A", "documentar guardrails"],
+  "blocked_actions": ["alterar DNS", "publicar backup", "abrir cockpit", "criar credencial"],
+  "outputs": ["hostgator-dns-runbook.json", "hostgator-dns-runbook.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_hostgator_dns_runbook.py"],
+  "severity_rules": {
+    "HIGH": ["DNS alterado sem aprovação", "backup apontado para www público"],
+    "MEDIUM": ["subdomínio sem target real"],
+    "LOW": ["aguardando target do CNAME/A"],
+    "OK": ["runbook gerado sem alteração"]
+  }
+}
