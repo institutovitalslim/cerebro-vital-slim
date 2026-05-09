@@ -621,3 +621,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/pedro
 ```
 
 Workflow: `pedro-omie-payload-validator`.
+
+## Agent OS Operations Runbook
+
+Runbook operacional read-only do IVS Agent OS: consolida estado, protocolos e próximos passos sem executar ações sensíveis.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_operations_runbook.py --json
+```
+
+Workflow: `agent-os-operations-runbook`.

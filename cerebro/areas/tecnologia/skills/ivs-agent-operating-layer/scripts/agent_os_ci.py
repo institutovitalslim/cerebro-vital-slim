@@ -28,6 +28,7 @@ def main():
     checks.append(cmd('pedro_omie_write_preflight',['python3',str(BASE/'scripts/pedro_omie_write_preflight.py'),'--json']))
     checks.append(cmd('pedro_omie_payload_validator',['python3',str(BASE/'scripts/pedro_omie_payload_validator.py'),'--templates','--json']))
     checks.append(cmd('approval_queue',['python3',str(BASE/'scripts/generate_approval_queue.py'),'--json']))
+    checks.append(cmd('operations_runbook',['python3',str(BASE/'scripts/generate_agent_os_operations_runbook.py'),'--json']))
     checks.append(cmd('activation_dossier',['python3',str(BASE/'scripts/generate_activation_dossier.py'),'--json']))
     checks.append(cmd('gate_blocks_pedro_without_approval',['python3',str(BASE/'scripts/sensitive_action_guard.py'),'--agent','pedro-controller-ivs','--action','omie_write','--sensitivity','financial'], allow_fail=True))
     # guard smoke is expected to exit non-zero. OK only if it blocked.

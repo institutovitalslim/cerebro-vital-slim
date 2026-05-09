@@ -1,0 +1,20 @@
+{
+  "id": "agent-os-operations-runbook",
+  "name": "Agent OS Operations Runbook",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Consolidar estado operacional, protocolos e próximos passos do IVS Agent OS sem executar ação sensível.",
+  "mode": "read-only operations runbook",
+  "entry_criteria": ["Clara Phase 2 ativada", "offsite local mirror executado", "Pedro payload validator pronto"],
+  "preflight": ["rodar watch Clara", "consolidar readiness", "consolidar approval queue", "listar bloqueios por input"],
+  "allowed_actions": ["gerar runbook", "gerar matriz de próximas ações", "reportar bloqueios"],
+  "blocked_actions": ["chamar Omie", "exportar backup externo", "alterar Clara", "registrar approval"],
+  "outputs": ["agent-os-operations-runbook.json", "agent-os-operations-runbook.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_operations_runbook.py"],
+  "severity_rules": {
+    "HIGH": ["runbook indicou execução sem approval"],
+    "MEDIUM": ["estado inconsistente"],
+    "LOW": ["input externo pendente"],
+    "OK": ["runbook gerado sem execução"]
+  }
+}

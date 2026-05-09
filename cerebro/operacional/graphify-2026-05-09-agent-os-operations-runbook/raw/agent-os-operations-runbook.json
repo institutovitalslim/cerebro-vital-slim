@@ -1,0 +1,83 @@
+{
+  "ok": true,
+  "generated_at": 1778365325,
+  "mode": "read_only_agent_os_operations_runbook",
+  "current_state": {
+    "readiness": {
+      "status": "READY",
+      "score": 100
+    },
+    "clara_phase2_watch_ok": true,
+    "offsite_local_mirror_verified": true,
+    "pedro_payload_validator_ready": true,
+    "approval_queue": {
+      "items": 3,
+      "pending": 1,
+      "executed": 2
+    }
+  },
+  "operational_protocols": [
+    {
+      "area": "Clara Phase 2",
+      "status": "active_watch",
+      "do": "monitorar, reportar HIGH/MEDIUM relevante",
+      "do_not": "pausar Clara sem ordem explícita; desbloquear paciente; enviar teste real"
+    },
+    {
+      "area": "Offsite backup",
+      "status": "local_mirror_done",
+      "do": "manter cópia local verificada; próximo externo só com destino/credencial revisados",
+      "do_not": "usar rclone sem revisão; versionar token; exportar para destino não aprovado"
+    },
+    {
+      "area": "Pedro/Omie",
+      "status": "payload_required",
+      "do": "coletar operation_type, payload_json, business_reason, idempotency_key",
+      "do_not": "chamar Omie, emitir/baixar/alterar financeiro sem payload+approval"
+    },
+    {
+      "area": "Cockpit/CI",
+      "status": "ready",
+      "do": "rodar CI/readiness antes/depois de mudança",
+      "do_not": "expor token; abrir cockpit publicamente"
+    }
+  ],
+  "next_action_matrix": [
+    {
+      "priority": 1,
+      "action": "Finalizar janela Clara 24h",
+      "requires": "aguardar checkpoints; nenhum approval",
+      "risk": "baixo"
+    },
+    {
+      "priority": 2,
+      "action": "Coletar payload real Pedro/Omie",
+      "requires": "dados concretos da operação",
+      "risk": "alto se executar; baixo enquanto read-only"
+    },
+    {
+      "priority": 3,
+      "action": "Definir backup externo real",
+      "requires": "destino rclone/storage + revisão credencial + approval",
+      "risk": "médio/alto"
+    },
+    {
+      "priority": 4,
+      "action": "Transformar Approval Console em UI interativa",
+      "requires": "auth forte + token policy + auditoria",
+      "risk": "médio"
+    }
+  ],
+  "blocked_until_input": [
+    "Pedro/Omie write real: payload + idempotency + approval",
+    "Backup externo/rclone: destino + credencial revisada + approval"
+  ],
+  "actions_taken": [],
+  "guardrails": [
+    "read-only",
+    "no patient unlock",
+    "no Omie call",
+    "no external export",
+    "no credential creation"
+  ]
+}
