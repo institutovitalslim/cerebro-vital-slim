@@ -1,0 +1,92 @@
+{
+  "ok": true,
+  "generated_at": 1778361731,
+  "mode": "clara_action_gate_shadow_read_only_dry_run",
+  "checks": [
+    {
+      "name": "zapi_bridge_healthz",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "status": 200,
+        "json": {
+          "ok": true,
+          "service": "zapi-clara-bridge"
+        }
+      }
+    },
+    {
+      "name": "enforcement_not_enabled",
+      "ok": true,
+      "detail": "CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=0"
+    },
+    {
+      "name": "admin_send_synthetic_dry_run",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "status": 200,
+        "json": {
+          "ok": true,
+          "dry_run": true,
+          "phone": "5599999999999",
+          "message_preview": "[DRY-RUN IVS] validação shadow Clara Action Gate. Não enviar."
+        }
+      }
+    },
+    {
+      "name": "patient_block_dry_run",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "error": "HTTP Error 409: Conflict"
+      }
+    },
+    {
+      "name": "action_gate_shadow_evaluation",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "exit_code": 0,
+        "json": {
+          "ok": false,
+          "agent": "clara-whatsapp",
+          "action": "clara_admin_send",
+          "sensitivity": "external_message",
+          "permission": {
+            "ok": false,
+            "decision": "forbidden",
+            "requires_approval": false,
+            "approved": false,
+            "agent": "clara-whatsapp",
+            "action": "clara_admin_send",
+            "sensitivity": "external_message",
+            "evidence": [],
+            "findings": [],
+            "generated_at": 1778361731,
+            "mode": "permission_evaluation_no_execution"
+          },
+          "approval": {
+            "ok": false,
+            "matches": [],
+            "checked_at": 1778361731
+          },
+          "generated_at": 1778361731,
+          "mode": "action_gate_evaluation_no_execution",
+          "final": "BLOCK_FORBIDDEN"
+        }
+      }
+    }
+  ],
+  "summary": {
+    "external_messages_sent": 0,
+    "enforcement_enabled": false,
+    "recommendation": "remain_in_phase_1_shadow"
+  },
+  "blocked_by_design": [
+    "no real WhatsApp send",
+    "no env toggle change",
+    "no patient unblock",
+    "no Clara pause"
+  ]
+}

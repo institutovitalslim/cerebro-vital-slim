@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-212124-49529466",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778361684,
+  "updated_at": 1778361737,
+  "subject": "Phase 1 Clara Action Gate Shadow IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar Phase 1 shadow/read-only da Clara: validar /admin/send dry_run, patient blocks e Action Gate sem ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "atendimento",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778361684,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778361737,
+      "message": "Clara Action Gate Shadow implementado: healthz OK, enforcement off, dry-runs sem envio real, patient block OK, Action Gate avaliado.",
+      "evidence": [
+        "/root/deliverables/clara-action-gate-shadow-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778361737,
+      "message": "Phase 1 Clara shadow concluída: 35 workflows/0 findings; CI 12 checks OK; readiness READY 100/100; recomendação remain_in_phase_1_shadow.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-clara-shadow.json",
+        "/root/deliverables/agent-os-ci-after-clara-shadow.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/clara-action-gate-shadow-latest.json",
+    "/root/deliverables/workflow-registry-after-clara-shadow.json",
+    "/root/deliverables/agent-os-ci-after-clara-shadow.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778361737
+}

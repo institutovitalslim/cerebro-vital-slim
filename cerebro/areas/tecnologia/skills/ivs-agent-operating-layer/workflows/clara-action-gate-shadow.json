@@ -1,0 +1,20 @@
+{
+  "id": "clara-action-gate-shadow",
+  "name": "Clara Action Gate Shadow — Phase 1",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Validar shadow/read-only do Action Gate da Clara antes de qualquer enforcement em produção.",
+  "mode": "read-only dry-run; no WhatsApp real; no env toggle",
+  "entry_criteria": ["Production Activation Plan aprovado para Phase 1", "Z-API bridge ativo", "pedido do Tiaro para seguir"],
+  "preflight": ["healthz do Z-API bridge", "confirmar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE != 1", "dry_run sintético", "dry_run paciente bloqueado", "Action Gate evaluation"],
+  "allowed_actions": ["dry_run /admin/send", "avaliar Action Gate", "gerar relatório"],
+  "blocked_actions": ["enviar WhatsApp real", "alterar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE", "desbloquear paciente", "pausar Clara"],
+  "outputs": ["clara-action-gate-shadow-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_action_gate_shadow.py"],
+  "severity_rules": {
+    "HIGH": ["mensagem real enviada", "paciente bloqueado liberado", "enforcement ativado sem aprovação"],
+    "MEDIUM": ["healthz falhou", "Action Gate indisponível"],
+    "LOW": ["shadow pendente"],
+    "OK": ["shadow validado sem envio externo"]
+  }
+}

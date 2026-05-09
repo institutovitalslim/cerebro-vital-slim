@@ -501,3 +501,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflow: `agent-os-production-activation-plan`.
+
+## Clara Action Gate Shadow — Phase 1
+
+Validação read-only/dry-run antes de qualquer enforcement da Clara. Não envia WhatsApp real e não altera `CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE`.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/clara_action_gate_shadow.py --json
+```
+
+Workflow: `clara-action-gate-shadow`.
