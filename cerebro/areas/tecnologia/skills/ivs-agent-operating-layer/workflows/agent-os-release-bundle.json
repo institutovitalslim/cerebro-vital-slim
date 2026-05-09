@@ -1,0 +1,15 @@
+{
+  "id": "agent-os-release-bundle",
+  "name": "Release Bundle IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Gerar pacote sanitizado de release do Agent OS sem secrets, backups ou token local.",
+  "mode": "sanitized bundle no secrets",
+  "entry_criteria": ["score READY", "marco de release", "pedido do Tiaro"],
+  "preflight": ["gerar scorecard", "excluir server/backups/token", "gerar tar.gz", "calcular SHA-256"],
+  "allowed_actions": ["empacotar scripts/workflows/docs", "incluir deliverables allowlistados", "gerar hash"],
+  "blocked_actions": ["incluir token", "incluir backups", "incluir secrets", "publicar externamente"],
+  "outputs": ["releases/ivs-agent-os-release-*.tar.gz", "agent-os-release-bundle-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_release_bundle.py"],
+  "severity_rules": {"HIGH": ["secret no bundle"], "MEDIUM": ["bundle incompleto"], "LOW": ["artefato opcional ausente"], "OK": ["bundle gerado com hash"]}
+}

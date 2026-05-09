@@ -450,3 +450,12 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflow: `agent-os-security-compliance`.
+
+## Readiness Scorecard e Release Bundle
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_readiness_scorecard.py --json
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_release_bundle.py --json
+```
+
+Workflows: `agent-os-readiness-scorecard`, `agent-os-release-bundle`.

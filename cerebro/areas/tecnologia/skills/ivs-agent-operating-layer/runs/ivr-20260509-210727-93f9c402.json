@@ -1,0 +1,60 @@
+{
+  "run_id": "ivr-20260509-210727-93f9c402",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778360847,
+  "updated_at": 1778360903,
+  "subject": "Readiness scorecard e release bundle IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar scorecard de prontidão e pacote de release seguro sem secrets.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778360847,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778360903,
+      "message": "Readiness scorecard e release bundle implementados; score READY 100/100.",
+      "evidence": [
+        "/root/deliverables/agent-os-readiness-scorecard.json",
+        "/root/deliverables/agent-os-release-bundle-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778360903,
+      "message": "Readiness/release concluído: 30 workflows/0 findings; CI OK; Cockpit OK; bundle sanitizado gerado.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-readiness-release.json",
+        "/root/deliverables/agent-os-ci-after-readiness-release.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-readiness-scorecard.json",
+    "/root/deliverables/agent-os-release-bundle-latest.json",
+    "/root/deliverables/workflow-registry-after-readiness-release.json",
+    "/root/deliverables/agent-os-ci-after-readiness-release.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778360903
+}

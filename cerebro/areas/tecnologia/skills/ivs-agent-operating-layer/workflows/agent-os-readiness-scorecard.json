@@ -1,0 +1,15 @@
+{
+  "id": "agent-os-readiness-scorecard",
+  "name": "Readiness Scorecard IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Calcular pontuação de prontidão do Agent OS com base em CI, drift, secrets, backup, restore, alertas e cockpit.",
+  "mode": "read-only readiness scoring",
+  "entry_criteria": ["fim de ciclo de implementação", "pré-release", "pedido do Tiaro"],
+  "preflight": ["rodar CI", "verificar workflow registry", "rodar drift", "rodar secrets", "verificar backup/restore", "avaliar alertas"],
+  "allowed_actions": ["calcular score", "gerar markdown/json", "bloquear release se não READY"],
+  "blocked_actions": ["corrigir automaticamente", "alterar produção", "executar ação sensível"],
+  "outputs": ["agent-os-readiness-scorecard.json", "agent-os-readiness-scorecard.md"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_readiness_scorecard.py"],
+  "severity_rules": {"HIGH": ["score < 80"], "MEDIUM": ["score 80-94"], "LOW": ["critério menor falhou"], "OK": ["score >= 95"]}
+}
