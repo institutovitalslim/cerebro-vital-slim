@@ -18,6 +18,7 @@ def main():
     checks.append(cmd('integrity_manifest',['python3',str(BASE/'scripts/agent_os_integrity_manifest.py')]))
     checks.append(cmd('cron_audit',['python3',str(BASE/'scripts/agent_os_cron_auditor.py'),'--json']))
     checks.append(cmd('cockpit_service_status',['python3',str(BASE/'scripts/agent_os_cockpit_service.py'),'status']))
+    checks.append(cmd('offsite_backup_readiness',['python3',str(BASE/'scripts/agent_os_offsite_backup.py'),'--json']))
     checks.append(cmd('gate_blocks_pedro_without_approval',['python3',str(BASE/'scripts/sensitive_action_guard.py'),'--agent','pedro-controller-ivs','--action','omie_write','--sensitivity','financial'], allow_fail=True))
     # guard smoke is expected to exit non-zero. OK only if it blocked.
     if checks[-1]['exit_code']==0: checks[-1]['ok']=False; checks[-1]['log']+='\nExpected block did not happen.'

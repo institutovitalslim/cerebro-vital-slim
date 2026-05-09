@@ -481,3 +481,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent
 ```
 
 Workflow: `agent-os-protected-cockpit-service`.
+
+## Offsite Backup Readiness
+
+Prepara exportação externa de backup sem enviar dados por padrão. Export real exige `--apply`, destino explícito e aprovação.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_offsite_backup.py --json
+```
+
+Workflow: `agent-os-offsite-backup-readiness`.

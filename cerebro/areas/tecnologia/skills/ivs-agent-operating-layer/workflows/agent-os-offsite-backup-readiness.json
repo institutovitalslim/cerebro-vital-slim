@@ -1,0 +1,20 @@
+{
+  "id": "agent-os-offsite-backup-readiness",
+  "name": "Offsite Backup Readiness IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar e validar exportação offsite de backups do Agent OS sem enviar dados para fora por padrão.",
+  "mode": "readiness by default; apply requires approval",
+  "entry_criteria": ["após backup semanal", "pedido do Tiaro por backup externo", "pré-disaster recovery"],
+  "preflight": ["gerar backup local", "verificar backup", "verificar destino configurado", "exigir Approval Ledger para apply"],
+  "allowed_actions": ["readiness check", "gerar plano de export", "local mirror em path allowlistado com approval", "rclone command plan"],
+  "blocked_actions": ["exportar offsite sem aprovação", "enviar para destino não configurado", "usar rclone apply sem revisão manual", "expor token/credenciais"],
+  "outputs": ["agent-os-offsite-backup-latest.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/agent_os_offsite_backup.py"],
+  "severity_rules": {
+    "HIGH": ["export sem approval", "credencial exposta"],
+    "MEDIUM": ["backup inválido", "destino não configurado quando apply solicitado"],
+    "LOW": ["readiness sem destino configurado"],
+    "OK": ["readiness OK ou export local allowlistado com approval"]
+  }
+}

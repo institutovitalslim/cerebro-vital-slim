@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-211424-68e6a1f5",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778361264,
+  "updated_at": 1778361328,
+  "subject": "Offsite backup readiness IVS Agent OS",
+  "context": "Tiaro autorizou seguir. Implementar exportador offsite seguro em dry-run/readiness, sem enviar dados para fora sem configuração explícita.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778361264,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778361328,
+      "message": "Offsite backup readiness implementado e incluído no CI; readiness sem export externo validado.",
+      "evidence": [
+        "/root/deliverables/agent-os-offsite-backup-latest.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778361328,
+      "message": "Offsite backup concluído: 33 workflows/0 findings; CI 10 checks OK; readiness READY 100/100.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-offsite-backup.json",
+        "/root/deliverables/agent-os-ci-after-offsite-backup.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/agent-os-offsite-backup-latest.json",
+    "/root/deliverables/workflow-registry-after-offsite-backup.json",
+    "/root/deliverables/agent-os-ci-after-offsite-backup.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778361328
+}
