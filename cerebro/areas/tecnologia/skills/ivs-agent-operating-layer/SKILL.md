@@ -600,3 +600,13 @@ Artefatos:
 - `/root/deliverables/offsite-local-mirror-export-verify.json`
 
 Workflow: `offsite-local-mirror-export`.
+
+## Pedro Omie Write Payload Intake
+
+Pacote read-only para coletar payload de escrita real no Omie. Não chama Omie e não usa credenciais.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_pedro_omie_payload_intake_packet.py --json
+```
+
+Workflow: `pedro-omie-write-payload-intake`.

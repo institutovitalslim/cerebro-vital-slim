@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "generated_at": 1778365126,
+  "mode": "read_only_approval_queue_no_execution",
+  "totals": {
+    "items": 3,
+    "pending": 1,
+    "executed": 2
+  },
+  "items": [
+    {
+      "id": "clara_phase2_enforcement",
+      "title": "Ativar Clara Action Gate Enforcement",
+      "status": "activated",
+      "risk": "atendimento externo / bloqueio indevido de follow-up administrativo",
+      "required_phrase": "Autorizo ativar CLARA_ADMIN_SEND_ENFORCE_ACTION_GATE=1 na Clara agora",
+      "scope": "clara_enforcement_phase2",
+      "preflight_ok": true,
+      "execution_performed": true,
+      "source": "clara-enforcement-phase2-preflight-latest.json"
+    },
+    {
+      "id": "pedro_omie_write",
+      "title": "Pedro executar escrita real no Omie",
+      "status": "pending_payload_and_explicit_approval",
+      "risk": "escrita financeira real no Omie",
+      "required_phrase": "Autorizo Pedro executar escrita Omie com este payload aprovado agora",
+      "scope": "pedro_omie_write",
+      "preflight_ok": true,
+      "execution_performed": false,
+      "source": "pedro-omie-write-preflight-latest.json"
+    },
+    {
+      "id": "offsite_backup_export",
+      "title": "Exportar backup Agent OS para destino externo/local mirror",
+      "status": "executed_local_mirror",
+      "risk": "movimentação de artefatos para fora do runtime local",
+      "required_phrase": "Autorizo exportar o backup Agent OS para este destino aprovado agora",
+      "scope": "offsite_backup_export",
+      "preflight_ok": true,
+      "execution_performed": true,
+      "source": "agent-os-offsite-backup-latest.json"
+    }
+  ],
+  "blocked_by_design": [
+    "does not write Approval Ledger",
+    "does not enable Clara enforcement",
+    "does not call Omie",
+    "does not export backup"
+  ]
+}

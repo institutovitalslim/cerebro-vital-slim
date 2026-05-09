@@ -1,0 +1,20 @@
+{
+  "id": "pedro-omie-write-payload-intake",
+  "name": "Pedro Omie Write Payload Intake",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Preparar coleta e revisão de payload para uma escrita real no Omie, sem executar chamada financeira.",
+  "mode": "read-only payload intake no Omie call",
+  "entry_criteria": ["Pedro/Omie preflight OK", "Tiaro quer avançar", "payload concreto ainda ausente"],
+  "preflight": ["gerar packet de inputs obrigatórios", "manter Omie write bloqueado", "exigir idempotency_key", "exigir aprovação explícita depois do payload"],
+  "allowed_actions": ["gerar template", "validar preflight", "atualizar fila read-only"],
+  "blocked_actions": ["chamar Omie", "emitir boleto", "baixar título", "criar/alterar financeiro", "usar credenciais"],
+  "outputs": ["pedro-omie-write-payload-intake-packet.json", "pedro-omie-write-payload-intake-packet.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_pedro_omie_payload_intake_packet.py"],
+  "severity_rules": {
+    "HIGH": ["Omie chamado sem payload/approval", "idempotency ausente em execução"],
+    "MEDIUM": ["payload incompleto"],
+    "LOW": ["aguardando dados"],
+    "OK": ["packet gerado sem execução"]
+  }
+}

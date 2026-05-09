@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "generated_at": 1778365126,
+  "mode": "read_only_drift_detector",
+  "totals": {
+    "skills": 5,
+    "findings": 0
+  },
+  "findings": [],
+  "details": {
+    "ivs-agent-operating-layer": {
+      "runtime_files": 110,
+      "canonical_files": 110,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    },
+    "ivs-agent-capability-registry": {
+      "runtime_files": 2,
+      "canonical_files": 2,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    },
+    "ivs-agent-handoff-guard": {
+      "runtime_files": 3,
+      "canonical_files": 3,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    },
+    "ivs-agent-observability-events": {
+      "runtime_files": 2,
+      "canonical_files": 2,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    },
+    "pedro-controller-ivs": {
+      "runtime_files": 8,
+      "canonical_files": 8,
+      "missing_in_canonical": [],
+      "missing_in_runtime": [],
+      "changed": []
+    }
+  }
+}

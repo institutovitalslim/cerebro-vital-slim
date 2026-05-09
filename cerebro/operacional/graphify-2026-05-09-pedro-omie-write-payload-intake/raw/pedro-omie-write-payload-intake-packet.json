@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "generated_at": 1778365120,
+  "mode": "pedro_omie_write_payload_intake_packet_no_execution",
+  "agent": "pedro-controller-ivs",
+  "action": "omie_write",
+  "approval_required": true,
+  "execution_performed": false,
+  "required_inputs": [
+    {
+      "field": "operation_type",
+      "examples": [
+        "emitir_boleto",
+        "baixar_titulo",
+        "criar_conta_receber",
+        "atualizar_cliente"
+      ],
+      "required": true
+    },
+    {
+      "field": "payload_json",
+      "description": "payload exato que seria enviado ao Omie, sem credenciais",
+      "required": true
+    },
+    {
+      "field": "business_reason",
+      "description": "motivo operacional/financeiro",
+      "required": true
+    },
+    {
+      "field": "idempotency_key",
+      "description": "chave única para evitar duplicidade",
+      "required": true
+    },
+    {
+      "field": "approval_phrase",
+      "description": "aprovação explícita depois da revisão do payload",
+      "required": true
+    }
+  ],
+  "required_phrase_template": "Autorizo Pedro executar Omie write <operation_type> com payload revisado e idempotency_key <idempotency_key> agora",
+  "blocked_by_design": [
+    "não chama Omie",
+    "não grava financeiro",
+    "não baixa título",
+    "não emite boleto/NF",
+    "não altera cliente",
+    "não usa credenciais"
+  ]
+}
