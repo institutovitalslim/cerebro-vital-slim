@@ -610,3 +610,14 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/gener
 ```
 
 Workflow: `pedro-omie-write-payload-intake`.
+
+## Pedro Omie Payload Validator
+
+Validador read-only para payloads de escrita Omie. Gera templates e calcula SHA256 do payload. Não chama Omie, não usa credenciais e não registra approval.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/pedro_omie_payload_validator.py --templates --json
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/pedro_omie_payload_validator.py --payload-file payload.json --json
+```
+
+Workflow: `pedro-omie-payload-validator`.

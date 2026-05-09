@@ -1,0 +1,20 @@
+{
+  "id": "pedro-omie-payload-validator",
+  "name": "Pedro Omie Payload Validator",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Validar e gerar templates de payload para escrita Omie sem chamar Omie, sem usar credenciais e sem registrar aprovação.",
+  "mode": "read-only validation no Omie call",
+  "entry_criteria": ["Pedro/Omie intake criado", "payload real ainda ausente ou precisa validação"],
+  "preflight": ["gerar templates por operação", "validar campos obrigatórios", "calcular hash do payload", "manter execução bloqueada"],
+  "allowed_actions": ["gerar template", "validar JSON", "calcular SHA256", "reportar achados"],
+  "blocked_actions": ["chamar Omie", "usar credenciais", "registrar approval", "executar escrita financeira"],
+  "outputs": ["pedro-omie-payload-validator-latest.json", "pedro-omie-payload-templates.json"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/pedro_omie_payload_validator.py"],
+  "severity_rules": {
+    "HIGH": ["operation_type inválido", "campo obrigatório ausente", "idempotency inválida"],
+    "MEDIUM": ["business_reason ausente"],
+    "LOW": ["template pendente de preenchimento"],
+    "OK": ["payload validado sem execução"]
+  }
+}

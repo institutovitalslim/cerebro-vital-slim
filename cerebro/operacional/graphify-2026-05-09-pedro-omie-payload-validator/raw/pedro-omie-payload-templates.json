@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "generated_at": 1778365207,
+  "mode": "pedro_omie_payload_templates_no_execution",
+  "templates": {
+    "emitir_boleto": {
+      "operation_type": "emitir_boleto",
+      "business_reason": "<motivo operacional>",
+      "idempotency_key": "ivs-emitir_boleto-YYYYMMDD-001",
+      "payload_json": {
+        "cliente_id": "<preencher>",
+        "valor": 0,
+        "vencimento": "<preencher>",
+        "descricao": "<preencher>"
+      }
+    },
+    "baixar_titulo": {
+      "operation_type": "baixar_titulo",
+      "business_reason": "<motivo operacional>",
+      "idempotency_key": "ivs-baixar_titulo-YYYYMMDD-001",
+      "payload_json": {
+        "titulo_id": "<preencher>",
+        "data_baixa": "<preencher>",
+        "valor_baixado": 0,
+        "forma_pagamento": "<preencher>"
+      }
+    },
+    "criar_conta_receber": {
+      "operation_type": "criar_conta_receber",
+      "business_reason": "<motivo operacional>",
+      "idempotency_key": "ivs-criar_conta_receber-YYYYMMDD-001",
+      "payload_json": {
+        "cliente_id": "<preencher>",
+        "valor": 0,
+        "vencimento": "<preencher>",
+        "categoria": "<preencher>",
+        "descricao": "<preencher>"
+      }
+    },
+    "atualizar_cliente": {
+      "operation_type": "atualizar_cliente",
+      "business_reason": "<motivo operacional>",
+      "idempotency_key": "ivs-atualizar_cliente-YYYYMMDD-001",
+      "payload_json": {
+        "cliente_id": "<preencher>",
+        "campos": {
+          "campo": "valor"
+        }
+      }
+    }
+  },
+  "blocked_by_design": [
+    "no Omie call",
+    "no credential use",
+    "no approval write"
+  ]
+}
