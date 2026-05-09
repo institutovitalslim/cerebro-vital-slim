@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "packet": {
+    "generated_at": 1778358996,
+    "mode": "handoff_packet_no_delivery",
+    "from": "maria-gerente",
+    "to": "agente-reels-intel",
+    "subject": "Teste dispatcher",
+    "context": "Contexto interno",
+    "next_action": "Responder com plano",
+    "sensitivity": "marketing",
+    "deadline": null,
+    "evidence": [],
+    "guardrails": [
+      "não expor ferramentas/bastidores para lead/paciente",
+      "não prometer resultado clínico",
+      "não alterar produção sem autorização",
+      "usar RC-25/graphify para mudança canônica"
+    ],
+    "findings": [],
+    "ok": true
+  },
+  "dispatch": "dry_run_no_delivery",
+  "generated_at": 1778358996
+}

@@ -1,0 +1,15 @@
+{
+  "id": "action-gate-approval",
+  "name": "Action Gate + Approval Ledger IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Registrar aprovações explícitas e avaliar ações sensíveis combinando policy gate e approval ledger, sem executar a ação.",
+  "mode": "approval ledger and no-execution gate",
+  "entry_criteria": ["Ação sensível write_with_approval", "Pausa/despausa Clara", "Escrita Omie", "Publicação externa", "Envio externo controlado"],
+  "preflight": ["Registrar aprovação no approval_ledger.py", "Executar action_gate.py", "Registrar resultado no Workflow Runner", "Só então executar ação por ferramenta específica se autorizado e apropriado"],
+  "allowed_actions": ["registrar aprovação", "verificar aprovação vigente", "avaliar ação", "bloquear sem aprovação"],
+  "blocked_actions": ["executar a ação sensível", "criar aprovação sem evidência", "ignorar TTL", "substituir autorização do Tiaro por inferência"],
+  "outputs": ["approval id", "gate decision", "evidência", "bloqueio ou liberação política"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/approval_ledger.py", "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/action_gate.py"],
+  "severity_rules": {"HIGH": ["ação forbidden", "write sem aprovação"], "MEDIUM": ["aprovação sem evidência robusta"], "LOW": ["aprovação expirada"], "OK": ["aprovação vigente e policy ok"]}
+}

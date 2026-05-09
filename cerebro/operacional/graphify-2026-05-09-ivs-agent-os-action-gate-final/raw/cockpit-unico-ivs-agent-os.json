@@ -1,0 +1,1822 @@
+{
+  "ok": true,
+  "status": "OK",
+  "generated_at": 1778359003,
+  "mode": "unified_read_only_agent_os_cockpit",
+  "sources": {
+    "workflow_registry": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "workflows": 15,
+        "findings": 0
+      }
+    },
+    "capability_registry": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "agents": 6,
+        "core_agents": 6,
+        "workflows": 15,
+        "findings": 0
+      }
+    },
+    "observability_events": {
+      "ok": true,
+      "error": null,
+      "totals": {
+        "events": 42,
+        "OK": 42
+      }
+    },
+    "workflow_runs": {
+      "error": null,
+      "totals": {
+        "runs": 5
+      }
+    },
+    "permission_matrix": {
+      "version": "2026-05-09",
+      "agents": 6
+    }
+  },
+  "workflows": [
+    {
+      "id": "action-gate-approval",
+      "name": "Action Gate + Approval Ledger IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "approval ledger and no-execution gate",
+      "scope": "Registrar aprovações explícitas e avaliar ações sensíveis combinando policy gate e approval ledger, sem executar a ação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/action-gate-approval.json",
+      "entry_count": 5,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "ação forbidden",
+          "write sem aprovação"
+        ],
+        "MEDIUM": [
+          "aprovação sem evidência robusta"
+        ],
+        "LOW": [
+          "aprovação expirada"
+        ],
+        "OK": [
+          "aprovação vigente e policy ok"
+        ]
+      }
+    },
+    {
+      "id": "agent-layer-audit",
+      "name": "IVS Agent Operating Layer Audit",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only consolidated audit",
+      "scope": "Consolidar Clara/Z-API, Pré-consulta e Marketing OS/João em uma visão executiva única.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-layer-audit.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "qualquer área com HIGH",
+          "monitor crítico falhou"
+        ],
+        "MEDIUM": [
+          "qualquer área com MEDIUM sem HIGH"
+        ],
+        "LOW": [
+          "somente achados LOW"
+        ],
+        "OK": [
+          "sem achados"
+        ]
+      }
+    },
+    {
+      "id": "agent-learning-autonomy",
+      "name": "Autonomia Evolutiva dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria + agentes IVS + conselhos",
+      "mode": "autonomous learning with guarded promotion; no external content becomes rule without validation",
+      "scope": "Garantir que Maria, Clara, João, Pedro e agentes do conselho evoluam continuamente com aprendizado externo de pesquisas, perfis de Instagram/X e canais do YouTube, sempre com governança IVS.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-learning-autonomy.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 5,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "aprendizado externo virou regra sensível sem validação",
+          "conteúdo clínico/financeiro aplicado como prescrição/decisão"
+        ],
+        "MEDIUM": [
+          "fonte falhou repetidamente",
+          "aprendizado sem métrica",
+          "conteúdo com tom incompatível com IVS"
+        ],
+        "LOW": [
+          "brief gerado e aguardando teste"
+        ],
+        "OK": [
+          "aprendizado classificado com fonte, aplicação, métrica e risco"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-cockpit",
+      "name": "Cockpit Único IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only unified cockpit",
+      "scope": "Consolidar capacidades, workflows, runs, eventos e matriz de permissões em uma visão executiva única.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-cockpit.json",
+      "entry_count": 3,
+      "preflight_count": 6,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "fonte crítica com HIGH",
+          "erro que impeça visão operacional"
+        ],
+        "MEDIUM": [
+          "erro parcial de coleta",
+          "achado MEDIUM em permissões/capacidades"
+        ],
+        "LOW": [
+          "achados informativos",
+          "documentação incompleta"
+        ],
+        "OK": [
+          "todas as fontes coletadas sem achados relevantes"
+        ]
+      }
+    },
+    {
+      "id": "agent-os-daily-audit",
+      "name": "Auditoria Diária IVS Agent OS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only daily audit",
+      "scope": "Executar auditoria consolidada diária do Agent OS IVS, gerar cockpit único e detectar mudanças de estado.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/agent-os-daily-audit.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "cockpit status HIGH",
+          "erro crítico de coleta"
+        ],
+        "MEDIUM": [
+          "cockpit status MEDIUM",
+          "mudança relevante em fonte crítica"
+        ],
+        "LOW": [
+          "status LOW por documentação/achado informativo"
+        ],
+        "OK": [
+          "cockpit OK e sem mudança relevante"
+        ]
+      }
+    },
+    {
+      "id": "capability-governance",
+      "name": "Governança de Capacidades dos Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only capability registry",
+      "scope": "Inventariar agentes, skills, subagentes, workflows e riscos operacionais antes de ampliar autonomia ou corrigir bloqueios.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/capability-governance.json",
+      "entry_count": 3,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "skill externa crítica em Clara sem guardrail",
+          "configuração inválida que exponha paciente/lead"
+        ],
+        "MEDIUM": [
+          "skill esperada ausente",
+          "handoff financeiro/clínico sem dono"
+        ],
+        "LOW": [
+          "skill sem SKILL.md",
+          "documentação incompleta"
+        ],
+        "OK": [
+          "inventário íntegro e sem achados relevantes"
+        ]
+      }
+    },
+    {
+      "id": "cron-governance",
+      "name": "Cron Governance IVS",
+      "owner": "Maria",
+      "executor": "Maria + IVS Agent Operating Layer",
+      "mode": "state-changing only for cron lifecycle after operational review; no patient contact and no production mutation beyond cron removal/update",
+      "scope": "Governar crons ativos: inventariar, classificar por workflow, cancelar redundâncias e manter apenas rotinas com função operacional clara.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/cron-governance.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "cron ativo executa ação sensível sem guardrail",
+          "cron de paciente removido sem evidência"
+        ],
+        "MEDIUM": [
+          "cron duplicado",
+          "cron com falhas recorrentes",
+          "cron sem workflow claro"
+        ],
+        "LOW": [
+          "cron rastreado e classificado"
+        ],
+        "OK": [
+          "inventário validado sem pendências"
+        ]
+      }
+    },
+    {
+      "id": "followup-seguro",
+      "name": "Follow-up Seguro Clara/Z-API",
+      "owner": "Maria",
+      "executor": "Clara-WhatsApp",
+      "mode": "state-changing only with explicit Tiaro authorization for real sends",
+      "scope": "Envio seguro de follow-up para leads pelo Z-API, com bloqueio conservador para pacientes conhecidos e do_not_reply.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/followup-seguro.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "tentativa de envio para patient_do_not_reply",
+          "envio real sem autorização explícita"
+        ],
+        "MEDIUM": [
+          "lead ativo bloqueado como patient-like",
+          "override manual ativo"
+        ],
+        "LOW": [
+          "dry_run aprovado sem envio real"
+        ]
+      }
+    },
+    {
+      "id": "handoff-operacional",
+      "name": "Handoff Operacional Seguro entre Agentes IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "handoff packet no-delivery",
+      "scope": "Transferir contexto e próxima ação entre Maria, Clara, João, Pedro e conselhos sem vazamento de bastidores e sem perda de guardrails.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/handoff-operacional.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "Clara recebendo paciente/clínico para resposta direta",
+          "prescrição/diagnóstico no pacote"
+        ],
+        "MEDIUM": [
+          "financeiro indo para agente não financeiro",
+          "agente desconhecido"
+        ],
+        "LOW": [
+          "evidência ausente",
+          "deadline ausente"
+        ],
+        "OK": [
+          "handoff classificado e seguro"
+        ]
+      }
+    },
+    {
+      "id": "marketing-os",
+      "name": "Marketing OS João",
+      "owner": "Maria",
+      "executor": "João",
+      "mode": "read-only monitor; Maria corrige execução, João executa marketing",
+      "scope": "Monitorar continuidade operacional do João em marketing, reels, HTMLs, backlog e regras canônicas.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/marketing-os.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "regra canônica ausente",
+          "falha estrutural de entrega crítica"
+        ],
+        "MEDIUM": [
+          "HTML não enviado no outbound",
+          "marcador de sessão travada",
+          "erro de mídia"
+        ],
+        "LOW": [
+          "backlog ativo monitorado"
+        ]
+      }
+    },
+    {
+      "id": "observability-events",
+      "name": "Observabilidade de Eventos Operacionais IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only redacted events",
+      "scope": "Normalizar eventos de agentes, Z-API, workflows e entregáveis em feed seguro para diagnóstico e cockpit.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/observability-events.json",
+      "entry_count": 4,
+      "preflight_count": 4,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "pausa global Clara",
+          "auto-pause",
+          "evento crítico de produção"
+        ],
+        "MEDIUM": [
+          "bloqueio de lead",
+          "falha de script",
+          "erro recorrente"
+        ],
+        "LOW": [
+          "documentação incompleta",
+          "evento informativo"
+        ],
+        "OK": [
+          "feed sem achados críticos"
+        ]
+      }
+    },
+    {
+      "id": "permission-governance",
+      "name": "Matriz de Permissões e Policy Gate IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "read-only permission evaluation",
+      "scope": "Avaliar se uma ação de agente é read-only, dry-run, write-with-approval ou forbidden antes da execução operacional.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/permission-governance.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "ação forbidden solicitada",
+          "pausar Clara sem aprovação explícita",
+          "risco clínico/paciente fora do escopo"
+        ],
+        "MEDIUM": [
+          "write_with_approval sem evidência",
+          "sensibilidade não classificada"
+        ],
+        "LOW": [
+          "ação dry-run sem evidência complementar"
+        ],
+        "OK": [
+          "ação read-only/dry-run segura ou escrita com aprovação registrada"
+        ]
+      }
+    },
+    {
+      "id": "preconsulta-safety",
+      "name": "Pré-consulta Safety",
+      "owner": "Maria",
+      "executor": "Sistema de pré-consulta",
+      "mode": "read-only monitor by default",
+      "scope": "Garantir que submissões e drafts da pré-consulta não sejam perdidos e que ninguém peça novo preenchimento sem validação.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/preconsulta-safety.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "submissão sem markdown",
+          "JSON inválido",
+          "app indisponível"
+        ],
+        "MEDIUM": [
+          "draft antigo",
+          "registro incompleto",
+          "fallback Telegram pendente"
+        ],
+        "LOW": [
+          "baseline sem mudança"
+        ]
+      }
+    },
+    {
+      "id": "sequencia-operacional",
+      "name": "Sequência Operacional Tiaro → Maria",
+      "owner": "Maria",
+      "executor": "Maria + workflows do IVS Agent Operating Layer",
+      "mode": "orquestração operacional com guardrails; ações sensíveis exigem autorização explícita",
+      "scope": "Quando Tiaro enviar uma sequência de atividades, Maria deve usar as skills/workflows novos do IVS Agent Operating Layer para organizar, validar, executar e reportar a sequência.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/sequencia-operacional.json",
+      "entry_count": 3,
+      "preflight_count": 5,
+      "blocked_count": 5,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "sequência contém ação sensível sem autorização explícita",
+          "risco de contato indevido com paciente/lead",
+          "mudança de produção sem guardrail"
+        ],
+        "MEDIUM": [
+          "etapa sem workflow claro",
+          "dependência de João/Clara travada",
+          "evidência insuficiente"
+        ],
+        "LOW": [
+          "sequência read-only com checks concluídos"
+        ],
+        "OK": [
+          "sequência executada com workflows mapeados e sem bloqueios"
+        ]
+      }
+    },
+    {
+      "id": "workflow-runner",
+      "name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "scope": "Registrar execução de workflows IVS com estado, evidências, achados, bloqueios e eventos redigidos.",
+      "file": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/workflows/workflow-runner.json",
+      "entry_count": 4,
+      "preflight_count": 5,
+      "blocked_count": 4,
+      "issues": [],
+      "severity_rules": {
+        "HIGH": [
+          "run failed",
+          "run blocked em ação crítica",
+          "tentativa de usar runner para autorizar ação proibida"
+        ],
+        "MEDIUM": [
+          "run sem atualização por período prolongado",
+          "evidência ausente em mudança sensível"
+        ],
+        "LOW": [
+          "run informativo",
+          "documentação complementar pendente"
+        ],
+        "OK": [
+          "run concluído com evidências"
+        ]
+      }
+    }
+  ],
+  "agents": [
+    {
+      "id": "maria-gerente",
+      "name": "Maria",
+      "is_core": true,
+      "skills_count": 6,
+      "local_skills_count": 6,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [
+        "maria-gerente",
+        "conselho-growth-vital-slim",
+        "llm-council",
+        "clara-whatsapp",
+        "agente-reels-intel"
+      ],
+      "risk_hints": [
+        "production_coordination",
+        "pausing_guardrails",
+        "rc25_required"
+      ]
+    },
+    {
+      "id": "agente-reels-intel",
+      "name": "João",
+      "is_core": true,
+      "skills_count": 45,
+      "local_skills_count": 35,
+      "builtin_or_legacy_count": 10,
+      "skills": [
+        {
+          "name": "graphify",
+          "path": "/root/.openclaw/skills/graphify",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "any input (code, docs, papers, images) → knowledge graph → clustered communities → HTML + JSON + audit report"
+        },
+        {
+          "name": "social-content-vitalslim",
+          "path": "/root/.openclaw/skills/social-content-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser criar, planejar ou otimizar conteudo para Instagram, WhatsApp Status, Stories, Reels ou carrosseis. Use tambem para 'post do Instagram', 'conteudo para stories', 'carrossel', 'reels', 'calendario de conteudo', 'o que postar', 'ideias de posts', 'engajamento no Instagram'.\""
+        },
+        {
+          "name": "content-strategy-vitalslim",
+          "path": "/root/.openclaw/skills/content-strategy-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser planejar estrategia de conteudo, decidir o que criar, montar calendario editorial, definir pilares de conteudo, ou escolher temas. Use tambem para 'plano de conteudo', 'calendario', 'o que postar este mes', 'temas para Instagram', 'estrategia de marketing de conteudo'.\""
+        },
+        {
+          "name": "copywriting-vitalslim",
+          "path": "/root/.openclaw/skills/copywriting-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario pedir para escrever, revisar ou melhorar copy para qualquer canal — posts Instagram, carrosseis, landing pages, anuncios, emails, scripts de atendimento. Tambem use quando o usuario disser 'escreve copy', 'melhora este texto', 'headline para', 'CTA', 'proposta de valor', 'texto da Clara', ou qualquer conteudo persuasivo para o Instituto Vital Slim.\""
+        },
+        {
+          "name": "customer-research-vitalslim",
+          "path": "/root/.openclaw/skills/customer-research-vitalslim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser entender melhor os pacientes, analisar depoimentos, pesquisar objecoes, mapear a jornada do paciente, ou extrair insights de reviews Google Maps. Use tambem para 'voice of customer', 'por que pacientes desistem', 'o que pacientes mais valorizam', 'objecoes de venda', 'linguagem dos pacientes'.\""
+        },
+        {
+          "name": "medical-content",
+          "path": "/root/.openclaw/skills/medical-content",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quando o usuario quiser criar, revisar ou verificar conteudo medico para compliance, adicionar disclaimers, referenciar estudos, ou garantir que copy respeite o Codigo de Etica Medica. Use tambem para 'disclaimer medico', 'referencia cientifica', 'compliance', 'etica medica', 'posso dizer isso', 'isso e permitido', 'CFM', 'conselho de medicina'.\""
+        },
+        {
+          "name": "tweet-carrossel",
+          "path": "/root/.openclaw/workspace/skills/tweet-carrossel",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "video-frames",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "summarize",
+          "path": "/root/.openclaw/skills/summarize",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Summarize URLs or files with a local CLI that uses OpenAI for abstractive summaries (fallback extractive) if OPENAI_API_KEY is set."
+        },
+        {
+          "name": "gog",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "notion-api",
+          "path": "/root/.openclaw/workspace/skills/notion-api",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "notion",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "stitch-mcp-operacao",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-gamecoach",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-qa",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-use",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "browser-sequential-thinking",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "web-search",
+          "path": null,
+          "has_skill_md": false,
+          "kind": "builtin_or_legacy_external",
+          "description": "Built-in, external, or legacy alias; not governed as local IVS skill."
+        },
+        {
+          "name": "deep-research",
+          "path": "/root/.openclaw/workspace/skills/deep-research",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "repo-reverse-ivs",
+          "path": "/root/.openclaw/workspace/skills/repo-reverse-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Analisa repositórios públicos sem instalar/clonar tudo e transforma em spec, prompt e plano para criar uma versão própria segura para o IVS."
+        },
+        {
+          "name": "reverse-engineering",
+          "path": "/root/.openclaw/workspace/skills/reverse-engineering",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Reverse engineer binaries, APIs, protocols, and workflows with evidence ladders, interface maps, and falsifiable hypotheses."
+        },
+        {
+          "name": "software-architect",
+          "path": "/root/.openclaw/workspace/skills/software-architect",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Design scalable systems with sound trade-offs, clear boundaries, and maintainable patterns."
+        },
+        {
+          "name": "software-engineer",
+          "path": "/root/.openclaw/workspace/skills/software-engineer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Write production-ready code with clean architecture, proper error handling, and pragmatic trade-offs between shipping fast and building right."
+        },
+        {
+          "name": "quality-driven-dev",
+          "path": "/root/.openclaw/workspace/skills/quality-driven-dev",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Quality-driven development with automatic TDD/DDD methodology selection and TRUST 5 quality framework. Use when building features, refactoring code, fixing bugs, or any coding task that needs structured quality assurance.\""
+        },
+        {
+          "name": "quality-gates",
+          "path": "/root/.openclaw/workspace/skills/quality-gates",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Quality checkpoints at every development stage — pre-commit through post-deploy — with configuration examples, threshold tables, bypass protocols, and CI/CD integration. Use when setting up quality automation, configuring CI pipelines, establishing coverage thresholds, or defining deployment requirements."
+        },
+        {
+          "name": "validacao-qa",
+          "path": "/root/.openclaw/workspace/skills/validacao-qa",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": ">"
+        },
+        {
+          "name": "openclaw-marketing-os",
+          "path": "/root/.openclaw/workspace/skills/openclaw-marketing-os",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Run, audit, or improve an OpenClaw/ClawLite-style multi-agent marketing operating system. Use when the task is to operate or package a full marketing engine across Hunter research intel, marketing-assets synchronization, JK content packaging, Elon social publishing, Tony blog publishing, Jenny lifecycle/activation, Peter blog QA, Karen truth-gate QA, Mission Control state management, and same-day delivery/receipt discipline. Also use when open-sourcing or documenting the system as a reusable growth operating system for AI-agent teams."
+        },
+        {
+          "name": "marketing-demand-acquisition",
+          "path": "/root/.openclaw/workspace/skills/marketing-demand-acquisition",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Creates demand generation campaigns, optimizes paid ad spend across LinkedIn, Google, and Meta, develops SEO strategies, and structures partnership programs for Series A+ startups scaling internationally. Use when planning marketing strategy, growth marketing, advertising campaigns, PPC optimization, lead generation, pipeline generation, or startup marketing budgets. Covers multi-channel acquisition (Google Ads, LinkedIn Ads, Meta Ads), CAC analysis, MQL/SQL workflows, attribution modeling, technical SEO, and co-marketing partnerships for hybrid PLG/Sales-Led motions in EU/US/Canada markets."
+        },
+        {
+          "name": "marketing-analytics",
+          "path": "/root/.openclaw/workspace/skills/marketing-analytics",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Analyze marketing campaign data to generate performance reports and optimization recommendations\""
+        },
+        {
+          "name": "product-manager-toolkit",
+          "path": "/root/.openclaw/workspace/skills/product-manager-toolkit",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market strategies. Use for feature prioritization, user research synthesis, requirement documentation, and product strategy development."
+        },
+        {
+          "name": "saas-decomposer",
+          "path": "/root/.openclaw/workspace/skills/saas-decomposer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Web SaaS service decomposition and AI internalization development plan generation. Analyze existing SaaS to identify functions replaceable by AI agents and establish skill-based internalization roadmap. Triggered by 'SaaS analysis', 'service decomposition', 'internalization', 'decompose', 'SaaS replacement', 'build this service with AI', etc.\""
+        },
+        {
+          "name": "design-premium-ivs",
+          "path": "/root/.openclaw/workspace/skills/design-premium-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Use para criar, revisar ou polir interfaces HTML, landing pages, cockpit, pré-consulta, dashboards e apresentações executivas do Instituto Vital Slim com padrão premium, evitando frontend genérico de IA. Orquestra design-impeccable, Taste Skill seletivo e motion sutil."
+        },
+        {
+          "name": "taste-skill",
+          "path": "/root/.openclaw/workspace/skills/taste-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Senior UI/UX Engineer. Architect digital interfaces overriding default LLM biases. Enforces metric-based rules, strict component architecture, CSS hardware acceleration, and balanced design engineering."
+        },
+        {
+          "name": "gpt-tasteskill",
+          "path": "/root/.openclaw/workspace/skills/gpt-tasteskill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing."
+        },
+        {
+          "name": "redesign-skill",
+          "path": "/root/.openclaw/workspace/skills/redesign-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS."
+        },
+        {
+          "name": "output-skill",
+          "path": "/root/.openclaw/workspace/skills/output-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output."
+        },
+        {
+          "name": "image-to-code-skill",
+          "path": "/root/.openclaw/workspace/skills/image-to-code-skill",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In Codex, it must prefer large, readable, section-specific images instead of tiny compressed boards, generate fresh standalone images for sections or detail views instead of cropping old ones, avoid lazy under-generation, avoid cards-inside-cards-inside-cards UI, and keep the hero clean, spacious, readable, and visible on a small laptop."
+        },
+        {
+          "name": "design-impeccable",
+          "path": "/root/.openclaw/workspace/skills/design-impeccable",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "|"
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [
+        "conselho-growth-vital-slim",
+        "llm-council"
+      ],
+      "risk_hints": [
+        "public_marketing",
+        "brand_claims",
+        "clinical_promise_risk"
+      ]
+    },
+    {
+      "id": "clara-whatsapp",
+      "name": "Clara",
+      "is_core": true,
+      "skills_count": 6,
+      "local_skills_count": 6,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "conselho-growth-vital-slim",
+          "path": "/root/.openclaw/workspace/skills/conselho-growth-vital-slim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Conselho estratégico de growth do Instituto Vital Slim. Acione quando Tiaro pedir conselho, board, visão dos especialistas, guerra, validação, decisão de crescimento, oferta, vendas, marketing, posicionamento, funil, operação, experiência do paciente ou expansão. Todos os especialistas dão uma visão; no final, o bilionário/especialista responsável pela área principal decide o direcionamento, e a equipe IVS fica como dona operacional da execução.\""
+        },
+        {
+          "name": "llm-council",
+          "path": "/root/.openclaw/workspace/skills/llm-council",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Run any question, idea, or decision through a council of 5 AI advisors who independently analyze it, peer-review each other anonymously, and synthesize a final verdict. Based on Karpathy's LLM Council methodology. MANDATORY TRIGGERS: 'council this', 'run the council', 'war room this', 'pressure-test this', 'stress-test this', 'debate this'. STRONG TRIGGERS (use when combined with a real decision or tradeoff): 'should I X or Y', 'which option', 'what would you do', 'is this the right move', 'validate this', 'get multiple perspectives', 'I can't decide', 'I'm torn between'. Do NOT trigger on simple yes/no questions, factual lookups, or casual 'should I' without a meaningful tradeoff (e.g. 'should I use markdown' is not a council question). DO trigger when the user presents a genuine decision with stakes, multiple options, and context that suggests they want it pressure-tested from multiple angles.\""
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        }
+      ],
+      "subagents": [
+        "conselho-growth-vital-slim",
+        "llm-council"
+      ],
+      "risk_hints": [
+        "whatsapp_real",
+        "lead_patient_boundary",
+        "patient_safety"
+      ]
+    },
+    {
+      "id": "pedro-controller-ivs",
+      "name": "Pedro",
+      "is_core": true,
+      "skills_count": 6,
+      "local_skills_count": 6,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [],
+      "risk_hints": [
+        "financial_write_gate",
+        "omie",
+        "approval_required"
+      ]
+    },
+    {
+      "id": "conselho-growth-vital-slim",
+      "name": "Conselho Growth Vital Slim",
+      "is_core": true,
+      "skills_count": 8,
+      "local_skills_count": 8,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "conselho-growth-vital-slim",
+          "path": "/root/.openclaw/workspace/skills/conselho-growth-vital-slim",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Conselho estratégico de growth do Instituto Vital Slim. Acione quando Tiaro pedir conselho, board, visão dos especialistas, guerra, validação, decisão de crescimento, oferta, vendas, marketing, posicionamento, funil, operação, experiência do paciente ou expansão. Todos os especialistas dão uma visão; no final, o bilionário/especialista responsável pela área principal decide o direcionamento, e a equipe IVS fica como dona operacional da execução.\""
+        },
+        {
+          "name": "graphify",
+          "path": "/root/.openclaw/skills/graphify",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "any input (code, docs, papers, images) → knowledge graph → clustered communities → HTML + JSON + audit report"
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [],
+      "risk_hints": [
+        "internal_only",
+        "recommendation_not_execution"
+      ]
+    },
+    {
+      "id": "llm-council",
+      "name": "LLM Council",
+      "is_core": true,
+      "skills_count": 8,
+      "local_skills_count": 8,
+      "builtin_or_legacy_count": 0,
+      "skills": [
+        {
+          "name": "llm-council",
+          "path": "/root/.openclaw/workspace/skills/llm-council",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "\"Run any question, idea, or decision through a council of 5 AI advisors who independently analyze it, peer-review each other anonymously, and synthesize a final verdict. Based on Karpathy's LLM Council methodology. MANDATORY TRIGGERS: 'council this', 'run the council', 'war room this', 'pressure-test this', 'stress-test this', 'debate this'. STRONG TRIGGERS (use when combined with a real decision or tradeoff): 'should I X or Y', 'which option', 'what would you do', 'is this the right move', 'validate this', 'get multiple perspectives', 'I can't decide', 'I'm torn between'. Do NOT trigger on simple yes/no questions, factual lookups, or casual 'should I' without a meaningful tradeoff (e.g. 'should I use markdown' is not a council question). DO trigger when the user presents a genuine decision with stakes, multiple options, and context that suggests they want it pressure-tested from multiple angles.\""
+        },
+        {
+          "name": "graphify",
+          "path": "/root/.openclaw/skills/graphify",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "any input (code, docs, papers, images) → knowledge graph → clustered communities → HTML + JSON + audit report"
+        },
+        {
+          "name": "ivs-agent-operating-layer",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-operating-layer",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Camada operacional IVS-first inspirada em Agent OS: Hands, workflows, safety monitor e auditoria para Clara, João e Maria."
+        },
+        {
+          "name": "rapidapi-social-learning",
+          "path": "/root/.openclaw/workspace/skills/rapidapi-social-learning",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Coleta conteúdos públicos via RapidAPI de Instagram e X/Twitter para aprendizado operacional da Clara e João, sem expor chaves."
+        },
+        {
+          "name": "youtube-learning-ivs",
+          "path": "/root/.openclaw/workspace/skills/youtube-learning-ivs",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Busca e resume vídeos/canais do YouTube para aprendizado comercial da Clara, transformando conteúdo em scripts premium de WhatsApp."
+        },
+        {
+          "name": "ivs-agent-handoff-guard",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-handoff-guard",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Cria pacotes seguros de handoff entre Maria, Clara, João, Pedro e conselhos, com escopo, guardrails e próximo passo."
+        },
+        {
+          "name": "ivs-agent-capability-registry",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-capability-registry",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Inventário e auditoria IVS-first das capacidades dos agentes, skills, workflows e guardrails do OpenClaw."
+        },
+        {
+          "name": "ivs-agent-observability-events",
+          "path": "/root/.openclaw/workspace/skills/ivs-agent-observability-events",
+          "has_skill_md": true,
+          "kind": "local_skill",
+          "description": "Normaliza eventos operacionais de agentes IVS, Z-API, workflows e entregáveis em um feed/cockpit read-only com redaction."
+        }
+      ],
+      "subagents": [],
+      "risk_hints": [
+        "internal_only",
+        "recommendation_not_execution"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "ivr-20260509-203604-d3740234",
+      "workflow_id": "workflow-runner",
+      "workflow_name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "state": "started",
+      "started_at": 1778358964,
+      "updated_at": 1778358964,
+      "subject": "Implementação final estendida IVS Agent OS",
+      "context": "Tiaro pediu seguir com implementação até o final; adicionar approval ledger, action gate e handoff dispatcher seguro.",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "sensitivity": "tech",
+      "steps": [
+        {
+          "state": "started",
+          "at": 1778358964,
+          "message": "Workflow execution started"
+        }
+      ],
+      "evidence": [],
+      "findings": [],
+      "blocked_actions": [
+        "executar WhatsApp real",
+        "alterar produção diretamente",
+        "pausar/despausar Clara",
+        "substituir autorização explícita por registro de run"
+      ],
+      "allowed_actions": [
+        "registrar execução",
+        "registrar evidência",
+        "gerar feed de eventos",
+        "gerar cockpit de runs",
+        "apontar bloqueio e próximo passo"
+      ]
+    },
+    {
+      "run_id": "ivr-20260509-200733-44933237",
+      "workflow_id": "workflow-runner",
+      "workflow_name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "state": "completed",
+      "started_at": 1778357253,
+      "updated_at": 1778357322,
+      "subject": "Implementação final IVS Agent OS",
+      "context": "Tiaro autorizou seguir até implementação final sem parar, salvo necessidade real.",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "sensitivity": "tech",
+      "steps": [
+        {
+          "state": "started",
+          "at": 1778357253,
+          "message": "Workflow execution started"
+        },
+        {
+          "state": "in_progress",
+          "at": 1778357306,
+          "message": "Capability Registry normalizado: built-ins/aliases legados não contam como falha; findings zerados.",
+          "evidence": [
+            "/root/deliverables/ivs-agent-capability-registry-final.json"
+          ]
+        },
+        {
+          "state": "in_progress",
+          "at": 1778357306,
+          "message": "Auditoria diária Agent OS e cockpit final implementados; Workflow Registry 14/0; Cockpit OK.",
+          "evidence": [
+            "/root/deliverables/agent-os-daily-audit-latest.json"
+          ]
+        },
+        {
+          "state": "completed",
+          "at": 1778357322,
+          "message": "Implementação final concluída: capability registry limpo, auditoria diária, cockpit OK, cron configurado.",
+          "evidence": [
+            "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+            "/root/deliverables/workflow-registry-final-agent-os.json"
+          ]
+        }
+      ],
+      "evidence": [
+        "/root/deliverables/ivs-agent-capability-registry-final.json",
+        "/root/deliverables/agent-os-daily-audit-latest.json",
+        "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+        "/root/deliverables/workflow-registry-final-agent-os.json"
+      ],
+      "findings": [],
+      "blocked_actions": [
+        "executar WhatsApp real",
+        "alterar produção diretamente",
+        "pausar/despausar Clara",
+        "substituir autorização explícita por registro de run"
+      ],
+      "allowed_actions": [
+        "registrar execução",
+        "registrar evidência",
+        "gerar feed de eventos",
+        "gerar cockpit de runs",
+        "apontar bloqueio e próximo passo"
+      ],
+      "completed_at": 1778357322
+    },
+    {
+      "run_id": "ivr-20260509-200600-146402c3",
+      "workflow_id": "workflow-runner",
+      "workflow_name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "state": "completed",
+      "started_at": 1778357160,
+      "updated_at": 1778357196,
+      "subject": "Implementar Cockpit Único IVS Agent OS",
+      "context": "Próxima etapa: consolidar capabilities, workflows, runs, eventos e permissões em uma visão executiva única.",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "sensitivity": "tech",
+      "steps": [
+        {
+          "state": "started",
+          "at": 1778357160,
+          "message": "Workflow execution started"
+        },
+        {
+          "state": "in_progress",
+          "at": 1778357196,
+          "message": "Gerador de cockpit único e workflow agent-os-cockpit criados.",
+          "evidence": [
+            "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py"
+          ]
+        },
+        {
+          "state": "completed",
+          "at": 1778357196,
+          "message": "Cockpit único validado com HTML/JSON e Workflow Registry 13/0.",
+          "evidence": [
+            "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+            "/root/deliverables/workflow-registry-after-unified-cockpit.json"
+          ]
+        }
+      ],
+      "evidence": [
+        "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_agent_os_cockpit.py",
+        "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+        "/root/deliverables/workflow-registry-after-unified-cockpit.json"
+      ],
+      "findings": [],
+      "blocked_actions": [
+        "executar WhatsApp real",
+        "alterar produção diretamente",
+        "pausar/despausar Clara",
+        "substituir autorização explícita por registro de run"
+      ],
+      "allowed_actions": [
+        "registrar execução",
+        "registrar evidência",
+        "gerar feed de eventos",
+        "gerar cockpit de runs",
+        "apontar bloqueio e próximo passo"
+      ],
+      "completed_at": 1778357196
+    },
+    {
+      "run_id": "ivr-20260509-200254-b2be2607",
+      "workflow_id": "workflow-runner",
+      "workflow_name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "state": "completed",
+      "started_at": 1778356974,
+      "updated_at": 1778357008,
+      "subject": "Implementar Agent Permission Matrix + Policy Gate",
+      "context": "Próxima etapa após Workflow Runner: transformar governança em checagem objetiva read-only/dry-run/write-with-approval/forbidden.",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "sensitivity": "tech",
+      "steps": [
+        {
+          "state": "started",
+          "at": 1778356974,
+          "message": "Workflow execution started"
+        },
+        {
+          "state": "in_progress",
+          "at": 1778357008,
+          "message": "Matriz de permissões, policy gate e workflow permission-governance criados.",
+          "evidence": [
+            "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies/agent-permission-matrix.json"
+          ]
+        },
+        {
+          "state": "completed",
+          "at": 1778357008,
+          "message": "Policy gate validado em casos críticos: Clara lead/clínico, Maria pausa Clara, Pedro Omie write, João publicação externa.",
+          "evidence": [
+            "/root/deliverables/workflow-registry-after-permission-gate.json"
+          ]
+        }
+      ],
+      "evidence": [
+        "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/policies/agent-permission-matrix.json",
+        "/root/deliverables/workflow-registry-after-permission-gate.json"
+      ],
+      "findings": [],
+      "blocked_actions": [
+        "executar WhatsApp real",
+        "alterar produção diretamente",
+        "pausar/despausar Clara",
+        "substituir autorização explícita por registro de run"
+      ],
+      "allowed_actions": [
+        "registrar execução",
+        "registrar evidência",
+        "gerar feed de eventos",
+        "gerar cockpit de runs",
+        "apontar bloqueio e próximo passo"
+      ],
+      "completed_at": 1778357008
+    },
+    {
+      "run_id": "ivr-20260509-200150-f87571a2",
+      "workflow_id": "workflow-runner",
+      "workflow_name": "Workflow Runner + Event Store IVS",
+      "owner": "Maria",
+      "executor": "Maria",
+      "state": "completed",
+      "started_at": 1778356910,
+      "updated_at": 1778356911,
+      "subject": "Implementar Workflow Runner + Event Store",
+      "context": "Tiaro autorizou seguir com próxima camada Agent OS IVS.",
+      "mode": "stateful audit trail no-sensitive-actions",
+      "sensitivity": "tech",
+      "steps": [
+        {
+          "state": "started",
+          "at": 1778356910,
+          "message": "Workflow execution started"
+        },
+        {
+          "state": "in_progress",
+          "at": 1778356910,
+          "message": "Scripts workflow_runner.py e generate_workflow_runs_cockpit.py criados.",
+          "evidence": [
+            "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py"
+          ]
+        },
+        {
+          "state": "completed",
+          "at": 1778356911,
+          "message": "Runner validado com execução real e workflow registry OK.",
+          "evidence": [
+            "/root/deliverables/workflow-registry-after-runner.json"
+          ]
+        }
+      ],
+      "evidence": [
+        "/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/workflow_runner.py",
+        "/root/deliverables/workflow-registry-after-runner.json"
+      ],
+      "findings": [],
+      "blocked_actions": [
+        "executar WhatsApp real",
+        "alterar produção diretamente",
+        "pausar/despausar Clara",
+        "substituir autorização explícita por registro de run"
+      ],
+      "allowed_actions": [
+        "registrar execução",
+        "registrar evidência",
+        "gerar feed de eventos",
+        "gerar cockpit de runs",
+        "apontar bloqueio e próximo passo"
+      ],
+      "completed_at": 1778356911
+    }
+  ],
+  "events": [
+    {
+      "ts": 1778359003,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:14:14] ignored phone=264802014335194 reason=non_text_or_empty payload_keys=instanceId,lastSeen,phone,status,type"
+    },
+    {
+      "ts": 1778359003,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:14:34] ignored phone=264802014335194 reason=non_text_or_empty payload_keys=instanceId,lastSeen,phone,status,type"
+    },
+    {
+      "ts": 1778359003,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:14:50] ignored phone=264802014335194 reason=non_text_or_empty payload_keys=instanceId,lastSeen,phone,status,type"
+    },
+    {
+      "ts": 1778359003,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:27:13] admin_send phone=5571***96 status=200 preview='Oi, Cinthya! Tudo bem?\\n\\nEstou retomando seu atendimento por aqui. Vi que você chegou a agendar sua avaliação em abril, e' body={\"zaapId\":\"019E0CEBB31A7AB1A5C7C8DAF39AA0F1\",\"messageId\":\"3412730D30C88B9D1D79\",\"id\":\"3412730D30C88B9D1D79\"}"
+    },
+    {
+      "ts": 1778359003,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:27:18] ignored phone=5571***96 reason=from_api_outbound payload_keys=broadcast,chatLid,chatName,connectedPhone,forwarded,fromApi,fromMe,instanceId,isEdit,isGroup,isNewsletter,isStatusReply,messageId,momment,participantLid,phone,photo,senderName,senderPhoto,status,text,type,waitingMessage"
+    },
+    {
+      "ts": 1778359003,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:28:15] ignored phone=85143834341566 reason=from_me payload_keys=broadcast,chatLid,chatName,connectedPhone,forwarded,fromApi,fromMe,instanceId,isEdit,isGroup,isNewsletter,isStatusReply,messageId,momment,participantLid,phone,photo,senderName,senderPhoto,status,text,type,waitingMessage"
+    },
+    {
+      "ts": 1778359003,
+      "source": "clara-zapi",
+      "kind": "log",
+      "severity": "OK",
+      "message": "[2026-05-09 13:28:17] ignored phone=85143834341566 reason=from_me payload_keys=broadcast,chatLid,chatName,connectedPhone,document,forwarded,fromApi,fromMe,instanceId,isEdit,isGroup,isNewsletter,isStatusReply,messageExpirationSeconds,messageId,momment,participantLid,phone,photo,senderName,senderPhoto,status,type,waitingMessage"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Action Gate + Approval Ledger IVS",
+      "id": "action-gate-approval",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "IVS Agent Operating Layer Audit",
+      "id": "agent-layer-audit",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Autonomia Evolutiva dos Agentes IVS",
+      "id": "agent-learning-autonomy",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Cockpit Único IVS Agent OS",
+      "id": "agent-os-cockpit",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Auditoria Diária IVS Agent OS",
+      "id": "agent-os-daily-audit",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Governança de Capacidades dos Agentes IVS",
+      "id": "capability-governance",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Cron Governance IVS",
+      "id": "cron-governance",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Follow-up Seguro Clara/Z-API",
+      "id": "followup-seguro",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Handoff Operacional Seguro entre Agentes IVS",
+      "id": "handoff-operacional",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Marketing OS João",
+      "id": "marketing-os",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Observabilidade de Eventos Operacionais IVS",
+      "id": "observability-events",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Matriz de Permissões e Policy Gate IVS",
+      "id": "permission-governance",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Pré-consulta Safety",
+      "id": "preconsulta-safety",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Sequência Operacional Tiaro → Maria",
+      "id": "sequencia-operacional",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "workflow-registry",
+      "kind": "workflow",
+      "severity": "OK",
+      "message": "Workflow Runner + Event Store IVS",
+      "id": "workflow-runner",
+      "owner": "Maria"
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-unico-ivs-agent-os.after-action-gate.report.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.after-action-gate.report.json",
+      "mtime": 1778359003,
+      "size": 0
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "agent-os-daily-audit-latest.md",
+      "path": "/root/deliverables/agent-os-daily-audit-latest.md",
+      "mtime": 1778359003,
+      "size": 1153
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "agent-os-daily-audit-after-action-gate.json",
+      "path": "/root/deliverables/agent-os-daily-audit-after-action-gate.json",
+      "mtime": 1778359003,
+      "size": 1959
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-unico-ivs-agent-os.html",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+      "mtime": 1778359003,
+      "size": 12509
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-unico-ivs-agent-os.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.json",
+      "mtime": 1778359003,
+      "size": 73306
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "action-gate-test.json",
+      "path": "/root/deliverables/action-gate-test.json",
+      "mtime": 1778358996,
+      "size": 1137
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "approval-ledger-test.json",
+      "path": "/root/deliverables/approval-ledger-test.json",
+      "mtime": 1778358996,
+      "size": 311
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "handoff-dispatcher-test.json",
+      "path": "/root/deliverables/handoff-dispatcher-test.json",
+      "mtime": 1778358996,
+      "size": 693
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "workflow-registry-after-action-gate.json",
+      "path": "/root/deliverables/workflow-registry-after-action-gate.json",
+      "mtime": 1778358983,
+      "size": 15434
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-workflow-runs-ivs.html",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.html",
+      "mtime": 1778357322,
+      "size": 1323
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-workflow-runs-ivs.json",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.json",
+      "mtime": 1778357322,
+      "size": 8808
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "agent-os-daily-audit-latest.json",
+      "path": "/root/deliverables/agent-os-daily-audit-latest.json",
+      "mtime": 1778357299,
+      "size": 1016
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "workflow-registry-final-agent-os.json",
+      "path": "/root/deliverables/workflow-registry-final-agent-os.json",
+      "mtime": 1778357293,
+      "size": 14535
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "ivs-agent-capability-registry-final.json",
+      "path": "/root/deliverables/ivs-agent-capability-registry-final.json",
+      "mtime": 1778357277,
+      "size": 38305
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "cockpit-unico-ivs-agent-os.report.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.report.json",
+      "mtime": 1778357196,
+      "size": 60772
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "workflow-registry-after-unified-cockpit.json",
+      "path": "/root/deliverables/workflow-registry-after-unified-cockpit.json",
+      "mtime": 1778357189,
+      "size": 13601
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "perm_pedro_write_no.json",
+      "path": "/root/deliverables/perm_pedro_write_no.json",
+      "mtime": 1778357008,
+      "size": 226
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "perm_maria_pause_yes.json",
+      "path": "/root/deliverables/perm_maria_pause_yes.json",
+      "mtime": 1778357008,
+      "size": 362
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "perm_maria_pause_no.json",
+      "path": "/root/deliverables/perm_maria_pause_no.json",
+      "mtime": 1778357008,
+      "size": 312
+    },
+    {
+      "ts": 1778359003,
+      "source": "deliverables",
+      "kind": "file",
+      "severity": "OK",
+      "message": "perm_joao_publish_no.json",
+      "path": "/root/deliverables/perm_joao_publish_no.json",
+      "mtime": 1778357008,
+      "size": 242
+    }
+  ],
+  "permission_levels": {
+    "read_only": "Pode consultar, auditar, gerar relatório e recomendar; não altera produção nem envia mensagem externa.",
+    "dry_run": "Pode simular execução e validar payload; não envia mensagem real nem grava em sistemas externos.",
+    "write_with_approval": "Pode executar escrita/envio somente com autorização explícita do Tiaro/Maria e evidência registrada.",
+    "forbidden": "Bloqueado para o agente/escopo, mesmo com automação disponível; exige handoff ou decisão humana."
+  },
+  "global_rules": [
+    "Paciente, do_not_reply e patient_bridge_known bloqueiam WhatsApp externo salvo exceção explícita de lead autorizada.",
+    "Clara não diagnostica, não prescreve e não expõe ferramentas/bastidores para lead/paciente.",
+    "Pausa/despausa da Clara exige ordem explícita do Tiaro.",
+    "Financeiro com escrita exige aprovação e gate específico.",
+    "Mudança canônica exige RC-25/graphify."
+  ],
+  "errors": []
+}

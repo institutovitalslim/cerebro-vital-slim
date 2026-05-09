@@ -342,3 +342,18 @@ Saídas:
 - `/root/deliverables/agent-os-daily-audit-latest.md`
 
 Workflow: `agent-os-daily-audit`.
+
+## Action Gate + Approval Ledger
+
+Camada final de governança para ações sensíveis. Registra aprovação explícita e avalia a ação combinando Permission Gate + Approval Ledger. Não executa a ação.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/approval_ledger.py add \
+  --agent maria-gerente --action pause_clara \
+  --approved-by Tiaro --evidence "ordem explícita" --scope "manutenção" --ttl-minutes 60
+
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/action_gate.py \
+  --agent maria-gerente --action pause_clara --sensitivity pause_clara --approval-id APPROVAL_ID
+```
+
+Workflow: `action-gate-approval`.

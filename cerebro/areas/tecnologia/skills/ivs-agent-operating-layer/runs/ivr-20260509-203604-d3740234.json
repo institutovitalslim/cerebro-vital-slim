@@ -1,0 +1,67 @@
+{
+  "run_id": "ivr-20260509-203604-d3740234",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778358964,
+  "updated_at": 1778359003,
+  "subject": "Implementação final estendida IVS Agent OS",
+  "context": "Tiaro pediu seguir com implementação até o final; adicionar approval ledger, action gate e handoff dispatcher seguro.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778358964,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778359003,
+      "message": "Action Gate + Approval Ledger implementados e validados sem execução real.",
+      "evidence": [
+        "/root/deliverables/action-gate-test.json"
+      ]
+    },
+    {
+      "state": "in_progress",
+      "at": 1778359003,
+      "message": "Handoff Dispatcher Seguro implementado e validado em dry-run/no-delivery.",
+      "evidence": [
+        "/root/deliverables/handoff-dispatcher-test.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778359003,
+      "message": "Implementação final estendida concluída: 15 workflows/0 findings; cockpit OK.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-action-gate.json",
+        "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/action-gate-test.json",
+    "/root/deliverables/handoff-dispatcher-test.json",
+    "/root/deliverables/workflow-registry-after-action-gate.json",
+    "/root/deliverables/cockpit-unico-ivs-agent-os.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778359003
+}

@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "agent": "maria-gerente",
+  "action": "pause_clara",
+  "sensitivity": "pause_clara",
+  "permission": {
+    "ok": true,
+    "decision": "write_with_approval",
+    "requires_approval": true,
+    "approved": true,
+    "agent": "maria-gerente",
+    "action": "pause_clara",
+    "sensitivity": "pause_clara",
+    "evidence": [],
+    "findings": [
+      {
+        "severity": "MEDIUM",
+        "code": "approval_without_evidence"
+      }
+    ],
+    "generated_at": 1778358996,
+    "mode": "permission_evaluation_no_execution"
+  },
+  "approval": {
+    "ok": true,
+    "matches": [
+      {
+        "approval_id": "appr-5cfbc40b00ba",
+        "agent": "maria-gerente",
+        "action": "pause_clara",
+        "approved_by": "Tiaro",
+        "evidence": "teste de ledger sem execução real",
+        "scope": "validação action gate",
+        "created_at": 1778358996,
+        "expires_at": 1778359296,
+        "mode": "approval_record_no_execution"
+      }
+    ],
+    "checked_at": 1778358996
+  },
+  "generated_at": 1778358996,
+  "mode": "action_gate_evaluation_no_execution",
+  "final": "ALLOW_BY_POLICY_BUT_NO_EXECUTION"
+}
