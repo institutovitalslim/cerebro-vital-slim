@@ -1,0 +1,20 @@
+{
+  "id": "approval-queue-governance",
+  "name": "Fila de Aprovações IVS Agent OS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "scope": "Consolidar aprovações pendentes de ações sensíveis em console read-only, sem registrar aprovação nem executar ação.",
+  "mode": "read-only no-execution",
+  "entry_criteria": ["preflights sensíveis concluídos", "aprovações pendentes", "pedido de continuidade sem frase explícita"],
+  "preflight": ["ler artefatos de preflight", "extrair frases exigidas", "confirmar execution_performed=false", "gerar HTML/JSON"],
+  "allowed_actions": ["gerar fila", "reportar pendências", "apontar frases exigidas"],
+  "blocked_actions": ["registrar approval", "ativar Clara enforcement", "chamar Omie", "exportar backup"],
+  "outputs": ["approval-queue-ivs-agent-os.json", "approval-queue-ivs-agent-os.html"],
+  "evidence": ["/root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_approval_queue.py"],
+  "severity_rules": {
+    "HIGH": ["approval criado pelo console", "ação sensível executada"],
+    "MEDIUM": ["preflight ausente"],
+    "LOW": ["pendência aguardando Tiaro"],
+    "OK": ["fila read-only gerada"]
+  }
+}

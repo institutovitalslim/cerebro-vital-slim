@@ -531,3 +531,13 @@ python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/pedro
 ```
 
 Workflow: `pedro-omie-guarded-write-preflight`.
+
+## Fila de Aprovações IVS Agent OS
+
+Console read-only que consolida aprovações pendentes e frases exigidas. Não registra aprovação e não executa ação sensível.
+
+```bash
+python3 /root/.openclaw/workspace/skills/ivs-agent-operating-layer/scripts/generate_approval_queue.py --json
+```
+
+Workflow: `approval-queue-governance`.

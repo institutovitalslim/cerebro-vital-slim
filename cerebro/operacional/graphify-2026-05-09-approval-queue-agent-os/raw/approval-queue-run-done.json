@@ -1,0 +1,58 @@
+{
+  "run_id": "ivr-20260509-212630-5df2c55b",
+  "workflow_id": "workflow-runner",
+  "workflow_name": "Workflow Runner + Event Store IVS",
+  "owner": "Maria",
+  "executor": "Maria",
+  "state": "completed",
+  "started_at": 1778361990,
+  "updated_at": 1778362037,
+  "subject": "Approval Queue IVS Agent OS",
+  "context": "Tiaro disse pode seguir, sem frases explícitas para Clara Phase 2 ou Pedro/Omie write. Implementar fila/console read-only de aprovações pendentes para governar próximos desbloqueios.",
+  "mode": "stateful audit trail no-sensitive-actions",
+  "sensitivity": "tech",
+  "steps": [
+    {
+      "state": "started",
+      "at": 1778361990,
+      "message": "Workflow execution started"
+    },
+    {
+      "state": "in_progress",
+      "at": 1778362037,
+      "message": "Fila de aprovações read-only implementada: 3 pendências, 0 execuções.",
+      "evidence": [
+        "/root/deliverables/approval-queue-ivs-agent-os.json"
+      ]
+    },
+    {
+      "state": "completed",
+      "at": 1778362037,
+      "message": "Approval Queue concluída: 38 workflows/0 findings; CI 15 checks OK; readiness READY 100/100.",
+      "evidence": [
+        "/root/deliverables/workflow-registry-after-approval-queue.json",
+        "/root/deliverables/agent-os-ci-after-approval-queue.json"
+      ]
+    }
+  ],
+  "evidence": [
+    "/root/deliverables/approval-queue-ivs-agent-os.json",
+    "/root/deliverables/workflow-registry-after-approval-queue.json",
+    "/root/deliverables/agent-os-ci-after-approval-queue.json"
+  ],
+  "findings": [],
+  "blocked_actions": [
+    "executar WhatsApp real",
+    "alterar produção diretamente",
+    "pausar/despausar Clara",
+    "substituir autorização explícita por registro de run"
+  ],
+  "allowed_actions": [
+    "registrar execução",
+    "registrar evidência",
+    "gerar feed de eventos",
+    "gerar cockpit de runs",
+    "apontar bloqueio e próximo passo"
+  ],
+  "completed_at": 1778362037
+}
