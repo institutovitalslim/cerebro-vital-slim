@@ -1,0 +1,221 @@
+{
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara",
+      "type": "agent",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "maquina_agendamento",
+      "label": "Máquina de agendamento",
+      "type": "capability",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "qa_diario_conversao_2026_05_12",
+      "label": "QA diário de conversão 2026-05-12",
+      "type": "report",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "whatsapp_current_ultimas_6h",
+      "label": "WhatsApp current últimas 6h",
+      "type": "dataset",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "whatsapp_historical_180d",
+      "label": "WhatsApp historical 180 dias",
+      "type": "dataset",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "confirmacao_tres_respostas_literais",
+      "label": "Confirmação com três respostas literais",
+      "type": "conversion_pattern",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "bifurcacao_objetiva_agenda_valores",
+      "label": "Bifurcação objetiva agenda ou valores",
+      "type": "conversion_pattern",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "demanda_treino_avaliacao_fisica",
+      "label": "Demanda de treino para avaliação física",
+      "type": "operational_learning",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "exames_documentos_data_vinculada",
+      "label": "Exames e documentos com data vinculada",
+      "type": "operational_learning",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "evitar_explicacao_generica_pre_qualificacao",
+      "label": "Evitar explicação genérica pré-qualificação",
+      "type": "conversion_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "evitar_documento_solto",
+      "label": "Evitar documento solto sem próximo passo",
+      "type": "conversion_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "guardrails_clinicos",
+      "label": "Guardrails clínicos",
+      "type": "guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "sem_pii",
+      "label": "Sem PII",
+      "type": "privacy_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "id": "nao_pausar_sem_tiaro",
+      "label": "Não pausar Clara sem Tiaro",
+      "type": "operational_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    }
+  ],
+  "edges": [
+    {
+      "source": "qa_diario_conversao_2026_05_12",
+      "target": "whatsapp_current_ultimas_6h",
+      "relation": "uses_dataset",
+      "relationship": "uses_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "qa_diario_conversao_2026_05_12",
+      "target": "whatsapp_historical_180d",
+      "relation": "uses_dataset",
+      "relationship": "uses_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "clara",
+      "target": "maquina_agendamento",
+      "relation": "operates_as",
+      "relationship": "operates_as",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "maquina_agendamento",
+      "target": "confirmacao_tres_respostas_literais",
+      "relation": "improves",
+      "relationship": "improves",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "maquina_agendamento",
+      "target": "bifurcacao_objetiva_agenda_valores",
+      "relation": "requires",
+      "relationship": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "maquina_agendamento",
+      "target": "demanda_treino_avaliacao_fisica",
+      "relation": "routes_to",
+      "relationship": "routes_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "maquina_agendamento",
+      "target": "exames_documentos_data_vinculada",
+      "relation": "requires",
+      "relationship": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "bifurcacao_objetiva_agenda_valores",
+      "target": "evitar_explicacao_generica_pre_qualificacao",
+      "relation": "reinforces",
+      "relationship": "reinforces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "exames_documentos_data_vinculada",
+      "target": "evitar_documento_solto",
+      "relation": "reinforces",
+      "relationship": "reinforces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "demanda_treino_avaliacao_fisica",
+      "target": "guardrails_clinicos",
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "exames_documentos_data_vinculada",
+      "target": "guardrails_clinicos",
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "confirmacao_tres_respostas_literais",
+      "target": "sem_pii",
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    },
+    {
+      "source": "clara",
+      "target": "nao_pausar_sem_tiaro",
+      "relation": "constrained_by",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-12.md"
+    }
+  ]
+}
