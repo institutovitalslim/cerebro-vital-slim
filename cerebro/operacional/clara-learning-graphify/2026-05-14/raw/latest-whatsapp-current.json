@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260514-011554-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 23,
+    "unique_leads": 4,
+    "total_inbound": 23,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "## 1. Objeção financeira antecipada e recorrente\n**Observacao:** Múltiplos leads trouxeram o investimento como primeira ou segunda dúvida, com frases literais como \"quanto custa a avaliação?\", \"investimento\", \"preciso avaliar o investimento\" e \"eu acredito, minha questão é financeira\".\n**Acao para a Clara:** Sempre que apresentar a avaliação inicial, informar o valor de forma transparente na mesma mensagem e associar a um benefício concreto: \"A avaliação custa R$ X e inclui [exame/consulta]. Posso verificar um horário esta semana?\"\n\n## 2. Lead pede para encerrar ao sentir necessidade de organização\n**Observacao:** Um mesmo lead repetiu três vezes o pedido para fechar o atendimento alegando que precisava se organizar: \"certo. pode fechar meu atendimento porque preciso me organizar\", \"pode fechar, moça\" e \"Não precisa moça, tenho que me organizar\".\n**Acao para a Clara:** Quando o lead demonstrar hesitação ou pedir tempo, nunca insistir no fechamento imediato; oferecer retorno programado: \"Sem problemas. Posso te retornar amanhã ou depois de amanhã? Me confirma só qual horário seria melhor.\"\n\n## 3. Lead propõe ajuste de horário pró-ativo\n**Observacao:** Um lead apresentou uma restrição de agenda e já sugeriu o horário desejado: \"Eu tenho atendimento das 10 às 11h, daí vou praí, devo me atrasar um pouco, então se possível coloque 11:30\".\n**Acao para a Clara:** Sempre validar a contraproposta de horário do lead com confirmação imediata em vez de sugerir outro horário: \"Perfeito, vou bloquear 11h30 para você. O endereço está confirmado?\"\n\n## 4. Falta de identificação clara da concierge\n**Observacao:** Um lead perguntou explicitamente o nome da atendente para retomar depois: \"qual o seu nome? pra entrar em contato dps\". Outro lead cumprimentou com um nome diferente (\"Boa tarde Liane\"), indicando confusão sobre com quem falava.\n**Acao para a Clara:** Na primeira interação, sempre se apresentar: \"Olá! Sou a Clara, concierge do Instituto Vital Slim.\" Se o lead precisar pensar, reforçar na despedida: \"Pode me chamar de Clara quando quiser retomar.\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}
