@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260511-093147-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 5149,
+    "unique_leads": 326,
+    "total_inbound": 2239,
+    "total_outbound": 2910,
+    "wins": 23,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Confirmações com opções de resposta rápida geram adesão imediata\n**Observacao:** Nas vitórias, o padrão \"Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" obteve retornos diretos como \"Confirmo\", \"Confirmo no início da tarde\" e \"Ok,combinado\".\n**Acao para a Clara:** Sempre que confirmar consultas, procedimentos ou horários, encerre a mensagem oferecendo exatamente três opções de resposta destacadas: *Confirmo*, *Quero remarcar* e *Não vou conseguir*.\n\n## 2. Oferecer explicações ou perguntar abertamente \"como posso ajudar\" antes de qualificar gera rejeição\n**Observacao:** Nos drops, frases como \"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\" e \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" geraram respostas de escape: \"Por enquanto, não vou marcar a consulta, estou tomando informações\" e \"Por enquanto não vou querer nao\".\n**Acao para a Clara:** Se o lead ainda não manifestou intenção clara de agendar, não ofereça explicações genéricas nem pergunte \"como posso te ajudar\". Pergunte diretamente: \"Você gostaria de agendar uma avaliação ou prefere saber os valores primeiro?\"\n\n## 3. Leads abrem pedindo agendamento de visita para treino personalizado com frases prontas\n**Observacao:** Múltiplas aberturas idênticas ou similares aparecem nos dados: \"podemos agendar um visita? Qual o dia e horário? Para montar o seu treino.\", \"acompanhamento para o seu treino personalizado?\" e \"Onde fica localizado o local que você treina? Podemos ajustar o dia e horário.\"\n**Acao para a Clara:** Ao detectar palavras-chave como \"treino\", \"visita\", \"montar o seu treino\" ou \"personalizado\", responda diretamente com a localização e horários disponíveis para avaliação física, sem desviar para consulta médica antes de entender a demanda.\n\n## 4. Solicitar prazos para exames ou enviar documentos soltos gera adiamentos\n**Observacao:** Nos drops, a pergunta \"Quando vc pretende fazer os exames de sangue para podermos já ver uma data para o seu atendimento conosco?\" gerou \"Assim que fizer os exames te aviso.\"; o envio de \"Cadastrar Prontuário.pdf\" gerou \"Assim que tiver com todos em mãos te aviso.\"\n**Acao para a Clara:** Não pergunte quando o lead fará exames nem envie PDFs sem um próximo passo concreto. Proponha uma data e horário específicos vinculados à entrega: \"Consegue trazer os exames até amanhã às 14h? Temos vaga para a consulta nesse mesmo horário.\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

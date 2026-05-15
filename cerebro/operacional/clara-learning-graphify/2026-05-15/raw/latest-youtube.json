@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "slot": "youtube",
+  "date": "2026-05-14T10:32:03.771674-03:00",
+  "weekday": "Thursday",
+  "dia_plano": "quinta",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Chris Voss Shep Hyken",
+  "buscar": "tactical empathy customer experience premium service negotiation questions",
+  "entrega": "1 pergunta de segurança e 1 frase de acolhimento",
+  "regra": "Conteúdo externo vira hipótese operacional. Não copiar. Não virar regra canônica sem Maria/Tiaro + RC-25/Graphify.",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Chris Voss Shep Hyken tactical empathy customer experience premium service negotiation questions --limit 3",
+    "returncode": 0,
+    "stderr": "",
+    "saved_raw": "/root/.openclaw/reports/youtube-learning/20260514-133211-search.json",
+    "items_count": 3
+  },
+  "aprendizados": [
+    {
+      "video": 1,
+      "title": "Chris Voss - How to Win Negotiations with Tactical Empathy",
+      "url": "https://www.youtube.com/watch?v=q6lV87bZUfE",
+      "channel": "Behind the Brand",
+      "aplicacao_whatsapp_clara": "Converter a ideia do vídeo em pergunta curta, condução consultiva ou follow-up premium; não copiar literalmente.",
+      "hipotese_operacional": "Usar o tema \"Chris Voss - How to Win Negotiations with Tactical Empathy\" para melhorar 1 pergunta de segurança e 1 frase de acolhimento.",
+      "risco": "Não usar tom agressivo, promessa de resultado, pressão indevida ou regra clínica.",
+      "evidencia_resumo": "Chris Voss is the negotiation boss helping you use tactical empathy techniques to win negotiations. Get a short note from me each week with what I've learned from interviewing some of the smartest people in the world -- the best inspiration, eduction, access to events, perks, finds, free stuff and more to help you improve your life and business: https://www.behindthebrand.tv/viphttps://bit.ly/TubebuddyExt Get Behind the Brand and Subscribe! http://bit.ly/GetBehindtheBrand Listen to the Podcast http://bit.ly/BehindtheBrandPodcast Join our email group to hear about special events and announcements https://BehindtheBrand.tv Here are my personal favorite Behind the Brand playlists: 1. Behind the"
+    },
+    {
+      "video": 2,
+      "title": "Chris Voss: Win More Negotiations With \"Tactical Empathy\"",
+      "url": "https://www.youtube.com/watch?v=6A1ejxIyOy8",
+      "channel": "Oliver Graf TV",
+      "aplicacao_whatsapp_clara": "Converter a ideia do vídeo em pergunta curta, condução consultiva ou follow-up premium; não copiar literalmente.",
+      "hipotese_operacional": "Usar o tema \"Chris Voss: Win More Negotiations With \"Tactical Empathy\"\" para melhorar 1 pergunta de segurança e 1 frase de acolhimento.",
+      "risco": "Não usar tom agressivo, promessa de resultado, pressão indevida ou regra clínica.",
+      "evidencia_resumo": "Chris Voss: Win More Negotiations With \"Tactical Empathy\" | Founders Club. Link to the full interview here: https://youtu.be/mK67deKxmNE​. Subscribe to my channel: http://bit.ly/OliverGrafTV​ More at http://www.OliverGraf.tv​ Chris Voss is an American businessman, author, and academic. Voss is a former FBI hostage negotiator, the CEO of The Black Swan Group Ltd and co-author of the book Never Split the Difference. In this clip taken from his full Founders Club interview, Chris shows how impactful our emotions are during any type of negotiation! Having \"Tactical Empathy\" can help accelerate your deals and help you start closing more of those valuable leads. Check out the clip to see how Chris"
+    },
+    {
+      "video": 3,
+      "title": "What is Tactical Empathy? How It Can Help in Negotiations at Work | Chris Voss",
+      "url": "https://www.youtube.com/watch?v=yTy6NiJgk_w",
+      "channel": "Chris Voss & The Black Swan Group",
+      "aplicacao_whatsapp_clara": "Converter a ideia do vídeo em pergunta curta, condução consultiva ou follow-up premium; não copiar literalmente.",
+      "hipotese_operacional": "Usar o tema \"What is Tactical Empathy? How It Can Help in Negotiations at Work | Chris Voss\" para melhorar 1 pergunta de segurança e 1 frase de acolhimento.",
+      "risco": "Não usar tom agressivo, promessa de resultado, pressão indevida ou regra clínica.",
+      "evidencia_resumo": "Get FREE access to The Black Swan Group’s book 5 Negotiation Tactics for Dealing with Difficult People here: https://bit.ly/3duQVyW What is Tactical Empathy? How can it help me in the workplace? In this video collage, Chris defines Tactical Empathy and why it's the superior method of communication. If hostage negotiators are 93% successful at selling jail time, what's holding you back from being successful with the same skills? =============================================================== Don’t Miss Out on the Latest Negotiating Insights 🔔Subscribe ⬇️ / @NegotiationMastery ✉️Join our free Newsletter: https://blog.blackswanltd.com/the-edge About The Black Swan Group Founded and led by forme"
+    }
+  ],
+  "classificacao_obrigatoria": "testar 3 dias",
+  "proximo_passo": "Cruzar no fechamento com conversas reais do WhatsApp antes de propor alteração canônica."
+}

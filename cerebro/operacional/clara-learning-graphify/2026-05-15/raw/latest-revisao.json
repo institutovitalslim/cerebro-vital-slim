@@ -1,0 +1,440 @@
+{
+  "slot": "revisao",
+  "date": "2026-05-09T00:20:06.330481",
+  "weekday": "Saturday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "Revisão interna",
+  "buscar": "aprendizados do dia",
+  "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+  "latest": [
+    {
+      "slot": "instagram_manha",
+      "date": "2026-05-08T11:33:48.891968",
+      "weekday": "Friday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "Instagram",
+      "perfil": "thiagoconcer",
+      "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+      "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username thiagoconcer --limit 3",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": false,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260508-113351-instagram-profile-thiagoconcer.json\",\n  \"error\": \"HTTP Error 500: Internal Server Error\"\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "slot": "instagram_tarde",
+      "date": "2026-05-08T20:40:07.183544",
+      "weekday": "Friday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "Instagram",
+      "perfil": "fabibertotti",
+      "buscar": "SPIN, negociação, social selling ou clínica premium",
+      "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username fabibertotti --limit 3",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260508-204009-instagram-profile-fabibertotti.json\",\n  \"items\": [\n    {\n      \"shortcode\": \"DW6_zc9kelC\",\n      \"caption\": \"🚨 INSCRIÇÕES ABERTAS ! 🚨\\n\\nO Poder da Narrativa é um evento presencial para quem quer aprender a falar com clareza, respeito e autoridade. Serão três dias intensivos em São Paulo para transformar a forma como você se expressa e é percebido. \\n\\n📅 3 a 5 de junho de 2026 \\n📍 Hotel Laghetto Stilo São Paulo\\n\\nAs vagas são limitadas, se você quer dar esse próximo passo, esse é o momento de garantir seu ingresso. Escreva EVENTO para receber o link com todas informações 📩\",\n      \"likes\": 946,\n      \"comments\": 427,\n      \"taken_at\": 1775761360,\n      \"media_type\": 1,\n      \"product_type\": \"feed\",\n      \"video_url_available\": false,\n      \"video_url\": \"\"\n    },\n    {\n      \"shortcode\": \"DSCl6sEjv7P\",\n      \"caption\": \"Tem gente que acha que ser engraçado no trabalho cria proximidade.\\n\\nCria. \\n\\nE esse é exatamente o problema.\\nProximidade e autoridade operam em tensão. Joseph Berger, sociólogo de Stanford, mostrou que status em grupos é construído por expectativas de competência e essas expectativas são frágeis. Uma vez que você estabelece um papel social, sair dele tem custo. O engraçado da equipe raramente vira o líder da equipe. Sabe por que? Porque o grupo já fixou sua função e não está na capacidade. \\n\\nGoffman chamava isso de enquadramento. Cada interação define um frame, um contrato implícito sobre quem você é naquele espaço. Humor excessivo sinaliza informalidade, disponibilidade, leveza. São qualidades simpáticas, mas péssimas âncoras para quem precisa ser levado a sério numa negociação, numa crise, numa decisão difícil.\\nA pesquisa de Robert Cialdini sobre influência reforça: autoridade é uma das alavancas mais poderosas de persuasão — mas ela depende de consistência de imagem. Quem oscila entre o engraçado e o sério cria dissonância. O grupo não sabe qual versão acreditar. Na dúvida, acredita na mais frequente.\\nO humor também tem um efeito menos óbvio: ele relaxa quem ouve.\\nE pessoas relaxadas não tomam decisões com urgência, não sentem o peso do que está sendo dito, não percebem hierarquia. Em contextos onde você precisa que algo seja levado a sério, humor dissolve exatamente a tensão que sustenta a seriedade.\\nIsso não significa virar rígido.\\nSignifica entender que toda escolha de tom é uma escolha de posicionamento. Quem ri de tudo comunica que nada pesa. E quem nada pesa dificilmente carrega autoridade quando precisa.\\nO palco muda. O personagem precisa saber quando mudar junto.\",\n      \"likes\": 181780,\n      \"comments\": 10659,\n      \"taken_at\": 1765278636,\n      \"media_type\": 2,\n      \"product_type\": \"clips\",\n      \"video_url_available\": true,\n      \"video_url\": \"https://instagram.fuio23-1.fna.fbcdn.net/o1/v/t2/f2/m86/AQOToQhjpFP-zHaM1P8iZgk1jyhjvZzapvfcwrH7TYeHIXaEJ6SK4blHTEYcBah8AVHUE7Z_1PwQBDXmg67_5lqj3JesrnrlLxQ2pB4.mp4?_nc_cat=111&_nc_oc=Adr8xp1-C9iez2LdtkfJRnPizXwLosGm5pe_wCbMBgzCCiunbEuhc0CMyPuTi_3KTs1OiSMWmsXSJ13kOcGAyZJS&_nc_sid=5e9851&_nc_ht=instagram.fuio23-1.fna.fbcdn.net&_nc_ohc=dpxdXX-fJhoQ7kNvwFHuKNN&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTcwNDAzODQ3Mzg5M\"\n    },\n    {\n      \"shortcode\": \"DSFlGRrDpZa\",\n      \"caption\": \"Assistir por assistir pode ser legal, eu sei, mas assistir buscando aprender te leva a outro nível! \\n\\nQuer elevar sua comunicação? Digite MENTORIA.\",\n      \"likes\": 459349,\n      \"comments\": 34328,\n      \"taken_at\": 1765378944,\n      \"media_type\": 2,\n      \"product_type\": \"clips\",\n      \"video_url_available\": true,\n      \"video_url\": \"https://instagram.fuio23-1.fna.fbcdn.net/o1/v/t2/f2/m86/AQPS2e0oVjLwObEXrE7Rn2-TZU4Xg9JEUxhHiV_z-46h5QID9CN-1iAS55xis7uwz9dY3RCNMYhPXQj-EcYTbYWkDdzMGEk1jU1K3ic.mp4?_nc_cat=109&_nc_oc=AdoEWBv84Vn2RJ08v3693n9fjXrPh9JSSMudO4rW7xQYDLxUbuqjq18aqc_zgU6D80uOHiyBxb01KHvaDGwAQLVw&_nc_sid=5e9851&_nc_ht=instagram.fuio23-1.fna.fbcdn.net&_nc_ohc=6-rrJVCGECIQ7kNvwEicZDs&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTIxNzgzOTMzMzU0M\"\n    }\n  ]\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "slot": "revisao",
+      "date": "2026-05-08T00:20:06.179575",
+      "weekday": "Friday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "Revisão interna",
+      "buscar": "aprendizados do dia",
+      "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+      "latest": [
+        {
+          "slot": "instagram_manha",
+          "date": "2026-05-07T20:37:50.443910",
+          "weekday": "Thursday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "Instagram",
+          "perfil": "camilaporto",
+          "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+          "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username camilaporto --limit 3",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260507-203754-instagram-profile-camilaporto.json\",\n  \"items\": [\n    {\n      \"shortcode\": null,\n      \"caption\": \"\",\n      \"likes\": null,\n      \"comments\": null,\n      \"taken_at\": null\n    },\n    {\n      \"shortcode\": null,\n      \"caption\": \"\",\n      \"likes\": null,\n      \"comments\": null,\n      \"taken_at\": null\n    },\n    {\n      \"shortcode\": null,\n      \"caption\": \"\",\n      \"likes\": null,\n      \"comments\": null,\n      \"taken_at\": null\n    }\n  ]\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "slot": "instagram_tarde",
+          "date": "2026-05-07T20:40:06.370232",
+          "weekday": "Thursday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "Instagram",
+          "perfil": "camilaporto",
+          "buscar": "SPIN, negociação, social selling ou clínica premium",
+          "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username camilaporto --limit 3",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260507-204008-instagram-profile-camilaporto.json\",\n  \"items\": [\n    {\n      \"shortcode\": null,\n      \"caption\": \"\",\n      \"likes\": null,\n      \"comments\": null,\n      \"taken_at\": null\n    },\n    {\n      \"shortcode\": null,\n      \"caption\": \"\",\n      \"likes\": null,\n      \"comments\": null,\n      \"taken_at\": null\n    },\n    {\n      \"shortcode\": null,\n      \"caption\": \"\",\n      \"likes\": null,\n      \"comments\": null,\n      \"taken_at\": null\n    }\n  ]\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "slot": "revisao",
+          "date": "2026-05-07T00:20:07.285051",
+          "weekday": "Thursday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "Revisão interna",
+          "buscar": "aprendizados do dia",
+          "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+          "latest": [
+            {
+              "slot": "instagram_manha",
+              "date": "2026-05-06T21:07:40.626486",
+              "weekday": "Wednesday",
+              "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+              "fonte": "Instagram",
+              "perfil": "thiagoconcer",
+              "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+              "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+              "coleta": {
+                "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username thiagoconcer --limit 3",
+                "returncode": 0,
+                "stdout": "{\n  \"ok\": false,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210743-instagram-profile-thiagoconcer.json\",\n  \"error\": \"HTTP Error 500: Internal Server Error\"\n}\n",
+                "stderr": ""
+              }
+            },
+            {
+              "slot": "instagram_tarde",
+              "date": "2026-05-06T21:07:52.688989",
+              "weekday": "Wednesday",
+              "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+              "fonte": "Instagram",
+              "perfil": "leandroladeira",
+              "buscar": "SPIN, negociação, social selling ou clínica premium",
+              "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+              "coleta": {
+                "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username leandroladeira --limit 3",
+                "returncode": 0,
+                "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210753-instagram-profile-leandroladeira.json\",\n  \"items\": []\n}\n",
+                "stderr": ""
+              }
+            },
+            {
+              "slot": "revisao",
+              "date": "2026-05-06T21:07:53.472332",
+              "weekday": "Wednesday",
+              "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+              "fonte": "Revisão interna",
+              "buscar": "aprendizados do dia",
+              "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+              "latest": [
+                {
+                  "slot": "instagram_manha",
+                  "date": "2026-05-06T21:07:40.626486",
+                  "weekday": "Wednesday",
+                  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+                  "fonte": "Instagram",
+                  "perfil": "thiagoconcer",
+                  "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+                  "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+                  "coleta": {
+                    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username thiagoconcer --limit 3",
+                    "returncode": 0,
+                    "stdout": "{\n  \"ok\": false,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210743-instagram-profile-thiagoconcer.json\",\n  \"error\": \"HTTP Error 500: Internal Server Error\"\n}\n",
+                    "stderr": ""
+                  }
+                },
+                {
+                  "slot": "instagram_tarde",
+                  "date": "2026-05-06T21:07:52.688989",
+                  "weekday": "Wednesday",
+                  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+                  "fonte": "Instagram",
+                  "perfil": "leandroladeira",
+                  "buscar": "SPIN, negociação, social selling ou clínica premium",
+                  "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+                  "coleta": {
+                    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username leandroladeira --limit 3",
+                    "returncode": 0,
+                    "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210753-instagram-profile-leandroladeira.json\",\n  \"items\": []\n}\n",
+                    "stderr": ""
+                  }
+                },
+                {
+                  "slot": "revisao",
+                  "date": "2026-05-06T00:20:15.742413",
+                  "weekday": "Wednesday",
+                  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+                  "fonte": "Revisão interna",
+                  "buscar": "aprendizados do dia",
+                  "entrega": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+                  "latest": [
+                    {
+                      "slot": "youtube",
+                      "date": "2026-05-05T21:21:45.196640",
+                      "weekday": "Tuesday",
+                      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+                      "fonte": "YouTube",
+                      "canal_ou_busca": "Alex Hormozi",
+                      "buscar": "value proposition offer sales objections",
+                      "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+                      "coleta": {
+                        "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Alex Hormozi value proposition offer sales objections --limit 3",
+                        "returncode": 0,
+                        "stdout": "{\n  \"ok\": false,\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260505-212149-search.json\",\n  \"items\": [],\n  \"stderr\": \"utube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing\\nERROR: [youtube] CojS0DwflXc: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies\\n\"\n}\n",
+                        "stderr": ""
+                      }
+                    }
+                  ]
+                },
+                {
+                  "slot": "x_twitter",
+                  "date": "2026-05-06T21:07:49.265759",
+                  "weekday": "Wednesday",
+                  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+                  "fonte": "X/Twitter",
+                  "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+                  "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+                  "coleta": {
+                    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-top --period Daily --type Likes",
+                    "returncode": 0,
+                    "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-top\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-210752-x-top-posts.json\",\n  \"count\": 0,\n  \"sample\": []\n}\n",
+                    "stderr": ""
+                  }
+                },
+                {
+                  "slot": "youtube",
+                  "date": "2026-05-06T21:07:43.378305",
+                  "weekday": "Wednesday",
+                  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+                  "fonte": "YouTube",
+                  "canal_ou_busca": "Gong",
+                  "buscar": "objection handling sales call review discovery questions",
+                  "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+                  "coleta": {
+                    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Gong objection handling sales call review discovery questions --limit 3",
+                    "returncode": 0,
+                    "stdout": "{\n  \"ok\": true,\n  \"source\": \"rapidapi-yt-api\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260506-210749-search.json\",\n  \"items\": [\n    {\n      \"title\": \"5 Sales Questions That Will Dramatically Increase Your Close Rates\",\n      \"url\": \"https://www.youtube.com/watch?v=3-0UVSuekrQ\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"6:17\",\n      \"view_count\": \"7760\",\n      \"published\": \"6 years ago\",\n      \"description\": \"First up is is that fair this is a great question to use when you're starting your discovery call with an upfront contract created by ...\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"376\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"How the Most Successful Salespeople Handle Objections: Gong Labs Live Episode 3\",\n      \"url\": \"https://www.youtube.com/watch?v=ALlnBsVlPhE\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"18:29\",\n      \"view_count\": \"2642\",\n      \"published\": \"6 years ago\",\n      \"description\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections. Follow us on LinkedIn for more ...\",\n      \"description_full\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections.\\n\\nFollow us on LinkedIn for more tips and tricks: https://www.linkedin.com/company/gong-io\\n\\nCheck out more Gong Labs Live episodes: https://www.youtube.com/playlist?list=PLctD8gzD0Q8r6G5g9mKucJmoaK8mtQiPH\\n\\nAbout Gong:\\nThe patented Gong Revenue Intelligence Platform captures and understands every customer interaction then delivers insights at scale, empowering revenue teams to make decisions based on data instead of opinions. \\n\\nSee more at www.gong.io/ri\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1109\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales\",\n      \"url\": \"https://www.youtube.com/watch?v=DBpLFAS2s3w\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"28:31\",\n      \"view_count\": \"40677\",\n      \"published\": \"7 years ago\",\n      \"description\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales - This is an sales training course on objection handling.\",\n      \"description_full\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales  - This is an sales training course on objection handling. Objection handling is one of the highest paid skills you can master in sales. Follow these 7 steps, and watch your income grow. You will learn some of the most powerful ways of overcoming and handling objections so you can close more deals.\\n\\nDownload the Slide Deck + Cheat Sheet and FULL Video course: https://pages.gong.io/objection-handling-masterclass-course/\\n\\nLearn how Gong.io can help you have better sales conversations and close more deals by understanding what works and what doesn’t work in your sales calls. Click here to get a free live demo: https://www.gong.io/demo/ \\n\\nFollow us on the social web:\\nTwitter: https://twitter.com/gong_io\\nLinkedIn: https://www.linkedin.com/company/gong-io\\nFacebook: https://www.facebook.com/To.GongIO/\",\n      \"keywords\": [\n        \"sales\",\n        \"sales skills\",\n        \"objection handling\",\n        \"handling objections\",\n        \"sales tips\",\n        \"sales techniques\",\n        \"persuasion\",\n        \"handling sales objections\",\n        \"sales training\",\n        \"sales process\",\n        \"sales call\",\n        \"objection handling script\",\n        \"sales call script\",\n        \"objection handling techniques\",\n        \"objection handling tips\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1710\",\n      \"channelTitle\": \"Gong.io\"\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+                    "stderr": ""
+                  }
+                }
+              ]
+            },
+            {
+              "ok": true,
+              "slot": "whatsapp-current",
+              "fonte": "WhatsApp IVS via planilha de conversas",
+              "modo": "current",
+              "periodo": "últimas 6h",
+              "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-231520-whatsapp-current.md",
+              "contadores": {
+                "total_messages": 6,
+                "unique_leads": 3,
+                "total_inbound": 6,
+                "total_outbound": 0,
+                "wins": 0,
+                "drops": 0
+              },
+              "aprendizados": "SEM_APRENDIZADOS_NOVOS - volume insuficiente",
+              "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+              "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+            },
+            {
+              "ok": true,
+              "slot": "whatsapp-historical",
+              "fonte": "WhatsApp IVS via planilha de conversas",
+              "modo": "historical",
+              "periodo": "últimos 180 dias",
+              "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-212346-whatsapp-historical.md",
+              "contadores": {
+                "total_messages": 5060,
+                "unique_leads": 322,
+                "total_inbound": 2150,
+                "total_outbound": 2910,
+                "wins": 23,
+                "drops": 5
+              },
+              "aprendizados": "## 1. Confirmação com múltipla escolha\n**Observacao:** Em todas as vitórias de confirmação, o closer enviou mensagem com nome do lead, procedimento/horário exato e três opções de resposta literais. O lead respondeu apenas \"Confirmo\". Exemplo real: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resultado: \"Confirmo\".\n**Acao para a Clara:** Sempre confirmar consultas citando o procedimento, o dia e o horário exatos, e oferecer exatamente três opções de resposta: *Confirmo*, *Quero remarcar* ou *Não vou conseguir*.\n\n## 2. Pitch de conteúdo antes do agendamento\n**Observacao:** Quando a Clara ofereceu explicar o que estava incluído na consulta (\"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\") ou detalhou o funcionamento individualizado antes do lead pedir, o lead dropou. Respostas reais: \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\" e \"Por enquanto não\".\n**Acao para a Clara:** Proibir envio de explicações detalhadas sobre conteúdo da consulta, PDFs ou pitch longo de procedimentos antes de ter uma data/hora de agendamento confirmada ou uma objeção explícita do lead.\n\n## 3. Saudação aberta genérica\n**Observacao:** A mensagem de abertura \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" recebeu drop imediato: \"Bom dia. Por enquanto não vou querer nao\". A falta de direcionamento na primeira interação gerou rejeição.\n**Acao para a Clara:** Eliminar saudações genéricas do tipo \"Como posso te ajudar hoje?\". A primeira mensagem deve propor diretamente um horário, confirmar uma consulta existente ou agendar uma visita, nunca abrir com pergunta ampla.\n\n## 4. Recuperação de histórico por reenvio\n**Observacao:** Ao perder o contexto, o closer usou a frase exata: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" O lead não abandonou; ao contrário, avançou: \"Confirmado amanhã?\".\n**Acao para a Clara:** Se perder o histórico da conversa, usar a frase literal: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" Em vez de pedir resumo genérico ao lead.",
+              "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+              "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+            },
+            {
+              "slot": "x_twitter",
+              "date": "2026-05-06T21:19:08.816664",
+              "weekday": "Wednesday",
+              "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+              "fonte": "X/Twitter",
+              "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+              "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+              "perfil": "Salesforce",
+              "coleta": {
+                "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-profile --screenname Salesforce --limit 5",
+                "returncode": 0,
+                "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260506-211915-x-profile-Salesforce.json\",\n  \"screenname\": \"Salesforce\",\n  \"count\": 5,\n  \"sample\": [\n    {\n      \"tweet_id\": \"2052058730435576304\",\n      \"screen_name\": null,\n      \"text\": \"⚠️ DO NOT POST YET\\n\\nHOLD: Announce Connections 2026 musical guest on X\\n\\nStatus: PENDING APPROVAL\\nBand Handle: CONFIDENTIAL\\nPublish time: 5/5 early a.m. PT\",\n      \"favorites\": 18,\n      \"retweets\": 3,\n      \"created_at\": \"Wed May 06 16:11:41 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052058826195820947\",\n      \"screen_name\": null,\n      \"text\": \"Oops?\\n\\nGuess who it is. 😉\",\n      \"favorites\": 3,\n      \"retweets\": null,\n      \"created_at\": \"Wed May 06 16:12:04 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052029508689989740\",\n      \"screen_name\": null,\n      \"text\": \"RT @tableau: https://t.co/cRGlBoLc1P\",\n      \"favorites\": null,\n      \"retweets\": 2,\n      \"created_at\": \"Wed May 06 14:15:34 +0000 2026\",\n      \"lang\": \"zxx\"\n    },\n    {\n      \"tweet_id\": \"2052011547438776507\",\n      \"screen_name\": null,\n      \"text\": \"RT @tableau: https://t.co/d6UwcSRq96\",\n      \"favorites\": null,\n      \"retweets\": 7,\n      \"created_at\": \"Wed May 06 13:04:12 +0000 2026\",\n      \"lang\": \"zxx\"\n    },\n    {\n      \"tweet_id\": \"2049973985140433264\",\n      \"screen_name\": null,\n      \"text\": \"Software was always created by humans, for humans.\\n\\nNow it's created by humans and agents.\\n\\nFor humans and agents.\\n\\nAnd you may never have to log in to use it.\\n\\nNot even Salesforce—which is now open to every human, agent, and platform with Headless 360. https://t.co/sQxUmDPq3Z\",\n      \"favorites\": 57,\n      \"retweets\": 12,\n      \"created_at\": \"Thu Apr 30 22:07:39 +0000 2026\",\n      \"lang\": \"en\"\n    }\n  ]\n}\n",
+                "stderr": ""
+              }
+            },
+            {
+              "slot": "youtube",
+              "date": "2026-05-06T21:07:43.378305",
+              "weekday": "Wednesday",
+              "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+              "fonte": "YouTube",
+              "canal_ou_busca": "Gong",
+              "buscar": "objection handling sales call review discovery questions",
+              "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+              "coleta": {
+                "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Gong objection handling sales call review discovery questions --limit 3",
+                "returncode": 0,
+                "stdout": "{\n  \"ok\": true,\n  \"source\": \"rapidapi-yt-api\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260506-210749-search.json\",\n  \"items\": [\n    {\n      \"title\": \"5 Sales Questions That Will Dramatically Increase Your Close Rates\",\n      \"url\": \"https://www.youtube.com/watch?v=3-0UVSuekrQ\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"6:17\",\n      \"view_count\": \"7760\",\n      \"published\": \"6 years ago\",\n      \"description\": \"First up is is that fair this is a great question to use when you're starting your discovery call with an upfront contract created by ...\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"376\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"How the Most Successful Salespeople Handle Objections: Gong Labs Live Episode 3\",\n      \"url\": \"https://www.youtube.com/watch?v=ALlnBsVlPhE\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"18:29\",\n      \"view_count\": \"2642\",\n      \"published\": \"6 years ago\",\n      \"description\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections. Follow us on LinkedIn for more ...\",\n      \"description_full\": \"Tanner Robinson, Co-Founder of SDR Huddle & Gong AE, explains how he handles objections.\\n\\nFollow us on LinkedIn for more tips and tricks: https://www.linkedin.com/company/gong-io\\n\\nCheck out more Gong Labs Live episodes: https://www.youtube.com/playlist?list=PLctD8gzD0Q8r6G5g9mKucJmoaK8mtQiPH\\n\\nAbout Gong:\\nThe patented Gong Revenue Intelligence Platform captures and understands every customer interaction then delivers insights at scale, empowering revenue teams to make decisions based on data instead of opinions. \\n\\nSee more at www.gong.io/ri\",\n      \"keywords\": [\n        \"Gong\",\n        \"Gong.io\",\n        \"Conversation Intelligence\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1109\",\n      \"channelTitle\": \"Gong.io\"\n    },\n    {\n      \"title\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales\",\n      \"url\": \"https://www.youtube.com/watch?v=DBpLFAS2s3w\",\n      \"channel\": \"Gong.io\",\n      \"duration\": \"28:31\",\n      \"view_count\": \"40677\",\n      \"published\": \"7 years ago\",\n      \"description\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales - This is an sales training course on objection handling.\",\n      \"description_full\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales  - This is an sales training course on objection handling. Objection handling is one of the highest paid skills you can master in sales. Follow these 7 steps, and watch your income grow. You will learn some of the most powerful ways of overcoming and handling objections so you can close more deals.\\n\\nDownload the Slide Deck + Cheat Sheet and FULL Video course: https://pages.gong.io/objection-handling-masterclass-course/\\n\\nLearn how Gong.io can help you have better sales conversations and close more deals by understanding what works and what doesn’t work in your sales calls. Click here to get a free live demo: https://www.gong.io/demo/ \\n\\nFollow us on the social web:\\nTwitter: https://twitter.com/gong_io\\nLinkedIn: https://www.linkedin.com/company/gong-io\\nFacebook: https://www.facebook.com/To.GongIO/\",\n      \"keywords\": [\n        \"sales\",\n        \"sales skills\",\n        \"objection handling\",\n        \"handling objections\",\n        \"sales tips\",\n        \"sales techniques\",\n        \"persuasion\",\n        \"handling sales objections\",\n        \"sales training\",\n        \"sales process\",\n        \"sales call\",\n        \"objection handling script\",\n        \"sales call script\",\n        \"objection handling techniques\",\n        \"objection handling tips\"\n      ],\n      \"category\": \"Science & Technology\",\n      \"lengthSeconds\": \"1710\",\n      \"channelTitle\": \"Gong.io\"\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+                "stderr": ""
+              }
+            }
+          ]
+        },
+        {
+          "ok": true,
+          "slot": "whatsapp-current",
+          "fonte": "WhatsApp IVS via planilha de conversas",
+          "modo": "current",
+          "periodo": "últimas 6h",
+          "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260507-231528-whatsapp-current.md",
+          "contadores": {
+            "total_messages": 19,
+            "unique_leads": 5,
+            "total_inbound": 19,
+            "total_outbound": 0,
+            "wins": 0,
+            "drops": 0
+          },
+          "aprendizados": "SEM_APRENDIZADOS_NOVOS - volume insuficiente",
+          "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+          "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+        },
+        {
+          "ok": true,
+          "slot": "whatsapp-historical",
+          "fonte": "WhatsApp IVS via planilha de conversas",
+          "modo": "historical",
+          "periodo": "últimos 180 dias",
+          "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-212346-whatsapp-historical.md",
+          "contadores": {
+            "total_messages": 5060,
+            "unique_leads": 322,
+            "total_inbound": 2150,
+            "total_outbound": 2910,
+            "wins": 23,
+            "drops": 5
+          },
+          "aprendizados": "## 1. Confirmação com múltipla escolha\n**Observacao:** Em todas as vitórias de confirmação, o closer enviou mensagem com nome do lead, procedimento/horário exato e três opções de resposta literais. O lead respondeu apenas \"Confirmo\". Exemplo real: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resultado: \"Confirmo\".\n**Acao para a Clara:** Sempre confirmar consultas citando o procedimento, o dia e o horário exatos, e oferecer exatamente três opções de resposta: *Confirmo*, *Quero remarcar* ou *Não vou conseguir*.\n\n## 2. Pitch de conteúdo antes do agendamento\n**Observacao:** Quando a Clara ofereceu explicar o que estava incluído na consulta (\"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\") ou detalhou o funcionamento individualizado antes do lead pedir, o lead dropou. Respostas reais: \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\" e \"Por enquanto não\".\n**Acao para a Clara:** Proibir envio de explicações detalhadas sobre conteúdo da consulta, PDFs ou pitch longo de procedimentos antes de ter uma data/hora de agendamento confirmada ou uma objeção explícita do lead.\n\n## 3. Saudação aberta genérica\n**Observacao:** A mensagem de abertura \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" recebeu drop imediato: \"Bom dia. Por enquanto não vou querer nao\". A falta de direcionamento na primeira interação gerou rejeição.\n**Acao para a Clara:** Eliminar saudações genéricas do tipo \"Como posso te ajudar hoje?\". A primeira mensagem deve propor diretamente um horário, confirmar uma consulta existente ou agendar uma visita, nunca abrir com pergunta ampla.\n\n## 4. Recuperação de histórico por reenvio\n**Observacao:** Ao perder o contexto, o closer usou a frase exata: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" O lead não abandonou; ao contrário, avançou: \"Confirmado amanhã?\".\n**Acao para a Clara:** Se perder o histórico da conversa, usar a frase literal: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" Em vez de pedir resumo genérico ao lead.",
+          "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+          "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+        },
+        {
+          "slot": "x_twitter",
+          "date": "2026-05-07T15:40:15.128861",
+          "weekday": "Thursday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "X/Twitter",
+          "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+          "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+          "query": "healthcare patient scheduling experience",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-search --query healthcare patient scheduling experience --search-type Top --limit 5",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-search\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260507-154017-x-search-posts.json\",\n  \"count\": 5,\n  \"sample\": [\n    {\n      \"tweet_id\": \"2052403610177163346\",\n      \"screen_name\": \"twitemarti\",\n      \"text\": \"WITHOUT TELLING ME WHO I WAS GOING TO SEE TODAY THEY SCHEDULED ME FOR TODAY WHICH I THOUGHT WAS GOOD THE LABS ARE NOT IN YET I DON'T EXPECT THEY'RE GOING TO SURPRISE ME WITH ANY NEWS THAT REFLECTS WHAT I'M GOING THROUGH WITH THE STENT A BAD STENT\",\n      \"favorites\": null,\n      \"retweets\": null,\n      \"created_at\": \"Thu May 07 15:02:07 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052192238952915170\",\n      \"screen_name\": \"JulieThoren\",\n      \"text\": \"I've worked in healthcare 46 years.  I am also a \\\"patient\\\" as are family and friends.  What I see every day in my job and what I experience as a patient is ridiculous. Elderly with minimal mobility being forced to register in one location and travel long distances for appointments, MRI/Xray etc. Disruption needs to happen sooner rather than later. One person took 20+ minutes to do a SIMPLE registration for lab work. I've done registrations myself and it took less than 5 minutes.\",\n      \"favorites\": null,\n      \"retweets\": null,\n      \"created_at\": \"Thu May 07 01:02:12 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1886877890869907572\",\n      \"screen_name\": \"hardeep_singh63\",\n      \"text\": \"**Chatbots in Healthcare**: In healthcare, chatbots assist with appointment scheduling, symptom checking, patient inquiries, and managing medical records, improving service efficiency and patient experience.\",\n      \"favorites\": null,\n      \"retweets\": null,\n      \"created_at\": \"Tue Feb 04 20:42:00 +0000 2025\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052344438228222206\",\n      \"screen_name\": \"allypallywally_\",\n      \"text\": \"I get to hospital way early to ensure i beat traffic and the traffic of the car park. \\nIm waiting. I see an increase in the wait time for my consultant... 1hr30. 1. Hr. 30. I've already cancelled three available slots for patients of my own. 🙃\",\n      \"favorites\": null,\n      \"retweets\": null,\n      \"created_at\": \"Thu May 07 11:06:59 +0000 2026\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"2052379095959560492\",\n      \"screen_name\": \"CertifyHealth\",\n      \"text\": \"The schedule looks full.\\n\\nBut many OB-GYN patient flow issues begin before the patient is even roomed.\",\n      \"favorites\": null,\n      \"retweets\": null,\n      \"created_at\": \"Thu May 07 13:24:42 +0000 2026\",\n      \"lang\": \"en\"\n    }\n  ]\n}\n",
+            "stderr": ""
+          }
+        },
+        {
+          "slot": "youtube",
+          "date": "2026-05-07T13:30:14.055807",
+          "weekday": "Thursday",
+          "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+          "fonte": "YouTube",
+          "canal_ou_busca": "Chris Voss Shep Hyken",
+          "buscar": "tactical empathy customer experience premium service",
+          "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+          "coleta": {
+            "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Chris Voss Shep Hyken tactical empathy customer experience premium service --limit 3",
+            "returncode": 0,
+            "stdout": "{\n  \"ok\": true,\n  \"source\": \"rapidapi-yt-api\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260507-133025-search.json\",\n  \"items\": [\n    {\n      \"title\": \"Mastering Customer Experience: Secrets to Seamless Service\",\n      \"url\": \"https://www.youtube.com/watch?v=S-KbQvhStXs\",\n      \"channel\": \"Shep Hyken: Customer Service & CX Expert\",\n      \"duration\": \"30:31\",\n      \"view_count\": \"338\",\n      \"published\": \"3 years ago\",\n      \"description\": \"Be Amazing or Go Home - Season 3 Episode 3 Watch more episodes of Be Amazing or Go Home on ShepTV! (http://www.\",\n      \"description_full\": \"Be Amazing or Go Home - Season 3 Episode 3\\n\\n👉 Watch more episodes of Be Amazing or Go Home on ShepTV! (http://www.ShepTV.com​​​)\\n\\nWelcome to another episode of Be Amazing or Go Home! In this episode, we dive deep into the world of customer experience and unveil the Secrets to Seamless Service that will take your business to the next level.\\n\\nJoin Shep Hyken and our special guest, Laura Bassett, VP of Product Marketing at NICE, one of the world's leading cloud CX experts, as they explore the key strategies and insights that can make your customer experiences truly exceptional. \\n\\nDiscover how to fix common customer service challenges and transform them into opportunities for excellence. Laura shares invaluable tips and techniques that will help you build lasting customer loyalty and satisfaction.\\n\\nBut that's not all! In this episode, we also delve into the fundamental principles of leadership with Susan Drumm, discussing the path to enlightened leadership and groundbreaking techniques that can enhance your leadership capabilities.\\n\\nAnd don't miss our \\\"Amazing Quote\\\" segment, where we highlight the importance of creating a consistent customer experience to keep your customers coming back for more.\\n\\nPlus, we'll showcase the latest and greatest in the world of customer service technology with the \\\"Amazing App\\\" segment and answer your burning customer service questions in our #AskShep segment.\\n\\nDon't miss out on the secrets to being amazing! Watch now and learn how to create unforgettable experiences for both your team and your customers. Like, comment, and subscribe to our channel for more amazing content.\\n-----------------------------\\nShepTV is another Shepard Presentation (http://www.ShepTV.com​​)\\n(Copyright © MMXXII, Shep Hyken)\",\n      \"keywords\": [\n        \"leadership\",\n        \"music\",\n        \"childhood experiences\",\n        \"customer service\",\n        \"customer experience\",\n        \"feedback\",\n        \"amazing customer service\",\n        \"customer loyalty\",\n        \"seamless experiences\",\n        \"personal background\",\n        \"leadership style\",\n        \"customer expectations\",\n        \"company culture\",\n        \"triggering past experiences\",\n        \"importance of mindset\",\n        \"serving customers\",\n        \"NICE\",\n        \"Amazing Leadership\",\n        \"Customer Service Tips\",\n        \"Creating Seamless Experiences\"\n      ],\n      \"category\": \"People & Blogs\",\n      \"lengthSeconds\": \"1830\",\n      \"channelTitle\": \"Shep Hyken: Customer Service & CX Expert\"\n    },\n    {\n      \"title\": \"A good customer experience starts from?\",\n      \"url\": \"https://www.youtube.com/watch?v=iQgYyCwxe7s\",\n      \"channel\": \"Shep Hyken: Customer Service & CX Expert\",\n      \"duration\": \"1:00\",\n      \"view_count\": \"58\",\n      \"published\": \"11 months ago\",\n      \"description\": \"A good customer experience starts with a good employee experience i believe that but if someone says put the customer at the ...\",\n      \"category\": \"People & Blogs\",\n      \"lengthSeconds\": \"59\",\n      \"channelTitle\": \"Shep Hyken: Customer Service & CX Expert\"\n    },\n    {\n      \"title\": \"First thing you must do for a great customer experience.\",\n      \"url\": \"https://www.youtube.com/watch?v=AgcWxK8m20E\",\n      \"channel\": \"Shep Hyken: Customer Service & CX Expert\",\n      \"duration\": \"0:24\",\n      \"view_count\": \"293\",\n      \"published\": \"3 years ago\",\n      \"description\": \"\",\n      \"keywords\": [\n        \"LearnItOnTikTok\",\n        \"shephyken\",\n        \"businesstips\",\n        \"customerservice\",\n        \"customerserviceexperience\",\n        \"home\",\n        \"fyp\",\n        \"foryoupage\",\n        \"reels\",\n        \"youtube\",\n        \"customerservicetips\",\n        \"Pepsi Apple Pie Challenge\"\n      ],\n      \"category\": \"People & Blogs\",\n      \"lengthSeconds\": \"24\",\n      \"channelTitle\": \"Shep Hyken: Customer Service & CX Expert\"\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+            "stderr": ""
+          }
+        }
+      ]
+    },
+    {
+      "ok": true,
+      "slot": "whatsapp-current",
+      "fonte": "WhatsApp IVS via planilha de conversas",
+      "modo": "current",
+      "periodo": "últimas 6h",
+      "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260508-231551-whatsapp-current.md",
+      "contadores": {
+        "total_messages": 3,
+        "unique_leads": 3,
+        "total_inbound": 3,
+        "total_outbound": 0,
+        "wins": 0,
+        "drops": 0
+      },
+      "aprendizados": "SEM_APRENDIZADOS_NOVOS - volume insuficiente",
+      "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "ok": true,
+      "slot": "whatsapp-historical",
+      "fonte": "WhatsApp IVS via planilha de conversas",
+      "modo": "historical",
+      "periodo": "últimos 180 dias",
+      "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260506-212346-whatsapp-historical.md",
+      "contadores": {
+        "total_messages": 5060,
+        "unique_leads": 322,
+        "total_inbound": 2150,
+        "total_outbound": 2910,
+        "wins": 23,
+        "drops": 5
+      },
+      "aprendizados": "## 1. Confirmação com múltipla escolha\n**Observacao:** Em todas as vitórias de confirmação, o closer enviou mensagem com nome do lead, procedimento/horário exato e três opções de resposta literais. O lead respondeu apenas \"Confirmo\". Exemplo real: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resultado: \"Confirmo\".\n**Acao para a Clara:** Sempre confirmar consultas citando o procedimento, o dia e o horário exatos, e oferecer exatamente três opções de resposta: *Confirmo*, *Quero remarcar* ou *Não vou conseguir*.\n\n## 2. Pitch de conteúdo antes do agendamento\n**Observacao:** Quando a Clara ofereceu explicar o que estava incluído na consulta (\"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\") ou detalhou o funcionamento individualizado antes do lead pedir, o lead dropou. Respostas reais: \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\" e \"Por enquanto não\".\n**Acao para a Clara:** Proibir envio de explicações detalhadas sobre conteúdo da consulta, PDFs ou pitch longo de procedimentos antes de ter uma data/hora de agendamento confirmada ou uma objeção explícita do lead.\n\n## 3. Saudação aberta genérica\n**Observacao:** A mensagem de abertura \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" recebeu drop imediato: \"Bom dia. Por enquanto não vou querer nao\". A falta de direcionamento na primeira interação gerou rejeição.\n**Acao para a Clara:** Eliminar saudações genéricas do tipo \"Como posso te ajudar hoje?\". A primeira mensagem deve propor diretamente um horário, confirmar uma consulta existente ou agendar uma visita, nunca abrir com pergunta ampla.\n\n## 4. Recuperação de histórico por reenvio\n**Observacao:** Ao perder o contexto, o closer usou a frase exata: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" O lead não abandonou; ao contrário, avançou: \"Confirmado amanhã?\".\n**Acao para a Clara:** Se perder o histórico da conversa, usar a frase literal: \"Não consegui recuperar o histórico anterior por aqui. Me reenvia a última mensagem ou a tarefa que ficou pendente, e eu continuo imediatamente.\" Em vez de pedir resumo genérico ao lead.",
+      "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "slot": "x_twitter",
+      "date": "2026-05-08T15:40:08.116475",
+      "weekday": "Friday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "X/Twitter",
+      "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+      "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+      "perfil": "Gong_io",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-profile --screenname Gong_io --limit 5",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": false,\n  \"source\": \"x-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260508-154013-x-profile-Gong_io.json\",\n  \"screenname\": \"Gong_io\",\n  \"count\": 0,\n  \"sample\": []\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "slot": "youtube",
+      "date": "2026-05-08T13:30:10.695489",
+      "weekday": "Friday",
+      "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+      "fonte": "YouTube",
+      "canal_ou_busca": "Camila Porto Thiago Concer G4 Educação",
+      "buscar": "WhatsApp vendas vendas consultivas cadência follow-up",
+      "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+      "coleta": {
+        "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Camila Porto Thiago Concer G4 Educação WhatsApp vendas vendas consultivas cadência follow-up --limit 3",
+        "returncode": 0,
+        "stdout": "{\n  \"ok\": true,\n  \"source\": \"rapidapi-yt-api\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260508-133018-search.json\",\n  \"items\": [\n    {\n      \"title\": \"6 técnicas para usar quando o cliente visualiza e não responde\",\n      \"url\": \"https://www.youtube.com/watch?v=B337-JzY6wc\",\n      \"channel\": \"Thiago Concer\",\n      \"duration\": \"7:58\",\n      \"view_count\": \"388519\",\n      \"published\": \"5 years ago\",\n      \"description\": \"Clique aqui para entrar na maior Comunidade de formação de vendas do Brasil: ...\",\n      \"description_full\": \"👇Clique aqui para entrar na maior Comunidade de formação de vendas do Brasil:\\nhttps://orgulhodeservendedor.com.br/comunidade/?src=Org_Youtube_Vídeo_COSV001-vendas&utm_source=Org&utm_medium=Youtube&utm_content=Vídeo&utm_campaign=COSV001-vendas&utm_term=\\n\\nTime de cuidados para você entrar na Comunidade de um jeito ou de outro: https://api.whatsapp.com/send/?phone=5519996166940&text&type=phone_number&app_absent=0 \\n\\nMuitos vendedores sofrem na hora de vender por WhatsApp, isso é bem comum. No vídeo de hoje você confere 6 técnicas para usar quando o cliente visualiza e não responde.\\n\\n🔎 Vem conhecer as dicas que eu uso e que funcionam de verdade. Dê o play e inscreva-se no canal!\\n\\n🚀 Inscreva-se agora e não perca os vídeos que vão te transformar em um monstro das vendas.\\nwww.youtube.com/c/ThiagoConcer?sub_confirmation=1\\n\\nQuer receber mais conteúdos grátis sobre técnicas de vendas?\\nAcesse meu site e se cadastre para receber em primeira mão: https://thiagoconcer.com.br\\n\\n============ TUDO SOBRE A OSV =============\\n📸 Siga o perfil no Instagram: https://www.instagram.com/thiagoconceroficial/ \\n📝 Leia todos os blogs: https://thiagoconcer.com.br/blog/ \\n📲 Entre para o grupo do Telegram: https://t.me/comunidadeOSV \\n\\n\\n=========== PARA ARREBENTAR DE VENDER ============\\n📚 Curso gratuito de CRM na pratica: Estratégia de vendas MATADORA\\nhttps://orgulhodeservendedor.com.br/estrategia-de-vendas-matadora/\\n\\n📚 Leia o meu livro Vendas Não Ocorrem Por Acaso: https://www.altabooks.com.br/produto/vendas-nao-ocorrem-por-acaso/ \\n\\n📌 Curso completo para vendedores - Clube OSV: https://osv.thiagoconcer.com.br/clube-osv/ \\n\\n🎯 Para gestores comerciais - Sales Clube: https://salesclube.com.br/ \\n\\n#OSV #thiagoconcer #vendasWhatsapp #tecnicasdevendas\",\n      \"keywords\": [\n        \"osv14194\",\n        \"video motivacional de vendas\",\n        \"video de vendas\",\n        \"video sobre vendas\",\n        \"thiago concer\",\n        \"tecnicas de vendas\",\n        \"dicas de vendas\",\n        \"como vender\",\n        \"como vender mais\",\n        \"como vender muito\",\n        \"como vender bem\",\n        \"como aprender vender\",\n        \"como ser um bom vendedor\",\n        \"o que fazer para vender mais\",\n        \"o que fazer para vender muito\",\n        \"vender mais\",\n        \"vender bem\",\n        \"ferramentas de vendas\",\n        \"video para vendedores\",\n        \"video para vendas\"\n      ],\n      \"category\": \"Education\",\n      \"lengthSeconds\": \"478\",\n      \"channelTitle\": \"Thiago Concer\"\n    },\n    {\n      \"title\": \"COMO ABORDAR O CLIENTE NO PRIMEIRO CONTATO! #shorts\",\n      \"url\": \"https://www.youtube.com/watch?v=WW-5rFEmgNQ\",\n      \"channel\": \"Thiago Concer\",\n      \"duration\": \"1:00\",\n      \"view_count\": \"369577\",\n      \"published\": \"1 year ago\",\n      \"description\": \"... o cliente compra você primeiro e o produto depois se durante a conversa ele sentir que você tá mais preocupado com a venda ...\",\n      \"category\": \"Education\",\n      \"lengthSeconds\": \"59\",\n      \"channelTitle\": \"Thiago Concer\"\n    },\n    {\n      \"title\": \"ATENÇÃO VENDEDORES: WhatsApp é uma MÁQUINAS DE VENDAS\",\n      \"url\": \"https://www.youtube.com/watch?v=niqdLSPqVPU\",\n      \"channel\": \"Thiago Concer\",\n      \"duration\": \"6:32\",\n      \"view_count\": \"6029\",\n      \"published\": \"9 months ago\",\n      \"description\": \"CONHEÇA A ANEV - https://anevedu.com.br/youtube A Formação mais completa para vendedores profissionais do Brasil.\",\n      \"description_full\": \"CONHEÇA A ANEV - https://anevedu.com.br/youtube\\nA Formação mais completa para vendedores profissionais do Brasil. \\n\\nVocê já se perguntou como corrigir erros nas suas vendas pelo WhatsApp? Aprenda técnicas eficazes para se tornar um vendedor mais competente e alcançar suas metas de vendas, otimizando cada interação e conquistando clientes fiéis!\\n\\n\\n#vendedor #vendas #vendaswhatsapp\",\n      \"keywords\": [\n        \"osv14194\",\n        \"video motivacional de vendas\",\n        \"video de vendas\",\n        \"video sobre vendas\",\n        \"thiago concer\",\n        \"tecnicas de vendas\",\n        \"dicas de vendas\",\n        \"como vender\",\n        \"como vender mais\",\n        \"como vender muito\",\n        \"como vender bem\",\n        \"como aprender vender\",\n        \"como ser um bom vendedor\",\n        \"o que fazer para vender mais\",\n        \"o que fazer para vender muito\",\n        \"vender mais\",\n        \"vender bem\",\n        \"ferramentas de vendas\",\n        \"video para vendedores\",\n        \"video para vendas\"\n      ],\n      \"category\": \"Education\",\n      \"lengthSeconds\": \"392\",\n      \"channelTitle\": \"Thiago Concer\"\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+        "stderr": ""
+      }
+    }
+  ]
+}
