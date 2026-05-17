@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "slot": "youtube",
+  "date": "2026-05-16T10:30:11.383969-03:00",
+  "weekday": "Saturday",
+  "dia_plano": "sábado",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Grant Cardone Jordan Belfort",
+  "buscar": "follow up tonality objection handling ethical closing",
+  "entrega": "1 condução firme sem agressividade",
+  "regra": "Conteúdo externo vira hipótese operacional. Não copiar. Não virar regra canônica sem Maria/Tiaro + RC-25/Graphify.",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Grant Cardone Jordan Belfort follow up tonality objection handling ethical closing --limit 3",
+    "returncode": 0,
+    "stderr": "",
+    "saved_raw": "/root/.openclaw/reports/youtube-learning/20260516-133019-search.json",
+    "items_count": 3
+  },
+  "aprendizados": [
+    {
+      "video": 1,
+      "title": "3 rules of expert SALES | Jordan Belfort",
+      "url": "https://www.youtube.com/watch?v=19gBpFGQMy4",
+      "channel": "Motivational Mirror",
+      "aplicacao_whatsapp_clara": "Converter a ideia do vídeo em pergunta curta, condução consultiva ou follow-up premium; não copiar literalmente.",
+      "hipotese_operacional": "Usar o tema \"3 rules of expert SALES | Jordan Belfort\" para melhorar 1 condução firme sem agressividade.",
+      "risco": "Não usar tom agressivo, promessa de resultado, pressão indevida ou regra clínica.",
+      "evidencia_resumo": ""
+    },
+    {
+      "video": 2,
+      "title": "How to Handle Any Objection | Free Sales Training Program | Sales School with Jordan Belfort",
+      "url": "https://www.youtube.com/watch?v=1CiYGZ6-Z80",
+      "channel": "The Wolf of Wall Street",
+      "aplicacao_whatsapp_clara": "Converter a ideia do vídeo em pergunta curta, condução consultiva ou follow-up premium; não copiar literalmente.",
+      "hipotese_operacional": "Usar o tema \"How to Handle Any Objection | Free Sales Training Program | Sales School with Jordan Belfort\" para melhorar 1 condução firme sem agressividade.",
+      "risco": "Não usar tom agressivo, promessa de resultado, pressão indevida ou regra clínica.",
+      "evidencia_resumo": "Welcome to Sales School! In this lesson, JB explains how to handle any objection during a sale. SPONSORED BY: netsuite.com/school lordjones.com/school LISTEN TO SALES SCHOOL: SPOTIFY: https://spoti.fi/2IaMgT3 APPLE: https://apple.co/33EDghh GOOGLE: https://bit.ly/30L1hRT SUBSCRIBE TO JB'S YOUTUBE CHANNEL: https://bit.ly/3iQ3C4u FOLLOW JB: INSTAGRAM: https://bit.ly/2Fj4jSz FACEBOOK: https://bit.ly/2Kr2bMO TWITTER: https://bit.ly/2Xub1j7 LINKEDIN: https://bit.ly/3175M9H CAMEO: https://bit.ly/2FC0tHd TIKTOK: https://bit.ly/2Yfcp86 #JordanBelfort #WolfOfWallStreet #SalesSchool"
+    },
+    {
+      "video": 3,
+      "title": "Pricing, Price Objections, and Lying Customers- Grant Cardone",
+      "url": "https://www.youtube.com/watch?v=siKV9kalIBg",
+      "channel": "Grant Cardone",
+      "aplicacao_whatsapp_clara": "Converter a ideia do vídeo em pergunta curta, condução consultiva ou follow-up premium; não copiar literalmente.",
+      "hipotese_operacional": "Usar o tema \"Pricing, Price Objections, and Lying Customers- Grant Cardone\" para melhorar 1 condução firme sem agressividade.",
+      "risco": "Não usar tom agressivo, promessa de resultado, pressão indevida ou regra clínica.",
+      "evidencia_resumo": "Do you struggle with customers giving you price objections? The key to handling a price objection is to take control of the whole conversation from the beginning. I want to help you handle even professional negotiators on price! For more on this presentation, go to https://grantcardonebootcamp.com/free The 10X Business Boot Camp is an incredible 3-day workshop where Grant Cardone, the #1 Business Consultant in America, works with you to devise a sales and marketing plan to drive 10X more sales to your company. Solopreneurs, small business owners, and large corporations attend this event to get Grant Cardone’s one-on-one guidance to take their revenues to another level. Receive the most curre"
+    }
+  ],
+  "classificacao_obrigatoria": "testar 3 dias",
+  "proximo_passo": "Cruzar no fechamento com conversas reais do WhatsApp antes de propor alteração canônica."
+}

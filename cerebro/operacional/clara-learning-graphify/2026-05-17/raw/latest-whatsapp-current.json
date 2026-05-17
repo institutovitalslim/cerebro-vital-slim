@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260517-011606-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 13,
+    "unique_leads": 3,
+    "total_inbound": 13,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "## 1. Comunicação fragmentada de sintomas\n**Observacao:** Leads descrevem problemas de saúde em mensagens curtas, separadas e com erros de digitação, como \"Estômago alto\", \"Hipertensa\", \"A dor\", \"Não me deixa dormir\", \"Baixa alta estima\" e \"Não me, sentir bem\".\n**Acao para a Clara:** Ao receber duas ou mais mensagens curtas seguidas (< 5 palavras) do mesmo lead, consolide os pontos antes de prosseguir: \"Obrigada por compartilhar. Entendi que você sente [sintoma 1], [sintoma 2] e que isso afeta [impacto]. Estou certa?\"\n\n## 2. Aberturas genéricas repetidas\n**Observacao:** Dois dos três leads iniciaram com a frase exata: \"Olá! Tenho interesse e queria mais informações, por favor.\"\n**Acao para a Clara:** Diante dessa abertura padronizada, não peça para o lead especificar o interesse do zero; assuma o contexto da clínica e pergunte diretamente: \"Olá! Seja bem-vindo(a) ao Instituto Vital Slim. Para te passar as informações certas, me conta: qual é o seu principal objetivo ou incômodo hoje?\"\n\n## 3. Follow-up espontâneo por ausência de resposta\n**Observacao:** Após a mensagem inicial, um mesmo lead enviou sequencialmente \"Forma geral\", \"Baixa alta estima\", \"Não me, sentir bem\", \"Sim\", \"Sim\", demonstrando tentativa de completar a informação enquanto aguardava atendimento.\n**Acao para a Clara:** Se identificar múltiplas mensagens consecutivas do mesmo lead em curto espaço de tempo, priorize uma resposta que valide todas: \"Agradeço você ter compartilhado todos esses detalhes. Vou organizar cada ponto para que a gente consiga te ajudar da melhor forma.\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}
