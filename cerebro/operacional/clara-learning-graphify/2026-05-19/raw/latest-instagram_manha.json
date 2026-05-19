@@ -1,0 +1,16 @@
+{
+  "slot": "instagram_manha",
+  "date": "2026-05-19T00:26:14.449297",
+  "weekday": "Tuesday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "Instagram",
+  "perfil": "camilaporto",
+  "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+  "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username camilaporto --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260519-002616-instagram-profile-camilaporto.json\",\n  \"items\": [\n    {\n      \"shortcode\": \"DYX7ef4Rbvl\",\n      \"caption\": \"💁🏼‍♀️✨\",\n      \"likes\": 21,\n      \"comments\": 0,\n      \"taken_at\": 1778879447,\n      \"media_type\": 1,\n      \"product_type\": \"feed\",\n      \"video_url_available\": false,\n      \"video_url\": \"\"\n    },\n    {\n      \"shortcode\": \"DXnNmgJkQR2\",\n      \"caption\": \"• dos últimos dias •\",\n      \"likes\": 40,\n      \"comments\": 1,\n      \"taken_at\": 1777244760,\n      \"media_type\": 8,\n      \"product_type\": \"carousel_container\",\n      \"video_url_available\": false,\n      \"video_url\": \"\"\n    },\n    {\n      \"shortcode\": \"DXcvYQ-EZ4B\",\n      \"caption\": \"• 💁🏼‍♀️✌🏻✨ •\",\n      \"likes\": 16,\n      \"comments\": 1,\n      \"taken_at\": 1776893393,\n      \"media_type\": 1,\n      \"product_type\": \"feed\",\n      \"video_url_available\": false,\n      \"video_url\": \"\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  }
+}

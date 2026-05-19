@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260519-011834-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 87,
+    "unique_leads": 9,
+    "total_inbound": 87,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "## 1. Abertura padronizada de interesse\n**Observacao:** Quatro leads abriram com a frase praticamente identica: \"Olá! Tenho interesse e queria mais informações, por favor.\" (uma variacao incluiu o emoji 😁), sugerindo origem comum de campanha ou anuncio.\n**Acao para a Clara:** Ao reconhecer essa abertura padronizada, responder imediatamente validando o interesse e qualificando em uma unica mensagem: \"Obrigada pelo interesse! Para te passar as informacoes certas, me conta: voce busca emagrecimento, reposicao hormonal ou avaliacao nutricional?\"\n\n## 2. Retorno de atendimento humano anterior\n**Observacao:** Lead retomou conversa mencionando atendente e contexto pendente: \"Estava falando a semana passada com Tiaro\", \"Referente a consulta do meu esposo\" e \"Fiquei de enviar os dados dele\".\n**Acao para a Clara:** Sempre que detectar nomes de atendentes ou frases como \"estava falando com\" e \"fiquei de enviar\", perguntar antes de prosseguir: \"Entendi! Voce deseja dar continuidade ao mesmo atendimento com o Tiaro ou posso ajudar agora com o envio dos dados?\"\n\n## 3. Objeção sobre plano de saúde empresarial\n**Observacao:** Lead questionou especificamente sobre cobertura: \"Vocês trabalham com plano de saúde? Bradesco empresarial\".\n**Acao para a Clara:** Responder com clareza sobre a politica real de convenios da clinica. Se nao houver cobertura para o plano mencionado, pivotar imediatamente: \"Nao temos convenio com esse plano, mas o valor particular e acessivel. Posso te enviar os investimentos e ja verificar uma data para voce?\"\n\n## 4. Entrada por demanda ocupacional/ASO\n**Observacao:** Lead trouxe contexto corporativo espontaneamente: \"No meu último ASO, a empresa que trabalho pediu para procurar um endocrinologista e um nutricionista por conta do resultado do IMC\".\n**Acao para a Clara:** Ao detectar termos como \"ASO\", \"empresa pediu\" ou \"IMC\", adaptar a abordagem destacando agilidade em relatorios medicos: \"Entendi que foi uma demanda do trabalho. Aqui fazemos a avaliacao completa e emitimos os laudos necessarios. Voce tem prazo para entregar na empresa?\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}
