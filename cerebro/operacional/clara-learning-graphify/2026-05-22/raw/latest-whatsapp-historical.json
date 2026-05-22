@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260518-093426-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 5373,
+    "unique_leads": 344,
+    "total_inbound": 2461,
+    "total_outbound": 2912,
+    "wins": 26,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Confirmações com palavras-chave estruturadas\n**Observacao:** Nos casos de vitória, o closer enviou mensagens com opções de resposta explícitas e em negrito: *\"Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\"* Os leads responderam literalmente *\"Confirmo\"*, *\"Confirmo\"*, *\"Ok,combinado\"* e *\"Confirmo no início da tarde\"*.\n**Acao para a Clara:** Sempre que confirmar uma consulta ou aplicacao, enviar obrigatoriamente as três opções de resposta em negrito: *Confirmo*, *Quero remarcar* e *Não vou conseguir*. Não ultrapassar três alternativas.\n\n## 2. Explicações adicionais afastam leads frios\n**Observacao:** Quando o closer ofereceu *\"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\"* ou enviou texto longo explicativo (*\"Funciona de forma individualizada, viu? Na consulta, a Dra. avalia seu caso com profundidade...\"*), os leads droparam imediatamente com *\"Por enquanto, não vou marcar a consulta, estou tomando informações\"* e *\"Por enquanto não\"*.\n**Acao para a Clara:** Se o lead não solicitar detalhes, proibir oferecer \"explicar o que está incluído\" ou enviar textos descritivos longos antes do agendamento. Ir direto para a proposta de dia e horário.\n\n## 3. Pergunta aberta gera rejeição imediata\n**Observacao:** A abertura *\"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\"* foi respondida com rejeição direta: *\"Bom dia. Por enquanto não vou querer nao\"*.\n**Acao para a Clara:** Nunca usar *\"Como posso te ajudar?\"* como primeira mensagem em leads frios. Substituir por uma proposta concreta, exemplo: *\"Vi que você tem interesse no Instituto Vital Slim. Tenho horário amanhã às 10h ou às 15h. Qual fica melhor?\"*\n\n## 4. Pergunta sobre prazo de exames gera adiamento tácito\n**Observacao:** Ao perguntar *\"Quando vc pretende fazer os exames de sangue para podermos já ver uma data para o seu atendimento conosco?\"*, o lead respondeu evasivamente *\"Assim que fizer os exames te aviso.\"*, sem marcar nada.\n**Acao para a Clara:** Não perguntar quando o lead pretende fazer exames. Oferecer uma data específica de consulta dizendo que os exames podem ser entregues nela ou realizados previamente com link/envio, mantendo o compromisso agendado.\n\n## 5. Imprevistos requerem remarcação proativa\n**Observacao:** Leads justificaram ausências com imprevistos reais: *\"Tive uma enxaqueca forte hoje pela manhã, meu celular acabou descarregando\"* e *\"Chegou uma equipe da séc e do Senai me prendeu até pouco tempo\"*.\n**Acao para a Clara:** Ao identificar desculpas por falta ou atraso, suspender qualquer cobrança e oferecer imediatamente duas opções concretas de remarcação, exemplo: *\"Sem problemas! Posso remarcar para amanhã às 9h ou quinta às 14h?\"*",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

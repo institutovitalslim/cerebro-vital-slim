@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260521-232012-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 28,
+    "unique_leads": 6,
+    "total_inbound": 28,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "## 1. Filtro de convênio na abertura\n**Observacao:** Lead inicia perguntando especificamente sobre plano de saúde (\"Aceita plano de saúde?\", \"Amil jasmim\") e declara impossibilidade de prosseguir quando não encontra a informação (\"No momento só consigo pelo convênio\").\n**Acao para a Clara:** Sempre que o lead mencionar convênio/plano na primeira mensagem, responder de forma direta e imediata: \"Não aceitamos plano de saúde/convênio, mas temos opções de pagamento no cartão e PIX. Posso te passar os valores para você avaliar?\"\n\n## 2. Narrativa clínica interconectada\n**Observacao:** Leads relatam múltiplos sintomas e já fazem auto-conexões entre eles (\"Sinto sono o tempo todo\", \"E estou muito incomodada com meu peso\", \"Acredito que as duascoisas estão conectadas\", \"Tenho 50 anos e ja posso estar na perimenopausa\").\n**Acao para a Clara:** Validar a percepção do lead antes de puxar agendamento: \"Você está certa em perceber essa conexão. Sono, peso e hormônios costumam estar relacionados, e a avaliação médica vai justamente investigar isso. Vamos agendar?\"\n\n## 3. Desistência por falta de previsão no presencial\n**Observacao:** Lead que havia sugerido horário (\"Opa. Pode ser amanha 10h\") desistiu no dia porque foi atendido por ordem de chegada sem previsão (\"Vim pra um compromisso por ordem de chegada e não tenho previsão de ser atendida ,vou desmarcar\") e tentou remarcar para outro dia/horário (\"Posso ir no sábado ?\", \"De manhã 8:30\").\n**Acao para a Clara:** Sempre confirmar na marcação se é consulta com hora marcada ou ordem de chegada. Se houver risco de atraso, enviar alerta proativo oferecendo remarcação antes que o lead desista no local.\n\n## 4. Aberturas vagas exigem condução imediata\n**Observacao:** Metade dos leads (3 de 6) abriu com saudações curtas ou palavras isoladas (\"Boa tarde!\", \"Pode\", \"Boa tarde!\") sem contexto, deixando o atendimento sem direção.\n**Acao para a Clara:** Nunca responder saudações vagas apenas com \"Como posso ajudar?\". Usar direcionamento imediato: \"Boa tarde! Sou a Clara do Instituto Vital Slim. Posso te ajudar com agendamento de emagrecimento ou análise hormonal hoje?\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

@@ -1,0 +1,865 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "qa_diario_clara_20260522_graph_nodes.py",
+      "file_type": "code",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L1",
+      "id": "qa_diario_clara_20260522_graph_nodes_py",
+      "community": 1,
+      "norm_label": "qa_diario_clara_20260522_graph_nodes.py"
+    },
+    {
+      "label": "ClaraQADiarioConversao20260522",
+      "file_type": "code",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L1",
+      "id": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "community": 1,
+      "norm_label": "claraqadiarioconversao20260522"
+    },
+    {
+      "label": ".evidencia_zero_outbound()",
+      "file_type": "code",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L4",
+      "id": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_evidencia_zero_outbound",
+      "community": 1,
+      "norm_label": ".evidencia_zero_outbound()"
+    },
+    {
+      "label": ".melhoria_sla_primeira_resposta()",
+      "file_type": "code",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L7",
+      "id": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_sla_primeira_resposta",
+      "community": 1,
+      "norm_label": ".melhoria_sla_primeira_resposta()"
+    },
+    {
+      "label": ".melhoria_abertura_vaga()",
+      "file_type": "code",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L10",
+      "id": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_abertura_vaga",
+      "community": 1,
+      "norm_label": ".melhoria_abertura_vaga()"
+    },
+    {
+      "label": ".melhoria_espera_sem_previsao()",
+      "file_type": "code",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L13",
+      "id": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_espera_sem_previsao",
+      "community": 1,
+      "norm_label": ".melhoria_espera_sem_previsao()"
+    },
+    {
+      "label": ".guardrail_operacional()",
+      "file_type": "code",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L16",
+      "id": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_guardrail_operacional",
+      "community": 1,
+      "norm_label": ".guardrail_operacional()"
+    },
+    {
+      "label": "Graphify seed for Clara daily conversion QA 2026-05-22 01:30 UTC.",
+      "file_type": "rationale",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L2",
+      "id": "raw_qa_diario_clara_20260522_graph_nodes_rationale_2",
+      "community": 1,
+      "norm_label": "graphify seed for clara daily conversion qa 2026-05-22 01:30 utc."
+    },
+    {
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 0,
+      "norm_label": "clara whatsapp",
+      "id": "clara"
+    },
+    {
+      "label": "Conselho Growth",
+      "type": "council",
+      "community": 0,
+      "norm_label": "conselho growth",
+      "id": "conselho_growth"
+    },
+    {
+      "label": "Agendamento premium de pacientes/leads",
+      "type": "capability",
+      "community": 0,
+      "norm_label": "agendamento premium de pacientes/leads",
+      "id": "agendamento_premium"
+    },
+    {
+      "label": "latest-evidence-gate",
+      "type": "learning_slot",
+      "source_file": "raw/latest-evidence-gate.json",
+      "community": 0,
+      "norm_label": "latest-evidence-gate",
+      "id": "slot_latest_evidence_gate"
+    },
+    {
+      "label": "instagram_manha",
+      "type": "learning_slot",
+      "source_file": "raw/latest-instagram_manha.json",
+      "community": 2,
+      "norm_label": "instagram_manha",
+      "id": "slot_instagram_manha"
+    },
+    {
+      "label": "Instagram",
+      "type": "source",
+      "community": 2,
+      "norm_label": "instagram",
+      "id": "fonte_instagram"
+    },
+    {
+      "label": "vendas consultivas, WhatsApp, atendimento premium",
+      "type": "topic",
+      "community": 2,
+      "norm_label": "vendas consultivas, whatsapp, atendimento premium",
+      "id": "tema_vendas_consultivas_whatsapp_atendimento_premium"
+    },
+    {
+      "label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "type": "deliverable",
+      "community": 2,
+      "norm_label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "id": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida"
+    },
+    {
+      "label": "instagram_tarde",
+      "type": "learning_slot",
+      "source_file": "raw/latest-instagram_tarde.json",
+      "community": 2,
+      "norm_label": "instagram_tarde",
+      "id": "slot_instagram_tarde"
+    },
+    {
+      "label": "SPIN, negocia\u00e7\u00e3o, social selling ou cl\u00ednica premium",
+      "type": "topic",
+      "community": 2,
+      "norm_label": "spin, negociacao, social selling ou clinica premium",
+      "id": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium"
+    },
+    {
+      "label": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avan\u00e7o",
+      "type": "deliverable",
+      "community": 2,
+      "norm_label": "1 resposta ruim + 1 resposta clara premium + 1 pergunta de avanco",
+      "id": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o"
+    },
+    {
+      "label": "revisao",
+      "type": "learning_slot",
+      "source_file": "raw/latest-revisao.json",
+      "community": 3,
+      "norm_label": "revisao",
+      "id": "slot_revisao"
+    },
+    {
+      "label": "Revis\u00e3o interna",
+      "type": "source",
+      "community": 3,
+      "norm_label": "revisao interna",
+      "id": "fonte_revis_o_interna"
+    },
+    {
+      "label": "aprendizados do dia",
+      "type": "topic",
+      "community": 3,
+      "norm_label": "aprendizados do dia",
+      "id": "tema_aprendizados_do_dia"
+    },
+    {
+      "label": "classificar aplicar amanh\u00e3 / descartar / testar 3 dias / propor mem\u00f3ria",
+      "type": "deliverable",
+      "community": 3,
+      "norm_label": "classificar aplicar amanha / descartar / testar 3 dias / propor memoria",
+      "id": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria"
+    },
+    {
+      "label": "whatsapp-current",
+      "type": "learning_slot",
+      "source_file": "raw/latest-whatsapp-current.json",
+      "community": 0,
+      "norm_label": "whatsapp-current",
+      "id": "slot_whatsapp_current"
+    },
+    {
+      "label": "WhatsApp IVS via planilha de conversas",
+      "type": "source",
+      "community": 0,
+      "norm_label": "whatsapp ivs via planilha de conversas",
+      "id": "fonte_whatsapp_ivs_via_planilha_de_conversas"
+    },
+    {
+      "label": "obje\u00e7\u00f5es, vit\u00f3rias, quedas, timing de convite para agenda, linguagem premium e follow-up",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "objecoes, vitorias, quedas, timing de convite para agenda, linguagem premium e follow-up",
+      "id": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f"
+    },
+    {
+      "label": "padr\u00f5es de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "padroes de conversa reais para melhorar agendamento da clara sem expor pii",
+      "id": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii"
+    },
+    {
+      "label": "whatsapp-historical",
+      "type": "learning_slot",
+      "source_file": "raw/latest-whatsapp-historical.json",
+      "community": 0,
+      "norm_label": "whatsapp-historical",
+      "id": "slot_whatsapp_historical"
+    },
+    {
+      "label": "x_twitter",
+      "type": "learning_slot",
+      "source_file": "raw/latest-x_twitter.json",
+      "community": 4,
+      "norm_label": "x_twitter",
+      "id": "slot_x_twitter"
+    },
+    {
+      "label": "X/Twitter",
+      "type": "source",
+      "community": 4,
+      "norm_label": "x/twitter",
+      "id": "fonte_x_twitter"
+    },
+    {
+      "label": "posts de alto engajamento sobre persuas\u00e3o, obje\u00e7\u00f5es, atendimento, neg\u00f3cios locais ou experi\u00eancia do cliente",
+      "type": "topic",
+      "community": 4,
+      "norm_label": "posts de alto engajamento sobre persuasao, objecoes, atendimento, negocios locais ou experiencia do cliente",
+      "id": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai"
+    },
+    {
+      "label": "1 frase curta + 1 \u00e2ngulo de obje\u00e7\u00e3o + 1 cuidado contra agressividade",
+      "type": "deliverable",
+      "community": 4,
+      "norm_label": "1 frase curta + 1 angulo de objecao + 1 cuidado contra agressividade",
+      "id": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade"
+    },
+    {
+      "label": "If you are booking a hotel with MakeMyTrip, please think twice. The hotel experience was terrible, but the customer support was even worse. I shared video proof 5 days ago and stil",
+      "type": "external_learning_item",
+      "source_file": "raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "yogeshsingh297",
+      "community": 6,
+      "norm_label": "if you are booking a hotel with makemytrip, please think twice. the hotel experience was terrible, but the customer support was even worse. i shared video proof 5 days ago and stil",
+      "id": "item_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_hotel_experi"
+    },
+    {
+      "label": "If you are booking a hotel with MakeMyTrip, please think twice. The hotel experience was terrible, but the customer support was even worse. I shared video proof",
+      "type": "concept",
+      "community": 6,
+      "norm_label": "if you are booking a hotel with makemytrip, please think twice. the hotel experience was terrible, but the customer support was even worse. i shared video proof",
+      "id": "conceito_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_ho"
+    },
+    {
+      "label": "Join Let\u2019s Talk Service for a breakdown of the new \u201cSet Appointment\u201d feature and how it can help position your business as the FIRST choice servicer while improving the customer ex",
+      "type": "external_learning_item",
+      "source_file": "raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "BrandSource",
+      "community": 8,
+      "norm_label": "join let\u2019s talk service for a breakdown of the new \u201cset appointment\u201d feature and how it can help position your business as the first choice servicer while improving the customer ex",
+      "id": "item_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_feature_and"
+    },
+    {
+      "label": "Join Let\u2019s Talk Service for a breakdown of the new \u201cSet Appointment\u201d feature and how it can help position your business as the FIRST choice servicer while impro",
+      "type": "concept",
+      "community": 8,
+      "norm_label": "join let\u2019s talk service for a breakdown of the new \u201cset appointment\u201d feature and how it can help position your business as the first choice servicer while impro",
+      "id": "conceito_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_f"
+    },
+    {
+      "label": "Captain Obvious Specialist in chat \ud83d\udc4b\n\nHey team \u2014 just wanted to confirm:\n\nIs this still the preferred customer experience workflow for guests after a disappointing booking?\n\nAsking",
+      "type": "external_learning_item",
+      "source_file": "raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "DanielaLucca27",
+      "community": 9,
+      "norm_label": "captain obvious specialist in chat \ud83d\udc4b\n\nhey team \u2014 just wanted to confirm:\n\nis this still the preferred customer experience workflow for guests after a disappointing booking?\n\nasking",
+      "id": "item_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confirm_is_thi"
+    },
+    {
+      "label": "Captain Obvious Specialist in chat \ud83d\udc4b\n\nHey team \u2014 just wanted to confirm:\n\nIs this still the preferred customer experience workflow for guests after a disappoint",
+      "type": "concept",
+      "community": 9,
+      "norm_label": "captain obvious specialist in chat \ud83d\udc4b\n\nhey team \u2014 just wanted to confirm:\n\nis this still the preferred customer experience workflow for guests after a disappoint",
+      "id": "conceito_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confir"
+    },
+    {
+      "label": "I am hiring freshers for the Customer Experience team at Shoffr. \n\nOur cars and our drivers are the face of Shoffr, but the CX team is the voice - the voice that holds our guest's ",
+      "type": "external_learning_item",
+      "source_file": "raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "TechJobsDailyIN",
+      "community": 7,
+      "norm_label": "i am hiring freshers for the customer experience team at shoffr. \n\nour cars and our drivers are the face of shoffr, but the cx team is the voice - the voice that holds our guest's ",
+      "id": "item_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our_cars_and"
+    },
+    {
+      "label": "I am hiring freshers for the Customer Experience team at Shoffr. \n\nOur cars and our drivers are the face of Shoffr, but the CX team is the voice - the voice tha",
+      "type": "concept",
+      "community": 7,
+      "norm_label": "i am hiring freshers for the customer experience team at shoffr. \n\nour cars and our drivers are the face of shoffr, but the cx team is the voice - the voice tha",
+      "id": "conceito_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our"
+    },
+    {
+      "label": "Complicated booking systems slow businesses down. \ud83d\udeab\n\nWith BookingDyno, you can simplify bookings, reduce manual work, and create a smoother customer experience.\n\nLess stress. Faste",
+      "type": "external_learning_item",
+      "source_file": "raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "BookingDyno",
+      "community": 10,
+      "norm_label": "complicated booking systems slow businesses down. \ud83d\udeab\n\nwith bookingdyno, you can simplify bookings, reduce manual work, and create a smoother customer experience.\n\nless stress. faste",
+      "id": "item_complicated_booking_systems_slow_businesses_down_with_bookingdyno_you_can_s"
+    },
+    {
+      "label": "Complicated booking systems slow businesses down. \ud83d\udeab\n\nWith BookingDyno, you can simplify bookings, reduce manual work, and create a smoother customer experience.",
+      "type": "concept",
+      "community": 10,
+      "norm_label": "complicated booking systems slow businesses down. \ud83d\udeab\n\nwith bookingdyno, you can simplify bookings, reduce manual work, and create a smoother customer experience.",
+      "id": "conceito_complicated_booking_systems_slow_businesses_down_with_bookingdyno"
+    },
+    {
+      "label": "youtube",
+      "type": "learning_slot",
+      "source_file": "raw/latest-youtube.json",
+      "community": 5,
+      "norm_label": "youtube",
+      "id": "slot_youtube"
+    },
+    {
+      "label": "YouTube",
+      "type": "source",
+      "community": 5,
+      "norm_label": "youtube",
+      "id": "fonte_youtube"
+    },
+    {
+      "label": "tactical empathy customer experience premium service",
+      "type": "topic",
+      "community": 5,
+      "norm_label": "tactical empathy customer experience premium service",
+      "id": "tema_tactical_empathy_customer_experience_premium_service"
+    },
+    {
+      "label": "ideia central + aplica\u00e7\u00e3o WhatsApp + script antes/depois + m\u00e9trica + risco",
+      "type": "deliverable",
+      "community": 5,
+      "norm_label": "ideia central + aplicacao whatsapp + script antes/depois + metrica + risco",
+      "id": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "qa_diario_clara_20260522_graph_nodes_py",
+      "_tgt": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "source": "qa_diario_clara_20260522_graph_nodes_py",
+      "target": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "_tgt": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_evidencia_zero_outbound",
+      "source": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "target": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_evidencia_zero_outbound",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "_tgt": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_sla_primeira_resposta",
+      "source": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "target": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_sla_primeira_resposta",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "_tgt": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_abertura_vaga",
+      "source": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "target": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_abertura_vaga",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "_tgt": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_espera_sem_previsao",
+      "source": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "target": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_melhoria_espera_sem_previsao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "_tgt": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_guardrail_operacional",
+      "source": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "target": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522_guardrail_operacional",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "qa_diario_clara_20260522_graph_nodes.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "raw_qa_diario_clara_20260522_graph_nodes_rationale_2",
+      "_tgt": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "source": "raw_qa_diario_clara_20260522_graph_nodes_claraqadiarioconversao20260522",
+      "target": "raw_qa_diario_clara_20260522_graph_nodes_rationale_2",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "must_master",
+      "relationship": "must_master",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "agendamento_premium",
+      "source": "clara",
+      "target": "agendamento_premium"
+    },
+    {
+      "type": "sabatina",
+      "relationship": "sabatina",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "conselho_growth",
+      "source": "clara",
+      "target": "conselho_growth"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_latest_evidence_gate",
+      "source": "clara",
+      "target": "slot_latest_evidence_gate"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_instagram_manha",
+      "source": "clara",
+      "target": "slot_instagram_manha"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_instagram_tarde",
+      "source": "clara",
+      "target": "slot_instagram_tarde"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_revisao",
+      "source": "clara",
+      "target": "slot_revisao"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_whatsapp_current",
+      "source": "clara",
+      "target": "slot_whatsapp_current"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_whatsapp_historical",
+      "source": "clara",
+      "target": "slot_whatsapp_historical"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_x_twitter",
+      "source": "clara",
+      "target": "slot_x_twitter"
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "clara",
+      "_tgt": "slot_youtube",
+      "source": "clara",
+      "target": "slot_youtube"
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_instagram_manha",
+      "_tgt": "fonte_instagram",
+      "source": "slot_instagram_manha",
+      "target": "fonte_instagram"
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_instagram_manha",
+      "_tgt": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "source": "slot_instagram_manha",
+      "target": "tema_vendas_consultivas_whatsapp_atendimento_premium"
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_instagram_manha",
+      "_tgt": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "source": "slot_instagram_manha",
+      "target": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida"
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "fonte_instagram",
+      "_tgt": "slot_instagram_tarde",
+      "source": "fonte_instagram",
+      "target": "slot_instagram_tarde"
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_instagram_tarde",
+      "_tgt": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "source": "slot_instagram_tarde",
+      "target": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium"
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_instagram_tarde",
+      "_tgt": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "source": "slot_instagram_tarde",
+      "target": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o"
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_revisao",
+      "_tgt": "fonte_revis_o_interna",
+      "source": "slot_revisao",
+      "target": "fonte_revis_o_interna"
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_revisao",
+      "_tgt": "tema_aprendizados_do_dia",
+      "source": "slot_revisao",
+      "target": "tema_aprendizados_do_dia"
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_revisao",
+      "_tgt": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria",
+      "source": "slot_revisao",
+      "target": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria"
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_whatsapp_current",
+      "_tgt": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "source": "slot_whatsapp_current",
+      "target": "fonte_whatsapp_ivs_via_planilha_de_conversas"
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_whatsapp_current",
+      "_tgt": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "source": "slot_whatsapp_current",
+      "target": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f"
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_whatsapp_current",
+      "_tgt": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "source": "slot_whatsapp_current",
+      "target": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii"
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "_tgt": "slot_whatsapp_historical",
+      "source": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "target": "slot_whatsapp_historical"
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "_tgt": "slot_whatsapp_historical",
+      "source": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "target": "slot_whatsapp_historical"
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "_tgt": "slot_whatsapp_historical",
+      "source": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "target": "slot_whatsapp_historical"
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "fonte_x_twitter",
+      "source": "slot_x_twitter",
+      "target": "fonte_x_twitter"
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "source": "slot_x_twitter",
+      "target": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai"
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "source": "slot_x_twitter",
+      "target": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade"
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "item_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_hotel_experi",
+      "source": "slot_x_twitter",
+      "target": "item_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_hotel_experi"
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "item_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_feature_and",
+      "source": "slot_x_twitter",
+      "target": "item_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_feature_and"
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "item_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confirm_is_thi",
+      "source": "slot_x_twitter",
+      "target": "item_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confirm_is_thi"
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "item_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our_cars_and",
+      "source": "slot_x_twitter",
+      "target": "item_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our_cars_and"
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_x_twitter",
+      "_tgt": "item_complicated_booking_systems_slow_businesses_down_with_bookingdyno_you_can_s",
+      "source": "slot_x_twitter",
+      "target": "item_complicated_booking_systems_slow_businesses_down_with_bookingdyno_you_can_s"
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "item_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_hotel_experi",
+      "_tgt": "conceito_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_ho",
+      "source": "item_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_hotel_experi",
+      "target": "conceito_if_you_are_booking_a_hotel_with_makemytrip_please_think_twice_the_ho"
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "item_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_feature_and",
+      "_tgt": "conceito_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_f",
+      "source": "item_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_feature_and",
+      "target": "conceito_join_let_s_talk_service_for_a_breakdown_of_the_new_set_appointment_f"
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "item_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confirm_is_thi",
+      "_tgt": "conceito_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confir",
+      "source": "item_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confirm_is_thi",
+      "target": "conceito_captain_obvious_specialist_in_chat_hey_team_just_wanted_to_confir"
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "item_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our_cars_and",
+      "_tgt": "conceito_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our",
+      "source": "item_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our_cars_and",
+      "target": "conceito_i_am_hiring_freshers_for_the_customer_experience_team_at_shoffr_our"
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "item_complicated_booking_systems_slow_businesses_down_with_bookingdyno_you_can_s",
+      "_tgt": "conceito_complicated_booking_systems_slow_businesses_down_with_bookingdyno",
+      "source": "item_complicated_booking_systems_slow_businesses_down_with_bookingdyno_you_can_s",
+      "target": "conceito_complicated_booking_systems_slow_businesses_down_with_bookingdyno"
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_youtube",
+      "_tgt": "fonte_youtube",
+      "source": "slot_youtube",
+      "target": "fonte_youtube"
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_youtube",
+      "_tgt": "tema_tactical_empathy_customer_experience_premium_service",
+      "source": "slot_youtube",
+      "target": "tema_tactical_empathy_customer_experience_premium_service"
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "slot_youtube",
+      "_tgt": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "source": "slot_youtube",
+      "target": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco"
+    }
+  ],
+  "hyperedges": []
+}
