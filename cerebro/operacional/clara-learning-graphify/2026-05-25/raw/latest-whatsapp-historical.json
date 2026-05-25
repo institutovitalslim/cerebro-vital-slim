@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260525-093356-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 5653,
+    "unique_leads": 372,
+    "total_inbound": 2741,
+    "total_outbound": 2912,
+    "wins": 28,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Confirmação estruturada com CTA fechado\n**Observacao:** Nas vitórias, quando o closer envia mensagem com dados completos do agendamento + opções de resposta exatas, o lead confirma imediatamente. Exemplo real do closer: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resposta do lead: \"Confirmo\".\n**Acao para a Clara:** Ao confirmar consultas ou aplicações, sempre usar a estrutura exata: \"Oi, [Nome]! Tudo bem? 😊 Estou passando para confirmar seu [serviço] de [data], às [hora], aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\"\n\n## 2. Não empurrar agendamento em leads de pesquisa\n**Observacao:** Leads que estão apenas pesquisando rejeitam ofertas diretas de explicação de consulta ou pedidos de exame. Exemplo real de drop: closer disse \"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\" e o lead respondeu \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\". Outro: closer perguntou \"Quando vc pretende fazer os exames de sangue para podermos já ver uma data para o seu atendimento conosco?\" e o lead disse \"Assim que fizer os exames te aviso.\"\n**Acao para a Clara:** Se o lead chegar com \"Gostaria de saber mais informações sobre o Instituto Vital Slim\" ou disser que está apenas pesquisando, NÃO oferecer explicar a consulta nem pedir exames na primeira resposta. Primeiro perguntar: \"Qual é a sua principal queixa ou objetivo hoje?\" e só depois de entender o contexto oferecer a próxima etapa.\n\n## 3. Direcionar saudações vagas no primeiro toque\n**Observacao:** Várias aberturas de leads são saudações vazias que não avançam sozinhas, como \"Oi\", \"Boa tarde\", \"Consegue me ajudar?\", \"Boa tarde!!\" e \"Olá openclaw. Vc está aí?\". Sem direcionamento imediato, a conversa fica sem propósito.\n**Acao para a Clara:** Ao receber apenas \"Oi\", \"Boa tarde\", \"Consegue me ajudar?\" ou similar, responder em uma única mensada: \"Oi! Bem-vindo(a) ao Instituto Vital Slim 😊 Para te ajudar melhor, me conta: você busca informações sobre qual área? (Emagrecimento, Tricologia, Nutrição, etc.)\"\n\n## 4. Diferenciar atendimento de pacientes existentes\n**Observacao:** No meio dos leads novos aparecem mensagens de clientes já cadastrados, como \"Thiaro por favor, vc poderia mim reenviar as NFS, não estou conseguindo abrir,o link, obrigado!\" e \"Quanto à segunda dose de vitamina C , parece que a Dra., quer que eu tome, portanto vou marcar no decorrer da semana.\" Aplicar script de captação nesses casos gera atrito e desvio operacional.\n**Acao para a Clara:** Se a mensagem mencionar NFS, exames anteriores, aplicações já feitas, treinos agendados ou nomes de profissionais sem contexto de primeiro contato, perguntar antes de qualquer oferta: \"Você já é paciente do Instituto Vital Slim?\" Se sim, transferir para o setor administrativo ou agenda conforme o caso.",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

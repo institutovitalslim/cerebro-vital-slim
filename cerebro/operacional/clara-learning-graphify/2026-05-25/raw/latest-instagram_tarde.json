@@ -1,0 +1,16 @@
+{
+  "slot": "instagram_tarde",
+  "date": "2026-05-24T20:40:15.116773",
+  "weekday": "Sunday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "Instagram",
+  "perfil": "fabibertotti",
+  "buscar": "SPIN, negociação, social selling ou clínica premium",
+  "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username fabibertotti --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": false,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260524-204041-instagram-profile-fabibertotti.json\",\n  \"error\": \"HTTP Error 500: Internal Server Error\"\n}\n",
+    "stderr": ""
+  }
+}
