@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260526-011555-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 8,
+    "unique_leads": 4,
+    "total_inbound": 8,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "## 1. Lead qualificado deixado sem resposta\n**Observacao:** Um lead demonstrou interesse claro no servico com a mensagem \"Boa noite o problema é só na barriga\", mas o dia fechou com 0 mensagens enviadas pela Clara e nenhuma conversao iniciada.\n**Acao para a Clara:** Ao captar palavras como \"barriga\", \"problema é só na...\" ou \"gordura localizada\", responder imediatamente: \"Ola! Obrigada por entrar em contato com o Instituto Vital Slim. Para te ajudar com a regiao da barriga, posso fazer algumas perguntas rapidas?\"\n\n## 2. Spam de assessoria de imprensa poluindo a fila\n**Observacao:** Metade das mensagens do dia vieram de \"*Assessoria Silvana Silvana ✨:*\" oferecendo \"podcast maravilhoso na TV Band\" e \"pacote Premium\" de entrevistas, sem qualquer relacao com a clinica.\n**Acao para a Clara:** Se identificar remetente com termos como \"Assessoria\", \"podcast\", \"TV Band\" ou oferta de midia/entrevista, nao priorizar na fila de atendimento e sinalizar como \"conteudo nao relacionado\" para revisao humana ao final do dia.",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}
