@@ -1,0 +1,16 @@
+{
+  "slot": "youtube",
+  "date": "2026-05-27T13:30:30.154538",
+  "weekday": "Wednesday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Gong",
+  "buscar": "objection handling sales call review discovery questions",
+  "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Gong objection handling sales call review discovery questions --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"youtube-html-search\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260527-133037-search.json\",\n  \"items\": [\n    {\n      \"title\": \"5 perguntas de vendas que aumentarão drasticamente suas taxas de conversão\",\n      \"url\": \"https://www.youtube.com/watch?v=3-0UVSuekrQ\",\n      \"channel\": \"Gong.io\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"How the Most Successful Salespeople Handle Objections: Gong Labs Live Episode 3\",\n      \"url\": \"https://www.youtube.com/watch?v=ALlnBsVlPhE\",\n      \"channel\": \"Gong.io\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"How to Handle ANY Sales Objection: Gong Labs Live Episode 18\",\n      \"url\": \"https://www.youtube.com/watch?v=2USfncEUFeY\",\n      \"channel\": \"Gong.io\",\n      \"duration\": null,\n      \"view_count\": null\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260527-231838-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 71,
+    "unique_leads": 15,
+    "total_inbound": 71,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "## 1. Ausência de resposta gera perda imediata\n**Observacao:** No dia foram recebidas 71 mensagens de 15 leads únicos (incluindo \"Iniciar atendimento\", \"Quero\", \"gostaria de saber mais sobre o tratamento\", \"Valor\") e a conta enviou 0 mensagens. Um lead frustrou-se: \"Preciso de um atendimento efetivo... Se tivesse me dito o valor da consulta, provavelmente teria fechado.\"\n**Acao para a Clara:** Se houver qualquer latência técnica, ao retornar deve abrir com: \"Peço desculpas pela demora. Vi que você quer [repetir demanda]. Vou te atender agora.\" Jamais deixar leads de alta intenção sem retorno.\n\n## 2. Questionários no WhatsApp são rejeitados sem contexto médico\n**Observacao:** Lead disse explicitamente: \"Preciso de um atendimento efetivo, preciso de um médico e não acho q deva responder um questionário no WhatsApp\".\n**Acao para a Clara:** Antes de aplicar questionário, posicionar como triagem breve para o médico: \"Para que o médico já chegue preparado na sua consulta, posso fazer só 2 perguntas rápidas sobre sua saúde?\" Se o lead recusar, oferecer agendamento humano imediato.\n\n## 3. Falta de transparência de preço bloqueia conversão\n**Observacao:** Lead afirmou literalmente: \"Se tivesse me dito o valor da consulta, provavelmente teria fechado.\" Outros sinalizaram a mesma demanda com as palavras \"Valor\" e \"Além do valor da consulta vau ter outros gastos tbm\".\n**Acao para a Clara:** Quando o lead pedir \"Valor\" ou demonstrar objeção financeira, informar o preço da consulta de forma direta na mesma mensagem, seguido de encaminhamento: \"A consulta é R$ [X]. Posso separar um horário para você?\"\n\n## 4. Leads que citam planejamento financeiro precisam de ancora de investimento\n**Observacao:** Lead declarou: \"Vou me organizar financeiramente e volto aqui pra agendar a consulta\" e complementou: \"Além do valor da consulta vau ter outros gastos tbm / Tem exames e tudo mais\".\n**Acao para a Clara:** Ao detectar frases como \"vou me organizar\" ou \"outros gastos\", enviar um raio-X completo: \"Entendo. Os exames iniciais ficam em torno de R$ [X] e aceitamos parcelamento em até [Y]x. Quer que eu reserve o horário com condição especial?\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

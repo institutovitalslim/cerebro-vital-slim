@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "rc_path": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28",
+  "type": "clara_daily_conversion_qa",
+  "nodes": 18,
+  "edges": 14,
+  "classification": [
+    "testar 3 dias",
+    "aplicar amanhã guardrail"
+  ],
+  "pii": "redacted"
+}

@@ -1,0 +1,294 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "Clara m\u00e1quina de agendamento",
+      "type": "agent",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Clara m\u00e1quina de agendamento",
+      "community": 4,
+      "norm_label": "clara maquina de agendamento"
+    },
+    {
+      "label": "Leads com mensagens ultra-curtas",
+      "type": "pattern",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Leads com mensagens ultra-curtas",
+      "community": 0,
+      "norm_label": "leads com mensagens ultra-curtas"
+    },
+    {
+      "label": "Primeira resposta curta",
+      "type": "practice",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Primeira resposta curta",
+      "community": 0,
+      "norm_label": "primeira resposta curta"
+    },
+    {
+      "label": "Pergunta operacional de agenda",
+      "type": "practice",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Pergunta operacional de agenda",
+      "community": 0,
+      "norm_label": "pergunta operacional de agenda"
+    },
+    {
+      "label": "Pre\u00e7o e endere\u00e7o como gatilhos de abertura",
+      "type": "pattern",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Pre\u00e7o e endere\u00e7o como gatilhos de abertura",
+      "community": 0,
+      "norm_label": "preco e endereco como gatilhos de abertura"
+    },
+    {
+      "label": "Obje\u00e7\u00e3o financeira por adiamento",
+      "type": "objection",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Obje\u00e7\u00e3o financeira por adiamento",
+      "community": 1,
+      "norm_label": "objecao financeira por adiamento"
+    },
+    {
+      "label": "Reserva assistida para in\u00edcio do m\u00eas",
+      "type": "practice",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Reserva assistida para in\u00edcio do m\u00eas",
+      "community": 1,
+      "norm_label": "reserva assistida para inicio do mes"
+    },
+    {
+      "label": "Men\u00e7\u00e3o espont\u00e2nea de sa\u00fade",
+      "type": "guardrail",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Men\u00e7\u00e3o espont\u00e2nea de sa\u00fade",
+      "community": 2,
+      "norm_label": "mencao espontanea de saude"
+    },
+    {
+      "label": "Triagem segura sem diagn\u00f3stico",
+      "type": "guardrail",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Triagem segura sem diagn\u00f3stico",
+      "community": 2,
+      "norm_label": "triagem segura sem diagnostico"
+    },
+    {
+      "label": "Paciente existente ou demanda administrativa",
+      "type": "guardrail",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Paciente existente ou demanda administrativa",
+      "community": 2,
+      "norm_label": "paciente existente ou demanda administrativa"
+    },
+    {
+      "label": "CTA fechado de confirma\u00e7\u00e3o",
+      "type": "practice",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "CTA fechado de confirma\u00e7\u00e3o",
+      "community": 4,
+      "norm_label": "cta fechado de confirmacao"
+    },
+    {
+      "label": "Lead em pesquisa",
+      "type": "pattern",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Lead em pesquisa",
+      "community": 5,
+      "norm_label": "lead em pesquisa"
+    },
+    {
+      "label": "Discovery antes de empurrar consulta",
+      "type": "practice",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Discovery antes de empurrar consulta",
+      "community": 5,
+      "norm_label": "discovery antes de empurrar consulta"
+    },
+    {
+      "label": "Risco m\u00e9dio: inbound sem outbound no recorte",
+      "type": "risk",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Risco m\u00e9dio: inbound sem outbound no recorte",
+      "community": 3,
+      "norm_label": "risco medio: inbound sem outbound no recorte"
+    },
+    {
+      "label": "Verifica\u00e7\u00e3o humana dos logs WhatsApp/Z-API",
+      "type": "action",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Verifica\u00e7\u00e3o humana dos logs WhatsApp/Z-API",
+      "community": 3,
+      "norm_label": "verificacao humana dos logs whatsapp/z-api"
+    },
+    {
+      "label": "N\u00e3o pausar Clara sem ordem expl\u00edcita do Tiaro",
+      "type": "guardrail",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "N\u00e3o pausar Clara sem ordem expl\u00edcita do Tiaro",
+      "community": 3,
+      "norm_label": "nao pausar clara sem ordem explicita do tiaro"
+    },
+    {
+      "label": "Teste operacional 3 dias",
+      "type": "governance",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "Teste operacional 3 dias",
+      "community": 1,
+      "norm_label": "teste operacional 3 dias"
+    },
+    {
+      "label": "RC-25 Graphify",
+      "type": "governance",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "id": "RC-25 Graphify",
+      "community": 1,
+      "norm_label": "rc-25 graphify"
+    }
+  ],
+  "links": [
+    {
+      "relation": "improves",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "CTA fechado de confirma\u00e7\u00e3o",
+      "_tgt": "Clara m\u00e1quina de agendamento",
+      "source": "Clara m\u00e1quina de agendamento",
+      "target": "CTA fechado de confirma\u00e7\u00e3o",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "recommends",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Leads com mensagens ultra-curtas",
+      "_tgt": "Primeira resposta curta",
+      "source": "Leads com mensagens ultra-curtas",
+      "target": "Primeira resposta curta",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "must_include",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Primeira resposta curta",
+      "_tgt": "Pergunta operacional de agenda",
+      "source": "Primeira resposta curta",
+      "target": "Pergunta operacional de agenda",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "informs",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Pre\u00e7o e endere\u00e7o como gatilhos de abertura",
+      "_tgt": "Primeira resposta curta",
+      "source": "Primeira resposta curta",
+      "target": "Pre\u00e7o e endere\u00e7o como gatilhos de abertura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "classification",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Primeira resposta curta",
+      "_tgt": "Teste operacional 3 dias",
+      "source": "Primeira resposta curta",
+      "target": "Teste operacional 3 dias",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "recommends",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Obje\u00e7\u00e3o financeira por adiamento",
+      "_tgt": "Reserva assistida para in\u00edcio do m\u00eas",
+      "source": "Obje\u00e7\u00e3o financeira por adiamento",
+      "target": "Reserva assistida para in\u00edcio do m\u00eas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "classification",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Reserva assistida para in\u00edcio do m\u00eas",
+      "_tgt": "Teste operacional 3 dias",
+      "source": "Reserva assistida para in\u00edcio do m\u00eas",
+      "target": "Teste operacional 3 dias",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "requires",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Men\u00e7\u00e3o espont\u00e2nea de sa\u00fade",
+      "_tgt": "Triagem segura sem diagn\u00f3stico",
+      "source": "Men\u00e7\u00e3o espont\u00e2nea de sa\u00fade",
+      "target": "Triagem segura sem diagn\u00f3stico",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "requires",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Paciente existente ou demanda administrativa",
+      "_tgt": "Triagem segura sem diagn\u00f3stico",
+      "source": "Triagem segura sem diagn\u00f3stico",
+      "target": "Paciente existente ou demanda administrativa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "registered_in",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Triagem segura sem diagn\u00f3stico",
+      "_tgt": "RC-25 Graphify",
+      "source": "Triagem segura sem diagn\u00f3stico",
+      "target": "RC-25 Graphify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "requires",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Lead em pesquisa",
+      "_tgt": "Discovery antes de empurrar consulta",
+      "source": "Lead em pesquisa",
+      "target": "Discovery antes de empurrar consulta",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "requires",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Risco m\u00e9dio: inbound sem outbound no recorte",
+      "_tgt": "Verifica\u00e7\u00e3o humana dos logs WhatsApp/Z-API",
+      "source": "Risco m\u00e9dio: inbound sem outbound no recorte",
+      "target": "Verifica\u00e7\u00e3o humana dos logs WhatsApp/Z-API",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "guarded_by",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Verifica\u00e7\u00e3o humana dos logs WhatsApp/Z-API",
+      "_tgt": "N\u00e3o pausar Clara sem ordem expl\u00edcita do Tiaro",
+      "source": "Verifica\u00e7\u00e3o humana dos logs WhatsApp/Z-API",
+      "target": "N\u00e3o pausar Clara sem ordem expl\u00edcita do Tiaro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "governed_by",
+      "type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-28/raw/qa-diaria-conversao-20260528-0130.md",
+      "_src": "Teste operacional 3 dias",
+      "_tgt": "RC-25 Graphify",
+      "source": "Teste operacional 3 dias",
+      "target": "RC-25 Graphify",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "checked_at_utc": "2026-05-28T00:52:16.678726+00:00",
+  "checked_at_brt": "2026-05-27T21:52:16.678738-03:00",
+  "current_brt_day_start": "2026-05-27T00:00:00-03:00",
+  "slots_expected": [
+    "instagram_manha",
+    "youtube",
+    "x_twitter",
+    "instagram_tarde",
+    "revisao"
+  ],
+  "slots_ok": [
+    "instagram_manha",
+    "youtube",
+    "x_twitter",
+    "instagram_tarde",
+    "revisao"
+  ],
+  "slots_missing_or_invalid": [],
+  "statuses": [
+    {
+      "slot": "instagram_manha",
+      "latest": "/root/.openclaw/reports/clara-learning/latest-instagram_manha.json",
+      "exists": true,
+      "fresh_today_brt": true,
+      "collection_ok": true,
+      "reason": "ok",
+      "mtime_utc": "2026-05-27T10:11:02.639467+00:00",
+      "mtime_brt": "2026-05-27T07:11:02.639467-03:00",
+      "size_bytes": 1769,
+      "declared_date": "2026-05-27T10:10:56.324599",
+      "collection_returncode": 0
+    },
+    {
+      "slot": "youtube",
+      "latest": "/root/.openclaw/reports/clara-learning/latest-youtube.json",
+      "exists": true,
+      "fresh_today_brt": true,
+      "collection_ok": true,
+      "reason": "ok",
+      "mtime_utc": "2026-05-27T13:30:38.014531+00:00",
+      "mtime_brt": "2026-05-27T10:30:38.014531-03:00",
+      "size_bytes": 1658,
+      "declared_date": "2026-05-27T13:30:30.154538",
+      "collection_returncode": 0
+    },
+    {
+      "slot": "x_twitter",
+      "latest": "/root/.openclaw/reports/clara-learning/latest-x_twitter.json",
+      "exists": true,
+      "fresh_today_brt": true,
+      "collection_ok": true,
+      "reason": "ok",
+      "mtime_utc": "2026-05-27T15:40:17.986353+00:00",
+      "mtime_brt": "2026-05-27T12:40:17.986353-03:00",
+      "size_bytes": 5964,
+      "declared_date": "2026-05-27T15:40:12.803807",
+      "collection_returncode": 0
+    },
+    {
+      "slot": "instagram_tarde",
+      "latest": "/root/.openclaw/reports/clara-learning/latest-instagram_tarde.json",
+      "exists": true,
+      "fresh_today_brt": true,
+      "collection_ok": true,
+      "reason": "ok",
+      "mtime_utc": "2026-05-27T20:40:14.554137+00:00",
+      "mtime_brt": "2026-05-27T17:40:14.554137-03:00",
+      "size_bytes": 1781,
+      "declared_date": "2026-05-27T20:40:12.178087",
+      "collection_returncode": 0
+    },
+    {
+      "slot": "revisao",
+      "latest": "/root/.openclaw/reports/clara-learning/latest-revisao.json",
+      "exists": true,
+      "fresh_today_brt": true,
+      "collection_ok": true,
+      "reason": "ok",
+      "mtime_utc": "2026-05-28T00:20:09.110852+00:00",
+      "mtime_brt": "2026-05-27T21:20:09.110852-03:00",
+      "size_bytes": 448573,
+      "declared_date": "2026-05-28T00:20:09.095449",
+      "latest_items": 8
+    }
+  ],
+  "rule": "Só reportar que Clara estudou quando este gate estiver ok=true ou quando o relatório deixar claro que foi compensação manual, não rotina executada no horário."
+}
