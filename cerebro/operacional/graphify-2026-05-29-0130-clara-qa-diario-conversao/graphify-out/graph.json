@@ -1,0 +1,226 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara",
+      "type": "agent",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "clara"
+    },
+    {
+      "id": "maquina_agendamento",
+      "label": "Máquina de agendamento",
+      "type": "capability",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "máquina de agendamento"
+    },
+    {
+      "id": "qa_diario_conversao_2026_05_29",
+      "label": "QA diário de conversão 2026-05-29",
+      "type": "report",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "qa diário de conversão 2026-05-29"
+    },
+    {
+      "id": "whatsapp_current_ultimas_6h",
+      "label": "WhatsApp current últimas 6h",
+      "type": "dataset",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "whatsapp current últimas 6h"
+    },
+    {
+      "id": "whatsapp_historical_180d",
+      "label": "WhatsApp historical 180 dias",
+      "type": "dataset",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "whatsapp historical 180 dias"
+    },
+    {
+      "id": "confirmacao_tres_respostas_literais",
+      "label": "Confirmação com três respostas literais",
+      "type": "conversion_pattern",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "confirmação com três respostas literais"
+    },
+    {
+      "id": "pesquisa_contexto_minimo",
+      "label": "Lead pesquisando exige contexto mínimo antes de pitch",
+      "type": "conversion_pattern",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "lead pesquisando exige contexto mínimo antes de pitch"
+    },
+    {
+      "id": "candidatura_fora_escopo",
+      "label": "Candidatura/emprego fora do funil de paciente",
+      "type": "routing_rule",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "candidatura/emprego fora do funil de paciente"
+    },
+    {
+      "id": "servico_avulso_valor_canonico",
+      "label": "Serviço avulso só com valor canônico",
+      "type": "pricing_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "serviço avulso só com valor canônico"
+    },
+    {
+      "id": "bioimpedancia_avulsa",
+      "label": "Bioimpedância avulsa",
+      "type": "service",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "bioimpedância avulsa"
+    },
+    {
+      "id": "consulta_nutricional_avulsa_sem_valor_confirmado",
+      "label": "Consulta nutricional avulsa sem valor confirmado no QA",
+      "type": "knowledge_gap",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "consulta nutricional avulsa sem valor confirmado no qa"
+    },
+    {
+      "id": "medicacao_controlada_bloqueio_clinico",
+      "label": "Menção a medicamento controlado exige bloqueio clínico",
+      "type": "clinical_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "menção a medicamento controlado exige bloqueio clínico"
+    },
+    {
+      "id": "inbound_sem_outbound_risco_telemetria",
+      "label": "Inbound sem outbound exige checagem de telemetria/runtime",
+      "type": "operational_risk",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "inbound sem outbound exige checagem de telemetria/runtime"
+    },
+    {
+      "id": "nao_pausar_sem_tiaro",
+      "label": "Não pausar Clara sem ordem explícita de Tiaro",
+      "type": "governance_guardrail",
+      "file_type": "document",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md",
+      "community": 0,
+      "norm_label": "não pausar clara sem ordem explícita de tiaro"
+    }
+  ],
+  "links": [
+    {
+      "source": "qa_diario_conversao_2026_05_29",
+      "target": "clara",
+      "label": "audits",
+      "type": "audits",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "clara",
+      "target": "maquina_agendamento",
+      "label": "operates_as",
+      "type": "operates_as",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "qa_diario_conversao_2026_05_29",
+      "target": "whatsapp_current_ultimas_6h",
+      "label": "uses",
+      "type": "uses",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "qa_diario_conversao_2026_05_29",
+      "target": "whatsapp_historical_180d",
+      "label": "uses",
+      "type": "uses",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "whatsapp_historical_180d",
+      "target": "confirmacao_tres_respostas_literais",
+      "label": "reinforces",
+      "type": "reinforces",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "whatsapp_historical_180d",
+      "target": "pesquisa_contexto_minimo",
+      "label": "reinforces",
+      "type": "reinforces",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "whatsapp_current_ultimas_6h",
+      "target": "candidatura_fora_escopo",
+      "label": "observed",
+      "type": "observed",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "whatsapp_current_ultimas_6h",
+      "target": "servico_avulso_valor_canonico",
+      "label": "observed",
+      "type": "observed",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "servico_avulso_valor_canonico",
+      "target": "bioimpedancia_avulsa",
+      "label": "applies_to",
+      "type": "applies_to",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "servico_avulso_valor_canonico",
+      "target": "consulta_nutricional_avulsa_sem_valor_confirmado",
+      "label": "flags_gap",
+      "type": "flags_gap",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "whatsapp_current_ultimas_6h",
+      "target": "medicacao_controlada_bloqueio_clinico",
+      "label": "observed",
+      "type": "observed",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "whatsapp_current_ultimas_6h",
+      "target": "inbound_sem_outbound_risco_telemetria",
+      "label": "flags",
+      "type": "flags",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    },
+    {
+      "source": "inbound_sem_outbound_risco_telemetria",
+      "target": "nao_pausar_sem_tiaro",
+      "label": "bounded_by",
+      "type": "bounded_by",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-29.md"
+    }
+  ]
+}
