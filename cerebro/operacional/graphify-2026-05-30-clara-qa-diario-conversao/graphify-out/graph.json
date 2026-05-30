@@ -1,0 +1,249 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara",
+      "type": "agent",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 0,
+      "norm_label": "clara"
+    },
+    {
+      "id": "maquina_agendamento",
+      "label": "M\u00e1quina de agendamento",
+      "type": "capability",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 0,
+      "norm_label": "maquina de agendamento"
+    },
+    {
+      "id": "qa_2026_05_30",
+      "label": "QA di\u00e1rio de convers\u00e3o 2026-05-30",
+      "type": "report",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 2,
+      "norm_label": "qa diario de conversao 2026-05-30"
+    },
+    {
+      "id": "whatsapp_current",
+      "label": "WhatsApp current \u00faltimas 6h",
+      "type": "dataset",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 1,
+      "norm_label": "whatsapp current ultimas 6h"
+    },
+    {
+      "id": "whatsapp_historical",
+      "label": "WhatsApp historical 180 dias",
+      "type": "dataset",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 2,
+      "norm_label": "whatsapp historical 180 dias"
+    },
+    {
+      "id": "zero_respostas",
+      "label": "Zero respostas em janela recente",
+      "type": "operational_risk",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 1,
+      "norm_label": "zero respostas em janela recente"
+    },
+    {
+      "id": "chegada_fisica",
+      "label": "Sinal de chegada f\u00edsica",
+      "type": "operational_signal",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 3,
+      "norm_label": "sinal de chegada fisica"
+    },
+    {
+      "id": "horario_citado",
+      "label": "Hor\u00e1rio citado pelo lead",
+      "type": "scheduling_signal",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 0,
+      "norm_label": "horario citado pelo lead"
+    },
+    {
+      "id": "confirmacao_ou_alternativas",
+      "label": "Confirmar hor\u00e1rio ou oferecer alternativas",
+      "type": "conversion_pattern",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 0,
+      "norm_label": "confirmar horario ou oferecer alternativas"
+    },
+    {
+      "id": "recepcao_equipe",
+      "label": "Orientar recep\u00e7\u00e3o e avisar equipe",
+      "type": "operational_pattern",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 3,
+      "norm_label": "orientar recepcao e avisar equipe"
+    },
+    {
+      "id": "saudacao_direcionada",
+      "label": "Sauda\u00e7\u00e3o vaga com pergunta direcionadora",
+      "type": "conversion_pattern",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 0,
+      "norm_label": "saudacao vaga com pergunta direcionadora"
+    },
+    {
+      "id": "guardrails_clinicos",
+      "label": "Guardrails cl\u00ednicos",
+      "type": "guardrail",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 0,
+      "norm_label": "guardrails clinicos"
+    },
+    {
+      "id": "sem_pii",
+      "label": "Sem PII",
+      "type": "privacy_guardrail",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 2,
+      "norm_label": "sem pii"
+    },
+    {
+      "id": "intervencao_humana",
+      "label": "Interven\u00e7\u00e3o humana para checar bridge/roteador/fila",
+      "type": "operational_action",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 1,
+      "norm_label": "intervencao humana para checar bridge/roteador/fila"
+    },
+    {
+      "id": "nao_pausar_sem_tiaro",
+      "label": "N\u00e3o pausar Clara sem ordem do Tiaro",
+      "type": "operational_guardrail",
+      "source_file": "raw/QA-DIARIO-CLARA-2026-05-30.md",
+      "file_type": "document",
+      "community": 1,
+      "norm_label": "nao pausar clara sem ordem do tiaro"
+    }
+  ],
+  "links": [
+    {
+      "type": "operates_as",
+      "relationship": "operates_as",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "maquina_agendamento",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "must_detect",
+      "relationship": "must_detect",
+      "confidence": "EXTRACTED",
+      "source": "maquina_agendamento",
+      "target": "horario_citado",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "must_detect",
+      "relationship": "must_detect",
+      "confidence": "EXTRACTED",
+      "source": "maquina_agendamento",
+      "target": "chegada_fisica",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_pattern",
+      "relationship": "uses_pattern",
+      "confidence": "EXTRACTED",
+      "source": "maquina_agendamento",
+      "target": "saudacao_direcionada",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "bounded_by",
+      "relationship": "bounded_by",
+      "confidence": "EXTRACTED",
+      "source": "maquina_agendamento",
+      "target": "guardrails_clinicos",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_dataset",
+      "relationship": "uses_dataset",
+      "confidence": "EXTRACTED",
+      "source": "qa_2026_05_30",
+      "target": "whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_dataset",
+      "relationship": "uses_dataset",
+      "confidence": "EXTRACTED",
+      "source": "qa_2026_05_30",
+      "target": "whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "sanitized_by",
+      "relationship": "sanitized_by",
+      "confidence": "EXTRACTED",
+      "source": "qa_2026_05_30",
+      "target": "sem_pii",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "shows",
+      "relationship": "shows",
+      "confidence": "EXTRACTED",
+      "source": "whatsapp_current",
+      "target": "zero_respostas",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "requires",
+      "relationship": "requires",
+      "confidence": "EXTRACTED",
+      "source": "zero_respostas",
+      "target": "intervencao_humana",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "requires_action",
+      "relationship": "requires_action",
+      "confidence": "EXTRACTED",
+      "source": "chegada_fisica",
+      "target": "recepcao_equipe",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "requires_response",
+      "relationship": "requires_response",
+      "confidence": "EXTRACTED",
+      "source": "horario_citado",
+      "target": "confirmacao_ou_alternativas",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "bounded_by",
+      "relationship": "bounded_by",
+      "confidence": "EXTRACTED",
+      "source": "intervencao_humana",
+      "target": "nao_pausar_sem_tiaro",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}
