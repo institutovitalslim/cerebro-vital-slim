@@ -1,0 +1,783 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "updated_by": "Maria / Graphify RC-25 QA diário Clara",
+    "updated_at": "2026-05-31T01:31:00Z"
+  },
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 3,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "conselho_growth",
+      "label": "Conselho Growth",
+      "type": "council",
+      "community": 3,
+      "norm_label": "conselho growth"
+    },
+    {
+      "id": "agendamento_premium",
+      "label": "Agendamento premium de pacientes/leads",
+      "type": "capability",
+      "community": 3,
+      "norm_label": "agendamento premium de pacientes/leads"
+    },
+    {
+      "id": "slot_latest_evidence_gate",
+      "label": "latest-evidence-gate",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-evidence-gate.json",
+      "community": 3,
+      "norm_label": "latest-evidence-gate"
+    },
+    {
+      "id": "slot_instagram_manha",
+      "label": "instagram_manha",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-instagram_manha.json",
+      "community": 0,
+      "norm_label": "instagram_manha"
+    },
+    {
+      "id": "fonte_instagram",
+      "label": "Instagram",
+      "type": "source",
+      "community": 0,
+      "norm_label": "instagram"
+    },
+    {
+      "id": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "label": "vendas consultivas, WhatsApp, atendimento premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "vendas consultivas, whatsapp, atendimento premium"
+    },
+    {
+      "id": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida"
+    },
+    {
+      "id": "slot_instagram_tarde",
+      "label": "instagram_tarde",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-instagram_tarde.json",
+      "community": 0,
+      "norm_label": "instagram_tarde"
+    },
+    {
+      "id": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "label": "SPIN, negociação, social selling ou clínica premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "spin, negociacao, social selling ou clinica premium"
+    },
+    {
+      "id": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "label": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 resposta ruim + 1 resposta clara premium + 1 pergunta de avanco"
+    },
+    {
+      "id": "slot_revisao",
+      "label": "revisao",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-revisao.json",
+      "community": 4,
+      "norm_label": "revisao"
+    },
+    {
+      "id": "fonte_revis_o_interna",
+      "label": "Revisão interna",
+      "type": "source",
+      "community": 4,
+      "norm_label": "revisao interna"
+    },
+    {
+      "id": "tema_aprendizados_do_dia",
+      "label": "aprendizados do dia",
+      "type": "topic",
+      "community": 4,
+      "norm_label": "aprendizados do dia"
+    },
+    {
+      "id": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria",
+      "label": "classificar aplicar amanhã / descartar / testar 3 dias / propor memória",
+      "type": "deliverable",
+      "community": 4,
+      "norm_label": "classificar aplicar amanha / descartar / testar 3 dias / propor memoria"
+    },
+    {
+      "id": "slot_whatsapp_current",
+      "label": "whatsapp-current",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-whatsapp-current.json",
+      "community": 2,
+      "norm_label": "whatsapp-current"
+    },
+    {
+      "id": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "label": "WhatsApp IVS via planilha de conversas",
+      "type": "source",
+      "community": 2,
+      "norm_label": "whatsapp ivs via planilha de conversas"
+    },
+    {
+      "id": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "label": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up",
+      "type": "topic",
+      "community": 2,
+      "norm_label": "objecoes, vitorias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "id": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "label": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "type": "deliverable",
+      "community": 2,
+      "norm_label": "padroes de conversa reais para melhorar agendamento da clara sem expor pii"
+    },
+    {
+      "id": "slot_whatsapp_historical",
+      "label": "whatsapp-historical",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-whatsapp-historical.json",
+      "community": 2,
+      "norm_label": "whatsapp-historical"
+    },
+    {
+      "id": "slot_x_twitter",
+      "label": "x_twitter",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-x_twitter.json",
+      "community": 5,
+      "norm_label": "x_twitter"
+    },
+    {
+      "id": "fonte_x_twitter",
+      "label": "X/Twitter",
+      "type": "source",
+      "community": 5,
+      "norm_label": "x/twitter"
+    },
+    {
+      "id": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "label": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+      "type": "topic",
+      "community": 5,
+      "norm_label": "posts de alto engajamento sobre persuasao, objecoes, atendimento, negocios locais ou experiencia do cliente"
+    },
+    {
+      "id": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "label": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+      "type": "deliverable",
+      "community": 5,
+      "norm_label": "1 frase curta + 1 angulo de objecao + 1 cuidado contra agressividade"
+    },
+    {
+      "id": "item_rt_bcherny_salesforce_published_a_detailed_writeup_on_going_agentic_with_claud",
+      "label": "RT @bcherny: Salesforce published a detailed writeup on going agentic with Claude Code. A couple things jumped out.\n\nA migration they'd sco…",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 9,
+      "norm_label": "rt @bcherny: salesforce published a detailed writeup on going agentic with claude code. a couple things jumped out.\n\na migration they'd sco..."
+    },
+    {
+      "id": "conceito_rt_bcherny_salesforce_published_a_detailed_writeup_on_going_agentic",
+      "label": "RT @bcherny: Salesforce published a detailed writeup on going agentic with Claude Code. A couple things jumped out.\n\nA migration they'd sco…",
+      "type": "concept",
+      "community": 9,
+      "norm_label": "rt @bcherny: salesforce published a detailed writeup on going agentic with claude code. a couple things jumped out.\n\na migration they'd sco..."
+    },
+    {
+      "id": "item_collecting_cash_isn_t_one_size_fits_all_collections_with_agentforce_scores_cus",
+      "label": "Collecting cash isn’t one-size-fits-all.\n\nCollections with Agentforce scores customer invoices by risk, prioritizes follow-ups, and recommends tailored account plans—from outreach ",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 8,
+      "norm_label": "collecting cash isn’t one-size-fits-all.\n\ncollections with agentforce scores customer invoices by risk, prioritizes follow-ups, and recommends tailored account plans—from outreach "
+    },
+    {
+      "id": "conceito_collecting_cash_isn_t_one_size_fits_all_collections_with_agentforce",
+      "label": "Collecting cash isn’t one-size-fits-all.\n\nCollections with Agentforce scores customer invoices by risk, prioritizes follow-ups, and recommends tailored account ",
+      "type": "concept",
+      "community": 8,
+      "norm_label": "collecting cash isn’t one-size-fits-all.\n\ncollections with agentforce scores customer invoices by risk, prioritizes follow-ups, and recommends tailored account "
+    },
+    {
+      "id": "item_marketing_just_got_agentic_stream_connections_live_on_salesforce_for_free_to",
+      "label": "Marketing just got agentic.\n\nStream Connections live on Salesforce+ for free to learn how AI agents help build always-on customer experiences — and prove ROI.\n\nKeynotes. Deep dives",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 7,
+      "norm_label": "marketing just got agentic.\n\nstream connections live on salesforce+ for free to learn how ai agents help build always-on customer experiences — and prove roi.\n\nkeynotes. deep dives"
+    },
+    {
+      "id": "conceito_marketing_just_got_agentic_stream_connections_live_on_salesforce_fo",
+      "label": "Marketing just got agentic.\n\nStream Connections live on Salesforce+ for free to learn how AI agents help build always-on customer experiences — and prove ROI.\n\n",
+      "type": "concept",
+      "community": 7,
+      "norm_label": "marketing just got agentic.\n\nstream connections live on salesforce+ for free to learn how ai agents help build always-on customer experiences — and prove roi.\n\n"
+    },
+    {
+      "id": "item_how_does_indeed_help_employers_hire_faster_with_data_cloud_and_agentforce_ai",
+      "label": "How does @Indeed help employers hire faster?\n\nWith Data Cloud and Agentforce, AI agents streamline account setup, resolve billing questions, and speed up job postings — so teams ca",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 6,
+      "norm_label": "how does @indeed help employers hire faster?\n\nwith data cloud and agentforce, ai agents streamline account setup, resolve billing questions, and speed up job postings — so teams ca"
+    },
+    {
+      "id": "conceito_how_does_indeed_help_employers_hire_faster_with_data_cloud_and_agen",
+      "label": "How does @Indeed help employers hire faster?\n\nWith Data Cloud and Agentforce, AI agents streamline account setup, resolve billing questions, and speed up job po",
+      "type": "concept",
+      "community": 6,
+      "norm_label": "how does @indeed help employers hire faster?\n\nwith data cloud and agentforce, ai agents streamline account setup, resolve billing questions, and speed up job po"
+    },
+    {
+      "id": "item_meet_your_scheduling_console_this_is_a_faster_more_flexible_way_to_schedule",
+      "label": "Meet your 🆕 Scheduling Console.\n\nThis is a faster, more flexible way to schedule and dispatch service appointments — with live updates, drag-and-drop scheduling, route visualizatio",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 10,
+      "norm_label": "meet your 🆕 scheduling console.\n\nthis is a faster, more flexible way to schedule and dispatch service appointments — with live updates, drag-and-drop scheduling, route visualizatio"
+    },
+    {
+      "id": "conceito_meet_your_scheduling_console_this_is_a_faster_more_flexible_way_t",
+      "label": "Meet your 🆕 Scheduling Console.\n\nThis is a faster, more flexible way to schedule and dispatch service appointments — with live updates, drag-and-drop scheduling",
+      "type": "concept",
+      "community": 10,
+      "norm_label": "meet your 🆕 scheduling console.\n\nthis is a faster, more flexible way to schedule and dispatch service appointments — with live updates, drag-and-drop scheduling"
+    },
+    {
+      "id": "slot_youtube",
+      "label": "youtube",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-youtube.json",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "fonte_youtube",
+      "label": "YouTube",
+      "type": "source",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "tema_follow_up_tonality_objection_handling_ethical_closing",
+      "label": "follow up tonality objection handling ethical closing",
+      "type": "topic",
+      "community": 1,
+      "norm_label": "follow up tonality objection handling ethical closing"
+    },
+    {
+      "id": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "label": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+      "type": "deliverable",
+      "community": 1,
+      "norm_label": "ideia central + aplicacao whatsapp + script antes/depois + metrica + risco"
+    },
+    {
+      "id": "item_youtube_video_19gbpfgqmy4",
+      "label": "YouTube video 19gBpFGQMy4",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=19gBpFGQMy4",
+      "profile": "",
+      "community": 1,
+      "norm_label": "youtube video 19gbpfgqmy4"
+    },
+    {
+      "id": "item_youtube_video_wao0icsafjo",
+      "label": "YouTube video Wao0icSaFjo",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=Wao0icSaFjo",
+      "profile": "",
+      "community": 1,
+      "norm_label": "youtube video wao0icsafjo"
+    },
+    {
+      "id": "item_youtube_video_wr8k03mbvty",
+      "label": "YouTube video Wr8k03MBVtY",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=Wr8k03MBVtY",
+      "profile": "",
+      "community": 1,
+      "norm_label": "youtube video wr8k03mbvty"
+    },
+    {
+      "id": "qa_diario_conversao_clara_20260531_0131",
+      "label": "QA diário de conversão Clara 2026-05-31 01:31 UTC",
+      "type": "rc25_report",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md",
+      "community": 2,
+      "norm_label": "qa diario conversao clara 2026-05-31"
+    },
+    {
+      "id": "risco_zero_outbound_com_clara_ativa",
+      "label": "Risco operacional: recebidas > 0 e enviadas = 0 com Clara ativa",
+      "type": "operational_risk",
+      "community": 2,
+      "norm_label": "risco operacional zero outbound clara ativa"
+    },
+    {
+      "id": "melhoria_validacao_emocional_primeiro",
+      "label": "Melhoria: validar dor emocional antes da pergunta operacional",
+      "type": "conversion_improvement",
+      "community": 2,
+      "norm_label": "validacao emocional antes pergunta operacional"
+    },
+    {
+      "id": "melhoria_reframe_tentativas_frustradas",
+      "label": "Melhoria: reframe de tentativas frustradas sem culpar lead",
+      "type": "conversion_improvement",
+      "community": 2,
+      "norm_label": "reframe tentativas frustradas sem culpa"
+    },
+    {
+      "id": "melhoria_pagamento_sem_inventar_condicao",
+      "label": "Melhoria: antecipar pagamento sem inventar condição",
+      "type": "conversion_improvement",
+      "community": 2,
+      "norm_label": "pagamento sem inventar condicao"
+    },
+    {
+      "id": "classificacao_testar_3_dias_clara_qa_20260531",
+      "label": "Classificação: testar 3 dias — QA Clara 2026-05-31",
+      "type": "learning_classification",
+      "community": 2,
+      "norm_label": "testar 3 dias qa clara 2026-05-31"
+    }
+  ],
+  "links": [
+    {
+      "type": "must_master",
+      "relationship": "must_master",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "agendamento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "sabatina",
+      "relationship": "sabatina",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "conselho_growth",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_latest_evidence_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_manha",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_revisao",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "fonte_instagram",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_instagram",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "fonte_revis_o_interna",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "tema_aprendizados_do_dia",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "fonte_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_rt_bcherny_salesforce_published_a_detailed_writeup_on_going_agentic_with_claud",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_collecting_cash_isn_t_one_size_fits_all_collections_with_agentforce_scores_cus",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_marketing_just_got_agentic_stream_connections_live_on_salesforce_for_free_to",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_how_does_indeed_help_employers_hire_faster_with_data_cloud_and_agentforce_ai",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_meet_your_scheduling_console_this_is_a_faster_more_flexible_way_to_schedule",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_rt_bcherny_salesforce_published_a_detailed_writeup_on_going_agentic_with_claud",
+      "target": "conceito_rt_bcherny_salesforce_published_a_detailed_writeup_on_going_agentic",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_collecting_cash_isn_t_one_size_fits_all_collections_with_agentforce_scores_cus",
+      "target": "conceito_collecting_cash_isn_t_one_size_fits_all_collections_with_agentforce",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_marketing_just_got_agentic_stream_connections_live_on_salesforce_for_free_to",
+      "target": "conceito_marketing_just_got_agentic_stream_connections_live_on_salesforce_fo",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_how_does_indeed_help_employers_hire_faster_with_data_cloud_and_agentforce_ai",
+      "target": "conceito_how_does_indeed_help_employers_hire_faster_with_data_cloud_and_agen",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_meet_your_scheduling_console_this_is_a_faster_more_flexible_way_to_schedule",
+      "target": "conceito_meet_your_scheduling_console_this_is_a_faster_more_flexible_way_t",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "fonte_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "tema_follow_up_tonality_objection_handling_ethical_closing",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_youtube_video_19gbpfgqmy4",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_youtube_video_wao0icsafjo",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_youtube_video_wr8k03mbvty",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "qa_diario_conversao_clara_20260531_0131",
+      "target": "clara",
+      "relation": "audits",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    },
+    {
+      "source": "qa_diario_conversao_clara_20260531_0131",
+      "target": "risco_zero_outbound_com_clara_ativa",
+      "relation": "identifies",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    },
+    {
+      "source": "qa_diario_conversao_clara_20260531_0131",
+      "target": "melhoria_validacao_emocional_primeiro",
+      "relation": "recommends",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    },
+    {
+      "source": "qa_diario_conversao_clara_20260531_0131",
+      "target": "melhoria_reframe_tentativas_frustradas",
+      "relation": "recommends",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    },
+    {
+      "source": "qa_diario_conversao_clara_20260531_0131",
+      "target": "melhoria_pagamento_sem_inventar_condicao",
+      "relation": "recommends",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    },
+    {
+      "source": "qa_diario_conversao_clara_20260531_0131",
+      "target": "classificacao_testar_3_dias_clara_qa_20260531",
+      "relation": "classifies",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    },
+    {
+      "source": "risco_zero_outbound_com_clara_ativa",
+      "target": "whatsapp_current",
+      "relation": "observed_in",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    },
+    {
+      "source": "melhoria_pagamento_sem_inventar_condicao",
+      "target": "whatsapp_historical",
+      "relation": "supported_by",
+      "evidence_type": "EXTRACTED",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-05-31/raw/qa-diario-conversao-clara-2026-05-31-0131.md"
+    }
+  ],
+  "hyperedges": []
+}
