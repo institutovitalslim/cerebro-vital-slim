@@ -1,0 +1,16 @@
+{
+  "slot": "youtube",
+  "date": "2026-05-31T13:32:44.316323",
+  "weekday": "Sunday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Will Guidara HubSpot",
+  "buscar": "unreasonable hospitality sales process customer experience",
+  "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Will Guidara HubSpot unreasonable hospitality sales process customer experience --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"youtube-html-search\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260531-133249-search.json\",\n  \"items\": [\n    {\n      \"title\": \"The Secret Ingredients of Great Hospitality | Will Guidara | TED\",\n      \"url\": \"https://www.youtube.com/watch?v=bwcyXcOpWVs\",\n      \"channel\": \"TED\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"The Secrets of Unreasonable Hospitality | Will Guidara\",\n      \"url\": \"https://www.youtube.com/watch?v=j7GbVJFc_cI\",\n      \"channel\": \"Leadership Lessons | Big Think+\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"YouTube video Tw8oOEa_UEI\",\n      \"url\": \"https://www.youtube.com/watch?v=Tw8oOEa_UEI\",\n      \"channel\": \"\",\n      \"duration\": null,\n      \"view_count\": null\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+    "stderr": ""
+  }
+}

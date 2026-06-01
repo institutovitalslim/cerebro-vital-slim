@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260601-011509-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 0,
+    "unique_leads": 0,
+    "total_inbound": 0,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "SEM_APRENDIZADOS_NOVOS - sem mensagens no período",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}
