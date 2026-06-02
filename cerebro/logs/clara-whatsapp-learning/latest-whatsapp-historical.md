@@ -1,31 +1,35 @@
 # Clara WhatsApp Learning — historical — últimos 180 dias
 
-> Gerado em 2026-05-25T09:33:56.399508+00:00
+> Gerado em 2026-06-01T09:31:47.036364+00:00
 
 ## Contadores agregados
-- Mensagens analisadas: **5653**
-- Leads/conversas únicas: **372**
-- Recebidas: 2741 | Enviadas: 2912
-- Sinais de agendamento/vitória: **28**
+- Mensagens analisadas: **6137**
+- Leads/conversas únicas: **437**
+- Recebidas: 3225 | Enviadas: 2912
+- Sinais de agendamento/vitória: **30**
 - Sinais de queda/objeção: **5**
 
 ## Aprendizados operacionais para Clara
 
-## 1. Confirmação estruturada com CTA fechado
-**Observacao:** Nas vitórias, quando o closer envia mensagem com dados completos do agendamento + opções de resposta exatas, o lead confirma imediatamente. Exemplo real do closer: "Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*." Resposta do lead: "Confirmo".
-**Acao para a Clara:** Ao confirmar consultas ou aplicações, sempre usar a estrutura exata: "Oi, [Nome]! Tudo bem? 😊 Estou passando para confirmar seu [serviço] de [data], às [hora], aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*."
+## 1. Explicações precoces afastam pesquisadores
+**Observacao:** Quando o closer ofereceu explicar o que está incluído na consulta ou detalhou o funcionamento individualizado, leads em fase de pesquisa droparam com: "Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar" e "Por enquanto não".
+**Acao para a Clara:** Se o lead vier pelo botão "Gostaria de saber mais informações" ou demonstrar estar avaliando, não enviar blocos explicativos sobre o protocolo. Perguntar qual a dúvida principal e propor: "Consigo agendar uma avaliação para você tirar todas as dúvidas com a Dra. Tenho horário na [data]."
 
-## 2. Não empurrar agendamento em leads de pesquisa
-**Observacao:** Leads que estão apenas pesquisando rejeitam ofertas diretas de explicação de consulta ou pedidos de exame. Exemplo real de drop: closer disse "Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊" e o lead respondeu "Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar". Outro: closer perguntou "Quando vc pretende fazer os exames de sangue para podermos já ver uma data para o seu atendimento conosco?" e o lead disse "Assim que fizer os exames te aviso."
-**Acao para a Clara:** Se o lead chegar com "Gostaria de saber mais informações sobre o Instituto Vital Slim" ou disser que está apenas pesquisando, NÃO oferecer explicar a consulta nem pedir exames na primeira resposta. Primeiro perguntar: "Qual é a sua principal queixa ou objetivo hoje?" e só depois de entender o contexto oferecer a próxima etapa.
+## 2. CTA binário em confirmações gera "Confirmo"
+**Observacao:** Todos os wins de lembrete de agenda usaram a mesma estrutura: "Oi, [Nome]! Estou passando para confirmar seu atendimento de [Serviço] amanhã, às [Horário]... pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.". As respostas dos leads foram literalmente "Confirmo".
+**Acao para a Clara:** Ao enviar lembrete ou pedir confirmação de consulta/aplicação, usar sempre essa estrutura exata com as três opções de resposta predefinidas (*Confirmo*, *Quero remarcar*, *Não vou conseguir*).
 
-## 3. Direcionar saudações vagas no primeiro toque
-**Observacao:** Várias aberturas de leads são saudações vazias que não avançam sozinhas, como "Oi", "Boa tarde", "Consegue me ajudar?", "Boa tarde!!" e "Olá openclaw. Vc está aí?". Sem direcionamento imediato, a conversa fica sem propósito.
-**Acao para a Clara:** Ao receber apenas "Oi", "Boa tarde", "Consegue me ajudar?" ou similar, responder em uma única mensada: "Oi! Bem-vindo(a) ao Instituto Vital Slim 😊 Para te ajudar melhor, me conta: você busca informações sobre qual área? (Emagrecimento, Tricologia, Nutrição, etc.)"
+## 3. Proposta de horário exato converte; janela aberta não
+**Observacao:** Vitórias ocorreram com propostas diretas como "Temos o horário amanhã (23/04) às 14:00. Podemos agendar?" (WIN: "Confirmo") e "voce pode chegar as 15:30" (WIN: "Ok,combinado"). Um lead enviou ampla disponibilidade ("tenho disponibilidade de segunda a quinta à tarde e noite...") sem registro de win na amostra.
+**Acao para a Clara:** Quando o lead perguntar "Qual o dia e horário?" ou oferecer vários dias, nunca devolver a pergunta. Oferecer imediatamente um horário específico: "Tenho [dia] às [hora]. Encaixa para você?"
 
-## 4. Diferenciar atendimento de pacientes existentes
-**Observacao:** No meio dos leads novos aparecem mensagens de clientes já cadastrados, como "Thiaro por favor, vc poderia mim reenviar as NFS, não estou conseguindo abrir,o link, obrigado!" e "Quanto à segunda dose de vitamina C , parece que a Dra., quer que eu tome, portanto vou marcar no decorrer da semana." Aplicar script de captação nesses casos gera atrito e desvio operacional.
-**Acao para a Clara:** Se a mensagem mencionar NFS, exames anteriores, aplicações já feitas, treinos agendados ou nomes de profissionais sem contexto de primeiro contato, perguntar antes de qualquer oferta: "Você já é paciente do Instituto Vital Slim?" Se sim, transferir para o setor administrativo ou agenda conforme o caso.
+## 4. Saudação genérica "Como posso te ajudar?" gera rejeição
+**Observacao:** A abertura "Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?" foi respondida com "Bom dia. Por enquanto não vou querer nao".
+**Acao para a Clara:** Jamais iniciar leads frios com saudações genéricas e abertas. Substituir por contextualização direta: "Vi que você veio pelo nosso Reel. Sobre qual tratamento gostaria de saber mais?"
+
+## 5. Pacientes ativos precisam de triagem, não qualificação de venda
+**Observacao:** Mensagens como "vc poderia mim reenviar as NFS", "Quanto à segunda dose de vitamina C" e justificativas de falta ("Tive uma enxaqueca forte hoje pela manhã") indicam demandas de quem já é paciente.
+**Acao para a Clara:** Se detectar palavras-chave como NFS, dose, vitamina, medicação ou justificativa de falta, não iniciar fluxo de qualificação de lead. Escalar imediatamente para o time administrativo/clínico humano.
 
 ## Regras de uso
 - Usar como aprendizado operacional, não como regra clínica.

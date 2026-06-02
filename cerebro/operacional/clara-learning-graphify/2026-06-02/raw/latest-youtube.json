@@ -1,0 +1,16 @@
+{
+  "slot": "youtube",
+  "date": "2026-06-01T13:33:09.287245",
+  "weekday": "Monday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Patrick Dang",
+  "buscar": "sales scripts discovery questions follow up",
+  "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Patrick Dang sales scripts discovery questions follow up --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"youtube-html-search\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260601-133316-search.json\",\n  \"items\": [\n    {\n      \"title\": \"How To Run A Discovery Call - Strategy Session\",\n      \"url\": \"https://www.youtube.com/watch?v=_DbSgU5naDQ\",\n      \"channel\": \"Patrick Dang\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"YouTube video dJR7OpkEeBk\",\n      \"url\": \"https://www.youtube.com/watch?v=dJR7OpkEeBk\",\n      \"channel\": \"\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"YouTube video t24ZFbxToRc\",\n      \"url\": \"https://www.youtube.com/watch?v=t24ZFbxToRc\",\n      \"channel\": \"\",\n      \"duration\": null,\n      \"view_count\": null\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+    "stderr": ""
+  }
+}

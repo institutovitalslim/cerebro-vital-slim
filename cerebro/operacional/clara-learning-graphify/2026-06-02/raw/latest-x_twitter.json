@@ -1,0 +1,16 @@
+{
+  "slot": "x_twitter",
+  "date": "2026-06-01T15:43:33.375984",
+  "weekday": "Monday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "X/Twitter",
+  "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+  "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+  "perfil": "Gong_io",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-profile --screenname Gong_io --limit 5",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260601-154336-x-profile-Gong_io.json\",\n  \"screenname\": \"Gong_io\",\n  \"count\": 5,\n  \"sample\": [\n    {\n      \"tweet_id\": \"1836886713815151082\",\n      \"screen_name\": null,\n      \"text\": \"ONCE-IN-A-LIFETIME EXPERIENCE\\n\\nWhat do you get when you combine 2-Michelin Stars + industry leaders + Gong?\\n\\nA recipe for a mind-blowing dinner party.\\n\\nThe food - and knowledge-sharing - was *chef's kiss* 🤌 https://t.co/Ab1J8g2CDO\",\n      \"favorites\": 11,\n      \"retweets\": 1,\n      \"created_at\": \"Thu Sep 19 21:54:54 +0000 2024\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1584801966873612288\",\n      \"screen_name\": null,\n      \"text\": \"THAT ONE HURT https://t.co/SPw29QusNr\",\n      \"favorites\": 32,\n      \"retweets\": 3,\n      \"created_at\": \"Tue Oct 25 07:00:07 +0000 2022\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1578125658651181057\",\n      \"screen_name\": null,\n      \"text\": \"RT @Wild_Bill32: @Gong_io hands down.\",\n      \"favorites\": null,\n      \"retweets\": 1,\n      \"created_at\": \"Thu Oct 06 20:50:51 +0000 2022\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1578125110401064960\",\n      \"screen_name\": null,\n      \"text\": \"RT @tabiouslcarter: Just updated my LinkedIn page! Officially my first day at @Gong_io 🥶🥶 I’m a Gongster now! 🚀🚀 https://t.co/DZFRW9tUdr\",\n      \"favorites\": null,\n      \"retweets\": 1,\n      \"created_at\": \"Thu Oct 06 20:48:41 +0000 2022\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1578125077219983360\",\n      \"screen_name\": null,\n      \"text\": \"RT @Jigarshah04: For product managers and designers, there's no better tools for early stage research/discovery on a feature or idea than @…\",\n      \"favorites\": null,\n      \"retweets\": 2,\n      \"created_at\": \"Thu Oct 06 20:48:33 +0000 2022\",\n      \"lang\": \"en\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  }
+}

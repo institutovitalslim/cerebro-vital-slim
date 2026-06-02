@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260601-093147-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 6137,
+    "unique_leads": 437,
+    "total_inbound": 3225,
+    "total_outbound": 2912,
+    "wins": 30,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Explicações precoces afastam pesquisadores\n**Observacao:** Quando o closer ofereceu explicar o que está incluído na consulta ou detalhou o funcionamento individualizado, leads em fase de pesquisa droparam com: \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\" e \"Por enquanto não\".\n**Acao para a Clara:** Se o lead vier pelo botão \"Gostaria de saber mais informações\" ou demonstrar estar avaliando, não enviar blocos explicativos sobre o protocolo. Perguntar qual a dúvida principal e propor: \"Consigo agendar uma avaliação para você tirar todas as dúvidas com a Dra. Tenho horário na [data].\"\n\n## 2. CTA binário em confirmações gera \"Confirmo\"\n**Observacao:** Todos os wins de lembrete de agenda usaram a mesma estrutura: \"Oi, [Nome]! Estou passando para confirmar seu atendimento de [Serviço] amanhã, às [Horário]... pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\". As respostas dos leads foram literalmente \"Confirmo\".\n**Acao para a Clara:** Ao enviar lembrete ou pedir confirmação de consulta/aplicação, usar sempre essa estrutura exata com as três opções de resposta predefinidas (*Confirmo*, *Quero remarcar*, *Não vou conseguir*).\n\n## 3. Proposta de horário exato converte; janela aberta não\n**Observacao:** Vitórias ocorreram com propostas diretas como \"Temos o horário amanhã (23/04) às 14:00. Podemos agendar?\" (WIN: \"Confirmo\") e \"voce pode chegar as 15:30\" (WIN: \"Ok,combinado\"). Um lead enviou ampla disponibilidade (\"tenho disponibilidade de segunda a quinta à tarde e noite...\") sem registro de win na amostra.\n**Acao para a Clara:** Quando o lead perguntar \"Qual o dia e horário?\" ou oferecer vários dias, nunca devolver a pergunta. Oferecer imediatamente um horário específico: \"Tenho [dia] às [hora]. Encaixa para você?\"\n\n## 4. Saudação genérica \"Como posso te ajudar?\" gera rejeição\n**Observacao:** A abertura \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" foi respondida com \"Bom dia. Por enquanto não vou querer nao\".\n**Acao para a Clara:** Jamais iniciar leads frios com saudações genéricas e abertas. Substituir por contextualização direta: \"Vi que você veio pelo nosso Reel. Sobre qual tratamento gostaria de saber mais?\"\n\n## 5. Pacientes ativos precisam de triagem, não qualificação de venda\n**Observacao:** Mensagens como \"vc poderia mim reenviar as NFS\", \"Quanto à segunda dose de vitamina C\" e justificativas de falta (\"Tive uma enxaqueca forte hoje pela manhã\") indicam demandas de quem já é paciente.\n**Acao para a Clara:** Se detectar palavras-chave como NFS, dose, vitamina, medicação ou justificativa de falta, não iniciar fluxo de qualificação de lead. Escalar imediatamente para o time administrativo/clínico humano.",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

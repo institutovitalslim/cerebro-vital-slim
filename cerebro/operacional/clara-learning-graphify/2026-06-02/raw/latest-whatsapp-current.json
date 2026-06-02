@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-current",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "current",
+  "periodo": "últimas 6h",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260601-231616-whatsapp-current.md",
+  "contadores": {
+    "total_messages": 8,
+    "unique_leads": 2,
+    "total_inbound": 8,
+    "total_outbound": 0,
+    "wins": 0,
+    "drops": 0
+  },
+  "aprendizados": "## 1. Origem em vídeo do Instagram\n**Observacao:** Lead abriu a conversa mencionando literalmente \"Gostaria de saber sobre o vídeo no Instagram\", demonstrando que o contato partiu de conteúdo específico em rede social.\n**Acao para a Clara:** Sempre que o lead citar vídeo/reels do Instagram, perguntar \"Qual vídeo você assistiu?\" e conectar a primeira resposta ao tema daquele conteúdo antes de qualquer abordagem genérica.\n\n## 2. Indicação por relacionamento familiar\n**Observacao:** A lead se apresentou como \"sou amiga da família Cedraz\", revelando que o primeiro contato foi por indicação de pacientes/conhecidos já atendidos.\n**Acao para a Clara:** Quando o lead se declarar amigo/familiar de paciente, responder imediatamente agradecendo a indicação — ex.: \"Que bom saber que você veio pela indicação da família Cedraz! São pacientes especiais para nós.\" — antes de iniciar qualificação.\n\n## 3. Alta intenção com médico e prazo definidos\n**Observacao:** A lead chegou pedindo diretamente \"Gostaria de marcar com Dra. Daniely, se possível ainda nesta semana\", sem necessidade de convencimento prévio.\n**Acao para a Clara:** Se o lead solicitar agendamento direto com profissional específico e prazo curto, não aplicar roteiro longo de qualificação; priorizar verificar a agenda da Dra. Daniely para esta semana e apresentar horários disponíveis em até duas mensagens.\n\n## 4. Contexto clínico-emocional detalhado\n**Observacao:** A lead compartilhou vulnerabilidade explícita (\"Estou em processo de início de menopausa, precisando emagrecer, e sair do desânimo\") e ainda citou \"Sobre cancaso\" (erro de digitação por cansaço).\n**Acao para a Clara:** Quando o lead mencionar sintomas como menopausa, desânimo e cansaço, validar primeiro com empatia usando as próprias palavras dele — ex.: \"Entendo que o início da menopausa pode trazer cansaço e desânimo, e você está buscando cuidar também do emocional\" — só depois avançar para a oferta.",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

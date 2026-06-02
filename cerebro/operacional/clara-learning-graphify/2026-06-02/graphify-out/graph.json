@@ -1,0 +1,681 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 3,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "conselho_growth",
+      "label": "Conselho Growth",
+      "type": "council",
+      "community": 3,
+      "norm_label": "conselho growth"
+    },
+    {
+      "id": "agendamento_premium",
+      "label": "Agendamento premium de pacientes/leads",
+      "type": "capability",
+      "community": 3,
+      "norm_label": "agendamento premium de pacientes/leads"
+    },
+    {
+      "id": "slot_latest_evidence_gate",
+      "label": "latest-evidence-gate",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-evidence-gate.json",
+      "community": 3,
+      "norm_label": "latest-evidence-gate"
+    },
+    {
+      "id": "slot_instagram_manha",
+      "label": "instagram_manha",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-instagram_manha.json",
+      "community": 0,
+      "norm_label": "instagram_manha"
+    },
+    {
+      "id": "fonte_instagram",
+      "label": "Instagram",
+      "type": "source",
+      "community": 0,
+      "norm_label": "instagram"
+    },
+    {
+      "id": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "label": "vendas consultivas, WhatsApp, atendimento premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "vendas consultivas, whatsapp, atendimento premium"
+    },
+    {
+      "id": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida"
+    },
+    {
+      "id": "slot_instagram_tarde",
+      "label": "instagram_tarde",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-instagram_tarde.json",
+      "community": 0,
+      "norm_label": "instagram_tarde"
+    },
+    {
+      "id": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "label": "SPIN, negocia\u00e7\u00e3o, social selling ou cl\u00ednica premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "spin, negociacao, social selling ou clinica premium"
+    },
+    {
+      "id": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "label": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avan\u00e7o",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 resposta ruim + 1 resposta clara premium + 1 pergunta de avanco"
+    },
+    {
+      "id": "slot_revisao",
+      "label": "revisao",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-revisao.json",
+      "community": 4,
+      "norm_label": "revisao"
+    },
+    {
+      "id": "fonte_revis_o_interna",
+      "label": "Revis\u00e3o interna",
+      "type": "source",
+      "community": 4,
+      "norm_label": "revisao interna"
+    },
+    {
+      "id": "tema_aprendizados_do_dia",
+      "label": "aprendizados do dia",
+      "type": "topic",
+      "community": 4,
+      "norm_label": "aprendizados do dia"
+    },
+    {
+      "id": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria",
+      "label": "classificar aplicar amanh\u00e3 / descartar / testar 3 dias / propor mem\u00f3ria",
+      "type": "deliverable",
+      "community": 4,
+      "norm_label": "classificar aplicar amanha / descartar / testar 3 dias / propor memoria"
+    },
+    {
+      "id": "slot_whatsapp_current",
+      "label": "whatsapp-current",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-whatsapp-current.json",
+      "community": 2,
+      "norm_label": "whatsapp-current"
+    },
+    {
+      "id": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "label": "WhatsApp IVS via planilha de conversas",
+      "type": "source",
+      "community": 2,
+      "norm_label": "whatsapp ivs via planilha de conversas"
+    },
+    {
+      "id": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "label": "obje\u00e7\u00f5es, vit\u00f3rias, quedas, timing de convite para agenda, linguagem premium e follow-up",
+      "type": "topic",
+      "community": 2,
+      "norm_label": "objecoes, vitorias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "id": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "label": "padr\u00f5es de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "type": "deliverable",
+      "community": 2,
+      "norm_label": "padroes de conversa reais para melhorar agendamento da clara sem expor pii"
+    },
+    {
+      "id": "slot_whatsapp_historical",
+      "label": "whatsapp-historical",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-whatsapp-historical.json",
+      "community": 2,
+      "norm_label": "whatsapp-historical"
+    },
+    {
+      "id": "slot_x_twitter",
+      "label": "x_twitter",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-x_twitter.json",
+      "community": 5,
+      "norm_label": "x_twitter"
+    },
+    {
+      "id": "fonte_x_twitter",
+      "label": "X/Twitter",
+      "type": "source",
+      "community": 5,
+      "norm_label": "x/twitter"
+    },
+    {
+      "id": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "label": "posts de alto engajamento sobre persuas\u00e3o, obje\u00e7\u00f5es, atendimento, neg\u00f3cios locais ou experi\u00eancia do cliente",
+      "type": "topic",
+      "community": 5,
+      "norm_label": "posts de alto engajamento sobre persuasao, objecoes, atendimento, negocios locais ou experiencia do cliente"
+    },
+    {
+      "id": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "label": "1 frase curta + 1 \u00e2ngulo de obje\u00e7\u00e3o + 1 cuidado contra agressividade",
+      "type": "deliverable",
+      "community": 5,
+      "norm_label": "1 frase curta + 1 angulo de objecao + 1 cuidado contra agressividade"
+    },
+    {
+      "id": "item_once_in_a_lifetime_experience_what_do_you_get_when_you_combine_2_michelin_stars",
+      "label": "ONCE-IN-A-LIFETIME EXPERIENCE\n\nWhat do you get when you combine 2-Michelin Stars + industry leaders + Gong?\n\nA recipe for a mind-blowing dinner party.\n\nThe food - and knowledge-sha",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 8,
+      "norm_label": "once-in-a-lifetime experience\n\nwhat do you get when you combine 2-michelin stars + industry leaders + gong?\n\na recipe for a mind-blowing dinner party.\n\nthe food - and knowledge-sha"
+    },
+    {
+      "id": "conceito_once_in_a_lifetime_experience_what_do_you_get_when_you_combine_2_mich",
+      "label": "ONCE-IN-A-LIFETIME EXPERIENCE\n\nWhat do you get when you combine 2-Michelin Stars + industry leaders + Gong?\n\nA recipe for a mind-blowing dinner party.\n\nThe food",
+      "type": "concept",
+      "community": 8,
+      "norm_label": "once-in-a-lifetime experience\n\nwhat do you get when you combine 2-michelin stars + industry leaders + gong?\n\na recipe for a mind-blowing dinner party.\n\nthe food"
+    },
+    {
+      "id": "item_that_one_hurt_https_t_co_spw29qusnr",
+      "label": "THAT ONE HURT https://t.co/SPw29QusNr",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 7,
+      "norm_label": "that one hurt https://t.co/spw29qusnr"
+    },
+    {
+      "id": "conceito_that_one_hurt_https_t_co_spw29qusnr",
+      "label": "THAT ONE HURT https://t.co/SPw29QusNr",
+      "type": "concept",
+      "community": 7,
+      "norm_label": "that one hurt https://t.co/spw29qusnr"
+    },
+    {
+      "id": "item_rt_wild_bill32_gong_io_hands_down",
+      "label": "RT @Wild_Bill32: @Gong_io hands down.",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 6,
+      "norm_label": "rt @wild_bill32: @gong_io hands down."
+    },
+    {
+      "id": "conceito_rt_wild_bill32_gong_io_hands_down",
+      "label": "RT @Wild_Bill32: @Gong_io hands down.",
+      "type": "concept",
+      "community": 6,
+      "norm_label": "rt @wild_bill32: @gong_io hands down."
+    },
+    {
+      "id": "item_rt_tabiouslcarter_just_updated_my_linkedin_page_officially_my_first_day_at_g",
+      "label": "RT @tabiouslcarter: Just updated my LinkedIn page! Officially my first day at @Gong_io \ud83e\udd76\ud83e\udd76 I\u2019m a Gongster now! \ud83d\ude80\ud83d\ude80 https://t.co/DZFRW9tUdr",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 10,
+      "norm_label": "rt @tabiouslcarter: just updated my linkedin page! officially my first day at @gong_io \ud83e\udd76\ud83e\udd76 i\u2019m a gongster now! \ud83d\ude80\ud83d\ude80 https://t.co/dzfrw9tudr"
+    },
+    {
+      "id": "conceito_rt_tabiouslcarter_just_updated_my_linkedin_page_officially_my_first",
+      "label": "RT @tabiouslcarter: Just updated my LinkedIn page! Officially my first day at @Gong_io \ud83e\udd76\ud83e\udd76 I\u2019m a Gongster now! \ud83d\ude80\ud83d\ude80 https://t.co/DZFRW9tUdr",
+      "type": "concept",
+      "community": 10,
+      "norm_label": "rt @tabiouslcarter: just updated my linkedin page! officially my first day at @gong_io \ud83e\udd76\ud83e\udd76 i\u2019m a gongster now! \ud83d\ude80\ud83d\ude80 https://t.co/dzfrw9tudr"
+    },
+    {
+      "id": "item_rt_jigarshah04_for_product_managers_and_designers_there_s_no_better_tools_for",
+      "label": "RT @Jigarshah04: For product managers and designers, there's no better tools for early stage research/discovery on a feature or idea than @\u2026",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "",
+      "community": 9,
+      "norm_label": "rt @jigarshah04: for product managers and designers, there's no better tools for early stage research/discovery on a feature or idea than @..."
+    },
+    {
+      "id": "conceito_rt_jigarshah04_for_product_managers_and_designers_there_s_no_better",
+      "label": "RT @Jigarshah04: For product managers and designers, there's no better tools for early stage research/discovery on a feature or idea than @\u2026",
+      "type": "concept",
+      "community": 9,
+      "norm_label": "rt @jigarshah04: for product managers and designers, there's no better tools for early stage research/discovery on a feature or idea than @..."
+    },
+    {
+      "id": "slot_youtube",
+      "label": "youtube",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-youtube.json",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "fonte_youtube",
+      "label": "YouTube",
+      "type": "source",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "tema_sales_scripts_discovery_questions_follow_up",
+      "label": "sales scripts discovery questions follow up",
+      "type": "topic",
+      "community": 1,
+      "norm_label": "sales scripts discovery questions follow up"
+    },
+    {
+      "id": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "label": "ideia central + aplica\u00e7\u00e3o WhatsApp + script antes/depois + m\u00e9trica + risco",
+      "type": "deliverable",
+      "community": 1,
+      "norm_label": "ideia central + aplicacao whatsapp + script antes/depois + metrica + risco"
+    },
+    {
+      "id": "item_how_to_run_a_discovery_call_strategy_session",
+      "label": "How To Run A Discovery Call - Strategy Session",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=_DbSgU5naDQ",
+      "profile": "Patrick Dang",
+      "community": 1,
+      "norm_label": "how to run a discovery call - strategy session"
+    },
+    {
+      "id": "item_youtube_video_djr7opkeebk",
+      "label": "YouTube video dJR7OpkEeBk",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=dJR7OpkEeBk",
+      "profile": "",
+      "community": 1,
+      "norm_label": "youtube video djr7opkeebk"
+    },
+    {
+      "id": "item_youtube_video_t24zfbxtorc",
+      "label": "YouTube video t24ZFbxToRc",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-02/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=t24ZFbxToRc",
+      "profile": "",
+      "community": 1,
+      "norm_label": "youtube video t24zfbxtorc"
+    }
+  ],
+  "links": [
+    {
+      "type": "must_master",
+      "relationship": "must_master",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "agendamento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "sabatina",
+      "relationship": "sabatina",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "conselho_growth",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_latest_evidence_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_manha",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_revisao",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "fonte_instagram",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_instagram",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "fonte_revis_o_interna",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "tema_aprendizados_do_dia",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "entrega_classificar_aplicar_amanh_descartar_testar_3_dias_propor_mem_ria",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "fonte_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_once_in_a_lifetime_experience_what_do_you_get_when_you_combine_2_michelin_stars",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_that_one_hurt_https_t_co_spw29qusnr",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_rt_wild_bill32_gong_io_hands_down",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_rt_tabiouslcarter_just_updated_my_linkedin_page_officially_my_first_day_at_g",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_rt_jigarshah04_for_product_managers_and_designers_there_s_no_better_tools_for",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_once_in_a_lifetime_experience_what_do_you_get_when_you_combine_2_michelin_stars",
+      "target": "conceito_once_in_a_lifetime_experience_what_do_you_get_when_you_combine_2_mich",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_that_one_hurt_https_t_co_spw29qusnr",
+      "target": "conceito_that_one_hurt_https_t_co_spw29qusnr",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_rt_wild_bill32_gong_io_hands_down",
+      "target": "conceito_rt_wild_bill32_gong_io_hands_down",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_rt_tabiouslcarter_just_updated_my_linkedin_page_officially_my_first_day_at_g",
+      "target": "conceito_rt_tabiouslcarter_just_updated_my_linkedin_page_officially_my_first",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_rt_jigarshah04_for_product_managers_and_designers_there_s_no_better_tools_for",
+      "target": "conceito_rt_jigarshah04_for_product_managers_and_designers_there_s_no_better",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "fonte_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "tema_sales_scripts_discovery_questions_follow_up",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_how_to_run_a_discovery_call_strategy_session",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_youtube_video_djr7opkeebk",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_youtube_video_t24zfbxtorc",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}
