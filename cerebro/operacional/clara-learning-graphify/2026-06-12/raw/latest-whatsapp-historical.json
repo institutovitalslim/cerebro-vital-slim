@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260608-093411-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 6187,
+    "unique_leads": 443,
+    "total_inbound": 3275,
+    "total_outbound": 2912,
+    "wins": 30,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Confirmações com opções literais de resposta\n**Observacao:** Em 4 das 9 vitórias analisadas, o closer encerrou a mensagem com opções exatas de resposta e os leads reagiram com \"Confirmo\". Exemplo real: \"Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resultado do lead: \"Confirmo\".\n**Acao para a Clara:** Ao confirmar qualquer agendamento, finalizar a mensagem com exatamente 3 opções de resposta em negrito: *Confirmo*, *Quero remarcar* e *Não vou conseguir*.\n\n## 2. Adiantar preparação logística no horário proposto\n**Observacao:** Um closer converteu com \"Ok,combinado\" ao enviar: \"voce pode chegar as 15:30 que ja vou fazendo os exames necessários antes do atendimento com a Dra\". O lead não questionou o que deveria fazer antes nem pediu para chegar mais tarde.\n**Acao para a Clara:** Sempre que marcar uma consulta ou exame, já informar no mesmo bloco de mensagem o horário de chegada + o tempo/etapa de preparação prévia (ex: \"chegue às 14h30 para exames, atendimento às 15h\"), eliminando dúvidas que retardam a confirmação.\n\n## 3. Explicação de serviço antes de qualificar gera rejeição\n**Observacao:** Dois drops ocorreram logo depois que o closer explicou detalhes da consulta sem o lead ter demonstrado prontidão. Exemplos reais das últimas mensagens antes do drop: \"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\" e \"Na consulta, a Dra. avalia seu caso com profundidade...\". Respostas do lead: \"Por enquanto, não vou marcar a consulta, estou tomando informações\" e \"Por enquanto não\".\n**Acao para a Clara:** Antes de descrever o que inclui a consulta ou listar procedimentos, perguntar diretamente: \"Você está buscando atendimento para agora ou está apenas pesquisando para decidir mais à frente?\" Só avançar com detalhes se o lead confirmar interesse imediato.\n\n## 4. Reels do Instagram sem contexto exigem ponte direta\n**Observacao:** Várias aberturas de leads na amostra foram compostas apenas pelo link repetido: \"https://www.instagram.com/reel/DViZCxeDoj6/?igsh=MWo4ZHBvamFodTN4OA==\", sem nenhuma mensagem de texto complementar.\n**Acao para a Clara:** Ao receber apenas um link de rede social, nunca responder com \"Oi, como posso ajudar?\". Usar frase de ponte contextual: \"Oi! Vi que você enviou um reel nosso. Esse conteúdo é sobre [tema]. Você se identificou com alguma situação específica para eu te direcionar melhor?\"\n\n## 5. Perguntas abertas sobre exames/documentos geram adiamento indefinido\n**Observacao:** Em dois drops da amostra, o closer perguntou quando o lead enviaria documentos ou faria exames. Respostas do lead: \"Assim que tiver com todos em mãos te aviso\" e \"Assim que fizer os exames te aviso.\", sem compromisso de data.\n**Acao para a Clara:** Nunca perguntar \"quando você vai fazer/enviar\". Propor uma data condicional: \"Que tal agendarmos para [dia] e você me envia os exames até [dia anterior]? Assim garantimos seu atendimento sem ficar na espera.\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

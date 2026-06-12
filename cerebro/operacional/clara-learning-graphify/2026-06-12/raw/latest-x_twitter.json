@@ -1,0 +1,16 @@
+{
+  "slot": "x_twitter",
+  "date": "2026-06-11T15:40:09.273873",
+  "weekday": "Thursday",
+  "regra": "Não copiar. Converter em abertura, pergunta, objeção, follow-up ou fechamento premium.",
+  "fonte": "X/Twitter",
+  "buscar": "posts de alto engajamento sobre persuasão, objeções, atendimento, negócios locais ou experiência do cliente",
+  "entrega": "1 frase curta + 1 ângulo de objeção + 1 cuidado contra agressividade",
+  "perfil": "Outreach_io",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py x-profile --screenname Outreach_io --limit 5",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"x-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260611-154012-x-profile-Outreach_io.json\",\n  \"screenname\": \"Outreach_io\",\n  \"count\": 5,\n  \"sample\": [\n    {\n      \"tweet_id\": \"1709668014420103387\",\n      \"screen_name\": null,\n      \"text\": \"#Unleash2023 is here! What are you looking forward to this week? https://t.co/zA5C0NgMCE\",\n      \"favorites\": 10,\n      \"retweets\": 2,\n      \"created_at\": \"Wed Oct 04 20:33:13 +0000 2023\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1688991067809648642\",\n      \"screen_name\": null,\n      \"text\": \"Our team has done it again! 😍 We are incredibly proud to be on the 2023 Cloud 100 list of the top 100 biggest private ☁️companies in the world. \\n\\nThank you for the recognition @Forbes @BessemerVP @SalesforceVC. https://t.co/tgi9fut4jx\",\n      \"favorites\": 10,\n      \"retweets\": 4,\n      \"created_at\": \"Tue Aug 08 19:10:25 +0000 2023\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1678440163536695296\",\n      \"screen_name\": null,\n      \"text\": \"Special sneak peek 👀 \\n\\nFor the very first time, senior enterprise executives will be joining the Outreach roundtable to discuss how to lead an organization to success in today's economic environment.  \\n\\nJoin us for an engaging two-part discussion https://t.co/n1xu7P1Ur0 https://t.co/2YovQFGS99\",\n      \"favorites\": 8,\n      \"retweets\": 2,\n      \"created_at\": \"Mon Jul 10 16:24:53 +0000 2023\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1673380060001357824\",\n      \"screen_name\": null,\n      \"text\": \"RT @jonfortt: I speak with @outreach_io CEO @medinism about generative #AI, sales, and the challenging economy in a #forttknox update. http…\",\n      \"favorites\": null,\n      \"retweets\": 5,\n      \"created_at\": \"Mon Jun 26 17:17:50 +0000 2023\",\n      \"lang\": \"en\"\n    },\n    {\n      \"tweet_id\": \"1669752078464430095\",\n      \"screen_name\": null,\n      \"text\": \"The #Unleash2023 agenda is OUT and features 60+ sessions with leaders from @Cisco, @Siemens, @Verizon, @CommScope, @SnowflakeDB, and more! Register before June 30 to get the early bird discount. https://t.co/phk92fGMvo\",\n      \"favorites\": 1,\n      \"retweets\": 1,\n      \"created_at\": \"Fri Jun 16 17:01:32 +0000 2023\",\n      \"lang\": \"en\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  }
+}
