@@ -18,3 +18,9 @@ Se algo já foi feito mais de uma vez com sucesso e ainda gera resposta de dúvi
 
 ## Função adicional
 Esta camada também serve como ponte de backlog recuperável quando demandas podem se perder entre tópicos, erros ou interrupções.
+
+## Kits operacionais
+
+- `kit-robustez-operacional-ivs/` — playbook e templates para diagnóstico antes de correção, skip reasons, incremental save, verify-then-write e health monitor operacional.
+
+- `graphify-2026-06-14-gbrain-fechamento-operacional/` — RC-25 de fechamento operacional mínimo do GBrain IVS.
