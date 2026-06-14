@@ -1,8 +1,8 @@
 # GBrain IVS — Health Report
 
-Gerado em: `2026-06-14T16:15:34.474847+00:00`
-Modo: `post-rc25`
-Arquivos espelhados: **5134**
+Gerado em: `2026-06-14T16:32:26.211250+00:00`
+Modo: `doctor-only`
+Arquivos espelhados: **0**
 
 ## Estatísticas
 - Pages: **4958**
@@ -27,11 +27,8 @@ Arquivos espelhados: **5134**
 - `takes_count` — 0 takes (takes.bootstrap_enabled is false; opt in to enable)
 
 ## Comandos
-- **OK** `bun run src/cli.ts import /root/.local/share/ivs-gbrain/import/ivs-brain --no-embed` (25.71s)
-- **OK** `bun run src/cli.ts extract --stale --catch-up` (2.12s)
-- **OK** `bun run src/cli.ts embed --stale` (2.62s)
-- **OK** `bun run src/cli.ts doctor` (4.63s)
-- **OK** `bun run src/cli.ts stats` (1.09s)
+- **OK** `bun run src/cli.ts doctor` (4.22s)
+- **OK** `bun run src/cli.ts stats` (1.32s)
 
 ## Regra operacional
 - Fonte de verdade continua sendo o markdown do `cerebro-vital-slim`.
