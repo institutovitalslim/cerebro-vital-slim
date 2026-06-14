@@ -1,0 +1,190 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "QA di\u00e1rio Clara 2026-06-14",
+      "type": "operational_review",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "qa_diario_clara_2026_06_14",
+      "community": 1,
+      "norm_label": "qa diario clara 2026-06-14"
+    },
+    {
+      "label": "WhatsApp current zerado em m\u00faltiplas execu\u00e7\u00f5es",
+      "type": "risk_signal",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "whatsapp_current_zerado_multiplas_execucoes",
+      "community": 1,
+      "norm_label": "whatsapp current zerado em multiplas execucoes"
+    },
+    {
+      "label": "Risco operacional de captura/pipeline WhatsApp",
+      "type": "operational_risk",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "risco_pipeline_captura_whatsapp",
+      "community": 1,
+      "norm_label": "risco operacional de captura/pipeline whatsapp"
+    },
+    {
+      "label": "Interven\u00e7\u00e3o humana/t\u00e9cnica para validar fonte, Z-API, bridge, planilha e cron",
+      "type": "action",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "intervencao_humana_tecnica",
+      "community": 1,
+      "norm_label": "intervencao humana/tecnica para validar fonte, z-api, bridge, planilha e cron"
+    },
+    {
+      "label": "Hist\u00f3rico WhatsApp 180 dias: 6187 mensagens e 443 leads",
+      "type": "evidence",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "historical_whatsapp_6187_443",
+      "community": 0,
+      "norm_label": "historico whatsapp 180 dias: 6187 mensagens e 443 leads"
+    },
+    {
+      "label": "Confirma\u00e7\u00e3o com respostas literais",
+      "type": "improvement",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "confirmacao_respostas_literais",
+      "community": 0,
+      "norm_label": "confirmacao com respostas literais"
+    },
+    {
+      "label": "Log\u00edstica de chegada e prepara\u00e7\u00e3o no mesmo bloco",
+      "type": "improvement",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "logistica_no_mesmo_bloco",
+      "community": 0,
+      "norm_label": "logistica de chegada e preparacao no mesmo bloco"
+    },
+    {
+      "label": "Qualificar prontid\u00e3o antes de explicar servi\u00e7o",
+      "type": "improvement",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "qualificar_antes_de_explicar_servico",
+      "community": 0,
+      "norm_label": "qualificar prontidao antes de explicar servico"
+    },
+    {
+      "label": "Guardrails cl\u00ednicos e comerciais preservados",
+      "type": "guardrail",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "id": "guardrails_clinicos_comerciais",
+      "community": 0,
+      "norm_label": "guardrails clinicos e comerciais preservados"
+    }
+  ],
+  "links": [
+    {
+      "relationship": "identifica",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "qa_diario_clara_2026_06_14",
+      "_tgt": "whatsapp_current_zerado_multiplas_execucoes",
+      "source": "qa_diario_clara_2026_06_14",
+      "target": "whatsapp_current_zerado_multiplas_execucoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "sinaliza",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "whatsapp_current_zerado_multiplas_execucoes",
+      "_tgt": "risco_pipeline_captura_whatsapp",
+      "source": "whatsapp_current_zerado_multiplas_execucoes",
+      "target": "risco_pipeline_captura_whatsapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "exige",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "risco_pipeline_captura_whatsapp",
+      "_tgt": "intervencao_humana_tecnica",
+      "source": "risco_pipeline_captura_whatsapp",
+      "target": "intervencao_humana_tecnica",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "sustenta",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "historical_whatsapp_6187_443",
+      "_tgt": "confirmacao_respostas_literais",
+      "source": "historical_whatsapp_6187_443",
+      "target": "confirmacao_respostas_literais",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "sustenta",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "historical_whatsapp_6187_443",
+      "_tgt": "logistica_no_mesmo_bloco",
+      "source": "historical_whatsapp_6187_443",
+      "target": "logistica_no_mesmo_bloco",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "sustenta",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "historical_whatsapp_6187_443",
+      "_tgt": "qualificar_antes_de_explicar_servico",
+      "source": "historical_whatsapp_6187_443",
+      "target": "qualificar_antes_de_explicar_servico",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "preserva",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "confirmacao_respostas_literais",
+      "_tgt": "guardrails_clinicos_comerciais",
+      "source": "confirmacao_respostas_literais",
+      "target": "guardrails_clinicos_comerciais",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "preserva",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "logistica_no_mesmo_bloco",
+      "_tgt": "guardrails_clinicos_comerciais",
+      "source": "logistica_no_mesmo_bloco",
+      "target": "guardrails_clinicos_comerciais",
+      "confidence_score": 1.0
+    },
+    {
+      "relationship": "preserva",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-14-0130.md",
+      "file_type": "doc",
+      "_src": "qualificar_antes_de_explicar_servico",
+      "_tgt": "guardrails_clinicos_comerciais",
+      "source": "qualificar_antes_de_explicar_servico",
+      "target": "guardrails_clinicos_comerciais",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}
