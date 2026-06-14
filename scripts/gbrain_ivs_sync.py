@@ -29,7 +29,31 @@ LOCK = Path('/root/.local/share/ivs-gbrain/gbrain_ivs_sync.lock')
 ENV = os.environ.copy()
 ENV['GBRAIN_HOME'] = '/root/.local/share/ivs-gbrain/home'
 ENV['OPENCLAW_WORKSPACE'] = '/root/.local/share/ivs-gbrain/agent-workspace'
-ENV['PATH'] = '/tmp/gbrain-ivs-bin:/root/.bun/bin:' + ENV.get('PATH', '')
+ENV['PATH'] = '/usr/local/bin:/root/.bun/bin:' + ENV.get('PATH', '')
+
+# Carrega a chave do provider de embedding (OpenAI) a partir do arquivo seguro,
+# de forma transitoria -- usada so para chamar a API de embedding durante o sync.
+# Nunca e gravada no GBrain (config/brain), preservando a governanca de segredos.
+def _load_secret_env(*paths):
+    for p in paths:
+        try:
+            with open(p, 'r', encoding='utf-8') as fh:
+                for line in fh:
+                    line = line.strip()
+                    if not line or line.startswith('#') or '=' not in line:
+                        continue
+                    if line.startswith('export '):
+                        line = line[len('export '):]
+                    k, _, v = line.partition('=')
+                    k = k.strip()
+                    v = v.strip().strip('"').strip("'")
+                    if k and v and not ENV.get(k):
+                        ENV[k] = v
+        except FileNotFoundError:
+            continue
+
+
+_load_secret_env('/root/.openclaw/secure/openai.env', '/root/.openclaw/.env.runtime')
 
 EXCLUDE_DIRS = {
     '.git', 'node_modules', '.venv', '__pycache__', 'secure', 'tmp', 'backups',

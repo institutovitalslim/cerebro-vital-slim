@@ -24,3 +24,5 @@ Esta camada também serve como ponte de backlog recuperável quando demandas pod
 - `kit-robustez-operacional-ivs/` — playbook e templates para diagnóstico antes de correção, skip reasons, incremental save, verify-then-write e health monitor operacional.
 
 - `graphify-2026-06-14-gbrain-fechamento-operacional/` — RC-25 de fechamento operacional mínimo do GBrain IVS.
+
+- `graphify-2026-06-14-gbrain-base-v2-takes-decisao/` — RC-25 de migração GBrain para base-v2 e decisão de manter takes desligado.

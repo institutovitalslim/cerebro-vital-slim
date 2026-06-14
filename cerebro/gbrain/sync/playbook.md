@@ -66,3 +66,7 @@ Critério mínimo:
 - Rodar writeback automático no cérebro canônico.
 - Salvar segredos.
 - Reestruturar pastas em massa sem backup e RC-25.
+
+## Upgrade aplicado — gbrain-base-v2
+
+Em 2026-06-14, o IVS migrou o GBrain para `gbrain-base-v2` via `unify-types` protegido. `takes` permanece desligado até piloto controlado aprovado.
