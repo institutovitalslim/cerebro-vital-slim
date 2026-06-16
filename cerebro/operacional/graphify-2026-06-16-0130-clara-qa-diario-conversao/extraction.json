@@ -1,0 +1,141 @@
+{
+  "nodes": [
+    {
+      "id": "qa_diario_clara_2026_06_16",
+      "label": "QA diário Clara 2026-06-16",
+      "type": "operational_review",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "whatsapp_current_persistente_zerado",
+      "label": "WhatsApp current persistentemente zerado",
+      "type": "risk_signal",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "risco_pipeline_captura_whatsapp",
+      "label": "Risco operacional de captura/pipeline WhatsApp",
+      "type": "operational_risk",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "intervencao_humana_tecnica",
+      "label": "Intervenção humana/técnica para validar fonte, Z-API, bridge, planilha e cron",
+      "type": "action",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "historical_whatsapp_6187_443",
+      "label": "Histórico WhatsApp 180 dias: 6187 mensagens e 443 leads",
+      "type": "evidence",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "oferta_duas_janelas_agenda",
+      "label": "Oferta de duas janelas concretas de agenda",
+      "type": "improvement",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "confirmacao_respostas_literais",
+      "label": "Confirmação com respostas literais",
+      "type": "improvement",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "ancoragem_rapida_abertura_vazia",
+      "label": "Ancoragem rápida para link/saudação vazia",
+      "type": "improvement",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "id": "guardrails_clinicos_comerciais",
+      "label": "Guardrails clínicos e comerciais preservados",
+      "type": "guardrail",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    }
+  ],
+  "edges": [
+    {
+      "source": "qa_diario_clara_2026_06_16",
+      "target": "whatsapp_current_persistente_zerado",
+      "relationship": "identifica",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "whatsapp_current_persistente_zerado",
+      "target": "risco_pipeline_captura_whatsapp",
+      "relationship": "sinaliza",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "risco_pipeline_captura_whatsapp",
+      "target": "intervencao_humana_tecnica",
+      "relationship": "exige",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "historical_whatsapp_6187_443",
+      "target": "oferta_duas_janelas_agenda",
+      "relationship": "sustenta",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "historical_whatsapp_6187_443",
+      "target": "confirmacao_respostas_literais",
+      "relationship": "sustenta",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "historical_whatsapp_6187_443",
+      "target": "ancoragem_rapida_abertura_vazia",
+      "relationship": "sustenta",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "oferta_duas_janelas_agenda",
+      "target": "guardrails_clinicos_comerciais",
+      "relationship": "preserva",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "confirmacao_respostas_literais",
+      "target": "guardrails_clinicos_comerciais",
+      "relationship": "preserva",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    },
+    {
+      "source": "ancoragem_rapida_abertura_vazia",
+      "target": "guardrails_clinicos_comerciais",
+      "relationship": "preserva",
+      "confidence": "EXTRACTED",
+      "source_file": "raw/qa-diario-clara-2026-06-16-0130.md",
+      "file_type": "document"
+    }
+  ]
+}

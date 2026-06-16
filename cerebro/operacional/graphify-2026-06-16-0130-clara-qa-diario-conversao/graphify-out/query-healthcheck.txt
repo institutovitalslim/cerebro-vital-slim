@@ -1,0 +1,17 @@
+NODE Guardrails clínicos e comerciais preservados [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE Histórico WhatsApp 180 dias: 6187 mensagens e 443 leads [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE Oferta de duas janelas concretas de agenda [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE WhatsApp current persistentemente zerado [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE Risco operacional de captura/pipeline WhatsApp [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE Confirmação com respostas literais [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE Ancoragem rápida para link/saudação vazia [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE QA diário Clara 2026-06-16 [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+NODE Intervenção humana/técnica para validar fonte, Z-API, bridge, planilha e cron [src=raw/qa-diario-clara-2026-06-16-0130.md loc= community=]
+EDGE Histórico WhatsApp 180 dias: 6187 mensagens e 443 leads -- [EXTRACTED]--> Oferta de duas janelas concretas de agenda
+EDGE Histórico WhatsApp 180 dias: 6187 mensagens e 443 leads -- [EXTRACTED]--> Confirmação com respostas literais
+EDGE Histórico WhatsApp 180 dias: 6187 mensagens e 443 leads -- [EXTRACTED]--> Ancoragem rápida para link/saudação vazia
+EDGE WhatsApp current persistentemente zerado -- [EXTRACTED]--> QA diário Clara 2026-06-16
+EDGE Risco operacional de captura/pipeline WhatsApp -- [EXTRACTED]--> Intervenção humana/técnica para validar fonte, Z-API, bridge, planilha e cron
+EDGE Oferta de duas janelas concretas de agenda -- [EXTRACTED]--> Guardrails clínicos e comerciais preservados
+EDGE Confirmação com respostas literais -- [EXTRACTED]--> Guardrails clínicos e comerciais preservados
+EDGE Ancoragem rápida para link/saudação vazia -- [EXTRACTED]--> Guardrails clínicos e comerciais preservados
