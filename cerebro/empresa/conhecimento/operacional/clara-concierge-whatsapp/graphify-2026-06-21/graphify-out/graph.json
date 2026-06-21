@@ -1,0 +1,470 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "aprendizado_externo_governado",
+        "label": "Aprendizado externo governado (RapidAPI + YouTube + orchestrator + autonomia)",
+        "nodes": [
+          "aprendizados_rc58_rapidapi",
+          "aprendizados_rc59_youtube",
+          "aprendizados_rc60_governanca_externa",
+          "aprendizados_rc61_autonomia_evolutiva"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "raw/APRENDIZADOS_2026-06-21.md"
+      },
+      {
+        "id": "operacao_interna_telegram_envio",
+        "label": "Opera\u00e7\u00e3o interna Telegram + envio real + curadoria + conselhos",
+        "nodes": [
+          "aprendizados_rc62_telegram_concierge",
+          "aprendizados_rc63_zapi_envio_real",
+          "aprendizados_rc64_curadoria_maria",
+          "aprendizados_rc65_conselhos_internos"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "raw/APRENDIZADOS_2026-06-21.md"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "RC-57 Convers\u00e3o Premium WhatsApp (Conselho Growth)",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc57_conversao_premium",
+      "community": 2,
+      "norm_label": "rc-57 conversao premium whatsapp (conselho growth)"
+    },
+    {
+      "label": "RC-58 Aprendizado RapidAPI Instagram/X",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc58_rapidapi",
+      "community": 0,
+      "norm_label": "rc-58 aprendizado rapidapi instagram/x"
+    },
+    {
+      "label": "RC-59 Aprendizado YouTube",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc59_youtube",
+      "community": 0,
+      "norm_label": "rc-59 aprendizado youtube"
+    },
+    {
+      "label": "RC-60 Governan\u00e7a do aprendizado externo",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc60_governanca_externa",
+      "community": 0,
+      "norm_label": "rc-60 governanca do aprendizado externo"
+    },
+    {
+      "label": "RC-61 Autonomia evolutiva governada",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc61_autonomia_evolutiva",
+      "community": 0,
+      "norm_label": "rc-61 autonomia evolutiva governada"
+    },
+    {
+      "label": "RC-62 Opera\u00e7\u00e3o Telegram t\u00f3pico Concierge Clara",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc62_telegram_concierge",
+      "community": 1,
+      "norm_label": "rc-62 operacao telegram topico concierge clara"
+    },
+    {
+      "label": "RC-63 Rota real WhatsApp Z-API",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc63_zapi_envio_real",
+      "community": 3,
+      "norm_label": "rc-63 rota real whatsapp z-api"
+    },
+    {
+      "label": "RC-64 Curadoria Maria em falha de envio",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc64_curadoria_maria",
+      "community": 3,
+      "norm_label": "rc-64 curadoria maria em falha de envio"
+    },
+    {
+      "label": "RC-65 Conselhos internos (Growth + LLM Council)",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc65_conselhos_internos",
+      "community": 1,
+      "norm_label": "rc-65 conselhos internos (growth + llm council)"
+    },
+    {
+      "label": "RC-66 GBrain memory-bridge",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": "Tiaro",
+      "contributor": "Clara",
+      "id": "aprendizados_rc66_gbrain",
+      "community": 1,
+      "norm_label": "rc-66 gbrain memory-bridge"
+    },
+    {
+      "label": "SPIN curto para WhatsApp",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": null,
+      "contributor": "Clara",
+      "id": "aprendizados_spin_curto",
+      "community": 2,
+      "norm_label": "spin curto para whatsapp"
+    },
+    {
+      "label": "Filtro anti-guru",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": null,
+      "contributor": "Clara",
+      "id": "aprendizados_filtro_anti_guru",
+      "community": 0,
+      "norm_label": "filtro anti-guru"
+    },
+    {
+      "label": "Classifica\u00e7\u00e3o de promo\u00e7\u00e3o (aplicar/testar/descartar/propor RC-25)",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": null,
+      "contributor": "Clara",
+      "id": "aprendizados_classificacao_promocao",
+      "community": 0,
+      "norm_label": "classificacao de promocao (aplicar/testar/descartar/propor rc-25)"
+    },
+    {
+      "label": "RC-25 atualiza\u00e7\u00e3o via graphify (governan\u00e7a can\u00f4nica)",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": null,
+      "contributor": "Clara",
+      "id": "aprendizados_rc25_graphify",
+      "community": 1,
+      "norm_label": "rc-25 atualizacao via graphify (governanca canonica)"
+    },
+    {
+      "label": "Maria (curadoria/governan\u00e7a de envio)",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": null,
+      "contributor": "Clara",
+      "id": "aprendizados_maria_governanca",
+      "community": 3,
+      "norm_label": "maria (curadoria/governanca de envio)"
+    },
+    {
+      "label": "Regra de ouro: n\u00e3o dar pre\u00e7o cedo",
+      "file_type": "document",
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-06-21",
+      "author": null,
+      "contributor": "Clara",
+      "id": "aprendizados_regra_ouro_preco",
+      "community": 2,
+      "norm_label": "regra de ouro: nao dar preco cedo"
+    }
+  ],
+  "links": [
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc57_conversao_premium",
+      "_tgt": "aprendizados_spin_curto",
+      "source": "aprendizados_rc57_conversao_premium",
+      "target": "aprendizados_spin_curto"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc57_conversao_premium",
+      "_tgt": "aprendizados_regra_ouro_preco",
+      "source": "aprendizados_rc57_conversao_premium",
+      "target": "aprendizados_regra_ouro_preco"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc65_conselhos_internos",
+      "_tgt": "aprendizados_rc57_conversao_premium",
+      "source": "aprendizados_rc57_conversao_premium",
+      "target": "aprendizados_rc65_conselhos_internos"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc58_rapidapi",
+      "_tgt": "aprendizados_rc60_governanca_externa",
+      "source": "aprendizados_rc58_rapidapi",
+      "target": "aprendizados_rc60_governanca_externa"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc59_youtube",
+      "_tgt": "aprendizados_rc60_governanca_externa",
+      "source": "aprendizados_rc59_youtube",
+      "target": "aprendizados_rc60_governanca_externa"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc60_governanca_externa",
+      "_tgt": "aprendizados_classificacao_promocao",
+      "source": "aprendizados_rc60_governanca_externa",
+      "target": "aprendizados_classificacao_promocao"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc60_governanca_externa",
+      "_tgt": "aprendizados_filtro_anti_guru",
+      "source": "aprendizados_rc60_governanca_externa",
+      "target": "aprendizados_filtro_anti_guru"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc61_autonomia_evolutiva",
+      "_tgt": "aprendizados_rc60_governanca_externa",
+      "source": "aprendizados_rc60_governanca_externa",
+      "target": "aprendizados_rc61_autonomia_evolutiva"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc61_autonomia_evolutiva",
+      "_tgt": "aprendizados_classificacao_promocao",
+      "source": "aprendizados_rc61_autonomia_evolutiva",
+      "target": "aprendizados_classificacao_promocao"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc62_telegram_concierge",
+      "_tgt": "aprendizados_rc63_zapi_envio_real",
+      "source": "aprendizados_rc62_telegram_concierge",
+      "target": "aprendizados_rc63_zapi_envio_real"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc62_telegram_concierge",
+      "_tgt": "aprendizados_rc65_conselhos_internos",
+      "source": "aprendizados_rc62_telegram_concierge",
+      "target": "aprendizados_rc65_conselhos_internos"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc63_zapi_envio_real",
+      "_tgt": "aprendizados_rc64_curadoria_maria",
+      "source": "aprendizados_rc63_zapi_envio_real",
+      "target": "aprendizados_rc64_curadoria_maria"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc64_curadoria_maria",
+      "_tgt": "aprendizados_maria_governanca",
+      "source": "aprendizados_rc64_curadoria_maria",
+      "target": "aprendizados_maria_governanca"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc65_conselhos_internos",
+      "_tgt": "aprendizados_rc25_graphify",
+      "source": "aprendizados_rc65_conselhos_internos",
+      "target": "aprendizados_rc25_graphify"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_rc66_gbrain",
+      "_tgt": "aprendizados_rc25_graphify",
+      "source": "aprendizados_rc66_gbrain",
+      "target": "aprendizados_rc25_graphify"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "aprendizados_classificacao_promocao",
+      "_tgt": "aprendizados_rc25_graphify",
+      "source": "aprendizados_classificacao_promocao",
+      "target": "aprendizados_rc25_graphify"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "aprendizado_externo_governado",
+      "label": "Aprendizado externo governado (RapidAPI + YouTube + orchestrator + autonomia)",
+      "nodes": [
+        "aprendizados_rc58_rapidapi",
+        "aprendizados_rc59_youtube",
+        "aprendizados_rc60_governanca_externa",
+        "aprendizados_rc61_autonomia_evolutiva"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md"
+    },
+    {
+      "id": "operacao_interna_telegram_envio",
+      "label": "Opera\u00e7\u00e3o interna Telegram + envio real + curadoria + conselhos",
+      "nodes": [
+        "aprendizados_rc62_telegram_concierge",
+        "aprendizados_rc63_zapi_envio_real",
+        "aprendizados_rc64_curadoria_maria",
+        "aprendizados_rc65_conselhos_internos"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "raw/APRENDIZADOS_2026-06-21.md"
+    }
+  ]
+}
