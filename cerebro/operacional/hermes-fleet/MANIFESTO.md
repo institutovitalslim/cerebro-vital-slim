@@ -1,4 +1,4 @@
-# Frota Hermes — manifesto (gerado 2026-06-23T00:55:32Z)
+# Frota Hermes — manifesto (2026-06-23T00:58:38Z)
 ## Gateways
 - hermes-gateway-ana.service active/running
 - hermes-gateway-clara.service active/running
@@ -24,3 +24,4 @@
 @reboot /root/clone_dra/course_browser_ensure.sh  # Chrome logado CDP (cursos + NotebookLM Ana)
 */10 * * * * /root/clone_dra/higgsfield_watchdog.sh  # Higgsfield auto-relogin (Joao)
 */15 * * * * /root/clone_dra/hermes_autoheal.sh  # autoheal Hermes (6 gateways + WhatsApp Clara)
+45 3 * * * /root/clone_dra/hermes_fleet_backup.sh >> /root/clone_dra/hermes_fleet_backup.log 2>&1  # backup diario inteligencia Hermes -> git cerebro
