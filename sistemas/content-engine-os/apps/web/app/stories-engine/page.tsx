@@ -55,6 +55,17 @@ type VariationResponse = {
   variations: { variant: string; focus: string; hook: string; cta: string; sticker: string; why: string }[]
 }
 
+type HandoffResponse = {
+  title: string
+  utm: { utm_source: string; utm_medium: string; utm_campaign: string; utm_content: string }
+  origin_tag: string
+  prefilled_text: string
+  whatsapp_url: string
+  expected_objections: string[]
+  clara_script: string
+  governance: { note: string; zapi_write: boolean; send_to_patient: boolean; requires_review_before_campaign: boolean }
+}
+
 const SEQUENCIAS = [
   ['espelho', 'Espelho · identificação emocional'],
   ['sem_culpa', 'Sem culpa · reframe de culpa'],
@@ -339,6 +350,8 @@ export default function StoriesEnginePage() {
   const [winners, setWinners] = useState<WinnerSequence[]>([])
   const [variation, setVariation] = useState<VariationResponse | null>(null)
   const [variationLoading, setVariationLoading] = useState<string | null>(null)
+  const [handoff, setHandoff] = useState<HandoffResponse | null>(null)
+  const [handoffLoading, setHandoffLoading] = useState<string | null>(null)
 
   const preview = useMemo(() => buildSequence({ tema, tipo, objetivo, objecao, momento, ativo, quantidade }), [tema, tipo, objetivo, objecao, momento, ativo, quantidade])
 
@@ -468,6 +481,27 @@ export default function StoriesEnginePage() {
       setVariation({ source_title: 'Erro', usage_note: 'Não consegui gerar variações agora.', variations: [] })
     } finally {
       setVariationLoading(null)
+    }
+  }
+
+  async function gerarHandoff(sequenceId: string) {
+    setHandoffLoading(sequenceId); setHandoff(null)
+    try {
+      const data = await getJson(`/stories/sequences/${sequenceId}/handoff?tenant_slug=demo`)
+      setHandoff(data)
+    } catch {
+      setHandoff({
+        title: 'Erro',
+        utm: { utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '' },
+        origin_tag: '',
+        prefilled_text: 'Não consegui gerar o handoff agora.',
+        whatsapp_url: '',
+        expected_objections: [],
+        clara_script: 'Não consegui gerar o script agora.',
+        governance: { note: 'Tente novamente após validar a API.', zapi_write: false, send_to_patient: false, requires_review_before_campaign: true },
+      })
+    } finally {
+      setHandoffLoading(null)
     }
   }
 
@@ -602,6 +636,9 @@ export default function StoriesEnginePage() {
                 <div className="rowTop"><strong>{item.title}</strong><span className="badge">{item.story_count} stories</span></div>
                 <span className="muted">Tipo: {labelOf(SEQUENCIAS, item.sequence_type)} · Objetivo: {labelOf(OBJETIVOS, item.objective)} · Objeção: {labelOf(OBJECOES, item.main_objection)}</span>
                 <span className="muted">Registros: {item.performance_entries || 0} · DMs úteis: {item.total_useful_dms || 0} · Leads: {item.total_leads || 0}</span>
+                <button type="button" className="secondaryLink" style={{ width: 'fit-content' }} onClick={() => gerarHandoff(item.id)} disabled={handoffLoading === item.id}>
+                  {handoffLoading === item.id ? 'Gerando handoff...' : 'Gerar handoff Clara'}
+                </button>
               </div>
             )) : <p className="muted">Nenhuma sequência salva ainda.</p>}
           </div>
@@ -652,6 +689,32 @@ export default function StoriesEnginePage() {
           <button className="primaryButton" disabled={perfLoading}>{perfLoading ? 'Registrando...' : 'Registrar performance'}</button>
           {perfMsg ? <span className={perfMsg.includes('registrada') ? 'successText' : 'errorText'}>{perfMsg}</span> : null}
         </form>
+      </section>
+
+      <section className="section grid" style={{ gridTemplateColumns: 'minmax(0, 1fr) minmax(320px, 440px)', gap: 24, alignItems: 'start' }}>
+        <article className="card">
+          <div className="rowTop"><h3>Handoff Clara/Z-API</h3><span className="badge">story → conversa → agenda</span></div>
+          {handoff ? (
+            <div className="tableLike">
+              <div className="row">
+                <strong>{handoff.title}</strong>
+                <span className="muted"><strong>Tag:</strong> {handoff.origin_tag}</span>
+                <span className="muted"><strong>UTM:</strong> {handoff.utm.utm_campaign} / {handoff.utm.utm_content}</span>
+                <span className="muted"><strong>Texto WhatsApp:</strong> {handoff.prefilled_text}</span>
+                <span className="muted"><strong>Objeções esperadas:</strong> {handoff.expected_objections.join(' · ')}</span>
+              </div>
+              <div className="row">
+                <strong>Script para Clara</strong>
+                <span>{handoff.clara_script}</span>
+                <span className="muted small">{handoff.governance.note}</span>
+              </div>
+            </div>
+          ) : <p className="muted">Gere o handoff em uma sequência salva para obter UTM, texto pré-preenchido, tag de origem e orientação SPIN para Clara.</p>}
+        </article>
+        <article className="card">
+          <h3>Governança</h3>
+          <p className="muted">Este handoff não envia mensagem, não escreve na Z-API e não publica campanha. Ele prepara o contrato operacional para revisão do João/Maria antes de ativar tracking real.</p>
+        </article>
       </section>
 
       <section className="section grid" style={{ gridTemplateColumns: 'minmax(0, 1fr) minmax(320px, 440px)', gap: 24, alignItems: 'start' }}>
