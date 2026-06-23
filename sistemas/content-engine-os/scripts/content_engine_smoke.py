@@ -69,11 +69,18 @@ def main() -> int:
     status, data, ctype = http_json("/api/health")
     checks.append(Check("api_health", status == 200 and isinstance(data, dict) and data.get("status") == "ok", f"status={status} content_type={ctype}"))
 
+    status, ctype, _ = http_head("/")
+    checks.append(Check("web_cockpit", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
+
     status, ctype, _ = http_head("/criar")
     checks.append(Check("web_criar", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
+    status, ctype, _ = http_head("/business-intelligence")
+    checks.append(Check("web_business_intelligence", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
+
     for name, path in [
         ("dashboard_summary", "/api/dashboard/summary?tenant_slug=demo"),
+        ("bi_overview", "/api/bi/overview?tenant_slug=demo"),
         ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
         ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
         ("stories_sequences", "/api/stories/sequences?tenant_slug=demo"),
