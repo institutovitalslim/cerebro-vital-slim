@@ -49,6 +49,7 @@ export const STATUS_LABEL: Record<string, string> = {
   gerado: 'Gerando arte…',
   renderizado: 'Pronto p/ revisar',
   aprovado: 'Aprovado ✓',
+  publicado: 'Publicado · métrica pendente',
   render_erro: 'Erro no render',
   pausado_formato: 'Pausado',
   ajustes_solicitados: 'Ajustes solicitados ✎',
@@ -84,7 +85,7 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
   const [matrixCtas, setMatrixCtas] = useState('pre_avaliacao,whatsapp_qualificado')
   const [matrixVisuais, setMatrixVisuais] = useState('dra_camera,broll_rotina')
   const [tema, setTema] = useState('')
-  const [briefing, setBriefing] = useState<{ thesis: string; hook: string; originTag: string; source: string } | null>(null)
+  const [briefing, setBriefing] = useState<{ thesis: string; hook: string; originTag: string; source: string; pillar: string; audienceStage: string; objective: string } | null>(null)
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState<string | null>(null)
   const [recent, setRecent] = useState<Creative[]>([])
@@ -98,6 +99,8 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
     const originTag = qs.get('origin_tag') || ''
     const source = qs.get('source') || ''
     const objective = qs.get('objective') || ''
+    const pillar = qs.get('pillar') || ''
+    const audienceStage = qs.get('audience_stage') || ''
     const nextTema = [thesis, hook ? `Hook: ${hook}` : '', originTag ? `Origem: ${originTag}` : ''].filter(Boolean).join('\n')
     if (nextTema) setTema(nextTema)
     if (objective === 'captacao_qualificada') setObjetivo('conversão')
@@ -105,7 +108,7 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
     if (objective === 'prova_e_metodo') setObjetivo('desejo')
     if (hook.toLowerCase().includes('mito') || hook.toLowerCase().includes('mentira')) setHookTipo('mito')
     if (hook.toLowerCase().includes('?') || hook.toLowerCase().includes('por que')) setHookTipo('pergunta_direta')
-    if (originTag || thesis || hook) setBriefing({ thesis, hook, originTag, source })
+    if (originTag || thesis || hook) setBriefing({ thesis, hook, originTag, source, pillar, audienceStage, objective })
   }, [])
 
   async function load() {
@@ -139,6 +142,14 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
       const body: Record<string, unknown> = {
         tenant_slug: 'demo', formato, objetivo, rede: 'instagram', tema: tema || null,
         hook_tipo: hookTipo, objecao_alvo: objecaoAlvo, visual_tipo: visualTipo, cta_tipo: ctaTipo,
+      }
+      if (briefing) {
+        body.source = briefing.source
+        body.thesis = briefing.thesis
+        body.pillar = briefing.pillar
+        body.audience_stage = briefing.audienceStage
+        body.origin_tag = briefing.originTag
+        body.hook = briefing.hook
       }
       if (formato === 'carrossel') {
         body.destino = destino
@@ -321,6 +332,7 @@ export function Galeria() {
   const [melhoria, setMelhoria] = useState('')
   const [slideFeedback, setSlideFeedback] = useState<Record<string, string>>({})
   const [regen, setRegen] = useState<string | null>(null)
+  const [statusMsg, setStatusMsg] = useState<string | null>(null)
 
   async function load() {
     const its = await listar()
@@ -335,7 +347,9 @@ export function Galeria() {
   }, [])
 
   async function aprovar(id: string) {
-    await fetch(`${api}/generation/creatives/${id}/approve`, { method: 'POST' })
+    const r = await fetch(`${api}/generation/creatives/${id}/approve`, { method: 'POST' })
+    const d = await r.json().catch(() => ({}))
+    setStatusMsg(d.calendar_entry ? 'Peça aprovada e enviada ao Calendário Editorial.' : 'Peça aprovada.')
     load()
   }
 
@@ -414,6 +428,7 @@ export function Galeria() {
             </button>
           ))}
         </div>
+        {statusMsg ? <span className="successText">{statusMsg}</span> : null}
 
         <div className="card" style={{ padding: 12, display: 'grid', gap: 10 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>

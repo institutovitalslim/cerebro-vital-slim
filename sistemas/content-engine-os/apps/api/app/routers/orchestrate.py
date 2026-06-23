@@ -16,6 +16,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.db import get_conn
+from app.routers.calendar import ensure_phase1_schema
 from app.services.openrouter_client import OpenRouterClient
 from app.services.codex_client import CodexClient
 
@@ -81,6 +82,12 @@ class OrchestrateRequest(BaseModel):
     trial_reel: bool = Field(default=False)       # usar como laboratório antes de escalar
     expected_intent_signal: str | None = None     # sinal esperado: DM, envio, salvar, WhatsApp, agenda
     quality_metric: str | None = None             # métrica principal de qualidade: dm_util|lead_util|envio|retencao
+    source: str | None = None                     # weekly-sprint quando vem do sprint semanal
+    thesis: str | None = None                     # tese estruturada do sprint
+    pillar: str | None = None                     # pilar do sprint
+    audience_stage: str | None = None             # consciência do público
+    origin_tag: str | None = None                 # ex.: weekly:pilar:reels
+    hook: str | None = None                       # hook literal selecionado no sprint
 
 
 class MatrixRequest(BaseModel):
@@ -344,6 +351,103 @@ def _apply_caption_footer(output: dict) -> dict:
     return output
 
 
+def _brief_payload(req: OrchestrateRequest) -> dict:
+    return {
+        "formato": req.formato,
+        "objetivo": req.objetivo,
+        "rede": req.rede,
+        "destino": req.destino,
+        "angulo": req.angulo,
+        "hook_tipo": req.hook_tipo,
+        "objecao_alvo": req.objecao_alvo,
+        "quebra_objecao": req.quebra_objecao,
+        "visual_tipo": req.visual_tipo,
+        "cta_tipo": req.cta_tipo,
+        "tema": req.tema,
+        "persona": req.persona,
+        "funil": req.funil,
+        "source": req.source,
+        "thesis": req.thesis,
+        "pillar": req.pillar,
+        "audience_stage": req.audience_stage,
+        "origin_tag": req.origin_tag,
+        "hook": req.hook,
+    }
+
+
+def _brief_value(brief: dict, key: str) -> str | None:
+    value = brief.get(key)
+    if value:
+        return str(value)
+    tema = brief.get("tema") or ""
+    patterns = {
+        "hook": r"(?:^|\n)Hook:\s*(.+)",
+        "origin_tag": r"(?:^|\n)Origem:\s*(.+)",
+    }
+    if key in patterns:
+        m = re.search(patterns[key], tema)
+        return m.group(1).strip() if m else None
+    if key == "thesis" and tema:
+        return str(tema).split("\n", 1)[0].strip()
+    return None
+
+
+def _ensure_calendar_for_creative(conn, cid: str) -> dict | None:
+    """Cria/atualiza entrada editorial para peça aprovada, sem duplicar."""
+    ensure_phase1_schema(conn)
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            select c.id::text as id, c.tenant_id, c.title, c.format, c.network, c.brief,
+                   c.asset_url, c.status
+            from creatives c where c.id=%s
+            """,
+            (cid,),
+        )
+        c = cur.fetchone()
+        if not c:
+            return None
+        brief = c.get("brief") or {}
+        if isinstance(brief, str):
+            try:
+                brief = json.loads(brief)
+            except Exception:
+                brief = {}
+        title = (c.get("title") or _brief_value(brief, "thesis") or f"Criativo {c.get('format')}").replace("*", "")
+        origin_tag = _brief_value(brief, "origin_tag")
+        sprint_thesis = _brief_value(brief, "thesis")
+        sprint_hook = _brief_value(brief, "hook")
+        notes_parts = [
+            "Aprovado no Banco de Criativos e enviado ao Calendário Editorial.",
+            f"Origem: {origin_tag}" if origin_tag else None,
+            f"Tese: {sprint_thesis}" if sprint_thesis else None,
+            f"Hook: {sprint_hook}" if sprint_hook else None,
+        ]
+        notes = "\n".join([p for p in notes_parts if p])
+        cur.execute(
+            """
+            insert into calendar_entries (
+                tenant_id, title, format, channel, objective, status, notes, creative_id,
+                origin_tag, sprint_thesis, sprint_hook
+            ) values (%s,%s,%s,%s,%s,'aprovado_para_publicar',%s,%s,%s,%s,%s)
+            on conflict (creative_id) where creative_id is not null do update set
+                title=excluded.title,
+                format=excluded.format,
+                channel=excluded.channel,
+                objective=excluded.objective,
+                status=case when calendar_entries.status in ('published','publicado','medido') then calendar_entries.status else 'aprovado_para_publicar' end,
+                notes=excluded.notes,
+                origin_tag=excluded.origin_tag,
+                sprint_thesis=excluded.sprint_thesis,
+                sprint_hook=excluded.sprint_hook
+            returning id::text as id, status, title
+            """,
+            (c["tenant_id"], title, c.get("format"), c.get("network") or "instagram", brief.get("objetivo"),
+             notes, cid, origin_tag, sprint_thesis, sprint_hook),
+        )
+        return cur.fetchone()
+
+
 def _quality(output: dict, formato: str) -> tuple[float, dict]:
     blob = json.dumps(output, ensure_ascii=False).lower()
     slides = output.get("slides") or []
@@ -420,7 +524,7 @@ async def orchestrate(req: OrchestrateRequest) -> dict:
                  output.get("caption"), output.get("title"), output.get("description"),
                  json.dumps(output.get("hashtags", []), ensure_ascii=False),
                  score, json.dumps(breakdown, ensure_ascii=False),
-                 json.dumps({"formato": req.formato, "objetivo": req.objetivo, "rede": req.rede, "destino": req.destino, "angulo": req.angulo, "hook_tipo": req.hook_tipo, "objecao_alvo": req.objecao_alvo, "quebra_objecao": req.quebra_objecao, "visual_tipo": req.visual_tipo, "cta_tipo": req.cta_tipo, "tema": req.tema, "persona": req.persona, "funil": req.funil}, ensure_ascii=False),
+                 json.dumps(_brief_payload(req), ensure_ascii=False),
                  req.test_cycle_id, req.variant_index, meta["angulo_ivs"], meta["hook_tipo"], meta["objecao_alvo"],
                  meta["quebra_objecao"], meta["visual_tipo"], meta["cta_tipo"], meta["destino_criativo"],
                  meta["hypothesis"], json.dumps(meta["modular_blocks"], ensure_ascii=False),
@@ -511,7 +615,7 @@ async def generate_matrix(req: MatrixRequest) -> dict:
                          json.dumps(output, ensure_ascii=False), output.get("caption"), output.get("title"),
                          output.get("description"), json.dumps(output.get("hashtags", []), ensure_ascii=False),
                          score, json.dumps(breakdown, ensure_ascii=False),
-                         json.dumps({"formato": one.formato, "objetivo": one.objetivo, "rede": one.rede, "destino": one.destino, "angulo": one.angulo, "hook_tipo": one.hook_tipo, "objecao_alvo": one.objecao_alvo, "visual_tipo": one.visual_tipo, "cta_tipo": one.cta_tipo, "tema": one.tema, "persona": one.persona, "funil": one.funil}, ensure_ascii=False),
+                         json.dumps(_brief_payload(one), ensure_ascii=False),
                          one.test_cycle_id, parent_id, one.variant_index, meta["angulo_ivs"], meta["hook_tipo"],
                          meta["objecao_alvo"], meta["quebra_objecao"], meta["visual_tipo"], meta["cta_tipo"],
                          meta["destino_criativo"], meta["hypothesis"], json.dumps(meta["modular_blocks"], ensure_ascii=False),
@@ -748,12 +852,14 @@ def feedback_creative(cid: str, req: FeedbackRequest) -> dict:
 @router.post("/creatives/{cid}/approve")
 def approve_creative(cid: str) -> dict:
     with get_conn() as conn:
+        ensure_phase1_schema(conn)
         with conn.cursor() as cur:
             cur.execute("update creatives set status='aprovado' where id=%s returning id::text as id", (cid,))
             r = cur.fetchone()
+        calendar = _ensure_calendar_for_creative(conn, cid) if r else None
     if not r:
         raise HTTPException(404, "creative não encontrado")
-    return {"id": r["id"], "status": "aprovado"}
+    return {"id": r["id"], "status": "aprovado", "calendar_entry": calendar}
 
 
 # ---- ANÁLISE DE PERFORMANCE (rubrica IVS de sinais virais do Instagram) ----

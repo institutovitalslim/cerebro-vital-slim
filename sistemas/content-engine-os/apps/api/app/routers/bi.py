@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from app.db import get_conn
+from app.routers.calendar import ensure_phase1_schema
 
 router = APIRouter(prefix="/bi", tags=["business-intelligence"])
 
@@ -22,6 +23,7 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
     receber ingestão diária via RapidAPI do perfil @dradaniely.freitas.
     """
     with get_conn() as conn:
+        ensure_phase1_schema(conn)
         tenant_id = _tenant_id(conn, tenant_slug)
         with conn.cursor() as cur:
             cur.execute(
@@ -95,7 +97,10 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
 
             cur.execute(
                 """
-                select id::text as id, title, format, channel, objective, status, scheduled_for, created_at
+                select id::text as id, title, format, channel, objective, status, scheduled_for, created_at,
+                       creative_id::text as creative_id, origin_tag, sprint_thesis, sprint_hook,
+                       metrics_recorded_at,
+                       case when metrics_recorded_at is null and status in ('published','publicado','metrics_pending') then true else false end as metrics_pending
                 from calendar_entries
                 where tenant_id = %s
                 order by coalesce(scheduled_for, created_at) asc
@@ -104,6 +109,19 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
                 (tenant_id,),
             )
             calendar = cur.fetchall()
+
+            cur.execute(
+                """
+                select
+                  coalesce(sum(case when status in ('approved','aprovado_para_publicar') then 1 else 0 end),0)::int as approved_to_publish,
+                  coalesce(sum(case when status in ('published','publicado','metrics_pending') and metrics_recorded_at is null then 1 else 0 end),0)::int as metrics_pending,
+                  coalesce(sum(case when status='medido' or metrics_recorded_at is not null then 1 else 0 end),0)::int as measured
+                from calendar_entries
+                where tenant_id = %s
+                """,
+                (tenant_id,),
+            )
+            editorial_flow = cur.fetchone()
 
             cur.execute(
                 """
@@ -188,6 +206,7 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
         "funnel": funnel,
         "recent_stories": recent_stories,
         "calendar": calendar,
+        "editorial_flow": editorial_flow,
         "sources": sources,
         "rapidapi_instagram": readiness,
         "social_profile": social_profile or {"profile_handle": "@dradaniely.freitas", "followers_count": 0, "profile_views": 0, "whatsapp_clicks": 0},

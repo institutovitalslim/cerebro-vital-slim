@@ -7,7 +7,8 @@ type BIOverview = {
   stories: { stories_sequences: number; stories_approved: number; stories_changes_requested: number }
   funnel: { story_clicks: number; qualified_dms: number; leads: number; appointments: number }
   recent_stories: { title: string; sequence_type: string; objective: string; status: string; created_at: string }[]
-  calendar: { title: string; format: string; channel: string; objective: string | null; status: string; scheduled_for: string | null }[]
+  calendar: { title: string; format: string; channel: string; objective: string | null; status: string; scheduled_for: string | null; metrics_pending?: boolean; origin_tag?: string | null }[]
+  editorial_flow: { approved_to_publish: number; metrics_pending: number; measured: number }
   sources: { network: string; total: number }[]
   rapidapi_instagram: { profile: string; collector: string; source: string; mode: string; status: string; next_step: string; pii_policy: string }
   social_profile: { profile_handle: string; followers_count: number; profile_views: number; whatsapp_clicks: number }
@@ -26,7 +27,7 @@ export default async function BIPage() {
     creatives: { total_creatives: 0, approved: 0, ready_review: 0, changes_requested: 0, avg_quality_score: 0 },
     by_format: [], stories: { stories_sequences: 0, stories_approved: 0, stories_changes_requested: 0 },
     funnel: { story_clicks: 0, qualified_dms: 0, leads: 0, appointments: 0 },
-    recent_stories: [], calendar: [], sources: [],
+    recent_stories: [], calendar: [], editorial_flow: { approved_to_publish: 0, metrics_pending: 0, measured: 0 }, sources: [],
     rapidapi_instagram: { profile: '@dradaniely.freitas', collector: 'João', source: 'RapidAPI', mode: 'read_only_planned', status: 'pendente', next_step: 'Criar ingestão diária', pii_policy: 'Sem PII' },
     social_profile: { profile_handle: '@dradaniely.freitas', followers_count: 0, profile_views: 0, whatsapp_clicks: 0 },
     social_aggregate_30d: { likes: 0, comments: 0, saves: 0, shares: 0, follows: 0, publications_tracked: 0 },
@@ -72,6 +73,7 @@ export default async function BIPage() {
         <article className="metricCard"><span className="metricLabel">Interatores mapeados</span><strong className="metricValue">{data.social_selling.total_interactors || 0}</strong><p className="muted small">{data.social_selling.candidates || 0} candidatos em triagem</p></article>
         <article className="metricCard"><span className="metricLabel">Sinais 30d</span><strong className="metricValue">{(data.social_aggregate_30d.likes || 0) + (data.social_aggregate_30d.comments || 0) + (data.social_aggregate_30d.saves || 0) + (data.social_aggregate_30d.shares || 0)}</strong><p className="muted small">likes + comentários + saves + shares</p></article>
         <article className="metricCard"><span className="metricLabel">WhatsApp pelo perfil</span><strong className="metricValue">{data.social_profile.whatsapp_clicks || 0}</strong><p className="muted small">sinal agregado de intenção</p></article>
+        <article className="metricCard"><span className="metricLabel">Métricas pendentes</span><strong className="metricValue">{data.editorial_flow.metrics_pending || 0}</strong><p className="muted small">publicadas aguardando aprendizado</p></article>
       </section>
 
       <section className="splitSection">

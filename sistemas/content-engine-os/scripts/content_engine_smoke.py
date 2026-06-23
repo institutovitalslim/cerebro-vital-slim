@@ -95,6 +95,20 @@ def main() -> int:
     ]:
         status, data, ctype = http_json(path)
         checks.append(Check(name, status == 200 and isinstance(data, dict), f"status={status} content_type={ctype}"))
+        if name == "calendar_entries" and status == 200 and isinstance(data, dict):
+            sample = (data.get("items") or [{}])[0]
+            checks.append(Check(
+                "calendar_phase1_fields",
+                all(k in sample for k in ("creative_id", "metrics_pending", "metrics_recorded_at")) or not data.get("items"),
+                "creative_id/metrics_pending/metrics_recorded_at presentes ou calendário vazio",
+            ))
+        if name == "bi_overview" and status == 200 and isinstance(data, dict):
+            flow = data.get("editorial_flow") or {}
+            checks.append(Check(
+                "bi_editorial_flow",
+                all(k in flow for k in ("approved_to_publish", "metrics_pending", "measured")),
+                f"editorial_flow={flow}",
+            ))
 
     status, data, _ = http_json("/api/generation/creatives?tenant_slug=demo&limit=1")
     asset_url = None
