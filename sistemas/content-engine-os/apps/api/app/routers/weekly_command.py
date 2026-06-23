@@ -120,16 +120,76 @@ def _pillar_cards() -> list[dict]:
     ]
 
 
-def _family_from(thesis: str, pillar: str, objective: str, stage: str) -> list[dict]:
+def _fallback_reel_hooks(thesis: str) -> list[str]:
+    clean = thesis.strip().rstrip('.')
+    return [
+        f"Se {clean[:92].lower()}, presta atenção nisso.",
+        f"Opinião impopular: {clean[:96].lower()}.",
+        f"O que ninguém te explicou sobre: {clean[:88].lower()}.",
+        f"Antes de tentar de novo, entenda isso: {clean[:86].lower()}.",
+        f"Você sabe por que isso acontece? {clean[:86]}",
+    ]
+
+
+def _fetch_reel_hooks(conn, tenant_id: str, thesis: str) -> list[str]:
+    kws = [w for w in thesis.lower().replace(';', ' ').replace(',', ' ').split() if len(w) >= 5][:8]
+    blob = "lower(coalesce(hook_base,'')||' '||coalesce(tese_central,'')||' '||coalesce(adaptacao_ivs,''))"
+    if kws:
+        score = " + ".join([f"(case when {blob} like %s then 1 else 0 end)" for _ in kws])
+        # Ordem dos parâmetros segue a ordem dos placeholders no SQL:
+        # primeiro os LIKEs do score no SELECT, depois o tenant_id do WHERE.
+        params = [f"%{k}%" for k in kws] + [tenant_id]
+        sql = f"""
+            select hook_base, ({score}) as score
+            from viral_scripts
+            where (tenant_id=%s or tenant_id is null)
+              and hook_base is not null
+              and (codigo like 'HOOK-%%' or classe_ivs like 'hook_%%' or origem like '%%biblioteca-hooks%%')
+            order by score desc, codigo asc
+            limit 12
+        """
+    else:
+        params = [tenant_id]
+        sql = """
+            select hook_base, 0 as score
+            from viral_scripts
+            where (tenant_id=%s or tenant_id is null)
+              and hook_base is not null
+              and (codigo like 'HOOK-%%' or classe_ivs like 'hook_%%' or origem like '%%biblioteca-hooks%%')
+            order by codigo asc
+            limit 12
+        """
+    with conn.cursor() as cur:
+        cur.execute(sql, params)
+        rows = cur.fetchall()
+    hooks: list[str] = []
+    for r in rows:
+        h = (r.get("hook_base") or "").strip().strip('"')
+        if h and h not in hooks:
+            hooks.append(h)
+        if len(hooks) >= 5:
+            break
+    for h in _fallback_reel_hooks(thesis):
+        if len(hooks) >= 5:
+            break
+        if h not in hooks:
+            hooks.append(h)
+    return hooks[:5]
+
+
+def _family_from(thesis: str, pillar: str, objective: str, stage: str, hook_variations: list[str] | None = None) -> list[dict]:
     base_tag = pillar.replace("_", "-")
+    reel_hooks = (hook_variations or _fallback_reel_hooks(thesis))[:5]
     return [
         {
             "format": "reels",
             "role": "alcance e identificação",
-            "hook": f"Se você sente que '{thesis[:72]}...', talvez o problema não seja esforço.",
-            "output": "roteiro de 30–45s com hook, mecanismo simples e CTA de salvar/compartilhar",
+            "hook": reel_hooks[0],
+            "hook_variations": reel_hooks,
+            "hook_test_minimum": 5,
+            "output": "roteiro de 30–45s com 5 hooks alternativos para teste no Reels Trial do Instagram, mecanismo simples e CTA de salvar/compartilhar",
             "cta": "salvar e enviar para alguém que precisa entender isso",
-            "metric": "retenção + compartilhamentos",
+            "metric": "retenção por hook + compartilhamentos",
             "production_url": "/producao/reels",
             "origin_tag": f"weekly:{base_tag}:reels",
         },
@@ -202,7 +262,8 @@ def weekly_overview(tenant_slug: str = "demo") -> dict:
                 (tenant_id,),
             )
             funnel = cur.fetchone()
-    pillars = _pillar_cards()
+        pillars = _pillar_cards()
+        default_hooks = _fetch_reel_hooks(conn, tenant_id, pillars[0]["thesis"])
     priority = "Escolha uma tese semanal, gere uma família completa e só depois aprove/publica."
     if creatives.get("ready_review", 0) > 0:
         priority = "Há peças prontas para revisão; aprove ou peça ajuste antes de criar volume novo."
@@ -220,7 +281,7 @@ def weekly_overview(tenant_slug: str = "demo") -> dict:
             "pillar": pillars[0]["pillar"],
             "objective": "autoridade_e_conversa",
             "audience_stage": "consciente_da_dor",
-            "family": _family_from(pillars[0]["thesis"], pillars[0]["pillar"], "autoridade_e_conversa", "consciente_da_dor"),
+            "family": _family_from(pillars[0]["thesis"], pillars[0]["pillar"], "autoridade_e_conversa", "consciente_da_dor", default_hooks),
         },
         "governance": {
             "mode": "plan_only",
@@ -232,7 +293,10 @@ def weekly_overview(tenant_slug: str = "demo") -> dict:
 
 @router.post("/family-plan")
 def family_plan(payload: FamilyPlanRequest) -> dict:
-    family = _family_from(payload.thesis, payload.pillar, payload.objective, payload.audience_stage)
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, payload.tenant_slug)
+        hook_variations = _fetch_reel_hooks(conn, tenant_id, payload.thesis)
+    family = _family_from(payload.thesis, payload.pillar, payload.objective, payload.audience_stage, hook_variations)
     return {
         "thesis": payload.thesis,
         "pillar": payload.pillar,

@@ -69,9 +69,26 @@ A ingestão é idempotente: antes de recriar o lote, remove apenas registros com
 - Mantém conteúdo como repertório editorial interno para geração e aprovação.
 - Conteúdos com prova social/antes-depois continuam exigindo autorização e revisão humana antes de publicação.
 
-## Validação mínima
+## Validação executada
 
 ```bash
-python3 -m py_compile scripts/ingest_content_uploads_20260623.py scripts/content_engine_smoke.py
+python3 -m py_compile scripts/ingest_content_uploads_20260623.py scripts/content_engine_smoke.py apps/api/app/routers/weekly_command.py
+python3 -m compileall apps/api scripts render_worker -q
+cd apps/web && npm run build
 python3 scripts/content_engine_smoke.py --json
 ```
+
+Resultado em 2026-06-23:
+
+- `content_engine_smoke.py --json`: `ok: true`
+- Build Next.js: compilado com sucesso, 30 páginas geradas
+- `/api/weekly-command/overview?tenant_slug=demo`: `200`, com 5 variações de hook vindas da biblioteca ingerida
+- Rotas web validadas: `/sprint-semanal`, `/banco-roteiros`, `/stories-engine` retornando `200 text/html`
+
+## Correção aplicada no Weekly Command
+
+Durante a validação, o endpoint `/api/weekly-command/overview` retornou `500` por uso incorreto de placeholders `%` no SQL dinâmico do `psycopg` e ordem de parâmetros invertida. Foi corrigido para:
+
+- escapar padrões `LIKE` literais com `%%`;
+- enviar parâmetros na ordem real dos placeholders: primeiro os `LIKEs` do score, depois `tenant_id`;
+- manter fallback local de hooks caso a biblioteca não retorne 5 variações.
