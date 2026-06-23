@@ -88,7 +88,9 @@ def main() -> int:
         ("social_selling_overview", "/api/social-selling/overview?tenant_slug=demo"),
         ("weekly_command_overview", "/api/weekly-command/overview?tenant_slug=demo"),
         ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
+        ("roteiros_library", "/api/generation/roteiros?tenant_slug=demo"),
         ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
+        ("stories_themes", "/api/stories/themes?tenant_slug=demo&limit=50"),
         ("stories_sequences", "/api/stories/sequences?tenant_slug=demo"),
     ]:
         status, data, ctype = http_json(path)
