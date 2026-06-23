@@ -284,6 +284,7 @@ export function Galeria() {
   const [sel, setSel] = useState<Creative | null>(null)
   const [idx, setIdx] = useState(0)
   const [melhoria, setMelhoria] = useState('')
+  const [slideFeedback, setSlideFeedback] = useState<Record<string, string>>({})
   const [regen, setRegen] = useState<string | null>(null)
 
   async function load() {
@@ -303,14 +304,32 @@ export function Galeria() {
     load()
   }
 
+  function feedbackKey(id: string, slideIndex: number) {
+    return `${id}:${slideIndex}`
+  }
+
+  function feedbackAtual(c: Creative) {
+    const porSlide = c.assets
+      .map((_, i) => ({ slide: i + 1, text: (slideFeedback[feedbackKey(c.id, i)] || '').trim() }))
+      .filter((x) => x.text)
+      .map((x) => `Slide ${x.slide}: ${x.text}`)
+    const geral = melhoria.trim() ? [`Geral: ${melhoria.trim()}`] : []
+    return [...porSlide, ...geral].join('\n')
+  }
+
   async function solicitarMelhorias(id: string) {
-    if (!melhoria.trim()) return
+    const creative = sel && sel.id === id ? sel : items.find((x) => x.id === id)
+    const texto = creative ? feedbackAtual(creative) : melhoria.trim()
+    if (!texto.trim()) return
     await fetch(`${api}/generation/creatives/${id}/feedback`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ texto: melhoria }),
+      body: JSON.stringify({ texto }),
     })
+    setRegen(id)
+    try { await fetch(`${api}/generation/creatives/${id}/regerar`, { method: 'POST' }) } finally { setRegen(null) }
     setMelhoria('')
-    load()
+    setSlideFeedback((cur) => Object.fromEntries(Object.entries(cur).filter(([k]) => !k.startsWith(`${id}:`))))
+    await load()
   }
 
   async function regerar(id: string) {
@@ -489,9 +508,18 @@ export function Galeria() {
                 ) : null}
                 {sel.assets.length > 0 ? <button className="secondaryLink" onClick={() => baixarTodos(sel)}>Baixar {sel.assets.length > 1 ? `todos (${sel.assets.length})` : 'imagem'}</button> : null}
                 <div style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: 10, display: 'grid', gap: 8 }}>
-                  <label className="muted small">Solicitar melhorias nesta peça</label>
-                  <textarea className="textarea" placeholder="Ex.: título maior, trocar a foto do slide 3, suavizar o CTA…" value={melhoria} onChange={(e) => setMelhoria(e.target.value)} style={{ minHeight: 64 }} />
-                  <button className="secondaryLink" onClick={() => solicitarMelhorias(sel.id)} disabled={!melhoria.trim()}>Enviar pedido de melhoria</button>
+                  <label className="muted small">Correção do slide {idx + 1}</label>
+                  <textarea
+                    className="textarea"
+                    placeholder={`Ex.: no slide ${idx + 1}, trocar a imagem, ajustar título, mudar CTA…`}
+                    value={slideFeedback[feedbackKey(sel.id, idx)] || ''}
+                    onChange={(e) => setSlideFeedback((cur) => ({ ...cur, [feedbackKey(sel.id, idx)]: e.target.value }))}
+                    style={{ minHeight: 76 }}
+                  />
+                  <label className="muted small">Correção geral da peça (opcional)</label>
+                  <textarea className="textarea" placeholder="Ex.: manter tom mais premium, reduzir texto de todos os slides…" value={melhoria} onChange={(e) => setMelhoria(e.target.value)} style={{ minHeight: 64 }} />
+                  {feedbackAtual(sel) ? <div className="resultBox"><strong className="muted small">Correções acumuladas antes de regerar</strong><br />{feedbackAtual(sel)}</div> : null}
+                  <button className="secondaryLink" onClick={() => solicitarMelhorias(sel.id)} disabled={!feedbackAtual(sel) || regen === sel.id}>{regen === sel.id ? 'Aplicando correções…' : 'Enviar correções e regerar peça'}</button>
                 </div>
               </div>
             </div>
