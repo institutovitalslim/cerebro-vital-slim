@@ -78,7 +78,7 @@ def main() -> int:
     status, ctype, _ = http_head("/business-intelligence")
     checks.append(Check("web_business_intelligence", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
-    for page in ["/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
+    for page in ["/sprint-semanal", "/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
         status, ctype, _ = http_head(page)
         checks.append(Check(f"web_{page.strip('/').replace('/', '_')}", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
@@ -86,6 +86,7 @@ def main() -> int:
         ("dashboard_summary", "/api/dashboard/summary?tenant_slug=demo"),
         ("bi_overview", "/api/bi/overview?tenant_slug=demo"),
         ("social_selling_overview", "/api/social-selling/overview?tenant_slug=demo"),
+        ("weekly_command_overview", "/api/weekly-command/overview?tenant_slug=demo"),
         ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
         ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
         ("stories_sequences", "/api/stories/sequences?tenant_slug=demo"),

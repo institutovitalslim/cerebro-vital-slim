@@ -25,6 +25,7 @@ const groups = [
     title: 'Comando',
     links: [
       { href: '/', label: 'Cockpit executivo' },
+      { href: '/sprint-semanal', label: 'Sprint semanal' },
       { href: '/business-intelligence', label: 'BI · Business Intelligence' },
       { href: '/social-selling', label: 'Social Selling' },
     ],

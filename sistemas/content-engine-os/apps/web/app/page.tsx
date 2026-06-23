@@ -28,8 +28,8 @@ const lanes = [
     label: '02 · Produção',
     title: 'Crie família, não peça solta',
     desc: 'Uma tese vira reel, carrossel, stories, anúncio e variações testáveis.',
-    href: '/criar',
-    cta: 'Criar família',
+    href: '/sprint-semanal',
+    cta: 'Abrir sprint',
     checks: ['hook', 'objeção', 'visual', 'CTA'],
   },
   {
@@ -83,7 +83,7 @@ export default async function HomePage() {
           </div>
           <div className="heroActions">
             <Link href="/business-intelligence" className="primaryLink">Começar pelo BI</Link>
-            <Link href="/criar" className="secondaryLink">Criar família agora</Link>
+            <Link href="/sprint-semanal" className="secondaryLink">Abrir sprint semanal</Link>
             <Link href="/banco-criativos" className="secondaryLink">Aprovar fila</Link>
           </div>
         </div>
