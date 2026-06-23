@@ -1,0 +1,1402 @@
+{
+  "ok": true,
+  "generated_at": 1778547676,
+  "totals": {
+    "artifacts": 199
+  },
+  "artifacts": [
+    {
+      "name": "agent-os-artifact-index.json",
+      "path": "/root/deliverables/agent-os-artifact-index.json",
+      "size": 45508,
+      "mtime": 1778541126,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-artifact-index.md",
+      "path": "/root/deliverables/agent-os-artifact-index.md",
+      "size": 20009,
+      "mtime": 1778541126,
+      "mime": "text/markdown"
+    },
+    {
+      "name": "agent-os-artifact-index.run.json",
+      "path": "/root/deliverables/agent-os-artifact-index.run.json",
+      "size": 14581,
+      "mtime": 1778360516,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-backup-verify-latest.json",
+      "path": "/root/deliverables/agent-os-backup-verify-latest.json",
+      "size": 352,
+      "mtime": 1778547675,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-backup-verify-run.json",
+      "path": "/root/deliverables/agent-os-backup-verify-run.json",
+      "size": 352,
+      "mtime": 1778360618,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-activation-dossier.json",
+      "path": "/root/deliverables/agent-os-ci-after-activation-dossier.json",
+      "size": 36514,
+      "mtime": 1778362216,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-activation-plan.json",
+      "path": "/root/deliverables/agent-os-ci-after-activation-plan.json",
+      "size": 20175,
+      "mtime": 1778361636,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-approval-queue.json",
+      "path": "/root/deliverables/agent-os-ci-after-approval-queue.json",
+      "size": 33151,
+      "mtime": 1778362023,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-backup-subdomain-request.json",
+      "path": "/root/deliverables/agent-os-ci-after-backup-subdomain-request.json",
+      "size": 56964,
+      "mtime": 1778368158,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-clara-extended-watch.json",
+      "path": "/root/deliverables/agent-os-ci-after-clara-extended-watch.json",
+      "size": 38058,
+      "mtime": 1778363485,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-clara-phase2-activation.json",
+      "path": "/root/deliverables/agent-os-ci-after-clara-phase2-activation.json",
+      "size": 37455,
+      "mtime": 1778362778,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-clara-phase2-preflight.json",
+      "path": "/root/deliverables/agent-os-ci-after-clara-phase2-preflight.json",
+      "size": 27342,
+      "mtime": 1778361809,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-clara-shadow.json",
+      "path": "/root/deliverables/agent-os-ci-after-clara-shadow.json",
+      "size": 22854,
+      "mtime": 1778361727,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-cockpit-service.json",
+      "path": "/root/deliverables/agent-os-ci-after-cockpit-service.json",
+      "size": 18100,
+      "mtime": 1778361208,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-cron-governance-final.json",
+      "path": "/root/deliverables/agent-os-ci-after-cron-governance-final.json",
+      "size": 17607,
+      "mtime": 1778361028,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-disaster-recovery.json",
+      "path": "/root/deliverables/agent-os-ci-after-disaster-recovery.json",
+      "size": 14839,
+      "mtime": 1778360629,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-domain-architecture.json",
+      "path": "/root/deliverables/agent-os-ci-after-domain-architecture.json",
+      "size": 54336,
+      "mtime": 1778367874,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-external-backup-intake.json",
+      "path": "/root/deliverables/agent-os-ci-after-external-backup-intake.json",
+      "size": 46001,
+      "mtime": 1778365412,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-external-four-inputs.json",
+      "path": "/root/deliverables/agent-os-ci-after-external-four-inputs.json",
+      "size": 46950,
+      "mtime": 1778365706,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-hostgator-dns.json",
+      "path": "/root/deliverables/agent-os-ci-after-hostgator-dns.json",
+      "size": 56945,
+      "mtime": 1778368077,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-offsite-backup.json",
+      "path": "/root/deliverables/agent-os-ci-after-offsite-backup.json",
+      "size": 18838,
+      "mtime": 1778361294,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-offsite-destination-packet.json",
+      "path": "/root/deliverables/agent-os-ci-after-offsite-destination-packet.json",
+      "size": 39715,
+      "mtime": 1778363638,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-offsite-local-mirror-export.json",
+      "path": "/root/deliverables/agent-os-ci-after-offsite-local-mirror-export.json",
+      "size": 39769,
+      "mtime": 1778364447,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-offsite-local-mirror-preflight.json",
+      "path": "/root/deliverables/agent-os-ci-after-offsite-local-mirror-preflight.json",
+      "size": 39726,
+      "mtime": 1778363699,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-operations-runbook.json",
+      "path": "/root/deliverables/agent-os-ci-after-operations-runbook.json",
+      "size": 44497,
+      "mtime": 1778365325,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-pedro-omie-preflight.json",
+      "path": "/root/deliverables/agent-os-ci-after-pedro-omie-preflight.json",
+      "size": 31063,
+      "mtime": 1778361912,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-pedro-payload-intake.json",
+      "path": "/root/deliverables/agent-os-ci-after-pedro-payload-intake.json",
+      "size": 39720,
+      "mtime": 1778365126,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-pedro-payload-validator.json",
+      "path": "/root/deliverables/agent-os-ci-after-pedro-payload-validator.json",
+      "size": 41691,
+      "mtime": 1778365223,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-protected-backup-automation.json",
+      "path": "/root/deliverables/agent-os-ci-after-protected-backup-automation.json",
+      "size": 57977,
+      "mtime": 1778369348,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-rclone-install.json",
+      "path": "/root/deliverables/agent-os-ci-after-rclone-install.json",
+      "size": 46962,
+      "mtime": 1778367513,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-rclone-provider-matrix.json",
+      "path": "/root/deliverables/agent-os-ci-after-rclone-provider-matrix.json",
+      "size": 51983,
+      "mtime": 1778367710,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-rclone-remote-intake.json",
+      "path": "/root/deliverables/agent-os-ci-after-rclone-remote-intake.json",
+      "size": 48839,
+      "mtime": 1778367615,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-readiness-release.json",
+      "path": "/root/deliverables/agent-os-ci-after-readiness-release.json",
+      "size": 15496,
+      "mtime": 1778360896,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-after-security-compliance.json",
+      "path": "/root/deliverables/agent-os-ci-after-security-compliance.json",
+      "size": 15472,
+      "mtime": 1778360753,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-latest.json",
+      "path": "/root/deliverables/agent-os-ci-latest.json",
+      "size": 58183,
+      "mtime": 1778547676,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-ci-latest.log",
+      "path": "/root/deliverables/agent-os-ci-latest.log",
+      "size": 51104,
+      "mtime": 1778547676,
+      "mime": "application/octet-stream"
+    },
+    {
+      "name": "agent-os-ci-run.json",
+      "path": "/root/deliverables/agent-os-ci-run.json",
+      "size": 14862,
+      "mtime": 1778360257,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-cli-refresh-all.json",
+      "path": "/root/deliverables/agent-os-cli-refresh-all.json",
+      "size": 116808,
+      "mtime": 1778359892,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-cli-status.json",
+      "path": "/root/deliverables/agent-os-cli-status.json",
+      "size": 117410,
+      "mtime": 1778359893,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-cli-test.json",
+      "path": "/root/deliverables/agent-os-cli-test.json",
+      "size": 160,
+      "mtime": 1778359893,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-critical-alerts-latest.json",
+      "path": "/root/deliverables/agent-os-critical-alerts-latest.json",
+      "size": 102,
+      "mtime": 1778547667,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-cron-audit-latest.json",
+      "path": "/root/deliverables/agent-os-cron-audit-latest.json",
+      "size": 1790,
+      "mtime": 1778547673,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-cron-audit-run.json",
+      "path": "/root/deliverables/agent-os-cron-audit-run.json",
+      "size": 1791,
+      "mtime": 1778361010,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-daily-audit-after-action-gate.json",
+      "path": "/root/deliverables/agent-os-daily-audit-after-action-gate.json",
+      "size": 1959,
+      "mtime": 1778359003,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-daily-audit-after-sensitive-enforcement.json",
+      "path": "/root/deliverables/agent-os-daily-audit-after-sensitive-enforcement.json",
+      "size": 1959,
+      "mtime": 1778359409,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-daily-audit-cron.log",
+      "path": "/root/deliverables/agent-os-daily-audit-cron.log",
+      "size": 307,
+      "mtime": 1778414133,
+      "mime": "application/octet-stream"
+    },
+    {
+      "name": "agent-os-daily-audit-latest.json",
+      "path": "/root/deliverables/agent-os-daily-audit-latest.json",
+      "size": 1016,
+      "mtime": 1778357299,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-daily-audit-latest.md",
+      "path": "/root/deliverables/agent-os-daily-audit-latest.md",
+      "size": 606,
+      "mtime": 1778547667,
+      "mime": "text/markdown"
+    },
+    {
+      "name": "agent-os-drift-report-final.json",
+      "path": "/root/deliverables/agent-os-drift-report-final.json",
+      "size": 1090,
+      "mtime": 1778360547,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-drift-report.json",
+      "path": "/root/deliverables/agent-os-drift-report.json",
+      "size": 1091,
+      "mtime": 1778541984,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-drift-report.run.json",
+      "path": "/root/deliverables/agent-os-drift-report.run.json",
+      "size": 1557,
+      "mtime": 1778360525,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-integrity-manifest.json",
+      "path": "/root/deliverables/agent-os-integrity-manifest.json",
+      "size": 224559,
+      "mtime": 1778547668,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-integrity-manifest.run.json",
+      "path": "/root/deliverables/agent-os-integrity-manifest.run.json",
+      "size": 230,
+      "mtime": 1778360733,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-offsite-backup-latest.json",
+      "path": "/root/deliverables/agent-os-offsite-backup-latest.json",
+      "size": 611,
+      "mtime": 1778547673,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-offsite-backup-readiness-followup.json",
+      "path": "/root/deliverables/agent-os-offsite-backup-readiness-followup.json",
+      "size": 612,
+      "mtime": 1778363623,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-offsite-backup-run.json",
+      "path": "/root/deliverables/agent-os-offsite-backup-run.json",
+      "size": 612,
+      "mtime": 1778361278,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-operations-runbook-run.json",
+      "path": "/root/deliverables/agent-os-operations-runbook-run.json",
+      "size": 2454,
+      "mtime": 1778365309,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-operations-runbook.html",
+      "path": "/root/deliverables/agent-os-operations-runbook.html",
+      "size": 1940,
+      "mtime": 1778547676,
+      "mime": "text/html"
+    },
+    {
+      "name": "agent-os-operations-runbook.json",
+      "path": "/root/deliverables/agent-os-operations-runbook.json",
+      "size": 2453,
+      "mtime": 1778547676,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-production-activation-plan-latest.json",
+      "path": "/root/deliverables/agent-os-production-activation-plan-latest.json",
+      "size": 1095,
+      "mtime": 1778547675,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-production-activation-plan-run.json",
+      "path": "/root/deliverables/agent-os-production-activation-plan-run.json",
+      "size": 1059,
+      "mtime": 1778361594,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-rc25-pipeline-latest.json",
+      "path": "/root/deliverables/agent-os-rc25-pipeline-latest.json",
+      "size": 13000,
+      "mtime": 1778541126,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-rc25-pipeline-run.json",
+      "path": "/root/deliverables/agent-os-rc25-pipeline-run.json",
+      "size": 14564,
+      "mtime": 1778360542,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-activation-dossier.json",
+      "path": "/root/deliverables/agent-os-readiness-after-activation-dossier.json",
+      "size": 1030,
+      "mtime": 1778362222,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-activation-plan.json",
+      "path": "/root/deliverables/agent-os-readiness-after-activation-plan.json",
+      "size": 1030,
+      "mtime": 1778361641,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-approval-queue.json",
+      "path": "/root/deliverables/agent-os-readiness-after-approval-queue.json",
+      "size": 1030,
+      "mtime": 1778362028,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-backup-subdomain-request.json",
+      "path": "/root/deliverables/agent-os-readiness-after-backup-subdomain-request.json",
+      "size": 1030,
+      "mtime": 1778368159,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-clara-extended-watch.json",
+      "path": "/root/deliverables/agent-os-readiness-after-clara-extended-watch.json",
+      "size": 1030,
+      "mtime": 1778363491,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-clara-phase2-activation.json",
+      "path": "/root/deliverables/agent-os-readiness-after-clara-phase2-activation.json",
+      "size": 1030,
+      "mtime": 1778362767,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-clara-phase2-preflight.json",
+      "path": "/root/deliverables/agent-os-readiness-after-clara-phase2-preflight.json",
+      "size": 1030,
+      "mtime": 1778361814,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-clara-shadow.json",
+      "path": "/root/deliverables/agent-os-readiness-after-clara-shadow.json",
+      "size": 1030,
+      "mtime": 1778361731,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-cockpit-service.json",
+      "path": "/root/deliverables/agent-os-readiness-after-cockpit-service.json",
+      "size": 1030,
+      "mtime": 1778361198,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-cron-governance-final.json",
+      "path": "/root/deliverables/agent-os-readiness-after-cron-governance-final.json",
+      "size": 1030,
+      "mtime": 1778361049,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-domain-architecture.json",
+      "path": "/root/deliverables/agent-os-readiness-after-domain-architecture.json",
+      "size": 1030,
+      "mtime": 1778367875,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-external-backup-intake.json",
+      "path": "/root/deliverables/agent-os-readiness-after-external-backup-intake.json",
+      "size": 1030,
+      "mtime": 1778365413,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-external-four-inputs.json",
+      "path": "/root/deliverables/agent-os-readiness-after-external-four-inputs.json",
+      "size": 1030,
+      "mtime": 1778365707,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-hostgator-dns.json",
+      "path": "/root/deliverables/agent-os-readiness-after-hostgator-dns.json",
+      "size": 1030,
+      "mtime": 1778368078,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-offsite-backup.json",
+      "path": "/root/deliverables/agent-os-readiness-after-offsite-backup.json",
+      "size": 1030,
+      "mtime": 1778361316,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-offsite-destination-packet.json",
+      "path": "/root/deliverables/agent-os-readiness-after-offsite-destination-packet.json",
+      "size": 1030,
+      "mtime": 1778363646,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-offsite-local-mirror-export.json",
+      "path": "/root/deliverables/agent-os-readiness-after-offsite-local-mirror-export.json",
+      "size": 1030,
+      "mtime": 1778364448,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-offsite-local-mirror-preflight.json",
+      "path": "/root/deliverables/agent-os-readiness-after-offsite-local-mirror-preflight.json",
+      "size": 1035,
+      "mtime": 1778363707,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-operations-runbook.json",
+      "path": "/root/deliverables/agent-os-readiness-after-operations-runbook.json",
+      "size": 1030,
+      "mtime": 1778365326,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-pedro-omie-preflight.json",
+      "path": "/root/deliverables/agent-os-readiness-after-pedro-omie-preflight.json",
+      "size": 1030,
+      "mtime": 1778361917,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-pedro-payload-intake.json",
+      "path": "/root/deliverables/agent-os-readiness-after-pedro-payload-intake.json",
+      "size": 1030,
+      "mtime": 1778365127,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-pedro-payload-validator.json",
+      "path": "/root/deliverables/agent-os-readiness-after-pedro-payload-validator.json",
+      "size": 1030,
+      "mtime": 1778365224,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-rclone-install.json",
+      "path": "/root/deliverables/agent-os-readiness-after-rclone-install.json",
+      "size": 1030,
+      "mtime": 1778367514,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-rclone-provider-matrix.json",
+      "path": "/root/deliverables/agent-os-readiness-after-rclone-provider-matrix.json",
+      "size": 1030,
+      "mtime": 1778367710,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-after-rclone-remote-intake.json",
+      "path": "/root/deliverables/agent-os-readiness-after-rclone-remote-intake.json",
+      "size": 1030,
+      "mtime": 1778367616,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-scorecard.json",
+      "path": "/root/deliverables/agent-os-readiness-scorecard.json",
+      "size": 1029,
+      "mtime": 1778541985,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-readiness-scorecard.md",
+      "path": "/root/deliverables/agent-os-readiness-scorecard.md",
+      "size": 395,
+      "mtime": 1778541985,
+      "mime": "text/markdown"
+    },
+    {
+      "name": "agent-os-readiness-scorecard.run.json",
+      "path": "/root/deliverables/agent-os-readiness-scorecard.run.json",
+      "size": 1030,
+      "mtime": 1778360883,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-regression-tests-final.log",
+      "path": "/root/deliverables/agent-os-regression-tests-final.log",
+      "size": 107,
+      "mtime": 1778359399,
+      "mime": "application/octet-stream"
+    },
+    {
+      "name": "agent-os-regression-tests.log",
+      "path": "/root/deliverables/agent-os-regression-tests.log",
+      "size": 105,
+      "mtime": 1778359277,
+      "mime": "application/octet-stream"
+    },
+    {
+      "name": "agent-os-release-bundle-latest.json",
+      "path": "/root/deliverables/agent-os-release-bundle-latest.json",
+      "size": 2700,
+      "mtime": 1778360883,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-release-bundle.run.json",
+      "path": "/root/deliverables/agent-os-release-bundle.run.json",
+      "size": 2701,
+      "mtime": 1778360883,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-restore-plan-latest.json",
+      "path": "/root/deliverables/agent-os-restore-plan-latest.json",
+      "size": 588,
+      "mtime": 1778541984,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-restore-plan-run.json",
+      "path": "/root/deliverables/agent-os-restore-plan-run.json",
+      "size": 588,
+      "mtime": 1778360618,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-retention-backup-dr.json",
+      "path": "/root/deliverables/agent-os-retention-backup-dr.json",
+      "size": 630,
+      "mtime": 1778360618,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-retention-backup-latest.json",
+      "path": "/root/deliverables/agent-os-retention-backup-latest.json",
+      "size": 630,
+      "mtime": 1778359677,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-secrets-scan-latest.json",
+      "path": "/root/deliverables/agent-os-secrets-scan-latest.json",
+      "size": 163,
+      "mtime": 1778547668,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-secrets-scan.run.json",
+      "path": "/root/deliverables/agent-os-secrets-scan.run.json",
+      "size": 1041,
+      "mtime": 1778360733,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-secrets-scan.run2.json",
+      "path": "/root/deliverables/agent-os-secrets-scan.run2.json",
+      "size": 164,
+      "mtime": 1778360741,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-trends.html",
+      "path": "/root/deliverables/agent-os-trends.html",
+      "size": 1356,
+      "mtime": 1778359892,
+      "mime": "text/html"
+    },
+    {
+      "name": "agent-os-trends.json",
+      "path": "/root/deliverables/agent-os-trends.json",
+      "size": 389,
+      "mtime": 1778359892,
+      "mime": "application/json"
+    },
+    {
+      "name": "agent-os-trends.report.json",
+      "path": "/root/deliverables/agent-os-trends.report.json",
+      "size": 390,
+      "mtime": 1778359787,
+      "mime": "application/json"
+    },
+    {
+      "name": "approval-console-ivs-agent-os.html",
+      "path": "/root/deliverables/approval-console-ivs-agent-os.html",
+      "size": 1347,
+      "mtime": 1778359892,
+      "mime": "text/html"
+    },
+    {
+      "name": "approval-console-ivs-agent-os.json",
+      "path": "/root/deliverables/approval-console-ivs-agent-os.json",
+      "size": 396,
+      "mtime": 1778359892,
+      "mime": "application/json"
+    },
+    {
+      "name": "approval-console-ivs-agent-os.report.json",
+      "path": "/root/deliverables/approval-console-ivs-agent-os.report.json",
+      "size": 397,
+      "mtime": 1778359787,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-activation-dossier.report.json",
+      "path": "/root/deliverables/cockpit-after-activation-dossier.report.json",
+      "size": 141089,
+      "mtime": 1778362222,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-activation-plan.report.json",
+      "path": "/root/deliverables/cockpit-after-activation-plan.report.json",
+      "size": 123676,
+      "mtime": 1778361627,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-analytics-ui.report.json",
+      "path": "/root/deliverables/cockpit-after-analytics-ui.report.json",
+      "size": 87104,
+      "mtime": 1778359797,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-approval-queue.report.json",
+      "path": "/root/deliverables/cockpit-after-approval-queue.report.json",
+      "size": 137770,
+      "mtime": 1778362028,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-clara-phase2-activation.report.json",
+      "path": "/root/deliverables/cockpit-after-clara-phase2-activation.report.json",
+      "size": 144688,
+      "mtime": 1778362767,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-clara-phase2-preflight.report.json",
+      "path": "/root/deliverables/cockpit-after-clara-phase2-preflight.report.json",
+      "size": 130810,
+      "mtime": 1778361814,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-clara-shadow.report.json",
+      "path": "/root/deliverables/cockpit-after-clara-shadow.report.json",
+      "size": 127201,
+      "mtime": 1778361731,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-cockpit-service.report.json",
+      "path": "/root/deliverables/cockpit-after-cockpit-service.report.json",
+      "size": 116554,
+      "mtime": 1778361208,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-command-center.report.json",
+      "path": "/root/deliverables/cockpit-after-command-center.report.json",
+      "size": 90158,
+      "mtime": 1778359913,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-cron-governance-final.report.json",
+      "path": "/root/deliverables/cockpit-after-cron-governance-final.report.json",
+      "size": 113344,
+      "mtime": 1778361049,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-disaster-recovery.report.json",
+      "path": "/root/deliverables/cockpit-after-disaster-recovery.report.json",
+      "size": 102162,
+      "mtime": 1778360629,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-drift-rc25.report.json",
+      "path": "/root/deliverables/cockpit-after-drift-rc25.report.json",
+      "size": 98769,
+      "mtime": 1778360547,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-offsite-backup.report.json",
+      "path": "/root/deliverables/cockpit-after-offsite-backup.report.json",
+      "size": 120186,
+      "mtime": 1778361316,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-pedro-omie-preflight.report.json",
+      "path": "/root/deliverables/cockpit-after-pedro-omie-preflight.report.json",
+      "size": 134345,
+      "mtime": 1778361917,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-protected-ci.report.json",
+      "path": "/root/deliverables/cockpit-after-protected-ci.report.json",
+      "size": 94445,
+      "mtime": 1778360268,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-readiness-release.report.json",
+      "path": "/root/deliverables/cockpit-after-readiness-release.report.json",
+      "size": 109868,
+      "mtime": 1778360896,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-security-compliance.report.json",
+      "path": "/root/deliverables/cockpit-after-security-compliance.report.json",
+      "size": 105581,
+      "mtime": 1778360753,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-after-sensitive-enforcement.report.json",
+      "path": "/root/deliverables/cockpit-after-sensitive-enforcement.report.json",
+      "size": 77119,
+      "mtime": 1778359409,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-clara-zapi-ivs.html",
+      "path": "/root/deliverables/cockpit-clara-zapi-ivs.html",
+      "size": 10028,
+      "mtime": 1778353808,
+      "mime": "text/html"
+    },
+    {
+      "name": "cockpit-clara-zapi-ivs.json",
+      "path": "/root/deliverables/cockpit-clara-zapi-ivs.json",
+      "size": 18377,
+      "mtime": 1778353808,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-geral-ivs-agent-operating-layer.html",
+      "path": "/root/deliverables/cockpit-geral-ivs-agent-operating-layer.html",
+      "size": 5321,
+      "mtime": 1778355003,
+      "mime": "text/html"
+    },
+    {
+      "name": "cockpit-geral-ivs-agent-operating-layer.json",
+      "path": "/root/deliverables/cockpit-geral-ivs-agent-operating-layer.json",
+      "size": 52523,
+      "mtime": 1778355003,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-marketing-os-joao-ivs.html",
+      "path": "/root/deliverables/cockpit-marketing-os-joao-ivs.html",
+      "size": 8401,
+      "mtime": 1778354513,
+      "mime": "text/html"
+    },
+    {
+      "name": "cockpit-marketing-os-joao-ivs.json",
+      "path": "/root/deliverables/cockpit-marketing-os-joao-ivs.json",
+      "size": 22900,
+      "mtime": 1778354513,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-preconsulta-ivs.html",
+      "path": "/root/deliverables/cockpit-preconsulta-ivs.html",
+      "size": 4485,
+      "mtime": 1778354202,
+      "mime": "text/html"
+    },
+    {
+      "name": "cockpit-preconsulta-ivs.json",
+      "path": "/root/deliverables/cockpit-preconsulta-ivs.json",
+      "size": 1771,
+      "mtime": 1778354202,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-server-token-info.json",
+      "path": "/root/deliverables/cockpit-server-token-info.json",
+      "size": 171,
+      "mtime": 1778360741,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-service-http-validation.json",
+      "path": "/root/deliverables/cockpit-service-http-validation.json",
+      "size": 68,
+      "mtime": 1778361131,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-service-start.json",
+      "path": "/root/deliverables/cockpit-service-start.json",
+      "size": 342,
+      "mtime": 1778361124,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-service-status.json",
+      "path": "/root/deliverables/cockpit-service-status.json",
+      "size": 319,
+      "mtime": 1778361124,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-unico-ivs-agent-os.after-action-gate.report.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.after-action-gate.report.json",
+      "size": 73367,
+      "mtime": 1778359003,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-unico-ivs-agent-os.html",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.html",
+      "size": 19983,
+      "mtime": 1778547667,
+      "mime": "text/html"
+    },
+    {
+      "name": "cockpit-unico-ivs-agent-os.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.json",
+      "size": 183079,
+      "mtime": 1778547667,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-unico-ivs-agent-os.report.json",
+      "path": "/root/deliverables/cockpit-unico-ivs-agent-os.report.json",
+      "size": 60772,
+      "mtime": 1778357196,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-vivo-ivs-agent-os.html",
+      "path": "/root/deliverables/cockpit-vivo-ivs-agent-os.html",
+      "size": 1591,
+      "mtime": 1778359892,
+      "mime": "text/html"
+    },
+    {
+      "name": "cockpit-vivo-ivs-agent-os.report.json",
+      "path": "/root/deliverables/cockpit-vivo-ivs-agent-os.report.json",
+      "size": 193,
+      "mtime": 1778359677,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-workflow-runs-ivs.html",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.html",
+      "size": 4502,
+      "mtime": 1778362789,
+      "mime": "text/html"
+    },
+    {
+      "name": "cockpit-workflow-runs-ivs.json",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.json",
+      "size": 55253,
+      "mtime": 1778362789,
+      "mime": "application/json"
+    },
+    {
+      "name": "cockpit-workflow-runs-ivs.report.json",
+      "path": "/root/deliverables/cockpit-workflow-runs-ivs.report.json",
+      "size": 2040,
+      "mtime": 1778356911,
+      "mime": "application/json"
+    },
+    {
+      "name": "ivs-agent-capability-registry-final.json",
+      "path": "/root/deliverables/ivs-agent-capability-registry-final.json",
+      "size": 38305,
+      "mtime": 1778357277,
+      "mime": "application/json"
+    },
+    {
+      "name": "ivs-agent-capability-registry.json",
+      "path": "/root/deliverables/ivs-agent-capability-registry.json",
+      "size": 32873,
+      "mtime": 1778356713,
+      "mime": "application/json"
+    },
+    {
+      "name": "ivs-agent-capability-registry.md",
+      "path": "/root/deliverables/ivs-agent-capability-registry.md",
+      "size": 1495,
+      "mtime": 1778356713,
+      "mime": "text/markdown"
+    },
+    {
+      "name": "ivs-agent-events.json",
+      "path": "/root/deliverables/ivs-agent-events.json",
+      "size": 10897,
+      "mtime": 1778356713,
+      "mime": "application/json"
+    },
+    {
+      "name": "ivs-agent-events.md",
+      "path": "/root/deliverables/ivs-agent-events.md",
+      "size": 3975,
+      "mtime": 1778356713,
+      "mime": "text/markdown"
+    },
+    {
+      "name": "ivs-agent-layer-daily-audit-latest.md",
+      "path": "/root/deliverables/ivs-agent-layer-daily-audit-latest.md",
+      "size": 1019,
+      "mtime": 1778355016,
+      "mime": "text/markdown"
+    },
+    {
+      "name": "runbook-ivs-agent-os.json",
+      "path": "/root/deliverables/runbook-ivs-agent-os.json",
+      "size": 1999,
+      "mtime": 1778359907,
+      "mime": "application/json"
+    },
+    {
+      "name": "runbook-ivs-agent-os.md",
+      "path": "/root/deliverables/runbook-ivs-agent-os.md",
+      "size": 1754,
+      "mtime": 1778359907,
+      "mime": "text/markdown"
+    },
+    {
+      "name": "runbook-ivs-agent-os.report.json",
+      "path": "/root/deliverables/runbook-ivs-agent-os.report.json",
+      "size": 2000,
+      "mtime": 1778359907,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-action-gate.json",
+      "path": "/root/deliverables/workflow-registry-after-action-gate.json",
+      "size": 15434,
+      "mtime": 1778358983,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-activation-dossier.json",
+      "path": "/root/deliverables/workflow-registry-after-activation-dossier.json",
+      "size": 36166,
+      "mtime": 1778362211,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-activation-plan.json",
+      "path": "/root/deliverables/workflow-registry-after-activation-plan.json",
+      "size": 31499,
+      "mtime": 1778361627,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-analytics-ui.json",
+      "path": "/root/deliverables/workflow-registry-after-analytics-ui.json",
+      "size": 20281,
+      "mtime": 1778359797,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-approval-queue.json",
+      "path": "/root/deliverables/workflow-registry-after-approval-queue.json",
+      "size": 35295,
+      "mtime": 1778362017,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-backup-subdomain-request.json",
+      "path": "/root/deliverables/workflow-registry-after-backup-subdomain-request.json",
+      "size": 51260,
+      "mtime": 1778368152,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-clara-extended-watch.json",
+      "path": "/root/deliverables/workflow-registry-after-clara-extended-watch.json",
+      "size": 38166,
+      "mtime": 1778363479,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-clara-phase2-activation.json",
+      "path": "/root/deliverables/workflow-registry-after-clara-phase2-activation.json",
+      "size": 37236,
+      "mtime": 1778362747,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-clara-phase2-preflight.json",
+      "path": "/root/deliverables/workflow-registry-after-clara-phase2-preflight.json",
+      "size": 33451,
+      "mtime": 1778361804,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-clara-shadow.json",
+      "path": "/root/deliverables/workflow-registry-after-clara-shadow.json",
+      "size": 32463,
+      "mtime": 1778361722,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-cockpit-service.json",
+      "path": "/root/deliverables/workflow-registry-after-cockpit-service.json",
+      "size": 29504,
+      "mtime": 1778361203,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-command-center.json",
+      "path": "/root/deliverables/workflow-registry-after-command-center.json",
+      "size": 21094,
+      "mtime": 1778359907,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-cron-governance-final.json",
+      "path": "/root/deliverables/workflow-registry-after-cron-governance-final.json",
+      "size": 28627,
+      "mtime": 1778361049,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-disaster-recovery.json",
+      "path": "/root/deliverables/workflow-registry-after-disaster-recovery.json",
+      "size": 25231,
+      "mtime": 1778360627,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-domain-architecture.json",
+      "path": "/root/deliverables/workflow-registry-after-domain-architecture.json",
+      "size": 49409,
+      "mtime": 1778367868,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-drift-rc25.json",
+      "path": "/root/deliverables/workflow-registry-after-drift-rc25.json",
+      "size": 24314,
+      "mtime": 1778360547,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-external-backup-intake.json",
+      "path": "/root/deliverables/workflow-registry-after-external-backup-intake.json",
+      "size": 44633,
+      "mtime": 1778365407,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-external-four-inputs.json",
+      "path": "/root/deliverables/workflow-registry-after-external-four-inputs.json",
+      "size": 45630,
+      "mtime": 1778365701,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-hardening-final.json",
+      "path": "/root/deliverables/workflow-registry-after-hardening-final.json",
+      "size": 18739,
+      "mtime": 1778359677,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-hostgator-dns.json",
+      "path": "/root/deliverables/workflow-registry-after-hostgator-dns.json",
+      "size": 50306,
+      "mtime": 1778368071,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-offsite-backup.json",
+      "path": "/root/deliverables/workflow-registry-after-offsite-backup.json",
+      "size": 30495,
+      "mtime": 1778361316,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-offsite-destination-packet.json",
+      "path": "/root/deliverables/workflow-registry-after-offsite-destination-packet.json",
+      "size": 39079,
+      "mtime": 1778363633,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-offsite-local-mirror-export.json",
+      "path": "/root/deliverables/workflow-registry-after-offsite-local-mirror-export.json",
+      "size": 41021,
+      "mtime": 1778364442,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-offsite-local-mirror-preflight.json",
+      "path": "/root/deliverables/workflow-registry-after-offsite-local-mirror-preflight.json",
+      "size": 40031,
+      "mtime": 1778363694,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-openfang-skills.json",
+      "path": "/root/deliverables/workflow-registry-after-openfang-skills.json",
+      "size": 10506,
+      "mtime": 1778356714,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-operations-runbook.json",
+      "path": "/root/deliverables/workflow-registry-after-operations-runbook.json",
+      "size": 43720,
+      "mtime": 1778365318,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-pedro-omie-preflight.json",
+      "path": "/root/deliverables/workflow-registry-after-pedro-omie-preflight.json",
+      "size": 34408,
+      "mtime": 1778361907,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-pedro-payload-intake.json",
+      "path": "/root/deliverables/workflow-registry-after-pedro-payload-intake.json",
+      "size": 41919,
+      "mtime": 1778365120,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-pedro-payload-validator.json",
+      "path": "/root/deliverables/workflow-registry-after-pedro-payload-validator.json",
+      "size": 42869,
+      "mtime": 1778365219,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-permission-gate.json",
+      "path": "/root/deliverables/workflow-registry-after-permission-gate.json",
+      "size": 12633,
+      "mtime": 1778357000,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-protected-backup-automation.json",
+      "path": "/root/deliverables/workflow-registry-after-protected-backup-automation.json",
+      "size": 52294,
+      "mtime": 1778369341,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-protected-ci.json",
+      "path": "/root/deliverables/workflow-registry-after-protected-ci.json",
+      "size": 22730,
+      "mtime": 1778360268,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-rclone-install.json",
+      "path": "/root/deliverables/workflow-registry-after-rclone-install.json",
+      "size": 46620,
+      "mtime": 1778367507,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-rclone-provider-matrix.json",
+      "path": "/root/deliverables/workflow-registry-after-rclone-provider-matrix.json",
+      "size": 48449,
+      "mtime": 1778367705,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-rclone-remote-intake.json",
+      "path": "/root/deliverables/workflow-registry-after-rclone-remote-intake.json",
+      "size": 47535,
+      "mtime": 1778367606,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-readiness-release.json",
+      "path": "/root/deliverables/workflow-registry-after-readiness-release.json",
+      "size": 27680,
+      "mtime": 1778360894,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-runner.json",
+      "path": "/root/deliverables/workflow-registry-after-runner.json",
+      "size": 11554,
+      "mtime": 1778356903,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-security-compliance.json",
+      "path": "/root/deliverables/workflow-registry-after-security-compliance.json",
+      "size": 26084,
+      "mtime": 1778360752,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-sensitive-enforcement.json",
+      "path": "/root/deliverables/workflow-registry-after-sensitive-enforcement.json",
+      "size": 16395,
+      "mtime": 1778359408,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-after-unified-cockpit.json",
+      "path": "/root/deliverables/workflow-registry-after-unified-cockpit.json",
+      "size": 13601,
+      "mtime": 1778357189,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-final-agent-os.json",
+      "path": "/root/deliverables/workflow-registry-final-agent-os.json",
+      "size": 14535,
+      "mtime": 1778357293,
+      "mime": "application/json"
+    },
+    {
+      "name": "workflow-registry-ivs-agent-operating-layer.html",
+      "path": "/root/deliverables/workflow-registry-ivs-agent-operating-layer.html",
+      "size": 6202,
+      "mtime": 1778355719,
+      "mime": "text/html"
+    },
+    {
+      "name": "workflow-registry-ivs-agent-operating-layer.json",
+      "path": "/root/deliverables/workflow-registry-ivs-agent-operating-layer.json",
+      "size": 7454,
+      "mtime": 1778355719,
+      "mime": "application/json"
+    }
+  ]
+}
