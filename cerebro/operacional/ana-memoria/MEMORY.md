@@ -62,7 +62,7 @@
 - `cerebro/operacional/graphify-2026-06-15-0100-manutencao-diaria-clara-gbrain-ana-fable/`
 
 ### Canônicos do cérebro (verdade por domínio)
-- `cerebro/CONTEXT_CANON.md` · `cerebro/BRAIN_ARCHITECTURE.md` · `cerebro/OPERATIONS_INDEX.md` · `cerebro/MAPA.md` · `cerebro/LEARNING_PROTOCOL.md` · `OPERATING_RULES.md`
+- `CONTEXT_CANON.md` (raiz) · `cerebro/BRAIN_ARCHITECTURE.md` · `cerebro/OPERATIONS_INDEX.md` · `cerebro/MAPA.md` · `cerebro/LEARNING_PROTOCOL.md` · `OPERATING_RULES.md`
 
 ### Ferramentas/skills
 - `memoria-cientifica`, `graphify` (`gbrain-ivs query`), `consulta-base-conhecimento`, `instagram-api`, `deep-research`.
