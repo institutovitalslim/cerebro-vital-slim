@@ -82,15 +82,26 @@ export default function SprintSemanalPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
+    const paramThesis = params?.get('thesis')
+    const paramObjective = params?.get('objective')
+    const paramStage = params?.get('audience_stage')
     fetchJson<Overview>('/weekly-command/overview?tenant_slug=demo')
       .then((data) => {
         setOverview(data)
         setPlan({ ...data.default_plan, approval_flow: [], governance: { external_actions: 'blocked_by_default', notes: 'Plano inicial.' } })
         setSelectedHooks({})
-        setThesis(data.default_plan.thesis)
+        setThesis(paramThesis || data.default_plan.thesis)
         setPillar(data.default_plan.pillar)
+        if (paramObjective) setObjective(paramObjective)
+        if (paramStage) setStage(paramStage)
       })
-      .catch(() => setError('Não consegui carregar o comando semanal agora. Usando fallback seguro.'))
+      .catch(() => {
+        if (paramThesis) setThesis(paramThesis)
+        if (paramObjective) setObjective(paramObjective)
+        if (paramStage) setStage(paramStage)
+        setError('Não consegui carregar o comando semanal agora. Usando fallback seguro.')
+      })
   }, [])
 
   async function gerarPlano(e: FormEvent) {

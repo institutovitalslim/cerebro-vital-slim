@@ -78,7 +78,7 @@ def main() -> int:
     status, ctype, _ = http_head("/business-intelligence")
     checks.append(Check("web_business_intelligence", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
-    for page in ["/sprint-semanal", "/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
+    for page in ["/sprint-semanal", "/aprendizado", "/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
         status, ctype, _ = http_head(page)
         checks.append(Check(f"web_{page.strip('/').replace('/', '_')}", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
@@ -87,6 +87,7 @@ def main() -> int:
         ("bi_overview", "/api/bi/overview?tenant_slug=demo"),
         ("social_selling_overview", "/api/social-selling/overview?tenant_slug=demo"),
         ("weekly_command_overview", "/api/weekly-command/overview?tenant_slug=demo"),
+        ("learning_insights", "/api/learning/insights?tenant_slug=demo"),
         ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
         ("roteiros_library", "/api/generation/roteiros?tenant_slug=demo"),
         ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
@@ -108,6 +109,14 @@ def main() -> int:
                 "bi_editorial_flow",
                 all(k in flow for k in ("approved_to_publish", "metrics_pending", "measured")),
                 f"editorial_flow={flow}",
+            ))
+        if name == "learning_insights" and status == 200 and isinstance(data, dict):
+            summary = data.get("summary") or {}
+            seed = data.get("next_sprint_seed") or {}
+            checks.append(Check(
+                "learning_phase2_contract",
+                all(k in summary for k in ("measured_items", "metrics_pending", "diagnosis")) and bool(seed.get("thesis")),
+                f"summary={summary} next_thesis={seed.get('thesis')}",
             ))
 
     status, data, _ = http_json("/api/generation/creatives?tenant_slug=demo&limit=1")
