@@ -55,6 +55,20 @@ async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
   return r.json()
 }
 
+function productionHref(item: FamilyItem, plan: Pick<Plan, 'thesis' | 'pillar' | 'objective' | 'audience_stage'> | Overview['default_plan']) {
+  const qs = new URLSearchParams({
+    source: 'weekly-sprint',
+    thesis: plan.thesis,
+    pillar: plan.pillar,
+    objective: plan.objective,
+    audience_stage: plan.audience_stage,
+    origin_tag: item.origin_tag,
+    format: item.format,
+    hook: item.hook,
+  })
+  return `${item.production_url}?${qs.toString()}`
+}
+
 export default function SprintSemanalPage() {
   const [overview, setOverview] = useState<Overview>(fallback)
   const [plan, setPlan] = useState<Plan | null>(null)
@@ -95,6 +109,7 @@ export default function SprintSemanalPage() {
   }
 
   const family = plan?.family || overview.default_plan.family || []
+  const activePlan = plan || overview.default_plan
 
   return (
     <div className="dashboardRoot">
@@ -188,7 +203,7 @@ export default function SprintSemanalPage() {
               <p className="muted small"><strong>CTA:</strong> {item.cta}</p>
               <p className="muted small"><strong>Métrica:</strong> {item.metric}</p>
               <div className="resultBox">{item.origin_tag}</div>
-              <Link className="secondaryLink" href={item.production_url}>Abrir produção →</Link>
+              <Link className="secondaryLink" href={productionHref(item, activePlan)}>Abrir produção com briefing →</Link>
             </article>
           ))}
         </div>

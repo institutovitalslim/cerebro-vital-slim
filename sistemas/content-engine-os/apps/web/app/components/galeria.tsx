@@ -84,9 +84,29 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
   const [matrixCtas, setMatrixCtas] = useState('pre_avaliacao,whatsapp_qualificado')
   const [matrixVisuais, setMatrixVisuais] = useState('dra_camera,broll_rotina')
   const [tema, setTema] = useState('')
+  const [briefing, setBriefing] = useState<{ thesis: string; hook: string; originTag: string; source: string } | null>(null)
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState<string | null>(null)
   const [recent, setRecent] = useState<Creative[]>([])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const qs = new URLSearchParams(window.location.search)
+    if (qs.get('source') !== 'weekly-sprint') return
+    const thesis = qs.get('thesis') || ''
+    const hook = qs.get('hook') || ''
+    const originTag = qs.get('origin_tag') || ''
+    const source = qs.get('source') || ''
+    const objective = qs.get('objective') || ''
+    const nextTema = [thesis, hook ? `Hook: ${hook}` : '', originTag ? `Origem: ${originTag}` : ''].filter(Boolean).join('\n')
+    if (nextTema) setTema(nextTema)
+    if (objective === 'captacao_qualificada') setObjetivo('conversão')
+    if (objective === 'educacao_de_mercado') setObjetivo('educação')
+    if (objective === 'prova_e_metodo') setObjetivo('desejo')
+    if (hook.toLowerCase().includes('mito') || hook.toLowerCase().includes('mentira')) setHookTipo('mito')
+    if (hook.toLowerCase().includes('?') || hook.toLowerCase().includes('por que')) setHookTipo('pergunta_direta')
+    if (originTag || thesis || hook) setBriefing({ thesis, hook, originTag, source })
+  }, [])
 
   async function load() {
     setRecent((await listar(lockFormato ? defaultFormato : undefined)).slice(0, 8))
@@ -151,6 +171,16 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           <h3>Nova peça</h3>
           <p className="muted">Reels puxam atenção. Carrossel constrói autoridade. Modo matriz transforma criativo em segmentação.</p>
         </div>
+
+        {briefing ? (
+          <div className="resultBox briefingBox">
+            <span className="metricLabel">Briefing herdado do Sprint Semanal</span>
+            {briefing.thesis ? <p><strong>Tese:</strong> {briefing.thesis}</p> : null}
+            {briefing.hook ? <p><strong>Hook:</strong> {briefing.hook}</p> : null}
+            {briefing.originTag ? <p><strong>Origem:</strong> {briefing.originTag}</p> : null}
+            <p className="muted small">Revise antes de gerar. Nada é publicado automaticamente.</p>
+          </div>
+        ) : null}
 
         <label className="muted small">Modo</label>
         <select className="input" value={modo} onChange={(e) => setModo(e.target.value as 'single' | 'matrix')}>
@@ -234,8 +264,8 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           </div>
         )}
 
-        <label className="muted small">Tema</label>
-        <input className="input" placeholder="ex: tireoide lenta e queda de cabelo na mulher 45+" value={tema} onChange={(e) => setTema(e.target.value)} />
+        <label className="muted small">Tema / briefing</label>
+        <textarea className="textarea" placeholder="ex: tireoide lenta e queda de cabelo na mulher 45+" value={tema} onChange={(e) => setTema(e.target.value)} />
 
         <button className="primaryButton" disabled={loading || (modo === 'matrix' && matrixTotal > 36)}>{loading ? 'Gerando…' : modo === 'matrix' ? 'Gerar matriz' : 'Gerar peça'}</button>
         {msg ? <span className="successText">{msg}</span> : null}

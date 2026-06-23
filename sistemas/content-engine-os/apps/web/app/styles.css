@@ -473,6 +473,13 @@ select.input:focus {
   color: #ddd0c0;
   overflow: auto;
 }
+.briefingBox {
+  display: grid;
+  gap: 8px;
+  border-color: rgba(255, 222, 138, 0.24);
+  background: rgba(255, 222, 138, 0.055);
+}
+.briefingBox p { margin: 0; }
 
 .tableLike { gap: 12px; }
 .compactRows .row { gap: 8px; }

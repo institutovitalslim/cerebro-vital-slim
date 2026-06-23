@@ -360,6 +360,7 @@ export default function StoriesEnginePage() {
   const [handoffLoading, setHandoffLoading] = useState<string | null>(null)
   const [reviewLoading, setReviewLoading] = useState<string | null>(null)
   const [reviewMsg, setReviewMsg] = useState<string | null>(null)
+  const [briefing, setBriefing] = useState<{ thesis: string; hook: string; originTag: string } | null>(null)
 
   const preview = useMemo(() => buildSequence({ tema, tipo, objetivo, objecao, momento, ativo, quantidade }), [tema, tipo, objetivo, objecao, momento, ativo, quantidade])
 
@@ -396,6 +397,22 @@ export default function StoriesEnginePage() {
       setWinners([])
     }
   }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const qs = new URLSearchParams(window.location.search)
+    if (qs.get('source') !== 'weekly-sprint') return
+    const thesis = qs.get('thesis') || ''
+    const hook = qs.get('hook') || ''
+    const originTag = qs.get('origin_tag') || ''
+    if (thesis) setTema(thesis)
+    if (hook) setSeoIntent(hook)
+    if (originTag || thesis || hook) setBriefing({ thesis, hook, originTag })
+    const objective = qs.get('objective') || ''
+    if (objective === 'captacao_qualificada') setObjetivo('agenda')
+    if (objective === 'educacao_de_mercado') setObjetivo('pesquisa')
+    if (objective === 'prova_e_metodo') setObjetivo('prova')
+  }, [])
 
   useEffect(() => { void carregarSequencias(); void carregarWinners() }, [])
 
@@ -556,6 +573,16 @@ export default function StoriesEnginePage() {
             <h3>Nova sequência</h3>
             <p className="muted">A sequência nasce da objeção da paciente, não de um dispositivo aleatório.</p>
           </div>
+
+          {briefing ? (
+            <div className="resultBox briefingBox">
+              <span className="metricLabel">Briefing herdado do Sprint Semanal</span>
+              {briefing.thesis ? <p><strong>Tese:</strong> {briefing.thesis}</p> : null}
+              {briefing.hook ? <p><strong>Hook:</strong> {briefing.hook}</p> : null}
+              {briefing.originTag ? <p><strong>Origem:</strong> {briefing.originTag}</p> : null}
+              <p className="muted small">Revise a sequência antes de salvar/aprovar. Nada é publicado automaticamente.</p>
+            </div>
+          ) : null}
 
           <label className="muted small">Tema central</label>
           <input className="input" value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Ex.: Não é falta de força de vontade" />
