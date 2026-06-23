@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+"""Smoke test read-only do Content Engine OS.
+
+Valida o que costuma quebrar a operação:
+- API pública via /api
+- web pública
+- endpoints centrais do Motor A
+- render público de um criativo renderizado
+- worker de render ativo no systemd
+
+Não cria conteúdo, não publica e não toca em dados sensíveis.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+import urllib.request
+from dataclasses import dataclass, asdict
+from typing import Any
+
+BASE = "https://conteudo.institutovitalslim.com.br"
+
+
+@dataclass
+class Check:
+    name: str
+    ok: bool
+    detail: str
+
+
+def http_json(path: str, timeout: int = 20) -> tuple[int, Any, str]:
+    url = f"{BASE}{path}"
+    req = urllib.request.Request(url, headers={"User-Agent": "IVS-Content-Smoke/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            body = resp.read().decode("utf-8", errors="replace")
+            try:
+                data = json.loads(body)
+            except Exception:
+                data = body[:300]
+            return resp.status, data, resp.headers.get("content-type", "")
+    except Exception as exc:
+        return 0, None, str(exc)
+
+
+def http_head(path: str, timeout: int = 20) -> tuple[int, str, int]:
+    url = f"{BASE}{path}"
+    req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "IVS-Content-Smoke/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status, resp.headers.get("content-type", ""), int(resp.headers.get("content-length") or 0)
+    except Exception as exc:
+        return 0, str(exc), 0
+
+
+def cmd(args: list[str]) -> tuple[int, str]:
+    p = subprocess.run(args, capture_output=True, text=True, timeout=20)
+    return p.returncode, (p.stdout + p.stderr).strip()
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--json", action="store_true")
+    args = parser.parse_args()
+    checks: list[Check] = []
+
+    status, data, ctype = http_json("/api/health")
+    checks.append(Check("api_health", status == 200 and isinstance(data, dict) and data.get("status") == "ok", f"status={status} content_type={ctype}"))
+
+    status, ctype, _ = http_head("/criar")
+    checks.append(Check("web_criar", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
+
+    for name, path in [
+        ("dashboard_summary", "/api/dashboard/summary?tenant_slug=demo"),
+        ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
+        ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
+        ("stories_sequences", "/api/stories/sequences?tenant_slug=demo"),
+    ]:
+        status, data, ctype = http_json(path)
+        checks.append(Check(name, status == 200 and isinstance(data, dict), f"status={status} content_type={ctype}"))
+
+    status, data, _ = http_json("/api/generation/creatives?tenant_slug=demo&limit=1")
+    asset_url = None
+    if status == 200 and isinstance(data, dict) and data.get("items"):
+        asset_url = data["items"][0].get("asset_url") or (data["items"][0].get("assets") or [None])[0]
+    if asset_url:
+        r_status, r_ctype, r_size = http_head(asset_url)
+        checks.append(Check("public_render", r_status == 200 and "image" in r_ctype and r_size > 1000, f"status={r_status} content_type={r_ctype} bytes={r_size} path={asset_url}"))
+    else:
+        checks.append(Check("public_render", False, "sem asset_url no último criativo"))
+
+    rc, out = cmd(["systemctl", "is-active", "content-render.service"])
+    checks.append(Check("render_worker_service", rc == 0 and out.strip() == "active", out[:200]))
+
+    ok = all(c.ok for c in checks)
+    payload = {"ok": ok, "checks": [asdict(c) for c in checks]}
+    if args.json:
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+    else:
+        for c in checks:
+            print(("OK" if c.ok else "FAIL"), c.name, c.detail)
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
