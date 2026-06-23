@@ -26,34 +26,96 @@ def _tenant_id(conn, tenant_slug: str) -> str:
 
 
 def _pillar_cards() -> list[dict]:
+    """Pilares estratégicos derivados do Avatar Mestre IVS.
+
+    Avatar central: mulher que não se reconhece mais no espelho; sente perda de
+    controle do corpo, baixa autoestima, compulsão, cansaço, libido baixa e medo
+    de tentar de novo. Os pilares viram teses semanais para produção por família.
+    """
     return [
         {
-            "pillar": "emagrecimento_metabolico",
-            "label": "Emagrecimento metabólico",
-            "thesis": "O corpo travado não é falta de força de vontade; é sinal de mecanismo metabólico não investigado.",
-            "objection": "já tentei de tudo",
-            "promise_safe": "entender o mecanismo antes de insistir em outra dieta",
+            "pillar": "reconexao_identidade_feminina",
+            "label": "Reconexão com identidade feminina",
+            "thesis": "O Vital Slim não fala só de peso; fala da mulher que quer voltar a se reconhecer no espelho.",
+            "objection": "não me reconheço mais",
+            "promise_safe": "mostrar caminho médico para recuperar controle, autoestima e direção",
         },
         {
-            "pillar": "hormonios_mulher_35_plus",
-            "label": "Hormônios 35+",
-            "thesis": "Depois dos 35, sintomas soltos podem ser sinais conectados de desregulação hormonal.",
-            "objection": "meus exames sempre dão normais",
-            "promise_safe": "olhar sintomas, rotina e exames com contexto clínico",
+            "pillar": "corpo_nao_responde",
+            "label": "Corpo não responde",
+            "thesis": "Quando o corpo para de responder, insistir na mesma dieta pode aumentar culpa em vez de resolver o mecanismo.",
+            "objection": "meu corpo não responde",
+            "promise_safe": "investigar o que está travando antes de culpar força de vontade",
         },
         {
-            "pillar": "tricologia_clinica",
-            "label": "Tricologia clínica",
-            "thesis": "Queda de cabelo não é só estética; pode ser sintoma-sentinela de desequilíbrio interno.",
-            "objection": "já usei shampoo e vitamina",
-            "promise_safe": "investigar causa antes de empilhar soluções superficiais",
+            "pillar": "ja_tentei_de_tudo",
+            "label": "Já tentei de tudo",
+            "thesis": "Quem já tentou de tudo não precisa de mais uma promessa; precisa de uma avaliação que explique por que não sustentou resultado.",
+            "objection": "já tentei e não funcionou",
+            "promise_safe": "trocar tentativa no escuro por acompanhamento e leitura individual",
         },
         {
-            "pillar": "metodo_ivs",
-            "label": "Método IVS",
-            "thesis": "A diferença não está em prometer resultado rápido, mas em acompanhar, medir e ajustar com método.",
-            "objection": "vai ser só mais uma consulta",
-            "promise_safe": "mostrar o valor do acompanhamento e da avaliação individual",
+            "pillar": "pos_filhos_corpo_mudou",
+            "label": "Depois dos filhos tudo mudou",
+            "thesis": "Depois dos filhos, o corpo pode mudar por sono, hormônios, rotina e metabolismo — não por falta de amor-próprio.",
+            "objection": "não tenho tempo e sinto culpa por investir em mim",
+            "promise_safe": "validar a rotina materna e mostrar cuidado possível, individual e sem julgamento",
+        },
+        {
+            "pillar": "compulsao_acucar_controle",
+            "label": "Compulsão por açúcar e controle",
+            "thesis": "A vontade incontrolável por doce pode ser sinal de desregulação metabólica e emocional, não falta de caráter.",
+            "objection": "não consigo parar de comer doce",
+            "promise_safe": "educar sobre controle alimentar com abordagem médica e acolhedora",
+        },
+        {
+            "pillar": "gordura_abdominal_metabolismo",
+            "label": "Gordura abdominal e metabolismo",
+            "thesis": "A gordura abdominal pode ser um sinal de resistência insulínica, sono ruim e inflamação leve acontecendo juntos.",
+            "objection": "faço esforço e a barriga não muda",
+            "promise_safe": "explicar mecanismo metabólico com clareza, sem promessa de resultado rápido",
+        },
+        {
+            "pillar": "energia_cansaco_rotina",
+            "label": "Energia, cansaço e rotina",
+            "thesis": "Cansaço constante, sono ruim e peso travado costumam andar juntos; tratar só a balança deixa parte do problema invisível.",
+            "objection": "estou sempre cansada e sem energia",
+            "promise_safe": "reposicionar energia como indicador clínico e não como preguiça",
+        },
+        {
+            "pillar": "libido_autoestima_hormonal",
+            "label": "Libido, autoestima e hormônios",
+            "thesis": "Baixa libido, autoestima baixa e mudança corporal podem fazer parte da mesma história hormonal e emocional.",
+            "objection": "tenho baixo desejo sexual e vergonha de falar disso",
+            "promise_safe": "abrir conversa médica segura, elegante e sem exposição",
+        },
+        {
+            "pillar": "menopausa_metabolismo",
+            "label": "Menopausa e metabolismo",
+            "thesis": "Na menopausa, o metabolismo não morreu; ele mudou, e precisa ser lido com outro mapa clínico.",
+            "objection": "depois da menopausa nada funciona",
+            "promise_safe": "educar sobre hormônios, massa muscular e risco metabólico com segurança",
+        },
+        {
+            "pillar": "medo_efeito_sanfona",
+            "label": "Medo do efeito sanfona",
+            "thesis": "O medo de voltar a engordar geralmente nasce de planos que emagrecem sem ensinar manutenção e acompanhamento.",
+            "objection": "vou emagrecer e engordar tudo de novo",
+            "promise_safe": "mostrar valor de acompanhamento, ajuste e manutenção realista",
+        },
+        {
+            "pillar": "executiva_sobrecarregada",
+            "label": "Executiva sobrecarregada",
+            "thesis": "A mulher que trabalha, cuida da casa e se cobra o tempo todo não precisa de dieta maluca; precisa de estratégia possível.",
+            "objection": "não tenho tempo para dietas malucas",
+            "promise_safe": "mostrar plano médico adaptado à rotina e não uma rotina idealizada",
+        },
+        {
+            "pillar": "seguranca_medica_valor",
+            "label": "Segurança médica e valor",
+            "thesis": "Preço só vira objeção quando o valor clínico ainda não ficou claro; segurança, método e acompanhamento precisam aparecer antes.",
+            "objection": "tenho medo de gastar e não funcionar",
+            "promise_safe": "construir percepção de valor com método, avaliação e autoridade médica",
         },
     ]
 
