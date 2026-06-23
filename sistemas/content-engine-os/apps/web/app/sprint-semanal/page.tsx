@@ -9,6 +9,8 @@ type FamilyItem = {
   format: string
   role: string
   hook: string
+  hook_variations?: string[]
+  hook_test_minimum?: number
   output: string
   cta: string
   metric: string
@@ -112,11 +114,17 @@ export default function SprintSemanalPage() {
         <div className="heroMain">
           <span className="badge">Comando da semana</span>
           <h3 className="sectionTitle">{overview.priority}</h3>
-          <p className="muted">Este módulo não publica, não envia DM e não escreve em WhatsApp. Ele organiza a tese e direciona a produção.</p>
+          <p className="heroText">Este módulo não publica, não envia DM e não escreve em WhatsApp. Ele organiza a tese e direciona a produção.</p>
+          <div className="commandNext">
+            <span className="metricLabel">Próxima ação em 10 segundos</span>
+            <strong>Validar a tese, escolher o hook vencedor do Reels e abrir a produção por formato.</strong>
+            <p className="muted small">Fluxo: BI → tese semanal → família completa → revisão humana → calendário → aprendizado.</p>
+          </div>
           <div className="metricGrid">
             <article className="metricCard"><span className="metricLabel">Para revisar</span><strong className="metricValue">{overview.creatives.ready_review}</strong></article>
             <article className="metricCard"><span className="metricLabel">Aprovados</span><strong className="metricValue">{overview.creatives.approved}</strong></article>
             <article className="metricCard"><span className="metricLabel">Stories</span><strong className="metricValue">{overview.stories.stories}</strong></article>
+            <article className="metricCard"><span className="metricLabel">Leads 30d</span><strong className="metricValue">{overview.funnel.leads}</strong></article>
           </div>
         </div>
         <form className="formCard" onSubmit={gerarPlano}>
@@ -167,7 +175,15 @@ export default function SprintSemanalPage() {
             <article className="flowCard" key={item.origin_tag}>
               <span className="badge badgeDark">{item.format}</span>
               <h3>{item.role}</h3>
-              <p className="muted small"><strong>Hook:</strong> {item.hook}</p>
+              <p className="muted small"><strong>Hook principal:</strong> {item.hook}</p>
+              {item.hook_variations?.length ? (
+                <div className="hookStack">
+                  <span className="metricLabel">Hooks para teste</span>
+                  {item.hook_variations.map((hook, index) => (
+                    <p className="hookLine" key={`${item.origin_tag}-hook-${index}`}><strong>{index + 1}.</strong> {hook}</p>
+                  ))}
+                </div>
+              ) : null}
               <p className="muted small"><strong>Saída:</strong> {item.output}</p>
               <p className="muted small"><strong>CTA:</strong> {item.cta}</p>
               <p className="muted small"><strong>Métrica:</strong> {item.metric}</p>
