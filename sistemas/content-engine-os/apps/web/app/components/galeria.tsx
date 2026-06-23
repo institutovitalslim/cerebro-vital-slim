@@ -55,9 +55,11 @@ export const STATUS_LABEL: Record<string, string> = {
 }
 export const is45 = (f: string) => f === 'carrossel' || f === 'estatico'
 
-async function listar(): Promise<Creative[]> {
+async function listar(format?: string): Promise<Creative[]> {
   try {
-    const r = await fetch(`${api}/generation/creatives?tenant_slug=demo&limit=60`, { cache: 'no-store' })
+    const qs = new URLSearchParams({ tenant_slug: 'demo', limit: '60' })
+    if (format) qs.set('format', format)
+    const r = await fetch(`${api}/generation/creatives?${qs.toString()}`, { cache: 'no-store' })
     const d = await r.json()
     return d.items || []
   } catch {
@@ -87,7 +89,7 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
   const [recent, setRecent] = useState<Creative[]>([])
 
   async function load() {
-    setRecent((await listar()).slice(0, 8))
+    setRecent((await listar(lockFormato ? defaultFormato : undefined)).slice(0, 8))
   }
   useEffect(() => {
     load()
