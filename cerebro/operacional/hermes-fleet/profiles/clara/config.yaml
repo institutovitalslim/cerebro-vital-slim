@@ -1,0 +1,9 @@
+model:
+  default: openai-codex/gpt-5.5
+  provider: auto
+agent:
+  reasoning_effort: high
+terminal:
+  cwd: .
+telegram:
+  require_mention: false

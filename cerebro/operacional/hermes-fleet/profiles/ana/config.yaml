@@ -1,0 +1,17 @@
+model:
+  default: anthropic/claude-opus-4.8
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
+  fallbacks:
+    - model: anthropic/claude-opus-4.8-fast
+      provider: openrouter
+      base_url: https://openrouter.ai/api/v1
+    - model: anthropic/claude-sonnet-4.6
+      provider: openrouter
+      base_url: https://openrouter.ai/api/v1
+agent:
+  reasoning_effort: high
+terminal:
+  cwd: .
+telegram:
+  require_mention: false
