@@ -55,7 +55,8 @@ async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
   return r.json()
 }
 
-function productionHref(item: FamilyItem, plan: Pick<Plan, 'thesis' | 'pillar' | 'objective' | 'audience_stage'> | Overview['default_plan']) {
+function productionHref(item: FamilyItem, plan: Pick<Plan, 'thesis' | 'pillar' | 'objective' | 'audience_stage'> | Overview['default_plan'], selectedHook?: string) {
+  const hook = selectedHook || item.hook
   const qs = new URLSearchParams({
     source: 'weekly-sprint',
     thesis: plan.thesis,
@@ -64,7 +65,7 @@ function productionHref(item: FamilyItem, plan: Pick<Plan, 'thesis' | 'pillar' |
     audience_stage: plan.audience_stage,
     origin_tag: item.origin_tag,
     format: item.format,
-    hook: item.hook,
+    hook,
   })
   return `${item.production_url}?${qs.toString()}`
 }
@@ -76,6 +77,7 @@ export default function SprintSemanalPage() {
   const [pillar, setPillar] = useState(fallback.default_plan.pillar)
   const [objective, setObjective] = useState('autoridade_e_conversa')
   const [stage, setStage] = useState('consciente_da_dor')
+  const [selectedHooks, setSelectedHooks] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -84,6 +86,7 @@ export default function SprintSemanalPage() {
       .then((data) => {
         setOverview(data)
         setPlan({ ...data.default_plan, approval_flow: [], governance: { external_actions: 'blocked_by_default', notes: 'Plano inicial.' } })
+        setSelectedHooks({})
         setThesis(data.default_plan.thesis)
         setPillar(data.default_plan.pillar)
       })
@@ -101,6 +104,7 @@ export default function SprintSemanalPage() {
         body: JSON.stringify({ tenant_slug: 'demo', thesis, pillar, objective, audience_stage: stage }),
       })
       setPlan(next)
+      setSelectedHooks({})
     } catch {
       setError('Falha ao gerar plano. Nada foi publicado ou enviado.')
     } finally {
@@ -186,16 +190,26 @@ export default function SprintSemanalPage() {
           <span className="muted small">{family.length} formatos guiados</span>
         </div>
         <div className="flowRail">
-          {family.map((item) => (
+          {family.map((item) => {
+            const selectedHook = selectedHooks[item.origin_tag] || item.hook
+            return (
             <article className="flowCard" key={item.origin_tag}>
               <span className="badge badgeDark">{item.format}</span>
               <h3>{item.role}</h3>
-              <p className="muted small"><strong>Hook principal:</strong> {item.hook}</p>
+              <p className="muted small"><strong>Hook principal:</strong> {selectedHook}</p>
               {item.hook_variations?.length ? (
                 <div className="hookStack">
-                  <span className="metricLabel">Hooks para teste</span>
+                  <span className="metricLabel">Escolha o hook para abrir produção</span>
                   {item.hook_variations.map((hook, index) => (
-                    <p className="hookLine" key={`${item.origin_tag}-hook-${index}`}><strong>{index + 1}.</strong> {hook}</p>
+                    <label className="hookOption" key={`${item.origin_tag}-hook-${index}`}>
+                      <input
+                        type="radio"
+                        name={`hook-${item.origin_tag}`}
+                        checked={selectedHook === hook}
+                        onChange={() => setSelectedHooks((prev) => ({ ...prev, [item.origin_tag]: hook }))}
+                      />
+                      <span><strong>{index + 1}.</strong> {hook}</span>
+                    </label>
                   ))}
                 </div>
               ) : null}
@@ -203,9 +217,10 @@ export default function SprintSemanalPage() {
               <p className="muted small"><strong>CTA:</strong> {item.cta}</p>
               <p className="muted small"><strong>Métrica:</strong> {item.metric}</p>
               <div className="resultBox">{item.origin_tag}</div>
-              <Link className="secondaryLink" href={productionHref(item, activePlan)}>Abrir produção com briefing →</Link>
+              <Link className="secondaryLink" href={productionHref(item, activePlan, selectedHook)}>Abrir produção com briefing →</Link>
             </article>
-          ))}
+            )
+          })}
         </div>
       </section>
 

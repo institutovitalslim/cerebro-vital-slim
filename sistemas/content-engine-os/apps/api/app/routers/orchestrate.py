@@ -23,6 +23,13 @@ router = APIRouter(prefix="/generation", tags=["generation"])
 
 RENDERS_DIR = "/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders"
 BANNED = ["cura", "garantido", "garantia de", "100%", "milagre", "perca x", "emagrece x"]
+CAPTION_FOOTER = (
+    "Dra Daniely Freitas\n"
+    "Médica, Farmacêutica e Professora de Medicina\n"
+    "CRM-BA 27.588\n"
+    "(Este conteúdo tem caráter meramente educativo e não substitui uma consulta médica.)"
+)
+CAPTION_FOOTER_MARKER = "CRM-BA 27.588"
 
 # Camada de direcionamento Meta Ads — 5 conjuntos por ÂNGULO (mentoria 06-14, playbook IVS:
 # cerebro/areas/marketing/sub-areas/trafego-pago/playbook-meta-ads-mentoria-06-14-ivs.md).
@@ -292,6 +299,7 @@ REGRAS OBRIGATÓRIAS:
 - {_cta_rule(req.formato, req.destino)}
 - REALCE: em TODA headline/hook, marque UMA palavra ou frase-chave entre *asteriscos* (vira realce dourado no design). Só 1 realce por frase; nunca a frase inteira.
 - Compliance médico (CFM): SEM promessa de cura/resultado garantido/número de kg; pode explicar mecanismo.
+- Toda legenda/caption de conteúdo deve terminar obrigatoriamente com esta assinatura/disclaimer, exatamente neste bloco:\n{CAPTION_FOOTER}
 - Instagram 2026: escreva para recomendação + busca. Texto na tela, legenda e semântica precisam carregar intenção real de busca quando houver.
 - Retenção: os 2 primeiros segundos devem começar por dor, mecanismo ou objeção — nunca vinheta.
 - Métrica de qualidade preferida: {req.quality_metric or 'DM útil / lead útil / envio / retenção, não curtida'}.
@@ -313,6 +321,27 @@ def _extract_json(text: str) -> dict:
         return json.loads(m.group(0))
     except Exception:
         return {"raw": text}
+
+
+def _with_caption_footer(text: object) -> str:
+    base = "" if text is None else str(text).strip()
+    if CAPTION_FOOTER_MARKER in base:
+        return base
+    return (base + "\n\n" + CAPTION_FOOTER).strip() if base else CAPTION_FOOTER
+
+
+def _apply_caption_footer(output: dict) -> dict:
+    """Garante assinatura/disclaimer em toda legenda gerada ou persistida."""
+    if not isinstance(output, dict):
+        return output
+    output["caption"] = _with_caption_footer(output.get("caption"))
+    # Algumas rotas de engenharia reversa retornam scripts com a chave PT-BR "legenda".
+    scripts = output.get("scripts")
+    if isinstance(scripts, list):
+        for item in scripts:
+            if isinstance(item, dict) and "legenda" in item:
+                item["legenda"] = _with_caption_footer(item.get("legenda"))
+    return output
 
 
 def _quality(output: dict, formato: str) -> tuple[float, dict]:
@@ -366,7 +395,7 @@ async def orchestrate(req: OrchestrateRequest) -> dict:
         viral, devices, brand = _fetch_context(conn, tenant_id, req.objetivo, req.tema)
     prompt = _build_prompt(req, viral, devices, brand)
     result = await _motor(prompt, SYSTEM_PROMPT)
-    output = _extract_json(result.get("content", ""))
+    output = _apply_caption_footer(_extract_json(result.get("content", "")))
     output["destino"] = req.destino   # feed|meta_ads -> consumido pelo render worker
     if req.destino == "meta_ads" and req.angulo:
         output["angulo"] = req.angulo
@@ -458,7 +487,7 @@ async def generate_matrix(req: MatrixRequest) -> dict:
                 tid = _tenant_id(conn, one.tenant_slug)
                 viral, devices, brand = _fetch_context(conn, tid, one.objetivo, one.tema)
             result = await _motor(_build_prompt(one, viral, devices, brand), SYSTEM_PROMPT)
-            output = _extract_json(result.get("content", ""))
+            output = _apply_caption_footer(_extract_json(result.get("content", "")))
             output["destino"] = one.destino
             if one.destino == "meta_ads" and one.angulo:
                 output["angulo"] = one.angulo
@@ -545,7 +574,7 @@ async def regerar(cid: str) -> dict:
         tid = _tenant_id(conn, req.tenant_slug)
         viral, devices, brand = _fetch_context(conn, tid, req.objetivo, req.tema)
     result = await _motor(_build_prompt(req, viral, devices, brand), SYSTEM_PROMPT)
-    output = _extract_json(result.get("content", ""))
+    output = _apply_caption_footer(_extract_json(result.get("content", "")))
     output["destino"] = req.destino
     if req.destino == "meta_ads" and req.angulo:
         output["angulo"] = req.angulo
@@ -654,7 +683,8 @@ ER_FRAMEWORK = (
     "antes/depois, sem medicalizar, sempre com CTA de consulta quando levantar sintoma; NUNCA crianças como "
     "sujeito); (3) define o tema dominante; (4) esboça 1 carrossel de 10 slides (hook, rehook, dor, valor x4, "
     "turning point, takeaway, CTA). Compliance CFM obrigatório. Cada script: hook (0-3s), desenvolvimento "
-    "(3-25s), cta (25-35s), legenda. Use os dispositivos de engenharia social quando fizer sentido."
+    "(3-25s), cta (25-35s), legenda. Toda legenda deve terminar exatamente com: " + CAPTION_FOOTER.replace("\n", " | ") + ". "
+    "Use os dispositivos de engenharia social quando fizer sentido."
 )
 
 
@@ -674,7 +704,7 @@ async def engenharia_reversa(req: EngReversaRequest) -> dict:
             raise RuntimeError("openrouter")
     except Exception:
         result = await CodexClient().generate(prompt, system=ER_FRAMEWORK)
-    data = _extract_json(result.get("content", ""))
+    data = _apply_caption_footer(_extract_json(result.get("content", "")))
     scripts = data.get("scripts") or []
     saved = 0
     with get_conn() as conn:

@@ -182,6 +182,11 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           </div>
         ) : null}
 
+        <div className="resultBox briefingBox">
+          <span className="metricLabel">Rodapé obrigatório de toda legenda</span>
+          <p>Dra Daniely Freitas<br />Médica, Farmacêutica e Professora de Medicina<br />CRM-BA 27.588<br />(Este conteúdo tem caráter meramente educativo e não substitui uma consulta médica.)</p>
+        </div>
+
         <label className="muted small">Modo</label>
         <select className="input" value={modo} onChange={(e) => setModo(e.target.value as 'single' | 'matrix')}>
           <option value="single">Peça única</option>

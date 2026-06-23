@@ -584,6 +584,11 @@ export default function StoriesEnginePage() {
             </div>
           ) : null}
 
+          <div className="resultBox briefingBox">
+            <span className="metricLabel">Rodapé obrigatório de legenda</span>
+            <p>Dra Daniely Freitas<br />Médica, Farmacêutica e Professora de Medicina<br />CRM-BA 27.588<br />(Este conteúdo tem caráter meramente educativo e não substitui uma consulta médica.)</p>
+          </div>
+
           <label className="muted small">Tema central</label>
           <input className="input" value={tema} onChange={(e) => setTema(e.target.value)} placeholder="Ex.: Não é falta de força de vontade" />
 
