@@ -117,6 +117,51 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
             )
             sources = cur.fetchall()
 
+            cur.execute(
+                """
+                select profile_handle, metric_date, followers_count, following_count, posts_count,
+                       reach, impressions, profile_views, website_clicks, whatsapp_clicks
+                from instagram_profile_daily_metrics
+                where tenant_id=%s
+                order by metric_date desc, created_at desc
+                limit 1
+                """,
+                (tenant_id,),
+            )
+            social_profile = cur.fetchone()
+
+            cur.execute(
+                """
+                select
+                  coalesce(sum(likes),0)::int as likes,
+                  coalesce(sum(comments),0)::int as comments,
+                  coalesce(sum(saves),0)::int as saves,
+                  coalesce(sum(shares),0)::int as shares,
+                  coalesce(sum(profile_visits),0)::int as profile_visits,
+                  coalesce(sum(follows),0)::int as follows,
+                  coalesce(sum(whatsapp_clicks),0)::int as whatsapp_clicks,
+                  count(*)::int as publications_tracked
+                from instagram_publication_daily_metrics
+                where tenant_id=%s and metric_date >= current_date - interval '30 days'
+                """,
+                (tenant_id,),
+            )
+            social_aggregate = cur.fetchone()
+
+            cur.execute(
+                """
+                select
+                  count(*)::int as total_interactors,
+                  coalesce(sum(case when status='candidate' then 1 else 0 end),0)::int as candidates,
+                  coalesce(sum(case when status='approved_for_manual_outreach' then 1 else 0 end),0)::int as approved_for_manual_outreach,
+                  coalesce(avg(fit_score),0)::numeric(8,2) as avg_fit_score
+                from social_selling_interactors
+                where tenant_id=%s
+                """,
+                (tenant_id,),
+            )
+            social_selling = cur.fetchone()
+
     readiness = {
         "profile": "@dradaniely.freitas",
         "collector": "João",
@@ -145,6 +190,9 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
         "calendar": calendar,
         "sources": sources,
         "rapidapi_instagram": readiness,
+        "social_profile": social_profile or {"profile_handle": "@dradaniely.freitas", "followers_count": 0, "profile_views": 0, "whatsapp_clicks": 0},
+        "social_aggregate_30d": social_aggregate,
+        "social_selling": social_selling,
         "content_score": content_score,
         "diagnosis": _diagnosis(creatives, stories, funnel),
     }

@@ -10,6 +10,9 @@ type BIOverview = {
   calendar: { title: string; format: string; channel: string; objective: string | null; status: string; scheduled_for: string | null }[]
   sources: { network: string; total: number }[]
   rapidapi_instagram: { profile: string; collector: string; source: string; mode: string; status: string; next_step: string; pii_policy: string }
+  social_profile: { profile_handle: string; followers_count: number; profile_views: number; whatsapp_clicks: number }
+  social_aggregate_30d: { likes: number; comments: number; saves: number; shares: number; follows: number; publications_tracked: number }
+  social_selling: { total_interactors: number; candidates: number; approved_for_manual_outreach: number; avg_fit_score: string | number }
   content_score: number
   diagnosis: { status_label: string; priority: string; next_actions: string[] }
 }
@@ -25,6 +28,9 @@ export default async function BIPage() {
     funnel: { story_clicks: 0, qualified_dms: 0, leads: 0, appointments: 0 },
     recent_stories: [], calendar: [], sources: [],
     rapidapi_instagram: { profile: '@dradaniely.freitas', collector: 'João', source: 'RapidAPI', mode: 'read_only_planned', status: 'pendente', next_step: 'Criar ingestão diária', pii_policy: 'Sem PII' },
+    social_profile: { profile_handle: '@dradaniely.freitas', followers_count: 0, profile_views: 0, whatsapp_clicks: 0 },
+    social_aggregate_30d: { likes: 0, comments: 0, saves: 0, shares: 0, follows: 0, publications_tracked: 0 },
+    social_selling: { total_interactors: 0, candidates: 0, approved_for_manual_outreach: 0, avg_fit_score: 0 },
     content_score: 0,
     diagnosis: { status_label: 'BI em estruturação', priority: 'Conectar dados reais.', next_actions: [] },
   })
@@ -50,6 +56,7 @@ export default async function BIPage() {
             <Link className="primaryLink" href="/criar">Gerar família de conteúdo</Link>
             <Link className="secondaryLink" href="/banco-criativos">Revisar criativos</Link>
             <Link className="secondaryLink" href="/stories-engine">Abrir Stories Engine</Link>
+            <Link className="secondaryLink" href="/social-selling">Abrir Social Selling</Link>
           </div>
         </div>
         <div className="heroRail">
@@ -57,6 +64,14 @@ export default async function BIPage() {
           <article className="heroMetricCard"><span className="metricLabel">Stories</span><strong className="metricValue">{data.stories.stories_sequences}</strong><p className="muted small">{data.stories.stories_approved} aprovadas · {data.stories.stories_changes_requested} com ajustes</p></article>
           <article className="heroMetricCard"><span className="metricLabel">Agendamentos atribuídos</span><strong className="metricValue">{data.funnel.appointments}</strong><p className="muted small">{data.funnel.leads} leads · {data.funnel.qualified_dms} DMs qualificadas</p></article>
         </div>
+      </section>
+
+
+      <section className="metricGrid">
+        <article className="metricCard"><span className="metricLabel">Seguidores</span><strong className="metricValue">{data.social_profile.followers_count || 0}</strong><p className="muted small">perfil {data.social_profile.profile_handle}</p></article>
+        <article className="metricCard"><span className="metricLabel">Interatores mapeados</span><strong className="metricValue">{data.social_selling.total_interactors || 0}</strong><p className="muted small">{data.social_selling.candidates || 0} candidatos em triagem</p></article>
+        <article className="metricCard"><span className="metricLabel">Sinais 30d</span><strong className="metricValue">{(data.social_aggregate_30d.likes || 0) + (data.social_aggregate_30d.comments || 0) + (data.social_aggregate_30d.saves || 0) + (data.social_aggregate_30d.shares || 0)}</strong><p className="muted small">likes + comentários + saves + shares</p></article>
+        <article className="metricCard"><span className="metricLabel">WhatsApp pelo perfil</span><strong className="metricValue">{data.social_profile.whatsapp_clicks || 0}</strong><p className="muted small">sinal agregado de intenção</p></article>
       </section>
 
       <section className="splitSection">

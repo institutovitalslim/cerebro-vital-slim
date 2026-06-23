@@ -26,6 +26,7 @@ const groups = [
     links: [
       { href: '/', label: 'Cockpit executivo' },
       { href: '/business-intelligence', label: 'BI · Business Intelligence' },
+      { href: '/social-selling', label: 'Social Selling' },
     ],
   },
   {
@@ -39,7 +40,10 @@ const groups = [
   {
     title: 'Produção',
     links: [
-      { href: '/criar', label: 'Criar família de conteúdo' },
+      { href: '/criar', label: 'Produção · escolher formato' },
+      { href: '/producao/carrosseis', label: 'Criar Carrosséis' },
+      { href: '/producao/estaticos', label: 'Criar Estáticos' },
+      { href: '/producao/reels', label: 'Criar Reels' },
       { href: '/stories-engine', label: 'Stories Engine' },
       { href: '/banco-criativos', label: 'Aprovar criativos' },
       { href: '/biblioteca', label: 'Biblioteca de assets' },

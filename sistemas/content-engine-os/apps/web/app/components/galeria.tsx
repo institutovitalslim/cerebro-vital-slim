@@ -65,9 +65,9 @@ async function listar(): Promise<Creative[]> {
   }
 }
 
-export function FormGerar() {
+export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }: { defaultFormato?: string; lockFormato?: boolean } = {}) {
   const [modo, setModo] = useState<'single' | 'matrix'>('single')
-  const [formato, setFormato] = useState('carrossel')
+  const [formato, setFormato] = useState(defaultFormato)
   const [objetivo, setObjetivo] = useState('educação')
   const [destino, setDestino] = useState('feed')
   const [angulo, setAngulo] = useState('baseline')
@@ -157,11 +157,15 @@ export function FormGerar() {
         </select>
 
         <label className="muted small">Formato</label>
-        <select className="input" value={formato} onChange={(e) => setFormato(e.target.value)}>
-          {FORMATOS.map((f) => (
-            <option key={f} value={f}>{f}</option>
-          ))}
-        </select>
+        {lockFormato ? (
+          <div className="resultBox"><strong>{formato}</strong><br /><span className="muted small">Formato travado para este módulo de produção.</span></div>
+        ) : (
+          <select className="input" value={formato} onChange={(e) => setFormato(e.target.value)}>
+            {FORMATOS.map((f) => (
+              <option key={f} value={f}>{f}</option>
+            ))}
+          </select>
+        )}
 
         {formato === 'carrossel' ? (
           <>

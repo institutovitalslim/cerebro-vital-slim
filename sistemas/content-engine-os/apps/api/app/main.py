@@ -19,6 +19,7 @@ from app.routers.calendar import router as calendar_router
 from app.routers.orchestrate import router as orchestrate_router
 from app.routers.stories import router as stories_router
 from app.routers.bi import router as bi_router
+from app.routers.social_selling import router as social_selling_router
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
@@ -46,6 +47,7 @@ app.include_router(calendar_router)
 app.include_router(orchestrate_router)
 app.include_router(stories_router)
 app.include_router(bi_router)
+app.include_router(social_selling_router)
 
 os.makedirs("/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders", exist_ok=True)
 app.mount("/renders", StaticFiles(directory="/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders"), name="renders")
