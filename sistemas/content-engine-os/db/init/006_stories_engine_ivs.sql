@@ -121,6 +121,11 @@ create index if not exists idx_story_block_metrics_sequence_created on story_blo
 create index if not exists idx_story_conversions_sequence_created on story_conversions (sequence_id, created_at desc);
 create index if not exists idx_story_conversions_origin_tag on story_conversions (origin_tag);
 
+
+alter table story_sequences add column if not exists review_notes text;
+alter table story_sequences add column if not exists reviewed_by text;
+alter table story_sequences add column if not exists reviewed_at timestamptz;
+
 alter table story_sequence_performance add column if not exists shares int;
 alter table story_sequence_performance add column if not exists saves int;
 alter table story_sequence_performance add column if not exists retention_initial_pct numeric(8,2);

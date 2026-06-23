@@ -134,6 +134,13 @@ class StorySequenceCreate(BaseModel):
     status: str = Field(default="draft")
 
 
+class StoryReviewUpdate(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    status: str = Field(pattern="^(draft|approved|changes_requested)$")
+    notes: str | None = None
+    reviewed_by: str = Field(default="tiaro")
+
+
 class StoryPerformanceCreate(BaseModel):
     tenant_slug: str = Field(default="demo")
     sequence_id: str
@@ -241,6 +248,9 @@ def list_sequences(tenant_slug: str = "demo", limit: int = 20) -> dict:
                   s.story_count,
                   s.payload,
                   s.status,
+                  s.review_notes,
+                  s.reviewed_by,
+                  s.reviewed_at,
                   s.created_at,
                   coalesce(count(p.id), 0) as performance_entries,
                   coalesce(sum(p.useful_dms), 0) as total_useful_dms,
@@ -289,6 +299,26 @@ def create_sequence(payload: StorySequenceCreate) -> dict:
             row = cur.fetchone()
             items_count = _insert_story_items(cur, tenant_id, row["id"], payload.payload)
     return {"status": "created", "id": row["id"], "title": title, "created_at": row["created_at"], "story_items": items_count}
+
+
+@router.post("/sequences/{sequence_id}/review")
+def review_sequence(sequence_id: str, payload: StoryReviewUpdate) -> dict:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, payload.tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                update story_sequences
+                set status = %s, review_notes = %s, reviewed_by = %s, reviewed_at = now()
+                where id = %s and tenant_id = %s
+                returning id::text as id, title, status, review_notes, reviewed_by, reviewed_at
+                """,
+                (payload.status, payload.notes, payload.reviewed_by[:80], sequence_id, tenant_id),
+            )
+            row = cur.fetchone()
+    if not row:
+        raise HTTPException(404, "sequence not found")
+    return {"status": "updated", "sequence": row}
 
 
 @router.get("/sequences/{sequence_id}/items")

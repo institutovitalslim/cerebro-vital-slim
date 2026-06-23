@@ -32,6 +32,10 @@ type SavedSequence = {
   performance_entries: number
   total_useful_dms: number
   total_leads: number
+  status: string
+  review_notes: string | null
+  reviewed_by: string | null
+  reviewed_at: string | null
 }
 
 type WinnerSequence = SavedSequence & {
@@ -354,6 +358,8 @@ export default function StoriesEnginePage() {
   const [variationLoading, setVariationLoading] = useState<string | null>(null)
   const [handoff, setHandoff] = useState<HandoffResponse | null>(null)
   const [handoffLoading, setHandoffLoading] = useState<string | null>(null)
+  const [reviewLoading, setReviewLoading] = useState<string | null>(null)
+  const [reviewMsg, setReviewMsg] = useState<string | null>(null)
 
   const preview = useMemo(() => buildSequence({ tema, tipo, objetivo, objecao, momento, ativo, quantidade }), [tema, tipo, objetivo, objecao, momento, ativo, quantidade])
 
@@ -509,6 +515,28 @@ export default function StoriesEnginePage() {
     }
   }
 
+  async function revisarSequencia(sequenceId: string, status: 'approved' | 'changes_requested') {
+    const notes = status === 'changes_requested'
+      ? window.prompt('Quais alterações você quer solicitar para esta sequência?')
+      : 'Aprovada para criação/publicação após revisão humana.'
+    if (status === 'changes_requested' && !notes) return
+    setReviewLoading(sequenceId); setReviewMsg(null)
+    try {
+      await postJson(`/stories/sequences/${sequenceId}/review`, {
+        tenant_slug: 'demo',
+        status,
+        notes,
+        reviewed_by: 'tiaro',
+      })
+      setReviewMsg(status === 'approved' ? 'Sequência aprovada.' : 'Alterações solicitadas.')
+      await carregarSequencias()
+    } catch {
+      setReviewMsg('Não consegui atualizar a revisão agora.')
+    } finally {
+      setReviewLoading(null)
+    }
+  }
+
   const seq = generated || preview
 
   return (
@@ -561,8 +589,8 @@ export default function StoriesEnginePage() {
           <input className="input" type="range" min="8" max="12" value={quantidade} onChange={(e) => setQuantidade(Number(e.target.value))} />
 
           <div className="formHeader" style={{ marginTop: 10 }}>
-            <span className="badge">Instagram 2026</span>
-            <p className="muted small">Busca, retenção, envio/salvamento e intenção real entram antes de postar.</p>
+            <span className="badge">Estratégia Instagram</span>
+            <p className="muted small">Campos de distribuição: busca no Instagram, retenção, envio/salvamento e sinal de intenção antes de postar.</p>
           </div>
           <label className="muted small">SEO social / intenção de busca</label>
           <input className="input" value={seoIntent} onChange={(e) => setSeoIntent(e.target.value)} placeholder="Ex.: efeito sanfona, emagrecimento com exames" />
@@ -640,11 +668,21 @@ export default function StoriesEnginePage() {
                 <div className="rowTop"><strong>{item.title}</strong><span className="badge">{item.story_count} stories</span></div>
                 <span className="muted">Tipo: {labelOf(SEQUENCIAS, item.sequence_type)} · Objetivo: {labelOf(OBJETIVOS, item.objective)} · Objeção: {labelOf(OBJECOES, item.main_objection)}</span>
                 <span className="muted">Registros: {item.performance_entries || 0} · DMs úteis: {item.total_useful_dms || 0} · Leads: {item.total_leads || 0}</span>
-                <button type="button" className="secondaryLink" style={{ width: 'fit-content' }} onClick={() => gerarHandoff(item.id)} disabled={handoffLoading === item.id}>
-                  {handoffLoading === item.id ? 'Gerando handoff...' : 'Gerar handoff Clara'}
-                </button>
+                <span className="muted"><strong>Status revisão:</strong> {item.status === 'approved' ? 'Aprovada' : item.status === 'changes_requested' ? 'Alterações solicitadas' : 'Rascunho'}{item.review_notes ? ` · ${item.review_notes}` : ''}</span>
+                <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 8, marginTop: 8 }}>
+                  <button type="button" className="primaryButton" onClick={() => revisarSequencia(item.id, 'approved')} disabled={reviewLoading === item.id}>
+                    {reviewLoading === item.id ? 'Atualizando...' : 'Aprovar criação'}
+                  </button>
+                  <button type="button" className="secondaryLink" onClick={() => revisarSequencia(item.id, 'changes_requested')} disabled={reviewLoading === item.id}>
+                    Solicitar alterações
+                  </button>
+                  <button type="button" className="secondaryLink" onClick={() => gerarHandoff(item.id)} disabled={handoffLoading === item.id}>
+                    {handoffLoading === item.id ? 'Gerando handoff...' : 'Gerar handoff Clara'}
+                  </button>
+                </div>
               </div>
             )) : <p className="muted">Nenhuma sequência salva ainda.</p>}
+            {reviewMsg ? <span className={reviewMsg.includes('aprovada') || reviewMsg.includes('solicitadas') ? 'successText' : 'errorText'}>{reviewMsg}</span> : null}
           </div>
         </article>
 

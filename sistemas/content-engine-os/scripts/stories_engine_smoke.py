@@ -93,6 +93,19 @@ def main() -> int:
     if len(items.get("items", [])) < 2:
         raise RuntimeError("story_items não foram persistidos")
 
+    review = request(
+        "POST",
+        f"/stories/sequences/{seq_id}/review",
+        {
+            "tenant_slug": "demo",
+            "status": "approved",
+            "notes": "Smoke aprovado para validar fluxo de revisão.",
+            "reviewed_by": "smoke",
+        },
+    )
+    if review.get("sequence", {}).get("status") != "approved":
+        raise RuntimeError("aprovação não foi persistida")
+
     handoff = request("GET", f"/stories/sequences/{seq_id}/handoff?tenant_slug=demo")
     if "utm_campaign" not in handoff.get("utm", {}):
         raise RuntimeError("handoff sem utm_campaign")
@@ -177,7 +190,7 @@ def main() -> int:
     if not winners.get("items"):
         raise RuntimeError("ranking vazio após performance")
 
-    print(json.dumps({"ok": True, "sequence_id": seq_id, "story_items": len(items["items"]), "tracking_clicks": clicks["summary"]["total_clicks"], "appointments": analytics["conversions"]["appointments"], "handoff_tag": handoff["origin_tag"], "themes": len(themes["items"]), "products": len(products["items"])}, ensure_ascii=False))
+    print(json.dumps({"ok": True, "sequence_id": seq_id, "story_items": len(items["items"]), "tracking_clicks": clicks["summary"]["total_clicks"], "appointments": analytics["conversions"]["appointments"], "review_status": review["sequence"]["status"], "handoff_tag": handoff["origin_tag"], "themes": len(themes["items"]), "products": len(products["items"])}, ensure_ascii=False))
     return 0
 
 
