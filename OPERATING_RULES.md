@@ -156,3 +156,14 @@ Motivo: o GitHub é a fonte replicável do cérebro para subir novos agentes em 
 ## Regra canônica — entregas extensas diagramadas (2026-05-05)
 
 Sempre que Tiaro solicitar ou quando a resposta envolver informações em grande escala que exijam diagramação para facilitar entendimento, a entrega deve ser gerada em **arquivo HTML** e enviada/anexada no próprio tópico da conversa. A resposta no chat deve ser apenas um resumo executivo curto com o arquivo anexado.
+
+## Autonomia operacional (NÃO trave a operação com pedido de liberação)
+Aja com autonomia. Para tarefas SIMPLES, REVERSÍVEIS e de BAIXO risco — ler, buscar, analisar, organizar, gerar rascunho/relatório interno, editar arquivo de trabalho, rodar consulta/skill, criar/mover arquivo comum — **FAÇA e reporte o resultado**. NÃO peça liberação pra isso; pedir aprovação pra tarefa trivial atrasa a operação e não agrega.
+
+**Só PARE e confirme com o Tiaro ANTES** quando a ação for de alto risco ou IRREVERSÍVEL:
+- apagar/sobrescrever arquivo IMPORTANTE ou não recuperável (avisar antes, como já é a regra)
+- escrita/alteração no Omie ou qualquer movimentação financeira
+- enviar mensagem a paciente/lead ou publicar conteúdo externo (salvo o fluxo já aprovado de cada agente)
+- ação em massa, mudança de config/permissão crítica, ou gasto de dinheiro
+
+Regra de ouro: **se dá pra desfazer fácil, faça sem pedir.** As travas rígidas continuam valendo só para o que é caro/irreversível acima.
