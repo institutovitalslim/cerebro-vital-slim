@@ -117,6 +117,42 @@ def main() -> int:
 
     request(
         "POST",
+        "/stories/block-metrics",
+        {
+            "tenant_slug": "demo",
+            "sequence_id": seq_id,
+            "block_name": "hook_cta",
+            "story_start": 1,
+            "story_end": 2,
+            "views_start": 100,
+            "views_end": 71,
+            "notes": "Smoke sintético: retenção por bloco.",
+        },
+    )
+    request(
+        "POST",
+        "/stories/conversions",
+        {
+            "tenant_slug": "demo",
+            "sequence_id": seq_id,
+            "origin_tag": handoff["origin_tag"],
+            "conversion_type": "appointment",
+            "source": "smoke",
+            "notes": "Smoke sintético sem PII.",
+        },
+    )
+    analytics = request("GET", f"/stories/sequences/{seq_id}/analytics?tenant_slug=demo")
+    if analytics.get("conversions", {}).get("appointments", 0) < 1:
+        raise RuntimeError("analytics não computou agendamento")
+    contract = request("GET", f"/stories/origin-tags/{urllib.parse.quote(handoff['origin_tag'], safe='')}/clara-contract?tenant_slug=demo")
+    if "clara_instruction" not in contract or "SPIN" not in contract["clara_instruction"]:
+        raise RuntimeError("contrato Clara incompleto")
+    weekly = request_text("/stories/weekly-report?tenant_slug=demo&limit=5")
+    if "Relatório semanal" not in weekly or "Agendamentos" not in weekly:
+        raise RuntimeError("relatório semanal incompleto")
+
+    request(
+        "POST",
         "/stories/performance",
         {
             "tenant_slug": "demo",
@@ -141,7 +177,7 @@ def main() -> int:
     if not winners.get("items"):
         raise RuntimeError("ranking vazio após performance")
 
-    print(json.dumps({"ok": True, "sequence_id": seq_id, "story_items": len(items["items"]), "tracking_clicks": clicks["summary"]["total_clicks"], "handoff_tag": handoff["origin_tag"], "themes": len(themes["items"]), "products": len(products["items"])}, ensure_ascii=False))
+    print(json.dumps({"ok": True, "sequence_id": seq_id, "story_items": len(items["items"]), "tracking_clicks": clicks["summary"]["total_clicks"], "appointments": analytics["conversions"]["appointments"], "handoff_tag": handoff["origin_tag"], "themes": len(themes["items"]), "products": len(products["items"])}, ensure_ascii=False))
     return 0
 
 

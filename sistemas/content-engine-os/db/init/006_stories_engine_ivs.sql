@@ -90,6 +90,37 @@ create table if not exists story_click_events (
 
 create index if not exists idx_story_click_events_sequence_created on story_click_events (sequence_id, created_at desc);
 
+create table if not exists story_block_metrics (
+  id uuid primary key default gen_random_uuid(),
+  tenant_id uuid not null references tenants(id) on delete cascade,
+  sequence_id uuid not null references story_sequences(id) on delete cascade,
+  block_name text not null,
+  story_start int,
+  story_end int,
+  views_start int,
+  views_end int,
+  retention_pct numeric(8,2),
+  drop_pct numeric(8,2),
+  notes text,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists story_conversions (
+  id uuid primary key default gen_random_uuid(),
+  tenant_id uuid not null references tenants(id) on delete cascade,
+  sequence_id uuid not null references story_sequences(id) on delete cascade,
+  origin_tag text,
+  conversion_type text not null,
+  source text not null default 'manual',
+  value numeric(10,2),
+  notes text,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_story_block_metrics_sequence_created on story_block_metrics (sequence_id, created_at desc);
+create index if not exists idx_story_conversions_sequence_created on story_conversions (sequence_id, created_at desc);
+create index if not exists idx_story_conversions_origin_tag on story_conversions (origin_tag);
+
 alter table story_sequence_performance add column if not exists shares int;
 alter table story_sequence_performance add column if not exists saves int;
 alter table story_sequence_performance add column if not exists retention_initial_pct numeric(8,2);

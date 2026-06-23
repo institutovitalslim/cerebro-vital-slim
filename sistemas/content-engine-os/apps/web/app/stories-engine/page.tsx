@@ -717,6 +717,8 @@ export default function StoriesEnginePage() {
                     <a className="secondaryLink" href={`${publicApi}/stories/sequences/${handoff.sequence_id}/export?tenant_slug=demo&format=telegram`} target="_blank">Export Telegram</a>
                     <a className="secondaryLink" href={`${publicApi}/stories/sequences/${handoff.sequence_id}/export?tenant_slug=demo&format=html`} target="_blank">Export HTML</a>
                     <a className="secondaryLink" href={`${publicApi}/stories/sequences/${handoff.sequence_id}/items?tenant_slug=demo`} target="_blank">Ver story_items</a>
+                    <a className="secondaryLink" href={`${publicApi}/stories/sequences/${handoff.sequence_id}/analytics?tenant_slug=demo`} target="_blank">Analytics</a>
+                    <a className="secondaryLink" href={`${publicApi}/stories/origin-tags/${encodeURIComponent(handoff.origin_tag)}/clara-contract?tenant_slug=demo`} target="_blank">Contrato Clara</a>
                   </div>
                 ) : null}
               </div>
@@ -726,6 +728,7 @@ export default function StoriesEnginePage() {
         <article className="card">
           <h3>Governança</h3>
           <p className="muted">Este handoff não envia mensagem, não escreve na Z-API e não publica campanha. Ele prepara o contrato operacional para revisão do João/Maria antes de ativar tracking real.</p>
+          <a className="secondaryLink" href={`${publicApi}/stories/weekly-report?tenant_slug=demo&limit=10`} target="_blank">Abrir relatório semanal HTML</a>
         </article>
       </section>
 

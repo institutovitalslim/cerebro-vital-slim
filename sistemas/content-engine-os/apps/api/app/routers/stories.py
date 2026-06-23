@@ -158,6 +158,28 @@ class StoryPerformanceCreate(BaseModel):
     notes: str | None = None
 
 
+class StoryConversionCreate(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    sequence_id: str
+    origin_tag: str | None = None
+    conversion_type: str = Field(pattern="^(lead|appointment|sale|qualified_dm)$")
+    source: str = Field(default="manual")
+    value: float | None = Field(default=None, ge=0)
+    notes: str | None = None
+
+
+class StoryBlockMetricCreate(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    sequence_id: str
+    block_name: str
+    story_start: int | None = Field(default=None, ge=1)
+    story_end: int | None = Field(default=None, ge=1)
+    views_start: int | None = Field(default=None, ge=0)
+    views_end: int | None = Field(default=None, ge=0)
+    notes: str | None = None
+
+
+
 @router.get("/themes")
 def list_themes(tenant_slug: str = "demo", limit: int = 50) -> dict:
     limit = max(1, min(limit, 100))
@@ -641,6 +663,230 @@ def export_sequence(sequence_id: str, tenant_slug: str = "demo", format: str = "
         f"Tracking: {handoff['tracking_url']}",
     ])
     return Response("\n".join(lines), media_type="text/plain; charset=utf-8")
+
+
+
+@router.post("/conversions")
+def create_conversion(payload: StoryConversionCreate) -> dict:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, payload.tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute("select id from story_sequences where id = %s and tenant_id = %s", (payload.sequence_id, tenant_id))
+            if not cur.fetchone():
+                raise HTTPException(404, "sequence not found")
+            cur.execute(
+                """
+                insert into story_conversions
+                  (tenant_id, sequence_id, origin_tag, conversion_type, source, value, notes)
+                values (%s, %s, %s, %s, %s, %s, %s)
+                returning id::text as id, created_at
+                """,
+                (
+                    tenant_id,
+                    payload.sequence_id,
+                    payload.origin_tag,
+                    payload.conversion_type,
+                    payload.source[:80],
+                    payload.value,
+                    payload.notes,
+                ),
+            )
+            row = cur.fetchone()
+    return {"status": "created", "id": row["id"], "created_at": row["created_at"]}
+
+
+@router.post("/block-metrics")
+def create_block_metric(payload: StoryBlockMetricCreate) -> dict:
+    retention_pct = None
+    drop_pct = None
+    if payload.views_start and payload.views_start > 0 and payload.views_end is not None:
+        retention_pct = round((payload.views_end / payload.views_start) * 100, 2)
+        drop_pct = round(100 - retention_pct, 2)
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, payload.tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute("select id from story_sequences where id = %s and tenant_id = %s", (payload.sequence_id, tenant_id))
+            if not cur.fetchone():
+                raise HTTPException(404, "sequence not found")
+            cur.execute(
+                """
+                insert into story_block_metrics
+                  (tenant_id, sequence_id, block_name, story_start, story_end, views_start, views_end,
+                   retention_pct, drop_pct, notes)
+                values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                returning id::text as id, retention_pct, drop_pct, created_at
+                """,
+                (
+                    tenant_id,
+                    payload.sequence_id,
+                    payload.block_name[:120],
+                    payload.story_start,
+                    payload.story_end,
+                    payload.views_start,
+                    payload.views_end,
+                    retention_pct,
+                    drop_pct,
+                    payload.notes,
+                ),
+            )
+            row = cur.fetchone()
+    return {"status": "created", "id": row["id"], "retention_pct": row["retention_pct"], "drop_pct": row["drop_pct"], "created_at": row["created_at"]}
+
+
+@router.get("/sequences/{sequence_id}/analytics")
+def get_sequence_analytics(sequence_id: str, tenant_slug: str = "demo") -> dict:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select id::text as id, title, sequence_type, objective, main_objection, story_count, created_at
+                from story_sequences where id = %s and tenant_id = %s
+                """,
+                (sequence_id, tenant_id),
+            )
+            sequence = cur.fetchone()
+            if not sequence:
+                raise HTTPException(404, "sequence not found")
+            cur.execute(
+                """
+                select count(*)::int as clicks from story_click_events
+                where tenant_id = %s and sequence_id = %s
+                """,
+                (tenant_id, sequence_id),
+            )
+            clicks = cur.fetchone()["clicks"]
+            cur.execute(
+                """
+                select
+                  coalesce(sum(case when conversion_type='qualified_dm' then 1 else 0 end),0)::int as qualified_dms,
+                  coalesce(sum(case when conversion_type='lead' then 1 else 0 end),0)::int as leads,
+                  coalesce(sum(case when conversion_type='appointment' then 1 else 0 end),0)::int as appointments,
+                  coalesce(sum(case when conversion_type='sale' then 1 else 0 end),0)::int as sales,
+                  coalesce(sum(value),0)::numeric as conversion_value
+                from story_conversions
+                where tenant_id = %s and sequence_id = %s
+                """,
+                (tenant_id, sequence_id),
+            )
+            conversions = cur.fetchone()
+            cur.execute(
+                """
+                select block_name, story_start, story_end, views_start, views_end,
+                       retention_pct, drop_pct, notes, created_at
+                from story_block_metrics
+                where tenant_id = %s and sequence_id = %s
+                order by created_at desc
+                limit 20
+                """,
+                (tenant_id, sequence_id),
+            )
+            blocks = cur.fetchall()
+            cur.execute(
+                """
+                select coalesce(sum(views),0)::int as views,
+                       coalesce(sum(replies),0)::int as replies,
+                       coalesce(sum(useful_dms),0)::int as useful_dms,
+                       coalesce(sum(leads),0)::int as leads_manual,
+                       round(avg(retention_initial_pct),2) as avg_retention_initial_pct
+                from story_sequence_performance
+                where tenant_id = %s and sequence_id = %s
+                """,
+                (tenant_id, sequence_id),
+            )
+            performance = cur.fetchone()
+    appointments = conversions["appointments"] or 0
+    leads = (conversions["leads"] or 0) + (performance["leads_manual"] or 0)
+    conversion_score = round((appointments * 25) + (leads * 10) + ((conversions["qualified_dms"] or 0) * 4) + (clicks * 0.5), 2)
+    return {
+        "sequence": sequence,
+        "clicks": clicks,
+        "performance": performance,
+        "conversions": conversions,
+        "blocks": blocks,
+        "score": conversion_score,
+        "recommended_next_action": "repetir_com_variacao" if appointments or leads >= 2 else "adaptar_hook_cta",
+    }
+
+
+@router.get("/origin-tags/{origin_tag}/clara-contract")
+def get_clara_contract_by_origin(origin_tag: str, tenant_slug: str = "demo") -> dict:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select id::text as id, title, sequence_type, objective, main_objection, payload
+                from story_sequences
+                where tenant_id = %s and %s like ('stories:stories_ivs_' || regexp_replace(lower(title), '[^a-z0-9áàâãéêíóôõúçñ]+', '-', 'g') || '%%')
+                order by created_at desc
+                limit 1
+                """,
+                (tenant_id, origin_tag),
+            )
+            row = cur.fetchone()
+    if not row:
+        raise HTTPException(404, "origin_tag not mapped")
+    sequence = _payload_sequence(row.get("payload") or {})
+    keyword = str(sequence.get("palavraChave") or "quero entender")
+    return {
+        "origin_tag": origin_tag,
+        "sequence_id": row["id"],
+        "title": row["title"],
+        "keyword": keyword,
+        "main_objection": row["main_objection"],
+        "clara_instruction": _clara_script(row["title"], keyword, row["main_objection"]),
+        "allowed_actions": ["acolher", "perguntar_contexto", "qualificar_spin", "encaminhar_para_agendamento_somente_apos_contexto"],
+        "blocked_actions": ["oferecer_horario_na_primeira_resposta", "prometer_resultado", "dar_preco_sem_contexto", "diagnosticar"],
+        "pii_policy": "não registrar nome, telefone ou conteúdo sensível neste contrato",
+    }
+
+
+@router.get("/weekly-report")
+def weekly_report(tenant_slug: str = "demo", limit: int = 10) -> HTMLResponse:
+    limit = max(1, min(limit, 30))
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select s.id::text as id, s.title, s.sequence_type, s.objective, s.main_objection,
+                       count(distinct c.id)::int as clicks,
+                       coalesce(sum(case when v.conversion_type='qualified_dm' then 1 else 0 end),0)::int as qualified_dms,
+                       coalesce(sum(case when v.conversion_type='lead' then 1 else 0 end),0)::int as leads,
+                       coalesce(sum(case when v.conversion_type='appointment' then 1 else 0 end),0)::int as appointments,
+                       coalesce(sum(case when v.conversion_type='sale' then 1 else 0 end),0)::int as sales,
+                       coalesce(sum(p.useful_dms),0)::int as manual_useful_dms,
+                       coalesce(sum(p.leads),0)::int as manual_leads,
+                       round(coalesce(avg(b.retention_pct),0),2) as avg_block_retention
+                from story_sequences s
+                left join story_click_events c on c.sequence_id=s.id
+                left join story_conversions v on v.sequence_id=s.id
+                left join story_sequence_performance p on p.sequence_id=s.id
+                left join story_block_metrics b on b.sequence_id=s.id
+                where s.tenant_id=%s
+                group by s.id
+                order by appointments desc, leads desc, qualified_dms desc, clicks desc, s.created_at desc
+                limit %s
+                """,
+                (tenant_id, limit),
+            )
+            rows = cur.fetchall()
+    trs = "".join(
+        f"<tr><td>{_html_escape(r['title'])}</td><td>{_html_escape(r['sequence_type'])}</td>"
+        f"<td>{r['clicks']}</td><td>{r['qualified_dms'] + r['manual_useful_dms']}</td>"
+        f"<td>{r['leads'] + r['manual_leads']}</td><td>{r['appointments']}</td>"
+        f"<td>{r['avg_block_retention']}%</td><td>{_html_escape(r['main_objection'])}</td></tr>"
+        for r in rows
+    )
+    html = f"""<!doctype html><html lang=\"pt-BR\"><meta charset=\"utf-8\"><title>Stories Engine IVS — Relatório semanal</title>
+    <body style=\"font-family:Inter,Arial,sans-serif;max-width:1100px;margin:32px auto;line-height:1.45;color:#17201d\">
+    <h1>Stories Engine IVS — Relatório semanal</h1>
+    <p>Ranking operacional por clique, DM qualificada, lead, agendamento e retenção média por bloco. Dados agregados, sem PII.</p>
+    <table border=\"1\" cellspacing=\"0\" cellpadding=\"8\"><thead><tr><th>Sequência</th><th>Tipo</th><th>Cliques</th><th>DMs úteis</th><th>Leads</th><th>Agendamentos</th><th>Retenção bloco</th><th>Objeção</th></tr></thead><tbody>{trs}</tbody></table>
+    <h2>Próxima ação</h2><p>Repetir sequências com agendamento/lead; adaptar hook+CTA nas sequências com clique sem conversão; descartar temas sem clique e sem retenção.</p>
+    </body></html>"""
+    return HTMLResponse(html)
 
 
 
