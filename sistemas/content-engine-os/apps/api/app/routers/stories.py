@@ -3,7 +3,8 @@ import re
 from typing import Any
 from urllib.parse import quote_plus
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Header, HTTPException
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from pydantic import BaseModel, Field
 
 from app.db import get_conn
@@ -33,6 +34,90 @@ def _clara_script(title: str, keyword: str, objection: str) -> str:
         "não pular direto para agenda. Começar com SPIN curto: acolher, perguntar o que mais incomodou "
         "na sequência e entender contexto antes de falar de avaliação. Objeção provável: "
         f"{objection}. Uma pergunta por vez."
+    )
+
+
+def _payload_sequence(payload: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(payload, dict):
+        return {}
+    sequence = payload.get("sequence")
+    return sequence if isinstance(sequence, dict) else {}
+
+
+def _story_items_from_payload(payload: dict[str, Any] | None) -> list[dict[str, Any]]:
+    sequence = _payload_sequence(payload)
+    stories = sequence.get("stories")
+    if not isinstance(stories, list):
+        return []
+    items: list[dict[str, Any]] = []
+    for idx, story in enumerate(stories, start=1):
+        if not isinstance(story, dict):
+            continue
+        copy = str(story.get("texto") or story.get("copy") or "").strip()
+        if not copy:
+            continue
+        items.append(
+            {
+                "story_order": int(story.get("n") or idx),
+                "story_type": str(story.get("funcao") or story.get("story_type") or "story"),
+                "hook": str(story.get("hook") or ""),
+                "copy": copy,
+                "visual_direction": str(story.get("visual") or story.get("visual_direction") or ""),
+                "sticker_type": str(story.get("sticker") or story.get("sticker_type") or ""),
+                "cta_type": str(story.get("dm") or story.get("cta_type") or sequence.get("palavraChave") or ""),
+                "expected_metric": str(story.get("dm") or story.get("expected_metric") or "DM útil"),
+                "compliance_status": "safe_draft" if story.get("risco") == "baixo" else "pending_review",
+                "quality_score": 82 if story.get("risco") == "baixo" else 70,
+            }
+        )
+    return items
+
+
+def _insert_story_items(cur, tenant_id: str, sequence_id: str, payload: dict[str, Any] | None) -> int:
+    items = _story_items_from_payload(payload)
+    for item in items:
+        cur.execute(
+            """
+            insert into story_items
+              (tenant_id, sequence_id, story_order, story_type, hook, copy, visual_direction,
+               sticker_type, cta_type, expected_metric, compliance_status, quality_score)
+            values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            on conflict (sequence_id, story_order) do update set
+              story_type=excluded.story_type,
+              hook=excluded.hook,
+              copy=excluded.copy,
+              visual_direction=excluded.visual_direction,
+              sticker_type=excluded.sticker_type,
+              cta_type=excluded.cta_type,
+              expected_metric=excluded.expected_metric,
+              compliance_status=excluded.compliance_status,
+              quality_score=excluded.quality_score
+            """,
+            (
+                tenant_id,
+                sequence_id,
+                item["story_order"],
+                item["story_type"],
+                item["hook"],
+                item["copy"],
+                item["visual_direction"],
+                item["sticker_type"],
+                item["cta_type"],
+                item["expected_metric"],
+                item["compliance_status"],
+                item["quality_score"],
+            ),
+        )
+    return len(items)
+
+
+def _html_escape(value: Any) -> str:
+    return (
+        str(value or "")
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
     )
 
 
@@ -180,7 +265,28 @@ def create_sequence(payload: StorySequenceCreate) -> dict:
                 ),
             )
             row = cur.fetchone()
-    return {"status": "created", "id": row["id"], "title": title, "created_at": row["created_at"]}
+            items_count = _insert_story_items(cur, tenant_id, row["id"], payload.payload)
+    return {"status": "created", "id": row["id"], "title": title, "created_at": row["created_at"], "story_items": items_count}
+
+
+@router.get("/sequences/{sequence_id}/items")
+def list_sequence_items(sequence_id: str, tenant_slug: str = "demo") -> dict:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select id::text as id, sequence_id::text as sequence_id, story_order,
+                       story_type, hook, copy, visual_direction, sticker_type, cta_type,
+                       expected_metric, compliance_status, quality_score, created_at
+                from story_items
+                where tenant_id = %s and sequence_id = %s
+                order by story_order asc
+                """,
+                (tenant_id, sequence_id),
+            )
+            rows = cur.fetchall()
+    return {"items": rows}
 
 
 @router.get("/sequences/{sequence_id}/performance")
@@ -365,6 +471,7 @@ def get_sequence_handoff(sequence_id: str, tenant_slug: str = "demo") -> dict:
         f"&text={quote_plus(prefilled)}"
         "&type=phone_number&app_absent=0"
     )
+    tracking_url = f"/api/stories/track/{row['id']}?tenant_slug=demo"
     expected_objections = [
         row["main_objection"],
         "preço/valor antes de contexto",
@@ -383,6 +490,7 @@ def get_sequence_handoff(sequence_id: str, tenant_slug: str = "demo") -> dict:
         "origin_tag": origin_tag,
         "prefilled_text": prefilled,
         "whatsapp_url": whatsapp_url,
+        "tracking_url": tracking_url,
         "expected_objections": expected_objections,
         "clara_script": _clara_script(row["title"], keyword, row["main_objection"]),
         "governance": {
@@ -392,6 +500,148 @@ def get_sequence_handoff(sequence_id: str, tenant_slug: str = "demo") -> dict:
             "note": "Handoff pronto para Clara, mas sem envio real automático nesta fase.",
         },
     }
+
+
+@router.get("/track/{sequence_id}")
+def track_sequence_click(
+    sequence_id: str,
+    tenant_slug: str = "demo",
+    user_agent: str | None = Header(default=None),
+):
+    """Registra clique interno e redireciona para WhatsApp.
+
+    Não envia mensagem, não chama Z-API e não identifica lead. Salva apenas evento agregado.
+    """
+    handoff = get_sequence_handoff(sequence_id, tenant_slug)
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                insert into story_click_events
+                  (tenant_id, sequence_id, origin_tag, utm_campaign, utm_content, user_agent)
+                values (%s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    tenant_id,
+                    sequence_id,
+                    handoff["origin_tag"],
+                    handoff["utm"]["utm_campaign"],
+                    handoff["utm"]["utm_content"],
+                    (user_agent or "")[:240],
+                ),
+            )
+    return RedirectResponse(handoff["whatsapp_url"], status_code=302)
+
+
+@router.get("/sequences/{sequence_id}/clicks")
+def list_sequence_clicks(sequence_id: str, tenant_slug: str = "demo") -> dict:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select count(*)::int as total_clicks, max(created_at) as last_click_at
+                from story_click_events
+                where tenant_id = %s and sequence_id = %s
+                """,
+                (tenant_id, sequence_id),
+            )
+            summary = cur.fetchone()
+            cur.execute(
+                """
+                select id::text as id, origin_tag, utm_campaign, utm_content, created_at
+                from story_click_events
+                where tenant_id = %s and sequence_id = %s
+                order by created_at desc
+                limit 20
+                """,
+                (tenant_id, sequence_id),
+            )
+            rows = cur.fetchall()
+    return {"summary": summary, "items": rows}
+
+
+def _sequence_export_payload(sequence_id: str, tenant_slug: str) -> dict[str, Any]:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select id::text as id, title, sequence_type, objective, main_objection,
+                       patient_moment, support_asset, story_count, payload, created_at
+                from story_sequences
+                where id = %s and tenant_id = %s
+                """,
+                (sequence_id, tenant_id),
+            )
+            row = cur.fetchone()
+            if not row:
+                raise HTTPException(404, "sequence not found")
+            cur.execute(
+                """
+                select story_order, story_type, hook, copy, visual_direction, sticker_type,
+                       cta_type, expected_metric, compliance_status, quality_score
+                from story_items
+                where tenant_id = %s and sequence_id = %s
+                order by story_order asc
+                """,
+                (tenant_id, sequence_id),
+            )
+            items = cur.fetchall()
+    return {"sequence": row, "items": items, "handoff": get_sequence_handoff(sequence_id, tenant_slug)}
+
+
+@router.get("/sequences/{sequence_id}/export")
+def export_sequence(sequence_id: str, tenant_slug: str = "demo", format: str = "telegram") -> Response:
+    data = _sequence_export_payload(sequence_id, tenant_slug)
+    seq = data["sequence"]
+    items = data["items"]
+    handoff = data["handoff"]
+    if format == "html":
+        rows = "".join(
+            f"<tr><td>{item['story_order']}</td><td>{_html_escape(item['story_type'])}</td>"
+            f"<td>{_html_escape(item['copy'])}</td><td>{_html_escape(item['sticker_type'])}</td>"
+            f"<td>{_html_escape(item['compliance_status'])}</td></tr>"
+            for item in items
+        )
+        html = f"""<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>{_html_escape(seq['title'])}</title>
+        <body style="font-family:Inter,Arial,sans-serif;max-width:980px;margin:32px auto;line-height:1.5">
+        <h1>{_html_escape(seq['title'])}</h1>
+        <p><strong>Tipo:</strong> {_html_escape(seq['sequence_type'])} · <strong>Objetivo:</strong> {_html_escape(seq['objective'])}</p>
+        <p><strong>Handoff:</strong> {_html_escape(handoff['origin_tag'])}</p>
+        <p><strong>Texto WhatsApp:</strong> {_html_escape(handoff['prefilled_text'])}</p>
+        <h2>Stories</h2><table border="1" cellspacing="0" cellpadding="8"><thead><tr><th>#</th><th>Função</th><th>Copy</th><th>CTA/Sticker</th><th>Compliance</th></tr></thead><tbody>{rows}</tbody></table>
+        <h2>Script Clara</h2><p>{_html_escape(handoff['clara_script'])}</p>
+        </body></html>"""
+        return HTMLResponse(html)
+
+    lines = [
+        f"## Sequência: {seq['title']}",
+        f"Tipo: {seq['sequence_type']} | Objetivo: {seq['objective']}",
+        f"Objeção principal: {seq['main_objection']}",
+        "",
+        "### Stories",
+    ]
+    for item in items:
+        lines.extend([
+            f"{item['story_order']}. {item['story_type']}",
+            f"Copy: {item['copy']}",
+            f"Visual: {item['visual_direction'] or 'N/D'}",
+            f"CTA/Sticker: {item['sticker_type'] or item['cta_type'] or 'N/D'}",
+            f"Métrica esperada: {item['expected_metric'] or 'DM útil'}",
+            "",
+        ])
+    lines.extend([
+        "### Handoff Clara",
+        f"Tag: {handoff['origin_tag']}",
+        f"UTM: {handoff['utm']['utm_campaign']} / {handoff['utm']['utm_content']}",
+        f"Texto WhatsApp: {handoff['prefilled_text']}",
+        f"Script: {handoff['clara_script']}",
+        f"Tracking: {handoff['tracking_url']}",
+    ])
+    return Response("\n".join(lines), media_type="text/plain; charset=utf-8")
+
 
 
 @router.post("/sequences/{sequence_id}/ab-variations")

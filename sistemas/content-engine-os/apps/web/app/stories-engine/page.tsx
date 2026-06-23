@@ -56,11 +56,13 @@ type VariationResponse = {
 }
 
 type HandoffResponse = {
+  sequence_id: string
   title: string
   utm: { utm_source: string; utm_medium: string; utm_campaign: string; utm_content: string }
   origin_tag: string
   prefilled_text: string
   whatsapp_url: string
+  tracking_url: string
   expected_objections: string[]
   clara_script: string
   governance: { note: string; zapi_write: boolean; send_to_patient: boolean; requires_review_before_campaign: boolean }
@@ -491,11 +493,13 @@ export default function StoriesEnginePage() {
       setHandoff(data)
     } catch {
       setHandoff({
+        sequence_id: '',
         title: 'Erro',
         utm: { utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '' },
         origin_tag: '',
         prefilled_text: 'Não consegui gerar o handoff agora.',
         whatsapp_url: '',
+        tracking_url: '',
         expected_objections: [],
         clara_script: 'Não consegui gerar o script agora.',
         governance: { note: 'Tente novamente após validar a API.', zapi_write: false, send_to_patient: false, requires_review_before_campaign: true },
@@ -701,12 +705,20 @@ export default function StoriesEnginePage() {
                 <span className="muted"><strong>Tag:</strong> {handoff.origin_tag}</span>
                 <span className="muted"><strong>UTM:</strong> {handoff.utm.utm_campaign} / {handoff.utm.utm_content}</span>
                 <span className="muted"><strong>Texto WhatsApp:</strong> {handoff.prefilled_text}</span>
+                <span className="muted"><strong>Tracking interno:</strong> {handoff.tracking_url || 'N/D'}</span>
                 <span className="muted"><strong>Objeções esperadas:</strong> {handoff.expected_objections.join(' · ')}</span>
               </div>
               <div className="row">
                 <strong>Script para Clara</strong>
                 <span>{handoff.clara_script}</span>
                 <span className="muted small">{handoff.governance.note}</span>
+                {handoff.sequence_id ? (
+                  <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 8, marginTop: 8 }}>
+                    <a className="secondaryLink" href={`${publicApi}/stories/sequences/${handoff.sequence_id}/export?tenant_slug=demo&format=telegram`} target="_blank">Export Telegram</a>
+                    <a className="secondaryLink" href={`${publicApi}/stories/sequences/${handoff.sequence_id}/export?tenant_slug=demo&format=html`} target="_blank">Export HTML</a>
+                    <a className="secondaryLink" href={`${publicApi}/stories/sequences/${handoff.sequence_id}/items?tenant_slug=demo`} target="_blank">Ver story_items</a>
+                  </div>
+                ) : null}
               </div>
             </div>
           ) : <p className="muted">Gere o handoff em uma sequência salva para obter UTM, texto pré-preenchido, tag de origem e orientação SPIN para Clara.</p>}

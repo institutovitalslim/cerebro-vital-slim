@@ -14,6 +14,7 @@ import json
 import sys
 import urllib.error
 import urllib.request
+import urllib.parse
 
 BASE = "http://127.0.0.1:8010"
 
@@ -32,6 +33,27 @@ def request(method: str, path: str, payload: dict | None = None) -> dict:
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
         raise RuntimeError(f"{method} {path} -> {exc.code}: {body}") from exc
+
+
+def request_text(path: str) -> str:
+    with urllib.request.urlopen(f"{BASE}{path}", timeout=20) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def request_redirect_location(path: str) -> str:
+    opener = urllib.request.build_opener(NoRedirect)
+    try:
+        opener.open(f"{BASE}{path}", timeout=20)
+    except urllib.error.HTTPError as exc:
+        if exc.code in {301, 302, 303, 307, 308}:
+            return exc.headers.get("Location", "")
+        raise
+    raise RuntimeError("tracking endpoint não redirecionou")
 
 
 def main() -> int:
@@ -58,17 +80,40 @@ def main() -> int:
                 "sequence": {
                     "palavraChave": "quero entender",
                     "ctaPrincipal": "Me manda 'quero entender' se essa parte fez sentido.",
-                    "stories": [{"n": 1, "texto": "Smoke test sem publicação."}],
+                    "stories": [
+                        {"n": 1, "funcao": "Hook", "texto": "Smoke test sem publicação.", "visual": "card IVS", "sticker": "enquete", "dm": "quero entender", "risco": "baixo"},
+                        {"n": 2, "funcao": "CTA", "texto": "Me manda quero entender para testar o fluxo.", "visual": "texto", "sticker": "DM", "dm": "quero entender", "risco": "baixo"},
+                    ],
                 }
             },
         },
     )
     seq_id = created["id"]
+    items = request("GET", f"/stories/sequences/{seq_id}/items?tenant_slug=demo")
+    if len(items.get("items", [])) < 2:
+        raise RuntimeError("story_items não foram persistidos")
+
     handoff = request("GET", f"/stories/sequences/{seq_id}/handoff?tenant_slug=demo")
     if "utm_campaign" not in handoff.get("utm", {}):
         raise RuntimeError("handoff sem utm_campaign")
     if "SPIN" not in handoff.get("clara_script", ""):
         raise RuntimeError("handoff sem orientação SPIN")
+    if not handoff.get("tracking_url"):
+        raise RuntimeError("handoff sem tracking_url")
+
+    export_txt = request_text(f"/stories/sequences/{seq_id}/export?tenant_slug=demo&format=telegram")
+    if "### Handoff Clara" not in export_txt or "Smoke IVS" not in export_txt:
+        raise RuntimeError("export Telegram incompleto")
+    export_html = request_text(f"/stories/sequences/{seq_id}/export?tenant_slug=demo&format=html")
+    if "<table" not in export_html or "Script Clara" not in export_html:
+        raise RuntimeError("export HTML incompleto")
+
+    location = request_redirect_location(f"/stories/track/{seq_id}?tenant_slug=demo")
+    if "api.whatsapp.com" not in location:
+        raise RuntimeError("tracking não redirecionou para WhatsApp")
+    clicks = request("GET", f"/stories/sequences/{seq_id}/clicks?tenant_slug=demo")
+    if clicks.get("summary", {}).get("total_clicks", 0) < 1:
+        raise RuntimeError("clique não foi registrado")
 
     request(
         "POST",
@@ -96,7 +141,7 @@ def main() -> int:
     if not winners.get("items"):
         raise RuntimeError("ranking vazio após performance")
 
-    print(json.dumps({"ok": True, "sequence_id": seq_id, "handoff_tag": handoff["origin_tag"], "themes": len(themes["items"]), "products": len(products["items"])}, ensure_ascii=False))
+    print(json.dumps({"ok": True, "sequence_id": seq_id, "story_items": len(items["items"]), "tracking_clicks": clicks["summary"]["total_clicks"], "handoff_tag": handoff["origin_tag"], "themes": len(themes["items"]), "products": len(products["items"])}, ensure_ascii=False))
     return 0
 
 

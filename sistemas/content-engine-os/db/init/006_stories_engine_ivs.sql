@@ -77,6 +77,19 @@ create index if not exists idx_story_products_tenant on story_products (tenant_i
 create index if not exists idx_story_items_sequence_order on story_items (sequence_id, story_order);
 create index if not exists idx_story_debriefs_sequence_created on story_debriefs (sequence_id, created_at desc);
 
+create table if not exists story_click_events (
+  id uuid primary key default gen_random_uuid(),
+  tenant_id uuid not null references tenants(id) on delete cascade,
+  sequence_id uuid not null references story_sequences(id) on delete cascade,
+  origin_tag text,
+  utm_campaign text,
+  utm_content text,
+  user_agent text,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_story_click_events_sequence_created on story_click_events (sequence_id, created_at desc);
+
 alter table story_sequence_performance add column if not exists shares int;
 alter table story_sequence_performance add column if not exists saves int;
 alter table story_sequence_performance add column if not exists retention_initial_pct numeric(8,2);
