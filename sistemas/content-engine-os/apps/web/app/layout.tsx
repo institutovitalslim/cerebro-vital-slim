@@ -55,7 +55,7 @@ const groups = [
     links: [
       { href: '/planejamento', label: 'Planejamento de campanhas' },
       { href: '/calendario', label: 'Calendário editorial' },
-      { href: '/aprendizado', label: 'Aprendizado de conteúdo' },
+      { href: '/aprendizado', label: 'Aprendizado de performance' },
       { href: '/dashboards', label: 'Ads & canais pagos' },
       { href: '/criativos-campeoes', label: 'Criativos campeões' },
     ],

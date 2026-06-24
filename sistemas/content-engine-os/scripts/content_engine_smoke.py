@@ -88,6 +88,7 @@ def main() -> int:
         ("social_selling_overview", "/api/social-selling/overview?tenant_slug=demo"),
         ("weekly_command_overview", "/api/weekly-command/overview?tenant_slug=demo"),
         ("learning_insights", "/api/learning/insights?tenant_slug=demo"),
+        ("learning_performance_dashboard", "/api/learning/performance-dashboard?tenant_slug=demo"),
         ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
         ("roteiros_library", "/api/generation/roteiros?tenant_slug=demo"),
         ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
@@ -113,10 +114,21 @@ def main() -> int:
         if name == "learning_insights" and status == 200 and isinstance(data, dict):
             summary = data.get("summary") or {}
             seed = data.get("next_sprint_seed") or {}
+            winners = data.get("winners") or {}
             checks.append(Check(
-                "learning_phase2_contract",
-                all(k in summary for k in ("measured_items", "metrics_pending", "diagnosis")) and bool(seed.get("thesis")),
-                f"summary={summary} next_thesis={seed.get('thesis')}",
+                "learning_phase3_contract",
+                data.get("phase") == "fase_3_performance_learning"
+                and all(k in summary for k in ("measured_items", "metrics_pending", "registered_publications"))
+                and bool(seed.get("thesis"))
+                and all(k in winners for k in ("by_format", "by_hook", "by_objection", "by_visual", "by_pillar", "by_cta")),
+                f"phase={data.get('phase')} summary={summary} next_thesis={seed.get('thesis')}",
+            ))
+        if name == "learning_performance_dashboard" and status == 200 and isinstance(data, dict):
+            board = data.get("variable_dashboard") or {}
+            checks.append(Check(
+                "learning_variable_dashboard",
+                all(k in board for k in ("by_format", "by_hook", "by_objection", "by_visual", "by_pillar", "by_cta")),
+                f"dashboard_keys={sorted(board.keys())}",
             ))
 
     status, data, _ = http_json("/api/generation/creatives?tenant_slug=demo&limit=1")

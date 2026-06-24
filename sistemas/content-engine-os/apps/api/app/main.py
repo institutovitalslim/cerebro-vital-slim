@@ -81,6 +81,6 @@ def root() -> dict:
             "editorial_calendar",
             "stories_connection_engine",
             "weekly_positioning_sprint",
-            "learning_feedback_loop",
+            "performance_learning_loop",
         ],
     }

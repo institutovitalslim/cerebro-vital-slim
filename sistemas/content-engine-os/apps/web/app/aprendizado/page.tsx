@@ -27,14 +27,23 @@ type Learning = {
   phase: string
   mode: string
   governance: { auto_publish: boolean; auto_dm: boolean; zapi_write: boolean; external_actions: string; note: string }
-  summary: { measured_items: number; metrics_pending: number; diagnosis: string }
-  winners: { top_items: TopItem[]; by_format: Bucket[]; by_hook: Bucket[]; by_origin: Bucket[]; by_cta: Bucket[] }
-  next_sprint_seed: { thesis: string; hook: string; objective: string; audience_stage: string; reason: string }
+  summary: { measured_items: number; registered_publications?: number; metrics_pending: number; champions_ready?: number; diagnosis: string }
+  winners: {
+    top_items: TopItem[]
+    by_format: Bucket[]
+    by_hook: Bucket[]
+    by_origin: Bucket[]
+    by_cta: Bucket[]
+    by_objection?: Bucket[]
+    by_visual?: Bucket[]
+    by_pillar?: Bucket[]
+  }
+  next_sprint_seed: { thesis: string; hook: string; objective: string; audience_stage: string; reason: string; champion_variables?: Record<string, string | null> }
   recommendations: string[]
 }
 
 const fallback: Learning = {
-  phase: 'fase_2_learning_loop',
+  phase: 'fase_3_performance_learning',
   mode: 'read_only_recommendation',
   governance: { auto_publish: false, auto_dm: false, zapi_write: false, external_actions: 'blocked_by_default', note: 'Aprendizado vira hipótese operacional.' },
   summary: { measured_items: 0, metrics_pending: 0, diagnosis: 'Ainda não há dados medidos.' },
@@ -89,9 +98,9 @@ export default async function AprendizadoPage() {
     <div className="dashboardRoot">
       <header className="pageHeader heroHeader">
         <div>
-          <p className="eyebrow">Fase 2 · loop de aprendizado</p>
-          <h2 className="pageTitle">Aprendizado de conteúdo</h2>
-          <p className="heroText">Transforma métricas registradas no Calendário Editorial em hipóteses práticas para o próximo sprint. Não publica, não envia DM e não escreve em WhatsApp.</p>
+          <p className="eyebrow">Fase 3 · performance por variável</p>
+          <h2 className="pageTitle">Aprendizado de performance</h2>
+          <p className="heroText">Registra publicação vinculada ao criativo, importa métricas reais já coletadas e transforma hook, objeção, visual, CTA, pilar e formato em hipóteses para o próximo sprint. Não publica, não envia DM e não escreve em WhatsApp.</p>
         </div>
         <div className="heroActions">
           <Link className="secondaryLink" href="/calendario">Fechar métricas</Link>
@@ -101,9 +110,9 @@ export default async function AprendizadoPage() {
 
       <section className="metricGrid">
         <article className="metricCard"><span className="metricLabel">Peças medidas</span><strong className="metricValue">{data.summary.measured_items}</strong><p className="muted small">base real do aprendizado</p></article>
+        <article className="metricCard"><span className="metricLabel">Publicações registradas</span><strong className="metricValue">{data.summary.registered_publications || 0}</strong><p className="muted small">criativo → publicação</p></article>
         <article className="metricCard"><span className="metricLabel">Métricas pendentes</span><strong className="metricValue">{data.summary.metrics_pending}</strong><p className="muted small">publicadas sem fechamento</p></article>
-        <article className="metricCard"><span className="metricLabel">Modo</span><strong className="metricValue" style={{ fontSize: 24 }}>read-only</strong><p className="muted small">sem ação externa automática</p></article>
-        <article className="metricCard"><span className="metricLabel">Z-API</span><strong className="metricValue" style={{ fontSize: 24 }}>{data.governance.zapi_write ? 'on' : 'off'}</strong><p className="muted small">governança preservada</p></article>
+        <article className="metricCard"><span className="metricLabel">Campeões prontos</span><strong className="metricValue">{data.summary.champions_ready || 0}</strong><p className="muted small">score interno ≥ 70</p></article>
       </section>
 
       <section className="heroSurface commandHero">
@@ -115,6 +124,13 @@ export default async function AprendizadoPage() {
             <p style={{ margin: '8px 0 0' }}>{data.next_sprint_seed.thesis}</p>
             <p className="muted small" style={{ margin: '8px 0 0' }}><strong>Hook:</strong> {data.next_sprint_seed.hook}</p>
             <p className="muted small" style={{ margin: '8px 0 0' }}>{data.next_sprint_seed.reason}</p>
+            {data.next_sprint_seed.champion_variables ? (
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 10 }}>
+                {Object.entries(data.next_sprint_seed.champion_variables).filter(([, value]) => Boolean(value)).map(([key, value]) => (
+                  <span className="badge" key={key}>{key}: {value}</span>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
         <article className="featurePanel featurePanelDark">
@@ -135,8 +151,23 @@ export default async function AprendizadoPage() {
       </section>
 
       <section className="splitSection">
-        <BucketList title="Origem / sprint tag" items={data.winners.by_origin} />
+        <BucketList title="Objeções vencedoras" items={data.winners.by_objection || []} />
+        <BucketList title="Visuais vencedores" items={data.winners.by_visual || []} />
+      </section>
+
+      <section className="splitSection">
+        <BucketList title="Pilares vencedores" items={data.winners.by_pillar || []} />
         <BucketList title="CTAs" items={data.winners.by_cta} />
+      </section>
+
+      <section className="splitSection">
+        <BucketList title="Origem / sprint tag" items={data.winners.by_origin} />
+        <article className="featurePanel featurePanelDark">
+          <span className="badge">Governança</span>
+          <h3 className="sectionTitle">Importação sem ação externa</h3>
+          <p className="muted small">A Fase 3 aceita métricas já obtidas por João/Meta/Instagram e registra no motor. Ela não publica, não puxa lead e não envia mensagem automaticamente.</p>
+          <div className="resultBox">Endpoint: <strong>POST /api/learning/metrics-import</strong></div>
+        </article>
       </section>
 
       <section className="section">

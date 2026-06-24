@@ -33,13 +33,27 @@ class CalendarStatusUpdate(BaseModel):
 
 class CalendarMetricsIn(BaseModel):
     reach: int | None = None
+    views: int | None = None
+    retention_rate: float | None = None
     likes: int | None = None
     comments: int | None = None
+    replies: int | None = None
     shares: int | None = None
     saves: int | None = None
     profile_clicks: int | None = None
+    whatsapp_clicks: int | None = None
     whatsapp_leads: int | None = None
+    leads: int | None = None
     appointments: int | None = None
+    notes: str | None = None
+
+
+class PublicationRegisterIn(BaseModel):
+    platform: str = Field(default="instagram")
+    published_at: datetime | None = None
+    platform_post_id: str | None = None
+    published_url: str | None = None
+    campaign_name: str | None = None
     notes: str | None = None
 
 
@@ -76,6 +90,11 @@ def ensure_phase1_schema(conn) -> None:
         cur.execute("alter table calendar_entries add column if not exists metrics_recorded_at timestamptz")
         cur.execute("create unique index if not exists idx_calendar_entries_creative_id on calendar_entries(creative_id) where creative_id is not null")
         cur.execute("create index if not exists idx_calendar_entries_status on calendar_entries(tenant_id, status)")
+        cur.execute("alter table publications add column if not exists platform text")
+        cur.execute("alter table publications add column if not exists platform_post_id text")
+        cur.execute("alter table publications add column if not exists published_url text")
+        cur.execute("alter table publications add column if not exists campaign_name text")
+        cur.execute("alter table publications add column if not exists notes text")
         cur.execute("create unique index if not exists idx_publications_creative_id_once on publications(creative_id) where creative_id is not null")
 
 
@@ -171,9 +190,64 @@ def update_entry_status(entry_id: str, payload: CalendarStatusUpdate) -> dict:
                 raise HTTPException(404, "entrada de calendário não encontrada")
             if row.get("creative_id") and payload.status in ("published", "publicado", "metrics_pending"):
                 cur.execute("update creatives set status='publicado' where id=%s", (row["creative_id"],))
+                cur.execute(
+                    """
+                    insert into publications (tenant_id, creative_id, format, published_at, platform, notes)
+                    select tenant_id, creative_id, format, coalesce(%s, published_at, now()), channel, %s
+                    from calendar_entries where id=%s
+                    on conflict (creative_id) where creative_id is not null do update set
+                        published_at=coalesce(excluded.published_at, publications.published_at),
+                        platform=coalesce(excluded.platform, publications.platform),
+                        notes=coalesce(excluded.notes, publications.notes)
+                    """,
+                    (published_at, payload.notes, entry_id),
+                )
             if row.get("creative_id") and payload.status in ("approved", "aprovado_para_publicar"):
                 cur.execute("update creatives set status='aprovado' where id=%s", (row["creative_id"],))
     return dict(row)
+
+
+@router.post("/entries/{entry_id}/publication")
+def register_publication(entry_id: str, payload: PublicationRegisterIn) -> dict:
+    """Fase 3: registra publicação real vinculada ao criativo, sem publicar nada externamente."""
+    with get_conn() as conn:
+        ensure_phase1_schema(conn)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                update calendar_entries
+                set status='published',
+                    published_at=coalesce(%s, published_at, now()),
+                    notes=coalesce(%s, notes)
+                where id=%s
+                returning id::text as id, tenant_id, creative_id::text as creative_id, format, channel, published_at
+                """,
+                (payload.published_at, payload.notes, entry_id),
+            )
+            entry = cur.fetchone()
+            if not entry:
+                raise HTTPException(404, "entrada de calendário não encontrada")
+            if entry.get("creative_id"):
+                cur.execute("update creatives set status='publicado' where id=%s", (entry["creative_id"],))
+            cur.execute(
+                """
+                insert into publications (
+                    tenant_id, creative_id, format, published_at, platform, platform_post_id,
+                    published_url, campaign_name, notes, metrics
+                ) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,'{}'::jsonb)
+                on conflict (creative_id) where creative_id is not null do update set
+                    published_at=coalesce(excluded.published_at, publications.published_at),
+                    platform=excluded.platform,
+                    platform_post_id=coalesce(excluded.platform_post_id, publications.platform_post_id),
+                    published_url=coalesce(excluded.published_url, publications.published_url),
+                    campaign_name=coalesce(excluded.campaign_name, publications.campaign_name),
+                    notes=coalesce(excluded.notes, publications.notes)
+                returning id::text as id, platform, platform_post_id, published_url, campaign_name, published_at
+                """,
+                (entry["tenant_id"], entry.get("creative_id"), entry.get("format"), entry.get("published_at"), payload.platform, payload.platform_post_id, payload.published_url, payload.campaign_name, payload.notes),
+            )
+            pub = cur.fetchone()
+    return {"calendar_entry_id": entry["id"], "creative_id": entry.get("creative_id"), "status": "published", "publication": pub}
 
 
 @router.post("/entries/{entry_id}/metrics")
@@ -199,10 +273,13 @@ def save_entry_metrics(entry_id: str, payload: CalendarMetricsIn) -> dict:
             if row.get("creative_id"):
                 cur.execute(
                     """
-                    insert into publications (tenant_id, creative_id, format, published_at, metrics)
-                    select tenant_id, creative_id, format, coalesce(published_at, now()), %s::jsonb
+                    insert into publications (tenant_id, creative_id, format, published_at, metrics, platform)
+                    select tenant_id, creative_id, format, coalesce(published_at, now()), %s::jsonb, channel
                     from calendar_entries where id=%s
-                    on conflict do nothing
+                    on conflict (creative_id) where creative_id is not null do update set
+                        metrics=excluded.metrics,
+                        published_at=coalesce(publications.published_at, excluded.published_at),
+                        platform=coalesce(publications.platform, excluded.platform)
                     returning id::text as id
                     """,
                     (json.dumps(metrics, ensure_ascii=False), entry_id),

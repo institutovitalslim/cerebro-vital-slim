@@ -263,7 +263,36 @@ def weekly_overview(tenant_slug: str = "demo") -> dict:
             )
             funnel = cur.fetchone()
         pillars = _pillar_cards()
-        default_hooks = _fetch_reel_hooks(conn, tenant_id, pillars[0]["thesis"])
+        performance_seed = None
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select e.sprint_thesis, e.sprint_hook, e.origin_tag, e.format,
+                       c.objecao_alvo, c.visual_tipo, c.cta_tipo,
+                       coalesce((e.metrics->>'reach')::numeric, 0) as reach,
+                       coalesce((e.metrics->>'saves')::numeric, 0) as saves,
+                       coalesce((e.metrics->>'shares')::numeric, 0) as shares,
+                       coalesce((e.metrics->>'whatsapp_leads')::numeric, (e.metrics->>'leads')::numeric, 0) as leads,
+                       coalesce((e.metrics->>'appointments')::numeric, 0) as appointments
+                from calendar_entries e
+                left join creatives c on c.id=e.creative_id
+                where e.tenant_id=%s and e.metrics_recorded_at is not null
+                order by (
+                    coalesce((e.metrics->>'saves')::numeric, 0) * 4 +
+                    coalesce((e.metrics->>'shares')::numeric, 0) * 3 +
+                    coalesce((e.metrics->>'whatsapp_leads')::numeric, (e.metrics->>'leads')::numeric, 0) * 12 +
+                    coalesce((e.metrics->>'appointments')::numeric, 0) * 25 +
+                    coalesce((e.metrics->>'reach')::numeric, 0) / 1000
+                ) desc
+                limit 1
+                """,
+                (tenant_id,),
+            )
+            performance_seed = cur.fetchone()
+        seed_thesis = (performance_seed or {}).get("sprint_thesis") or pillars[0]["thesis"]
+        seed_origin = (performance_seed or {}).get("origin_tag") or ""
+        seed_pillar = seed_origin.split(":")[1].replace("-", "_") if ":" in seed_origin else pillars[0]["pillar"]
+        default_hooks = _fetch_reel_hooks(conn, tenant_id, seed_thesis)
     priority = "Escolha uma tese semanal, gere uma família completa e só depois aprove/publica."
     if creatives.get("ready_review", 0) > 0:
         priority = "Há peças prontas para revisão; aprove ou peça ajuste antes de criar volume novo."
@@ -277,11 +306,13 @@ def weekly_overview(tenant_slug: str = "demo") -> dict:
         "funnel": funnel,
         "pillars": pillars,
         "default_plan": {
-            "thesis": pillars[0]["thesis"],
-            "pillar": pillars[0]["pillar"],
+            "thesis": seed_thesis,
+            "pillar": seed_pillar,
             "objective": "autoridade_e_conversa",
             "audience_stage": "consciente_da_dor",
-            "family": _family_from(pillars[0]["thesis"], pillars[0]["pillar"], "autoridade_e_conversa", "consciente_da_dor", default_hooks),
+            "family": _family_from(seed_thesis, seed_pillar, "autoridade_e_conversa", "consciente_da_dor", default_hooks),
+            "seed_source": "performance_winner" if performance_seed else "pillar_default",
+            "winner_variables": performance_seed or {},
         },
         "governance": {
             "mode": "plan_only",
