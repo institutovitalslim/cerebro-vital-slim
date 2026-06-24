@@ -22,6 +22,7 @@ from app.routers.bi import router as bi_router
 from app.routers.social_selling import router as social_selling_router
 from app.routers.weekly_command import router as weekly_command_router
 from app.routers.learning import router as learning_router
+from app.routers.external_learning import router as external_learning_router
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
@@ -52,6 +53,7 @@ app.include_router(bi_router)
 app.include_router(social_selling_router)
 app.include_router(weekly_command_router)
 app.include_router(learning_router)
+app.include_router(external_learning_router)
 
 os.makedirs("/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders", exist_ok=True)
 app.mount("/renders", StaticFiles(directory="/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders"), name="renders")
@@ -82,5 +84,6 @@ def root() -> dict:
             "stories_connection_engine",
             "weekly_positioning_sprint",
             "performance_learning_loop",
+            "external_reverse_engineering_learning",
         ],
     }

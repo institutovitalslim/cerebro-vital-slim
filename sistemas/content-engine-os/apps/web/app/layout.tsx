@@ -28,6 +28,7 @@ const groups = [
       { href: '/sprint-semanal', label: 'Sprint semanal' },
       { href: '/business-intelligence', label: 'BI · Business Intelligence' },
       { href: '/social-selling', label: 'Social Selling' },
+      { href: '/radar-externo', label: 'Radar externo' },
     ],
   },
   {

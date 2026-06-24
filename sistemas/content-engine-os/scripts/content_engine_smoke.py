@@ -78,7 +78,7 @@ def main() -> int:
     status, ctype, _ = http_head("/business-intelligence")
     checks.append(Check("web_business_intelligence", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
-    for page in ["/sprint-semanal", "/aprendizado", "/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
+    for page in ["/sprint-semanal", "/aprendizado", "/radar-externo", "/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
         status, ctype, _ = http_head(page)
         checks.append(Check(f"web_{page.strip('/').replace('/', '_')}", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
@@ -89,6 +89,7 @@ def main() -> int:
         ("weekly_command_overview", "/api/weekly-command/overview?tenant_slug=demo"),
         ("learning_insights", "/api/learning/insights?tenant_slug=demo"),
         ("learning_performance_dashboard", "/api/learning/performance-dashboard?tenant_slug=demo"),
+        ("external_learning_overview", "/api/external-learning/overview?tenant_slug=demo"),
         ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
         ("roteiros_library", "/api/generation/roteiros?tenant_slug=demo"),
         ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
@@ -129,6 +130,15 @@ def main() -> int:
                 "learning_variable_dashboard",
                 all(k in board for k in ("by_format", "by_hook", "by_objection", "by_visual", "by_pillar", "by_cta")),
                 f"dashboard_keys={sorted(board.keys())}",
+            ))
+        if name == "external_learning_overview" and status == 200 and isinstance(data, dict):
+            summary = data.get("summary") or {}
+            checks.append(Check(
+                "external_learning_phase4_contract",
+                data.get("phase") == "fase_4_external_reverse_engineering"
+                and all(k in summary for k in ("total_items", "profiles", "avg_score"))
+                and "top_items" in data and "patterns" in data and "opportunities" in data,
+                f"phase={data.get('phase')} summary={summary}",
             ))
 
     status, data, _ = http_json("/api/generation/creatives?tenant_slug=demo&limit=1")
