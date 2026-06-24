@@ -78,7 +78,7 @@ def main() -> int:
     status, ctype, _ = http_head("/business-intelligence")
     checks.append(Check("web_business_intelligence", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
-    for page in ["/sprint-semanal", "/aprendizado", "/radar-externo", "/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
+    for page in ["/sprint-semanal", "/aprendizado", "/radar-externo", "/compliance", "/producao/carrosseis", "/producao/estaticos", "/producao/reels", "/social-selling"]:
         status, ctype, _ = http_head(page)
         checks.append(Check(f"web_{page.strip('/').replace('/', '_')}", status == 200 and "text/html" in ctype, f"status={status} content_type={ctype}"))
 
@@ -90,6 +90,7 @@ def main() -> int:
         ("learning_insights", "/api/learning/insights?tenant_slug=demo"),
         ("learning_performance_dashboard", "/api/learning/performance-dashboard?tenant_slug=demo"),
         ("external_learning_overview", "/api/external-learning/overview?tenant_slug=demo"),
+        ("compliance_overview", "/api/compliance/overview?tenant_slug=demo"),
         ("creatives_list", "/api/generation/creatives?tenant_slug=demo&limit=2"),
         ("roteiros_library", "/api/generation/roteiros?tenant_slug=demo"),
         ("calendar_entries", "/api/calendar/entries?tenant_slug=demo"),
@@ -138,6 +139,15 @@ def main() -> int:
                 data.get("phase") == "fase_4_external_reverse_engineering"
                 and all(k in summary for k in ("total_items", "profiles", "avg_score"))
                 and "top_items" in data and "patterns" in data and "opportunities" in data,
+                f"phase={data.get('phase')} summary={summary}",
+            ))
+        if name == "compliance_overview" and status == 200 and isinstance(data, dict):
+            summary = data.get("summary") or {}
+            checks.append(Check(
+                "compliance_phase5_contract",
+                data.get("phase") == "fase_5_scientific_compliance"
+                and all(k in summary for k in ("assessments", "high_risk", "medium_risk", "low_risk", "avg_score"))
+                and "scientific_sources" in data and "pending_creatives" in data,
                 f"phase={data.get('phase')} summary={summary}",
             ))
 

@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.db import get_conn
+from app.services.compliance import assess_creative
 
 router = APIRouter(prefix="/calendar", tags=["calendar"])
 
@@ -189,6 +190,9 @@ def update_entry_status(entry_id: str, payload: CalendarStatusUpdate) -> dict:
             if not row:
                 raise HTTPException(404, "entrada de calendário não encontrada")
             if row.get("creative_id") and payload.status in ("published", "publicado", "metrics_pending"):
+                compliance = assess_creative(conn, row["creative_id"])
+                if compliance and compliance.get("risk_level") == "high":
+                    raise HTTPException(400, {"error": "compliance_blocked", "message": "Publicação bloqueada por risco médico/compliance alto.", "assessment": compliance})
                 cur.execute("update creatives set status='publicado' where id=%s", (row["creative_id"],))
                 cur.execute(
                     """
@@ -228,6 +232,9 @@ def register_publication(entry_id: str, payload: PublicationRegisterIn) -> dict:
             if not entry:
                 raise HTTPException(404, "entrada de calendário não encontrada")
             if entry.get("creative_id"):
+                compliance = assess_creative(conn, entry["creative_id"])
+                if compliance and compliance.get("risk_level") == "high":
+                    raise HTTPException(400, {"error": "compliance_blocked", "message": "Registro de publicação bloqueado por risco médico/compliance alto.", "assessment": compliance})
                 cur.execute("update creatives set status='publicado' where id=%s", (entry["creative_id"],))
             cur.execute(
                 """

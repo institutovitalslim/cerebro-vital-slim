@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field
 
 from app.db import get_conn
 from app.routers.calendar import ensure_phase1_schema
+from app.services.compliance import assess_creative
 from app.services.openrouter_client import OpenRouterClient
 from app.services.codex_client import CodexClient
 
@@ -856,10 +857,11 @@ def approve_creative(cid: str) -> dict:
         with conn.cursor() as cur:
             cur.execute("update creatives set status='aprovado' where id=%s returning id::text as id", (cid,))
             r = cur.fetchone()
+        compliance = assess_creative(conn, cid) if r else None
         calendar = _ensure_calendar_for_creative(conn, cid) if r else None
     if not r:
         raise HTTPException(404, "creative não encontrado")
-    return {"id": r["id"], "status": "aprovado", "calendar_entry": calendar}
+    return {"id": r["id"], "status": "aprovado", "calendar_entry": calendar, "compliance": compliance}
 
 
 # ---- ANÁLISE DE PERFORMANCE (rubrica IVS de sinais virais do Instagram) ----

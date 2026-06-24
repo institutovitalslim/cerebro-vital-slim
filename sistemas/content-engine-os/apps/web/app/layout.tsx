@@ -29,6 +29,7 @@ const groups = [
       { href: '/business-intelligence', label: 'BI · Business Intelligence' },
       { href: '/social-selling', label: 'Social Selling' },
       { href: '/radar-externo', label: 'Radar externo' },
+      { href: '/compliance', label: 'Compliance médico' },
     ],
   },
   {
