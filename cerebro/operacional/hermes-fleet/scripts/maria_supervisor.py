@@ -10,7 +10,8 @@ HERMES = {"Jarvis": "/root/.hermes/profiles/jarvis",
           "Pedro": "/root/.hermes/profiles/pedro",
           "Clara-Telegram": "/root/.hermes/profiles/clara",
           "Ana": "/root/.hermes/profiles/ana",
-          "Joao": "/root/.hermes/profiles/joao"}
+          "Joao": "/root/.hermes/profiles/joao",
+          "Eduardo": "/root/.hermes/profiles/eduardo"}
 OPENCLAW = {}
 STATE = "/root/.hermes/maria_supervisor_state.json"
 LOG = "/root/.hermes/maria_supervisor.log"

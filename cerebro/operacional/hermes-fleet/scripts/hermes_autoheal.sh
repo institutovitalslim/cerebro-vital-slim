@@ -11,7 +11,7 @@ alert(){ [ -n "$TOKEN" ] && curl -s "https://api.telegram.org/bot$TOKEN/sendMess
 actions=0
 
 # 1) os 6 gateways Hermes (frota de agentes)
-for g in hermes-gateway hermes-gateway-jarvis hermes-gateway-pedro hermes-gateway-clara hermes-gateway-ana hermes-gateway-joao; do
+for g in hermes-gateway hermes-gateway-jarvis hermes-gateway-pedro hermes-gateway-clara hermes-gateway-ana hermes-gateway-joao hermes-gateway-eduardo; do
   if ! $SU is-active "$g.service" 2>/dev/null | grep -q '^active'; then
     $SU reset-failed "$g.service" 2>/dev/null
     $SU restart "$g.service" 2>/dev/null
