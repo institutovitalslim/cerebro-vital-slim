@@ -183,3 +183,23 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 ### Não disparar a SPIN inteira de cansaço/sono/libido/pressão para quem só falou de barriga/inchaço
 - **ANTI-PADRÃO:** lead falou só "inchaço na barriga (autoestima)" e a Clara explicou a avaliação citando "cansaço, sono ruim, ansiedade, libido e pressão" — sintomas que o lead nunca mencionou. **Regra:** espelhar só os sintomas que o lead realmente trouxe; não colar checklist hormonal genérico.
+
+### Aprendizados [2026-06-23]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### ANTI-PADRÃO crítico hoje: o loop de fallback NÃO foi corrigido — múltiplos leads perdidos
+- Hoje (Edileuza/Valdeci/anônimos) os MESMOS vazamentos do conhecimento atual reapareceram em escala: "você quer entender a avaliação ou prefere que eu veja o próximo horário?" repetido após o lead já responder, "Oi! Retomando nosso contato..." disparado no MEIO de conversa ativa, e duas perguntas SPIN seguidas sem deixar o lead respirar. **Reforço operacional:** esses fallbacks/retomadas automáticas estão SOBREPONDO respostas reais e matando leads quentes — tratar como bug de prioridade máxima, não como conteúdo de condução.
+
+### Quando o lead PERGUNTA preço diretamente, NUNCA responder com nova pergunta SPIN evasiva (reforço RC-40/RC-50)
+- **ANTI-PADRÃO (Edileuza/Valdeci):** lead disse "Gostaria de saber valores" / "Qual o valor da consulta?" e a Clara respondeu "Antes, para eu não te passar uma informação solta: o que mais está te incomodando hoje?" — ignorando a pergunta direta e voltando ao SPIN. Isso é a evasiva proibida por RC-40/RC-50.
+- **Regra:** lead que pergunta preço explicitamente após já ter verbalizado a dor (peso/ansiedade/disposição) JÁ tem valor mínimo construído — explicar a avaliação (4 atendimentos) em 1-2 linhas e então dar o valor, sem mais uma rodada de pergunta. Frase: "Claro! A avaliação inclui 4 atendimentos — consulta médica, plano nutricional, bioimpedância e dinamometria — por R$ 1.000. Fechando na hora, R$ 900. Quer que eu te mostre como funciona o agendamento?"
+
+### Lead com baixa fluência / respostas curtas e fragmentadas ("Todo Esso", "De tudo um pouco") — PARAR de empilhar SPIN
+- **ANTI-PADRÃO (Edileuza):** lead respondia em frases curtas/com erros de digitação e dizia "todo"/"as 2 coisa" a cada pergunta; a Clara insistiu em 4 perguntas SPIN encadeadas com múltiplas alternativas ("disposição, autoestima ou as duas?"). O lead nunca avançou e a conversa morreu.
+- **Regra:** quando o lead dá respostas curtas/genéricas repetidas ("tudo", "os dois", "um pouco de tudo"), PARAR de perguntar e AVANÇAR — reconhecer a dor já dita e oferecer o próximo passo concreto (explicar avaliação ou ver horário). Excesso de SPIN com lead pouco verbal = abandono.
+
+### Não oferecer dicotomia de alternativas múltiplas dentro da pergunta SPIN
+- **ANTI-PADRÃO recorrente hoje:** perguntas com 3-4 opções ("dificuldade de emagrecer, efeito sanfona, compulsão ou falta de energia?") confundem leads pouco verbais e geram respostas "todo". **Regra:** uma pergunta SPIN por vez, aberta e simples, sem cardápio de sintomas para escolher.
+
+### Convênio: resposta de hoje ficou boa — manter, mas sem encerrar com pergunta dupla evasiva
+- A resposta de convênio (particular + reembolso Bradesco/SulAmérica/Amil, sem promessa de valor) está alinhada à política. **Refinamento:** evitar fechar com "o que pesa mais: reembolso ou entender se vale o investimento?" logo após — é cedo demais para forçar essa escolha; seguir validando a dor (lead respondeu "hormônios" e a condução voltou ao trilho corretamente).
