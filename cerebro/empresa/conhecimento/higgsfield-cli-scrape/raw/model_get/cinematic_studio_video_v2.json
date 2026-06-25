@@ -1,0 +1,74 @@
+{
+  "display_name": "Cinematic Studio Video V2",
+  "job_set_type": "cinematic_studio_video_v2",
+  "params": [
+    {
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": "16:9",
+      "required": false,
+      "enum": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16"
+      ]
+    },
+    {
+      "name": "duration",
+      "type": "integer",
+      "default": 5,
+      "required": false
+    },
+    {
+      "name": "genre",
+      "type": "string",
+      "default": "auto",
+      "required": false,
+      "enum": [
+        "auto",
+        "action",
+        "horror",
+        "comedy",
+        "western",
+        "suspense",
+        "intimate",
+        "spectacle"
+      ]
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "default": "std",
+      "required": false,
+      "enum": [
+        "pro",
+        "std"
+      ]
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "sound",
+      "type": "string",
+      "default": "on",
+      "required": false,
+      "enum": [
+        "on",
+        "off"
+      ]
+    }
+  ],
+  "type": "video"
+}

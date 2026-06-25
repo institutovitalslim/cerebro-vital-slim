@@ -1,0 +1,19 @@
+{
+  "display_name": "Brain Activity",
+  "job_set_type": "brain_activity",
+  "params": [
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "text"
+}

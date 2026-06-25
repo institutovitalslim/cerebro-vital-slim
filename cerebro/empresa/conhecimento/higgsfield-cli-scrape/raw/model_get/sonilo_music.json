@@ -1,0 +1,19 @@
+{
+  "display_name": "Sonilo Music",
+  "job_set_type": "sonilo_music",
+  "params": [
+    {
+      "name": "duration",
+      "type": "number",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "audio"
+}

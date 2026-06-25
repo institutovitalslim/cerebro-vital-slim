@@ -1,0 +1,37 @@
+{
+  "display_name": "Remove Background",
+  "job_set_type": "sam_3_video",
+  "params": [
+    {
+      "name": "apply_mask",
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "frames_count",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": "",
+      "required": false
+    }
+  ],
+  "type": "video"
+}

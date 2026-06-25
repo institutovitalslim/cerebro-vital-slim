@@ -1,0 +1,317 @@
+===== higgsfield generate --help
+Create jobs, estimate cost, inspect results, and list recent image, video, or text generations.
+
+Usage:
+  higgsfield generate [command]
+
+Aliases:
+  generate, gen
+
+Examples:
+  higgsfield generate create nano_banana_2 --prompt "studio product photo"
+  higgsfield generate cost nano_banana_2 --prompt "studio product photo"
+  higgsfield generate wait <job_id>
+
+Available Commands:
+  cost        Estimate generation cost
+  create      Create a generation job
+  get         Show one generation job
+  list        List recent generation jobs
+  wait        Poll a job until it finishes
+
+Flags:
+  -h, --help   help for generate
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield generate [command] --help" for more information about a command.
+===== higgsfield generate create --help
+Create an image, video, or text job.
+Pass params as --name value. Media flags: --image, --start-image, --end-image, --video, --audio.
+Media flags accept a UUID (upload id or job id) or a local file path — paths are auto-uploaded.
+Use --wait to block until each job finishes and print the result URL(s).
+
+Usage:
+  higgsfield generate create <job_set_type> [--param value]... [flags]
+
+Examples:
+  higgsfield generate create nano_banana_2 --prompt "cinematic product photo" --image ./photo.png
+  higgsfield generate create nano_banana_2 --prompt "..." --wait
+  higgsfield generate create <video_model> --prompt "..." --wait --wait-timeout 20m --wait-interval 5s
+
+Flags:
+  -h, --help   help for create
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+===== higgsfield generate workflow --help
+Create jobs, estimate cost, inspect results, and list recent image, video, or text generations.
+
+Usage:
+  higgsfield generate [command]
+
+Aliases:
+  generate, gen
+
+Examples:
+  higgsfield generate create nano_banana_2 --prompt "studio product photo"
+  higgsfield generate cost nano_banana_2 --prompt "studio product photo"
+  higgsfield generate wait <job_id>
+
+Available Commands:
+  cost        Estimate generation cost
+  create      Create a generation job
+  get         Show one generation job
+  list        List recent generation jobs
+  wait        Poll a job until it finishes
+
+Flags:
+  -h, --help   help for generate
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield generate [command] --help" for more information about a command.
+===== higgsfield model --help
+List Higgsfield models and inspect each model's job_set_type, media type, and accepted parameters.
+
+Usage:
+  higgsfield model [command]
+
+Examples:
+  higgsfield model list
+  higgsfield model list --image
+  higgsfield model get nano_banana_2
+
+Available Commands:
+  get         Show model parameters and defaults
+  list        List image, video, and text generation models
+
+Flags:
+  -h, --help   help for model
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield model [command] --help" for more information about a command.
+===== higgsfield model list --help
+List image, video, and text generation models
+
+Usage:
+  higgsfield model list [flags]
+
+Examples:
+  higgsfield model list
+  higgsfield model list --video
+  higgsfield model list --text
+  higgsfield model list --image --json
+
+Flags:
+  -h, --help    help for list
+      --image   show image models only
+      --text    show text models only
+      --video   show video models only
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+===== higgsfield model get --help
+Show model parameters and defaults
+
+Usage:
+  higgsfield model get <job_set_type> [flags]
+
+Examples:
+  higgsfield model get nano_banana_2
+  higgsfield model get <job_set_type> --json
+
+Flags:
+  -h, --help   help for get
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+===== higgsfield marketing-studio --help
+Manage avatars, products, hooks, settings, and web products used by Higgsfield Marketing Studio workflows.
+
+Usage:
+  higgsfield marketing-studio [command]
+
+Aliases:
+  marketing-studio, marketing, ms
+
+Examples:
+  higgsfield marketing-studio avatars list
+  higgsfield marketing-studio hooks list
+  higgsfield marketing-studio products create --title "Sneaker" --image <upload_id>
+  higgsfield marketing-studio webproducts fetch --url https://example.com --wait
+
+Available Commands:
+  ad-formats    DTC Ads Engine ad format presets
+  ad-references Manage Marketing Studio ad references
+  avatars       Manage Marketing Studio avatars
+  brand-kits    Marketing Studio brand kits
+  dtc-ads       DTC Ads Engine — branded image generation
+  hooks         Manage Marketing Studio hooks
+  products      Manage Marketing Studio products
+  settings      Manage Marketing Studio settings
+  webproducts   Manage Marketing Studio web products
+
+Flags:
+  -h, --help   help for marketing-studio
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio [command] --help" for more information about a command.
+===== higgsfield upload --help
+Upload local image, video, or audio files and list previously uploaded media IDs for use in generation commands.
+
+Usage:
+  higgsfield upload [command]
+
+Examples:
+  higgsfield upload create ./input.png
+  higgsfield upload list --image
+  higgsfield upload list --video --size 50
+
+Available Commands:
+  create      Upload a local media file
+  list        List uploaded media IDs
+
+Flags:
+  -h, --help   help for upload
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield upload [command] --help" for more information about a command.
+===== higgsfield soul-id --help
+Create custom Soul character references from uploaded images, list existing references, inspect one reference, or wait for training to finish.
+
+Usage:
+  higgsfield soul-id [command]
+
+Examples:
+  higgsfield soul-id create --name Alice --soul-2 --image <id1> --image <id2> --image <id3> --image <id4> --image <id5>
+  higgsfield soul-id list
+  higgsfield soul-id wait <soul_id>
+
+Available Commands:
+  create      Create a custom Soul reference
+  get         Show one custom Soul reference
+  list        List custom Soul references
+  wait        Poll Soul training until it finishes
+
+Flags:
+  -h, --help   help for soul-id
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield soul-id [command] --help" for more information about a command.
+===== higgsfield product-photoshoot --help
+Submit a high-level intent and a mode; backend assembles a structured prompt and generates images.
+
+Usage:
+  higgsfield product-photoshoot [command]
+
+Examples:
+  higgsfield product-photoshoot create --mode lifestyle_scene --prompt "bottle for IG" --image bottle.jpg --count 3
+
+Available Commands:
+  create      Enhance prompt and generate brand images
+
+Flags:
+  -h, --help   help for product-photoshoot
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield product-photoshoot [command] --help" for more information about a command.
+===== higgsfield marketplace-cards --help
+Create marketplace main images, secondary product images, and A+ style modules. Backend keeps marketplace references and prompt templates private, then returns nano_banana_2 prompts for job creation.
+
+Usage:
+  higgsfield marketplace-cards [command]
+
+Aliases:
+  marketplace-cards, marketplace-card, cards
+
+Examples:
+  hf marketplace-cards create --scope product-images --prompt "sparkling lemonade can" --image can.png
+
+Available Commands:
+  create      Enhance marketplace card prompts and generate images
+
+Flags:
+  -h, --help   help for marketplace-cards
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketplace-cards [command] --help" for more information about a command.
+===== higgsfield workspace --help
+List available workspaces, select the active workspace, or return jobs to your private account context.
+
+Usage:
+  higgsfield workspace [command]
+
+Aliases:
+  workspace, ws
+
+Examples:
+  higgsfield workspace list
+  higgsfield workspace set <workspace_id>
+  higgsfield workspace status
+  higgsfield workspace unset
+
+Available Commands:
+  list        List workspaces available to your account
+  set         Select a workspace for future requests
+  status      Show the currently selected workspace
+  unset       Clear the selected workspace
+
+Flags:
+  -h, --help   help for workspace
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield workspace [command] --help" for more information about a command.
+===== higgsfield account --help
+View the signed-in account's balance, subscription plan, and recent credit transactions.
+
+Usage:
+  higgsfield account [command]
+
+Aliases:
+  account, acc
+
+Examples:
+  higgsfield account status
+  higgsfield account transactions --size 50
+
+Available Commands:
+  status       Show account email, plan, and available credits
+  transactions List recent credit transactions
+
+Flags:
+  -h, --help   help for account
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield account [command] --help" for more information about a command.

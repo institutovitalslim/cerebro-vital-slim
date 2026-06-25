@@ -1,0 +1,19 @@
+{
+  "display_name": "Color Grading LUT",
+  "job_set_type": "color_grading_lut",
+  "params": [
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "image"
+}

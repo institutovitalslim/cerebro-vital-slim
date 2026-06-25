@@ -1,0 +1,54 @@
+{
+  "display_name": "Cinematic Studio Video",
+  "job_set_type": "cinematic_studio_video",
+  "params": [
+    {
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": "16:9",
+      "required": false,
+      "enum": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16"
+      ]
+    },
+    {
+      "name": "duration",
+      "type": "string",
+      "default": 5,
+      "required": false,
+      "enum": [
+        "5",
+        "10"
+      ]
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "slow_motion",
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    {
+      "name": "sound",
+      "type": "boolean",
+      "default": true,
+      "required": false
+    }
+  ],
+  "type": "video"
+}

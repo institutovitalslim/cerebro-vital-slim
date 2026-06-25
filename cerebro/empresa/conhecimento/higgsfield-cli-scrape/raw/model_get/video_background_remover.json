@@ -1,0 +1,13 @@
+{
+  "display_name": "Video Background Remover",
+  "job_set_type": "video_background_remover",
+  "params": [
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "video"
+}

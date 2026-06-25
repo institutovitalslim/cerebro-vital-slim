@@ -1,0 +1,43 @@
+{
+  "display_name": "Nano Banana Pro",
+  "job_set_type": "nano_banana_2_ai_stylist",
+  "params": [
+    {
+      "name": "background_preset_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "input_image",
+      "type": "object",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "outfit_preset_ids",
+      "type": "array",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "pose_preset_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "user_outfit_ids",
+      "type": "array",
+      "default": null,
+      "required": false
+    }
+  ],
+  "type": "image"
+}

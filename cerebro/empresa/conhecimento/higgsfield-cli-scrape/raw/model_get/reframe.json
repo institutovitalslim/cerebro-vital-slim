@@ -1,0 +1,50 @@
+{
+  "display_name": "Reframe",
+  "job_set_type": "reframe",
+  "params": [
+    {
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": null,
+      "required": true,
+      "enum": [
+        "21:9",
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16"
+      ]
+    },
+    {
+      "name": "duration",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "resolution",
+      "type": "string",
+      "default": "720p",
+      "required": false,
+      "enum": [
+        "480p",
+        "720p",
+        "1080p"
+      ]
+    }
+  ],
+  "type": "video"
+}

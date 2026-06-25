@@ -1,0 +1,52 @@
+{
+  "display_name": "Minimax Hailuo",
+  "job_set_type": "minimax_hailuo",
+  "params": [
+    {
+      "name": "duration",
+      "type": "string",
+      "default": 6,
+      "required": false,
+      "enum": [
+        "6",
+        "10"
+      ]
+    },
+    {
+      "name": "input_images",
+      "type": "array",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "model",
+      "type": "string",
+      "default": "minimax-2.3",
+      "required": false,
+      "enum": [
+        "minimax",
+        "minimax-fast",
+        "minimax-2.3",
+        "minimax-2.3-fast"
+      ]
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "resolution",
+      "type": "string",
+      "default": "768",
+      "required": false,
+      "enum": [
+        "512",
+        "768",
+        "1080"
+      ]
+    }
+  ],
+  "type": "video"
+}

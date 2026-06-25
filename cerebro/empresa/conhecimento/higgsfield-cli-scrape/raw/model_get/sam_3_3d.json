@@ -1,0 +1,43 @@
+{
+  "display_name": "3D Objects",
+  "job_set_type": "sam_3_3d",
+  "params": [
+    {
+      "name": "detection_threshold",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "export_textured_glb",
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": "",
+      "required": false
+    },
+    {
+      "name": "seed",
+      "type": "object",
+      "default": null,
+      "required": false
+    }
+  ],
+  "type": "3d"
+}

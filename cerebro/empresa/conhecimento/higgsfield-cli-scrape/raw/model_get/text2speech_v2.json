@@ -1,0 +1,42 @@
+{
+  "display_name": "text2speech_v2",
+  "job_set_type": "text2speech_v2",
+  "params": [
+    {
+      "name": "model",
+      "type": "string",
+      "default": null,
+      "required": true,
+      "enum": [
+        "elevenlabs",
+        "minimax",
+        "seed_speech",
+        "vibe_voice",
+        "cozy_voice"
+      ]
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "voice_id",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "voice_type",
+      "type": "string",
+      "default": null,
+      "required": true,
+      "enum": [
+        "preset",
+        "element"
+      ]
+    }
+  ],
+  "type": "audio"
+}

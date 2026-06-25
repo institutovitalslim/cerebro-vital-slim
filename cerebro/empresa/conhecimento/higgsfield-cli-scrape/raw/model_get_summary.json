@@ -1,0 +1,782 @@
+[
+  {
+    "job_set_type": "sam_3_3d",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "3d_rigging",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "image_to_3d",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "multi_image_to_3d",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "tripo_3d",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "inworld_text_to_speech",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "mirelo_text_to_audio",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "sonilo_music",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "text2speech_v2",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "autosprite",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "bytedance_image_upscale",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_2_5",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_image",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_soul_cast",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_soul_location",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "color_grading_lut",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "flux_2",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "flux_kontext",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "gpt_image_2",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "grok_image",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "text2image_soul_v2",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "image_auto",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "image_background_remover",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "image_decompose",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "kling_omni_image",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "ms_image",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "marketing_studio_image",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "nano_banana",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "nano_banana_flash",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "nano_banana_2",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "nano_banana_2_ai_stylist",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "nano_banana_2_skin_enhancer",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "nano_banana_2_shots",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "openai_hazel",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "outpaint",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "recraft_v4_1",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "seedream_v4_5",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "seedream_v5_lite",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "soul_cast",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "soul_cinematic",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "soul_location",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "topaz_image",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "topaz_image_generative",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "z_image",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "soul_cinema_studio",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "brain_activity",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "bytedance_video_upscale",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_3_0",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_video",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_video_3_5",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "cinematic_studio_video_v2",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "clipify",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "draw_to_video",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "veo3",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "veo3_1",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "veo3_1_lite",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "grok_video",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "grok_video_v15",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "kling2_6",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "kling3_0_motion_control",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "kling3_0_turbo",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "kling3_0",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "llm_text",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "marketing_studio_video",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "minimax_hailuo",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "reframe",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "sam_3_video",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "seedance1_5",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "seedance_2_0",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "seedance_2_0_mini",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "topaz_video",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "video_background_remover",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "video_deflicker",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "video_upscale",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "wan2_6",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "wan2_7",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "dubbing",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  },
+  {
+    "job_set_type": "voice_change",
+    "ok": true,
+    "keys": [
+      "display_name",
+      "job_set_type",
+      "params",
+      "type"
+    ]
+  }
+]

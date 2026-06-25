@@ -1,0 +1,109 @@
+{
+  "display_name": "Multi-Image to 3D",
+  "job_set_type": "multi_image_to_3d",
+  "params": [
+    {
+      "name": "animation_action_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "enable_animation",
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    {
+      "name": "enable_pbr",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "enable_rigging",
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    {
+      "name": "enable_safety_checker",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "pose_mode",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "rigging_height_meters",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "seed",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "should_remesh",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "should_texture",
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    {
+      "name": "symmetry_mode",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "target_polycount",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "texture_image_url",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "texture_prompt",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "topology",
+      "type": "object",
+      "default": null,
+      "required": false
+    }
+  ],
+  "type": "3d"
+}

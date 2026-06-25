@@ -1,0 +1,61 @@
+{
+  "display_name": "Google Veo 3.1",
+  "job_set_type": "veo3_1",
+  "params": [
+    {
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": "16:9",
+      "required": false,
+      "enum": [
+        "16:9",
+        "9:16"
+      ]
+    },
+    {
+      "name": "duration",
+      "type": "string",
+      "default": 8,
+      "required": false,
+      "enum": [
+        "4",
+        "6",
+        "8"
+      ]
+    },
+    {
+      "name": "input_image",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "model",
+      "type": "string",
+      "default": "veo-3-1-fast",
+      "required": false,
+      "enum": [
+        "veo-3-1-preview",
+        "veo-3-1-fast"
+      ]
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "quality",
+      "type": "string",
+      "default": "basic",
+      "required": false,
+      "enum": [
+        "basic",
+        "high",
+        "ultra"
+      ]
+    }
+  ],
+  "type": "video"
+}

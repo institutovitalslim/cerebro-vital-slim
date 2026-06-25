@@ -1,0 +1,886 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mapa Higgsfield CLI — IVS Content OS</title><style>
+:root{--bg:#080d1b;--panel:#101936;--panel2:#121f42;--line:#2a3a66;--txt:#edf3ff;--muted:#aebce0;--gold:#d9b56d;--cyan:#7fd8ff;}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top left,#1a2a52 0,#080d1b 36%,#050814 100%);color:var(--txt);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55} a{color:var(--cyan)}
+.header{padding:34px 36px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(16,25,54,.96),rgba(9,15,32,.9));position:sticky;top:0;z-index:5;backdrop-filter:blur(8px)}
+.header .eyebrow{color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-size:12px}.header h1{margin:.2rem 0 0;font-size:28px}.header p{margin:.35rem 0 0;color:var(--muted)}
+main{max-width:1280px;margin:0 auto;padding:28px}.card{background:rgba(16,25,54,.82);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+h1,h2,h3{color:white;line-height:1.2} h1{font-size:30px} h2{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:23px} h3{font-size:18px;color:#fff2d0} p,li{color:#e7eeff} code{background:#1a2547;color:#eaf1ff;border:1px solid #2c3c69;border-radius:6px;padding:1px 5px;font-size:.92em} pre{background:#071126;border:1px solid #2a3a66;border-radius:14px;padding:16px;overflow:auto} pre code{background:transparent;border:none;padding:0;color:#d8efff}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:18px 0;background:#0d1730;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13px} th,td{border-bottom:1px solid #26375f;border-right:1px solid #26375f;padding:10px;vertical-align:top} th:last-child,td:last-child{border-right:none} tr:last-child td{border-bottom:none} th{background:#17254c;color:#fff;text-align:left;position:sticky;top:100px} td{color:#dbe6ff}.toc{background:#0d1730;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:20px}.toc ul{margin:.25rem 0}.toc a{text-decoration:none}.footer{color:var(--muted);font-size:12px;margin-top:20px;text-align:center}
+</style></head><body><div class="header"><div class="eyebrow">Instituto Vital Slim · Content OS</div><h1>Mapa Higgsfield CLI para Agentes IVS</h1><p>Scrape governado/read-only · modelos, comandos, Marketing Studio e playbooks de uso</p></div><main><div class="card"><h1 id="mapa-higgsfield-cli-para-agentes-ivs-content-os">Mapa Higgsfield CLI para agentes IVS / Content OS</h1>
+<ul>
+<li><strong>Gerado em:</strong> 2026-06-25T18:31:28.284859+00:00</li>
+<li><strong>Escopo:</strong> CLI Higgsfield público/autenticado em modo leitura, sem geração de mídia.</li>
+<li><strong>Fontes:</strong> README/MODELS GitHub + <code>higgsfield --help</code> + <code>model list/get --json</code> + listas Marketing Studio.</li>
+</ul>
+<h2 id="guardrails-ivs">Guardrails IVS</h2>
+<ul>
+<li>Não usar Higgsfield para publicar automaticamente. A saída é asset/URL para revisão.</li>
+<li>Não usar rosto/pessoa real sem autorização e fonte de imagem aprovada.</li>
+<li>Conteúdo clínico/promessa/resultado passa por compliance Content OS e Ana quando necessário.</li>
+<li>Não inserir PII, conversa de paciente, prontuário ou lead individual em prompt.</li>
+<li>Para geração real, checar créditos com <code>higgsfield account status</code> e preferir <code>--wait</code> para entregar URL final.</li>
+</ul>
+<h2 id="inventario-vivo">Inventário vivo</h2>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th style="text-align: right;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modelos totais</td>
+<td style="text-align: right;">78</td>
+</tr>
+<tr>
+<td>Modelos tipo <code>3d</code></td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>Modelos tipo <code>audio</code></td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Modelos tipo <code>image</code></td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr>
+<td>Modelos tipo <code>text</code></td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Modelos tipo <code>video</code></td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>Hooks Marketing Studio</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr>
+<td>Settings Marketing Studio</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Ad formats DTC</td>
+<td style="text-align: right;">42</td>
+</tr>
+</tbody>
+</table>
+<h2 id="matriz-de-uso-rapido-intencao-comando">Matriz de uso rápido — intenção → comando</h2>
+<table>
+<thead>
+<tr>
+<th>Intenção</th>
+<th>Padrão</th>
+<th>Comando base</th>
+<th>Uso no Content OS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Imagem premium geral, carrossel, banner, texto em imagem, design limpo</td>
+<td><code>gpt_image_2</code></td>
+<td><code>higgsfield generate create gpt_image_2 --prompt "..." --aspect_ratio 4:5 --quality high --resolution 2k --wait</code></td>
+<td>Criativos estáticos, thumbnails, capas de carrossel, variações visuais com texto curto.</td>
+</tr>
+<tr>
+<td>Imagem com personagem/referência/estilo consistente</td>
+<td><code>nano_banana_2 ou nano_banana_flash</code></td>
+<td><code>higgsfield generate create nano_banana_2 --prompt "..." --image ./ref.png --aspect_ratio 9:16 --wait</code></td>
+<td>Mascotes, personagens recorrentes, avatar visual de campanha.</td>
+</tr>
+<tr>
+<td>Retrato/identidade consistente treinada</td>
+<td><code>text2image_soul_v2</code></td>
+<td><code>higgsfield generate create text2image_soul_v2 --prompt "..." --soul-id &lt;soul_id&gt; --quality 2k --wait</code></td>
+<td>Só usar com identidade autorizada; útil para apresentadores/brand persona.</td>
+</tr>
+<tr>
+<td>Ambiente/local/cenário sem pessoas</td>
+<td><code>cinematic_studio_soul_location</code></td>
+<td><code>higgsfield generate create cinematic_studio_soul_location --prompt "clínica premium, luz natural..." --aspect_ratio 16:9 --wait</code></td>
+<td>Bastidores sintéticos, cenários premium, ambientações de campanha.</td>
+</tr>
+<tr>
+<td>Vídeo vertical/reel cinematográfico sério</td>
+<td><code>seedance_2_0</code></td>
+<td><code>higgsfield generate create seedance_2_0 --prompt "..." --aspect_ratio 9:16 --duration 5 --resolution 1080p --wait --wait-timeout 20m</code></td>
+<td>Reels de autoridade, transições, vídeos curtos de conceito.</td>
+</tr>
+<tr>
+<td>Image-to-video a partir de frame aprovado</td>
+<td><code>seedance_2_0</code></td>
+<td><code>higgsfield generate create seedance_2_0 --prompt "camera push-in..." --start-image ./frame.png --aspect_ratio 9:16 --duration 5 --wait</code></td>
+<td>Animar capa/arte aprovada no Content OS.</td>
+</tr>
+<tr>
+<td>Vídeo simples, plano único, custo menor</td>
+<td><code>kling3_0</code></td>
+<td><code>higgsfield generate create kling3_0 --prompt "..." --start-image ./frame.png --duration 5 --mode pro --wait</code></td>
+<td>Teste rápido quando Seedance for excesso.</td>
+</tr>
+<tr>
+<td>UGC/ad com avatar + produto + hook/setting</td>
+<td><code>marketing_studio_video</code></td>
+<td><code>higgsfield generate create marketing_studio_video --prompt "..." --avatars @avatars.json --product_ids @products.json --mode ugc --duration 15 --aspect_ratio 9:16 --resolution 720p --wait --wait-timeout 30m</code></td>
+<td>Anúncios UGC, demonstração, product review. Usar hook/setting só nos modos compatíveis.</td>
+</tr>
+<tr>
+<td>Imagem publicitária com layout/headline/benefícios</td>
+<td><code>marketing_studio_image / dtc-ads</code></td>
+<td><code>higgsfield marketing-studio dtc-ads generate --prompt "..." --format-id &lt;id&gt; --wait</code></td>
+<td>Stack de anúncios estáticos e variações de promessa/benefício.</td>
+</tr>
+<tr>
+<td>Importar produto por URL para Marketing Studio</td>
+<td><code>products fetch</code></td>
+<td><code>higgsfield marketing-studio products fetch --url https://... --wait</code></td>
+<td>Criar entidade reutilizável de produto/oferta antes de gerar ads.</td>
+</tr>
+<tr>
+<td>Product photoshoot/hero de produto</td>
+<td><code>product-photoshoot</code></td>
+<td><code>higgsfield product-photoshoot create --mode lifestyle_scene --prompt "..." --image ./produto.png --count 3 --wait</code></td>
+<td>Fotos premium de produto/kit/serviço visual, quando houver imagem base.</td>
+</tr>
+<tr>
+<td>Marketplace cards / imagens secundárias</td>
+<td><code>marketplace-cards</code></td>
+<td><code>higgsfield marketplace-cards create --scope product-images --prompt "..." --image ./produto.png --wait</code></td>
+<td>Cards de oferta, módulos A+, imagens de landing/comercial.</td>
+</tr>
+<tr>
+<td>Analisar viralidade de vídeo pronto</td>
+<td><code>brain_activity</code></td>
+<td><code>higgsfield generate create brain_activity --video ./reel.mp4 --wait</code></td>
+<td>Gate pós-produção: hook, atenção, retenção e pontos fracos antes de publicar.</td>
+</tr>
+<tr>
+<td>Upload explícito de mídia</td>
+<td><code>upload create</code></td>
+<td><code>higgsfield upload create ./arquivo.png --json</code></td>
+<td>Opcional; generate create auto-uploada caminhos locais.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="modelos-prioritarios-para-o-ivs">Modelos prioritários para o IVS</h2>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>Tipo</th>
+<th>Quando usar</th>
+<th>Parâmetros principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gpt_image_2</code> — GPT Image 2</td>
+<td>image</td>
+<td>imagem premium geral, banners, capa, texto em imagem, carrossel</td>
+<td><code>--aspect-ratio</code> ['1:1', '4:3', '3:4', '16:9', '9:16', '3:2', '2:3'], <code>--batch-size</code> default=1, <code>media flags</code>, <code>--prompt</code>*, <code>--quality</code> ['low', 'medium', 'high'], <code>--resolution</code> ['1k', '2k', '4k']</td>
+</tr>
+<tr>
+<td><code>nano_banana_2</code> — Nano Banana Pro</td>
+<td>image</td>
+<td>personagem/referência/edição criativa difícil</td>
+<td><code>--aspect-ratio</code> ['auto', '1:1', '3:2', '2:3', '4:3', '3:4', '4:5', '5:4', '9:16', '16:9', '21:9'], <code>--folder-id</code>, <code>--input-images</code>, <code>--prompt</code>*, <code>--resolution</code> ['1k', '2k', '4k']</td>
+</tr>
+<tr>
+<td><code>nano_banana_flash</code> — Nano Banana 2</td>
+<td>image</td>
+<td>iteração mais rápida de personagem/referência</td>
+<td><code>--aspect-ratio</code> ['1:1', '3:2', '2:3', '4:3', '3:4', '4:5', '5:4', '9:16', '16:9', '21:9'], <code>media flags</code>, <code>--prompt</code>*, <code>--resolution</code> ['1k', '2k', '4k']</td>
+</tr>
+<tr>
+<td><code>flux_2</code> — FLUX.2</td>
+<td>image</td>
+<td>imagem geral alternativa/experimentos visuais</td>
+<td><code>--aspect-ratio</code> ['1:1', '4:3', '3:4', '16:9', '9:16'], <code>--input-images</code>, <code>--model</code> ['pro', 'flex', 'max'], <code>--prompt</code>*, <code>--resolution</code> ['1k', '2k']</td>
+</tr>
+<tr>
+<td><code>text2image_soul_v2</code> — Higgsfield Soul V2</td>
+<td>image</td>
+<td>identidade/rosto treinado autorizado</td>
+<td><code>--aspect-ratio</code> ['1:1', '16:9', '9:16', '4:3', '3:4', '3:2', '2:3'], <code>--custom-reference-id</code>, <code>media flags</code>, <code>--prompt</code>*, <code>--quality</code> ['1.5k', '2k']</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_soul_location</code> — Cinematic Studio Soul Location</td>
+<td>image</td>
+<td>locações e cenários premium</td>
+<td><code>--aspect-ratio</code> ['1:1', '16:9', '9:16', '4:3', '3:4', '3:2', '2:3', '21:9', '9:21'], <code>--prompt</code>*</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_soul_cast</code> — Cinematic Studio Soul Cast</td>
+<td>image</td>
+<td>personas/personagens cinematográficos</td>
+<td><code>--aspect-ratio</code> ['1:1', '16:9', '9:16', '4:3', '3:4', '3:2', '2:3', '5:4', '4:5', '21:9', '9:21'], <code>--budget</code> default=50, <code>--prompt</code></td>
+</tr>
+<tr>
+<td><code>seedance_2_0</code> — Seedance 2.0</td>
+<td>video</td>
+<td>vídeo principal/reels/image-to-video</td>
+<td><code>--aspect-ratio</code> ['auto', '16:9', '9:16', '4:3', '3:4', '1:1', '21:9'], <code>--bitrate-mode</code> ['standard', 'high'], <code>--duration</code> default=5, <code>--generate-audio</code> default=True, <code>--genre</code> ['auto', 'action', 'horror', 'comedy', 'noir', 'drama', 'epic'], <code>media flags</code>, <code>--mode</code> ['std', 'fast'], <code>--prompt</code>*, <code>--resolution</code> ['480p', '720p', '1080p', '4k']</td>
+</tr>
+<tr>
+<td><code>kling3_0</code> — Kling v3.0</td>
+<td>video</td>
+<td>vídeo plano único/alternativa econômica</td>
+<td><code>--aspect-ratio</code> ['16:9', '9:16', '1:1'], <code>--duration</code> default=5, <code>media flags</code>, <code>--mode</code> ['pro', 'std', '4k'], <code>--prompt</code>*, <code>--sound</code> ['on', 'off']</td>
+</tr>
+<tr>
+<td><code>veo3_1</code> — Google Veo 3.1</td>
+<td>video</td>
+<td>vídeo alternativo/volume quando disponível</td>
+<td><code>--aspect-ratio</code> ['16:9', '9:16'], <code>--duration</code> ['4', '6', '8'], <code>--input-image</code>, <code>--model</code> ['veo-3-1-preview', 'veo-3-1-fast'], <code>--prompt</code>*, <code>--quality</code> ['basic', 'high', 'ultra']</td>
+</tr>
+<tr>
+<td><code>marketing_studio_video</code> — Marketing Studio Video</td>
+<td>video</td>
+<td>UGC e anúncios com avatar/produto</td>
+<td><code>--ad-reference-id</code>, <code>--aspect-ratio</code> ['auto', '21:9', '16:9', '4:3', '1:1', '3:4', '9:16'], <code>--avatar-ids</code>, <code>--avatars</code>, <code>--duration</code> default=15, <code>--generate-audio</code> default=False, <code>--hook-id</code>, <code>media flags</code>, <code>--mode</code> default=ugc, <code>--product-ids</code>, <code>--prompt</code>*, <code>--resolution</code> ['480p', '720p', '1080p'], <code>--setting-id</code>, <code>--web-product-ids</code></td>
+</tr>
+<tr>
+<td><code>marketing_studio_image</code> — Marketing Studio Image</td>
+<td>image</td>
+<td>imagem publicitária Marketing Studio</td>
+<td><code>--aspect-ratio</code> ['auto', '1:1', '3:2', '2:3', '4:3', '3:4', '4:5', '5:4', '9:16', '16:9', '21:9'], <code>--input-images</code>, <code>--prompt</code>*, <code>--resolution</code> ['1k', '2k', '4k']</td>
+</tr>
+<tr>
+<td><code>brain_activity</code> — Brain Activity</td>
+<td>text</td>
+<td>Virality Predictor para vídeo pronto</td>
+<td><code>--folder-id</code>, <code>media flags</code>*</td>
+</tr>
+<tr>
+<td><code>text2speech_v2</code> — text2speech_v2</td>
+<td>audio</td>
+<td>voz/TTS quando necessário</td>
+<td><code>--model</code><em> ['elevenlabs', 'minimax', 'seed_speech', 'vibe_voice', 'cozy_voice'], <code>--prompt</code></em>, <code>--voice-id</code><em>, <code>--voice-type</code></em> ['preset', 'element']</td>
+</tr>
+</tbody>
+</table>
+<h2 id="marketing-studio-playbook">Marketing Studio — playbook</h2>
+<h3 id="discovery">Discovery</h3>
+<pre><code class="language-bash">higgsfield marketing-studio avatars list --json
+higgsfield marketing-studio products list --json
+higgsfield marketing-studio hooks list --json
+higgsfield marketing-studio settings list --json
+higgsfield marketing-studio ad-formats list --json
+</code></pre>
+<h3 id="produto-por-url">Produto por URL</h3>
+<pre><code class="language-bash">higgsfield marketing-studio products fetch --url https://exemplo.com/produto --wait
+</code></pre>
+<h3 id="video-ugc-com-produtoavatar">Vídeo UGC com produto/avatar</h3>
+<pre><code class="language-bash">printf '[&quot;&lt;product_id&gt;&quot;]' &gt; products.json
+printf '[{&quot;id&quot;:&quot;&lt;avatar_id&gt;&quot;,&quot;type&quot;:&quot;preset&quot;}]' &gt; avatars.json
+higgsfield generate create marketing_studio_video \
+  --prompt &quot;UGC vertical, abertura forte, benefício claro, CTA suave&quot; \
+  --avatars @avatars.json \
+  --product_ids @products.json \
+  --mode ugc \
+  --duration 15 \
+  --aspect_ratio 9:16 \
+  --resolution 720p \
+  --wait --wait-timeout 30m
+</code></pre>
+<h3 id="dtc-ads-engine-imagem-com-formato-obrigatorio">DTC Ads Engine — imagem com formato obrigatório</h3>
+<pre><code class="language-bash">higgsfield marketing-studio ad-formats list --json
+higgsfield marketing-studio dtc-ads generate \
+  --prompt &quot;headline curta, benefício visual, prova/autoridade, estética premium IVS&quot; \
+  --format-id &lt;format_id&gt; \
+  --wait
+</code></pre>
+<h3 id="hooks-disponiveis-nomes">Hooks disponíveis — nomes</h3>
+<ul>
+<li><code>3d45fb46-254f-4c83-9685-8e3d28945a67</code> — <strong>Product Hit</strong> (stunt): Object flies into frame, hits subject. Brief reaction → pivot to product.</li>
+<li><code>75b6d501-be0e-4416-a7ed-52f04f180574</code> — <strong>Spicy</strong> (subtle): The shot starts with an extreme close-up of a collarbone, slowly tilts up to reveal a flawless makeup look, then pulls back into selfie framing before a silent pause leads into the product pitch.</li>
+<li><code>26cac2dd-99cb-4818-a678-509b0dab2c32</code> — <strong>Interview</strong> (subtle): Interviewer asks a second stranger a question based entirely on the first stranger's random answer; confusion builds until the second person naturally notices the product (Erewhon-style aspirational item) and pivots into</li>
+<li><code>d50eb41c-fcfa-4f4d-93aa-473cdc6bc3b2</code> — <strong>Random Object Mic</strong> (stunt): During a casual vlog, a random absurd object falls into the person's hand from above, and they immediately use it as a microphone to continue a completely serious product review.</li>
+<li><code>8101cd3e-3cc9-4607-a171-3582daa2f6ee</code> — <strong>Product Crash</strong> (subtle): The product itself falls from above and destroyed, creating chaos; harsh sharpness leads to a perfectly clean and restored scene where a person calmly begins reviewing the product.</li>
+<li><code>31976cc7-e597-4be2-9753-4a80153b0cc7</code> — <strong>Blizzard</strong> (stunt): A cozy indoor scene is suddenly hit by a violent, impossible blizzard; chaos fills the room but the product remains intact and functioning, and once the storm stops, the product is still working.</li>
+<li><code>2db84ed8-7082-4981-9c9c-9d61b3c28668</code> — <strong>Camera Bump</strong> (subtle): The camera operator accidentally bumps into a person, hitting their forehead; they react briefly, recover, and naturally reveal the dress (or product on it) while transitioning into a casual explanation.</li>
+<li><code>5443eff1-d940-4ad3-9413-957bb048a6b0</code> — <strong>Product Dodge</strong> (stunt): Suddenly, a product flies into a person's face; he quickly bends down to avoid a collision, and in the next frame he stands up straight and already holds the product in his hands and begins to review as if nothing had ha</li>
+<li><code>ec9fdf99-314d-480d-a656-10d9861341e7</code> — <strong>Epic Fail</strong> (subtle): A person performs an unsuccessful backflip, lands unsuccessfully, falls, and immediately, without pause, takes out the product and begins an unflappable review.</li>
+</ul>
+<h3 id="settings-disponiveis-nomes">Settings disponíveis — nomes</h3>
+<ul>
+<li><code>b8368076-35eb-4045-b33b-74b2646d9863</code> — <strong>Bedroom</strong> (realistic): On bed or propped against pillows, soft window light. Unmade bed, cozy textures. Relaxed morning or evening wind-down vibe — honest, low-effort feel.</li>
+<li><code>b03705e5-bbed-4d83-8d29-3bc2101cd14f</code> — <strong>Airplane Wing</strong> (unrealistic): Person sits on airplane wing mid-flight at altitude. Casual product review — powerful wind, clouds, engine roar.</li>
+<li><code>10f47b85-abd7-4899-b6b6-91ff2969d3bf</code> — <strong>Nature</strong> (realistic): Outdoors — trail, park, beach, or garden depending on product. Natural light, greenery or open sky. Active or peaceful mood — setting adapts to product.</li>
+<li><code>3cf2164e-ffac-4867-9c43-1d673a5cb28a</code> — <strong>Roofing</strong> (unrealistic): Person on the edge of a skyscraper rooftop, city skyline stretched out behind, wind moving through hair, sun catching the buildings. Casual product review with the entire city below, character completely unbothered by th</li>
+<li><code>6bfbe372-e50a-4900-adee-d4cbd0db8a2f</code> — <strong>Gym</strong> (realistic): Gym floor, locker room, or post-workout bench. Bright overhead lighting, equipment in background. Sweaty or freshly finished energy — product tied to performance or recovery.</li>
+<li><code>e99c2ee8-3c4a-4697-9a58-908e73c9ad38</code> — <strong>Volcano Rim</strong> (unrealistic): Person sits on active volcano rim, lava below. Casual product review — lava bubbles, smoke drifts through, zero reaction.</li>
+<li><code>189fa1ac-1fdc-44f4-bdea-8804a76f0659</code> — <strong>Bathroom</strong> (realistic): Mirror selfie or front camera in bathroom. Ring light or vanity lighting, tiles visible. Intimate getting-ready energy — product shown mid-routine, close-up friendly.</li>
+<li><code>f495493f-0251-4bd7-afc0-90bc6a862e04</code> — <strong>Tiny Reviewer</strong> (unrealistic): Person shrunk to 15cm next to a product their full height. Normal selfie review at impossible scale — leans on it.</li>
+<li><code>a0eb0be9-f0ff-4aee-9dee-69d9fd20110a</code> — <strong>Kitchen</strong> (realistic): Standing at counter or leaning on island, natural daylight. Clean surface, mug or fruit in background. Casual mid-day energy — product fits daily routine.</li>
+<li><code>d6992aea-4521-4606-9e4f-8c766e12622c</code> — <strong>Car Roof</strong> (unrealistic): Person on roof of moving car, desert highway, golden hour. Product review while swaying with the road. Semi truck passes — no flinch.</li>
+<li><code>fdfa032c-801f-4602-8dfd-1162b0f8c9c9</code> — <strong>In Car</strong> (realistic): Selfie from passenger or driver seat, parked or cruising. Window light on face. Casual tone — talking to camera between errands.</li>
+<li><code>8c95f9ba-5849-44b1-82d0-9f6b33240758</code> — <strong>Street</strong> (realistic): Walking on sidewalk or standing on urban street, handheld selfie. City backdrop — storefronts, traffic, pedestrians. Energetic pace, talking while moving. Spontaneous discovery feel.</li>
+<li><code>d39dda10-643c-44e2-bfc8-2451dddde7d9</code> — <strong>Office</strong> (realistic): Desk setup, laptop open, coffee nearby. Clean modern space, soft overhead or monitor glow. Hushed mid-workday tone — quick product mention squeezed between tasks.</li>
+<li><code>71f61bb0-dfd9-459b-a220-0dd468b977d5</code> — <strong>Train Surf</strong> (unrealistic): Person hangs outside a moving train, filming selfie.  Reviews product — wind pressing on them is the live demo.</li>
+</ul>
+<h2 id="catalogo-completo-por-tipo">Catálogo completo por tipo</h2>
+<h3 id="3d">3d</h3>
+<table>
+<thead>
+<tr>
+<th>job_set_type</th>
+<th>Nome</th>
+<th>Required</th>
+<th>Opcionais/Enums principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>3d_rigging</code></td>
+<td>3D Rigging</td>
+<td>model_url</td>
+<td>animation_action_id, enable_animation=False, enable_safety_checker, folder_id, height_meters, model_url</td>
+</tr>
+<tr>
+<td><code>image_to_3d</code></td>
+<td>Image to 3D</td>
+<td>medias</td>
+<td>animation_action_id, enable_animation=False, enable_pbr, enable_rigging=False, enable_safety_checker, folder_id, pose_mode, rigging_height_meters, seed, should_remesh, should_texture=False, symmetry_mode, target_polycount, texture_image_url, texture_prompt, topology</td>
+</tr>
+<tr>
+<td><code>multi_image_to_3d</code></td>
+<td>Multi-Image to 3D</td>
+<td>medias</td>
+<td>animation_action_id, enable_animation=False, enable_pbr, enable_rigging=False, enable_safety_checker, folder_id, pose_mode, rigging_height_meters, seed, should_remesh, should_texture=False, symmetry_mode, target_polycount, texture_image_url, texture_prompt, topology</td>
+</tr>
+<tr>
+<td><code>sam_3_3d</code></td>
+<td>3D Objects</td>
+<td>medias</td>
+<td>detection_threshold, export_textured_glb=True, folder_id, prompt=, seed</td>
+</tr>
+<tr>
+<td><code>tripo_3d</code></td>
+<td>Text to 3D</td>
+<td>prompt</td>
+<td>auto_size=False, face_limit, folder_id, geometry_quality=standard/detailed, negative_prompt, pbr=True, prompt, seed, texture=True, texture_quality=standard/detailed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="audio">audio</h3>
+<table>
+<thead>
+<tr>
+<th>job_set_type</th>
+<th>Nome</th>
+<th>Required</th>
+<th>Opcionais/Enums principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inworld_text_to_speech</code></td>
+<td>Inworld Text to Speech</td>
+<td>prompt, voice</td>
+<td>prompt, voice</td>
+</tr>
+<tr>
+<td><code>mirelo_text_to_audio</code></td>
+<td>Mirelo Text to Audio</td>
+<td>duration, prompt</td>
+<td>duration, prompt</td>
+</tr>
+<tr>
+<td><code>sonilo_music</code></td>
+<td>Sonilo Music</td>
+<td>duration, prompt</td>
+<td>duration, prompt</td>
+</tr>
+<tr>
+<td><code>text2speech_v2</code></td>
+<td>text2speech_v2</td>
+<td>model, prompt, voice_id, voice_type</td>
+<td>model=elevenlabs/minimax/seed_speech/vibe_voice/cozy_voice, prompt, voice_id, voice_type=preset/element</td>
+</tr>
+</tbody>
+</table>
+<h3 id="image">image</h3>
+<table>
+<thead>
+<tr>
+<th>job_set_type</th>
+<th>Nome</th>
+<th>Required</th>
+<th>Opcionais/Enums principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>autosprite</code></td>
+<td>AutoSprite Animation</td>
+<td>image_url</td>
+<td>folder_id, frame_count=25, frame_size=256, image_url, is_humanoid=True, kind=idle/walk/run/attack/jump/custom/iso_idle_up/iso_idle_northeast, name, prompt, remove_bg=default/ultra, video_tier=turbo/pro/max, with_sound=False</td>
+</tr>
+<tr>
+<td><code>bytedance_image_upscale</code></td>
+<td>Bytedance Image Upscale</td>
+<td>medias</td>
+<td>folder_id, resolution=2k/4k</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_2_5</code></td>
+<td>Cinematic Studio 2.5</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, prompt, resolution=1k/2k/4k</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_image</code></td>
+<td>Cinematic Studio Image</td>
+<td>camera_focal_length_id, camera_lens_id, camera_model_id, prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16/3:2/2:3/21:9, batch_size=1, camera_aperture_id, camera_focal_length_id, camera_lens_id, camera_model_id, prompt, resolution=1k/2k/4k</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_soul_cast</code></td>
+<td>Cinematic Studio Soul Cast</td>
+<td>-</td>
+<td>aspect_ratio=1:1/16:9/9:16/4:3/3:4/3:2/2:3/5:4, budget=50, prompt</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_soul_location</code></td>
+<td>Cinematic Studio Soul Location</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/16:9/9:16/4:3/3:4/3:2/2:3/21:9, prompt</td>
+</tr>
+<tr>
+<td><code>color_grading_lut</code></td>
+<td>Color Grading LUT</td>
+<td>medias</td>
+<td>folder_id</td>
+</tr>
+<tr>
+<td><code>flux_2</code></td>
+<td>FLUX.2</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, input_images, model=pro/flex/max, prompt, resolution=1k/2k</td>
+</tr>
+<tr>
+<td><code>flux_kontext</code></td>
+<td>Flux Kontext</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, input_images, prompt</td>
+</tr>
+<tr>
+<td><code>gpt_image_2</code></td>
+<td>GPT Image 2</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16/3:2/2:3, batch_size=1, prompt, quality=low/medium/high, resolution=1k/2k/4k</td>
+</tr>
+<tr>
+<td><code>grok_image</code></td>
+<td>Grok Image</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, mode=std/quality, prompt</td>
+</tr>
+<tr>
+<td><code>image_auto</code></td>
+<td>Image Auto</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, prompt</td>
+</tr>
+<tr>
+<td><code>image_background_remover</code></td>
+<td>Image Background Remover</td>
+<td>medias</td>
+<td></td>
+</tr>
+<tr>
+<td><code>image_decompose</code></td>
+<td>Image Decompose</td>
+<td>medias</td>
+<td>folder_id, mode=granular/standard</td>
+</tr>
+<tr>
+<td><code>kling_omni_image</code></td>
+<td>Kling O1 Image</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/auto/16:9/9:16/4:3/3:4/3:2/2:3, input_images, prompt, resolution=1k/2k</td>
+</tr>
+<tr>
+<td><code>marketing_studio_image</code></td>
+<td>Marketing Studio Image</td>
+<td>prompt</td>
+<td>aspect_ratio=auto/1:1/3:2/2:3/4:3/3:4/4:5/5:4, input_images, prompt, resolution=1k/2k/4k</td>
+</tr>
+<tr>
+<td><code>ms_image</code></td>
+<td>MS Image</td>
+<td>prompt</td>
+<td>aspect_ratio=auto/1:1/3:2/2:3/4:3/3:4/4:5/5:4, avatars, batch_size=1, brand_kit_id, folder_id, product_ids, prompt, quality=low/medium/high, resolution=1k, style_id</td>
+</tr>
+<tr>
+<td><code>nano_banana</code></td>
+<td>Nano Banana</td>
+<td>prompt</td>
+<td>aspect_ratio=auto/1:1/3:2/2:3/4:3/3:4/4:5/5:4, input_images, prompt</td>
+</tr>
+<tr>
+<td><code>nano_banana_2</code></td>
+<td>Nano Banana Pro</td>
+<td>prompt</td>
+<td>aspect_ratio=auto/1:1/3:2/2:3/4:3/3:4/4:5/5:4, folder_id, input_images, prompt, resolution=1k/2k/4k</td>
+</tr>
+<tr>
+<td><code>nano_banana_2_ai_stylist</code></td>
+<td>Nano Banana Pro</td>
+<td>input_image</td>
+<td>background_preset_id, folder_id, input_image, outfit_preset_ids, pose_preset_id, user_outfit_ids</td>
+</tr>
+<tr>
+<td><code>nano_banana_2_shots</code></td>
+<td>Nano Banana Pro</td>
+<td>input_images</td>
+<td>aspect_ratio=auto/1:1/3:2/2:3/4:3/3:4/4:5/5:4, folder_id, input_images</td>
+</tr>
+<tr>
+<td><code>nano_banana_2_skin_enhancer</code></td>
+<td>Nano Banana Pro</td>
+<td>input_image, preset_id</td>
+<td>folder_id, input_image, preset_id</td>
+</tr>
+<tr>
+<td><code>nano_banana_flash</code></td>
+<td>Nano Banana 2</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/3:2/2:3/4:3/3:4/4:5/5:4/9:16, prompt, resolution=1k/2k/4k</td>
+</tr>
+<tr>
+<td><code>openai_hazel</code></td>
+<td>OpenAI Hazel</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/3:2/2:3/auto, input_images, prompt, quality=low/medium/high</td>
+</tr>
+<tr>
+<td><code>outpaint</code></td>
+<td>Outpaint</td>
+<td>medias</td>
+<td>aspect_ratio=auto/1:1/3:2/2:3/4:3/3:4/4:5/5:4, folder_id</td>
+</tr>
+<tr>
+<td><code>recraft_v4_1</code></td>
+<td>Recraft V4.1</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/3:4/4:3/4:5/5:4/3:2/2:3/16:9, background_color, batch_size=1, colors, model_type=standard/vector/utility/utility_vector, prompt, resolution=1k/2k</td>
+</tr>
+<tr>
+<td><code>seedream_v4_5</code></td>
+<td>Seedream 4.5</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/16:9/3:2/21:9/3:4/9:16/2:3, input_images, prompt, quality=basic/high</td>
+</tr>
+<tr>
+<td><code>seedream_v5_lite</code></td>
+<td>Seedream V5 Lite</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, prompt, quality=basic/high</td>
+</tr>
+<tr>
+<td><code>soul_cast</code></td>
+<td>Soul Cast</td>
+<td>-</td>
+<td>aspect_ratio=1:1/16:9/9:16/4:3/3:4/3:2/2:3/5:4, budget=50, prompt</td>
+</tr>
+<tr>
+<td><code>soul_cinema_studio</code></td>
+<td>soul_cinema_studio</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/16:9/9:16/4:3/3:4/3:2/2:3/21:9, custom_reference_id, enhance_prompt=False, prompt, quality=1.5k/2k, style_id</td>
+</tr>
+<tr>
+<td><code>soul_cinematic</code></td>
+<td>Soul Cinematic</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/16:9/9:16/4:3/3:4/3:2/2:3/21:9, custom_reference_id, prompt, quality=1.5k/2k</td>
+</tr>
+<tr>
+<td><code>soul_location</code></td>
+<td>Soul Location</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/16:9/9:16/4:3/3:4/3:2/2:3/21:9, prompt</td>
+</tr>
+<tr>
+<td><code>text2image_soul_v2</code></td>
+<td>Higgsfield Soul V2</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/16:9/9:16/4:3/3:4/3:2/2:3, custom_reference_id, prompt, quality=1.5k/2k</td>
+</tr>
+<tr>
+<td><code>topaz_image</code></td>
+<td>Topaz</td>
+<td>input_image, output_height, output_width</td>
+<td>denoise=0, face_enhancement=False, face_enhancement_creativity=0, face_enhancement_strength=0, folder_id, input_image, model=Standard V2/Low Resolution V2/CGI/High Fidelity V2/Text Refine, output_height, output_width, sharpen=0</td>
+</tr>
+<tr>
+<td><code>topaz_image_generative</code></td>
+<td>Topaz</td>
+<td>input_image, output_height, output_width</td>
+<td>autoprompt=True, creativity=1, denoise=0, face_enhancement=False, face_enhancement_creativity=0, face_enhancement_strength=0, folder_id, input_image, model=Standard MAX/Redefine/Recovery/Recovery V2, output_height, output_width, prompt=, sharpen=0, texture=1</td>
+</tr>
+<tr>
+<td><code>z_image</code></td>
+<td>Z Image</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, prompt</td>
+</tr>
+</tbody>
+</table>
+<h3 id="text">text</h3>
+<table>
+<thead>
+<tr>
+<th>job_set_type</th>
+<th>Nome</th>
+<th>Required</th>
+<th>Opcionais/Enums principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>brain_activity</code></td>
+<td>Brain Activity</td>
+<td>medias</td>
+<td>folder_id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="video">video</h3>
+<table>
+<thead>
+<tr>
+<th>job_set_type</th>
+<th>Nome</th>
+<th>Required</th>
+<th>Opcionais/Enums principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bytedance_video_upscale</code></td>
+<td>Bytedance Video Upscale</td>
+<td>-</td>
+<td>duration, folder_id, fps=24, model_version=standard/pro, preset=common/aigc/short_series/ugc/old_film, resolution=1080p/2k/4k</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_3_0</code></td>
+<td>Cinematic Studio 3.0</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/1:1, duration=5, generate_audio=False, prompt</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_video</code></td>
+<td>Cinematic Studio Video</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, duration=5/10, prompt, slow_motion=False, sound=True</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_video_3_5</code></td>
+<td>Cinematic Studio Video 3.5</td>
+<td>-</td>
+<td>aspect_ratio=auto/21:9/16:9/4:3/1:1/3:4/9:16, batch_size=1, camera_aperture_id, camera_focal_length_id, camera_lens_id, camera_model_id, camera_style, color_grading, duration=15, enhance_prompt=False, folder_id, generate_audio=False, genre=auto/action/horror/comedy/noir/drama/epic, light_scheme, multi_prompt, multi_shot_mode=auto/custom, multi_shots=False, prompt=, prompt_language=en/zh, resolution=480p/720p/1080p, style_id, style_prompt</td>
+</tr>
+<tr>
+<td><code>cinematic_studio_video_v2</code></td>
+<td>Cinematic Studio Video V2</td>
+<td>prompt</td>
+<td>aspect_ratio=1:1/4:3/3:4/16:9/9:16, duration=5, genre=auto/action/horror/comedy/western/suspense/intimate/spectacle, mode=pro/std, prompt, sound=on/off</td>
+</tr>
+<tr>
+<td><code>clipify</code></td>
+<td>Clipify</td>
+<td>urls</td>
+<td>clip_aspect=9:16/1:1/16:9, clips_num=10, folder_id, max_height=1080, segment_seconds=10, subtitle_case=lower/upper/as-is, subtitle_font=notosans, subtitle_highlight_hex=#FFE84D, subtitle_position=bottom/center/top, track_face_crop=True, urls</td>
+</tr>
+<tr>
+<td><code>draw_to_video</code></td>
+<td>Draw To Video</td>
+<td>prompt, sketch, video</td>
+<td>aspect_ratio=auto/21:9/16:9/4:3/1:1/3:4/9:16, duration, enhancer=True, folder_id, generate_audio=False, prompt, ref_image, resolution=480p/720p/1080p, sketch, video</td>
+</tr>
+<tr>
+<td><code>dubbing</code></td>
+<td>dubbing</td>
+<td>input_video, target_language</td>
+<td>folder_id, input_video, target_language=eng/cmn/fra/hin/ita/jpn/kor/por</td>
+</tr>
+<tr>
+<td><code>grok_video</code></td>
+<td>Grok Video</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/1:1, duration=5, prompt</td>
+</tr>
+<tr>
+<td><code>grok_video_v15</code></td>
+<td>Grok Video 1.5</td>
+<td>medias, prompt</td>
+<td>duration=5, prompt, resolution=480p/720p</td>
+</tr>
+<tr>
+<td><code>kling2_6</code></td>
+<td>Kling 2.6 Video</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/1:1, duration=5/10, input_image, prompt, sound=True</td>
+</tr>
+<tr>
+<td><code>kling3_0</code></td>
+<td>Kling v3.0</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/1:1, duration=5, mode=pro/std/4k, prompt, sound=on/off</td>
+</tr>
+<tr>
+<td><code>kling3_0_motion_control</code></td>
+<td>Kling 3.0 Motion Control</td>
+<td>medias</td>
+<td>background_source=input_image/input_video, folder_id, mode=std/pro</td>
+</tr>
+<tr>
+<td><code>kling3_0_turbo</code></td>
+<td>Kling 3.0 Turbo</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/1:1, duration=5, prompt, resolution=720p/1080p</td>
+</tr>
+<tr>
+<td><code>llm_text</code></td>
+<td>LLM Generation</td>
+<td>model</td>
+<td>input_images, model, reasoning_effort, system_prompt=, user_prompt=</td>
+</tr>
+<tr>
+<td><code>marketing_studio_video</code></td>
+<td>Marketing Studio Video</td>
+<td>prompt</td>
+<td>ad_reference_id, aspect_ratio=auto/21:9/16:9/4:3/1:1/3:4/9:16, avatar_ids, avatars, duration=15, generate_audio=False, hook_id, mode=ugc, product_ids, prompt, resolution=480p/720p/1080p, setting_id, web_product_ids</td>
+</tr>
+<tr>
+<td><code>minimax_hailuo</code></td>
+<td>Minimax Hailuo</td>
+<td>prompt</td>
+<td>duration=6/10, input_images, model=minimax/minimax-fast/minimax-2.3/minimax-2.3-fast, prompt, resolution=512/768/1080</td>
+</tr>
+<tr>
+<td><code>reframe</code></td>
+<td>Reframe</td>
+<td>aspect_ratio, medias</td>
+<td>aspect_ratio=21:9/16:9/4:3/1:1/3:4/9:16, duration, folder_id, resolution=480p/720p/1080p</td>
+</tr>
+<tr>
+<td><code>sam_3_video</code></td>
+<td>Remove Background</td>
+<td>medias</td>
+<td>apply_mask=True, folder_id, frames_count, prompt=</td>
+</tr>
+<tr>
+<td><code>seedance1_5</code></td>
+<td>Seedance 1.5 Pro</td>
+<td>prompt</td>
+<td>aspect_ratio=auto/16:9/9:16/4:3/3:4/1:1/21:9, duration=4/8/12, generate_audio=True, prompt, resolution=480p/720p/1080p</td>
+</tr>
+<tr>
+<td><code>seedance_2_0</code></td>
+<td>Seedance 2.0</td>
+<td>prompt</td>
+<td>aspect_ratio=auto/16:9/9:16/4:3/3:4/1:1/21:9, bitrate_mode=standard/high, duration=5, generate_audio=True, genre=auto/action/horror/comedy/noir/drama/epic, mode=std/fast, prompt, resolution=480p/720p/1080p/4k</td>
+</tr>
+<tr>
+<td><code>seedance_2_0_mini</code></td>
+<td>Seedance 2.0 Mini</td>
+<td>prompt</td>
+<td>aspect_ratio=auto/16:9/9:16/4:3/3:4/1:1/21:9, bitrate_mode=standard/high, duration=5, generate_audio=True, genre=auto/action/horror/comedy/noir/drama/epic, prompt, resolution=480p/720p</td>
+</tr>
+<tr>
+<td><code>topaz_video</code></td>
+<td>Topaz</td>
+<td>-</td>
+<td>aspect_ratio=auto/21:9/16:9/4:3/1:1/3:4/9:16, duration, enhancement, folder_id, frame_interpolation, frame_rate=30, frames_count, input_height, input_video, input_video_size=0, input_width, resolution=1080p/2160p</td>
+</tr>
+<tr>
+<td><code>veo3</code></td>
+<td>Google Veo 3</td>
+<td>input_image, prompt</td>
+<td>aspect_ratio=16:9/9:16, input_image, model=veo-3-preview/veo-3-fast, prompt</td>
+</tr>
+<tr>
+<td><code>veo3_1</code></td>
+<td>Google Veo 3.1</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16, duration=4/6/8, input_image, model=veo-3-1-preview/veo-3-1-fast, prompt, quality=basic/high/ultra</td>
+</tr>
+<tr>
+<td><code>veo3_1_lite</code></td>
+<td>Google Veo 3.1 Lite</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/auto, duration=4/6/8, generate_audio=False, prompt</td>
+</tr>
+<tr>
+<td><code>video_background_remover</code></td>
+<td>Video Background Remover</td>
+<td>medias</td>
+<td></td>
+</tr>
+<tr>
+<td><code>video_deflicker</code></td>
+<td>Video Deflicker</td>
+<td>input_video</td>
+<td>duration, folder_id, input_video</td>
+</tr>
+<tr>
+<td><code>video_upscale</code></td>
+<td>Video Upscale</td>
+<td>input_video</td>
+<td>duration, folder_id, input_video</td>
+</tr>
+<tr>
+<td><code>voice_change</code></td>
+<td>voice_change</td>
+<td>input_video, voice_id</td>
+<td>folder_id, input_video, voice_id, voice_type=preset/element</td>
+</tr>
+<tr>
+<td><code>wan2_6</code></td>
+<td>Wan 2.6 Video</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/1:1, duration=5/10/15, prompt, quality=720p/1080p</td>
+</tr>
+<tr>
+<td><code>wan2_7</code></td>
+<td>Wan 2.7</td>
+<td>prompt</td>
+<td>aspect_ratio=16:9/9:16/1:1/4:3/3:4, duration=5, prompt, resolution=720p/1080p</td>
+</tr>
+</tbody>
+</table>
+<h2 id="playbook-por-agente">Playbook por agente</h2>
+<h3 id="joao">João</h3>
+<ul>
+<li>Criar variações visuais/reels/ads via Content OS</li>
+<li>Usar Virality Predictor antes de escala</li>
+<li>Nunca publicar automaticamente; entregar URL/asset para aprovação</li>
+</ul>
+<h3 id="jarvis">Jarvis</h3>
+<ul>
+<li>Pode consultar este mapa e orquestrar qual skill/fluxo chamar</li>
+<li>Deve carregar ivs-data-dev-os antes de desenvolvimento ou integração Content OS</li>
+</ul>
+<h3 id="maria">Maria</h3>
+<ul>
+<li>Governar uso, custos e compliance; pedir aprovação para publicação externa ou uso de rosto real</li>
+</ul>
+<h3 id="ana">Ana</h3>
+<ul>
+<li>Revisar claims clínicos antes de conteúdo médico promissor; Higgsfield não decide compliance clínico</li>
+</ul>
+<h3 id="clara">Clara</h3>
+<ul>
+<li>Não usar para atendimento direto; pode receber assets já aprovados via fluxos internos, sem envio automático</li>
+</ul>
+<h2 id="onde-consultar-os-brutos">Onde consultar os brutos</h2>
+<ul>
+<li><code>raw/README.md</code>, <code>raw/MODELS.md</code>, <code>raw/cli_help.txt</code>, <code>raw/cli_subcommands_help.txt</code></li>
+<li><code>raw/model_list_live.json</code>, <code>raw/model_get/*.json</code>, <code>raw/lists/*.json</code></li>
+</ul></div><div class="footer">Gerado por Maria em 2026-06-25T18:33:54.604625+00:00</div></main></body></html>

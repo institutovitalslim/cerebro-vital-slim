@@ -1,0 +1,114 @@
+[
+  {
+    "name": "avatars",
+    "cmd": "marketing-studio avatars list --json",
+    "returncode": 0,
+    "bytes": 4802,
+    "count": 20,
+    "stderr": ""
+  },
+  {
+    "name": "products",
+    "cmd": "marketing-studio products list --json",
+    "returncode": 0,
+    "bytes": 3,
+    "count": 0,
+    "stderr": ""
+  },
+  {
+    "name": "webproducts",
+    "cmd": "marketing-studio webproducts list --json",
+    "returncode": 0,
+    "bytes": 3,
+    "count": 0,
+    "stderr": ""
+  },
+  {
+    "name": "hooks",
+    "cmd": "marketing-studio hooks list --json",
+    "returncode": 0,
+    "bytes": 5894,
+    "count": 9,
+    "stderr": ""
+  },
+  {
+    "name": "settings",
+    "cmd": "marketing-studio settings list --json",
+    "returncode": 0,
+    "bytes": 8758,
+    "count": 14,
+    "stderr": ""
+  },
+  {
+    "name": "ad_references",
+    "cmd": "marketing-studio ad-references list --json",
+    "returncode": 0,
+    "bytes": 56,
+    "count": 0,
+    "stderr": ""
+  },
+  {
+    "name": "brand_kits",
+    "cmd": "marketing-studio brand-kits list --json",
+    "returncode": 0,
+    "bytes": 56,
+    "count": 0,
+    "stderr": ""
+  },
+  {
+    "name": "ad_formats",
+    "cmd": "marketing-studio ad-formats list --json",
+    "returncode": 0,
+    "bytes": 11453,
+    "count": 42,
+    "stderr": ""
+  },
+  {
+    "name": "uploads_image",
+    "cmd": "upload list --image --size 20 --json",
+    "returncode": 0,
+    "bytes": 4839,
+    "count": 20,
+    "stderr": ""
+  },
+  {
+    "name": "uploads_video",
+    "cmd": "upload list --video --size 20 --json",
+    "returncode": 0,
+    "bytes": 3148,
+    "count": 13,
+    "stderr": ""
+  },
+  {
+    "name": "soul_ids",
+    "cmd": "soul-id list --json",
+    "returncode": 0,
+    "bytes": 501,
+    "count": 3,
+    "stderr": ""
+  },
+  {
+    "name": "workspace_status",
+    "cmd": "workspace status --json",
+    "returncode": 0,
+    "bytes": 23,
+    "count": null,
+    "stderr": ""
+  },
+  {
+    "name": "workspaces",
+    "cmd": "workspace list --json",
+    "returncode": 0,
+    "bytes": 177,
+    "count": 1,
+    "stderr": ""
+  },
+  {
+    "name": "recent_jobs",
+    "cmd": "generate list --size 20 --json",
+    "returncode": 0,
+    "bytes": 20138,
+    "count": 20,
+    "stderr": ""
+  }
+]

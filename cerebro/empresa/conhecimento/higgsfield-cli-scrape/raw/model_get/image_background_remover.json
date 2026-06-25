@@ -1,0 +1,13 @@
+{
+  "display_name": "Image Background Remover",
+  "job_set_type": "image_background_remover",
+  "params": [
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "image"
+}

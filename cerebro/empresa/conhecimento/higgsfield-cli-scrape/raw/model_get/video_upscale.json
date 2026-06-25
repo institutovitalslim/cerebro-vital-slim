@@ -1,0 +1,25 @@
+{
+  "display_name": "Video Upscale",
+  "job_set_type": "video_upscale",
+  "params": [
+    {
+      "name": "duration",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "input_video",
+      "type": "object",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "video"
+}

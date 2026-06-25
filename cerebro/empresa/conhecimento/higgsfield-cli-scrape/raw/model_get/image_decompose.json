@@ -1,0 +1,29 @@
+{
+  "display_name": "Image Decompose",
+  "job_set_type": "image_decompose",
+  "params": [
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "default": "granular",
+      "required": false,
+      "enum": [
+        "granular",
+        "standard"
+      ]
+    }
+  ],
+  "type": "image"
+}

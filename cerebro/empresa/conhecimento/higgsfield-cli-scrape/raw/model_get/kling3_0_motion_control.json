@@ -1,0 +1,39 @@
+{
+  "display_name": "Kling 3.0 Motion Control",
+  "job_set_type": "kling3_0_motion_control",
+  "params": [
+    {
+      "name": "background_source",
+      "type": "string",
+      "default": "input_image",
+      "required": false,
+      "enum": [
+        "input_image",
+        "input_video"
+      ]
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "default": "std",
+      "required": false,
+      "enum": [
+        "std",
+        "pro"
+      ]
+    }
+  ],
+  "type": "video"
+}

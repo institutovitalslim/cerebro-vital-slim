@@ -1,0 +1,1132 @@
+===== higgsfield auth --help
+RETURN=0
+Authenticate with Higgsfield using device login and manage the local credentials file.
+
+Usage:
+  higgsfield auth [command]
+
+Examples:
+  higgsfield auth login
+  higgsfield auth token
+  higgsfield auth logout
+
+Available Commands:
+  login       Start browser-based device login
+  logout      Delete the locally stored access token
+  token       Print the current access token
+
+Flags:
+  -h, --help   help for auth
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield auth [command] --help" for more information about a command.
+
+
+===== higgsfield auth login --help
+RETURN=0
+Start browser-based device login
+
+Usage:
+  higgsfield auth login [flags]
+
+Flags:
+  -h, --help   help for login
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield auth logout --help
+RETURN=0
+Delete the locally stored access token
+
+Usage:
+  higgsfield auth logout [flags]
+
+Flags:
+  -h, --help   help for logout
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield auth token --help
+RETURN=0
+Print the current access token
+
+Usage:
+  higgsfield auth token [flags]
+
+Flags:
+  -h, --help   help for token
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield account status --help
+RETURN=0
+Show account email, plan, and available credits
+
+Usage:
+  higgsfield account status [flags]
+
+Flags:
+  -h, --help   help for status
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield account transactions --help
+RETURN=0
+List recent credit transactions
+
+Usage:
+  higgsfield account transactions [flags]
+
+Examples:
+  higgsfield account transactions
+  higgsfield account transactions --size 100 --cursor 20
+
+Flags:
+      --cursor int   pagination cursor
+  -h, --help         help for transactions
+      --size int     page size (max 100) (default 20)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield generate cost --help
+RETURN=0
+Estimate credits without creating a job.
+Params and media flags match generate create. Local file paths are auto-uploaded.
+
+Usage:
+  higgsfield generate cost <job_set_type> [--param value]... [flags]
+
+Examples:
+  higgsfield generate cost nano_banana_2 --prompt "cinematic product photo"
+  higgsfield generate cost <video_model> --prompt "slow push-in shot" --image ./first.png
+
+Flags:
+  -h, --help   help for cost
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield generate get --help
+RETURN=0
+Show one generation job
+
+Usage:
+  higgsfield generate get <id> [flags]
+
+Examples:
+  higgsfield generate get <job_id>
+  higgsfield generate get <job_id> --json
+
+Flags:
+  -h, --help   help for get
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield generate list --help
+RETURN=0
+List recent generation jobs
+
+Usage:
+  higgsfield generate list [flags]
+
+Examples:
+  higgsfield generate list
+  higgsfield generate list --video --size 50
+  higgsfield generate list --text
+  higgsfield generate list --json
+
+Flags:
+  -h, --help       help for list
+      --image      image jobs only
+      --size int   page size (default 20)
+      --text       text jobs only
+      --video      video jobs only
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield generate wait --help
+RETURN=0
+Poll a job until it finishes
+
+Usage:
+  higgsfield generate wait <id> [flags]
+
+Examples:
+  higgsfield generate wait <job_id>
+  higgsfield generate wait <job_id> --timeout 20m --interval 5s
+  higgsfield generate wait <job_id> --quiet
+
+Flags:
+  -h, --help                help for wait
+      --interval duration   poll interval (default 3s)
+  -q, --quiet               no progress output
+      --timeout duration    max wait duration (default 10m0s)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield upload create --help
+RETURN=0
+Upload a local media file
+
+Usage:
+  higgsfield upload create <file> [flags]
+
+Examples:
+  higgsfield upload create ./reference.png
+  higgsfield upload create ./clip.mp4
+
+Flags:
+  -h, --help   help for create
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield upload list --help
+RETURN=0
+List uploaded media IDs
+
+Usage:
+  higgsfield upload list [flags]
+
+Examples:
+  higgsfield upload list
+  higgsfield upload list --audio
+  higgsfield upload list --video --size 50
+
+Flags:
+      --audio      audio uploads only
+  -h, --help       help for list
+      --image      image uploads only
+      --size int   page size (default 20)
+      --video      video uploads only
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield soul-id create --help
+RETURN=0
+Create a custom Soul reference
+
+Usage:
+  higgsfield soul-id create [flags]
+
+Examples:
+  higgsfield soul-id create --name Alice --soul-2 --image <id1> --image <id2> --image <id3> --image <id4> --image <id5>
+  higgsfield soul-id create --name Alice --soul-cinematic --image <id1> --image <id2> --image <id3> --image <id4> --image <id5>
+
+Flags:
+  -h, --help                help for create
+      --image stringArray   uploaded image id (repeatable, 5–20)
+      --name string         character name (required)
+      --soul-2              train Soul 2.0 model
+      --soul-cinematic      train Soul Cinematic model
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield soul-id list --help
+RETURN=0
+List custom Soul references
+
+Usage:
+  higgsfield soul-id list [flags]
+
+Examples:
+  higgsfield soul-id list
+  higgsfield soul-id list --size 50
+
+Flags:
+  -h, --help       help for list
+      --size int   page size (default 20)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield soul-id get --help
+RETURN=0
+Show one custom Soul reference
+
+Usage:
+  higgsfield soul-id get <id> [flags]
+
+Examples:
+  higgsfield soul-id get <soul_id>
+  higgsfield soul-id get <soul_id> --json
+
+Flags:
+  -h, --help   help for get
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield soul-id wait --help
+RETURN=0
+Poll Soul training until it finishes
+
+Usage:
+  higgsfield soul-id wait <id> [flags]
+
+Examples:
+  higgsfield soul-id wait <soul_id>
+  higgsfield soul-id wait <soul_id> --timeout 45m --interval 15s
+
+Flags:
+  -h, --help                help for wait
+      --interval duration   poll interval (default 10s)
+  -q, --quiet               no progress output
+      --timeout duration    max wait duration (default 30m0s)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield product-photoshoot create --help
+RETURN=0
+Enhance prompt and generate brand images
+
+Usage:
+  higgsfield product-photoshoot create [flags]
+
+Examples:
+  higgsfield product-photoshoot create --mode product_shot --prompt "hero shot of fragrance" --image fragrance.jpg
+
+Flags:
+      --aspect_ratio string      override default aspect ratio for the mode
+      --brand_context string     extra brand description
+      --count int                number of variants (1-10) (default 1)
+      --enhance-only             return enhanced prompts without submitting generation jobs
+  -h, --help                     help for create
+      --image strings            reference image — file path or upload UUID; repeatable
+      --interval duration        poll interval (default 3s)
+      --mode string              product photoshoot mode (required)
+      --product_context string   extra product description
+      --prompt string            user intent (required)
+      --timeout duration         max wait per job (default 10m0s)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketplace-cards create --help
+RETURN=0
+Enhance marketplace card prompts and generate images
+
+Usage:
+  higgsfield marketplace-cards create [flags]
+
+Examples:
+  hf marketplace-cards create --scope full-set --prompt "peach lemonade can" --image product.png
+
+Flags:
+      --asset strings            specific asset type; repeatable
+      --brand_context string     extra brand description
+      --category string          marketplace product category
+      --enhance-only             return enhanced prompts without submitting generation jobs
+  -h, --help                     help for create
+      --image strings            product reference image — file path or upload UUID; repeatable
+      --interval duration        poll interval (default 3s)
+      --main-job string          existing completed nano_banana_2 main image job id for secondary/A+ assets
+      --product_context string   extra product description
+      --product_url string       source product URL
+      --prompt string            user intent (required)
+      --scope string             generation scope: main, product-images, aplus, full-set (default "main")
+      --timeout duration         max wait per job (default 15m0s)
+      --visual_style string      visual style constraints
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio avatars --help
+RETURN=0
+Manage Marketing Studio avatars
+
+Usage:
+  higgsfield marketing-studio avatars [command]
+
+Examples:
+  higgsfield marketing-studio avatars list
+  higgsfield marketing-studio avatars create --name Alice --image <upload_id>
+
+Available Commands:
+  create      Create a Marketing Studio avatar
+  list        List Marketing Studio avatars
+
+Flags:
+  -h, --help   help for avatars
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio avatars [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio avatars list --help
+RETURN=0
+List Marketing Studio avatars
+
+Usage:
+  higgsfield marketing-studio avatars list [flags]
+
+Examples:
+  higgsfield marketing-studio avatars list
+  higgsfield marketing-studio avatars list --size 50
+
+Flags:
+  -h, --help       help for list
+      --size int   page size (default 20)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio avatars create --help
+RETURN=0
+Create a Marketing Studio avatar
+
+Usage:
+  higgsfield marketing-studio avatars create [flags]
+
+Examples:
+  higgsfield marketing-studio avatars create --name Alice
+  higgsfield marketing-studio avatars create --name Alice --image <upload_id> --pinned
+
+Flags:
+  -h, --help               help for create
+      --image string       uploaded image id
+      --image-url string   uploaded image cloudfront url
+      --name string        avatar name (required)
+      --pinned             pin avatar
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio avatars get --help
+RETURN=0
+Manage Marketing Studio avatars
+
+Usage:
+  higgsfield marketing-studio avatars [command]
+
+Examples:
+  higgsfield marketing-studio avatars list
+  higgsfield marketing-studio avatars create --name Alice --image <upload_id>
+
+Available Commands:
+  create      Create a Marketing Studio avatar
+  list        List Marketing Studio avatars
+
+Flags:
+  -h, --help   help for avatars
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio avatars [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio products --help
+RETURN=0
+Manage Marketing Studio products
+
+Usage:
+  higgsfield marketing-studio products [command]
+
+Examples:
+  higgsfield marketing-studio products list
+  higgsfield marketing-studio products create --title "Sneaker" --image <upload_id>
+  higgsfield marketing-studio products fetch --url https://example.com/product --wait
+
+Available Commands:
+  create      Create a product from uploaded images
+  fetch       Import a product from a web page
+  list        List Marketing Studio products
+
+Flags:
+  -h, --help   help for products
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio products [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio products list --help
+RETURN=0
+List Marketing Studio products
+
+Usage:
+  higgsfield marketing-studio products list [flags]
+
+Examples:
+  higgsfield marketing-studio products list
+  higgsfield marketing-studio products list --limit 50 --offset 50
+
+Flags:
+  -h, --help         help for list
+      --limit int    page limit (default 20)
+      --offset int   page offset
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio products create --help
+RETURN=0
+Create a product from uploaded images
+
+Usage:
+  higgsfield marketing-studio products create [flags]
+
+Examples:
+  higgsfield marketing-studio products create --title "Sneaker" --image <upload_id>
+  higgsfield marketing-studio products create --title "Sneaker" --description "Limited release" --image <upload_id>
+
+Flags:
+      --description string   product description
+  -h, --help                 help for create
+      --image stringArray    uploaded image id (repeatable, ≥1)
+      --title string         product title (required)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio products fetch --help
+RETURN=0
+Import a product from a web page
+
+Usage:
+  higgsfield marketing-studio products fetch [flags]
+
+Examples:
+  higgsfield marketing-studio products fetch --url https://example.com/product
+  higgsfield marketing-studio products fetch --url https://example.com/product --wait
+
+Flags:
+  -h, --help               help for fetch
+      --timeout duration   wait timeout (default 1m30s)
+      --url string         product page URL (required)
+      --wait               block until import completes
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio products get --help
+RETURN=0
+Manage Marketing Studio products
+
+Usage:
+  higgsfield marketing-studio products [command]
+
+Examples:
+  higgsfield marketing-studio products list
+  higgsfield marketing-studio products create --title "Sneaker" --image <upload_id>
+  higgsfield marketing-studio products fetch --url https://example.com/product --wait
+
+Available Commands:
+  create      Create a product from uploaded images
+  fetch       Import a product from a web page
+  list        List Marketing Studio products
+
+Flags:
+  -h, --help   help for products
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio products [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio webproducts --help
+RETURN=0
+Manage Marketing Studio web products
+
+Usage:
+  higgsfield marketing-studio webproducts [command]
+
+Examples:
+  higgsfield marketing-studio webproducts list
+  higgsfield marketing-studio webproducts create --url https://example.com --title "Product"
+  higgsfield marketing-studio webproducts fetch --url https://example.com --wait
+
+Available Commands:
+  create      Create a web product manually
+  fetch       Import a web product from a URL
+  list        List Marketing Studio web products
+
+Flags:
+  -h, --help   help for webproducts
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio webproducts [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio webproducts fetch --help
+RETURN=0
+Import a web product from a URL
+
+Usage:
+  higgsfield marketing-studio webproducts fetch [flags]
+
+Examples:
+  higgsfield marketing-studio webproducts fetch --url https://example.com
+  higgsfield marketing-studio webproducts fetch --url https://example.com --wait --timeout 2m
+
+Flags:
+  -h, --help               help for fetch
+      --timeout duration   wait timeout (default 1m30s)
+      --url string         page URL (required)
+      --wait               block until import completes
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio webproducts list --help
+RETURN=0
+List Marketing Studio web products
+
+Usage:
+  higgsfield marketing-studio webproducts list [flags]
+
+Examples:
+  higgsfield marketing-studio webproducts list
+  higgsfield marketing-studio webproducts list --limit 50 --offset 50
+
+Flags:
+  -h, --help         help for list
+      --limit int    page limit (default 20)
+      --offset int   page offset
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio webproducts get --help
+RETURN=0
+Manage Marketing Studio web products
+
+Usage:
+  higgsfield marketing-studio webproducts [command]
+
+Examples:
+  higgsfield marketing-studio webproducts list
+  higgsfield marketing-studio webproducts create --url https://example.com --title "Product"
+  higgsfield marketing-studio webproducts fetch --url https://example.com --wait
+
+Available Commands:
+  create      Create a web product manually
+  fetch       Import a web product from a URL
+  list        List Marketing Studio web products
+
+Flags:
+  -h, --help   help for webproducts
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio webproducts [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio hooks --help
+RETURN=0
+Manage Marketing Studio hooks
+
+Usage:
+  higgsfield marketing-studio hooks [command]
+
+Examples:
+  higgsfield marketing-studio hooks list
+  higgsfield marketing-studio hooks list --search sale --size 50
+
+Available Commands:
+  list        List Marketing Studio hooks
+
+Flags:
+  -h, --help   help for hooks
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio hooks [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio hooks list --help
+RETURN=0
+List Marketing Studio hooks
+
+Usage:
+  higgsfield marketing-studio hooks list [flags]
+
+Examples:
+  higgsfield marketing-studio hooks list
+  higgsfield marketing-studio hooks list --search sale --cursor <cursor>
+
+Flags:
+      --cursor string   pagination cursor
+  -h, --help            help for list
+      --search string   search by name or prompt
+      --size int        custom item page size; preset items may also be returned (default 20)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio settings --help
+RETURN=0
+Manage Marketing Studio settings
+
+Usage:
+  higgsfield marketing-studio settings [command]
+
+Examples:
+  higgsfield marketing-studio settings list
+  higgsfield marketing-studio settings list --search office --size 50
+
+Available Commands:
+  list        List Marketing Studio settings
+
+Flags:
+  -h, --help   help for settings
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio settings [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio settings list --help
+RETURN=0
+List Marketing Studio settings
+
+Usage:
+  higgsfield marketing-studio settings list [flags]
+
+Examples:
+  higgsfield marketing-studio settings list
+  higgsfield marketing-studio settings list --search office --cursor <cursor>
+
+Flags:
+      --cursor string   pagination cursor
+  -h, --help            help for list
+      --search string   search by name or prompt
+      --size int        custom item page size; preset items may also be returned (default 20)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio ad-references --help
+RETURN=0
+Manage Marketing Studio ad references
+
+Usage:
+  higgsfield marketing-studio ad-references [command]
+
+Aliases:
+  ad-references, ad-refs, adrefs
+
+Examples:
+  higgsfield marketing-studio ad-references list
+  higgsfield marketing-studio ad-references create --video-input <upload_id>
+  higgsfield marketing-studio ad-references get <id>
+
+Available Commands:
+  create      Create an ad reference
+  get         Fetch an ad reference
+  list        List ad references
+
+Flags:
+  -h, --help   help for ad-references
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio ad-references [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio ad-references list --help
+RETURN=0
+List ad references
+
+Usage:
+  higgsfield marketing-studio ad-references list [flags]
+
+Examples:
+  higgsfield marketing-studio ad-references list
+  higgsfield marketing-studio ad-references list --size 50 --cursor <cursor>
+
+Flags:
+      --cursor string   pagination cursor (created_at unix timestamp)
+  -h, --help            help for list
+      --size int        page size (default 20)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio ad-references create --help
+RETURN=0
+Create an ad reference
+
+Usage:
+  higgsfield marketing-studio ad-references create [flags]
+
+Examples:
+  higgsfield marketing-studio ad-references create --video-input <upload_id>
+  higgsfield marketing-studio ad-references create --video-input <upload_id> --avatar <avatar_id>
+  higgsfield marketing-studio ad-references create --job <job_id> --product <product_id>
+
+Flags:
+      --avatar string        marketing-studio avatar id (optional)
+  -h, --help                 help for create
+      --job string           completed video job id
+      --product string       marketing-studio product id (optional)
+      --video-input string   uploaded video input id
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio ad-references get --help
+RETURN=0
+Fetch an ad reference
+
+Usage:
+  higgsfield marketing-studio ad-references get <id> [flags]
+
+Examples:
+  higgsfield marketing-studio ad-references get 30c71a38-...
+
+Flags:
+  -h, --help   help for get
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio brand-kits --help
+RETURN=0
+Marketing Studio brand kits
+
+Usage:
+  higgsfield marketing-studio brand-kits [command]
+
+Aliases:
+  brand-kits, brand-kit, bk
+
+Examples:
+  higgsfield marketing-studio brand-kits list
+  higgsfield marketing-studio brand-kits fetch --url https://example.com --wait
+  higgsfield marketing-studio brand-kits get <id>
+
+Available Commands:
+  fetch       Create a brand kit from a website URL
+  get         Fetch a brand kit
+  list        List brand kits
+
+Flags:
+  -h, --help   help for brand-kits
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio brand-kits [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio brand-kits list --help
+RETURN=0
+List brand kits
+
+Usage:
+  higgsfield marketing-studio brand-kits list [flags]
+
+Examples:
+  higgsfield marketing-studio brand-kits list
+  higgsfield marketing-studio brand-kits list --size 50 --cursor <cursor>
+
+Flags:
+      --cursor string   pagination cursor (created_at unix timestamp)
+  -h, --help            help for list
+      --size int        page size (default 20)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio brand-kits fetch --help
+RETURN=0
+Create a brand kit from a website URL
+
+Usage:
+  higgsfield marketing-studio brand-kits fetch [flags]
+
+Examples:
+  higgsfield marketing-studio brand-kits fetch --url https://example.com
+  higgsfield marketing-studio brand-kits fetch --url https://example.com --wait
+
+Flags:
+  -h, --help               help for fetch
+      --timeout duration   wait timeout (default 2m0s)
+      --url string         website URL (required)
+      --wait               block until the kit is completed or failed
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio brand-kits get --help
+RETURN=0
+Fetch a brand kit
+
+Usage:
+  higgsfield marketing-studio brand-kits get <id> [flags]
+
+Examples:
+  higgsfield marketing-studio brand-kits get <id>
+
+Flags:
+  -h, --help   help for get
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio ad-formats --help
+RETURN=0
+DTC Ads Engine ad format presets
+
+Usage:
+  higgsfield marketing-studio ad-formats [command]
+
+Aliases:
+  ad-formats, ad-format, formats
+
+Examples:
+  higgsfield marketing-studio ad-formats list
+  higgsfield marketing-studio ad-formats list --type headline
+
+Available Commands:
+  list        List ad format presets
+
+Flags:
+  -h, --help   help for ad-formats
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio ad-formats [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio ad-formats list --help
+RETURN=0
+List ad format presets
+
+Usage:
+  higgsfield marketing-studio ad-formats list [flags]
+
+Examples:
+  higgsfield marketing-studio ad-formats list
+  higgsfield marketing-studio ad-formats list --type headline --json
+
+Flags:
+  -h, --help          help for list
+      --type string   filter by format type (client-side)
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield marketing-studio dtc-ads --help
+RETURN=0
+DTC Ads Engine — branded image generation
+
+Usage:
+  higgsfield marketing-studio dtc-ads [command]
+
+Aliases:
+  dtc-ads, dtc, ads
+
+Examples:
+  higgsfield marketing-studio dtc-ads generate --prompt "hero shot" --format-id <uuid> --brand-kit-id <uuid>
+
+Available Commands:
+  generate    Generate a DTC ad image
+
+Flags:
+  -h, --help   help for dtc-ads
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+Use "higgsfield marketing-studio dtc-ads [command] --help" for more information about a command.
+
+
+===== higgsfield marketing-studio dtc-ads generate --help
+RETURN=0
+Generate a DTC ad image
+
+Usage:
+  higgsfield marketing-studio dtc-ads generate [flags]
+
+Examples:
+  higgsfield marketing-studio dtc-ads generate --prompt "hero shot" --format-id <uuid>
+  higgsfield marketing-studio dtc-ads generate --prompt "..." --format-id <uuid> --brand-kit-id <uuid> --wait
+
+Flags:
+      --aspect-ratio string   aspect ratio (default 1:1)
+      --avatar stringArray    avatar: <avatar_id>[:<type>] (default type: preset; max 1)
+      --batch-size int        batch size 1..20 (default 1)
+      --brand-kit-id string   brand kit id to apply
+      --cost-only             preview cost without creating a job
+      --folder-id string      folder placement
+      --format-id string      ad format id (required)
+      --from-file string      JSON file with the params shape (flags merge over file values)
+  -h, --help                  help for generate
+      --media stringArray     reference media: <media_input_id>[:<role>] (default role: image; repeatable, ≤14)
+      --product stringArray   product id (max 1)
+      --prompt string         image brief (required, or via --from-file)
+      --quality string        quality: low, medium, high (default low)
+      --resolution string     resolution: 1k, 2k, 4k (default 1k)
+      --timeout duration      wait timeout (default 5m0s)
+      --wait                  block until the job finishes
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield workspace list --help
+RETURN=0
+List workspaces available to your account
+
+Usage:
+  higgsfield workspace list [flags]
+
+Flags:
+  -h, --help   help for list
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield workspace set --help
+RETURN=0
+Select a workspace for future requests
+
+Usage:
+  higgsfield workspace set <id> [flags]
+
+Flags:
+  -h, --help   help for set
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield workspace status --help
+RETURN=0
+Show the currently selected workspace
+
+Usage:
+  higgsfield workspace status [flags]
+
+Flags:
+  -h, --help   help for status
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+
+
+===== higgsfield workspace unset --help
+RETURN=0
+Clear the selected workspace
+
+Usage:
+  higgsfield workspace unset [flags]
+
+Flags:
+  -h, --help   help for unset
+
+Global Flags:
+      --json       print raw JSON responses
+      --no-color   disable color output
+

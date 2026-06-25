@@ -1,0 +1,42 @@
+{
+  "display_name": "OpenAI Hazel",
+  "job_set_type": "openai_hazel",
+  "params": [
+    {
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": "1:1",
+      "required": false,
+      "enum": [
+        "1:1",
+        "3:2",
+        "2:3",
+        "auto"
+      ]
+    },
+    {
+      "name": "input_images",
+      "type": "array",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "quality",
+      "type": "string",
+      "default": "medium",
+      "required": false,
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    }
+  ],
+  "type": "image"
+}

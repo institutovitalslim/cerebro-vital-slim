@@ -1,0 +1,45 @@
+{
+  "display_name": "dubbing",
+  "job_set_type": "dubbing",
+  "params": [
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "input_video",
+      "type": "object",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "target_language",
+      "type": "string",
+      "default": null,
+      "required": true,
+      "enum": [
+        "eng",
+        "cmn",
+        "fra",
+        "hin",
+        "ita",
+        "jpn",
+        "kor",
+        "por",
+        "rus",
+        "tur",
+        "spa",
+        "deu",
+        "ara",
+        "pol",
+        "ind",
+        "fil",
+        "swe",
+        "fin"
+      ]
+    }
+  ],
+  "type": "video"
+}

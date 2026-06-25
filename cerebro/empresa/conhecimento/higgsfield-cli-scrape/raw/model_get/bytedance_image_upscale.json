@@ -1,0 +1,29 @@
+{
+  "display_name": "Bytedance Image Upscale",
+  "job_set_type": "bytedance_image_upscale",
+  "params": [
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "resolution",
+      "type": "string",
+      "default": "4k",
+      "required": false,
+      "enum": [
+        "2k",
+        "4k"
+      ]
+    }
+  ],
+  "type": "image"
+}

@@ -1,0 +1,35 @@
+{
+  "display_name": "voice_change",
+  "job_set_type": "voice_change",
+  "params": [
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "input_video",
+      "type": "object",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "voice_id",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "voice_type",
+      "type": "string",
+      "default": "preset",
+      "required": false,
+      "enum": [
+        "preset",
+        "element"
+      ]
+    }
+  ],
+  "type": "video"
+}

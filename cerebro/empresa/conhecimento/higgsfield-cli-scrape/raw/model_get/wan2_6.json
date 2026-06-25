@@ -1,0 +1,51 @@
+{
+  "display_name": "Wan 2.6 Video",
+  "job_set_type": "wan2_6",
+  "params": [
+    {
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": "16:9",
+      "required": false,
+      "enum": [
+        "16:9",
+        "9:16",
+        "1:1"
+      ]
+    },
+    {
+      "name": "duration",
+      "type": "string",
+      "default": 5,
+      "required": false,
+      "enum": [
+        "5",
+        "10",
+        "15"
+      ]
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "quality",
+      "type": "string",
+      "default": "720p",
+      "required": false,
+      "enum": [
+        "720p",
+        "1080p"
+      ]
+    }
+  ],
+  "type": "video"
+}

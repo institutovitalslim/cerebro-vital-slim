@@ -1,0 +1,19 @@
+{
+  "display_name": "Inworld Text to Speech",
+  "job_set_type": "inworld_text_to_speech",
+  "params": [
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "voice",
+      "type": "string",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "audio"
+}

@@ -1,0 +1,62 @@
+{
+  "display_name": "Seedance 1.5 Pro",
+  "job_set_type": "seedance1_5",
+  "params": [
+    {
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": "16:9",
+      "required": false,
+      "enum": [
+        "auto",
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "1:1",
+        "21:9"
+      ]
+    },
+    {
+      "name": "duration",
+      "type": "string",
+      "default": 4,
+      "required": false,
+      "enum": [
+        "4",
+        "8",
+        "12"
+      ]
+    },
+    {
+      "name": "generate_audio",
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "medias",
+      "type": "array",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "prompt",
+      "type": "string",
+      "default": null,
+      "required": true
+    },
+    {
+      "name": "resolution",
+      "type": "string",
+      "default": "720p",
+      "required": false,
+      "enum": [
+        "480p",
+        "720p",
+        "1080p"
+      ]
+    }
+  ],
+  "type": "video"
+}

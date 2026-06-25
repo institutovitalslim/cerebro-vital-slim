@@ -1,0 +1,43 @@
+{
+  "display_name": "3D Rigging",
+  "job_set_type": "3d_rigging",
+  "params": [
+    {
+      "name": "animation_action_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "enable_animation",
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    {
+      "name": "enable_safety_checker",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "height_meters",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "model_url",
+      "type": "string",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "3d"
+}

@@ -1,0 +1,88 @@
+{
+  "display_name": "Clipify",
+  "job_set_type": "clipify",
+  "params": [
+    {
+      "name": "clip_aspect",
+      "type": "string",
+      "default": "9:16",
+      "required": false,
+      "enum": [
+        "9:16",
+        "1:1",
+        "16:9"
+      ]
+    },
+    {
+      "name": "clips_num",
+      "type": "integer",
+      "default": 10,
+      "required": false
+    },
+    {
+      "name": "folder_id",
+      "type": "object",
+      "default": null,
+      "required": false
+    },
+    {
+      "name": "max_height",
+      "type": "integer",
+      "default": 1080,
+      "required": false
+    },
+    {
+      "name": "segment_seconds",
+      "type": "integer",
+      "default": 10,
+      "required": false
+    },
+    {
+      "name": "subtitle_case",
+      "type": "string",
+      "default": "as-is",
+      "required": false,
+      "enum": [
+        "lower",
+        "upper",
+        "as-is"
+      ]
+    },
+    {
+      "name": "subtitle_font",
+      "type": "string",
+      "default": "notosans",
+      "required": false
+    },
+    {
+      "name": "subtitle_highlight_hex",
+      "type": "string",
+      "default": "#FFE84D",
+      "required": false
+    },
+    {
+      "name": "subtitle_position",
+      "type": "string",
+      "default": "bottom",
+      "required": false,
+      "enum": [
+        "bottom",
+        "center",
+        "top"
+      ]
+    },
+    {
+      "name": "track_face_crop",
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    {
+      "name": "urls",
+      "type": "array",
+      "default": null,
+      "required": true
+    }
+  ],
+  "type": "video"
+}
