@@ -255,9 +255,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Aprendizados [2026-06-25]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
-### Aprendizados [2026-06-25]
-> Promovido das conversas reais (LEAD apenas).
-
 ### O loop de re-pergunta SPIN APÓS o lead já ter respondido continua matando leads quentes — bug de prioridade máxima
 - **ANTI-PADRÃO crítico recorrente (Carina e anônimo):** o lead respondeu "Peso" / "Quero emagrecer" / "Sim" e a Clara devolveu de novo "Para eu continuar do ponto certo e sem pular etapas: o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?" — 3x na MESMA conversa após ele já ter dito "Peso". A condução humana-padrão (microblocos empáticos: dor→tentativas→frustração) estava funcionando lindamente e foi quebrada por essa pergunta-template reciclada. Tratar como BUG, não conteúdo.
 - **Regra:** uma vez que o lead nomeou o foco ("peso", "emagrecer", "hormônios"), NUNCA reapresentar a pergunta-cardápio "peso, disposição, hormônios ou saúde". Fixar o foco declarado e avançar para experiência/avaliação/preço.
