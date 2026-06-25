@@ -94,12 +94,40 @@ A v0 já pode ser usada em modo **local/read-only** para:
 3. outputs longos do GBrain;
 4. relatórios técnicos internos.
 
+## Integração opcional já aplicada
+
+A auditoria diária Clara/Z-API recebeu o flag opcional `--compress-context`.
+
+Comando validado:
+
+```bash
+python3 /root/cerebro-vital-slim/cerebro/areas/tecnologia/skills/ivs-agent-operating-layer/scripts/clara_daily_audit.py \
+  --no-save \
+  --json \
+  --compress-context
+```
+
+Resultado real do smoke:
+
+```json
+{
+  "ok": true,
+  "severity": "MÉDIA",
+  "compressed_context": {
+    "ok": true,
+    "critical_line_count": 12,
+    "redactions": {"phone_br": 21}
+  }
+}
+```
+
+Governança mantida: o compressor é pós-processador de observabilidade; falha nele não derruba a auditoria, não envia WhatsApp, não pausa/despausa Clara e não entra no caminho crítico do atendimento.
+
 Ainda não deve ser colocada como proxy ou dependência crítica no caminho da Clara.
 
 ## Próximos incrementos recomendados
 
-1. Integrar como pré-processador opcional nos scripts de auditoria da Clara.
-2. Criar fixtures reais anonimizados de Z-API e cron.
-3. Adicionar métrica de redução percentual de caracteres/tokens.
-4. Adicionar modo `--stdin` para uso em pipes.
-5. Adicionar política de retenção/limpeza para originais preservados.
+1. Criar fixtures reais anonimizados de Z-API e cron.
+2. Adicionar métrica de redução percentual de caracteres/tokens.
+3. Adicionar modo `--stdin` para uso em pipes.
+4. Adicionar política de retenção/limpeza para originais preservados.

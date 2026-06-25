@@ -16,6 +16,7 @@ SKILL_DIR = Path('/root/.openclaw/workspace/skills/ivs-agent-operating-layer')
 MONITOR = SKILL_DIR / 'scripts' / 'clara_safety_monitor.py'
 DEFAULT_STATE = Path('/root/.openclaw/workspace/ops/zapi_bridge/clara_safety_audit_state.json')
 DEFAULT_OUT = Path('/root/deliverables/clara-daily-audit-latest.md')
+CONTEXT_COMPRESSOR = Path('/root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py')
 
 
 def run_monitor() -> Dict[str, Any]:
@@ -142,12 +143,49 @@ def render_md(report: Dict[str, Any], cur: Dict[str, Any], changes: List[str], s
     return '\n'.join(lines) + '\n'
 
 
+def compress_context(path: Path, kind: str = 'clara-log') -> Dict[str, Any]:
+    """Optional read-only post-processing with IVS Context Compressor.
+
+    Failure here must never fail the daily audit: this is an observability aid,
+    not a production dependency in Clara's path.
+    """
+    if not CONTEXT_COMPRESSOR.exists():
+        return {'ok': False, 'error': f'compressor not found: {CONTEXT_COMPRESSOR}'}
+    try:
+        raw = subprocess.check_output(
+            [
+                sys.executable,
+                str(CONTEXT_COMPRESSOR),
+                '--input',
+                str(path),
+                '--type',
+                kind,
+                '--format',
+                'json',
+            ],
+            text=True,
+            stderr=subprocess.STDOUT,
+        )
+        payload = json.loads(raw)
+        return {
+            'ok': bool(payload.get('ok')),
+            'sha256': payload.get('sha256'),
+            'outputs': payload.get('outputs'),
+            'evidence': payload.get('evidence'),
+            'critical_line_count': (payload.get('summary') or {}).get('critical_line_count'),
+            'redactions': (payload.get('summary') or {}).get('redactions'),
+        }
+    except Exception as exc:
+        return {'ok': False, 'error': str(exc)[:500]}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--state', default=str(DEFAULT_STATE))
     ap.add_argument('--out', default=str(DEFAULT_OUT))
     ap.add_argument('--no-save', action='store_true')
     ap.add_argument('--json', action='store_true')
+    ap.add_argument('--compress-context', action='store_true', help='Run IVS Context Compressor on the generated report (read-only, optional).')
     args = ap.parse_args()
 
     report = run_monitor()
@@ -160,9 +198,12 @@ def main() -> int:
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(md, encoding='utf-8')
+    compressed_context = compress_context(out) if args.compress_context else None
     if not args.no_save:
         save_json(state_path, {'snapshot': cur, 'last_report': str(out), 'updated_at': int(time.time())})
     result = {'ok': True, 'severity': sev, 'changes': changes, 'snapshot': cur, 'report': str(out), 'state': str(state_path), 'saved': not args.no_save}
+    if compressed_context is not None:
+        result['compressed_context'] = compressed_context
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:

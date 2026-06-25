@@ -93,6 +93,19 @@ Extrai e preserva quando encontrados:
 - eventos QuarkClinic/Clara relevantes;
 - falhas de cron/agente.
 
+## Integração opcional com auditoria diária Clara/Z-API
+
+A auditoria diária pode acionar o compressor como pós-processador read-only, sem mudar o fluxo crítico da Clara:
+
+```bash
+python3 /root/cerebro-vital-slim/cerebro/areas/tecnologia/skills/ivs-agent-operating-layer/scripts/clara_daily_audit.py \
+  --no-save \
+  --json \
+  --compress-context
+```
+
+O campo `compressed_context` no JSON retorna SHA256, caminhos do Markdown/JSON comprimidos e evidência original preservada. Falha no compressor não derruba a auditoria; ele é observabilidade, não dependência de produção.
+
 ## Teste
 
 ```bash

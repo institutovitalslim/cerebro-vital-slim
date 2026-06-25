@@ -71,6 +71,19 @@ python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compre
 - telefones brasileiros;
 - tokens/instâncias Z-API óbvios.
 
+## Integração opcional com auditoria diária Clara/Z-API
+
+```bash
+python3 /root/cerebro-vital-slim/cerebro/areas/tecnologia/skills/ivs-agent-operating-layer/scripts/clara_daily_audit.py \
+  --no-save \
+  --json \
+  --compress-context
+```
+
+- Campo novo no JSON: `compressed_context`.
+- Modo seguro: pós-processador read-only; falha do compressor não falha a auditoria.
+- Não envia WhatsApp, não pausa/despausa Clara, não altera estado quando combinado com `--no-save`.
+
 ## Teste obrigatório após alteração
 
 ```bash
