@@ -147,6 +147,41 @@ A v0 já pode ser usada em modo **local/read-only** para:
 3. outputs longos do GBrain;
 4. relatórios técnicos internos.
 
+## Retenção/limpeza segura
+
+Criada rotina de limpeza com dry-run por padrão:
+
+```bash
+python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+  --cleanup \
+  --cleanup-retention-days 30
+```
+
+Aplicação real exige confirmação explícita:
+
+```bash
+python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+  --cleanup \
+  --apply-cleanup \
+  --cleanup-retention-days 30
+```
+
+Smoke real em produção, sem apagar nada:
+
+```json
+{
+  "ok": true,
+  "mode": "dry-run",
+  "retention_days": 30,
+  "candidate_count": 0,
+  "candidate_bytes": 0,
+  "deleted_count": 0,
+  "safety": "dry-run by default; deletion requires --apply-cleanup"
+}
+```
+
+Segurança: a rotina só considera arquivos antigos dentro de `reports/` e `evidence/`, com sufixos conhecidos (`.json`, `.md`, `.txt`, `.log`, `.meta.json`), e preserva `.gitignore`.
+
 ## Integração opcional já aplicada
 
 As auditorias abaixo receberam o flag opcional `--compress-context`.

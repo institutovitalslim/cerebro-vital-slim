@@ -68,6 +68,20 @@ comando_longo 2>&1 | \
 python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py --recover <sha256_completo>
 ```
 
+## Retenção/limpeza segura
+
+Dry-run, sem apagar:
+
+```bash
+python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py --cleanup --cleanup-retention-days 30
+```
+
+Aplicar de verdade exige flag explícito:
+
+```bash
+python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py --cleanup --apply-cleanup --cleanup-retention-days 30
+```
+
 ## Governança
 
 - O resumo não substitui a fonte original.

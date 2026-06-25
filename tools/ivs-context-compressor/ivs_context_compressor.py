@@ -305,6 +305,68 @@ def compress_stdin(args: argparse.Namespace) -> int:
     return emit_payload(payload, args)
 
 
+def cleanup_retention(args: argparse.Namespace) -> int:
+    """Remove old generated reports/evidence only when --apply-cleanup is explicit."""
+    retention_days = args.cleanup_retention_days
+    if retention_days < 1:
+        print(json.dumps({"ok": False, "error": "--cleanup-retention-days must be >= 1"}, ensure_ascii=False), file=sys.stderr)
+        return 2
+    now = dt.datetime.now(dt.timezone.utc).timestamp()
+    cutoff = now - (retention_days * 86400)
+    roots = {
+        "reports": Path(args.out_dir).expanduser().resolve(),
+        "evidence": Path(args.evidence_dir).expanduser().resolve(),
+    }
+    candidates: List[Dict[str, Any]] = []
+    skipped: List[Dict[str, str]] = []
+    allowed_suffixes = {".json", ".md", ".txt", ".log", ".meta.json"}
+    for kind, root in roots.items():
+        if not root.exists():
+            skipped.append({"kind": kind, "path": str(root), "reason": "missing_dir"})
+            continue
+        for path in root.rglob("*"):
+            if not path.is_file():
+                continue
+            if path.name == ".gitignore":
+                continue
+            suffix = ".meta.json" if path.name.endswith(".meta.json") else path.suffix
+            if suffix not in allowed_suffixes:
+                skipped.append({"kind": kind, "path": str(path), "reason": f"suffix_not_allowed:{suffix or 'none'}"})
+                continue
+            stat = path.stat()
+            if stat.st_mtime <= cutoff:
+                age_days = round((now - stat.st_mtime) / 86400, 2)
+                candidates.append({
+                    "kind": kind,
+                    "path": str(path),
+                    "size_bytes": stat.st_size,
+                    "age_days": age_days,
+                })
+    deleted: List[str] = []
+    errors: List[Dict[str, str]] = []
+    if args.apply_cleanup:
+        for item in candidates:
+            try:
+                Path(item["path"]).unlink()
+                deleted.append(item["path"])
+            except Exception as exc:  # pragma: no cover - defensive filesystem guard
+                errors.append({"path": item["path"], "error": str(exc)})
+    payload = {
+        "ok": not errors,
+        "mode": "apply" if args.apply_cleanup else "dry-run",
+        "retention_days": retention_days,
+        "candidate_count": len(candidates),
+        "candidate_bytes": sum(int(item["size_bytes"]) for item in candidates),
+        "deleted_count": len(deleted),
+        "deleted_bytes": sum(int(item["size_bytes"]) for item in candidates if item["path"] in set(deleted)),
+        "candidates": candidates[:200],
+        "skipped": skipped[:100],
+        "errors": errors,
+        "safety": "dry-run by default; deletion requires --apply-cleanup",
+    }
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
+    return 0 if not errors else 1
+
 def recover(args: argparse.Namespace) -> int:
     digest = args.recover.strip()
     if not re.fullmatch(r"[a-fA-F0-9]{64}", digest):
@@ -340,12 +402,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--max-lines", type=int, default=80, help="Máximo de linhas críticas no resumo")
     p.add_argument("--recover", help="SHA256 completo para localizar original preservado")
     p.add_argument("--copy-to", help="Copia original recuperado para este caminho")
+    p.add_argument("--cleanup-retention-days", type=int, default=30, help="Retenção mínima em dias para --cleanup")
+    p.add_argument("--cleanup", action="store_true", help="Lista arquivos antigos de reports/evidence para limpeza; dry-run por padrão")
+    p.add_argument("--apply-cleanup", action="store_true", help="Aplica a limpeza; sem este flag --cleanup só simula")
     return p
 
 
 def main(argv: List[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if args.cleanup:
+        return cleanup_retention(args)
     if args.recover:
         return recover(args)
     if args.stdin:

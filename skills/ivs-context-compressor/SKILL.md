@@ -79,6 +79,27 @@ python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compre
   --recover <sha256_completo>
 ```
 
+## Retenção/limpeza segura
+
+Dry-run por padrão — não apaga nada:
+
+```bash
+python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+  --cleanup \
+  --cleanup-retention-days 30
+```
+
+Aplicar limpeza exige flag explícito:
+
+```bash
+python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+  --cleanup \
+  --apply-cleanup \
+  --cleanup-retention-days 30
+```
+
+Segurança: só remove arquivos antigos em `reports/` e `evidence/`, com sufixos conhecidos (`.json`, `.md`, `.txt`, `.log`, `.meta.json`), preservando `.gitignore`.
+
 ## Saídas padrão
 
 - Relatórios JSON/Markdown: `/root/cerebro-vital-slim/ops/context-compressor/reports/`

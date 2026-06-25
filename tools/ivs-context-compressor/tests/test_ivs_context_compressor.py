@@ -3,9 +3,11 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -121,8 +123,66 @@ def test_stdin_mode():
         assert Path(payload["evidence"]["original_path"]).exists()
 
 
+def test_cleanup_retention_dry_run_and_apply():
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td)
+        out_dir = tmp / "reports"
+        ev_dir = tmp / "evidence"
+        out_dir.mkdir()
+        ev_dir.mkdir()
+        old_report = out_dir / "old.md"
+        old_evidence = ev_dir / "old.log"
+        fresh_report = out_dir / "fresh.md"
+        protected = ev_dir / ".gitignore"
+        for path in [old_report, old_evidence, fresh_report, protected]:
+            path.write_text("x", encoding="utf-8")
+        old_ts = time.time() - (3 * 86400)
+        os.utime(old_report, (old_ts, old_ts))
+        os.utime(old_evidence, (old_ts, old_ts))
+
+        dry = run([
+            sys.executable,
+            str(SCRIPT),
+            "--cleanup",
+            "--cleanup-retention-days",
+            "1",
+            "--out-dir",
+            str(out_dir),
+            "--evidence-dir",
+            str(ev_dir),
+        ])
+        assert dry.returncode == 0, dry.stderr
+        dry_payload = json.loads(dry.stdout)
+        assert dry_payload["mode"] == "dry-run"
+        assert dry_payload["candidate_count"] == 2
+        assert old_report.exists()
+        assert old_evidence.exists()
+
+        applied = run([
+            sys.executable,
+            str(SCRIPT),
+            "--cleanup",
+            "--apply-cleanup",
+            "--cleanup-retention-days",
+            "1",
+            "--out-dir",
+            str(out_dir),
+            "--evidence-dir",
+            str(ev_dir),
+        ])
+        assert applied.returncode == 0, applied.stderr
+        applied_payload = json.loads(applied.stdout)
+        assert applied_payload["mode"] == "apply"
+        assert applied_payload["deleted_count"] == 2
+        assert not old_report.exists()
+        assert not old_evidence.exists()
+        assert fresh_report.exists()
+        assert protected.exists()
+
+
 if __name__ == "__main__":
     test_cli_compress_and_recover()
     test_redact_mcp_token_in_url()
     test_stdin_mode()
+    test_cleanup_retention_dry_run_and_apply()
     print("ok")
