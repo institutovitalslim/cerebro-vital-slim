@@ -159,8 +159,8 @@ auxiliary:
     timeout: 360
     extra_body: {}
   compression:
-    provider: auto
-    model: ''
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 120
@@ -525,7 +525,7 @@ streaming:
   transport: auto
   edit_interval: 0.8
   buffer_threshold: 24
-  cursor: " \u2589"
+  cursor: ' ▉'
   fresh_final_after_seconds: 0.0
 sessions:
   auto_prune: false
