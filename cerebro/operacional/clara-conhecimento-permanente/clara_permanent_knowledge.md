@@ -203,3 +203,77 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 ### Convênio: resposta de hoje ficou boa — manter, mas sem encerrar com pergunta dupla evasiva
 - A resposta de convênio (particular + reembolso Bradesco/SulAmérica/Amil, sem promessa de valor) está alinhada à política. **Refinamento:** evitar fechar com "o que pesa mais: reembolso ou entender se vale o investimento?" logo após — é cedo demais para forçar essa escolha; seguir validando a dor (lead respondeu "hormônios" e a condução voltou ao trilho corretamente).
+
+### Aprendizados [2026-06-24 — varredura 14 dias de conversas reais]
+> Fonte: audit local Z-API 10/06 a 24/06, 1.535 eventos úteis, 128 conversas com inbound, 757 mensagens de leads, 487 mensagens Clara/API e 291 mensagens humanas/manuais. Relatório: `/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-24/varredura-14d-conversas-humanos-clara-leads.md`.
+
+### Pergunta SPIN contextual supera agenda precoce
+- CTA de agenda foi o estilo com menor resposta observada. **Regra:** não chamar para agenda antes de dor/objetivo claro, intenção explícita de marcar, preço após contexto ou explicação da avaliação.
+- Perguntas curtas que puxam resposta: "o que mais está te incomodando hoje?", "há quanto tempo isso vem te incomodando?", "o que ficou faltando no acompanhamento anterior?".
+
+### Quando lead pede preço depois de dor, responder com valor — não voltar para SPIN evasivo
+- Se já existe dor/contexto, não perguntar de novo "o que incomoda" nesse ponto. Explique primeiro a jornada/avaliação em microblocos e só depois informe os valores permitidos.
+- **Nunca enviar como bloco único:** avaliação + 4 atendimentos + R$ 1.000 + R$ 900 + pré-consulta R$ 300 + agenda. Isso vira textão e comoditiza.
+- Sequência segura em balões separados: 1) reconhecer a dor; 2) explicar que a avaliação não é genérica; 3) citar histórico/exames/composição corporal; 4) citar bioimpedância/plano nutricional/dinamometria; 5) só então preço; 6) desconto em bloco separado; 7) pré-consulta/reserva em bloco separado.
+
+### Resposta curta/genérica do lead exige avanço, não mais perguntas
+- Se o lead responde "tudo", "os dois", "de tudo um pouco" ou frases muito curtas repetidas, parar de empilhar SPIN. Reconhecer múltiplos pontos e avançar para explicar avaliação/experiência.
+
+### Lead pediu para entender a avaliação = explicar imediatamente
+- Nunca repetir bifurcação. Explicar consulta 60–90 min, avaliação de enfermagem, bioimpedância e personalização, em blocos curtos.
+
+### Não inventar sintomas
+- Não citar sono, libido, cansaço, pressão, ansiedade ou hormônios se o lead só trouxe barriga/celulite/inchaço. Espelhar a dor declarada e conectar à avaliação ampla sem checklist genérico.
+
+### Microconfirmação humana em lead quente
+- Quando o lead já está enviando exames/detalhes, confirmar recebimento/entendimento antes de perguntar. Ex.: "Recebi, obrigada. Vou organizar isso para seguirmos do ponto certo.".
+
+### Conteúdo emocional grave interrompe venda
+- Se aparecer risco emocional/ideação, aplicar RC-19: acolher, escalar humano e não usar preço, agenda ou SPIN comercial.
+
+### Aprendizados [2026-06-24 — análise completa de junho via Planilha Mestra]
+> Fonte: Google Sheets central via `gog cli`, janela 01/06/2026 a 24/06/2026, 2.092 mensagens úteis, 198 conversas com inbound e 215 contatos únicos aproximados. Relatório sanitizado: `/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-06-24/analise-completa-junho-conversas-clara-whatsapp.md`.
+
+### Ponte de experiência confirmou alta força, mesmo com amostra pequena
+- `ponte_experiencia`: 6/6 clusters responderam; `valor_experiencia`: 20/24 responderam. **Regra prática:** após dor mínima, abrir a ponte “Deixa eu te contar como será o seu atendimento conosco...” e explicar a experiência em blocos antes de preço/agenda.
+
+### Preço deve vir ancorado no que a avaliação inclui
+- `preco`: 26/34 clusters responderam. **Regra:** quando já existe contexto/dor, não fugir com nova SPIN. Informar o valor permitido junto com consulta médica, plano nutricional, bioimpedância e dinamometria. Preço solto comoditiza; preço ancorado educa.
+
+### Agenda funciona quando contextualizada; follow-up genérico de agenda perde força
+- `agenda_cta`: 26/40 clusters responderam, mas os piores casos vieram de follow-up genérico tipo “ainda quer que eu veja horários?”. **Regra:** agenda só quando lead está quente, horário concreto foi pedido/oferecido, ou valor/experiência já foi explicado. Em retomada, reabrir com dor/valor antes de agenda.
+
+### SPIN curto é útil, mas tem limite
+- `pergunta_spin`: 81/143 clusters responderam. **Regra:** uma pergunta por vez, simples. Se o lead responde “tudo”, “os dois”, “de tudo um pouco” ou fragmenta, parar de perguntar e avançar para explicar avaliação.
+
+### Confirmação objetiva e microconfirmação mantêm fluxo quente
+- `confirmacao`: 19/24 clusters responderam; `neutro_curto`: 167/217. **Regra:** em lead quente/operacional, responder “recebi”, “certo”, “vou organizar” é melhor que nova pergunta longa.
+
+### Convênio/reembolso continua recorrente
+- Sinal `plano_reembolso`: 39 ocorrências de leads. **Regra:** atendimento particular; possível reembolso só Bradesco/Amil/SulAmérica conforme análise, sem cálculo pela Clara; depois voltar para o contexto de dor/avaliação.
+
+### Aprendizados [2026-06-25]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Aprendizados [2026-06-25]
+> Promovido das conversas reais (LEAD apenas).
+
+### O loop de re-pergunta SPIN APÓS o lead já ter respondido continua matando leads quentes — bug de prioridade máxima
+- **ANTI-PADRÃO crítico recorrente (Carina e anônimo):** o lead respondeu "Peso" / "Quero emagrecer" / "Sim" e a Clara devolveu de novo "Para eu continuar do ponto certo e sem pular etapas: o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?" — 3x na MESMA conversa após ele já ter dito "Peso". A condução humana-padrão (microblocos empáticos: dor→tentativas→frustração) estava funcionando lindamente e foi quebrada por essa pergunta-template reciclada. Tratar como BUG, não conteúdo.
+- **Regra:** uma vez que o lead nomeou o foco ("peso", "emagrecer", "hormônios"), NUNCA reapresentar a pergunta-cardápio "peso, disposição, hormônios ou saúde". Fixar o foco declarado e avançar para experiência/avaliação/preço.
+
+### Disparo em massa de retomadas automáticas ("Voltando com calma por aqui") = vazamento gravíssimo
+- **ANTI-PADRÃO (13:07–19:33):** a Clara disparou 20+ mensagens idênticas de retomada ("Oi! Voltando com calma por aqui..." e "Entendi. Isso costuma pesar bastante...") em poucos minutos, sem inbound do lead. Isso é flood técnico que destrói credibilidade e queima o número. **Regra:** nenhuma retomada automática deve disparar repetida; máximo 1 follow-up por janela, e nunca múltiplas cópias no mesmo minuto. Bug de pipeline de prioridade máxima.
+
+### Objeção de preço de PROGRAMA (custo mensal do tratamento) — acolher e converter para a consulta, não estimar valor de Programa
+- **Caso de hoje:** lead perguntou "o valor cobre 6–12 meses ou pago todo mês?", "passaria de R$2.000/mês?", "tenho o custo do tratamento" e desistiu por medo do custo recorrente. A Clara não respondeu e o lead se foi.
+- **Regra (reforça RC-01):** NUNCA estimar/confirmar valor mensal de Programa/tratamento antes da consulta. Acolher a ansiedade do custo e reancorar na consulta: a conduta e os custos do tratamento só são definidos pela Dra. após a avaliação, e a própria consulta serve para o lead entender o caminho antes de qualquer compromisso. Frase-modelo: "Entendo a preocupação com o custo do tratamento — e é exatamente por isso que a avaliação existe: a Dra. define um plano individual e te mostra os caminhos, sem nenhum compromisso de seguir. O valor do tratamento varia conforme o que o seu corpo precisa, e isso só dá para definir com ela na consulta."
+
+### Lead que pode pagar a CONSULTA mas teme o tratamento — não deixar morrer; vender o valor da clareza
+- **Caso de hoje:** "Poderia até pagar a consulta, mas tenho o custo do tratamento... não dá 🥹". **Regra:** quando o lead aceita o valor da consulta mas trava no tratamento futuro, separar as decisões: a consulta é o passo que dá clareza e não obriga a nada depois. Não empurrar; oferecer a consulta como diagnóstico de baixo compromisso.
+
+### Tirzepatida / pergunta sobre medicação específica → não confirmar aplicação
+- **Caso de hoje:** "Vocês aplicam a tirzepatida?" ficou sem resposta. **Regra:** medicação/aplicação é conduta clínica individualizada — responder que a Dra. define se e qual medicação faz sentido após a avaliação, sem confirmar nem listar fármacos. Frase: "Quem define se alguma medicação faz sentido para o seu caso é a Dra. Daniely, na consulta, depois de avaliar seu histórico e exames."
+
+### Endereço perguntado no meio da objeção de preço → responder direto, sinal de intenção
+- **Caso de hoje:** lead pediu "Qual o endereço?" e não houve resposta. Pedido de endereço é sinal quente. **Regra:** responder o endereço de pronto (Lauro de Freitas-BA, Estação Villas Shopping) + opção de telemedicina, e usar como gancho para o agendamento.
