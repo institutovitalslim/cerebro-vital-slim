@@ -96,9 +96,9 @@ A v0 já pode ser usada em modo **local/read-only** para:
 
 ## Integração opcional já aplicada
 
-A auditoria diária Clara/Z-API recebeu o flag opcional `--compress-context`.
+As auditorias abaixo receberam o flag opcional `--compress-context`.
 
-Comando validado:
+### Clara/Z-API
 
 ```bash
 python3 /root/cerebro-vital-slim/cerebro/areas/tecnologia/skills/ivs-agent-operating-layer/scripts/clara_daily_audit.py \
@@ -120,6 +120,52 @@ Resultado real do smoke:
   }
 }
 ```
+
+### Crons Agent OS
+
+```bash
+python3 /root/cerebro-vital-slim/cerebro/areas/tecnologia/skills/ivs-agent-operating-layer/scripts/agent_os_cron_auditor.py \
+  --json \
+  --compress-context
+```
+
+Resultado real do smoke:
+
+```json
+{
+  "ok": true,
+  "compressed_context": {
+    "ok": true,
+    "critical_line_count": 2,
+    "redactions": {}
+  }
+}
+```
+
+### Health do GBrain
+
+```bash
+python3 /root/cerebro-vital-slim/scripts/gbrain_ivs_sync.py \
+  --doctor-only \
+  --mode doctor-only \
+  --compress-context
+```
+
+Resultado real do smoke:
+
+```json
+{
+  "ok": false,
+  "mode": "doctor-only",
+  "compressed_context": {
+    "ok": true,
+    "critical_line_count": 6,
+    "redactions": {}
+  }
+}
+```
+
+Observação: no smoke do GBrain, `ok:false` veio do health atual do GBrain/doctor, não do compressor; o compressor executou com `ok:true` e preservou evidência.
 
 Governança mantida: o compressor é pós-processador de observabilidade; falha nele não derruba a auditoria, não envia WhatsApp, não pausa/despausa Clara e não entra no caminho crítico do atendimento.
 

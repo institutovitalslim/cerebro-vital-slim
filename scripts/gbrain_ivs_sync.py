@@ -25,6 +25,7 @@ IMPORT = Path('/root/.local/share/ivs-gbrain/import/ivs-brain')
 REPORT_DIR = Path('/root/.local/share/ivs-gbrain/reports')
 CANONICAL_LATEST = ROOT / 'cerebro/gbrain/sync/latest-health.md'
 LOCK = Path('/root/.local/share/ivs-gbrain/gbrain_ivs_sync.lock')
+CONTEXT_COMPRESSOR = ROOT / 'tools/ivs-context-compressor/ivs_context_compressor.py'
 
 ENV = os.environ.copy()
 ENV['GBRAIN_HOME'] = '/root/.local/share/ivs-gbrain/home'
@@ -159,6 +160,29 @@ def parse_health(text: str) -> dict:
     return out
 
 
+
+def compress_context(path: Path, kind: str = 'gbrain-results') -> dict:
+    if not CONTEXT_COMPRESSOR.exists():
+        return {'ok': False, 'error': f'compressor not found: {CONTEXT_COMPRESSOR}'}
+    try:
+        raw = subprocess.check_output(
+            [sys.executable, str(CONTEXT_COMPRESSOR), '--input', str(path), '--type', kind, '--format', 'json'],
+            text=True,
+            stderr=subprocess.STDOUT,
+            timeout=120,
+        )
+        payload = json.loads(raw)
+        return {
+            'ok': bool(payload.get('ok')),
+            'sha256': payload.get('sha256'),
+            'outputs': payload.get('outputs'),
+            'evidence': payload.get('evidence'),
+            'critical_line_count': (payload.get('summary') or {}).get('critical_line_count'),
+            'redactions': (payload.get('summary') or {}).get('redactions'),
+        }
+    except Exception as exc:
+        return {'ok': False, 'error': str(exc)[:500]}
+
 def build_markdown(payload: dict) -> str:
     stats = payload.get('stats_parsed', {})
     health = payload.get('health_parsed', {})
@@ -209,6 +233,7 @@ def main() -> int:
     ap.add_argument('--doctor-only', action='store_true', help='não espelha/importa; roda só doctor/stats')
     ap.add_argument('--no-clean', action='store_true', help='não limpa a pasta de importação antes de espelhar')
     ap.add_argument('--mode', default='manual', choices=['manual', 'cron', 'post-rc25', 'doctor-only'])
+    ap.add_argument('--compress-context', action='store_true', help='Run IVS Context Compressor on the generated health report (read-only, optional).')
     args = ap.parse_args()
 
     if not GBRAIN_REPO.exists():
@@ -255,6 +280,10 @@ def main() -> int:
         json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
         md = build_markdown(payload)
         md_path.write_text(md, encoding='utf-8')
+        compressed_context = compress_context(md_path) if args.compress_context else None
+        if compressed_context is not None:
+            payload['compressed_context'] = compressed_context
+            json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
         CANONICAL_LATEST.parent.mkdir(parents=True, exist_ok=True)
         CANONICAL_LATEST.write_text(md, encoding='utf-8')
         (REPORT_DIR / 'latest.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -267,6 +296,7 @@ def main() -> int:
             'stats': payload['stats_parsed'],
             'report': str(md_path),
             'canonical_latest': str(CANONICAL_LATEST),
+            **({'compressed_context': compressed_context} if compressed_context is not None else {}),
         }, ensure_ascii=False, indent=2))
         return 0 if payload['ok'] else 2
     finally:

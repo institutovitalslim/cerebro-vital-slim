@@ -50,8 +50,10 @@ REDACTIONS: List[Tuple[str, re.Pattern[str], str]] = [
     ("api_key", re.compile(r"\b(api[_-]?key|token|secret|password|senha)\s*[:=]\s*['\"]?[^\s,'\"]{8,}", re.I), r"\1=[REDACTED_SECRET]"),
     ("email", re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"), "[REDACTED_EMAIL]"),
     # Telefone primeiro, porque telefone BR com DDD também pode ter 11 dígitos como CPF.
-    # Exige DDD explícito para não redigir sufixos numéricos de messageId/traceId.
-    ("phone_br", re.compile(r"(?<![A-Za-z0-9])(?:\+?55\s*)?\(?\d{2}\)?\s*9?\d{4}[-\s]?\d{4}(?![A-Za-z0-9])"), "[REDACTED_PHONE]"),
+    # Só redige telefone quando há rótulo operacional explícito ou formato humano (+55/(DD)).
+    # Isso evita redigir unix timestamps, messageId, trace_id ou request_id numéricos.
+    ("phone_br", re.compile(r"\b(phone|telefone|whatsapp|celular|jid)\s*[:=]\s*(?:\+?55\s*)?\(?\d{2}\)?\s*9?\d{4}[-\s]?\d{4}\b", re.I), r"\1=[REDACTED_PHONE]"),
+    ("phone_br_standalone", re.compile(r"(?<![A-Za-z0-9])(?:\+55\s*\d{2}\s*9?\d{4}[-\s]?\d{4}|\(\d{2}\)\s*9?\d{4}[-\s]?\d{4})(?![A-Za-z0-9])"), "[REDACTED_PHONE]"),
     ("cpf", re.compile(r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b"), "[REDACTED_CPF]"),
     ("zapi_instance", re.compile(r"\b(instanc(?:e|ia)[_-]?(?:id|token)?|zapi[_-]?(?:token|secret))\s*[:=]\s*['\"]?[^\s,'\"]{8,}", re.I), r"\1=[REDACTED_ZAPI]"),
 ]

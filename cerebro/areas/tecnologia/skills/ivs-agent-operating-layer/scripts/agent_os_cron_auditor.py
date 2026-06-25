@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Read-only auditor for Gateway crons vs IVS Agent OS registry."""
-import argparse, json, subprocess, time, re
+import argparse, json, subprocess, time, re, sys
 from pathlib import Path
 BASE=Path('/root/.openclaw/workspace/skills/ivs-agent-operating-layer')
 DEL=Path('/root/deliverables')
+CONTEXT_COMPRESSOR=Path('/root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py')
 REG=BASE/'crons/active-crons.json'
 WORKFLOWS=BASE/'workflows'
 AGENT_OS_PREFIX='IVS Agent OS'
@@ -26,8 +27,19 @@ def workflow_ids():
         except Exception: pass
     return ids
 
+
+def compress_context(path, kind='cron-log'):
+    if not CONTEXT_COMPRESSOR.exists():
+        return {'ok': False, 'error': f'compressor not found: {CONTEXT_COMPRESSOR}'}
+    try:
+        raw=subprocess.check_output([sys.executable, str(CONTEXT_COMPRESSOR), '--input', str(path), '--type', kind, '--format', 'json'], text=True, stderr=subprocess.STDOUT, timeout=120)
+        payload=json.loads(raw)
+        return {'ok': bool(payload.get('ok')), 'sha256': payload.get('sha256'), 'outputs': payload.get('outputs'), 'evidence': payload.get('evidence'), 'critical_line_count': (payload.get('summary') or {}).get('critical_line_count'), 'redactions': (payload.get('summary') or {}).get('redactions')}
+    except Exception as e:
+        return {'ok': False, 'error': str(e)[:500]}
+
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument('--json',action='store_true'); ap.add_argument('--gateway-json'); args=ap.parse_args()
+    ap=argparse.ArgumentParser(); ap.add_argument('--json',action='store_true'); ap.add_argument('--gateway-json'); ap.add_argument('--compress-context', action='store_true', help='Run IVS Context Compressor on the generated cron audit (read-only, optional).'); args=ap.parse_args()
     gw=load(args.gateway_json, {}) if args.gateway_json else fetch_gateway()
     jobs=gw.get('jobs', gw if isinstance(gw,list) else [])
     reg=load(REG, [])
@@ -55,7 +67,10 @@ def main():
         if isinstance(r,dict) and r.get('workflow') and r.get('workflow') not in wf:
             findings.append({'severity':'MEDIUM','code':'registry_workflow_missing','id':r.get('id'),'workflow':r.get('workflow')})
     report={'ok':not any(f['severity'] in ('HIGH','MEDIUM') for f in findings),'generated_at':int(time.time()),'mode':'read_only_cron_audit','totals':{'gateway_jobs':len(jobs),'enabled':len(enabled),'disabled':len(disabled),'registry_jobs':len(reg_jobs),'findings':len(findings)},'findings':findings,'agent_os_crons':[{'id':j.get('id'),'name':j.get('name'),'enabled':j.get('enabled'),'schedule':j.get('schedule')} for j in jobs if str(j.get('name','')).startswith(AGENT_OS_PREFIX)]}
-    DEL.mkdir(parents=True,exist_ok=True); (DEL/'agent-os-cron-audit-latest.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+    DEL.mkdir(parents=True,exist_ok=True); out=DEL/'agent-os-cron-audit-latest.json'; out.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+    if args.compress_context:
+        report['compressed_context']=compress_context(out, 'cron-log')
+        out.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False,indent=2))
     raise SystemExit(0 if report['ok'] else 2)
 if __name__=='__main__': main()

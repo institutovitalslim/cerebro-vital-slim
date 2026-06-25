@@ -78,6 +78,11 @@ def test_redact_mcp_token_in_url():
     assert "[REDACTED_MCP_TOKEN]" in redacted
     assert counts["mcp_token"] == 1
 
+    redacted_ts, counts_ts = mod.redact('{"generated_at": 1782371652, "messageId": "MSG987654321"}')
+    assert "1782371652" in redacted_ts
+    assert "MSG987654321" in redacted_ts
+    assert "phone_br" not in counts_ts
+
 
 if __name__ == "__main__":
     test_cli_compress_and_recover()

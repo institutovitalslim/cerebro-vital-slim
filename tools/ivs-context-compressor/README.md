@@ -93,14 +93,31 @@ Extrai e preserva quando encontrados:
 - eventos QuarkClinic/Clara relevantes;
 - falhas de cron/agente.
 
-## Integração opcional com auditoria diária Clara/Z-API
+## Integrações opcionais read-only
 
-A auditoria diária pode acionar o compressor como pós-processador read-only, sem mudar o fluxo crítico da Clara:
+### Auditoria diária Clara/Z-API
 
 ```bash
 python3 /root/cerebro-vital-slim/cerebro/areas/tecnologia/skills/ivs-agent-operating-layer/scripts/clara_daily_audit.py \
   --no-save \
   --json \
+  --compress-context
+```
+
+### Auditoria de crons Agent OS
+
+```bash
+python3 /root/cerebro-vital-slim/cerebro/areas/tecnologia/skills/ivs-agent-operating-layer/scripts/agent_os_cron_auditor.py \
+  --json \
+  --compress-context
+```
+
+### Health do GBrain
+
+```bash
+python3 /root/cerebro-vital-slim/scripts/gbrain_ivs_sync.py \
+  --doctor-only \
+  --mode doctor-only \
   --compress-context
 ```
 
