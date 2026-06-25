@@ -48,10 +48,22 @@ algum_comando_que_gera_log | python3 /root/cerebro-vital-slim/tools/ivs-context-
   --format json
 ```
 
-Wrapper curto:
+Wrapper curto versionado:
 
 ```bash
 algum_comando_que_gera_log | /root/cerebro-vital-slim/tools/ivs-context-compressor/ivscc cron-log saida-comando.log --format json
+```
+
+Alias operacional instalado no PATH do servidor:
+
+```bash
+algum_comando_que_gera_log | ivscc cron-log saida-comando.log --format json
+```
+
+Instalação do alias:
+
+```bash
+ln -sfn /root/cerebro-vital-slim/tools/ivs-context-compressor/ivscc /usr/local/bin/ivscc
 ```
 
 Receitas operacionais: `tools/ivs-context-compressor/recipes.md`.
