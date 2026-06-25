@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "type": "treino-diario-clara-conversao-premium-whatsapp",
+  "generated_at_utc": "2026-06-24T10:24:01Z",
+  "clara_paused": false,
+  "pii_exposed": false,
+  "sources": {
+    "current": {
+      "path": "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+      "read_ok": true,
+      "ok": true,
+      "mtime_utc": "2026-06-24T10:22:09Z",
+      "bytes": 690,
+      "periodo": "últimas 6h",
+      "contadores": {
+        "total_messages": 0,
+        "unique_leads": 0,
+        "total_inbound": 0,
+        "total_outbound": 0,
+        "wins": 0,
+        "drops": 0
+      },
+      "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260624-102209-whatsapp-current.md",
+      "risk": "RISCO_TECNICO_CAPTURA_PIPELINE: current zerado; não assumir ausência real de demanda."
+    },
+    "historical": {
+      "path": "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json",
+      "read_ok": true,
+      "ok": true,
+      "mtime_utc": "2026-06-24T10:23:02Z",
+      "bytes": 3626,
+      "periodo": "últimos 180 dias",
+      "contadores": {
+        "total_messages": 6187,
+        "unique_leads": 443,
+        "total_inbound": 3275,
+        "total_outbound": 2912,
+        "wins": 30,
+        "drops": 5
+      },
+      "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260624-102302-whatsapp-historical.md",
+      "risk": null
+    }
+  },
+  "canonical_source_checked": "/root/cerebro-vital-slim/cerebro/areas/atendimento/clara-operacao/clara_system_prompt.md#TRAVA_DIÁRIA_APRENDIZADOS_DE_CONVERSÃO_CLARA_2026-06-14",
+  "canonical_rc25_2026_06_14_reinforced": [
+    "Confirmação de agenda deve usar opções literais: Confirmo / Quero remarcar / Não vou conseguir.",
+    "Convite/confirmação de agenda deve trazer logística no mesmo bloco: chegada, preparação/exames prévios e atendimento quando aplicável.",
+    "Antes de explicar consulta/serviço/procedimento, qualificar prontidão: atendimento agora ou apenas pesquisando.",
+    "Para exames/documentos/questionário, evitar pergunta aberta que vira “te aviso depois”; dar próximo passo concreto."
+  ],
+  "training_directive": "Reforço aplicado ao treino da Clara: condução premium de WhatsApp com fechamento concreto, qualificação de prontidão antes de explicações e confirmação objetiva de agenda, sem PII e sem pausar operação.",
+  "status": "TREINO_EXECUTADO_SEM_PAUSAR_CLARA"
+}

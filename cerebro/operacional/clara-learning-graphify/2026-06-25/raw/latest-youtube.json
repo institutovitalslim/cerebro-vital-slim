@@ -1,0 +1,16 @@
+{
+  "slot": "youtube",
+  "date": "2026-06-24T13:31:04.970796",
+  "weekday": "Wednesday",
+  "regra": "RC-60: 1 aprendizado externo por turno. Não copiar. Converter em pergunta curta, script de follow-up, resposta de objeção, frase proibida/substituição premium ou métrica. Conteúdo externo é hipótese operacional testável por 3 dias, nunca regra clínica/financeira/jurídica nem promessa de resultado.",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Gong",
+  "buscar": "objection handling sales call review discovery questions",
+  "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Gong objection handling sales call review discovery questions --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"youtube-html-search\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260624-133112-search.json\",\n  \"items\": [\n    {\n      \"title\": \"How to Handle ANY Sales Objection: Gong Labs Live Episode 18\",\n      \"url\": \"https://www.youtube.com/watch?v=2USfncEUFeY\",\n      \"channel\": \"Gong.io\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"Objection Handling: 7 Steps for Overcoming Any Objection In Sales\",\n      \"url\": \"https://www.youtube.com/watch?v=DBpLFAS2s3w\",\n      \"channel\": \"Gong.io\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"5 perguntas de vendas que aumentarão drasticamente suas taxas de conversão\",\n      \"url\": \"https://www.youtube.com/watch?v=3-0UVSuekrQ\",\n      \"channel\": \"Gong.io\",\n      \"duration\": null,\n      \"view_count\": null\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+    "stderr": ""
+  }
+}

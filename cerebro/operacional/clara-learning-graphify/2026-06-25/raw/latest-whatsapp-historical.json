@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260624-102302-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 6187,
+    "unique_leads": 443,
+    "total_inbound": 3275,
+    "total_outbound": 2912,
+    "wins": 30,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Confirmação estruturada gera confirmação imediata\n**Observacao:** Nas vitórias, leads respondem \"Confirmo\" quando recebem mensagem padronizada com nome, procedimento, horário e opções de resposta. Exemplo literal do closer: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" → WIN: \"Confirmo\".\n**Acao para a Clara:** Sempre confirmar consultas/aplicações com mensagem padronizada contendo: nome do paciente, nome do procedimento, dia/hora e as três opções de resposta em negrito: *Confirmo*, *Quero remarcar* ou *Não vou conseguir*.\n\n## 2. Abordagem de venda direta em leads frios gera rejeição\n**Observacao:** Nos drops, leads que receberam oferta para explicar a consulta ou perguntas abertas de ajuda responderam com \"Por enquanto não\". Exemplos literais: ULTIMA: \"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\" → DROP: \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\"; ULTIMA: \"Bom dia! Que bom ter vc por aqui 😊 Como posso te ajudar hoje?\" → DROP: \"Bom dia. Por enquanto não vou querer nao\".\n**Acao para a Clara:** Para leads que iniciam com \"Gostaria de saber mais informações\", nunca oferecer agendamento ou explicação de consulta na primeira mensagem. Primeiro, perguntar: \"Olá! Bem-vindo(a). Para te direcionar melhor, qual tratamento ou área você tem interesse: emagrecimento, aplicações, tricologia ou nutrição?\"\n\n## 3. Entrada padronizada de anúncios exige resposta direcionada\n**Observacao:** A abertura \"Gostaria de saber mais informações sobre o Instituto Vital Slim\" aparece repetidamente mais de 10 vezes nos dados, indicando origem em anúncio/formulário. Respostas genéricas podem não converter.\n**Acao para a Clara:** Identificar a frase exata \"Gostaria de saber mais informações sobre o Instituto Vital Slim\" e responder com: \"Olá! O Instituto Vital Slim atua com emagrecimento, aplicações, tricologia e nutrição. Qual dessas áreas te interessa? Assim já te encaminho para o especialista certo.\"\n\n## 4. Clientes existentes usam o canal para demandas administrativas\n**Observacao:** Foram identificadas demandas não-comerciais no meio de leads: \"Thiaro por favor, vc poderia mim reenviar as NFS, não estou conseguindo abrir,o link\" e envio de \"Cadastrar Prontuário.pdf\" seguido de drop \"Assim que tiver com todos em mãos te aviso\".\n**Acao para a Clara:** Se a mensagem do lead contiver as palavras \"NF\", \"nota fiscal\", \"prontuário\", \"boleto\" ou \"reenviar link\", interromper o fluxo de vendas e responder: \"Vou te encaminhar para o setor administrativo. Aguarde um momento.\"",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

@@ -1,0 +1,16 @@
+{
+  "slot": "instagram_tarde",
+  "date": "2026-06-24T20:40:09.945562",
+  "weekday": "Wednesday",
+  "regra": "RC-60: 1 aprendizado externo por turno. Não copiar. Converter em pergunta curta, script de follow-up, resposta de objeção, frase proibida/substituição premium ou métrica. Conteúdo externo é hipótese operacional testável por 3 dias, nunca regra clínica/financeira/jurídica nem promessa de resultado.",
+  "fonte": "Instagram",
+  "perfil": "leandroladeira",
+  "buscar": "SPIN, negociação, social selling ou clínica premium",
+  "entrega": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avanço",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username leandroladeira --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260624-204014-instagram-profile-leandroladeira.json\",\n  \"items\": []\n}\n",
+    "stderr": ""
+  }
+}
