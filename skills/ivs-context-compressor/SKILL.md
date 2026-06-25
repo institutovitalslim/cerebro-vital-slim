@@ -25,11 +25,23 @@ Para incidentes críticos, sempre confira o original preservado antes de conclui
 
 ## Comando principal
 
+Arquivo:
+
 ```bash
 python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
   --input /caminho/arquivo.log \
   --type clara-log \
   --format md
+```
+
+Pipe/stdin:
+
+```bash
+algum_comando_que_gera_log | python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+  --stdin \
+  --stdin-name saida-comando.log \
+  --type cron-log \
+  --format json
 ```
 
 Tipos aceitos:
@@ -72,6 +84,18 @@ python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compre
 - tokens/instâncias Z-API óbvios.
 
 ## Integrações opcionais read-only
+
+### Métricas de redução
+
+Cada execução inclui no JSON/Markdown:
+
+- `estimated_tokens_original`
+- `estimated_tokens_redacted`
+- `estimated_tokens_compressed_context`
+- `estimated_token_reduction_pct`
+- `compression_effect`: `reduced`, `expanded` ou `neutral`
+
+A estimativa usa aproximação local de 4 caracteres por token. Em entradas pequenas, o resumo pode ficar maior que o original; isso aparece como `compression_effect=expanded`.
 
 ### Auditoria diária Clara/Z-API
 

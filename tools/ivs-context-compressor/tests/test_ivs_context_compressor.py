@@ -50,6 +50,9 @@ def test_cli_compress_and_recover():
         assert payload["summary"]["redactions"].get("email") == 1
         assert payload["summary"]["redactions"].get("api_key") == 1
         assert payload["summary"]["redactions"].get("phone_br") >= 1
+        assert payload["summary"]["reduction"]["estimated_tokens_original"] > 0
+        assert payload["summary"]["reduction"]["estimated_tokens_compressed_context"] > 0
+        assert "estimated_token_reduction_pct" in payload["summary"]["reduction"]
         md = Path(payload["outputs"]["markdown"]).read_text(encoding="utf-8")
         assert "anon@example.invalid" not in md
         assert "11900000000" not in md
@@ -84,7 +87,42 @@ def test_redact_mcp_token_in_url():
     assert "phone_br" not in counts_ts
 
 
+def test_stdin_mode():
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td)
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                "--stdin",
+                "--stdin-name",
+                "pipe.log",
+                "--type",
+                "cron-log",
+                "--out-dir",
+                str(tmp / "reports"),
+                "--evidence-dir",
+                str(tmp / "evidence"),
+                "--format",
+                "json",
+            ],
+            input="2026-06-25T08:00:00Z ERROR cron failed status_code=500 request_id=REQPIPE123\n",
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert proc.returncode == 0, proc.stderr
+        payload = json.loads(proc.stdout)
+        assert payload["ok"] is True
+        assert payload["input_path"] == "stdin"
+        assert payload["input_name"] == "pipe.log"
+        assert payload["summary"]["error_like_count"] == 1
+        assert Path(payload["outputs"]["json"]).exists()
+        assert Path(payload["evidence"]["original_path"]).exists()
+
+
 if __name__ == "__main__":
     test_cli_compress_and_recover()
     test_redact_mcp_token_in_url()
+    test_stdin_mode()
     print("ok")

@@ -18,6 +18,13 @@ Foi criada a primeira versão funcional do **IVS Context Compressor**, uma camad
 
 ## Capacidades v0
 
+- Entrada por arquivo (`--input`) ou pipe/stdin (`--stdin --stdin-name`).
+- Métricas estimadas de redução de contexto/tokens:
+  - `estimated_tokens_original`;
+  - `estimated_tokens_redacted`;
+  - `estimated_tokens_compressed_context`;
+  - `estimated_token_reduction_pct`;
+  - `compression_effect`.
 - Redaction de PII/secrets:
   - `mcp_token` em URL;
   - bearer token;
@@ -75,6 +82,32 @@ Resultado resumido:
   "message_ids": ["MSG123456789", "MSG987654321"]
 }
 ```
+
+Smoke real com stdin/pipe:
+
+```bash
+printf '2026-06-25T08:10:00Z ERROR pipe failed status_code=503 request_id=REQSTDIN999 phone=11900000000\n' | \
+python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+  --stdin \
+  --stdin-name stdin-smoke.log \
+  --type cron-log \
+  --format json
+```
+
+Resultado resumido:
+
+```json
+{
+  "ok": true,
+  "input_path": "stdin",
+  "input_name": "stdin-smoke.log",
+  "error_like_count": 1,
+  "redactions": {"phone_br": 1},
+  "compression_effect": "expanded"
+}
+```
+
+Observação: `expanded` é esperado em inputs muito pequenos porque o resumo/evidência mínima pode ser maior que a linha original; em logs grandes, a métrica tende a mostrar redução.
 
 Recuperação validada:
 

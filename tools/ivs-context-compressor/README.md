@@ -29,11 +29,23 @@ O compressor **não substitui fonte canônica**. Ele cria uma visão compacta e 
 
 ## Uso rápido
 
+Arquivo:
+
 ```bash
 python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
   --input /caminho/para/log.txt \
   --type clara-log \
   --format md
+```
+
+Pipe/stdin:
+
+```bash
+algum_comando_que_gera_log | python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+  --stdin \
+  --stdin-name saida-comando.log \
+  --type cron-log \
+  --format json
 ```
 
 Tipos aceitos:
@@ -92,6 +104,18 @@ Extrai e preserva quando encontrados:
 - eventos Z-API relevantes;
 - eventos QuarkClinic/Clara relevantes;
 - falhas de cron/agente.
+
+## Métricas de redução
+
+Cada JSON/Markdown inclui estimativas locais, sem dependência de tokenizer externo:
+
+- `estimated_tokens_original`
+- `estimated_tokens_redacted`
+- `estimated_tokens_compressed_context`
+- `estimated_token_reduction_pct`
+- `compression_effect`: `reduced`, `expanded` ou `neutral`
+
+A estimativa usa aproximação conservadora de 4 caracteres por token. Em entradas muito pequenas, o resumo pode ficar maior que o original; nesses casos `compression_effect=expanded`.
 
 ## Integrações opcionais read-only
 

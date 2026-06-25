@@ -128,6 +128,31 @@ def collect_ids(text: str) -> Dict[str, List[str]]:
     return result
 
 
+def estimate_tokens(text_or_chars: str | int) -> int:
+    # Estimativa conservadora para triagem operacional. Não depende de tokenizer externo.
+    chars = text_or_chars if isinstance(text_or_chars, int) else len(text_or_chars)
+    return max(1, round(chars / 4)) if chars else 0
+
+
+def reduction_metrics(text: str, redacted_text: str, critical: List[Dict[str, Any]], ids: Dict[str, List[str]], warnings: List[str]) -> Dict[str, Any]:
+    compressed_chars = sum(len(item.get("text", "")) for item in critical)
+    compressed_chars += len(json.dumps(ids, ensure_ascii=False))
+    compressed_chars += sum(len(w) for w in warnings)
+    original_chars = len(text)
+    redacted_chars = len(redacted_text)
+    reduction_pct = round((1 - (compressed_chars / original_chars)) * 100, 2) if original_chars else 0.0
+    redaction_delta_pct = round(((redacted_chars - original_chars) / original_chars) * 100, 2) if original_chars else 0.0
+    return {
+        "compressed_context_char_count": compressed_chars,
+        "estimated_tokens_original": estimate_tokens(original_chars),
+        "estimated_tokens_redacted": estimate_tokens(redacted_chars),
+        "estimated_tokens_compressed_context": estimate_tokens(compressed_chars),
+        "estimated_token_reduction_pct": reduction_pct,
+        "compression_effect": "reduced" if reduction_pct > 0 else ("expanded" if reduction_pct < 0 else "neutral"),
+        "redaction_char_delta_pct": redaction_delta_pct,
+    }
+
+
 def summarize(text: str, redacted_text: str, kind: str, max_lines: int) -> Dict[str, Any]:
     lines = redacted_text.splitlines()
     critical = extract_critical_lines(lines, kind, max_lines=max_lines)
@@ -141,6 +166,7 @@ def summarize(text: str, redacted_text: str, kind: str, max_lines: int) -> Dict[
         warnings.append("Conteúdo potencialmente sensível: usar apenas versão redigida em relatórios e manter original restrito.")
     if any(ids.get(k) for k in ["message_ids", "trace_ids", "status_codes"]):
         warnings.append("IDs/status preservados para auditoria e recuperação.")
+    metrics = reduction_metrics(text, redacted_text, critical, ids, warnings)
     return {
         "kind": kind,
         "line_count": len(lines),
@@ -149,6 +175,7 @@ def summarize(text: str, redacted_text: str, kind: str, max_lines: int) -> Dict[
         "critical_line_count": len(critical),
         "error_like_count": len(errors),
         "send_status_like_count": len(sends),
+        "reduction": metrics,
         "ids": ids,
         "critical_lines": critical,
         "warnings": warnings,
@@ -184,6 +211,8 @@ def render_markdown(payload: Dict[str, Any]) -> str:
         f"- Original preservado: `{payload['evidence']['original_path']}`",
         f"- Linhas: `{s['line_count']}`",
         f"- Caracteres original/redigido: `{s['char_count_original']}` / `{s['char_count_redacted']}`",
+        f"- Contexto comprimido estimado: `{s['reduction']['compressed_context_char_count']}` chars / `{s['reduction']['estimated_tokens_compressed_context']}` tokens",
+        f"- Redução estimada de tokens: `{s['reduction']['estimated_token_reduction_pct']}%` (`{s['reduction']['compression_effect']}`)",
         f"- Linhas críticas extraídas: `{s['critical_line_count']}`",
         f"- Eventos de erro/falha: `{s['error_like_count']}`",
         "",
@@ -215,40 +244,65 @@ def render_markdown(payload: Dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def compress_file(args: argparse.Namespace) -> int:
-    input_path = Path(args.input).expanduser().resolve()
-    if not input_path.exists():
-        print(json.dumps({"ok": False, "error": f"input not found: {input_path}"}, ensure_ascii=False), file=sys.stderr)
-        return 2
-    raw = input_path.read_bytes()
+def compress_raw(raw: bytes, source_name: str, source_path: str, args: argparse.Namespace) -> Dict[str, Any]:
     digest = sha256_bytes(raw)
     text = raw.decode(args.encoding, errors="replace")
     redacted_text, redaction_counts = redact(text)
-    evidence = write_evidence(input_path, raw, Path(args.evidence_dir), digest)
+    evidence = write_evidence(Path(source_name), raw, Path(args.evidence_dir), digest)
     summary = summarize(text, redacted_text, args.type, args.max_lines)
     summary["redactions"] = redaction_counts
-    payload = {
+    return {
         "ok": True,
         "created_at": utc_now(),
-        "input_name": input_path.name,
-        "input_path": str(input_path),
+        "input_name": source_name,
+        "input_path": source_path,
         "sha256": digest,
         "evidence": evidence,
         "summary": summary,
     }
+
+
+def write_outputs(payload: Dict[str, Any], args: argparse.Namespace) -> Dict[str, str]:
     out_dir = Path(args.out_dir)
     ensure_dir(out_dir)
-    stem = f"{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}-{input_path.stem}-{digest[:10]}"
+    safe_stem = re.sub(r"[^A-Za-z0-9_.-]+", "-", Path(payload["input_name"]).stem or "stdin")[:80]
+    stem = f"{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}-{safe_stem}-{payload['sha256'][:10]}"
     json_path = out_dir / f"{stem}.json"
     md_path = out_dir / f"{stem}.md"
+    md_text = render_markdown(payload)
+    payload["summary"]["reduction"]["markdown_report_char_count"] = len(md_text)
+    payload["summary"]["reduction"]["estimated_tokens_markdown_report"] = estimate_tokens(md_text)
     json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     md_path.write_text(render_markdown(payload), encoding="utf-8")
-    payload["outputs"] = {"json": str(json_path), "markdown": str(md_path)}
+    return {"json": str(json_path), "markdown": str(md_path)}
+
+
+def emit_payload(payload: Dict[str, Any], args: argparse.Namespace) -> int:
+    payload["outputs"] = write_outputs(payload, args)
     if args.format == "json":
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print(render_markdown(payload))
     return 0
+
+
+def compress_file(args: argparse.Namespace) -> int:
+    input_path = Path(args.input).expanduser().resolve()
+    if not input_path.exists():
+        print(json.dumps({"ok": False, "error": f"input not found: {input_path}"}, ensure_ascii=False), file=sys.stderr)
+        return 2
+    payload = compress_raw(input_path.read_bytes(), input_path.name, str(input_path), args)
+    return emit_payload(payload, args)
+
+
+def compress_stdin(args: argparse.Namespace) -> int:
+    raw = sys.stdin.buffer.read()
+    if not raw:
+        print(json.dumps({"ok": False, "error": "stdin is empty"}, ensure_ascii=False), file=sys.stderr)
+        return 2
+    source_name = args.stdin_name or f"stdin-{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}.txt"
+    payload = compress_raw(raw, source_name, "stdin", args)
+    return emit_payload(payload, args)
 
 
 def recover(args: argparse.Namespace) -> int:
@@ -276,6 +330,8 @@ def recover(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="IVS Context Compressor")
     p.add_argument("--input", help="Arquivo de entrada a comprimir")
+    p.add_argument("--stdin", action="store_true", help="Lê conteúdo bruto do stdin e preserva como evidência")
+    p.add_argument("--stdin-name", default="stdin.txt", help="Nome sintético para relatórios/evidência quando usar --stdin")
     p.add_argument("--type", default="generic", choices=sorted(TYPE_HINTS.keys()), help="Tipo operacional do conteúdo")
     p.add_argument("--format", default="json", choices=["json", "md"], help="Formato impresso no stdout")
     p.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR), help="Diretório dos relatórios")
@@ -292,8 +348,10 @@ def main(argv: List[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.recover:
         return recover(args)
+    if args.stdin:
+        return compress_stdin(args)
     if not args.input:
-        parser.error("--input is required unless --recover is used")
+        parser.error("--input is required unless --recover or --stdin is used")
     return compress_file(args)
 
 
