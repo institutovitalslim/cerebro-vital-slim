@@ -1,0 +1,5 @@
+2026-06-25T07:30:00Z INFO webhook received phone=11900000000 messageId=MSG123456789 lead=Lead Teste Sintetico
+2026-06-25T07:30:02Z ERROR zapi-fail status_code=500 trace_id=TRACE-ABC-999 token=TEST_SECRET_123456 email=anon@example.invalid
+2026-06-25T07:30:04Z WARN quarkclinic_check_failed request_id=REQ-777777 cpf=000.000.000-00
+2026-06-25T07:30:05Z INFO NO_REPLY lead elegivel aguardando continuidade
+2026-06-25T07:30:09Z INFO zapi-commit status_code=200 messageId=MSG987654321
