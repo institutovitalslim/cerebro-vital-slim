@@ -48,6 +48,14 @@ algum_comando_que_gera_log | python3 /root/cerebro-vital-slim/tools/ivs-context-
   --format json
 ```
 
+Wrapper curto:
+
+```bash
+algum_comando_que_gera_log | /root/cerebro-vital-slim/tools/ivs-context-compressor/ivscc cron-log saida-comando.log --format json
+```
+
+Receitas operacionais: `tools/ivs-context-compressor/recipes.md`.
+
 Tipos aceitos:
 
 - `clara-log`

@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# IVS Context Compressor short pipe wrapper.
+# Usage:
+#   some_command | ivscc cron-log output-name.log
+#   ivscc clara-log /path/to/file.log --format md
+set -euo pipefail
+
+SCRIPT="/root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py"
+
+usage() {
+  cat <<'USAGE'
+IVS Context Compressor wrapper
+
+Pipe/stdin:
+  command | ivscc <type> [stdin-name] [--format json|md]
+
+Arquivo:
+  ivscc <type> /path/to/file.log [--format json|md]
+
+Tipos:
+  clara-log | zapi-webhook | cron-log | gbrain-results | generic
+
+Exemplos:
+  tail -n 500 /root/.openclaw/workspace/ops/zapi_bridge/zapi_clara_bridge_runtime.log | ivscc clara-log clara-runtime-tail.log --format md
+  python3 scripts/gbrain_ivs_sync.py --doctor-only --mode doctor-only 2>&1 | ivscc gbrain-results gbrain-doctor.log
+  openclaw cron list --json | ivscc cron-log cron-list.json
+USAGE
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]]; then
+  usage
+  exit 0
+fi
+
+TYPE="$1"
+shift
+FORMAT="json"
+EXTRA=()
+POSITIONAL=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --format)
+      FORMAT="${2:-json}"
+      shift 2
+      ;;
+    --format=*)
+      FORMAT="${1#--format=}"
+      shift
+      ;;
+    --max-lines|--out-dir|--evidence-dir)
+      EXTRA+=("$1" "${2:-}")
+      shift 2
+      ;;
+    --max-lines=*|--out-dir=*|--evidence-dir=*)
+      EXTRA+=("$1")
+      shift
+      ;;
+    *)
+      POSITIONAL+=("$1")
+      shift
+      ;;
+  esac
+done
+
+if [[ ! -t 0 ]]; then
+  STDIN_NAME="${POSITIONAL[0]:-stdin-${TYPE}.log}"
+  exec python3 "$SCRIPT" --stdin --stdin-name "$STDIN_NAME" --type "$TYPE" --format "$FORMAT" "${EXTRA[@]}"
+fi
+
+INPUT="${POSITIONAL[0]:-}"
+if [[ -z "$INPUT" ]]; then
+  usage >&2
+  exit 2
+fi
+
+exec python3 "$SCRIPT" --input "$INPUT" --type "$TYPE" --format "$FORMAT" "${EXTRA[@]}"

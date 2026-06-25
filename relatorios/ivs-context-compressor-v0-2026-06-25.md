@@ -82,25 +82,33 @@ Resultado resumido:
   "message_ids": ["MSG123456789", "MSG987654321"]
 }
 ```
+## Novo uso por pipe/stdin
 
-Smoke real com stdin/pipe:
+Agora qualquer comando pode mandar saída direto para o compressor:
 
 ```bash
-printf '2026-06-25T08:10:00Z ERROR pipe failed status_code=503 request_id=REQSTDIN999 phone=11900000000\n' | \
-python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
+algum_comando_que_gera_log | python3 /root/cerebro-vital-slim/tools/ivs-context-compressor/ivs_context_compressor.py \
   --stdin \
-  --stdin-name stdin-smoke.log \
+  --stdin-name saida-comando.log \
   --type cron-log \
   --format json
 ```
 
-Resultado resumido:
+Ou com o wrapper curto criado:
+
+```bash
+algum_comando_que_gera_log | /root/cerebro-vital-slim/tools/ivs-context-compressor/ivscc cron-log saida-comando.log --format json
+```
+
+Receitas operacionais documentadas em `tools/ivs-context-compressor/recipes.md`.
+
+Resultado resumido do smoke real com wrapper:
 
 ```json
 {
   "ok": true,
   "input_path": "stdin",
-  "input_name": "stdin-smoke.log",
+  "input_name": "wrapper-smoke.log",
   "error_like_count": 1,
   "redactions": {"phone_br": 1},
   "compression_effect": "expanded"
