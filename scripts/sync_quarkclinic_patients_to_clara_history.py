@@ -98,26 +98,46 @@ def load_qc_helper():
     return mod
 
 
-def iter_quark_patients(max_pages: int, workers: int = 16):
+def iter_quark_patients(max_pages: int, workers: int = 40, phone_timeout: int = 8):
     qc = load_qc_helper()
-    patients = list(qc.iter_quark_patients(max_pages=max_pages))
+    patients: list[dict[str, Any]] = []
+    for page in range(1, max_pages + 1):
+        try:
+            status, payload = qc.quark_request("GET", "/v1/pacientes", query=[("page", str(page))], timeout=max(10, phone_timeout + 4))
+        except Exception:
+            continue
+        if status >= 400:
+            continue
+        items = payload.get("response", []) if isinstance(payload, dict) else []
+        if not items:
+            break
+        patients.extend([x for x in items if isinstance(x, dict)])
+        if len(items) < 100:
+            break
 
     def fetch(patient: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
         pid = patient.get("id")
         phones: list[str] = []
         if pid:
             try:
-                status, payload = qc.quark_request("GET", f"/v1/pacientes/{pid}/telefones", timeout=25)
+                status, payload = qc.quark_request("GET", f"/v1/pacientes/{pid}/telefones", timeout=phone_timeout)
                 if status < 400 and isinstance(payload, dict):
                     phones = payload.get("response", []) or []
             except Exception:
                 phones = []
         return patient, phones
 
+    # Important for Hermes cron: no_agent scripts have a hard timeout. Do not let a
+    # few slow QuarkClinic phone endpoints hold the whole sync. High concurrency +
+    # short per-phone timeout makes the routine deterministic; skipped slow phones
+    # are retried on the next 2h run.
     with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
         futures = [ex.submit(fetch, p) for p in patients]
         for fut in as_completed(futures):
-            yield fut.result()
+            try:
+                yield fut.result(timeout=phone_timeout + 2)
+            except Exception:
+                continue
 
 
 def gog_get(range_a1: str) -> list[list[str]]:
@@ -211,7 +231,7 @@ def sync_exclusions(patient_rows: list[dict[str, Any]], apply: bool) -> dict[str
     return {"candidate_exclusion_updates": added, "preserved_exceptions": preserved, "path": str(EXCLUSIONS_FILE)}
 
 
-def build_sync(max_pages: int, workers: int) -> tuple[list[dict[str, Any]], list[list[str]], dict[str, Any]]:
+def build_sync(max_pages: int, workers: int, phone_timeout: int) -> tuple[list[dict[str, Any]], list[list[str]], dict[str, Any]]:
     existing = existing_patient_phone_variants()
     seen: set[str] = set()
     patient_rows: list[dict[str, Any]] = []
@@ -219,7 +239,7 @@ def build_sync(max_pages: int, workers: int) -> tuple[list[dict[str, Any]], list
     stats = {"quark_patients_seen": 0, "patients_with_phone": 0, "duplicates_skipped": 0, "already_in_sheet": 0}
     now_ms = str(int(time.time() * 1000))
     today = dt.datetime.now(dt.timezone.utc).strftime("%Y/%m/%d")
-    for patient, phones in iter_quark_patients(max_pages=max_pages, workers=workers):
+    for patient, phones in iter_quark_patients(max_pages=max_pages, workers=workers, phone_timeout=phone_timeout):
         stats["quark_patients_seen"] += 1
         qid = patient.get("id")
         name = str(patient.get("nome") or "").strip()
@@ -257,12 +277,13 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true", help="Write to Google Sheet and local exclusions")
     ap.add_argument("--max-pages", type=int, default=80)
-    ap.add_argument("--workers", type=int, default=16)
+    ap.add_argument("--workers", type=int, default=40)
+    ap.add_argument("--phone-timeout", type=int, default=8)
     ap.add_argument("--quiet-no-change", action="store_true")
     args = ap.parse_args()
 
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    patient_rows, append_rows, stats = build_sync(args.max_pages, args.workers)
+    patient_rows, append_rows, stats = build_sync(args.max_pages, args.workers, args.phone_timeout)
     exclusion_result = sync_exclusions(patient_rows, apply=args.apply)
     append_result = gog_append(append_rows) if args.apply else {"ok": True, "appended": 0, "dry_run": True}
     report = {
