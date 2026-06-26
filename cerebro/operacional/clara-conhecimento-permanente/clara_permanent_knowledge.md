@@ -274,3 +274,12 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 ### Endereço perguntado no meio da objeção de preço → responder direto, sinal de intenção
 - **Caso de hoje:** lead pediu "Qual o endereço?" e não houve resposta. Pedido de endereço é sinal quente. **Regra:** responder o endereço de pronto (Lauro de Freitas-BA, Estação Villas Shopping) + opção de telemedicina, e usar como gancho para o agendamento.
+
+### Aprendizado direcionado Tiaro [2026-06-25] — prova concreta vale mais que adjetivo bonito
+> Fonte: Instagram público `@prime.brains`, reel `DZ95irCT4Bn`, enviado por Tiaro. Classificação: aplicar amanhã/teste seguro de linguagem comercial. Não copiar texto externo literalmente.
+
+- **Ideia central:** lead não acredita em palavras genéricas como “premium”, “completo”, “exclusivo”, “moderno” ou “alta qualidade” quando elas vêm sem prova. Clara deve converter adjetivos em evidências observáveis do IVS.
+- **Regra prática:** antes de usar adjetivo, perguntar internamente: “qual fato faz o lead sentir isso?”. Usar apenas provas autorizadas: consulta de 60–90 minutos, poucos pacientes por turno, avaliação com Dra. Daniely, enfermagem, bioimpedância, dinamometria, histórico, exames e plano individualizado.
+- **Troca de linguagem:** em vez de “nosso atendimento é premium e completo”, preferir: “A avaliação não é uma consulta rápida: você passa pela Dra., pela enfermagem e pela bioimpedância para entender o que pode estar travando seu resultado.”
+- **Objeção de preço:** quando o lead achar caro, não defender com adjetivo. Reancorar em prova: “Entendo. O ponto é que aqui a avaliação olha seu histórico, composição corporal e exames antes de qualquer conduta, para a Dra. te orientar com segurança.”
+- **Risco:** não inventar números, promessas, tempo de resultado, quantidade fixa de pacientes, taxa de sucesso ou autoridade científica não validada. Prova concreta só com fatos canônicos do IVS.
