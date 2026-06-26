@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-import argparse, json, os, subprocess, sys
+import argparse, json, subprocess
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from pathlib import Path
-from urllib.parse import quote_plus
 
 ROOT = Path('/root/cerebro-vital-slim')
 STATE = ROOT / 'ops/quarkclinic_confirmations/state/pending_confirmations.json'
 LOGDIR = ROOT / 'ops/quarkclinic_confirmations/logs'
-QC = '/root/.openclaw/workspace/snapshot/openclaw-home/workspace/skills/quarkclinic-api/scripts/quarkclinic_api.py'
+QC = '/root/.openclaw/workspace/snapshot/openclaw-home/workspace/snapshot/openclaw-home/workspace/skills/quarkclinic-api/scripts/quarkclinic_api.py'
 ENV = '/root/.openclaw/workspace/ops/zapi_bridge/zapi_bridge.env'
+CLARA_LEADS_STATE = Path('/root/.openclaw/workspace/ops/zapi_bridge/clara_leads_state.json')
 TZ = ZoneInfo('America/Bahia')
 
 
@@ -37,6 +37,157 @@ def normalize_phone(raw):
     if len(digits) >= 10:
         return '55' + digits
     return digits
+
+
+def phone_variants(raw):
+    phone = normalize_phone(raw)
+    variants = set()
+    if not phone:
+        return variants
+    variants.add(phone)
+    if phone.startswith('55') and len(phone) >= 12:
+        ddi = phone[:2]
+        ddd = phone[2:4]
+        rest = phone[4:]
+        if len(rest) == 9 and rest.startswith('9'):
+            variants.add(ddi + ddd + rest[1:])
+        elif len(rest) == 8:
+            variants.add(ddi + ddd + '9' + rest)
+    return {v for v in variants if v}
+
+
+def load_clara_leads_state(path=CLARA_LEADS_STATE):
+    if not Path(path).exists():
+        return {}
+    try:
+        data = json.loads(Path(path).read_text())
+    except Exception:
+        return {}
+    leads = data.get('leads') if isinstance(data, dict) else None
+    return leads if isinstance(leads, dict) else {}
+
+
+def collect_phone_candidates(appt):
+    """Coleta telefones do agendamento e paciente preservando a ordem original do cadastro.
+
+    Regra de negócio: confirmação deve ir para o telefone em que o paciente já fala
+    com a clínica. A ordem do cadastro serve apenas como fallback quando nenhum
+    candidato tiver histórico na Clara/Z-API.
+    """
+    paciente = appt.get('paciente') or {}
+    ordered_raw = [
+        paciente.get('telefone'),
+        paciente.get('celular'),
+        paciente.get('whatsapp'),
+        appt.get('telefoneComDDI'),
+        appt.get('telefone'),
+        appt.get('celular'),
+        appt.get('whatsapp'),
+        appt.get('telefonePaciente'),
+        appt.get('celularPaciente'),
+        appt.get('whatsappPaciente'),
+    ]
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            for k, v in obj.items():
+                lk = str(k).lower()
+                if any(tok in lk for tok in ('telefone', 'celular', 'whatsapp', 'phone')):
+                    if isinstance(v, (str, int, float)):
+                        ordered_raw.append(v)
+                    else:
+                        walk(v)
+                elif isinstance(v, (dict, list, tuple)):
+                    walk(v)
+        elif isinstance(obj, (list, tuple)):
+            for v in obj:
+                walk(v)
+
+    walk(appt)
+
+    candidates = []
+    seen = set()
+    for raw in ordered_raw:
+        phone = normalize_phone(raw)
+        # Telefones BR com DDI costumam ter 12 ou 13 dígitos. Evita capturar IDs.
+        if not phone or len(phone) < 12 or len(phone) > 13:
+            continue
+        if phone not in seen:
+            candidates.append(phone)
+            seen.add(phone)
+    return candidates
+
+
+def clara_history_score(phone, leads_state):
+    """Pontua evidência de conversa real/relacionamento no WhatsApp da clínica."""
+    best_score = 0
+    best_key = ''
+    best_entry = None
+    for variant in phone_variants(phone):
+        for key in (variant, f'{variant}@c.us'):
+            entry = leads_state.get(key)
+            if not isinstance(entry, dict):
+                continue
+            score = 0
+            inbound_count = int(entry.get('inbound_count') or 0)
+            reply_count = int(entry.get('reply_count') or 0)
+            if inbound_count > 0:
+                score += 1000 + min(inbound_count, 100)
+            if reply_count > 0:
+                score += 200 + min(reply_count, 50)
+            if entry.get('last_inbound_at'):
+                score += 100
+            if entry.get('last_reply_at'):
+                score += 80
+            if entry.get('active'):
+                score += 20
+            if score > best_score:
+                best_score = score
+                best_key = key
+                best_entry = entry
+    return best_score, best_key, best_entry
+
+
+def choose_confirmation_phone(appt, leads_state=None):
+    """Escolhe telefone de confirmação.
+
+    Prioridade canônica definida por Tiaro em 2026-06-26:
+    confirmações de atendimento devem ser enviadas ao telefone em que o paciente
+    já fala com a clínica/Clara. Se houver mais de um número no cadastro, não usar
+    automaticamente o segundo número; escolher o candidato com histórico Z-API.
+    """
+    leads_state = leads_state if leads_state is not None else load_clara_leads_state()
+    candidates = collect_phone_candidates(appt)
+    scored = []
+    for idx, phone in enumerate(candidates):
+        score, matched_key, entry = clara_history_score(phone, leads_state)
+        scored.append({
+            'phone': phone,
+            'score': score,
+            'matched_key': matched_key,
+            'inbound_count': int((entry or {}).get('inbound_count') or 0),
+            'last_inbound_at': (entry or {}).get('last_inbound_at'),
+            'last_reply_at': (entry or {}).get('last_reply_at'),
+            'active': bool((entry or {}).get('active')),
+            'fallback_order': idx,
+        })
+    if not scored:
+        return '', {'reason': 'no_phone_candidates', 'candidates': []}
+    with_history = [s for s in scored if s['score'] > 0]
+    if with_history:
+        chosen = sorted(with_history, key=lambda s: (s['score'], s.get('last_inbound_at') or 0, -s['fallback_order']), reverse=True)[0]
+        reason = 'matched_clara_whatsapp_history'
+    else:
+        chosen = scored[0]
+        reason = 'fallback_quarkclinic_order_no_clara_history'
+    return chosen['phone'], {'reason': reason, 'chosen': chosen, 'candidates': scored}
+
+
+def mask_phone(phone):
+    p = normalize_phone(phone)
+    if len(p) <= 4:
+        return '***'
+    return f'{p[:4]}*****{p[-4:]}'
 
 
 def describe_target_day(now_date, target_date):
@@ -78,6 +229,7 @@ def load_existing_pending(now_date):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['next-morning', 'same-day-afternoon'], default='next-morning')
+    parser.add_argument('--dry-run', action='store_true', help='não envia WhatsApp; apenas calcula destinatários e mensagens')
     args = parser.parse_args()
 
     now = datetime.now(TZ)
@@ -97,9 +249,12 @@ def main():
     env = load_env(ENV)
     base = env.get('ZAPI_BASE_URL') or f"https://api.z-api.io/instances/{env['ZAPI_INSTANCE_ID']}/token/{env['ZAPI_TOKEN']}"
     client = env['ZAPI_CLIENT_TOKEN']
+    leads_state = load_clara_leads_state()
 
     pending_by_id = load_existing_pending(now.date())
     sent = []
+    skipped = []
+    dry_run_items = []
     for appt in items:
         status = str(appt.get('status') or appt.get('statusMarcacao') or '').lower()
         if 'cancel' in status:
@@ -117,10 +272,11 @@ def main():
             continue
         paciente = appt.get('paciente') or {}
         nome = paciente.get('nome') or appt.get('pacienteNome') or appt.get('nomePaciente') or 'paciente'
-        phone = normalize_phone((paciente.get('telefone') or paciente.get('celular') or appt.get('telefoneComDDI') or appt.get('telefone') or appt.get('whatsapp') or ''))
-        if not phone:
-            continue
+        phone, phone_selection = choose_confirmation_phone(appt, leads_state)
         ag_id = appt.get('id') or appt.get('agendamentoId')
+        if not phone:
+            skipped.append({'agendamentoId': ag_id, 'nome': nome, 'reason': 'no_phone', 'phoneSelection': phone_selection})
+            continue
         procedimento = appt.get('procedimento') or {}
         procedimento_nome = (procedimento.get('nome') or appt.get('procedimentoNome') or 'atendimento').strip()
         primeiro_nome = nome.split()[0].title()
@@ -130,6 +286,16 @@ def main():
             "Se estiver tudo certo, pode me responder com *Confirmo*.\n"
             "Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*."
         )
+        if args.dry_run:
+            dry_run_items.append({
+                'phoneMasked': mask_phone(phone),
+                'nome': nome,
+                'agendamentoId': ag_id,
+                'dataHoraInicio': dt,
+                'phoneSelection': phone_selection,
+                'messagePreview': msg[:220],
+            })
+            continue
         payload = json.dumps({'phone': phone, 'message': msg})
         cmd = [
             'curl','-sS','-X','POST', f'{base}/send-text',
@@ -140,18 +306,26 @@ def main():
         raw = subprocess.check_output(cmd, text=True)
         resp = json.loads(raw)
         if not resp.get('messageId'):
-            raise RuntimeError(f'Falha envio para {phone}: {raw}')
+            raise RuntimeError(f'Falha envio para {mask_phone(phone)}: {raw}')
         item = {
             'phone': phone,
             'nome': nome,
             'agendamentoId': ag_id,
             'dataHoraInicio': dt,
             'messageId': resp.get('messageId'),
-            'status': 'sent'
+            'status': 'sent',
+            'phoneSelection': phone_selection,
         }
         item['turno'] = turno
         pending_by_id[str(ag_id)] = item
         sent.append(item)
+
+    LOGDIR.mkdir(parents=True, exist_ok=True)
+    if args.dry_run:
+        out_payload = {'date': target_str, 'mode': args.mode, 'dryRun': True, 'candidateCount': len(dry_run_items), 'items': dry_run_items, 'skipped': skipped}
+        (LOGDIR / f'dry_run_{target_str}_{args.mode}.json').write_text(json.dumps(out_payload, ensure_ascii=False, indent=2))
+        print(json.dumps({'date': target_str, 'mode': args.mode, 'dryRun': True, 'candidateCount': len(dry_run_items), 'skippedCount': len(skipped)}, ensure_ascii=False))
+        return
 
     pending = {
         'generatedAt': now.isoformat(),
@@ -160,9 +334,8 @@ def main():
         'items': sorted(pending_by_id.values(), key=lambda x: x.get('dataHoraInicio', '')),
     }
     STATE.write_text(json.dumps(pending, ensure_ascii=False, indent=2))
-    LOGDIR.mkdir(parents=True, exist_ok=True)
-    (LOGDIR / f'send_{target_str}.json').write_text(json.dumps({'sent': sent}, ensure_ascii=False, indent=2))
-    print(json.dumps({'date': target_str, 'mode': args.mode, 'sentCount': len(sent)}, ensure_ascii=False))
+    (LOGDIR / f'send_{target_str}.json').write_text(json.dumps({'sent': sent, 'skipped': skipped}, ensure_ascii=False, indent=2))
+    print(json.dumps({'date': target_str, 'mode': args.mode, 'sentCount': len(sent), 'skippedCount': len(skipped)}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

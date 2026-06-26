@@ -19,6 +19,13 @@
 - ambíguo: não atualizar automaticamente
 - variações de telefone entre Quarkclinic e webhook devem ser toleradas, inclusive com ou sem o 9 adicional no celular
 
+## Regra de escolha do telefone de confirmação
+- Se o paciente/agendamento tiver mais de um telefone, a confirmação deve ir para o número em que o paciente já conversa com a clínica/Clara no WhatsApp.
+- A fonte para essa decisão é o histórico local da Clara/Z-API (`clara_leads_state.json`), usando evidências como `inbound_count`, `last_inbound_at`, `last_reply_at` e `active`.
+- A ordem dos telefones no Quarkclinic só é fallback quando nenhum candidato tem histórico na Clara/Z-API.
+- O sistema deve tolerar variantes com e sem nono dígito ao comparar números.
+- O dry-run registra `phoneSelection.reason`; o estado pendente registra `phoneSelection` junto com o envio real.
+
 ## Cron ativo
 - Nome: `whatsapp-confirmacoes-manha-seguinte` → `0 16 * * *`
 - Nome: `whatsapp-confirmacoes-tarde-mesmo-dia` → `30 7 * * *`
