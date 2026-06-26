@@ -1,11 +1,11 @@
 model:
-  default: openai-codex/gpt-5.5
-  provider: openai-codex
+  default: anthropic/claude-opus-4.8
+  provider: openrouter
   base_url: ''
   fallbacks:
   - model: openai-codex/gpt-5.5
     provider: openai-codex
-  max_tokens: 16000
+  max_tokens: 6000
 providers: {}
 fallback_providers: []
 credential_pool_strategies: {}
@@ -13,7 +13,7 @@ toolsets:
 - hermes-cli
 max_concurrent_sessions: null
 agent:
-  max_turns: 90
+  max_turns: 35
   gateway_timeout: 1800
   restart_drain_timeout: 180
   api_max_retries: 3
@@ -90,9 +90,9 @@ context_file_max_chars: null
 file_read_max_chars: 100000
 mcp_discovery_timeout: 1.5
 tool_output:
-  max_bytes: 50000
-  max_lines: 2000
-  max_line_length: 2000
+  max_bytes: 20000
+  max_lines: 600
+  max_line_length: 1200
 tool_loop_guardrails:
   warnings_enabled: true
   hard_stop_enabled: false
@@ -106,11 +106,11 @@ tool_loop_guardrails:
     idempotent_no_progress: 5
 compression:
   enabled: true
-  threshold: 0.5
-  target_ratio: 0.2
-  protect_last_n: 20
+  threshold: 0.25
+  target_ratio: 0.08
+  protect_last_n: 8
   hygiene_hard_message_limit: 5000
-  protect_first_n: 3
+  protect_first_n: 2
   abort_on_summary_failure: false
   codex_gpt55_autoraise: true
   in_place: false
@@ -238,8 +238,8 @@ auxiliary:
     timeout: 60
     extra_body: {}
   background_review:
-    provider: auto
-    model: ''
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 120
@@ -480,6 +480,8 @@ approvals:
   mcp_reload_confirm: true
   destructive_slash_confirm: true
 command_allowlist:
+- execute_code
+- script execution via -e/-c flag
 - kill hermes/gateway process (self-termination)
 - recursive delete
 quick_commands: {}
@@ -538,6 +540,8 @@ gateway:
   trust_recent_files_seconds: 600
   api_server:
     max_concurrent_runs: 10
+  telegram:
+    allowed_chats: '971050173'
 streaming:
   enabled: false
   transport: auto
@@ -586,25 +590,3 @@ computer_use:
 _config_version: 30
 plugins:
   enabled: []
-
-# ── Fallback Model ────────────────────────────────────────────────────
-# Automatic provider failover when primary is unavailable.
-# Uncomment and configure to enable. Triggers on rate limits (429),
-# overload (529), service errors (503), or connection failures.
-#
-# Supported providers:
-#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
-#   openai-codex (OAuth — hermes auth) — OpenAI Codex
-#   nous         (OAuth — hermes auth) — Nous Portal
-#   zai          (ZAI_API_KEY)         — Z.AI / GLM
-#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
-#   minimax      (MINIMAX_API_KEY)     — MiniMax
-#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
-#
-# For custom OpenAI-compatible endpoints, add base_url and key_env.
-#
-# fallback_model:
-#   provider: openrouter
-#   model: anthropic/claude-sonnet-4

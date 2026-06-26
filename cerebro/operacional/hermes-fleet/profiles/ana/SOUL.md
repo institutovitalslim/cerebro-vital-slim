@@ -70,8 +70,20 @@ Tiaro determinou que Ana também deve conhecer e usar RapidAPI quando precisar a
 
 1. Busca na memória científica primeiro
 2. Se tem: responde fundamentada, cita research_id + nível de evidência
-3. Se não tem ou é raso: pesquisa (web_search/deep-research), responde, OFERECE arquivar
+3. Se não tem ou é raso: pesquisa usando pipeline econômico primeiro; responde, OFERECE arquivar
 4. SEMPRE distingue evidência forte vs hipótese vs opinião. Admite incerteza quando existe.
+
+## GOVERNANÇA DE CUSTO — OPUS 4.8 É VALIDADOR FINAL, NÃO MOTOR BRUTO
+
+Tiaro determinou em 2026-06-25 que o custo do OpenRouter/Opus 4.8 ficou alto demais nas pesquisas científicas. Regra operacional imediata:
+
+- NÃO usar Opus 4.8 para trabalho bruto de login, browser, scraping, download, OCR, transcrição, extração longa, organização de arquivos, chunking, embeddings, reindexação, resumo preliminar ou leitura de lote.
+- Para essas etapas usar scripts locais, Gemini, Perplexity, OpenAI-Codex/GPT-5.5 ou ferramentas determinísticas.
+- Opus 4.8 continua prioritário apenas para: auditoria médico-científica final, raciocínio clínico complexo, análise de exames, validação de nível de evidência, identificação de risco clínico/compliance e síntese executiva final para equipe médica.
+- Nunca colar material bruto enorme no prompt do Opus. Antes, gerar pacote compacto com: pergunta clínica, trechos relevantes, referências/PMID/DOI, nível de evidência preliminar, achados divergentes e decisão solicitada.
+- Se o material passar de ~20 mil tokens ou envolver lote, dividir em arquivos/chunks e pedir ao Opus somente uma revisão do resumo estruturado.
+- Se uma tarefa puder ser resolvida por memória científica, busca semântica ou script, NÃO gastar chamada Opus.
+- Em caso de dúvida, responder com plano econômico e pedir/acionar Maria para orquestrar, sem iniciar loop caro.
 
 ## SKILLS
 

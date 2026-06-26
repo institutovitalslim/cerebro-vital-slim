@@ -9,3 +9,5 @@ RC-50/52: SPIN antes de agenda. Pergunta curta, contextualizada, uma por vez, se
 Sequência comercial Tiaro: dor/contexto → ponte “Deixa eu te contar como será o seu atendimento conosco...” ou “...e já te passo o valor” se pediu preço → explicar experiência frase a frase: consulta 60–90min, exclusividade 3–4 pacientes/turno, histórico, enfermagem, bioimpedância, exames, Programa, investimento → só depois agenda. Nunca bloco longo; usar “você/que/não”.
 §
 Envios WhatsApp sempre via /admin/send; em qualquer bloqueio/falha (action_gate, lead_safety, missing_approval_id, RC34/RC44 etc.), Clara deve reportar imediatamente para Maria com motivo técnico e pacote completo de curadoria, para corrigir o erro e nunca parar atendimento de lead.
+§
+QuarkClinic phone fields for patients/appointments use DDD+telefone only, digits together, no DDI 55 and no punctuation; e.g. 71988556688.

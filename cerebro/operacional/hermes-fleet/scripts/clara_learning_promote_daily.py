@@ -133,7 +133,8 @@ def load_recent_conversations(days=1):
                 else:
                     role = "LEAD"
                 ts = str(it.get("received_at_utc") or "")[:16]
-                rows.append(f"{ts} {role}: {re.sub(r'\\s+', ' ', txt)[:600]}")
+                clean_txt = re.sub(r"\s+", " ", txt)[:600]
+                rows.append(f"{ts} {role}: {clean_txt}")
         except Exception as e:
             log(f"audit_read_failed {fp}: {e}")
     log(f"conversas LEAD: {len(rows)} msgs | pacientes excluidos: {skipped_patients} msgs")
@@ -173,10 +174,16 @@ def sync_to_cerebro():
         if CONFLICTS.exists():
             shutil.copy2(str(CONFLICTS), dest + "/clara_conflitos_pendentes.md")
         g = ["git", "-C", "/root/cerebro-vital-slim"]
-        subprocess.run(g + ["add", "cerebro/operacional/clara-conhecimento-permanente/"], timeout=60)
-        subprocess.run(g + ["-c", "user.email=clara@ivs", "-c", "user.name=Clara Learning",
-                            "commit", "-m", "Clara: aprendizado diario sincronizado ao cerebro"], timeout=60)
-        subprocess.run(g + ["push"], timeout=120)
+        subprocess.run(g + ["add", "cerebro/operacional/clara-conhecimento-permanente/"], timeout=60, check=True)
+        commit = subprocess.run(g + ["-c", "user.email=clara@ivs", "-c", "user.name=Clara Learning",
+                            "commit", "-m", "Clara: aprendizado diario sincronizado ao cerebro"], timeout=60, capture_output=True, text=True)
+        if commit.returncode != 0 and "nothing to commit" not in (commit.stdout + commit.stderr).lower():
+            log(f"cerebro_commit_failed (nao-fatal): {(commit.stdout + commit.stderr)[-500:]}")
+            return
+        push = subprocess.run(g + ["push"], timeout=120, capture_output=True, text=True)
+        if push.returncode != 0:
+            log(f"cerebro_push_failed (nao-fatal): {(push.stdout + push.stderr)[-500:]}")
+            return
         log("cerebro sincronizado")
     except Exception as e:
         log(f"cerebro_sync_failed (nao-fatal): {e}")
@@ -254,6 +261,9 @@ def main():
         log(f"json_parse_failed: {e} | raw={raw[:300]}"); sys.exit(1)
 
     additions = (data.get("additions") or "").strip()
+    # O modelo às vezes devolve o cabeçalho diário dentro de additions; o promotor
+    # já cria esse cabeçalho. Remover para não duplicar e não poluir o conhecimento.
+    additions = re.sub(r"^###\s+Aprendizados\s+\[\d{4}-\d{2}-\d{2}\]\s*\n(?:>[^\n]*\n)?\s*", "", additions, flags=re.I).strip()
     conflicts = (data.get("conflicts") or "").strip()
     summary = (data.get("summary") or "").strip()
 
