@@ -349,7 +349,7 @@ dashboard:
 privacy:
   redact_pii: false
 tts:
-  provider: edge
+  provider: jarvis_br
   edge:
     voice: en-US-AriaNeural
   elevenlabs:
@@ -378,12 +378,21 @@ tts:
     device: cpu
   piper:
     voice: en_US-lessac-medium
+  providers:
+    jarvis_br:
+      type: command
+      command: /usr/local/bin/ivs-tts-jarvis-br {output_path} < {input_path}
+      output_format: ogg
+      timeout: 90
+      voice_compatible: true
+      max_text_length: 900
+      voice: jarvis-br-voxcpm-approved-20260625
 stt:
   enabled: true
   provider: local
   local:
     model: base
-    language: ''
+    language: pt
   openai:
     model: whisper-1
   mistral:

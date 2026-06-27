@@ -64,9 +64,10 @@ Tiaro determinou que **todo desenvolvimento solicitado a qualquer agente IVS** d
 
 ## Referências complementares
 
-- `references/content-engine-weekly-sprint.md`: Sprint Semanal, família de conteúdo e briefing herdado.
+- `references/content-engine-editorial-ingest.md`: Sprint Semanal, família de conteúdo e briefing herdado.
+- `references/content-engine-web-pain-desire-ingest.md`: ingestão governada de perguntas/dúvidas públicas da web como dores e desejos do avatar mestre no Content Engine OS (`story_themes`, `themes`, `manual_themes`, `opportunities`, `content_pattern_library`).
 - `references/content-engine-performance-learning.md`: Fase 3 do Content Engine OS — publicação vinculada ao criativo, importação governada de métricas, dashboard por variável e retroalimentação do próximo sprint.
-- `references/vital-slim-tracker-patient-portal-replit-lessons.md`: lições de produto/arquitetura e execução Replit para sistemas com ambiente profissional + portal paciente mobile, incluindo o pitfall de não presumir Plan mode antes de mandar comando direto de Build.
+
 - `references/replit-patient-portal-dev-lessons.md`: lições operacionais para apps Replit com painel profissional + portal paciente mobile, comandos diretos de Build, validação de escrita real e separação de origem dos dados.
 - `references/replit-patient-portal-qa-confirm-flow.md`: receita de QA real para fluxos mobile de registro em etapas (`Tipo → Itens/foto → Conferir → Salvar`), incluindo bug de botão sem `onClick` no Button real, uso de logs temporários e critério de aceite via preview/browser.
 - `references/replit-patient-portal-soft-delete-p1-p2-lessons.md`: lições P1/P2 do portal paciente mobile — feedback pós-salvamento, editar/remover/repetir refeição, câmera/preview local, soft delete com `deletedAt`, filtros em todos os consumidores e visão profissional de pacientes sem registro hoje.
@@ -79,6 +80,10 @@ Tiaro determinou que **todo desenvolvimento solicitado a qualquer agente IVS** d
 ## Content Engine OS — checkpoints de fase
 
 Quando Tiaro pedir para "seguir para a próxima fase" do Content Engine OS, não basta implementar uma tela isolada: feche o ciclo operacional com contrato de API, UI, smoke, validação real, **publicação no subdomínio do sistema**, commit e push. GitHub é obrigatório para versionamento, mas **não conta como publicação da entrega**; a entrega só está concluída quando estiver acessível e validada no subdomínio operacional, por exemplo `https://conteudo.institutovitalslim.com.br/<rota>`.
+
+### Blog científico IVS em VPS com aprovação médica
+
+Quando Tiaro pedir blog científico/médico, biblioteca pública de autoridade, conteúdo assinado pela Dra. Daniely ou publicação em subdomínio como `blog.institutovitalslim.com.br`, use o padrão em `references/medical-blog-vps-approval-workflow.md`. Regra central: se um post leva assinatura da Dra. Daniely, a aprovação médica precisa ser um gate técnico com `approved_by`, `approved_at`, hash da versão aprovada e audit log; qualquer alteração após aprovação invalida a publicação até nova aprovação.
 
 - Fase 1: `Sprint → Produção → Banco de Criativos → Aprovar → Calendário → Publicado → Métrica → BI`.
 - Fase 2: loop de aprendizado a partir das peças medidas.
@@ -133,6 +138,8 @@ Quando a correção envolver `/producao/carrosseis`, fila de peças recentes ou 
 Quando a evolução envolver transformar o Content Engine OS em uma máquina semanal de posicionamento, use `references/content-engine-weekly-sprint.md`. Padrão: `/sprint-semanal`, `weekly-command` API, tese/pilar antes de peça, família com Reels + Carrossel + Stories + Estático, hook selector para Reels, briefing herdado por querystring nos módulos de produção, rodapé/disclaimer obrigatório em toda legenda aplicado no prompt e no backend, e governança `plan_only` sem publicação/DM automática.
 
 Quando Tiaro/Maria enviarem DOCX/XLSX/TXT para alimentar o Content Engine OS com hooks, temas, roteiros, régua de mídia ou stories, use `references/content-engine-editorial-ingest.md`. Padrão: extrair com `python-docx`/`openpyxl`, criar script idempotente com `origin` do lote, gravar em `viral_scripts`, `themes`, `story_themes` e/ou `narrative_devices`, validar por endpoints públicos e manter tudo como repertório editorial interno sem publicação, DM, Z-API, QuarkClinic ou Omie. Para detalhes práticos do lote 2026-06-23 — validação do Weekly Command, pitfalls de `psycopg LIKE` e correção de `.next` stale — consulte `references/content-engine-editorial-ingest-20260623-lessons.md`.
+
+Quando Tiaro pedir que perguntas/dúvidas públicas encontradas na web entrem como dores e desejos do avatar mestre, use `references/content-engine-web-pain-desire-ingest.md`. Padrão: manter dados agregados e públicos, criar origem idempotente, gravar em `story_themes`, `themes`, `manual_themes`, `opportunities` e `content_pattern_library`, validar smoke e API pública correta (`https://conteudo.institutovitalslim.com.br/api/...`, não apenas `127.0.0.1` quando o smoke usa domínio público).
 
 ## Receita: Content Engine OS quebrado
 

@@ -10,4 +10,4 @@ Sequência comercial Tiaro: dor/contexto → ponte “Deixa eu te contar como se
 §
 Envios WhatsApp sempre via /admin/send; em qualquer bloqueio/falha (action_gate, lead_safety, missing_approval_id, RC34/RC44 etc.), Clara deve reportar imediatamente para Maria com motivo técnico e pacote completo de curadoria, para corrigir o erro e nunca parar atendimento de lead.
 §
-QuarkClinic phone fields for patients/appointments use DDD+telefone only, digits together, no DDI 55 and no punctuation; e.g. 71988556688.
+QuarkClinic: telefones = DDD+número sem DDI. POST /v1/pacientes não aceita endereço; gerar pendência UI/recepção.
