@@ -1,0 +1,138 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 1,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "qa_diario",
+      "label": "QA di\u00e1rio de convers\u00e3o",
+      "type": "process",
+      "community": 0,
+      "norm_label": "qa diario de conversao"
+    },
+    {
+      "id": "agendamento",
+      "label": "Agendamento seguro",
+      "type": "capability",
+      "community": 1,
+      "norm_label": "agendamento seguro"
+    },
+    {
+      "id": "triagem_area",
+      "label": "Triagem por \u00e1rea antes de venda direta",
+      "type": "learning",
+      "community": 1,
+      "norm_label": "triagem por area antes de venda direta"
+    },
+    {
+      "id": "confirmacao_literal",
+      "label": "Confirma\u00e7\u00e3o com op\u00e7\u00f5es literais",
+      "type": "learning",
+      "community": 0,
+      "norm_label": "confirmacao com opcoes literais"
+    },
+    {
+      "id": "desvio_admin",
+      "label": "Desvio administrativo imediato",
+      "type": "learning",
+      "community": 2,
+      "norm_label": "desvio administrativo imediato"
+    },
+    {
+      "id": "risco_current_zerado",
+      "label": "Risco de observabilidade: current zerado",
+      "type": "risk",
+      "community": 0,
+      "norm_label": "risco de observabilidade: current zerado"
+    },
+    {
+      "id": "guardrails",
+      "label": "Guardrails cl\u00ednicos e comerciais",
+      "type": "guardrail",
+      "community": 2,
+      "norm_label": "guardrails clinicos e comerciais"
+    }
+  ],
+  "links": [
+    {
+      "type": "is_reviewed_by",
+      "relationship": "is_reviewed_by",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "qa_diario",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "must_improve",
+      "relationship": "must_improve",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "agendamento",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "found_learning",
+      "relationship": "found_learning",
+      "confidence": "EXTRACTED",
+      "source": "qa_diario",
+      "target": "triagem_area",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "reinforced_learning",
+      "relationship": "reinforced_learning",
+      "confidence": "EXTRACTED",
+      "source": "qa_diario",
+      "target": "confirmacao_literal",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "found_learning",
+      "relationship": "found_learning",
+      "confidence": "EXTRACTED",
+      "source": "qa_diario",
+      "target": "desvio_admin",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "limits_confidence",
+      "relationship": "limits_confidence",
+      "confidence": "EXTRACTED",
+      "source": "qa_diario",
+      "target": "risco_current_zerado",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "triagem_area",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "source": "agendamento",
+      "target": "confirmacao_literal",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "protects",
+      "relationship": "protects",
+      "confidence": "EXTRACTED",
+      "source": "desvio_admin",
+      "target": "guardrails",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}
