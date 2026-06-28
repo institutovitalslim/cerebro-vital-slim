@@ -1,11 +1,11 @@
 model:
-  default: anthropic/claude-opus-4.8
-  provider: openrouter
+  default: openai-codex/gpt-5.5
+  provider: openai-codex
   base_url: ''
   fallbacks:
   - model: openai-codex/gpt-5.5
     provider: openai-codex
-  max_tokens: 6000
+  max_tokens: 3000
 providers: {}
 fallback_providers: []
 credential_pool_strategies: {}
