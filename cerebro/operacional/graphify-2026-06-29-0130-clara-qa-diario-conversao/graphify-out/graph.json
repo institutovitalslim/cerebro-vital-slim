@@ -1,0 +1,31 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {"id":"qa_diario_clara_2026_06_29","label":"QA diário Clara 2026-06-29","type":"operational_review","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":1,"norm_label":"qa diario clara 2026-06-29"},
+    {"id":"current_whatsapp_zerado_2026_06_29","label":"WhatsApp current zerado em 2026-06-29","type":"evidence","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":1,"norm_label":"whatsapp current zerado em 2026-06-29"},
+    {"id":"sem_amostra_util_ultimas_6h","label":"Sem amostra útil nas últimas 6h","type":"risk_signal","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":1,"norm_label":"sem amostra util nas ultimas 6h"},
+    {"id":"bloqueio_observabilidade_conversao_recente","label":"Bloqueio de observabilidade da conversão recente","type":"operational_risk","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":2,"norm_label":"bloqueio de observabilidade da conversao recente"},
+    {"id":"validacao_humana_tecnica_pipeline_whatsapp","label":"Validação humana/técnica do pipeline WhatsApp","type":"action","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":2,"norm_label":"validacao humana/tecnica do pipeline whatsapp"},
+    {"id":"historico_whatsapp_6187_443_30_5","label":"Histórico WhatsApp: 6187 mensagens, 443 leads, 30 wins, 5 drops","type":"evidence","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":0,"norm_label":"historico whatsapp 6187 mensagens 443 leads 30 wins 5 drops"},
+    {"id":"qualificar_antes_de_vender_lead_frio","label":"Qualificar antes de vender para lead frio","type":"improvement","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":0,"norm_label":"qualificar antes de vender para lead frio"},
+    {"id":"oferta_horario_concreto","label":"Oferta de horário concreto quando houver intenção mínima","type":"improvement","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":0,"norm_label":"oferta de horario concreto quando houver intencao minima"},
+    {"id":"confirmacao_fechada_pos_agendamento","label":"Confirmação fechada pós-agendamento","type":"improvement","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":0,"norm_label":"confirmacao fechada pos-agendamento"},
+    {"id":"guardrails_clinicos_preservados","label":"Guardrails clínicos preservados","type":"guardrail","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":0,"norm_label":"guardrails clinicos preservados"},
+    {"id":"nao_pausar_clara_sem_ordem_tiaro","label":"Não pausar Clara sem ordem direta do Tiaro","type":"governance","source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document","community":2,"norm_label":"nao pausar clara sem ordem direta do tiaro"}
+  ],
+  "links": [
+    {"source":"qa_diario_clara_2026_06_29","target":"current_whatsapp_zerado_2026_06_29","relationship":"identifica","relation":"identifica","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"current_whatsapp_zerado_2026_06_29","target":"sem_amostra_util_ultimas_6h","relationship":"evidencia","relation":"evidencia","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"sem_amostra_util_ultimas_6h","target":"bloqueio_observabilidade_conversao_recente","relationship":"sinaliza","relation":"sinaliza","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"bloqueio_observabilidade_conversao_recente","target":"validacao_humana_tecnica_pipeline_whatsapp","relationship":"exige","relation":"exige","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"bloqueio_observabilidade_conversao_recente","target":"nao_pausar_clara_sem_ordem_tiaro","relationship":"não autoriza","relation":"não autoriza","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"historico_whatsapp_6187_443_30_5","target":"qualificar_antes_de_vender_lead_frio","relationship":"sustenta","relation":"sustenta","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"historico_whatsapp_6187_443_30_5","target":"oferta_horario_concreto","relationship":"sustenta","relation":"sustenta","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"historico_whatsapp_6187_443_30_5","target":"confirmacao_fechada_pos_agendamento","relationship":"sustenta","relation":"sustenta","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"qualificar_antes_de_vender_lead_frio","target":"guardrails_clinicos_preservados","relationship":"respeita","relation":"respeita","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"oferta_horario_concreto","target":"guardrails_clinicos_preservados","relationship":"respeita","relation":"respeita","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"},
+    {"source":"confirmacao_fechada_pos_agendamento","target":"guardrails_clinicos_preservados","relationship":"respeita","relation":"respeita","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"raw/qa-diario-clara-2026-06-29-0130.md","file_type":"document"}
+  ]
+}
