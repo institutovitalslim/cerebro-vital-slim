@@ -460,10 +460,24 @@ whatsapp: {}
 telegram:
   reactions: false
   channel_prompts: {}
-  allowed_chats: ''
+  allowed_chats: '-5152297471'
   extra:
     rich_messages: false
-  require_mention: false
+    allowed_chats: '-5152297471'
+    group_allowed_chats: '-5152297471'
+    require_mention: true
+    guest_mode: false
+    exclusive_bot_mentions: true
+    mention_patterns: &id001
+    - \bana\b
+    - \bmédica\b
+    - \bmedica\b
+    - '@AnaTiaro_bot\b'
+  require_mention: true
+  group_allowed_chats: '-5152297471'
+  guest_mode: false
+  exclusive_bot_mentions: true
+  mention_patterns: *id001
 mattermost:
   require_mention: true
   free_response_channels: ''
@@ -541,7 +555,7 @@ gateway:
   api_server:
     max_concurrent_runs: 10
   telegram:
-    allowed_chats: '971050173'
+    allowed_chats: 971050173,-5152297471
 streaming:
   enabled: false
   transport: auto

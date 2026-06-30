@@ -13,3 +13,5 @@ Manuais oficiais disponíveis no profile Jarvis: manuais/gwm_h6_phev.txt e manua
 Logos oficiais do IVS estão na pasta Google Drive “VITAL SLIM - ARQUIVOS - LOGO”: https://drive.google.com/drive/folders/1Tl4iRcyo0xwltKOekqad5dwEJKgi13EA. A logomarca correta confirmada por Tiaro é a padrão dourada “Instituto Vital Slim”, vetorial/sem fundo; usar essa referência, não arquivos parecidos locais.
 §
 Para pesquisas/scrapers pedidos por Tiaro, Jarvis deve começar pelo arsenal governado da VPS/cérebro — `ivs-scrapling-safe`, Playwright, Agent Reach e GBrain — antes de recorrer a fetch simples; Tiaro espera uso profundo das ferramentas disponíveis.
+§
+IVS agent avatar convention: for Telegram group/agent photos, use premium human/editorial avatars safe for circular crop; add lower banner text only inside safe crop. Agente Ana’s approved look: blonde, slim/elegant, light eyes, soft waves with lightly curled ends, captivating warm smile, medical-research premium aesthetic.
