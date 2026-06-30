@@ -115,3 +115,23 @@ Depois de enviar, valide se chegou:
 ```bash
 ivs-agent-message inbox --agent joao --status open --json
 ```
+
+## Pitfall: aviso ao agente ≠ aviso ao Tiaro
+
+Quando Tiaro pedir explicitamente para “informar/avisar o agente”, não basta responder ao Tiaro nem apenas registrar no barramento interno. Faça o canal que o agente realmente vê:
+
+1. **Barramento interno IVS** (`ivs-agent-message`) para handoff rastreável.
+2. **Canal visível do agente**, quando existir e for o canal operacional atual.
+3. **Watcher de inbox do agente**, quando a mensagem exigir resposta/ação do agente.
+4. Reporte ao Tiaro com o ID real da entrega.
+
+### Pitfall crítico: mensagem enviada por bot não vira input do próprio agente
+
+Se Maria usa `hermes send` para postar no chat do agente, isso pode aparecer visualmente no Telegram, mas **não garante que o agente processe**:
+
+- bot não recebe a própria mensagem como inbound;
+- bot geralmente não processa mensagem de outro bot;
+- DM `telegram:971050173` nos perfis João/Pedro/Jarvis é a DM do Tiaro com aquele bot, não uma fila acionável pela Maria;
+- `message_id` de envio prova entrega Telegram, mas não prova que o agente leu, raciocinou ou respondeu.
+
+Regra operacional: para pedir resposta real de outro agente, use `ivs-agent-message` + o watcher `ivs_inbox_watcher.py` do perfil. O watcher lê mensagens novas, aciona o perfil do agente, envia resposta no canal visível quando cadastrado e responde à Maria pelo barramento.
