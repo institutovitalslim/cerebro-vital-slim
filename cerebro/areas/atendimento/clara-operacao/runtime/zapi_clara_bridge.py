@@ -1860,6 +1860,12 @@ def enforce_no_reopening_after_context(phone: str, inbound_text: str, reply: str
     if active_context and (contains_hard_final_decline(inbound_text) or recent_context_has_hard_final_decline(phone)):
         log(f"rc49_respect_final_decline applied phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
         return build_respectful_final_close_reply()
+    # RC-66: pergunta objetiva sobre acompanhamento/programa precisa ser respondida
+    # antes de qualquer recuperação genérica de SPIN. Ex.: "E faz o acompanhamento?"
+    # após explicação de consulta/preço não pode virar "o que te incomoda?".
+    if active_context and contains_program_question(inbound_text) and is_generic_discovery_reply(text):
+        log(f"rc66_program_question_recovered_before_generic phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_program_followup_explanation_reply()
     if active_context and contains_commercial_decline(inbound_text) and recent_context_mentions_price_or_schedule(phone):
         log(f"rc47_commercial_decline_recovery applied phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
         return build_commercial_decline_recovery_reply()
@@ -2293,8 +2299,31 @@ def contains_program_question(text: str) -> bool:
     ))
 
 
+def build_program_followup_explanation_reply() -> str:
+    return (
+        "Sim. Depois da consulta inicial, se fizer sentido para o seu caso, a Dra. Daniely pode indicar um Programa de Acompanhamento individual.\n\n"
+        "Esse programa é definido depois da avaliação, porque depende do seu histórico, exames, composição corporal, objetivo e do que for seguro para você.\n\n"
+        "Por isso eu não te passo um valor fechado de acompanhamento por aqui antes da consulta. O primeiro passo é a avaliação inicial."
+    )
+
+
+def is_generic_discovery_reply(reply: str) -> bool:
+    lower = (reply or "").lower()
+    return any(marker in lower for marker in (
+        "o que mais está te incomodando", "o que mais esta te incomodando",
+        "o que está te incomodando", "o que esta te incomodando",
+        "o que te trouxe", "o que fez você buscar", "o que fez voce buscar",
+        "me conta um pouquinho", "para eu entender melhor", "para eu continuar do ponto certo",
+    ))
+
+
 def enforce_program_reasoning(inbound_text: str, reply: str) -> str:
-    """Garante raciocínio correto antes de falar do Programa de Acompanhamento."""
+    """Garante raciocínio correto quando o lead pergunta sobre acompanhamento/programa.
+
+    RC-66: pergunta objetiva como "E faz o acompanhamento?" não é convite para
+    reabrir descoberta. A Clara deve responder sobre acompanhamento e seguir a
+    lógica comercial já iniciada, sem repetir pergunta clichê.
+    """
     text = (reply or "").strip()
     if not text or text == "NO_REPLY":
         return text or "NO_REPLY"
@@ -2306,14 +2335,9 @@ def enforce_program_reasoning(inbound_text: str, reply: str) -> str:
         marker in lower for marker in ("primeiro passo", "histórico", "historico", "composição corporal", "composicao corporal", "manhã", "manha", "tarde")
     )
     lacks_agenda_direction = not any(marker in lower for marker in ("horário", "horario", "manhã", "manha", "tarde", "agendar", "consulta inicial"))
-    if weak_fixed_value_answer or (mentions_program and lacks_agenda_direction):
-        return (
-            "Sim, existe essa possibilidade. A consulta inicial é justamente o primeiro passo para a Dra. Daniely entender seu caso com profundidade: "
-            "histórico, exames, composição corporal, rotina e objetivo.\n\n"
-            "A partir disso, se fizer sentido, ela pode desenhar um Programa de Acompanhamento individual para você, com conduta, metas e ajustes ao longo do processo.\n\n"
-            "Por isso o programa não tem valor fechado antes da avaliação: ele depende do que for indicado para o seu caso.\n\n"
-            "Para começar certo, o melhor passo é agendar a consulta inicial. Você prefere que eu veja um horário pela manhã ou pela tarde?"
-        )
+    if is_generic_discovery_reply(text) or weak_fixed_value_answer or (mentions_program and lacks_agenda_direction):
+        log(f"rc66_program_question_no_generic_reopen inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_program_followup_explanation_reply()
     return text
 
 
