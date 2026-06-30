@@ -1680,7 +1680,36 @@ def contains_hard_final_decline(text: str) -> bool:
     return compact in {
         "no momento nenhum", "no momento não", "no momento nao",
         "não quero obrigado", "nao quero obrigado", "não quero obrigada", "nao quero obrigada",
+        "não obg", "nao obg", "não obrigada", "nao obrigada", "não obrigado", "nao obrigado",
     } or "no momento não" in lower or "no momento nao" in lower or "no momento nenhum" in lower
+
+
+def contains_distance_final_decline(text: str) -> bool:
+    """Detecta desistência final por distância/logística.
+
+    RC-67: se o lead já disse que distância inviabiliza e agradece/recusa,
+    Clara deve encerrar com respeito. Não pode transformar em agenda.
+    """
+    lower = (text or "").strip().lower()
+    compact = re.sub(r"[^a-záàâãéêíóôõúç]+", " ", lower).strip()
+    distance_marker = any(marker in lower for marker in (
+        "longe pra mim", "longe para mim", "muito longe", "distância", "distancia",
+        "fica longe", "é longe", "e longe", "inviabiliza", "não consigo ir", "nao consigo ir",
+    ))
+    final_marker = any(marker in lower for marker in (
+        "não obg", "nao obg", "não obrigada", "nao obrigada", "não obrigado", "nao obrigado",
+        "obg pela atenção", "obg pela atencao", "obrigada pela atenção", "obrigado pela atenção",
+        "obrigada pela atencao", "obrigado pela atencao", "pela atenção", "pela atencao",
+        "deixa", "vou deixar", "não vou", "nao vou", "sem condições", "sem condicoes",
+    )) or compact in {"longe para mim", "longe pra mim", "muito longe"}
+    return distance_marker and final_marker
+
+
+def build_distance_final_close_reply() -> str:
+    return (
+        "Entendo. Obrigada por me avisar.\n\n"
+        "Não vou insistir. Se em outro momento fizer sentido para você vir até Lauro de Freitas, é só me chamar por aqui."
+    )
 
 
 def contains_polite_conversation_close(text: str) -> bool:
@@ -1854,6 +1883,9 @@ def enforce_no_reopening_after_context(phone: str, inbound_text: str, reply: str
         return text or "NO_REPLY"
     entry = get_lead_entry(phone)
     active_context = int(entry.get("reply_count") or 0) > 0 or int(entry.get("inbound_count") or 0) > 1
+    if active_context and contains_distance_final_decline(inbound_text):
+        log(f"rc67_distance_final_decline_no_schedule phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_distance_final_close_reply()
     if active_context and contains_polite_conversation_close(inbound_text):
         log(f"rc65_polite_close_no_reopen applied phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
         return build_polite_close_no_reopen_reply(inbound_text)
