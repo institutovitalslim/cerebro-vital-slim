@@ -379,19 +379,19 @@ def should_block_reply(phone: str, reply: str) -> Tuple[bool, str]:
     last_reply_hash = entry.get("last_reply_hash")
     last_reply_at = entry.get("last_reply_at")
 
-    # Regra operacional Tiaro/Maria 2026-05-25: Clara não pode ficar sem atendimento
-    # por autopausa global. Resposta duplicada no mesmo telefone é apenas sinal de QA,
-    # nunca motivo para pausar a operação inteira. Mantemos log/estado e deixamos enviar,
-    # porque pior que repetir uma orientação é deixar lead sem retorno.
+    # RC-65: duplicar a mesma pergunta no mesmo lead quebra a lógica da conversa.
+    # A proteção antiga só logava e deixava enviar para evitar autopausa global, mas
+    # isso gerou repetição visível ao lead (ex.: mesma pergunta de descoberta 3x).
+    # A correção segura é bloquear apenas a bolha duplicada, sem pausar a Clara.
     try:
         if last_reply_hash == reply_hash and last_reply_at and (now - float(last_reply_at) <= REPEAT_REPLY_WINDOW_SECONDS):
             update_phone_event_entry(phone, {
                 "last_reply_hash": reply_hash,
                 "last_reply_at": now,
-                "last_duplicate_reply_allowed_at": now,
+                "last_duplicate_reply_blocked_at": now,
             })
-            log(f"duplicate_reply_allowed_no_global_pause phone={phone}")
-            return False, "duplicate_reply_allowed_no_global_pause"
+            log(f"duplicate_reply_blocked_no_global_pause phone={phone}")
+            return True, "duplicate_reply_blocked_no_global_pause"
     except Exception:
         pass
 
@@ -1546,6 +1546,7 @@ def call_clara(phone: str, text: str, sender_name: Optional[str] = None) -> str:
         log(f"clara_thinking_gate_ok phone={phone} chars={len(thinking_plan)} preview={thinking_plan[:180]!r}")
 
     if recent_context:
+        instructions += "\n\nTRAVA RC-64 — LEITURA DE CONTEXTO ANTES DE FOLLOW-UP: se o CONTEXTO RECENTE REAL DO WHATSAPP já trouxer dor/tema declarado pelo lead (ex.: menopausa, engordou/ganho de peso, ansiedade, cansaço, libido, sono, hormônios), a próxima resposta DEVE retomar esse tema nominalmente. É proibido perguntar de novo de forma genérica 'o que está te incomodando' ou 'o que te trouxe' como se fosse primeira conversa. Antes de escrever, identifique: tema declarado, última pergunta pendente e próximo micro-passo específico."
         instructions += recent_context
     if thinking_plan:
         instructions += "\n\nPlano interno obrigatório já gerado antes da resposta. Use como trava operacional, sem mencionar ao lead e sem expor JSON/checklist:\n" + thinking_plan
@@ -1682,6 +1683,40 @@ def contains_hard_final_decline(text: str) -> bool:
     } or "no momento não" in lower or "no momento nao" in lower or "no momento nenhum" in lower
 
 
+def contains_polite_conversation_close(text: str) -> bool:
+    """Detecta agradecimento/despedida que deve encerrar sem reabrir SPIN.
+
+    Incidente 2026-06-30: lead disse "grata", "muito obrigada pela informação",
+    "bjs"/"Deus abençoe" e a Clara reabriu a mesma pergunta de descoberta.
+    """
+    lower = (text or "").strip().lower()
+    compact = re.sub(r"[^a-záàâãéêíóôõúç]+", " ", lower).strip()
+    if compact in {
+        "grata", "grato", "obrigada", "obrigado", "muito obrigada", "muito obrigado",
+        "muito obrigada pela informação", "muito obrigado pela informação",
+        "obrigada pela informação", "obrigado pela informação", "agradeço", "agradeco",
+        "bjs", "beijos", "beijo", "um beijo", "deus abençoe", "deus abencoe",
+        "deus abençoe vcs", "deus abencoe vcs", "amém", "amem",
+    }:
+        return True
+    return any(marker in lower for marker in (
+        "obrigada pela informação", "obrigado pela informação", "muito obrigada pela informação",
+        "muito obrigado pela informação", "agradeço a informação", "agradeco a informacao",
+        "deus abençoe", "deus abencoe",
+    )) or any(re.search(rf"(?<![a-záàâãéêíóôõúç]){token}(?![a-záàâãéêíóôõúç])", lower) for token in (
+        "grata", "grato", "bjs", "beijos", "beijo", "obrigada", "obrigado", "amém", "amem"
+    ))
+
+
+def build_polite_close_no_reopen_reply(inbound_text: str = "") -> str:
+    lower = (inbound_text or "").lower()
+    if "deus abençoe" in lower or "deus abencoe" in lower or "amém" in lower or "amem" in lower:
+        return "Amém. Que Deus abençoe você também."
+    if "bjs" in lower or "beijo" in lower:
+        return "Um beijo. Se precisar no futuro, estou por aqui."
+    return "Por nada. Se precisar no futuro, estou por aqui."
+
+
 def recent_context_has_hard_final_decline(phone: str) -> bool:
     ctx = build_recent_conversation_context(phone, limit=5).lower()
     return any(marker in ctx for marker in ("no momento nenhum", "no momento não", "no momento nao"))
@@ -1755,8 +1790,25 @@ def contains_weight_belly_metabolism_context(text: str) -> bool:
     lower = (text or "").lower()
     return any(marker in lower for marker in (
         "barriga", "gordinha", "gordinho", "metabolismo", "perder peso",
-        "emagrec", "ansiedade", "117 kg", "cento e dezessete"
+        "emagrec", "engord", "ganho de peso", "aumento de peso", "peso",
+        "menopausa", "climatério", "climaterio", "hormonal", "ansiedade",
+        "117 kg", "cento e dezessete"
     ))
+
+
+def contains_menopause_weight_context(text: str) -> bool:
+    lower = (text or "").lower()
+    return any(marker in lower for marker in ("menopausa", "climatério", "climaterio")) and any(marker in lower for marker in (
+        "engord", "ganho de peso", "aumento de peso", "peso", "emagrec", "barriga"
+    ))
+
+
+def build_contextual_menopause_weight_reply() -> str:
+    return (
+        "Entendi. Pelo que você já trouxe, a menopausa e o ganho de peso merecem mesmo um olhar mais cuidadoso.\n\n"
+        "Nessa fase, pode fazer sentido avaliar fatores hormonais, metabólicos, composição corporal, sono e rotina antes de qualquer conduta.\n\n"
+        "Você chegou a investigar isso recentemente com exames ou ainda não olhou com profundidade?"
+    )
 
 
 def build_contextual_weight_belly_reply(inbound_text: str) -> str:
@@ -1782,6 +1834,8 @@ def build_text_runtime_failsafe_reply(inbound_text: str) -> str:
     """
     if contains_evaluation_explanation_request(inbound_text):
         return build_evaluation_explanation_reply()
+    if contains_menopause_weight_context(inbound_text):
+        return build_contextual_menopause_weight_reply()
     if contains_weight_belly_metabolism_context(inbound_text) or contains_inbound_scheduling_intent(inbound_text):
         return build_contextual_weight_belly_reply(inbound_text)
     return build_spin_continuation_reply()
@@ -1800,6 +1854,9 @@ def enforce_no_reopening_after_context(phone: str, inbound_text: str, reply: str
         return text or "NO_REPLY"
     entry = get_lead_entry(phone)
     active_context = int(entry.get("reply_count") or 0) > 0 or int(entry.get("inbound_count") or 0) > 1
+    if active_context and contains_polite_conversation_close(inbound_text):
+        log(f"rc65_polite_close_no_reopen applied phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_polite_close_no_reopen_reply(inbound_text)
     if active_context and (contains_hard_final_decline(inbound_text) or recent_context_has_hard_final_decline(phone)):
         log(f"rc49_respect_final_decline applied phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
         return build_respectful_final_close_reply()
@@ -1822,12 +1879,55 @@ def enforce_no_reopening_after_context(phone: str, inbound_text: str, reply: str
     if contains_evaluation_explanation_request(inbound_text):
         log(f"rc58_explanation_request_recovered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
         return build_evaluation_explanation_reply()
+    if is_bare_objective_category(inbound_text):
+        log(f"rc65_bare_category_no_generic_reopen phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_price_category_deepening_reply(inbound_text)
     log(f"rc45_no_reopening_after_context applied phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
     if contains_commercial_decline(inbound_text):
         return build_short_decline_context_reply()
+    if contains_menopause_weight_context(inbound_text):
+        return build_contextual_menopause_weight_reply()
     if contains_weight_belly_metabolism_context(inbound_text):
         return build_contextual_weight_belly_reply(inbound_text)
     return build_spin_continuation_reply()
+
+
+def is_context_blind_generic_discovery(reply: str) -> bool:
+    lower = (reply or "").lower()
+    if not lower:
+        return False
+    generic_discovery = any(marker in lower for marker in (
+        "o que mais está te incomodando", "o que mais esta te incomodando",
+        "o que está te incomodando", "o que esta te incomodando",
+        "o que te trouxe", "o que fez você buscar", "o que fez voce buscar",
+        "me conta um pouquinho", "para eu entender melhor"
+    ))
+    if not generic_discovery:
+        return False
+    contextual_tokens = (
+        "menopausa", "climatério", "climaterio", "engord", "ganho de peso",
+        "aumento de peso", "peso", "emagrec", "hormonal", "hormônios", "hormonios"
+    )
+    return not any(token in lower for token in contextual_tokens)
+
+
+def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply: str) -> str:
+    """RC-64: impede follow-up cego quando o histórico já contém dor declarada.
+
+    A memória/prompt não bastam: o runtime precisa travar respostas genéricas
+    que perguntam novamente "o que incomoda" quando o WhatsApp já mostrou o tema.
+    """
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    if not is_context_blind_generic_discovery(text):
+        return text
+    ctx = build_recent_conversation_context(phone, limit=12)
+    combined = f"{ctx}\n{inbound_text or ''}"
+    if contains_menopause_weight_context(combined):
+        log(f"rc64_context_blind_followup_rewritten phone={phone} replyPreview={text[:140]!r}")
+        return build_contextual_menopause_weight_reply()
+    return text
 
 
 
@@ -3733,6 +3833,7 @@ class Handler(BaseHTTPRequestHandler):
                 reply = enforce_discovery_before_next_step(processed_text, reply)
                 reply = enforce_spin_before_agendamento(phone, processed_text, reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
+                reply = enforce_context_continuity_before_send(phone, processed_text, reply)
                 reply = enforce_rc39_no_generic_next_step(reply)
                 reply = enforce_price_timing(phone, processed_text, reply)
                 reply = enforce_program_reasoning(processed_text, reply)
@@ -3744,6 +3845,7 @@ class Handler(BaseHTTPRequestHandler):
                 reply = enforce_agendamento_reply_quality(reply)
                 reply = final_scrub_banned_next_step_phrase(reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
+                reply = enforce_context_continuity_before_send(phone, processed_text, reply)
                 reply = enforce_outbound_price_safety(phone, reply, processed_text)
                 block_reply, block_reason = should_block_reply(phone, reply)
                 if block_reply:
