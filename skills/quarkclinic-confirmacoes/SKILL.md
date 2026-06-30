@@ -32,6 +32,7 @@ Use esta skill para operar o fluxo de confirmação de pacientes entre **Quarkcl
 6. Sempre verificar o procedimento real agendado e usar essa informação na mensagem. Nunca assumir que todo atendimento é “consulta”.
 7. Quando a resposta vier de paciente já confirmado no fluxo operacional, o sistema deve apenas atualizar o Quarkclinic e registrar o status. Não deve responder o paciente automaticamente no WhatsApp.
 8. Quando houver mais de um telefone no cadastro/agendamento, a confirmação deve ser enviada para o telefone em que o paciente já fala com a clínica/Clara no WhatsApp. A ordem do cadastro Quarkclinic é apenas fallback quando nenhum telefone tiver histórico Z-API/Clara. Nunca escolher automaticamente o segundo número se outro número já tem conversa ativa com a clínica.
+9. Antes de qualquer envio, bloquear em modo fail-closed agendas canceladas/removidas/excluídas. O QuarkClinic pode retornar cancelamento como `statusMarcacao: EXCLUIDO` — não basta procurar apenas a palavra `cancelado`.
 
 ## Execução padrão
 ### Enviar confirmações da manhã seguinte

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, json, subprocess
+import argparse, json, subprocess, unicodedata
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from pathlib import Path
@@ -37,6 +37,40 @@ def normalize_phone(raw):
     if len(digits) >= 10:
         return '55' + digits
     return digits
+
+
+def normalize_status_text(value):
+    text = str(value or '').strip().lower()
+    text = ''.join(ch for ch in unicodedata.normalize('NFD', text) if unicodedata.category(ch) != 'Mn')
+    return text
+
+
+def get_appointment_status(appt):
+    fields = (
+        'status', 'statusMarcacao', 'situacao', 'situacaoAgendamento',
+        'statusAgendamento', 'statusConsulta', 'statusAtendimento',
+    )
+    values = [normalize_status_text(appt.get(field)) for field in fields if appt.get(field) is not None]
+    status_obj = appt.get('status')
+    if isinstance(status_obj, dict):
+        values.extend(normalize_status_text(status_obj.get(k)) for k in ('nome', 'descricao', 'codigo', 'status') if status_obj.get(k) is not None)
+    return ' '.join(v for v in values if v)
+
+
+def is_cancelled_appointment(appt):
+    """Detecta agenda cancelada/removida em variações reais do QuarkClinic.
+
+    Incidente 2026-06-30: QuarkClinic retornou `statusMarcacao: EXCLUIDO`
+    para um retorno cancelado. A versão anterior só procurava `cancel` e
+    enviou confirmação indevida. Este gate é fail-closed para marcadores de
+    cancelamento/exclusão antes de qualquer envio Z-API.
+    """
+    status = get_appointment_status(appt)
+    cancelled_markers = (
+        'cancel', 'cancelad', 'excluid', 'exclu', 'removid', 'delet',
+        'deleted', 'inactive', 'inativo', 'desmarcad', 'desmarc',
+    )
+    return any(marker in status for marker in cancelled_markers), status
 
 
 def phone_variants(raw):
@@ -256,8 +290,14 @@ def main():
     skipped = []
     dry_run_items = []
     for appt in items:
-        status = str(appt.get('status') or appt.get('statusMarcacao') or '').lower()
-        if 'cancel' in status:
+        is_cancelled, status_text = is_cancelled_appointment(appt)
+        if is_cancelled:
+            skipped.append({
+                'agendamentoId': appt.get('id') or appt.get('agendamentoId'),
+                'nome': (appt.get('paciente') or {}).get('nome') or appt.get('pacienteNome') or appt.get('nomePaciente') or 'paciente',
+                'reason': 'cancelled_or_excluded_status',
+                'status': status_text,
+            })
             continue
         dt = appt.get('dataHoraInicio') or appt.get('data_inicio') or appt.get('dataHora') or (f"{appt.get('dataAgendamento','')}T{appt.get('horaAgendamento','')}" if appt.get('dataAgendamento') and appt.get('horaAgendamento') else '')
         if not dt:
