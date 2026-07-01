@@ -1337,7 +1337,8 @@ def enforce_outbound_price_safety(phone: str, message: str, inbound_text: str = 
     entry = get_phone_event_entry(phone)
     lead_texts = get_recent_lead_texts(phone, limit=8)
     has_real_recent_context = any(has_price_context_text(t) for t in lead_texts)
-    if bool(entry.get("price_context_ready")) and has_real_recent_context:
+    rc68_context_ready = bool(entry.get("price_context_ready")) and str(entry.get("price_context_source") or "") == "rc68_price_question_after_context"
+    if bool(entry.get("price_context_ready")) and (has_real_recent_context or rc68_context_ready):
         return text
     candidate = (inbound_text or "").strip() or (lead_texts[-1] if lead_texts else "")
     if is_bare_objective_category(candidate):
@@ -2137,6 +2138,22 @@ def contains_price_question(text: str) -> bool:
     ))
 
 
+def contains_fatigue_complaint(text: str) -> bool:
+    lower = (text or "").lower()
+    return any(marker in lower for marker in (
+        "cansativo", "responder a mesma coisa", "mesma coisa várias vezes", "mesma coisa varias vezes",
+        "já respondi", "ja respondi", "perguntou isso", "de novo", "várias vezes", "varias vezes",
+    ))
+
+
+def build_consultation_price_reply() -> str:
+    return (
+        "Claro. A consulta inicial é R$ 1.000,00.\n\n"
+        "Pode ser parcelada em até 2x sem juros, e a reserva é de R$ 300,00, abatida do valor da consulta.\n\n"
+        "Ela inclui a avaliação médica com a Dra. Daniely, enfermagem, bioimpedância e direcionamento inicial."
+    )
+
+
 def contains_money_value(text: str) -> bool:
     """Detecta oferta comercial de preço/desconto, inclusive escrita por extenso.
 
@@ -2276,6 +2293,67 @@ def mark_price_context_if_present(phone: str, inbound_text: str) -> None:
         "price_context_ready_at": time.time(),
         "price_context_source": "lead_inbound",
     })
+
+
+def consultation_price_context_ready(phone: str, inbound_text: str = "") -> bool:
+    """Permite responder valor da consulta sem cansar o lead.
+
+    RC-68: se o lead já trouxe um tema mínimo (ex.: peso) ou já houve convite
+    para agenda, insistir em nova pergunta antes do valor vira fricção comercial.
+    """
+    entry = get_phone_event_entry(phone)
+    if bool(entry.get("price_context_ready")) or has_price_context_text(inbound_text):
+        return True
+    lead_texts = get_recent_lead_texts(phone, limit=8)
+    if any(has_price_context_text(t) for t in lead_texts):
+        return True
+    try:
+        lead_entry = get_lead_entry(phone) or {}
+        last_reply_preview = str(lead_entry.get("last_reply_preview") or "")
+        if int(lead_entry.get("reply_count") or 0) >= 2 and reply_contains_agendamento_invite(last_reply_preview):
+            return True
+    except Exception:
+        pass
+    if int(entry.get("price_deflections", 0) or 0) >= 1:
+        return True
+    return False
+
+
+def enforce_price_question_after_context(phone: str, inbound_text: str, reply: str) -> str:
+    """RC-68: pergunta explícita de valor, após contexto mínimo, recebe valor.
+
+    O runtime não pode converter "Prefiro que me informe o valor da consulta primeiro"
+    em mais uma pergunta clichê. Se o lead já respondeu minimamente ou já foi
+    convidado para agenda, a resposta correta é informar o valor da consulta.
+    """
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    if not contains_price_question(inbound_text):
+        return text
+    if contains_money_value(text):
+        return text
+    if consultation_price_context_ready(phone, inbound_text) or contains_fatigue_complaint(inbound_text):
+        update_phone_event_entry(phone, {
+            "price_context_ready": True,
+            "price_context_ready_at": time.time(),
+            "price_context_source": "rc68_price_question_after_context",
+        })
+        log(f"rc68_price_question_after_context_answered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_consultation_price_reply()
+    return text
+
+
+def enforce_fatigue_complaint_no_repeat(phone: str, inbound_text: str, reply: str) -> str:
+    """Quando o lead reclama de repetição, Clara pede desculpa e para de perguntar."""
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    if not contains_fatigue_complaint(inbound_text):
+        return text
+    if contains_price_question(build_recent_conversation_context(phone, limit=6)) or contains_price_question(inbound_text):
+        return "Você tem razão, me desculpe. Vou ser direta.\n\n" + build_consultation_price_reply()
+    return "Você tem razão, me desculpe. Vou ser mais direta e não vou repetir a mesma pergunta."
 
 
 def enforce_price_timing(phone: str, inbound_text: str, reply: str) -> str:
@@ -3890,6 +3968,8 @@ class Handler(BaseHTTPRequestHandler):
                 reply = enforce_spin_before_agendamento(phone, processed_text, reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
+                reply = enforce_price_question_after_context(phone, processed_text, reply)
+                reply = enforce_fatigue_complaint_no_repeat(phone, processed_text, reply)
                 reply = enforce_rc39_no_generic_next_step(reply)
                 reply = enforce_price_timing(phone, processed_text, reply)
                 reply = enforce_program_reasoning(processed_text, reply)
@@ -3902,6 +3982,8 @@ class Handler(BaseHTTPRequestHandler):
                 reply = final_scrub_banned_next_step_phrase(reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
+                reply = enforce_price_question_after_context(phone, processed_text, reply)
+                reply = enforce_fatigue_complaint_no_repeat(phone, processed_text, reply)
                 reply = enforce_outbound_price_safety(phone, reply, processed_text)
                 block_reply, block_reason = should_block_reply(phone, reply)
                 if block_reply:
