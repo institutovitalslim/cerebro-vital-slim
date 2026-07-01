@@ -46,6 +46,7 @@ CLARA_THINKING_TIMEOUT_SECONDS = int(os.getenv("CLARA_THINKING_TIMEOUT_SECONDS",
 CLARA_ZAPI_DELAY_TYPING_SECONDS = int(os.getenv("CLARA_ZAPI_DELAY_TYPING_SECONDS", "10"))
 CLARA_HUMAN_CHUNKING_ENABLED = os.getenv("CLARA_HUMAN_CHUNKING_ENABLED", "1").strip().lower() in ("1", "true", "yes", "on")
 CLARA_HUMAN_CHUNK_MAX_CHARS = int(os.getenv("CLARA_HUMAN_CHUNK_MAX_CHARS", "230"))
+CLARA_HUMAN_CHUNK_INTER_SEND_SECONDS = float(os.getenv("CLARA_HUMAN_CHUNK_INTER_SEND_SECONDS", "3.0"))
 
 # Áudio inbound/outbound — habilitado por variável de ambiente.
 # Sem as chaves, o bridge mantém fallback seguro para texto.
@@ -3512,6 +3513,15 @@ def split_human_conversation_chunks(message: str, max_chars: int = CLARA_HUMAN_C
     return [c for c in chunks if c]
 
 
+def is_generic_greeting_chunk(chunk: str) -> bool:
+    text = re.sub(r"\s+", " ", (chunk or "").strip()).lower()
+    return text in {
+        "oi!", "oi", "olá!", "ola!", "olá", "ola",
+        "bom dia!", "bom dia", "boa tarde!", "boa tarde", "boa noite!", "boa noite",
+        "que bom te receber por aqui.", "que bom te receber por aqui",
+    }
+
+
 def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara_reply") -> Tuple[int, str]:
     if source in {"clara_reply", "admin_send"}:
         original_message = message
@@ -3519,6 +3529,11 @@ def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara
         if message != original_message:
             log(f"rc52_transport_rewrote_commercial_output phone={phone} source={source} originalPreview={original_message[:120]!r} newPreview={message[:120]!r}")
     chunks = split_human_conversation_chunks(message)
+    if len(chunks) > 1:
+        original_count = len(chunks)
+        chunks = [c for c in chunks if not is_generic_greeting_chunk(c)] or chunks
+        if len(chunks) != original_count:
+            log(f"rc72_generic_greeting_chunk_removed phone={phone} source={source} before={original_count} after={len(chunks)}")
     if not CLARA_HUMAN_CHUNKING_ENABLED or not source.startswith("clara") or len(chunks) <= 1:
         return send_zapi_text(phone, message, source=source, skip_transport_safety=True)
     results = []
@@ -3526,6 +3541,8 @@ def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara
     last_body = ""
     log(f"rc72_human_chunking_enabled phone={phone} source={source} chunks={len(chunks)}")
     for idx, chunk in enumerate(chunks, start=1):
+        if idx > 1 and CLARA_HUMAN_CHUNK_INTER_SEND_SECONDS > 0:
+            time.sleep(CLARA_HUMAN_CHUNK_INTER_SEND_SECONDS)
         status, body = send_zapi_text(phone, chunk, source=source, skip_transport_safety=True)
         last_status, last_body = status, body
         results.append({"idx": idx, "status": status, "preview": chunk[:80], "body": body[:200]})
