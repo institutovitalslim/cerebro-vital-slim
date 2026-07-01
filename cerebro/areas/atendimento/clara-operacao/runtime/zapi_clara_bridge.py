@@ -1182,6 +1182,21 @@ def mark_lead_replied(phone: str, reply: str) -> None:
     save_leads_state(state)
 
 
+def update_lead_entry(phone: str, patch: Dict[str, Any]) -> None:
+    if not phone:
+        return
+    state = load_leads_state()
+    leads = state.setdefault("leads", {})
+    key, entry = get_lead_lookup_entry(phone)
+    if not key:
+        key = phone
+        entry = leads.get(phone) if isinstance(leads.get(phone), dict) else {}
+    entry.update(patch or {})
+    entry["updated_at"] = int(time.time())
+    leads[key] = entry
+    save_leads_state(state)
+
+
 def extract_confirmed_lead_name(text: str) -> Optional[str]:
     raw = (text or "").strip()
     if not raw:
@@ -1674,6 +1689,48 @@ def contains_commercial_decline(text: str) -> bool:
     ))
 
 
+def contains_financial_no_fit_decline(text: str) -> bool:
+    """Lead declarou impossibilidade financeira: não entra em follow-up ativo.
+
+    RC-70: "não tenho condições" / "fora das minhas possibilidades" não é
+    pausa temporária nem lead frio; é NQ financeiro até nova mensagem espontânea.
+    """
+    lower = (text or "").strip().lower()
+    compact = re.sub(r"[^a-záàâãéêíóôõúç0-9]+", " ", lower).strip()
+    if any(ok in compact for ok in (
+        "dentro das minhas condicoes", "dentro das minhas condições",
+        "cabe nas minhas condicoes", "cabe nas minhas condições",
+    )):
+        return False
+    patterns = (
+        r"\bn[ãa]o tenho condi[cç][õo]es\b",
+        r"\bsem condi[cç][õo]es\b",
+        r"\bsem condi[cç][õo]es financeiras\b",
+        r"\bn[ãa]o consigo pagar\b",
+        r"\bn[ãa]o posso pagar\b",
+        r"\bfora (?:do meu or[cç]amento|de minhas possibilidades|das minhas possibilidades)\b",
+        r"\bt[áa] fora de (?:minha|minhas) possibilidade",
+    )
+    return any(re.search(pattern, compact) for pattern in patterns)
+
+
+def recent_context_has_financial_no_fit_decline(phone: str, limit: int = 18) -> bool:
+    texts = get_recent_lead_texts(phone, limit=limit)
+    return any(contains_financial_no_fit_decline(t) for t in texts)
+
+
+def non_lead_tag_reason(tag_names: list[str]) -> Optional[str]:
+    tag_set = {str(t or "").strip().lower() for t in (tag_names or [])}
+    blocked = tag_set.intersection({
+        "nao qualificado", "não qualificado", "sem condicoes financeiras", "sem condições financeiras",
+        "perdeu por convenio", "perdeu por convênio", "perdeu por distancia", "perdeu por distância",
+        "curioso/frio", "atendimento diferente", "nq", "sem perfil",
+    })
+    if blocked:
+        return "zapi_non_qualified_tag=" + ",".join(sorted(blocked))
+    return None
+
+
 def contains_hard_final_decline(text: str) -> bool:
     """Recusa final/educada em que insistir piora a experiência."""
     lower = (text or "").strip().lower()
@@ -1893,6 +1950,9 @@ def enforce_no_reopening_after_context(phone: str, inbound_text: str, reply: str
     if active_context and (contains_hard_final_decline(inbound_text) or recent_context_has_hard_final_decline(phone)):
         log(f"rc49_respect_final_decline applied phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
         return build_respectful_final_close_reply()
+    if contains_financial_no_fit_decline(inbound_text):
+        log(f"rc70_financial_no_fit_close phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return "Entendo. Obrigada por me avisar. Não vou insistir.\n\nSe em outro momento fizer sentido para você retomar, é só me chamar por aqui."
     # RC-66: pergunta objetiva sobre acompanhamento/programa precisa ser respondida
     # antes de qualquer recuperação genérica de SPIN. Ex.: "E faz o acompanhamento?"
     # após explicação de consulta/preço não pode virar "o que te incomoda?".
@@ -3629,6 +3689,10 @@ def get_payload_exclusion_reason(phone: str, payload: Dict[str, Any]) -> Optiona
     # 3) tags Z-API de paciente/programa/VIP/agendou também bloqueiam Clara comercial.
     ok_tags, tag_names, tag_ids = get_zapi_contact_tag_names_safe(phone)
     if ok_tags:
+        non_lead_reason = non_lead_tag_reason(tag_names)
+        if non_lead_reason:
+            add_exclusion_alias(phone, str(payload.get("chatName") or payload.get("senderName") or "Lead não qualificado"), "not_qualified_do_not_followup", non_lead_reason)
+            return non_lead_reason
         tag_set = {str(t or "").strip().lower() for t in tag_names}
         if tag_set.intersection({"paciente", "programa", "vip", "agendou", "compareceu", "fechou"}):
             add_exclusion_alias(phone, str(payload.get("chatName") or payload.get("senderName") or "Paciente"), "zapi_non_lead_tag", "zapi_tag_scope_guard")
@@ -3821,6 +3885,15 @@ class Handler(BaseHTTPRequestHandler):
                 return
 
             exclusion_reason = get_exclusion_reason(phone)
+            if not exclusion_reason and not force:
+                ok_tags, tag_names, _tag_ids = get_zapi_contact_tag_names_safe(phone)
+                if ok_tags:
+                    exclusion_reason = non_lead_tag_reason(tag_names)
+                    if exclusion_reason:
+                        add_exclusion_alias(phone, "Lead não qualificado", "not_qualified_do_not_followup", exclusion_reason)
+                if not exclusion_reason and recent_context_has_financial_no_fit_decline(phone):
+                    exclusion_reason = "not_qualified_financial_no_fit"
+                    add_exclusion_alias(phone, "Lead sem perfil financeiro", exclusion_reason, "admin_send_recent_audit_financial_decline")
             if exclusion_reason and not force:
                 matched_exclusion_phone, exclusion_entry = get_exclusion_entry(phone)
                 exclusion_source = str((exclusion_entry or {}).get("source") or "")
@@ -3962,6 +4035,7 @@ class Handler(BaseHTTPRequestHandler):
                 if process_quarkclinic_confirmation_reply(phone, processed_text):
                     return
                 mark_price_context_if_present(phone, processed_text)
+                financial_no_fit_current = contains_financial_no_fit_decline(processed_text)
 
                 # Regra Tiaro 2026-05-30: SEMPRE consultar QuarkClinic pelo celular
                 # antes de qualquer decisão comercial da Clara. Falha na consulta = não responde.
@@ -4060,6 +4134,15 @@ class Handler(BaseHTTPRequestHandler):
                     status, body = send_zapi_text(phone, reply, source="clara_reply")
                 if 200 <= int(status) < 300:
                     mark_lead_replied(phone, reply)
+                    if financial_no_fit_current:
+                        add_exclusion_alias(phone, str(sender_name or payload.get("chatName") or "Lead sem perfil financeiro"), "not_qualified_financial_no_fit", "lead_inbound_financial_decline")
+                        update_lead_entry(phone, {
+                            "followup_blocked": True,
+                            "not_qualified": True,
+                            "not_qualified_reason": "financial_no_fit",
+                            "not_qualified_at": time.time(),
+                        })
+                        log(f"rc70_financial_no_fit_exclusion_added phone={phone} text={processed_text[:120]!r}")
                     if is_agendamento_event(reply):
                         notify_internal_agendamento(phone, sender_name, processed_text, reply)
                     if contains_call_request(processed_text):
