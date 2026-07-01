@@ -2025,19 +2025,39 @@ def has_substantive_weight_context(text: str) -> bool:
         "1.48", "1,48", "70 kg", "salário mínimo", "salario minimo",
         "mudança no corpo", "mudanca no corpo", "falta de energia", "gestação", "gestacao",
         "alimentação", "alimentacao", "corpo", "pele", "energia", "não me priorizei", "nao me priorizei",
+        "obesidade", "bariátrica", "bariatrica", "compulsão", "compulsao", "reganho", "saúde", "saude", "disposição", "disposicao",
     )
     score += sum(1 for marker in markers if marker in lower)
-    return score >= 2 or ("peso" in lower and any(m in lower for m in ("20", "13", "70", "abdominal", "emagrec", "resultado", "quilos", "kilos", "kg", "eliminar")))
+    return score >= 2 or ("peso" in lower and any(m in lower for m in ("20", "13", "70", "abdominal", "emagrec", "resultado", "quilos", "kilos", "kg", "eliminar", "disposição", "disposicao", "saúde", "saude")))
+
+
+def has_mature_discovery_context(text: str) -> bool:
+    """RC-75: quando já há contexto suficiente, parar de cavar e posicionar a jornada."""
+    lower = (text or "").lower()
+    markers = (
+        "obesidade", "emagrecer", "emagrec", "peso", "disposição", "disposicao", "saúde", "saude",
+        "bariátrica", "bariatrica", "voltei a obesidade", "compulsão", "compulsao", "reganho",
+        "resultado", "manter", "noite", "ansiedade", "perda de controle", "fome física", "fome fisica",
+    )
+    score = sum(1 for marker in markers if marker in lower)
+    strong = any(marker in lower for marker in ("bariátrica", "bariatrica", "compulsão", "compulsao", "reganho", "voltei a obesidade"))
+    return score >= 4 or (strong and score >= 2)
 
 
 def summarize_declared_context(combined_context: str) -> str:
     lower = (combined_context or "").lower()
     parts = []
+    if "bariátrica" in lower or "bariatrica" in lower:
+        parts.append("histórico de bariátrica e retorno da obesidade")
+    if "compulsão" in lower or "compulsao" in lower:
+        parts.append("compulsão alimentar")
+    if "reganho" in lower:
+        parts.append("reganho de peso")
     if "gestação" in lower or "gestacao" in lower:
         parts.append("mudanças depois da gestação")
     if "energia" in lower or "disposição" in lower or "disposicao" in lower:
         parts.append("queda de energia")
-    if "peso" in lower or "emagrec" in lower or "quilos" in lower or "kilos" in lower or "kg" in lower:
+    if "peso" in lower or "obesidade" in lower or "emagrec" in lower or "quilos" in lower or "kilos" in lower or "kg" in lower:
         parts.append("objetivo de eliminar peso")
     if "corpo" in lower:
         parts.append("mudança no corpo")
@@ -2045,7 +2065,7 @@ def summarize_declared_context(combined_context: str) -> str:
         parts.append("alimentação")
     if not parts:
         return "o que você me contou"
-    return ", ".join(dict.fromkeys(parts)[:4])
+    return ", ".join(list(dict.fromkeys(parts))[:4])
 
 
 def build_patient_journey_explanation(context_summary: str = "") -> str:
@@ -2058,14 +2078,24 @@ def build_patient_journey_explanation(context_summary: str = "") -> str:
     )
 
 
+def build_journey_fit_check_reply(context_summary: str = "") -> str:
+    lower = (context_summary or "").lower()
+    if any(marker in lower for marker in ("compuls", "reganho", "bariátrica", "bariatrica", "obesidade")):
+        bridge = "Pelo seu relato, faz sentido primeiro entender o que está por trás desse reganho e da compulsão, em vez de tratar como falta de força de vontade."
+    else:
+        bridge = "Pelo seu relato, faz sentido primeiro entender o que está por trás da dificuldade de resultado, em vez de passar uma orientação solta."
+    return (
+        build_patient_journey_explanation(context_summary)
+        + "\n\n" + bridge
+        + "\n\nEsse formato de avaliação faz sentido para o que você está buscando agora?"
+    )
+
+
 def build_weight_context_no_more_spin_reply(combined_context: str) -> str:
     context_summary = summarize_declared_context(combined_context)
     if "salário mínimo" in (combined_context or "").lower() or "salario minimo" in (combined_context or "").lower() or "condições de seguir" in (combined_context or "").lower() or "condicoes de seguir" in (combined_context or "").lower():
         return build_consultation_price_reply(context_summary=context_summary)
-    return (
-        build_patient_journey_explanation(context_summary)
-        + "\n\nQuer que eu te passe o valor da consulta inicial ou prefere que eu veja a agenda?"
-    )
+    return build_journey_fit_check_reply(context_summary)
 
 
 def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply: str) -> str:
@@ -2098,6 +2128,75 @@ def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply:
         return build_weight_context_no_more_spin_reply(combined)
     return text
 
+
+
+def response_is_more_discovery_question(text: str) -> bool:
+    lower = (text or "").lower()
+    if "?" not in lower:
+        return False
+    if "faz sentido para" in lower or "valor da consulta" in lower or "consulta inicial" in lower:
+        return False
+    return any(marker in lower for marker in (
+        "o que", "qual", "quando", "como", "você sente", "voce sente", "você já", "voce ja",
+        "fome", "ansiedade", "perda de controle", "disposição", "disposicao", "resultado", "tentou", "incomoda",
+    ))
+
+
+def recent_reply_checked_journey_fit(phone: str) -> bool:
+    entry = get_lead_entry(phone) or {}
+    last = str(entry.get("last_reply_preview") or "").lower()
+    if "esse formato de avaliação faz sentido" in last or "esse formato de avaliacao faz sentido" in last:
+        return True
+    event = get_phone_event_entry(phone)
+    return bool(event.get("journey_fit_check_sent"))
+
+
+def build_price_after_fit_reply(phone: str, inbound_text: str) -> str:
+    ctx = build_recent_conversation_context(phone, limit=18)
+    context_summary = summarize_declared_context(f"{ctx}\n{inbound_text or ''}")
+    return build_consultation_price_reply(context_summary=context_summary)
+
+
+def enforce_mature_discovery_to_journey_fit(phone: str, inbound_text: str, reply: str) -> str:
+    """RC-75: muita descoberta já feita -> explicar jornada, checar expectativa, só depois valor."""
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    if contains_price_question(inbound_text):
+        return text
+    if contains_short_affirmative(inbound_text) and recent_reply_checked_journey_fit(phone):
+        log(f"rc75_fit_confirmed_price_next phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        update_phone_event_entry(phone, {
+            "journey_fit_confirmed": True,
+            "journey_fit_confirmed_at": time.time(),
+            "price_context_ready": True,
+            "price_context_source": "rc75_fit_confirmed",
+        })
+        return build_price_after_fit_reply(phone, inbound_text)
+    ctx = build_recent_conversation_context(phone, limit=20)
+    combined = f"{ctx}\n{inbound_text or ''}"
+    if not has_mature_discovery_context(combined):
+        return text
+    already_journey = contains_patient_journey_explanation(text) and ("faz sentido" in text.lower())
+    if already_journey:
+        update_phone_event_entry(phone, {
+            "journey_fit_check_sent": True,
+            "journey_fit_check_sent_at": time.time(),
+            "price_context_ready": True,
+            "price_context_source": "rc75_journey_fit_check",
+        })
+        return text
+    if response_is_more_discovery_question(text) or not contains_patient_journey_explanation(text):
+        context_summary = summarize_declared_context(combined)
+        log(f"rc75_mature_context_journey_fit_rewritten phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        update_phone_event_entry(phone, {
+            "journey_fit_check_sent": True,
+            "journey_fit_check_sent_at": time.time(),
+            "price_context_ready": True,
+            "price_context_source": "rc75_journey_fit_check",
+        })
+        return build_journey_fit_check_reply(context_summary)
+    return text
 
 
 def reply_contains_agendamento_invite(reply: str) -> bool:
@@ -3543,7 +3642,7 @@ def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara
         chunks = [c for c in chunks if not is_generic_greeting_chunk(c)] or chunks
         if len(chunks) != original_count:
             log(f"rc72_generic_greeting_chunk_removed phone={phone} source={source} before={original_count} after={len(chunks)}")
-    if not CLARA_HUMAN_CHUNKING_ENABLED or not source.startswith("clara") or len(chunks) <= 1:
+    if not CLARA_HUMAN_CHUNKING_ENABLED or not (source.startswith("clara") or source == "admin_send") or len(chunks) <= 1:
         return send_zapi_text(phone, message, source=source, skip_transport_safety=True)
     results = []
     last_status = 0
@@ -4324,6 +4423,7 @@ class Handler(BaseHTTPRequestHandler):
                 reply = enforce_spin_before_agendamento(phone, processed_text, reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
+                reply = enforce_mature_discovery_to_journey_fit(phone, processed_text, reply)
                 reply = enforce_included_explanation_after_yes(phone, processed_text, reply)
                 reply = enforce_price_question_after_context(phone, processed_text, reply)
                 reply = enforce_money_after_journey(phone, processed_text, reply)
@@ -4340,6 +4440,7 @@ class Handler(BaseHTTPRequestHandler):
                 reply = final_scrub_banned_next_step_phrase(reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
+                reply = enforce_mature_discovery_to_journey_fit(phone, processed_text, reply)
                 reply = enforce_included_explanation_after_yes(phone, processed_text, reply)
                 reply = enforce_price_question_after_context(phone, processed_text, reply)
                 reply = enforce_money_after_journey(phone, processed_text, reply)
