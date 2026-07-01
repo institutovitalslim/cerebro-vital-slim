@@ -1710,6 +1710,10 @@ def contains_financial_no_fit_decline(text: str) -> bool:
         r"\bsem condi[cç][õo]es financeiras\b",
         r"\bn[ãa]o consigo pagar\b",
         r"\bn[ãa]o posso pagar\b",
+        r"\bn[ãa]o vai d[áa]r? (?:para|pra) mim\b",
+        r"\bn[ãa]o vai d[áa] para mim\b",
+        r"\bn[ãa]o d[áa] (?:para|pra) mim\b",
+        r"\bn[ãa]o vai dar ainda\b",
         r"\bfora (?:do meu or[cç]amento|de minhas possibilidades|das minhas possibilidades)\b",
         r"\bt[áa] fora de (?:minha|minhas) possibilidade",
     )
@@ -3509,16 +3513,20 @@ def split_human_conversation_chunks(message: str, max_chars: int = CLARA_HUMAN_C
 
 
 def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara_reply") -> Tuple[int, str]:
+    if source in {"clara_reply", "admin_send"}:
+        original_message = message
+        message = enforce_outbound_price_safety(phone, final_scrub_banned_next_step_phrase(message))
+        if message != original_message:
+            log(f"rc52_transport_rewrote_commercial_output phone={phone} source={source} originalPreview={original_message[:120]!r} newPreview={message[:120]!r}")
     chunks = split_human_conversation_chunks(message)
     if not CLARA_HUMAN_CHUNKING_ENABLED or not source.startswith("clara") or len(chunks) <= 1:
-        return send_zapi_text(phone, message, source=source)
+        return send_zapi_text(phone, message, source=source, skip_transport_safety=True)
     results = []
     last_status = 0
     last_body = ""
     log(f"rc72_human_chunking_enabled phone={phone} source={source} chunks={len(chunks)}")
     for idx, chunk in enumerate(chunks, start=1):
-        chunk_source = f"{source}_chunk" if source.startswith("clara") else source
-        status, body = send_zapi_text(phone, chunk, source=chunk_source)
+        status, body = send_zapi_text(phone, chunk, source=source, skip_transport_safety=True)
         last_status, last_body = status, body
         results.append({"idx": idx, "status": status, "preview": chunk[:80], "body": body[:200]})
         if not (200 <= int(status) < 300):
@@ -3526,12 +3534,12 @@ def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara
     return last_status, json.dumps({"chunked": True, "chunks": len(chunks), "results": results, "last_body": last_body[:500]}, ensure_ascii=False)
 
 
-def send_zapi_text(phone: str, message: str, source: str = "clara_reply") -> Tuple[int, str]:
+def send_zapi_text(phone: str, message: str, source: str = "clara_reply", skip_transport_safety: bool = False) -> Tuple[int, str]:
     if not ZAPI_BASE_URL:
         raise RuntimeError("ZAPI_BASE_URL is empty")
     if not ZAPI_CLIENT_TOKEN:
         raise RuntimeError("ZAPI_CLIENT_TOKEN is empty")
-    if source in {"clara_reply", "admin_send"}:
+    if source in {"clara_reply", "admin_send"} and not skip_transport_safety:
         original_message = message
         message = enforce_outbound_price_safety(phone, final_scrub_banned_next_step_phrase(message))
         if message != original_message:
