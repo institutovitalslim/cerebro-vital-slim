@@ -44,6 +44,8 @@ ZAPI_SEND_AUDIO_PATH = os.getenv("ZAPI_SEND_AUDIO_PATH", "/send-audio")
 CLARA_REQUIRE_THINKING = os.getenv("CLARA_REQUIRE_THINKING", "1").strip().lower() in ("1", "true", "yes", "on")
 CLARA_THINKING_TIMEOUT_SECONDS = int(os.getenv("CLARA_THINKING_TIMEOUT_SECONDS", "45"))
 CLARA_ZAPI_DELAY_TYPING_SECONDS = int(os.getenv("CLARA_ZAPI_DELAY_TYPING_SECONDS", "10"))
+CLARA_HUMAN_CHUNKING_ENABLED = os.getenv("CLARA_HUMAN_CHUNKING_ENABLED", "1").strip().lower() in ("1", "true", "yes", "on")
+CLARA_HUMAN_CHUNK_MAX_CHARS = int(os.getenv("CLARA_HUMAN_CHUNK_MAX_CHARS", "230"))
 
 # Áudio inbound/outbound — habilitado por variável de ambiente.
 # Sem as chaves, o bridge mantém fallback seguro para texto.
@@ -3453,6 +3455,77 @@ def final_scrub_banned_next_step_phrase(message: str) -> str:
         log(f"rc41_final_scrub_next_step applied source_text_preview={original[:120]!r} result_preview={text[:120]!r}")
     return text
 
+def split_human_conversation_chunks(message: str, max_chars: int = CLARA_HUMAN_CHUNK_MAX_CHARS) -> list[str]:
+    """Transforma bloco único em bolhas humanas: frase -> digitando -> frase.
+
+    RC-72: no WhatsApp a Clara não deve enviar textão em blocos. O runtime
+    divide a resposta final em frases curtas e o envio aplica `delayTyping`
+    antes de cada bolha.
+    """
+    text = re.sub(r"\s*\n+\s*", " ", (message or "").strip())
+    text = re.sub(r"\s{2,}", " ", text).strip()
+    if not text:
+        return []
+    protected = text
+    replacements: Dict[str, str] = {}
+    protected_abbrevs = {
+        "Dra.": "__ABBR_DRA__",
+        "Dr.": "__ABBR_DR__",
+        "Sr.": "__ABBR_SR__",
+        "Sra.": "__ABBR_SRA__",
+    }
+    for value, token in protected_abbrevs.items():
+        protected = protected.replace(value, token)
+        replacements[token] = value
+    for i, m in enumerate(re.finditer(r"R\$\s*\d{1,3}(?:\.\d{3})*,\d{2}|\b\d+[,.]\d+\s*(?:m|kg)\b", protected)):
+        token = f"__NUMTOK{i}__"
+        replacements[token] = m.group(0)
+        protected = protected.replace(m.group(0), token, 1)
+    pieces = re.split(r"(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÇ0-9])", protected)
+    chunks: list[str] = []
+    for raw in pieces:
+        piece = raw.strip()
+        for token, value in replacements.items():
+            piece = piece.replace(token, value)
+        if not piece:
+            continue
+        if len(piece) <= max_chars:
+            chunks.append(piece)
+            continue
+        # Frase longa: quebra por vírgula/; mantendo leitura natural.
+        current = ""
+        subparts = re.split(r"(?<=[,;:])\s+", piece)
+        for sub in subparts:
+            if not current:
+                current = sub
+            elif len(current) + 1 + len(sub) <= max_chars:
+                current += " " + sub
+            else:
+                chunks.append(current.strip())
+                current = sub
+        if current.strip():
+            chunks.append(current.strip())
+    return [c for c in chunks if c]
+
+
+def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara_reply") -> Tuple[int, str]:
+    chunks = split_human_conversation_chunks(message)
+    if not CLARA_HUMAN_CHUNKING_ENABLED or not source.startswith("clara") or len(chunks) <= 1:
+        return send_zapi_text(phone, message, source=source)
+    results = []
+    last_status = 0
+    last_body = ""
+    log(f"rc72_human_chunking_enabled phone={phone} source={source} chunks={len(chunks)}")
+    for idx, chunk in enumerate(chunks, start=1):
+        chunk_source = f"{source}_chunk" if source.startswith("clara") else source
+        status, body = send_zapi_text(phone, chunk, source=chunk_source)
+        last_status, last_body = status, body
+        results.append({"idx": idx, "status": status, "preview": chunk[:80], "body": body[:200]})
+        if not (200 <= int(status) < 300):
+            break
+    return last_status, json.dumps({"chunked": True, "chunks": len(chunks), "results": results, "last_body": last_body[:500]}, ensure_ascii=False)
+
+
 def send_zapi_text(phone: str, message: str, source: str = "clara_reply") -> Tuple[int, str]:
     if not ZAPI_BASE_URL:
         raise RuntimeError("ZAPI_BASE_URL is empty")
@@ -3467,9 +3540,9 @@ def send_zapi_text(phone: str, message: str, source: str = "clara_reply") -> Tup
     if not guard.get("ok"):
         raise RuntimeError(f"zapi_text_blocked_by_runtime_enforcement: {json.dumps(guard, ensure_ascii=False)[:500]}")
     payload = {"phone": phone, "message": message}
-    if source == "clara_reply" and CLARA_ZAPI_DELAY_TYPING_SECONDS > 0:
-        # Z-API /send-text: delayTyping exibe “digitando...” por 1–15s antes do envio.
-        # Mantém percepção humana sem alterar o conteúdo da resposta.
+    if source.startswith("clara") and CLARA_ZAPI_DELAY_TYPING_SECONDS > 0:
+        # Z-API /send-text: delayTyping exibe “digitando...” por 1–15s antes de cada bolha.
+        # RC-72: frase -> digitando -> frase, sem textão em bloco.
         payload["delayTyping"] = max(1, min(15, CLARA_ZAPI_DELAY_TYPING_SECONDS))
         log(f"zapi_delay_typing_enabled phone={phone} seconds={payload['delayTyping']} source={source}")
     headers = {"Client-Token": ZAPI_CLIENT_TOKEN}
@@ -4257,7 +4330,7 @@ class Handler(BaseHTTPRequestHandler):
                         log(f"audio_reply_failed phone={phone}: {audio_err}; falling_back=text")
                         sent_as_audio = False
                 if not sent_as_audio:
-                    status, body = send_zapi_text(phone, reply, source="clara_reply")
+                    status, body = send_zapi_text_human_sequence(phone, reply, source="clara_reply")
                 if 200 <= int(status) < 300:
                     mark_lead_replied(phone, reply)
                     if financial_no_fit_current:
@@ -4292,7 +4365,7 @@ class Handler(BaseHTTPRequestHandler):
                             except Exception as audio_err:
                                 log(f"audio_failsafe_audio_failed phone={phone}: {audio_err}; falling_back=text")
                         if not sent_as_audio:
-                            status, body = send_zapi_text(phone, fallback_reply, source="clara_audio_failsafe")
+                            status, body = send_zapi_text_human_sequence(phone, fallback_reply, source="clara_audio_failsafe")
                             log(f"audio_failsafe_text_sent phone={phone} status={status}")
                         if 200 <= int(status) < 300:
                             mark_lead_replied(phone, fallback_reply)
@@ -4301,7 +4374,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not is_audio:
                     try:
                         fallback_reply = build_text_runtime_failsafe_reply(processed_text or event_text)
-                        status, body = send_zapi_text(phone, fallback_reply, source="clara_text_failsafe")
+                        status, body = send_zapi_text_human_sequence(phone, fallback_reply, source="clara_text_failsafe")
                         log(f"text_failsafe_sent phone={phone} status={status} replyPreview={fallback_reply[:120]!r} body={body[:200]}")
                         if 200 <= int(status) < 300:
                             mark_lead_replied(phone, fallback_reply)
