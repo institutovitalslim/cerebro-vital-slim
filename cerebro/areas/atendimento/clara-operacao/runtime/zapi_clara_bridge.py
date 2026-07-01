@@ -3446,6 +3446,15 @@ def final_scrub_banned_next_step_phrase(message: str) -> str:
             "Entendi. Antes de falar de agenda, preciso te direcionar com segurança.\n\n"
             "Me conta o que mais está te incomodando hoje para eu encaminhar corretamente: peso, fome/ansiedade, saúde metabólica ou dificuldade de manter resultado?"
         )
+    # RC-74: "me conta em uma frase" / "em poucas palavras" soa robótico
+    # e rebaixa o atendimento premium. A Clara pode pedir contexto, mas sem
+    # impor formato de resposta ao lead.
+    text = re.sub(r"(?iu)\bme conta em uma frase\s*:\s*", "Me conta um pouco: ", text)
+    text = re.sub(r"(?iu)\bme conta em uma frase\b", "Me conta um pouco", text)
+    text = re.sub(r"(?iu)\bem poucas palavras\s*,?\s*", "", text)
+    text = re.sub(r"(?iu)\bpode me mandar de novo ou me resumir em uma frase o principal\?", "pode me mandar de novo ou me contar o principal?", text)
+    text = re.sub(r"^\s*qual\b", "Qual", text)
+    text = re.sub(r"^\s*pode\b", "Pode", text)
     banned_patterns = [
         r"(?is)\s*(?:posso|consigo)\s+te\s+(?:orientar|ajudar|guiar|explicar)\s+com\s+o\s+pr[oó]ximo\s+passo\s*(?:agora)?\s*[?.!]*",
         r"(?is)\s*quer\s+que\s+eu\s+te\s+(?:oriente|ajude|guie|explique)\s+com\s+o\s+pr[oó]ximo\s+passo\s*[?.!]*",
@@ -4375,7 +4384,7 @@ class Handler(BaseHTTPRequestHandler):
             except Exception as err:
                 log(f"bridge error phone={phone}: {err}")
                 if is_audio:
-                    fallback_reply = "Recebi seu áudio, mas ele não abriu direito por aqui. Pode me mandar de novo ou me resumir em uma frase o principal? Quero te orientar sem deixar sua mensagem parada."
+                    fallback_reply = "Recebi seu áudio, mas ele não abriu direito por aqui. Pode me mandar de novo ou me contar o principal? Quero te orientar sem deixar sua mensagem parada."
                     try:
                         sent_as_audio = False
                         status = 0

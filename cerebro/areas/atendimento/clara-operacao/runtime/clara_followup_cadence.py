@@ -215,7 +215,7 @@ FOLLOWUP_POOLS = [
     # Passo 1 — retomada leve, 1 pergunta de abertura
     [
         ("Oi! Passando para retomar seu contato com o Instituto Vital Slim. "
-         "Para eu te orientar melhor, me conta em uma frase: o que mais te fez buscar ajuda agora?"),
+         "Para eu te orientar melhor, me conta um pouco: o que mais te fez buscar ajuda agora?"),
         ("Oi! Fiquei de te ajudar por aqui e não quis te deixar sem retorno. "
          "Só para eu entender seu momento: o que mais está te incomodando hoje?"),
         ("Oi! Voltando aqui com calma. Para eu te orientar do jeito certo, "
