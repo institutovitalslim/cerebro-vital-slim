@@ -1,0 +1,8 @@
+{
+  "status": "qa_recorded",
+  "pii_exposed": false,
+  "current_messages": 0,
+  "historical_messages": 6187,
+  "historical_unique_leads": 443,
+  "risk": "observability_pipeline_requires_human_technical_intervention"
+}
