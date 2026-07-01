@@ -2013,26 +2013,51 @@ def has_substantive_weight_context(text: str) -> bool:
     lower = (text or "").lower()
     score = 0
     markers = (
-        "emagrec", "peso", "engord", "20 kg", "20 quilos", "gordura abdominal",
+        "emagrec", "peso", "engord", "quilos", "kilos", "kg", "gordura abdominal",
         "barriga", "gestante", "dificuldade de manter", "resultado", "2 anos",
         "1.48", "1,48", "70 kg", "salário mínimo", "salario minimo",
+        "mudança no corpo", "mudanca no corpo", "falta de energia", "gestação", "gestacao",
+        "alimentação", "alimentacao", "corpo", "pele", "energia", "não me priorizei", "nao me priorizei",
     )
     score += sum(1 for marker in markers if marker in lower)
-    return score >= 2 or ("peso" in lower and any(m in lower for m in ("20", "70", "abdominal", "emagrec", "resultado")))
+    return score >= 2 or ("peso" in lower and any(m in lower for m in ("20", "13", "70", "abdominal", "emagrec", "resultado", "quilos", "kilos", "kg", "eliminar")))
+
+
+def summarize_declared_context(combined_context: str) -> str:
+    lower = (combined_context or "").lower()
+    parts = []
+    if "gestação" in lower or "gestacao" in lower:
+        parts.append("mudanças depois da gestação")
+    if "energia" in lower or "disposição" in lower or "disposicao" in lower:
+        parts.append("queda de energia")
+    if "peso" in lower or "emagrec" in lower or "quilos" in lower or "kilos" in lower or "kg" in lower:
+        parts.append("objetivo de eliminar peso")
+    if "corpo" in lower:
+        parts.append("mudança no corpo")
+    if "alimentação" in lower or "alimentacao" in lower:
+        parts.append("alimentação")
+    if not parts:
+        return "o que você me contou"
+    return ", ".join(dict.fromkeys(parts)[:4])
+
+
+def build_patient_journey_explanation(context_summary: str = "") -> str:
+    prefix = f"Pelo que você trouxe — {context_summary} — o caminho aqui não é começar por uma orientação solta.\n\n" if context_summary else "O caminho aqui não é começar por uma orientação solta.\n\n"
+    return (
+        prefix
+        + "A jornada começa pela consulta inicial com a Dra. Daniely, para entender seu histórico, rotina, exames e objetivo.\n\n"
+        "No mesmo processo, a equipe faz bioimpedância e avaliação de composição corporal, para enxergar o que pode estar dificultando seu resultado.\n\n"
+        "Depois disso, a Dra. define o direcionamento inicial e, se fizer sentido para o seu caso, pode indicar um Programa de Acompanhamento."
+    )
 
 
 def build_weight_context_no_more_spin_reply(combined_context: str) -> str:
-    lower = (combined_context or "").lower()
-    if "salário mínimo" in lower or "salario minimo" in lower or "condições de seguir" in lower or "condicoes de seguir" in lower:
-        return build_consultation_price_reply()
-    if "1.48" in lower or "1,48" in lower or "70 kg" in lower or "70kg" in lower:
-        return (
-            "Entendi. Com 1,48 m e 70 kg, além do ganho de peso e da gordura abdominal que você relatou, já faz sentido sair da etapa de perguntas e partir para uma avaliação bem direcionada.\n\n"
-            "O próximo passo é a consulta inicial com a Dra. Daniely para avaliar composição corporal, exames, rotina e segurança do caminho. Posso te passar o valor da consulta ou prefere que eu veja a agenda?"
-        )
+    context_summary = summarize_declared_context(combined_context)
+    if "salário mínimo" in (combined_context or "").lower() or "salario minimo" in (combined_context or "").lower() or "condições de seguir" in (combined_context or "").lower() or "condicoes de seguir" in (combined_context or "").lower():
+        return build_consultation_price_reply(context_summary=context_summary)
     return (
-        "Entendi. Pelo que você já contou — ganho de peso, dificuldade de manter resultado e gordura abdominal — já tenho contexto suficiente para te orientar.\n\n"
-        "O caminho mais seguro é começar pela avaliação com a Dra. Daniely. Posso te passar o valor da consulta ou prefere que eu veja a agenda?"
+        build_patient_journey_explanation(context_summary)
+        + "\n\nQuer que eu te passe o valor da consulta inicial ou prefere que eu veja a agenda?"
     )
 
 
@@ -2092,6 +2117,31 @@ def build_spin_continuation_reply() -> str:
         "Entendi. Para eu continuar do ponto certo e sem pular etapas: "
         "o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?"
     )
+
+
+def contains_service_scope_question(text: str) -> bool:
+    lower = (text or "").lower()
+    return any(marker in lower for marker in (
+        "qual área", "qual area", "vocês trabalham", "voces trabalham", "trabalham com",
+        "nutrição", "nutricao", "nutricionista", "é nutri", "e nutri",
+    ))
+
+
+def build_service_scope_reply() -> str:
+    return (
+        "Atuamos com avaliação médica para emagrecimento, saúde metabólica/hormonal, composição corporal e disposição.\n\n"
+        "A nutrição pode fazer parte do cuidado, mas o primeiro passo aqui é uma avaliação com a Dra. Daniely para entender histórico, exames, bioimpedância, rotina e objetivo.\n\n"
+        "Para eu te orientar melhor: o que fez você procurar ajuda agora?"
+    )
+
+
+def enforce_service_scope_question(inbound_text: str, reply: str) -> str:
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    if contains_service_scope_question(inbound_text) and is_generic_discovery_reply(text):
+        return build_service_scope_reply()
+    return text
 
 
 def recent_lead_has_minimum_spin_context(phone: str, inbound_text: str = "") -> bool:
@@ -2244,11 +2294,30 @@ def contains_fatigue_complaint(text: str) -> bool:
     ))
 
 
-def build_consultation_price_reply() -> str:
+def build_consultation_price_reply(context_summary: str = "") -> str:
     return (
-        "Claro. A consulta inicial é R$ 1.000,00.\n\n"
-        "Pode ser parcelada em até 2x sem juros, e a reserva é de R$ 300,00, abatida do valor da consulta.\n\n"
-        "Ela inclui a avaliação médica com a Dra. Daniely, enfermagem, bioimpedância e direcionamento inicial."
+        build_patient_journey_explanation(context_summary)
+        + "\n\nSobre o valor: a consulta inicial é R$ 1.000,00.\n\n"
+        "Pode ser parcelada em até 2x sem juros, e a reserva é de R$ 300,00, abatida do valor da consulta."
+    )
+
+
+def contains_patient_journey_explanation(text: str) -> bool:
+    lower = (text or "").lower()
+    return (
+        ("jornada" in lower or "caminho" in lower or "começa pela consulta" in lower or "comeca pela consulta" in lower)
+        and ("dra. daniely" in lower or "daniely" in lower)
+        and ("bioimpedância" in lower or "bioimpedancia" in lower or "composição corporal" in lower or "composicao corporal" in lower)
+        and ("programa de acompanhamento" in lower or "direcionamento inicial" in lower)
+    )
+
+
+def build_evaluation_included_reply(phone: str = "", inbound_text: str = "") -> str:
+    ctx = build_recent_conversation_context(phone, limit=14) if phone else ""
+    context_summary = summarize_declared_context(f"{ctx}\n{inbound_text or ''}")
+    return (
+        build_patient_journey_explanation(context_summary)
+        + "\n\nNa prática, essa avaliação inicial inclui a consulta médica, enfermagem, bioimpedância e um direcionamento inicial para você entender por onde começar com segurança."
     )
 
 
@@ -2418,18 +2487,17 @@ def consultation_price_context_ready(phone: str, inbound_text: str = "") -> bool
 
 
 def enforce_price_question_after_context(phone: str, inbound_text: str, reply: str) -> str:
-    """RC-68: pergunta explícita de valor, após contexto mínimo, recebe valor.
+    """RC-68/71: pergunta explícita de valor, após contexto mínimo, recebe valor,
+    mas a jornada IVS vem antes do preço.
 
-    O runtime não pode converter "Prefiro que me informe o valor da consulta primeiro"
-    em mais uma pergunta clichê. Se o lead já respondeu minimamente ou já foi
-    convidado para agenda, a resposta correta é informar o valor da consulta.
+    O lead pode pedir valor; a Clara não deve cansar com mais SPIN. Porém também
+    não deve jogar R$ 1.000/R$ 900 antes de explicar a jornada: consulta médica,
+    enfermagem/bioimpedância, direcionamento e possibilidade de programa.
     """
     text = (reply or "").strip()
     if not text or text == "NO_REPLY":
         return text or "NO_REPLY"
     if not contains_price_question(inbound_text):
-        return text
-    if contains_money_value(text):
         return text
     if contains_program_question(inbound_text):
         update_phone_event_entry(phone, {
@@ -2440,13 +2508,66 @@ def enforce_price_question_after_context(phone: str, inbound_text: str, reply: s
         log(f"rc68_program_value_question_answered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
         return build_program_value_boundary_reply()
     if consultation_price_context_ready(phone, inbound_text) or contains_fatigue_complaint(inbound_text):
+        ctx = build_recent_conversation_context(phone, limit=14)
+        context_summary = summarize_declared_context(f"{ctx}\n{inbound_text or ''}")
         update_phone_event_entry(phone, {
             "price_context_ready": True,
             "price_context_ready_at": time.time(),
-            "price_context_source": "rc68_price_question_after_context",
+            "price_context_source": "rc71_price_after_journey",
+            "journey_explained_before_price": True,
+            "journey_explained_at": time.time(),
         })
-        log(f"rc68_price_question_after_context_answered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
-        return build_consultation_price_reply()
+        log(f"rc71_price_after_journey_answered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_consultation_price_reply(context_summary=context_summary)
+    return text
+
+
+def contains_short_affirmative(text: str) -> bool:
+    compact = compact_text_key(text)
+    return compact in {"sim", "s", "quero", "pode", "claro", "isso", "ok", "ta", "tá"}
+
+
+def recent_reply_asked_to_explain_included(phone: str) -> bool:
+    entry = get_lead_entry(phone) or {}
+    last = str(entry.get("last_reply_preview") or "").lower()
+    return any(marker in last for marker in (
+        "explique o que está incluído", "explique o que esta incluido",
+        "quer que eu te explique", "o que está incluído nessa avaliação", "o que esta incluido nessa avaliacao",
+    ))
+
+
+def enforce_included_explanation_after_yes(phone: str, inbound_text: str, reply: str) -> str:
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    if contains_short_affirmative(inbound_text) and recent_reply_asked_to_explain_included(phone):
+        if contains_money_value(text) or not contains_patient_journey_explanation(text):
+            log(f"rc71_yes_explain_included_rewritten phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+            update_phone_event_entry(phone, {
+                "journey_explained_before_price": True,
+                "journey_explained_at": time.time(),
+                "price_context_source": "rc71_yes_explain_included",
+            })
+            return build_evaluation_included_reply(phone, inbound_text)
+    return text
+
+
+def enforce_money_after_journey(phone: str, inbound_text: str, reply: str) -> str:
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY" or not contains_money_value(text):
+        return text or "NO_REPLY"
+    if contains_patient_journey_explanation(text):
+        return text
+    if contains_price_question(inbound_text) and consultation_price_context_ready(phone, inbound_text):
+        ctx = build_recent_conversation_context(phone, limit=14)
+        context_summary = summarize_declared_context(f"{ctx}\n{inbound_text or ''}")
+        log(f"rc71_money_without_journey_rewritten phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        update_phone_event_entry(phone, {
+            "journey_explained_before_price": True,
+            "journey_explained_at": time.time(),
+            "price_context_source": "rc71_money_without_journey",
+        })
+        return build_consultation_price_reply(context_summary=context_summary)
     return text
 
 
@@ -4091,11 +4212,14 @@ class Handler(BaseHTTPRequestHandler):
                 update_confirmed_lead_name(phone, processed_text)
                 reply = enforce_no_first_time_question(reply)
                 reply = enforce_no_unconfirmed_name(phone, reply, processed_text, sender_name=sender_name)
+                reply = enforce_service_scope_question(processed_text, reply)
                 reply = enforce_discovery_before_next_step(processed_text, reply)
                 reply = enforce_spin_before_agendamento(phone, processed_text, reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
+                reply = enforce_included_explanation_after_yes(phone, processed_text, reply)
                 reply = enforce_price_question_after_context(phone, processed_text, reply)
+                reply = enforce_money_after_journey(phone, processed_text, reply)
                 reply = enforce_fatigue_complaint_no_repeat(phone, processed_text, reply)
                 reply = enforce_rc39_no_generic_next_step(reply)
                 reply = enforce_price_timing(phone, processed_text, reply)
@@ -4109,7 +4233,9 @@ class Handler(BaseHTTPRequestHandler):
                 reply = final_scrub_banned_next_step_phrase(reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
+                reply = enforce_included_explanation_after_yes(phone, processed_text, reply)
                 reply = enforce_price_question_after_context(phone, processed_text, reply)
+                reply = enforce_money_after_journey(phone, processed_text, reply)
                 reply = enforce_fatigue_complaint_no_repeat(phone, processed_text, reply)
                 reply = enforce_outbound_price_safety(phone, reply, processed_text)
                 block_reply, block_reason = should_block_reply(phone, reply)
