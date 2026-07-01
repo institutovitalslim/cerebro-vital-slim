@@ -1337,7 +1337,7 @@ def enforce_outbound_price_safety(phone: str, message: str, inbound_text: str = 
     entry = get_phone_event_entry(phone)
     lead_texts = get_recent_lead_texts(phone, limit=8)
     has_real_recent_context = any(has_price_context_text(t) for t in lead_texts)
-    rc68_context_ready = bool(entry.get("price_context_ready")) and str(entry.get("price_context_source") or "") == "rc68_price_question_after_context"
+    rc68_context_ready = bool(entry.get("price_context_ready")) and str(entry.get("price_context_source") or "").startswith("rc68_")
     if bool(entry.get("price_context_ready")) and (has_real_recent_context or rc68_context_ready):
         return text
     candidate = (inbound_text or "").strip() or (lead_texts[-1] if lead_texts else "")
@@ -1939,19 +1939,45 @@ def is_context_blind_generic_discovery(reply: str) -> bool:
         "o que mais está te incomodando", "o que mais esta te incomodando",
         "o que está te incomodando", "o que esta te incomodando",
         "o que te trouxe", "o que fez você buscar", "o que fez voce buscar",
-        "me conta um pouquinho", "para eu entender melhor"
+        "me conta um pouquinho", "para eu entender melhor", "para eu continuar do ponto certo"
     ))
     if not generic_discovery:
         return False
-    contextual_tokens = (
-        "menopausa", "climatério", "climaterio", "engord", "ganho de peso",
-        "aumento de peso", "peso", "emagrec", "hormonal", "hormônios", "hormonios"
+    # Perguntas genéricas com lista de categorias ("peso, disposição...") continuam
+    # sendo genéricas mesmo citando tokens como peso/hormônios. A decisão de
+    # continuidade vem do histórico real, não da presença desses tokens na resposta.
+    return True
+
+
+def has_substantive_weight_context(text: str) -> bool:
+    lower = (text or "").lower()
+    score = 0
+    markers = (
+        "emagrec", "peso", "engord", "20 kg", "20 quilos", "gordura abdominal",
+        "barriga", "gestante", "dificuldade de manter", "resultado", "2 anos",
+        "1.48", "1,48", "70 kg", "salário mínimo", "salario minimo",
     )
-    return not any(token in lower for token in contextual_tokens)
+    score += sum(1 for marker in markers if marker in lower)
+    return score >= 2 or ("peso" in lower and any(m in lower for m in ("20", "70", "abdominal", "emagrec", "resultado")))
+
+
+def build_weight_context_no_more_spin_reply(combined_context: str) -> str:
+    lower = (combined_context or "").lower()
+    if "salário mínimo" in lower or "salario minimo" in lower or "condições de seguir" in lower or "condicoes de seguir" in lower:
+        return build_consultation_price_reply()
+    if "1.48" in lower or "1,48" in lower or "70 kg" in lower or "70kg" in lower:
+        return (
+            "Entendi. Com 1,48 m e 70 kg, além do ganho de peso e da gordura abdominal que você relatou, já faz sentido sair da etapa de perguntas e partir para uma avaliação bem direcionada.\n\n"
+            "O próximo passo é a consulta inicial com a Dra. Daniely para avaliar composição corporal, exames, rotina e segurança do caminho. Posso te passar o valor da consulta ou prefere que eu veja a agenda?"
+        )
+    return (
+        "Entendi. Pelo que você já contou — ganho de peso, dificuldade de manter resultado e gordura abdominal — já tenho contexto suficiente para te orientar.\n\n"
+        "O caminho mais seguro é começar pela avaliação com a Dra. Daniely. Posso te passar o valor da consulta ou prefere que eu veja a agenda?"
+    )
 
 
 def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply: str) -> str:
-    """RC-64: impede follow-up cego quando o histórico já contém dor declarada.
+    """RC-64/69: impede follow-up cego quando o histórico já contém dor declarada.
 
     A memória/prompt não bastam: o runtime precisa travar respostas genéricas
     que perguntam novamente "o que incomoda" quando o WhatsApp já mostrou o tema.
@@ -1961,11 +1987,23 @@ def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply:
         return text or "NO_REPLY"
     if not is_context_blind_generic_discovery(text):
         return text
-    ctx = build_recent_conversation_context(phone, limit=12)
+    ctx = build_recent_conversation_context(phone, limit=16)
     combined = f"{ctx}\n{inbound_text or ''}"
+    if contains_fatigue_complaint(combined):
+        log(f"rc69_fatigue_generic_followup_blocked phone={phone} replyPreview={text[:140]!r}")
+        return enforce_fatigue_complaint_no_repeat(phone, inbound_text, text)
+    if contains_program_question(inbound_text) and contains_price_question(inbound_text):
+        log(f"rc69_program_value_generic_followup_rewritten phone={phone} replyPreview={text[:140]!r}")
+        return build_program_value_boundary_reply()
+    if contains_price_question(combined) and consultation_price_context_ready(phone, inbound_text):
+        log(f"rc68_context_price_generic_followup_rewritten phone={phone} replyPreview={text[:140]!r}")
+        return build_consultation_price_reply()
     if contains_menopause_weight_context(combined):
         log(f"rc64_context_blind_followup_rewritten phone={phone} replyPreview={text[:140]!r}")
         return build_contextual_menopause_weight_reply()
+    if has_substantive_weight_context(combined):
+        log(f"rc69_weight_context_no_more_spin phone={phone} replyPreview={text[:140]!r}")
+        return build_weight_context_no_more_spin_reply(combined)
     return text
 
 
@@ -2333,6 +2371,14 @@ def enforce_price_question_after_context(phone: str, inbound_text: str, reply: s
         return text
     if contains_money_value(text):
         return text
+    if contains_program_question(inbound_text):
+        update_phone_event_entry(phone, {
+            "price_context_ready": True,
+            "price_context_ready_at": time.time(),
+            "price_context_source": "rc68_program_value_question_after_context",
+        })
+        log(f"rc68_program_value_question_answered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_program_value_boundary_reply()
     if consultation_price_context_ready(phone, inbound_text) or contains_fatigue_complaint(inbound_text):
         update_phone_event_entry(phone, {
             "price_context_ready": True,
@@ -2414,6 +2460,13 @@ def build_program_followup_explanation_reply() -> str:
         "Sim. Depois da consulta inicial, se fizer sentido para o seu caso, a Dra. Daniely pode indicar um Programa de Acompanhamento individual.\n\n"
         "Esse programa é definido depois da avaliação, porque depende do seu histórico, exames, composição corporal, objetivo e do que for seguro para você.\n\n"
         "Por isso eu não te passo um valor fechado de acompanhamento por aqui antes da consulta. O primeiro passo é a avaliação inicial."
+    )
+
+
+def build_program_value_boundary_reply() -> str:
+    return (
+        "Entendo. O valor do Programa de Acompanhamento não é fechado antes da consulta, porque depende do que a Dra. Daniely indicar depois de avaliar seu histórico, exames, composição corporal e objetivo.\n\n"
+        "O primeiro passo é a consulta inicial. Ela custa R$ 1.000,00, pode ser parcelada em até 2x sem juros, e a reserva é de R$ 300,00 abatida do valor da consulta."
     )
 
 
