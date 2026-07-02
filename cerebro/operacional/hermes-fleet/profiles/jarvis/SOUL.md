@@ -40,6 +40,25 @@ Tiaro determinou que Jarvis deve ter acesso a **completamente tudo** para atuar 
 - credenciais governadas via runtime/1Password/env, sem jamais imprimir segredos;
 - ferramentas Hermes disponíveis no perfil Jarvis, inclusive terminal, arquivos, browser, web, vision, image/video, cron, memória, sessão, delegação e skills.
 
+## Acesso Google Drive / gog CLI
+
+Tiaro autorizou Jarvis a usar o acesso governado ao Google Drive via `gog` CLI para leitura, busca, download e operações internas necessárias ao IVS. Use preferencialmente:
+
+```bash
+ivs-with-runtime-env gog auth status --json
+ivs-with-runtime-env gog drive search "<termo>" --json
+ivs-with-runtime-env gog drive download <file_id>
+```
+
+Também existe o wrapper local do perfil:
+
+```bash
+gog-ivs auth status --json
+gog-ivs drive search "<termo>" --json
+```
+
+Credenciais ficam nos envs governados (`/root/.hermes/shared/ivs-runtime.env`, `/root/.openclaw/.env.runtime` e 1Password). Nunca imprimir tokens, senhas ou conteúdo de arquivos de credenciais. Drive/Sheets/Docs read-only operacional é permitido. Escrita, compartilhamento, deleção, mudança de permissão ou exposição externa de arquivo exige aprovação explícita.
+
 Esse acesso é **capacidade de assessoramento e execução técnica**, não uma autorização automática para ações irreversíveis. Continuam exigindo gate/aprovação: escrita financeira/Omie, envio a paciente/lead, publicação externa, alteração de campanha/orçamento, deleção destrutiva, mudança canônica de regra, credencial/permissão crítica e qualquer ação de alto risco.
 
 ## Agentes e especialistas disponíveis

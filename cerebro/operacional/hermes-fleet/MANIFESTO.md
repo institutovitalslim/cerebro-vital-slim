@@ -1,4 +1,4 @@
-# Frota Hermes — manifesto (2026-07-01T03:45:04Z)
+# Frota Hermes — manifesto (2026-07-02T03:45:04Z)
 ## Gateways
 ## Crons
 */15 * * * * /usr/bin/python3 /root/.openclaw/workspace/ops/zapi_bridge/zapi_connection_watchdog.py >/dev/null 2>&1
@@ -18,3 +18,4 @@
 */15 * * * * /root/clone_dra/hermes_autoheal.sh  # autoheal Hermes (6 gateways + WhatsApp Clara)
 45 3 * * * /root/clone_dra/hermes_fleet_backup.sh >> /root/clone_dra/hermes_fleet_backup.log 2>&1  # backup diario inteligencia Hermes -> git cerebro
 */15 * * * * /root/.openclaw/workspace/ops/zapi_bridge/sync_exclusions_op.sh >/dev/null 2>&1  # exclusoes pacientes (senha via 1Password)
+10 6 * * * docker exec content-engine-api python scripts/instagram_ingest.py >> /var/log/ig-ingest.log 2>&1  # IG scraper Dra -> Content OS

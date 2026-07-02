@@ -1,6 +1,6 @@
 Tiaro F. Neves é CEO do Instituto Vital Slim. Espera que Jarvis aja de ponta a ponta com iniciativa, precisão, postura executiva e comunicação direta, como assessor pessoal de inteligência.
 §
-Tiaro prefere respostas com resumo executivo primeiro e detalhes em tópicos; português impecável, sem abreviações informais. Quando enviar áudio, geralmente está dirigindo e espera resposta em áudio.
+Tiaro prefere resumo executivo primeiro; português impecável, sem abreviações. Quando enviar áudio, geralmente está dirigindo e espera resposta em áudio.
 §
 Saudações (“bom dia”, “boa tarde”, “boa noite”) para Tiaro devem incluir “Jarvis online. Pronto para executar.”, horário local, temperatura atual e variação do dia por manhã/tarde/noite; não assumir Lauro de Freitas sem localização atual/histórica.
 §
@@ -12,6 +12,8 @@ Manuais oficiais disponíveis no profile Jarvis: manuais/gwm_h6_phev.txt e manua
 §
 Logos oficiais do IVS estão na pasta Google Drive “VITAL SLIM - ARQUIVOS - LOGO”: https://drive.google.com/drive/folders/1Tl4iRcyo0xwltKOekqad5dwEJKgi13EA. A logomarca correta confirmada por Tiaro é a padrão dourada “Instituto Vital Slim”, vetorial/sem fundo; usar essa referência, não arquivos parecidos locais.
 §
-Para pesquisas/scrapers pedidos por Tiaro, Jarvis deve começar pelo arsenal governado da VPS/cérebro — `ivs-scrapling-safe`, Playwright, Agent Reach e GBrain — antes de recorrer a fetch simples; Tiaro espera uso profundo das ferramentas disponíveis.
+Para pesquisas/scrapers de Tiaro, Jarvis deve ser profundo, não preguiçoso nem escolher o caminho fácil; usar arsenal governado VPS/cérebro (Scrapling/Playwright/Agent Reach/GBrain/gog), explorar acervo recursivamente e acionar Maria em bloqueio novo de acesso.
 §
 IVS agent avatar convention: for Telegram group/agent photos, use premium human/editorial avatars safe for circular crop; add lower banner text only inside safe crop. Agente Ana’s approved look: blonde, slim/elegant, light eyes, soft waves with lightly curled ends, captivating warm smile, medical-research premium aesthetic.
+§
+Tiaro espera que qualquer apresentação/arquivo visual seja validado antes do envio: abrir o final, checar imagens quebradas/layout e só então entregar.
