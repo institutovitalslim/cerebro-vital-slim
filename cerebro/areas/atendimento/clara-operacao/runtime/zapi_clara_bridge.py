@@ -41,6 +41,8 @@ ZAPI_BASE_URL = os.getenv("ZAPI_BASE_URL", "").strip() or (
 )
 ZAPI_SEND_TEXT_PATH = os.getenv("ZAPI_SEND_TEXT_PATH", "/send-text")
 ZAPI_SEND_AUDIO_PATH = os.getenv("ZAPI_SEND_AUDIO_PATH", "/send-audio")
+ZAPI_SEND_VIDEO_PATH = os.getenv("ZAPI_SEND_VIDEO_PATH", "/send-video")
+CLARA_BIOIMPEDANCIA_VIDEO_URL = os.getenv("CLARA_BIOIMPEDANCIA_VIDEO_URL", "https://openclaw.institutovitalslim.com.br/public/video-bioimpedancia-ivs.mp4")
 CLARA_REQUIRE_THINKING = os.getenv("CLARA_REQUIRE_THINKING", "1").strip().lower() in ("1", "true", "yes", "on")
 CLARA_THINKING_TIMEOUT_SECONDS = int(os.getenv("CLARA_THINKING_TIMEOUT_SECONDS", "45"))
 CLARA_ZAPI_DELAY_TYPING_SECONDS = int(os.getenv("CLARA_ZAPI_DELAY_TYPING_SECONDS", "10"))
@@ -2069,12 +2071,14 @@ def summarize_declared_context(combined_context: str) -> str:
 
 
 def build_patient_journey_explanation(context_summary: str = "") -> str:
-    prefix = f"Pelo que você trouxe — {context_summary} — o caminho aqui não é começar por uma orientação solta.\n\n" if context_summary else "O caminho aqui não é começar por uma orientação solta.\n\n"
+    prefix = f"Pelo que você trouxe — {context_summary} — faz sentido explicar a jornada antes de falar de valor.\n\n" if context_summary else "Antes de falar de valor, faz sentido você entender como é a jornada aqui.\n\n"
     return (
         prefix
-        + "A jornada começa pela consulta inicial com a Dra. Daniely, para entender seu histórico, rotina, exames e objetivo.\n\n"
-        "No mesmo processo, a equipe faz bioimpedância e avaliação de composição corporal, para enxergar o que pode estar dificultando seu resultado.\n\n"
-        "Depois disso, a Dra. define o direcionamento inicial e, se fizer sentido para o seu caso, pode indicar um Programa de Acompanhamento."
+        + "O tratamento no Instituto Vital Slim é médico e olha o sobrepeso, obesidade, saúde hormonal e metabolismo de forma multifatorial.\n\n"
+        "Seu atendimento começa com uma consulta médica profunda com a Dra. Daniely, em torno de 60 a 90 minutos.\n\n"
+        "Você também passa por uma avaliação de enfermagem completa e por uma bioimpedância de última geração, para entendermos composição corporal, massa muscular, gordura visceral e hidratação celular.\n\n"
+        "Depois da confirmação do agendamento, você recebe a solicitação de exames complementares, como exames de sangue, para analisar vitaminas, minerais, inflamação, hormônios e outros marcadores de saúde.\n\n"
+        "Com tudo isso, a Dra. Daniely define se faz sentido um Programa de Acompanhamento personalizado para o seu objetivo, em vez de uma orientação solta ou protocolo pronto."
     )
 
 
@@ -3436,6 +3440,55 @@ def send_zapi_audio(phone: str, audio_bytes: bytes, source: str = "clara_reply")
     return status, body
 
 
+def send_zapi_video_url(phone: str, video_url: str, source: str = "clara_reply") -> Tuple[int, str]:
+    if not ZAPI_BASE_URL:
+        raise RuntimeError("ZAPI_BASE_URL is empty")
+    if not ZAPI_CLIENT_TOKEN:
+        raise RuntimeError("ZAPI_CLIENT_TOKEN is empty")
+    if not video_url:
+        raise RuntimeError("video_url is empty")
+    guard_message = f"video_url:{video_url}"
+    guard = evaluate_zapi_runtime_enforcement(phone, guard_message, source=source, channel="video", phase="preflight")
+    if not guard.get("ok"):
+        raise RuntimeError(f"zapi_video_blocked_by_runtime_enforcement: {json.dumps(guard, ensure_ascii=False)[:500]}")
+    payload = {"phone": phone, "video": video_url}
+    headers = {"Client-Token": ZAPI_CLIENT_TOKEN}
+    url = ZAPI_BASE_URL.rstrip("/") + ZAPI_SEND_VIDEO_PATH
+    status, body = post_json(url, payload, headers=headers, timeout=90)
+    if 200 <= status < 300:
+        evaluate_zapi_runtime_enforcement(phone, guard_message, source=source, channel="video", phase="commit", status=str(status))
+    else:
+        evaluate_zapi_runtime_enforcement(phone, guard_message, source=source, channel="video", phase="fail", status=str(status))
+    return status, body
+
+
+def should_send_bioimpedancia_video_after_reply(phone: str, reply: str) -> bool:
+    if not CLARA_BIOIMPEDANCIA_VIDEO_URL:
+        return False
+    event = get_phone_event_entry(phone)
+    if event.get("bioimpedancia_video_sent"):
+        return False
+    lower = (reply or "").lower()
+    journey = contains_patient_journey_explanation(reply) or "bioimpedância de última geração" in lower or "bioimpedancia de ultima geração" in lower or "bioimpedancia de ultima geracao" in lower
+    commercial_moment = contains_money_value(reply) or "esse formato de avaliação faz sentido" in lower or "esse formato de avaliacao faz sentido" in lower
+    return bool(journey and commercial_moment)
+
+
+def maybe_send_bioimpedancia_video(phone: str, reply: str) -> None:
+    if not should_send_bioimpedancia_video_after_reply(phone, reply):
+        return
+    try:
+        time.sleep(max(CLARA_HUMAN_CHUNK_INTER_SEND_SECONDS, 3.0))
+        status, body = send_zapi_video_url(phone, CLARA_BIOIMPEDANCIA_VIDEO_URL, source="clara_reply")
+        if 200 <= int(status) < 300:
+            update_phone_event_entry(phone, {"bioimpedancia_video_sent": True, "bioimpedancia_video_sent_at": time.time()})
+            log(f"rc76_bioimpedancia_video_sent phone={phone} status={status} url={CLARA_BIOIMPEDANCIA_VIDEO_URL}")
+        else:
+            log(f"rc76_bioimpedancia_video_failed phone={phone} status={status} body={body[:300]}")
+    except Exception as err:
+        log(f"rc76_bioimpedancia_video_exception phone={phone}: {err}")
+
+
 
 
 def validate_admin_send_lead_safety(payload: Dict[str, Any], phone: str, message: str) -> Tuple[bool, Dict[str, Any]]:
@@ -4099,7 +4152,10 @@ class Handler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(data)))
             self.send_header("Cache-Control", "public, max-age=86400")
             self.end_headers()
-            self.wfile.write(data)
+            try:
+                self.wfile.write(data)
+            except (BrokenPipeError, ConnectionResetError) as err:
+                log(f"public_bioimpedancia_video_client_aborted: {err}")
             return
         if path == "/admin/status":
             if not self._check_admin_secret():
@@ -4468,6 +4524,8 @@ class Handler(BaseHTTPRequestHandler):
                     status, body = send_zapi_text_human_sequence(phone, reply, source="clara_reply")
                 if 200 <= int(status) < 300:
                     mark_lead_replied(phone, reply)
+                    if not sent_as_audio:
+                        maybe_send_bioimpedancia_video(phone, reply)
                     if financial_no_fit_current:
                         add_exclusion_alias(phone, str(sender_name or payload.get("chatName") or "Lead sem perfil financeiro"), "not_qualified_financial_no_fit", "lead_inbound_financial_decline")
                         update_lead_entry(phone, {
