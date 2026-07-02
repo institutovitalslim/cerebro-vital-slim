@@ -4,6 +4,10 @@
 
 ## Status da absorção
 
+## Regra de qualidade de fonte
+
+A partir da correção do Tiaro em 2026-07-02, este método só pode ser promovido/expandido com base em transcrições verificadas. Títulos, manifestos, páginas da Hotmart e inferências não bastam. Itens sem transcrição devem ser listados como lacuna, não analisados.
+
 **Status:** `PENDENTE_VALIDACAO_HOTMART`
 
 O aprendizado está **parcialmente operacionalizado**, mas **não está concluído** porque a validação direta na Hotmart não foi confirmada. João, Jarvis e Content Engine podem usar apenas como base parcial derivada dos artefatos locais já transcritos. Nem todos os 150 itens do curso foram transcritos integralmente porque o acesso autenticado ainda precisa ser restabelecido/verificado. Não houve bypass de login/paywall/DRM.
