@@ -1,6 +1,6 @@
 """Orquestrador de geração (motor A) — coração do Content Engine OS.
 Combina conhecimento (roteiro viral análogo + dispositivos + tema/persona + voz da marca)
--> gera via Opus 4.8 (OpenRouter) com fallback Codex/OAuth -> checklist -> persiste em creatives.
+-> gera via Codex GPT-5.5 (gateway OAuth) -> checklist -> persiste em creatives.
 Saída estruturada: headline com *ênfase dourada* + image_prompt por slide; ciente de feed vs Meta Ads.
 """
 from __future__ import annotations
@@ -11,6 +11,7 @@ import json
 import os
 import re
 import shutil
+from urllib.parse import urlencode
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
@@ -18,7 +19,6 @@ from pydantic import BaseModel, Field
 from app.db import get_conn
 from app.routers.calendar import ensure_phase1_schema
 from app.services.compliance import assess_creative
-from app.services.openrouter_client import OpenRouterClient
 from app.services.codex_client import CodexClient
 
 router = APIRouter(prefix="/generation", tags=["generation"])
@@ -32,6 +32,34 @@ CAPTION_FOOTER = (
     "(Este conteúdo tem caráter meramente educativo e não substitui uma consulta médica.)"
 )
 CAPTION_FOOTER_MARKER = "CRM-BA 27.588"
+TRACKING_BASE_URL = "https://www.institutovitalslim.com.br/"
+
+
+def _utm_slug(value: object, fallback: str = "conteudo") -> str:
+    raw = str(value or fallback).lower().strip()
+    raw = re.sub(r"[^a-z0-9]+", "-", raw)
+    return re.sub(r"-+", "-", raw).strip("-") or fallback
+
+
+def _tracking_for_creative(creative: dict) -> dict:
+    """UTM única por criativo/banner para rastrear qual post gerou cliques/leads."""
+    cid = str(creative.get("id") or creative.get("creative_id") or "").strip()
+    fmt = _utm_slug(creative.get("format"), "post")
+    campaign = f"{fmt}-{cid[:8]}" if cid else fmt
+    parts = [
+        creative.get("hook_tipo"),
+        creative.get("objecao_alvo"),
+        creative.get("visual_tipo"),
+        creative.get("cta_tipo"),
+    ]
+    utm_content = _utm_slug("-".join(str(p) for p in parts if p), fmt)
+    utm = {
+        "utm_source": creative.get("network") or "instagram",
+        "utm_medium": "post_banner",
+        "utm_campaign": campaign,
+        "utm_content": utm_content,
+    }
+    return {"utm": utm, "tracking_url": f"{TRACKING_BASE_URL}?{urlencode(utm)}"}
 
 # Camada de direcionamento Meta Ads — 5 conjuntos por ÂNGULO (mentoria 06-14, playbook IVS:
 # cerebro/areas/marketing/sub-areas/trafego-pago/playbook-meta-ads-mentoria-06-14-ivs.md).
@@ -173,16 +201,24 @@ def _output_spec(formato: str) -> str:
     if formato == "carrossel":
         return (
             'Entregue SOMENTE um JSON válido com EXATAMENTE estas chaves:\n'
-            '- "title": headline da CAPA, curta e forte (1 linha).\n'
-            '- "cover_sub": subtítulo curto da capa (1 frase).\n'
-            '- "slides": lista de 4 a 6 objetos, cada um:\n'
-            '    {"label": rótulo curto (ex.: "SINAL 1", "ERRO 2"),\n'
-            '     "headline": frase curta de impacto,\n'
-            '     "sub": 1 frase explicando o mecanismo,\n'
-            '     "image_prompt": descrição VISUAL concreta e realista da foto do slide '
-            '(ambiente, pessoa/sujeito, ação, luz, clima) — SEM texto e SEM palavras na imagem}.\n'
-            '- "cta_headline": headline do slide final (reframe forte).\n'
-            '- "cta_sub": subtítulo do CTA.\n'
+            '- "title": headline da CAPA — AFIRMAÇÃO curta e forte (1 linha, nunca pergunta).\n'
+            '- "cover_sub": subtítulo da capa que COMPLETA o title (1 frase que conecta com ele).\n'
+            '- "slides": lista de 6 a 8 objetos. REGRA DE ESCRITA: em cada objeto, headline e sub formam UM '
+            'pensamento conectado — o sub continua e explica o headline; o headline NUNCA pode terminar cortado '
+            'no meio da frase. Cada objeto:\n'
+            '    {"label": rótulo curto (ex.: "SINAL 1", "ERRO", "TESTE HOJE"),\n'
+            '     "headline": frase CURTA e COMPLETA (máx ~7 palavras), com 1 palavra-chave entre *asteriscos*,\n'
+            '     "sub": 1 a 2 frases que completam/explicam o headline — SEMPRE preenchido, nunca vazio,\n'
+            '     "image_prompt": cena visual concreta, realista e ESPECÍFICA ao ponto DESTE slide '
+            '(mulher 45+ em situação real do dia a dia coerente com o texto: ambiente, ação, luz, clima). '
+            'Varie a cena a cada slide (nunca repita). PROIBIDO na imagem: comida/doce, remédio/caneta/seringa, '
+            'jaleco, ambiente clínico/hospitalar, e qualquer texto/palavra/logo}.\n'
+            '- OBRIGATÓRIO: pelo menos 2 slides entregam um MICRO-RESULTADO TESTÁVEL — algo prático que a leitora '
+            'aplica HOJE e valida sozinha (ex.: um mini-teste caseiro, um sinal do corpo p/ observar por alguns dias, '
+            'um ajuste simples de rotina), gerando uma pequena vitória e mostrando que a Dra domina o assunto. '
+            'Nesses slides use label "TESTE HOJE" ou "FAÇA AGORA" e deixe o passo concreto no sub.\n'
+            '- "cta_headline": headline do slide final — convite ao próximo passo (pré-avaliação), sem promessa médica.\n'
+            '- "cta_sub": subtítulo do CTA — 1 frase CURTA e COMPLETA (máx ~120 caracteres), nunca cortada.\n'
             '- "caption": legenda do post.\n'
             '- "hashtags": lista de 8 a 12.\n'
             '- "modular_blocks": objeto com angle, hook_tipo, objecao_alvo, quebra_objecao, visual_tipo, cta_tipo e hypothesis.'
@@ -288,14 +324,15 @@ PERSONA: {req.persona or 'mulher 38-55 que já tentou de tudo e continua travada
 {angulo_block}
 {modular_block}
 
-MÉTODO LIGHT COPY (Leandro Ladeira) — aplicar na criação:
-- ASSOCIAÇÃO RICA: prefira analogias inusitadas que ocupam slot vazio na mente. Ex.: "hormônios na perimenopausa como orquestra fora do compasso" (rica) vs "é igual a um músculo" (pobre/batida). Quanto mais inédita a associação, mais memorável.
-- TÉCNICAS DE CRIAÇÃO: "conta inusitada" (represente o conceito via dado bizarro/exagerado); "listar o feio/ruim" do nicho antes de ir ao bonito (libera o criativo do óbvio); "oposto" (defenda o contrário do esperado para gerar curiosidade).
-- OBSERVAÇÃO ATIVA: transforme falas reais de pacientes em conteúdo. "Me sinto estranha no próprio corpo" é mais poderosa que qualquer copy técnica — anonimize sempre.
-- LADO ENGRAÇADO/SÉRIO: use humor leve no cotidiano da mulher 40+ (calor súbito, sono, cansaço) e feche com reflexão séria/acolhedora (não irônica).
-- ESTRUTURA: Gancho (loop de curiosidade — dor ou mecanismo inesperado) → Desenvolvimento (associação + prova/mecanismo) → Fechamento (reflexão + CTA que gera ação, não venda).
-- IDENTIDADE DA DRA.: valores = acolhimento, ciência séria, escuta, respeito ao corpo da mulher. Inimigo em comum (ético) = desinformação e promessas de emagrecimento rápido.
-- COMPLIANCE SEMPRE: "pode ajudar", "muitas mulheres relatam", "investigação individualizada" — NUNCA resultado garantido ou kg prometido.
+MÉTODO LIGHT COPY (Leandro Ladeira) — aplicar na criação (fonte operacional: cerebro/areas/marketing/metodo-light-copy.md):
+- ASSOCIAÇÃO RICA: crie analogia/cena que ocupe slot vazio na mente; proíba analogias batidas como "metabolismo é motor" ou "disciplina é músculo". Gere 5 opções e escolha a mais específica/visual.
+- TÉCNICAS DE CRIAÇÃO: conta inusitada; isolar características antes de associar; listar o feio/errado do nicho; oposto/contrário do esperado; ponto de vista deslocado.
+- OBSERVAÇÃO ATIVA: use falas reais anonimizadas de pacientes/leads. Fala real > copy técnica. Ex.: "me sinto estranha no próprio corpo".
+- IDENTIDADE DA DRA.: ciência séria, escuta, investigação, autoridade gentil. Inimigo comum ético: desinformação, gotinhas milagrosas, dieta genérica e culpa.
+- ELEMENTOS LITERÁRIOS DISPONÍVEIS: aforismo, anáfora, antítese, hipérbole controlada, metáfora visual, personificação, desfecho inesperado, mundo ao contrário, ponto de vista, tríade cômica. Use 1-2, nunca todos.
+- ESTRUTURA: Gancho (dor/cena/contradição) → Premissa/associação → Mecanismo seguro → Virada → CTA compatível com o estágio.
+- RUBRICA: dor real + associação rica + mecanismo médico seguro + identidade IVS + compliance + CTA. Se qualquer item estiver fraco, reescreva antes de entregar.
+- COMPLIANCE SEMPRE: "pode ajudar", "avaliação individualizada", "investigação médica", "acompanhamento profissional" — NUNCA cura, resultado garantido ou kg prometido.
 
 ROTEIRO VIRAL ANÁLOGO (use como referência de ângulo/hook, adapte — não copie literal):
 {viral_txt}
@@ -400,7 +437,7 @@ def _ensure_calendar_for_creative(conn, cid: str) -> dict | None:
         cur.execute(
             """
             select c.id::text as id, c.tenant_id, c.title, c.format, c.network, c.brief,
-                   c.asset_url, c.status
+                   c.asset_url, c.status, c.hook_tipo, c.objecao_alvo, c.visual_tipo, c.cta_tipo
             from creatives c where c.id=%s
             """,
             (cid,),
@@ -480,17 +517,11 @@ SYSTEM_PROMPT = ("Você é o motor de conteúdo do Instituto Vital Slim: estrate
 
 
 async def _motor(prompt: str, system: str):
+    # Regra IVS: TODA geração via Codex GPT-5.5 (gateway OAuth). Nunca OpenRouter/Anthropic direto.
     try:
-        result = await OpenRouterClient().generate(prompt, system=system)
-        if result.get("mode") in ("mock", "degraded_mock"):
-            raise RuntimeError(f"openrouter falhou: {result.get('errors') or 'sem api_key'}")
+        return await CodexClient().generate(prompt, system=system)
     except Exception as e:
-        try:
-            result = await CodexClient().generate(prompt, system=system)
-            result["fallback_reason"] = f"openrouter indisponível: {type(e).__name__}: {e}"
-        except Exception as e2:
-            raise HTTPException(503, f"motor indisponível (openrouter: {e}; codex: {e2})")
-    return result
+        raise HTTPException(503, f"motor (codex) indisponível: {type(e).__name__}: {e}")
 
 
 @router.post("/orchestrate")
@@ -721,6 +752,7 @@ def list_creatives(tenant_slug: str = "demo", limit: int = 40, test_cycle_id: st
                    objecao_alvo: str | None = None, visual_tipo: str | None = None,
                    cta_tipo: str | None = None, destino_criativo: str | None = None,
                    status: str | None = None, format: str | None = None) -> dict:
+    limit = max(1, min(int(limit or 40), 100))  # teto p/ não bloquear o worker com ?limit gigante
     with get_conn() as conn:
         tid = _tenant_id(conn, tenant_slug)
         with conn.cursor() as cur:
@@ -753,6 +785,7 @@ def list_creatives(tenant_slug: str = "demo", limit: int = 40, test_cycle_id: st
             d["angulo_nome"] = None
         d.pop("script", None)
         d["assets"] = _assets_for(r["id"]) if r.get("asset_url") else []
+        d.update(_tracking_for_creative(d))
         items.append(d)
     return {"items": items}
 
@@ -803,12 +836,7 @@ async def engenharia_reversa(req: EngReversaRequest) -> dict:
         '"scripts" (lista de 3 objetos {hook, desenvolvimento, cta, legenda}), '
         '"carrossel" (lista de 10 strings, 1 por slide).'
     )
-    try:
-        result = await OpenRouterClient().generate(prompt, system=ER_FRAMEWORK)
-        if result.get("mode") in ("mock", "degraded_mock"):
-            raise RuntimeError("openrouter")
-    except Exception:
-        result = await CodexClient().generate(prompt, system=ER_FRAMEWORK)
+    result = await CodexClient().generate(prompt, system=ER_FRAMEWORK)  # Codex GPT-5.5 (regra IVS)
     data = _apply_caption_footer(_extract_json(result.get("content", "")))
     scripts = data.get("scripts") or []
     saved = 0
@@ -862,6 +890,21 @@ def approve_creative(cid: str) -> dict:
     if not r:
         raise HTTPException(404, "creative não encontrado")
     return {"id": r["id"], "status": "aprovado", "calendar_entry": calendar, "compliance": compliance}
+
+
+@router.delete("/creatives/{cid}")
+def delete_creative(cid: str, tenant_slug: str = "demo") -> dict:
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute("select id from creatives where id=%s and tenant_id=%s", (cid, tid))
+            if not cur.fetchone():
+                raise HTTPException(404, "criativo nao encontrado")
+            cur.execute("delete from creatives where id=%s and tenant_id=%s", (cid, tid))
+    d = f"/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders/{cid}"
+    if os.path.isdir(d):
+        shutil.rmtree(d, ignore_errors=True)
+    return {"ok": True, "deleted": cid}
 
 
 # ---- ANÁLISE DE PERFORMANCE (rubrica IVS de sinais virais do Instagram) ----
@@ -1023,6 +1066,150 @@ def reel_render(cid: str) -> dict:
     if not r:
         raise HTTPException(404, "creative não encontrado")
     return {"id": r["id"], "reel_status": "render_pendente"}
+
+
+# ============ KIT DE GRAVAÇÃO DA DRA (reels + stories) ============
+# Quando um criativo de vídeo precisa da Dra. Daniely, o sistema entrega: roteiro p/ teleprompter (.txt),
+# direção de arte (cenário/figurino/enquadramento — NUNCA hospital/jaleco), e upload do vídeo gravado.
+import os as _os, shutil as _shutil, uuid as _uuid
+from fastapi import UploadFile, File, Form
+from fastapi.responses import PlainTextResponse
+
+DRA_VIDEO_ROOT = "/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/dra_videos"
+
+DIRECAO_ARTE_SYS = (
+    "Você é diretor(a) de arte de conteúdo médico premium do Instituto Vital Slim. "
+    "Gere a DIREÇÃO DE ARTE para a Dra. Daniely Freitas GRAVAR um vídeo (reel ou story, 9:16) lendo o roteiro. "
+    "REGRAS ABSOLUTAS: (1) a Dra NUNCA aparece em ambiente hospitalar/clínico, maca ou com equipamento médico; "
+    "(2) NUNCA de jaleco — sempre blazer/roupa elegante; (3) cenário neutro e sofisticado (estúdio sóbrio, "
+    "fundo liso, escritório/lifestyle premium); (4) vertical 9:16, plano médio (cintura pra cima), olhando para a câmera; "
+    "(5) compliance CFM: sem promessa de cura/resultado. "
+    "Estruture em markdown curto e prático com as seções: CENÁRIO, FIGURINO, ENQUADRAMENTO & CÂMERA, "
+    "EXPRESSÃO & TOM, ILUMINAÇÃO, RITMO/DURAÇÃO, DICAS DE TELEPROMPTER e O QUE NÃO FAZER. "
+    "Objetivo: a Dra grava UMA vez lendo o roteiro; depois o sistema usa o trecho dela no Hook e CTA e b-roll no meio."
+)
+
+
+def _roteiro_text(script) -> str:
+    """Roteiro contínuo p/ teleprompter (hook + cenas + cta), limpo de marcações."""
+    if isinstance(script, str):
+        try:
+            script = json.loads(script)
+        except Exception:
+            return script or ""
+    if not isinstance(script, dict):
+        return ""
+    parts = []
+    h = (script.get("hook") or "").strip()
+    if h:
+        parts.append(h)
+    for sc in (script.get("script") or []):
+        t = (sc.get("text") if isinstance(sc, dict) else str(sc)) or ""
+        t = re.sub(r"^\s*CENA\s*\d+\s*\([^)]*\)\s*[—:\-]\s*", "", t.strip(), flags=re.I)
+        t = re.sub(r"^\s*(Texto na tela|Mecanismo|Aprofundar|Reframe[^:]*|Você sabia[^:]*|Quebra de objeção[^:]*)\s*:?\s*", "", t, flags=re.I)
+        if t:
+            parts.append(t.strip().strip("'\""))
+    c = (script.get("cta") or "").strip()
+    if c:
+        parts.append(c)
+    return re.sub(r"\*", "", "\n\n".join(parts)).strip()
+
+
+def _kit_fetch(cid):
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select id::text as id, format, title, script, direcao_arte, dra_video_url "
+                        "from creatives where id=%s", (cid,))
+            return cur.fetchone()
+
+
+@router.get("/creatives/{cid}/roteiro.txt")
+def kit_roteiro_txt(cid: str):
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return PlainTextResponse(_roteiro_text(r["script"]) or "(sem roteiro)",
+                             headers={"Content-Disposition": 'attachment; filename="roteiro_%s.txt"' % cid[:8]})
+
+
+@router.post("/creatives/{cid}/direcao-arte")
+async def kit_direcao_gen(cid: str) -> dict:
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    rot = _roteiro_text(r["script"])
+    prompt = ("Formato do criativo: %s\nTítulo/tema: %s\n\nROTEIRO QUE A DRA VAI LER:\n%s\n\n"
+              "Gere a direção de arte para a gravação." % (r["format"], r.get("title") or "", rot[:1800]))
+    result = await _motor(prompt, DIRECAO_ARTE_SYS)
+    da = (result.get("content") or "").strip()
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set direcao_arte=%s where id=%s", (da, cid))
+    return {"direcao_arte": da}
+
+
+@router.get("/creatives/{cid}/direcao-arte")
+def kit_direcao_get(cid: str) -> dict:
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return {"direcao_arte": r["direcao_arte"], "has_video": bool(r["dra_video_url"]),
+            "roteiro": _roteiro_text(r["script"])}
+
+
+@router.get("/creatives/{cid}/kit.txt")
+def kit_completo_txt(cid: str):
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    rot = _roteiro_text(r["script"])
+    da = r["direcao_arte"] or "(gere a direção de arte na ferramenta antes de baixar o kit completo)"
+    body = ("KIT DE GRAVAÇÃO — DRA. DANIELY FREITAS\n" + "=" * 44 +
+            "\n\n# ROTEIRO (cole no teleprompter)\n\n" + rot +
+            "\n\n\n# DIREÇÃO DE ARTE\n\n" + da + "\n")
+    return PlainTextResponse(body, headers={"Content-Disposition": 'attachment; filename="kit_gravacao_%s.txt"' % cid[:8]})
+
+
+@router.post("/creatives/{cid}/dra-video")
+async def kit_dra_video_upload(cid: str, file: UploadFile = File(...)) -> dict:
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    d = _os.path.join(DRA_VIDEO_ROOT, cid)
+    _os.makedirs(d, exist_ok=True)
+    safe = "%s_%s" % (_uuid.uuid4().hex, _os.path.basename(file.filename or "dra.mp4"))
+    path = _os.path.join(d, safe)
+    with open(path, "wb") as buf:
+        _shutil.copyfileobj(file.file, buf)
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set dra_video_url=%s where id=%s", (path, cid))
+    return {"ok": True, "filename": file.filename, "size": _os.path.getsize(path)}
+
+
+@router.post("/raw-reel")
+async def raw_reel(tenant_slug: str = Form("demo"), title: str = Form(""), hook: str = Form(""),
+                   file: UploadFile = File(...)) -> dict:
+    """Vídeo bruto -> reel pronto (cortes, legenda cinética, b-roll, efeitos) via daemon v15."""
+    scr = {"hook": hook, "title": title, "script": [], "cta": "", "source": "video_bruto"}
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                "insert into creatives (tenant_id, format, network, title, script, status) "
+                "values (%s,'reels','instagram',%s,%s::jsonb,'gerado') returning id::text as id",
+                (tid, title or "Reel (vídeo bruto)", json.dumps(scr, ensure_ascii=False)))
+            cid = cur.fetchone()["id"]
+    d = _os.path.join(DRA_VIDEO_ROOT, cid)
+    _os.makedirs(d, exist_ok=True)
+    safe = "%s_%s" % (_uuid.uuid4().hex, _os.path.basename(file.filename or "bruto.mp4"))
+    path = _os.path.join(d, safe)
+    with open(path, "wb") as buf:
+        _shutil.copyfileobj(file.file, buf)
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set dra_video_url=%s, reel_status='render_pendente' where id=%s", (path, cid))
+    return {"ok": True, "id": cid, "reel_status": "render_pendente", "size": _os.path.getsize(path)}
 
 
 # ---- INTELIGÊNCIA CRIATIVA (Marca & posicionamento — com validação) ----

@@ -1,65 +1,155 @@
 ---
 name: light-copy
-description: Metodo Light Copy (Leandro Ladeira) para criacao de conteudo autoral e persuasivo para IVS
+description: Método Light Copy (Leandro Ladeira) operacionalizado para criação, revisão e auditoria de conteúdo autoral IVS
 ---
 
-# Skill: Light Copy — Conteudo Autoral IVS
+# Skill: Light Copy — Conteúdo Autoral IVS
 
-## O que e
+## Status
 
-O metodo Light Copy e um sistema de criacao de copy baseado em **associacao criativa** (nao em scripts prontos).
-A premissa: quem domina associacao cria melhor E comunica de forma mais memoravel, persuasiva e emocional.
+`OPERACIONAL_CONCLUIDO_COM_LACUNAS_DE_TRANSCRICAO` em 2026-07-02.
 
-## Frameworks principais (Modulo 01 - ja dominado pelo Joao)
+Fonte canônica:
+`/root/cerebro-vital-slim/cerebro/areas/marketing/metodo-light-copy.md`
 
-### 1. Associacao Criativa
-- **Rica** = slot vazio na mente do publico (inedita, inesquecivel)
-- **Pobre** = slot lotado (ja foi usada mil vezes: "e como um musculo", "como dirigir um carro")
-- Tecnicas: "conta inusitada", "listar primeiro o feio/errado", "oposto", "isolar caracteristicas antes de associar"
+Base usada:
+- 150 itens inventariados no curso Hotmart `Light Copy`;
+- 19 aulas transcritas localmente;
+- 545.918 bytes de transcrição;
+- adaptação IVS compliance-safe.
 
-### 2. Observacao Ativa
-- Fala real de paciente > copy tecnica
-- Anote: toda coisa inusitada que ouvir no consultorio vira conteudo
-- Regra de ouro: "Olhe para onde ninguem olha" (todos veem a balanca — olhe a mulher que sorriu ao ver o numero)
+Se precisar absorção literal 100% das aulas restantes, revalidar sessão Hotmart antes. Não burlar login/paywall/DRM.
 
-### 3. Lado Engraçado/Serio (Danilo Gentil)
-- Historias cotidianas com tom leve → fecho serio/acolhedor
-- Ex.: humor sobre calor subito → "mas meu corpo esta tentando me dizer algo"
+## Quando usar
 
-### 4. Processo Criativo (8 etapas)
-1. Objetivo claro (1 objetivo de comunicacao)
-2. Pesquisa (repertorio pessoal + referencia externa)
-3. Brainstorm sem julgamento (listar ideias ruins primeiro)
-4. Incubacao (parar de pensar — vai ao banho)
-5. Escrita ("edite como borracha, escreva como genio")
-6. Iluminacao (nao publique de primeira — releia)
-7. Verificacao (dados com contexto, nao so numero)
-8. Reflexao (aprendizado para o proximo ciclo)
+Use esta skill quando Tiaro, João, Jarvis ou Maria pedirem:
+- copy autoral;
+- reels/stories/carrosséis com mais força;
+- revisão de gancho;
+- criação de campanha;
+- aumento de percepção de valor;
+- WhatsApp/Clara antes do preço;
+- página/landing/anúncio com linguagem menos genérica.
 
-### 5. Identidade da Comunicadora (Dra. Daniely)
-- AMA: ciencia, escuta genuina, resultado sustentavel
-- ACREDITA: corpo feminino 40+ precisa de investigacao, nao julgamento
-- ODEIA: desinformacao, gotinhas milagrosas, promessas de emagrecimento rapido
-- Inimigo em comum com a paciente = a desinformacao (ethical positioning)
-- Bordao possivel: "seu corpo aos 40+ pede investigacao, nao julgamento"
+## Princípio central
 
-## Compliance CFM (INEGOCIAVEL)
+Light Copy não é script pronto. É pensamento por **associação rica**, observação ativa, identidade, premissa, revisão e volume.
 
-- NUNCA: cura, resultado garantido, numero de kg, "definitivo", "milagre"
-- SEMPRE: "pode ajudar", "muitas mulheres relatam", "investigacao individualizada", "acompanhamento profissional"
-- CTA padrao: "Cada mulher e unica. O caminho comeca com uma avaliacao individualizada."
+## Frameworks obrigatórios
 
-## Como usar no Content Engine OS
+### 1. Associação Criativa
 
-Ao pedir geracao de conteudo, inclua no request:
-- `hook_tipo`: identificacao | mecanismo | contraste | mito | pergunta_direta
-- `objecao_alvo`: ja_tentei_de_tudo | nao_e_pra_mim | muito_caro | nao_tenho_tempo
-- `send_save_reason`: por que uma mulher de 40+ salvaria ou mandaria para uma amiga
+- **Rica** = ocupa slot vazio na mente do público; visual, inesperada, específica.
+- **Pobre** = slot lotado: “metabolismo é motor”, “disciplina é músculo”, “emagrecer é receita”.
+- Técnicas: conta inusitada, isolar características, listar o feio/errado, oposto, ponto de vista deslocado.
 
-## Aulas pendentes (scraper rodando automaticamente)
+Checklist:
+- Tem imagem mental?
+- É específico para mulher 35–55?
+- Evita analogia batida?
+- Explica sem prometer resultado?
+- Dá vontade de comentar “é exatamente isso”?
 
-- Modulo 01 (Associacao Criativa): COMPLETO — destilado em cerebro/areas/marketing/metodo-light-copy.md
-- Modulo 02 (Copy Tradicional, Gatilhos Mentais, Headlines, Avatar): 12% — scraper baixando
-- Modulos 03-06 (Elementos Literarios, Narrativas, Mercado, Analise): 0% — fila do scraper
-- Total: 134 aulas, 10 estudadas, 124 pendentes
-- Destilacoes salvas em: cerebro/areas/marketing/lightcopy/
+### 2. Observação Ativa
+
+Fala real de paciente > copy técnica.
+
+Capturar:
+- objeções no WhatsApp;
+- frases da pré-consulta;
+- surpresas na bioimpedância;
+- dúvidas de Instagram;
+- cenas do consultório.
+
+Sempre anonimizar e preservar compliance.
+
+### 3. Processo Criativo
+
+1. Objetivo único.
+2. Pesquisa: repertório + referência + fala real.
+3. Brainstorm sem julgamento.
+4. Incubação.
+5. Escrita.
+6. Revisão/iluminação.
+7. Verificação em dados reais.
+8. Reflexão.
+
+### 4. Identidade da Comunicadora
+
+Dra. Daniely comunica:
+- ciência séria;
+- escuta;
+- investigação;
+- autoridade gentil;
+- combate à desinformação, gotinhas milagrosas, dieta genérica e culpa.
+
+Mantras possíveis:
+- “Seu corpo pede investigação, não julgamento.”
+- “A balança é só uma parte da conversa.”
+- “Emagrecimento sério começa antes da dieta: começa entendendo o corpo.”
+
+### 5. Gatilhos Mentais Éticos
+
+Só usar para clareza e valor percebido, nunca para manipulação ou promessa clínica.
+
+Aplicáveis: afeição, ancoragem, antecipação, compromisso, comunidade, curiosidade, escassez real, FOMO ético, história, novidade, simplicidade, porque, reciprocidade, prova, reconhecimento, surpresa, urgência real, exclusividade.
+
+## Estrutura base
+
+1. Gancho: dor, cena ou contradição.
+2. Premissa/associação rica.
+3. Desenvolvimento: mecanismo seguro.
+4. Virada: novo jeito de enxergar.
+5. CTA: ação compatível com estágio.
+
+## Compliance CFM
+
+Nunca:
+- cura;
+- resultado garantido;
+- kg prometido;
+- “milagre”, “definitivo”, “derreter gordura”;
+- antes/depois sensacionalista;
+- superioridade antiética.
+
+Preferir:
+- pode ajudar;
+- avaliação individualizada;
+- investigação médica;
+- acompanhamento profissional;
+- cada caso precisa ser avaliado.
+
+## Rubrica de revisão
+
+Pontuar 0–2:
+- dor real;
+- associação rica;
+- mecanismo seguro;
+- identidade IVS;
+- compliance;
+- CTA.
+
+Mínimo para publicar: 9/12.
+
+## Prompt operacional
+
+```text
+Crie conteúdo IVS usando Light Copy.
+Tema: [tema]
+Dor real: [fala/dor]
+Objetivo: [salvar/compartilhar/agendar/educar]
+Público: mulher 35–55
+Associação rica obrigatória: gerar 5 opções e escolher a melhor
+Mecanismo médico seguro: [mecanismo]
+Compliance: sem promessa de resultado, sem kg, sem cura
+Formato: [Reels/Stories/Carrossel/WhatsApp/Landing]
+Saída: gancho, roteiro/copy, CTA e justificativa Light Copy.
+```
+
+## Exemplos de ganchos IVS
+
+- “Você não precisa de mais uma dieta se ainda não entendeu por que as outras pararam de funcionar.”
+- “A balança conta o número. A composição corporal conta a história.”
+- “Seu corpo pode não estar te sabotando. Pode estar pedindo investigação.”
+- “Dieta genérica é como responder uma pergunta sem ter ouvido a história inteira.”
+- “O corpo feminino aos 40+ não precisa de julgamento rápido. Precisa de leitura completa.”

@@ -1,34 +1,35 @@
 # GBrain IVS — Health Report
 
-Gerado em: `2026-06-14T16:32:26.211250+00:00`
-Modo: `doctor-only`
-Arquivos espelhados: **0**
+Gerado em: `2026-07-02T19:27:25.160778+00:00`
+Modo: `manual`
+Arquivos espelhados: **9489**
 
 ## Estatísticas
-- Pages: **4958**
-- Chunks: **7589**
-- Embedded: **7589**
-- Links: **3632**
-- Tags: **28**
-- Timeline: **0**
+- Pages: **3705**
+- Chunks: **9440**
+- Embedded: **9440**
+- Links: **3796**
+- Tags: **19**
+- Timeline: **9**
 
 ## Saúde
-- Overall health: **65/100**
-- Brain score: **70/100**
+- Overall health: **35/100**
+- Brain score: **83/100**
 - Embed staleness: **OK**
 
 ## Warnings
-- `content_sanity_audit_recent` — 218 events (hard=0 [hard_block=0 reject=0 quarantine=0] soft=15 [soft_block=0 flag=15] warn=203), sources: default=218. (Local audit only — multi-host operators set GBRAIN_AUDIT_DIR.)
-- `flagged_pages` — 1 page(s) flagged (markup-heavy or oversize) — still searchable, agent warned on retrieval. Review with 'gbrain quarantine list --include-flagged'.
+- `content_sanity_audit_recent` — 284 events (hard=0 [hard_block=0 reject=0 quarantine=0] soft=0 [soft_block=0 flag=0] warn=284), sources: default=284. (Local audit only — multi-host operators set GBRAIN_AUDIT_DIR.)
+- `conversation_format_coverage` — 6/6 conversation pages (100.0%) match NO built-in pattern. Breakdown: _no_match=6. Investigate: gbrain conversation-parser scan <slug> | Enable LLM fallback (opt-in): gbrain config set conversation_parser.llm_fallback_enabled true
 - `jsonb_integrity` — Could not check JSONB integrity
 - `pgvector` — Could not check pgvector extension
-- `resolver_health` — 4 issue(s): 0 error(s), 4 warning(s)
-- `skill_conformance` — Could not parse manifest.json
 - `takes_count` — 0 takes (takes.bootstrap_enabled is false; opt in to enable)
 
 ## Comandos
-- **OK** `bun run src/cli.ts doctor` (4.22s)
-- **OK** `bun run src/cli.ts stats` (1.32s)
+- **OK** `bun run src/cli.ts import /root/.local/share/ivs-gbrain/import/ivs-brain --no-embed` (42.12s)
+- **OK** `bun run src/cli.ts extract --stale --catch-up` (1.27s)
+- **OK** `bun run src/cli.ts embed --stale` (4.62s)
+- **FALHA** `bun run src/cli.ts doctor` (4.77s)
+- **OK** `bun run src/cli.ts stats` (1.0s)
 
 ## Regra operacional
 - Fonte de verdade continua sendo o markdown do `cerebro-vital-slim`.
