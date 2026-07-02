@@ -4,9 +4,9 @@
 
 ## Status da absorção
 
-**Status:** `OPERACIONAL_CONCLUIDO_COM_LACUNAS_DE_TRANSCRICAO`
+**Status:** `PENDENTE_VALIDACAO_HOTMART`
 
-O aprendizado está concluído para uso operacional no IVS: João, Jarvis e Content Engine já têm estrutura suficiente para criar, revisar e auditar conteúdo com Light Copy. Nem todos os 150 itens do curso foram transcritos integralmente porque a sessão Hotmart expirou durante a tentativa de retomada em 2026-07-02. Não houve bypass de login/paywall/DRM.
+O aprendizado está **parcialmente operacionalizado**, mas **não está concluído** porque a validação direta na Hotmart não foi confirmada. João, Jarvis e Content Engine podem usar apenas como base parcial derivada dos artefatos locais já transcritos. Nem todos os 150 itens do curso foram transcritos integralmente porque o acesso autenticado ainda precisa ser restabelecido/verificado. Não houve bypass de login/paywall/DRM.
 
 ### Evidência local
 
@@ -446,6 +446,4 @@ Saída: gancho, roteiro/copy, CTA e justificativa Light Copy.
 
 ## 15. Lacunas e governança
 
-O aprendizado operacional está suficiente para produção. Porém, se Tiaro quiser **absorção 100% literal do curso completo**, o próximo passo é relogar a Hotmart e transcrever os 131 itens restantes/pendentes/erro. Sem sessão válida, não é permitido burlar acesso.
-
-Enquanto isso, esta versão é a fonte operacional canônica para uso IVS.
+Esta versão é uma **base parcial de trabalho**, não uma conclusão do curso. A fonte só pode ser marcada como concluída depois de validar acesso Hotmart e revisar/absorver o material restante diretamente na origem autenticada. Sem sessão válida, não é permitido burlar acesso.

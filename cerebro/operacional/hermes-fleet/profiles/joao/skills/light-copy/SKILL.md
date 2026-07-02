@@ -7,18 +7,18 @@ description: Método Light Copy (Leandro Ladeira) operacionalizado para criaçã
 
 ## Status
 
-`OPERACIONAL_CONCLUIDO_COM_LACUNAS_DE_TRANSCRICAO` em 2026-07-02.
+`PENDENTE_VALIDACAO_HOTMART` em 2026-07-02.
 
 Fonte canônica:
 `/root/cerebro-vital-slim/cerebro/areas/marketing/metodo-light-copy.md`
 
-Base usada:
+Base parcial usada:
 - 150 itens inventariados no curso Hotmart `Light Copy`;
 - 19 aulas transcritas localmente;
 - 545.918 bytes de transcrição;
 - adaptação IVS compliance-safe.
 
-Se precisar absorção literal 100% das aulas restantes, revalidar sessão Hotmart antes. Não burlar login/paywall/DRM.
+Não marcar como concluído até validar acesso Hotmart e absorver/revisar o material restante na origem autenticada. Não burlar login/paywall/DRM.
 
 ## Quando usar
 
