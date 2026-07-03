@@ -1,0 +1,67 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "rc": "RC-25",
+    "date": "2026-07-03T01:30:00Z"
+  },
+  "nodes": [
+    {
+      "id": "clara_whatsapp",
+      "label": "Clara WhatsApp",
+      "type": "agent"
+    },
+    {
+      "id": "qa_diario_conversao",
+      "label": "QA diário de conversão/agendamento",
+      "type": "routine"
+    },
+    {
+      "id": "observability_blocker",
+      "label": "Bloqueio técnico de observabilidade por pelo menos três ciclos",
+      "type": "risk"
+    },
+    {
+      "id": "microcompromisso_agenda",
+      "label": "Fechamento com microcompromisso de agenda",
+      "type": "improvement"
+    },
+    {
+      "id": "objecao_escolha_controlada",
+      "label": "Objeção tratada com escolha controlada",
+      "type": "improvement"
+    },
+    {
+      "id": "followup_binario",
+      "label": "Follow-up de silêncio com alternativa binária",
+      "type": "improvement"
+    }
+  ],
+  "links": [
+    {
+      "source": "qa_diario_conversao",
+      "target": "clara_whatsapp",
+      "type": "audits"
+    },
+    {
+      "source": "qa_diario_conversao",
+      "target": "observability_blocker",
+      "type": "detected"
+    },
+    {
+      "source": "clara_whatsapp",
+      "target": "microcompromisso_agenda",
+      "type": "can_apply"
+    },
+    {
+      "source": "clara_whatsapp",
+      "target": "objecao_escolha_controlada",
+      "type": "can_apply"
+    },
+    {
+      "source": "clara_whatsapp",
+      "target": "followup_binario",
+      "type": "can_apply"
+    }
+  ]
+}

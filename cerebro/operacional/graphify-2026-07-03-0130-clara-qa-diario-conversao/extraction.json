@@ -1,0 +1,16 @@
+{
+  "status": "qa_recorded",
+  "pii_exposed": false,
+  "current_messages": 0,
+  "historical_messages": 6187,
+  "historical_unique_leads": 443,
+  "historical_wins": 30,
+  "historical_drops": 5,
+  "historical_win_rate_unique_leads_approx": 0.0677,
+  "risk": "observability_pipeline_requires_human_technical_intervention_persistent_three_cycles",
+  "classification": {
+    "aplicar_amanha": ["microcompromisso de agenda", "objeção com escolha controlada", "follow-up binário"],
+    "testar_3_dias": "medir taxa de resposta quando pipeline voltar a capturar conversas",
+    "intervencao_humana": "revisar pipeline current/historical e parser"
+  }
+}
