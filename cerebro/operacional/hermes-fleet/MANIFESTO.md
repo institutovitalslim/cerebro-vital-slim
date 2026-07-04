@@ -1,4 +1,4 @@
-# Frota Hermes — manifesto (2026-07-03T03:45:06Z)
+# Frota Hermes — manifesto (2026-07-04T06:45:07Z)
 ## Gateways
 ## Crons
 */15 * * * * /usr/bin/python3 /root/.openclaw/workspace/ops/zapi_bridge/zapi_connection_watchdog.py >/dev/null 2>&1
@@ -19,3 +19,6 @@
 45 3 * * * /root/clone_dra/hermes_fleet_backup.sh >> /root/clone_dra/hermes_fleet_backup.log 2>&1  # backup diario inteligencia Hermes -> git cerebro
 */15 * * * * /root/.openclaw/workspace/ops/zapi_bridge/sync_exclusions_op.sh >/dev/null 2>&1  # exclusoes pacientes (senha via 1Password)
 10 6 * * * docker exec content-engine-api python scripts/instagram_ingest.py >> /var/log/ig-ingest.log 2>&1  # IG scraper Dra -> Content OS
+25 6 * * * docker exec --env-file /root/.openclaw/secure/meta_insights.env content-engine-api python scripts/meta_insights_ingest.py >> /var/log/meta-insights-ingest.log 2>&1  # Meta Insights (privadas) -> Content OS
+40 6 * * * docker exec --env-file /root/.openclaw/secure/meta_insights.env content-engine-api python scripts/meta_social_ingest.py >> /var/log/meta-social-ingest.log 2>&1  # Interacoes IG -> Social Selling
+50 6 * * * docker exec --env-file /root/.openclaw/secure/meta_insights.env content-engine-api python scripts/meta_ads_ingest.py >> /var/log/meta-ads-ingest.log 2>&1  # Meta Ads -> Content OS

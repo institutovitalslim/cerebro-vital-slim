@@ -14,6 +14,8 @@ Logos oficiais do IVS estão na pasta Google Drive “VITAL SLIM - ARQUIVOS - LO
 §
 Para pesquisas/scrapers, Tiaro espera profundidade: usar VPS/cérebro/Scrapling/Playwright/Agent Reach/GBrain/gog, explorar acervo e acionar Maria em bloqueio. Não reabrir tarefa cancelada nem pedir dado já fornecido.
 §
-IVS agent avatar convention: for Telegram group/agent photos, use premium human/editorial avatars safe for circular crop; add lower banner text only inside safe crop. Agente Ana’s approved look: blonde, slim/elegant, light eyes, soft waves with lightly curled ends, captivating warm smile, medical-research premium aesthetic.
+Avatares de agentes IVS: premium humano/editorial, seguros para corte circular. Ana aprovada: loira elegante, olhos claros, sorriso acolhedor, estética médica/científica premium.
 §
 Tiaro espera que qualquer apresentação/arquivo visual seja validado antes do envio: abrir o final, checar imagens quebradas/layout e só então entregar.
+§
+Figurinhas Panini Copa faltantes da Clarinha: lista em /root/.hermes/profiles/jarvis/workspace/codigos_figurinhas_panini_copa_faltantes.txt
