@@ -153,15 +153,46 @@ def main():
             ok, checks, vm, snap = validate_snapshot(token, require_fresh=False)
             result.update({'status': 'success' if ok else 'failed', 'checks': checks, 'snapshot': snap, 'vm': {'id': vm.get('id'), 'hostname': vm.get('hostname'), 'state': vm.get('state')}})
         else:
-            action = request('POST', f'/api/vps/v1/virtual-machines/{VM_ID}/snapshot', token)
-            result['action'] = action
-            final_action = wait_action(token, int(action.get('id')), max_seconds=args.wait_seconds)
-            result['final_action'] = final_action
-            ok, checks, vm, snap = validate_snapshot(token, started_at=started, require_fresh=True)
-            action_ok = final_action.get('state') == 'success'
-            checks.insert(0, {'name': 'snapshot_create_action_success', 'ok': action_ok, 'detail': final_action.get('state')})
-            ok = ok and action_ok
-            result.update({'status': 'success' if ok else 'failed', 'checks': checks, 'snapshot': snap, 'vm': {'id': vm.get('id'), 'hostname': vm.get('hostname'), 'state': vm.get('state')}})
+            try:
+                action = request('POST', f'/api/vps/v1/virtual-machines/{VM_ID}/snapshot', token)
+                result['action'] = action
+                action_id = action.get('id')
+                if action_id is None:
+                    raise RuntimeError(f'POST snapshot não retornou action id: {action}')
+                final_action = wait_action(token, int(action_id), max_seconds=args.wait_seconds)
+                result['final_action'] = final_action
+                ok, checks, vm, snap = validate_snapshot(token, started_at=started, require_fresh=True)
+                action_ok = final_action.get('state') == 'success'
+                checks.insert(0, {'name': 'snapshot_create_action_success', 'ok': action_ok, 'detail': final_action.get('state')})
+                ok = ok and action_ok
+                result.update({'status': 'success' if ok else 'failed', 'checks': checks, 'snapshot': snap, 'vm': {'id': vm.get('id'), 'hostname': vm.get('hostname'), 'state': vm.get('state')}})
+            except RuntimeError as e:
+                # A Hostinger às vezes responde 403 "VPS has unfinished actions" exatamente
+                # quando outra ação de snapshot já foi aceita e ainda está finalizando.
+                # Nesse caso, não devemos marcar o cron como falha sem verificar se um
+                # snapshot fresco apareceu logo depois do horário de início.
+                msg = str(e)
+                if 'unfinished actions' not in msg.lower() and 'VPS:2047' not in msg:
+                    raise
+                result['unfinished_action_error'] = msg
+                deadline = time.time() + args.wait_seconds
+                last = None
+                while time.time() < deadline:
+                    ok, checks, vm, snap = validate_snapshot(token, started_at=started, require_fresh=True)
+                    last = {'ok': ok, 'checks': checks, 'snapshot': snap, 'vm': vm}
+                    if ok:
+                        checks.insert(0, {'name': 'snapshot_create_action_or_existing_fresh', 'ok': True, 'detail': 'hostinger_unfinished_action_but_fresh_snapshot_validated'})
+                        result.update({'status': 'success', 'checks': checks, 'snapshot': snap, 'vm': {'id': vm.get('id'), 'hostname': vm.get('hostname'), 'state': vm.get('state')}})
+                        break
+                    time.sleep(20)
+                else:
+                    if last:
+                        checks = last['checks']
+                        checks.insert(0, {'name': 'snapshot_create_action_or_existing_fresh', 'ok': False, 'detail': 'unfinished_actions_and_no_fresh_snapshot'})
+                        vm = last['vm']; snap = last['snapshot']
+                        result.update({'status': 'failed', 'checks': checks, 'snapshot': snap, 'vm': {'id': vm.get('id'), 'hostname': vm.get('hostname'), 'state': vm.get('state')}})
+                    else:
+                        raise
     except Exception as e:
         result.update({'status': 'failed', 'error': str(e)})
 
