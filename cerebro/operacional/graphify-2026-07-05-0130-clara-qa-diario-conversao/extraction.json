@@ -1,0 +1,26 @@
+{
+  "tipo": "rc25_graphify",
+  "tema": "QA diário Clara conversão/agendamento",
+  "data_utc": "2026-07-05T01:30:00Z",
+  "fontes": [
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json"
+  ],
+  "sanitizado": true,
+  "pii": false,
+  "metricas": {
+    "current_total_messages": 0,
+    "current_unique_leads": 0,
+    "current_wins": 0,
+    "current_drops": 0,
+    "historical_total_messages": 6187,
+    "historical_unique_leads": 443,
+    "historical_wins": 30,
+    "historical_drops": 5,
+    "historical_win_rate_unique_leads_aprox": 0.0677,
+    "historical_drop_rate_unique_leads_aprox": 0.0113
+  },
+  "aprendizado_operacional": "Pipeline de observabilidade segue sem amostra current e histórico está desatualizado/com falha qualitativa; tratar recomendações como reforços seguros até normalização técnica.",
+  "risco": "RISCO_TECNICO_OBSERVABILIDADE_QA",
+  "gate": "Não pausar Clara sem ordem direta do Tiaro."
+}
