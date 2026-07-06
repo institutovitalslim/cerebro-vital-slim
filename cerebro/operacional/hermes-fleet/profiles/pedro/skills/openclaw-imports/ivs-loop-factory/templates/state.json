@@ -1,0 +1,22 @@
+{
+  "run_id": "",
+  "loop_name": "",
+  "preset": "",
+  "goal": "",
+  "owner": "",
+  "constraints": [],
+  "iteration": 0,
+  "max_iterations": 5,
+  "current_score": null,
+  "target_score": null,
+  "best_artifact": null,
+  "last_action": null,
+  "observations": [],
+  "commands_run": [],
+  "files_changed": [],
+  "open_risks": [],
+  "approval_required": false,
+  "status": "PARTIAL",
+  "stop_reason": null,
+  "next_action": ""
+}

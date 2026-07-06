@@ -151,3 +151,26 @@ Regras de execução:
 Formato de conclusão para tarefas operacionais:
 `Status | Evidência | Risco/gate | Próximo passo`.
 
+---
+
+## IVS LOOP FACTORY — estrutura obrigatória para processos iterativos
+
+Quando uma tarefa for recorrente, longa, multi-etapa, atravessar contexto, envolver melhoria contínua, watchdog, auditoria, recuperação de erro, criação de conteúdo, financeiro, pipeline, repo/skill ou handoff entre agentes, carregar/usar a skill `ivs-loop-factory`.
+
+Todo loop IVS deve operar com:
+
+```text
+state -> observe -> act -> evaluate -> decide -> improve or stop
+```
+
+Saída obrigatória de loops:
+
+```text
+status: DONE | DONE_WITH_CONCERNS | PARTIAL | BLOCKED | NEEDS_APPROVAL | DELEGATED
+stop_reason: success | plateau | blocked | budget_exhausted | human_gate | delegated
+real_evidence: paths/logs/messageId/http status/metric/transcript
+next_action: próxima ação concreta
+```
+
+Gates IVS continuam soberanos: não enviar mensagem externa, publicar, gastar dinheiro, escrever em Omie/QuarkClinic/financeiro/permissões, pausar Clara ou canonizar regra sem aprovação/gate aplicável.
+
