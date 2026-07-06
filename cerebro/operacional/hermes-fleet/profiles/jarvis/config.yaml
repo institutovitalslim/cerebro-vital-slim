@@ -397,10 +397,10 @@ tts:
       type: command
       command: /usr/local/bin/ivs-tts-jarvis-br {output_path} < {input_path}
       output_format: ogg
-      timeout: 90
+      timeout: 260
       voice_compatible: true
       max_text_length: 900
-      voice: jarvis-br-voxcpm-approved-20260625
+      voice: jarvis-br-voxcpm-clean-clone-20260705
 stt:
   enabled: true
   provider: local
