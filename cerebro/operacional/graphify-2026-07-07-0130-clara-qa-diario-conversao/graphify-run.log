@@ -1,0 +1,4 @@
+Graphify RC-25 execution note:
+- Attempted: graphify . --no-viz
+- Result: CLI returned "unknown command '.'" in this runtime.
+- Fallback: sanitized RC-25 package preserved with README.md, raw/, extraction.json and graphify-out/GRAPH_REPORT.md.
