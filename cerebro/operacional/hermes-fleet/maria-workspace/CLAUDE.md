@@ -262,3 +262,27 @@ Governança: nenhum writeback automático no canônico; segredos/tokens proibido
 - **llm-council** (stress-test de decisão de alto impacto, NÃO executa): `python3 /root/.hermes/skills/council-llm/council_llm.py "<decisão>"`. Use antes de decisões irreversíveis/caras.
 - **conselho-growth** (matriz risco/retorno de hipótese de crescimento): `python3 /root/.hermes/skills/council-growth/council_growth.py "<hipótese>"`. Use pra priorizar ideias de growth.
 São DOIS conselhos distintos: o primeiro julga RISCO de uma decisão; o segundo prioriza POTENCIAL de uma ideia de crescimento.
+
+---
+
+## IVS LOOP FACTORY — estrutura obrigatória para processos iterativos
+
+Quando uma tarefa for recorrente, longa, multi-etapa, atravessar contexto, envolver melhoria contínua, watchdog, auditoria, recuperação de erro, criação de conteúdo, financeiro, pipeline, repo/skill ou handoff entre agentes, carregar/usar a skill `ivs-loop-factory`.
+
+Todo loop IVS deve operar com:
+
+```text
+state -> observe -> act -> evaluate -> decide -> improve or stop
+```
+
+Saída obrigatória de loops:
+
+```text
+status: DONE | DONE_WITH_CONCERNS | PARTIAL | BLOCKED | NEEDS_APPROVAL | DELEGATED
+stop_reason: success | plateau | blocked | budget_exhausted | human_gate | delegated
+real_evidence: paths/logs/messageId/http status/metric/transcript
+next_action: próxima ação concreta
+```
+
+Gates IVS continuam soberanos: não enviar mensagem externa, publicar, gastar dinheiro, escrever em Omie/QuarkClinic/financeiro/permissões, pausar Clara ou canonizar regra sem aprovação/gate aplicável.
+

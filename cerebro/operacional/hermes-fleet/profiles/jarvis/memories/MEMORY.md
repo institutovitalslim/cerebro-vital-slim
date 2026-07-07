@@ -10,7 +10,7 @@ Carro do Tiaro: GWM Haval H6 PHEV19, não PHEV34. Tem modos EV, HEV e PHEV, com 
 §
 Manuais oficiais disponíveis no profile Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt, com PDFs originais na pasta manuais/. Sempre consultar antes de responder sobre esses veículos.
 §
-Logos oficiais do IVS estão na pasta Google Drive “VITAL SLIM - ARQUIVOS - LOGO”: https://drive.google.com/drive/folders/1Tl4iRcyo0xwltKOekqad5dwEJKgi13EA. A logomarca correta confirmada por Tiaro é a padrão dourada “Instituto Vital Slim”, vetorial/sem fundo; usar essa referência, não arquivos parecidos locais.
+Logo IVS oficial: Drive “VITAL SLIM - ARQUIVOS - LOGO” (folder 1Tl4iRcyo0xwltKOekqad5dwEJKgi13EA); usar padrão dourado “Instituto Vital Slim” vetorial/sem fundo.
 §
 Para pesquisas/scrapers, Tiaro espera profundidade: usar VPS/cérebro/Scrapling/Playwright/Agent Reach/GBrain/gog, explorar acervo e acionar Maria em bloqueio. Não reabrir tarefa cancelada nem pedir dado já fornecido.
 §
@@ -19,3 +19,5 @@ Avatares de agentes IVS: premium humano/editorial, seguros para corte circular. 
 Tiaro espera que qualquer apresentação/arquivo visual seja validado antes do envio: abrir o final, checar imagens quebradas/layout e só então entregar.
 §
 Figurinhas Panini Copa faltantes da Clarinha: lista em /root/.hermes/profiles/jarvis/workspace/codigos_figurinhas_panini_copa_faltantes.txt
+§
+Site principal WordPress do IVS no HostGator/cPanel: /home2/medic614/institutovitalslim.com.br; plugins em wp-content/plugins.
