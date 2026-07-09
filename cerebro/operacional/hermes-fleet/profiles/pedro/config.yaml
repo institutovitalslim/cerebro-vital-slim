@@ -11,3 +11,6 @@ terminal:
   cwd: .
 telegram:
   require_mention: false
+onboarding:
+  seen:
+    busy_input_prompt: true

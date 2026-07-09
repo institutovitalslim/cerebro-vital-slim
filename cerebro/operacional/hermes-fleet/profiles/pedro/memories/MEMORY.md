@@ -30,10 +30,11 @@
 
 ## 3. Preferências e regras dadas pelo Tiaro
 
-**Regras de classificação contábil (conta Bradesco salvo indicado):**
+**Regras de classificação contábil:**
 - Entrada "RENTABINVEST FACILCRED" → categoria **Rendimentos de Aplicações**, favorecido **Bradesco**.
-- Saída "TARIFA" ou "TAR" → categoria **Tarifas Bancárias**, beneficiário **BRADESCO**.
-- Saída "ENCARGOS" → categoria **Juros sobre Empréstimos**, favorecido **Bradesco**.
+- Saída de recurso de **qualquer banco** cuja descrição contenha "TARIFA" → lançar como pagamento de **Tarifas Bancárias**, com o **próprio banco da conta de saída como beneficiário**.
+- Saída de recurso de **qualquer banco** cuja descrição contenha "JUROS" → lançar como pagamento de **Juros sobre Empréstimos**, com o **próprio banco da conta de saída como favorecido**.
+- Saída "ENCARGOS" na conta Bradesco → categoria **Juros sobre Empréstimos**, favorecido **Bradesco**.
 - Saída "GASTOS CARTÃO DE CRÉDITO" (cobrança de cartão) → **transferência interna** para conta **Cartão Bradesco - Elo** (não despesa).
 - Saída com descrição "TIARO FERNANDES NEVES" (**qualquer conta**) → categoria **Retirada de Sócio**.
 
