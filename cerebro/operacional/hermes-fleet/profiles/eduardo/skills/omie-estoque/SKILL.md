@@ -22,8 +22,10 @@ Treinamento completo do Pedro: `TREINAMENTO-PEDRO-OMIE-ESTOQUE.md`.
 1. Identificar o item/protocolo e seus sinônimos/códigos.
 2. Consultar controle interno atualizado quando existir.
 3. Consultar Omie read-only quando o pedido depender do saldo oficial.
-4. Se houver divergência controle interno × Omie, reportar como divergência; não inventar saldo.
-5. Separar: `tem em estoque físico`, `tem cadastro/saldo Omie`, `precisa contagem Liane`, `precisa compra/reposição`.
+4. Para implantes/pellets, buscar também variações de nome entre controle interno e Omie (ex.: `Pellet - NADH 200mg` no controle pode aparecer como `PEL0004 — PELLET - NAD 200 MG` no Omie).
+5. Se `ListarProdutos`/`ListarProdutosResumido` vier vazio, não concluir ausência: consultar `estoque/consulta ListarPosEstoque` com `cExibeTodos:"S"` e filtrar por descrição/código; depois, se achar o produto, confirmar posição com `estoque/resumo ObterEstoqueProduto` por `cCodigo` ou `nIdProduto`.
+6. Se houver divergência controle interno × Omie, reportar como divergência; não inventar saldo.
+7. Separar: `tem em estoque físico`, `tem cadastro/saldo Omie`, `precisa contagem Liane`, `precisa compra/reposição`.
 
 ## Tabelas de fornecedores e protocolos injetáveis
 
@@ -42,7 +44,10 @@ Quando o usuário perguntar valor de item/protocolo de farmácia de manipulaçã
 
 Na Victa, o `Guia Estético` pode trazer “Gordura Localizada”, “Auxiliar de Lipedema” e “Lipodistrofia” com código/composição, mas sem preço visível. O preço relacionado pode aparecer na `Tabela Guia Ortomolecular`/tabela de preços separada. Antes de responder que não há valor, procurar por códigos e termos em todos os PDFs/planilhas Victa arquivados.
 
-Referência rápida da sessão: `references/lipedema-victa-stin-estoque.md`.
+Referências rápidas:
+
+- Caso “gordura localizada” e tabela Stin/Victa: `references/lipedema-victa-stin-estoque.md`.
+- Caso implante/pellet NADH 200mg no controle interno vs NAD 200mg no Omie: `references/implantes-pellets-nadh-omie-controle.md`.
 
 ## Reporte recomendado
 
