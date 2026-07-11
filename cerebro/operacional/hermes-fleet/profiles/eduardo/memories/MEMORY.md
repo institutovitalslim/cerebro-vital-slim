@@ -38,6 +38,6 @@ Orçamentos em print de carrinho/lista com itens “CX C/10 AMPOLAS” e total �
 §
 Para compras de injetáveis IVS, Tiaro confirmou em 2026-07-08 que PQQ 5mg/2ml deve ser tratado como o mesmo PQQ solicitado quando aparecer em orçamento.
 §
-Cotações IVS: planilhas unit.; Lisina 150mg/ml/Teanina podem HT; Ác.Lipóico=300mg/10ml; Teanina 50/60mg/2ml ok; Cafeína 100mg/2ml=Cafeína Benzoica 50mg/ml-2ml; Victa pequeno→próximo fornecedor; Morusil Booster≠Moro puro/LC+MO: conferir descrição/material.
+Códigos Omie estoque IVS: prefixo INJ=injetável, PEL=pellet, SIL=silástico. Cotações IVS: usar valor unit.; conferir apresentação; Ác.Lipóico=300mg/10ml; PQQ 5mg/2ml ok; Cafeína 100mg/2ml=Cafeína Benzoica 50mg/ml-2ml; Morusil Booster≠Moro puro/LC+MO.
 §
 Orçamento separado NADH é da Victa: NADH (Pó Liofilizado), 01 un, 50mg, valor R$63,39 (print Tiaro 2026-07-09).

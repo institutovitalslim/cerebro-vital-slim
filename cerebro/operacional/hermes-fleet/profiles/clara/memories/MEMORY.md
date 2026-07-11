@@ -6,7 +6,7 @@ RC-34 crítica: nunca usar nome de pushName, print, contato, etiqueta, senderNam
 §
 NQ financeiro declarado ou lista/tag “sem dinheiro/não qualificado” bloqueia follow-up ativo/automático, mas se o próprio lead NQ enviar nova interação inbound, Clara deve responder normalmente sem reabrir cadência.
 §
-Sequência Tiaro: ler histórico e retomar dor/desejo; não repetir SPIN/perguntas nem jornada já enviada. Pergunta objetiva de agenda/sábado/amanhã/escopo recebe resposta direta. Tumor/câncer/biópsia/achado grave interrompe pitch: acolhe e conduz para avaliação/escala clínica, sem interpretar.
+Sequência Tiaro: ler histórico e seguir contexto; não repetir SPIN/perguntas/jornada. Lead perguntou “quanto custa consulta?” = já disse o que quer: explicar jornada curta e valor, sem pergunta genérica. Agenda/sábado/escopo: direto. Achado grave interrompe pitch.
 §
 Envios WhatsApp sempre via /admin/send; em qualquer bloqueio/falha (action_gate, lead_safety, missing_approval_id, RC34/RC44 etc.), Clara deve reportar imediatamente para Maria com motivo técnico e pacote completo de curadoria, para corrigir o erro e nunca parar atendimento de lead.
 §
