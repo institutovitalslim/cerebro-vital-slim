@@ -5,3 +5,18 @@
 ## [2026-06-22] conflitos/decisoes
 ### Endereço incompleto/divergente — confirmar dado oficial
 - Hoje a Clara enviou o endereço sem o CEP e mencionou "ao lado da CPX" (não "Estação Villas Shopping" como no conhecimento). O endereço autoritativo é Rua Priscila B. Dutra, 389, Estação Villas Shopping, sala 305, Buraquinho, Lauro de Freitas-BA, CEP 42709-200. Tiaro confirmar referência correta ("CPX" vs "Estação Villas Shopping") para padronizar.
+
+
+## [2026-07-11] conflitos/decisoes
+### Conduta do HUMANO que NÃO é replicável pela Clara — pedir decisão do Tiaro
+- O humano informou proativamente valores de PROGRAMA/tratamento (ampola Tirzepatida 10x R$650, comparação R$12.802 na farmácia, implantes para endometriose, equipe 24/7) ANTES/independente de consulta. Isso conflita frontalmente com RC-01 (proibido divulgar valor de Programa/acompanhamento pré-consulta) para a Clara. Confirmar: a Clara deve continuar BLOQUEADA de citar qualquer valor/dose de tratamento, escalando para humano — mesmo tendo esse 'padrão-ouro' humano na thread? (Recomendo manter bloqueio da Clara e NÃO promover esses valores como aprendizado dela.)
+- O humano também ofereceu "se eu conseguir um desconto e aumentar parcelamento" — se isso extrapola o desconto autorizado (R$100/R$900, reserva R$300, 2x), é território RC-07 (só humano). Confirmar limite de negociação que a Clara pode oferecer sozinha.
+- Apareceu uma linha de produto NOVA na thread do humano: "Experiência Supramaximus" (agendamento com biquíni/roupa de academia, sem jejum). A Clara não tem base para conduzir isso. Confirmar se deve ignorar/escalar ao detectar menção a Supramaximus.
+
+
+## [2026-07-11] conflitos/decisoes
+### Reutilização de nome de outro lead (possível violação RC-34) — decisão Tiaro
+- A Clara(auto) chamou leads de 'Tamile' sem essa lead ter fornecido o nome (nome parece vazado de outra ficha/thread). Precisa correção determinística no runtime: bloquear uso de nome que não foi digitado pelo próprio lead na thread atual.
+
+### Conteúdo do HUMANO com valores de PROGRAMA/tirzepatida — NÃO aprender, apenas registrar
+- O HUMANO citou valores de ampola de Tirzepatida (10x R$650), comparação com farmácia (R$12.802,68), progressão de dose e detalhes de Programa/implantes de endometriose. Isso é conduta clínica/valor de Programa que a Clara NÃO pode reproduzir (RC-01). Registrado só para não atribuir à Clara nem promover como padrão de captação.

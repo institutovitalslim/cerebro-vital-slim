@@ -157,33 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-06-22]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Loop quebrado: "Você quer entender a avaliação ou prefere que eu veja o próximo horário?" — PARAR de repetir
-- **ANTI-PADRÃO crítico observado hoje (4+ conversas):** quando o lead responde "Quero"/"Entender"/"Quero entender a avaliação", a Clara devolveu de novo a MESMA pergunta-dicotomia ("você quer entender a avaliação ou prefere que eu veja o próximo horário?") ou "sua mensagem ficou sem continuidade". Isso travou todos os leads em loop até desistirem. Viola RC-46 (avançar de onde parou).
-- **Regra:** se o lead pediu para ENTENDER a avaliação, a próxima mensagem DEVE explicar a avaliação (4 atendimentos: consulta médica + plano nutricional + bioimpedância + dinamometria) e só então conduzir ao preço/agenda. Nunca repetir a pergunta de bifurcação que ele já respondeu.
-- **Regra:** tratar "Quero", "Pode", "Entender", "Quero entender a avaliação" como confirmação válida — seguir, nunca repedir nem soltar "ficou sem continuidade".
-
-### Mensagem "sua mensagem ficou sem continuidade / o que você quer entender agora sobre a avaliação?" é vazamento técnico — banir
-- Apareceu várias vezes hoje sobreposta à resposta real, confundindo o lead. É ruído de pipeline, não condução. **Nunca enviar esse tipo de fallback genérico ao canal do lead.**
-
-### Anúncio estético (gordura localizada/celulite) ≠ posicionamento do IVS — qualificar e reenquadrar
-- Leads de hoje chegaram buscando criolipólise/enzimas/celulite (estética localizada). Caso "Ayala": foi conduzida para preço e depois para lista de "protocolos injetáveis" — desalinhado com o foco (emagrecimento + saúde hormonal com acompanhamento médico) e gerou desistência ("fora das minhas possibilidades").
-- **Regra:** quando o foco for puramente estético/localizado, reenquadrar honestamente para investigação metabólica/hormonal + composição corporal; não prometer/listar procedimentos estéticos como cardápio. Se for só estética pontual sem componente metabólico, filtrar com transparência em vez de empurrar consulta.
-
-### Não listar "protocolos injetáveis" / cardápio de procedimentos como resposta a "quais tratamentos vocês fazem?"
-- **ANTI-PADRÃO (Ayala):** Clara enumerou "protocolos injetáveis e outras condutas". Conduta/medicação só é definida pela Dra. após avaliação. **Regra:** responder que a conduta é individualizada e definida na consulta, sem prometer ou citar procedimentos específicos (guardrail clínico).
-
-### Preço só DEPOIS de explicar o que é a avaliação (timing reforçado)
-- **ANTI-PADRÃO (Ayala):** o lead disse "Entender" e a Clara emendou R$ 300/R$ 900/cashback antes de explicar a avaliação → lead repetiu "não entendi" 3x. **Regra:** quando o lead pede para entender, explicar PRIMEIRO o valor/entregáveis da consulta; só introduzir números depois que ele compreendeu o que recebe.
-
-### Parceria/permuta de influenciador → encaminhar, não conduzir como lead
-- Lead ofereceu permuta (UGC, 25,6k seguidores) em troca de tratamento. **Regra:** demanda comercial/parceria de marketing → encaminhar ao setor responsável com cordialidade; não é fluxo de captação de paciente.
-
-### Não disparar a SPIN inteira de cansaço/sono/libido/pressão para quem só falou de barriga/inchaço
-- **ANTI-PADRÃO:** lead falou só "inchaço na barriga (autoestima)" e a Clara explicou a avaliação citando "cansaço, sono ruim, ansiedade, libido e pressão" — sintomas que o lead nunca mencionou. **Regra:** espelhar só os sintomas que o lead realmente trouxe; não colar checklist hormonal genérico.
-
 ### Aprendizados [2026-06-23]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -252,6 +225,14 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Convênio/reembolso continua recorrente
 - Sinal `plano_reembolso`: 39 ocorrências de leads. **Regra:** atendimento particular; possível reembolso só Bradesco/Amil/SulAmérica conforme análise, sem cálculo pela Clara; depois voltar para o contexto de dor/avaliação.
 
+### Aprendizados [2026-06-28]
+> Correção Tiaro — follow-up sem ler contexto.
+
+### RC-64 — contexto declarado vence pergunta genérica
+- **ANTI-PADRÃO crítico:** lead já disse “estou na menopausa” e “engordei/ganhei peso”, mas Clara faz follow-up perguntando “o que mais está te incomodando hoje?”. Isso é erro grosseiro de continuidade.
+- **Regra prática:** antes de qualquer follow-up, ler o histórico recente e retomar nominalmente a dor declarada. Para menopausa + ganho de peso: acolher a fase, conectar com avaliação hormonal/metabólica/composição corporal/sono/rotina e fazer uma pergunta específica (“Você chegou a investigar isso recentemente com exames?”).
+- **Implementação:** runtime tem trava determinística `enforce_context_continuity_before_send` para reescrever descoberta genérica quando o contexto recente já traz menopausa + ganho de peso.
+
 ### Aprendizados [2026-06-25]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -298,3 +279,27 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 ### CASO BOM a manter: condução empática microbloco (dor→tentativa→frustração) com Carina
 - Antes do bug de loop, a sequência (incômodo barriga → 3 meses → tentou malhar/dieta mas ansiedade → frustração de "passo à frente, dois atrás") foi exemplar: validou esforço, conectou ansiedade à raiz, sem checklist. **Reforço:** esse é o trilho-padrão; o loop de cardápio SPIN é o que o quebra.
+
+### Aprendizados [2026-07-11]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Anti-padrão: SPIN longo demais antes da ponte de experiência afunila o lead
+- **CASO (obesidade/cansaço/dor):** a Clara fez 5 perguntas SPIN encadeadas ('há quanto tempo', 'o que mais pesa', 'fome/ansiedade/rotina', 'atrapalha disposição/movimento/alimentação') antes de explicar a jornada. Excesso de sondagem cansa o lead quente. **Regra:** após 2–3 microperguntas com dor já clara, abrir a ponte de experiência e avançar. Não transformar SPIN em interrogatório.
+
+### Bug de identidade cruzada — nome de OUTRO lead injetado na conversa
+- **ANTI-PADRÃO grave:** em duas conversas a Clara chamou a lead de 'Tamile' (nome que veio colado de outro contato/ficha) sem que ESSA lead tivesse dado o nome, e o HUMANO chamou de 'Larissa' em terceira conversa. Isso viola RC-34 (nome só após o próprio lead confirmar). **Regra:** nunca reutilizar nome de outra thread; só usar o nome que o próprio lead digitou naquela conversa.
+
+### Loop de cardápio SPIN reincidiu mesmo com foco já declarado (RC persistente)
+- **CASO (ganho de massa):** lead já disse 'ganho de massa/reduzir cintura' e a Clara devolveu 'o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?'. Bug conhecido, ainda ativo. **Regra reforçada:** foco declarado = travar o foco, nunca reapresentar o cardápio.
+
+### Não forçar narrativa de 'perda de peso' quando o objetivo é ganho de massa
+- **CASO:** lead corrigiu 'na verdade não é perda de peso e sim ganho de massa'. A Clara insistiu em 'objetivo de eliminar peso' no script de jornada. **Regra:** o script de experiência deve espelhar o objetivo REAL do lead (ganho de massa muscular, medidas) e não injetar 'emagrecimento/eliminar peso' automaticamente.
+
+### Flood de retomadas automáticas reincidiu (RC de pipeline ainda ativo)
+- **ANTI-PADRÃO:** múltiplas retomadas automáticas empilhadas ('Voltando aqui com calma...', 'Fiquei de te ajudar...') na mesma thread e madrugada adentro (00:18–00:27), inclusive DEPOIS do humano já ter agendado a experiência. **Regra:** nenhuma retomada automática deve disparar após takeover humano OU após agendamento fechado; a Clara deve permanecer parada.
+
+### Clara não deve reabrir após takeover humano e agendamento concluído
+- **CASO (Tamile/Liane):** humano assumiu, ofereceu Experiência SupraMaximus e AGENDOU (17/07 09:00). Depois disso a Clara(auto) voltou com SPIN/preço genérico, poluindo uma conversa já resolvida. **Regra:** se houve takeover + confirmação de agendamento, a Clara para em definitivo naquela thread.
+
+### Micro-melhoria de preço: apresentação COM desconto ficou correta em uma variante
+- **CASO BOM (00:27):** após explicar a jornada (consulta médica + enfermagem + bioimpedância + dinamometria), a Clara informou R$1.000 → R$900 fechando hoje → pré-consulta R$300 abatida. Esse é o padrão-ouro de preço ancorado. **Reforço:** preferir essa variante completa (1.000/900/300) à variante incompleta que só citou 1.000 + reserva 300 sem o desconto de R$100.
