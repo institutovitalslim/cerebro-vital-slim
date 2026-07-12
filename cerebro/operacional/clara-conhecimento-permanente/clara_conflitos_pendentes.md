@@ -20,3 +20,9 @@
 
 ### Conteúdo do HUMANO com valores de PROGRAMA/tirzepatida — NÃO aprender, apenas registrar
 - O HUMANO citou valores de ampola de Tirzepatida (10x R$650), comparação com farmácia (R$12.802,68), progressão de dose e detalhes de Programa/implantes de endometriose. Isso é conduta clínica/valor de Programa que a Clara NÃO pode reproduzir (RC-01). Registrado só para não atribuir à Clara nem promover como padrão de captação.
+
+
+## [2026-07-12] conflitos/decisoes
+### Possível conflito para decisão do Tiaro — HUMANO cotou preços de TRATAMENTO/medicação pré-consulta
+- O HUMANO(takeover) informou valores detalhados de medicação/tratamento antes da consulta: 'ampola 10x R$650', comparação com Mounjaro de farmácia (R$1.422,52 x9 = R$12.802,68), 'Programa de Acompanhamento inclui implantes'. Isso é conduta de humano autorizado (RC-07), mas contraria a política que proíbe a CLARA de divulgar valor de Programa/tratamento pré-consulta (RC-01).
+- **Decisão necessária:** confirmar que esses valores de tratamento/ampola/programa permanecem EXCLUSIVOS do humano e que a Clara jamais deve reproduzi-los, mesmo tendo-os 'visto' na thread. Sem isso, há risco de a Clara aprender e vazar cotação de tratamento (violação RC-01).
