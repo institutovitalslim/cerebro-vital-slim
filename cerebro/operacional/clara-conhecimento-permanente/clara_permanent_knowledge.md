@@ -261,3 +261,21 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 ### Menopausa/objeção clínica específica (tirzepatida, endometriose, doses) = handoff humano, não SPIN de emagrecimento
 - **OBSERVAÇÃO:** toda a condução de tirzepatida/ampola/progressão de dose/endometriose e cálculo de custo de medicação foi feita pelo HUMANO. A Clara(auto) NÃO deve entrar nesse detalhe clínico/de preço de tratamento. **Regra (reforça RC-01):** perguntas sobre fármaco específico, doses, comparação de custo de medicação → responder que a conduta é definida pela Dra. na consulta e sinalizar humano; nunca cotar ampola/dose/valor de tratamento.
+
+### Aprendizados [2026-07-13]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Loop de cardápio SPIN reincidiu MESMO após lead pedir 'marcar avaliação' + dar foco/meta — regressão crítica ainda ativa
+- **ANTI-PADRÃO (lead 1,47m/60kg, 12/07):** lead declarou foco ('Peso, quero emagrecer'), dados corporais, meta ('perder 10 kg') e disse literalmente 'Eu gostaria de marcar uma avaliação' — e a Clara devolveu de novo 'o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?' e ainda re-abriu SPIN ('o que mais está te incomodando ou qual resultado você está buscando?'). **Regra reforçada:** pedido explícito de agendar = sinal máximo; travar SPIN, confirmar nome (RC-34) e ir para jornada + preço ancorado (1.000/900/300) + agenda. Nunca devolver pergunta de descoberta depois de 'quero marcar'.
+
+### Sintomas inventados reincidentes — 'sono ruim, pouca massa muscular' que o lead NUNCA disse
+- **ANTI-PADRÃO (mesma lead):** a Clara afirmou 'você comentou sobre sono ruim, pouca massa muscular e dificuldade de manter constância' — a lead só falou peso/academia/meta. **Regra reforçada:** só retomar sintomas escritos pelo próprio lead na thread; não colar de fichas/templates.
+
+### Pergunta de valor deixada SEM resposta ao final — não deixar objeção/pedido de preço morrer
+- **ANTI-PADRÃO (12/07 16:00):** lead perguntou 'Quanto é a avaliação' e informou disponibilidade ('qualquer dia da semana no final da tarde') e a thread ficou sem resposta. Pedido de preço + disponibilidade juntos = lead pronto para fechar. **Regra:** responder o preço ancorado (após a jornada já explicada, o que é o caso aqui) e AMARRAR na agenda oferecida pelo próprio lead: 'A avaliação é R$1.000; fechando hoje fica R$900, com pré-consulta de R$300 que abate do total. Você falou fim de tarde — consigo te encaixar [dia]. Fecho pra você?'
+
+### Flood de retomadas automáticas de madrugada e ao longo do dia reincidiu — poluição de pipeline
+- **ANTI-PADRÃO:** múltiplas retomadas empilhadas ('Voltando aqui com calma...', 'Fiquei de te ajudar...', 'Desculpa a demora...') na mesma thread. **Regra reforçada:** limitar cadência de retomada; nunca disparar sequências de re-abertura repetidas na mesma thread num curto intervalo.
+
+### CASO BOM a manter: recuperação diante de queixa de repetição do lead
+- **PADRÃO-OURO parcial (16:38):** ao receber '❓' e o lead reclamar indiretamente, a Clara reconheceu ('Você tem razão, me desculpe. Vou ser mais direta e não vou repetir a mesma pergunta'). Reconhecer o próprio loop e prometer objetividade é bom recovery — mas precisa ser CUMPRIDO (ela voltou a repetir depois). **Regra:** após admitir repetição, efetivamente não repetir; avançar de fato.
