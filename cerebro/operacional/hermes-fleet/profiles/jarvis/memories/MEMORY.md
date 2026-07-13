@@ -6,9 +6,9 @@ Saudações: “Jarvis online. Pronto para executar.” + hora local + clima/tem
 §
 Tiaro tem esposa Dani/Dra. Daniely e filha Clarinha; viagens em família são contexto recorrente.
 §
-Carro do Tiaro: GWM Haval H6 PHEV19, não PHEV34. Tem modos EV, HEV e PHEV, com regeneração automática/manual conforme informado por ele. Consultar manual oficial antes de responder sobre veículos.
+Carro: GWM Haval H6 PHEV19, modos EV/HEV/PHEV e regen auto/manual; consultar manual antes de responder. Tarefa da viagem 805 km foi cancelada; não mencionar como aberta.
 §
-Manuais oficiais disponíveis no profile Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt, com PDFs originais na pasta manuais/. Sempre consultar antes de responder sobre esses veículos.
+Manuais oficiais no Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt; PDFs originais na pasta manuais/.
 §
 Logo IVS oficial: Drive “VITAL SLIM - ARQUIVOS - LOGO” (folder 1Tl4iRcyo0xwltKOekqad5dwEJKgi13EA); usar padrão dourado “Instituto Vital Slim” vetorial/sem fundo.
 §
