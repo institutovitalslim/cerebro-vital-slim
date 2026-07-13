@@ -197,10 +197,18 @@ def main():
         result.update({'status': 'failed', 'error': str(e)})
 
     result['finished_at'] = iso(utcnow())
-    out = LOG_DIR / f"snapshot-{utcnow().strftime('%Y%m%d-%H%M%SZ')}.json"
-    out.write_text(json.dumps(result, ensure_ascii=False, indent=2))
-    latest = LOG_DIR / 'latest.json'
-    latest.write_text(json.dumps(result, ensure_ascii=False, indent=2))
+    prefix = 'validate' if args.validate_only else 'snapshot'
+    out = LOG_DIR / f"{prefix}-{utcnow().strftime('%Y%m%d-%H%M%SZ')}.json"
+    payload = json.dumps(result, ensure_ascii=False, indent=2)
+    out.write_text(payload)
+
+    # latest.json deve continuar sendo prova do último snapshot CRIADO.
+    # Validações manuais/read-only usam latest-validate.json para não apagar
+    # evidência de criação que Tiaro/Maria precisam auditar depois.
+    latest_name = 'latest-validate.json' if args.validate_only else 'latest.json'
+    latest = LOG_DIR / latest_name
+    latest.write_text(payload)
+
     print(json.dumps({
         'status': result['status'],
         'mode': result['mode'],
@@ -208,6 +216,7 @@ def main():
         'snapshot_created_at': result.get('snapshot', {}).get('created_at'),
         'snapshot_expires_at': result.get('snapshot', {}).get('expires_at'),
         'log': str(out),
+        'latest': str(latest),
         'failed_checks': [c for c in result.get('checks', []) if not c.get('ok')],
     }, ensure_ascii=False, indent=2))
     sys.exit(0 if result['status'] == 'success' else 1)
