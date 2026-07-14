@@ -12,7 +12,7 @@ Manuais oficiais no Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt;
 §
 Logo IVS oficial: Drive “VITAL SLIM - ARQUIVOS - LOGO” (folder 1Tl4iRcyo0xwltKOekqad5dwEJKgi13EA); usar padrão dourado “Instituto Vital Slim” vetorial/sem fundo.
 §
-Pesquisas/scrapers: Tiaro espera profundidade com VPS/cérebro/Scrapling/Playwright/Agent Reach/GBrain/gog; não pedir dado já fornecido.
+Research: usar VPS/cérebro/Scrapling/Playwright/Agent Reach/GBrain/gog; não pedir dado já fornecido.
 §
 Avatares de agentes IVS: premium humano/editorial, seguros para corte circular. Ana aprovada: loira elegante, olhos claros, sorriso acolhedor, estética médica/científica premium.
 §
@@ -24,6 +24,8 @@ Site principal WordPress do IVS no HostGator/cPanel: /home2/medic614/institutovi
 §
 Google Business Profile IVS: acesso pela conta institutovitalslim@gmail.com com sessão já ligada na VPS; usar antes de pedir novo login.
 §
-Posts Facebook/Instagram IVS: solicitar ao João para inserir no Content OS e obter aprovação do Tiaro antes de publicar; Jarvis não publica direto nesses canais.
+Posts FB/IG IVS: acionar João/Content OS e obter aprovação; Jarvis não publica direto.
 §
 Chrome remoto/noVNC: Tiaro pode não conseguir abrir IP direto; preferir link trycloudflare quando disponível.
+§
+Repos salvos: Vibe-Trading=HKUDS/Vibe-Trading (trading agent, nota repo_notes/HKUDS_Vibe-Trading_analise.md). Carrossel DaYAGDDgZgE=CodeGraph/OpenWiki/future-agi/skills/marketing/Whisper/Caveman; skill ivs-agent-superpowers-repo-pack.
