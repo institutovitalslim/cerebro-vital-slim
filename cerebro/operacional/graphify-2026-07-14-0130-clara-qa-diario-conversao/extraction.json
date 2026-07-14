@@ -1,0 +1,47 @@
+{
+  "rc": "RC-25",
+  "date": "2026-07-14T01:30:00Z",
+  "agent": "maria-gerente",
+  "sources": [
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json"
+  ],
+  "counters": {
+    "current": {
+      "total_messages": 0,
+      "unique_leads": 0,
+      "total_inbound": 0,
+      "total_outbound": 0,
+      "wins": 0,
+      "drops": 0
+    },
+    "historical": {
+      "total_messages": 6187,
+      "unique_leads": 443,
+      "total_inbound": 3275,
+      "total_outbound": 2912,
+      "wins": 30,
+      "drops": 5
+    },
+    "win_rate_per_unique_lead": 6.772,
+    "drop_rate_per_unique_lead": 1.1287
+  },
+  "signals": {
+    "scheduling": "current zero; historical wins from objective confirmation CTA",
+    "objection": "historical drops tied to premature explanation/exam request",
+    "silence": "current zero messages; no recent abandonment evidence"
+  },
+  "improvements": [
+    "confirmation CTA with short choices",
+    "direct schedule offer for hot leads",
+    "origin segmentation inbound vs treino/personal"
+  ],
+  "risk": {
+    "operational": "low",
+    "conversion": "medium hypothesis",
+    "human_intervention": "light operational review only",
+    "pause_clara": "not indicated; explicit Tiaro order required"
+  },
+  "classification": "testar 3 dias",
+  "pii": "sanitized/no phones/no sensitive conversations"
+}

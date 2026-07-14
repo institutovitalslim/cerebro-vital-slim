@@ -1,0 +1,111 @@
+{
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent"
+    },
+    {
+      "id": "qa_diario",
+      "label": "QA diário de conversão/agendamento",
+      "type": "process"
+    },
+    {
+      "id": "current",
+      "label": "Janela current sem mensagens",
+      "type": "evidence"
+    },
+    {
+      "id": "historical",
+      "label": "Histórico WhatsApp 180 dias",
+      "type": "evidence"
+    },
+    {
+      "id": "cta_confirmacao",
+      "label": "CTA padronizado de confirmação",
+      "type": "learning"
+    },
+    {
+      "id": "lead_quente_objetivo",
+      "label": "Objetividade em leads quentes",
+      "type": "learning"
+    },
+    {
+      "id": "risco_explicacao_precoce",
+      "label": "Risco da explicação precoce",
+      "type": "risk"
+    },
+    {
+      "id": "segmentacao_origem",
+      "label": "Segmentação por origem inbound vs treino/personal",
+      "type": "learning"
+    },
+    {
+      "id": "guardrails_clinicos",
+      "label": "Guardrails clínicos",
+      "type": "constraint"
+    },
+    {
+      "id": "teste_3_dias",
+      "label": "Classificação: testar 3 dias",
+      "type": "decision"
+    }
+  ],
+  "edges": [
+    {
+      "source": "clara",
+      "target": "qa_diario",
+      "relationship": "audited_by"
+    },
+    {
+      "source": "qa_diario",
+      "target": "current",
+      "relationship": "uses_evidence"
+    },
+    {
+      "source": "qa_diario",
+      "target": "historical",
+      "relationship": "uses_evidence"
+    },
+    {
+      "source": "historical",
+      "target": "cta_confirmacao",
+      "relationship": "supports"
+    },
+    {
+      "source": "historical",
+      "target": "lead_quente_objetivo",
+      "relationship": "supports"
+    },
+    {
+      "source": "historical",
+      "target": "risco_explicacao_precoce",
+      "relationship": "shows_risk"
+    },
+    {
+      "source": "historical",
+      "target": "segmentacao_origem",
+      "relationship": "supports"
+    },
+    {
+      "source": "cta_confirmacao",
+      "target": "guardrails_clinicos",
+      "relationship": "must_respect"
+    },
+    {
+      "source": "lead_quente_objetivo",
+      "target": "guardrails_clinicos",
+      "relationship": "must_respect"
+    },
+    {
+      "source": "segmentacao_origem",
+      "target": "teste_3_dias",
+      "relationship": "classified_as"
+    }
+  ],
+  "meta": {
+    "tool": "graphify-rc25-deterministic",
+    "pii": "sanitized",
+    "source": "clara-learning reports"
+  }
+}
