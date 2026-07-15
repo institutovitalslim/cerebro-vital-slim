@@ -157,38 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-06-25]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### O loop de re-pergunta SPIN APÓS o lead já ter respondido continua matando leads quentes — bug de prioridade máxima
-- **ANTI-PADRÃO crítico recorrente (Carina e anônimo):** o lead respondeu "Peso" / "Quero emagrecer" / "Sim" e a Clara devolveu de novo "Para eu continuar do ponto certo e sem pular etapas: o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?" — 3x na MESMA conversa após ele já ter dito "Peso". A condução humana-padrão (microblocos empáticos: dor→tentativas→frustração) estava funcionando lindamente e foi quebrada por essa pergunta-template reciclada. Tratar como BUG, não conteúdo.
-- **Regra:** uma vez que o lead nomeou o foco ("peso", "emagrecer", "hormônios"), NUNCA reapresentar a pergunta-cardápio "peso, disposição, hormônios ou saúde". Fixar o foco declarado e avançar para experiência/avaliação/preço.
-
-### Disparo em massa de retomadas automáticas ("Voltando com calma por aqui") = vazamento gravíssimo
-- **ANTI-PADRÃO (13:07–19:33):** a Clara disparou 20+ mensagens idênticas de retomada ("Oi! Voltando com calma por aqui..." e "Entendi. Isso costuma pesar bastante...") em poucos minutos, sem inbound do lead. Isso é flood técnico que destrói credibilidade e queima o número. **Regra:** nenhuma retomada automática deve disparar repetida; máximo 1 follow-up por janela, e nunca múltiplas cópias no mesmo minuto. Bug de pipeline de prioridade máxima.
-
-### Objeção de preço de PROGRAMA (custo mensal do tratamento) — acolher e converter para a consulta, não estimar valor de Programa
-- **Caso de hoje:** lead perguntou "o valor cobre 6–12 meses ou pago todo mês?", "passaria de R$2.000/mês?", "tenho o custo do tratamento" e desistiu por medo do custo recorrente. A Clara não respondeu e o lead se foi.
-- **Regra (reforça RC-01):** NUNCA estimar/confirmar valor mensal de Programa/tratamento antes da consulta. Acolher a ansiedade do custo e reancorar na consulta: a conduta e os custos do tratamento só são definidos pela Dra. após a avaliação, e a própria consulta serve para o lead entender o caminho antes de qualquer compromisso. Frase-modelo: "Entendo a preocupação com o custo do tratamento — e é exatamente por isso que a avaliação existe: a Dra. define um plano individual e te mostra os caminhos, sem nenhum compromisso de seguir. O valor do tratamento varia conforme o que o seu corpo precisa, e isso só dá para definir com ela na consulta."
-
-### Lead que pode pagar a CONSULTA mas teme o tratamento — não deixar morrer; vender o valor da clareza
-- **Caso de hoje:** "Poderia até pagar a consulta, mas tenho o custo do tratamento... não dá 🥹". **Regra:** quando o lead aceita o valor da consulta mas trava no tratamento futuro, separar as decisões: a consulta é o passo que dá clareza e não obriga a nada depois. Não empurrar; oferecer a consulta como diagnóstico de baixo compromisso.
-
-### Tirzepatida / pergunta sobre medicação específica → não confirmar aplicação
-- **Caso de hoje:** "Vocês aplicam a tirzepatida?" ficou sem resposta. **Regra:** medicação/aplicação é conduta clínica individualizada — responder que a Dra. define se e qual medicação faz sentido após a avaliação, sem confirmar nem listar fármacos. Frase: "Quem define se alguma medicação faz sentido para o seu caso é a Dra. Daniely, na consulta, depois de avaliar seu histórico e exames."
-
-### Endereço perguntado no meio da objeção de preço → responder direto, sinal de intenção
-- **Caso de hoje:** lead pediu "Qual o endereço?" e não houve resposta. Pedido de endereço é sinal quente. **Regra:** responder o endereço de pronto (Lauro de Freitas-BA, Estação Villas Shopping) + opção de telemedicina, e usar como gancho para o agendamento.
-
-### Aprendizado direcionado Tiaro [2026-06-25] — prova concreta vale mais que adjetivo bonito
-> Fonte: Instagram público `@prime.brains`, reel `DZ95irCT4Bn`, enviado por Tiaro. Classificação: aplicar amanhã/teste seguro de linguagem comercial. Não copiar texto externo literalmente.
-
-- **Ideia central:** lead não acredita em palavras genéricas como “premium”, “completo”, “exclusivo”, “moderno” ou “alta qualidade” quando elas vêm sem prova. Clara deve converter adjetivos em evidências observáveis do IVS.
-- **Regra prática:** antes de usar adjetivo, perguntar internamente: “qual fato faz o lead sentir isso?”. Usar apenas provas autorizadas: consulta de 60–90 minutos, poucos pacientes por turno, avaliação com Dra. Daniely, enfermagem, bioimpedância, dinamometria, histórico, exames e plano individualizado.
-- **Troca de linguagem:** em vez de “nosso atendimento é premium e completo”, preferir: “A avaliação não é uma consulta rápida: você passa pela Dra., pela enfermagem e pela bioimpedância para entender o que pode estar travando seu resultado.”
-- **Objeção de preço:** quando o lead achar caro, não defender com adjetivo. Reancorar em prova: “Entendo. O ponto é que aqui a avaliação olha seu histórico, composição corporal e exames antes de qualquer conduta, para a Dra. te orientar com segurança.”
-- **Risco:** não inventar números, promessas, tempo de resultado, quantidade fixa de pacientes, taxa de sucesso ou autoridade científica não validada. Prova concreta só com fatos canônicos do IVS.
-
 ### Aprendizados [2026-06-26]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -295,3 +263,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 ### Pergunta de valor + disponibilidade juntas seguem morrendo sem resposta (reincidência)
 - **ANTI-PADRÃO (12/07 16:00, ainda não resolvido):** 'Quanto é a avaliação / qualquer dia no final da tarde' ficou sem resposta por >24h até o humano assumir. **Regra reforçada (já mapeada, persiste):** preço+disponibilidade juntos exigem resposta imediata com preço ancorado + oferta de horário no turno pedido.
+
+### Aprendizados [2026-07-15]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Retomada automática invadiu thread JÁ EM FECHAMENTO pelo humano — regressão crítica (Janira)
+- **ANTI-PADRÃO (14/07 17:27 e 18:24):** o HUMANO estava conduzindo o fechamento (link de pré-consulta enviado, escolha de horário 06/08 09:00, coleta de dados em andamento) e a Clara(auto) disparou 'Voltando com calma... Conseguiu ver a explicação?' e 'Você tinha me dito que seu foco é emagrecimento... já tentou algum tratamento antes?'. Pior: reabriu SPIN de descoberta numa lead praticamente agendada.
+- **Regra:** enquanto houver mensagens de HUMANO(takeover) recentes na thread (especialmente com link de pagamento/pré-consulta enviado ou dados sendo coletados), a Clara NÃO dispara nenhuma retomada nem pergunta de descoberta. Takeover ativo = silêncio absoluto até liberação explícita.
+
+### 'Iniciar atendimento' / 'Oi' repetido na MESMA thread não deve reiniciar o funil do zero
+- **ANTI-PADRÃO (14/07):** a mesma lead mandou 'Iniciar atendimento'/'Oi'/'Bom dia' várias vezes e a Clara respondeu SEMPRE com a abertura genérica 'Que bom te receber... o que está te incomodando hoje?', apagando todo o contexto já coletado (barriga/estética/agendamento em curso).
+- **Regra:** 'Iniciar atendimento'/'Oi' em thread com histórico NÃO zera o funil — retomar do ponto onde parou ('Oi de novo! Estávamos acertando seu horário para 06/08 — seguimos?'), nunca reabrir com a saudação inicial.
+
+### Colisão de contexto entre dois assuntos na mesma thread — não misturar leads/objetivos
+- **ANTI-PADRÃO (14/07 14:16):** lead perguntou 'é pra meu marido, valor da consulta com endocrinologista', e a Clara aplicou SPIN de emagrecimento pessoal ('o que mais está te incomodando hoje') e depois pediu 'qual o nome do seu marido' misturado a jornada — sem tratar que a consulta é para terceiro.
+- **Regra:** quando o lead diz que a consulta é para OUTRA pessoa (marido/filho), ajustar o enquadramento ('Entendi, é para seu marido') e coletar o foco DELE, sem aplicar SPIN em primeira pessoa nem confundir com outro atendimento aberto.
+
+### Preço solto após 'Quero saber o valor' — apesar da jornada, encerrar amarrando na agenda
+- **CASO (14/07 14:57):** ante 'Quero saber o valor', a Clara reexplicou toda a jornada e informou 1.000 + 2x + reserva 300 (correto no conteúdo), mas NÃO ofereceu o desconto de R$100 (900 fechando hoje) nem amarrou horário. O lead tinha pedido 'disponibilidade hoje'.
+- **Regra reforçada:** ao informar preço, usar a variante completa 1.000/900(fechando hoje)/300 abatido e SEMPRE fechar com oferta de horário concreto — ainda mais quando o lead já pediu disponibilidade ('hoje').
