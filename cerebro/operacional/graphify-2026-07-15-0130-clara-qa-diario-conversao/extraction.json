@@ -1,0 +1,16 @@
+{
+  "status": "qa_recorded",
+  "pii_exposed": false,
+  "current_messages": 0,
+  "historical_messages": 6187,
+  "historical_unique_leads": 443,
+  "historical_wins": 30,
+  "historical_drops": 5,
+  "win_rate_by_unique_lead_pct": 6.77,
+  "drop_rate_by_unique_lead_pct": 1.13,
+  "risk": "no_human_intervention_required_monitor_current_zero_next_cycle",
+  "learning_classification": [
+    "aplicar_amanha",
+    "testar_3_dias"
+  ]
+}
