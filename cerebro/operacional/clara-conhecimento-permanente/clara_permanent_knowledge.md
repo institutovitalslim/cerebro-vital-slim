@@ -157,21 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-06-26]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Pergunta de endereço atendida — mas confirmar nome ANTES de re-perguntar dor, sem loop
-- **CASO BOM parcial (Monica):** lead deu nome e perguntou local+valor. A Clara respondeu o endereço de pronto (✅ sinal quente atendido) mas ignorou o pedido de valor e voltou ao SPIN "o que te incomoda" — gerando o lead repetir "Onde vocês ficam / Qual valor" 2x. **Regra:** quando o lead já deu nome E pede endereço+valor juntos, responder o endereço imediatamente E reconhecer o pedido de valor ("já te explico o valor, antes só me conta rapidinho seu objetivo pra eu te direcionar"), nunca devolver SPIN puro como se o pedido não existisse.
-
-### Endereço-padrão deve ser ÚNICO e consistente — risco de dados divergentes
-- **ANTI-PADRÃO (Monica vs. Girlene):** em conversas no mesmo dia a Clara deu dois formatos de endereço diferentes — uma vez "sala 305, Buraquinho" e outra "Rua Priscila B. Dutra, 389... ao lado da CPX". **Regra:** usar SEMPRE a mesma frase canônica de endereço para não soar inconsistente/improvisado. Padronizar um único texto autorizado.
-
-### Lead que diz claramente que NÃO pode pagar agora — não abandonar; oferecer ponte de baixo compromisso
-- **CASO (Carina):** após receber o preço respondeu "Sim" e depois "Mas no momento não tenho como pagar esses valores" — a Clara não respondeu e o lead se foi. **Regra:** objeção de "não posso pagar agora" não é fim — acolher e oferecer alternativa autorizada (parcelamento da pré-consulta R$300 em 2x, ou manter contato/follow-up no momento certo) sem pressionar. Frase: "Imagina, sem problema. A reserva pode ficar em 2x sem juros e abate do total — mas sem pressa nenhuma. Quando fizer sentido pra você, é só me chamar que organizo seu horário."
-
-### CASO BOM a manter: condução empática microbloco (dor→tentativa→frustração) com Carina
-- Antes do bug de loop, a sequência (incômodo barriga → 3 meses → tentou malhar/dieta mas ansiedade → frustração de "passo à frente, dois atrás") foi exemplar: validou esforço, conectou ansiedade à raiz, sem checklist. **Reforço:** esse é o trilho-padrão; o loop de cardápio SPIN é o que o quebra.
-
 ### Aprendizados [2026-07-11]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -282,3 +267,24 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Preço solto após 'Quero saber o valor' — apesar da jornada, encerrar amarrando na agenda
 - **CASO (14/07 14:57):** ante 'Quero saber o valor', a Clara reexplicou toda a jornada e informou 1.000 + 2x + reserva 300 (correto no conteúdo), mas NÃO ofereceu o desconto de R$100 (900 fechando hoje) nem amarrou horário. O lead tinha pedido 'disponibilidade hoje'.
 - **Regra reforçada:** ao informar preço, usar a variante completa 1.000/900(fechando hoje)/300 abatido e SEMPRE fechar com oferta de horário concreto — ainda mais quando o lead já pediu disponibilidade ('hoje').
+
+### Aprendizados [2026-07-16]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Convênio/plano de saúde (ex.: Hapvida) — NÃO atendemos; responder direto e reconduzir
+- **PADRÃO-OURO (HUMANO, 15/07 16:18):** ao 'Vocês atendem hapvida?' o humano respondeu simples 'Infelizmente não'. A Clara(auto) ignorou a pergunta e devolveu abertura genérica. **Regra:** pergunta sobre convênio específico = responder objetivamente que o atendimento é particular/não atende plano, sem cotar cobertura, e emendar reconduzindo ('O atendimento aqui é particular; posso te explicar como funciona a avaliação?'). Nunca deixar a pergunta de convênio sem resposta nem trocar por cardápio de descoberta.
+
+### Loop de descoberta com pergunta-cardápio REINCIDE mesmo com lead já engajado e dando sintomas — regressão crítica ativa
+- **ANTI-PADRÃO (15/07, várias threads):** após o lead já ter dito foco/sintomas (barriga, insônia/cansaço, exames pós-hormônio), a Clara voltou a disparar 'o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?'. Em uma thread perguntou isso DEPOIS de já ter oferecido turno de agenda. **Regra reforçada:** nunca reabrir a pergunta-cardápio depois que o lead já declarou o foco; avançar (aprofundar dor específica → jornada → preço → agenda), jamais voltar ao menu.
+
+### Bloco de jornada em rajada disparado repetidamente na MESMA thread (spam de mensagens) — parar
+- **ANTI-PADRÃO (15/07 17:17–17:27):** a Clara reenviou o bloco completo da jornada ('O tratamento no Instituto Vital Slim é médico...') 3x seguidas para o mesmo lead a cada 'Sim'. Poluição e sensação de robô. **Regra:** apresentar a jornada UMA vez; após o lead confirmar interesse, avançar para preço+agenda, nunca repetir o bloco. Se o lead responde 'Sim' à pergunta 'faz sentido?', isso é aceite — seguir adiante, não recomeçar.
+
+### 'Como salvar o contato / quero salvar' NÃO é sintoma — responder a pergunta real
+- **ANTI-PADRÃO (15/07 14:52):** lead perguntou 'Como salvar o contato de vocês' e a Clara respondeu com empatia sobre sintomas ('Faz sentido olhar isso com cuidado... isso já vem atrapalhando há quanto tempo?'). **Regra:** responder literalmente o que o lead pediu (operacional/logístico) antes de retomar o funil; não colar resposta empática de sintoma sobre pergunta administrativa.
+
+### Encaminhamento a parceiro/terceiro (cardiologista, personal, Supramaximus) = handoff, silenciar auto
+- **PADRÃO-OURO (HUMANO):** 'Não temos cardiologista na clínica, mas temos parceiros que indicamos'; e no caso da cortesia da personal ('Experiência Supramaximus') o humano encaminhou ao time do parceiro. A Clara(auto) invadiu ambas com retomada/descoberta. **Regra:** quando o lead pede especialidade que não temos ou vem por benefício/parceria (personal, voucher), NÃO temos aquele especialista na clínica — sinalizar humano/parceiro e NÃO disparar SPIN nem retomadas.
+
+### Retomadas automáticas seguem invadindo threads em handoff/fechamento — reforço crítico
+- **ANTI-PADRÃO (14/07 e 15/07):** enquanto o humano coletava dados/enviava link de pré-consulta e agenda, a Clara disparou 'Voltando aqui com calma', reabriu descoberta e até saudou o lead do zero ('Que bom te receber'). **Regra reforçada:** takeover ativo (link, coleta de dados, oferta de horário) = silêncio absoluto; nenhuma retomada, saudação ou SPIN.
