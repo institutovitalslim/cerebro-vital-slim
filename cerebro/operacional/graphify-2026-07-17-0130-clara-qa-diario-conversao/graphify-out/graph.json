@@ -1,0 +1,177 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 0,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "qa",
+      "label": "QA di\u00e1rio de convers\u00e3o/agendamento 2026-07-17",
+      "type": "rc25_record",
+      "community": 1,
+      "norm_label": "qa diario de conversao/agendamento 2026-07-17"
+    },
+    {
+      "id": "current",
+      "label": "Janela current: \u00faltimas 6h sem mensagens",
+      "type": "evidence",
+      "community": 1,
+      "norm_label": "janela current: ultimas 6h sem mensagens"
+    },
+    {
+      "id": "historical",
+      "label": "Hist\u00f3rico: 6187 mensagens, 443 leads, 30 vit\u00f3rias, 5 quedas",
+      "type": "evidence",
+      "community": 1,
+      "norm_label": "historico: 6187 mensagens, 443 leads, 30 vitorias, 5 quedas"
+    },
+    {
+      "id": "cta",
+      "label": "CTA padronizado de confirma\u00e7\u00e3o com op\u00e7\u00f5es curtas",
+      "type": "practice",
+      "community": 0,
+      "norm_label": "cta padronizado de confirmacao com opcoes curtas"
+    },
+    {
+      "id": "data_first",
+      "label": "Fechar data antes de educar/explicar",
+      "type": "practice",
+      "community": 0,
+      "norm_label": "fechar data antes de educar/explicar"
+    },
+    {
+      "id": "origin",
+      "label": "Segmentar origem: inbound gen\u00e9rico versus treino/personal",
+      "type": "practice",
+      "community": 0,
+      "norm_label": "segmentar origem: inbound generico versus treino/personal"
+    },
+    {
+      "id": "guardrails",
+      "label": "Guardrails cl\u00ednicos: n\u00e3o diagnosticar, prescrever ou prometer resultado",
+      "type": "guardrail",
+      "community": 0,
+      "norm_label": "guardrails clinicos: nao diagnosticar, prescrever ou prometer resultado"
+    },
+    {
+      "id": "risk",
+      "label": "Risco baixo no atendimento; moderado em convers\u00e3o se houver explica\u00e7\u00e3o precoce",
+      "type": "risk",
+      "community": 1,
+      "norm_label": "risco baixo no atendimento; moderado em conversao se houver explicacao precoce"
+    }
+  ],
+  "links": [
+    {
+      "type": "should_apply",
+      "relationship": "should_apply",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "cta",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "should_apply",
+      "relationship": "should_apply",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "data_first",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "should_apply",
+      "relationship": "should_apply",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "origin",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "audited_by",
+      "relationship": "audited_by",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "qa",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_evidence",
+      "relationship": "uses_evidence",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_evidence",
+      "relationship": "uses_evidence",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "recommends",
+      "relationship": "recommends",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "cta",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "recommends",
+      "relationship": "recommends",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "data_first",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "recommends",
+      "relationship": "recommends",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "origin",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "assesses",
+      "relationship": "assesses",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "risk",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "respects",
+      "relationship": "respects",
+      "confidence": "EXTRACTED",
+      "source": "cta",
+      "target": "guardrails",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "respects",
+      "relationship": "respects",
+      "confidence": "EXTRACTED",
+      "source": "data_first",
+      "target": "guardrails",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "respects",
+      "relationship": "respects",
+      "confidence": "EXTRACTED",
+      "source": "origin",
+      "target": "guardrails",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

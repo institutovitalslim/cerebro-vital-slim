@@ -1,0 +1,44 @@
+{
+  "tipo": "rc25_graphify",
+  "tema": "QA diário Clara conversão/agendamento",
+  "data_utc": "2026-07-17T01:30:00Z",
+  "fontes": [
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json"
+  ],
+  "sanitizado": true,
+  "pii": false,
+  "metricas": {
+    "current_total_messages": 0,
+    "current_unique_leads": 0,
+    "current_wins": 0,
+    "current_drops": 0,
+    "historical_total_messages": 6187,
+    "historical_unique_leads": 443,
+    "historical_inbound": 3275,
+    "historical_outbound": 2912,
+    "historical_wins": 30,
+    "historical_drops": 5,
+    "historical_win_rate_unique_leads_aprox": 0.0677,
+    "historical_drop_rate_unique_leads_aprox": 0.0113
+  },
+  "sinais": {
+    "agendamento_current": "sem sinais por ausência de mensagens nas últimas 6h",
+    "agendamento_historical": "30 vitórias; padrão agregado de confirmação objetiva e proposta direta de horário",
+    "objecao_historical": "5 quedas; risco agregado de explicação precoce antes de data",
+    "silencio_current": "sem amostra operacional recente; usar follow-up curto quando houver silêncio real"
+  },
+  "melhorias_praticas": [
+    "padronizar confirmação com resposta curta",
+    "fechar data antes de educar",
+    "classificar origem no primeiro turno"
+  ],
+  "aprendizado_operacional": "Confirmação objetiva, proposta de data antes de educação e segmentação por origem aumentam chance de agendamento sem violar guardrails clínicos.",
+  "classificacao": [
+    "aplicar amanhã",
+    "testar 3 dias"
+  ],
+  "risco": "BAIXO_ATENDIMENTO_MODERADO_CONVERSAO_SE_EXPLICACAO_PRECOCE",
+  "intervencao_humana": "não indicada imediatamente; monitorar próximo ciclo current",
+  "gate": "Não pausar Clara sem ordem direta do Tiaro."
+}
