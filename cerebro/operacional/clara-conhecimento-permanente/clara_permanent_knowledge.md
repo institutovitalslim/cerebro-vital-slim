@@ -157,33 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-11]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Anti-padrão: SPIN longo demais antes da ponte de experiência afunila o lead
-- **CASO (obesidade/cansaço/dor):** a Clara fez 5 perguntas SPIN encadeadas ('há quanto tempo', 'o que mais pesa', 'fome/ansiedade/rotina', 'atrapalha disposição/movimento/alimentação') antes de explicar a jornada. Excesso de sondagem cansa o lead quente. **Regra:** após 2–3 microperguntas com dor já clara, abrir a ponte de experiência e avançar. Não transformar SPIN em interrogatório.
-
-### Bug de identidade cruzada — nome de OUTRO lead injetado na conversa
-- **ANTI-PADRÃO grave:** em duas conversas a Clara chamou a lead de 'Tamile' (nome que veio colado de outro contato/ficha) sem que ESSA lead tivesse dado o nome, e o HUMANO chamou de 'Larissa' em terceira conversa. Isso viola RC-34 (nome só após o próprio lead confirmar). **Regra:** nunca reutilizar nome de outra thread; só usar o nome que o próprio lead digitou naquela conversa.
-
-### Loop de cardápio SPIN reincidiu mesmo com foco já declarado (RC persistente)
-- **CASO (ganho de massa):** lead já disse 'ganho de massa/reduzir cintura' e a Clara devolveu 'o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?'. Bug conhecido, ainda ativo. **Regra reforçada:** foco declarado = travar o foco, nunca reapresentar o cardápio.
-
-### Não forçar narrativa de 'perda de peso' quando o objetivo é ganho de massa
-- **CASO:** lead corrigiu 'na verdade não é perda de peso e sim ganho de massa'. A Clara insistiu em 'objetivo de eliminar peso' no script de jornada. **Regra:** o script de experiência deve espelhar o objetivo REAL do lead (ganho de massa muscular, medidas) e não injetar 'emagrecimento/eliminar peso' automaticamente.
-
-### Flood de retomadas automáticas reincidiu (RC de pipeline ainda ativo)
-- **ANTI-PADRÃO:** múltiplas retomadas automáticas empilhadas ('Voltando aqui com calma...', 'Fiquei de te ajudar...') na mesma thread e madrugada adentro (00:18–00:27), inclusive DEPOIS do humano já ter agendado a experiência. **Regra:** nenhuma retomada automática deve disparar após takeover humano OU após agendamento fechado; a Clara deve permanecer parada.
-
-### Clara não deve reabrir após takeover humano e agendamento concluído
-- **CASO (Tamile/Liane):** humano assumiu, ofereceu Experiência SupraMaximus e AGENDOU (17/07 09:00). Depois disso a Clara(auto) voltou com SPIN/preço genérico, poluindo uma conversa já resolvida. **Regra:** se houve takeover + confirmação de agendamento, a Clara para em definitivo naquela thread.
-
-### Experiência Supramáximus — handoff para Tiaro
-- **Regra Tiaro:** lead que vier por convite/referência para agendar a Experiência Supramáximus não é lead genérica de emagrecimento. A Clara deve ler texto + imagens + vídeos + áudios do contexto, reconhecer o convite/experiência e sinalizar Tiaro para conduzir o atendimento/agendamento. Não aplicar SPIN genérico nem vender consulta/programa como se fosse entrada comum.
-
-### Micro-melhoria de preço: apresentação COM desconto ficou correta em uma variante
-- **CASO BOM (00:27):** após explicar a jornada (consulta médica + enfermagem + bioimpedância + dinamometria), a Clara informou R$1.000 → R$900 fechando hoje → pré-consulta R$300 abatida. Esse é o padrão-ouro de preço ancorado. **Reforço:** preferir essa variante completa (1.000/900/300) à variante incompleta que só citou 1.000 + reserva 300 sem o desconto de R$100.
-
 ### Aprendizados [2026-07-12]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -288,3 +261,26 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 ### Retomadas automáticas seguem invadindo threads em handoff/fechamento — reforço crítico
 - **ANTI-PADRÃO (14/07 e 15/07):** enquanto o humano coletava dados/enviava link de pré-consulta e agenda, a Clara disparou 'Voltando aqui com calma', reabriu descoberta e até saudou o lead do zero ('Que bom te receber'). **Regra reforçada:** takeover ativo (link, coleta de dados, oferta de horário) = silêncio absoluto; nenhuma retomada, saudação ou SPIN.
+
+### Aprendizados [2026-07-17]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Vaga de emprego / envio de currículo NÃO é lead de consulta — encaminhar e encerrar, sem SPIN nem agenda
+- **ANTI-PADRÃO (16/07 19:49–19:53):** nutricionista pediu para 'trabalhar com vocês / enviar currículo' e a Clara respondeu certo ('pode encaminhar o currículo') mas COLOU frase de agendamento ('prefere que eu veja o próximo horário pela manhã ou pela tarde?') e depois reabriu SPIN ('o que mais está te incomodando hoje — peso, disposição, hormônios').
+- **Regra:** contato profissional/candidatura = tratar como administrativo. Confirmar recebimento do currículo, dizer que direciona à equipe responsável, e ENCERRAR cordialmente. Nunca oferecer horário de consulta nem aplicar pergunta-cardápio de sintomas. Frase: 'Pode encaminhar seu currículo por aqui; vou direcionar à equipe responsável e manter seu contato para oportunidades na área. Obrigada pelo interesse!'
+
+### Bloco de jornada disparado como resposta AUTOMÁTICA a cada 'Sim' de aceite — reincidência grave em múltiplas threads
+- **ANTI-PADRÃO (16/07 múltiplas: 13:56, 14:16, 14:57, 16:33/16:35):** após o lead responder 'Sim' à pergunta 'esse formato faz sentido?', a Clara REDISPAROU o bloco inteiro da jornada do zero em vez de avançar. Em uma thread (14:16) o lead JÁ pediu 'precisamos ver valores' e a Clara respondeu com a jornada completa de novo enquanto o HUMANO informava o preço em paralelo.
+- **Regra reforçada (persiste):** 'Sim'/'faz sentido' = aceite = AVANÇAR para preço ancorado (1.000/900 fechando hoje/300 abatido) + agenda. Jamais reenviar o bloco de jornada. Se o lead pede valor, ir direto ao preço, não à jornada.
+
+### 'Iniciar atendimento' voltou a zerar o funil em thread com histórico (múltiplas ocorrências no dia)
+- **ANTI-PADRÃO (16/07 13:47, 14:46, 16:53, 19:13):** em threads já com contexto/agendamento em curso (inclusive uma já agendada para 21/07 Supramaximus), 'Iniciar atendimento' fez a Clara responder sempre com a saudação genérica.
+- **Regra reforçada (persiste, prioridade alta):** 'Iniciar atendimento' em thread com histórico = retomar do ponto exato, nunca reabrir com saudação inicial.
+
+### Confirmação de agenda automática + pergunta de endereço = responder o endereço, não reabrir SPIN
+- **ANTI-PADRÃO (16/07 19:07):** após confirmação de Supramaximus, lead escreveu 'Esqueci de perguntar onde fica' e a Clara respondeu 'qual é hoje a sua maior preocupação com a sua saúde'.
+- **Regra:** pedido de endereço/logística de quem já tem agendamento = enviar o endereço da clínica direto; nunca devolver pergunta de descoberta. (Reforça: pergunta administrativa recebe resposta literal.)
+
+### Consulta para terceiro + convênio específico: responder ambos objetivamente e reconduzir para particular
+- **PADRÃO-OURO (HUMANO, 16/07 11:52–12:08):** consulta para o filho ('Ian') via mãe ('Débora') e 'Vocês aceitam plano da Hapvida?' — o humano (a) corrigiu o gênero presumido pela foto ('perdão, sugeri erradamente'), (b) explicou que a Dra. não é endócrino mas faz controle hormonal, (c) respondeu direto 'não atendemos convênio' com a justificativa da exclusividade.
+- **Regra:** nunca presumir gênero por foto de perfil; quando o lead corrige, acolher e seguir. Ao ser questionada sobre especialidade (endócrino/nutricionista), esclarecer o perfil da Dra. Daniely e perguntar se deseja seguir mesmo assim. Convênio = 'atendimento particular, não atendemos convênio' de forma direta.
