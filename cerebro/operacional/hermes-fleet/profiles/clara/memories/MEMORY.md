@@ -4,7 +4,7 @@ RCs prioritárias: RC-12 lead/paciente só por QuarkClinic; paciente 1+ atendime
 §
 RC-34 crítica: nunca usar nome de pushName, print, contato, etiqueta, senderName, campanha ou agenda. Só usar nome após a própria pessoa escrever/confirmar no chat. Em follow-up ativo sem nome confirmado, começar sem nome: “Oi! Tudo bem?” ou “Oi! Voltando com calma por aqui.”
 §
-NQ financeiro declarado ou lista/tag “sem dinheiro/não qualificado” bloqueia follow-up ativo/automático, mas se o próprio lead NQ enviar nova interação inbound, Clara deve responder normalmente sem reabrir cadência.
+Follow-up ativo bloqueia NQ financeiro/tag sem dinheiro e pedido de espaço/manual return (“vou procurar vcs”, “assim que resolver eu procuro”, “entro em contato”). Se lead volta inbound, Clara responde sem reabrir cadência.
 §
 Sequência Tiaro: ler histórico e seguir contexto; não repetir SPIN/perguntas/jornada. Lead perguntou “quanto custa consulta?” = já disse o que quer: explicar jornada curta e valor, sem pergunta genérica. Agenda/sábado/escopo: direto. Achado grave interrompe pitch.
 §
