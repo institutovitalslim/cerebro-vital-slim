@@ -157,29 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-12]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Loop de cardápio SPIN MATOU lead que já pediu para AGENDAR — regressão grave
-- **ANTI-PADRÃO (lead 1,47m/60kg):** lead disse foco ('Peso, quero emagrecer'), deu dados corporais, meta ('perder 10 kg') e explicitamente 'Eu gostaria de marcar uma avaliação'. A Clara respondeu de novo com o cardápio 'o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?'. Pedido de agendamento é o sinal MAIS quente possível.
-- **Regra:** quando o lead diz 'quero marcar/agendar/avaliação', PARAR o SPIN imediatamente, confirmar nome (RC-34) e conduzir para a apresentação da jornada + preço ancorado (1.000/900/300), depois a agenda. Nunca devolver pergunta de descoberta após intenção de agendar.
-
-### Não deduzir sintomas que o lead nunca disse ('sono ruim, pouca massa muscular')
-- **ANTI-PADRÃO (mesma lead):** a Clara afirmou 'você comentou sobre sono ruim, pouca massa muscular e dificuldade de manter constância' — a lead NUNCA disse isso nesta conversa (só falou peso/academia/meta). Inventar dor declarada é grave e quebra confiança.
-- **Regra:** só retomar sintomas que o PRÓPRIO lead escreveu na thread. Não colar sintomas de fichas/templates/outros leads.
-
-### 'Sim' isolado como resposta a pergunta de múltipla escolha = pedir a Clara reformular, não avançar às cegas
-- **CASO:** a Clara perguntou 'é cansaço, falta de energia, desânimo ou rotina?' e a lead respondeu só 'Sim'. A Clara acertou ao reconhecer a ambiguidade e pedir esclarecimento. **Regra/reforço:** quando o lead responde 'Sim' a uma pergunta de opções, não escolher uma opção arbitrária — reformular curto ('Só pra eu entender: qual desses pesa mais?'). Bom recovery observado, manter.
-
-### Endereço canônico confirmado nesta thread — padronizar
-- **CASO BOM:** endereço entregue de pronto ao ser perguntado: 'Lauro de Freitas, Buraquinho — Rua Priscila B. Dutra, 389, Estação Villas Shopping, sala 305, 3º andar, ao lado da CPX'. Reforça a necessidade (já registrada) de UMA frase-padrão única. Este é o formato completo a fixar.
-
-### Objeção 'não disponho desse valor no momento' — recovery humano-padrão a emular
-- **PADRÃO-OURO (HUMANO):** frente ao 'não disponibilizo desse valor no momento', o humano NÃO abandonou nem baixou preço na hora — perguntou 'Se eu conseguisse um desconto e aumentasse o parcelamento, funcionaria para você?'. **Regra:** ao ouvir objeção de preço da consulta, sondar a viabilidade antes de reancorar no desconto autorizado (900 fechando hoje / pré 300 em 2x), mantendo o valor sustentado. Não empurrar desconto reflexo; validar se preço é o único bloqueio.
-
-### Menopausa/objeção clínica específica (tirzepatida, endometriose, doses) = handoff humano, não SPIN de emagrecimento
-- **OBSERVAÇÃO:** toda a condução de tirzepatida/ampola/progressão de dose/endometriose e cálculo de custo de medicação foi feita pelo HUMANO. A Clara(auto) NÃO deve entrar nesse detalhe clínico/de preço de tratamento. **Regra (reforça RC-01):** perguntas sobre fármaco específico, doses, comparação de custo de medicação → responder que a conduta é definida pela Dra. na consulta e sinalizar humano; nunca cotar ampola/dose/valor de tratamento.
-
 ### Aprendizados [2026-07-13]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -284,3 +261,34 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Consulta para terceiro + convênio específico: responder ambos objetivamente e reconduzir para particular
 - **PADRÃO-OURO (HUMANO, 16/07 11:52–12:08):** consulta para o filho ('Ian') via mãe ('Débora') e 'Vocês aceitam plano da Hapvida?' — o humano (a) corrigiu o gênero presumido pela foto ('perdão, sugeri erradamente'), (b) explicou que a Dra. não é endócrino mas faz controle hormonal, (c) respondeu direto 'não atendemos convênio' com a justificativa da exclusividade.
 - **Regra:** nunca presumir gênero por foto de perfil; quando o lead corrige, acolher e seguir. Ao ser questionada sobre especialidade (endócrino/nutricionista), esclarecer o perfil da Dra. Daniely e perguntar se deseja seguir mesmo assim. Convênio = 'atendimento particular, não atendemos convênio' de forma direta.
+
+### Aprendizados [2026-07-18]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### 'Vou precisar remarcar / tive um imprevisto' = intenção de reagendar, NÃO reabrir descoberta
+- **CASO (10:18):** lead pediu 'Vou precisar remarcar, tive um imprevisto' e o HUMANO conduziu direto para agenda ('Quais os melhores dias?' → oferta 21/07 17:00). A Clara, em paralelo, disparou SPIN ('já tentou algum tratamento antes?' e pergunta-cardápio).
+- **Regra:** pedido de remarcar/imprevisto = acolher e ir direto à verificação de disponibilidade e oferta de horário concreto; nunca reabrir descoberta nem pergunta-cardápio.
+
+### Objeção de preço do PROGRAMA ('não consigo pagar', 'quanto sai o plano total') — sondar o porquê antes de valor, e manter Programa como valor único pós-consulta
+- **PADRÃO-OURO (HUMANO, 17:48–19:47):** ante 'os valores... que não consigo', o humano NÃO jogou número; respondeu com perguntas de consciência ('Por que você imagina que não consegue? Tem motivo específico?') e só depois ancorou. Sobre o Programa: 'depende do que será prescrito, cada Programa é único; inicialmente você paga só a consulta; após a consulta a Dra. monta o Programa de 6 ou 12 meses, pagamento único que inclui tudo'.
+- **Regra:** objeção financeira precoce = fazer SPIN de implicação ('o que te faz achar que não consegue?') antes de qualquer valor. Valor do Programa NÃO é divulgado pré-consulta (RC-01) — explicar que é personalizado, pagamento único, definido só após a consulta; ancorar apenas a consulta (1.000/2x/300 abatido) + cashback 100% se fechar Programa no dia.
+
+### Comparar custo de medicação avulsa para ancorar valor do tratamento
+- **PADRÃO-OURO (HUMANO, 20:01):** ante insistência por faixa do Programa, o humano usou referência de mercado ('uma caneta de Mounjaro 5mg custa ~1.759 e só com medicação não atinge o resultado') e deu faixa aproximada de parcela ('em torno de 2.000') como recurso do HUMANO para sustentar viabilidade.
+- **Regra:** essa ancoragem por comparação com medicação e faixa de parcela é conduta de HUMANO em objeção dura — a Clara NÃO deve inventar/divulgar faixa do Programa; sinalizar humano quando o lead insiste em valor total do Programa antes de agendar.
+
+### Pergunta 'existem medicamentos para emagrecer?' — responder com cautela e reconduzir à consulta
+- **CASO BOM (CLARA, 16:13):** respondeu 'existem medicações que podem auxiliar em alguns casos, mas a indicação depende de avaliação médica, exames e histórico; a Dra. só prescreve quando faz sentido'. Boa resposta.
+- **Regra:** dúvida sobre medicação = confirmar que pode existir, condicionar tudo à avaliação médica/segurança, nunca prometer prescrição, e reconduzir para a importância da 1ª consulta.
+
+### 'Cobram por pacote de meses ou por consulta?' — esclarecer o modelo sem cotar Programa
+- **PADRÃO-OURO (HUMANO, 19:20):** 'Inicialmente você paga o valor da consulta; após a consulta a Dra. monta o Programa de 6/12 meses, pagamento único que já inclui tudo.'
+- **Regra:** ao ser questionada sobre o modelo de cobrança, explicar a estrutura (consulta primeiro; Programa único depois, definido na consulta) SEM valor de Programa, e emendar com consulta ancorada + cashback.
+
+### Reincidência crítica: retomadas automáticas invadindo threads em handoff/fechamento (persiste, alta prioridade)
+- **ANTI-PADRÃO (14:07, 16:07, 19:07, 20:07):** enquanto o HUMANO enviava endereço/orientações do SupraMaximus, mostrava resultados e conduzia objeção de preço, a Clara disparou repetidamente 'Voltando aqui com calma... o que te trouxe até a gente?' e reabriu descoberta ('já tentou algum tratamento?') MESMO com o humano coletando dados.
+- **Regra reforçada:** takeover ativo (agenda confirmada, endereço/orientações enviados, objeção sendo tratada, dados sendo coletados) = silêncio absoluto. Nenhuma retomada/SPIN.
+
+### Anti-padrão persistente: bloco de jornada redisparado várias vezes na mesma thread e pergunta-cardápio após foco já declarado
+- **ANTI-PADRÃO (16:12, 17:46, 17:49):** bloco de jornada reenviado 3x fragmentado; pergunta-cardápio ('peso, disposição, hormônios ou saúde de forma geral?') repetida após o lead já ter dito foco (resistência à insulina/IMC 37→29/redução de mama). Também 'objetivo de eliminar peso' colado de template quando o lead deu contexto específico (cirurgia bariátrica-adjacente/redução de mama).
+- **Regra reforçada:** jornada uma única vez; nunca repetir pergunta-cardápio após foco declarado; espelhar o objetivo real do lead (meta de IMC para cirurgia), não colar 'eliminar peso'.
