@@ -74,6 +74,45 @@ def contains_financial_no_fit_decline(text: str) -> bool:
     return any(re.search(pattern, norm) for pattern in patterns)
 
 
+def contains_terminal_deferral_decline(text: str) -> bool:
+    """Detecta quando o lead pediu espaço e disse que ele mesmo retornará.
+
+    Isso não torna o contato NQ definitivo nem bloqueia inbound futuro. Só bloqueia
+    follow-up ativo da Clara para não reabrir conversa encerrada com "vou procurar vocês".
+    """
+    norm = normalize_decision_text(text)
+    if not norm:
+        return False
+    patterns = (
+        r'\b(eu\s+)?vou\s+(?:me|mim)?\s*(?:organizar|resolver|ver|pensar)?.{0,30}\bprocurar\s+(?:vcs|voces|vocês)\b',
+        r'\b(?:assim que|quando)\s+(?:eu\s+)?(?:resolver|puder|der|me organizar|mim organizar).{0,50}\b(?:procuro|procurar|entro em contato|retorno)\b',
+        r'\b(?:eu\s+)?(?:procuro|procurarei|retorno|entro em contato)\s+(?:vcs|voces|vocês|com voces|com vocês|com vcs)\b',
+        r'\b(?:eu\s+)?vou\s+procurar\s+(?:vcs|voces|vocês)\b',
+    )
+    return any(re.search(pattern, norm) for pattern in patterns)
+
+
+def contains_open_discovery_question(text: str) -> bool:
+    """Detecta quando a última fala da Clara já deixou pergunta de descoberta aberta.
+
+    Se o lead não respondeu depois disso, a cadência não deve mandar outra pergunta
+    genérica de retomada. Esse foi o incidente Jamile (2026-07-18): a Clara perguntou
+    sobre emagrecimento/problema de saúde e, no D+1, retomou com a mesma pergunta.
+    """
+    norm = normalize_decision_text(text)
+    if not norm or '?' not in (text or ''):
+        return False
+    patterns = (
+        r'\bo que mais\b.{0,80}\b(?:incomod|buscar ajuda|trouxe|preocupacao)\b',
+        r'\balem do emagrecimento\b.{0,120}\b(?:problema de saude|incomoda)\b',
+        r'\bqual e hoje\b.{0,120}\bmaior preocupacao\b',
+        r'\bvoce ja tentou\b.{0,120}\b(?:tratamento|mudanca de rotina|acompanhamento medico)\b',
+        r'\besta buscando comecar agora\b.{0,80}\bacompanhamento medico\b',
+        r'\bme conta\b.{0,80}\b(?:o que te trouxe|o que fez voce buscar|buscar ajuda agora)\b',
+    )
+    return any(re.search(pattern, norm) for pattern in patterns)
+
+
 def phone_variants(phone: str) -> list[str]:
     normalized = normalize_phone(phone) or ''
     variants = []
@@ -94,6 +133,14 @@ def phone_variants(phone: str) -> list[str]:
 
 
 def recent_audit_has_financial_no_fit_decline(phone: str, max_files: int = 60) -> bool:
+    return recent_audit_has_text_match(phone, contains_financial_no_fit_decline, max_files=max_files)
+
+
+def recent_audit_has_terminal_deferral_decline(phone: str, max_files: int = 60) -> bool:
+    return recent_audit_has_text_match(phone, contains_terminal_deferral_decline, max_files=max_files)
+
+
+def recent_audit_has_text_match(phone: str, matcher, max_files: int = 60) -> bool:
     variants = set(phone_variants(phone))
     if not variants:
         return False
@@ -119,7 +166,7 @@ def recent_audit_has_financial_no_fit_decline(phone: str, max_files: int = 60) -
                             text = str(raw_text.get('message') or raw_text.get('body') or '')
                         elif isinstance(raw_text, str):
                             text = raw_text
-                    if contains_financial_no_fit_decline(text):
+                    if matcher(text):
                         return True
         except Exception:
             continue
@@ -135,6 +182,21 @@ def mark_not_qualified_financial(phone: str, name: str = 'Lead sem perfil financ
             'name': name,
             'reason': 'not_qualified_financial_no_fit',
             'source': 'followup_cadence_audit_financial_decline',
+            'updated_at': now,
+        }
+    state['updated_at'] = now
+    write_json(BASE / 'clara_exclusions.json', state)
+
+
+def mark_terminal_deferral_followup_block(phone: str, name: str = 'Lead pediu para retornar quando resolver') -> None:
+    state = load_json(BASE / 'clara_exclusions.json', {'phones': {}})
+    phones = state.setdefault('phones', {})
+    now = int(time.time())
+    for variant in phone_variants(phone):
+        phones[variant] = {
+            'name': name,
+            'reason': 'lead_requested_no_active_followup_manual_return',
+            'source': 'followup_cadence_audit_terminal_deferral',
             'updated_at': now,
         }
     state['updated_at'] = now
@@ -302,6 +364,7 @@ def select_candidates(leads_state: Dict[str, Any], cadence_state: Dict[str, Any]
         'raw_entries': 0, 'invalid_phone': 0, 'deduped_variant': 0, 'not_replied_by_clara': 0,
         'pending_lead_message': 0, 'cadence_complete': 0, 'not_due': 0, 'selected': 0,
         'blocked_not_qualified': 0, 'blocked_financial_no_fit_audit': 0,
+        'blocked_terminal_deferral_audit': 0, 'blocked_open_discovery_question': 0,
     }
     selected_by_canon: Dict[str, Candidate] = {}
     for raw_phone, entry in leads.items():
@@ -324,6 +387,13 @@ def select_candidates(leads_state: Dict[str, Any], cadence_state: Dict[str, Any]
             entry['updated_at'] = int(now)
             stats['blocked_financial_no_fit_audit'] += 1
             continue
+        if recent_audit_has_terminal_deferral_decline(phone):
+            mark_terminal_deferral_followup_block(phone)
+            entry['followup_blocked'] = True
+            entry['followup_blocked_reason'] = 'lead_requested_manual_return'
+            entry['updated_at'] = int(now)
+            stats['blocked_terminal_deferral_audit'] += 1
+            continue
         first_seen = float(entry.get('first_seen_at') or 0)
         last_in = float(entry.get('last_inbound_at') or first_seen or 0)
         last_reply = float(entry.get('last_reply_at') or 0)
@@ -334,6 +404,16 @@ def select_candidates(leads_state: Dict[str, Any], cadence_state: Dict[str, Any]
         # Se o lead mandou algo depois da última resposta da Clara, não é follow-up: é resposta pendente.
         if last_in > last_reply + 60:
             stats['pending_lead_message'] += 1
+            continue
+        last_reply_preview = str(entry.get('last_reply_preview') or '')
+        # Se a última fala da Clara já foi uma pergunta de descoberta e o lead não respondeu,
+        # não reenviar uma retomada genérica com outra pergunta parecida. Isso evita o caso
+        # Jamile/RC-65/68: Clara parece esquecer o histórico e pergunta a mesma coisa no D+1.
+        if contains_open_discovery_question(last_reply_preview):
+            entry['followup_blocked'] = True
+            entry['followup_blocked_reason'] = 'open_discovery_question_waiting_lead_reply'
+            entry['updated_at'] = int(now)
+            stats['blocked_open_discovery_question'] += 1
             continue
         cycle = current_cycle_id(entry)
         cstate = cadence_state.setdefault('phones', {}).setdefault(phone_hash(canon), {})
