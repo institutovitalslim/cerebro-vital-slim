@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Análise IVS — Onlook</title>
+  <style>
+    :root{--bg:#f7f4ee;--ink:#161616;--muted:#656565;--blue:#1457ff;--card:#fffaf2;--line:#ded6c8;--ok:#0f7b4f;--warn:#9a5b00;--bad:#a02a2a;}
+    body{margin:0;background:var(--bg);font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;color:var(--ink);line-height:1.55;}
+    .wrap{max-width:1120px;margin:0 auto;padding:44px 24px 72px;}
+    .hero{border:1px solid var(--line);background:linear-gradient(135deg,#fffaf2 0%,#f1ede4 100%);border-radius:28px;padding:34px;box-shadow:0 18px 50px rgba(0,0,0,.07)}
+    h1{font-size:42px;line-height:1.05;margin:0 0 12px;letter-spacing:-.035em}.subtitle{font-size:18px;color:var(--muted);max-width:820px}.pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:white;font-size:13px}.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:22px}.card{grid-column:span 6;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px}.card.full{grid-column:1/-1}.card.third{grid-column:span 4}h2{font-size:24px;margin:0 0 14px;letter-spacing:-.02em}h3{font-size:18px;margin:20px 0 8px}ul{margin:0;padding-left:20px}li{margin:6px 0}.muted{color:var(--muted)}.score{font-size:48px;font-weight:800;color:var(--blue);letter-spacing:-.05em}.small{font-size:13px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;background:white;border-radius:16px;overflow:hidden}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f1ede4;font-size:13px}td{font-size:14px}.tag{display:inline-block;padding:3px 8px;border-radius:999px;background:#eef2ff;color:#123cbb;font-size:12px;margin:2px}.risk{color:var(--bad);font-weight:700}.go{color:var(--ok);font-weight:700}.maybe{color:var(--warn);font-weight:700}code{background:#eee7dc;padding:2px 6px;border-radius:7px}.footer{margin-top:28px;color:var(--muted);font-size:13px}
+    @media(max-width:850px){.card,.card.third{grid-column:1/-1}h1{font-size:34px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <h1>Análise IVS — Onlook</h1>
+    <p class="subtitle"><strong>Onlook</strong> é um editor visual AI-first para criar, estilizar e editar apps React/Next.js diretamente em cima do codebase. A proposta é ser o “Cursor para designers”.</p>
+    <div class="pillrow">
+      <span class="pill">Repo: onlook-dev/onlook</span>
+      <span class="pill ok">Licença: Apache-2.0</span>
+      <span class="pill">Stack: TypeScript/Bun/Next/Supabase</span>
+      <span class="pill">Stars verificadas: 26.223</span>
+      <span class="pill warn">Recomendação: adaptar conceito, não instalar inteiro</span>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card third"><div class="score">8/10</div><div class="small">Potencial estratégico para IVS</div></div>
+    <div class="card third"><div class="score">6/10</div><div class="small">Prontidão para uso direto no IVS</div></div>
+    <div class="card third"><div class="score">7/10</div><div class="small">Valor como referência técnica</div></div>
+
+    <div class="card full">
+      <h2>Resumo executivo</h2>
+      <p>O Onlook é relevante para nós porque ataca uma dor real: acelerar criação/edição de interfaces React/Next.js com uma camada visual, mantendo vínculo com código real. Para o IVS, isso encaixa especialmente em <strong>landing pages, funis, páginas da Clara, painéis internos, relatórios HTML e aplicação consistente do design system IVS</strong>.</p>
+      <p><strong>Minha recomendação:</strong> não instalar como ferramenta central agora. Usar como referência para criar um <strong>IVS Visual Layer</strong> menor e governado: editor/gerador visual de páginas IVS-first, com templates próprios, tokens de marca, pré-visualização, diffs e aprovação antes de publicar.</p>
+    </div>
+
+    <div class="card">
+      <h2>O que o repo faz</h2>
+      <ul>
+        <li>Cria apps Next.js rapidamente a partir de texto, imagem ou templates.</li>
+        <li>Edita visualmente a UI em navegador/DOM com experiência tipo Figma.</li>
+        <li>Permite preview em tempo real.</li>
+        <li>Gerencia assets, tokens de marca, páginas e camadas.</li>
+        <li>Integra AI para gerar e aplicar alterações.</li>
+        <li>Tem branching/checkpoints para experimentar designs.</li>
+        <li>Usa script preload para comunicação direta com DOM do app renderizado.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Arquitetura observada</h2>
+      <ul>
+        <li><code>apps/web/client</code>: front-end Next.js do editor.</li>
+        <li><code>apps/web/server</code>: servidor de controle com Fastify/WebSocket/tRPC.</li>
+        <li><code>apps/web/preload</code>: script injetado no app/template para ler e manipular DOM via iframe.</li>
+        <li><code>apps/backend</code>: Supabase local/backend.</li>
+        <li><code>packages/ai</code>: agentes, chat, tools, prompts e streaming.</li>
+        <li><code>packages/parser</code>: edição de código, estilo, layout, texto, imagens e transformação.</li>
+        <li><code>packages/code-provider</code>: abstração para CodeSandbox e filesystem local.</li>
+      </ul>
+    </div>
+
+    <div class="card full">
+      <h2>Encaixe prático no IVS</h2>
+      <table>
+        <thead><tr><th>Uso IVS</th><th>Valor</th><th>Como eu faria</th><th>Decisão</th></tr></thead>
+        <tbody>
+          <tr><td>Landing pages e campanhas</td><td>Alto</td><td>Editor visual com templates IVS, tokens de marca, copy blocks e export HTML/Next.</td><td class="go">Priorizar</td></tr>
+          <tr><td>Páginas da Clara/funis</td><td>Alto</td><td>Pré-visualizar páginas, formulários e CTAs com aprovação antes de deploy.</td><td class="go">Priorizar</td></tr>
+          <tr><td>Painéis internos</td><td>Médio/alto</td><td>Gerar telas com componentes padronizados, sem mexer em dados sensíveis no editor.</td><td class="maybe">Piloto</td></tr>
+          <tr><td>Relatórios HTML premium</td><td>Médio</td><td>Usar conceito de tokens/layers para relatórios do Tiaro, pacientes e tráfego.</td><td class="maybe">Adaptar</td></tr>
+          <tr><td>Uso direto como produto completo</td><td>Incerto</td><td>Stack grande, ainda com partes em early access e muitas dependências.</td><td class="risk">Não agora</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>O que aproveitar</h2>
+      <ul>
+        <li><strong>Preload/iframe DOM bridge:</strong> padrão muito útil para selecionar elementos visualmente.</li>
+        <li><strong>Parser/aplicador de mudanças:</strong> separar intenção visual de patch em código.</li>
+        <li><strong>Code provider abstraction:</strong> trocar backend de código sem acoplar tudo.</li>
+        <li><strong>Checkpoints/branching:</strong> indispensável para não quebrar páginas em produção.</li>
+        <li><strong>Tokens/assets/layers:</strong> base para design system IVS operacional.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>O que descartar</h2>
+      <ul>
+        <li>Não trazer a plataforma inteira para produção IVS.</li>
+        <li>Não expor projetos com dados sensíveis/pacientes/leads dentro de editor visual genérico.</li>
+        <li>Não depender de CodeSandbox/Supabase externo para páginas críticas.</li>
+        <li>Não permitir “AI apply” direto em produção sem diff, preview e aprovação.</li>
+        <li>Não transformar em ferramenta aberta para equipe sem permissões e trilha de auditoria.</li>
+      </ul>
+    </div>
+
+    <div class="card full">
+      <h2>Riscos</h2>
+      <table>
+        <thead><tr><th>Risco</th><th>Impacto</th><th>Mitigação IVS</th></tr></thead>
+        <tbody>
+          <tr><td>Complexidade técnica</td><td>Alto</td><td>Construir MVP pequeno: selecionar elemento, editar texto/estilo, gerar diff e preview.</td></tr>
+          <tr><td>Alteração insegura de código</td><td>Alto</td><td>Modo read-only por padrão, branch/sandbox, diff obrigatório, aprovação antes de deploy.</td></tr>
+          <tr><td>PII/compliance</td><td>Alto</td><td>Nunca carregar dados reais de pacientes/leads; usar fixtures sintéticas e redaction.</td></tr>
+          <tr><td>Dependências externas</td><td>Médio</td><td>Local-first; evitar CodeSandbox externo para artefatos IVS críticos.</td></tr>
+          <tr><td>Manutenção</td><td>Médio</td><td>Focar em 3 fluxos de alto ROI, não replicar o Onlook completo.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card full">
+      <h2>Plano recomendado — IVS Visual Layer</h2>
+      <ol>
+        <li><strong>MVP 1:</strong> editor visual local para páginas HTML/Next do IVS com seleção de elemento + edição de texto/classes Tailwind.</li>
+        <li><strong>MVP 2:</strong> biblioteca de componentes/tokens IVS: hero, CTA, formulário Typeform-like, cards, provas sociais, seção médica/compliance.</li>
+        <li><strong>MVP 3:</strong> AI assistida, mas governada: prompt → diff → preview → aprovação.</li>
+        <li><strong>MVP 4:</strong> export para landing/funil com checklist LGPD/compliance e bloqueio de PII.</li>
+        <li><strong>MVP 5:</strong> integração com fluxo do João/Clara para páginas de campanha, sem publicação automática.</li>
+      </ol>
+    </div>
+
+    <div class="card full">
+      <h2>Decisão final</h2>
+      <p><span class="go">Adaptar como referência.</span> O Onlook é uma excelente inspiração para acelerar front-end/design no IVS, mas a melhor estratégia é criar uma versão menor, própria, governada e conectada ao nosso design system — não instalar o repo inteiro na operação.</p>
+      <p><strong>Próximo passo sugerido:</strong> se Tiaro aprovar, eu preparo uma spec curta do <code>ivs-visual-layer</code> e um MVP local com uma página IVS real/sintética para provar: selecionar elemento → editar → gerar diff → preview.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    Evidências: GitHub API, README/package.json/estrutura via GitHub raw/contents e reverse repo IVS. Nenhum clone/instalação completa executado. Relatório base: /root/.openclaw/reports/repo-reverse-ivs/20260719-103927-onlook-dev-onlook.md
+  </div>
+</div>
+</body>
+</html>
