@@ -1,0 +1,224 @@
+{
+  "scrape": {
+    "source_url": "https://drive.google.com/drive/folders/1004IL-fGddgoSelbUguJHon2HVJvGZw4?usp=sharing",
+    "downloaded_file": "vox-motion-graphics.skill",
+    "zip_sha256": "765c946d78bf114907e96da8be4ac749e36ef8009fa273eb65f2133b9ca83053",
+    "files_count": 3,
+    "generated_at": "2026-07-19T18:26:30.601602Z"
+  },
+  "manifest": [
+    {
+      "path": "SKILL.md",
+      "bytes": 16872,
+      "sha256": "29219cc8b8fc2185f5315bf3ee0a524a3a6ab9540520a96d7726b2c29d79f7aa",
+      "lines": 321,
+      "headings": [
+        [
+          "#",
+          "Vox-Style Motion Graphics Explainer (Higgsfield MCP)"
+        ],
+        [
+          "##",
+          "Operating mode"
+        ],
+        [
+          "##",
+          "Defaults"
+        ],
+        [
+          "##",
+          "Story engine (what separates a banger from postcards)"
+        ],
+        [
+          "##",
+          "Pipeline"
+        ],
+        [
+          "##",
+          "Phase T — Topic"
+        ],
+        [
+          "##",
+          "Phase R — Research"
+        ],
+        [
+          "##",
+          "Phase 1 — Style key"
+        ],
+        [
+          "##",
+          "Phase 2 — Script (Vox formula)"
+        ],
+        [
+          "##",
+          "Phase 3 — Block prompts"
+        ],
+        [
+          "##",
+          "Phase 4 — Clips"
+        ],
+        [
+          "##",
+          "Phase 5 — Voiceover"
+        ],
+        [
+          "##",
+          "Phase 6 — Assemble (automatic, mandatory)"
+        ],
+        [
+          "##",
+          "Delivery"
+        ],
+        [
+          "##",
+          "Failure handling"
+        ]
+      ],
+      "code_blocks": 3,
+      "model_mentions": [
+        "explainer_video",
+        "gemini_omni",
+        "generate_audio",
+        "generate_image",
+        "generate_video",
+        "job_status",
+        "list_voices",
+        "nano_banana_pro",
+        "resolve_explainer_preset",
+        "seed_audio",
+        "seedance_2_0",
+        "show_generations"
+      ]
+    },
+    {
+      "path": "references/diorama-doc.md",
+      "bytes": 7389,
+      "sha256": "5ea15442d69f164ff5d7775c960b49715f1daf0ff0db57c3ba4f7a6e563b37e2",
+      "lines": 164,
+      "headings": [
+        [
+          "#",
+          "Paper-Diorama Documentary Style (\"WHO BLINKS?\" playbook)"
+        ],
+        [
+          "##",
+          "Style key"
+        ],
+        [
+          "##",
+          "STYLE tokens (open every clip prompt with these)"
+        ],
+        [
+          "##",
+          "Prop typography"
+        ],
+        [
+          "##",
+          "Reusable prop assets (attach to keep objects consistent)"
+        ],
+        [
+          "##",
+          "Engine: seedance_2_0 (ref-grade)"
+        ],
+        [
+          "##",
+          "Fake-oner block prompt shape"
+        ],
+        [
+          "##",
+          "Moderation map (hard-won)"
+        ],
+        [
+          "##",
+          "Music"
+        ]
+      ],
+      "code_blocks": 6,
+      "model_mentions": [
+        "gemini_omni",
+        "generate_audio",
+        "generate_image",
+        "generate_video",
+        "nano_banana_pro",
+        "seedance_2_0"
+      ]
+    },
+    {
+      "path": "references/vox-prompts.md",
+      "bytes": 7674,
+      "sha256": "227f3a502a1ba1669f760cd9dbad554321f45a28b2355d7c02aa131f511de8f1",
+      "lines": 159,
+      "headings": [
+        [
+          "#",
+          "Vox-Style Prompt Templates"
+        ],
+        [
+          "##",
+          "The visual vocabulary"
+        ],
+        [
+          "##",
+          "Motion vocabulary"
+        ],
+        [
+          "##",
+          "STYLE KEY prompt (only for 16:9 runs — default 9:16 uses the preset)"
+        ],
+        [
+          "##",
+          "STYLE tokens (used in every block prompt's STYLE REFERENCE line)"
+        ],
+        [
+          "##",
+          "Block prompt template"
+        ],
+        [
+          "##",
+          "Worked examples"
+        ],
+        [
+          "##",
+          "Script example (structure reference, 6 blocks = 1 minute)"
+        ]
+      ],
+      "code_blocks": 6,
+      "model_mentions": [
+        "generate_image",
+        "nano_banana_pro"
+      ]
+    }
+  ],
+  "uuid_like_ids": [
+    "0561c26f-ad53-44da-815d-a8796d32d864",
+    "0cb0ada4-5376-44fe-8950-822425825336",
+    "4cf403d1-6791-4661-af13-7d61330accdd",
+    "68d803d1-3876-4410-9be4-9d800f6913be",
+    "80e4dd7b-cd65-42d4-b191-b58d62558602",
+    "bd35a771-ddd9-456f-827a-18027293d1b0"
+  ],
+  "risks": [
+    "usa créditos/pagamento Higgsfield",
+    "há mapa de moderação/NSFW e risco com políticos/rostos",
+    "regra original manda prosseguir sem aprovação — precisa adaptar para gate IVS antes de gasto",
+    "usa fake-oner como técnica narrativa, não falsificação factual"
+  ],
+  "core_pipeline": [
+    "T Topic: tema dado ou pesquisa de tendência",
+    "R Research: fatos verificados e fontes",
+    "1 Style key: preset Mixed Media ou key 16:9",
+    "2 Script: blocos de 10s com fórmula Vox",
+    "3 Prompts: um prompt visual por bloco",
+    "4 Clips: gerar N vídeos",
+    "5 Voiceover: uma narração por bloco",
+    "6 Assemble: juntar clips, áudio e legendas em MP4"
+  ],
+  "ivs_applications": [
+    "Reels educativos premium do João",
+    "Vídeos de explicação de exames sem rosto/paciente",
+    "Conteúdos de autoridade sobre método IVS",
+    "Motion graphics para campanhas, sem promessa de resultado",
+    "Versões internas para apresentar mecanismos metabólicos"
+  ],
+  "no_secrets_detected": true
+}
