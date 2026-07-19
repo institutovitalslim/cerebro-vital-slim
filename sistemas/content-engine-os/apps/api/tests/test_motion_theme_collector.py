@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from app.services.motion_video_theme_collector import (
+    build_motion_plan_payload_from_winner,
     build_theme_ingest_payload,
     build_winner_outputs,
     parse_hashtag_posts,
@@ -75,6 +76,23 @@ class MotionThemeCollectorTests(unittest.TestCase):
         self.assertIn("avaliação", text)
         self.assertNotIn("garante", text)
         self.assertIn("review_required", outputs["compliance_gate"])
+    def test_build_motion_plan_payload_from_winner_links_source_and_guardrails(self):
+        winner = {
+            "winner_type": "attention",
+            "external_id": "instagram:ABC",
+            "content_format": "sinal_escondido",
+            "hook_summary": "Menopausa não é frescura",
+            "source_url": "https://www.instagram.com/p/ABC/",
+            "outputs": build_winner_outputs({"hook_summary": "Menopausa não é frescura", "content_format": "sinal_escondido"}, winner_type="attention", topic="menopausa"),
+        }
+        payload = build_motion_plan_payload_from_winner(winner, topic="menopausa")
+        self.assertEqual(payload["source_type"], "theme_winner")
+        self.assertIsNone(payload["source_id"])
+        self.assertEqual(payload["content_format"], "sinal_escondido")
+        self.assertIn("Menopausa", payload["topic"])
+        self.assertIn("instagram:ABC", payload["source_examples_summary"])
+        self.assertIn("não copiar", payload["source_examples_summary"].lower())
+        self.assertEqual(payload["duration_seconds"], 60)
 
 
 if __name__ == "__main__":

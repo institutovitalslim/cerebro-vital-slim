@@ -736,3 +736,17 @@ select.input:focus {
   margin: 8px 0;
   padding-left: 18px;
 }
+.winnerPlanButton {
+  margin-top: 10px;
+  border: 1px solid rgba(252, 211, 77, .35);
+  background: rgba(245, 158, 11, .12);
+  color: #fde68a;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.winnerPlanButton:disabled {
+  opacity: .55;
+  cursor: wait;
+}

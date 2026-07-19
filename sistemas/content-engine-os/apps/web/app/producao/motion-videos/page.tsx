@@ -251,6 +251,30 @@ export default function Page() {
     }
   }
 
+  async function generatePlanFromWinner(winner: ThemeWinner) {
+    setGenerating(true)
+    setError('')
+    setPlan(null)
+    setProjectId('')
+    try {
+      const response = await fetch(`${api}/motion-videos/plan-from-winner`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tenant_slug: 'demo', topic: themeForm.topic, winner }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data?.detail || `winner plan ${response.status}`)
+      setPlan(data.payload)
+      setProjectId(data.id)
+      setCollectMessage(`Plano gerado a partir do winner ${winner.winner_type}: ${data.id}`)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Falha ao gerar plano do winner')
+    } finally {
+      setGenerating(false)
+    }
+  }
+
   async function collectTheme() {
     setCollectingTheme(true)
     setError('')
@@ -422,6 +446,9 @@ export default function Page() {
                       {winner.outputs.hooks_adaptados.map((hook) => <li key={hook}>{hook}</li>)}
                     </ul>
                     <small>{winner.outputs.compliance_gate}</small>
+                    <button type="button" className="winnerPlanButton" onClick={() => generatePlanFromWinner(winner)} disabled={generating}>
+                      {generating ? 'Gerando plano...' : 'Gerar plano Higgsfield deste winner'}
+                    </button>
                   </article>
                 ))}
               </div>

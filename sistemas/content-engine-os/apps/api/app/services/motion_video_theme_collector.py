@@ -187,6 +187,35 @@ def select_theme_winners(examples: list[dict[str, Any]], topic: str) -> list[dic
     return winners
 
 
+def build_motion_plan_payload_from_winner(winner: dict[str, Any], topic: str) -> dict[str, Any]:
+    outputs = winner.get("outputs") or {}
+    hooks = outputs.get("hooks_adaptados") or []
+    first_hook = hooks[0] if hooks else (winner.get("hook_summary") or f"Referência winner sobre {topic}")
+    source_id = winner.get("external_id") or winner.get("source_url") or "theme_winner"
+    return {
+        "tenant_slug": "demo",
+        "source_type": "theme_winner",
+        "source_id": None,
+        "topic": f"{topic.capitalize()} — {first_hook}",
+        "thesis": f"Usar o winner {winner.get('winner_type')} como ponto de partida para explicar {topic} sem promessa, diagnóstico público ou cópia da referência.",
+        "objective": "educacao_autoridade",
+        "objection": "isso_e_normal_da_idade",
+        "content_format": winner.get("content_format") or "mini_aula_visual",
+        "source_example_ids": [source_id],
+        "source_examples_summary": (
+            f"Winner real {winner.get('winner_type')} ({source_id}) usado apenas como referência de mecanismo. "
+            f"URL: {winner.get('source_url') or 'não informada'}. Não copiar legenda, roteiro, voz, edição ou claim clínico. "
+            f"Hooks adaptados: {' | '.join(hooks[:3])}. Compliance: {outputs.get('compliance_gate', 'review_required')}"
+        ),
+        "content_strategy": "loop_previsao",
+        "screen_format": "reels",
+        "duration_seconds": 60,
+        "visual_preset": "ivs_mixed_media_medico_premium",
+        "voiceover": "documental_feminina_pt_br",
+        "cta": "Procure avaliação médica individualizada para entender seu caso.",
+    }
+
+
 def collect_theme_items(topic: str, tags_csv: str | None = None, posts_per_tag: int = 6, limit: int = 8) -> dict[str, Any]:
     tags = theme_tags(topic, tags_csv)
     seen: set[str] = set()

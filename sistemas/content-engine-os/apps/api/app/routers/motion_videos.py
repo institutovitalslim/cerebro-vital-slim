@@ -16,9 +16,16 @@ from app.services.motion_video_planner import (
     motion_video_options,
     normalize_real_content_format_example,
 )
-from app.services.motion_video_theme_collector import build_theme_ingest_payload, collect_theme_items, select_theme_winners
+from app.services.motion_video_theme_collector import build_motion_plan_payload_from_winner, build_theme_ingest_payload, collect_theme_items, select_theme_winners
 
 router = APIRouter(prefix="/motion-videos", tags=["motion-videos"])
+
+
+class WinnerPlanRequest(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    topic: str = Field(default="menopausa")
+    winner: dict[str, Any]
+    overrides: dict[str, Any] = Field(default_factory=dict)
 
 
 class ThemeCollectRequest(BaseModel):
@@ -535,6 +542,19 @@ def create_plan(payload: MotionVideoPlanRequest) -> dict[str, Any]:
         "approval_status": "plan_only",
         "payload": plan,
     }
+
+
+@router.post("/plan-from-winner")
+def create_plan_from_winner(payload: WinnerPlanRequest) -> dict[str, Any]:
+    base = build_motion_plan_payload_from_winner(payload.winner, payload.topic)
+    base["tenant_slug"] = payload.tenant_slug
+    for key, value in (payload.overrides or {}).items():
+        if key in {"topic", "objective", "objection", "content_format", "content_strategy", "screen_format", "duration_seconds", "visual_preset", "voiceover", "cta"}:
+            base[key] = value
+    request = MotionVideoPlanRequest(**base)
+    result = create_plan(request)
+    result["winner_source"] = {"winner_type": payload.winner.get("winner_type"), "external_id": payload.winner.get("external_id"), "source_url": payload.winner.get("source_url")}
+    return result
 
 
 @router.post("/{project_id}/approve-generation")
