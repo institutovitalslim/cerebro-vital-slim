@@ -22,10 +22,18 @@ export const metadata: Metadata = {
 
 const groups = [
   {
+    title: '1 · Fontes (base do sistema)',
+    links: [
+      { href: '/fontes', label: 'Fontes de conteúdo & sinais' },
+      { href: '/biblioteca/dra', label: 'Fotos da Dra' },
+      { href: '/stories-engine/broll', label: 'B-roll (fotos e vídeos)' },
+    ],
+  },
+  {
     title: 'Comando',
     links: [
       { href: '/', label: 'Cockpit executivo' },
-      { href: '/sprint-semanal', label: 'Sprint semanal' },
+      { href: '/ajuda', label: 'Manual / ajuda' },
       { href: '/business-intelligence', label: 'BI · Business Intelligence' },
       { href: '/social-selling', label: 'Social Selling' },
       { href: '/radar-externo', label: 'Radar externo' },
@@ -35,7 +43,6 @@ const groups = [
   {
     title: 'Inteligência',
     links: [
-      { href: '/fontes', label: 'Radar de fontes & sinais' },
       { href: '/banco-roteiros', label: 'Banco de roteiros' },
       { href: '/estrategia', label: 'Estratégia de marca' },
     ],
@@ -44,11 +51,13 @@ const groups = [
     title: 'Produção',
     links: [
       { href: '/criar', label: 'Produção · escolher formato' },
+      { href: '/producao/video-bruto', label: 'Vídeo bruto → Reel' },
       { href: '/producao/carrosseis', label: 'Criar Carrosséis' },
       { href: '/producao/estaticos', label: 'Criar Estáticos' },
       { href: '/producao/reels', label: 'Criar Reels' },
+      { href: '/producao/motion-videos', label: 'Motion Videos · Higgsfield' },
       { href: '/stories-engine', label: 'Stories Engine' },
-      { href: '/banco-criativos', label: 'Aprovar criativos' },
+      { href: '/banco-criativos', label: 'Banco de Criativos' },
       { href: '/biblioteca', label: 'Biblioteca de assets' },
     ],
   },
@@ -61,10 +70,6 @@ const groups = [
       { href: '/dashboards', label: 'Ads & canais pagos' },
       { href: '/criativos-campeoes', label: 'Criativos campeões' },
     ],
-  },
-  {
-    title: 'Motor B · Pacientes',
-    links: [{ href: '/apresentacoes', label: 'Apresentações de acompanhamento' }],
   },
 ]
 
