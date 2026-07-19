@@ -17,6 +17,10 @@ ivs-social-reach youtube-info --url 'https://www.youtube.com/watch?v=VIDEO_ID'
 ivs-social-reach youtube-subtitles --url 'https://www.youtube.com/watch?v=VIDEO_ID' --lang 'pt,en'
 ```
 
+## Referências operacionais IVS
+
+- `references/instagram-stable-theme-search.md` — rota validada para busca temática Instagram/Search/Hashtag via RapidAPI Stable API (`search_ig.php` + `search_hashtag.php`) para alimentar o Content OS com fontes prioritárias 100→30.
+
 ## Guardrails IVS
 
 - Somente leitura/coleta. Não publicar, curtir, comentar, seguir ou mandar DM.

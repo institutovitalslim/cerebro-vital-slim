@@ -31,3 +31,5 @@ Chrome remoto/noVNC: Tiaro pode não conseguir abrir IP direto; preferir link tr
 Repos salvos: Vibe-Trading=HKUDS/Vibe-Trading; carrossel DaYAGDDgZgE mapeado em repo_notes/skills.
 §
 Tiaro aprovou o padrão das páginas estáticas Authority Link Engine do IVS em Lauro de Freitas; usar como benchmark para futuras páginas SEO/autoridade locais.
+§
+Eduardo é gestor IVS de Materiais e Medicamentos.

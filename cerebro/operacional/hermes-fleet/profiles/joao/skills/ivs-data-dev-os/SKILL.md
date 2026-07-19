@@ -176,6 +176,10 @@ Conclusão mínima: smoke `ok:true`, criativo teste `renderizado`, PNG público 
 ## Referências complementares
 
 - `references/content-engine-weekly-sprint.md` — sprint semanal de posicionamento, hook selector, briefing herdado e governança de legenda.
+- `references/content-engine-strategy-selector-and-restart.md` — padrão para seletores de estratégia narrativa com resumo/estrutura/quando escolher, validação de build e restart seguro dos containers `content-engine-web`/`content-engine-api`.
+- `references/content-engine-instagram-strategy-source-ingest.md` — padrão para quando Tiaro pedir para aprender uma estratégia de Reel/post e incluir como fonte/material do Content OS: consumo real da peça, destilação IVS-first, registro em documento, prompt reference library, seed SQL e `viral_scripts`.
+- `references/content-engine-instagram-theme-search-priority.md` — padrão validado para busca temática Instagram/Search/Hashtag como prioridade de fontes do Content OS, usando `search_ig.php` + `search_hashtag.php`, com `instagram-theme-search-priority` acima de perfis semente.
+- `references/content-engine-approved-profile-content-map.md` — padrão para mapear em lote conteúdos de perfis Instagram aprovados para a biblioteca do Content OS: coleta read-only, `external_content_items`, `content_pattern_library`, `viral_scripts`, seed idempotente, documentação e validação por contagens reais.
 - `references/content-engine-phase1-editorial-flow.md` — contrato e validação da Fase 1 operacional: aprovar criativo → calendário → publicado → métrica → BI.
 - `references/content-engine-phase2-learning-loop.md` — contrato e validação da Fase 2: métricas registradas → ranking de vencedores → recomendações → próxima tese do Sprint Semanal.
 - `references/higgsfield-cli-content-os-map.md` — roteamento Higgsfield CLI para Content Engine OS, com fonte canônica no cérebro.
