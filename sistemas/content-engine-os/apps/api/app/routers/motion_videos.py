@@ -16,8 +16,18 @@ from app.services.motion_video_planner import (
     motion_video_options,
     normalize_real_content_format_example,
 )
+from app.services.motion_video_theme_collector import build_theme_ingest_payload, collect_theme_items
 
 router = APIRouter(prefix="/motion-videos", tags=["motion-videos"])
+
+
+class ThemeCollectRequest(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    topic: str = Field(default="menopausa")
+    tags: str | None = None
+    posts_per_tag: int = Field(default=6, ge=1, le=12)
+    limit: int = Field(default=8, ge=1, le=12)
+    dry_run: bool = Field(default=False)
 
 
 class RealExampleIngestRequest(BaseModel):
@@ -108,7 +118,7 @@ def _upsert_format_example(cur, tenant_id: str, format_id: str | None, item: dic
             item["source_handle_or_url"],
             item["external_id"],
             item["content_url"],
-            item["thumbnail_url"],
+            item.get("thumbnail_url"),
             item["transcript_summary"],
             item["hook_summary"],
             item.get("retention_mechanism"),
@@ -246,6 +256,38 @@ def winners(content_format: str = "mito_que_prende") -> dict[str, Any]:
     return {"content_format": content_format, "items": items}
 
 
+@router.post("/collect-theme")
+def collect_theme(payload: ThemeCollectRequest) -> dict[str, Any]:
+    try:
+        collected = collect_theme_items(payload.topic, payload.tags, payload.posts_per_tag, payload.limit)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, payload.tenant_slug)
+        formats = _format_ids(conn, tenant_id)
+        ingested: list[dict[str, Any]] = []
+        with conn.cursor() as cur:
+            for source_item in collected["items"]:
+                item = build_theme_ingest_payload(source_item, topic=payload.topic)
+                format_id = formats.get(item["content_format"])
+                if not format_id:
+                    continue
+                if not payload.dry_run:
+                    _upsert_format_example(cur, tenant_id, format_id, item)
+                ingested.append({"external_id": item["external_id"], "content_format": item["content_format"], "url": item["content_url"], "score": item["metrics"].get("score"), "hashtag": source_item.get("hashtag")})
+    return {
+        "status": "dry_run" if payload.dry_run else "collected",
+        "tenant_slug": payload.tenant_slug,
+        "topic": payload.topic,
+        "tags": collected["tags"],
+        "collected_count": collected["collected_count"],
+        "selected_count": collected["selected_count"],
+        "ingested_count": 0 if payload.dry_run else len(ingested),
+        "items": ingested,
+        "errors": collected.get("errors", []),
+    }
+
+
 @router.post("/ingest-example")
 def ingest_real_example(payload: RealExampleIngestRequest) -> dict[str, Any]:
     raw = payload.model_dump() if hasattr(payload, "model_dump") else payload.dict()
@@ -301,7 +343,7 @@ def seed_examples(tenant_slug: str = "demo") -> dict[str, Any]:
                         item["source_handle_or_url"],
                         item["external_id"],
                         item["content_url"],
-                        item["thumbnail_url"],
+                        item.get("thumbnail_url"),
                         item["transcript_summary"],
                         item["hook_summary"],
                         item["why_this_example_works"],

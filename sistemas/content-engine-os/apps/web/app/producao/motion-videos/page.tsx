@@ -117,6 +117,9 @@ export default function Page() {
   const [ingesting, setIngesting] = useState(false)
   const [ingestMessage, setIngestMessage] = useState('')
   const [exampleItems, setExampleItems] = useState<ContentFormatExample[]>([])
+  const [collectingTheme, setCollectingTheme] = useState(false)
+  const [collectMessage, setCollectMessage] = useState('')
+  const [themeForm, setThemeForm] = useState({ topic: 'menopausa', tags: 'menopausa,climaterio,fogachos,menopausaemagrecimento,terapiahormonal', limit: 8 })
   const [exampleForm, setExampleForm] = useState({
     content_url: 'https://www.instagram.com/reel/ABC123/',
     source_handle_or_url: '@perfil_exemplo',
@@ -209,6 +212,32 @@ export default function Page() {
       setError(err instanceof Error ? err.message : 'Falha ao cadastrar exemplo real')
     } finally {
       setIngesting(false)
+    }
+  }
+
+  async function collectTheme() {
+    setCollectingTheme(true)
+    setError('')
+    setCollectMessage('')
+    try {
+      const response = await fetch(`${api}/motion-videos/collect-theme`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tenant_slug: 'demo', topic: themeForm.topic, tags: themeForm.tags, posts_per_tag: 6, limit: themeForm.limit }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data?.detail || `collect ${response.status}`)
+      setCollectMessage(`Coleta concluída: ${data.ingested_count} exemplos ingeridos de ${data.collected_count} coletados.`)
+      const examplesResponse = await fetch(`${api}/motion-videos/examples?tenant_slug=demo&content_format=${encodeURIComponent(form.content_format)}`, { credentials: 'include', cache: 'no-store' })
+      if (examplesResponse.ok) {
+        const examplesData = await examplesResponse.json()
+        setExampleItems(examplesData.items || [])
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Falha ao coletar tema')
+    } finally {
+      setCollectingTheme(false)
     }
   }
 
@@ -311,6 +340,39 @@ export default function Page() {
               <p>{options.matrix_8x8.rows.length} fontes × {options.matrix_8x8.columns.length} sinais, com winners de atenção, conversão e adaptação IVS.</p>
             </div>
           ) : null}
+
+          <div className="themeCollectBox">
+            <div className="sectionHeaderCompact">
+              <span className="eyebrow small">Fase 4 · coleta temática</span>
+              <strong>Buscar referências públicas por tema</strong>
+            </div>
+            <div className="twoCols">
+              <input
+                value={themeForm.topic}
+                onChange={(e) => setThemeForm({ ...themeForm, topic: e.target.value })}
+                placeholder="Tema: menopausa"
+              />
+              <input
+                type="number"
+                min="1"
+                max="12"
+                value={themeForm.limit}
+                onChange={(e) => setThemeForm({ ...themeForm, limit: Number(e.target.value) })}
+                placeholder="Limite"
+              />
+            </div>
+            <textarea
+              value={themeForm.tags}
+              onChange={(e) => setThemeForm({ ...themeForm, tags: e.target.value })}
+              rows={2}
+              placeholder="hashtags separadas por vírgula"
+            />
+            <button type="button" className="secondaryButton" onClick={collectTheme} disabled={collectingTheme}>
+              {collectingTheme ? 'Coletando...' : 'Coletar referências por tema'}
+            </button>
+            {collectMessage ? <p className="successText small">{collectMessage}</p> : null}
+            <small className="muted">Gate: máximo 12 itens, somente conteúdo público, sem baixar mídia, publicar ou copiar legenda.</small>
+          </div>
 
           <div className="realExampleBox">
             <div className="sectionHeaderCompact">

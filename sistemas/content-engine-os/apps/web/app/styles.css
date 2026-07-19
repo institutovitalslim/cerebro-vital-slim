@@ -694,3 +694,17 @@ select.input:focus {
   cursor: pointer;
 }
 .secondaryButton:disabled { opacity: .6; cursor: not-allowed; }
+
+/* Motion Videos Fase 4 · coleta temática */
+.themeCollectBox {
+  border: 1px solid rgba(59, 130, 246, .24);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, .72), rgba(30, 58, 138, .18));
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+.themeCollectBox input,
+.themeCollectBox textarea {
+  width: 100%;
+}
