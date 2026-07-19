@@ -14,9 +14,30 @@ from app.services.motion_video_planner import (
     example_winners_for_format,
     motion_video_matrix_8x8,
     motion_video_options,
+    normalize_real_content_format_example,
 )
 
 router = APIRouter(prefix="/motion-videos", tags=["motion-videos"])
+
+
+class RealExampleIngestRequest(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    content_format: str
+    source_type: str = Field(default="manual_url")
+    source_handle_or_url: str | None = None
+    external_id: str | None = None
+    content_url: str | None = None
+    thumbnail_url: str | None = None
+    transcript_summary: str | None = None
+    hook_summary: str | None = None
+    why_this_example_works: str | None = None
+    retention_mechanism: str | None = None
+    compliance_risk: str | None = None
+    ivs_applicability_score: int = Field(default=70, ge=0, le=100)
+    winner_candidate_type: str | None = None
+    metrics: dict[str, Any] = Field(default_factory=dict)
+    raw_payload_summary: str | None = None
+    caption_summary: str | None = None
 
 
 class MotionVideoPlanRequest(BaseModel):
@@ -47,6 +68,62 @@ def _tenant_id(conn, tenant_slug: str) -> str:
     if not row:
         raise HTTPException(status_code=404, detail=f"tenant '{tenant_slug}' not found")
     return row["id"]
+
+
+def _format_ids(conn, tenant_id: str) -> dict[str, str]:
+    with conn.cursor() as cur:
+        cur.execute("select key, id from content_formats where tenant_id=%s", (tenant_id,))
+        return {row["key"]: row["id"] for row in cur.fetchall()}
+
+
+def _upsert_format_example(cur, tenant_id: str, format_id: str | None, item: dict[str, Any]) -> None:
+    cur.execute(
+        """
+        insert into content_format_examples (
+          tenant_id, content_format_id, content_format_key, source_type,
+          source_handle_or_url, external_id, content_url, thumbnail_url,
+          transcript_summary, hook_summary, retention_mechanism, why_this_example_works,
+          compliance_risk, ivs_applicability_score, metadata
+        ) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s::jsonb)
+        on conflict (tenant_id, external_id) do update set
+          content_format_id = excluded.content_format_id,
+          content_format_key = excluded.content_format_key,
+          source_type = excluded.source_type,
+          source_handle_or_url = excluded.source_handle_or_url,
+          content_url = excluded.content_url,
+          thumbnail_url = excluded.thumbnail_url,
+          transcript_summary = excluded.transcript_summary,
+          hook_summary = excluded.hook_summary,
+          retention_mechanism = excluded.retention_mechanism,
+          why_this_example_works = excluded.why_this_example_works,
+          compliance_risk = excluded.compliance_risk,
+          ivs_applicability_score = excluded.ivs_applicability_score,
+          metadata = excluded.metadata
+        """,
+        (
+            tenant_id,
+            format_id,
+            item["content_format"],
+            item["source_type"],
+            item["source_handle_or_url"],
+            item["external_id"],
+            item["content_url"],
+            item["thumbnail_url"],
+            item["transcript_summary"],
+            item["hook_summary"],
+            item.get("retention_mechanism"),
+            item["why_this_example_works"],
+            item["compliance_risk"],
+            item["ivs_applicability_score"],
+            json.dumps({
+                "winner_candidate_type": item.get("winner_candidate_type"),
+                "copy_guardrail": item.get("copy_guardrail"),
+                "selected_for_generation": item.get("selected_for_generation", False),
+                "raw_metrics": item.get("raw_metrics") or {},
+                "raw_payload_summary": item.get("raw_payload_summary"),
+            }, ensure_ascii=False),
+        ),
+    )
 
 
 def _safe_fetch_sources(conn, tenant_id: str) -> dict[str, list[dict[str, Any]]]:
@@ -108,12 +185,51 @@ def options() -> dict[str, Any]:
 
 
 @router.get("/examples")
-def examples(content_format: str | None = None) -> dict[str, Any]:
+def examples(content_format: str | None = None, tenant_slug: str = "demo", include_archetypes: bool = True) -> dict[str, Any]:
     try:
-        items = build_content_format_examples(content_format)
+        items = build_content_format_examples(content_format) if include_archetypes else []
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc))
-    return {"items": items, "count": len(items), "content_format": content_format}
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            if content_format:
+                cur.execute(
+                    """
+                    select id::text, content_format_key as content_format, source_type, source_handle_or_url,
+                           external_id, content_url, thumbnail_url, transcript_summary, hook_summary,
+                           retention_mechanism, why_this_example_works, compliance_risk,
+                           ivs_applicability_score, metadata, created_at
+                    from content_format_examples
+                    where tenant_id=%s and content_format_key=%s
+                    order by created_at desc
+                    limit 120
+                    """,
+                    (tenant_id, content_format),
+                )
+            else:
+                cur.execute(
+                    """
+                    select id::text, content_format_key as content_format, source_type, source_handle_or_url,
+                           external_id, content_url, thumbnail_url, transcript_summary, hook_summary,
+                           retention_mechanism, why_this_example_works, compliance_risk,
+                           ivs_applicability_score, metadata, created_at
+                    from content_format_examples
+                    where tenant_id=%s
+                    order by created_at desc
+                    limit 240
+                    """,
+                    (tenant_id,),
+                )
+            db_items = cur.fetchall()
+    for item in db_items:
+        item["copy_guardrail"] = (item.get("metadata") or {}).get("copy_guardrail", "Referência governada: não copiar.")
+        item["winner_candidate_type"] = (item.get("metadata") or {}).get("winner_candidate_type", "pending")
+        item["origin"] = "db"
+    for item in items:
+        item["origin"] = "archetype"
+    merged = db_items + items
+    return {"items": merged, "count": len(merged), "content_format": content_format, "db_count": len(db_items), "archetype_count": len(items)}
 
 
 @router.get("/matrix-8x8")
@@ -128,6 +244,24 @@ def winners(content_format: str = "mito_que_prende") -> dict[str, Any]:
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc))
     return {"content_format": content_format, "items": items}
+
+
+@router.post("/ingest-example")
+def ingest_real_example(payload: RealExampleIngestRequest) -> dict[str, Any]:
+    raw = payload.model_dump() if hasattr(payload, "model_dump") else payload.dict()
+    try:
+        item = normalize_real_content_format_example(raw)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, payload.tenant_slug)
+        formats = _format_ids(conn, tenant_id)
+        format_id = formats.get(item["content_format"])
+        if not format_id:
+            raise HTTPException(status_code=422, detail="rode /motion-videos/seed-formats antes de ingerir exemplos reais")
+        with conn.cursor() as cur:
+            _upsert_format_example(cur, tenant_id, format_id, item)
+    return {"status": "ingested", "tenant_slug": payload.tenant_slug, "item": item}
 
 
 @router.post("/seed-examples")

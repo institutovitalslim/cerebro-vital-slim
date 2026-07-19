@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from typing import Any
+from urllib.parse import urlparse
 
 CONTENT_FORMATS: list[dict[str, Any]] = [
     {
@@ -280,6 +281,56 @@ EXAMPLE_ARCHETYPES = [
         "winner_candidate_type": "ivs_fit",
     },
 ]
+
+
+def normalize_real_content_format_example(payload: dict[str, Any]) -> dict[str, Any]:
+    """Normaliza um vídeo real governado para content_format_examples.
+
+    Não baixa mídia nem copia roteiro: transforma URL/payload em referência de mecanismo
+    com guardrails de compliance e revisão humana antes de uso em geração.
+    """
+    content_format = (payload.get("content_format") or "").strip()
+    fmt = get_content_format(content_format)
+    raw_url = (payload.get("content_url") or payload.get("url") or "").strip()
+    source_type = (payload.get("source_type") or "manual_url").strip()
+    source_handle_or_url = (payload.get("source_handle_or_url") or payload.get("source_profile") or raw_url or "manual").strip()
+    external_id = (payload.get("external_id") or "").strip()
+    clean_url = raw_url
+
+    if raw_url:
+        parsed = urlparse(raw_url)
+        path_parts = [part for part in parsed.path.split("/") if part]
+        if "instagram.com" in parsed.netloc and len(path_parts) >= 2 and path_parts[0] in {"p", "reel", "tv"}:
+            shortcode = path_parts[1]
+            clean_url = f"https://www.instagram.com/{path_parts[0]}/{shortcode}/"
+            external_id = external_id or f"instagram:{shortcode}"
+        elif not external_id:
+            external_id = f"url:{parsed.netloc}{parsed.path}" if parsed.netloc else f"manual:{fmt['key']}"
+    if not external_id:
+        external_id = f"manual:{fmt['key']}:{abs(hash(str(payload))) % 100000000}"
+
+    score = int(payload.get("ivs_applicability_score") or 70)
+    score = max(0, min(100, score))
+    return {
+        "content_format": fmt["key"],
+        "content_format_name": fmt["name"],
+        "source_type": source_type,
+        "source_handle_or_url": source_handle_or_url,
+        "external_id": external_id,
+        "content_url": clean_url or None,
+        "thumbnail_url": payload.get("thumbnail_url"),
+        "transcript_summary": (payload.get("transcript_summary") or "Referência real cadastrada para análise de mecanismo; transcrição completa não armazenada.").strip(),
+        "hook_summary": (payload.get("hook_summary") or "Hook pendente de análise pelo João/Maria.").strip(),
+        "why_this_example_works": (payload.get("why_this_example_works") or "Exemplo real precisa ser usado apenas para abstrair mecanismo, ritmo e retenção.").strip(),
+        "retention_mechanism": payload.get("retention_mechanism") or "pending_analysis",
+        "compliance_risk": payload.get("compliance_risk") or "review_required",
+        "ivs_applicability_score": score,
+        "winner_candidate_type": payload.get("winner_candidate_type") or "pending",
+        "selected_for_generation": False,
+        "copy_guardrail": "Referência real: não copiar frase, roteiro, legenda, voz, edição proprietária ou claim clínico; usar somente mecanismo abstrato.",
+        "raw_metrics": payload.get("metrics") or {},
+        "raw_payload_summary": payload.get("raw_payload_summary") or payload.get("caption_summary") or None,
+    }
 
 
 def build_content_format_examples(format_key: str | None = None) -> list[dict[str, Any]]:

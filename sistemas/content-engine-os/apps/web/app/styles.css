@@ -665,3 +665,32 @@ select.input:focus {
 .exampleCard small,
 .winnerCard p,
 .matrixMini p { margin: 0; color: var(--text-soft); line-height: 1.52; }
+
+/* Motion Videos Fase 3 · referências reais governadas */
+.realExampleBox {
+  border: 1px solid rgba(74, 222, 128, .2);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(20,83,45,.16), rgba(0,0,0,.16));
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+.realExampleBox input,
+.realExampleBox textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255,255,255,.045);
+  color: var(--text);
+  padding: 10px 12px;
+}
+.secondaryButton {
+  border: 1px solid rgba(212,168,60,.35);
+  border-radius: 999px;
+  background: rgba(212,168,60,.12);
+  color: #fff3d6;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.secondaryButton:disabled { opacity: .6; cursor: not-allowed; }

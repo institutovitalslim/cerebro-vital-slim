@@ -18,6 +18,7 @@ type ContentFormat = {
 
 type ContentFormatExample = {
   id: string
+  external_id?: string
   content_format: string
   hook_summary: string
   why_this_example_works: string
@@ -26,6 +27,7 @@ type ContentFormatExample = {
   ivs_applicability_score: number
   winner_candidate_type: string
   copy_guardrail: string
+  origin?: string
 }
 
 type MotionPreset = Record<string, { label: string; description: string }>
@@ -112,6 +114,17 @@ export default function Page() {
   const [error, setError] = useState('')
   const [plan, setPlan] = useState<MotionPlan | null>(null)
   const [projectId, setProjectId] = useState('')
+  const [ingesting, setIngesting] = useState(false)
+  const [ingestMessage, setIngestMessage] = useState('')
+  const [exampleItems, setExampleItems] = useState<ContentFormatExample[]>([])
+  const [exampleForm, setExampleForm] = useState({
+    content_url: 'https://www.instagram.com/reel/ABC123/',
+    source_handle_or_url: '@perfil_exemplo',
+    hook_summary: 'Hook real observado nos 3 primeiros segundos',
+    transcript_summary: 'Resumo curto do vídeo, sem copiar roteiro literal.',
+    why_this_example_works: 'Funciona porque abre loop, reframeia objeção e entrega payoff visual.',
+    ivs_applicability_score: 88,
+  })
   const [form, setForm] = useState({
     topic: 'Por que emagrecer não é o mesmo que manter?',
     objective: 'educacao_autoridade',
@@ -136,14 +149,21 @@ export default function Page() {
       .finally(() => setLoading(false))
   }, [])
 
+  useEffect(() => {
+    fetch(`${api}/motion-videos/examples?tenant_slug=demo&content_format=${encodeURIComponent(form.content_format)}`, { credentials: 'include', cache: 'no-store' })
+      .then((r) => r.ok ? r.json() : Promise.reject(new Error(`examples ${r.status}`)))
+      .then((data) => setExampleItems(data.items || []))
+      .catch(() => setExampleItems([]))
+  }, [form.content_format])
+
   const selectedFormat = useMemo(
     () => options?.content_formats.find((item) => item.key === form.content_format),
     [options, form.content_format],
   )
 
   const selectedExamples = useMemo(
-    () => (options?.content_format_examples || []).filter((item) => item.content_format === form.content_format),
-    [options, form.content_format],
+    () => exampleItems.length ? exampleItems : (options?.content_format_examples || []).filter((item) => item.content_format === form.content_format),
+    [options, form.content_format, exampleItems],
   )
 
   async function submit(event: FormEvent) {
@@ -167,6 +187,28 @@ export default function Page() {
       setError(err instanceof Error ? err.message : 'Falha ao gerar plano')
     } finally {
       setGenerating(false)
+    }
+  }
+
+  async function ingestExample() {
+    setIngesting(true)
+    setError('')
+    setIngestMessage('')
+    try {
+      const response = await fetch(`${api}/motion-videos/ingest-example`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tenant_slug: 'demo', content_format: form.content_format, source_type: 'manual_url', ...exampleForm }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data?.detail || `ingest ${response.status}`)
+      setIngestMessage(`Exemplo real cadastrado: ${data.item.external_id}`)
+      setExampleItems((current) => [{ ...data.item, origin: 'db' }, ...current.filter((item) => item.external_id !== data.item.external_id)])
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Falha ao cadastrar exemplo real')
+    } finally {
+      setIngesting(false)
     }
   }
 
@@ -255,7 +297,7 @@ export default function Page() {
             </div>
             {selectedExamples.map((example) => (
               <article key={example.id} className="exampleCard">
-                <span>{example.winner_candidate_type}</span>
+                <span>{example.origin === 'db' ? 'real' : example.winner_candidate_type}</span>
                 <strong>{example.hook_summary}</strong>
                 <p>{example.why_this_example_works}</p>
                 <small>{example.copy_guardrail}</small>
@@ -269,6 +311,50 @@ export default function Page() {
               <p>{options.matrix_8x8.rows.length} fontes × {options.matrix_8x8.columns.length} sinais, com winners de atenção, conversão e adaptação IVS.</p>
             </div>
           ) : null}
+
+          <div className="realExampleBox">
+            <div className="sectionHeaderCompact">
+              <span className="eyebrow small">Fase 3 · exemplo real</span>
+              <strong>Cadastro governado por URL</strong>
+            </div>
+            <input
+              value={exampleForm.content_url}
+              onChange={(e) => setExampleForm({ ...exampleForm, content_url: e.target.value })}
+              placeholder="https://www.instagram.com/reel/..."
+            />
+            <div className="twoCols">
+              <input
+                value={exampleForm.source_handle_or_url}
+                onChange={(e) => setExampleForm({ ...exampleForm, source_handle_or_url: e.target.value })}
+                placeholder="@perfil ou origem"
+              />
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value={exampleForm.ivs_applicability_score}
+                onChange={(e) => setExampleForm({ ...exampleForm, ivs_applicability_score: Number(e.target.value) })}
+                placeholder="Score IVS"
+              />
+            </div>
+            <textarea
+              value={exampleForm.hook_summary}
+              onChange={(e) => setExampleForm({ ...exampleForm, hook_summary: e.target.value })}
+              rows={2}
+              placeholder="Resumo do hook"
+            />
+            <textarea
+              value={exampleForm.why_this_example_works}
+              onChange={(e) => setExampleForm({ ...exampleForm, why_this_example_works: e.target.value })}
+              rows={2}
+              placeholder="Por que funciona sem copiar"
+            />
+            <button type="button" className="secondaryButton" onClick={ingestExample} disabled={ingesting}>
+              {ingesting ? 'Cadastrando...' : 'Cadastrar exemplo real sem copiar'}
+            </button>
+            {ingestMessage ? <p className="successText small">{ingestMessage}</p> : null}
+            <small className="muted">Não baixa mídia nem publica. Só cria referência de mecanismo com revisão obrigatória.</small>
+          </div>
 
           <label>
             Vídeos de exemplo / referência de mecanismo

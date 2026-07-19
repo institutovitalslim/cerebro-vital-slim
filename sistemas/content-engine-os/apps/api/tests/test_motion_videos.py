@@ -68,6 +68,26 @@ class MotionVideoPlannerTests(unittest.TestCase):
         self.assertEqual([item["winner_type"] for item in winners], ["attention", "conversion", "ivs_fit"])
         self.assertTrue(all(len(item["outputs_required"]) == 5 for item in winners))
 
+    def test_real_example_payload_is_sanitized_and_governed(self):
+        from app.services.motion_video_planner import normalize_real_content_format_example
+
+        item = normalize_real_content_format_example({
+            "content_format": "mito_que_prende",
+            "source_type": "instagram_url",
+            "content_url": "https://www.instagram.com/reel/ABC123/?igsh=secret",
+            "source_handle_or_url": "@perfil_exemplo",
+            "hook_summary": "Hook externo aqui",
+            "transcript_summary": "Resumo do vídeo, sem copiar roteiro literal.",
+            "why_this_example_works": "Abre loop e resolve com mecanismo.",
+            "ivs_applicability_score": 91,
+        })
+        self.assertEqual(item["content_format"], "mito_que_prende")
+        self.assertEqual(item["external_id"], "instagram:ABC123")
+        self.assertEqual(item["content_url"], "https://www.instagram.com/reel/ABC123/")
+        self.assertEqual(item["compliance_risk"], "review_required")
+        self.assertFalse(item["selected_for_generation"])
+        self.assertIn("não copiar", item["copy_guardrail"].lower())
+
     def test_build_plan_rejects_unknown_content_format(self):
         with self.assertRaisesRegex(ValueError, "content_format desconhecido"):
             build_motion_video_plan({"topic": "Teste", "content_format": "lego_brick"})
