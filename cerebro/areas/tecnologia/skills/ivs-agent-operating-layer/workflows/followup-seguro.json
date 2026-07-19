@@ -11,6 +11,7 @@
     "Mensagem aprovada ou gerada pela Clara dentro do escopo comercial"
   ],
   "preflight": [
+    "Regra canônica Tiaro 2026-07-19: primeira tarefa obrigatória do motor é analisar todo o contexto recente das mensagens do lead antes de selecionar/redigir qualquer follow-up, para retomar do ponto certo e não parecer que esqueceu a conversa",
     "Executar followup_safety_check.py em modo dry-run/local quando aplicável",
     "Verificar clara_exclusions.json",
     "Verificar clara_leads_state.json",

@@ -11,7 +11,9 @@ Seguro por padrão:
 - não usa nome do lead;
 - não oferece agenda no follow-up frio;
 - deduplica variantes de telefone;
-- registra ledger local redigido.
+- registra ledger local redigido;
+- antes de escolher qualquer texto, analisa o contexto completo recente da conversa
+  para retomar do ponto certo, sem parecer que esqueceu o lead.
 """
 from __future__ import annotations
 
@@ -310,6 +312,145 @@ FOLLOWUP_POOLS = [
 ]
 
 
+
+def extract_event_text(item: Dict[str, Any]) -> str:
+    text = str(item.get('text') or '')
+    if not text and isinstance(item.get('payload'), dict):
+        raw_text = item['payload'].get('text')
+        if isinstance(raw_text, dict):
+            text = str(raw_text.get('message') or raw_text.get('body') or '')
+        elif isinstance(raw_text, str):
+            text = raw_text
+        elif isinstance(item['payload'].get('message'), dict):
+            msg = item['payload']['message']
+            text = str(msg.get('text') or msg.get('conversation') or '')
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def event_timestamp(item: Dict[str, Any]) -> float:
+    for key in ('timestamp', 'ts', 'created_at', 'at'):
+        value = item.get(key)
+        if value is None:
+            continue
+        try:
+            value_f = float(value)
+            if value_f > 10_000_000_000:  # ms
+                value_f /= 1000
+            return value_f
+        except Exception:
+            continue
+    return 0.0
+
+
+def recent_conversation_for_phone(phone: str, max_files: int = 120, max_events: int = 80) -> List[Dict[str, Any]]:
+    """Carrega o histórico recente real do lead antes de qualquer follow-up.
+
+    Regra canônica Tiaro (2026-07-19): a primeira tarefa do motor de follow-up é
+    analisar o contexto das mensagens para voltar a se conectar com o lead da forma
+    certa. Este snapshot fica redigido no relatório (categoria/âncora, sem dump de conversa).
+    """
+    variants = set(phone_variants(phone))
+    if not variants:
+        return []
+    events: List[Dict[str, Any]] = []
+    try:
+        files = sorted(AUDIT_DIR.glob('zapi_webhook_events_*.jsonl'), key=lambda p: p.stat().st_mtime)[-max_files:]
+    except Exception:
+        files = []
+    for file_path in files:
+        try:
+            with file_path.open('r', encoding='utf-8') as fh:
+                for line in fh:
+                    try:
+                        item = json.loads(line)
+                    except Exception:
+                        continue
+                    item_phone = normalize_phone(str(item.get('phone') or '')) or re.sub(r'\D+', '', str(item.get('phone') or ''))
+                    if item_phone not in variants:
+                        continue
+                    text = extract_event_text(item)
+                    if not text:
+                        continue
+                    events.append({
+                        'ts': event_timestamp(item),
+                        'from_me': bool(item.get('from_me')) or bool(item.get('fromMe')),
+                        'text': text[:1200],
+                    })
+        except Exception:
+            continue
+    events.sort(key=lambda x: x.get('ts') or 0)
+    return events[-max_events:]
+
+
+def analyze_lead_message_context(phone: str, last_reply_preview: str = '') -> Dict[str, Any]:
+    """Analisa todo o contexto recente antes de redigir a retomada."""
+    events = recent_conversation_for_phone(phone)
+    inbound = [e for e in events if not e.get('from_me')]
+    outbound = [e for e in events if e.get('from_me')]
+    last_inbound_text = inbound[-1]['text'] if inbound else ''
+    last_outbound_text = outbound[-1]['text'] if outbound else (last_reply_preview or '')
+    joined_inbound = ' '.join(e['text'] for e in inbound[-8:])
+    norm_in = normalize_decision_text(joined_inbound)
+
+    if contains_terminal_deferral_decline(last_inbound_text):
+        return {'ok': False, 'category': 'terminal_deferral', 'anchor': 'lead pediu para retornar depois', 'event_count': len(events)}
+    if contains_financial_no_fit_decline(last_inbound_text):
+        return {'ok': False, 'category': 'financial_no_fit', 'anchor': 'lead recusou por condição financeira', 'event_count': len(events)}
+    outbound_after_inbound = bool(outbound) and (not inbound or float(outbound[-1].get('ts') or 0) >= float(inbound[-1].get('ts') or 0))
+    if contains_open_discovery_question(last_outbound_text) and (outbound_after_inbound or not outbound):
+        return {'ok': False, 'category': 'open_discovery_waiting', 'anchor': 'Clara já deixou pergunta de descoberta aberta', 'event_count': len(events)}
+
+    category = 'generic_contextual'
+    anchor = 'retomar o ponto anterior com leveza'
+    if re.search(r'\b(pre[cç]o|valor|consulta|investimento|pagar|parcel)', norm_in):
+        category = 'price_or_investment'
+        anchor = 'retomar a dúvida sobre investimento sem pressionar'
+    elif re.search(r'\b(agenda|hor[aá]rio|marcar|consulta|vaga|encaixe)', norm_in):
+        category = 'schedule_interest'
+        anchor = 'retomar o interesse em consulta/agenda sem oferecer hoje ou amanhã'
+    elif re.search(r'\b(emagrec|peso|gordura|barriga|corpo|obes)', norm_in):
+        category = 'weight_or_body_pain'
+        anchor = 'retomar a dor ligada a peso/corpo'
+    elif re.search(r'\b(cansad|energia|sono|disposi[cç][aã]o|fraqueza)', norm_in):
+        category = 'energy_or_routine_pain'
+        anchor = 'retomar a queixa de energia/rotina como descoberta'
+    elif re.search(r'\b(exame|horm[oô]nio|tireoide|glicose|colesterol|metab[oó]lic)', norm_in):
+        category = 'metabolic_or_exam_pain'
+        anchor = 'retomar a preocupação com exames/metabolismo'
+    elif last_inbound_text:
+        anchor = 'retomar a última fala do lead sem repetir pergunta'
+
+    return {
+        'ok': True,
+        'category': category,
+        'anchor': anchor,
+        'event_count': len(events),
+        'last_inbound_preview': last_inbound_text[:180],
+        'last_outbound_preview': last_outbound_text[:180],
+    }
+
+
+def contextualize_followup_message(base_message: str, context: Dict[str, Any]) -> str:
+    """Ajusta a abertura do follow-up à leitura do histórico, sem expor dados sensíveis."""
+    category = context.get('category') or 'generic_contextual'
+    if category == 'price_or_investment':
+        return ("Retomando nosso papo sobre investimento com calma: antes de qualquer decisão, "
+                "o mais importante é entender se a avaliação faz sentido para o seu momento. "
+                "Me conta só uma coisa: o que mais pesa para você hoje, o valor ou a segurança de saber o caminho certo?")
+    if category == 'schedule_interest':
+        return ("Retomando de onde paramos sobre a consulta: antes de olhar possibilidade de agenda, "
+                "quero entender seu momento para te orientar certo. O que fez você buscar ajuda agora?")
+    if category == 'weight_or_body_pain':
+        return ("Retomando o ponto que apareceu sobre peso/corpo: muitas vezes não é só força de vontade, "
+                "tem rotina, exames e metabolismo envolvidos. Hoje o que mais está te incomodando nisso?")
+    if category == 'energy_or_routine_pain':
+        return ("Retomando o que você trouxe sobre energia/rotina: isso costuma atrapalhar muito a constância. "
+                "No seu dia a dia, o que mais pesa: cansaço, sono, fome ou falta de tempo?")
+    if category == 'metabolic_or_exam_pain':
+        return ("Retomando sua preocupação com exames/metabolismo: a primeira avaliação serve justamente para "
+                "entender a raiz do problema antes de propor qualquer caminho. O que mais te preocupa hoje?")
+    return base_message
+
 def pick_followup_message(step: int, phone_state: Dict[str, Any], seed_key: str) -> Tuple[str, int]:
     """Escolhe uma variação do passo que o lead ainda não recebeu.
 
@@ -345,6 +486,8 @@ class Candidate:
     last_reply_at: float
     reply_count: int
     reason: str
+    context_category: str = 'unknown'
+    context_anchor: str = ''
 
 
 def in_business_hours(ts: Optional[float] = None) -> bool:
@@ -365,6 +508,7 @@ def select_candidates(leads_state: Dict[str, Any], cadence_state: Dict[str, Any]
         'pending_lead_message': 0, 'cadence_complete': 0, 'not_due': 0, 'selected': 0,
         'blocked_not_qualified': 0, 'blocked_financial_no_fit_audit': 0,
         'blocked_terminal_deferral_audit': 0, 'blocked_open_discovery_question': 0,
+        'context_analyzed': 0, 'context_missing': 0,
     }
     selected_by_canon: Dict[str, Candidate] = {}
     for raw_phone, entry in leads.items():
@@ -406,14 +550,22 @@ def select_candidates(leads_state: Dict[str, Any], cadence_state: Dict[str, Any]
             stats['pending_lead_message'] += 1
             continue
         last_reply_preview = str(entry.get('last_reply_preview') or '')
-        # Se a última fala da Clara já foi uma pergunta de descoberta e o lead não respondeu,
-        # não reenviar uma retomada genérica com outra pergunta parecida. Isso evita o caso
-        # Jamile/RC-65/68: Clara parece esquecer o histórico e pergunta a mesma coisa no D+1.
-        if contains_open_discovery_question(last_reply_preview):
+        # Regra canônica Tiaro (2026-07-19): antes de qualquer seleção/envio,
+        # analisar o contexto real da conversa para reconectar do jeito certo.
+        context = analyze_lead_message_context(phone, last_reply_preview)
+        stats['context_analyzed'] += 1
+        if not context.get('event_count'):
+            stats['context_missing'] += 1
+        if not context.get('ok', True):
             entry['followup_blocked'] = True
-            entry['followup_blocked_reason'] = 'open_discovery_question_waiting_lead_reply'
+            entry['followup_blocked_reason'] = str(context.get('category') or 'context_not_safe')
             entry['updated_at'] = int(now)
-            stats['blocked_open_discovery_question'] += 1
+            if context.get('category') == 'open_discovery_waiting':
+                stats['blocked_open_discovery_question'] += 1
+            elif context.get('category') == 'terminal_deferral':
+                stats['blocked_terminal_deferral_audit'] += 1
+            elif context.get('category') == 'financial_no_fit':
+                stats['blocked_financial_no_fit_audit'] += 1
             continue
         cycle = current_cycle_id(entry)
         cstate = cadence_state.setdefault('phones', {}).setdefault(phone_hash(canon), {})
@@ -441,6 +593,8 @@ def select_candidates(leads_state: Dict[str, Any], cadence_state: Dict[str, Any]
             phone=phone, key=phone_hash(canon), due_step=int(next_step), due_at=float(due_at),
             first_seen_at=first_seen, last_inbound_at=last_in, last_reply_at=last_reply,
             reply_count=reply_count, reason=f'D+{next_step}_due_after_clara_reply',
+            context_category=str(context.get('category') or 'unknown'),
+            context_anchor=str(context.get('anchor') or ''),
         )
         old = selected_by_canon.get(canon)
         if old:
@@ -526,6 +680,7 @@ def main() -> int:
         # Seed determinística por lead+ciclo: garante variação e não repete texto.
         seed_key = f"{cand.key}:{int(cand.last_inbound_at or 0)}"
         msg, variant_idx = pick_followup_message(cand.due_step, pst, seed_key)
+        msg = contextualize_followup_message(msg, {'category': cand.context_category, 'anchor': cand.context_anchor})
         status, body = call_admin_send(cand.phone, msg, dry_run=dry_run, approval_id=args.approval_id or None, secret=secret)
         ok = bool(body.get('ok')) and 200 <= status < 300
         result = {
@@ -533,6 +688,8 @@ def main() -> int:
             'phone_last4': cand.phone[-4:],
             'step': cand.due_step,
             'variant': variant_idx,
+            'context_category': cand.context_category,
+            'context_anchor': cand.context_anchor,
             'due_at': now_iso(cand.due_at),
             'last_reply_at': now_iso(cand.last_reply_at),
             'dry_run': dry_run,
