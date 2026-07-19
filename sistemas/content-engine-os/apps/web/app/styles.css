@@ -708,3 +708,31 @@ select.input:focus {
 .themeCollectBox textarea {
   width: 100%;
 }
+
+/* Motion Videos Fase 5 · winners reais */
+.themeWinnersGrid {
+  display: grid;
+  gap: 12px;
+  margin-top: 6px;
+}
+.themeWinnerCard {
+  border: 1px solid rgba(245, 158, 11, .24);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(15, 23, 42, .58);
+}
+.themeWinnerCard span {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgba(245, 158, 11, .15);
+  color: #fcd34d;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.themeWinnerCard ul {
+  margin: 8px 0;
+  padding-left: 18px;
+}

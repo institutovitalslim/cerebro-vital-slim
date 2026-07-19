@@ -132,6 +132,61 @@ def fetch_hashtag(tag: str, timeout: int = 45) -> dict[str, Any]:
         return json.loads(response.read())
 
 
+def _metric_score(example: dict[str, Any]) -> int:
+    meta = example.get("metadata") or {}
+    if isinstance(meta, str):
+        try:
+            meta = json.loads(meta)
+        except Exception:
+            meta = {}
+    raw = meta.get("raw_metrics") or {}
+    return int(raw.get("score") or raw.get("likes") or 0)
+
+
+def build_winner_outputs(example: dict[str, Any], winner_type: str, topic: str) -> dict[str, Any]:
+    hook = compact(example.get("hook_summary") or f"Referência sobre {topic}", 140)
+    safe_topic = topic.strip() or "tema clínico"
+    return {
+        "hooks_adaptados": [
+            f"{safe_topic.capitalize()} não precisa ser tratada como sentença: quais sinais merecem avaliação?",
+            f"O que muda no corpo na {safe_topic} — e por que olhar só para peso confunde?",
+            f"Antes de aceitar que é 'normal da idade', vale investigar este padrão com avaliação médica.",
+        ],
+        "roteiro_reel": {
+            "hook": hook,
+            "estrutura": ["abrir loop sem promessa", "mostrar mecanismo de forma visual", "separar sintoma de diagnóstico", "fechar com convite para avaliação individual"],
+            "cta": "Se isso faz sentido para você, procure avaliação médica individualizada.",
+        },
+        "stories": ["Enquete: você sente que seu corpo mudou depois dos 40?", "Caixa: qual sintoma mais atrapalha sua rotina?", "Aviso: conteúdo educativo, não substitui consulta."],
+        "angulo_anuncio": f"Conteúdo educativo sobre {safe_topic} para mulheres que querem entender sinais do corpo sem promessa de resultado.",
+        "hipotese_metrica": "Medir retenção nos 3 primeiros segundos, salvamentos e cliques qualificados para avaliação.",
+        "compliance_gate": "review_required: revisar claims, evitar prescrição/diagnóstico público e manter disclaimer educativo.",
+        "source_guardrail": "Usar somente o mecanismo abstrato da referência; não copiar texto, edição, legenda, voz ou claim clínico.",
+    }
+
+
+def select_theme_winners(examples: list[dict[str, Any]], topic: str) -> list[dict[str, Any]]:
+    if not examples:
+        return []
+    attention = max(examples, key=lambda x: (_metric_score(x), len(x.get("hook_summary") or "")))
+    conversion = max(examples, key=lambda x: (1 if x.get("content_format") in {"antes_da_decisao", "erro_comum", "sinal_escondido"} else 0, _metric_score(x)))
+    ivs_fit = max(examples, key=lambda x: (int(x.get("ivs_applicability_score") or 0), -1 if str(x.get("compliance_risk") or "").startswith("high") else 0))
+    packs = [("attention", attention, "melhor sinal de atenção/retenção"), ("conversion", conversion, "melhor potencial de quebra de objeção"), ("ivs_fit", ivs_fit, "maior aderência IVS com revisão clínica")]
+    winners = []
+    for winner_type, example, rationale in packs:
+        winners.append({
+            "winner_type": winner_type,
+            "external_id": example.get("external_id"),
+            "content_format": example.get("content_format"),
+            "source_url": example.get("content_url"),
+            "hook_summary": example.get("hook_summary"),
+            "rationale": rationale,
+            "selected_for_generation": False,
+            "outputs": build_winner_outputs(example, winner_type, topic),
+        })
+    return winners
+
+
 def collect_theme_items(topic: str, tags_csv: str | None = None, posts_per_tag: int = 6, limit: int = 8) -> dict[str, Any]:
     tags = theme_tags(topic, tags_csv)
     seen: set[str] = set()

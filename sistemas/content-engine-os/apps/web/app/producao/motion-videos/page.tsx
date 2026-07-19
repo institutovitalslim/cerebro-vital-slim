@@ -30,6 +30,25 @@ type ContentFormatExample = {
   origin?: string
 }
 
+type ThemeWinner = {
+  winner_type: string
+  external_id?: string
+  content_format?: string
+  source_url?: string
+  hook_summary?: string
+  rationale: string
+  selected_for_generation: boolean
+  outputs: {
+    hooks_adaptados: string[]
+    roteiro_reel: { hook: string; estrutura: string[]; cta: string }
+    stories: string[]
+    angulo_anuncio: string
+    hipotese_metrica: string
+    compliance_gate: string
+    source_guardrail: string
+  }
+}
+
 type MotionPreset = Record<string, { label: string; description: string }>
 type ScreenFormats = Record<string, { label: string; aspect_ratio: string; recommended?: boolean }>
 
@@ -119,6 +138,8 @@ export default function Page() {
   const [exampleItems, setExampleItems] = useState<ContentFormatExample[]>([])
   const [collectingTheme, setCollectingTheme] = useState(false)
   const [collectMessage, setCollectMessage] = useState('')
+  const [themeWinners, setThemeWinners] = useState<ThemeWinner[]>([])
+  const [loadingWinners, setLoadingWinners] = useState(false)
   const [themeForm, setThemeForm] = useState({ topic: 'menopausa', tags: 'menopausa,climaterio,fogachos,menopausaemagrecimento,terapiahormonal', limit: 8 })
   const [exampleForm, setExampleForm] = useState({
     content_url: 'https://www.instagram.com/reel/ABC123/',
@@ -215,6 +236,21 @@ export default function Page() {
     }
   }
 
+  async function loadThemeWinners() {
+    setLoadingWinners(true)
+    setError('')
+    try {
+      const response = await fetch(`${api}/motion-videos/theme-winners?tenant_slug=demo&topic=${encodeURIComponent(themeForm.topic)}`, { credentials: 'include', cache: 'no-store' })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data?.detail || `winners ${response.status}`)
+      setThemeWinners(data.winners || [])
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Falha ao selecionar winners')
+    } finally {
+      setLoadingWinners(false)
+    }
+  }
+
   async function collectTheme() {
     setCollectingTheme(true)
     setError('')
@@ -234,6 +270,7 @@ export default function Page() {
         const examplesData = await examplesResponse.json()
         setExampleItems(examplesData.items || [])
       }
+      await loadThemeWinners()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Falha ao coletar tema')
     } finally {
@@ -370,7 +407,25 @@ export default function Page() {
             <button type="button" className="secondaryButton" onClick={collectTheme} disabled={collectingTheme}>
               {collectingTheme ? 'Coletando...' : 'Coletar referências por tema'}
             </button>
+            <button type="button" className="secondaryButton" onClick={loadThemeWinners} disabled={loadingWinners}>
+              {loadingWinners ? 'Selecionando winners...' : 'Selecionar winners reais'}
+            </button>
             {collectMessage ? <p className="successText small">{collectMessage}</p> : null}
+            {themeWinners.length ? (
+              <div className="themeWinnersGrid">
+                {themeWinners.map((winner) => (
+                  <article key={winner.winner_type} className="themeWinnerCard">
+                    <span>{winner.winner_type}</span>
+                    <strong>{winner.hook_summary}</strong>
+                    <p>{winner.rationale}</p>
+                    <ul>
+                      {winner.outputs.hooks_adaptados.map((hook) => <li key={hook}>{hook}</li>)}
+                    </ul>
+                    <small>{winner.outputs.compliance_gate}</small>
+                  </article>
+                ))}
+              </div>
+            ) : null}
             <small className="muted">Gate: máximo 12 itens, somente conteúdo público, sem baixar mídia, publicar ou copiar legenda.</small>
           </div>
 

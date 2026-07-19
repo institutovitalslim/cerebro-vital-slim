@@ -16,7 +16,7 @@ from app.services.motion_video_planner import (
     motion_video_options,
     normalize_real_content_format_example,
 )
-from app.services.motion_video_theme_collector import build_theme_ingest_payload, collect_theme_items
+from app.services.motion_video_theme_collector import build_theme_ingest_payload, collect_theme_items, select_theme_winners
 
 router = APIRouter(prefix="/motion-videos", tags=["motion-videos"])
 
@@ -358,6 +358,30 @@ def seed_examples(tenant_slug: str = "demo") -> dict[str, Any]:
                 )
                 upserted += 1
     return {"status": "seeded", "tenant_slug": tenant_slug, "content_format_examples": upserted}
+
+
+@router.get("/theme-winners")
+def theme_winners(tenant_slug: str = "demo", topic: str = "menopausa", limit: int = 80) -> dict[str, Any]:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select id::text, content_format_key as content_format, source_type, source_handle_or_url,
+                       external_id, content_url, transcript_summary, hook_summary, retention_mechanism,
+                       why_this_example_works, compliance_risk, ivs_applicability_score, metadata, created_at
+                from content_format_examples
+                where tenant_id=%s
+                  and source_type='rapidapi_instagram_theme_search'
+                  and (source_handle_or_url ilike %s or transcript_summary ilike %s)
+                order by created_at desc
+                limit %s
+                """,
+                (tenant_id, f"%{topic}%", f"%{topic}%", limit),
+            )
+            examples = cur.fetchall()
+    winners = select_theme_winners(examples, topic=topic)
+    return {"tenant_slug": tenant_slug, "topic": topic, "examples_considered": len(examples), "winners": winners}
 
 
 @router.get("/sources")

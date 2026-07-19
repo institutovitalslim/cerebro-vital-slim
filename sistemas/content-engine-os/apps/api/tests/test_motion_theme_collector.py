@@ -7,7 +7,9 @@ sys.path.insert(0, str(ROOT))
 
 from app.services.motion_video_theme_collector import (
     build_theme_ingest_payload,
+    build_winner_outputs,
     parse_hashtag_posts,
+    select_theme_winners,
     theme_tags,
 )
 
@@ -50,6 +52,29 @@ class MotionThemeCollectorTests(unittest.TestCase):
         self.assertEqual(payload["content_format"], "sinal_escondido")
         self.assertEqual(payload["compliance_risk"], "review_required")
         self.assertIn("não copiar", payload["why_this_example_works"].lower())
+    def test_select_theme_winners_returns_three_output_packs(self):
+        examples = [
+            {"external_id": "a", "content_format": "sinal_escondido", "hook_summary": "Menopausa não é frescura", "why_this_example_works": "Abre loop", "ivs_applicability_score": 90, "metadata": {"raw_metrics": {"score": 80}}, "source_handle_or_url": "theme_search:menopausa:fogachos", "content_url": "https://www.instagram.com/p/a/"},
+            {"external_id": "b", "content_format": "antes_da_decisao", "hook_summary": "Antes da terapia hormonal", "why_this_example_works": "Quebra objeção", "ivs_applicability_score": 76, "metadata": {"raw_metrics": {"score": 120}}, "source_handle_or_url": "theme_search:menopausa:terapiahormonal", "content_url": "https://www.instagram.com/p/b/"},
+            {"external_id": "c", "content_format": "checklist_rapido", "hook_summary": "Sinais que merecem avaliação", "why_this_example_works": "Seguro", "ivs_applicability_score": 95, "metadata": {"raw_metrics": {"score": 20}}, "source_handle_or_url": "theme_search:menopausa:climaterio", "content_url": "https://www.instagram.com/p/c/"},
+        ]
+        winners = select_theme_winners(examples, topic="menopausa")
+        self.assertEqual([w["winner_type"] for w in winners], ["attention", "conversion", "ivs_fit"])
+        for winner in winners:
+            outputs = winner["outputs"]
+            self.assertEqual(len(outputs["hooks_adaptados"]), 3)
+            self.assertIn("roteiro_reel", outputs)
+            self.assertIn("stories", outputs)
+            self.assertIn("angulo_anuncio", outputs)
+            self.assertIn("hipotese_metrica", outputs)
+            self.assertFalse(winner["selected_for_generation"])
+
+    def test_build_winner_outputs_keeps_medical_guardrails(self):
+        outputs = build_winner_outputs({"hook_summary": "Menopausa não é frescura", "content_format": "sinal_escondido"}, winner_type="attention", topic="menopausa")
+        text = " ".join(outputs["hooks_adaptados"]).lower()
+        self.assertIn("avaliação", text)
+        self.assertNotIn("garante", text)
+        self.assertIn("review_required", outputs["compliance_gate"])
 
 
 if __name__ == "__main__":
