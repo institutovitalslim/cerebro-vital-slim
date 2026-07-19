@@ -9,7 +9,10 @@ from app.services.motion_video_planner import (  # noqa: E402
     CONTENT_FORMATS,
     MOTION_PRESETS,
     SCREEN_FORMATS,
+    build_content_format_examples,
     build_motion_video_plan,
+    example_winners_for_format,
+    motion_video_matrix_8x8,
 )
 
 
@@ -49,6 +52,21 @@ class MotionVideoPlannerTests(unittest.TestCase):
             self.assertIn(marker, first_prompt)
         self.assertGreaterEqual(plan["quality_scores_estimados"]["compliance_score"], 85)
         self.assertEqual(plan["approval_status"], "plan_only")
+        self.assertEqual(len(plan["source_examples"]), 3)
+        self.assertEqual(plan["matrix_8x8_applied"]["rows"], 8)
+        self.assertEqual(plan["matrix_8x8_applied"]["columns"], 8)
+        self.assertEqual({item["winner_type"] for item in plan["batch_winners"]}, {"attention", "conversion", "ivs_fit"})
+
+    def test_phase2_examples_matrix_and_winners_contract(self):
+        examples = build_content_format_examples("mito_que_prende")
+        self.assertEqual(len(examples), 3)
+        self.assertTrue(all(item["copy_guardrail"] for item in examples))
+        matrix = motion_video_matrix_8x8()
+        self.assertEqual(len(matrix["rows"]), 8)
+        self.assertEqual(len(matrix["columns"]), 8)
+        winners = example_winners_for_format("mito_que_prende")
+        self.assertEqual([item["winner_type"] for item in winners], ["attention", "conversion", "ivs_fit"])
+        self.assertTrue(all(len(item["outputs_required"]) == 5 for item in winners))
 
     def test_build_plan_rejects_unknown_content_format(self):
         with self.assertRaisesRegex(ValueError, "content_format desconhecido"):

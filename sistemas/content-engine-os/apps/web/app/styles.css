@@ -624,3 +624,44 @@ select.input:focus {
 .motionBlock pre { white-space: pre-wrap; word-break: break-word; background: rgba(0,0,0,.28); border-radius:16px; padding:16px; overflow:auto; }
 @media (max-width: 1100px) { .motionHero,.motionGrid { grid-template-columns: 1fr; } .motionPreview { position: relative; top: auto; } }
 @media (max-width: 720px) { .twoCols,.scoreGrid { grid-template-columns: 1fr; } .motionFlow { grid-template-columns: 1fr; } }
+
+/* Motion Videos Fase 2 · exemplos, matriz e winners */
+.examplesRail,
+.winnerStack {
+  display: grid;
+  gap: 10px;
+}
+.sectionHeaderCompact {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.exampleCard,
+.winnerCard,
+.matrixMini {
+  border: 1px solid rgba(212,168,60,.18);
+  border-radius: 16px;
+  background: rgba(0,0,0,.18);
+  padding: 14px;
+  display: grid;
+  gap: 7px;
+}
+.exampleCard span,
+.winnerCard span {
+  width: fit-content;
+  border: 1px solid rgba(255,241,168,.18);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--accent-hi);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.exampleCard strong,
+.winnerCard strong,
+.matrixMini strong { color: #fff4e7; }
+.exampleCard p,
+.exampleCard small,
+.winnerCard p,
+.matrixMini p { margin: 0; color: var(--text-soft); line-height: 1.52; }

@@ -7,7 +7,14 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.db import get_conn
-from app.services.motion_video_planner import CONTENT_FORMATS, build_motion_video_plan, motion_video_options
+from app.services.motion_video_planner import (
+    CONTENT_FORMATS,
+    build_content_format_examples,
+    build_motion_video_plan,
+    example_winners_for_format,
+    motion_video_matrix_8x8,
+    motion_video_options,
+)
 
 router = APIRouter(prefix="/motion-videos", tags=["motion-videos"])
 
@@ -98,6 +105,83 @@ def options() -> dict[str, Any]:
         "Aprovação de gasto",
     ]
     return payload
+
+
+@router.get("/examples")
+def examples(content_format: str | None = None) -> dict[str, Any]:
+    try:
+        items = build_content_format_examples(content_format)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    return {"items": items, "count": len(items), "content_format": content_format}
+
+
+@router.get("/matrix-8x8")
+def matrix_8x8() -> dict[str, Any]:
+    return motion_video_matrix_8x8()
+
+
+@router.get("/winners")
+def winners(content_format: str = "mito_que_prende") -> dict[str, Any]:
+    try:
+        items = example_winners_for_format(content_format)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    return {"content_format": content_format, "items": items}
+
+
+@router.post("/seed-examples")
+def seed_examples(tenant_slug: str = "demo") -> dict[str, Any]:
+    examples = build_content_format_examples()
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, tenant_slug)
+        upserted = 0
+        with conn.cursor() as cur:
+            cur.execute("select key, id from content_formats where tenant_id=%s", (tenant_id,))
+            format_ids = {row["key"]: row["id"] for row in cur.fetchall()}
+            for item in examples:
+                format_id = format_ids.get(item["content_format"])
+                if not format_id:
+                    continue
+                cur.execute(
+                    """
+                    insert into content_format_examples (
+                      tenant_id, content_format_id, content_format_key, source_type,
+                      source_handle_or_url, external_id, content_url, thumbnail_url,
+                      transcript_summary, hook_summary, why_this_example_works,
+                      compliance_risk, ivs_applicability_score, metadata
+                    ) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s::jsonb)
+                    on conflict (tenant_id, external_id) do update set
+                      transcript_summary = excluded.transcript_summary,
+                      hook_summary = excluded.hook_summary,
+                      why_this_example_works = excluded.why_this_example_works,
+                      compliance_risk = excluded.compliance_risk,
+                      ivs_applicability_score = excluded.ivs_applicability_score,
+                      metadata = excluded.metadata
+                    """,
+                    (
+                        tenant_id,
+                        format_id,
+                        item["content_format"],
+                        item["source_type"],
+                        item["source_handle_or_url"],
+                        item["external_id"],
+                        item["content_url"],
+                        item["thumbnail_url"],
+                        item["transcript_summary"],
+                        item["hook_summary"],
+                        item["why_this_example_works"],
+                        item["compliance_risk"],
+                        item["ivs_applicability_score"],
+                        json.dumps({
+                            "retention_mechanism": item["retention_mechanism"],
+                            "winner_candidate_type": item["winner_candidate_type"],
+                            "copy_guardrail": item["copy_guardrail"],
+                        }, ensure_ascii=False),
+                    ),
+                )
+                upserted += 1
+    return {"status": "seeded", "tenant_slug": tenant_slug, "content_format_examples": upserted}
 
 
 @router.get("/sources")

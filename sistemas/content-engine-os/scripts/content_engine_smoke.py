@@ -21,6 +21,47 @@ from dataclasses import dataclass, asdict
 from typing import Any
 
 BASE = "https://conteudo.institutovitalslim.com.br"
+AUTH_COOKIE: str | None = None
+
+
+def load_demo_auth_cookie() -> str | None:
+    """Cria cookie efêmero para smoke autenticado sem senha nem persistência."""
+    code = r'''
+from app.db import get_conn
+from app.auth_core import make_token
+with get_conn() as conn, conn.cursor() as cur:
+    cur.execute("""
+        select u.id::text as id, u.tenant_id::text as tenant_id, u.email
+        from users u join tenants t on t.id = u.tenant_id
+        where t.slug=%s
+        order by u.created_at asc
+        limit 1
+    """, ("demo",))
+    u = cur.fetchone()
+if u:
+    print("cos_session=" + make_token(u["id"], u["tenant_id"], u["email"], ttl=900))
+'''
+    try:
+        proc = subprocess.run(
+            ["docker", "exec", "content-engine-api", "python", "-c", code],
+            capture_output=True,
+            text=True,
+            timeout=20,
+            check=False,
+        )
+    except Exception:
+        return None
+    cookie = (proc.stdout or "").strip()
+    if proc.returncode == 0 and cookie.startswith("cos_session="):
+        return cookie
+    return None
+
+
+def request_headers() -> dict[str, str]:
+    headers = {"User-Agent": "IVS-Content-Smoke/1.0"}
+    if AUTH_COOKIE:
+        headers["Cookie"] = AUTH_COOKIE
+    return headers
 
 
 @dataclass
@@ -32,7 +73,7 @@ class Check:
 
 def http_json(path: str, timeout: int = 20) -> tuple[int, Any, str]:
     url = f"{BASE}{path}"
-    req = urllib.request.Request(url, headers={"User-Agent": "IVS-Content-Smoke/1.0"})
+    req = urllib.request.Request(url, headers=request_headers())
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             body = resp.read().decode("utf-8", errors="replace")
@@ -47,7 +88,7 @@ def http_json(path: str, timeout: int = 20) -> tuple[int, Any, str]:
 
 def http_head(path: str, timeout: int = 20) -> tuple[int, str, int]:
     url = f"{BASE}{path}"
-    req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "IVS-Content-Smoke/1.0"})
+    req = urllib.request.Request(url, method="HEAD", headers=request_headers())
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             return resp.status, resp.headers.get("content-type", ""), int(resp.headers.get("content-length") or 0)
@@ -61,10 +102,19 @@ def cmd(args: list[str]) -> tuple[int, str]:
 
 
 def main() -> int:
+    global AUTH_COOKIE
     parser = argparse.ArgumentParser()
     parser.add_argument("--json", action="store_true")
+    parser.add_argument("--no-auth", action="store_true", help="não gerar cookie efêmero de smoke autenticado")
     args = parser.parse_args()
+    if not args.no_auth:
+        AUTH_COOKIE = load_demo_auth_cookie()
     checks: list[Check] = []
+    checks.append(Check(
+        "auth_cookie",
+        bool(AUTH_COOKIE) or args.no_auth,
+        "cookie efêmero carregado" if AUTH_COOKIE else "sem cookie; modo público",
+    ))
 
     status, data, ctype = http_json("/api/health")
     checks.append(Check("api_health", status == 200 and isinstance(data, dict) and data.get("status") == "ok", f"status={status} content_type={ctype}"))

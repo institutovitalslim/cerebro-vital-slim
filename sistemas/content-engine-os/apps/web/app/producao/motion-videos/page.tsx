@@ -16,11 +16,29 @@ type ContentFormat = {
   compliance_notes: string
 }
 
+type ContentFormatExample = {
+  id: string
+  content_format: string
+  hook_summary: string
+  why_this_example_works: string
+  retention_mechanism: string
+  compliance_risk: string
+  ivs_applicability_score: number
+  winner_candidate_type: string
+  copy_guardrail: string
+}
+
 type MotionPreset = Record<string, { label: string; description: string }>
 type ScreenFormats = Record<string, { label: string; aspect_ratio: string; recommended?: boolean }>
 
 type MotionOptions = {
   content_formats: ContentFormat[]
+  content_format_examples: ContentFormatExample[]
+  matrix_8x8: {
+    rows: { key: string; label: string; source_type: string }[]
+    columns: { key: string; label: string }[]
+    winner_types: { key: string; label: string; selects_for: string }[]
+  }
   motion_presets: MotionPreset
   screen_formats: ScreenFormats
   duration_presets: { key: string; label: string; duration_seconds: number; blocks_count: number }[]
@@ -56,6 +74,9 @@ type MotionPlan = {
   through_line_object: string
   payoff: string
   blocks: PlanBlock[]
+  source_examples: ContentFormatExample[]
+  batch_winners: { winner_type: string; winner_label: string; example_id: string; rationale: string; outputs_required: string[] }[]
+  matrix_8x8_applied: { rows: number; columns: number; winner_types: string[] }
   caption: string
   cta: string
   compliance_notes: string[]
@@ -117,6 +138,11 @@ export default function Page() {
 
   const selectedFormat = useMemo(
     () => options?.content_formats.find((item) => item.key === form.content_format),
+    [options, form.content_format],
+  )
+
+  const selectedExamples = useMemo(
+    () => (options?.content_format_examples || []).filter((item) => item.content_format === form.content_format),
     [options, form.content_format],
   )
 
@@ -222,6 +248,28 @@ export default function Page() {
             </div>
           ) : null}
 
+          <div className="examplesRail">
+            <div className="sectionHeaderCompact">
+              <span className="eyebrow small">Fase 2 · vídeos de exemplo</span>
+              <strong>{selectedExamples.length} referências de mecanismo</strong>
+            </div>
+            {selectedExamples.map((example) => (
+              <article key={example.id} className="exampleCard">
+                <span>{example.winner_candidate_type}</span>
+                <strong>{example.hook_summary}</strong>
+                <p>{example.why_this_example_works}</p>
+                <small>{example.copy_guardrail}</small>
+              </article>
+            ))}
+          </div>
+
+          {options?.matrix_8x8 ? (
+            <div className="matrixMini">
+              <strong>Matriz 8×8 ativa</strong>
+              <p>{options.matrix_8x8.rows.length} fontes × {options.matrix_8x8.columns.length} sinais, com winners de atenção, conversão e adaptação IVS.</p>
+            </div>
+          ) : null}
+
           <label>
             Vídeos de exemplo / referência de mecanismo
             <textarea
@@ -299,6 +347,15 @@ export default function Page() {
               <p><strong>Hook:</strong> {plan.hook_question}</p>
               <p><strong>Objeto-metáfora:</strong> {plan.through_line_object}</p>
               <p><strong>Payoff:</strong> {plan.payoff}</p>
+              <div className="winnerStack">
+                <strong>Winners do batch</strong>
+                {plan.batch_winners.map((winner) => (
+                  <div key={winner.winner_type} className="winnerCard">
+                    <span>{winner.winner_label}</span>
+                    <p>{winner.rationale}</p>
+                  </div>
+                ))}
+              </div>
               {projectId ? <p className="small muted">Projeto salvo: <code>{projectId}</code></p> : null}
             </>
           )}

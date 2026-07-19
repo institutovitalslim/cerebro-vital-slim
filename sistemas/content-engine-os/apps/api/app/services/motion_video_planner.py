@@ -226,6 +226,114 @@ CONTENT_FORMATS: list[dict[str, Any]] = [
     },
 ]
 
+MATRIX_8X8_ROWS = [
+    {"key": "dr_marlonbatista", "label": "@dr.marlonbatista", "source_type": "approved_profile"},
+    {"key": "dra_camilapaes", "label": "@dra.camilapaes", "source_type": "approved_profile"},
+    {"key": "instagram_theme_search", "label": "Busca temática Instagram", "source_type": "search"},
+    {"key": "validated_medical_profile", "label": "Perfil médico validado pelo João", "source_type": "approved_profile"},
+    {"key": "ivs_active_creatives", "label": "Criativos ativos IVS", "source_type": "owned_media"},
+    {"key": "tiaro_submitted_reels", "label": "Reels/cards enviados por Tiaro", "source_type": "operator_submission"},
+    {"key": "validated_local_competitor", "label": "Concorrente local validado", "source_type": "competitor"},
+    {"key": "external_format_source", "label": "Fonte externa de formato sem claim clínico", "source_type": "external_hypothesis"},
+]
+
+MATRIX_8X8_COLUMNS = [
+    {"key": "hook_3s", "label": "Hook visual/verbal nos 3 primeiros segundos"},
+    {"key": "content_format", "label": "Formato de conteúdo usado"},
+    {"key": "objection", "label": "Objeção atacada"},
+    {"key": "retention_mechanism", "label": "Mecanismo de retenção"},
+    {"key": "proof_authority", "label": "Prova/autoridade usada"},
+    {"key": "cta", "label": "CTA/ação pedida"},
+    {"key": "compliance_risk", "label": "Compliance/risco"},
+    {"key": "ivs_avatar_fit", "label": "Aplicabilidade ao avatar IVS"},
+]
+
+WINNER_TYPES = [
+    {"key": "attention", "label": "Winner de atenção", "selects_for": "melhor hook/retenção"},
+    {"key": "conversion", "label": "Winner de conversão", "selects_for": "melhor quebra de objeção + CTA"},
+    {"key": "ivs_fit", "label": "Winner de adaptação IVS", "selects_for": "maior alinhamento avatar + compliance"},
+]
+
+EXAMPLE_ARCHETYPES = [
+    {
+        "slot": "hook_retention",
+        "source_type": "format_example_archetype",
+        "hook_summary": "Hook de 3 segundos com pergunta que abre loop e segura a resposta para o final.",
+        "why_this_example_works": "Cria lacuna de curiosidade sem prometer milagre e facilita adaptação para motion graphics.",
+        "retention_mechanism": "open_loop_payoff",
+        "winner_candidate_type": "attention",
+    },
+    {
+        "slot": "objection_conversion",
+        "source_type": "format_example_archetype",
+        "hook_summary": "Quebra a objeção central mostrando processo, contexto e próximo passo seguro.",
+        "why_this_example_works": "Transforma resistência em critério de decisão sem pressão comercial agressiva.",
+        "retention_mechanism": "objection_reframe",
+        "winner_candidate_type": "conversion",
+    },
+    {
+        "slot": "ivs_fit_compliance",
+        "source_type": "format_example_archetype",
+        "hook_summary": "Adapta o formato para o avatar IVS com tom médico-premium e sem paciente real.",
+        "why_this_example_works": "Preserva a mecânica do formato, reduz risco de cópia e mantém compliance clínico.",
+        "retention_mechanism": "avatar_mirror_safe",
+        "winner_candidate_type": "ivs_fit",
+    },
+]
+
+
+def build_content_format_examples(format_key: str | None = None) -> list[dict[str, Any]]:
+    formats = [get_content_format(format_key)] if format_key else CONTENT_FORMATS
+    examples: list[dict[str, Any]] = []
+    for fmt in formats:
+        for index, archetype in enumerate(EXAMPLE_ARCHETYPES, start=1):
+            examples.append({
+                "id": f"{fmt['key']}::{archetype['slot']}",
+                "content_format": fmt["key"],
+                "content_format_name": fmt["name"],
+                "source_type": archetype["source_type"],
+                "source_handle_or_url": "library://ivs/content-format-examples",
+                "external_id": f"{fmt['key']}-{archetype['slot']}",
+                "content_url": None,
+                "thumbnail_url": None,
+                "transcript_summary": f"Arquétipo de vídeo de exemplo para {fmt['name']}: {archetype['hook_summary']}",
+                "hook_summary": archetype["hook_summary"],
+                "why_this_example_works": archetype["why_this_example_works"],
+                "retention_mechanism": archetype["retention_mechanism"],
+                "compliance_risk": "low",
+                "ivs_applicability_score": 86 + index,
+                "winner_candidate_type": archetype["winner_candidate_type"],
+                "copy_guardrail": "Usar como referência de mecanismo; não copiar frase, roteiro, legenda ou edição proprietária.",
+            })
+    return examples
+
+
+def motion_video_matrix_8x8() -> dict[str, Any]:
+    return {
+        "rows": deepcopy(MATRIX_8X8_ROWS),
+        "columns": deepcopy(MATRIX_8X8_COLUMNS),
+        "winner_types": deepcopy(WINNER_TYPES),
+        "selection_rule": "Após cada batch 8x8, selecionar 3 winners: atenção, conversão e adaptação IVS.",
+        "required_outputs_per_winner": ["3 hooks adaptados", "1 roteiro de Reel", "1 variação para Stories", "1 ângulo de anúncio", "1 hipótese de métrica"],
+    }
+
+
+def example_winners_for_format(format_key: str) -> list[dict[str, Any]]:
+    examples = build_content_format_examples(format_key)
+    winners: list[dict[str, Any]] = []
+    for winner_type in WINNER_TYPES:
+        candidate = next((item for item in examples if item["winner_candidate_type"] == winner_type["key"]), examples[0])
+        winners.append({
+            "winner_type": winner_type["key"],
+            "winner_label": winner_type["label"],
+            "example_id": candidate["id"],
+            "rationale": f"{winner_type['selects_for']}; {candidate['why_this_example_works']}",
+            "selected_for_generation": False,
+            "outputs_required": ["3 hooks adaptados", "1 roteiro de Reel", "1 variação para Stories", "1 ângulo de anúncio", "1 hipótese de métrica"],
+        })
+    return winners
+
+
 SCREEN_FORMATS: dict[str, dict[str, Any]] = {
     "reels": {"label": "Reels / Shorts / TikTok", "aspect_ratio": "9:16", "recommended": True},
     "youtube": {"label": "YouTube horizontal", "aspect_ratio": "16:9", "recommended": False},
@@ -270,6 +378,8 @@ def get_content_format(key: str) -> dict[str, Any]:
 def motion_video_options() -> dict[str, Any]:
     return {
         "content_formats": deepcopy(CONTENT_FORMATS),
+        "content_format_examples": build_content_format_examples(),
+        "matrix_8x8": motion_video_matrix_8x8(),
         "screen_formats": deepcopy(SCREEN_FORMATS),
         "motion_presets": deepcopy(MOTION_PRESETS),
         "duration_presets": deepcopy(DURATION_PRESETS),
@@ -336,6 +446,8 @@ def build_motion_video_plan(payload: dict[str, Any]) -> dict[str, Any]:
     duration_seconds = int(payload.get("duration_seconds") or blocks_count * 10)
     strategy = payload.get("content_strategy") or "loop_previsao"
     source_examples_summary = payload.get("source_examples_summary") or "Sem exemplos externos selecionados; usar biblioteca IVS-first de formatos."
+    examples = build_content_format_examples(content_format_key)
+    winners = example_winners_for_format(content_format_key)
 
     negative = (
         "readable text, words, numbers, watermark, logo, patient identity, before-and-after imagery, "
@@ -369,6 +481,13 @@ def build_motion_video_plan(payload: dict[str, Any]) -> dict[str, Any]:
         "content_format_name": fmt["name"],
         "content_format_application": fmt["prompt_bias"],
         "source_examples_abstraction": source_examples_summary,
+        "source_examples": examples,
+        "batch_winners": winners,
+        "matrix_8x8_applied": {
+            "rows": len(MATRIX_8X8_ROWS),
+            "columns": len(MATRIX_8X8_COLUMNS),
+            "winner_types": [item["key"] for item in WINNER_TYPES],
+        },
         "content_strategy": strategy,
         "screen_format": screen_key,
         "aspect_ratio": screen["aspect_ratio"],
