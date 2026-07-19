@@ -157,24 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-13]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Loop de cardápio SPIN reincidiu MESMO após lead pedir 'marcar avaliação' + dar foco/meta — regressão crítica ainda ativa
-- **ANTI-PADRÃO (lead 1,47m/60kg, 12/07):** lead declarou foco ('Peso, quero emagrecer'), dados corporais, meta ('perder 10 kg') e disse literalmente 'Eu gostaria de marcar uma avaliação' — e a Clara devolveu de novo 'o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?' e ainda re-abriu SPIN ('o que mais está te incomodando ou qual resultado você está buscando?'). **Regra reforçada:** pedido explícito de agendar = sinal máximo; travar SPIN, confirmar nome (RC-34) e ir para jornada + preço ancorado (1.000/900/300) + agenda. Nunca devolver pergunta de descoberta depois de 'quero marcar'.
-
-### Sintomas inventados reincidentes — 'sono ruim, pouca massa muscular' que o lead NUNCA disse
-- **ANTI-PADRÃO (mesma lead):** a Clara afirmou 'você comentou sobre sono ruim, pouca massa muscular e dificuldade de manter constância' — a lead só falou peso/academia/meta. **Regra reforçada:** só retomar sintomas escritos pelo próprio lead na thread; não colar de fichas/templates.
-
-### Pergunta de valor deixada SEM resposta ao final — não deixar objeção/pedido de preço morrer
-- **ANTI-PADRÃO (12/07 16:00):** lead perguntou 'Quanto é a avaliação' e informou disponibilidade ('qualquer dia da semana no final da tarde') e a thread ficou sem resposta. Pedido de preço + disponibilidade juntos = lead pronto para fechar. **Regra:** responder o preço ancorado (após a jornada já explicada, o que é o caso aqui) e AMARRAR na agenda oferecida pelo próprio lead: 'A avaliação é R$1.000; fechando hoje fica R$900, com pré-consulta de R$300 que abate do total. Você falou fim de tarde — consigo te encaixar [dia]. Fecho pra você?'
-
-### Flood de retomadas automáticas de madrugada e ao longo do dia reincidiu — poluição de pipeline
-- **ANTI-PADRÃO:** múltiplas retomadas empilhadas ('Voltando aqui com calma...', 'Fiquei de te ajudar...', 'Desculpa a demora...') na mesma thread. **Regra reforçada:** limitar cadência de retomada; nunca disparar sequências de re-abertura repetidas na mesma thread num curto intervalo.
-
-### CASO BOM a manter: recuperação diante de queixa de repetição do lead
-- **PADRÃO-OURO parcial (16:38):** ao receber '❓' e o lead reclamar indiretamente, a Clara reconheceu ('Você tem razão, me desculpe. Vou ser mais direta e não vou repetir a mesma pergunta'). Reconhecer o próprio loop e prometer objetividade é bom recovery — mas precisa ser CUMPRIDO (ela voltou a repetir depois). **Regra:** após admitir repetição, efetivamente não repetir; avançar de fato.
-
 ### Aprendizados [2026-07-14]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -292,3 +274,18 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Anti-padrão persistente: bloco de jornada redisparado várias vezes na mesma thread e pergunta-cardápio após foco já declarado
 - **ANTI-PADRÃO (16:12, 17:46, 17:49):** bloco de jornada reenviado 3x fragmentado; pergunta-cardápio ('peso, disposição, hormônios ou saúde de forma geral?') repetida após o lead já ter dito foco (resistência à insulina/IMC 37→29/redução de mama). Também 'objetivo de eliminar peso' colado de template quando o lead deu contexto específico (cirurgia bariátrica-adjacente/redução de mama).
 - **Regra reforçada:** jornada uma única vez; nunca repetir pergunta-cardápio após foco declarado; espelhar o objetivo real do lead (meta de IMC para cirurgia), não colar 'eliminar peso'.
+
+### Aprendizados [2026-07-19]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Paciente JÁ CADASTRADO pede aplicação de medicação/retorno — NÃO aplicar SPIN de captação; handoff
+- **CASO (18/07 15:21–15:24):** lead 'Gostaria de agendar a aplicação da medicação'. A Clara começou a explicar a importância da 1ª consulta e disparou pergunta-cardápio ('o que mais está te incomodando?'). Só quando o lead disse 'Já sou paciente' é que a Clara acertou ('vou alinhar com a equipe os próximos passos para sua aplicação').
+- **Regra:** pedido de 'aplicação de medicação', 'retorno' ou 'já sou paciente' = fora do escopo de captação (RC-07 é conduta de paciente recorrente/humano). NÃO reconduzir para 1ª consulta nem aplicar SPIN/pergunta-cardápio. Confirmar que é paciente e sinalizar humano/equipe. Frase: 'Perfeito, vou alinhar com a equipe os próximos passos da sua aplicação e já te retornamos por aqui.'
+
+### 'Qual a especialidade da Dra.?' — responder o perfil dela antes/junto ao SPIN, não ignorar a pergunta
+- **ANTI-PADRÃO (18/07 12:23–12:28):** lead perguntou 2x 'qual a especialidade dela?' (contexto menopausa/hormônios) e a Clara ignorou nas duas vezes, devolvendo pergunta-cardápio e depois só 'a Dra. avalia metabolismo, hormônios...'. Nunca esclareceu o perfil/especialidade solicitado.
+- **Regra:** pergunta sobre especialidade/formação da Dra. Daniely = responder objetivamente o perfil dela (médica com foco em emagrecimento/controle metabólico e hormonal, não endocrinologista) e perguntar se deseja seguir mesmo assim — nunca deixar a pergunta sem resposta. (Reforça padrão-ouro de 16/07: esclarecer perfil quando questionada sobre especialidade.)
+
+### Lead pede EXPLICITAMENTE valor do Programa total como condição para agendar — sinalizar humano, não travar em loop
+- **PADRÃO-OURO (HUMANO, 17/07 19:43–20:03):** ante 'investir R$1000 na consulta pra saber depois o restante não fica viável', o humano manteve a política (Programa é personalizado, definido na consulta) mas sustentou viabilidade com ancoragem de mercado (comparação Mounjaro, faixa aproximada de parcela) — conduta que a Clara NÃO reproduz. A Clara, em paralelo, ainda disparou retomada/SPIN.
+- **Regra:** quando o lead condiciona o agendamento a saber o valor TOTAL do Programa antes da consulta, a Clara deve reafirmar 1x que o Programa é individualizado (definido só na consulta, RC-01), reforçar consulta ancorada + cashback 100% fechando no dia, e SINALIZAR HUMANO — nunca inventar faixa nem entrar em loop de jornada.
