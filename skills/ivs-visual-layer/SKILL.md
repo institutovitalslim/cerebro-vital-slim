@@ -37,7 +37,7 @@ A primeira versão é local/read-only por padrão: recebe um HTML IVS existente,
 5. Mudança clínica/conteúdo médico não é função desta skill; só estrutura visual, navegação e auditoria.
 6. Qualquer aplicação definitiva em template canônico exige validação posterior e commit.
 
-## Comando
+## Comando básico
 
 ```bash
 python3 /root/cerebro-vital-slim/skills/ivs-visual-layer/scripts/ivs_visual_layer.py \
@@ -46,10 +46,42 @@ python3 /root/cerebro-vital-slim/skills/ivs-visual-layer/scripts/ivs_visual_laye
   --mode presentation-v12
 ```
 
+## Comando com edição controlada + diff
+
+Crie um JSON de operações:
+
+```json
+{
+  "operations": [
+    {"type": "text_replace", "old": "texto atual", "new": "texto novo", "count": 1},
+    {"type": "add_class", "id": "final-cta", "class": "ivs-review-focus"}
+  ]
+}
+```
+
+Rode:
+
+```bash
+python3 /root/cerebro-vital-slim/skills/ivs-visual-layer/scripts/ivs_visual_layer.py \
+  --input /caminho/apresentacao.html \
+  --out-dir /root/cerebro-vital-slim/deliverables/ivs-visual-layer-smoke \
+  --mode presentation-v12 \
+  --edit-spec /caminho/edit.json
+```
+
+Operações suportadas no piloto:
+
+- `text_replace`: substitui texto em cópia, com `count` explícito.
+- `add_class`: adiciona classe CSS em elemento por `id`, útil para foco/revisão visual.
+
+A saída editada continua sendo QA interno e não substitui o original.
+
 ## Saídas
 
 - `*-visual-layer.html`: cópia HTML instrumentada para revisão interna.
 - `*-visual-layer.audit.json`: relatório estrutural redigido.
+- `*-visual-layer-edited.html`: cópia editada quando `--edit-spec` é usado.
+- `*-visual-layer-edited.diff`: diff unificado da camada visual base para a cópia editada.
 
 ## Critérios de aceite do piloto
 
