@@ -60,9 +60,16 @@ def normalize_decision_text(value: str) -> str:
 
 
 def contains_financial_no_fit_decline(text: str) -> bool:
+    """Detecta negativa financeira terminal que bloqueia avanço ativo.
+
+    Regra Tiaro (2026-07-19): se o lead já respondeu que está caro demais,
+    fora das condições, sem dinheiro/orçamento ou equivalente, o motor não deve
+    tentar avançar follow-up. Inbound futuro continua permitido.
+    """
     norm = normalize_decision_text(text)
     if not norm:
         return False
+    # Protege frases afirmativas/qualificadoras: "cabe nas minhas condições" não é negativa.
     if 'dentro d minhas condicoes' in norm or 'dentro das minhas condicoes' in norm or 'cabe nas minhas condicoes' in norm:
         return False
     patterns = (
@@ -72,6 +79,14 @@ def contains_financial_no_fit_decline(text: str) -> bool:
         r'\bnao consigo pagar\b',
         r'\bnao posso pagar\b',
         r'\bfora do meu orcamento\b',
+        r'\bfoge (?:do|ao) meu orcamento\b',
+        r'\b(?:muito|bem) caro(?: pra mim| para mim)?\b',
+        r'\bcaro demais(?: pra mim| para mim)?\b',
+        r'\b(?:e|esta|ta) caro(?: pra mim| para mim)?\b',
+        r'\bnao da(?: pra mim| para mim| agora)?\b',
+        r'\bnao cabe (?:no|dentro do|em meu|no meu) orcamento\b',
+        r'\binviavel(?: pra mim| para mim)?\b',
+        r'\bsem chance(?: pra mim| para mim)?\b',
     )
     return any(re.search(pattern, norm) for pattern in patterns)
 

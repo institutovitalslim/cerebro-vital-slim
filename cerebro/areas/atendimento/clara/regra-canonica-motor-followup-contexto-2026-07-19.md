@@ -21,10 +21,12 @@ Voltar a se conectar com o lead da forma certa, retomando o ponto real da conver
    - dúvidas/objeções já verbalizadas;
    - dores citadas;
    - se já existe pergunta de descoberta aberta aguardando resposta;
-   - sinais de recusa final, pedido de retorno futuro ou bloqueio de follow-up.
+   - sinais de recusa final, pedido de retorno futuro ou bloqueio de follow-up;
+   - negativa financeira/sem avanço, como “é muito caro para mim”, “não tenho condições”, “não consigo pagar”, “fora do meu orçamento”, “não dá para mim agora”.
 3. Se a última mensagem da Clara já deixou uma pergunta aberta e o lead ainda não respondeu, o motor não deve mandar outra pergunta genérica parecida.
-4. A mensagem de follow-up deve reconectar a partir do contexto, sem expor dados sensíveis e sem inventar informações.
-5. Evidência operacional deve ser redigida: categoria/contexto/âncora são permitidos; dump de conversa, telefone completo e PII não são permitidos em relatório.
+4. Se o lead já deu negativa terminal de avanço — especialmente financeira/sem condição — o motor deve bloquear follow-up ativo e não insistir. Inbound futuro permanece permitido.
+5. A mensagem de follow-up deve reconectar a partir do contexto, sem expor dados sensíveis e sem inventar informações.
+6. Evidência operacional deve ser redigida: categoria/contexto/âncora são permitidos; dump de conversa, telefone completo e PII não são permitidos em relatório.
 
 ## Estado de implementação
 
