@@ -28,7 +28,7 @@ Posts FB/IG IVS: acionar João/Content OS e obter aprovação; Jarvis não publi
 §
 Chrome remoto/noVNC: Tiaro pode não conseguir abrir IP direto; preferir link trycloudflare quando disponível.
 §
-Repos salvos: Vibe-Trading=HKUDS/Vibe-Trading; carrossel DaYAGDDgZgE mapeado em repo_notes/skills.
+Claude main local no notebook; Jarvis não orquestra. Content OS handoffs: content-engine-os/CLAUDE.md.
 §
 Tiaro aprovou o padrão das páginas estáticas Authority Link Engine do IVS em Lauro de Freitas; usar como benchmark para futuras páginas SEO/autoridade locais.
 §
