@@ -218,6 +218,7 @@
     prepareDOM(root);
     if (reducedMotion() || document.documentElement.dataset.ivsMotion === 'off') {
       document.body.classList.remove('ivs-motion-pending');
+      document.body.classList.add('ivs-motion-active');
       animateWithoutGSAP(root);
       return { reduced: true };
     }
@@ -235,11 +236,13 @@
       initGSAP(root);
       initVanta(cfg);
       document.body.classList.remove('ivs-motion-pending');
+      document.body.classList.add('ivs-motion-active');
       log('info', 'camada inicializada', { profile: cfg.profile, vanta: cfg.vanta });
       return { ok: true, profile: cfg.profile };
     } catch (err) {
       log('warn', 'fallback sem bibliotecas externas', err.message);
       document.body.classList.remove('ivs-motion-pending');
+      document.body.classList.add('ivs-motion-active');
       animateWithoutGSAP(root);
       return { ok: false, fallback: true, error: err.message };
     }

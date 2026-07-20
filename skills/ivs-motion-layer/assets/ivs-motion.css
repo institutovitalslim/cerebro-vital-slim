@@ -21,10 +21,39 @@ html.ivs-lenis.ivs-lenis-smooth { scroll-behavior: auto !important; }
 .ivs-motion-ready body { background: var(--ivs-motion-bg); }
 
 .ivs-motion-shell {
+  position: relative;
   background:
     radial-gradient(circle at 16% 12%, rgba(214, 180, 108, 0.13), transparent 28rem),
     radial-gradient(circle at 86% 8%, rgba(120, 200, 157, 0.10), transparent 28rem),
     var(--ivs-motion-bg);
+}
+
+.ivs-motion-shell::before,
+.ivs-motion-shell::after {
+  content: "";
+  position: fixed;
+  z-index: -3;
+  width: 34vmax;
+  height: 34vmax;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(42px);
+  opacity: .20;
+  transform: translate3d(0,0,0);
+}
+
+.ivs-motion-shell::before {
+  left: -12vmax;
+  top: 8vmax;
+  background: radial-gradient(circle, rgba(214,180,108,.66), transparent 62%);
+  animation: ivs-orb-drift-a 10s var(--ivs-motion-ease) infinite alternate;
+}
+
+.ivs-motion-shell::after {
+  right: -14vmax;
+  top: 42vmax;
+  background: radial-gradient(circle, rgba(120,200,157,.42), transparent 64%);
+  animation: ivs-orb-drift-b 12s var(--ivs-motion-ease) infinite alternate;
 }
 
 .ivs-motion-hero,
@@ -41,7 +70,23 @@ html.ivs-lenis.ivs-lenis-smooth { scroll-behavior: auto !important; }
   z-index: -2;
   background:
     linear-gradient(135deg, rgba(8,15,16,.82), rgba(13,24,27,.76)),
-    radial-gradient(circle at 80% 20%, var(--ivs-motion-gold-soft), transparent 22rem);
+    radial-gradient(circle at 80% 20%, var(--ivs-motion-gold-soft), transparent 22rem),
+    linear-gradient(110deg, transparent 0%, rgba(214,180,108,.10) 42%, rgba(255,255,255,.13) 50%, rgba(214,180,108,.10) 58%, transparent 100%);
+  background-size: auto, auto, 240% 100%;
+  animation: ivs-hero-sheen 7.5s linear infinite;
+}
+
+[data-ivs-vanta]::after {
+  content: "";
+  position: absolute;
+  inset: auto 8% 10% auto;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(214,180,108,.24), transparent 68%);
+  filter: blur(10px);
+  animation: ivs-float-soft 6s var(--ivs-motion-ease) infinite alternate;
 }
 
 .ivs-motion-section,
@@ -64,12 +109,25 @@ html.ivs-lenis.ivs-lenis-smooth { scroll-behavior: auto !important; }
 
 .ivs-motion-card,
 [data-ivs-motion="card"] {
+  position: relative;
+  overflow: hidden;
   background: var(--ivs-motion-surface);
   border: 1px solid var(--ivs-motion-line);
   box-shadow: var(--ivs-motion-shadow);
   border-radius: 24px;
   backdrop-filter: blur(16px);
   transform-style: preserve-3d;
+}
+
+.ivs-motion-card::before,
+[data-ivs-motion="card"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.08) 46%, rgba(214,180,108,.16) 52%, transparent 62%);
+  transform: translateX(-130%);
+  animation: ivs-card-sheen 5.8s ease-in-out infinite;
 }
 
 .ivs-motion-card:hover,
@@ -80,6 +138,10 @@ html.ivs-lenis.ivs-lenis-smooth { scroll-behavior: auto !important; }
 .ivs-motion-word {
   display: inline-block;
   transform-origin: 0 80%;
+}
+
+.ivs-motion-active [data-ivs-motion="split-title"] .ivs-motion-word {
+  animation: ivs-word-breathe 4.8s ease-in-out infinite;
 }
 
 .ivs-motion-progress {
@@ -117,10 +179,54 @@ html.ivs-lenis.ivs-lenis-smooth { scroll-behavior: auto !important; }
   color: var(--ivs-motion-muted);
   border-radius: 999px;
   padding: .42rem .7rem;
+  animation: ivs-float-soft 5.2s var(--ivs-motion-ease) infinite alternate;
+}
+
+.ivs-motion-chip:nth-child(2n) { animation-delay: -1.7s; }
+.ivs-motion-chip:nth-child(3n) { animation-delay: -3.1s; }
+
+[data-ivs-motion="pulse"] {
+  animation: ivs-premium-pulse 2.8s ease-in-out infinite;
 }
 
 .ivs-motion-gold { color: var(--ivs-motion-gold); }
 .ivs-motion-muted { color: var(--ivs-motion-muted); }
+
+@keyframes ivs-orb-drift-a {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  100% { transform: translate3d(12vmax,7vmax,0) scale(1.18); }
+}
+
+@keyframes ivs-orb-drift-b {
+  0% { transform: translate3d(0,0,0) scale(.92); }
+  100% { transform: translate3d(-10vmax,-6vmax,0) scale(1.08); }
+}
+
+@keyframes ivs-hero-sheen {
+  0% { background-position: 0 0, 0 0, 180% 0; }
+  100% { background-position: 0 0, 0 0, -80% 0; }
+}
+
+@keyframes ivs-float-soft {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(0,-12px,0); }
+}
+
+@keyframes ivs-card-sheen {
+  0%, 44% { transform: translateX(-130%); opacity: 0; }
+  52% { opacity: 1; }
+  72%, 100% { transform: translateX(130%); opacity: 0; }
+}
+
+@keyframes ivs-word-breathe {
+  0%, 100% { filter: brightness(1); transform: translateY(0); }
+  50% { filter: brightness(1.18); transform: translateY(-1px); }
+}
+
+@keyframes ivs-premium-pulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(214,180,108,0); transform: scale(1); }
+  50% { box-shadow: 0 0 42px rgba(214,180,108,.24); transform: scale(1.015); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

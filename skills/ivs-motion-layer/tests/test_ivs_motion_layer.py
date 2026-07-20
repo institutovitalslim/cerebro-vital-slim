@@ -19,6 +19,8 @@ class IVSMotionLayerTest(unittest.TestCase):
         self.assertIn('vanta@0.5.24', js)
         self.assertIn('prefers-reduced-motion', css)
         self.assertIn('data-ivs-motion="off"', css)
+        self.assertIn('@keyframes ivs-hero-sheen', css)
+        self.assertIn('@keyframes ivs-card-sheen', css)
 
     def test_apply_motion_injects_assets_without_overwriting_input(self):
         with tempfile.TemporaryDirectory() as tmp:

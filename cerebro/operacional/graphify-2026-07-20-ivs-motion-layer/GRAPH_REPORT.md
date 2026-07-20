@@ -51,5 +51,18 @@ Resultado:
 - `unittest`: 3 testes OK
 - Chromium screenshot: arquivo PNG gerado com 310.907 bytes
 
+## Ajuste pós-validação do Tiaro
+Tiaro apontou corretamente que a primeira entrega mostrada como screenshot/HTML no Telegram não evidenciava animação. A camada foi reforçada com motion visível também sem depender apenas de scroll/CDN:
+
+- animação ambiente CSS no fundo;
+- sheen contínuo no hero;
+- shimmer nos cards;
+- chips flutuantes;
+- pulse controlado no CTA;
+- preview MP4 gerado para validação visual em canais que não executam HTML.
+
+Artefato de preview:
+- `/root/cerebro-vital-slim/skills/ivs-motion-layer/examples/demo-apresentacao-ivs-motion-preview.mp4`
+
 ## Próxima ação
 Aplicar em um HTML real de apresentação V10/V11/evolução ou landing do IVS e avaliar com Tiaro antes de tornar padrão automático nos geradores.
