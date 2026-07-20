@@ -1,0 +1,145 @@
+/* IVS Motion Layer v0.1 — Instituto Vital Slim
+   Camada própria. Referências: Lenis/GSAP/Vanta; sem código React Bits. */
+:root {
+  --ivs-motion-bg: #080f10;
+  --ivs-motion-surface: rgba(13, 24, 27, 0.86);
+  --ivs-motion-surface-strong: rgba(18, 31, 35, 0.94);
+  --ivs-motion-text: #f7f2e8;
+  --ivs-motion-muted: #b8c0ba;
+  --ivs-motion-gold: #d6b46c;
+  --ivs-motion-gold-soft: rgba(214, 180, 108, 0.18);
+  --ivs-motion-green: #78c89d;
+  --ivs-motion-line: rgba(245, 233, 204, 0.16);
+  --ivs-motion-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
+  --ivs-motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ivs-motion-duration: 760ms;
+}
+
+html.ivs-lenis,
+html.ivs-lenis body { height: auto; }
+html.ivs-lenis.ivs-lenis-smooth { scroll-behavior: auto !important; }
+.ivs-motion-ready body { background: var(--ivs-motion-bg); }
+
+.ivs-motion-shell {
+  background:
+    radial-gradient(circle at 16% 12%, rgba(214, 180, 108, 0.13), transparent 28rem),
+    radial-gradient(circle at 86% 8%, rgba(120, 200, 157, 0.10), transparent 28rem),
+    var(--ivs-motion-bg);
+}
+
+.ivs-motion-hero,
+[data-ivs-vanta] {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+[data-ivs-vanta]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(135deg, rgba(8,15,16,.82), rgba(13,24,27,.76)),
+    radial-gradient(circle at 80% 20%, var(--ivs-motion-gold-soft), transparent 22rem);
+}
+
+.ivs-motion-section,
+[data-ivs-motion="fade-up"],
+[data-ivs-motion="card"],
+[data-ivs-motion="split-title"] {
+  will-change: transform, opacity;
+}
+
+.ivs-motion-pending [data-ivs-motion="fade-up"],
+.ivs-motion-pending .ivs-motion-section {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(0.985);
+}
+
+.ivs-motion-pending [data-ivs-motion="card"] {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) rotateX(3deg);
+}
+
+.ivs-motion-card,
+[data-ivs-motion="card"] {
+  background: var(--ivs-motion-surface);
+  border: 1px solid var(--ivs-motion-line);
+  box-shadow: var(--ivs-motion-shadow);
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  transform-style: preserve-3d;
+}
+
+.ivs-motion-card:hover,
+[data-ivs-motion="card"]:hover {
+  border-color: rgba(214, 180, 108, 0.42);
+}
+
+.ivs-motion-word {
+  display: inline-block;
+  transform-origin: 0 80%;
+}
+
+.ivs-motion-progress {
+  --ivs-progress: 0%;
+  display: block;
+  position: relative;
+  height: 10px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(247, 242, 232, 0.10);
+}
+
+.ivs-motion-progress::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--ivs-progress);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ivs-motion-gold), #f3deb1, var(--ivs-motion-green));
+  box-shadow: 0 0 28px rgba(214, 180, 108, 0.34);
+}
+
+.ivs-motion-counter {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+.ivs-motion-chip {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  border: 1px solid var(--ivs-motion-line);
+  background: rgba(247,242,232,0.06);
+  color: var(--ivs-motion-muted);
+  border-radius: 999px;
+  padding: .42rem .7rem;
+}
+
+.ivs-motion-gold { color: var(--ivs-motion-gold); }
+.ivs-motion-muted { color: var(--ivs-motion-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+  .ivs-motion-pending [data-ivs-motion],
+  .ivs-motion-pending .ivs-motion-section {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+[data-ivs-motion="off"] *,
+[data-ivs-motion="off"] {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}

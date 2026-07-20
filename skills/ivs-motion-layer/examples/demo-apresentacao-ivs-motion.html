@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo IVS Motion Layer — Apresentação Premium</title>
+  <style>
+    :root{--bg:#081012;--text:#f8f1e4;--muted:#b9b8ad;--gold:#d6b46c;--line:rgba(255,255,255,.14)}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif} .wrap{max-width:1160px;margin:0 auto;padding:34px 22px} .hero{min-height:82vh;display:grid;align-items:center;border-bottom:1px solid var(--line);position:relative} .eyebrow{letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-size:12px;font-weight:800} h1{font-size:clamp(42px,7vw,92px);line-height:.94;margin:18px 0;letter-spacing:-.07em;max-width:940px} h2{font-size:clamp(30px,4vw,56px);line-height:1;margin:0 0 18px;letter-spacing:-.05em} p{color:var(--muted);font-size:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card,.metric,.panel{padding:24px;border-radius:28px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.metric strong{display:block;font-size:52px;color:var(--gold);line-height:1}.section{padding:100px 0}.timeline{display:grid;gap:18px}.bar-label{display:flex;justify-content:space-between;margin:20px 0 8px}.cta{display:inline-flex;margin-top:20px;padding:14px 18px;border:1px solid rgba(214,180,108,.55);border-radius:999px;color:var(--text);text-decoration:none;background:rgba(214,180,108,.12)} @media(max-width:800px){.grid{grid-template-columns:1fr}.hero{min-height:70vh}}
+  </style>
+  <link id="ivs-motion-css" rel="stylesheet" href="ivs-motion-assets/ivs-motion.css">
+  <script id="ivs-motion-config">
+window.IVSMotionConfig = {profile: 'presentation', lenis: true, gsap: true, vanta: true, debug: false};
+</script>
+  <script id="ivs-motion-js" defer src="ivs-motion-assets/ivs-motion.js"></script>
+</head>
+<body class="ivs-motion-shell ivs-motion-profile-presentation">
+  <header class="hero" data-ivs-vanta>
+    <div class="wrap">
+      <div class="eyebrow">Instituto Vital Slim · Motion Layer</div>
+      <h1 data-ivs-motion="split-title">Apresentações clínicas com presença premium, clareza e movimento controlado.</h1>
+      <p>Demo local da camada que integra Lenis, GSAP e Vanta opcional com presets IVS próprios.</p>
+      <a class="cta" href="#metricas">Ver presets aplicados</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="section" id="metricas" data-ivs-motion="fade-up">
+      <div class="eyebrow">Preset 01 · Counters</div>
+      <h2 data-ivs-motion="split-title">Métricas ganham leitura imediata.</h2>
+      <div class="grid">
+        <div class="metric" data-ivs-motion="card" data-ivs-motion="card"><strong data-ivs-counter="21.6" data-suffix=" kg">0</strong><p>Exemplo de evolução ponderal em apresentação de acompanhamento.</p></div>
+        <div class="metric" data-ivs-motion="card" data-ivs-motion="card"><strong data-ivs-counter="92" data-suffix="%">0</strong><p>Indicador visual para aderência ou progresso interno.</p></div>
+        <div class="metric" data-ivs-motion="card" data-ivs-motion="card"><strong data-ivs-counter="6" data-suffix=" meses">0</strong><p>Tempo de jornada contado com animação discreta.</p></div>
+      </div>
+    </section>
+
+    <section class="section" data-ivs-motion="fade-up">
+      <div class="eyebrow">Preset 02 · Progress</div>
+      <h2 data-ivs-motion="split-title">Barras ajudam a explicar sem poluir.</h2>
+      <div class="panel" data-ivs-motion="card" data-ivs-motion="card">
+        <div class="bar-label"><span>Composição corporal</span><strong>74%</strong></div><span data-ivs-progress="74"></span>
+        <div class="bar-label"><span>Rotina alimentar</span><strong>63%</strong></div><span data-ivs-progress="63"></span>
+        <div class="bar-label"><span>Treino e energia</span><strong>58%</strong></div><span data-ivs-progress="58"></span>
+      </div>
+    </section>
+
+    <section class="section" data-ivs-motion="fade-up">
+      <div class="eyebrow">Preset 03 · Cards</div>
+      <h2 data-ivs-motion="split-title">Cards entram em sequência, sem exagero.</h2>
+      <div class="grid">
+        <div class="card" data-ivs-motion="card" data-ivs-motion="card"><h3>Clareza clínica</h3><p>Movimento serve para guiar a leitura, não para transformar dado médico em espetáculo.</p></div>
+        <div class="card" data-ivs-motion="card" data-ivs-motion="card"><h3>Performance</h3><p>Lenis e GSAP são opcionais; fallback mantém o HTML legível se CDN falhar.</p></div>
+        <div class="card" data-ivs-motion="card" data-ivs-motion="card"><h3>Governança</h3><p>React Bits é referência visual; componentes IVS são próprios, sem cópia direta.</p></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
