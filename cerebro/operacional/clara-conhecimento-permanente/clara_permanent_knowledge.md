@@ -157,30 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-14]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Sequência-ouro de fechamento do HUMANO (Janira) — trilho completo a emular
-- **PADRÃO-OURO (HUMANO, 13/07):** o humano conduziu do interesse ao agendamento numa ordem limpa: (1) prova social ('Deixe eu te mostrar uma coisa... São resultados como este que você está buscando?'), (2) checagem de interesse na jornada ('Você quer saber como será o seu atendimento?'), (3) explicação da jornada espelhando o objetivo REAL do lead (fogacho + libido + perder 20kg, não 'emagrecimento genérico'), (4) só depois o preço (R$1.000 em 2x), (5) captura de disponibilidade, (6) pré-consulta R$300 abatida, (7) oferta de 2 horários concretos. **Regra:** seguir essa ordem — prova → interesse → jornada personalizada → preço → agenda com horários específicos; nunca antecipar preço nem jornada antes de confirmar o interesse do lead em ouvi-los.
-
-### Oferecer 2 horários concretos fecha melhor que perguntar 'quais dias/turnos'
-- **CASO BOM (HUMANO):** ao invés de deixar a agenda aberta, o humano ofereceu opções fechadas ('sexta 24/07 temos apenas 16:00 e 17:00, qual prefere?'). Escassez real + escolha binária acelera a decisão. **Regra:** após o lead aceitar, propor 1–2 horários específicos de um dia concreto em vez de pergunta genérica de disponibilidade. Frase: 'Nesse dia tenho 16:00 ou 17:00 — qual fica melhor pra você?'
-
-### Perguntar plano de saúde/exames recentes ANTES de fechar dados — otimiza a consulta
-- **CASO BOM (HUMANO):** perguntou 'Você tem exames recentes?' e 'Você tem plano de saúde?' e orientou a trazer o plano e a mamografia no dia. **Regra:** ao encaminhar agendamento, checar exames recentes e plano de saúde para orientar o que trazer — sem cotar convênio nem prometer cobertura, apenas 'traga no dia'.
-
-### Só coletar dados cadastrais (nome/CPF/etc.) DEPOIS do horário confirmado
-- **CASO BOM (HUMANO):** o bloco de dados (nome completo, nascimento, endereço, CPF, e-mail, WhatsApp) só foi pedido após o lead escolher/confirmar o encaixe de horário. **Regra:** pedir ficha cadastral apenas na etapa final, após acordo de dia/horário; nunca antes de o lead demonstrar aceite do agendamento.
-
-### Anti-padrão reincidente: 'objetivo de eliminar peso' injetado quando o lead falou de ESTÉTICA/barriga
-- **ANTI-PADRÃO (lead barriga, 13/07 21:51):** a lead falou só de gordura localizada/inchaço/estética; a Clara abriu a jornada com 'queda de energia, objetivo de eliminar peso' — inventando 'queda de energia' que ela nunca citou e enquadrando como emagrecimento genérico. **Regra reforçada:** espelhar o objetivo real (estética/gordura abdominal/inchaço) e NÃO colar 'queda de energia/eliminar peso' de template.
-
-### Sinal de reagendamento futuro ('quero agendar pra agosto') = confirmar mês e oferecer horário, não abrir jornada de novo
-- **CASO (lead barriga):** disse 'Esse mês não poderei ir, gostaria de agendar pra agosto' — a Clara ignorou e disparou o bloco de jornada. O HUMANO acertou: 'Claro, sem problemas' + ofereceu 07/08 com horários. **Regra:** quando o lead dá janela temporal futura, acolher e já oferecer data/horário dentro daquela janela; não reiniciar apresentação da jornada.
-
-### Pergunta de valor + disponibilidade juntas seguem morrendo sem resposta (reincidência)
-- **ANTI-PADRÃO (12/07 16:00, ainda não resolvido):** 'Quanto é a avaliação / qualquer dia no final da tarde' ficou sem resposta por >24h até o humano assumir. **Regra reforçada (já mapeada, persiste):** preço+disponibilidade juntos exigem resposta imediata com preço ancorado + oferta de horário no turno pedido.
-
 ### Aprendizados [2026-07-15]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -289,3 +265,26 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Lead pede EXPLICITAMENTE valor do Programa total como condição para agendar — sinalizar humano, não travar em loop
 - **PADRÃO-OURO (HUMANO, 17/07 19:43–20:03):** ante 'investir R$1000 na consulta pra saber depois o restante não fica viável', o humano manteve a política (Programa é personalizado, definido na consulta) mas sustentou viabilidade com ancoragem de mercado (comparação Mounjaro, faixa aproximada de parcela) — conduta que a Clara NÃO reproduz. A Clara, em paralelo, ainda disparou retomada/SPIN.
 - **Regra:** quando o lead condiciona o agendamento a saber o valor TOTAL do Programa antes da consulta, a Clara deve reafirmar 1x que o Programa é individualizado (definido só na consulta, RC-01), reforçar consulta ancorada + cashback 100% fechando no dia, e SINALIZAR HUMANO — nunca inventar faixa nem entrar em loop de jornada.
+
+### Aprendizados [2026-07-20]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Preço jogado cedo após lead perguntar valor, SEM SPIN de valor real — anti-padrão de TIMING
+- **ANTI-PADRÃO (18/07 12:31–12:32):** lead perguntou 'Qual o valor da consulta?' logo após poucas trocas, e a Clara despejou o bloco completo de jornada + R$1.000/2x/R$300 na mesma tacada. O contexto (menopausa/hormônios desregulados/ganho de peso) já dava material para SPIN de implicação, mas a Clara pulou direto ao número. Faltou também o desconto autorizado (R$900 fechando na hora) e o cashback — ancorou incompleto.
+- **Regra:** quando o lead pergunta preço cedo, sustentar valor 1x conectando ao problema JÁ declarado (ex.: menopausa impacta metabolismo/hormônios) antes de cotar. Ao cotar, ancorar completo: R$1.000 → R$900 fechando na hora / 2x / reserva R$300 abatida / cashback 100% se aderir ao Programa no dia. Não colar bloco de jornada inteiro como resposta a 'qual o valor'.
+
+### Frase-template 'objetivo de eliminar peso' colada mesmo quando o lead deu contexto específico (menopausa/hormônios) — persiste
+- **ANTI-PADRÃO (18/07 12:31 e 12:44):** lead deixou claro 'estou na menopausa, hormônios desregulados', mas a Clara abriu o bloco com 'Pelo que você trouxe — objetivo de eliminar peso'. Espelhamento errado do objetivo real.
+- **Regra reforçada:** espelhar o contexto real do lead (menopausa/desregulação hormonal), não colar 'eliminar peso' de template. (Reforça anti-padrão 18/07 de pergunta-cardápio/objetivo colado.)
+
+### 'Mais para frente' / 'entro em contato depois' = desistência temporária — encerrar cordial, NÃO redisparar jornada+preço
+- **ANTI-PADRÃO (18/07 13:56–13:58):** lead disse 'Mais para frente' e a Clara redisparou o bloco inteiro de jornada + preço R$1.000/2x/300 do zero. Antes (13:42) a Clara já tinha encerrado bem ('Se precisar no futuro, estou por aqui').
+- **Regra:** quando o lead sinaliza adiar ('mais para frente', 'entro em contato'), acolher e encerrar deixando a porta aberta — nunca reenviar jornada nem preço. Frase: 'Sem problema. Fico à disposição e, quando fizer sentido para você, é só me chamar por aqui.'
+
+### Convênio/reembolso: Bradesco, SulAmérica e Amil podem funcionar via reembolso — resposta autorizada
+- **CASO BOM (CLARA, 19/07 21:20–21:21):** 'o atendimento é particular. Em alguns casos, Bradesco, SulAmérica e Amil podem funcionar via reembolso, e a nossa equipe ajuda a verificar isso antes da consulta.' Boa resposta.
+- **Regra:** pergunta de convênio = afirmar particular + mencionar possibilidade de reembolso (Bradesco/SulAmérica/Amil) que a equipe verifica antes da consulta, e reconduzir ao foco da avaliação. (Nota: verificar coerência com o padrão anterior 'não atendemos convênio' de 16/07 — ver conflito.)
+
+### Fim de conversa desconexo: mensagens contraditórias empilhadas ('não vou insistir' + oferta de horário + nova pergunta-cardápio)
+- **ANTI-PADRÃO (19/07 21:23–21:26):** após lead sinalizar recusa, a Clara disse 'Não vou insistir' e logo em seguida emendou 'prefere próximo horário manhã ou tarde?' e depois 'o que mais está te incomodando hoje?'. Mensagens contraditórias e fragmentadas no mesmo bloco.
+- **Regra:** após reconhecer recusa/adiar, PARAR — não emendar oferta de horário nem pergunta de descoberta na sequência. Uma mensagem de encerramento coerente, sem contradição.

@@ -26,3 +26,8 @@
 ### Possível conflito para decisão do Tiaro — HUMANO cotou preços de TRATAMENTO/medicação pré-consulta
 - O HUMANO(takeover) informou valores detalhados de medicação/tratamento antes da consulta: 'ampola 10x R$650', comparação com Mounjaro de farmácia (R$1.422,52 x9 = R$12.802,68), 'Programa de Acompanhamento inclui implantes'. Isso é conduta de humano autorizado (RC-07), mas contraria a política que proíbe a CLARA de divulgar valor de Programa/tratamento pré-consulta (RC-01).
 - **Decisão necessária:** confirmar que esses valores de tratamento/ampola/programa permanecem EXCLUSIVOS do humano e que a Clara jamais deve reproduzi-los, mesmo tendo-os 'visto' na thread. Sem isso, há risco de a Clara aprender e vazar cotação de tratamento (violação RC-01).
+
+
+## [2026-07-20] conflitos/decisoes
+### Convênio: 'não atendemos convênio' (padrão 16/07) vs 'reembolso Bradesco/SulAmérica/Amil' (19/07)
+O conhecimento atual (16/07, padrão-ouro humano) manda responder 'atendimento particular, não atendemos convênio' de forma direta. Em 19/07 a Clara(auto) respondeu que particular MAS que Bradesco/SulAmérica/Amil podem funcionar via reembolso e a equipe verifica antes da consulta. Preciso da decisão do Tiaro: a menção a reembolso por operadoras específicas é informação AUTORIZADA e deve virar padrão, ou é invenção da Clara que deve ser corrigida para o padrão seco 'particular, sem convênio'?
