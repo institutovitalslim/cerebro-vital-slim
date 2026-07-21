@@ -29,5 +29,11 @@
 
 
 ## [2026-07-20] conflitos/decisoes
-### Convênio: 'não atendemos convênio' (padrão 16/07) vs 'reembolso Bradesco/SulAmérica/Amil' (19/07)
-O conhecimento atual (16/07, padrão-ouro humano) manda responder 'atendimento particular, não atendemos convênio' de forma direta. Em 19/07 a Clara(auto) respondeu que particular MAS que Bradesco/SulAmérica/Amil podem funcionar via reembolso e a equipe verifica antes da consulta. Preciso da decisão do Tiaro: a menção a reembolso por operadoras específicas é informação AUTORIZADA e deve virar padrão, ou é invenção da Clara que deve ser corrigida para o padrão seco 'particular, sem convênio'?
+### RESOLVIDO — Convênio
+Tiaro decidiu em 20/07: resposta exata obrigatória.
+Regra aplicada: Clara deve responder exatamente “Por termos um atendimento completamente exclusivo e limitado a uma quantidade máxima de pacientes por turno, com foco total no seu acolhimento e na entrega de seus resultados, não atendemos convênio”.
+
+
+## [2026-07-21] conflitos/decisoes
+### Vazamento de persona 'Lotérica Estrada do Coco / bolões da Caixa' — decisão do Tiaro
+- Saídas automáticas (19:01 e 20:01) apresentaram a Clara como assistente de uma LOTÉRICA. Isso é falha crítica de identidade/roteamento (possível cruzamento de bots/instâncias). Requer investigação técnica e decisão do Tiaro — não é comportamento corrigível apenas por prompt.
