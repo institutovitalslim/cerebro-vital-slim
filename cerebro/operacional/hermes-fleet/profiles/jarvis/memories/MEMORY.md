@@ -1,4 +1,4 @@
-Tiaro é CEO do IVS; espera Jarvis ponta a ponta, executivo, preciso e direto.
+Tiaro é CEO do IVS; espera execução prática ponta a ponta. Estratégias/links devem virar artefatos, agentes, gates e evidência.
 §
 Tiaro prefere resumo executivo primeiro; português impecável. Áudio recebido geralmente indica que está dirigindo e espera áudio.
 §
@@ -6,7 +6,7 @@ Saudações: “Jarvis online. Pronto para executar.” + hora local + clima/tem
 §
 Tiaro tem esposa Dani/Dra. Daniely e filha Clarinha; viagens em família são contexto recorrente.
 §
-Carro: GWM Haval H6 PHEV19; consultar manual antes de responder. Tarefa viagem 805 km cancelada; não mencionar como aberta.
+Carro: GWM Haval H6 PHEV19; consultar manual antes de responder.
 §
 Manuais oficiais no Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt; PDFs originais na pasta manuais/.
 §
