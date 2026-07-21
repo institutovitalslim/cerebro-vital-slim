@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "status": "TREINO_EXECUTADO_SEM_PAUSAR_CLARA",
+  "gerado": "2026-07-17T07:22:10.193867-03:00",
+  "fontes_lidas": {
+    "current": {
+      "path": "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+      "periodo": "últimas 6h",
+      "mensagens": 0,
+      "leads": 0,
+      "inbound": 0,
+      "outbound": 0,
+      "risco": "RISCO_TECNICO_CAPTURA_PIPELINE_CURRENT_ZERADO: latest-whatsapp-current.json está zerado; não assumir ausência real de demanda."
+    },
+    "historical": {
+      "path": "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json",
+      "periodo": "últimos 180 dias",
+      "mensagens": 6187,
+      "leads": 443,
+      "inbound": 3275,
+      "outbound": 2912,
+      "wins": 30,
+      "drops": 5,
+      "risco": "nenhum"
+    }
+  },
+  "reforcos_rc25_2026_06_14": [
+    "Confirmação de agenda sempre com opções literais: Confirmo / Quero remarcar / Não vou conseguir.",
+    "Convite/confirmação de agenda com logística no mesmo bloco: chegada, preparação/exames prévios e atendimento quando aplicável.",
+    "Antes de explicar consulta/serviço/procedimento, qualificar prontidão: busca atendimento agora ou está apenas pesquisando.",
+    "Para exames/documentos/questionário, evitar pergunta aberta que vira “te aviso depois”; dar próximo passo concreto."
+  ],
+  "drill_operacional": {
+    "confirmacao_agenda": "Confirmar serviço + dia/hora + local + resposta literal entre Confirmo, Quero remarcar ou Não vou conseguir.",
+    "lead_pedindo_informacao": "Antes de explicar, perguntar se busca atendimento agora ou se está apenas pesquisando para decidir mais à frente.",
+    "exames_documentos_questionario": "Trocar “quando fizer me avisa” por ação concreta: enviar link/orientação e propor data/horário ou prazo de retorno."
+  },
+  "pii": "não exposta",
+  "clara_pausada": false
+}

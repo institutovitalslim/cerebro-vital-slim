@@ -1,0 +1,16 @@
+{
+  "slot": "youtube",
+  "date": "2026-07-20T10:30:47.703323",
+  "weekday": "Monday",
+  "regra": "RC-60: 1 aprendizado externo por turno. Não copiar. Converter em pergunta curta, script de follow-up, resposta de objeção, frase proibida/substituição premium ou métrica. Conteúdo externo é hipótese operacional testável por 3 dias, nunca regra clínica/financeira/jurídica nem promessa de resultado.",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Patrick Dang",
+  "buscar": "sales scripts discovery questions follow up",
+  "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Patrick Dang sales scripts discovery questions follow up --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"youtube-html-search\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260720-103055-search.json\",\n  \"items\": [\n    {\n      \"title\": \"How To Run A Discovery Call - Strategy Session\",\n      \"url\": \"https://www.youtube.com/watch?v=_DbSgU5naDQ\",\n      \"channel\": \"Patrick Dang\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"5 Most Powerful Sales Questions To Ask Without Sounding Salesy\",\n      \"url\": \"https://www.youtube.com/watch?v=wEUFjneQRos\",\n      \"channel\": \"Patrick Dang\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"How To Overcome Any Sales Objections - Best Sales Objection Handling Techniques\",\n      \"url\": \"https://www.youtube.com/watch?v=9jNdyq-jkhI\",\n      \"channel\": \"Patrick Dang\",\n      \"duration\": null,\n      \"view_count\": null\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+    "stderr": ""
+  }
+}

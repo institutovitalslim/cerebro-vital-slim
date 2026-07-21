@@ -1,0 +1,713 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 2,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "conselho_growth",
+      "label": "Conselho Growth",
+      "type": "council",
+      "community": 2,
+      "norm_label": "conselho growth"
+    },
+    {
+      "id": "agendamento_premium",
+      "label": "Agendamento premium de pacientes/leads",
+      "type": "capability",
+      "community": 2,
+      "norm_label": "agendamento premium de pacientes/leads"
+    },
+    {
+      "id": "slot_latest_evidence_gate",
+      "label": "latest-evidence-gate",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-evidence-gate.json",
+      "community": 2,
+      "norm_label": "latest-evidence-gate"
+    },
+    {
+      "id": "slot_instagram_manha",
+      "label": "instagram_manha",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-instagram_manha.json",
+      "community": 0,
+      "norm_label": "instagram_manha"
+    },
+    {
+      "id": "fonte_instagram",
+      "label": "Instagram",
+      "type": "source",
+      "community": 0,
+      "norm_label": "instagram"
+    },
+    {
+      "id": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "label": "vendas consultivas, WhatsApp, atendimento premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "vendas consultivas, whatsapp, atendimento premium"
+    },
+    {
+      "id": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 insight + 1 pergunta curta de abertura + 1 frase proibida"
+    },
+    {
+      "id": "slot_instagram_tarde",
+      "label": "instagram_tarde",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-instagram_tarde.json",
+      "community": 0,
+      "norm_label": "instagram_tarde"
+    },
+    {
+      "id": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "label": "SPIN, negocia\u00e7\u00e3o, social selling ou cl\u00ednica premium",
+      "type": "topic",
+      "community": 0,
+      "norm_label": "spin, negociacao, social selling ou clinica premium"
+    },
+    {
+      "id": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "label": "1 resposta ruim + 1 resposta Clara premium + 1 pergunta de avan\u00e7o",
+      "type": "deliverable",
+      "community": 0,
+      "norm_label": "1 resposta ruim + 1 resposta clara premium + 1 pergunta de avanco"
+    },
+    {
+      "id": "slot_revisao",
+      "label": "revisao",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-revisao.json",
+      "community": 4,
+      "norm_label": "revisao"
+    },
+    {
+      "id": "fonte_revis_o_interna",
+      "label": "Revis\u00e3o interna",
+      "type": "source",
+      "community": 4,
+      "norm_label": "revisao interna"
+    },
+    {
+      "id": "tema_aprendizados_do_dia",
+      "label": "aprendizados do dia",
+      "type": "topic",
+      "community": 4,
+      "norm_label": "aprendizados do dia"
+    },
+    {
+      "id": "entrega_classificar_aplicar_amanh_testar_3_dias_descartar_propor_rc_25_consolida",
+      "label": "classificar aplicar amanh\u00e3 / testar 3 dias / descartar / propor RC-25; consolidar 1 pergunta curta, 1 follow-up ou 1 resposta de obje\u00e7\u00e3o",
+      "type": "deliverable",
+      "community": 4,
+      "norm_label": "classificar aplicar amanha / testar 3 dias / descartar / propor rc-25; consolidar 1 pergunta curta, 1 follow-up ou 1 resposta de objecao"
+    },
+    {
+      "id": "slot_latest_treino_clara_conversao_premium_whatsapp",
+      "label": "latest-treino-clara-conversao-premium-whatsapp",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-treino-clara-conversao-premium-whatsapp.json",
+      "community": 2,
+      "norm_label": "latest-treino-clara-conversao-premium-whatsapp"
+    },
+    {
+      "id": "slot_latest_treino_diario_clara_whatsapp",
+      "label": "latest-treino-diario-clara-whatsapp",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-treino-diario-clara-whatsapp.json",
+      "community": 2,
+      "norm_label": "latest-treino-diario-clara-whatsapp"
+    },
+    {
+      "id": "slot_whatsapp_current",
+      "label": "whatsapp-current",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-whatsapp-current.json",
+      "community": 3,
+      "norm_label": "whatsapp-current"
+    },
+    {
+      "id": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "label": "WhatsApp IVS via planilha de conversas",
+      "type": "source",
+      "community": 3,
+      "norm_label": "whatsapp ivs via planilha de conversas"
+    },
+    {
+      "id": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "label": "obje\u00e7\u00f5es, vit\u00f3rias, quedas, timing de convite para agenda, linguagem premium e follow-up",
+      "type": "topic",
+      "community": 3,
+      "norm_label": "objecoes, vitorias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+    },
+    {
+      "id": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "label": "padr\u00f5es de conversa reais para melhorar agendamento da Clara sem expor PII",
+      "type": "deliverable",
+      "community": 3,
+      "norm_label": "padroes de conversa reais para melhorar agendamento da clara sem expor pii"
+    },
+    {
+      "id": "slot_whatsapp_historical",
+      "label": "whatsapp-historical",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-whatsapp-historical.json",
+      "community": 3,
+      "norm_label": "whatsapp-historical"
+    },
+    {
+      "id": "slot_x_twitter",
+      "label": "x_twitter",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-x_twitter.json",
+      "community": 5,
+      "norm_label": "x_twitter"
+    },
+    {
+      "id": "fonte_x_twitter",
+      "label": "X/Twitter",
+      "type": "source",
+      "community": 5,
+      "norm_label": "x/twitter"
+    },
+    {
+      "id": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "label": "posts de alto engajamento sobre persuas\u00e3o, obje\u00e7\u00f5es, atendimento, neg\u00f3cios locais ou experi\u00eancia do cliente",
+      "type": "topic",
+      "community": 5,
+      "norm_label": "posts de alto engajamento sobre persuasao, objecoes, atendimento, negocios locais ou experiencia do cliente"
+    },
+    {
+      "id": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "label": "1 frase curta + 1 \u00e2ngulo de obje\u00e7\u00e3o + 1 cuidado contra agressividade",
+      "type": "deliverable",
+      "community": 5,
+      "norm_label": "1 frase curta + 1 angulo de objecao + 1 cuidado contra agressividade"
+    },
+    {
+      "id": "item_an_18_year_old_made_12_750_building_websites_nobody_asked_him_to_build_his_col",
+      "label": "An 18-year-old made $12,750 building websites nobody asked him to build\n\nHis cold email is not a paragraph explaining why a local business needs a better website.\n\nIt is a link to ",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "0xKiyoro",
+      "community": 6,
+      "norm_label": "an 18-year-old made $12,750 building websites nobody asked him to build\n\nhis cold email is not a paragraph explaining why a local business needs a better website.\n\nit is a link to "
+    },
+    {
+      "id": "conceito_an_18_year_old_made_12_750_building_websites_nobody_asked_him_to_buil",
+      "label": "An 18-year-old made $12,750 building websites nobody asked him to build\n\nHis cold email is not a paragraph explaining why a local business needs a better websit",
+      "type": "concept",
+      "community": 6,
+      "norm_label": "an 18-year-old made $12,750 building websites nobody asked him to build\n\nhis cold email is not a paragraph explaining why a local business needs a better websit"
+    },
+    {
+      "id": "item_a_chinese_developer_just_showed_the_core_of_a_7_840_month_badminton_ai_business",
+      "label": "A CHINESE DEVELOPER JUST SHOWED THE CORE OF A $7,840/MONTH BADMINTON AI BUSINESS IN 32 SECONDS\n\nHe pointed one fixed camera at an ordinary court and built a YOLO-based system that ",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "0xTria",
+      "community": 8,
+      "norm_label": "a chinese developer just showed the core of a $7,840/month badminton ai business in 32 seconds\n\nhe pointed one fixed camera at an ordinary court and built a yolo-based system that "
+    },
+    {
+      "id": "conceito_a_chinese_developer_just_showed_the_core_of_a_7_840_month_badminton_a",
+      "label": "A CHINESE DEVELOPER JUST SHOWED THE CORE OF A $7,840/MONTH BADMINTON AI BUSINESS IN 32 SECONDS\n\nHe pointed one fixed camera at an ordinary court and built a YOL",
+      "type": "concept",
+      "community": 8,
+      "norm_label": "a chinese developer just showed the core of a $7,840/month badminton ai business in 32 seconds\n\nhe pointed one fixed camera at an ordinary court and built a yol"
+    },
+    {
+      "id": "item_guests_remember_thoughtful_details_one_simple_welcome_touch_can_leave_a_last",
+      "label": "\ud83c\udfe1 Guests remember thoughtful details.\n\nOne simple welcome touch can leave a lasting impression. \u2615\n\n\ud83d\udcde Book a Call Now: https://t.co/Ts6fjckQgb\n\n#BNBGUY #MainBNBGuy #360BNBSolutions ",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "360bnbsolutions",
+      "community": 7,
+      "norm_label": "\ud83c\udfe1 guests remember thoughtful details.\n\none simple welcome touch can leave a lasting impression. \u2615\n\n\ud83d\udcde book a call now: https://t.co/ts6fjckqgb\n\n#bnbguy #mainbnbguy #360bnbsolutions "
+    },
+    {
+      "id": "conceito_guests_remember_thoughtful_details_one_simple_welcome_touch_can_le",
+      "label": "\ud83c\udfe1 Guests remember thoughtful details.\n\nOne simple welcome touch can leave a lasting impression. \u2615\n\n\ud83d\udcde Book a Call Now: https://t.co/Ts6fjckQgb\n\n#BNBGUY #MainBNBG",
+      "type": "concept",
+      "community": 7,
+      "norm_label": "\ud83c\udfe1 guests remember thoughtful details.\n\none simple welcome touch can leave a lasting impression. \u2615\n\n\ud83d\udcde book a call now: https://t.co/ts6fjckqgb\n\n#bnbguy #mainbnbg"
+    },
+    {
+      "id": "item_you_really_shouldn_t_buy_a_movie_ticket_before_experiencing_the_view_from_your_s",
+      "label": "You really shouldn't buy a movie ticket before experiencing the view from your seat \u2620\ufe0f\n\nIntroducing Vantage. \n\nA prototype for a more immersive movie ticket booking experience wher",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "thebuggeddev",
+      "community": 10,
+      "norm_label": "you really shouldn't buy a movie ticket before experiencing the view from your seat \u2620\ufe0f\n\nintroducing vantage. \n\na prototype for a more immersive movie ticket booking experience wher"
+    },
+    {
+      "id": "conceito_you_really_shouldn_t_buy_a_movie_ticket_before_experiencing_the_view_f",
+      "label": "You really shouldn't buy a movie ticket before experiencing the view from your seat \u2620\ufe0f\n\nIntroducing Vantage. \n\nA prototype for a more immersive movie ticket boo",
+      "type": "concept",
+      "community": 10,
+      "norm_label": "you really shouldn't buy a movie ticket before experiencing the view from your seat \u2620\ufe0f\n\nintroducing vantage. \n\na prototype for a more immersive movie ticket boo"
+    },
+    {
+      "id": "item_the_future_of_parenting_might_have_just_arrived_he_didn_t_wait_weeks_for_a_doc",
+      "label": "The Future Of Parenting Might Have Just Arrived.\n\nHe Didn't Wait Weeks For A Doctor... AI Checked His Entire Body In One Visit.\n\nFor most people, getting a full health check is exh",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-x_twitter.json",
+      "url": "",
+      "profile": "DimaHolovatyi",
+      "community": 9,
+      "norm_label": "the future of parenting might have just arrived.\n\nhe didn't wait weeks for a doctor... ai checked his entire body in one visit.\n\nfor most people, getting a full health check is exh"
+    },
+    {
+      "id": "conceito_the_future_of_parenting_might_have_just_arrived_he_didn_t_wait_weeks",
+      "label": "The Future Of Parenting Might Have Just Arrived.\n\nHe Didn't Wait Weeks For A Doctor... AI Checked His Entire Body In One Visit.\n\nFor most people, getting a full",
+      "type": "concept",
+      "community": 9,
+      "norm_label": "the future of parenting might have just arrived.\n\nhe didn't wait weeks for a doctor... ai checked his entire body in one visit.\n\nfor most people, getting a full"
+    },
+    {
+      "id": "slot_youtube",
+      "label": "youtube",
+      "type": "learning_slot",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-youtube.json",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "fonte_youtube",
+      "label": "YouTube",
+      "type": "source",
+      "community": 1,
+      "norm_label": "youtube"
+    },
+    {
+      "id": "tema_sales_scripts_discovery_questions_follow_up",
+      "label": "sales scripts discovery questions follow up",
+      "type": "topic",
+      "community": 1,
+      "norm_label": "sales scripts discovery questions follow up"
+    },
+    {
+      "id": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "label": "ideia central + aplica\u00e7\u00e3o WhatsApp + script antes/depois + m\u00e9trica + risco",
+      "type": "deliverable",
+      "community": 1,
+      "norm_label": "ideia central + aplicacao whatsapp + script antes/depois + metrica + risco"
+    },
+    {
+      "id": "item_how_to_run_a_discovery_call_strategy_session",
+      "label": "How To Run A Discovery Call - Strategy Session",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=_DbSgU5naDQ",
+      "profile": "Patrick Dang",
+      "community": 1,
+      "norm_label": "how to run a discovery call - strategy session"
+    },
+    {
+      "id": "item_5_most_powerful_sales_questions_to_ask_without_sounding_salesy",
+      "label": "5 Most Powerful Sales Questions To Ask Without Sounding Salesy",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=wEUFjneQRos",
+      "profile": "Patrick Dang",
+      "community": 1,
+      "norm_label": "5 most powerful sales questions to ask without sounding salesy"
+    },
+    {
+      "id": "item_how_to_overcome_any_sales_objections_best_sales_objection_handling_techniques",
+      "label": "How To Overcome Any Sales Objections - Best Sales Objection Handling Techniques",
+      "type": "external_learning_item",
+      "source_file": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/2026-07-20/raw/latest-youtube.json",
+      "url": "https://www.youtube.com/watch?v=9jNdyq-jkhI",
+      "profile": "Patrick Dang",
+      "community": 1,
+      "norm_label": "how to overcome any sales objections - best sales objection handling techniques"
+    }
+  ],
+  "links": [
+    {
+      "type": "must_master",
+      "relationship": "must_master",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "agendamento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "sabatina",
+      "relationship": "sabatina",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "conselho_growth",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_latest_evidence_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_manha",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_revisao",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_latest_treino_clara_conversao_premium_whatsapp",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_latest_treino_diario_clara_whatsapp",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "learns_from",
+      "relationship": "learns_from",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "slot_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "fonte_instagram",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "tema_vendas_consultivas_whatsapp_atendimento_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_manha",
+      "target": "entrega_1_insight_1_pergunta_curta_de_abertura_1_frase_proibida",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_instagram",
+      "target": "slot_instagram_tarde",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "tema_spin_negocia_o_social_selling_ou_cl_nica_premium",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_instagram_tarde",
+      "target": "entrega_1_resposta_ruim_1_resposta_clara_premium_1_pergunta_de_avan_o",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "fonte_revis_o_interna",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "tema_aprendizados_do_dia",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_revisao",
+      "target": "entrega_classificar_aplicar_amanh_testar_3_dias_descartar_propor_rc_25_consolida",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_whatsapp_current",
+      "target": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "fonte_whatsapp_ivs_via_planilha_de_conversas",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "tema_obje_es_vit_rias_quedas_timing_de_convite_para_agenda_linguagem_premium_e_f",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "entrega_padr_es_de_conversa_reais_para_melhorar_agendamento_da_clara_sem_expor_pii",
+      "target": "slot_whatsapp_historical",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "fonte_x_twitter",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "tema_posts_de_alto_engajamento_sobre_persuas_o_obje_es_atendimento_neg_cios_locai",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "entrega_1_frase_curta_1_ngulo_de_obje_o_1_cuidado_contra_agressividade",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_an_18_year_old_made_12_750_building_websites_nobody_asked_him_to_build_his_col",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_a_chinese_developer_just_showed_the_core_of_a_7_840_month_badminton_ai_business",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_guests_remember_thoughtful_details_one_simple_welcome_touch_can_leave_a_last",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_you_really_shouldn_t_buy_a_movie_ticket_before_experiencing_the_view_from_your_s",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_x_twitter",
+      "target": "item_the_future_of_parenting_might_have_just_arrived_he_didn_t_wait_weeks_for_a_doc",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_an_18_year_old_made_12_750_building_websites_nobody_asked_him_to_build_his_col",
+      "target": "conceito_an_18_year_old_made_12_750_building_websites_nobody_asked_him_to_buil",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_a_chinese_developer_just_showed_the_core_of_a_7_840_month_badminton_ai_business",
+      "target": "conceito_a_chinese_developer_just_showed_the_core_of_a_7_840_month_badminton_a",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_guests_remember_thoughtful_details_one_simple_welcome_touch_can_leave_a_last",
+      "target": "conceito_guests_remember_thoughtful_details_one_simple_welcome_touch_can_le",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_you_really_shouldn_t_buy_a_movie_ticket_before_experiencing_the_view_from_your_s",
+      "target": "conceito_you_really_shouldn_t_buy_a_movie_ticket_before_experiencing_the_view_f",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "contains_concept",
+      "relationship": "contains_concept",
+      "confidence": "EXTRACTED",
+      "source": "item_the_future_of_parenting_might_have_just_arrived_he_didn_t_wait_weeks_for_a_doc",
+      "target": "conceito_the_future_of_parenting_might_have_just_arrived_he_didn_t_wait_weeks",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_source",
+      "relationship": "uses_source",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "fonte_youtube",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "extracts_topic",
+      "relationship": "extracts_topic",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "tema_sales_scripts_discovery_questions_follow_up",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "produces",
+      "relationship": "produces",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "entrega_ideia_central_aplica_o_whatsapp_script_antes_depois_m_trica_risco",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_how_to_run_a_discovery_call_strategy_session",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_5_most_powerful_sales_questions_to_ask_without_sounding_salesy",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "observed",
+      "relationship": "observed",
+      "confidence": "EXTRACTED",
+      "source": "slot_youtube",
+      "target": "item_how_to_overcome_any_sales_objections_best_sales_objection_handling_techniques",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

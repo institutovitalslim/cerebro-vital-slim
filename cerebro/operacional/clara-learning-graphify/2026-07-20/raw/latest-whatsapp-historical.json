@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "slot": "whatsapp-historical",
+  "fonte": "WhatsApp IVS via planilha de conversas",
+  "modo": "historical",
+  "periodo": "últimos 180 dias",
+  "cerebro_report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260720-093053-whatsapp-historical.md",
+  "contadores": {
+    "total_messages": 6187,
+    "unique_leads": 443,
+    "total_inbound": 3275,
+    "total_outbound": 2912,
+    "wins": 30,
+    "drops": 5
+  },
+  "aprendizados": "## 1. Confirmações com opções de resposta claras\n**Observacao:** Mensagens de confirmação que trazem nome do paciente, procedimento, horário exato e opções de resposta diretas (\"Confirmo\", \"Quero remarcar\", \"Não vou conseguir\") têm alta taxa de conversão. Exemplo real que gerou vitória: \"Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*.\" Resultado: \"Confirmo\".\n**Acao para a Clara:** Sempre que confirmar um agendamento, enviar mensagem com nome do paciente, tipo de atendimento, data/horário e três opções de resposta exatas: *Confirmo*, *Quero remarcar* e *Não vou conseguir*.\n\n## 2. Oferta de horário específico fecha mais que pergunta aberta\n**Observacao:** Leads que perguntam \"Qual o dia e horário?\" (ex: \"podemos agendar um visita? Qual o dia e horário? Para montar o seu treino.\") reenviam a mensagem várias vezes sem fechar, enquanto propostas com horário concreto convertem. Exemplo real de vitória: \"Temos o horário amanhã (23/04) às 14:00. Podemos agendar?\" Resultado: \"Confirmo no início da tarde.\"\n**Acao para a Clara:** Nunca perguntar apenas \"Qual dia e horário serve para você?\". Sempre apresentar 1 ou 2 horários específicos disponíveis, como: \"Temos vagas amanhã às 09:00 ou quinta às 14:00. Qual funciona melhor para você?\"\n\n## 3. Explicações detalhadas no primeiro contato afastam leads em pesquisa\n**Observacao:** Quando a Clara oferece explicações longas sobre o que está incluído na consulta ou como funciona o tratamento individualizado, leads que ainda estão na fase de pesquisa desistem. Exemplos reais de drop: após \"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊\", o lead respondeu \"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar\"; e após \"Na consulta, a Dra. avalia seu caso com profundidade e, a partir disso, define a conduta mais adequada...\", veio \"Por enquanto não\".\n**Acao para a Clara:** Antes de explicar detalhes do protocolo ou conteúdo da consulta, perguntar em qual fase o lead está: \"Você está buscando informações para decidir mais pra frente, ou gostaria de agendar já para essa semana?\" Só detalhar o serviço se o lead demonstrar intenção imediata de agendar.\n\n## 4. Mensagens repetidas indicam falta de resposta e perda de temperatura\n**Observacao:** Vários leads reenviaram a mesma mensagem idêntica em sequência quando não foram atendidos, como \"Boa tarde Ana Clara Tudo bem ? podemos agendar um visita? Qual o dia e horário? Para montar o seu treino.\" (aparece 3 vezes nas aberturas e 2 nas recebidas) e múltiplos \"Boa tarde!\" e \"❤️\" consecutivos.\n**Acao para a Clara:** Se identificar que o lead enviou a mesma mensagem duas vezes ou mais, priorizar a resposta imediata e iniciar com um reconhecimento: \"Oi! Vi que você mandou mensagem mais cedo e não quero deixar você sem resposta. Vamos resolver isso agora?\" Não deixar mensagens repetidas sem atendimento prioritário.",
+  "entrega": "padrões de conversa reais para melhorar agendamento da Clara sem expor PII",
+  "buscar": "objeções, vitórias, quedas, timing de convite para agenda, linguagem premium e follow-up"
+}

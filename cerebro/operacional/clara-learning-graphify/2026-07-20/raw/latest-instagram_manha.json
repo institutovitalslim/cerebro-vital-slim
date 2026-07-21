@@ -1,0 +1,16 @@
+{
+  "slot": "instagram_manha",
+  "date": "2026-07-20T07:11:01.452291",
+  "weekday": "Monday",
+  "regra": "RC-60: 1 aprendizado externo por turno. Não copiar. Converter em pergunta curta, script de follow-up, resposta de objeção, frase proibida/substituição premium ou métrica. Conteúdo externo é hipótese operacional testável por 3 dias, nunca regra clínica/financeira/jurídica nem promessa de resultado.",
+  "fonte": "Instagram",
+  "perfil": "camilaporto",
+  "buscar": "vendas consultivas, WhatsApp, atendimento premium",
+  "entrega": "1 insight + 1 pergunta curta de abertura + 1 frase proibida",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/rapidapi-social-learning/scripts/social_learning.py instagram-profile --username camilaporto --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"instagram-profile\",\n  \"saved\": \"/root/.openclaw/reports/social-learning/20260720-071111-instagram-profile-camilaporto.json\",\n  \"items\": [\n    {\n      \"shortcode\": \"DaTlDOBxwem\",\n      \"caption\": \"• Nós duas explicando uma situação que claramente saiu do nosso controle • \\n\\nnós duas sendo nós duas! 🤦🏼‍♀️\",\n      \"likes\": 52,\n      \"comments\": 3,\n      \"taken_at\": 1783028483,\n      \"media_type\": 1,\n      \"product_type\": \"feed\",\n      \"video_url_available\": false,\n      \"video_url\": \"\"\n    },\n    {\n      \"shortcode\": \"DZiG1Auujz-\",\n      \"caption\": \"• Pov: suas amigas topam qualquer trend. 🤩💚✨\\n\\n#trending #amigas #loja #lifestyle\",\n      \"likes\": 66,\n      \"comments\": 4,\n      \"taken_at\": 1781368608,\n      \"media_type\": 2,\n      \"product_type\": \"clips\",\n      \"video_url_available\": true,\n      \"video_url\": \"https://scontent-ams2-1.cdninstagram.com/o1/v/t2/f2/m86/AQP_7hkbD2GfS_zeobKdGLebs2a-U84FhYM7HPBsUgjOZQOdsITg6dL1-mHND9ooc4xRQOMc0DxWGPIDLxnDgNujfws53B-NJgEDJBY.mp4?_nc_cat=105&_nc_sid=5e9851&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_ohc=8UOvNRqpk_0Q7kNvwE7RYJj&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTE0Nzc2Nzg5NTA5MDc1OCwiYXNzZXRfYWdlX2RheXMiOjM2LCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6MzAsInVybGdlbl9zb\"\n    },\n    {\n      \"shortcode\": \"DZDw9t6RvAw\",\n      \"caption\": \"• toda essa beleza merece ir pro feed! •\",\n      \"likes\": 13,\n      \"comments\": 0,\n      \"taken_at\": 1780350389,\n      \"media_type\": 1,\n      \"product_type\": \"feed\",\n      \"video_url_available\": false,\n      \"video_url\": \"\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  }
+}
