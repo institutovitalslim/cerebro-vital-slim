@@ -6,7 +6,7 @@ Saudações: “Jarvis online. Pronto para executar.” + hora local + clima/tem
 §
 Tiaro tem esposa Dani/Dra. Daniely e filha Clarinha; viagens em família são contexto recorrente.
 §
-Carro: GWM Haval H6 PHEV19; consultar manual antes de responder.
+Carro: GWM Haval H6 PHEV19; consultar manual; PHEV19/805 km não é pendência.
 §
 Manuais oficiais no Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt; PDFs originais na pasta manuais/.
 §

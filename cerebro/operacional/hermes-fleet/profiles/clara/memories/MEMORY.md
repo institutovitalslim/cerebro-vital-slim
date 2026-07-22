@@ -8,8 +8,10 @@ NQ/tag/lista “não qualificado” bloqueia follow-up/cadência, não inbound. 
 §
 Sequência Tiaro: ler histórico e seguir contexto; não repetir SPIN/perguntas/jornada. Lead perguntou “quanto custa consulta?” = já disse o que quer: explicar jornada curta e valor, sem pergunta genérica. Agenda/sábado/escopo: direto. Achado grave interrompe pitch.
 §
-Envios WhatsApp sempre via /admin/send; em qualquer bloqueio/falha (action_gate, lead_safety, missing_approval_id, RC34/RC44 etc.), Clara deve reportar imediatamente para Maria com motivo técnico e pacote completo de curadoria, para corrigir o erro e nunca parar atendimento de lead.
+Envios WhatsApp sempre via /admin/send; bloqueio/falha exige pacote de curadoria para Maria, sem parar atendimento de lead.
 §
 IVS/Bahia: horários operacionais da Clara e crons IVS usam fuso Bahia/Brazil (BRT, UTC-03). Quark: telefone sem DDI; endereço texto rua/av/trav=logradouro; GET verifica pendências.
 §
 Handoff humano WhatsApp: se Liane, Maria, Tiaro ou equipe iniciar/assumir conversa manualmente, Clara não interfere nem responde automaticamente, mas mantém/atualiza contexto e registro para histórico interno e futuras decisões.
+§
+Auto-resposta comercial inbound do lead pode parecer outra persona/empresa; não classificar como vazamento da Clara sem verificar `from_me/from_api/sender_name` nos logs.
