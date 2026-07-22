@@ -157,27 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-16]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Convênio/plano de saúde (ex.: Hapvida) — NÃO atendemos; responder direto e reconduzir
-- **PADRÃO-OURO (HUMANO, 15/07 16:18):** ao 'Vocês atendem hapvida?' o humano respondeu simples 'Infelizmente não'. A Clara(auto) ignorou a pergunta e devolveu abertura genérica. **Regra:** pergunta sobre convênio específico = responder objetivamente que o atendimento é particular/não atende plano, sem cotar cobertura, e emendar reconduzindo ('O atendimento aqui é particular; posso te explicar como funciona a avaliação?'). Nunca deixar a pergunta de convênio sem resposta nem trocar por cardápio de descoberta.
-
-### Loop de descoberta com pergunta-cardápio REINCIDE mesmo com lead já engajado e dando sintomas — regressão crítica ativa
-- **ANTI-PADRÃO (15/07, várias threads):** após o lead já ter dito foco/sintomas (barriga, insônia/cansaço, exames pós-hormônio), a Clara voltou a disparar 'o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?'. Em uma thread perguntou isso DEPOIS de já ter oferecido turno de agenda. **Regra reforçada:** nunca reabrir a pergunta-cardápio depois que o lead já declarou o foco; avançar (aprofundar dor específica → jornada → preço → agenda), jamais voltar ao menu.
-
-### Bloco de jornada em rajada disparado repetidamente na MESMA thread (spam de mensagens) — parar
-- **ANTI-PADRÃO (15/07 17:17–17:27):** a Clara reenviou o bloco completo da jornada ('O tratamento no Instituto Vital Slim é médico...') 3x seguidas para o mesmo lead a cada 'Sim'. Poluição e sensação de robô. **Regra:** apresentar a jornada UMA vez; após o lead confirmar interesse, avançar para preço+agenda, nunca repetir o bloco. Se o lead responde 'Sim' à pergunta 'faz sentido?', isso é aceite — seguir adiante, não recomeçar.
-
-### 'Como salvar o contato / quero salvar' NÃO é sintoma — responder a pergunta real
-- **ANTI-PADRÃO (15/07 14:52):** lead perguntou 'Como salvar o contato de vocês' e a Clara respondeu com empatia sobre sintomas ('Faz sentido olhar isso com cuidado... isso já vem atrapalhando há quanto tempo?'). **Regra:** responder literalmente o que o lead pediu (operacional/logístico) antes de retomar o funil; não colar resposta empática de sintoma sobre pergunta administrativa.
-
-### Encaminhamento a parceiro/terceiro (cardiologista, personal, Supramaximus) = handoff, silenciar auto
-- **PADRÃO-OURO (HUMANO):** 'Não temos cardiologista na clínica, mas temos parceiros que indicamos'; e no caso da cortesia da personal ('Experiência Supramaximus') o humano encaminhou ao time do parceiro. A Clara(auto) invadiu ambas com retomada/descoberta. **Regra:** quando o lead pede especialidade que não temos ou vem por benefício/parceria (personal, voucher), NÃO temos aquele especialista na clínica — sinalizar humano/parceiro e NÃO disparar SPIN nem retomadas.
-
-### Retomadas automáticas seguem invadindo threads em handoff/fechamento — reforço crítico
-- **ANTI-PADRÃO (14/07 e 15/07):** enquanto o humano coletava dados/enviava link de pré-consulta e agenda, a Clara disparou 'Voltando aqui com calma', reabriu descoberta e até saudou o lead do zero ('Que bom te receber'). **Regra reforçada:** takeover ativo (link, coleta de dados, oferta de horário) = silêncio absoluto; nenhuma retomada, saudação ou SPIN.
-
 ### Aprendizados [2026-07-17]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -277,9 +256,9 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 - **CASO (11:12–11:13):** lead disse 'iniciar meu processo de emagrecimento para engravidar'; a Clara acolheu bem ('faz sentido cuidar disso antes da gestação'), mas na sequência colou o template 'objetivo de eliminar peso' ao abrir a jornada.
 - **Regra:** quando o lead traz objetivo específico (engravidar/fertilidade, saúde reprodutiva), espelhar exatamente isso ao longo do SPIN e da apresentação da jornada — nunca reduzir a 'eliminar peso'. (Reforça anti-padrão persistente de objetivo colado.)
 
-### Vazamento de identidade/persona errada — guardrail crítico
-- **ANTI-PADRÃO GRAVE (19:01, 20:01):** mensagens automáticas se apresentando como 'assistente virtual da Lotérica Estrada do Coco / bolões oficiais da Caixa'. Persona completamente fora do Instituto Vital Slim.
-- **Regra (guardrail duro):** a Clara é SEMPRE e SOMENTE concierge do Instituto Vital Slim. Jamais assumir outra empresa/persona. Qualquer saída com identidade estranha = bug crítico; sinalizar Tiaro imediatamente.
+### Auto-resposta comercial do WhatsApp do lead NÃO é vazamento de persona da Clara
+- **CORREÇÃO TIARO (20/07 19:01, 20:01):** mensagens se apresentando como 'assistente virtual da Lotérica Estrada do Coco / bolões oficiais da Caixa' eram respostas automáticas do WhatsApp comercial daquele lead, não saída/persona da Clara.
+- **Regra:** antes de marcar persona leak/bug crítico, verificar `from_me`, `from_api`, `sender_name`, telefone e instância no webhook. Mensagem inbound/auto-resposta do lead é contexto do lead, não falha da Clara. Só classificar como vazamento se a mensagem for comprovadamente outbound da instância IVS/Clara.
 
 ### Lead pergunta preço direto ('como vou para consulta sem saber o valor?') e ficou SEM resposta — RC-46/RC-40
 - **ANTI-PADRÃO (22:49):** lead cobrou 'Como eu vou para uma consulta sem saber o valor???' e a conversa não teve resposta. Lead insistindo em preço = momento de ser transparente, não silêncio.
@@ -292,3 +271,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### 'Iniciar atendimento' redisparado em massa dentro de thread com agenda em curso (persiste, alta prioridade)
 - **ANTI-PADRÃO (12:52, 15:05, 18:23, 18:46, 18:52, 19:40):** múltiplos 'Iniciar atendimento' fizeram a Clara/reativação repetir o bloco de reengajamento ('Vi que demonstrou interesse... não demos continuidade') DEZENAS de vezes, inclusive sobre threads com agendamento já em andamento e enquanto o humano conduzia reagendamento/orientações do SupraMaximus.
 - **Regra reforçada:** 'Iniciar atendimento' em thread com histórico/agenda = retomar do ponto exato; NUNCA disparar mensagem de reengajamento em loop nem múltiplas cópias idênticas. Detectar duplicatas e emitir no máximo uma mensagem coerente.
+
+### Aprendizados [2026-07-22]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Exames complementares — o que responder ao lead que pergunta 'quais exames?' / 'exames custam quanto?'
+- **PADRÃO-OURO (HUMANO, 21/07 21:04, 21:09–21:16):** ao ser questionado sobre exames, o humano explicou: exames de sangue (vitaminas, minerais, inflamação, hormônios, tireoide) são solicitados após a confirmação/pré-consulta e o lead **faz em qualquer laboratório**; a clínica **não cobra** por eles. A bioimpedância é feita na própria consulta e neste mês vem **bonificada** (junto com planejamento alimentar de nutricionista, sem custo adicional).
+- **Regra:** pergunta sobre exames/hormônio/tireoide = explicar que o pedido de exames de sangue sai após o agendamento e é feito em qualquer laboratório (a clínica não cobra pelos exames); hormônios/tireoide já entram nesse pedido; bioimpedância é feita na consulta. Não inventar preço de exame. Frase: 'Os exames de sangue você pode fazer em qualquer laboratório; hormônios e tireoide já entram no pedido que enviamos após o agendamento. A bioimpedância é feita aqui na consulta.'
+
+### Objeção 'preciso pagar o cartão / só consigo em agosto' — usar reserva de R$300 e prazo dos exames como ponte, não encerrar
+- **PADRÃO-OURO (HUMANO, 21/07 21:14–21:21):** ante 'tenho que pagar o cartão', o humano mostrou que **não precisa pagar a consulta inteira agora** — para agendar paga só a pré-consulta de R$300 (abatida do valor final, parcelável em 2x sem juros) e já vai fazendo os exames; e reenquadrou o tempo ('agosto é exatamente o tempo de você fazer seus exames'), oferecendo deixar um novo contato agendado para a segunda quinzena.
+- **Regra:** objeção financeira de curto prazo (esperar fatura/mês) = oferecer a reserva de R$300 (2x, abatida) como entrada baixa que trava a agenda, enquadrar o intervalo como o tempo natural de fazer os exames, e propor um follow-up agendado. Não encerrar como desistência.
+
+### Lead agendando para TERCEIRO (marido/familiar) — coletar contexto de quem fará a consulta, não aplicar SPIN na pessoa que está no chat
+- **CASO (21/07 17:34):** lead disse 'não seria pra mim, seria para meu marido... ele pediu que eu agendasse'.
+- **Regra:** quando quem escreve não é o paciente, conduzir o agendamento em nome do terceiro (nome/dados de quem fará a consulta) e direcionar as perguntas de contexto ao caso do paciente real; não personalizar o SPIN em quem está apenas intermediando.
+
+### Indicação de paciente atual ('fulana me indicou') — acolher a referência antes de seguir
+- **CASO (21/07 19:01–19:04):** lead se apresentou dizendo que foi indicada por uma paciente e já perguntou o valor.
+- **Regra:** reconhecer/valorizar a indicação ('que bom que veio por indicação'), seguir com breve descoberta e sustentar valor antes de cotar — a indicação já traz confiança, use isso para construir valor, mas não pule direto ao preço.

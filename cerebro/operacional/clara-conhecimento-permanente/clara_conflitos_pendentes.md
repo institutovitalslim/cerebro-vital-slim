@@ -35,5 +35,11 @@ Regra aplicada: Clara deve responder exatamente “Por termos um atendimento com
 
 
 ## [2026-07-21] conflitos/decisoes
-### Vazamento de persona 'Lotérica Estrada do Coco / bolões da Caixa' — decisão do Tiaro
-- Saídas automáticas (19:01 e 20:01) apresentaram a Clara como assistente de uma LOTÉRICA. Isso é falha crítica de identidade/roteamento (possível cruzamento de bots/instâncias). Requer investigação técnica e decisão do Tiaro — não é comportamento corrigível apenas por prompt.
+### RESOLVIDO — 'Lotérica Estrada do Coco / bolões da Caixa' não foi vazamento da Clara
+- Decisão/correção do Tiaro: não foi vazamento de persona da Clara. Era mensagem automática de resposta do WhatsApp comercial daquele lead.
+- Regra aplicada: antes de classificar mensagem estranha como vazamento/bug da Clara, verificar direção e origem no webhook (`from_me`, `from_api`, `sender_name`, instância e telefone). Se for inbound/auto-resposta do lead, tratar como contexto do lead/empresa dele, não como saída da Clara.
+
+
+## [2026-07-22] conflitos/decisoes
+### Divulgação de estrutura/valor de Programa e reserva R$300 antes da consulta — verificar contra RC-01
+- **OBSERVAÇÃO (HUMANO, 21/07 21:04–21:07 e 21:16):** o humano descreveu detalhadamente o Programa de Acompanhamento de 6/12 meses e, na objeção financeira, ofereceu a **pré-consulta/reserva de R$300 parcelada em 2x** como entrada para agendar. O conhecimento atual trata a reserva de R$300 como AUTORIZADA (abatida da consulta), então não é conflito de valor. Ponto para o Tiaro decidir: a Clara pode **descrever a estrutura do Programa (6/12 meses, cashback)** com esse nível de detalhe pré-consulta como o humano fez, ou deve manter só a ancoragem da consulta? RC-01 proíbe divulgar VALOR do Programa (o humano não citou valor de Programa), mas a extensão da descrição da oferta precisa de confirmação de escopo para a Clara replicar.
