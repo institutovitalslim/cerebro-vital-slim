@@ -1,0 +1,153 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent",
+      "community": 1,
+      "norm_label": "clara whatsapp"
+    },
+    {
+      "id": "qa",
+      "label": "QA di\u00e1rio de convers\u00e3o/agendamento 2026-07-22",
+      "type": "process",
+      "community": 1,
+      "norm_label": "qa diario de conversao/agendamento 2026-07-22"
+    },
+    {
+      "id": "current",
+      "label": "Janela current: \u00faltimas 6h sem mensagens",
+      "type": "evidence",
+      "community": 1,
+      "norm_label": "janela current: ultimas 6h sem mensagens"
+    },
+    {
+      "id": "hist",
+      "label": "Hist\u00f3rico: 6187 mensagens, 443 leads, 30 vit\u00f3rias, 5 quedas",
+      "type": "evidence",
+      "community": 0,
+      "norm_label": "historico: 6187 mensagens, 443 leads, 30 vitorias, 5 quedas"
+    },
+    {
+      "id": "confirmacao",
+      "label": "CTA padronizado de confirma\u00e7\u00e3o com op\u00e7\u00f5es curtas",
+      "type": "practice",
+      "community": 0,
+      "norm_label": "cta padronizado de confirmacao com opcoes curtas"
+    },
+    {
+      "id": "horarios",
+      "label": "Oferta de 1-2 hor\u00e1rios concretos",
+      "type": "practice",
+      "community": 0,
+      "norm_label": "oferta de 1-2 horarios concretos"
+    },
+    {
+      "id": "repetidas",
+      "label": "Mensagens repetidas como sinal de sil\u00eancio/atraso percebido",
+      "type": "practice",
+      "community": 2,
+      "norm_label": "mensagens repetidas como sinal de silencio/atraso percebido"
+    },
+    {
+      "id": "guardrails",
+      "label": "Guardrails cl\u00ednicos: n\u00e3o diagnosticar, prescrever ou prometer resultado",
+      "type": "guardrail",
+      "community": 0,
+      "norm_label": "guardrails clinicos: nao diagnosticar, prescrever ou prometer resultado"
+    },
+    {
+      "id": "risco",
+      "label": "Risco baixo de compliance; moderado de convers\u00e3o se repeti\u00e7\u00e3o n\u00e3o for priorizada",
+      "type": "risk",
+      "community": 2,
+      "norm_label": "risco baixo de compliance; moderado de conversao se repeticao nao for priorizada"
+    }
+  ],
+  "links": [
+    {
+      "type": "is_audited_by",
+      "relationship": "is_audited_by",
+      "confidence": "EXTRACTED",
+      "source": "clara",
+      "target": "qa",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_evidence",
+      "relationship": "uses_evidence",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "current",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "uses_evidence",
+      "relationship": "uses_evidence",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "hist",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "assesses",
+      "relationship": "assesses",
+      "confidence": "EXTRACTED",
+      "source": "qa",
+      "target": "risco",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "source": "hist",
+      "target": "confirmacao",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "source": "hist",
+      "target": "horarios",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "supports",
+      "relationship": "supports",
+      "confidence": "EXTRACTED",
+      "source": "hist",
+      "target": "repetidas",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "respects",
+      "relationship": "respects",
+      "confidence": "EXTRACTED",
+      "source": "confirmacao",
+      "target": "guardrails",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "respects",
+      "relationship": "respects",
+      "confidence": "EXTRACTED",
+      "source": "horarios",
+      "target": "guardrails",
+      "confidence_score": 1.0
+    },
+    {
+      "type": "mitigates",
+      "relationship": "mitigates",
+      "confidence": "EXTRACTED",
+      "source": "repetidas",
+      "target": "risco",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,44 @@
+{
+  "tipo": "rc25_graphify",
+  "tema": "QA diário Clara conversão/agendamento",
+  "data_utc": "2026-07-22T01:30:00Z",
+  "agent": "maria-gerente",
+  "fontes": [
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json"
+  ],
+  "sanitizado": true,
+  "pii": false,
+  "metricas": {
+    "current_total_messages": 0,
+    "current_unique_leads": 0,
+    "current_wins": 0,
+    "current_drops": 0,
+    "historical_total_messages": 6187,
+    "historical_unique_leads": 443,
+    "historical_inbound": 3275,
+    "historical_outbound": 2912,
+    "historical_wins": 30,
+    "historical_drops": 5,
+    "historical_win_rate_unique_leads_pct": 6.77,
+    "historical_drop_rate_unique_leads_pct": 1.13
+  },
+  "sinais": {
+    "agendamento": "confirmação objetiva com opções curtas; horários concretos superam pergunta aberta",
+    "objecao": "explicação longa antes de intenção pode esfriar lead em pesquisa",
+    "silencio": "mensagens repetidas indicam atraso percebido e perda de temperatura"
+  },
+  "melhorias_praticas": [
+    "confirmação com três respostas curtas",
+    "oferecer 1-2 horários concretos antes de explicar programa",
+    "priorizar lead com mensagem repetida e reconhecer atraso percebido"
+  ],
+  "aprendizado_operacional_novo": "Gatilho de prioridade para mensagens repetidas como sinal de silêncio/atraso percebido e risco de perda de temperatura.",
+  "classificacao": [
+    "aplicar amanhã",
+    "testar 3 dias"
+  ],
+  "risco": "BAIXO_COMPLIANCE_MODERADO_CONVERSAO_SE_REPETICAO_SEM_PRIORIZACAO",
+  "intervencao_humana": "não indicada imediatamente; monitorar próximo ciclo current",
+  "gate": "Não pausar Clara sem ordem direta do Tiaro."
+}
