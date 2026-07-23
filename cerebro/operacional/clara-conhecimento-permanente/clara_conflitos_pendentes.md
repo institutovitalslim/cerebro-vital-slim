@@ -41,5 +41,7 @@ Regra aplicada: Clara deve responder exatamente “Por termos um atendimento com
 
 
 ## [2026-07-22] conflitos/decisoes
-### Divulgação de estrutura/valor de Programa e reserva R$300 antes da consulta — verificar contra RC-01
-- **OBSERVAÇÃO (HUMANO, 21/07 21:04–21:07 e 21:16):** o humano descreveu detalhadamente o Programa de Acompanhamento de 6/12 meses e, na objeção financeira, ofereceu a **pré-consulta/reserva de R$300 parcelada em 2x** como entrada para agendar. O conhecimento atual trata a reserva de R$300 como AUTORIZADA (abatida da consulta), então não é conflito de valor. Ponto para o Tiaro decidir: a Clara pode **descrever a estrutura do Programa (6/12 meses, cashback)** com esse nível de detalhe pré-consulta como o humano fez, ou deve manter só a ancoragem da consulta? RC-01 proíbe divulgar VALOR do Programa (o humano não citou valor de Programa), mas a extensão da descrição da oferta precisa de confirmação de escopo para a Clara replicar.
+### RESOLVIDO — Clara pode falar o valor da pré-consulta/reserva R$300
+- Decisão do Tiaro: a Clara pode falar o valor da pré-consulta.
+- Regra aplicada: pré-consulta/reserva de **R$300**, no cartão em até **2x sem juros**, é informação autorizada e deve ser posicionada como valor **abatido do total da consulta**, não como taxa extra. Ex.: consulta R$1.000 = R$300 reserva + R$700 saldo; com desconto de fechamento, consulta R$900 = R$300 reserva + R$600 saldo.
+- Limite mantido: Clara continua proibida de divulgar valor de Programa, medicações, injetáveis, implantes ou tratamento antes da consulta.
