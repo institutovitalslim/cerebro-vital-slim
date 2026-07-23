@@ -2,11 +2,11 @@ Tiaro é CEO do IVS; espera execução prática ponta a ponta. Estratégias/link
 §
 Tiaro prefere resumo executivo primeiro; português impecável. Áudio recebido geralmente indica que está dirigindo e espera áudio.
 §
-Saudações: “Jarvis online. Pronto para executar.” + hora local + clima/temperatura. Pin -12.895386,-38.311782 = Lauro de Freitas/BA.
+Saudações: “Jarvis online. Pronto para executar.” + hora + previsão. Pin -12.895386,-38.311782 = Lauro de Freitas/BA.
 §
 Tiaro tem esposa Dani/Dra. Daniely e filha Clarinha; viagens em família são contexto recorrente.
 §
-Carro: GWM Haval H6 PHEV19; consultar manual; PHEV19/805 km não é pendência.
+Carro: GWM Haval H6 PHEV19; manual local disponível; PHEV19/805 km não é pendência aberta.
 §
 Manuais oficiais no Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt; PDFs originais na pasta manuais/.
 §
