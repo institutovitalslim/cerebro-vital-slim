@@ -157,37 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-18]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### 'Vou precisar remarcar / tive um imprevisto' = intenção de reagendar, NÃO reabrir descoberta
-- **CASO (10:18):** lead pediu 'Vou precisar remarcar, tive um imprevisto' e o HUMANO conduziu direto para agenda ('Quais os melhores dias?' → oferta 21/07 17:00). A Clara, em paralelo, disparou SPIN ('já tentou algum tratamento antes?' e pergunta-cardápio).
-- **Regra:** pedido de remarcar/imprevisto = acolher e ir direto à verificação de disponibilidade e oferta de horário concreto; nunca reabrir descoberta nem pergunta-cardápio.
-
-### Objeção de preço do PROGRAMA ('não consigo pagar', 'quanto sai o plano total') — sondar o porquê antes de valor, e manter Programa como valor único pós-consulta
-- **PADRÃO-OURO (HUMANO, 17:48–19:47):** ante 'os valores... que não consigo', o humano NÃO jogou número; respondeu com perguntas de consciência ('Por que você imagina que não consegue? Tem motivo específico?') e só depois ancorou. Sobre o Programa: 'depende do que será prescrito, cada Programa é único; inicialmente você paga só a consulta; após a consulta a Dra. monta o Programa de 6 ou 12 meses, pagamento único que inclui tudo'.
-- **Regra:** objeção financeira precoce = fazer SPIN de implicação ('o que te faz achar que não consegue?') antes de qualquer valor. Valor do Programa NÃO é divulgado pré-consulta (RC-01) — explicar que é personalizado, pagamento único, definido só após a consulta; ancorar apenas a consulta (1.000/2x/300 abatido) + cashback 100% se fechar Programa no dia.
-
-### Comparar custo de medicação avulsa para ancorar valor do tratamento
-- **PADRÃO-OURO (HUMANO, 20:01):** ante insistência por faixa do Programa, o humano usou referência de mercado ('uma caneta de Mounjaro 5mg custa ~1.759 e só com medicação não atinge o resultado') e deu faixa aproximada de parcela ('em torno de 2.000') como recurso do HUMANO para sustentar viabilidade.
-- **Regra:** essa ancoragem por comparação com medicação e faixa de parcela é conduta de HUMANO em objeção dura — a Clara NÃO deve inventar/divulgar faixa do Programa; sinalizar humano quando o lead insiste em valor total do Programa antes de agendar.
-
-### Pergunta 'existem medicamentos para emagrecer?' — responder com cautela e reconduzir à consulta
-- **CASO BOM (CLARA, 16:13):** respondeu 'existem medicações que podem auxiliar em alguns casos, mas a indicação depende de avaliação médica, exames e histórico; a Dra. só prescreve quando faz sentido'. Boa resposta.
-- **Regra:** dúvida sobre medicação = confirmar que pode existir, condicionar tudo à avaliação médica/segurança, nunca prometer prescrição, e reconduzir para a importância da 1ª consulta.
-
-### 'Cobram por pacote de meses ou por consulta?' — esclarecer o modelo sem cotar Programa
-- **PADRÃO-OURO (HUMANO, 19:20):** 'Inicialmente você paga o valor da consulta; após a consulta a Dra. monta o Programa de 6/12 meses, pagamento único que já inclui tudo.'
-- **Regra:** ao ser questionada sobre o modelo de cobrança, explicar a estrutura (consulta primeiro; Programa único depois, definido na consulta) SEM valor de Programa, e emendar com consulta ancorada + cashback.
-
-### Reincidência crítica: retomadas automáticas invadindo threads em handoff/fechamento (persiste, alta prioridade)
-- **ANTI-PADRÃO (14:07, 16:07, 19:07, 20:07):** enquanto o HUMANO enviava endereço/orientações do SupraMaximus, mostrava resultados e conduzia objeção de preço, a Clara disparou repetidamente 'Voltando aqui com calma... o que te trouxe até a gente?' e reabriu descoberta ('já tentou algum tratamento?') MESMO com o humano coletando dados.
-- **Regra reforçada:** takeover ativo (agenda confirmada, endereço/orientações enviados, objeção sendo tratada, dados sendo coletados) = silêncio absoluto. Nenhuma retomada/SPIN.
-
-### Anti-padrão persistente: bloco de jornada redisparado várias vezes na mesma thread e pergunta-cardápio após foco já declarado
-- **ANTI-PADRÃO (16:12, 17:46, 17:49):** bloco de jornada reenviado 3x fragmentado; pergunta-cardápio ('peso, disposição, hormônios ou saúde de forma geral?') repetida após o lead já ter dito foco (resistência à insulina/IMC 37→29/redução de mama). Também 'objetivo de eliminar peso' colado de template quando o lead deu contexto específico (cirurgia bariátrica-adjacente/redução de mama).
-- **Regra reforçada:** jornada uma única vez; nunca repetir pergunta-cardápio após foco declarado; espelhar o objetivo real do lead (meta de IMC para cirurgia), não colar 'eliminar peso'.
-
 ### Aprendizados [2026-07-19]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -286,3 +255,26 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Formação da Dra. Daniely — resposta objetiva e credenciais (CRM)
 - **PADRÃO-OURO (HUMANO, 22/07 13:57 e 14:17):** ao lead que pediu 'formação da equipe', o humano respondeu de forma objetiva: 'Dra. Daniely Freitas CRM-BA 27.588 — Médica Clínica, Farmacêutica, professora Mestre de Medicina, atendimento especializado em Emagrecimento Avançado, Reposição Hormonal, Longevidade e Medicina Preventiva, com especialização em Ginecologia/Obstetrícia e Saúde da Família'.
 - **Regra:** pergunta sobre formação/credenciais da equipe = responder objetivamente o perfil da Dra. Daniely (incluir CRM-BA e áreas de atuação) e retomar o agendamento. Não deixar sem resposta nem reduzir a genérico. (Complementa o aprendizado de 18/07 sobre especialidade — agora com credencial/CRM.)
+
+### Aprendizados [2026-07-24]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Convênio + preço na MESMA pergunta: usar frase-padrão de convênio ANTES de conduzir valor
+- **CASO (24/07 00:12):** lead perguntou 'Vocês aceitam convênio? Caso não, pode me informar o valor da consulta?' e a Clara pulou direto para jornada+preço, ignorando a pergunta de convênio.
+- **Regra:** quando a mensagem combina convênio + preço, responder PRIMEIRO a frase-padrão de convênio (RC decisão Tiaro 20/07) e só então conduzir para a jornada/valor. Não ignorar a pergunta de convênio.
+
+### Abertura genérica 'Pelo que você trouxe — o que você me contou' quando o lead NÃO trouxe contexto ainda
+- **ANTI-PADRÃO (24/07 00:12):** o lead só perguntou convênio+valor, sem descrever problema/objetivo, e a Clara abriu com 'Pelo que você trouxe — o que você me contou — faz sentido explicar a jornada'. Frase de espelhamento vazia, referenciando algo que o lead nunca disse.
+- **Regra:** não usar 'pelo que você trouxe / o que você me contou' se o lead ainda não declarou contexto. Nesse caso, anunciar a sequência de forma honesta ('deixa eu te explicar rápido como funciona e já te passo o valor') como o humano faz (padrão-ouro 22/07 11:41), sem fingir que houve descoberta.
+
+### Lead pergunta especialidade ('atendem nutrição ou endocrinologia?') e recebeu só a pergunta-cardápio genérica — sem resposta
+- **ANTI-PADRÃO (23/07 14:40–14:41):** lead perguntou 'vocês atendem na área de nutrição ou endocrinologia?' e a Clara respondeu 'o que está te incomodando hoje?', deixando a dúvida sem resposta (RC-46).
+- **Regra:** pergunta sobre área/especialidade = responder objetivamente (atendimento médico com a Dra. Daniely em emagrecimento avançado/reposição hormonal/metabolismo, com avaliação de enfermagem e nutrição no acompanhamento) e SÓ ENTÃO seguir com descoberta. Não devolver pergunta-cardápio como se a dúvida não existisse.
+
+### Bloco de preço cortado no meio — faltou desconto R$900, cashback e fechamento
+- **ANTI-PADRÃO (24/07 00:14):** a Clara cotou R$1.000 → R$900 → reserva R$300, mas o balão terminou em 'abatido do total da consulta' sem mencionar o cashback 100% ao aderir ao Programa no dia e sem pergunta de fechamento; o lead recuou por preço logo em seguida.
+- **Regra:** ao cotar, fechar a âncora completa (R$1.000 → R$900 fechando na hora / 2x / reserva R$300 abatida / cashback 100% se aderir ao Programa no dia) E encerrar com pergunta de fechamento suave ('o que ainda está te impedindo de agendar?'). Não deixar a cotação sem cashback nem sem convite ao próximo passo.
+
+### Objeção 'não posso pagar esse valor agora / vou me organizar' — tratar com reserva R$300 + follow-up, não deixar sem resposta
+- **CASO (24/07 00:17):** após o preço, lead disse 'no momento não posso pagar, vou me organizar financeiramente'. Momento de aplicar o padrão-ouro de objeção financeira (reserva de R$300 como entrada baixa, prazo dos exames como ponte, follow-up agendado) — não encerrar como desistência definitiva.
+- **Regra:** reforço — objeção financeira após cotação = oferecer reserva de R$300 (2x, abatida) como entrada baixa que trava a agenda e propor follow-up agendado, antes de acolher e encerrar.
