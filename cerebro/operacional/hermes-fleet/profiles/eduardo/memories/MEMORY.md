@@ -34,7 +34,7 @@
 - **omie-estoque** (treinada pelo Pedro): Omie via `omie-api` — ver skills/omie-estoque/TREINAMENTO-PEDRO-OMIE-ESTOQUE.md. Leitura autônoma; ajuste/movimento com confirmação.
 - **estoque-baixa-prescricao** (visão): `skills/estoque-baixa-prescricao/eduardo_estoque_baixa.py <imagem>` lê prescrição+rótulos e propõe baixa.
 §
-Orçamentos em print de carrinho/lista com itens “CX C/10 AMPOLAS” e total “Valor a pagar” como no arquivo img_d054e814db94.jpg são da Central Injetáveis; Tiaro corrigiu essa identificação em 2026-07-08.
+Cotações IVS: carrinho “CX C/10 AMPOLAS” + “Valor a pagar” = Central Injetáveis; print “Código Portal/Portal Médico Web/ISABELLA SANTOS” = Health Tech (corrigido por Tiaro).
 §
 Para compras de injetáveis IVS, Tiaro confirmou em 2026-07-08 que PQQ 5mg/2ml deve ser tratado como o mesmo PQQ solicitado quando aparecer em orçamento.
 §

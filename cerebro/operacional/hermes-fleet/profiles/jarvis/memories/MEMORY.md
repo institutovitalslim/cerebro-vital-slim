@@ -1,4 +1,4 @@
-Tiaro é CEO do IVS; espera execução prática ponta a ponta. Estratégias/links devem virar artefatos, agentes, gates e evidência.
+Tiaro é CEO IVS; espera execução ponta a ponta. “Pode seguir” = avançar à próxima fase lógica com artefatos, gates e evidência.
 §
 Tiaro prefere resumo executivo primeiro; português impecável. Áudio recebido geralmente indica que está dirigindo e espera áudio.
 §
@@ -12,7 +12,7 @@ Manuais oficiais no Jarvis: manuais/gwm_h6_phev.txt e manuais/triumph_rs765.txt;
 §
 Logo IVS oficial: Drive “VITAL SLIM - ARQUIVOS - LOGO” (folder 1Tl4iRcyo0xwltKOekqad5dwEJKgi13EA); usar padrão dourado “Instituto Vital Slim” vetorial/sem fundo.
 §
-Research: usar VPS/cérebro/Scrapling/Playwright/Agent Reach/GBrain/gog; não pedir dado já fornecido.
+Research: usar VPS/cérebro/Scrapling/Playwright/Agent Reach/GBrain/gog; não pedir dado fornecido.
 §
 Avatares de agentes IVS: premium humano/editorial, seguros para corte circular. Ana aprovada: loira elegante, olhos claros, sorriso acolhedor, estética médica/científica premium.
 §
@@ -20,7 +20,7 @@ Tiaro espera que qualquer apresentação/arquivo visual seja validado antes do e
 §
 Figurinhas Panini faltantes da Clarinha: codigos_figurinhas_panini_copa_faltantes.txt no workspace Jarvis.
 §
-Site principal WordPress do IVS no HostGator/cPanel: /home2/medic614/institutovitalslim.com.br; plugins em wp-content/plugins.
+HostGator IVS: SSH medic614@192.185.217.23 key workspace/hostgator-ssh/jarvis_hostgator_ivs_ed25519; raiz /home2/medic614/institutovitalslim.com.br; plugins wp-content/{plugins,mu-plugins}.
 §
 Google Business Profile IVS: acesso pela conta institutovitalslim@gmail.com com sessão já ligada na VPS; usar antes de pedir novo login.
 §
@@ -30,6 +30,6 @@ Chrome remoto/noVNC: Tiaro pode não conseguir abrir IP direto; preferir link tr
 §
 Claude main local no notebook; Jarvis não orquestra. Content OS handoffs: content-engine-os/CLAUDE.md.
 §
-Tiaro aprovou o padrão das páginas estáticas Authority Link Engine do IVS em Lauro de Freitas; usar como benchmark para futuras páginas SEO/autoridade locais.
+Páginas estáticas Authority Link Engine IVS em Lauro de Freitas aprovadas; usar como benchmark SEO/local.
 §
 Eduardo é gestor IVS de Materiais e Medicamentos.
