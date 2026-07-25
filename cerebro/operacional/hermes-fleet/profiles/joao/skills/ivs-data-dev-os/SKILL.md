@@ -6,7 +6,7 @@ author: Maria — Instituto Vital Slim
 license: Proprietary-IVS
 metadata:
   hermes:
-    tags: [ivs, data-intelligence, software-development, multi-agent, governance, lgpd]
+    tags: [ivs, data-intelligence, software-development, multi-agent, governance]
     related_skills: [ivs-agent-operating-layer, repo-reverse-ivs, quality-driven-dev, security-compliance]
 ---
 
@@ -14,7 +14,7 @@ metadata:
 
 ## Overview
 
-IVS Data Dev OS é a camada operacional para criar sistemas internos do Instituto Vital Slim com uma cadeia multiagente mais governada e mais útil que um coding agent genérico. A inspiração arquitetural vem do reverse de Codebuff/Freebuff, mas a implementação é IVS-first: dados sensíveis protegidos, agentes por etapa, registry de ferramentas, contratos de dados, avaliação contínua, rastreabilidade, LGPD e entrega executiva em HTML.
+IVS Data Dev OS é a camada operacional para criar sistemas internos do Instituto Vital Slim com uma cadeia multiagente mais governada e mais útil que um coding agent genérico. A inspiração arquitetural vem do reverse de Codebuff/Freebuff, mas a implementação é IVS-first: dados sensíveis protegidos, agentes por etapa, registry de ferramentas, contratos de dados, avaliação contínua, rastreabilidade e entrega executiva em HTML.
 
 A regra central: **não existe agente decorativo**. Cada agente precisa reduzir risco, aumentar qualidade ou acelerar uma etapa mensurável.
 
@@ -26,7 +26,7 @@ Use quando o pedido envolver:
 - organizar agentes diferentes com skills/ferramentas específicas por etapa;
 - cruzar fontes IVS como QuarkClinic, Z-API, Omie, Ads, Drive, pré-consulta ou cérebro;
 - criar benchmark/evals para medir qualidade de agentes ou relatórios;
-- definir segurança, LGPD, redaction, approval gates e observabilidade antes de build;
+- definir segurança, redaction, approval gates e observabilidade antes de build;
 - mapear ferramentas externas de conteúdo/SaaS e transformar seus padrões em módulos soberanos dentro do Content Engine OS.
 
 Não use para atendimento direto a paciente/lead, decisão clínica, escrita real sem aprovação, ou cópia direta de código externo para produção.
@@ -46,7 +46,7 @@ Tiaro determinou que **todo desenvolvimento solicitado a qualquer agente IVS** d
 | 1 | Product Analyst IVS | traduz demanda em problema, usuário, métrica e escopo | problem brief |
 | 2 | Solution Architect IVS | define arquitetura, serviços, integrações e tradeoffs | architecture plan |
 | 3 | Data Architect IVS | define fontes, schemas, lineage e qualidade | data contract |
-| 4 | Security/LGPD Guard IVS | classifica sensibilidade, PII, secrets e permissões | risk gate |
+| 4 | Security Guard IVS | classifica sensibilidade, PII, secrets e permissões | risk gate |
 | 5 | Builder IVS | implementa scripts, APIs, dashboards ou automações | diff/artefato |
 | 6 | QA/Bench Engineer IVS | cria testes, bench e valida regressões | test report |
 | 7 | Release Engineer IVS | prepara deploy/rollback/cron/observabilidade | release packet |
@@ -60,7 +60,7 @@ Tiaro determinou que **todo desenvolvimento solicitado a qualquer agente IVS** d
 - WhatsApp/Z-API, QuarkClinic e Omie em escrita real exigem autorização explícita e gates canônicos IVS.
 - Cada ferramenta deve declarar permission_mode, sensitivity_allowed, risco, logs e evidências.
 - Em sistemas com múltiplos atores, defina antes do build **quem cria cada dado**. Exemplo IVS: profissional pode cadastrar paciente/metas e acompanhar/revisar; refeição/foto diária deve nascer no módulo do paciente, não no painel profissional, salvo fluxo explicitamente marcado como simulação/revisão.
-- Em protótipos de paciente, separar `professional dashboard` e `patient portal` com sessão/role explícita, `tenantId`, `patientId`, origem do dado e avisos de demo/LGPD.
+- Em protótipos de paciente, separar `professional dashboard` e `patient portal` com sessão/role explícita, `tenantId`, `patientId`, origem do dado e avisos de demo.
 
 ## Referências complementares
 
@@ -150,7 +150,7 @@ Regra: não faça apenas clone visual. O diferencial IVS é fechar o ciclo `stor
 
 Quando Tiaro/Maria pedirem para analisar, corrigir, refazer ou elevar o Content Engine OS, use `references/content-engine-os-redesign.md`. O alvo é um cockpit operacional de autoridade, não um conjunto de páginas soltas. A estrutura deve guiar o usuário por: `sinal → tese → família de conteúdo → aprovação → publicação → BI → próxima rodada`.
 
-Ative somente os agentes do pipeline desta skill (`Product Analyst IVS`, `Solution Architect IVS`, `Data Architect IVS`, `Security/LGPD Guard IVS`, `Builder IVS`, `QA/Bench Engineer IVS`, `Release Engineer IVS`, `Executive Narrator IVS`) antes de recorrer a habilidades complementares. O padrão de produto é: próxima ação clara em até 10 segundos, criação por família de conteúdo, aprovação explícita, BI acionável e zero PII.
+Ative somente os agentes do pipeline desta skill (`Product Analyst IVS`, `Solution Architect IVS`, `Data Architect IVS`, `Security Guard IVS`, `Builder IVS`, `QA/Bench Engineer IVS`, `Release Engineer IVS`, `Executive Narrator IVS`) antes de recorrer a habilidades complementares. O padrão de produto é: próxima ação clara em até 10 segundos, criação por família de conteúdo, aprovação explícita, BI acionável e zero PII.
 
 Quando a melhoria envolver produção por formato, BI social, métricas de seguidores/interações ou busca ativa governada, use também `references/content-engine-production-social-selling.md`. A produção deve separar Carrosséis, Estáticos e Reels, mantendo Stories no Stories Engine; o Social Selling deve priorizar interatores públicos para abordagem manual, sem DM automática, disparo em massa, diagnóstico ou promessa.
 

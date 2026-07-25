@@ -1,4 +1,4 @@
-# Frota Hermes — manifesto (2026-07-24T06:45:04Z)
+# Frota Hermes — manifesto (2026-07-25T06:45:04Z)
 ## Gateways
 ## Crons
 */15 * * * * /usr/bin/python3 /root/.openclaw/workspace/ops/zapi_bridge/zapi_connection_watchdog.py >/dev/null 2>&1
@@ -25,3 +25,5 @@
 55 6 * * * cd /root/cerebro-vital-slim/sistemas/content-engine-os && python3 apps/api/scripts/google_ads_fetch.py 2>>/var/log/google-ads-ingest.log | docker exec -i content-engine-api python scripts/google_ads_load.py >> /var/log/google-ads-ingest.log 2>&1  # Google Ads -> Content OS
 5 * * * * /usr/bin/python3 /root/dns-watchdog/dns_snapshot.py >/dev/null 2>&1  # vigia DNS zona IVS (alerta Telegram se registro sumir)
 40 6 * * * /usr/bin/python3 /root/dns-watchdog/dns_watchdog.py >/dev/null 2>&1
+52 6 * * * docker exec --env-file /root/.openclaw/secure/meta_insights.env content-engine-api python scripts/meta_ads_ad_ingest.py >> /var/log/ivs-ads-ingest.log 2>&1  # Meta nivel anuncio (Central de Trafego)
+5 7 * * * python3 /root/cerebro-vital-slim/sistemas/content-engine-os/apps/api/scripts/ctwa_fetch.py | docker exec -i content-engine-api python scripts/ctwa_load.py >> /var/log/ivs-ads-ingest.log 2>&1  # Leads CTWA + fluxo (spool completo)
