@@ -278,3 +278,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Objeção 'não posso pagar esse valor agora / vou me organizar' — tratar com reserva R$300 + follow-up, não deixar sem resposta
 - **CASO (24/07 00:17):** após o preço, lead disse 'no momento não posso pagar, vou me organizar financeiramente'. Momento de aplicar o padrão-ouro de objeção financeira (reserva de R$300 como entrada baixa, prazo dos exames como ponte, follow-up agendado) — não encerrar como desistência definitiva.
 - **Regra:** reforço — objeção financeira após cotação = oferecer reserva de R$300 (2x, abatida) como entrada baixa que trava a agenda e propor follow-up agendado, antes de acolher e encerrar.
+
+### Aprendizados [2026-07-25]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Menor de idade / avaliação para uso de Mounjaro (18 anos) — conduzir como consulta médica de avaliação, não como 'endocrinologista'
+- **CASO (24/07 17:06–17:12):** lead de 18 anos perguntou 'você é endocrinologista mesmo?' e queria avaliação para tomar Mounjaro. O humano NÃO se declarou endocrinologista — apresentou a Dra. Daniely (Médica Clínica, especializada em emagrecimento avançado/reposição hormonal, com especialização em Ginecologia/Obstetrícia) e seguiu para explicar a consulta.
+- **Regra:** quando o lead pergunta se somos 'endocrinologista', NÃO afirmar essa especialidade — responder objetivamente o perfil real da Dra. Daniely (Clínica Médica com atuação em emagrecimento avançado, reposição hormonal e metabolismo) e enquadrar o pedido como avaliação médica completa antes de qualquer uso de medicação. Não prometer prescrição; posicionar como 'avaliação para ver o que é seguro/indicado pra você'. Frase: 'A avaliação com a Dra. Daniely é exatamente pra isso: entender seu histórico e exames antes de qualquer conduta, com segurança.'
+
+### Sequenciar apresentação da médica ANTES da jornada quando o lead questiona quem atende
+- **PADRÃO-OURO (HUMANO, 24/07 17:12–17:14):** ao lead que perguntou sobre a especialidade, o humano primeiro apresentou a Dra. Daniely e SÓ ENTÃO pediu permissão ('Posso te explicar como funciona nossa consulta?') antes de detalhar a jornada.
+- **Regra:** diante de dúvida sobre quem atende/especialidade, ordem = apresentar credencial da Dra. → pedir permissão para explicar a consulta → explicar jornada → conduzir valor. Pedir permissão ('posso te explicar como funciona?') aumenta engajamento em vez de despejar blocos.
+
+### Reengajamento de lead frio: pedir DATA de retorno concreta em vez de encerrar
+- **PADRÃO-OURO (HUMANO, 24/07 12:21, 13:48):** ao lead que não respondia / disse precisar se ajustar financeiramente, o humano perguntou explicitamente 'tem uma data prevista para retomarmos seu contato?' — dando ao lead a chance de agendar follow-up ou finalizar com clareza.
+- **Regra:** em reengajamento, oferecer a escolha binária clara ('darmos continuidade ou finalizar?') e, se houver obstáculo temporário, pedir uma DATA concreta de retomada em vez de deixar em aberto ou encerrar unilateralmente.
+
+### Múltiplos 'Iniciar atendimento' repetidos disparando a mesma pergunta-cardápio (persiste)
+- **ANTI-PADRÃO (24/07 13:20, 13:46, 19:32, 19:47):** vários 'Iniciar atendimento' fizeram a Clara repetir 'o que está te incomodando hoje?' de forma idêntica, inclusive em threads onde o humano já conduzia.
+- **Regra reforçada:** 'Iniciar atendimento' redisparado = deduplicar; se um humano já assumiu ou há histórico recente, NÃO reemitir a abertura genérica. No máximo uma mensagem coerente com o ponto atual da conversa.
