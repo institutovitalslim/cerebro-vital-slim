@@ -1,4 +1,4 @@
-# Frota Hermes — manifesto (2026-07-25T06:45:04Z)
+# Frota Hermes — manifesto (2026-07-26T06:45:05Z)
 ## Gateways
 ## Crons
 */15 * * * * /usr/bin/python3 /root/.openclaw/workspace/ops/zapi_bridge/zapi_connection_watchdog.py >/dev/null 2>&1
@@ -27,3 +27,4 @@
 40 6 * * * /usr/bin/python3 /root/dns-watchdog/dns_watchdog.py >/dev/null 2>&1
 52 6 * * * docker exec --env-file /root/.openclaw/secure/meta_insights.env content-engine-api python scripts/meta_ads_ad_ingest.py >> /var/log/ivs-ads-ingest.log 2>&1  # Meta nivel anuncio (Central de Trafego)
 5 7 * * * python3 /root/cerebro-vital-slim/sistemas/content-engine-os/apps/api/scripts/ctwa_fetch.py | docker exec -i content-engine-api python scripts/ctwa_load.py >> /var/log/ivs-ads-ingest.log 2>&1  # Leads CTWA + fluxo (spool completo)
+15 7 * * * docker exec content-engine-api python -c "import asyncio; from app.routers.ads import ads_sentinela; print('sentinela:', asyncio.run(ads_sentinela('demo')))" >> /var/log/ivs-ads-ingest.log 2>&1

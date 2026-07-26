@@ -20,6 +20,7 @@ ivs-social-reach youtube-subtitles --url 'https://www.youtube.com/watch?v=VIDEO_
 ## Referências operacionais IVS
 
 - `references/instagram-stable-theme-search.md` — rota validada para busca temática Instagram/Search/Hashtag via RapidAPI Stable API (`search_ig.php` + `search_hashtag.php`) para alimentar o Content OS com fontes prioritárias 100→30.
+- `references/instagram-explore-system-design-search.md` — busca ampla no Explore/hashtags por segmento para trazer referências visuais e system designs campeões; usar moodboards/imagens para validação do Tiaro, sem limitar a perfis semente.
 
 ## Guardrails IVS
 
