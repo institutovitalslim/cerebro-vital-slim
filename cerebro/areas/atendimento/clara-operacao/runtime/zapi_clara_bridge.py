@@ -287,7 +287,7 @@ def mirror_phone_event_entry(phone: str, patch: Dict[str, Any]) -> None:
     save_event_state(state)
 
 
-def should_skip_event(phone: str, message_id: str, text: str) -> Tuple[bool, str]:
+def should_skip_event(phone: str, message_id: str, text: str, *, is_audio: bool = False) -> Tuple[bool, str]:
     now = time.time()
     entry = get_phone_event_entry(phone)
     text_hash = sha1_text(text)
@@ -299,7 +299,10 @@ def should_skip_event(phone: str, message_id: str, text: str) -> Tuple[bool, str
         return True, "duplicate_message_id_persistent"
 
     try:
-        if last_text_hash == text_hash and last_inbound_at and (now - float(last_inbound_at) <= REPEAT_TEXT_WINDOW_SECONDS):
+        # RC-55: dois áudios consecutivos chegam sem texto e antes da transcrição
+        # usam o mesmo placeholder operacional ("[audio recebido]"). Não deduplicar
+        # áudio por hash de texto; áudio só deve ser deduplicado por message_id.
+        if (not is_audio) and last_text_hash == text_hash and last_inbound_at and (now - float(last_inbound_at) <= REPEAT_TEXT_WINDOW_SECONDS):
             return True, "duplicate_text_window"
     except Exception:
         pass
@@ -536,6 +539,34 @@ def extract_phone(payload: Dict[str, Any]) -> Optional[str]:
         if phone:
             return phone
     return None
+
+
+def extract_zapi_reply_target(payload: Dict[str, Any], fallback_phone: str) -> str:
+    """Destino real para envio na Z-API.
+
+    Incidente 2026-07-07/08: alguns leads vindos de anúncio chegam com
+    `phone`/`chatLid` no formato WhatsApp LID (`...@lid`). O runtime usava
+    `extract_phone()` para tudo; isso removia `@lid` e a Z-API aceitava a chamada,
+    mas a entrega voltava com `Phone number does not exist`. Para envio, quando o
+    inbound veio por LID, preservar o sufixo `@lid`. Para regras internas,
+    QuarkClinic e estado, continuar usando o telefone normalizado/fallback.
+    """
+    candidates = [
+        payload.get("phone"),
+        payload.get("chatLid"),
+        deep_get(payload, "data", "phone"),
+        deep_get(payload, "data", "chatLid"),
+        deep_get(payload, "key", "remoteJid"),
+        deep_get(payload, "data", "key", "remoteJid"),
+        deep_get(payload, "message", "key", "remoteJid"),
+    ]
+    for candidate in candidates:
+        if not isinstance(candidate, str):
+            continue
+        raw = candidate.strip()
+        if raw.endswith("@lid") and "@" in raw:
+            return raw
+    return fallback_phone
 
 
 def extract_message_id(payload: Dict[str, Any]) -> Optional[str]:
@@ -1035,7 +1066,9 @@ def save_leads_state(state: Dict[str, Any]) -> None:
     state["updated_at"] = int(time.time())
     path = Path(CLARA_LEADS_FILE)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    tmp_path = path.with_suffix(path.suffix + f".tmp.{os.getpid()}.{int(time.time() * 1000)}")
+    tmp_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    os.replace(tmp_path, path)
 
 
 def has_activation_phrase(text: str) -> bool:
@@ -1073,6 +1106,13 @@ def should_bypass_exclusion_for_lead_intent(phone: str, text: str) -> Tuple[bool
     if reason == "patient_do_not_reply" or source == "manual":
         return False, reason
 
+    # RC-12 hard gate: paciente confirmado pelo QuarkClinic nunca pode ser
+    # liberado por janela ativa de lead, frase comercial ou estado legado.
+    # A regressão diária usa este helper diretamente para garantir que a
+    # precedência clínica não dependa apenas do fluxo principal do webhook.
+    if reason == "quarkclinic_patient_rc12" or str(reason or "").startswith("quarkclinic_patient_rc12"):
+        return False, reason
+
     # Correção operacional Tiaro/Maria 2026-05-25: `patient_bridge_known` /
     # `bridge_contexto_paciente` é base auxiliar, não fonte final de paciente.
     # Ela estava derrubando leads com mensagem comercial curta (ex.: "reposição hormonal")
@@ -1089,6 +1129,23 @@ def should_bypass_exclusion_for_lead_intent(phone: str, text: str) -> Tuple[bool
         if not ok_tags:
             return False, f"{reason}:zapi_tag_check_unavailable"
         if "lead" not in tag_names:
+            # RC-84 (2026-07-10): `patient_bridge_known` pode estar stale em variante
+            # com/sem nono dígito. Se QuarkClinic já não achou paciente e a Z-API só
+            # traz tags comerciais antigas, uma pergunta explícita de preço/interesse
+            # deve reativar o lead. Tags duras (paciente/VIP/humano/bloqueado) seguem
+            # fail-closed.
+            stale_commercial_tags = {"não qualificado", "nao qualificado", "curioso/frio", "curioso", "frio"}
+            hard_block_tags = {
+                "paciente", "paciente ativo", "vip", "humano", "atendimento humano",
+                "do not reply", "não responder", "nao responder", "bloqueado",
+            }
+            tag_set = {str(t).strip().lower() for t in tag_names if str(t).strip()}
+            if has_clear_lead_intent(text) and tag_set and tag_set.issubset(stale_commercial_tags):
+                mark_lead_active(phone, "bypass_patient_bridge_stale_commercial_tags_clear_intent")
+                log(f"patient_bridge_stale_tags_bypassed_clear_intent phone={phone} tags={','.join(tag_names)}")
+                return True, f"bypass_patient_bridge_stale_commercial_tags_clear_intent:{reason}"
+            if tag_set.intersection(hard_block_tags):
+                return False, f"{reason}:zapi_hard_tags={','.join(tag_names or tag_ids or ['none'])}"
             return False, f"{reason}:zapi_not_lead_tags={','.join(tag_names or tag_ids or ['none'])}"
         if is_known_lead(phone):
             mark_lead_active(phone, "bypass_patient_bridge_known_lead_with_zapi_lead_tag")
@@ -1279,6 +1336,23 @@ def should_respond_to_lead(phone: str, text: str) -> Tuple[bool, str]:
         # mostra tag não-comercial (VIP/Paciente/etc.) e ausência de Lead.
         ok_tags, tag_names, tag_ids = get_zapi_contact_tag_names_safe(phone)
         if ok_tags and tag_names and "lead" not in tag_names:
+            # RC-81 (2026-07-07): lead que volta por vontade própria com intenção
+            # clara não pode ficar mudo por tag comercial antiga como
+            # "não qualificado"/"curioso/frio". Isso NÃO libera paciente/VIP:
+            # esses marcadores continuam fail-closed. A checagem QuarkClinic RC-12
+            # também já acontece antes deste ponto no fluxo principal.
+            stale_commercial_tags = {"não qualificado", "nao qualificado", "curioso/frio", "curioso", "frio"}
+            hard_block_tags = {
+                "paciente", "paciente ativo", "vip", "humano", "atendimento humano",
+                "do not reply", "não responder", "nao responder", "bloqueado",
+            }
+            tag_set = {str(t).strip().lower() for t in tag_names if str(t).strip()}
+            if has_clear_lead_intent(text) and tag_set and tag_set.issubset(stale_commercial_tags):
+                mark_lead_active(phone, "reactivated_clear_interest_over_stale_zapi_tags")
+                log(f"lead_reactivated_over_stale_zapi_tags phone={phone} tags={','.join(tag_names)}")
+                return True, "reactivated_clear_interest_over_stale_zapi_tags"
+            if tag_set.intersection(hard_block_tags):
+                return False, f"known_lead_blocked_zapi_hard_tags={','.join(tag_names or tag_ids)}"
             return False, f"known_lead_blocked_zapi_not_lead_tags={','.join(tag_names or tag_ids)}"
         # Regra operacional Tiaro 2026-05-25: lead é conduzido pela Clara até o
         # agendamento. Janela expirada não pode matar continuidade comercial;
@@ -1361,6 +1435,28 @@ def enforce_outbound_price_safety(phone: str, message: str, inbound_text: str = 
     if bool(entry.get("price_context_ready")) and (has_real_recent_context or rc68_context_ready):
         return text
     candidate = (inbound_text or "").strip() or (lead_texts[-1] if lead_texts else "")
+    # RC-68/71 + correção Tiaro 2026-07-10: quando o lead pergunta diretamente
+    # “quanto custa a consulta?”, ele já disse o que quer. Não repetir SPIN
+    # genérico. Permitir preço somente se a mensagem trouxer jornada/contexto
+    # antes do valor (não preço seco).
+    if contains_price_question(candidate) and contains_patient_journey_explanation(text):
+        return text
+    # RC-85: quando a Clara perguntou autorização para enviar a explicação
+    # ("Posso te enviar agora?") e o lead respondeu afirmativamente ("Pode sim"),
+    # o próximo bloco com jornada + valor NÃO pode ser reescrito para nova pergunta
+    # genérica de descoberta. Esse era o bug do print 2026-07-25: a Clara prometeu
+    # explicar, recebeu autorização e o transporte RC-51 trocou a explicação por
+    # "o que mais está te incomodando", repetindo SPIN e encerrando mal a conversa.
+    if contains_patient_journey_explanation(text) and recent_lead_confirmed_send_permission(phone, inbound_text):
+        update_phone_event_entry(phone, {
+            "price_context_ready": True,
+            "price_context_ready_at": time.time(),
+            "price_context_source": "rc85_yes_after_send_permission",
+            "journey_explained_before_price": True,
+            "journey_explained_at": time.time(),
+        })
+        log(f"rc85_yes_after_send_permission_price_allowed phone={phone} candidate={candidate[:80]!r}")
+        return text
     if is_bare_objective_category(candidate):
         log(f"rc51_outbound_price_safety_rewrite_category phone={phone} inbound={candidate[:80]!r} messagePreview={text[:120]!r}")
         return build_price_category_deepening_reply(candidate)
@@ -2049,6 +2145,10 @@ def has_mature_discovery_context(text: str) -> bool:
 def summarize_declared_context(combined_context: str) -> str:
     lower = (combined_context or "").lower()
     parts = []
+    if "tireoide" in lower or "tireóide" in lower or "thyroid" in lower:
+        parts.append("queixa relacionada à tireoide")
+    if "inchado" in lower or "inchaço" in lower or "inchaco" in lower:
+        parts.append("inchaço")
     if "bariátrica" in lower or "bariatrica" in lower:
         parts.append("histórico de bariátrica e retorno da obesidade")
     if "compulsão" in lower or "compulsao" in lower:
@@ -2075,7 +2175,7 @@ def build_patient_journey_explanation(context_summary: str = "") -> str:
     return (
         prefix
         + "O tratamento no Instituto Vital Slim é médico e olha o sobrepeso, obesidade, saúde hormonal e metabolismo de forma multifatorial.\n\n"
-        "Seu atendimento começa com uma consulta médica profunda com a Dra. Daniely, em torno de 60 a 90 minutos.\n\n"
+        "Seu atendimento começa com uma consulta médica profunda com a Dra. Daniely, em torno de 60 a 90 minutos, olhando histórico, rotina, sintomas, exames e objetivo.\n\n"
         "Você também passa por uma avaliação de enfermagem completa e por uma bioimpedância de última geração, para entendermos composição corporal, massa muscular, gordura visceral e hidratação celular.\n\n"
         "Depois da confirmação do agendamento, você recebe a solicitação de exames complementares, como exames de sangue, para analisar vitaminas, minerais, inflamação, hormônios e outros marcadores de saúde.\n\n"
         "Com tudo isso, a Dra. Daniely define se faz sentido um Programa de Acompanhamento personalizado para o seu objetivo, em vez de uma orientação solta ou protocolo pronto."
@@ -2083,14 +2183,15 @@ def build_patient_journey_explanation(context_summary: str = "") -> str:
 
 
 def build_journey_fit_check_reply(context_summary: str = "") -> str:
-    lower = (context_summary or "").lower()
-    if any(marker in lower for marker in ("compuls", "reganho", "bariátrica", "bariatrica", "obesidade")):
-        bridge = "Pelo seu relato, faz sentido primeiro entender o que está por trás desse reganho e da compulsão, em vez de tratar como falta de força de vontade."
-    else:
-        bridge = "Pelo seu relato, faz sentido primeiro entender o que está por trás da dificuldade de resultado, em vez de passar uma orientação solta."
+    """RC-80: jornada + fit check sem recapitular contexto de novo.
+
+    Incidente 2026-07-06: depois de explicar a jornada em várias bolhas, a Clara
+    ainda enviou uma ponte começando com "Pelo seu relato...", repetindo o contexto
+    do lead e soando desatenta. A jornada já carrega o racional; a próxima bolha
+    deve apenas checar encaixe/expectativa.
+    """
     return (
         build_patient_journey_explanation(context_summary)
-        + "\n\n" + bridge
         + "\n\nEsse formato de avaliação faz sentido para o que você está buscando agora?"
     )
 
@@ -2100,6 +2201,61 @@ def build_weight_context_no_more_spin_reply(combined_context: str) -> str:
     if "salário mínimo" in (combined_context or "").lower() or "salario minimo" in (combined_context or "").lower() or "condições de seguir" in (combined_context or "").lower() or "condicoes de seguir" in (combined_context or "").lower():
         return build_consultation_price_reply(context_summary=context_summary)
     return build_journey_fit_check_reply(context_summary)
+
+
+def contains_reflective_repeat_confirmation(reply: str) -> bool:
+    """Detecta confirmação espelhada que repete a dor sem avançar.
+
+    Incidente RC-86: após a Clara perguntar uma lista ampla (peso, disposição,
+    hormônios, saúde), o lead respondeu "Peso". A resposta seguinte apenas
+    espelhou/confirmou a categoria ("Então o foco principal...") e abriu espaço
+    para outra rodada repetitiva. Isso não é SPIN útil; é loop de confirmação.
+    """
+    lower = (reply or "").lower()
+    if not lower or "?" not in lower:
+        return False
+    reflective_markers = (
+        "foco principal", "então o foco", "entao o foco", "reduzir peso",
+        "desinchar", "melhorar a forma como a roupa veste", "certo?",
+    )
+    return sum(1 for marker in reflective_markers if marker in lower) >= 2
+
+
+def context_has_weight_plus_hormone(combined_context: str) -> bool:
+    lower = (combined_context or "").lower()
+    has_weight = any(marker in lower for marker in ("peso", "emagrec", "engord", "desinchar", "inchaço", "inchaco", "inchado"))
+    has_hormone = any(marker in lower for marker in ("hormônio", "hormonio", "hormônios", "hormonios", "horm", "tireoide", "tireóide", "metabó", "metabo"))
+    return has_weight and has_hormone
+
+
+def enforce_no_repetitive_discovery_after_declared_context(phone: str, inbound_text: str, reply: str) -> str:
+    """RC-86: depois de dor declarada, parar de repetir SPIN genérico.
+
+    Se o lead já declarou peso e/ou trouxe hormônios/metabolismo, a Clara não
+    deve repetir listas amplas nem confirmar a mesma categoria de novo. Ela deve
+    aprofundar de forma específica uma única vez ou avançar para jornada/fit.
+    """
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    ctx = build_recent_conversation_context(phone, limit=14)
+    combined = f"{ctx}\n{inbound_text or ''}"
+    if is_bare_objective_category(inbound_text) and (
+        is_generic_discovery_reply(text) or contains_reflective_repeat_confirmation(text)
+    ):
+        log(f"rc86_bare_category_specific_deepening phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_price_category_deepening_reply(inbound_text)
+    if context_has_weight_plus_hormone(combined) and (
+        is_generic_discovery_reply(text)
+        or response_is_more_discovery_question(text)
+        or contains_reflective_repeat_confirmation(text)
+    ):
+        log(f"rc86_weight_hormone_no_more_spin phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_journey_fit_check_reply(summarize_declared_context(combined))
+    if prior_context_has_meaningful_discovery(phone, inbound_text) and is_generic_discovery_reply(text):
+        log(f"rc86_meaningful_context_no_generic_spin phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_journey_fit_check_reply(summarize_declared_context(combined))
+    return text
 
 
 def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply: str) -> str:
@@ -2123,6 +2279,8 @@ def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply:
         return build_program_value_boundary_reply()
     if contains_price_question(combined) and consultation_price_context_ready(phone, inbound_text):
         log(f"rc68_context_price_generic_followup_rewritten phone={phone} replyPreview={text[:140]!r}")
+        if recent_context_already_has_patient_journey(phone):
+            return build_consultation_price_direct_reply()
         return build_consultation_price_reply()
     if contains_menopause_weight_context(combined):
         log(f"rc64_context_blind_followup_rewritten phone={phone} replyPreview={text[:140]!r}")
@@ -2137,6 +2295,14 @@ def enforce_context_continuity_before_send(phone: str, inbound_text: str, reply:
 def response_is_more_discovery_question(text: str) -> bool:
     lower = (text or "").lower()
     if "?" not in lower:
+        return False
+    if any(marker in lower for marker in (
+        "cheque a próxima disponibilidade", "cheque a proxima disponibilidade",
+        "checar a próxima disponibilidade", "checar a proxima disponibilidade",
+        "cheque a agenda", "checar a agenda", "verificar disponibilidade",
+        "disponibilidade para você", "disponibilidade para voce",
+        "já te expliquei a jornada", "ja te expliquei a jornada",
+    )):
         return False
     if "faz sentido para" in lower or "valor da consulta" in lower or "consulta inicial" in lower:
         return False
@@ -2156,9 +2322,9 @@ def recent_reply_checked_journey_fit(phone: str) -> bool:
 
 
 def build_price_after_fit_reply(phone: str, inbound_text: str) -> str:
-    ctx = build_recent_conversation_context(phone, limit=18)
-    context_summary = summarize_declared_context(f"{ctx}\n{inbound_text or ''}")
-    return build_consultation_price_reply(context_summary=context_summary)
+    # Depois que a jornada/fit já foi apresentada e o lead confirma ou pede valor,
+    # não repetir a jornada. Avançar direto para preço ancorado.
+    return build_consultation_price_direct_reply()
 
 
 def enforce_mature_discovery_to_journey_fit(phone: str, inbound_text: str, reply: str) -> str:
@@ -2180,6 +2346,14 @@ def enforce_mature_discovery_to_journey_fit(phone: str, inbound_text: str, reply
     ctx = build_recent_conversation_context(phone, limit=20)
     combined = f"{ctx}\n{inbound_text or ''}"
     if not has_mature_discovery_context(combined):
+        return text
+    # RC-79: se a jornada já foi enviada no WhatsApp, não forçar a mesma
+    # sequência de valor de novo. A próxima resposta precisa avançar o fluxo ou
+    # responder a pergunta objetiva do lead.
+    if recent_context_already_has_patient_journey(phone):
+        if contains_patient_journey_explanation(text) or response_is_more_discovery_question(text) or is_generic_discovery_reply(text):
+            log(f"rc79_mature_context_after_existing_journey phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+            return build_after_journey_continuation_reply(phone, inbound_text)
         return text
     already_journey = contains_patient_journey_explanation(text) and ("faz sentido" in text.lower())
     if already_journey:
@@ -2227,6 +2401,135 @@ def build_spin_continuation_reply() -> str:
         "Entendi. Para eu continuar do ponto certo e sem pular etapas: "
         "o que mais está te incomodando hoje — peso, disposição, hormônios ou saúde de forma geral?"
     )
+
+
+def contains_schedule_availability_question(text: str) -> bool:
+    """Pergunta objetiva de agenda/dia precisa ser respondida, não virar SPIN."""
+    lower = (text or "").lower()
+    if not any(marker in lower for marker in ("sábado", "sabado", "amanhã", "amanha", "hoje", "dia", "horário", "horario", "agenda", "atende", "atendem")):
+        return False
+    return any(pattern in lower for pattern in (
+        "atende sábado", "atende sabado", "atendem sábado", "atendem sabado",
+        "dia de sábado", "dia de sabado", "aos sábados", "aos sabados",
+        "atende amanhã", "atende amanha", "atendem amanhã", "atendem amanha",
+        "tem horário", "tem horario", "tem agenda", "tem vaga", "tem disponibilidade",
+        "consulta amanhã", "consulta amanha", "horário amanhã", "horario amanha",
+    ))
+
+
+def contains_thyroid_scope_question(text: str) -> bool:
+    lower = (text or "").lower()
+    has_thyroid = "tireoide" in lower or "tireóide" in lower or "thyroid" in lower
+    asks_scope = any(marker in lower for marker in (
+        "faz acompanhamento", "acompanha", "trata", "tratamento", "só tratamento", "so tratamento",
+        "também atende", "tambem atende", "avalia", "cuida", "vocês fazem", "voces fazem"
+    ))
+    return bool(has_thyroid and asks_scope)
+
+
+def prior_context_has_meaningful_discovery(phone: str, inbound_text: str = "") -> bool:
+    ctx = build_recent_conversation_context(phone, limit=16)
+    combined = f"{ctx}\n{inbound_text or ''}"
+    return has_pain_or_goal_context(combined) or has_substantive_weight_context(combined) or has_mature_discovery_context(combined)
+
+
+def build_schedule_availability_reply(phone: str, inbound_text: str = "") -> str:
+    lower = (inbound_text or "").lower()
+    ctx = build_recent_conversation_context(phone, limit=18)
+    combined = f"{ctx}\n{inbound_text or ''}"
+    if "amanhã" in lower or "amanha" in lower:
+        first = "Posso verificar se ainda temos disponibilidade para amanhã."
+    elif "sábado" in lower or "sabado" in lower:
+        first = "Atendemos sim em alguns sábados, conforme disponibilidade da agenda."
+    else:
+        first = "Posso verificar a disponibilidade da agenda para você."
+    if prior_context_has_meaningful_discovery(phone, inbound_text):
+        summary = summarize_declared_context(combined)
+        return (
+            first
+            + f"\n\nPelo que você comentou sobre {summary}, o ideal é ver uma avaliação com a Dra. Daniely."
+            + "\n\nQuer que eu cheque a próxima disponibilidade para você?"
+        )
+    return (
+        first
+        + "\n\nAntes de eu verificar horário, me conta só o principal: você está buscando ajuda para emagrecimento, tireoide/hormônios ou saúde geral?"
+    )
+
+
+def build_thyroid_scope_reply(phone: str = "", inbound_text: str = "") -> str:
+    ctx = build_recent_conversation_context(phone, limit=14) if phone else ""
+    combined = f"{ctx}\n{inbound_text or ''}"
+    if prior_context_has_meaningful_discovery(phone, inbound_text):
+        return (
+            "Sim, a Dra. Daniely também avalia a parte metabólica e hormonal, incluindo investigação relacionada à tireoide quando faz sentido para o caso."
+            "\n\nSem interpretar sintoma por aqui, o caminho seguro é ela olhar seu histórico e seus exames."
+            "\n\nPelo que você comentou, posso verificar disponibilidade para uma avaliação?"
+        )
+    return (
+        "Sim, a Dra. Daniely também avalia a parte metabólica e hormonal, incluindo investigação relacionada à tireoide quando faz sentido para o caso."
+        "\n\nPara eu te orientar sem te passar algo solto: sua principal busca hoje é tireoide/indisposição, emagrecimento ou saúde geral?"
+    )
+
+
+def recent_context_already_has_patient_journey(phone: str) -> bool:
+    ctx = build_recent_conversation_context(phone, limit=24)
+    lower = ctx.lower()
+    return contains_patient_journey_explanation(ctx) or (
+        ("bioimpedância de última geração" in lower or "bioimpedancia de ultima geracao" in lower)
+        and "dra. daniely" in lower
+        and "programa de acompanhamento" in lower
+    )
+
+
+def build_after_journey_continuation_reply(phone: str, inbound_text: str = "") -> str:
+    if contains_price_question(inbound_text):
+        return build_consultation_price_direct_reply()
+    if contains_schedule_availability_question(inbound_text):
+        return build_schedule_availability_reply(phone, inbound_text)
+    lower = (inbound_text or "").lower()
+    if "tireoide" in lower or "tireóide" in lower or "inchado" in lower or "inchaço" in lower or "inchaco" in lower:
+        return (
+            "Entendi. Esse ponto da tireoide, inchaço e indisposição precisa ser avaliado com segurança pela Dra. Daniely, junto com seus exames."
+            "\n\nComo eu já te expliquei a jornada da avaliação, o próximo passo é ver disponibilidade de consulta."
+            "\n\nQuer que eu cheque a agenda para você?"
+        )
+    return (
+        "Entendi. Pelo que você trouxe, faz sentido seguir para uma avaliação com a Dra. Daniely."
+        "\n\nComo eu já te expliquei a jornada da avaliação, o próximo passo é ver disponibilidade de consulta."
+        "\n\nQuer que eu cheque a agenda para você?"
+    )
+
+
+def enforce_direct_objective_question_recovery(phone: str, inbound_text: str, reply: str) -> str:
+    """RC-78: perguntas objetivas de agenda/escopo devem ser respondidas antes de novo SPIN."""
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    lower = text.lower()
+    if contains_schedule_availability_question(inbound_text):
+        answers_schedule = any(marker in lower for marker in (
+            "sábado", "sabado", "amanhã", "amanha", "disponibilidade", "agenda", "atendemos", "posso verificar", "checar"
+        ))
+        if is_generic_discovery_reply(text) or contains_patient_journey_explanation(text) or not answers_schedule:
+            log(f"rc78_schedule_question_recovered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+            return build_schedule_availability_reply(phone, inbound_text)
+    if contains_thyroid_scope_question(inbound_text):
+        answers_thyroid = "tireoide" in lower or "tireóide" in lower or "metabólica" in lower or "metabolica" in lower or "hormonal" in lower
+        if is_generic_discovery_reply(text) or not answers_thyroid:
+            log(f"rc78_thyroid_scope_recovered phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+            return build_thyroid_scope_reply(phone, inbound_text)
+    return text
+
+
+def enforce_no_repeat_patient_journey(phone: str, inbound_text: str, reply: str) -> str:
+    """RC-79: não reenviar a jornada/bioimpedância se ela já foi explicada no chat."""
+    text = (reply or "").strip()
+    if not text or text == "NO_REPLY":
+        return text or "NO_REPLY"
+    if contains_patient_journey_explanation(text) and recent_context_already_has_patient_journey(phone):
+        log(f"rc79_no_repeat_journey_rewritten phone={phone} inbound={inbound_text[:80]!r} replyPreview={text[:120]!r}")
+        return build_after_journey_continuation_reply(phone, inbound_text)
+    return text
 
 
 def contains_service_scope_question(text: str) -> bool:
@@ -2408,8 +2711,51 @@ def build_consultation_price_reply(context_summary: str = "") -> str:
     return (
         build_patient_journey_explanation(context_summary)
         + "\n\nSobre o valor: a consulta inicial é R$ 1.000,00.\n\n"
-        "Pode ser parcelada em até 2x sem juros, e a reserva é de R$ 300,00, abatida do valor da consulta."
+        "Fechando o agendamento agora, consigo aplicar R$ 100 de desconto, então ela fica por R$ 900,00.\n\n"
+        "A reserva é de R$ 300,00, no cartão em até 2x sem juros, e esse valor é abatido do total da consulta."
     )
+
+
+def build_consultation_price_direct_reply() -> str:
+    """Preço sem repetir jornada quando ela já foi explicada no histórico."""
+    return (
+        "Sobre o valor: a consulta inicial é R$ 1.000,00.\n\n"
+        "Fechando o agendamento agora, consigo aplicar R$ 100 de desconto, então ela fica por R$ 900,00.\n\n"
+        "A reserva é de R$ 300,00, no cartão em até 2x sem juros, e esse valor é abatido do total da consulta."
+    )
+
+
+def split_clara_whatsapp_blocks(message: str) -> list[str]:
+    """Alias histórico usado por regressões RC-61/RC-62."""
+    return split_human_conversation_chunks(message)
+
+
+def enforce_price_journey_microblocks(phone: str, inbound_text: str, reply: str) -> str:
+    """Compatibilidade RC-61/RC-62: preço autorizado só após jornada e em microblocos.
+
+    Inclui explicitamente a pré-consulta/reserva R$300, autorizada por Tiaro,
+    como valor abatido do total da consulta.
+    """
+    text = final_scrub_banned_next_step_phrase(reply or "")
+    if not text or not contains_money_value(text):
+        return text
+    blocks = split_clara_whatsapp_blocks(text)
+    first_money = next((idx for idx, block in enumerate(blocks) if contains_money_value(block)), -1)
+    pre_price = " ".join(blocks[:first_money]).lower() if first_money >= 0 else ""
+    has_value_stack_before_price = (
+        first_money >= 4
+        and "dra. daniely" in pre_price
+        and ("histórico" in pre_price or "historico" in pre_price)
+        and "exames" in pre_price
+        and ("composição corporal" in pre_price or "composicao corporal" in pre_price or "bioimpedância" in pre_price or "bioimpedancia" in pre_price)
+        and "rotina" in pre_price
+    )
+    dense_blocks = any(len(block) > 240 for block in blocks) or len(blocks) < 6
+    if has_value_stack_before_price and not dense_blocks:
+        return "\n\n".join(blocks)
+    context_summary = summarize_declared_context(f"{build_recent_conversation_context(phone)}\n{inbound_text or ''}")
+    log(f"rc61_price_journey_microblocks_rewritten phone={phone} inbound={str(inbound_text)[:80]!r} replyPreview={text[:120]!r}")
+    return build_consultation_price_reply(context_summary)
 
 
 def contains_patient_journey_explanation(text: str) -> bool:
@@ -2515,7 +2861,7 @@ def is_bare_objective_category(text: str) -> bool:
     """
     compact = compact_text_key(text)
     return compact in {
-        "emagrecimento", "emagrecer", "perder peso", "hormonal", "hormonios", "hormônios",
+        "emagrecimento", "emagrecer", "perder peso", "peso", "hormonal", "hormonios", "hormônios",
         "saude hormonal", "saúde hormonal", "longevidade", "saude", "saúde",
         "saude geral", "saúde geral", "saude de forma geral", "saúde de forma geral",
         "metabolico", "metabólico", "hormonal metabolico", "hormonal metabólico",
@@ -2634,7 +2980,26 @@ def enforce_price_question_after_context(phone: str, inbound_text: str, reply: s
 
 def contains_short_affirmative(text: str) -> bool:
     compact = compact_text_key(text)
-    return compact in {"sim", "s", "quero", "pode", "claro", "isso", "ok", "ta", "tá"}
+    return compact in {"sim", "s", "quero", "pode", "podesim", "podeclaro", "claro", "comcerteza", "isso", "ok", "ta", "tá"}
+
+
+def recent_lead_confirmed_send_permission(phone: str, inbound_text: str = "") -> bool:
+    """RC-85: 'Pode sim' depois de 'Posso te enviar agora?' libera cumprir a promessa.
+
+    A confirmação pode chegar como texto curto composto ("pode sim", "com certeza")
+    e a checagem final de transporte nem sempre recebe inbound_text; por isso também
+    consultamos as últimas falas reais do lead e o último preview da Clara.
+    """
+    entry = get_lead_entry(phone) or {}
+    last_reply = str(entry.get("last_reply_preview") or "").lower()
+    asked_permission = any(marker in last_reply for marker in (
+        "posso te enviar agora", "posso enviar agora", "posso te mandar agora",
+        "quer que eu te envie", "quer que eu te mande", "te explico agora",
+    ))
+    if not asked_permission:
+        return False
+    candidates = [inbound_text] + get_recent_lead_texts(phone, limit=3)
+    return any(contains_short_affirmative(t) for t in candidates if t)
 
 
 def recent_reply_asked_to_explain_included(phone: str) -> bool:
@@ -2820,37 +3185,22 @@ def contains_plan_question_direct(text: str) -> bool:
         "aceita plano", "aceitam plano", "atende plano", "atendem plano",
         "aceita convênio", "aceita convenio", "aceitam convênio", "aceitam convenio",
         "atendimento pelo plano", "consulta pelo plano", "pelo meu plano",
+        "reembolso", "reembolsam", "reembolsa", "reembolsar", "ressarcimento",
         "sulamerica", "sulamérica", "bradesco", "amil", "unimed", "mamães baianas", "mamaes baianas"
     ))
 
 
+PLAN_CONVENIO_RESPONSE_EXACT = "Por termos um atendimento completamente exclusivo e limitado a uma quantidade máxima de pacientes por turno, com foco total no seu acolhimento e na entrega de seus resultados, não atendemos convênio"
+
+
 def enforce_plan_question_response(inbound_text: str, reply: str) -> str:
-    """Garante resposta correta para pergunta direta sobre plano/convênio antes de virar perda."""
+    """Garante resposta exata definida por Tiaro para pergunta direta sobre plano/convênio."""
     text = (reply or "").strip()
     if not text or text == "NO_REPLY":
         return text or "NO_REPLY"
     if not contains_plan_question_direct(inbound_text) or contains_plan_rejection(inbound_text):
         return text
-    lower = text.lower()
-    mentions_no_direct_plan = any(marker in lower for marker in (
-        "não trabalhamos com convênio direto", "nao trabalhamos com convenio direto",
-        "não atendemos por convênio direto", "nao atendemos por convenio direto",
-        "atendimento é particular", "atendimento e particular", "consulta particular"
-    ))
-    mentions_reimbursement_when_applicable = any(marker in lower for marker in (
-        "reembolso", "bradesco", "sulamérica", "sulamerica", "amil"
-    ))
-    has_next_question = "?" in text
-    risky_price_push = any(marker in lower for marker in (
-        "valores são acessíveis", "valores sao acessiveis", "posso te passar os valores", "passar os valores"
-    ))
-    if risky_price_push or not (mentions_no_direct_plan and mentions_reimbursement_when_applicable and has_next_question):
-        return (
-            "Hoje não trabalhamos com convênio direto. Em Bradesco, SulAmérica e Amil, a equipe pode ajudar a estimar e dar entrada no reembolso da consulta inicial, sem promessa de valor específico.\n\n"
-            "A consulta aqui é uma avaliação médica integrada, com composição corporal e plano de ação individualizado — não uma consulta rápida de convênio.\n\n"
-            "O que pesa mais para você agora: conseguir reembolso ou entender se a avaliação vale o investimento particular?"
-        )
-    return text
+    return PLAN_CONVENIO_RESPONSE_EXACT
 
 
 def enforce_objection_handling(inbound_text: str, reply: str) -> str:
@@ -2868,15 +3218,14 @@ def enforce_objection_handling(inbound_text: str, reply: str) -> str:
         "agradeco seu contato", "entendo perfeitamente"
     ))
     has_real_objection_question = ("?" in text) and any(marker in lower for marker in (
-        "o que pesa", "custo", "vale a pena", "dúvida", "duvida", "investimento", "confiança", "confianca", "reembolso"
+        "o que pesa", "custo", "vale a pena", "dúvida", "duvida", "investimento", "confiança", "confianca",
+        "particular", "avaliação", "avaliacao"
     ))
-    if passive_close or not has_real_objection_question:
-        return (
-            "Entendo, faz sentido você considerar o plano. Só para te orientar com justiça: aqui a consulta particular não é para substituir seu plano, "
-            "e sim para fazer uma avaliação mais profunda e integrada, com olhar médico, composição corporal e plano de ação individualizado.\n\n"
-            "Se for Bradesco, SulAmérica ou Amil, a equipe ainda pode te ajudar a estimar o reembolso antes da consulta e dar entrada no pedido com você, sem promessa de valor específico.\n\n"
-            "O que pesa mais para você agora: o custo inicial ou a dúvida se vale a pena fazer uma avaliação mais completa?"
-        )
+    old_reimbursement_claim = any(marker in lower for marker in ("bradesco", "sulamérica", "sulamerica", "amil")) or (
+        "reembolso" in lower and not any(marker in lower for marker in ("não fazemos reembolso", "nao fazemos reembolso"))
+    )
+    if passive_close or old_reimbursement_claim or not has_real_objection_question:
+        return PLAN_CONVENIO_RESPONSE_EXACT
     return text
 
 
@@ -3474,19 +3823,25 @@ def should_send_bioimpedancia_video_after_reply(phone: str, reply: str) -> bool:
     return bool(journey and commercial_moment)
 
 
-def maybe_send_bioimpedancia_video(phone: str, reply: str) -> None:
-    if not should_send_bioimpedancia_video_after_reply(phone, reply):
+def maybe_send_bioimpedancia_video(phone: str, reply: str, safety_phone: str = "") -> None:
+    state_phone = safety_phone or phone
+    if not should_send_bioimpedancia_video_after_reply(state_phone, reply):
         return
     try:
         time.sleep(max(CLARA_HUMAN_CHUNK_INTER_SEND_SECONDS, 3.0))
         status, body = send_zapi_video_url(phone, CLARA_BIOIMPEDANCIA_VIDEO_URL, source="clara_reply")
         if 200 <= int(status) < 300:
-            update_phone_event_entry(phone, {"bioimpedancia_video_sent": True, "bioimpedancia_video_sent_at": time.time()})
-            log(f"rc76_bioimpedancia_video_sent phone={phone} status={status} url={CLARA_BIOIMPEDANCIA_VIDEO_URL}")
+            update_phone_event_entry(state_phone, {
+                "bioimpedancia_video_sent": True,
+                "bioimpedancia_video_sent_at": time.time(),
+                "bioimpedancia_video_target": phone,
+                "bioimpedancia_video_zapi_body": body[:500],
+            })
+            log(f"rc76_bioimpedancia_video_sent phone={phone} safety_phone={state_phone} status={status} url={CLARA_BIOIMPEDANCIA_VIDEO_URL} body={body[:240]}")
         else:
-            log(f"rc76_bioimpedancia_video_failed phone={phone} status={status} body={body[:300]}")
+            log(f"rc76_bioimpedancia_video_failed phone={phone} safety_phone={state_phone} status={status} body={body[:300]}")
     except Exception as err:
-        log(f"rc76_bioimpedancia_video_exception phone={phone}: {err}")
+        log(f"rc76_bioimpedancia_video_exception phone={phone} safety_phone={state_phone}: {err}")
 
 
 
@@ -3581,6 +3936,15 @@ def final_scrub_banned_next_step_phrase(message: str) -> str:
     if not text:
         return text
     original = text
+    # Voice guide: português impecável. Nunca deixar abreviações de WhatsApp
+    # como "vc/q/n/pq/p/" saírem em mensagem da Clara.
+    text = re.sub(r"(?iu)\bpq\b", "por que", text)
+    text = re.sub(r"(?iu)\bvc\b", "você", text)
+    text = re.sub(r"(?iu)\bq\b", "que", text)
+    text = re.sub(r"(?iu)\bn\b", "não", text)
+    text = re.sub(r"(?iu)\bp/\b", "para", text)
+    text = re.sub(r"(?iu)\btbm\b", "também", text)
+    text = re.sub(r"(?iu)\bobg\b", "obrigada", text)
     # RC-34 hotfix 2026-06-15: nome salvo no WhatsApp/Z-API não é nome confirmado.
     # Como o modelo pode herdar vocativos de histórico contaminado, removemos
     # vocativo nominal no início da resposta por segurança.
@@ -3683,12 +4047,13 @@ def is_generic_greeting_chunk(chunk: str) -> bool:
     }
 
 
-def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara_reply") -> Tuple[int, str]:
+def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara_reply", safety_phone: str = "") -> Tuple[int, str]:
+    safety_lookup_phone = safety_phone or phone
     if source in {"clara_reply", "admin_send"}:
         original_message = message
-        message = enforce_outbound_price_safety(phone, final_scrub_banned_next_step_phrase(message))
+        message = enforce_outbound_price_safety(safety_lookup_phone, final_scrub_banned_next_step_phrase(message))
         if message != original_message:
-            log(f"rc52_transport_rewrote_commercial_output phone={phone} source={source} originalPreview={original_message[:120]!r} newPreview={message[:120]!r}")
+            log(f"rc52_transport_rewrote_commercial_output phone={phone} safety_phone={safety_lookup_phone} source={source} originalPreview={original_message[:120]!r} newPreview={message[:120]!r}")
     chunks = split_human_conversation_chunks(message)
     if len(chunks) > 1:
         original_count = len(chunks)
@@ -3696,7 +4061,7 @@ def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara
         if len(chunks) != original_count:
             log(f"rc72_generic_greeting_chunk_removed phone={phone} source={source} before={original_count} after={len(chunks)}")
     if not CLARA_HUMAN_CHUNKING_ENABLED or not (source.startswith("clara") or source == "admin_send") or len(chunks) <= 1:
-        return send_zapi_text(phone, message, source=source, skip_transport_safety=True)
+        return send_zapi_text(phone, message, source=source, skip_transport_safety=True, safety_phone=safety_lookup_phone)
     results = []
     last_status = 0
     last_body = ""
@@ -3712,23 +4077,41 @@ def send_zapi_text_human_sequence(phone: str, message: str, source: str = "clara
     return last_status, json.dumps({"chunked": True, "chunks": len(chunks), "results": results, "last_body": last_body[:500]}, ensure_ascii=False)
 
 
-def send_zapi_text(phone: str, message: str, source: str = "clara_reply", skip_transport_safety: bool = False) -> Tuple[int, str]:
+def send_zapi_text_sequence(phone: str, message: str, source: str = "clara_reply", safety_phone: str = "") -> Tuple[int, str]:
+    """Alias histórico usado por regressões antigas."""
+    safety_lookup_phone = safety_phone or phone
+    if source in {"clara_reply", "admin_send"}:
+        message = enforce_price_journey_microblocks(safety_lookup_phone, "", message)
+        message = final_scrub_banned_next_step_phrase(message)
+    chunks = split_human_conversation_chunks(message)
+    last_status = 200
+    last_body = "{}"
+    for chunk in chunks or [message]:
+        last_status, last_body = send_zapi_text(phone, chunk, source=source)
+        if not (200 <= int(last_status) < 300):
+            break
+    return last_status, last_body
+
+
+def send_zapi_text(phone: str, message: str, source: str = "clara_reply", skip_transport_safety: bool = False, safety_phone: str = "") -> Tuple[int, str]:
     if not ZAPI_BASE_URL:
         raise RuntimeError("ZAPI_BASE_URL is empty")
     if not ZAPI_CLIENT_TOKEN:
         raise RuntimeError("ZAPI_CLIENT_TOKEN is empty")
     if source in {"clara_reply", "admin_send"} and not skip_transport_safety:
         original_message = message
-        message = enforce_outbound_price_safety(phone, final_scrub_banned_next_step_phrase(message))
+        safety_lookup_phone = safety_phone or phone
+        message = enforce_outbound_price_safety(safety_lookup_phone, final_scrub_banned_next_step_phrase(message))
         if message != original_message:
-            log(f"rc52_transport_rewrote_commercial_output phone={phone} source={source} originalPreview={original_message[:120]!r} newPreview={message[:120]!r}")
+            log(f"rc52_transport_rewrote_commercial_output phone={phone} safety_phone={safety_lookup_phone} source={source} originalPreview={original_message[:120]!r} newPreview={message[:120]!r}")
     guard = evaluate_zapi_runtime_enforcement(phone, message, source=source, channel="text", phase="preflight")
     if not guard.get("ok"):
         raise RuntimeError(f"zapi_text_blocked_by_runtime_enforcement: {json.dumps(guard, ensure_ascii=False)[:500]}")
     payload = {"phone": phone, "message": message}
-    if source.startswith("clara") and CLARA_ZAPI_DELAY_TYPING_SECONDS > 0:
+    if (source.startswith("clara") or source == "admin_send") and CLARA_ZAPI_DELAY_TYPING_SECONDS > 0:
         # Z-API /send-text: delayTyping exibe “digitando...” por 1–15s antes de cada bolha.
         # RC-72: frase -> digitando -> frase, sem textão em bloco.
+        # Tiaro reforçou que /admin/send também precisa parecer humano.
         payload["delayTyping"] = max(1, min(15, CLARA_ZAPI_DELAY_TYPING_SECONDS))
         log(f"zapi_delay_typing_enabled phone={phone} seconds={payload['delayTyping']} source={source}")
     headers = {"Client-Token": ZAPI_CLIENT_TOKEN}
@@ -4051,7 +4434,7 @@ def add_exclusion_alias(phone: str, name: str, reason: str, source: str) -> None
         log(f"exclusion_alias_write_failed phone={phone}: {err}")
 
 
-def get_payload_exclusion_reason(phone: str, payload: Dict[str, Any]) -> Optional[str]:
+def get_payload_exclusion_reason(phone: str, payload: Dict[str, Any], inbound_text: str = "") -> Optional[str]:
     # 1) bloqueio por telefone/LID/aliases já conhecidos.
     for candidate in extract_payload_contact_ids(payload, phone):
         reason = get_exclusion_reason(candidate)
@@ -4066,12 +4449,28 @@ def get_payload_exclusion_reason(phone: str, payload: Dict[str, Any]) -> Optiona
         add_exclusion_alias(phone, str(payload.get("chatName") or payload.get("senderName") or "Paciente"), "patient_chat_name_marker", "zapi_chat_name_patient_marker")
         return "patient_chat_name_marker"
 
-    # 3) tags Z-API de paciente/programa/VIP/agendou também bloqueiam Clara comercial.
+    # 3) tags/listas Z-API de paciente/programa/VIP/agendou bloqueiam Clara comercial.
+    # Nuance Tiaro 2026-07-17: tag/lista NQ bloqueia follow-up ativo, mas NÃO
+    # pode calar inbound novo com intenção clara (ex.: "qual o valor da consulta").
     ok_tags, tag_names, tag_ids = get_zapi_contact_tag_names_safe(phone)
     if ok_tags:
         non_lead_reason = non_lead_tag_reason(tag_names)
         if non_lead_reason:
             add_exclusion_alias(phone, str(payload.get("chatName") or payload.get("senderName") or "Lead não qualificado"), "not_qualified_do_not_followup", non_lead_reason)
+            current_text = inbound_text or extract_text(payload) or ""
+            if has_clear_lead_intent(current_text):
+                update_lead_entry(phone, {
+                    "active": True,
+                    "followup_blocked": True,
+                    "not_qualified": True,
+                    "status": "NQ",
+                    "not_qualified_reason": non_lead_reason,
+                    "inbound_nq_reply_allowed": True,
+                    "last_inbound_at": int(time.time()),
+                    "active_until": int(time.time()) + CLARA_ACTIVE_LEAD_WINDOW_SECONDS,
+                })
+                log(f"nq_tag_followup_only_inbound_allowed phone={phone} reason={non_lead_reason} tags={','.join(tag_names or tag_ids or [])}")
+                return None
             return non_lead_reason
         tag_set = {str(t or "").strip().lower() for t in tag_names}
         if tag_set.intersection({"paciente", "programa", "vip", "agendou", "compareceu", "fechou"}):
@@ -4132,6 +4531,33 @@ class Handler(BaseHTTPRequestHandler):
             return True
         return self.headers.get("X-Bridge-Secret", "") == BRIDGE_SHARED_SECRET
 
+    def _serve_public_bioimpedancia_video(self, head_only: bool = False) -> None:
+        media_path = Path("/root/.openclaw/media/outbound/clara-assets/video-bioimpedancia-ivs.mp4")
+        if not media_path.exists():
+            self._send_json(404, {"ok": False, "error": "media_not_found"})
+            return
+        size = media_path.stat().st_size
+        self.send_response(200)
+        self.send_header("Content-Type", "video/mp4")
+        self.send_header("Content-Length", str(size))
+        self.send_header("Cache-Control", "public, max-age=86400")
+        self.end_headers()
+        if head_only:
+            return
+        try:
+            self.wfile.write(media_path.read_bytes())
+        except (BrokenPipeError, ConnectionResetError) as err:
+            log(f"public_bioimpedancia_video_client_aborted: {err}")
+
+    def do_HEAD(self) -> None:
+        parsed = urlparse(self.path)
+        path = parsed.path.rstrip("/") or "/"
+        if path == "/public/video-bioimpedancia-ivs.mp4":
+            self._serve_public_bioimpedancia_video(head_only=True)
+            return
+        self.send_response(404)
+        self.end_headers()
+
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/") or "/"
@@ -4142,20 +4568,7 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         if path == "/public/video-bioimpedancia-ivs.mp4":
-            media_path = Path("/root/.openclaw/media/outbound/clara-assets/video-bioimpedancia-ivs.mp4")
-            if not media_path.exists():
-                self._send_json(404, {"ok": False, "error": "media_not_found"})
-                return
-            data = media_path.read_bytes()
-            self.send_response(200)
-            self.send_header("Content-Type", "video/mp4")
-            self.send_header("Content-Length", str(len(data)))
-            self.send_header("Cache-Control", "public, max-age=86400")
-            self.end_headers()
-            try:
-                self.wfile.write(data)
-            except (BrokenPipeError, ConnectionResetError) as err:
-                log(f"public_bioimpedancia_video_client_aborted: {err}")
+            self._serve_public_bioimpedancia_video(head_only=False)
             return
         if path == "/admin/status":
             if not self._check_admin_secret():
@@ -4249,7 +4662,9 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json(400, {"ok": False, "error": "invalid json"})
                 return
 
-            phone = normalize_phone(str(payload.get("phone", "")))
+            raw_phone = str(payload.get("phone", "")).strip()
+            phone = normalize_phone(raw_phone)
+            zapi_target = raw_phone if raw_phone.endswith("@lid") else (phone or "")
             message = str(payload.get("message", "")).strip()
             dry_run = bool(payload.get("dry_run") or payload.get("dryRun"))
             force = bool(payload.get("force"))
@@ -4308,10 +4723,10 @@ class Handler(BaseHTTPRequestHandler):
                     log(f"admin_send blocked_by_action_gate phone={phone} decision={str(gate_decision)[:300]}")
                     self._send_json(403, {"ok": False, "phone": phone, "blocked": "action_gate", "decision": gate_decision})
                     return
-                zapi_status, zapi_body = send_zapi_text(phone, message, source="admin_send")
+                zapi_status, zapi_body = send_zapi_text_human_sequence(zapi_target, message, source="admin_send", safety_phone=phone)
                 if 200 <= zapi_status < 300:
                     mark_followup_outbound(phone, "admin_send_followup")
-                log(f"admin_send phone={phone} status={zapi_status} preview={message[:120]!r} body={zapi_body[:200]}")
+                log(f"admin_send phone={phone} zapi_target={zapi_target} status={zapi_status} preview={message[:120]!r} body={zapi_body[:200]}")
                 self._send_json(200 if 200 <= zapi_status < 300 else 502, {
                     "ok": 200 <= zapi_status < 300,
                     "phone": phone,
@@ -4382,6 +4797,16 @@ class Handler(BaseHTTPRequestHandler):
             log(f"ignored reason=missing_phone payload_keys={','.join(sorted(payload.keys()))}")
             self._send_json(200, {"ok": True, "ignored": "missing_phone"})
             return
+        reply_target = extract_zapi_reply_target(payload, phone)
+        if reply_target != phone:
+            log(f"zapi_reply_target_alias phone={phone} reply_target={reply_target}")
+        delivery_error = str(payload.get("error") or deep_get(payload, "data", "error") or "").strip()
+        if delivery_error:
+            log(f"zapi_delivery_error phone={phone} reply_target={reply_target} message_id={message_id} error={delivery_error!r}")
+            if "phone number does not exist" in delivery_error.lower():
+                notify_internal_clara_failure(phone, sender_name, text or "[sem texto]", "zapi_delivery_error", delivery_error)
+            self._send_json(200, {"ok": True, "ignored": "delivery_error", "phone": phone, "error": delivery_error})
+            return
         if not text and not is_audio:
             log(f"ignored phone={phone} reason=non_text_or_empty payload_keys={','.join(sorted(payload.keys()))}")
             self._send_json(200, {"ok": True, "ignored": "non_text_or_empty"})
@@ -4391,7 +4816,7 @@ class Handler(BaseHTTPRequestHandler):
             log(f"ignored phone={phone} message_id={message_id} reason=duplicate")
             self._send_json(200, {"ok": True, "ignored": "duplicate", "messageId": message_id})
             return
-        skip_event, skip_reason = should_skip_event(phone, message_id, event_text)
+        skip_event, skip_reason = should_skip_event(phone, message_id, event_text, is_audio=is_audio)
         if skip_event:
             self._send_json(200, {"ok": True, "ignored": skip_reason, "messageId": message_id, "phone": phone})
             log(f"ignored phone={phone} message_id={message_id} reason={skip_reason} text={event_text[:120]!r}")
@@ -4433,7 +4858,7 @@ class Handler(BaseHTTPRequestHandler):
                     return
 
                 bypass_exclusion, bypass_reason = should_bypass_exclusion_for_lead_intent(phone, processed_text)
-                exclusion_reason = get_payload_exclusion_reason(phone, payload)
+                exclusion_reason = get_payload_exclusion_reason(phone, payload, processed_text)
                 # RC-55: se o QuarkClinic confirmou que NÃO é paciente, uma marca antiga
                 # patient_bridge_known/bridge_contexto_paciente não pode silenciar lead ativo.
                 # Mantém bloqueio de paciente real quando QuarkClinic sinaliza patient_flag acima.
@@ -4475,11 +4900,15 @@ class Handler(BaseHTTPRequestHandler):
                 reply = enforce_no_first_time_question(reply)
                 reply = enforce_no_unconfirmed_name(phone, reply, processed_text, sender_name=sender_name)
                 reply = enforce_service_scope_question(processed_text, reply)
+                reply = enforce_direct_objective_question_recovery(phone, processed_text, reply)
                 reply = enforce_discovery_before_next_step(processed_text, reply)
                 reply = enforce_spin_before_agendamento(phone, processed_text, reply)
+                reply = enforce_no_repetitive_discovery_after_declared_context(phone, processed_text, reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
+                reply = enforce_direct_objective_question_recovery(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
                 reply = enforce_mature_discovery_to_journey_fit(phone, processed_text, reply)
+                reply = enforce_no_repeat_patient_journey(phone, processed_text, reply)
                 reply = enforce_included_explanation_after_yes(phone, processed_text, reply)
                 reply = enforce_price_question_after_context(phone, processed_text, reply)
                 reply = enforce_money_after_journey(phone, processed_text, reply)
@@ -4494,9 +4923,13 @@ class Handler(BaseHTTPRequestHandler):
                 reply = enforce_vitor_video_practical_application(processed_text, reply)
                 reply = enforce_agendamento_reply_quality(reply)
                 reply = final_scrub_banned_next_step_phrase(reply)
+                reply = enforce_direct_objective_question_recovery(phone, processed_text, reply)
+                reply = enforce_no_repetitive_discovery_after_declared_context(phone, processed_text, reply)
                 reply = enforce_no_reopening_after_context(phone, processed_text, reply)
+                reply = enforce_direct_objective_question_recovery(phone, processed_text, reply)
                 reply = enforce_context_continuity_before_send(phone, processed_text, reply)
                 reply = enforce_mature_discovery_to_journey_fit(phone, processed_text, reply)
+                reply = enforce_no_repeat_patient_journey(phone, processed_text, reply)
                 reply = enforce_included_explanation_after_yes(phone, processed_text, reply)
                 reply = enforce_price_question_after_context(phone, processed_text, reply)
                 reply = enforce_money_after_journey(phone, processed_text, reply)
@@ -4511,7 +4944,7 @@ class Handler(BaseHTTPRequestHandler):
                 if is_audio and CLARA_AUDIO_MIRRORING and (ELEVENLABS_API_KEY or OPENAI_API_KEY):
                     try:
                         audio_reply, tts_provider = generate_tts_audio(reply)
-                        status, body = send_zapi_audio(phone, audio_reply, source="clara_reply")
+                        status, body = send_zapi_audio(reply_target, audio_reply, source="clara_reply")
                         sent_as_audio = 200 <= int(status) < 300
                         if sent_as_audio:
                             log(f"audio_reply_sent phone={phone} provider={tts_provider} status={status}")
@@ -4521,11 +4954,11 @@ class Handler(BaseHTTPRequestHandler):
                         log(f"audio_reply_failed phone={phone}: {audio_err}; falling_back=text")
                         sent_as_audio = False
                 if not sent_as_audio:
-                    status, body = send_zapi_text_human_sequence(phone, reply, source="clara_reply")
+                    status, body = send_zapi_text_human_sequence(reply_target, reply, source="clara_reply", safety_phone=phone)
                 if 200 <= int(status) < 300:
                     mark_lead_replied(phone, reply)
                     if not sent_as_audio:
-                        maybe_send_bioimpedancia_video(phone, reply)
+                        maybe_send_bioimpedancia_video(reply_target, reply, safety_phone=phone)
                     if financial_no_fit_current:
                         add_exclusion_alias(phone, str(sender_name or payload.get("chatName") or "Lead sem perfil financeiro"), "not_qualified_financial_no_fit", "lead_inbound_financial_decline")
                         update_lead_entry(phone, {
@@ -4551,14 +4984,14 @@ class Handler(BaseHTTPRequestHandler):
                         if CLARA_AUDIO_MIRRORING and (ELEVENLABS_API_KEY or OPENAI_API_KEY):
                             try:
                                 audio_reply, tts_provider = generate_tts_audio(fallback_reply)
-                                status, body = send_zapi_audio(phone, audio_reply, source="clara_audio_failsafe")
+                                status, body = send_zapi_audio(reply_target, audio_reply, source="clara_audio_failsafe")
                                 sent_as_audio = 200 <= int(status) < 300
                                 if sent_as_audio:
                                     log(f"audio_failsafe_sent phone={phone} provider={tts_provider} status={status}")
                             except Exception as audio_err:
                                 log(f"audio_failsafe_audio_failed phone={phone}: {audio_err}; falling_back=text")
                         if not sent_as_audio:
-                            status, body = send_zapi_text_human_sequence(phone, fallback_reply, source="clara_audio_failsafe")
+                            status, body = send_zapi_text_human_sequence(reply_target, fallback_reply, source="clara_audio_failsafe")
                             log(f"audio_failsafe_text_sent phone={phone} status={status}")
                         if 200 <= int(status) < 300:
                             mark_lead_replied(phone, fallback_reply)
@@ -4567,7 +5000,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not is_audio:
                     try:
                         fallback_reply = build_text_runtime_failsafe_reply(processed_text or event_text)
-                        status, body = send_zapi_text_human_sequence(phone, fallback_reply, source="clara_text_failsafe")
+                        status, body = send_zapi_text_human_sequence(reply_target, fallback_reply, source="clara_text_failsafe")
                         log(f"text_failsafe_sent phone={phone} status={status} replyPreview={fallback_reply[:120]!r} body={body[:200]}")
                         if 200 <= int(status) < 300:
                             mark_lead_replied(phone, fallback_reply)
