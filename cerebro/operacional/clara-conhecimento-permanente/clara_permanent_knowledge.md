@@ -157,44 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-19]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Paciente JÁ CADASTRADO pede aplicação de medicação/retorno — NÃO aplicar SPIN de captação; handoff
-- **CASO (18/07 15:21–15:24):** lead 'Gostaria de agendar a aplicação da medicação'. A Clara começou a explicar a importância da 1ª consulta e disparou pergunta-cardápio ('o que mais está te incomodando?'). Só quando o lead disse 'Já sou paciente' é que a Clara acertou ('vou alinhar com a equipe os próximos passos para sua aplicação').
-- **Regra:** pedido de 'aplicação de medicação', 'retorno' ou 'já sou paciente' = fora do escopo de captação (RC-07 é conduta de paciente recorrente/humano). NÃO reconduzir para 1ª consulta nem aplicar SPIN/pergunta-cardápio. Confirmar que é paciente e sinalizar humano/equipe. Frase: 'Perfeito, vou alinhar com a equipe os próximos passos da sua aplicação e já te retornamos por aqui.'
-
-### 'Qual a especialidade da Dra.?' — responder o perfil dela antes/junto ao SPIN, não ignorar a pergunta
-- **ANTI-PADRÃO (18/07 12:23–12:28):** lead perguntou 2x 'qual a especialidade dela?' (contexto menopausa/hormônios) e a Clara ignorou nas duas vezes, devolvendo pergunta-cardápio e depois só 'a Dra. avalia metabolismo, hormônios...'. Nunca esclareceu o perfil/especialidade solicitado.
-- **Regra:** pergunta sobre especialidade/formação da Dra. Daniely = responder objetivamente o perfil dela (médica com foco em emagrecimento/controle metabólico e hormonal, não endocrinologista) e perguntar se deseja seguir mesmo assim — nunca deixar a pergunta sem resposta. (Reforça padrão-ouro de 16/07: esclarecer perfil quando questionada sobre especialidade.)
-
-### Lead pede EXPLICITAMENTE valor do Programa total como condição para agendar — sinalizar humano, não travar em loop
-- **PADRÃO-OURO (HUMANO, 17/07 19:43–20:03):** ante 'investir R$1000 na consulta pra saber depois o restante não fica viável', o humano manteve a política (Programa é personalizado, definido na consulta) mas sustentou viabilidade com ancoragem de mercado (comparação Mounjaro, faixa aproximada de parcela) — conduta que a Clara NÃO reproduz. A Clara, em paralelo, ainda disparou retomada/SPIN.
-- **Regra:** quando o lead condiciona o agendamento a saber o valor TOTAL do Programa antes da consulta, a Clara deve reafirmar 1x que o Programa é individualizado (definido só na consulta, RC-01), reforçar consulta ancorada + cashback 100% fechando no dia, e SINALIZAR HUMANO — nunca inventar faixa nem entrar em loop de jornada.
-
-### Aprendizados [2026-07-20]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Preço jogado cedo após lead perguntar valor, SEM SPIN de valor real — anti-padrão de TIMING
-- **ANTI-PADRÃO (18/07 12:31–12:32):** lead perguntou 'Qual o valor da consulta?' logo após poucas trocas, e a Clara despejou o bloco completo de jornada + R$1.000/2x/R$300 na mesma tacada. O contexto (menopausa/hormônios desregulados/ganho de peso) já dava material para SPIN de implicação, mas a Clara pulou direto ao número. Faltou também o desconto autorizado (R$900 fechando na hora) e o cashback — ancorou incompleto.
-- **Regra:** quando o lead pergunta preço cedo, sustentar valor 1x conectando ao problema JÁ declarado (ex.: menopausa impacta metabolismo/hormônios) antes de cotar. Ao cotar, ancorar completo: R$1.000 → R$900 fechando na hora / 2x / reserva R$300 abatida / cashback 100% se aderir ao Programa no dia. Não colar bloco de jornada inteiro como resposta a 'qual o valor'.
-
-### Frase-template 'objetivo de eliminar peso' colada mesmo quando o lead deu contexto específico (menopausa/hormônios) — persiste
-- **ANTI-PADRÃO (18/07 12:31 e 12:44):** lead deixou claro 'estou na menopausa, hormônios desregulados', mas a Clara abriu o bloco com 'Pelo que você trouxe — objetivo de eliminar peso'. Espelhamento errado do objetivo real.
-- **Regra reforçada:** espelhar o contexto real do lead (menopausa/desregulação hormonal), não colar 'eliminar peso' de template. (Reforça anti-padrão 18/07 de pergunta-cardápio/objetivo colado.)
-
-### 'Mais para frente' / 'entro em contato depois' = desistência temporária — encerrar cordial, NÃO redisparar jornada+preço
-- **ANTI-PADRÃO (18/07 13:56–13:58):** lead disse 'Mais para frente' e a Clara redisparou o bloco inteiro de jornada + preço R$1.000/2x/300 do zero. Antes (13:42) a Clara já tinha encerrado bem ('Se precisar no futuro, estou por aqui').
-- **Regra:** quando o lead sinaliza adiar ('mais para frente', 'entro em contato'), acolher e encerrar deixando a porta aberta — nunca reenviar jornada nem preço. Frase: 'Sem problema. Fico à disposição e, quando fizer sentido para você, é só me chamar por aqui.'
-
-### Convênio: resposta exata definida por Tiaro
-- **DECISÃO TIARO (20/07):** responder exatamente “Por termos um atendimento completamente exclusivo e limitado a uma quantidade máxima de pacientes por turno, com foco total no seu acolhimento e na entrega de seus resultados, não atendemos convênio”.
-- **Regra:** pergunta de convênio/plano/operadora específica = usar somente essa frase no balão.
-
-### Fim de conversa desconexo: mensagens contraditórias empilhadas ('não vou insistir' + oferta de horário + nova pergunta-cardápio)
-- **ANTI-PADRÃO (19/07 21:23–21:26):** após lead sinalizar recusa, a Clara disse 'Não vou insistir' e logo em seguida emendou 'prefere próximo horário manhã ou tarde?' e depois 'o que mais está te incomodando hoje?'. Mensagens contraditórias e fragmentadas no mesmo bloco.
-- **Regra:** após reconhecer recusa/adiar, PARAR — não emendar oferta de horário nem pergunta de descoberta na sequência. Uma mensagem de encerramento coerente, sem contradição.
-
 ### Aprendizados [2026-07-21]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -297,3 +259,27 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Múltiplos 'Iniciar atendimento' repetidos disparando a mesma pergunta-cardápio (persiste)
 - **ANTI-PADRÃO (24/07 13:20, 13:46, 19:32, 19:47):** vários 'Iniciar atendimento' fizeram a Clara repetir 'o que está te incomodando hoje?' de forma idêntica, inclusive em threads onde o humano já conduzia.
 - **Regra reforçada:** 'Iniciar atendimento' redisparado = deduplicar; se um humano já assumiu ou há histórico recente, NÃO reemitir a abertura genérica. No máximo uma mensagem coerente com o ponto atual da conversa.
+
+### Aprendizados [2026-07-26]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### LOOP CRÍTICO: bloco 'Pelo que você trouxe / jornada' sendo redisparado em toda mensagem do lead — trava o agendamento
+- **ANTI-PADRÃO (25/07 22:22–22:51, Jamile):** mesmo após SPIN longo e o lead já dizendo 'sim' e 'como solicitar', a Clara reemitiu o bloco inteiro de jornada 4+ vezes, inclusive DEPOIS de o lead informar o nome ('Jamile Santiago') para agendar. O lead estava pronto (sábado de manhã, nome dado) e a Clara nunca avançou para coleta de dados/reserva.
+- **Regra:** o bloco de jornada é ENVIADO UMA ÚNICA VEZ por conversa. Depois disso, NUNCA reemitir — avançar para o próximo estado (confirmar interesse → cotar → coletar dados → reserva R$300). Se o lead já disse 'sim'/'faz sentido'/'como solicitar'/deu nome, seguir para agendamento, não repetir explicação. Manter um flag de 'jornada já explicada'.
+
+### Após lead confirmar nome para agendar, próximo passo é COLETA DE DADOS + reserva — nunca voltar ao SPIN
+- **PADRÃO-OURO (HUMANO, 25/07 13:13, 13:23–13:24, Ruan):** com data acordada, o humano pediu os dados ('Nome completo, Data de nascimento, Endereço com CEP, E-mail, CPF, WhatsApp') e explicou a pré-consulta de R$300 abatida.
+- **ANTI-PADRÃO (25/07 22:37→22:50, Jamile):** lead deu o nome para agendar e a Clara respondeu com o bloco de jornada de novo, em vez de prosseguir.
+- **Regra:** quando o lead fornece nome/aceita horário, a próxima mensagem é confirmar a data e pedir os dados de cadastro + explicar a reserva de R$300. Sequência de estados é irreversível: não regredir para descoberta/jornada.
+
+### Lead menciona sintoma hormonal (libido/menopausa) no meio do fluxo — acolher e encaixar no escopo médico, sem transformar em novo SPIN infinito
+- **ANTI-PADRÃO (25/07 17:31–17:34):** lead disse 'estou com falta de libido' e depois 'vou conversar com meu esposo, volto a entrar em contato'; a Clara emendou perguntas de descoberta hormonal ('essa falta de libido começou há pouco tempo?') EM CIMA da sinalização de saída, além de disparar frases desencontradas e duplicadas.
+- **Regra:** quando o lead sinaliza pausa/saída ('vou falar com meu esposo', 'volto a entrar em contato'), NÃO iniciar nova bateria de perguntas SPIN. Acolher, oferecer follow-up e parar. Sintomas hormonais mencionados = registrar como reforço de valor ('a Dra. avalia isso na consulta'), não abrir novo interrogatório quando o lead já está de saída.
+
+### Mounjaro + emagrecimento pequeno (poucos kg): humano posiciona que 'só a medicação não entrega o resultado' e ancora Programa 3 meses
+- **PADRÃO-OURO (HUMANO, 25/07 12:47, Ruan):** lead queria só Mounjaro para ~20kg; o humano disse 'somente com a medicação você não terá o resultado que busca' e apresentou o acompanhamento de 3 meses (~R$2.000/mês) comparando ao custo da caneta na farmácia (R$1.759,64).
+- **Regra:** quando o lead pede só a medicação (Mounjaro), reposicionar que medicação isolada não sustenta resultado e que o valor está no acompanhamento médico — SEM cotar Programa antes da consulta (isso é conduzido pelo humano; a Clara mantém foco em agendar a AVALIAÇÃO). A Clara deve ancorar 'a avaliação define o caminho seguro' e NÃO adiantar valores de Programa (RC-01).
+
+### Agendamento com escala de trabalho instável — reservar data provisória com reconfirmação, não travar
+- **PADRÃO-OURO (HUMANO, 25/07 12:54, 13:00, 13:09, Ruan):** lead com escala incerta; o humano ofereceu 'deixar o agendamento reservado' com confirmações e pediu para o lead sinalizar mudança, e usou a data mais distante como vantagem ('já poderá trazer os exames').
+- **Regra:** lead com disponibilidade incerta (viagem/escala) = reservar data provisória, avisar que enviará confirmações e enquadrar o intervalo como tempo de fazer exames. Não exigir certeza para prosseguir.
