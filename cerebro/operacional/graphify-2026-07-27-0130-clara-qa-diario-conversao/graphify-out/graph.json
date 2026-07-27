@@ -1,0 +1,23 @@
+{
+  "nodes": [
+    {"id": "qa_diario_clara_2026_07_27", "label": "QA diário Clara 2026-07-27", "type": "operational_review", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "whatsapp_current_zerado_2026_07_27", "label": "WhatsApp current zerado em 2026-07-27", "type": "evidence", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "historico_whatsapp_6187_443_30_5", "label": "Histórico WhatsApp: 6187 mensagens, 443 leads, 30 vitórias, 5 quedas", "type": "evidence", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "confirmacao_opcoes_fechadas", "label": "Confirmação com opções fechadas", "type": "conversion_practice", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "oferta_horario_concreto", "label": "Oferta de horário concreto", "type": "conversion_practice", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "medir_fase_decisao_antes_explicar", "label": "Medir fase de decisão antes de explicar", "type": "conversion_practice", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "priorizar_mensagem_repetida", "label": "Priorizar mensagem repetida", "type": "conversion_practice", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "observabilidade_current_zerado", "label": "Observabilidade de current zerado", "type": "operational_risk", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"},
+    {"id": "guardrail_nao_pausar_clara_sem_tiaro", "label": "Não pausar Clara sem ordem direta do Tiaro", "type": "guardrail", "source_file": "raw/qa-diario-clara-2026-07-27-0130.md"}
+  ],
+  "edges": [
+    {"source": "qa_diario_clara_2026_07_27", "target": "whatsapp_current_zerado_2026_07_27", "type": "observed", "confidence": "EXTRACTED"},
+    {"source": "qa_diario_clara_2026_07_27", "target": "historico_whatsapp_6187_443_30_5", "type": "uses_evidence", "confidence": "EXTRACTED"},
+    {"source": "historico_whatsapp_6187_443_30_5", "target": "confirmacao_opcoes_fechadas", "type": "supports", "confidence": "EXTRACTED"},
+    {"source": "historico_whatsapp_6187_443_30_5", "target": "oferta_horario_concreto", "type": "supports", "confidence": "EXTRACTED"},
+    {"source": "historico_whatsapp_6187_443_30_5", "target": "medir_fase_decisao_antes_explicar", "type": "supports", "confidence": "EXTRACTED"},
+    {"source": "historico_whatsapp_6187_443_30_5", "target": "priorizar_mensagem_repetida", "type": "supports", "confidence": "EXTRACTED"},
+    {"source": "whatsapp_current_zerado_2026_07_27", "target": "observabilidade_current_zerado", "type": "raises_monitoring_risk", "confidence": "EXTRACTED"},
+    {"source": "qa_diario_clara_2026_07_27", "target": "guardrail_nao_pausar_clara_sem_tiaro", "type": "preserves", "confidence": "EXTRACTED"}
+  ]
+}

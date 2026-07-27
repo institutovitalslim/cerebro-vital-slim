@@ -1,0 +1,26 @@
+{
+  "rc": "RC-25",
+  "date_utc": "2026-07-27T01:30:00Z",
+  "agent": "maria-gerente",
+  "scope": "clara_daily_conversion_qa",
+  "pii_removed": true,
+  "clinical_guardrails_preserved": true,
+  "new_operational_learning": false,
+  "current": {
+    "messages": 0,
+    "unique_leads": 0,
+    "wins": 0,
+    "drops": 0,
+    "report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260727-011512-whatsapp-current.md"
+  },
+  "historical": {
+    "messages": 6187,
+    "unique_leads": 443,
+    "inbound": 3275,
+    "outbound": 2912,
+    "wins": 30,
+    "drops": 5,
+    "report": "/root/cerebro-vital-slim/cerebro/logs/clara-whatsapp-learning/20260720-093053-whatsapp-historical.md"
+  },
+  "decision": "no_immediate_human_intervention; monitor current pipeline if repeated zero during active traffic"
+}
