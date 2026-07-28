@@ -1,6 +1,6 @@
 # Clara WhatsApp Learning — historical — últimos 180 dias
 
-> Gerado em 2026-07-20T09:30:53.873180+00:00
+> Gerado em 2026-07-27T09:31:27.194958+00:00
 
 ## Contadores agregados
 - Mensagens analisadas: **6187**
@@ -11,21 +11,21 @@
 
 ## Aprendizados operacionais para Clara
 
-## 1. Confirmações com opções de resposta claras
-**Observacao:** Mensagens de confirmação que trazem nome do paciente, procedimento, horário exato e opções de resposta diretas ("Confirmo", "Quero remarcar", "Não vou conseguir") têm alta taxa de conversão. Exemplo real que gerou vitória: "Oi, Cíntia! Tudo bem? 😊 Estou passando para confirmar seu atendimento de Aplicação SC - Tirzepatida amanhã, às 09:00, aqui no Instituto Vital Slim. Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*." Resultado: "Confirmo".
-**Acao para a Clara:** Sempre que confirmar um agendamento, enviar mensagem com nome do paciente, tipo de atendimento, data/horário e três opções de resposta exatas: *Confirmo*, *Quero remarcar* e *Não vou conseguir*.
+## 1. Aberturas de campanha com copy idêntica
+**Observacao:** 8 leads distintos abriram a conversa com a frase exata e sem variação: "Gostaria de saber mais informações sobre o Instituto Vital Slim". Isso indica tráfego pago ou formulário com copy padronizada.
+**Acao para a Clara:** Identificar essa frase-chave e descartar saudações genéricas. Responder diretamente com uma pergunta qualificadora: *"Que bom que você entrou em contato! Para te passar as informações certas: você busca emagrecimento, aplicação de medicamento ou consulta médica?"*
 
-## 2. Oferta de horário específico fecha mais que pergunta aberta
-**Observacao:** Leads que perguntam "Qual o dia e horário?" (ex: "podemos agendar um visita? Qual o dia e horário? Para montar o seu treino.") reenviam a mensagem várias vezes sem fechar, enquanto propostas com horário concreto convertem. Exemplo real de vitória: "Temos o horário amanhã (23/04) às 14:00. Podemos agendar?" Resultado: "Confirmo no início da tarde."
-**Acao para a Clara:** Nunca perguntar apenas "Qual dia e horário serve para você?". Sempre apresentar 1 ou 2 horários específicos disponíveis, como: "Temos vagas amanhã às 09:00 ou quinta às 14:00. Qual funciona melhor para você?"
+## 2. Confirmação com opções de resposta fechadas
+**Observacao:** Todas as vitórias de agendamento ocorreram após envio de mensagem com opções literais de reply. Exemplo real da vitória: *"Se estiver tudo certo, pode me responder com *Confirmo*. Se precisar, você também pode me dizer *Quero remarcar* ou *Não vou conseguir*."* — o lead respondeu apenas *"Confirmo"*.
+**Acao para a Clara:** Sempre que solicitar confirmação de presença, apresentar no máximo 3 respostas previsíveis e destacadas em negrito: *Confirmo*, *Quero remarcar* ou *Não vou conseguir*, pedindo para o lead responder apenas com uma delas.
 
-## 3. Explicações detalhadas no primeiro contato afastam leads em pesquisa
-**Observacao:** Quando a Clara oferece explicações longas sobre o que está incluído na consulta ou como funciona o tratamento individualizado, leads que ainda estão na fase de pesquisa desistem. Exemplos reais de drop: após "Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊", o lead respondeu "Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar"; e após "Na consulta, a Dra. avalia seu caso com profundidade e, a partir disso, define a conduta mais adequada...", veio "Por enquanto não".
-**Acao para a Clara:** Antes de explicar detalhes do protocolo ou conteúdo da consulta, perguntar em qual fase o lead está: "Você está buscando informações para decidir mais pra frente, ou gostaria de agendar já para essa semana?" Só detalhar o serviço se o lead demonstrar intenção imediata de agendar.
+## 3. Explicação de serviço antes do compromisso gera recusa
+**Observacao:** 3 dos 5 drops vieram após tentativa de explicar o que está incluso na consulta ou como funciona o tratamento. Exemplo literal: após *"Se vc quiser, eu também posso te explicar rapidinho o que está incluído na consulta 😊"*, o lead dropou: *"Por enquanto, não vou marcar a consulta, estou tomando informações, para posteriormente marcar"*.
+**Acao para a Clara:** Nunca oferecer "explicar o que está incluso na consulta" antes de propor um horário concreto. Regra: primeiro sugerir data e local; só detalhar o conteúdo da consulta se o lead perguntar ou após a confirmação do agendamento.
 
-## 4. Mensagens repetidas indicam falta de resposta e perda de temperatura
-**Observacao:** Vários leads reenviaram a mesma mensagem idêntica em sequência quando não foram atendidos, como "Boa tarde Ana Clara Tudo bem ? podemos agendar um visita? Qual o dia e horário? Para montar o seu treino." (aparece 3 vezes nas aberturas e 2 nas recebidas) e múltiplos "Boa tarde!" e "❤️" consecutivos.
-**Acao para a Clara:** Se identificar que o lead enviou a mesma mensagem duas vezes ou mais, priorizar a resposta imediata e iniciar com um reconhecimento: "Oi! Vi que você mandou mensagem mais cedo e não quero deixar você sem resposta. Vamos resolver isso agora?" Não deixar mensagens repetidas sem atendimento prioritário.
+## 4. Links do Instagram sem mensagem de texto
+**Observacao:** 7 aberturas distintas foram compostas unicamente pelo mesmo link: *"https://www.instagram.com/reel/DViZCxeDoj6/?igsh=MWo4ZHBvamFodTN4OA=="*, sem nenhuma palavra acompanhando.
+**Acao para a Clara:** Ao receber apenas uma URL (Reels, Stories ou post), nunca responder com saudação genérica. Iniciar assumindo o contexto do conteúdo: *"Oi! Vi que você veio pelo nosso vídeo. Posso te ajudar com mais informações sobre esse tratamento?"*
 
 ## Regras de uso
 - Usar como aprendizado operacional, não como regra clínica.
