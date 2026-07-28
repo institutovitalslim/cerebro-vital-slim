@@ -1,5 +1,5 @@
 model:
-  default: openai-codex/gpt-5.5
+  default: openai-codex/gpt-5.6-sol
   provider: openai-codex
   base_url: ''
   fallbacks:

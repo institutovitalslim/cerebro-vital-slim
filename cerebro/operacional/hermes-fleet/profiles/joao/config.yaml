@@ -1,6 +1,6 @@
 model:
-  default: openai-codex/gpt-5.5
-  provider: auto
+  default: openai-codex/gpt-5.6-sol
+  provider: openai-codex
   fallbacks:
   - model: moonshotai/kimi-k2.6
     provider: openrouter
@@ -236,6 +236,13 @@ auxiliary:
     api_key: ''
     timeout: 60
     extra_body: {}
+  background_review:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: ''
+    timeout: 120
+    extra_body: {}
 display:
   compact: false
   personality: ''
@@ -276,6 +283,7 @@ display:
   tool_progress_overrides: {}
   tool_preview_length: 0
   tool_progress_grouping: accumulate
+  reasoning_style: code
   ephemeral_system_ttl: 0
   platforms:
     telegram:
@@ -289,6 +297,12 @@ display:
     - context_pct
     - cwd
   copy_shortcut: auto
+  pet:
+    enabled: false
+    slug: ''
+    render_mode: auto
+    scale: 0.33
+    unicode_cols: 0
 dashboard:
   theme: default
   show_token_analytics: false
@@ -576,3 +590,6 @@ mcp_servers:
     oauth:
       timeout: 300
       redirect_port: 59891
+  openseo:
+    url: http://127.0.0.1:3015/mcp
+    enabled: true
