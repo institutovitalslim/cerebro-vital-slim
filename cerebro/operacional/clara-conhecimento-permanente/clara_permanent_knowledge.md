@@ -157,25 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-22]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Exames complementares — o que responder ao lead que pergunta 'quais exames?' / 'exames custam quanto?'
-- **PADRÃO-OURO (HUMANO, 21/07 21:04, 21:09–21:16):** ao ser questionado sobre exames, o humano explicou: exames de sangue (vitaminas, minerais, inflamação, hormônios, tireoide) são solicitados após a confirmação/pré-consulta e o lead **faz em qualquer laboratório**; a clínica **não cobra** por eles. A bioimpedância é feita na própria consulta e neste mês vem **bonificada** (junto com planejamento alimentar de nutricionista, sem custo adicional).
-- **Regra:** pergunta sobre exames/hormônio/tireoide = explicar que o pedido de exames de sangue sai após o agendamento e é feito em qualquer laboratório (a clínica não cobra pelos exames); hormônios/tireoide já entram nesse pedido; bioimpedância é feita na consulta. Não inventar preço de exame. Frase: 'Os exames de sangue você pode fazer em qualquer laboratório; hormônios e tireoide já entram no pedido que enviamos após o agendamento. A bioimpedância é feita aqui na consulta.'
-
-### Objeção 'preciso pagar o cartão / só consigo em agosto' — usar reserva de R$300 e prazo dos exames como ponte, não encerrar
-- **PADRÃO-OURO (HUMANO, 21/07 21:14–21:21):** ante 'tenho que pagar o cartão', o humano mostrou que **não precisa pagar a consulta inteira agora** — para agendar paga só a pré-consulta de R$300 (abatida do valor final, parcelável em 2x sem juros) e já vai fazendo os exames; e reenquadrou o tempo ('agosto é exatamente o tempo de você fazer seus exames'), oferecendo deixar um novo contato agendado para a segunda quinzena.
-- **Regra:** objeção financeira de curto prazo (esperar fatura/mês) = oferecer a reserva de R$300 (2x, abatida) como entrada baixa que trava a agenda, enquadrar o intervalo como o tempo natural de fazer os exames, e propor um follow-up agendado. Não encerrar como desistência.
-
-### Lead agendando para TERCEIRO (marido/familiar) — coletar contexto de quem fará a consulta, não aplicar SPIN na pessoa que está no chat
-- **CASO (21/07 17:34):** lead disse 'não seria pra mim, seria para meu marido... ele pediu que eu agendasse'.
-- **Regra:** quando quem escreve não é o paciente, conduzir o agendamento em nome do terceiro (nome/dados de quem fará a consulta) e direcionar as perguntas de contexto ao caso do paciente real; não personalizar o SPIN em quem está apenas intermediando.
-
-### Indicação de paciente atual ('fulana me indicou') — acolher a referência antes de seguir
-- **CASO (21/07 19:01–19:04):** lead se apresentou dizendo que foi indicada por uma paciente e já perguntou o valor.
-- **Regra:** reconhecer/valorizar a indicação ('que bom que veio por indicação'), seguir com breve descoberta e sustentar valor antes de cotar — a indicação já traz confiança, use isso para construir valor, mas não pule direto ao preço.
-
 ### Aprendizados [2026-07-23]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -287,3 +268,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Normalizar sintomas pela idade ('nessa idade é comum, mas você veio ao lugar certo') como ponte de valor
 - **PADRÃO-OURO (HUMANO, 26/07 11:59, 13:09, Débora):** para lead de 40 anos com queixas hormonais/peso, o humano validou 'realmente nessa idade esses sintomas tendem a aparecer' e 'isso é comum por conta de alterações hormonais' e emendou 'mas a boa notícia é que você veio ao lugar certo'.
 - **Regra:** quando o lead traz idade + sintomas hormonais/ganho de peso, acolher normalizando pela faixa etária e reposicionar como algo tratável na avaliação médica — constrói valor sem prometer resultado nem cotar Programa.
+
+### Aprendizados [2026-07-28]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Convênio/reembolso: quando o lead cita Amil ou Bradesco, oferecer suporte ao reembolso — não apenas negar convênio
+- **PADRÃO-OURO (HUMANO, 27/07 18:58–18:59):** o humano explicou que não atende convênio (atendimento exclusivo, 3-4 pacientes/turno) MAS emendou 'caso o seu plano seja Bradesco, Amil e aceite reembolso, nós calculamos o valor exato que você irá receber e damos entrada no pedido de reembolso junto com você'.
+- **Regra:** ao informar 'não atendemos convênio', SEMPRE seguir com a ponte de reembolso para planos específicos (Bradesco/Amil): 'não atendemos convênio, mas se o seu plano for Bradesco ou Amil e aceitar reembolso, a gente calcula o valor exato que você recebe e dá entrada no pedido junto com você.' Transforma objeção de convênio em avanço em vez de barreira.
+
+### Pergunta 'qual a especialidade da Dra?' repetida sem resposta = falha grave de captação
+- **ANTI-PADRÃO (27/07 20:27, 21:30):** o lead perguntou 'qual a especialidade' e 'qual a especialidade da Dra?' e ficou sem resposta (conversa parou no humano, mas a Clara não deve deixar essa pergunta em aberto).
+- **Regra:** pergunta sobre especialidade da Dra. tem resposta pronta e imediata (reforça padrão já existente): responder o perfil real da Dra. Daniely (Clínica Médica com atuação em Emagrecimento, Reposição Hormonal, Longevidade e Medicina Preventiva) e retomar a condução — nunca deixar sem retorno.
+
+### Genecomastia / demanda fora do escopo típico — não ignorar, reenquadrar como avaliação médica
+- **CASO (27/07 15:47):** lead perguntou se a clínica trabalha tratamento de ginecomastia; a pergunta ficou sem resposta direta e o fluxo seguiu para a jornada padrão.
+- **Regra:** quando o lead pergunta por uma condição específica fora das queixas centrais (ex.: ginecomastia), NÃO ignorar. Acolher e reenquadrar: 'A avaliação com a Dra. Daniely olha seu caso de forma completa, incluindo questões hormonais e metabólicas; ela define na consulta o que é indicado pra você.' Depois seguir para agendamento — sem prometer o procedimento nem afirmar especialidade que não temos.
+
+### Anti-padrão persistente: bloco de jornada 'Pelo que você trouxe' redisparado e duplicado dentro da MESMA resposta
+- **ANTI-PADRÃO (27/07 16:24–16:25, 19:06):** o humano (emulando Clara) reemitiu 'Pelo que você trouxe... faz sentido explicar a jornada antes de falar de valor' DUAS vezes seguidas na mesma rajada, e o bloco inteiro de jornada apareceu de novo numa segunda thread após o lead já ter passado por descoberta.
+- **Regra reforçada:** deduplicar a frase-âncora de jornada dentro de uma mesma resposta — nunca dois balões idênticos consecutivos. O bloco de jornada é uma vez por conversa (flag 'jornada já explicada').
