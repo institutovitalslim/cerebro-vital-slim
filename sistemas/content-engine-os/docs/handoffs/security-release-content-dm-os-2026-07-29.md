@@ -50,14 +50,23 @@ A revisão de segurança do IVS Content DM OS e do adaptador Content Engine foi 
 
 O remoto privado `institutovitalslim/ivs-content-dm-os` ainda não existe. A criação foi tentada por GraphQL e REST e falhou com HTTP 403: o token atual não tem permissão `createRepository`. Nenhum repositório ou push foi criado.
 
-## Gate para integração/deploy
+## Deploy local autorizado por Tiaro
 
-O `BUILD_LOCK.md` permanece vigente e atribui o Content Engine ao Claude Main. Portanto:
+Em 2026-07-29, Tiaro autorizou explicitamente seguir com a promoção local. Foi executado restart sequencial apenas de API e web; Postgres e Redis não foram recriados.
 
-1. Validar o bundle seletivo contra o estado atual do workspace.
-2. Integrar somente os arquivos listados no manifesto.
-3. Executar novamente os três grupos de gates.
-4. Manter `IVS_DELIVERY_MODE=dry_run` e não configurar Meta live.
-5. Só então promover o compose em janela controlada, com rollback disponível.
+### Evidência pós-deploy
 
-Não remover o BUILD_LOCK por este handoff.
+- Snapshot completo pré-deploy: `/root/deliverables/content-engine-os-predeploy-full-2026-07-29.tar.gz`
+- SHA-256 do snapshot: `037e278932362dcb3e34d8a1ebe10d2130e4074f1c4f70f55ec66200b23cfa3a`
+- API: container novo `086cffeca2d1...`, running, restart count 0, `/health` HTTP 200.
+- Web: container novo `57411b9550f9...`, running, restart count 0, raiz HTTP 307.
+- Adaptador Content DM OS sem autenticação: HTTP 401.
+- Postgres e Redis permaneceram running, restart count 0.
+- Logs recentes: zero `traceback`, `uncaught`, `fatal` ou `error`.
+- Meta live não foi ativado e nenhuma entrega externa foi feita.
+
+A configuração Nginx versionada ainda usa o placeholder `contentos.seudominio.com` e não há endpoint público canônico instalado para validação externa.
+
+## Governança após a janela
+
+O `BUILD_LOCK.md` permanece vigente e o Claude Main continua sendo o dono do Content Engine OS. A autorização foi aplicada como janela operacional pontual; o lock permanente não foi removido.
