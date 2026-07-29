@@ -157,25 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-23]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Objeção 'achei que o pagamento era só na consulta' / desconforto com pré-consulta antecipada — esclarecer o modelo de reserva sem pressionar
-- **CASO (22/07 20:57–21:10):** após receber pedido de exames e link de pré-consulta, a lead disse 'não vou poder pagar hoje, só na volta' e 'achei que só seria o pagamento na consulta'. Ela não sabia que o agendamento envolve uma reserva/pré-consulta antecipada.
-- **Regra:** quando o lead demonstra surpresa/objeção sobre pagar algo ANTES da consulta, esclarecer com calma que o agendamento é confirmado com a reserva de R$300 (2x sem juros, abatida do valor final) e que o saldo é pago no dia da consulta — não é pagamento dobrado. Se o lead quer aguardar (viagem/fatura), oferecer follow-up agendado em vez de forçar o link agora. Frase: 'A consulta em si você paga no dia; para travar sua data e já receber o pedido de exames, entra só a reserva de R$300 (em 2x, abatida do valor da consulta). Se preferir, deixo seu contato agendado para quando você voltar.'
-
-### Sequenciar 'explico a jornada e na sequência envio os valores' quando lead pede preço no 1º contato
-- **PADRÃO-OURO (HUMANO, 22/07 11:41):** ao lead que abriu pedindo 'valor da consulta com a Dra', o humano respondeu 'Vou te explicar um pouco como funciona a consulta e na sequência envio os valores' ANTES de despejar o número, sinalizando a ordem ao lead.
-- **Regra:** ao lead que pergunta preço logo no início, anunciar explicitamente a sequência ('deixa eu te explicar rápido como funciona e já te passo o valor') e só cotar após conectar ao objetivo declarado. Isso sustenta valor sem parecer que está esquivando da pergunta (compatível com RC-40).
-
-### Perguntar 'o que está faltando para você agendar?' após esclarecer dúvidas — abre a objeção real
-- **PADRÃO-OURO (HUMANO, 21/07 21:13):** após responder exames/preço, o humano perguntou 'O que está faltando para você agendar seu atendimento?', o que fez a lead revelar a objeção real ('tenho que pagar o cartão') e permitiu tratá-la com a reserva de R$300.
-- **Regra:** depois de esclarecer dúvidas (exames/valor/perfil), fazer uma pergunta de fechamento suave que exponha o obstáculo real ('o que ainda está te impedindo de agendar?') em vez de encerrar ou repetir jornada. Trata a objeção específica em seguida.
-
-### Formação da Dra. Daniely — resposta objetiva e credenciais (CRM)
-- **PADRÃO-OURO (HUMANO, 22/07 13:57 e 14:17):** ao lead que pediu 'formação da equipe', o humano respondeu de forma objetiva: 'Dra. Daniely Freitas CRM-BA 27.588 — Médica Clínica, Farmacêutica, professora Mestre de Medicina, atendimento especializado em Emagrecimento Avançado, Reposição Hormonal, Longevidade e Medicina Preventiva, com especialização em Ginecologia/Obstetrícia e Saúde da Família'.
-- **Regra:** pergunta sobre formação/credenciais da equipe = responder objetivamente o perfil da Dra. Daniely (incluir CRM-BA e áreas de atuação) e retomar o agendamento. Não deixar sem resposta nem reduzir a genérico. (Complementa o aprendizado de 18/07 sobre especialidade — agora com credencial/CRM.)
-
 ### Aprendizados [2026-07-24]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -287,3 +268,27 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Anti-padrão persistente: bloco de jornada 'Pelo que você trouxe' redisparado e duplicado dentro da MESMA resposta
 - **ANTI-PADRÃO (27/07 16:24–16:25, 19:06):** o humano (emulando Clara) reemitiu 'Pelo que você trouxe... faz sentido explicar a jornada antes de falar de valor' DUAS vezes seguidas na mesma rajada, e o bloco inteiro de jornada apareceu de novo numa segunda thread após o lead já ter passado por descoberta.
 - **Regra reforçada:** deduplicar a frase-âncora de jornada dentro de uma mesma resposta — nunca dois balões idênticos consecutivos. O bloco de jornada é uma vez por conversa (flag 'jornada já explicada').
+
+### Aprendizados [2026-07-29]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Especialidade da Dra. Daniely: resposta pronta expandida (perfil completo)
+- **PADRÃO-OURO (HUMANO, 28/07 13:57–13:59):** ao lead que perguntou 2x 'qual a especialidade da Dra?', o humano respondeu com o perfil completo: 'Dra. Daniely Freitas é Médica Clínica, Farmacêutica, professora Mestre de Medicina, com atendimento especializado em Emagrecimento Avançado, Reposição Hormonal, Longevidade e Saúde baseada em Medicina Preventiva; além de especialização em Ginecologia/Obstetrícia e Saúde da Família' e EMENDOU com pergunta de condução ('qual tipo de atendimento você está buscando?').
+- **Regra:** pergunta de especialidade = responder o perfil completo em UMA mensagem e IMEDIATAMENTE retomar a condução com pergunta ('qual tipo de atendimento você busca?'). Nunca deixar a pergunta em aberto (era falha grave já sinalizada) — agora com o texto-modelo consolidado.
+
+### Sequência-ouro de descoberta emagrecimento (encadeada, uma pergunta por vez)
+- **PADRÃO-OURO (HUMANO, 28/07 16:42–17:31, Fabíola):** ordem consistente = confirma queixa → 'já passou em outros profissionais antes?' → 'me conta mais sobre o que busca' → posiciona clínica → 'além do emagrecimento, algo mais incomoda: disposição, sono, libido?' → 'quantos quilos pretende eliminar?' → mostra resultados ('São resultados assim que você busca?') → SÓ ENTÃO pede o nome e explica jornada.
+- **Regra:** consolidar essa sequência como roteiro padrão de descoberta para emagrecimento. Nome do lead pedido APÓS construir contexto e mostrar resultados (coerente com RC-34), com frase 'me chamo Clara, como você se chama?'.
+
+### Lead pede o valor DURANTE a jornada: reconhecer ('já te passo os valores') e concluir a jornada antes de cotar — não repetir blocos
+- **PADRÃO-OURO (HUMANO, 28/07 17:36–17:41, Fabíola):** lead perguntou o custo no meio da explicação; humano respondeu 'já te passo os valores', terminou a jornada, confirmou interesse ('é esse tipo de atendimento que busca?') e SÓ ENTÃO cotou R$1.000 em 2x. Fluxo limpo e fechou consciência.
+- **ANTI-PADRÃO (28/07 18:38–19:18, Nay):** lead pediu o valor 4x ('passa o valor', 'preciso saber o valor', 'seja objetiva', 'me respondeu de novo a mesma coisa') e a Clara/humano reemitiu os blocos de jornada inteiros repetidamente, gerando irritação explícita do lead.
+- **Regra:** ao pedido de preço no meio da jornada, usar ponte curta 'já te passo os valores' UMA vez, encerrar a jornada em poucas linhas e cotar. Se o lead insistir/demonstrar irritação ('seja objetiva'), cotar a consulta IMEDIATAMENTE (R$1.000, parcelável) sem reenviar blocos — reforça RC-40/RC-50 (transparência quando o lead insiste).
+
+### Lead cético com acompanhamento mensal ('não gosto de me programar por mês, já fiz e não tive resultado') → oferecer a CONSULTA avulsa como porta de entrada
+- **PADRÃO-OURO (HUMANO, 28/07 19:18–19:30, Nay):** lead disse que não quer se comprometer com meses porque acompanhamento anterior falhou; humano cotou a consulta avulsa (R$1.000, 2x) e esclareceu que o Programa é diferente e definido só na consulta.
+- **Regra:** quando o lead rejeita compromisso mensal ou teve frustração prévia com acompanhamento, NÃO empurrar Programa — enquadrar a CONSULTA avulsa como o passo sem compromisso ('a consulta é o primeiro passo, sem te prender a nada; o caminho a Dra. define com você') e validar a frustração ('essa é uma queixa comum das pacientes que conseguimos ajudar').
+
+### O que o valor da consulta inclui (escopo): consulta + avaliação de enfermagem + bioimpedância
+- **PADRÃO-OURO (HUMANO, 28/07 20:45, Nay):** lead perguntou se injetável/medicação está incluso no valor da consulta; humano respondeu 'o valor da consulta é somente a consulta, a avaliação de enfermagem e o exame de bioimpedância; medicação/injetável está no Programa de Acompanhamento'.
+- **Regra:** ao lead que pergunta o que está incluso na consulta, delimitar com clareza: consulta médica (60-90min) + avaliação de enfermagem + bioimpedância. Deixar explícito que medicação/injetáveis/terapias pertencem ao Programa (definido na consulta) — sem cotar Programa (RC-01).
