@@ -402,12 +402,48 @@ prefill_messages_file: ''
 goals:
   max_turns: 20
 skills:
-  external_dirs: []
+  external_dirs:
+  - /root/.hermes/profiles/joao/vendor/claude-ads/v2.0.1
   template_vars: true
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
   write_approval: false
+  disabled:
+  - ads
+  - ads-amazon
+  - ads-apple
+  - ads-attribution
+  - ads-audit
+  - ads-budget
+  - ads-competitor
+  - ads-create
+  - ads-creative
+  - ads-dna
+  - ads-generate
+  - ads-google
+  - ads-landing
+  - ads-launch
+  - ads-linkedin
+  - ads-math
+  - ads-meta
+  - ads-microsoft
+  - ads-monitor
+  - ads-optimize
+  - ads-photoshoot
+  - ads-pinterest
+  - ads-plan
+  - ads-reddit
+  - ads-report
+  - ads-research
+  - ads-server-side-tracking
+  - ads-setup
+  - ads-snapchat
+  - ads-test
+  - ads-tiktok
+  - ads-validate
+  - ads-x
+  - ads-youtube
 curator:
   enabled: true
   interval_hours: 168
@@ -593,3 +629,25 @@ mcp_servers:
   openseo:
     url: http://127.0.0.1:3015/mcp
     enabled: true
+
+# ── Fallback Model ────────────────────────────────────────────────────
+# Automatic provider failover when primary is unavailable.
+# Uncomment and configure to enable. Triggers on rate limits (429),
+# overload (529), service errors (503), or connection failures.
+#
+# Supported providers:
+#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
+#   openai-codex (OAuth — hermes auth) — OpenAI Codex
+#   nous         (OAuth — hermes auth) — Nous Portal
+#   zai          (ZAI_API_KEY)         — Z.AI / GLM
+#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
+#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
+#   minimax      (MINIMAX_API_KEY)     — MiniMax
+#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
+#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
+#
+# For custom OpenAI-compatible endpoints, add base_url and key_env.
+#
+# fallback_model:
+#   provider: openrouter
+#   model: anthropic/claude-sonnet-4
