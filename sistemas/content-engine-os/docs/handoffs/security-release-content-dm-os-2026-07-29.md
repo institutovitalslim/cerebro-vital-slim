@@ -3,7 +3,7 @@
 **Data:** 2026-07-29  
 **Origem:** Maria, Gerente Geral IVS  
 **Destino:** Claude Main, dono atual do Content Engine OS  
-**Status:** correções concluídas e validadas; deploy não executado
+**Status:** correções, deploy VPS e integração interna concluídos e validados
 
 ## Resumo
 
@@ -14,7 +14,8 @@ A revisão de segurança do IVS Content DM OS e do adaptador Content Engine foi 
 - Repositório local: `/root/.hermes/maria-workspace/projects/ivs-content-dm-os`
 - Base: `ivs/main` (`79de081`)
 - Branch: `fix/ivs-security-release-blockers`
-- Commit final: `75def0a` — `fix: harden IVS content delivery and retention`
+- Commit de segurança: `75def0a` — `fix: harden IVS content delivery and retention`
+- Commit VPS local: `9d80158` — `feat: operate IVS Content DM OS fully on VPS`
 - Upstream público foi preservado e não recebeu push.
 
 ## Correções principais
@@ -31,8 +32,8 @@ A revisão de segurança do IVS Content DM OS e do adaptador Content Engine foi 
 
 ## Evidência
 
-- DM OS: 128 testes, lint, typecheck e build aprovados; npm audit 0.
-- Content Engine API: 45 testes e compileall aprovados; pip-audit 0.
+- DM OS: 129 testes, lint, typecheck e build aprovados; npm audit 0.
+- Content Engine API: 48 testes e compileall aprovados; pip-audit 0.
 - Content Engine Web: typecheck e build aprovados; npm audit 0.
 - Smoke negativo: 401 sem auth; 200 autenticado; live Meta falso; tenant não permitido 403; porta temporária fechada.
 - Gate IVS: 15 arquivos críticos OK.
@@ -46,9 +47,9 @@ A revisão de segurança do IVS Content DM OS e do adaptador Content Engine foi 
 - Rollback: `/root/deliverables/ROLLBACK-security-fixes-2026-07-29.md`
 - Checksums: `/root/deliverables/SHA256SUMS-security-fixes-2026-07-29.txt`
 
-## Bloqueio GitHub verificado
+## Decisão de hospedagem
 
-O remoto privado `institutovitalslim/ivs-content-dm-os` ainda não existe. A criação foi tentada por GraphQL e REST e falhou com HTTP 403: o token atual não tem permissão `createRepository`. Nenhum repositório ou push foi criado.
+Tiaro determinou que o Content DM OS siga a mesma lógica do Content OS: sistema integralmente criado e operado na VPS. Repositório GitHub separado não é requisito. Nenhum repositório remoto ou push do DM OS foi criado; o histórico local e o Git bundle são os mecanismos de versionamento/recuperação.
 
 ## Deploy local autorizado por Tiaro
 
@@ -66,6 +67,22 @@ Em 2026-07-29, Tiaro autorizou explicitamente seguir com a promoção local. Foi
 - Meta live não foi ativado e nenhuma entrega externa foi feita.
 
 A configuração Nginx versionada ainda usa o placeholder `contentos.seudominio.com` e não há endpoint público canônico instalado para validação externa.
+
+## Content DM OS integral na VPS
+
+- Web local: `127.0.0.1:3020`.
+- Postgres e Redis somente nas redes Docker; sem portas públicas.
+- Redis autenticado e validado: comando anônimo negado, comando autenticado `PONG`.
+- Worker saudável em `standby_dry_run`, sem criar fila live ou chamar Meta.
+- Migração Prisma one-shot concluída com exit code `0`.
+- Health final: HTTP 200 com database, redis, queue e worker `ok`.
+- Containers Postgres, Redis, web e worker: running/healthy, restart count 0.
+- Integração Content OS pela rede `content-engine-os_default` com origem HTTP privada exata e token dedicado.
+- Smoke ponta a ponta: Content Engine 200; anônimo 401; adapter status 200; campanha 202; `persisted=false`; `dispatched=false`; `live_meta_delivery=false`.
+- Backup validado: `/root/backups/ivs-content-dm-os/20260729T155551Z/`.
+- Bundle local atualizado: `/root/deliverables/ivs-content-dm-os-vps-9d80158.bundle`.
+- Pacote seletivo do adaptador: `/root/deliverables/content-engine-dm-integration-2026-07-29.tar.gz`.
+- Runbook: `/root/.hermes/maria-workspace/projects/ivs-content-dm-os/docs/vps-runbook.md`.
 
 ## Governança após a janela
 
