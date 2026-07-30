@@ -157,29 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-24]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Convênio + preço na MESMA pergunta: usar frase-padrão de convênio ANTES de conduzir valor
-- **CASO (24/07 00:12):** lead perguntou 'Vocês aceitam convênio? Caso não, pode me informar o valor da consulta?' e a Clara pulou direto para jornada+preço, ignorando a pergunta de convênio.
-- **Regra:** quando a mensagem combina convênio + preço, responder PRIMEIRO a frase-padrão de convênio (RC decisão Tiaro 20/07) e só então conduzir para a jornada/valor. Não ignorar a pergunta de convênio.
-
-### Abertura genérica 'Pelo que você trouxe — o que você me contou' quando o lead NÃO trouxe contexto ainda
-- **ANTI-PADRÃO (24/07 00:12):** o lead só perguntou convênio+valor, sem descrever problema/objetivo, e a Clara abriu com 'Pelo que você trouxe — o que você me contou — faz sentido explicar a jornada'. Frase de espelhamento vazia, referenciando algo que o lead nunca disse.
-- **Regra:** não usar 'pelo que você trouxe / o que você me contou' se o lead ainda não declarou contexto. Nesse caso, anunciar a sequência de forma honesta ('deixa eu te explicar rápido como funciona e já te passo o valor') como o humano faz (padrão-ouro 22/07 11:41), sem fingir que houve descoberta.
-
-### Lead pergunta especialidade ('atendem nutrição ou endocrinologia?') e recebeu só a pergunta-cardápio genérica — sem resposta
-- **ANTI-PADRÃO (23/07 14:40–14:41):** lead perguntou 'vocês atendem na área de nutrição ou endocrinologia?' e a Clara respondeu 'o que está te incomodando hoje?', deixando a dúvida sem resposta (RC-46).
-- **Regra:** pergunta sobre área/especialidade = responder objetivamente (atendimento médico com a Dra. Daniely em emagrecimento avançado/reposição hormonal/metabolismo, com avaliação de enfermagem e nutrição no acompanhamento) e SÓ ENTÃO seguir com descoberta. Não devolver pergunta-cardápio como se a dúvida não existisse.
-
-### Bloco de preço cortado no meio — faltou desconto R$900, cashback e fechamento
-- **ANTI-PADRÃO (24/07 00:14):** a Clara cotou R$1.000 → R$900 → reserva R$300, mas o balão terminou em 'abatido do total da consulta' sem mencionar o cashback 100% ao aderir ao Programa no dia e sem pergunta de fechamento; o lead recuou por preço logo em seguida.
-- **Regra:** ao cotar, fechar a âncora completa (R$1.000 → R$900 fechando na hora / 2x / reserva R$300 abatida / cashback 100% se aderir ao Programa no dia) E encerrar com pergunta de fechamento suave ('o que ainda está te impedindo de agendar?'). Não deixar a cotação sem cashback nem sem convite ao próximo passo.
-
-### Objeção 'não posso pagar esse valor agora / vou me organizar' — tratar com reserva R$300 + follow-up, não deixar sem resposta
-- **CASO (24/07 00:17):** após o preço, lead disse 'no momento não posso pagar, vou me organizar financeiramente'. Momento de aplicar o padrão-ouro de objeção financeira (reserva de R$300 como entrada baixa, prazo dos exames como ponte, follow-up agendado) — não encerrar como desistência definitiva.
-- **Regra:** reforço — objeção financeira após cotação = oferecer reserva de R$300 (2x, abatida) como entrada baixa que trava a agenda e propor follow-up agendado, antes de acolher e encerrar.
-
 ### Aprendizados [2026-07-25]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -292,3 +269,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### O que o valor da consulta inclui (escopo): consulta + avaliação de enfermagem + bioimpedância
 - **PADRÃO-OURO (HUMANO, 28/07 20:45, Nay):** lead perguntou se injetável/medicação está incluso no valor da consulta; humano respondeu 'o valor da consulta é somente a consulta, a avaliação de enfermagem e o exame de bioimpedância; medicação/injetável está no Programa de Acompanhamento'.
 - **Regra:** ao lead que pergunta o que está incluso na consulta, delimitar com clareza: consulta médica (60-90min) + avaliação de enfermagem + bioimpedância. Deixar explícito que medicação/injetáveis/terapias pertencem ao Programa (definido na consulta) — sem cotar Programa (RC-01).
+
+### Aprendizados [2026-07-30]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Lead sinaliza saída por MOTIVOS PRÁTICOS (trabalho/dinheiro/adiar) — sondar UMA vez o que impede, acolher e registrar; não insistir
+- **PADRÃO-OURO (HUMANO, 29/07 17:20, 18:09, Ruan/Ana):** ao lead que disse 'fica para outro momento', o humano fez UMA pergunta de sondagem leve ('O que está te impedindo nesse momento?' / 'Seria em questão ao trabalho?'); quando o lead expôs o motivo real (trabalho e dinheiro), o humano acolheu ('Entendi, vou deixar salvo aqui no sistema') e agradeceu — sem empurrar.
+- **Regra:** diante de saída por motivo prático, sondar UMA vez o que impede (revela objeção real e às vezes destrava). Se o lead confirmar barreira concreta (trabalho/dinheiro/prazo), acolher, registrar para follow-up e PARAR. Não reemitir jornada nem insistir. Frase: 'Entendo, vou deixar registrado aqui e retomo com você futuramente, pode ser?'
+
+### Lead com indisponibilidade de longo prazo (viagem/deslocamento por meses) — registrar para retomada futura, não forçar reserva
+- **PADRÃO-OURO (HUMANO, 29/07 13:47–13:51, Ruan):** lead piloto deslocado por ~2 meses; humano perguntou previsão de retorno e, ao ouvir 'final de outubro', respondeu 'vou deixar registrado no sistema e retorno para você futuramente, pode ser?'.
+- **Regra:** distinguir de escala instável de curto prazo (que permite reserva provisória): quando a indisponibilidade é de meses, NÃO forçar reserva de data — perguntar a previsão de retorno e registrar para reengajamento no período indicado. Confirmar o combinado com o lead ('retomo com você futuramente, pode ser?').
+
+### Anti-padrão: mensagens automáticas de reengajamento duplicadas e desencontradas na mesma janela
+- **ANTI-PADRÃO (29/07 17:27–17:28, 20:28–20:29, 23:24):** foram disparadas várias mensagens de reengajamento idênticas ou quase idênticas em sequência ('Percebi que seu atendimento ficou em aberto...' 2x; 'Você ainda procura ajuda para...' 2x), e uma delas reapareceu DEPOIS de o lead já ter respondido ('Pode ser particular também… quais os valores?') — ignorando a mensagem viva do lead.
+- **Regra:** reengajamento = UMA mensagem por tentativa, sem duplicar o mesmo texto. Antes de disparar reengajamento, checar se há mensagem não respondida do lead — se houver, responder o que o lead perguntou (ex.: valores) em vez de enviar template genérico.
+
+### Descoberta emagrecimento por SPIN funciona bem quando o lead responde curto — encadear P→I aprofundando a dor antes da jornada
+- **PADRÃO-OURO (CLARA, 30/07 03:14–03:25):** lead trouxe múltiplas queixas; a Clara priorizou UMA ('o que mais tem te incomodado: peso, energia ou ansiedade?'), afunilou o problema do peso ('começar, manter ou voltar depois que perde?'), aprofundou a dor ('mesmo ajustando, o corpo não responde como antes?') e SÓ ENTÃO abriu a jornada — lead confirmou e pediu para marcar.
+- **Regra:** com lead de respostas curtas, encadear perguntas SPIN afuniladas (priorizar a queixa principal → especificar a dificuldade → aprofundar a implicação) antes de abrir a jornada. Uma pergunta por balão, esperando o retorno. A jornada abre quando o lead demonstra consciência da dor.
