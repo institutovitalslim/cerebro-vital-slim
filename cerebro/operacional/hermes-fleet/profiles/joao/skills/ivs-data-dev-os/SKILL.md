@@ -64,6 +64,7 @@ Tiaro determinou que **todo desenvolvimento solicitado a qualquer agente IVS** d
 
 ## Referências complementares
 
+- `references/voice-ai-provider-integration.md`: padrão para avaliar e integrar provedores de TTS, clonagem, ASR, Voice Design e agentes de voz por API/MCP, com consentimento necessário-mas-não-suficiente, DPA/privacidade, pricing conservador, OAuth PKCE headless com callback do processo ativo, SDK drift e QA live.
 - `references/content-engine-weekly-sprint.md`: Sprint Semanal, família de conteúdo e briefing herdado.
 - `references/content-engine-performance-learning.md`: Fase 3 do Content Engine OS — publicação vinculada ao criativo, importação governada de métricas, dashboard por variável e retroalimentação do próximo sprint.
 - `references/vital-slim-tracker-patient-portal-replit-lessons.md`: lições de produto/arquitetura e execução Replit para sistemas com ambiente profissional + portal paciente mobile, incluindo o pitfall de não presumir Plan mode antes de mandar comando direto de Build.

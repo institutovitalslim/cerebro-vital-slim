@@ -629,6 +629,20 @@ mcp_servers:
   openseo:
     url: http://127.0.0.1:3015/mcp
     enabled: true
+  fish-audio:
+    url: https://api.fish.audio/mcp
+    auth: oauth
+    enabled: true
+    connect_timeout: 900
+    timeout: 300
+    oauth:
+      timeout: 900
+      redirect_port: 49233
+    tools:
+      include:
+      - search_voices
+      - get_voice
+      - get_credit_balance
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.
