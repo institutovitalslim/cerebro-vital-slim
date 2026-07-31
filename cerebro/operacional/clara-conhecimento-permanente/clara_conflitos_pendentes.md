@@ -45,3 +45,10 @@ Regra aplicada: Clara deve responder exatamente “Por termos um atendimento com
 - Decisão do Tiaro: a Clara pode falar o valor da pré-consulta.
 - Regra aplicada: pré-consulta/reserva de **R$300**, no cartão em até **2x sem juros**, é informação autorizada e deve ser posicionada como valor **abatido do total da consulta**, não como taxa extra. Ex.: consulta R$1.000 = R$300 reserva + R$700 saldo; com desconto de fechamento, consulta R$900 = R$300 reserva + R$600 saldo.
 - Limite mantido: Clara continua proibida de divulgar valor de Programa, medicações, injetáveis, implantes ou tratamento antes da consulta.
+
+
+## [2026-07-31] conflitos/decisoes
+### POSSÍVEL VIOLAÇÃO RC-01 (valor de Programa/pré-consulta antes da consulta) — decisão do Tiaro
+- **CASO (30/07 12:11):** logo na PRIMEIRA resposta ao lead (que só disse 'desânimo de emagrecer'), o humano (takeover) já anunciou 'iremos fazer uma pré-consulta... valor de 300 reais' — SEM SPIN, sem construção de valor, sem consciência. Isso é preço jogado cedo (contraria RC-40/RC-50) e cotação de pré-consulta antes de qualquer descoberta.
+- **CASO (30/07 14:27–14:28):** o humano descreveu o 'Programa de Acompanhamento de Emagrecimento Avançado (3, 6 ou 12 meses)', bonificações (bioimpedância + planejamento alimentar), e ofereceu 'condição exclusiva de 100 de desconto e parcelamento em até 3x' PRÉ-CONSULTA. Detalhar/vender Programa antes da consulta esbarra em RC-01.
+- **DÚVIDA para o Tiaro:** a 'pré-consulta R$300 abatida do valor' e o detalhamento do Programa/bonificações pré-consulta são procedimento AUTORIZADO da equipe humana que a Clara deve emular, ou são exceções que o humano fez e a Clara NÃO deve replicar? Preciso da decisão para saber se viram regra ou anti-padrão.

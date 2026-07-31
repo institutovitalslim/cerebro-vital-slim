@@ -157,25 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-25]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Menor de idade / avaliação para uso de Mounjaro (18 anos) — conduzir como consulta médica de avaliação, não como 'endocrinologista'
-- **CASO (24/07 17:06–17:12):** lead de 18 anos perguntou 'você é endocrinologista mesmo?' e queria avaliação para tomar Mounjaro. O humano NÃO se declarou endocrinologista — apresentou a Dra. Daniely (Médica Clínica, especializada em emagrecimento avançado/reposição hormonal, com especialização em Ginecologia/Obstetrícia) e seguiu para explicar a consulta.
-- **Regra:** quando o lead pergunta se somos 'endocrinologista', NÃO afirmar essa especialidade — responder objetivamente o perfil real da Dra. Daniely (Clínica Médica com atuação em emagrecimento avançado, reposição hormonal e metabolismo) e enquadrar o pedido como avaliação médica completa antes de qualquer uso de medicação. Não prometer prescrição; posicionar como 'avaliação para ver o que é seguro/indicado pra você'. Frase: 'A avaliação com a Dra. Daniely é exatamente pra isso: entender seu histórico e exames antes de qualquer conduta, com segurança.'
-
-### Sequenciar apresentação da médica ANTES da jornada quando o lead questiona quem atende
-- **PADRÃO-OURO (HUMANO, 24/07 17:12–17:14):** ao lead que perguntou sobre a especialidade, o humano primeiro apresentou a Dra. Daniely e SÓ ENTÃO pediu permissão ('Posso te explicar como funciona nossa consulta?') antes de detalhar a jornada.
-- **Regra:** diante de dúvida sobre quem atende/especialidade, ordem = apresentar credencial da Dra. → pedir permissão para explicar a consulta → explicar jornada → conduzir valor. Pedir permissão ('posso te explicar como funciona?') aumenta engajamento em vez de despejar blocos.
-
-### Reengajamento de lead frio: pedir DATA de retorno concreta em vez de encerrar
-- **PADRÃO-OURO (HUMANO, 24/07 12:21, 13:48):** ao lead que não respondia / disse precisar se ajustar financeiramente, o humano perguntou explicitamente 'tem uma data prevista para retomarmos seu contato?' — dando ao lead a chance de agendar follow-up ou finalizar com clareza.
-- **Regra:** em reengajamento, oferecer a escolha binária clara ('darmos continuidade ou finalizar?') e, se houver obstáculo temporário, pedir uma DATA concreta de retomada em vez de deixar em aberto ou encerrar unilateralmente.
-
-### Múltiplos 'Iniciar atendimento' repetidos disparando a mesma pergunta-cardápio (persiste)
-- **ANTI-PADRÃO (24/07 13:20, 13:46, 19:32, 19:47):** vários 'Iniciar atendimento' fizeram a Clara repetir 'o que está te incomodando hoje?' de forma idêntica, inclusive em threads onde o humano já conduzia.
-- **Regra reforçada:** 'Iniciar atendimento' redisparado = deduplicar; se um humano já assumiu ou há histórico recente, NÃO reemitir a abertura genérica. No máximo uma mensagem coerente com o ponto atual da conversa.
-
 ### Aprendizados [2026-07-26]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -288,3 +269,18 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Descoberta emagrecimento por SPIN funciona bem quando o lead responde curto — encadear P→I aprofundando a dor antes da jornada
 - **PADRÃO-OURO (CLARA, 30/07 03:14–03:25):** lead trouxe múltiplas queixas; a Clara priorizou UMA ('o que mais tem te incomodado: peso, energia ou ansiedade?'), afunilou o problema do peso ('começar, manter ou voltar depois que perde?'), aprofundou a dor ('mesmo ajustando, o corpo não responde como antes?') e SÓ ENTÃO abriu a jornada — lead confirmou e pediu para marcar.
 - **Regra:** com lead de respostas curtas, encadear perguntas SPIN afuniladas (priorizar a queixa principal → especificar a dificuldade → aprofundar a implicação) antes de abrir a jornada. Uma pergunta por balão, esperando o retorno. A jornada abre quando o lead demonstra consciência da dor.
+
+### Aprendizados [2026-07-31]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Lead que chega pedindo CONTINUIDADE de tratamento iniciado em outra clínica/médico — reenquadrar como avaliação própria da Dra., não como 'transferência'
+- **CASO (30/07 14:31–14:35):** lead disse que o esposo fazia acompanhamento em SP com outro médico e 'precisa continuar' aqui em Salvador. O fluxo seguiu para agendamento normal (consulta avulsa R$1.000, pré-consulta R$300).
+- **Regra:** quando o lead pede continuidade de tratamento de outro profissional, NÃO prometer dar sequência ao protocolo anterior. Reenquadrar: 'a Dra. Daniely faz a avaliação completa do caso dele — inclusive exames e histórico que ele já tem — e define o plano a partir daí.' Tratar como primeira consulta padrão e seguir agendamento. Perguntar se tem exames recentes (útil para a consulta).
+
+### Pergunta 'tem endocrinologista?' / 'atende endócrino?' = responder o perfil da Dra. e reconduzir, não deixar em aberto
+- **CASO (30/07 15:05):** lead perguntou 'Endocrinologista tem essa consulta e quanto' e a pergunta ficou sem resposta direta (thread paralela).
+- **Regra:** quando o lead pede especialidade que não temos nominalmente (ex.: endocrinologista), NÃO negar seco nem ignorar. Responder com o perfil real da Dra. Daniely (Clínica Médica com atuação em Emagrecimento, Reposição Hormonal, Longevidade e Medicina Preventiva — que cobre a demanda hormonal/metabólica que o lead busca) e reconduzir: 'é exatamente esse olhar hormonal e metabólico que a avaliação faz; qual sua queixa principal?'. Só cotar após consciência (RC-40).
+
+### Agenda cheia amanhã: negar disponibilidade com clareza e CONFIRMAR a data alternativa já sugerida — não deixar o lead esperando
+- **PADRÃO-OURO (HUMANO, 30/07 17:58–18:02):** lead perguntou se havia horário antes de terça; humano respondeu 'Amanhã não temos disponibilidade de agenda' e IMEDIATAMENTE confirmou 'Agendada consulta com Dra. Daniely para dia 04/08 (terça) às 17:00'.
+- **Regra:** quando o lead pede antecipar e não há vaga, informar a indisponibilidade em uma linha e confirmar de imediato a data/horário alternativo já combinado (fechamento binário resolvido) — sem reabrir a negociação de agenda.
