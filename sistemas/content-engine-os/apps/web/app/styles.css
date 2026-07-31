@@ -28,6 +28,11 @@
   /* raios + tipografia */
   --radius-sm: 16px; --radius-pill: 999px;
   --fs-xs: 0.72rem; --fs-sm: 0.82rem; --fs-md: 0.92rem; --fs-base: 1rem;
+  /* cores de estado (rampa validada na /trafego) */
+  --state-good: #2f9e63;
+  --state-warn: #c9a227;
+  --state-bad: #c0524d;
+  --state-neutral: #6f6a61;
 }
 
 * { box-sizing: border-box; }
@@ -511,7 +516,7 @@ select.input:focus {
   line-height: 1.6;
 }
 .empty::before {
-  content: 'º6';
+  content: '✦';
   font-size: 1.3rem;
   color: var(--accent);
   opacity: 0.65;
@@ -749,4 +754,506 @@ select.input:focus {
 .winnerPlanButton:disabled {
   opacity: .55;
   cursor: wait;
+}
+
+/* ————— Design system compartilhado (padrão /trafego) —————
+   Usa os tokens --state-good/--state-warn/--state-bad/--state-neutral.
+   Consumido pelos primitivos em app/components/ui/ e pelas páginas novas. */
+
+/* pill chapada colorida (como o Chip da /trafego) — pinte com background */
+.stateChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--radius-pill);
+  padding: 3px 12px;
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--state-neutral);
+}
+
+/* card de ação (fila da /trafego): featurePanel + borda esquerda colorida.
+   Uso: <article class="featurePanel cardAcao" style={{ '--cor': ... }}> */
+.cardAcao {
+  border-left: 4px solid var(--cor, var(--state-neutral));
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+a.cardAcao { display: grid; color: inherit; }
+a.cardAcao:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+  border-left-color: var(--cor, var(--state-neutral));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .24);
+}
+
+/* KPI centrado com borda colorida + glow interno (Kpi da /trafego).
+   Uso: <article class="kpiTile" style={{ '--cor': ... }}> */
+.kpiTile {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid color-mix(in srgb, var(--cor, var(--line-strong)) 40%, transparent);
+  box-shadow: inset 0 0 24px color-mix(in srgb, var(--cor, transparent) 8%, transparent);
+}
+.kpiTile .kpiRotulo {
+  margin: 0;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  opacity: .6;
+}
+.kpiTile .kpiValor {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1.45rem;
+  color: var(--cor, inherit);
+}
+
+/* Content Radar v1 · evidência observada + governança de fontes */
+.radarRoot { gap: var(--s-7); }
+.radarHero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-6);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(255, 241, 168, .14), transparent 30%),
+    linear-gradient(132deg, rgba(38, 28, 18, .94), rgba(12, 10, 7, .98));
+}
+.radarHeroCopy { display: grid; gap: var(--s-3); }
+.radarStatusLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  color: var(--text-soft);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.radarLiveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--state-neutral);
+  box-shadow: 0 0 0 5px rgba(111, 106, 97, .12);
+}
+.radarLiveDot.isOn {
+  background: var(--state-good);
+  box-shadow: 0 0 0 5px rgba(47, 158, 99, .12);
+}
+.radarMetrics .metricCard { min-height: 158px; align-content: start; gap: 7px; }
+.radarMetrics .metricCard p { margin: auto 0 0; }
+.radarMetricPrimary {
+  border-color: rgba(255, 241, 168, .32);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(255, 241, 168, .12), transparent 42%),
+    var(--surface-strong);
+}
+.radarAlert {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, .035);
+}
+.radarAlertError { border-color: rgba(255, 141, 135, .42); color: #ffd1cd; }
+.radarAlert span { color: var(--text-soft); }
+
+.radarMethod {
+  display: grid;
+  gap: var(--s-6);
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(150deg, rgba(31, 23, 15, .88), rgba(17, 13, 9, .94));
+  box-shadow: var(--shadow);
+}
+.radarMethodSteps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--line);
+}
+.radarMethodSteps li {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 180px;
+  padding: 20px;
+  background: rgba(15, 12, 8, .94);
+}
+.radarMethodSteps li > span {
+  color: var(--accent-mid);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  font-weight: 800;
+}
+.radarMethodSteps strong { color: #fff5e8; line-height: 1.35; }
+.radarMethodSteps small { color: var(--text-soft); line-height: 1.55; }
+.radarTimestamp { margin: 0; color: var(--text-soft); font-size: .82rem; }
+.radarTimestamp strong { color: #f7ecdd; }
+
+.radarEligibleSection {
+  padding: 26px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 241, 168, .22);
+  background: rgba(255, 241, 168, .035);
+}
+.radarEligibleGrid,
+.radarEvidenceGrid,
+.radarSourceGrid {
+  display: grid;
+  gap: var(--s-4);
+}
+.radarEligibleGrid { grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); }
+.radarEvidenceGrid { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+.radarSourceGrid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+.radarToolbarHeader { margin-bottom: 2px; }
+.radarToolbar {
+  position: sticky;
+  top: 14px;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(240px, 1.4fr) minmax(180px, .8fr) minmax(180px, .8fr) auto auto;
+  align-items: end;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: rgba(18, 14, 9, .92);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .28);
+  backdrop-filter: blur(18px);
+}
+.radarToolbar label { display: grid; gap: 6px; }
+.radarToolbar label > span {
+  color: var(--text-soft);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.radarToolbar .input { min-height: 46px; padding: 10px 13px; }
+.radarToolbar .secondaryButton,
+.radarToolbar .secondaryLink { min-height: 46px; white-space: nowrap; }
+
+.radarEvidenceCard {
+  --signal-color: var(--state-neutral);
+  display: grid;
+  align-content: start;
+  gap: var(--s-4);
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--signal-color);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--signal-color) 7%, transparent), transparent 36%),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+.radarSignalBreakout { --signal-color: #e6bd48; }
+.radarSignalOutlier { --signal-color: #d69b43; }
+.radarSignalEarly { --signal-color: #7fa7c9; }
+.radarSignalNormal { --signal-color: var(--state-good); }
+.radarSignalInsufficient { --signal-color: var(--state-neutral); }
+.radarEvidenceCard h4 {
+  margin: 4px 0 0;
+  color: #fff5e8;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.55rem;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+.radarEvidenceCard p { margin: 0; }
+.radarCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+.radarPillRow { display: flex; gap: 7px; flex-wrap: wrap; }
+.radarEvidenceCard .stateChip { background: var(--signal-color); color: #17120c; }
+.radarSignalLabel {
+  color: var(--signal-color);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.radarCaption { color: var(--text-soft); line-height: 1.62; }
+.radarUnknown { display: block; margin-top: 5px; color: var(--state-warn); }
+.radarEvidenceStrip {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 12px;
+  padding: 13px 14px;
+  border: 1px solid color-mix(in srgb, var(--signal-color) 30%, transparent);
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, .18);
+  color: var(--text-soft);
+  font-size: .78rem;
+}
+.radarEvidenceStrip strong { color: #fff5e8; text-align: right; }
+.radarEvidenceDefinition {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--line);
+}
+.radarEvidenceDefinition div { min-width: 0; padding: 12px; background: rgba(10, 8, 6, .72); }
+.radarEvidenceDefinition dt {
+  color: var(--muted);
+  font-size: .66rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.radarEvidenceDefinition dd { margin: 4px 0 0; color: #f8eee3; font-weight: 700; overflow-wrap: anywhere; }
+.radarReason {
+  padding: 12px 14px;
+  border-left: 3px solid var(--state-neutral);
+  background: rgba(255, 255, 255, .025);
+  color: var(--text-soft);
+  line-height: 1.5;
+  font-size: .8rem;
+}
+.radarDetails {
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, .14);
+}
+.radarDetails summary { cursor: pointer; color: #f3e8d9; font-weight: 700; }
+.radarDetails p { margin: 12px 0 0; color: var(--muted); font-size: .8rem; }
+.radarDetails ul { display: grid; gap: 7px; margin: 12px 0 0; padding: 0; list-style: none; }
+.radarDetails li { display: flex; justify-content: space-between; gap: 12px; color: var(--text-soft); font-size: .78rem; }
+.radarDetails li a { color: var(--accent-mid); text-decoration: underline; text-underline-offset: 3px; }
+.radarHypothesis {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px dashed rgba(212, 168, 60, .24);
+  background: rgba(212, 168, 60, .04);
+}
+.radarHypothesis > span { color: var(--accent-mid); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; }
+.radarHypothesis p { color: var(--text-soft); font-size: .8rem; line-height: 1.55; }
+.radarCardActions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.radarDisabledAction {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, .025);
+}
+.radarPaginationGate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 18px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  color: var(--text-soft);
+  font-size: .82rem;
+  text-align: center;
+  background: rgba(255, 255, 255, .02);
+}
+.radarSourceCard {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+  min-width: 0;
+  min-height: 155px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--state-neutral);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, .025);
+}
+.radarSourceCard p,
+.radarSourceCard strong,
+.radarSourceCard span { overflow-wrap: anywhere; }
+.radarSourceCard p { margin: 0; color: var(--text-soft); font-size: .78rem; line-height: 1.5; }
+.radarSourceCard.source-approved,
+.radarSourceCard.source-own_account { border-left-color: var(--state-good); }
+.radarSourceCard.source-candidate { border-left-color: var(--state-warn); }
+.radarSourceCard.source-excluded { border-left-color: var(--state-bad); opacity: .76; }
+.radarSourceCard.source-thematic_search { border-left-color: #7fa7c9; }
+.radarSourcesSection { padding-bottom: var(--s-4); }
+
+@media (max-width: 1180px) {
+  .radarMethodSteps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .radarToolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); position: relative; top: auto; }
+}
+@media (max-width: 760px) {
+  .radarHero { align-items: stretch; flex-direction: column; }
+  .radarMethod { padding: 20px; }
+  .radarMethodSteps,
+  .radarToolbar,
+  .radarEvidenceDefinition { grid-template-columns: 1fr; }
+  .radarMethodSteps li { min-height: auto; }
+  .radarEvidenceGrid,
+  .radarEligibleGrid,
+  .radarSourceGrid { grid-template-columns: minmax(0, 1fr); }
+  .radarEligibleSection { padding: 18px; }
+  .radarCardTop { align-items: flex-start; flex-direction: column; }
+  .radarSignalLabel { white-space: normal; }
+  .radarCardActions > *,
+  .radarToolbar > * { width: 100%; }
+}
+
+/* Content Radar v1 · estados exclusivos, a11y e governança inline */
+.radarRoot,
+.radarRoot > *,
+.radarHeroCopy,
+.radarStatePanel { min-width: 0; }
+
+.radarStateHero { align-items: center; }
+.radarStatePanel {
+  display: grid;
+  justify-items: start;
+  gap: var(--s-3);
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at 95% 0%, rgba(255, 241, 168, .08), transparent 36%), var(--surface-strong);
+  box-shadow: var(--shadow);
+  color: #f4ece3;
+}
+.radarStatePanel > * { margin: 0; }
+.radarStatePanel p { color: #c9c1b8; line-height: 1.65; }
+.radarStateError { border-color: rgba(255, 141, 135, .58); }
+.radarStateError > strong,
+.radarStateError > p:first-of-type { color: #ffb3ae; }
+
+.radarInlineEmpty {
+  display: grid;
+  justify-items: start;
+  gap: var(--s-2);
+  padding: var(--s-6);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .025);
+  color: #c9c1b8;
+  line-height: 1.6;
+}
+.radarInlineEmpty strong { color: #fff5e8; }
+.radarInlineEmpty .secondaryLink { margin-top: var(--s-2); }
+.radarSectionIntro { max-width: 72ch; margin: 7px 0 0; }
+.radarCount { color: #c9c1b8; text-align: right; }
+
+.radarActivity {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-pill);
+  padding: 5px 9px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: #e7e0d8;
+  background: rgba(255, 255, 255, .06);
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.radarActivity::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #aaa39a; }
+.radarActivity.isActive { color: #baf4d3; border-color: rgba(127, 208, 165, .42); }
+.radarActivity.isActive::before { background: #7fd0a5; }
+.radarSourceCard.isInactive {
+  opacity: 1;
+  border-color: rgba(255, 255, 255, .13);
+  background: rgba(255, 255, 255, .015);
+}
+.radarSourceCard.isInactive > :not(.radarCardTop) { color: #aaa39a; }
+
+.radarGovernanceDetails { margin-top: var(--s-2); padding-top: var(--s-3); border-top: 1px solid var(--line); }
+.radarGovernanceDetails summary {
+  width: fit-content;
+  cursor: pointer;
+  color: #f7d86a;
+  font-size: .82rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.radarGovernanceForm { display: grid; gap: var(--s-3); margin-top: var(--s-4); }
+.radarGovernanceForm label { display: grid; gap: 7px; }
+.radarGovernanceForm label > span { color: #d4ccc3; font-size: .75rem; font-weight: 700; line-height: 1.45; }
+.radarGovernanceForm .textarea { min-height: 96px; }
+.radarGovernanceForm .secondaryButton { min-height: 46px; width: fit-content; }
+.radarGovernanceFeedback {
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  color: #eee6dd;
+  line-height: 1.55;
+}
+.radarGovernanceFeedback.is-ok { border-color: rgba(127, 208, 165, .48); background: rgba(47, 158, 99, .12); color: #c8f5dc; }
+.radarGovernanceFeedback.is-error { border-color: rgba(255, 141, 135, .5); background: rgba(192, 82, 77, .12); color: #ffc4c0; }
+
+/* Cores usadas como texto mantêm contraste AA sobre as superfícies escuras. */
+.radarSignalBreakout { --signal-color: #f3ce65; }
+.radarSignalOutlier { --signal-color: #e8b563; }
+.radarSignalEarly { --signal-color: #9bc9eb; }
+.radarSignalNormal { --signal-color: #7fd0a5; }
+.radarSignalInsufficient { --signal-color: #b4ada4; }
+
+.radarSkeleton {
+  display: block;
+  min-height: 158px;
+  overflow: hidden;
+  background: linear-gradient(110deg, rgba(255,255,255,.035) 25%, rgba(255,241,168,.1) 45%, rgba(255,255,255,.035) 65%);
+  background-size: 220% 100%;
+  animation: radarSkeletonPulse 1.6s ease-in-out infinite;
+}
+.radarLoadingLine { color: #c9c1b8; line-height: 1.6; }
+@keyframes radarSkeletonPulse { to { background-position-x: -220%; } }
+
+@media (max-width: 640px) {
+  .radarRoot { gap: var(--s-5); }
+  .radarRoot .pageTitle { font-size: clamp(1.75rem, 10vw, 2.25rem); overflow-wrap: anywhere; }
+  .radarHero,
+  .radarMethod,
+  .radarEligibleSection,
+  .radarStatePanel { border-radius: var(--radius-lg); }
+  .radarEvidenceCard,
+  .radarSourceCard { padding: var(--s-4); }
+  .radarInlineEmpty { padding: var(--s-5) var(--s-4); }
+  .radarCount { text-align: left; }
+  .radarGovernanceForm .secondaryButton,
+  .radarStatePanel .primaryButton,
+  .radarStatePanel .secondaryLink { width: 100%; }
+  .radarDetails li { align-items: flex-start; flex-direction: column; overflow-wrap: anywhere; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radarSkeleton { animation: none; }
 }
