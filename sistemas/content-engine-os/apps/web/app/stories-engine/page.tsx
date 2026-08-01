@@ -72,6 +72,24 @@ type HandoffResponse = {
   governance: { note: string; zapi_write: boolean; send_to_patient: boolean; requires_review_before_campaign: boolean }
 }
 
+type RadarProvenance = {
+  radar_item_id: string
+  radar_external_id: string
+  radar_baseline_id: string
+  radar_snapshot_id: string
+  radar_cutoff_at: string
+  radar_algorithm_version: string
+}
+
+type SourceContext = {
+  source: string
+  thesis: string
+  hook: string
+  objective: string
+  originTag: string
+  provenance?: RadarProvenance
+}
+
 const SEQUENCIAS = [
   ['espelho', 'Espelho · identificação emocional'],
   ['sem_culpa', 'Sem culpa · reframe de culpa'],
@@ -118,6 +136,30 @@ const ATIVOS = [
   ['enquete', 'Enquete'],
   ['caixinha', 'Caixinha'],
   ['depoimento', 'Depoimento validado'],
+]
+
+const CONTENT_STRATEGIES: [string, string, string, string, string][] = [
+  [
+    'jornada_ivs',
+    'Estratégia 1 · Jornada IVS',
+    'Cena concreta → tensão emocional → reframe sem culpa → guia → caminho',
+    'Melhor para criar identificação, acolher a dor e mostrar que a paciente não é culpada.',
+    'Use quando o objetivo é conexão, confiança, autoridade gentil e quebra de culpa.',
+  ],
+  [
+    'retencao_loops',
+    'Estratégia 2 · Retenção por Loops',
+    'Hook → lead → valor → loop aberto → valor → loop → CTA',
+    'Melhor para segurar atenção com curiosidade progressiva e entregar valor em blocos curtos.',
+    'Use quando o objetivo é retenção, carrossel em fio, Reel explicativo ou sequência de Stories com avanço.',
+  ],
+  [
+    'loop_previsao',
+    'Estratégia 3 · Loop de Previsão Ética',
+    'Stakes → grande pergunta → headfake/reframe → rehook → CTA seguro',
+    'Melhor para abrir uma previsão mental, quebrar a expectativa com uma virada lógica e reter sem promessa.',
+    'Use quando o objetivo é Stories/Reels com suspense educativo, mito com virada ou anúncio que precisa qualificar atenção.',
+  ],
 ]
 
 const publicApi = process.env.NEXT_PUBLIC_API_BASE_URL || '/api'
@@ -186,6 +228,7 @@ function buildSequence(input: {
   momento: string
   ativo: string
   quantidade: number
+  contentStrategy: string
 }): Sequence {
   const tema = input.tema.trim() || 'por que não é falta de força de vontade'
   const [palavraChave, ctaPrincipal] = ctaFor(input.objetivo, input.objecao)
@@ -193,6 +236,212 @@ function buildSequence(input: {
   const momento = labelOf(MOMENTOS, input.momento).split(' · ')[0].toLowerCase()
   const tipo = labelOf(SEQUENCIAS, input.tipo)
   const temaLower = tema.charAt(0).toLowerCase() + tema.slice(1)
+
+  if (input.contentStrategy === 'loop_previsao') {
+    const base: Omit<Story, 'n'>[] = [
+      {
+        funcao: 'Stakes · personagem',
+        texto: `Uma mulher chega cansada de lidar com ${temaLower} e com a sensação de que o próprio corpo parou de responder.`,
+        visual: visualFor(input.ativo, 0),
+        sticker: 'Enquete: “já vivi isso / estou vivendo”',
+        objecao: 'Cria personagem reconhecível sem explorar insegurança corporal.',
+        dm: '“sou eu”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Stakes · risco e urgência',
+        texto: `O risco não é “falhar de novo”. É repetir mais uma tentativa no escuro e continuar sem entender o que precisa ser investigado.`,
+        visual: 'Texto premium com contraste claro',
+        sticker: 'Slider: quanto isso pesa?',
+        objecao: 'Quebra culpa e aumenta valor percebido da avaliação.',
+        dm: '“já tentei”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Grande pergunta',
+        texto: `A pergunta certa não é “qual dieta eu faço agora?”. É: por que as outras tentativas ficaram tão difíceis de sustentar?`,
+        visual: visualFor('texto', 1),
+        sticker: 'Caixinha: “qual foi sua maior tentativa?”',
+        objecao: 'Abre previsão mental específica e evita promessa de solução rápida.',
+        dm: 'Histórico de tentativas',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Predição esperada',
+        texto: `A resposta comum seria: falta de disciplina. Mas essa costuma ser a explicação mais pobre.`,
+        visual: input.ativo === 'dra' ? visualFor('dra', 1) : 'Card A/B: disciplina vs investigação',
+        sticker: 'Enquete: “já te disseram isso?” sim / muito',
+        objecao: 'Expõe a crença esperada para preparar a virada.',
+        dm: '“sempre ouvi isso”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Headfake/Reframe',
+        texto: objLine,
+        visual: visualFor(input.ativo, 1),
+        sticker: 'Prepare o print',
+        objecao: labelOf(OBJECOES, input.objecao),
+        dm: '“faz sentido”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Rehook',
+        texto: `E é aí que vem a próxima pergunta: se não é só força de vontade, o que precisa ser olhado antes da próxima tentativa?`,
+        visual: input.ativo === 'dra' ? visualFor('dra', 2) : visualFor('bastidor', 0),
+        sticker: 'Enquete: exames / rotina / sono / fome / ansiedade',
+        objecao: 'Fecha a virada e abre novo loop sem vácuo de atenção.',
+        dm: 'Sinais de investigação',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Caminho seguro',
+        texto: `No Instituto Vital Slim, o caminho começa por avaliação individualizada: história, sintomas, exames, rotina e objetivo real.`,
+        visual: input.ativo === 'print' ? visualFor('print', 1) : visualFor('bastidor', 1),
+        sticker: 'Reação: “quero entender”',
+        objecao: 'Mostra método e segurança sem prometer resultado.',
+        dm: '“quero entender”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'CTA seguro',
+        texto: ctaPrincipal,
+        visual: 'CTA minimalista com botão/sticker de resposta',
+        sticker: `DM com palavra-chave: ${palavraChave}`,
+        objecao: 'Convida sem pressão e filtra quem quer orientação real.',
+        dm: palavraChave,
+        risco: input.objetivo === 'agenda' ? 'médio' : 'baixo',
+      },
+      {
+        funcao: 'Rehook final',
+        texto: `Se você mandar “${palavraChave}”, a próxima conversa não começa por preço ou promessa. Começa entendendo seu contexto.`,
+        visual: 'Bastidor leve da equipe/WhatsApp sem dados',
+        sticker: 'Última chamada suave',
+        objecao: 'Quebra preço sem valor percebido e medo de atendimento genérico.',
+        dm: palavraChave,
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Compartilhamento',
+        texto: `Encaminha para uma mulher que está prestes a se culpar de novo. Talvez a pergunta dela ainda esteja errada.`,
+        visual: 'Texto emocional, sem imagem corporal sensível',
+        sticker: 'Compartilhar',
+        objecao: 'Amplia alcance por identificação e reframe.',
+        dm: 'Compartilhamentos e respostas',
+        risco: 'baixo',
+      },
+    ]
+    const stories = base.slice(0, input.quantidade).map((story, index) => ({ ...story, n: index + 1 }))
+    return {
+      tipo: `${tipo} · Loop de Previsão Ética`,
+      tese: `${tipo}: ${tema}. Sequência em Stakes → Grande Pergunta → Headfake/Reframe → Rehook para abrir previsão, quebrar “${labelOf(OBJECOES, input.objecao)}” e conduzir para uma resposta privada segura.`,
+      ctaPrincipal,
+      palavraChave,
+      stories,
+    }
+  }
+
+  if (input.contentStrategy === 'retencao_loops') {
+    const base: Omit<Story, 'n'>[] = [
+      {
+        funcao: 'Hook',
+        texto: `Você não cansou de “${temaLower}”. Você cansou de tentar resolver isso sem entender o que está travando seu corpo e sua rotina.`,
+        visual: visualFor(input.ativo, 0),
+        sticker: 'Enquete rápida: “já senti isso / estou vivendo isso”',
+        objecao: 'Interrompe o scroll e quebra culpa logo no começo.',
+        dm: '“sou eu”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Lead',
+        texto: `Fica comigo: antes de falar em dieta, tem uma pergunta que muda a forma de olhar para ${temaLower}.`,
+        visual: 'Texto premium com frase única e respiro visual',
+        sticker: 'Slider: quanto isso te pega?',
+        objecao: 'Segura a pessoa até o próximo story sem prometer solução instantânea.',
+        dm: 'Respostas de identificação',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Valor 1',
+        texto: objLine,
+        visual: visualFor(input.ativo, 1),
+        sticker: 'Prepare o print',
+        objecao: labelOf(OBJECOES, input.objecao),
+        dm: '“faz sentido”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Loop 1',
+        texto: `Mas tem um detalhe que quase ninguém olha: quando a tentativa ignora história, exames e rotina, a cobrança fica maior que a clareza.`,
+        visual: input.ativo === 'dra' ? visualFor('dra', 1) : visualFor('bastidor', 0),
+        sticker: 'Caixinha: “o que você já tentou?”',
+        objecao: 'Abre curiosidade para método sem vender fórmula.',
+        dm: 'Histórico de tentativas',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Valor 2',
+        texto: `No Instituto Vital Slim, a avaliação começa entendendo ponto de partida, sintomas, exames, sono, fome, ansiedade e objetivo real.`,
+        visual: input.ativo === 'dra' ? visualFor('dra', 2) : visualFor('bastidor', 1),
+        sticker: 'Enquete: “isso já foi avaliado?” sim / não',
+        objecao: 'Mostra investigação individualizada, não promessa.',
+        dm: '“nunca olharam isso”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Loop 2',
+        texto: `E é aqui que muita mulher perde tempo: repetir a estratégia antiga esperando um resultado diferente.`,
+        visual: 'Card printável com contraste claro',
+        sticker: 'Slider: “isso foi uma virada?”',
+        objecao: 'Quebra “já tentei de tudo” e reposiciona o problema.',
+        dm: '“foi exatamente assim”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Valor 3',
+        texto: `A próxima tentativa não precisa começar pela culpa. Pode começar por clareza, escuta e um plano que caiba na vida real.`,
+        visual: visualFor(input.ativo, 2),
+        sticker: 'Reação ou botão “quero entender”',
+        objecao: 'Transforma vergonha em segurança para conversar.',
+        dm: '“quero entender”',
+        risco: 'baixo',
+      },
+      {
+        funcao: 'CTA',
+        texto: ctaPrincipal,
+        visual: 'CTA minimalista com botão/sticker de resposta',
+        sticker: `DM com palavra-chave: ${palavraChave}`,
+        objecao: 'Convida sem pressão, sem promessa e com próxima ação clara.',
+        dm: palavraChave,
+        risco: input.objetivo === 'agenda' ? 'médio' : 'baixo',
+      },
+      {
+        funcao: 'Follow-up',
+        texto: `Se você mandou “${palavraChave}”, a equipe entende primeiro o contexto antes de orientar o próximo passo.`,
+        visual: 'Bastidor leve da equipe/WhatsApp sem dados',
+        sticker: 'Última chamada suave',
+        objecao: 'Qualifica a DM e reduz curiosa de preço.',
+        dm: palavraChave,
+        risco: 'baixo',
+      },
+      {
+        funcao: 'Compartilhamento',
+        texto: `Encaminha essa sequência para uma mulher que está se culpando em silêncio. Às vezes o primeiro passo é só parar de carregar isso sozinha.`,
+        visual: 'Texto emocional, sem imagem corporal sensível',
+        sticker: 'Compartilhar',
+        objecao: 'Amplia alcance por identificação, sem venda direta.',
+        dm: 'Compartilhamentos e reações',
+        risco: 'baixo',
+      },
+    ]
+    const stories = base.slice(0, input.quantidade).map((story, index) => ({ ...story, n: index + 1 }))
+    return {
+      tipo: `${tipo} · Retenção por Loops`,
+      tese: `${tipo}: ${tema}. Sequência em Hook → Lead → Valor → Loop → Valor → Loop → CTA para reter, qualificar e quebrar a objeção “${labelOf(OBJECOES, input.objecao)}”.`,
+      ctaPrincipal,
+      palavraChave,
+      stories,
+    }
+  }
 
   const base: Omit<Story, 'n'>[] = [
     {
@@ -224,7 +473,7 @@ function buildSequence(input: {
     },
     {
       funcao: 'Contexto clínico',
-      texto: `No IVS, antes de orientar, a gente olha história, exames, rotina, sono, ansiedade, tentativas anteriores e objetivo real.`,
+      texto: `No Instituto Vital Slim, antes de orientar, a gente olha história, exames, rotina, sono, ansiedade, tentativas anteriores e objetivo real.`,
       visual: input.ativo === 'dra' ? visualFor('dra', 2) : visualFor('bastidor', 0),
       sticker: 'Caixinha: “o que você já tentou?”',
       objecao: 'Mostra método, não promessa.',
@@ -340,6 +589,7 @@ export default function StoriesEnginePage() {
   const [objecao, setObjecao] = useState('culpa')
   const [momento, setMomento] = useState('frustracao')
   const [ativo, setAtivo] = useState('texto')
+  const [contentStrategy, setContentStrategy] = useState('jornada_ivs')
   const [quantidade, setQuantidade] = useState(10)
   const [seoIntent, setSeoIntent] = useState('por que não consigo emagrecer')
   const [sendSaveReason, setSendSaveReason] = useState('mandar para uma amiga que se culpa pelo peso')
@@ -361,8 +611,9 @@ export default function StoriesEnginePage() {
   const [reviewLoading, setReviewLoading] = useState<string | null>(null)
   const [reviewMsg, setReviewMsg] = useState<string | null>(null)
   const [briefing, setBriefing] = useState<{ thesis: string; hook: string; originTag: string } | null>(null)
+  const [sourceContext, setSourceContext] = useState<SourceContext | null>(null)
 
-  const preview = useMemo(() => buildSequence({ tema, tipo, objetivo, objecao, momento, ativo, quantidade }), [tema, tipo, objetivo, objecao, momento, ativo, quantidade])
+  const preview = useMemo(() => buildSequence({ tema, tipo, objetivo, objecao, momento, ativo, quantidade, contentStrategy }), [tema, tipo, objetivo, objecao, momento, ativo, quantidade, contentStrategy])
 
   function gerar(event: FormEvent) {
     event.preventDefault()
@@ -401,7 +652,8 @@ export default function StoriesEnginePage() {
   useEffect(() => {
     if (typeof window === 'undefined') return
     const qs = new URLSearchParams(window.location.search)
-    if (qs.get('source') !== 'weekly-sprint') return
+    const source = qs.get('source') || ''
+    if (!['weekly-sprint', 'radar'].includes(source)) return
     const thesis = qs.get('thesis') || ''
     const hook = qs.get('hook') || ''
     const originTag = qs.get('origin_tag') || ''
@@ -409,6 +661,15 @@ export default function StoriesEnginePage() {
     if (hook) setSeoIntent(hook)
     if (originTag || thesis || hook) setBriefing({ thesis, hook, originTag })
     const objective = qs.get('objective') || ''
+    const provenance = source === 'radar' ? {
+      radar_item_id: qs.get('radar_item_id') || '',
+      radar_external_id: qs.get('radar_external_id') || '',
+      radar_baseline_id: qs.get('radar_baseline_id') || '',
+      radar_snapshot_id: qs.get('radar_snapshot_id') || '',
+      radar_cutoff_at: qs.get('radar_cutoff_at') || '',
+      radar_algorithm_version: qs.get('radar_algorithm_version') || '',
+    } : undefined
+    setSourceContext({ source, thesis, hook, objective, originTag, provenance })
     if (objective === 'captacao_qualificada') setObjetivo('agenda')
     if (objective === 'educacao_de_mercado') setObjetivo('pesquisa')
     if (objective === 'prova_e_metodo') setObjetivo('prova')
@@ -429,10 +690,16 @@ export default function StoriesEnginePage() {
         patient_moment: momento,
         support_asset: ativo,
         story_count: current.stories.length,
+        source: sourceContext?.source || null,
+        thesis: sourceContext?.thesis || null,
+        hook: sourceContext?.hook || null,
+        source_objective: sourceContext?.objective || null,
+        ...(sourceContext?.provenance || {}),
         payload: {
           sequence: current,
-          inputs: { tema, tipo, objetivo, objecao, momento, ativo, quantidade },
+          inputs: { tema, tipo, objetivo, objecao, momento, ativo, quantidade, contentStrategy },
           instagram_strategy: {
+            content_strategy: contentStrategy,
             seo_social_intent: seoIntent,
             send_save_reason: sendSaveReason,
             expected_intent_signal: expectedSignal,
@@ -559,7 +826,7 @@ export default function StoriesEnginePage() {
   return (
     <div className="dashboardRoot">
       <header className="pageHeader heroHeader">
-        <p className="eyebrow">Motor A · Stories</p>
+        <p className="eyebrow">Conexão diária</p>
         <h2 className="pageTitle">Stories Connection Engine IVS</h2>
         <p className="heroText">
           Gerador funcional de sequências de Stories: tema, objeção, objetivo e momento emocional entram; o sistema devolve textos, stickers, visual sugerido, quebra de objeção e DM esperada.
@@ -596,6 +863,27 @@ export default function StoriesEnginePage() {
           <select className="input" value={tipo} onChange={(e) => setTipo(e.target.value)}>
             {SEQUENCIAS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
           </select>
+
+          <label className="muted small">Estratégia narrativa</label>
+          <select className="input" value={contentStrategy} onChange={(e) => setContentStrategy(e.target.value)}>
+            {CONTENT_STRATEGIES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+          </select>
+          <div className="grid" style={{ gridTemplateColumns: '1fr', gap: 8, margin: '-2px 0 8px' }}>
+            {CONTENT_STRATEGIES.map(([value, label, framework, resumo, uso]) => (
+              <button
+                type="button"
+                key={value}
+                className={contentStrategy === value ? 'resultBox' : 'secondaryLink'}
+                onClick={() => setContentStrategy(value)}
+                style={{ textAlign: 'left', padding: 12, borderColor: contentStrategy === value ? 'rgba(212,168,60,.55)' : undefined }}
+              >
+                <strong>{label}</strong>
+                <span className="muted small" style={{ display: 'block', marginTop: 4 }}>{resumo}</span>
+                <span className="muted small" style={{ display: 'block', marginTop: 4 }}><strong>Estrutura:</strong> {framework}</span>
+                <span className="muted small" style={{ display: 'block', marginTop: 4 }}><strong>Quando escolher:</strong> {uso}</span>
+              </button>
+            ))}
+          </div>
 
           <label className="muted small">Objetivo</label>
           <select className="input" value={objetivo} onChange={(e) => setObjetivo(e.target.value)}>
@@ -656,6 +944,7 @@ export default function StoriesEnginePage() {
           </div>
           <p className="muted">{seq.tese}</p>
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 8, marginBottom: 14 }}>
+            <div className="resultBox"><strong className="muted small">Estratégia</strong><p className="small" style={{ margin: '4px 0 0' }}>{CONTENT_STRATEGIES.find(([value]) => value === contentStrategy)?.[1]}</p></div>
             <div className="resultBox"><strong className="muted small">SEO social</strong><p className="small" style={{ margin: '4px 0 0' }}>{seoIntent}</p></div>
             <div className="resultBox"><strong className="muted small">Motivo de envio</strong><p className="small" style={{ margin: '4px 0 0' }}>{sendSaveReason}</p></div>
             <div className="resultBox"><strong className="muted small">Sinal esperado</strong><p className="small" style={{ margin: '4px 0 0' }}>{expectedSignal}</p></div>

@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 
 import { StoryboardPanel } from './storyboard'
+import { DraRecordingKit } from './dra-kit'
 
 const api = process.env.NEXT_PUBLIC_API_BASE_URL || '/api'
 
@@ -30,6 +31,8 @@ export type Creative = {
   feedback?: string | null
   reel_status?: string | null
   reel_url?: string | null
+  utm?: Record<string, string>
+  tracking_url?: string
 }
 
 const FORMATOS = ['carrossel', 'reels', 'stories', 'estatico']
@@ -43,8 +46,38 @@ const ANGULOS_META: [string, string][] = [
 ]
 const HOOKS = ['identificacao', 'mecanismo', 'contraste', 'mito', 'pergunta_direta']
 const VISUAIS = ['dra_camera', 'broll_rotina', 'prova_metodo', 'texto_premium']
+const VISUAL_HOOKS: [string, string, string][] = [
+  ['text_slide_in', 'Text Slide In · texto premium', 'Nomeia dor/mito/contraste nos primeiros 0-2s.'],
+  ['match_cut', 'Match Cut · corte de virada', 'Transforma tentativa solta em método/avaliação.'],
+  ['jump_switch', 'Jump Switch · movimento do sujeito', 'Dá ritmo ao bastidor/explicação sem trend genérica.'],
+  ['speed_ramp', 'Speed Ramp · acelera/desacelera', 'Mostra caos → pausa no mecanismo/tecnologia.'],
+  ['unusual_image', 'Unusual Image · objeto-metáfora', 'Roupa, espelho, agenda ou exame como tensão visual segura.'],
+]
 const CTAS = ['salvar_compartilhar', 'pre_avaliacao', 'whatsapp_qualificado', 'agendamento']
 const OBJECOES = ['ja_tentei_de_tudo', 'so_mais_uma_dieta', 'preco_valor', 'sem_tempo', 'hormonios_metabolismo']
+const CONTENT_STRATEGIES: [string, string, string, string, string][] = [
+  [
+    'jornada_ivs',
+    'Estratégia 1 · Jornada IVS',
+    'Cena concreta → tensão emocional → reframe sem culpa → guia → caminho',
+    'Melhor para criar identificação, acolher a dor e mostrar que a paciente não é culpada.',
+    'Use quando o objetivo é conexão, confiança, autoridade gentil e quebra de culpa.',
+  ],
+  [
+    'retencao_loops',
+    'Estratégia 2 · Retenção por Loops',
+    'Hook → lead → valor → loop aberto → valor → loop → CTA',
+    'Melhor para segurar atenção com curiosidade progressiva e entregar valor em blocos curtos.',
+    'Use quando o objetivo é retenção, carrossel em fio, Reel explicativo ou sequência de Stories com avanço.',
+  ],
+  [
+    'loop_previsao',
+    'Estratégia 3 · Loop de Previsão Ética',
+    'Stakes → grande pergunta → headfake/reframe → rehook → CTA seguro',
+    'Melhor para abrir uma previsão mental, quebrar a expectativa com uma virada lógica e reter sem promessa.',
+    'Use quando o objetivo é Reel/story com suspense educativo, mito com virada ou anúncio que precisa qualificar atenção.',
+  ],
+]
 export const STATUS_LABEL: Record<string, string> = {
   gerado: 'Gerando arte…',
   renderizado: 'Pronto p/ revisar',
@@ -55,6 +88,26 @@ export const STATUS_LABEL: Record<string, string> = {
   ajustes_solicitados: 'Ajustes solicitados ✎',
 }
 export const is45 = (f: string) => f === 'carrossel' || f === 'estatico'
+
+type RadarProvenance = {
+  radar_item_id: string
+  radar_external_id: string
+  radar_baseline_id: string
+  radar_snapshot_id: string
+  radar_cutoff_at: string
+  radar_algorithm_version: string
+}
+
+type SourceBriefing = {
+  thesis: string
+  hook: string
+  originTag: string
+  source: string
+  pillar: string
+  audienceStage: string
+  objective: string
+  provenance?: RadarProvenance
+}
 
 async function listar(format?: string): Promise<Creative[]> {
   try {
@@ -73,27 +126,51 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
   const [formato, setFormato] = useState(defaultFormato)
   const [objetivo, setObjetivo] = useState('educação')
   const [destino, setDestino] = useState('feed')
+  const [modelo, setModelo] = useState('viral')
   const [angulo, setAngulo] = useState('baseline')
   const [hookTipo, setHookTipo] = useState('identificacao')
   const [objecaoAlvo, setObjecaoAlvo] = useState('ja_tentei_de_tudo')
   const [visualTipo, setVisualTipo] = useState('dra_camera')
+  const [visualHookMechanic, setVisualHookMechanic] = useState('text_slide_in')
   const [ctaTipo, setCtaTipo] = useState('pre_avaliacao')
+  const [contentStrategy, setContentStrategy] = useState('jornada_ivs')
   const [matrixName, setMatrixName] = useState('Ciclo modular IVS')
   const [matrixAngulos, setMatrixAngulos] = useState('culpa,so_dieta,metodo')
   const [matrixHooks, setMatrixHooks] = useState('identificacao,mecanismo,contraste')
   const [matrixObjecoes, setMatrixObjecoes] = useState('ja_tentei_de_tudo')
   const [matrixCtas, setMatrixCtas] = useState('pre_avaliacao,whatsapp_qualificado')
   const [matrixVisuais, setMatrixVisuais] = useState('dra_camera,broll_rotina')
+  const [matrixVisualHooks, setMatrixVisualHooks] = useState('text_slide_in')
   const [tema, setTema] = useState('')
-  const [briefing, setBriefing] = useState<{ thesis: string; hook: string; originTag: string; source: string; pillar: string; audienceStage: string; objective: string } | null>(null)
+  const [briefing, setBriefing] = useState<SourceBriefing | null>(null)
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState<string | null>(null)
   const [recent, setRecent] = useState<Creative[]>([])
+  const [pillars, setPillars] = useState<{ pillar: string; label: string; thesis: string }[]>([])
+  const [sprintPillar, setSprintPillar] = useState('')
+  const [sprintMsg, setSprintMsg] = useState<string | null>(null)
+  const [sprintBusy, setSprintBusy] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
     const qs = new URLSearchParams(window.location.search)
-    if (qs.get('source') !== 'weekly-sprint') return
+    if (qs.get('source') === 'ideias') {
+      // Prefill vindo do Banco de Roteiros / Sinais virais / Estúdio: titulo, hook, formato, tipo
+      const titulo = qs.get('titulo') || ''
+      const hookIdeia = qs.get('hook') || ''
+      const tipo = qs.get('tipo') || ''
+      const fmtRaw = (qs.get('formato') || '').toLowerCase()
+      const fmt = fmtRaw === 'reel' ? 'reels' : fmtRaw === 'story' ? 'stories' : fmtRaw
+      if (!lockFormato && FORMATOS.includes(fmt)) setFormato(fmt)
+      const temaIdeia = [titulo, hookIdeia ? `Hook: ${hookIdeia}` : ''].filter(Boolean).join('\n')
+      if (temaIdeia) setTema(temaIdeia)
+      const h = hookIdeia.toLowerCase()
+      if (h.includes('mito') || h.includes('mentira')) setHookTipo('mito')
+      if (h.includes('?') || h.includes('por que')) setHookTipo('pergunta_direta')
+      if (titulo || hookIdeia) setBriefing({ thesis: titulo, hook: hookIdeia, originTag: tipo ? `ideias:${tipo}` : 'ideias', source: 'ideias', pillar: '', audienceStage: '', objective: '' })
+      return
+    }
+    if (!['weekly-sprint', 'radar'].includes(qs.get('source') || '')) return
     const thesis = qs.get('thesis') || ''
     const hook = qs.get('hook') || ''
     const originTag = qs.get('origin_tag') || ''
@@ -108,7 +185,15 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
     if (objective === 'prova_e_metodo') setObjetivo('desejo')
     if (hook.toLowerCase().includes('mito') || hook.toLowerCase().includes('mentira')) setHookTipo('mito')
     if (hook.toLowerCase().includes('?') || hook.toLowerCase().includes('por que')) setHookTipo('pergunta_direta')
-    if (originTag || thesis || hook) setBriefing({ thesis, hook, originTag, source, pillar, audienceStage, objective })
+    const provenance = source === 'radar' ? {
+      radar_item_id: qs.get('radar_item_id') || '',
+      radar_external_id: qs.get('radar_external_id') || '',
+      radar_baseline_id: qs.get('radar_baseline_id') || '',
+      radar_snapshot_id: qs.get('radar_snapshot_id') || '',
+      radar_cutoff_at: qs.get('radar_cutoff_at') || '',
+      radar_algorithm_version: qs.get('radar_algorithm_version') || '',
+    } : undefined
+    if (originTag || thesis || hook) setBriefing({ thesis, hook, originTag, source, pillar, audienceStage, objective, provenance })
   }, [])
 
   async function load() {
@@ -119,6 +204,55 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
     const t = setInterval(load, 5000)
     return () => clearInterval(t)
   }, [])
+  useEffect(() => {
+    fetch(`${api}/weekly-command/overview?tenant_slug=demo`, { cache: 'no-store' })
+      .then((r) => r.json()).then((d) => setPillars(d.pillars || [])).catch(() => {})
+  }, [])
+
+  function aplicarPilar(pid: string) {
+    setSprintPillar(pid); setSprintMsg(null)
+    const p = pillars.find((x) => x.pillar === pid)
+    if (p) setTema(p.thesis)
+  }
+  async function gerarSemana() {
+    if (!sprintPillar || sprintBusy) return
+    setSprintBusy(true); setSprintMsg(null); setMsg(null)
+    const dias = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado']
+    const H = { 'Content-Type': 'application/json' }
+    try {
+      const p = pillars.find((x) => x.pillar === sprintPillar)
+      const thesis = p?.thesis || tema || ''
+      const r = await fetch(`${api}/weekly-command/family-plan`, {
+        method: 'POST', headers: H,
+        body: JSON.stringify({ tenant_slug: 'demo', thesis, pillar: sprintPillar, objective: 'autoridade_e_conversa', audience_stage: 'consciente_da_dor' }),
+      })
+      const d = await r.json()
+      const item = (d.family || []).find((f: { format: string }) => f.format === formato)
+      const pool: string[] = item?.hook_variations || (item?.hook ? [item.hook] : [thesis])
+      const week = Array.from({ length: 7 }, (_, i) => pool[i % pool.length] || thesis)
+      let ok = 0
+      for (let i = 0; i < 7; i++) {
+        setSprintMsg(`Gerando ${i + 1}/7 · ${dias[i]}…`)
+        const body: Record<string, unknown> = {
+          tenant_slug: 'demo', formato, objetivo, rede: 'instagram',
+          tema: `${thesis}\nHook: ${week[i]}`,
+          hook_tipo: hookTipo, objecao_alvo: objecaoAlvo, visual_tipo: visualTipo, visual_hook_mechanic: visualHookMechanic, cta_tipo: ctaTipo, content_strategy: contentStrategy,
+          source: 'weekly-sprint', thesis, pillar: sprintPillar, audience_stage: 'consciente_da_dor',
+          origin_tag: `weekly:${sprintPillar}:${formato}:dia${i + 1}`, hook: week[i],
+        }
+        if (formato === 'carrossel') { body.destino = destino; body.modelo = modelo; if (destino === 'meta_ads') body.angulo = angulo }
+        try {
+          const rr = await fetch(`${api}/generation/orchestrate`, { method: 'POST', headers: H, body: JSON.stringify(body) })
+          if (rr.ok) ok += 1
+        } catch { /* segue para o próximo dia */ }
+        load()
+      }
+      setSprintMsg(`Semana gerada: ${ok}/7 ${formato}(s). Acompanhe no Banco de Criativos (renderizando).`)
+    } catch {
+      setSprintMsg('Falha ao gerar a semana. Tente de novo.')
+    }
+    setSprintBusy(false)
+  }
 
   async function gerar(e: FormEvent) {
     e.preventDefault()
@@ -126,13 +260,23 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
     setMsg(null)
     try {
       const csv = (s: string) => s.split(',').map((x) => x.trim()).filter(Boolean)
+      const sourceHandoff: Record<string, string> = briefing ? {
+        source: briefing.source,
+        thesis: briefing.thesis,
+        pillar: briefing.pillar,
+        audience_stage: briefing.audienceStage,
+        origin_tag: briefing.originTag,
+        hook: briefing.hook,
+        source_objective: briefing.objective,
+        ...(briefing.provenance || {}),
+      } : {}
       if (modo === 'matrix') {
-        const angulos = csv(matrixAngulos); const hooks = csv(matrixHooks); const objecoes = csv(matrixObjecoes); const ctas = csv(matrixCtas); const visuais = csv(matrixVisuais)
-        const total = angulos.length * hooks.length * objecoes.length * ctas.length * visuais.length
+        const angulos = csv(matrixAngulos); const hooks = csv(matrixHooks); const objecoes = csv(matrixObjecoes); const ctas = csv(matrixCtas); const visuais = csv(matrixVisuais); const visualHookMechanics = csv(matrixVisualHooks)
+        const total = angulos.length * hooks.length * objecoes.length * ctas.length * visuais.length * visualHookMechanics.length
         if (total > 36) throw new Error('matrix_limit')
         const r = await fetch(`${api}/generation/matrix`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tenant_slug: 'demo', name: matrixName, formato, objetivo, rede: 'instagram', destino, tema: tema || null, angulos, hooks, objecoes, ctas, visuais }),
+          body: JSON.stringify({ tenant_slug: 'demo', name: matrixName, formato, objetivo, rede: 'instagram', destino, tema: tema || null, angulos, hooks, objecoes, ctas, visuais, visual_hook_mechanics: visualHookMechanics, content_strategy: contentStrategy, ...sourceHandoff }),
         })
         if (!r.ok) throw new Error()
         const d = await r.json()
@@ -141,18 +285,15 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
       }
       const body: Record<string, unknown> = {
         tenant_slug: 'demo', formato, objetivo, rede: 'instagram', tema: tema || null,
-        hook_tipo: hookTipo, objecao_alvo: objecaoAlvo, visual_tipo: visualTipo, cta_tipo: ctaTipo,
+        hook_tipo: hookTipo, objecao_alvo: objecaoAlvo, visual_tipo: visualTipo, visual_hook_mechanic: visualHookMechanic, cta_tipo: ctaTipo,
+        content_strategy: contentStrategy,
       }
       if (briefing) {
-        body.source = briefing.source
-        body.thesis = briefing.thesis
-        body.pillar = briefing.pillar
-        body.audience_stage = briefing.audienceStage
-        body.origin_tag = briefing.originTag
-        body.hook = briefing.hook
+        Object.assign(body, sourceHandoff)
       }
       if (formato === 'carrossel') {
         body.destino = destino
+        body.modelo = modelo
         if (destino === 'meta_ads') body.angulo = angulo
       }
       const r = await fetch(`${api}/generation/orchestrate`, {
@@ -172,7 +313,7 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
   }
 
   const countCsv = (s: string) => s.split(',').map((x) => x.trim()).filter(Boolean).length
-  const matrixTotal = countCsv(matrixAngulos) * countCsv(matrixHooks) * countCsv(matrixObjecoes) * countCsv(matrixCtas) * countCsv(matrixVisuais)
+  const matrixTotal = countCsv(matrixAngulos) * countCsv(matrixHooks) * countCsv(matrixObjecoes) * countCsv(matrixCtas) * countCsv(matrixVisuais) * countCsv(matrixVisualHooks)
 
   return (
     <section className="section grid" style={{ gridTemplateColumns: 'minmax(320px, 420px) minmax(0, 1fr)', gap: 24, alignItems: 'start' }}>
@@ -183,9 +324,27 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           <p className="muted">Reels puxam atenção. Carrossel constrói autoridade. Modo matriz transforma criativo em segmentação.</p>
         </div>
 
+        <div className="resultBox briefingBox" style={{ borderColor: 'rgba(212,168,60,.35)' }}>
+          <span className="metricLabel">Sprint semanal deste formato</span>
+          <p className="muted small" style={{ marginTop: 0 }}>Escolha o pilar da semana para <strong>este</strong> formato e gere a semana inteira: <strong>7 peças, uma por dia</strong> (domingo a sábado), cada uma com o seu próprio hook. É independente dos outros formatos.</p>
+          <select className="input" value={sprintPillar} onChange={(e) => aplicarPilar(e.target.value)} disabled={sprintBusy}>
+            <option value="">— escolher pilar da semana —</option>
+            {pillars.map((p) => <option key={p.pillar} value={p.pillar}>{p.label}</option>)}
+          </select>
+          {sprintPillar ? (
+            <button type="button" className="primaryButton" style={{ marginTop: 10, width: '100%' }} onClick={gerarSemana} disabled={sprintBusy}>
+              {sprintBusy ? 'Gerando a semana…' : 'Gerar a semana (7 peças, 1 por dia)'}
+            </button>
+          ) : null}
+          {sprintMsg ? <p className="small" style={{ marginTop: 8 }}>{sprintMsg}</p> : null}
+          {sprintPillar && !sprintBusy ? (
+            <p className="muted small" style={{ marginTop: 6 }}>Gera 7 peças de uma vez (renderização pesada — leva alguns minutos). Nada é publicado automaticamente; tudo entra no Banco de Criativos para revisão.</p>
+          ) : null}
+        </div>
+
         {briefing ? (
           <div className="resultBox briefingBox">
-            <span className="metricLabel">Briefing herdado do Sprint Semanal</span>
+            <span className="metricLabel">{briefing.source === 'ideias' ? '🎯 Ideia que você escolheu produzir' : 'Briefing do sprint deste formato'}</span>
             {briefing.thesis ? <p><strong>Tese:</strong> {briefing.thesis}</p> : null}
             {briefing.hook ? <p><strong>Hook:</strong> {briefing.hook}</p> : null}
             {briefing.originTag ? <p><strong>Origem:</strong> {briefing.originTag}</p> : null}
@@ -204,6 +363,27 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           <option value="matrix">Matriz de teste</option>
         </select>
 
+        <label className="muted small">Estratégia narrativa</label>
+        <select className="input" value={contentStrategy} onChange={(e) => setContentStrategy(e.target.value)}>
+          {CONTENT_STRATEGIES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+        </select>
+        <div className="grid" style={{ gridTemplateColumns: '1fr', gap: 8, margin: '-2px 0 8px' }}>
+          {CONTENT_STRATEGIES.map(([value, label, framework, resumo, uso]) => (
+            <button
+              type="button"
+              key={value}
+              className={contentStrategy === value ? 'resultBox' : 'secondaryLink'}
+              onClick={() => setContentStrategy(value)}
+              style={{ textAlign: 'left', padding: 12, borderColor: contentStrategy === value ? 'rgba(212,168,60,.55)' : undefined }}
+            >
+              <strong>{label}</strong>
+              <span className="muted small" style={{ display: 'block', marginTop: 4 }}>{resumo}</span>
+              <span className="muted small" style={{ display: 'block', marginTop: 4 }}><strong>Estrutura:</strong> {framework}</span>
+              <span className="muted small" style={{ display: 'block', marginTop: 4 }}><strong>Quando escolher:</strong> {uso}</span>
+            </button>
+          ))}
+        </div>
+
         <label className="muted small">Formato</label>
         {lockFormato ? (
           <div className="resultBox"><strong>{formato}</strong><br /><span className="muted small">Formato travado para este módulo de produção.</span></div>
@@ -217,6 +397,15 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
 
         {formato === 'carrossel' ? (
           <>
+            <label className="muted small">Modelo do carrossel</label>
+            <select className="input" value={modelo} onChange={(e) => setModelo(e.target.value)}>
+              <option value="viral">Narrativo (viral) — hook → rehook → valor → virada → ação → CTA</option>
+              <option value="cientifico">Científico — tweet do estudo + provas + minha prática</option>
+            </select>
+            {modelo === 'cientifico' ? (
+              <p className="muted small" style={{ margin: 0 }}>Dica: cole no tema o achado/estudo (autores, ano, periódico). O motor nunca inventa referência.</p>
+            ) : null}
+
             <label className="muted small">Destino do carrossel</label>
             <select className="input" value={destino} onChange={(e) => setDestino(e.target.value)}>
               <option value="feed">Feed — salvar/compartilhar + autoridade</option>
@@ -243,7 +432,7 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           ))}
         </select>
 
-        {modo === 'single' ? <div style={{ border: '1px solid rgba(186,155,96,.18)', borderRadius: 14, padding: 12, display: 'grid', gap: 10 }}>
+        {modo === 'single' ? <div style={{ border: '1px solid rgba(212,168,60,.18)', borderRadius: 14, padding: 12, display: 'grid', gap: 10 }}>
           <div>
             <span className="badge badgeDark">Hipótese criativa</span>
             <p className="muted small" style={{ margin: '6px 0 0' }}>Campos usados para filtrar performance depois: hook, objeção, visual e CTA.</p>
@@ -254,10 +443,15 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           <select className="input" value={objecaoAlvo} onChange={(e) => setObjecaoAlvo(e.target.value)}>{OBJECOES.map((o) => <option key={o} value={o}>{o}</option>)}</select>
           <label className="muted small">Visual</label>
           <select className="input" value={visualTipo} onChange={(e) => setVisualTipo(e.target.value)}>{VISUAIS.map((v) => <option key={v} value={v}>{v}</option>)}</select>
+          <label className="muted small">Visual Hook</label>
+          <select className="input" value={visualHookMechanic} onChange={(e) => setVisualHookMechanic(e.target.value)}>
+            {VISUAL_HOOKS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+          </select>
+          <p className="muted small" style={{ margin: '-4px 0 0' }}>{VISUAL_HOOKS.find(([value]) => value === visualHookMechanic)?.[2]}</p>
           <label className="muted small">CTA</label>
           <select className="input" value={ctaTipo} onChange={(e) => setCtaTipo(e.target.value)}>{CTAS.map((c) => <option key={c} value={c}>{c}</option>)}</select>
         </div> : (
-          <div style={{ border: '1px solid rgba(186,155,96,.22)', borderRadius: 14, padding: 12, display: 'grid', gap: 10 }}>
+          <div style={{ border: '1px solid rgba(212,168,60,.22)', borderRadius: 14, padding: 12, display: 'grid', gap: 10 }}>
             <div>
               <span className="badge badgeDark">Matriz modular</span>
               <p className="muted small" style={{ margin: '6px 0 0' }}>Use vírgulas para combinar variáveis. Limite inicial: 36 variações por ciclo.</p>
@@ -273,8 +467,10 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
             <input className="input" value={matrixCtas} onChange={(e) => setMatrixCtas(e.target.value)} />
             <label className="muted small">Visuais</label>
             <input className="input" value={matrixVisuais} onChange={(e) => setMatrixVisuais(e.target.value)} />
-            <div className="resultBox" style={{ borderColor: matrixTotal > 36 ? 'rgba(255,90,90,.45)' : 'rgba(186,155,96,.35)' }}>
-              {countCsv(matrixAngulos)} ângulos × {countCsv(matrixHooks)} hooks × {countCsv(matrixObjecoes)} objeções × {countCsv(matrixCtas)} CTAs × {countCsv(matrixVisuais)} visuais = <strong>{matrixTotal}</strong> variações
+            <label className="muted small">Visual Hooks</label>
+            <input className="input" value={matrixVisualHooks} onChange={(e) => setMatrixVisualHooks(e.target.value)} placeholder="text_slide_in,match_cut" />
+            <div className="resultBox" style={{ borderColor: matrixTotal > 36 ? 'rgba(255,90,90,.45)' : 'rgba(212,168,60,.35)' }}>
+              {countCsv(matrixAngulos)} ângulos × {countCsv(matrixHooks)} hooks × {countCsv(matrixObjecoes)} objeções × {countCsv(matrixCtas)} CTAs × {countCsv(matrixVisuais)} visuais × {countCsv(matrixVisualHooks)} visual hooks = <strong>{matrixTotal}</strong> variações
               <p className="muted small" style={{ margin: '6px 0 0' }}>Sem promessa de resultado, prazo, cura ou emagrecimento garantido. Tudo segue para revisão humana.</p>
             </div>
           </div>
@@ -296,10 +492,10 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
           <a className="secondaryLink" href="/banco-criativos">Ver banco completo</a>
         </div>
 
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 14 }}>
+        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(180px,1fr))', gap: 14 }}>
           {recent.map((c) => (
             <a key={c.id} href="/banco-criativos" className="card" style={{ padding: 10, display: 'grid', gap: 10 }}>
-              <div style={{ aspectRatio: is45(c.format) ? '4 / 5' : '9 / 16', background: 'linear-gradient(180deg,#17120d,#0f0b07)', borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(186,155,96,0.12)' }}>
+              <div style={{ aspectRatio: is45(c.format) ? '4 / 5' : '9 / 16', background: 'linear-gradient(180deg,#17120d,#0f0b07)', borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(212,168,60,0.12)' }}>
                 {c.assets[0] ? (
                   <img src={`${api}${c.assets[0]}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : (
@@ -322,6 +518,7 @@ export function FormGerar({ defaultFormato = 'carrossel', lockFormato = false }:
 export function Galeria() {
   const [items, setItems] = useState<Creative[]>([])
   const [filtro, setFiltro] = useState('todos')
+  const [fDestino, setFDestino] = useState('todos')
   const [fAngulo, setFAngulo] = useState('todos')
   const [fHook, setFHook] = useState('todos')
   const [fObjecao, setFObjecao] = useState('todos')
@@ -332,12 +529,23 @@ export function Galeria() {
   const [melhoria, setMelhoria] = useState('')
   const [slideFeedback, setSlideFeedback] = useState<Record<string, string>>({})
   const [regen, setRegen] = useState<string | null>(null)
+  const [approving, setApproving] = useState<string | null>(null)
+  const [publishing, setPublishing] = useState<string | null>(null)
+  const [agendadas, setAgendadas] = useState<Record<string, { quando_bahia: string; status: string; erro?: string | null }>>({})
+  const [quandoAgendar, setQuandoAgendar] = useState('')
   const [statusMsg, setStatusMsg] = useState<string | null>(null)
 
   async function load() {
     const its = await listar()
     setItems(its)
     setSel((cur) => (cur ? its.find((x) => x.id === cur.id) || cur : cur))
+    try {
+      const r = await fetch(`${api}/publishing/instagram/agendadas?tenant_slug=demo`)
+      const d = await r.json()
+      const m: Record<string, { quando_bahia: string; status: string; erro?: string | null }> = {}
+      for (const it of d.items || []) if (it.status === 'agendada' || it.status === 'erro') m[it.creative_id] = it
+      setAgendadas(m)
+    } catch { /* agenda indisponível não derruba a galeria */ }
   }
 
   useEffect(() => {
@@ -346,11 +554,104 @@ export function Galeria() {
     return () => clearInterval(t)
   }, [])
 
+  const [operandoSlide, setOperandoSlide] = useState(false)
+  async function operarSlide(id: string, acao: string, slideNum: number, para?: number) {
+    if (operandoSlide) return
+    if (acao === 'remover' && !window.confirm(`Remover o slide ${slideNum}? (fica guardado no servidor — dá para recuperar se mudar de ideia)`)) return
+    setOperandoSlide(true)
+    try {
+      const qs = new URLSearchParams({ acao, slide: String(slideNum) })
+      if (para) qs.set('para', String(para))
+      const r = await fetch(`${api}/generation/creatives/${id}/slides/operar?${qs.toString()}`, { method: 'POST' })
+      const d = await r.json().catch(() => ({}))
+      if (!r.ok) throw new Error(d.detail || 'Falha na operação')
+      await load()
+      if (acao === 'tornar_capa') setIdx(0)
+      else if (acao === 'remover') setIdx((cur) => Math.max(0, Math.min(cur, (d.slides || 1) - 1)))
+      else if (acao === 'mover' && para) setIdx(para - 1)
+      setStatusMsg('Slides atualizados.')
+    } catch (e) {
+      setStatusMsg(`Não consegui mexer nos slides: ${e instanceof Error ? e.message : e}`)
+    }
+    setOperandoSlide(false)
+  }
+
   async function aprovar(id: string) {
-    const r = await fetch(`${api}/generation/creatives/${id}/approve`, { method: 'POST' })
-    const d = await r.json().catch(() => ({}))
-    setStatusMsg(d.calendar_entry ? 'Peça aprovada e enviada ao Calendário Editorial.' : 'Peça aprovada.')
-    load()
+    setApproving(id)
+    setStatusMsg(null)
+    try {
+      const r = await fetch(`${api}/generation/creatives/${id}/approve`, { method: 'POST' })
+      const d = await r.json().catch(() => ({}))
+      if (!r.ok) throw new Error(d.detail || 'Falha ao aprovar')
+
+      setItems((cur) => cur.map((x) => (x.id === id ? { ...x, status: 'aprovado', feedback: null } : x)))
+      setSlideFeedback((cur) => Object.fromEntries(Object.entries(cur).filter(([k]) => !k.startsWith(`${id}:`))))
+      setMelhoria('')
+      setSel(null)
+      setStatusMsg(d.calendar_entry ? 'Aprovação confirmada. Peça aprovada e enviada ao Calendário Editorial.' : 'Aprovação confirmada. Peça aprovada.')
+      await load()
+    } catch (err) {
+      setStatusMsg(err instanceof Error ? `Não consegui aprovar: ${err.message}` : 'Não consegui aprovar esta peça.')
+    } finally {
+      setApproving(null)
+    }
+  }
+
+  async function agendarPublicacao(id: string) {
+    if (!quandoAgendar) { setStatusMsg('Escolha data e hora (horário da Bahia) antes de agendar.'); return }
+    try {
+      const r = await fetch(`${api}/publishing/instagram/agendar`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tenant_slug: 'demo', creative_id: id, quando: quandoAgendar }),
+      })
+      const d = await r.json().catch(() => ({}))
+      if (!r.ok) throw new Error(d.detail || 'Falha ao agendar')
+      setStatusMsg(`⏰ Agendada para ${d.agendado_para_bahia} (Bahia). O robô publica e avisa no Telegram.`)
+      await load()
+    } catch (e) { setStatusMsg(`Não consegui agendar: ${e instanceof Error ? e.message : e}`) }
+  }
+
+  async function cancelarAgendamento(id: string) {
+    try {
+      await fetch(`${api}/publishing/instagram/agendar/cancelar`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tenant_slug: 'demo', creative_id: id }),
+      })
+      setStatusMsg('Agendamento cancelado.')
+      await load()
+    } catch { setStatusMsg('Não consegui cancelar agora.') }
+  }
+
+  async function publicar(id: string) {
+    setPublishing(id)
+    setStatusMsg(null)
+    try {
+      const H = { 'Content-Type': 'application/json' }
+      const pv = await fetch(`${api}/publishing/instagram/preview`, {
+        method: 'POST', headers: H, body: JSON.stringify({ tenant_slug: 'demo', creative_id: id }),
+      })
+      const p = await pv.json().catch(() => ({}))
+      if (!pv.ok) throw new Error(p.detail || 'Falha ao preparar a publicação')
+      if (p.ja_publicado) throw new Error(`Já publicado em ${p.ja_publicado.permalink || 'link indisponível'}`)
+      const ok = window.confirm(
+        `Publicar AGORA no Instagram da Dra?\n\n` +
+        `Formato: ${p.format} · ${p.slides} slide(s)\n\n` +
+        `Legenda:\n${(p.caption || '').slice(0, 400)}${(p.caption || '').length > 400 ? '…' : ''}\n\n` +
+        `Esta ação é pública e imediata.`)
+      if (!ok) { setStatusMsg('Publicação cancelada.'); return }
+      const r = await fetch(`${api}/publishing/instagram/publish`, {
+        method: 'POST', headers: H,
+        body: JSON.stringify({ tenant_slug: 'demo', creative_id: id, confirm: true }),
+      })
+      const d = await r.json().catch(() => ({}))
+      if (!r.ok) throw new Error(d.detail || 'Falha ao publicar')
+      setStatusMsg(`Publicado no Instagram ✓ ${d.permalink || ''}`)
+      await load()
+    } catch (err) {
+      setStatusMsg(err instanceof Error ? `Publicação: ${err.message}` : 'Não consegui publicar.')
+    } finally {
+      setPublishing(null)
+    }
   }
 
   function feedbackKey(id: string, slideIndex: number) {
@@ -388,6 +689,21 @@ export function Galeria() {
     load()
   }
 
+  async function apagar(id: string) {
+    if (!confirm('Apagar este criativo? Esta acao nao pode ser desfeita.')) return
+    setStatusMsg(null)
+    try {
+      const r = await fetch(`${api}/generation/creatives/${id}`, { method: 'DELETE' })
+      const d = await r.json().catch(() => ({}))
+      if (!r.ok) throw new Error(d.detail || 'Falha ao apagar')
+      setItems((cur) => cur.filter((x) => x.id !== id))
+      setSel((sx) => (sx && sx.id === id ? null : sx))
+      setStatusMsg('Criativo apagado.')
+    } catch (err) {
+      setStatusMsg(err instanceof Error ? `Nao consegui apagar: ${err.message}` : 'Nao consegui apagar.')
+    }
+  }
+
   function baixarTodos(c: Creative) {
     c.assets.forEach((a, i) => {
       const l = document.createElement('a')
@@ -402,6 +718,7 @@ export function Galeria() {
   const unique = (key: keyof Creative) => Array.from(new Set(items.map((x) => x[key]).filter(Boolean) as string[])).sort()
   const vis = items.filter((c) => {
     if (!(filtro === 'todos' || (filtro === 'aprovados' ? c.status === 'aprovado' : c.format === filtro))) return false
+    if (fDestino !== 'todos' && (c.destino || 'feed') !== fDestino) return false
     if (fAngulo !== 'todos' && c.angulo_ivs !== fAngulo) return false
     if (fHook !== 'todos' && c.hook_tipo !== fHook) return false
     if (fObjecao !== 'todos' && c.objecao_alvo !== fObjecao) return false
@@ -421,6 +738,14 @@ export function Galeria() {
           <span className="muted small">{vis.length} peças · atualização automática</span>
         </div>
 
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+          {[['todos', 'Tudo'], ['feed', '🌱 Orgânico'], ['meta_ads', '📣 Meta Ads']].map(([v, r]) => (
+            <button key={v} className={v === fDestino ? 'primaryButton' : 'secondaryLink'} style={{ minHeight: 38, padding: '0 14px' }} onClick={() => setFDestino(v)}>
+              {r}
+            </button>
+          ))}
+          <span className="muted small">🌱 vai para o feed/perfil · 📣 vira anúncio nas Campanhas Meta</span>
+        </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {['todos', 'aprovados', 'carrossel', 'reels', 'stories', 'estatico'].map((f) => (
             <button key={f} className={f === filtro ? 'primaryButton' : 'secondaryLink'} style={{ minHeight: 38, padding: '0 14px' }} onClick={() => setFiltro(f)}>
@@ -435,7 +760,7 @@ export function Galeria() {
             <span className="badge badgeDark">Filtros de hipótese</span>
             <button className="secondaryLink" onClick={() => { setFAngulo('todos'); setFHook('todos'); setFObjecao('todos'); setFVisual('todos'); setFCta('todos') }}>Limpar variáveis</button>
           </div>
-          <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 8 }}>
+          <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(160px,1fr))', gap: 8 }}>
             <select className="input" value={fAngulo} onChange={(e) => setFAngulo(e.target.value)}><option value="todos">Todos ângulos</option>{unique('angulo_ivs').map((v) => <option key={v} value={v}>{v}</option>)}</select>
             <select className="input" value={fHook} onChange={(e) => setFHook(e.target.value)}><option value="todos">Todos hooks</option>{unique('hook_tipo').map((v) => <option key={v} value={v}>{v}</option>)}</select>
             <select className="input" value={fObjecao} onChange={(e) => setFObjecao(e.target.value)}><option value="todos">Todas objeções</option>{unique('objecao_alvo').map((v) => <option key={v} value={v}>{v}</option>)}</select>
@@ -446,7 +771,7 @@ export function Galeria() {
 
         {vis.length === 0 ? <div className="empty">Nenhuma peça aqui ainda. Gere em “Criação de criativos”.</div> : null}
 
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(230px,1fr))', gap: 18 }}>
+        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(230px,1fr))', gap: 18 }}>
           {vis.map((c) => (
             <article key={c.id} className="card" style={{ padding: 12, display: 'grid', gap: 12 }}>
               <div
@@ -462,7 +787,7 @@ export function Galeria() {
                   background: 'linear-gradient(180deg,#17120d,#0f0b07)',
                   borderRadius: 16,
                   overflow: 'hidden',
-                  border: '1px solid rgba(186,155,96,0.12)',
+                  border: '1px solid rgba(212,168,60,0.12)',
                 }}
               >
                 {c.format === 'reels' && c.reel_url ? (
@@ -479,7 +804,9 @@ export function Galeria() {
 
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 <span className="badge">{c.format}</span>
-                {c.destino === 'meta_ads' ? <span className="badge badgeDark">Meta Ads</span> : null}
+                {c.destino === 'meta_ads'
+                  ? <span className="badge badgeDark">📣 Meta Ads</span>
+                  : <span className="badge badgeDark">🌱 Orgânico</span>}
                 {c.angulo_nome ? <span className="badge badgeDark">{c.angulo_nome}</span> : null}
                 {c.objecao_alvo ? <span className="badge badgeDark">Obj: {c.objecao_alvo}</span> : null}
                 {c.hook_tipo ? <span className="badge badgeDark">Hook: {c.hook_tipo}</span> : null}
@@ -493,9 +820,17 @@ export function Galeria() {
                 <p className="muted small" style={{ margin: 0 }}>{STATUS_LABEL[c.status] || c.status}</p>
               </div>
 
-              <button className="primaryButton" style={{ width: '100%' }} onClick={() => { setSel(c); setIdx(0) }} disabled={c.assets.length === 0}>
-                Revisar e aprovar
-              </button>
+              <div style={{ display: 'grid', gridTemplateColumns: ['aprovado', 'publicado'].includes(c.status) ? '1fr' : '1fr 1fr', gap: 8 }}>
+                <button className="secondaryLink" style={{ width: '100%' }} onClick={() => { setSel(c); setIdx(0) }} disabled={c.assets.length === 0}>
+                  Prévia
+                </button>
+                {!['aprovado', 'publicado'].includes(c.status) ? (
+                  <button className="primaryButton" style={{ width: '100%' }} onClick={() => aprovar(c.id)} disabled={c.assets.length === 0 || approving === c.id}>
+                    {approving === c.id ? 'Aprovando…' : 'Aprovar'}
+                  </button>
+                ) : null}
+              </div>
+              <button className="secondaryLink" style={{ width: '100%', minHeight: 32, fontSize: '0.72rem', borderColor: 'rgba(255,141,135,.4)', color: 'var(--danger)' }} onClick={() => apagar(c.id)}>Apagar</button>
             </article>
           ))}
         </div>
@@ -505,8 +840,10 @@ export function Galeria() {
         <div onClick={() => setSel(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(5,3,2,.88)', backdropFilter: 'blur(10px)', zIndex: 50, display: 'grid', placeItems: 'center', padding: 24 }}>
           <div onClick={(e) => e.stopPropagation()} className="card" style={{ maxWidth: 1120, width: '100%', maxHeight: '92vh', overflow: 'auto', display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 360px', gap: 22 }}>
             <div>
-              <div style={{ aspectRatio: is45(sel.format) ? '4 / 5' : '9 / 16', background: 'linear-gradient(180deg,#17120d,#0f0b07)', borderRadius: 18, overflow: 'hidden', display: 'grid', placeItems: 'center', maxHeight: '72vh', border: '1px solid rgba(186,155,96,0.12)' }}>
-                {sel.assets[idx] ? <img src={`${api}${sel.assets[idx]}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} /> : <span className="muted">renderizando…</span>}
+              <div style={{ aspectRatio: is45(sel.format) ? '4 / 5' : '9 / 16', background: 'linear-gradient(180deg,#17120d,#0f0b07)', borderRadius: 18, overflow: 'hidden', display: 'grid', placeItems: 'center', maxHeight: '72vh', border: '1px solid rgba(212,168,60,0.12)' }}>
+                {sel.format === 'reels' && sel.reel_url ? (
+                  <video src={`${api}${sel.reel_url}`} controls autoPlay playsInline poster={sel.assets[0] ? `${api}${sel.assets[0]}` : undefined} style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#000' }} />
+                ) : sel.assets[idx] ? <img src={`${api}${sel.assets[idx]}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} /> : <span className="muted">renderizando…</span>}
               </div>
               {sel.assets.length > 1 ? (
                 <div style={{ display: 'flex', gap: 8, marginTop: 12, overflowX: 'auto', paddingBottom: 4 }}>
@@ -515,19 +852,48 @@ export function Galeria() {
                       key={a}
                       src={`${api}${a}`}
                       onClick={() => setIdx(i)}
-                      style={{ width: 62, height: 78, objectFit: 'cover', borderRadius: 10, cursor: 'pointer', flexShrink: 0, border: i === idx ? '2px solid #b6945b' : '2px solid rgba(255,255,255,0.06)' }}
+                      style={{ width: 62, height: 78, objectFit: 'cover', borderRadius: 10, cursor: 'pointer', flexShrink: 0, border: i === idx ? '2px solid #D4A83C' : '2px solid rgba(255,255,255,0.06)' }}
                     />
                   ))}
                 </div>
               ) : null}
+              {sel.assets.length > 0 && sel.format !== 'reels' ? (
+                <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+                  <span className="muted small">🎛 Slide {idx + 1}:</span>
+                  <button className="secondaryLink" disabled={operandoSlide || idx === 0}
+                    title="este slide vira a capa"
+                    onClick={() => operarSlide(sel.id, 'tornar_capa', idx + 1)}>⭐ Tornar capa</button>
+                  <button className="secondaryLink" disabled={operandoSlide || idx === 0}
+                    title="trocar com o slide anterior"
+                    onClick={() => operarSlide(sel.id, 'mover', idx + 1, idx)}>⬅ Mover</button>
+                  <button className="secondaryLink" disabled={operandoSlide || idx >= sel.assets.length - 1}
+                    title="trocar com o próximo slide"
+                    onClick={() => operarSlide(sel.id, 'mover', idx + 1, idx + 2)}>Mover ➡</button>
+                  <button className="secondaryLink" disabled={operandoSlide || sel.assets.length <= 1}
+                    title="tira da galeria (recuperável no servidor)"
+                    style={{ color: 'var(--state-bad)' }}
+                    onClick={() => operarSlide(sel.id, 'remover', idx + 1)}>🗑 Remover</button>
+                  {operandoSlide ? <span className="muted small">aplicando…</span> : null}
+                </div>
+              ) : null}
               {sel.format === 'reels' ? <StoryboardPanel cid={sel.id} /> : null}
+              {sel.format === 'stories' ? <DraRecordingKit cid={sel.id} /> : null}
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
                 <span className="badge badgeDark">{sel.format}{sel.destino === 'meta_ads' ? ' · Meta Ads' : ''}</span>
-                <button className="secondaryLink" onClick={() => setSel(null)}>Fechar</button>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                  {!['aprovado', 'publicado'].includes(sel.status) && sel.assets.length > 0 ? <button className="primaryButton" style={{ padding: '8px 12px' }} onClick={() => aprovar(sel.id)} disabled={approving === sel.id}>{approving === sel.id ? 'Aprovando…' : 'Aprovar'}</button> : null}
+                  <button className="secondaryLink" onClick={() => setSel(null)}>Fechar</button>
+                </div>
               </div>
+              {statusMsg ? (
+                <p className="small" style={{ margin: 0, padding: '10px 12px', borderRadius: 10,
+                  background: 'rgba(201,162,39,.10)', border: '1px solid rgba(201,162,39,.35)' }}>
+                  {statusMsg}
+                </p>
+              ) : null}
               <div style={{ display: 'grid', gap: 8 }}>
                 <strong style={{ fontSize: '1.05rem', lineHeight: 1.4 }}>{(sel.title || '').replace(/\*/g, '')}</strong>
                 <p className="muted small" style={{ margin: 0 }}>Slide {idx + 1} de {Math.max(sel.assets.length, 1)}</p>
@@ -544,19 +910,49 @@ export function Galeria() {
               {sel.caption ? <div className="resultBox">{sel.caption}</div> : null}
               {sel.hashtags && sel.hashtags.length ? <p className="muted small" style={{ margin: 0 }}>{sel.hashtags.join(' ')}</p> : null}
               {sel.feedback ? (
-                <div className="resultBox" style={{ borderColor: 'rgba(186,155,96,.4)' }}>
+                <div className="resultBox" style={{ borderColor: 'rgba(212,168,60,.4)' }}>
                   <strong className="muted small">Melhorias solicitadas</strong>
                   <p className="small" style={{ margin: '4px 0 0', whiteSpace: 'pre-wrap' }}>{sel.feedback}</p>
                   <button className="primaryButton" style={{ marginTop: 8, padding: '6px 12px', fontSize: 13 }} onClick={() => regerar(sel.id)} disabled={regen === sel.id}>{regen === sel.id ? 'Regerando…' : 'Regerar com base na melhoria'}</button>
                 </div>
               ) : null}
               <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {sel.status === 'aprovado' ? (
-                  <span className="badge">Aprovado ✓</span>
+                {sel.status === 'publicado' ? (
+                  <span className="badge">Publicado no Instagram ✓</span>
+                ) : sel.status === 'aprovado' ? (
+                  <>
+                    <span className="badge">Aprovado ✓</span>
+                    {['carrossel', 'estatico'].includes(sel.format) && sel.assets.length > 0 ? (
+                      <>
+                      <button className="primaryButton" onClick={() => publicar(sel.id)} disabled={publishing === sel.id}>
+                        {publishing === sel.id ? 'Publicando…' : 'Publicar no Instagram'}
+                      </button>
+                      {agendadas[sel.id]?.status === 'agendada' ? (
+                        <span style={{ display: 'inline-flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                          <span className="badge">⏰ agendada p/ {agendadas[sel.id].quando_bahia} (Bahia)</span>
+                          <button className="secondaryLink" onClick={() => cancelarAgendamento(sel.id)}>cancelar</button>
+                        </span>
+                      ) : (
+                        <span style={{ display: 'inline-flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
+                          {agendadas[sel.id]?.status === 'erro' ? (
+                            <span className="badge" style={{ borderColor: 'var(--state-bad)' }}
+                              title={agendadas[sel.id]?.erro || ''}>⚠️ último agendamento falhou</span>
+                          ) : null}
+                          <input type="datetime-local" className="input" value={quandoAgendar}
+                            onChange={(e) => setQuandoAgendar(e.target.value)}
+                            style={{ padding: '8px 10px', maxWidth: 220 }} />
+                          <button className="secondaryLink" onClick={() => agendarPublicacao(sel.id)}
+                            title="publica sozinho no horário marcado (fuso da Bahia)">📅 Agendar</button>
+                        </span>
+                      )}
+                      </>
+                    ) : null}
+                  </>
                 ) : sel.assets.length > 0 ? (
-                  <button className="primaryButton" onClick={() => aprovar(sel.id)}>Aprovar peça</button>
+                  <button className="primaryButton" onClick={() => aprovar(sel.id)} disabled={approving === sel.id}>{approving === sel.id ? 'Aprovando…' : 'Aprovar peça'}</button>
                 ) : null}
                 {sel.assets.length > 0 ? <button className="secondaryLink" onClick={() => baixarTodos(sel)}>Baixar {sel.assets.length > 1 ? `todos (${sel.assets.length})` : 'imagem'}</button> : null}
+                <button className="secondaryLink" style={{ borderColor: 'rgba(255,141,135,.4)', color: 'var(--danger)' }} onClick={() => apagar(sel.id)}>Apagar criativo</button>
                 <div style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: 10, display: 'grid', gap: 8 }}>
                   <label className="muted small">Correção do slide {idx + 1}</label>
                   <textarea

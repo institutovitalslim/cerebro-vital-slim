@@ -8,6 +8,12 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from pydantic import BaseModel, Field
 
 from app.db import get_conn
+from app.radar_provenance import (
+    RadarProvenanceMixin,
+    radar_provenance,
+    validate_radar_tenant_chain,
+)
+from app.routers.stories_broll import match_broll
 
 router = APIRouter(prefix="/stories", tags=["stories"])
 
@@ -121,7 +127,7 @@ def _html_escape(value: Any) -> str:
     )
 
 
-class StorySequenceCreate(BaseModel):
+class StorySequenceCreate(RadarProvenanceMixin):
     tenant_slug: str = Field(default="demo")
     title: str
     sequence_type: str
@@ -132,6 +138,10 @@ class StorySequenceCreate(BaseModel):
     story_count: int = Field(default=10, ge=1, le=30)
     payload: dict[str, Any] = Field(default_factory=dict)
     status: str = Field(default="draft")
+    source: str | None = None
+    thesis: str | None = Field(default=None, max_length=20000)
+    hook: str | None = Field(default=None, max_length=5000)
+    source_objective: str | None = Field(default=None, max_length=200)
 
 
 class StoryReviewUpdate(BaseModel):
@@ -247,6 +257,7 @@ def list_sequences(tenant_slug: str = "demo", limit: int = 20) -> dict:
                   s.support_asset,
                   s.story_count,
                   s.payload,
+                  s.radar_provenance,
                   s.status,
                   s.review_notes,
                   s.reviewed_by,
@@ -273,14 +284,26 @@ def create_sequence(payload: StorySequenceCreate) -> dict:
     title = payload.title.strip()
     if not title:
         raise HTTPException(400, "title obrigatório")
+    provenance = radar_provenance(payload)
+    stored_payload = dict(payload.payload)
+    stored_payload["source_context"] = {
+        "source": payload.source,
+        "thesis": payload.thesis,
+        "hook": payload.hook,
+        "objective": payload.source_objective or payload.objective,
+        "effective_objective": payload.objective,
+    }
+    stored_payload["provenance"] = provenance
     with get_conn() as conn:
         tenant_id = _tenant_id(conn, payload.tenant_slug)
+        validate_radar_tenant_chain(conn, tenant_id, provenance)
         with conn.cursor() as cur:
             cur.execute(
                 """
                 insert into story_sequences
-                  (tenant_id, title, sequence_type, objective, main_objection, patient_moment, support_asset, story_count, payload, status)
-                values (%s, %s, %s, %s, %s, %s, %s, %s, %s::jsonb, %s)
+                  (tenant_id, title, sequence_type, objective, main_objection, patient_moment,
+                   support_asset, story_count, payload, status, radar_provenance)
+                values (%s, %s, %s, %s, %s, %s, %s, %s, %s::jsonb, %s, %s::jsonb)
                 returning id::text as id, created_at
                 """,
                 (
@@ -292,13 +315,18 @@ def create_sequence(payload: StorySequenceCreate) -> dict:
                     payload.patient_moment,
                     payload.support_asset,
                     payload.story_count,
-                    json.dumps(payload.payload, ensure_ascii=False),
+                    json.dumps(stored_payload, ensure_ascii=False),
                     payload.status,
+                    json.dumps(provenance, ensure_ascii=False),
                 ),
             )
             row = cur.fetchone()
-            items_count = _insert_story_items(cur, tenant_id, row["id"], payload.payload)
-    return {"status": "created", "id": row["id"], "title": title, "created_at": row["created_at"], "story_items": items_count}
+            items_count = _insert_story_items(cur, tenant_id, row["id"], stored_payload)
+    return {
+        "status": "created", "id": row["id"], "title": title,
+        "created_at": row["created_at"], "story_items": items_count,
+        "provenance": provenance,
+    }
 
 
 @router.post("/sequences/{sequence_id}/review")
@@ -544,6 +572,7 @@ def get_sequence_handoff(sequence_id: str, tenant_slug: str = "demo") -> dict:
         "whatsapp_url": whatsapp_url,
         "tracking_url": tracking_url,
         "expected_objections": expected_objections,
+        "broll_biblioteca": match_broll(f"{row['title']} {row.get('main_objection') or ''}", limit=6),
         "clara_script": _clara_script(row["title"], keyword, row["main_objection"]),
         "governance": {
             "send_to_patient": False,
