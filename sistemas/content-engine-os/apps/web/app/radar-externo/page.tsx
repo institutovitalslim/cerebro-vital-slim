@@ -103,6 +103,19 @@ const signalLabels: Record<SignalState, string> = {
   breakout: 'Breakout',
 }
 
+const reasonLabels: Record<string, string> = {
+  source_not_active: 'fonte inativa para este corte',
+  source_not_eligible: 'fonte ainda não elegível para ideação',
+  unknown_observation_window: 'janela de observação ainda não identificada',
+  insufficient_sample: 'amostra comparável ainda insuficiente',
+  zero_baseline: 'mediana comparável igual a zero',
+}
+
+function reasonLabel(reason?: string | null): string | null {
+  if (!reason) return null
+  return reasonLabels[reason] || 'evidência ainda insuficiente para promoção'
+}
+
 const metricLabels: Record<string, string> = {
   views: 'visualizações',
   plays: 'reproduções',
@@ -412,12 +425,15 @@ function SourceGovernance({ sources, result = '' }: { sources: RadarSource[]; re
         <div className="radarSourceGrid">
           {sources.map((source) => {
             const name = source.display_name || source.canonical_key
+            const excluded = source.source_kind === 'excluded'
+            const activityLabel = excluded ? 'Excluída' : source.active ? 'Ativa' : 'Inativa'
+            const activityTone = source.active && !excluded ? 'isActive' : 'isInactive'
             const allowedTargets = SOURCE_KINDS.filter((kind) => kind !== source.source_kind && !(source.source_kind === 'thematic_search' && (kind === 'approved' || kind === 'own_account')))
             return (
               <article className={`radarSourceCard source-${source.source_kind} ${source.active ? '' : 'isInactive'}`} key={source.id}>
                 <div className="radarCardTop">
                   <strong>{name}</strong>
-                  <span className={`radarActivity ${source.active ? 'isActive' : 'isInactive'}`}>{source.active ? 'Ativa' : 'Inativa'}</span>
+                  <span className={`radarActivity ${activityTone}`}>{activityLabel}</span>
                 </div>
                 <div className="radarPillRow">
                   <span className="stateChip">{sourceLabels[source.source_kind]}</span>
@@ -603,7 +619,7 @@ export default async function RadarExternoPage({
                   <div><p className="eyebrow">{item.source_network}</p><h4>{profileName}</h4>{item.source_kind === 'thematic_search' && !item.actual_source_profile ? <small className="radarUnknown">Perfil real não identificado pelo coletor</small> : null}</div>
                   <p className="radarCaption">{item.caption_excerpt || 'Legenda não observada pelo coletor.'}</p>
                   <dl className="radarEvidenceDefinition"><div><dt>Base métrica</dt><dd>{item.metric_basis ? metricLabels[item.metric_basis] || item.metric_basis : 'não disponível'}</dd></div><div><dt>Valor observado</dt><dd>{formatNumber(item.metric_value)}</dd></div><div><dt>Mediana comparável</dt><dd>{formatNumber(item.median_value)}</dd></div><div><dt>Desempenho relativo</dt><dd>{item.performance_ratio == null ? 'não calculado' : `${formatNumber(item.performance_ratio)}×`}</dd></div><div><dt>Amostra</dt><dd>{item.sample_count == null ? 'não calculada' : `${formatNumber(item.sample_count)} posts`}</dd></div><div><dt>Maturidade</dt><dd>{item.maturity === 'target' ? 'completa' : item.maturity === 'provisional' ? 'provisória' : 'insuficiente'}</dd></div></dl>
-                  {item.reason ? <p className="radarReason"><strong>Por que não sobe:</strong> {item.reason}</p> : null}
+                  {item.reason ? <p className="radarReason"><strong>Por que não sobe:</strong> {reasonLabel(item.reason)}</p> : null}
                   <details className="radarDetails"><summary>Ver base de comparação</summary>{comparisons.length === 0 ? <p>Não há posts comparáveis registrados para este corte.</p> : <ul>{comparisons.map((post) => <li key={post.content_item_id}>{post.url ? <a href={post.url} target="_blank" rel="noreferrer" aria-label={`Abrir post comparável ${post.external_id} em nova aba`}>#{post.external_id}</a> : <span>#{post.external_id}</span>}<strong>{formatNumber(post.metric_value)}</strong></li>)}</ul>}</details>
                   <div className="radarHypothesis"><span>Hipótese editorial — não validação</span><p>{reverse.why_it_may_have_worked || 'Ainda sem hipótese de mecanismo registrada.'}</p>{reverse.adaptation_to_instituto_vital_slim ? <p><strong>Adaptação:</strong> {reverse.adaptation_to_instituto_vital_slim}</p> : null}</div>
                   <div className="radarCardActions">{item.eligible_for_ideation ? <Link className="primaryButton" href={buildStudioHref(item, data.version)} aria-label={`Usar ${profileName} como hipótese no Estúdio`}>Usar como hipótese</Link> : <span className="radarDisabledAction">{item.source_kind === 'candidate' ? 'Aguarda aprovação da fonte' : 'Aguarda evidência suficiente'}</span>}{item.url ? <a className="secondaryLink" href={item.url} target="_blank" rel="noreferrer" aria-label={`Abrir referência de ${profileName} em nova aba`}>Abrir referência</a> : null}</div>
