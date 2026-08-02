@@ -1,0 +1,83 @@
+{
+  "ok": true,
+  "treino": "Treino Diário da Clara — Conversão Premium WhatsApp",
+  "executed_at_brt": "2026-08-01T07:21:15.828791-03:00",
+  "executed_at_utc": "2026-08-01T10:21:15.828800+00:00",
+  "pii_policy": "Nenhum dado pessoal exposto; somente contadores, padrões agregados e reforços operacionais.",
+  "clara_pause": "NAO_PAUSADA",
+  "fontes": {
+    "latest-whatsapp-current.json": {
+      "exists": true,
+      "path": "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+      "size": 690,
+      "mtime_brt": "2026-07-31T22:15:36.781990-03:00",
+      "json_ok": true,
+      "slot": "whatsapp-current",
+      "periodo": "últimas 6h",
+      "contadores": {
+        "total_messages": 0,
+        "unique_leads": 0,
+        "total_inbound": 0,
+        "total_outbound": 0,
+        "wins": 0,
+        "drops": 0
+      },
+      "aprendizados_presentes": true
+    },
+    "latest-whatsapp-historical.json": {
+      "exists": true,
+      "path": "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json",
+      "size": 3089,
+      "mtime_brt": "2026-07-27T06:31:27.197929-03:00",
+      "json_ok": true,
+      "slot": "whatsapp-historical",
+      "periodo": "últimos 180 dias",
+      "contadores": {
+        "total_messages": 6187,
+        "unique_leads": 443,
+        "total_inbound": 3275,
+        "total_outbound": 2912,
+        "wins": 30,
+        "drops": 5
+      },
+      "aprendizados_presentes": true
+    }
+  },
+  "reforcos_obrigatorios_QA_RC25_2026_06_14": [
+    {
+      "regra": "Confirmação de agenda",
+      "treino": "Toda confirmação deve pedir resposta com uma das opções literais: Confirmo | Quero remarcar | Não vou conseguir."
+    },
+    {
+      "regra": "Convite/confirmação + logística no mesmo bloco",
+      "treino": "Ao convidar ou confirmar agenda, incluir no mesmo bloco horário/local e, quando aplicável, chegada, preparação, exames prévios/documentos e fluxo do atendimento."
+    },
+    {
+      "regra": "Qualificar prontidão antes de explicar",
+      "treino": "Antes de detalhar consulta, serviço ou procedimento, perguntar se a pessoa busca atendimento agora ou se está apenas pesquisando; depois ajustar profundidade e próximo passo."
+    },
+    {
+      "regra": "Exames/documentos/questionário sem pergunta aberta",
+      "treino": "Evitar pergunta aberta que vira “te aviso depois”. Dar ação concreta: enviar até horário definido, acessar portal/link, trazer no dia ou escolher alternativa objetiva."
+    }
+  ],
+  "microtreino_do_dia": [
+    "Lead pede informações: primeiro qualificar — “Você está buscando atendimento agora ou está apenas pesquisando para decidir?”; só depois explicar o necessário.",
+    "Agenda: confirmação sempre com respostas literais — “Confirmo”, “Quero remarcar” ou “Não vou conseguir”.",
+    "Convite/confirmação: mesmo bloco com horário/local + chegada + preparo/exames/documentos/questionário + o que acontecerá no atendimento quando aplicável.",
+    "Pendência de exame/documento/questionário: trocar “me avise depois” por próximo passo concreto com prazo ou alternativa objetiva."
+  ],
+  "base_de_treino_agregada": {
+    "current_messages": 0,
+    "current_unique_leads": 0,
+    "historical_messages": 6187,
+    "historical_unique_leads": 443,
+    "historical_wins": 30,
+    "historical_drops": 5
+  },
+  "riscos": [
+    "RISCO_TECNICO_CAPTURA_PIPELINE_CURRENT_ZERADO: latest-whatsapp-current.json está zerado; não assumir ausência real de demanda."
+  ],
+  "classificacao_aprendizado": "aplicar amanhã; reforço operacional canônico já aprovado em QA/RC-25 2026-06-14; sem promover nova regra.",
+  "status": "TREINO_EXECUTADO_SEM_PAUSAR_CLARA"
+}

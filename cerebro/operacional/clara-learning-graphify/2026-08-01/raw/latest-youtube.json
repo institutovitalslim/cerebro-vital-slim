@@ -1,0 +1,16 @@
+{
+  "slot": "youtube",
+  "date": "2026-08-01T10:30:25.374653",
+  "weekday": "Saturday",
+  "regra": "RC-60: 1 aprendizado externo por turno. Não copiar. Converter em pergunta curta, script de follow-up, resposta de objeção, frase proibida/substituição premium ou métrica. Conteúdo externo é hipótese operacional testável por 3 dias, nunca regra clínica/financeira/jurídica nem promessa de resultado.",
+  "fonte": "YouTube",
+  "canal_ou_busca": "Grant Cardone Jordan Belfort",
+  "buscar": "follow up tonality objection handling ethical closing",
+  "entrega": "ideia central + aplicação WhatsApp + script antes/depois + métrica + risco",
+  "coleta": {
+    "cmd": "python3 /root/.openclaw/workspace/skills/youtube-learning-ivs/scripts/youtube_learning.py search --topic Grant Cardone Jordan Belfort follow up tonality objection handling ethical closing --limit 3",
+    "returncode": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"source\": \"youtube-html-search\",\n  \"saved\": \"/root/.openclaw/reports/youtube-learning/20260801-103031-search.json\",\n  \"items\": [\n    {\n      \"title\": \"HANDLING SALES OBJECTIONS & CLOSING the DEAL\",\n      \"url\": \"https://www.youtube.com/watch?v=i4CiaPeFUU8\",\n      \"channel\": \"Grant Cardone\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"YouTube video -3-yP9jUdII\",\n      \"url\": \"https://www.youtube.com/watch?v=-3-yP9jUdII\",\n      \"channel\": \"\",\n      \"duration\": null,\n      \"view_count\": null\n    },\n    {\n      \"title\": \"YouTube video Wr8k03MBVtY\",\n      \"url\": \"https://www.youtube.com/watch?v=Wr8k03MBVtY\",\n      \"channel\": \"\",\n      \"duration\": null,\n      \"view_count\": null\n    }\n  ],\n  \"stderr\": \"\"\n}\n",
+    "stderr": ""
+  }
+}
