@@ -1,0 +1,346 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-08-02T13:08:20.054095+00:00",
+  "safety": {
+    "synthetic_pgvector_corpus": true,
+    "gbrain_mode": "read_only_search",
+    "runtime_paths_persisted": false,
+    "pii_persisted": false,
+    "production_modified": false,
+    "dsn_validated_ephemeral_loopback": true
+  },
+  "comparability_note": "Os corpora não são equivalentes: métricas de latência não autorizam comparação direta nem substituição arquitetural.",
+  "gate_thresholds": {
+    "pgvector_recall_at_3_min": 0.9,
+    "pgvector_mrr_min": 0.8,
+    "pgvector_p95_ms_max": 250,
+    "gbrain_pass_rate_min": 0.9,
+    "gbrain_expected_path_max_rank": 3
+  },
+  "gates": [
+    {
+      "name": "gbrain_pass_rate",
+      "observed": 0.5,
+      "comparator": ">=",
+      "threshold": 0.9,
+      "scope": "operational_baseline",
+      "passed": false
+    },
+    {
+      "name": "pgvector_recall_at_3",
+      "observed": 1.0,
+      "comparator": ">=",
+      "threshold": 0.9,
+      "scope": "synthetic_candidate",
+      "passed": true
+    },
+    {
+      "name": "pgvector_mrr",
+      "observed": 1.0,
+      "comparator": ">=",
+      "threshold": 0.8,
+      "scope": "synthetic_candidate",
+      "passed": true
+    },
+    {
+      "name": "pgvector_latency_p95_ms",
+      "observed": 9.717,
+      "comparator": "<=",
+      "threshold": 250,
+      "scope": "synthetic_candidate",
+      "passed": true
+    }
+  ],
+  "gbrain": {
+    "queries": 6,
+    "passed": 3,
+    "pass_rate": 0.5,
+    "latency_p50_ms": 1278.146,
+    "latency_p95_ms": 1637.922,
+    "evaluation": "ranked_expected_path_top_k",
+    "runtime_paths_persisted": false,
+    "results": [
+      {
+        "name": "Governança GBrain / Graphify RC-25",
+        "query": "GBrain Graphify RC-25 fonte verdade",
+        "passed": true,
+        "returncode": 0,
+        "error_type": null,
+        "expected_path_rank": 2,
+        "result_count": 4,
+        "latency_ms": 1278.146
+      },
+      {
+        "name": "Resolver por área operacional",
+        "query": "resolver atendimento Clara WhatsApp",
+        "passed": false,
+        "returncode": 0,
+        "error_type": null,
+        "expected_path_rank": 4,
+        "result_count": 5,
+        "latency_ms": 1411.283
+      },
+      {
+        "name": "Clara confirmação objetiva",
+        "query": "Clara confirmação agenda remarcar",
+        "passed": false,
+        "returncode": 0,
+        "error_type": null,
+        "expected_path_rank": null,
+        "result_count": 8,
+        "latency_ms": 1151.638
+      },
+      {
+        "name": "Marketing João / Reels",
+        "query": "João marketing reels tráfego",
+        "passed": false,
+        "returncode": 0,
+        "error_type": null,
+        "expected_path_rank": null,
+        "result_count": 5,
+        "latency_ms": 1637.922
+      },
+      {
+        "name": "Apresentação paciente V10",
+        "query": "apresentação V10 QuarkClinic exames",
+        "passed": true,
+        "returncode": 0,
+        "error_type": null,
+        "expected_path_rank": 3,
+        "result_count": 3,
+        "latency_ms": 1095.905
+      },
+      {
+        "name": "Financeiro Omie",
+        "query": "Omie boletos financeiro",
+        "passed": true,
+        "returncode": 0,
+        "error_type": null,
+        "expected_path_rank": 1,
+        "result_count": 4,
+        "latency_ms": 1211.7
+      }
+    ]
+  },
+  "pgvector": {
+    "queries": 12,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "mrr": 1.0,
+    "latency_p50_ms": 7.427,
+    "latency_p95_ms": 9.717,
+    "documents": 20,
+    "index_ms": 35.932,
+    "extension_version": "0.8.6",
+    "embedding": "local-deterministic-hash-384d",
+    "execution_plan": {
+      "hnsw_index_available": true,
+      "hnsw_used_by_default": false,
+      "default_plan": "Limit"
+    },
+    "latency_scope": "micro_corpus_default_planner_not_hnsw_claim",
+    "results": [
+      {
+        "name": "Governança RC-25",
+        "query": "qual regra usa Graphify RC-25 e mantém o markdown como fonte de verdade",
+        "expected": "gbrain-governance",
+        "retrieved": [
+          "gbrain-governance",
+          "scientific",
+          "inventory"
+        ],
+        "scores": [
+          0.498121,
+          0.199076,
+          0.184685
+        ],
+        "latency_ms": 7.427
+      },
+      {
+        "name": "Resolver",
+        "query": "como o resolver classifica atendimento marketing financeiro e tecnologia",
+        "expected": "gbrain-resolver",
+        "retrieved": [
+          "gbrain-resolver",
+          "finance-omie",
+          "marketing-reels"
+        ],
+        "scores": [
+          0.737422,
+          0.286972,
+          0.239116
+        ],
+        "latency_ms": 8.402
+      },
+      {
+        "name": "Confirmação Clara",
+        "query": "quais opções literais Confirmo Quero remarcar Não vou conseguir",
+        "expected": "clara-confirmation",
+        "retrieved": [
+          "clara-confirmation",
+          "patient-v10",
+          "gbrain-governance"
+        ],
+        "scores": [
+          0.69182,
+          0.220374,
+          0.202431
+        ],
+        "latency_ms": 8.214
+      },
+      {
+        "name": "João Reels",
+        "query": "quem coordena Reels criativos e relatório diário de tráfego",
+        "expected": "marketing-reels",
+        "retrieved": [
+          "marketing-reels",
+          "security",
+          "ads"
+        ],
+        "scores": [
+          0.678502,
+          0.222767,
+          0.192105
+        ],
+        "latency_ms": 9.717
+      },
+      {
+        "name": "V10",
+        "query": "pré-requisitos da apresentação V10 QuarkClinic exames e questionário pré-consulta",
+        "expected": "patient-v10",
+        "retrieved": [
+          "patient-v10",
+          "patient-evolution",
+          "clara-confirmation"
+        ],
+        "scores": [
+          0.67364,
+          0.310848,
+          0.293547
+        ],
+        "latency_ms": 8.25
+      },
+      {
+        "name": "Omie",
+        "query": "boletos conciliação escrita financeira Omie gate humano",
+        "expected": "finance-omie",
+        "retrieved": [
+          "finance-omie",
+          "clara-confirmation",
+          "backups"
+        ],
+        "scores": [
+          0.730369,
+          0.252945,
+          0.194871
+        ],
+        "latency_ms": 7.15
+      },
+      {
+        "name": "Drafts",
+        "query": "drafts pré-consulta parados duas horas POST formulário servidor",
+        "expected": "preconsult-drafts",
+        "retrieved": [
+          "preconsult-drafts",
+          "ads",
+          "browser-qa"
+        ],
+        "scores": [
+          0.664933,
+          0.225549,
+          0.170453
+        ],
+        "latency_ms": 6.339
+      },
+      {
+        "name": "Follow-up",
+        "query": "cadência de leads D+1 D+2 D+3 deduplicação horário comercial",
+        "expected": "lead-followup",
+        "retrieved": [
+          "lead-followup",
+          "agent-state",
+          "security"
+        ],
+        "scores": [
+          0.756178,
+          0.221313,
+          0.189576
+        ],
+        "latency_ms": 5.947
+      },
+      {
+        "name": "Evolução",
+        "query": "devolutiva acompanhamento primeira última medição peso bioimpedância fotos exames",
+        "expected": "patient-evolution",
+        "retrieved": [
+          "patient-evolution",
+          "nutrition",
+          "exercise"
+        ],
+        "scores": [
+          0.764517,
+          0.226931,
+          0.220749
+        ],
+        "latency_ms": 6.882
+      },
+      {
+        "name": "Playwright",
+        "query": "Playwright QA de formulários funis read-only sem publicar",
+        "expected": "browser-qa",
+        "retrieved": [
+          "browser-qa",
+          "calendar",
+          "preconsult-drafts"
+        ],
+        "scores": [
+          0.609449,
+          0.274319,
+          0.217818
+        ],
+        "latency_ms": 7.273
+      },
+      {
+        "name": "Estado de agentes",
+        "query": "cache locks sessões filas idempotência TTL fail-closed",
+        "expected": "agent-state",
+        "retrieved": [
+          "agent-state",
+          "backups",
+          "finance-omie"
+        ],
+        "scores": [
+          0.62233,
+          0.203721,
+          0.164538
+        ],
+        "latency_ms": 8.711
+      },
+      {
+        "name": "Áudio",
+        "query": "lead envia áudio responder em áudio manter continuidade",
+        "expected": "audio-response",
+        "retrieved": [
+          "audio-response",
+          "gbrain-resolver",
+          "browser-qa"
+        ],
+        "scores": [
+          0.693296,
+          0.166067,
+          0.148388
+        ],
+        "latency_ms": 8.096
+      }
+    ]
+  },
+  "decision": {
+    "status": "DONE_WITH_CONCERNS",
+    "gbrain_gate_status": "FAIL",
+    "candidate_gate_status": "PASS_SYNTHETIC_ONLY",
+    "requires_same_corpus_evidence": true,
+    "requires_human_gate_before_production": true,
+    "decision": "INVESTIGATE_GBRAIN_GAP_NO_STANDALONE_DECISION",
+    "reason": "O GBrain falhou o gate operacional; o resultado sintético do pgvector não prova que uma camada separada resolva a lacuna."
+  }
+}

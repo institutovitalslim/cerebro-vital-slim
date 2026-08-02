@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "source_repo": "https://github.com/pgvector/pgvector",
+  "source_commit": "4f3d17f6f74fe98adf54df4d016de241eeaae9af",
+  "runtime_image": "pgvector/pgvector@sha256:a36250871de0833b8757561c72f2477ef1ddd1101afa4e617fb552e0de514c6b",
+  "mode": "ephemeral_synthetic_benchmark",
+  "pii": false,
+  "production_connections": false,
+  "external_writes": false,
+  "candidate": "standalone pgvector",
+  "baseline": "GBrain IVS read-only ranked-path regression",
+  "gates": {
+    "pgvector_recall_at_3_min": 0.90,
+    "pgvector_mrr_min": 0.80,
+    "pgvector_p95_ms_max": 250,
+    "gbrain_pass_rate_min": 0.90,
+    "gbrain_expected_path_max_rank": 3
+  },
+  "observational_metrics": [
+    "gbrain_latency_p50_ms",
+    "gbrain_latency_p95_ms",
+    "pgvector_default_execution_plan"
+  ]
+}

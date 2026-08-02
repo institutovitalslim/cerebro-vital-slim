@@ -1,0 +1,8 @@
+[
+  {"name":"Governança GBrain / Graphify RC-25","query":"GBrain Graphify RC-25 fonte verdade","expected_path_prefixes":["cerebro/operacional/graphify-2026-06-13-gbrain-ivs-fase3-link-layer","cerebro/operacional/gbrain-ivs-install-2026-06-13","cerebro/operacional/graphify-2026-06-14-gbrain-fechamento-operacional"]},
+  {"name":"Resolver por área operacional","query":"resolver atendimento Clara WhatsApp","expected_path_prefixes":["cerebro/areas/atendimento"]},
+  {"name":"Clara confirmação objetiva","query":"Clara confirmação agenda remarcar","expected_path_prefixes":["cerebro/areas/atendimento/clara-operacao"]},
+  {"name":"Marketing João / Reels","query":"João marketing reels tráfego","expected_path_prefixes":["cerebro/areas/marketing"]},
+  {"name":"Apresentação paciente V10","query":"apresentação V10 QuarkClinic exames","expected_path_prefixes":["cerebro/areas/operacoes/apresentacao-paciente-novo-v10"]},
+  {"name":"Financeiro Omie","query":"Omie boletos financeiro","expected_path_prefixes":["cerebro/areas/financeiro"]}
+]

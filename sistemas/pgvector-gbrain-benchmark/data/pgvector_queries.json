@@ -1,0 +1,14 @@
+[
+  {"name":"Governança RC-25","query":"qual regra usa Graphify RC-25 e mantém o markdown como fonte de verdade","expected":"gbrain-governance"},
+  {"name":"Resolver","query":"como o resolver classifica atendimento marketing financeiro e tecnologia","expected":"gbrain-resolver"},
+  {"name":"Confirmação Clara","query":"quais opções literais Confirmo Quero remarcar Não vou conseguir","expected":"clara-confirmation"},
+  {"name":"João Reels","query":"quem coordena Reels criativos e relatório diário de tráfego","expected":"marketing-reels"},
+  {"name":"V10","query":"pré-requisitos da apresentação V10 QuarkClinic exames e questionário pré-consulta","expected":"patient-v10"},
+  {"name":"Omie","query":"boletos conciliação escrita financeira Omie gate humano","expected":"finance-omie"},
+  {"name":"Drafts","query":"drafts pré-consulta parados duas horas POST formulário servidor","expected":"preconsult-drafts"},
+  {"name":"Follow-up","query":"cadência de leads D+1 D+2 D+3 deduplicação horário comercial","expected":"lead-followup"},
+  {"name":"Evolução","query":"devolutiva acompanhamento primeira última medição peso bioimpedância fotos exames","expected":"patient-evolution"},
+  {"name":"Playwright","query":"Playwright QA de formulários funis read-only sem publicar","expected":"browser-qa"},
+  {"name":"Estado de agentes","query":"cache locks sessões filas idempotência TTL fail-closed","expected":"agent-state"},
+  {"name":"Áudio","query":"lead envia áudio responder em áudio manter continuidade","expected":"audio-response"}
+]

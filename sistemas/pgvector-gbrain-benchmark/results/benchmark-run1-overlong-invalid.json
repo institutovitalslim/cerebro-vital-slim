@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "status": "INVALID_DISCARDED_SANITIZED",
+  "reason": "Consultas longas fora do protocolo canônico e persistência indevida de caminhos retornados pelo GBrain.",
+  "original_sha256": "5e530bc37568a7bbec47db791fa0186444eaf6fc4bea539ba8cfe5fcbcdc52a4",
+  "runtime_outputs_retained": false,
+  "usable_for_decision": false
+}

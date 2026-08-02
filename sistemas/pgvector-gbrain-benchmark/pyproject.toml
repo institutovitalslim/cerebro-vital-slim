@@ -1,0 +1,20 @@
+[project]
+name = "ivs-pgvector-gbrain-benchmark"
+version = "0.1.0"
+description = "Benchmark governado, sintético e reproduzível de pgvector versus o baseline do GBrain IVS"
+requires-python = ">=3.11"
+dependencies = ["psycopg[binary]>=3.2,<4"]
+
+[dependency-groups]
+dev = ["pytest>=8,<9"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ivs_pgvector_bench"]

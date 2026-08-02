@@ -1,0 +1,22 @@
+[
+  {"id":"gbrain-governance","title":"Governança do GBrain","body":"O GBrain localiza conhecimento, mas a fonte de verdade continua no markdown canônico. Mudanças permanentes usam Graphify e registro RC-25."},
+  {"id":"gbrain-resolver","title":"Resolver por área","body":"O resolver classifica conhecimento entre atendimento, marketing, operações, financeiro, tecnologia e governança antes do arquivamento."},
+  {"id":"clara-confirmation","title":"Confirmação de agenda","body":"A confirmação objetiva da Clara apresenta as opções literais Confirmo, Quero remarcar e Não vou conseguir."},
+  {"id":"marketing-reels","title":"Marketing e Reels","body":"João coordena Reels, criativos e o relatório diário de tráfego no tópico de marketing."},
+  {"id":"patient-v10","title":"Apresentação V10 de paciente novo","body":"A apresentação V10 exige cadastro no QuarkClinic, exames, questionário pré-consulta e validação antes da revisão."},
+  {"id":"finance-omie","title":"Financeiro e Omie","body":"Boletos, conciliação e consultas financeiras usam Omie; qualquer escrita financeira exige gate humano."},
+  {"id":"preconsult-drafts","title":"Rascunhos de pré-consulta","body":"Drafts parados por mais de duas horas exigem investigar o POST do formulário e a chegada ao servidor."},
+  {"id":"lead-followup","title":"Cadência de follow-up","body":"A cadência de leads opera em D+1, D+2 e D+3, com deduplicação, horário comercial e interrupção após resposta."},
+  {"id":"patient-evolution","title":"Apresentação de evolução","body":"A devolutiva de acompanhamento usa primeira e última medição, jornada do peso, bioimpedância, fotos e exames."},
+  {"id":"browser-qa","title":"QA governado de navegador","body":"Playwright valida formulários, funis e páginas em modo read-only, sem publicar e sem enviar mensagens externas."},
+  {"id":"agent-state","title":"Estado e deduplicação de agentes","body":"Cache, locks, sessões e filas precisam de idempotência, TTL, auditoria e recuperação fail-closed."},
+  {"id":"audio-response","title":"Resposta a áudio","body":"Quando um lead envia áudio, o atendimento responde em áudio e preserva a continuidade da conversa."},
+  {"id":"inventory","title":"Inventário de estoque","body":"O inventário físico é validado pela equipe de operação antes de qualquer ajuste administrativo."},
+  {"id":"nutrition","title":"Rotina nutricional","body":"O acompanhamento nutricional observa adesão alimentar, registros e evolução sem diagnóstico automático."},
+  {"id":"exercise","title":"Treinamento físico","body":"O preparador físico acompanha treino, progressão e aderência em alinhamento com a equipe clínica."},
+  {"id":"scientific","title":"Validação científica","body":"Conteúdo médico exige fontes científicas, revisão clínica e proibição de promessas de resultado."},
+  {"id":"backups","title":"Backups da VPS","body":"Snapshots e cópias de segurança precisam de retenção, checksum, restauração testada e ausência de segredos."},
+  {"id":"ads","title":"Anúncios pagos","body":"Meta Ads e Google Ads são consultados em modo somente leitura para custo, leads e desempenho de campanhas."},
+  {"id":"calendar","title":"Calendário editorial","body":"O calendário organiza peças aprovadas, datas, formatos e status de publicação sem publicar automaticamente."},
+  {"id":"security","title":"Segurança operacional","body":"Tokens e credenciais ficam fora do código e dos relatórios; logs usam redaction e evidência sanitizada."}
+]
