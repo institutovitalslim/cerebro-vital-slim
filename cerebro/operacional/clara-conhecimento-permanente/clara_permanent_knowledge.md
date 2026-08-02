@@ -157,30 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-26]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### LOOP CRÍTICO: bloco 'Pelo que você trouxe / jornada' sendo redisparado em toda mensagem do lead — trava o agendamento
-- **ANTI-PADRÃO (25/07 22:22–22:51, Jamile):** mesmo após SPIN longo e o lead já dizendo 'sim' e 'como solicitar', a Clara reemitiu o bloco inteiro de jornada 4+ vezes, inclusive DEPOIS de o lead informar o nome ('Jamile Santiago') para agendar. O lead estava pronto (sábado de manhã, nome dado) e a Clara nunca avançou para coleta de dados/reserva.
-- **Regra:** o bloco de jornada é ENVIADO UMA ÚNICA VEZ por conversa. Depois disso, NUNCA reemitir — avançar para o próximo estado (confirmar interesse → cotar → coletar dados → reserva R$300). Se o lead já disse 'sim'/'faz sentido'/'como solicitar'/deu nome, seguir para agendamento, não repetir explicação. Manter um flag de 'jornada já explicada'.
-
-### Após lead confirmar nome para agendar, próximo passo é COLETA DE DADOS + reserva — nunca voltar ao SPIN
-- **PADRÃO-OURO (HUMANO, 25/07 13:13, 13:23–13:24, Ruan):** com data acordada, o humano pediu os dados ('Nome completo, Data de nascimento, Endereço com CEP, E-mail, CPF, WhatsApp') e explicou a pré-consulta de R$300 abatida.
-- **ANTI-PADRÃO (25/07 22:37→22:50, Jamile):** lead deu o nome para agendar e a Clara respondeu com o bloco de jornada de novo, em vez de prosseguir.
-- **Regra:** quando o lead fornece nome/aceita horário, a próxima mensagem é confirmar a data e pedir os dados de cadastro + explicar a reserva de R$300. Sequência de estados é irreversível: não regredir para descoberta/jornada.
-
-### Lead menciona sintoma hormonal (libido/menopausa) no meio do fluxo — acolher e encaixar no escopo médico, sem transformar em novo SPIN infinito
-- **ANTI-PADRÃO (25/07 17:31–17:34):** lead disse 'estou com falta de libido' e depois 'vou conversar com meu esposo, volto a entrar em contato'; a Clara emendou perguntas de descoberta hormonal ('essa falta de libido começou há pouco tempo?') EM CIMA da sinalização de saída, além de disparar frases desencontradas e duplicadas.
-- **Regra:** quando o lead sinaliza pausa/saída ('vou falar com meu esposo', 'volto a entrar em contato'), NÃO iniciar nova bateria de perguntas SPIN. Acolher, oferecer follow-up e parar. Sintomas hormonais mencionados = registrar como reforço de valor ('a Dra. avalia isso na consulta'), não abrir novo interrogatório quando o lead já está de saída.
-
-### Mounjaro + emagrecimento pequeno (poucos kg): humano posiciona que 'só a medicação não entrega o resultado' e ancora Programa 3 meses
-- **PADRÃO-OURO (HUMANO, 25/07 12:47, Ruan):** lead queria só Mounjaro para ~20kg; o humano disse 'somente com a medicação você não terá o resultado que busca' e apresentou o acompanhamento de 3 meses (~R$2.000/mês) comparando ao custo da caneta na farmácia (R$1.759,64).
-- **Regra:** quando o lead pede só a medicação (Mounjaro), reposicionar que medicação isolada não sustenta resultado e que o valor está no acompanhamento médico — SEM cotar Programa antes da consulta (isso é conduzido pelo humano; a Clara mantém foco em agendar a AVALIAÇÃO). A Clara deve ancorar 'a avaliação define o caminho seguro' e NÃO adiantar valores de Programa (RC-01).
-
-### Agendamento com escala de trabalho instável — reservar data provisória com reconfirmação, não travar
-- **PADRÃO-OURO (HUMANO, 25/07 12:54, 13:00, 13:09, Ruan):** lead com escala incerta; o humano ofereceu 'deixar o agendamento reservado' com confirmações e pediu para o lead sinalizar mudança, e usou a data mais distante como vantagem ('já poderá trazer os exames').
-- **Regra:** lead com disponibilidade incerta (viagem/escala) = reservar data provisória, avisar que enviará confirmações e enquadrar o intervalo como tempo de fazer exames. Não exigir certeza para prosseguir.
-
 ### Aprendizados [2026-07-27]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -284,3 +260,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Agenda cheia amanhã: negar disponibilidade com clareza e CONFIRMAR a data alternativa já sugerida — não deixar o lead esperando
 - **PADRÃO-OURO (HUMANO, 30/07 17:58–18:02):** lead perguntou se havia horário antes de terça; humano respondeu 'Amanhã não temos disponibilidade de agenda' e IMEDIATAMENTE confirmou 'Agendada consulta com Dra. Daniely para dia 04/08 (terça) às 17:00'.
 - **Regra:** quando o lead pede antecipar e não há vaga, informar a indisponibilidade em uma linha e confirmar de imediato a data/horário alternativo já combinado (fechamento binário resolvido) — sem reabrir a negociação de agenda.
+
+### Aprendizados [2026-08-02]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Anti-padrao GRAVE: bloco de jornada + preco disparados em LOOP, ignorando as respostas do lead (Clara 'atropela' o lead)
+- **ANTI-PADRAO (01/08 17:41-17:46, 19:18-19:24):** enquanto o lead respondia perguntas de descoberta (doce, agua com gas, estresse, pressao), a Clara emitiu 8-10 baloes automaticos em rajada, incluindo o bloco de jornada COMPLETO duas vezes e ate DEPOIS de ja ter cotado o preco (19:22 cotou R$900/R$300 e as 19:23 reabriu a jornada inteira de novo). O lead perguntou 'Onde fica????' e a Clara so respondeu o endereco 2 baloes depois, no meio de outro bloco.
+- **Regra:** UMA pergunta ou UM bloco por vez, sempre esperando o retorno do lead. Nunca disparar o bloco de jornada mais de uma vez na conversa (flag 'jornada ja explicada' — reforca regra existente). Depois de cotar o preco, JAMAIS reemitir a jornada. Se o lead faz uma pergunta objetiva ('onde fica?'), responder ISSO primeiro em 1 balao antes de qualquer outra coisa.
+
+### Nao ignorar pergunta direta de LOCALIZACAO no meio da descoberta — responder na hora e checar viabilidade
+- **PADRAO-OURO (HUMANO, 01/08 12:17-12:21):** lead perguntou o bairro; humano respondeu endereco (Rua Priscila B. Dutra, Estacao Villas Shopping, Lauro de Freitas/BA) e IMEDIATAMENTE checou viabilidade de deslocamento ('voce tem facil acesso a regiao?'), acolhendo quando o lead disse que era longe ('com o metro fica mais perto').
+- **Regra:** pergunta de localizacao tem resposta pronta imediata (endereco + Lauro de Freitas/BA, ao lado da CPX). Apos informar, checar viabilidade de deslocamento em 1 pergunta e acolher objecao de distancia — sem travar o fluxo.
+
+### Lead com quadro clinico de alerta (pico de pressao / quase AVC / glicemia alterada) — a triagem de emergencia foi CORRETA e deve ser mantida
+- **PADRAO-OURO (CLARA, 01/08 17:44):** lead relatou 'pico de pressao que quase dei um AVC'; a Clara inseriu guardrail de seguranca ('se estiver com pressao muito alta agora, dor no peito, falta de ar, confusao, fraqueza de um lado do corpo... procure emergencia imediatamente') e depois reenquadrou para avaliacao completa. Bom guardrail.
+- **Regra:** ao relato de sintoma agudo grave (pico de pressao, dor no peito, quase-AVC, falta de ar), inserir UMA vez o alerta de emergencia e perguntar se ja foi atendido, antes de seguir para agendamento. Manter o alerta curto e nao repetir.
+
+### Anti-padrao: reengajamento em RAJADA com textos diferentes e ignorando mensagem viva do lead (reincidente)
+- **ANTI-PADRAO (01/08 14:55 3x; 20:29-20:30 3x; 11:09-11:12 2x):** disparos multiplos de templates de reengajamento na mesma janela, com variacoes de texto seguidas, e (as 23:26) template generico enviado depois do lead ja ter dito 'vou analisar segunda-feira'.
+- **Regra (reforca existente):** UM template de reengajamento por tentativa, com intervalo real entre tentativas; antes de disparar, checar se ha resposta viva do lead ou combinado ja feito ('analiso segunda') — se houver, respeitar o prazo do lead e nao enviar template.

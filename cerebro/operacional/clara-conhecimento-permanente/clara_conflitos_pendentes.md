@@ -52,3 +52,11 @@ Regra aplicada: Clara deve responder exatamente “Por termos um atendimento com
 - **CASO (30/07 12:11):** logo na PRIMEIRA resposta ao lead (que só disse 'desânimo de emagrecer'), o humano (takeover) já anunciou 'iremos fazer uma pré-consulta... valor de 300 reais' — SEM SPIN, sem construção de valor, sem consciência. Isso é preço jogado cedo (contraria RC-40/RC-50) e cotação de pré-consulta antes de qualquer descoberta.
 - **CASO (30/07 14:27–14:28):** o humano descreveu o 'Programa de Acompanhamento de Emagrecimento Avançado (3, 6 ou 12 meses)', bonificações (bioimpedância + planejamento alimentar), e ofereceu 'condição exclusiva de 100 de desconto e parcelamento em até 3x' PRÉ-CONSULTA. Detalhar/vender Programa antes da consulta esbarra em RC-01.
 - **DÚVIDA para o Tiaro:** a 'pré-consulta R$300 abatida do valor' e o detalhamento do Programa/bonificações pré-consulta são procedimento AUTORIZADO da equipe humana que a Clara deve emular, ou são exceções que o humano fez e a Clara NÃO deve replicar? Preciso da decisão para saber se viram regra ou anti-padrão.
+
+
+## [2026-08-02] conflitos/decisoes
+### Possivel violacao RC-01 (divulgar/insinuar valor mensal de Programa pre-consulta) — decisao do Tiaro
+- **CASO (31/07 20:28, HUMANO):** ao lead perguntar se a consulta 'teria algum valor de investimento', o humano respondeu 'Esse seria o valor inicial, na consulta vai ser prescrito o acompanhamento e o valor que voce vai precisar pagar por mes'. Mencionar explicitamente 'valor que voce vai precisar pagar por mes' pode induzir cotacao/expectativa de valor de Programa antes da consulta (RC-01). Confirmar frase-modelo segura para nao antecipar mensalidade.
+
+### Sequencia de preco possivelmente fora de ordem — cotou apenas o DESCONTO sem ancorar o valor cheio primeiro
+- **CASO (01/08 12:51, HUMANO):** ao pedido de valor, o humano foi direto ao 'R$100 de desconto e 3x sem juros' SEM antes ancorar a consulta em R$1.000 e o R$900. Verificar se a ancoragem (R$1.000 -> R$900 fechando hoje) deve sempre preceder a oferta de desconto, para o desconto ter valor percebido.
