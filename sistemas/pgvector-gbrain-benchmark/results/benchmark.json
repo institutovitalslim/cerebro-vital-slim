@@ -1,10 +1,11 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-02T13:08:20.054095+00:00",
+  "generated_at": "2026-08-02T14:53:21.650847+00:00",
   "safety": {
     "synthetic_pgvector_corpus": true,
     "gbrain_mode": "read_only_search",
     "runtime_paths_persisted": false,
+    "canonical_paths_persisted": true,
     "pii_persisted": false,
     "production_modified": false,
     "dsn_validated_ephemeral_loopback": true
@@ -20,11 +21,11 @@
   "gates": [
     {
       "name": "gbrain_pass_rate",
-      "observed": 0.5,
+      "observed": 1.0,
       "comparator": ">=",
       "threshold": 0.9,
       "scope": "operational_baseline",
-      "passed": false
+      "passed": true
     },
     {
       "name": "pgvector_recall_at_3",
@@ -44,7 +45,7 @@
     },
     {
       "name": "pgvector_latency_p95_ms",
-      "observed": 9.717,
+      "observed": 13.84,
       "comparator": "<=",
       "threshold": 250,
       "scope": "synthetic_candidate",
@@ -53,10 +54,10 @@
   ],
   "gbrain": {
     "queries": 6,
-    "passed": 3,
-    "pass_rate": 0.5,
-    "latency_p50_ms": 1278.146,
-    "latency_p95_ms": 1637.922,
+    "passed": 6,
+    "pass_rate": 1.0,
+    "latency_p50_ms": 1445.013,
+    "latency_p95_ms": 1720.481,
     "evaluation": "ranked_expected_path_top_k",
     "runtime_paths_persisted": false,
     "results": [
@@ -65,60 +66,78 @@
         "query": "GBrain Graphify RC-25 fonte verdade",
         "passed": true,
         "returncode": 0,
+        "expected_path_rank": 1,
+        "max_rank": 3,
+        "matched_canonical_path": "cerebro/gbrain/referencias/gbrain-graphify-rc25-fonte-verdade.md",
+        "canonical_path_tracked": true,
+        "result_count": 5,
         "error_type": null,
-        "expected_path_rank": 2,
-        "result_count": 4,
-        "latency_ms": 1278.146
+        "latency_ms": 1720.481
       },
       {
         "name": "Resolver por área operacional",
         "query": "resolver atendimento Clara WhatsApp",
-        "passed": false,
+        "passed": true,
         "returncode": 0,
+        "expected_path_rank": 1,
+        "max_rank": 3,
+        "matched_canonical_path": "cerebro/areas/atendimento/referencias/clara/resolver-atendimento-clara-whatsapp-leads.md",
+        "canonical_path_tracked": true,
+        "result_count": 6,
         "error_type": null,
-        "expected_path_rank": 4,
-        "result_count": 5,
-        "latency_ms": 1411.283
+        "latency_ms": 1297.421
       },
       {
         "name": "Clara confirmação objetiva",
         "query": "Clara confirmação agenda remarcar",
-        "passed": false,
+        "passed": true,
         "returncode": 0,
+        "expected_path_rank": 1,
+        "max_rank": 3,
+        "matched_canonical_path": "cerebro/areas/atendimento/referencias/clara/confirmacao-agenda-opcoes.md",
+        "canonical_path_tracked": true,
+        "result_count": 9,
         "error_type": null,
-        "expected_path_rank": null,
-        "result_count": 8,
-        "latency_ms": 1151.638
+        "latency_ms": 1445.013
       },
       {
         "name": "Marketing João / Reels",
         "query": "João marketing reels tráfego",
-        "passed": false,
+        "passed": true,
         "returncode": 0,
+        "expected_path_rank": 1,
+        "max_rank": 3,
+        "matched_canonical_path": "cerebro/areas/marketing/referencias/joao/marketing-reels-trafego.md",
+        "canonical_path_tracked": true,
+        "result_count": 7,
         "error_type": null,
-        "expected_path_rank": null,
-        "result_count": 5,
-        "latency_ms": 1637.922
+        "latency_ms": 1642.146
       },
       {
         "name": "Apresentação paciente V10",
         "query": "apresentação V10 QuarkClinic exames",
         "passed": true,
         "returncode": 0,
+        "expected_path_rank": 1,
+        "max_rank": 3,
+        "matched_canonical_path": "cerebro/areas/operacoes/referencias/apresentacao-v10-quarkclinic-exames.md",
+        "canonical_path_tracked": true,
+        "result_count": 5,
         "error_type": null,
-        "expected_path_rank": 3,
-        "result_count": 3,
-        "latency_ms": 1095.905
+        "latency_ms": 1385.462
       },
       {
         "name": "Financeiro Omie",
         "query": "Omie boletos financeiro",
         "passed": true,
         "returncode": 0,
+        "expected_path_rank": 2,
+        "max_rank": 3,
+        "matched_canonical_path": "cerebro/areas/financeiro/referencias/omie/financeiro-omie-boletos.md",
+        "canonical_path_tracked": true,
+        "result_count": 5,
         "error_type": null,
-        "expected_path_rank": 1,
-        "result_count": 4,
-        "latency_ms": 1211.7
+        "latency_ms": 1153.952
       }
     ]
   },
@@ -127,10 +146,10 @@
     "recall_at_1": 1.0,
     "recall_at_3": 1.0,
     "mrr": 1.0,
-    "latency_p50_ms": 7.427,
-    "latency_p95_ms": 9.717,
+    "latency_p50_ms": 11.576,
+    "latency_p95_ms": 13.84,
     "documents": 20,
-    "index_ms": 35.932,
+    "index_ms": 57.324,
     "extension_version": "0.8.6",
     "embedding": "local-deterministic-hash-384d",
     "execution_plan": {
@@ -154,7 +173,7 @@
           0.199076,
           0.184685
         ],
-        "latency_ms": 7.427
+        "latency_ms": 12.015
       },
       {
         "name": "Resolver",
@@ -170,7 +189,7 @@
           0.286972,
           0.239116
         ],
-        "latency_ms": 8.402
+        "latency_ms": 10.245
       },
       {
         "name": "Confirmação Clara",
@@ -186,7 +205,7 @@
           0.220374,
           0.202431
         ],
-        "latency_ms": 8.214
+        "latency_ms": 13.84
       },
       {
         "name": "João Reels",
@@ -202,7 +221,7 @@
           0.222767,
           0.192105
         ],
-        "latency_ms": 9.717
+        "latency_ms": 9.938
       },
       {
         "name": "V10",
@@ -218,7 +237,7 @@
           0.310848,
           0.293547
         ],
-        "latency_ms": 8.25
+        "latency_ms": 13.028
       },
       {
         "name": "Omie",
@@ -234,7 +253,7 @@
           0.252945,
           0.194871
         ],
-        "latency_ms": 7.15
+        "latency_ms": 12.331
       },
       {
         "name": "Drafts",
@@ -250,7 +269,7 @@
           0.225549,
           0.170453
         ],
-        "latency_ms": 6.339
+        "latency_ms": 11.062
       },
       {
         "name": "Follow-up",
@@ -266,7 +285,7 @@
           0.221313,
           0.189576
         ],
-        "latency_ms": 5.947
+        "latency_ms": 10.278
       },
       {
         "name": "Evolução",
@@ -282,7 +301,7 @@
           0.226931,
           0.220749
         ],
-        "latency_ms": 6.882
+        "latency_ms": 11.576
       },
       {
         "name": "Playwright",
@@ -298,7 +317,7 @@
           0.274319,
           0.217818
         ],
-        "latency_ms": 7.273
+        "latency_ms": 13.476
       },
       {
         "name": "Estado de agentes",
@@ -314,7 +333,7 @@
           0.203721,
           0.164538
         ],
-        "latency_ms": 8.711
+        "latency_ms": 9.897
       },
       {
         "name": "Áudio",
@@ -330,17 +349,17 @@
           0.166067,
           0.148388
         ],
-        "latency_ms": 8.096
+        "latency_ms": 12.775
       }
     ]
   },
   "decision": {
     "status": "DONE_WITH_CONCERNS",
-    "gbrain_gate_status": "FAIL",
+    "gbrain_gate_status": "PASS",
     "candidate_gate_status": "PASS_SYNTHETIC_ONLY",
     "requires_same_corpus_evidence": true,
     "requires_human_gate_before_production": true,
-    "decision": "INVESTIGATE_GBRAIN_GAP_NO_STANDALONE_DECISION",
-    "reason": "O GBrain falhou o gate operacional; o resultado sintético do pgvector não prova que uma camada separada resolva a lacuna."
+    "decision": "KEEP_GBRAIN_NO_STANDALONE_PGVECTOR",
+    "reason": "O candidato passou gates sintéticos, mas não demonstrou valor incremental no mesmo corpus do GBrain."
   }
 }

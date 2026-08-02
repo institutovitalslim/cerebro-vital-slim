@@ -26,6 +26,7 @@ uv run python -m ivs_pgvector_bench.runner \
   --corpus data/synthetic_corpus.json \
   --queries data/pgvector_queries.json \
   --gbrain-cases data/gbrain_cases.json \
+  --canonical-root "$ROOT/../.." \
   --manifest manifest.json \
   --output results/benchmark.json
 uv run python -m ivs_pgvector_bench.report \

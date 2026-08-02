@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
 import signal
 import subprocess
 from datetime import UTC, datetime
@@ -11,9 +10,8 @@ from pathlib import Path
 from time import perf_counter
 
 from .core import compute_metrics, decide, evaluate_gates
+from .gbrain_eval import assess_ranked_canonical_path, build_tracked_path_index
 from .pgvector_backend import PgvectorBackend
-
-_RESULT_PATH = re.compile(r"^\[[^\]]+\]\s+([^\s]+)\s+--", re.MULTILINE)
 
 
 def assess_gbrain_case(
@@ -23,27 +21,23 @@ def assess_gbrain_case(
     stdout: str,
     stderr: str,
     latency_ms: float,
+    tracked_paths: dict[str, str],
     error_type: str | None = None,
     max_rank: int | None = None,
 ) -> dict:
     del stderr
-    paths = _RESULT_PATH.findall(stdout)
-    prefixes = [prefix.strip("/").lower() for prefix in case["expected_path_prefixes"]]
-    rank = None
-    for index, path in enumerate(paths, start=1):
-        normalized = path.strip("/").lower()
-        if any(normalized == prefix or normalized.startswith(prefix + "/") for prefix in prefixes):
-            rank = index
-            break
-    effective_max_rank = max_rank if max_rank is not None else int(case.get("max_rank", 3))
+    assessment = assess_ranked_canonical_path(
+        case,
+        returncode=returncode,
+        stdout=stdout,
+        tracked_paths=tracked_paths,
+        max_rank=max_rank,
+    )
     return {
         "name": case["name"],
         "query": case["query"],
-        "passed": returncode == 0 and rank is not None and rank <= effective_max_rank,
-        "returncode": returncode,
+        **assessment,
         "error_type": error_type,
-        "expected_path_rank": rank,
-        "result_count": len(paths),
         "latency_ms": round(latency_ms, 3),
     }
 
@@ -83,11 +77,14 @@ def _run_isolated(command: list[str], timeout_seconds: float) -> dict:
 
 def run_gbrain(
     cases: list[dict],
+    *,
+    canonical_root: Path,
     executable: str = "gbrain-ivs",
     timeout_seconds: float = 90.0,
     max_rank: int | None = None,
 ) -> dict:
     rows = []
+    tracked_paths = build_tracked_path_index(canonical_root)
     for case in cases:
         started = perf_counter()
         result = _run_isolated([executable, "search", case["query"]], timeout_seconds)
@@ -98,6 +95,7 @@ def run_gbrain(
                 stdout=result["stdout"],
                 stderr=result["stderr"],
                 latency_ms=(perf_counter() - started) * 1000,
+                tracked_paths=tracked_paths,
                 error_type=result["error_type"],
                 max_rank=max_rank,
             )
@@ -153,6 +151,7 @@ def main() -> int:
     parser.add_argument("--corpus", type=Path, required=True)
     parser.add_argument("--queries", type=Path, required=True)
     parser.add_argument("--gbrain-cases", type=Path, required=True)
+    parser.add_argument("--canonical-root", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--dsn-env", default="IVS_BENCH_PGVECTOR_DSN")
     parser.add_argument("--output", type=Path, required=True)
@@ -170,6 +169,7 @@ def main() -> int:
     pgvector_result = run_pgvector(dsn, docs, queries)
     gbrain_result = run_gbrain(
         cases,
+        canonical_root=args.canonical_root,
         max_rank=int(thresholds["gbrain_expected_path_max_rank"]),
     )
     gate_results = evaluate_gates(
@@ -183,6 +183,9 @@ def main() -> int:
         gates=gate_results,
     )
     runtime_paths_persisted = any("top_paths" in row for row in gbrain_result["results"])
+    canonical_paths_persisted = any(
+        row.get("matched_canonical_path") for row in gbrain_result["results"]
+    )
     payload = {
         "schema_version": 2,
         "generated_at": datetime.now(UTC).isoformat(),
@@ -190,7 +193,8 @@ def main() -> int:
             "synthetic_pgvector_corpus": True,
             "gbrain_mode": "read_only_search",
             "runtime_paths_persisted": runtime_paths_persisted,
-            "pii_persisted": runtime_paths_persisted,
+            "canonical_paths_persisted": canonical_paths_persisted,
+            "pii_persisted": False,
             "production_modified": False,
             "dsn_validated_ephemeral_loopback": True,
         },

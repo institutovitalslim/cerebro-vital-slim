@@ -30,10 +30,12 @@ def render_html(payload: dict) -> str:
     decision = payload["decision"]
     g_rows = "".join(
         f"<tr><td>{_esc(row['name'])}</td><td><code>{_esc(row['query'])}</code></td>"
+        f"<td><code>{_esc(row.get('matched_canonical_path') or '—')}</code></td>"
+        f"<td>{_esc(row.get('expected_path_rank') if row.get('expected_path_rank') is not None else '—')}</td>"
         f"<td><span class='badge {'ok' if row['passed'] else 'fail'}'>{'PASSOU' if row['passed'] else 'FALHOU'}</span></td>"
         f"<td>{_ms(row['latency_ms'])}</td></tr>"
         for row in g.get("results", [])
-    ) or "<tr><td colspan='4'>Sem detalhamento nesta amostra.</td></tr>"
+    ) or "<tr><td colspan='6'>Sem detalhamento nesta amostra.</td></tr>"
     p_rows = "".join(
         f"<tr><td>{_esc(row['name'])}</td><td><code>{_esc(row['expected'])}</code></td>"
         f"<td><code>{_esc(row['retrieved'][0] if row.get('retrieved') else '—')}</code></td>"
@@ -88,11 +90,11 @@ table{{width:100%;border-collapse:collapse;font-size:14px}} th{{text-align:left;
 <section class="card decision"><span class="code-label">{_esc(decision['decision'])}</span><h2>{decision_title}</h2><p>{_esc(decision['reason'])}</p><p><strong>Diretriz:</strong> otimizar o GBrain existente antes de criar outro banco, outro índice e outro fluxo de sincronização.</p></section>
 <section class="warning"><strong>Limite metodológico:</strong> {_esc(payload['comparability_note'])} O microbenchmark sintético prova viabilidade técnica do pgvector; não prova superioridade sobre o corpus real e a busca híbrida do GBrain.</section>
 <section class="cols">
-<div class="card"><h2>GBrain operacional</h2><ul><li>{g['passed']}/{g['queries']} casos aprovados.</li><li>p50: {_ms(g['latency_p50_ms'])}; p95: {_ms(g['latency_p95_ms'])}.</li><li>Consulta read-only; nenhum arquivo canônico alterado.</li><li>O GBrain já opera com PGLite/PostgreSQL e embeddings vetoriais.</li></ul></div>
+<div class="card"><h2>GBrain operacional</h2><ul><li>{g['passed']}/{g['queries']} casos aprovados.</li><li>p50: {_ms(g['latency_p50_ms'])}; p95: {_ms(g['latency_p95_ms'])}.</li><li>As consultas do benchmark são read-only; os roteadores foram preparados como mudança versionada separada.</li><li>O GBrain já opera com PGLite/PostgreSQL e embeddings vetoriais.</li></ul></div>
 <div class="card"><h2>pgvector sintético</h2><ul><li>{p['documents']} documentos e {p['queries']} consultas sem PII.</li><li>Recall@1: {_pct(p['recall_at_1'])}; MRR: {_pct(p['mrr'])}.</li><li>p50: {_ms(p['latency_p50_ms'])}; p95: {_ms(p['latency_p95_ms'])}.</li><li>Extensão { _esc(p['extension_version']) }; indexação em {_ms(p['index_ms'])}.</li><li>HNSW disponível; usado pelo plano padrão: {hnsw_used}. A latência é do microcorpus, não do índice HNSW.</li></ul></div>
 </section>
 <section class="card"><h2>Gates executados</h2><table><thead><tr><th>Gate</th><th>Observado</th><th>Limite</th><th>Status</th><th>Escopo</th></tr></thead><tbody>{gate_rows}</tbody></table></section>
-<section class="card"><h2>Casos do GBrain</h2><table><thead><tr><th>Caso</th><th>Consulta focada</th><th>Status</th><th>Latência</th></tr></thead><tbody>{g_rows}</tbody></table></section>
+<section class="card"><h2>Casos do GBrain</h2><table><thead><tr><th>Caso</th><th>Consulta focada</th><th>Fonte rastreada</th><th>Rank</th><th>Status</th><th>Latência</th></tr></thead><tbody>{g_rows}</tbody></table></section>
 <section class="card"><h2>Casos sintéticos do pgvector</h2><table><thead><tr><th>Caso</th><th>Esperado</th><th>Top 1</th><th>Latência</th></tr></thead><tbody>{p_rows}</tbody></table></section>
 <section class="card"><h2>Recomendação operacional</h2><ol><li><strong>Não instalar</strong> uma camada pgvector paralela neste momento.</li><li>Tratar a latência do GBrain como pauta de otimização interna: profiling, cache e ajuste do pipeline híbrido.</li><li>Reabrir a decisão apenas se surgir consulta real com falha reproduzível e um piloto no mesmo corpus demonstrar ganho.</li><li>Manter o PostgreSQL/pgvector do benchmark efêmero e fora de produção.</li></ol></section>
 <footer>Gerado em {_esc(payload['generated_at'])} · Artefato sem PII e sem credenciais · Instituto Vital Slim</footer>
