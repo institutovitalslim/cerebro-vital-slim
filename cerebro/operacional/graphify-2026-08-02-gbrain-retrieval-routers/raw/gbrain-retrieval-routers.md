@@ -42,7 +42,7 @@ Baseline estrito: 3/6. Falhas: Resolver, confirmação da Clara e Marketing/Reel
 ## Evidência posterior à mudança
 
 - Regressão canônica estrita: **6/6**, com arquivo rastreado.
-- Ranks: Governança 1; Resolver 1; Clara 1; Marketing 1; V10 1; Omie 2.
+- Ranks: Governança 1; Resolver 1; Clara 1; Marketing 1; V10 1; Omie 1.
 - Benchmark governado: **31/31 testes**; GBrain pass rate **100%**; pgvector sintético Recall@3 e MRR **100%**; gate p95 `<= 250 ms` aprovado.
 - Decisão preservada: `KEEP_GBRAIN_NO_STANDALONE_PGVECTOR`.
 - Sync lexical concluído com `--no-embed`; a etapa de embeddings foi deliberadamente omitida porque a credencial não estava disponível no processo. O gate executado usa `gbrain search` lexical/tsvector.

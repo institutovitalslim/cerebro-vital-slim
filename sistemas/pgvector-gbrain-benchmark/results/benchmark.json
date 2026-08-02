@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-02T14:53:21.650847+00:00",
+  "generated_at": "2026-08-02T15:36:58.350293+00:00",
   "safety": {
     "synthetic_pgvector_corpus": true,
     "gbrain_mode": "read_only_search",
@@ -45,7 +45,7 @@
     },
     {
       "name": "pgvector_latency_p95_ms",
-      "observed": 13.84,
+      "observed": 14.639,
       "comparator": "<=",
       "threshold": 250,
       "scope": "synthetic_candidate",
@@ -56,8 +56,8 @@
     "queries": 6,
     "passed": 6,
     "pass_rate": 1.0,
-    "latency_p50_ms": 1445.013,
-    "latency_p95_ms": 1720.481,
+    "latency_p50_ms": 1150.192,
+    "latency_p95_ms": 1389.313,
     "evaluation": "ranked_expected_path_top_k",
     "runtime_paths_persisted": false,
     "results": [
@@ -72,7 +72,7 @@
         "canonical_path_tracked": true,
         "result_count": 5,
         "error_type": null,
-        "latency_ms": 1720.481
+        "latency_ms": 1150.192
       },
       {
         "name": "Resolver por área operacional",
@@ -85,7 +85,7 @@
         "canonical_path_tracked": true,
         "result_count": 6,
         "error_type": null,
-        "latency_ms": 1297.421
+        "latency_ms": 1389.313
       },
       {
         "name": "Clara confirmação objetiva",
@@ -98,7 +98,7 @@
         "canonical_path_tracked": true,
         "result_count": 9,
         "error_type": null,
-        "latency_ms": 1445.013
+        "latency_ms": 1149.937
       },
       {
         "name": "Marketing João / Reels",
@@ -111,7 +111,7 @@
         "canonical_path_tracked": true,
         "result_count": 7,
         "error_type": null,
-        "latency_ms": 1642.146
+        "latency_ms": 1084.244
       },
       {
         "name": "Apresentação paciente V10",
@@ -124,20 +124,20 @@
         "canonical_path_tracked": true,
         "result_count": 5,
         "error_type": null,
-        "latency_ms": 1385.462
+        "latency_ms": 1130.766
       },
       {
         "name": "Financeiro Omie",
         "query": "Omie boletos financeiro",
         "passed": true,
         "returncode": 0,
-        "expected_path_rank": 2,
+        "expected_path_rank": 1,
         "max_rank": 3,
         "matched_canonical_path": "cerebro/areas/financeiro/referencias/omie/financeiro-omie-boletos.md",
         "canonical_path_tracked": true,
-        "result_count": 5,
+        "result_count": 4,
         "error_type": null,
-        "latency_ms": 1153.952
+        "latency_ms": 1178.626
       }
     ]
   },
@@ -146,10 +146,10 @@
     "recall_at_1": 1.0,
     "recall_at_3": 1.0,
     "mrr": 1.0,
-    "latency_p50_ms": 11.576,
-    "latency_p95_ms": 13.84,
+    "latency_p50_ms": 10.839,
+    "latency_p95_ms": 14.639,
     "documents": 20,
-    "index_ms": 57.324,
+    "index_ms": 62.311,
     "extension_version": "0.8.6",
     "embedding": "local-deterministic-hash-384d",
     "execution_plan": {
@@ -173,7 +173,7 @@
           0.199076,
           0.184685
         ],
-        "latency_ms": 12.015
+        "latency_ms": 13.189
       },
       {
         "name": "Resolver",
@@ -189,7 +189,7 @@
           0.286972,
           0.239116
         ],
-        "latency_ms": 10.245
+        "latency_ms": 14.639
       },
       {
         "name": "Confirmação Clara",
@@ -205,7 +205,7 @@
           0.220374,
           0.202431
         ],
-        "latency_ms": 13.84
+        "latency_ms": 8.381
       },
       {
         "name": "João Reels",
@@ -221,7 +221,7 @@
           0.222767,
           0.192105
         ],
-        "latency_ms": 9.938
+        "latency_ms": 8.381
       },
       {
         "name": "V10",
@@ -237,7 +237,7 @@
           0.310848,
           0.293547
         ],
-        "latency_ms": 13.028
+        "latency_ms": 10.839
       },
       {
         "name": "Omie",
@@ -253,7 +253,7 @@
           0.252945,
           0.194871
         ],
-        "latency_ms": 12.331
+        "latency_ms": 11.367
       },
       {
         "name": "Drafts",
@@ -269,7 +269,7 @@
           0.225549,
           0.170453
         ],
-        "latency_ms": 11.062
+        "latency_ms": 12.849
       },
       {
         "name": "Follow-up",
@@ -285,7 +285,7 @@
           0.221313,
           0.189576
         ],
-        "latency_ms": 10.278
+        "latency_ms": 13.288
       },
       {
         "name": "Evolução",
@@ -301,7 +301,7 @@
           0.226931,
           0.220749
         ],
-        "latency_ms": 11.576
+        "latency_ms": 9.439
       },
       {
         "name": "Playwright",
@@ -317,7 +317,7 @@
           0.274319,
           0.217818
         ],
-        "latency_ms": 13.476
+        "latency_ms": 11.493
       },
       {
         "name": "Estado de agentes",
@@ -333,7 +333,7 @@
           0.203721,
           0.164538
         ],
-        "latency_ms": 9.897
+        "latency_ms": 9.308
       },
       {
         "name": "Áudio",
@@ -349,7 +349,7 @@
           0.166067,
           0.148388
         ],
-        "latency_ms": 12.775
+        "latency_ms": 9.867
       }
     ]
   },

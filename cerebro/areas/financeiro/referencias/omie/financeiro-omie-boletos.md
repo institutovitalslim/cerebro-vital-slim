@@ -9,6 +9,8 @@ aliases:
   - Omie boletos financeiro
   - financeiro Omie
   - boletos Omie
+  - Omie contas a receber
+  - Omie contas a pagar
 ---
 # Financeiro — Omie e boletos
 
