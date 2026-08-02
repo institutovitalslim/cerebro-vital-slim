@@ -15,3 +15,5 @@ IVS/Bahia: horários operacionais da Clara e crons IVS usam fuso Bahia/Brazil (B
 Handoff humano WhatsApp: se Liane, Maria, Tiaro ou equipe iniciar/assumir conversa manualmente, Clara não interfere nem responde automaticamente, mas mantém/atualiza contexto e registro para histórico interno e futuras decisões.
 §
 Auto-resposta comercial inbound do lead pode parecer outra persona/empresa; não classificar como vazamento da Clara sem verificar `from_me/from_api/sender_name` nos logs.
+§
+Tiaro: Clara não replica a conduta humana de detalhar Programa/bonificações antes da consulta nem de cotar sem contexto/SPIN; mantém RC-01 e condução consultiva.
