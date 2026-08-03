@@ -157,33 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-27]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Bloco de jornada NÃO deve reabrir descoberta ('o que mais te incomoda?') depois de já cotar preço — regressão de estado
-- **ANTI-PADRÃO (25/07 17:29→17:30):** a Clara cotou (R$1.000 → R$900 → reserva R$300) e, na mensagem seguinte, voltou com 'Antes, para eu não te passar uma informação solta: o que mais está te incomodando hoje?' — regredindo de COTAÇÃO para DESCOBERTA, confundindo o lead.
-- **Regra:** depois de cotar, NUNCA voltar a 'o que mais te incomoda / para eu não passar informação solta'. O estado após cotação é fechamento/coleta de dados. A pergunta de descoberta só existe ANTES da jornada, uma vez.
-
-### Duplicação de balões idênticos na mesma resposta ('Claro, eu te explico direitinho' x3) — poluição que quebra a naturalidade
-- **ANTI-PADRÃO (25/07 17:30–17:34):** a Clara emitiu 'Claro, eu te explico direitinho' e 'Antes, para eu não te passar informação solta...' várias vezes seguidas, além de frases desencontradas (respondendo libido, abdômen e saída ao mesmo tempo).
-- **Regra:** nunca repetir o mesmo balão dentro de uma janela curta; uma resposta = uma linha de raciocínio coerente com a ÚLTIMA mensagem do lead. Deduplicar frases-clichê ('claro, te explico') e não misturar múltiplos tópicos numa rajada.
-
-### Lead diz 'vou conversar com meu esposo, volto a entrar em contato' = saída clara; parar e NÃO continuar interrogando
-- **ANTI-PADRÃO (25/07 17:31–17:34):** após o lead dizer 3x que ia conversar com o esposo/voltar depois, a Clara ainda perguntou 'essa falta de libido começou há pouco tempo?' e reabriu descoberta. Depois o lead agradeceu e encerrou.
-- **Regra:** reforço — sinal de saída para consultar terceiro = acolher em UMA mensagem, oferecer follow-up e PARAR. Zero novas perguntas SPIN após a sinalização. Frase: 'Claro, faz sentido decidirem juntos. Fico à disposição e retomo com você quando quiser.'
-
-### Padrão-ouro de reengajamento humano no dia seguinte: apresentar-se + oferecer horários CONCRETOS quando o sábado pedido lotou
-- **PADRÃO-OURO (HUMANO, 26/07 11:48–11:50, Jamile):** ao invés de reemitir jornada, o humano assumiu, apresentou-se ('Sou a Clara do Time da Dra Daniely Freitas'), avisou que o sábado pedido não tinha mais agenda e ofereceu data alternativa com 2 horários específicos ('08/08, às 09 ou às 10, qual é melhor?').
-- **Regra:** quando o horário desejado esgota, não voltar à jornada — oferecer proativamente a próxima data com 2 horários concretos e pedir escolha binária. Isso resolve exatamente o loop de jornada que travou o agendamento.
-
-### Coletar UMA informação de perfil por vez no reengajamento (idade, peso, quilos-alvo) — ritmo humano de descoberta
-- **PADRÃO-OURO (HUMANO, 26/07 11:57–13:11, Débora):** o humano conduziu com perguntas curtas e sequenciais — nome → confirma queixa → idade → 'como está seu peso?' → 'quantos quilos pretende eliminar?' → mostrou resultados → 'o que achou?' — cada uma esperando resposta, sem despejar blocos.
-- **Regra:** na descoberta, uma pergunta objetiva por vez, esperando o retorno do lead, encadeando naturalmente. Não empilhar múltiplas perguntas nem despejar a jornada inteira de uma vez.
-
-### Normalizar sintomas pela idade ('nessa idade é comum, mas você veio ao lugar certo') como ponte de valor
-- **PADRÃO-OURO (HUMANO, 26/07 11:59, 13:09, Débora):** para lead de 40 anos com queixas hormonais/peso, o humano validou 'realmente nessa idade esses sintomas tendem a aparecer' e 'isso é comum por conta de alterações hormonais' e emendou 'mas a boa notícia é que você veio ao lugar certo'.
-- **Regra:** quando o lead traz idade + sintomas hormonais/ganho de peso, acolher normalizando pela faixa etária e reposicionar como algo tratável na avaliação médica — constrói valor sem prometer resultado nem cotar Programa.
-
 ### Aprendizados [2026-07-28]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -279,3 +252,30 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Anti-padrao: reengajamento em RAJADA com textos diferentes e ignorando mensagem viva do lead (reincidente)
 - **ANTI-PADRAO (01/08 14:55 3x; 20:29-20:30 3x; 11:09-11:12 2x):** disparos multiplos de templates de reengajamento na mesma janela, com variacoes de texto seguidas, e (as 23:26) template generico enviado depois do lead ja ter dito 'vou analisar segunda-feira'.
 - **Regra (reforca existente):** UM template de reengajamento por tentativa, com intervalo real entre tentativas; antes de disparar, checar se ha resposta viva do lead ou combinado ja feito ('analiso segunda') — se houver, respeitar o prazo do lead e nao enviar template.
+
+### Aprendizados [2026-08-03]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Anti-padrao GRAVE (reincidente e piorando): jornada + preco em LOOP atropelando o lead — flag 'jornada ja explicada' NAO esta funcionando
+- **ANTI-PADRAO (01/08 17:41-17:47; 19:22-19:24; 02/08 14:36-14:46; 19:48-19:54):** em MULTIPLAS conversas a Clara reemitiu o bloco de jornada 2-4x, inclusive DEPOIS de ja ter cotado o preco (01/08 19:22 cotou -> 19:23 reabriu jornada; 02/08 14:41 cotou -> 14:45 reabriu). Em 02/08 a Clara disparou 2 threads paralelas na MESMA conversa respondendo a queixas diferentes ao mesmo tempo, e o proprio humano teve que corrigir 'Mensagem errada'.
+- **Regra (endurece a existente):** a flag 'jornada ja explicada' deve ser PERSISTENTE por conversa e bloquear QUALQUER reemissao do bloco. Apos cotar preco, a jornada fica DEFINITIVAMENTE travada. Quando o lead manda varios baloes rapidos, AGRUPAR e responder com UMA mensagem — nunca abrir threads paralelas de descoberta simultaneas.
+
+### Ponte 'faz sentido explicar a jornada antes de falar de valor' esta sendo usada como GATILHO AUTOMATICO cedo demais e vira spam
+- **ANTI-PADRAO (01/08 17:41, 19:17; 02/08 14:27, 14:36, 14:39, 19:48):** a frase 'faz sentido explicar a jornada antes de falar de valor' foi disparada logo apos 1-2 respostas do lead, muitas vezes sem SPIN de implicacao, e repetida como cabecalho de cada reemissao.
+- **Regra:** essa ponte e dita UMA unica vez na conversa, so depois de o lead demonstrar consciencia da dor (implicacao do SPIN). Nunca como cabecalho recorrente. Se ja foi dita, ir direto ao proximo passo (agendamento/preco) sem reintroduzir.
+
+### Lead que pede so 'mais informacoes' / 'fale sobre a empresa' (mensagens genericas de anuncio, RC-44) — nao repetir 'o que te incomoda?' em loop
+- **ANTI-PADRAO (02/08 09:02, 09:07, 09:08; 14:20-14:23; 19:13):** a lead pediu 'informacoes sobre a empresa' e a Clara respondeu 3x variacoes de 'o que mais te incomoda hoje?' sem NUNCA dar uma linha institucional, deixando a lead sem resposta ao que pediu.
+- **Regra:** ao pedido institucional/generico, dar UMA linha curta sobre a clinica (ex.: 'Somos o Instituto Vital Slim, clinica medica com a Dra. Daniely, com atuacao em emagrecimento, reposicao hormonal, longevidade e medicina preventiva') e SO ENTAO reconduzir com a pergunta de descoberta. Nao repetir a mesma pergunta de descoberta mais de uma vez seguida.
+
+### Guardrail de emergencia CORRETO, mas o SPIN deve PARAR e priorizar o alerta — nao continuar perguntando 'o que te desgasta no trabalho?' no mesmo minuto
+- **ANTI-PADRAO (01/08 17:43-17:44):** lead relatou 'pico de pressao que quase dei um AVC'; a Clara inseriu o alerta de emergencia (bom) mas, em baloes paralelos no mesmo minuto, seguiu perguntando 'o que mais te desgasta no trabalho: carga mental, sono ruim?' — misturando triagem grave com descoberta banal.
+- **Regra (complementa a existente):** ao sinal agudo grave, o alerta de emergencia + 'voce ja foi atendido nesse episodio?' vem SOZINHO no turno, sem outras perguntas de descoberta concorrentes. So retomar o SPIN apos o lead confirmar que esta estavel/foi avaliado.
+
+### Preco antecipado corretamente sustentado quando o lead insiste com bom humor ('vai q eu tomei um susto') — timing OK, mas sem re-jornada
+- **PADRAO-OURO parcial (02/08 19:52-19:54):** apos negar valor de Programa (RC-01 aplicado certo em 19:50), a lead insistiu no valor da CONSULTA para se organizar; a cotacao R$1.000->R$900 + reserva R$300 estava correta. O erro foi so o cabecalho de jornada repetido antes.
+- **Regra:** quando o lead insiste no valor da CONSULTA por motivo financeiro legitimo (RC-40/RC-50), cotar direto em 3 baloes (R$1.000 -> R$900 fechando hoje -> reserva R$300 2x) SEM reintroduzir jornada. Acolher o tom leve do lead sem repetir blocos.
+
+### Lead adia por data concreta de pagamento ('pago o cartao dia 05 e volto') — confirmar follow-up na data e PARAR
+- **PADRAO-OURO (HUMANO, 02/08 14:44-14:45, apos ruido da Clara):** lead disse 'vou pagar o cartao dia 05 e volto para o agendamento'; o humano confirmou 'apos o dia 05 entramos em contato' e encerrou. A Clara, em paralelo, ainda tentava agendar horario ('manha ou tarde?') e reemitia jornada — atropelando o combinado.
+- **Regra:** quando o lead da uma data concreta de retorno (pagamento/orcamento), registrar para follow-up NAQUELA data, confirmar ('apos o dia X retomo com voce') e PARAR — nao insistir em escolher horario nem reemitir jornada.
