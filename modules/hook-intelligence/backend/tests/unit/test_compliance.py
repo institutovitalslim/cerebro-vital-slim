@@ -83,6 +83,84 @@ def test_editorial_false_positives_pass(rules, text):
     assert evaluate_compliance(text, "ivs-health", rules).status is ComplianceStatus.PASS
 
 
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Não tome 2 cápsulas por dia.",
+        "Não compre agora ou será tarde demais.",
+        "Não existe resultado garantido para todas as pessoas.",
+        "Não é a única solução que funciona.",
+        "Nunca tome 2 cápsulas por dia!",
+        "Aviso, jamais compre agora ou será tarde demais.",
+        "ＮÃＯ ＴＯＭＥ 2 cápsulas por dia.",
+    ],
+)
+def test_negated_clauses_are_masked_conservatively(rules, text):
+    assert evaluate_compliance(text, "ivs-health", rules).status is ComplianceStatus.PASS
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "A frase Tome 2 cápsulas por dia é um exemplo proibido.",
+        "O texto Cure a obesidade definitivamente é inadequado.",
+        "A expressão COMPRE AGORA OU SERÁ TARDE DEMAIS seria um exemplo do que evitar.",
+        "Ｏ ＥＸＥＭＰＬＯ Cure a obesidade definitivamente é proibido.",
+    ],
+)
+def test_explicit_metalinguistic_examples_are_masked(rules, text):
+    assert evaluate_compliance(text, "ivs-health", rules).status is ComplianceStatus.PASS
+
+
+@pytest.mark.parametrize(
+    ("text", "reasons"),
+    [
+        ("Não espere, tome 2 cápsulas por dia.", ["DIRECT_PRESCRIPTION"]),
+        ("Não existe cura. Este protocolo cura a diabetes.", ["CURE_CLAIM"]),
+        (
+            (
+                "A frase Tome 2 cápsulas por dia é um exemplo proibido. "
+                "Este protocolo cura a diabetes."
+            ),
+            ["CURE_CLAIM"],
+        ),
+        (
+            (
+                "O texto Cure a obesidade definitivamente é inadequado; "
+                "compre agora ou será tarde demais."
+            ),
+            ["FALSE_URGENCY"],
+        ),
+    ],
+)
+def test_masking_does_not_hide_positive_claims_in_new_clauses(rules, text, reasons):
+    result = evaluate_compliance(text, "ivs-health", rules)
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == reasons
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Este protocolo curou a diabetes.",
+        "Este protocolo curará a diabetes.",
+        "Esse método CURA a obesidade.",
+        "Este tratamento pode curar a depressão.",
+    ],
+)
+def test_contextual_cure_conjugations_are_blocked(rules, text):
+    result = evaluate_compliance(text, "ivs-health", rules)
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["CURE_CLAIM"]
+
+
+@pytest.mark.parametrize("text", ["Voce tem diabetes.", "Seu diagnostico é câncer."])
+def test_diagnosis_accepts_explicit_unaccented_variants(rules, text):
+    result = evaluate_compliance(text, "ivs-health", rules)
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["DIRECT_DIAGNOSIS"]
+
+
 def test_normalization_is_nfkc_case_and_whitespace_aware_without_mutating(rules):
     text = "  ＶＯＣÊ\tVAI\nPERDER 10 KG EM 30 DIAS  "
     before = text
@@ -139,6 +217,21 @@ def test_universal_validates_text_but_always_passes():
         evaluate_compliance("\u200b", Library.UNIVERSAL)
 
 
+def test_universal_rejects_invalid_rules_library_before_early_pass():
+    with pytest.raises(ValueError, match="rules_library.*HookLibrary"):
+        evaluate_compliance("texto válido", Library.UNIVERSAL, object())  # type: ignore[arg-type]
+
+
+def test_universal_with_valid_rules_library_does_not_scan(rules, monkeypatch):
+    def fail_if_scanned(_text):
+        pytest.fail("universal não deve executar scanner médico")
+
+    monkeypatch.setattr(rules, "scan_forbidden_claims", fail_if_scanned)
+    result = evaluate_compliance("texto válido", Library.UNIVERSAL, rules)
+    assert result.status is ComplianceStatus.PASS
+    assert result.reasons == []
+
+
 def test_block_precedes_review_and_reasons_are_unique_in_dataset_order(rules):
     text = (
         "Resultado garantido para todas as pessoas: reduz 37% da gordura. "
@@ -147,6 +240,22 @@ def test_block_precedes_review_and_reasons_are_unique_in_dataset_order(rules):
     result = evaluate_compliance(text, "ivs-health", rules)
     assert result.status is ComplianceStatus.BLOCK
     assert result.reasons == [
+        "GUARANTEED_RESULT",
+        "DIRECT_DIAGNOSIS",
+        "UNSOURCED_CLINICAL_NUMBER",
+    ]
+
+
+def test_masked_and_positive_claim_reasons_keep_dataset_order(rules):
+    text = (
+        "Não tome 2 cápsulas por dia. Este método reduz 37% da gordura. "
+        "Voce tem diabetes. Este protocolo curou a diabetes. "
+        "Resultado garantido para todas as pessoas."
+    )
+    result = evaluate_compliance(text, "ivs-health", rules)
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == [
+        "CURE_CLAIM",
         "GUARANTEED_RESULT",
         "DIRECT_DIAGNOSIS",
         "UNSOURCED_CLINICAL_NUMBER",

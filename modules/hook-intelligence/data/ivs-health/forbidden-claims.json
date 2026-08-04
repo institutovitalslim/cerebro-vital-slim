@@ -1,12 +1,12 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "categories": [
     {
       "id": "cure",
       "label": "Cura",
       "description": "Afirma eliminar ou reverter definitivamente uma doença ou condição.",
       "examples": ["Este protocolo cura a diabetes.", "Cure a obesidade definitivamente."],
-      "patterns": ["\\b(?:este\\s{1,4}|esse\\s{1,4}|o\\s{1,4}|)protocol(?:o|os)\\s{1,4}cura\\s{1,4}(?:a|o)\\s{1,4}(?:diabetes|obesidade|depressão|hipertensão|ansiedade|câncer|infecção)\\b", "\\bcure\\s{1,4}(?:a|o)\\s{1,4}(?:diabetes|obesidade|depressão|hipertensão|ansiedade|câncer|infecção)(?:\\s{1,4}definitivamente|)\\b", "\\b(?:elimina|eliminar|eliminado|eliminada)\\s{1,4}(?:definitivamente\\s{1,4}|)(?:a|o)\\s{1,4}(?:doença|condição)\\b"]
+      "patterns": ["\\b(?:este\\s{1,4}|esse\\s{1,4}|esta\\s{1,4}|essa\\s{1,4}|o\\s{1,4}|a\\s{1,4}|)(?:protocolo|tratamento|método|terapia|procedimento)\\s{1,4}(?:pode\\s{1,4}|)(?:cura|curou|curará|curam|curava|curaria|curar)\\s{1,4}(?:a\\s{1,4}|o\\s{1,4}|)(?:diabetes|obesidade|depressão|hipertensão|ansiedade|câncer|infecção)\\b", "\\bcure\\s{1,4}(?:a|o)\\s{1,4}(?:diabetes|obesidade|depressão|hipertensão|ansiedade|câncer|infecção)(?:\\s{1,4}definitivamente|)\\b", "\\b(?:elimina|eliminar|eliminado|eliminada)\\s{1,4}(?:definitivamente\\s{1,4}|)(?:a|o)\\s{1,4}(?:doença|condição)\\b"]
     },
     {
       "id": "guarantee",
@@ -20,7 +20,7 @@
       "label": "Diagnóstico",
       "description": "Declara diretamente uma condição usando uma lista conservadora de termos clínicos explícitos; não representa cobertura clínica completa.",
       "examples": ["Você tem diabetes.", "Seu quadro é depressão.", "Você é diabético.", "Seu diagnóstico é câncer."],
-      "patterns": ["\\b(?:você|tu)\\s{1,4}(?:tem|está\\s{1,4}com|sofre\\s{1,4}de)\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\bseu\\s{1,4}quadro\\s{1,4}(?:é|indica)\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\b(?:você|tu)\\s{1,4}é\\s{1,4}(?:diabétic[oa]|hipertens[oa]|obes[oa]|depressiv[oa])\\b", "\\bseu\\s{1,4}diagnóstico\\s{1,4}é\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b"]
+      "patterns": ["\\b(?:você|voce|tu)\\s{1,4}(?:tem|está\\s{1,4}com|sofre\\s{1,4}de)\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|cancer|infecção)\\b", "\\bseu\\s{1,4}quadro\\s{1,4}(?:é|indica)\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|cancer|infecção)\\b", "\\b(?:você|voce|tu)\\s{1,4}é\\s{1,4}(?:diabétic[oa]|hipertens[oa]|obes[oa]|depressiv[oa])\\b", "\\bseu\\s{1,4}(?:diagnóstico|diagnostico)\\s{1,4}é\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|cancer|infecção)\\b"]
     },
     {
       "id": "prescription",

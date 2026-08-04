@@ -4,6 +4,7 @@ As regras são conservadoras e servem para triagem editorial. O resultado não �
 avaliação jurídica ou médica definitiva.
 """
 
+import re
 import unicodedata
 
 from hook_intelligence.domain.models import (
@@ -24,6 +25,16 @@ _CATEGORY_REASON = {
     "absolute_superiority": "ABSOLUTE_SUPERIORITY",
 }
 _REVIEW_CATEGORIES = frozenset({"unsourced_number"})
+_NEGATED_CLAUSE_RE = re.compile(
+    r"(^|[,.;:!?])(\s{0,20}(?:não|nunca|jamais)\b[^,.;:!?]{0,500})",
+    re.IGNORECASE,
+)
+_METALINGUISTIC_CLAUSE_RE = re.compile(
+    r"(^|[,.;:!?])(\s{0,20}(?:a frase|o texto|a expressão|o exemplo)\s{1,4}"
+    r"[^,.;:!?]{0,300}\s{1,4}(?:é|seria)\s{1,4}[^,.;:!?]{0,80}"
+    r"(?:proibid[oa]|inadequad[oa]|exemplo\s{1,4}do\s{1,4}que\s{1,4}evitar)\b)",
+    re.IGNORECASE,
+)
 
 
 def _normalize_claim_text(text: str) -> str:
@@ -54,6 +65,16 @@ def _coerce_library(library: Library | str) -> Library:
         raise ValueError(f"library inválida: {library!r}") from error
 
 
+def _mask_editorial_context(text: str) -> str:
+    """Mascara heurísticas editoriais bounded sem alterar o texto recebido."""
+
+    def mask_clause(match: re.Match[str]) -> str:
+        return match.group(1) + (" " * len(match.group(2)))
+
+    masked = _METALINGUISTIC_CLAUSE_RE.sub(mask_clause, text)
+    return _NEGATED_CLAUSE_RE.sub(mask_clause, masked)
+
+
 def evaluate_compliance(
     text: str,
     library: Library | str,
@@ -63,13 +84,13 @@ def evaluate_compliance(
 
     normalized = _normalize_claim_text(text)
     active_library = _coerce_library(library)
-    if active_library is Library.UNIVERSAL:
-        return ComplianceResult(status=ComplianceStatus.PASS, reasons=[])
     if rules_library is not None and not isinstance(rules_library, HookLibrary):
         raise ValueError("rules_library deve ser uma HookLibrary validada")
+    if active_library is Library.UNIVERSAL:
+        return ComplianceResult(status=ComplianceStatus.PASS, reasons=[])
     rules = HookLibrary.load_default() if rules_library is None else rules_library
     try:
-        matches = rules.scan_forbidden_claims(normalized)
+        matches = rules.scan_forbidden_claims(_mask_editorial_context(normalized))
     except (ValueError, TypeError):
         # Não publique expressão nem detalhe do motor de regex.
         raise ValueError("falha contextual ao avaliar regras médicas IVS") from None
