@@ -358,8 +358,9 @@ class HookLibrary:
         """Aceita um subset conservador sem executar a expressão não confiável.
 
         O subset limita tamanho e rejeita quantificação de grupos, backreferences,
-        lookbehind, condicionais e wildcards ilimitados. As regras são deliberadamente
-        mais estritas que o motor ``re`` para manter tempo de busca previsível.
+        extensões de grupo (salvo ``(?:...)``) e wildcards ilimitados. As regras são
+        deliberadamente mais estritas que o motor ``re`` para manter tempo de busca
+        previsível.
         """
 
         reason = None
@@ -371,9 +372,11 @@ class HookLibrary:
             reason = "lookbehind não permitido"
         elif REGEX_CONDITIONAL_MARKER in expression:
             reason = "condicional não permitido"
+        elif re.search(r"\(\?(?!:)", expression):
+            reason = "extensão de grupo não permitida; apenas (?:...) é aceito"
         elif re.search(r"(?<!\\)\.(?:\*|\+)", expression):
             reason = "wildcard ilimitado não permitido"
-        elif re.search(r"(?<!\\)\)(?:[*+?]|\{\d+(?:,\d*)?\})", expression):
+        elif re.search(r"(?<!\\)\)\s*[*+?{]", expression):
             reason = "quantificador aplicado a grupo não permitido"
         if reason is not None:
             cls._invalid(relative, item_id, "pattern", f"{expression}: {reason}")

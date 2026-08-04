@@ -571,8 +571,22 @@ def test_templates_avoid_known_slot_agreement_traps():
         "(a+)+$",
         "(a*)*$",
         "(.*)+",
+        "(?x)(a+) +$",
+        "(?x)((a+)) +$",
+        "(?x)(a|aa) +$",
+        "(?x:(a+) +$)",
+        "(?i)a",
+        "(?x:a+)",
+        "(?#comment)a",
+        "(a+)   +$",
+        "(a*)   *$",
+        "(a)   ?$",
+        "(a)   {1,2}$",
+        "((a+))   +$",
+        "(a|aa)   +$",
         r"\b(a)\1\b",
         r"(?P<word>a)(?P=word)",
+        r"(?=dose)alta",
         r"(?<=dose)alta",
         r"(?<!sem )risco",
         r"(a)(?(1)b|c)",
@@ -596,17 +610,36 @@ def test_loader_rejects_unsafe_claim_regex_with_context(tmp_path, unsafe_pattern
     assert unsafe_pattern in message
 
 
+def test_loader_accepts_pure_non_capturing_group_in_claim_regex(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "ivs-health/forbidden-claims.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["categories"][0]["patterns"] = [r"\b(?:cura|curar)\b"]
+    write_json(path, payload)
+
+    library = HookLibrary.load(root)
+
+    assert library.scan_forbidden_claims("Este método cura.") == (("cure", r"\b(?:cura|curar)\b"),)
+
+
 @pytest.mark.parametrize(
     ("category", "text", "detected"),
     [
         ("diagnosis", "Você tem diabetes.", True),
         ("diagnosis", "Seu quadro é depressão.", True),
+        ("diagnosis", "Você é diabético.", True),
+        ("diagnosis", "Seu diagnóstico é câncer.", True),
         ("diagnosis", "Você tem dúvidas sobre o tema?", False),
         ("diagnosis", "Você tem experiência prática.", False),
+        ("diagnosis", "Você é incrível.", False),
+        ("diagnosis", "Seu diagnóstico é um tema complexo.", False),
         ("prescription", "Tome 2 cápsulas por dia.", True),
         ("prescription", "Consuma 20 mg diariamente.", True),
+        ("prescription", "Tome metformina diariamente.", True),
+        ("prescription", "Use este medicamento.", True),
         ("prescription", "Use esta estrutura no início do vídeo.", False),
         ("prescription", "Consuma este conteúdo diariamente.", False),
+        ("prescription", "Tome conhecimento do contexto.", False),
     ],
 )
 def test_claim_scanner_diagnosis_and_prescription_matrix(category, text, detected):

@@ -19,15 +19,15 @@
       "id": "diagnosis",
       "label": "Diagnóstico",
       "description": "Declara diretamente uma condição usando uma lista conservadora de termos clínicos explícitos; não representa cobertura clínica completa.",
-      "examples": ["Você tem diabetes.", "Seu quadro é depressão."],
-      "patterns": ["\\b(?:você|tu)\\s+(?:tem|está\\s+com|sofre\\s+de)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\bseu\\s+quadro\\s+(?:é|indica)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b"]
+      "examples": ["Você tem diabetes.", "Seu quadro é depressão.", "Você é diabético.", "Seu diagnóstico é câncer."],
+      "patterns": ["\\b(?:você|tu)\\s+(?:tem|está\\s+com|sofre\\s+de)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\bseu\\s+quadro\\s+(?:é|indica)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\b(?:você|tu)\\s+é\\s+(?:diabétic[oa]|hipertens[oa]|obes[oa]|depressiv[oa])\\b", "\\bseu\\s+diagnóstico\\s+é\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b"]
     },
     {
       "id": "prescription",
       "label": "Prescrição",
       "description": "Ordena o uso de substância, dose, tratamento ou conduta clínica.",
-      "examples": ["Tome 2 cápsulas por dia.", "Consuma 20 mg diariamente."],
-      "patterns": ["\\b(?:tome|consuma|use|aplique|ingira)\\s+(?:\\d+[.,]\\d+|\\d+)\\s*(?:mg|ml|g|cápsulas?|comprimidos?|gotas?|doses?)\\b", "\\b(?:faça|inicie)\\s+(?:este|o|um)\\s+tratamento\\b"]
+      "examples": ["Tome 2 cápsulas por dia.", "Consuma 20 mg diariamente.", "Tome metformina diariamente.", "Use este medicamento."],
+      "patterns": ["\\b(?:tome|consuma|use|aplique|ingira)\\s+(?:\\d+[.,]\\d+|\\d+)\\s*(?:mg|ml|g|cápsulas?|comprimidos?|gotas?|doses?)\\b", "\\b(?:faça|inicie)\\s+(?:este|o|um)\\s+tratamento\\b", "\\b(?:tome|use|consuma|ingira)\\s+(?:metformina|insulina|antibiótico|antidepressivo)\\s+(?:diariamente|por\\s+dia|todos\\s+os\\s+dias)\\b", "\\b(?:tome|use|consuma|ingira)\\s+(?:este|esta|o|a|um|uma)\\s+(?:medicamento|remédio|fármaco|antibiótico|antidepressivo)\\b"]
     },
     {
       "id": "false_urgency",
