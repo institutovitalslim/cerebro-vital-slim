@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "hipoteses_integradas": [
+    {
+      "titulo": "Fadiga matinal, queda de cabelo, pele seca e intestino irregular + TSH elevado = padrão de hipotireoidismo subclínico",
+      "queixas_relacionadas": [
+        "Fadiga matinal intensa e baixo nível de energia (5/5)",
+        "Queda de cabelo",
+        "Pele seca e unhas fracas",
+        "Hábito intestinal irregular (constipação alternante)",
+        "Dificuldade de manutenção do peso"
+      ],
+      "exames_relacionados": [
+        "TSH 6,13 uUI/mL (ref 0,27-4,2)",
+        "T4 Livre normal",
+        "T3 Total normal"
+      ],
+      "descricao_clinica": "A tríade de queixas da paciente — fadiga com energia 3/10 e disposição ao acordar 1/5, queda capilar, pele seca e constipação intermitente — encontra suporte laboratorial direto no TSH de 6,13 com T4 Livre preservado, padrão compatível com hipotireoidismo subclínico. Em mulher de 62 anos, a hipótese etiológica mais provável é tireoidite autoimune, exigindo confirmação em nova dosagem em 6-8 semanas com pesquisa de anti-TPO e anti-tireoglobulina. Relevante notar que o hipotireoidismo subclínico também contribui para o LDL/ApoB elevados e para a dificuldade de manutenção do peso — ou seja, este eixo pode ser o denominador comum de múltiplas queixas.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Repetir TSH e T4L em 6-8 semanas com anti-TPO e anti-tireoglobulina; avaliação endocrinológica para considerar conduta terapêutica conforme evolução, sintomas e perfil lipídico associado."
+    },
+    {
+      "titulo": "Carga aterogênica elevada (ApoB 116) em pós-menopausa sedentária = risco cardiovascular silencioso prioritário",
+      "queixas_relacionadas": [
+        "Sedentarismo total (contexto de risco, sem queixa direta)"
+      ],
+      "exames_relacionados": [
+        "ApoB 116 mg/dL (ref <100)",
+        "LDL 141 mg/dL",
+        "Não-HDL 159 mg/dL",
+        "Colesterol Total 251 mg/dL"
+      ],
+      "descricao_clinica": "A paciente não apresenta queixa cardiovascular, mas o ApoB de 116 mg/dL confirma aumento real do número de partículas aterogênicas — o achado não é apenas reflexo do HDL alto (92). Em mulher de 62 anos, pós-menopausa há mais de uma década, sedentária e com disglicemia inicial, este é o achado de maior peso prognóstico do painel. Atenuantes importantes: PCR-us <1, triglicérides normais e homocisteína ótima sugerem baixo componente inflamatório residual. O TSH elevado deve ser excluído como causa secundária antes de definir a estratégia hipolipemiante definitiva.",
+      "prioridade": 3,
+      "tipo": "achado_laboratorial_sem_queixa",
+      "acao_proposta": "Estratificação cardiometabólica estruturada nas próximas semanas: considerar Lp(a) e escore de cálcio coronariano; discutir estratégia hipolipemiante (nutricional, atividade física e, conforme julgamento médico, farmacológica) após reavaliação tireoidiana."
+    },
+    {
+      "titulo": "Reganho de peso recorrente + padrão alimentar de alta carga glicêmica + glicemia 104 = disglicemia inicial com resistência insulínica incipiente",
+      "queixas_relacionadas": [
+        "Dificuldade de manutenção do peso — reganho após emagrecimento",
+        "Padrão alimentar com carboidratos refinados e apenas 2 refeições/dia",
+        "Fadiga e baixa energia"
+      ],
+      "exames_relacionados": [
+        "Glicose 104 mg/dL (ref 70-99)",
+        "Glicemia média estimada 108 mg/dL",
+        "HOMA-IR 2,11 (faixa de atenção IVS)",
+        "HbA1c 5,4% (limiar de atenção)"
+      ],
+      "descricao_clinica": "O histórico de oscilação ponderal ao longo da vida, associado a padrão alimentar concentrado em carboidratos de alto índice glicêmico (pão, tapioca, banana) em apenas 2 refeições diárias e sedentarismo total, encontra correlato laboratorial na glicemia de jejum alterada (104), glicemia média estimada de 108 e HOMA-IR em faixa de atenção. O padrão sugere disglicemia inicial com resistência insulínica incipiente, ainda sem hiperinsulinemia estabelecida — janela de oportunidade ideal para reversão por estilo de vida. O hipoestrogenismo pós-menopausa agrava a redistribuição visceral de gordura e a perda de sensibilidade à insulina, fechando o ciclo do reganho.",
+      "prioridade": 3,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Intervenção nutricional estruturada (redistribuição de refeições, redução de carga glicêmica, aumento proteico) e treino resistido progressivo; considerar TOTG 75g para caracterização completa; reavaliar glicemia, insulina e HbA1c em 3-6 meses."
+    },
+    {
+      "titulo": "Queda de cabelo, pele seca, sono ruim e fadiga + estradiol 5 pg/mL = repercussões sistêmicas do hipoestrogenismo pós-menopausa",
+      "queixas_relacionadas": [
+        "Queda de cabelo",
+        "Pele seca e unhas fracas",
+        "Qualidade de sono 3/10",
+        "Fadiga matinal"
+      ],
+      "exames_relacionados": [
+        "Estradiol 5 pg/mL",
+        "FSH 76,4 mUI/mL",
+        "LH 52,9 mUI/mL"
+      ],
+      "descricao_clinica": "O eixo hipergonadotrófico-hipoestrogênico (estradiol 5 com FSH 76,4) confirma pós-menopausa estabelecida com exposição estrogênica mínima. As queixas dermatológicas (pele seca, queda capilar, unhas frágeis), o sono fragmentado de má qualidade e parte da fadiga são compatíveis com hipoestrogenismo sustentado — que também contribui para o perfil lipídico aterogênico e a disglicemia. Paciente nunca realizou reposição hormonal e está há tempo estimado superior a 10 anos de menopausa, o que exige ponderação criteriosa de risco-benefício quanto a estratégias hormonais versus não hormonais, conforme diretrizes vigentes.",
+      "prioridade": 3,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Avaliação ginecológica/endocrinológica para discussão individualizada de estratégias hormonais ou não hormonais, considerando janela terapêutica e risco cardiovascular; abordar higiene do sono e investigar apneia obstrutiva se sono ruim persistir."
+    },
+    {
+      "titulo": "Baixa vitalidade e fadiga + SHBG elevada com testosterona livre no terço inferior = possível componente androgênico funcional",
+      "queixas_relacionadas": [
+        "Fadiga e energia 3/10",
+        "Dificuldade de manutenção de peso (menor suporte à massa magra)"
+      ],
+      "exames_relacionados": [
+        "SHBG 105 nmol/L (faixa superior)",
+        "Testosterona livre/biodisponível no terço inferior da referência"
+      ],
+      "descricao_clinica": "Embora a testosterona total esteja adequada, a SHBG elevada reduz as frações livre e biodisponível para o terço inferior da referência. Em correlação com as queixas de baixa vitalidade, fadiga persistente e dificuldade de composição corporal, este padrão pode representar componente androgênico funcional contribuindo para o quadro — hipótese secundária às tireoidiana e estrogênica, mas relevante no plano integrado, especialmente pela relação com massa magra em paciente sedentária com risco de sarcopenia.",
+      "prioridade": 2,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Correlacionar clinicamente (libido, força, composição corporal) em consulta; priorizar treino resistido e adequação proteica como primeira linha; reavaliar eixo androgênico após correção tireoidiana, que também influencia SHBG."
+    },
+    {
+      "titulo": "Sedentarismo total + IGF-1 no quartil inferior + hipoestrogenismo = risco elevado de sarcopenia e fragilidade óssea",
+      "queixas_relacionadas": [
+        "Sedentarismo (ausência completa de atividade física)",
+        "Apenas 2 refeições/dia com provável baixa ingesta proteica"
+      ],
+      "exames_relacionados": [
+        "IGF-1 no quartil inferior da referência",
+        "Estradiol 5 pg/mL",
+        "Vitamina D 56 ng/mL (abaixo do alvo ótimo IVS >80)"
+      ],
+      "descricao_clinica": "A convergência de sedentarismo total, padrão alimentar hipoproteico (2 refeições/dia), IGF-1 no quartil inferior, hipoestrogenismo profundo e vitamina D subótima configura cenário de alto risco para sarcopenia e perda de massa óssea em mulher de 62 anos. Não há queixa musculoesquelética ativa, mas a fadiga e a dificuldade de manutenção do peso podem ter componente de baixa massa magra. Este eixo é estrutural para o sucesso do emagrecimento sustentável: sem preservação muscular, o histórico de reganho tende a se repetir.",
+      "prioridade": 2,
+      "tipo": "padrao_nutricional",
+      "acao_proposta": "Solicitar densitometria óssea e avaliação de composição corporal (bioimpedância/DEXA); estruturar treino resistido progressivo e meta proteica por refeição; considerar otimização de vitamina D sob orientação clínica."
+    },
+    {
+      "titulo": "Leucopenia leve (3.250/µL) sem queixa infecciosa = achado subclínico a caracterizar evolutivamente",
+      "queixas_relacionadas": [],
+      "exames_relacionados": [
+        "Leucócitos 3.250/µL (ref 3.600-11.000)",
+        "Neutrófilos 1.869/µL e linfócitos 1.060/µL (próximos aos limites inferiores)"
+      ],
+      "descricao_clinica": "Leucopenia leve e proporcional, sem citopenia seletiva e com demais linhagens preservadas, em paciente sem queixa infecciosa ou uso de medicações. Padrão frequentemente compatível com variação constitucional benigna ou leucopenia transitória pós-viral, mas que exige caracterização da tendência evolutiva antes de ser rotulado como benigno. B12 de 781 pg/mL afasta deficiência franca, embora esteja abaixo do alvo funcional IVS.",
+      "prioridade": 2,
+      "tipo": "achado_laboratorial_sem_queixa",
+      "acao_proposta": "Repetir hemograma em 4-8 semanas com dosagem de folato e zinco; revisar histórico de infecções virais recentes; se persistência ou progressão, investigação complementar direcionada (sorologias virais e triagem autoimune)."
+    }
+  ],
+  "queixas_sem_correlato_laboratorial": [
+    {
+      "queixa": "Hábito intestinal irregular com intolerância ao glúten declarada e consumo diário de pão",
+      "interpretacao": "A alternância constipação/trânsito normal pode ter componente tireoidiano (TSH elevado), mas a inconsistência entre intolerância declarada e consumo regular de glúten sugere sensibilidade não caracterizada — possivelmente sensibilidade ao glúten não celíaca, disbiose ou doença celíaca não investigada. Não há sorologia celíaca no painel atual.",
+      "proxima_acao": "Solicitar anti-transglutaminase IgA + IgA total ANTES de retirar o glúten da dieta; após esclarecimento, orientar adequação alimentar coerente com o diagnóstico."
+    },
+    {
+      "queixa": "Qualidade de sono 3/10 sem horas de sono documentadas",
+      "interpretacao": "Parcialmente explicável pelo hipoestrogenismo, mas a intensidade da fadiga matinal (1/5 ao acordar) levanta hipótese de apneia obstrutiva do sono — prevalente em mulheres pós-menopausa com sobrepeso — não avaliável pelos exames laboratoriais realizados.",
+      "proxima_acao": "Anamnese dirigida do sono (ronco, pausas respiratórias, sonolência diurna — escala de Epworth); considerar polissonografia se triagem positiva."
+    },
+    {
+      "queixa": "Barreira financeira como principal obstáculo ao cuidado da saúde",
+      "interpretacao": "Fator psicossocial sem correlato laboratorial, mas com impacto direto na adesão. O histórico de reganho pode refletir intervenções anteriores não sustentáveis; o plano precisa ser realista, priorizado e com custo-efetividade explícita.",
+      "proxima_acao": "Estruturar o plano em fases priorizadas por impacto clínico, deixando claro o que é essencial agora e o que pode aguardar; alinhar expectativas de investimento na consulta."
+    }
+  ],
+  "achados_sem_queixa_correspondente": [
+    {
+      "achado": "ApoB 116 mg/dL com LDL 141 e não-HDL 159 — carga aterogênica confirmada",
+      "relevancia_clinica": "Principal risco silencioso do caso. Sem sintomas, mas com maior peso prognóstico em mulher de 62 anos pós-menopausa. Atenuado por HDL 92, PCR-us <1 e triglicérides normais.",
+      "monitoramento": "Reavaliar perfil lipídico + ApoB em 3 meses após intervenção; considerar Lp(a) única e escore de cálcio coronariano para estratificação definitiva; reavaliar após correção do TSH (causa secundária potencial)."
+    },
+    {
+      "achado": "Leucopenia leve (3.250/µL)",
+      "relevancia_clinica": "Baixo risco imediato; padrão proporcional sugere benignidade, mas exige confirmação evolutiva.",
+      "monitoramento": "Hemograma de controle em 4-8 semanas + folato e zinco; escalonar investigação apenas se persistência/progressão."
+    },
+    {
+      "achado": "Vitamina D 56 ng/mL — suficiente, mas abaixo do alvo ótimo IVS (>80)",
+      "relevancia_clinica": "Relevância aumentada pelo contexto de hipoestrogenismo e sedentarismo (proteção óssea e muscular).",
+      "monitoramento": "Reavaliar 25-OH-vitamina D em 3-6 meses junto com cálcio e marcadores ósseos, conforme estratégia definida em consulta."
+    },
+    {
+      "achado": "IGF-1 no quartil inferior da referência",
+      "relevancia_clinica": "Compatível com declínio fisiológico do eixo GH/IGF-1, mas clinicamente relevante no contexto de risco de sarcopenia.",
+      "monitoramento": "Acompanhar via composição corporal (DEXA/bioimpedância) e força funcional; resposta esperada com treino resistido e adequação proteica."
+    }
+  ],
+  "plano_clinico_integrado": {
+    "alvos_prioritarios": [
+      "Confirmar e manejar o hipotireoidismo subclínico (repetir TSH/T4L + anti-TPO em 6-8 semanas) — potencial denominador comum de fadiga, queda de cabelo, intestino e lipídios",
+      "Estratificar e reduzir a carga aterogênica (ApoB/LDL/não-HDL) com abordagem estruturada nas próximas semanas",
+      "Reverter a disglicemia inicial: reestruturação alimentar (3-4 refeições, menor carga glicêmica, meta proteica) e treino resistido progressivo",
+      "Avaliar risco-benefício de estratégias hormonais ou não hormonais para o hipoestrogenismo sintomático, com profissional habilitado",
+      "Proteção musculoesquelética: densitometria óssea, composição corporal, otimização de vitamina D e proteína",
+      "Esclarecer a questão do glúten (sorologia celíaca antes da exclusão) e investigar qualidade do sono/apneia"
+    ],
+    "monitoramento_sugerido": "Em 6-8 semanas: TSH, T4L, anti-TPO/anti-Tg e hemograma de controle (leucopenia). Em 3 meses: perfil lipídico completo + ApoB. Em 3-6 meses: glicemia, insulina, HOMA-IR, HbA1c e 25-OH-vitamina D. Densitometria óssea e composição corporal como linha de base do programa.",
+    "investigacoes_adicionais": [
+      "Anti-TPO e anti-tireoglobulina",
+      "Anti-transglutaminase IgA + IgA total (antes de excluir glúten)",
+      "Lp(a) — dosagem única",
+      "Escore de cálcio coronariano, conforme julgamento clínico",
+      "TOTG 75g para caracterização da disglicemia",
+      "Densitometria óssea (DEXA) + composição corporal",
+      "Folato e zinco (contexto da leucopenia)",
+      "Triagem de apneia do sono (Epworth; polissonografia se positiva)"
+    ]
+  },
+  "narrativa_executiva": "Nicelia, seus exames explicam muito do que você sente: sua tireoide está trabalhando com esforço extra e a fase pós-menopausa está impactando sua energia, seu cabelo, seu sono e a facilidade de reganhar peso. O momento de agir é agora — o açúcar e o colesterol estão em fase inicial, ainda totalmente reversíveis com o plano certo.",
+  "alinhamento_disc": "Perfil D: seja direta e objetiva — abra com os 3 achados de maior impacto (tireoide, ApoB, disglicemia), mostre causa-efeito com as queixas dela, apresente o plano em etapas claras com metas e prazos mensuráveis, e dê a ela o controle da decisão. Evite rodeios e excesso de detalhe técnico; dado o fator financeiro, mostre custo-benefício e o que é inegociável versus opcional."
+}

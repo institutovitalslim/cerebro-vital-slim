@@ -1,0 +1,52 @@
+{
+  "paciente_nome": "Leonardo Torres de Andrade",
+  "paciente_slug": "leonardo-torres-de-andrade",
+  "sexo": "M",
+  "idade": 43,
+  "fase": "completa",
+  "gerado_em": "2026-08-04T18:46:52.042369",
+  "renderer": "v12",
+  "audit_dir": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_completa_20260804_184651",
+  "etapas": {
+    "etapa_1_questionario": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_1_questionario.json",
+    "etapa_2_exames": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_2_exames.json",
+    "etapa_3_interpretacao": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_3_interpretacao.json",
+    "etapa_4_cruzamento": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_4_cruzamento.json"
+  },
+  "insumos": {
+    "questionario": {
+      "path": "/root/ivs-preconsulta-data/draft-cfce500f-a1df-4410-8a11-46955ccd276b-leonardo-torres-de-andrade.json",
+      "presente": true,
+      "sha256": "dcf3f0dfc3d9302f898aa9a35be5672c72659b1e168b562b88e8bb71d873b760",
+      "bytes": 3564
+    },
+    "exames_pdfs": {
+      "path": "/root/.hermes/profiles/ana/workspace/leonardo_torres_2026-08-04/drive_manifest.json",
+      "presente": true,
+      "sha256": "4a55e9230b7cefd9754a3140f76a4b9ccd03bc9c3bc562268892eae4490c5415",
+      "bytes": 837
+    },
+    "bioimpedancia": {
+      "path": "/tmp/proval/bio_leonardo.json",
+      "presente": true,
+      "sha256": "127e49dab3e0f0caae0f9f6905b66eec50287143af6d2967cb4c7eb2bee231a6",
+      "bytes": 181414
+    },
+    "antropometria": {
+      "path": "/tmp/proval/antro_leonardo_img.json",
+      "presente": true,
+      "sha256": "2f518e14380fe80452b9adf860ca8ce515505ded5e655771786867cf5004653b",
+      "bytes": 147136
+    }
+  },
+  "artefatos": {
+    "html_interna": "/tmp/proval/out/apresentacao-leonardo-torres-de-andrade-v12-20260804_184651.html",
+    "html_paciente": "/tmp/proval/out/apresentacao-leonardo-torres-de-andrade-paciente-v12-20260804_184651.html"
+  },
+  "validacao": {
+    "gate": "_v10_internal_validation",
+    "fase": "completa",
+    "status": "passed",
+    "log_dir": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/validacao_v10"
+  }
+}

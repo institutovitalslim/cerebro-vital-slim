@@ -1,0 +1,32 @@
+{
+  "paciente_nome": "CLEITON DE JESUS CARVALHO",
+  "sexo": "M",
+  "idade": 44,
+  "pdfs_processados": [
+    {
+      "nome": "Exames de Sangue.pdf",
+      "extraidos_pelo_llm": 50,
+      "validados": 49,
+      "lab_origem": "Instituto Hermes Pardini",
+      "data_coleta": "01/06/2026"
+    }
+  ],
+  "exames_validados": 49,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "PCR-us",
+        "nome_no_laudo": "PROTEÍNA C REATIVA ULTRA SENSIVEL",
+        "valor": 0.55,
+        "unidade": "mg/dL",
+        "ref_min": 0,
+        "ref_max": 1.0,
+        "grupo": "inflamatorio",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+    }
+  ],
+  "cross_check_warnings": []
+}

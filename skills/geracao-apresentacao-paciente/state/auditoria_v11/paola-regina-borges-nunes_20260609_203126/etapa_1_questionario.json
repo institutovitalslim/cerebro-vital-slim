@@ -1,0 +1,187 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Paola Regina Borges Nunes",
+    "sexo": "F",
+    "idade": 49,
+    "imc_atual": 29.5,
+    "imc_objetivo": 25.3,
+    "profissao": "Micro empresária",
+    "como_conheceu": "outro"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Excesso de peso persistente",
+      "intensidade": 5,
+      "contexto": "Luta com peso a vida toda, atualmente 70kg com objetivo de 60kg. Já tentou diversas abordagens sem sucesso sustentado.",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Baixa energia e disposição",
+      "intensidade": 4,
+      "contexto": "Nível de energia 3/10, acorda com disposição 4/5, sensação fim do dia 4/5. Qualidade do sono 5/10.",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Libido reduzida",
+      "intensidade": 4,
+      "contexto": "Libido reduzida associada a perimenopausa, ressecamento vaginal e dispareunia presentes.",
+      "categoria": "hormonal"
+    },
+    {
+      "queixa": "Ciclo menstrual irregular",
+      "intensidade": 3,
+      "contexto": "Ciclo irregular em perimenopausa, com sintomas de inchaço. Sem reposição hormonal atual.",
+      "categoria": "hormonal"
+    },
+    {
+      "queixa": "Ansiedade como barreira para autocuidado",
+      "intensidade": 4,
+      "contexto": "Ansiedade identificada como principal barreira para cuidar da saúde. Investe raramente em saúde.",
+      "categoria": "psicossocial"
+    },
+    {
+      "queixa": "Frequência intestinal irregular",
+      "intensidade": 3,
+      "contexto": "Trânsito intestinal irregular, pode indicar disbiose ou padrão alimentar inadequado.",
+      "categoria": "gastrointestinal"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [],
+    "cirurgias": [
+      {
+        "procedimento": "Cesárea",
+        "ano": 2011
+      },
+      {
+        "procedimento": "Cesárea",
+        "ano": 2015
+      },
+      {
+        "procedimento": "Colecistectomia",
+        "ano": 2022
+      }
+    ],
+    "medicacoes_atuais": [],
+    "alergias_intolerancias": [
+      "Pistache"
+    ],
+    "historico_familiar": "Câncer de pulmão e próstata em familiares",
+    "reposicao_hormonal": "Não realiza reposição hormonal atualmente"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "3-4x por semana",
+      "tipo": "Musculação"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 3,
+      "doces": "Geralmente após o almoço",
+      "alcool": "Não consome",
+      "tabaco": "Não fuma",
+      "hidratacao_litros": 2.0,
+      "padrao_geral": "Padrão hiperproteico com baixo consumo de vegetais. Café da manhã e lanches com suplemento Way, almoço baseado em carne com pouca salada e arroz ocasional, jantar pipoca. Uso de açúcar para adoçar. Alimentação fim de semana variável em quantidade de refeições. Restrições: peixe, frutos do mar, comida baiana."
+    },
+    "sono": {
+      "horas": 7.0,
+      "qualidade_1_10": 5,
+      "energia_ao_acordar_1_5": 4,
+      "cansaco_durante_dia": "Não relata cansaço durante o dia"
+    },
+    "trabalho": {
+      "tipo": "Trabalho sentado",
+      "horarios": "08:00 às 12:20h"
+    },
+    "frequencia_intestinal": "Irregular"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "Irregular",
+    "menopausa": "Perimenopausa",
+    "metodo_contraceptivo": "Não utiliza",
+    "libido": "Reduzida",
+    "ressecamento_vaginal": "Presente",
+    "dispareunia": "Presente",
+    "queda_cabelo": "Leve",
+    "pele": "Seca",
+    "unhas": "Sem alterações",
+    "sintomas_ciclo": "Inchaço"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Ansiedade",
+    "investe_em_saude": "Raramente investe em saúde",
+    "nivel_energia_1_10": 3,
+    "ansiedade_estresse": "Ansiedade identificada como principal barreira para autocuidado. Falta de tempo relatada como desafio principal."
+  },
+  "metas": {
+    "peso_atual_kg": 70.0,
+    "peso_objetivo_kg": 60.0,
+    "peso_maximo_anterior_kg": 84.0,
+    "diferenca_para_objetivo_kg": 10.0
+  },
+  "spin": {
+    "tempo_luta": "Vida toda - sempre foi pessoa acima do peso",
+    "incomodo_principal": "Peso corporal",
+    "desafios": "Falta de tempo",
+    "cenario_sem_tratamento": "Permanecerá da mesma forma",
+    "investimento_perdido": "Sim, já investiu em tentativas anteriores",
+    "vida_resolvida_significaria": "Vida normal",
+    "interesse_programa": "Não agora"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Perimenopausa sem reposição hormonal com sintomas significativos",
+      "categoria": "hormonal",
+      "prioridade": 3,
+      "justificativa": "Libido reduzida, ressecamento vaginal, dispareunia e ciclo irregular em perimenopausa sugerem hipoestrogenismo que impacta qualidade de vida e saúde óssea/cardiovascular. Requer avaliação hormonal completa."
+    },
+    {
+      "sinal": "Baixa energia persistente (3/10) com sono subótimo",
+      "categoria": "energia_sono",
+      "prioridade": 3,
+      "justificativa": "Energia muito baixa associada a qualidade de sono 5/10 pode indicar disfunção tireoidiana, deficiências nutricionais ou resistência insulínica. Necessita investigação laboratorial."
+    },
+    {
+      "sinal": "IMC 29.5 com histórico de obesidade grau I (IMC máximo 35.4)",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Sobrepeso persistente desde sempre com múltiplas tentativas frustradas sugere componente metabólico/hormonal subjacente. Risco cardiovascular e metabólico aumentado."
+    },
+    {
+      "sinal": "Padrão alimentar hiperproteico com baixíssimo consumo de vegetais",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Alimentação pobre em fibras e vegetais associada a intestino irregular pode indicar disbiose, deficiências de micronutrientes e inflamação de baixo grau."
+    },
+    {
+      "sinal": "Ansiedade como barreira principal + investimento raro em saúde",
+      "categoria": "psicossocial",
+      "prioridade": 2,
+      "justificativa": "Ansiedade não tratada compromete adesão terapêutica e perpetua ciclo de autocuidado inadequado. Pode estar relacionada a desequilíbrios hormonais da perimenopausa."
+    },
+    {
+      "sinal": "Trabalho sedentário 4h20min/dia + atividade física 3-4x/semana",
+      "categoria": "musculo_esqueletico",
+      "prioridade": 1,
+      "justificativa": "Apesar de praticar musculação regularmente, trabalho sentado pode contribuir para resistência insulínica e sarcopenia relativa. Padrão de movimento diário precisa ser avaliado."
+    },
+    {
+      "sinal": "Histórico familiar de câncer (pulmão e próstata)",
+      "categoria": "outro",
+      "prioridade": 1,
+      "justificativa": "Histórico familiar de neoplasias requer vigilância oncológica adequada, especialmente em contexto de sobrepeso e perimenopausa (risco aumentado para câncer de mama/endométrio)."
+    }
+  ],
+  "perfil_disc": "S",
+  "interpretacao_inicial": "Paciente de 49 anos em perimenopausa com sobrepeso persistente (IMC 29.5), baixa energia (3/10) e múltiplos sintomas de hipoestrogenismo não tratado (libido reduzida, ressecamento vaginal, dispareunia, ciclo irregular). O padrão clínico sugere síndrome metabólica em desenvolvimento associada a declínio hormonal fisiológico, agravado por padrão alimentar inadequado (hiperproteico, pobre em vegetais, uso de açúcar) e ansiedade como barreira para autocuidado. A colecistectomia prévia (2022) pode ter impactado digestão de gorduras e absorção de vitaminas lipossolúveis. Apesar de praticar musculação 3-4x/semana, a paciente mantém peso elevado e energia muito baixa, sugerindo componente metabólico/hormonal subjacente que impede resposta adequada ao exercício.\n\nHipóteses diagnósticas a investigar laboratorialmente: (1) hipotireoidismo subclínico ou clínico (fadiga, peso, pele seca, queda capilar); (2) resistência insulínica/pré-diabetes (sobrepeso persistente, padrão alimentar); (3) deficiência de estrogênio/progesterona (sintomas perimenopáusicos); (4) deficiências nutricionais (vitamina D, B12, ferro, magnésio) secundárias a padrão alimentar restrito e má absorção pós-colecistectomia; (5) disbiose intestinal (intestino irregular, alimentação pobre em fibras). A ansiedade pode ser tanto causa quanto consequência dos desequilíbrios hormonais. Perfil DISC S indica necessidade de abordagem empática, estruturada e com suporte contínuo para adesão.",
+  "completude": {
+    "campos_preenchidos": 47,
+    "campos_totais": 50,
+    "percentual": 94.0,
+    "campos_criticos_faltantes": [
+      "Exames laboratoriais prévios não mencionados",
+      "Detalhamento de tentativas anteriores de emagrecimento",
+      "Uso de suplementos além do Way não especificado"
+    ]
+  }
+}

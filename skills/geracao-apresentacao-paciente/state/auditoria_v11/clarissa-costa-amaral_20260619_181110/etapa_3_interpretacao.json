@@ -1,0 +1,597 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Clarissa Costa Amaral",
+    "sexo": "F",
+    "idade": 38
+  },
+  "sistemas": {
+    "metabolico": {
+      "schema_version": "1.0",
+      "sistema": "metabolico",
+      "exames_interpretados": [
+        {
+          "nome": "Glicose",
+          "valor": "88",
+          "unidade": "mg/dL",
+          "referencia": "70 a 99",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Glicemia de jejum dentro de faixa ótima IVS (<90), sem evidência de hiperglicemia atual.",
+          "risco_medio_prazo": "Baixo risco glicêmico isolado; contudo, deve ser interpretado em conjunto com o perfil insulínico que sugere compensação.",
+          "fator_etiologico_provavel": "Homeostase glicêmica preservada, possivelmente às custas de hiperinsulinemia compensatória.",
+          "severidade": 2,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "HbA1c",
+          "valor": "4,2",
+          "unidade": "%",
+          "referencia": "<5,4",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Média glicêmica dos últimos 2-3 meses em faixa ótima, sem sinais de disglicemia crônica.",
+          "risco_medio_prazo": "Baixo risco de progressão a pré-diabetes no curto horizonte; valor relativamente baixo pode merecer atenção quanto a possível variação de hemácias ou hipoglicemias, se houver clínica compatível.",
+          "fator_etiologico_provavel": "Controle glicêmico médio preservado; valor baixo pode refletir variabilidade individual.",
+          "severidade": 1,
+          "investigacao_adicional": "Considerar hemograma para descartar interferentes na HbA1c se houver sintomas de hipoglicemia."
+        },
+        {
+          "nome": "Insulina",
+          "valor": "19,5",
+          "unidade": "µUI/mL",
+          "referencia": "2,5 a 13,1",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "compatível com hiperinsulinemia de jejum / tendência a resistência insulínica",
+          "risco_curto_prazo": "Insulina de jejum elevada sugere esforço pancreático aumentado para manter euglicemia, compatível com resistência insulínica em fase compensada.",
+          "risco_medio_prazo": "Possível evolução para disglicemia, ganho ponderal de difícil controle, dislipidemia aterogênica e síndrome metabólica se o quadro persistir sem intervenção.",
+          "fator_etiologico_provavel": "Provável resistência insulínica associada a fatores como adiposidade visceral, padrão alimentar e sedentarismo; correlacionar com IMC e circunferência abdominal.",
+          "severidade": 3,
+          "investigacao_adicional": "Perfil lipídico completo, circunferência abdominal, TSH, e avaliação de SOP (LH/FSH, androgênios) dado o contexto feminino em idade reprodutiva."
+        },
+        {
+          "nome": "HOMA-IR",
+          "valor": "4,26",
+          "unidade": "",
+          "referencia": "<2,7",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "compatível com resistência insulínica estabelecida",
+          "risco_curto_prazo": "Índice claramente acima do limiar de resistência (>2,5 IVS), indicando redução significativa da sensibilidade à insulina mesmo com glicemia e HbA1c normais.",
+          "risco_medio_prazo": "Risco aumentado de progressão para pré-diabetes/diabetes tipo 2, esteatose hepática metabólica, hipertensão e eventos cardiometabólicos em 1-5 anos caso não haja modificação de estilo de vida e acompanhamento.",
+          "fator_etiologico_provavel": "Resistência insulínica provável, frequentemente associada a adiposidade visceral, padrão dietético hiperglicídico e sedentarismo; em mulher de 38 anos, considerar também investigação de SOP.",
+          "severidade": 4,
+          "investigacao_adicional": "Avaliação clínica para considerar perfil lipídico, transaminases/USG hepático (esteatose), rastreio de SOP e avaliação nutricional/metabólica estruturada."
+        }
+      ],
+      "sintese_do_sistema": "O perfil metabólico apresenta um padrão característico de resistência insulínica em fase compensada: glicemia de jejum (88 mg/dL) e HbA1c (4,2%) em faixa ótima, porém às custas de hiperinsulinemia de jejum (insulina 19,5 µUI/mL) e HOMA-IR elevado (4,26), bem acima do limiar de resistência (<2,7). Esse conjunto sugere que o pâncreas vem mantendo a euglicemia mediante maior produção de insulina, situação que tende a preceder em anos a disglicemia franca e que merece atenção clínica preventiva.",
+      "alertas_criticos": [
+        {
+          "exame": "HOMA-IR",
+          "motivo": "Índice de 4,26 (referência <2,7) compatível com resistência insulínica estabelecida, apesar de glicemia e HbA1c normais, indicando hiperinsulinemia compensatória.",
+          "acao_clinica_sugerida": "Agendar avaliação clínica metabólica para confirmação do quadro, investigação complementar (perfil lipídico, função hepática, rastreio de SOP) e definição de plano de modificação de estilo de vida e seguimento individualizado."
+        }
+      ]
+    },
+    "outros": {
+      "schema_version": "1.0",
+      "sistema": "outros",
+      "exames_interpretados": [
+        {
+          "nome": "Triglicérides",
+          "valor": "123,5",
+          "unidade": "mg/dL",
+          "referencia": "<150",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor dentro da faixa, sem repercussão metabólica imediata.",
+          "risco_medio_prazo": "Baixo risco aterogênico se mantido o padrão atual de dieta e atividade física.",
+          "fator_etiologico_provavel": "Perfil lipídico estável.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Colesterol Total",
+          "valor": "200",
+          "unidade": "mg/dL",
+          "referencia": "<190",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "normal-limítrofe (discreta elevação)",
+          "risco_curto_prazo": "Elevação discreta, possivelmente influenciada pelo HDL elevado; sem risco agudo. Recomenda-se analisar frações ao invés do valor isolado.",
+          "risco_medio_prazo": "Risco cardiovascular global tende a ser baixo dado o HDL alto e não-HDL/LDL adequados; manter monitoramento anual.",
+          "fator_etiologico_provavel": "Componente do colesterol total elevado às custas de HDL alto (fator protetor).",
+          "severidade": 2,
+          "investigacao_adicional": "Cálculo de risco cardiovascular global (escore) e acompanhamento das frações lipídicas."
+        },
+        {
+          "nome": "HDL",
+          "valor": "74",
+          "unidade": "mg/dL",
+          "referencia": ">50",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal (favorável)",
+          "risco_curto_prazo": "Nível elevado, considerado fator de proteção cardiovascular.",
+          "risco_medio_prazo": "Perfil protetor frente à aterosclerose se mantido.",
+          "fator_etiologico_provavel": "Bom padrão de atividade física e/ou perfil genético favorável.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Não-HDL",
+          "valor": "126",
+          "unidade": "mg/dL",
+          "referencia": "<130",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Próximo ao limite superior; representa o conjunto de partículas aterogênicas, ainda dentro do aceitável.",
+          "risco_medio_prazo": "Manutenção de hábitos pode preservar baixo risco; pequena margem para melhora.",
+          "fator_etiologico_provavel": "Equilíbrio lipídico com leve margem de atenção.",
+          "severidade": 2,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "LDL",
+          "valor": "103",
+          "unidade": "mg/dL",
+          "referencia": "<130",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Dentro da faixa de referência; sem risco imediato.",
+          "risco_medio_prazo": "Baixo risco se mantido; meta pode ser individualizada conforme risco cardiovascular global.",
+          "fator_etiologico_provavel": "Padrão lipídico estável.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "VLDL",
+          "valor": "22",
+          "unidade": "mg/dL",
+          "referencia": "<30",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor adequado, coerente com triglicérides normais.",
+          "risco_medio_prazo": "Sem repercussão prevista.",
+          "fator_etiologico_provavel": "Metabolismo de triglicérides preservado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "PCR-us",
+          "valor": "4,9",
+          "unidade": "mg/L",
+          "referencia": "<3",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "compatível com estado inflamatório de baixo grau",
+          "risco_curto_prazo": "Valor acima de 3 mg/L sugere atividade inflamatória, podendo refletir processo agudo transitório (infecção, esforço físico recente) ou inflamação sistêmica crônica de baixo grau.",
+          "risco_medio_prazo": "Se persistentemente elevada, associa-se a maior risco cardiometabólico; recomenda-se reavaliação após exclusão de causas agudas.",
+          "fator_etiologico_provavel": "Inflamação subclínica — possíveis fatores: adiposidade visceral, processo infeccioso recente, estresse oxidativo ou contexto hormonal.",
+          "severidade": 3,
+          "investigacao_adicional": "Repetir PCR-us em 4-6 semanas afastando quadro agudo; correlacionar com composição corporal, glicemia/insulina e perfil hormonal."
+        },
+        {
+          "nome": "TGO",
+          "valor": "18",
+          "unidade": "U/L",
+          "referencia": "<32",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Função hepatocelular sem sinais de citólise.",
+          "risco_medio_prazo": "Sem repercussão prevista.",
+          "fator_etiologico_provavel": "Integridade hepatocelular preservada.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Ferro",
+          "valor": "149,6",
+          "unidade": "µg/dL",
+          "referencia": "50 a 170",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Ferro sérico no terço superior da faixa, sem alteração relevante.",
+          "risco_medio_prazo": "Sem risco previsto; interpretar junto à saturação de transferrina.",
+          "fator_etiologico_provavel": "Status de ferro adequado.",
+          "severidade": 1,
+          "investigacao_adicional": "Saturação de transferrina, se análise mais detalhada for desejada."
+        },
+        {
+          "nome": "Ferritina",
+          "valor": "79,7",
+          "unidade": "ng/mL",
+          "referencia": "13 a 150",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal (faixa ótima IVS)",
+          "risco_curto_prazo": "Estoques de ferro adequados, sem sinais de ferropenia.",
+          "risco_medio_prazo": "Sem risco previsto; lembrar que ferritina é reagente de fase aguda e pode estar discretamente influenciada pela inflamação (PCR-us elevada).",
+          "fator_etiologico_provavel": "Reservas de ferro preservadas.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Homocisteína",
+          "valor": "6,4",
+          "unidade": "µmol/L",
+          "referencia": "<12",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal (favorável)",
+          "risco_curto_prazo": "Valor baixo, sugere boa disponibilidade de cofatores (B12, B9, B6) e baixo risco vascular relacionado.",
+          "risco_medio_prazo": "Perfil favorável quanto ao risco cardiovascular e cognitivo.",
+          "fator_etiologico_provavel": "Metabolismo de metilação adequado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Sódio",
+          "valor": "138",
+          "unidade": "mEq/L",
+          "referencia": "136 a 146",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Equilíbrio hidroeletrolítico preservado.",
+          "risco_medio_prazo": "Sem repercussão prevista.",
+          "fator_etiologico_provavel": "Homeostase do sódio adequada.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Magnésio",
+          "valor": "2",
+          "unidade": "mg/dL",
+          "referencia": "1,6 a 2,6",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Magnésio sérico adequado; lembrar que o sérico reflete pobremente o estoque intracelular.",
+          "risco_medio_prazo": "Sem repercussão prevista no momento.",
+          "fator_etiologico_provavel": "Status de magnésio plasmático preservado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Cálcio",
+          "valor": "9,1",
+          "unidade": "mg/dL",
+          "referencia": "8,6 a 10,2",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Calcemia adequada, em harmonia com PTH normal.",
+          "risco_medio_prazo": "Sem repercussão prevista.",
+          "fator_etiologico_provavel": "Homeostase do cálcio preservada.",
+          "severidade": 1,
+          "investigacao_adicional": "Correlação com cálcio iônico e vitamina D, se houver suspeita óssea."
+        },
+        {
+          "nome": "PTH",
+          "valor": "30",
+          "unidade": "pg/mL",
+          "referencia": "15 a 65",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Eixo paratireoideano equilibrado, coerente com calcemia normal.",
+          "risco_medio_prazo": "Sem repercussão prevista.",
+          "fator_etiologico_provavel": "Regulação cálcio-PTH preservada.",
+          "severidade": 1,
+          "investigacao_adicional": "Correlacionar com vitamina D para interpretação completa do metabolismo ósseo."
+        }
+      ],
+      "sintese_do_sistema": "O conjunto laboratorial apresenta perfil metabólico globalmente favorável: triglicérides, LDL, VLDL e não-HDL dentro das faixas de referência, com HDL elevado (74 mg/dL) atuando como fator de proteção cardiovascular. O colesterol total discretamente acima do corte (200 mg/dL) deve ser interpretado no contexto do HDL elevado, não configurando achado de risco isolado. A homocisteína baixa reforça boa disponibilidade de cofatores de metilação, e os marcadores de ferro (ferro, ferritina) encontram-se adequados. O metabolismo hidroeletrolítico e ósseo (sódio, magnésio, cálcio, PTH) está equilibrado, e a função hepatocelular (TGO) sem sinais de citólise.",
+      "alertas_criticos": []
+    },
+    "hormonal_feminino": {
+      "schema_version": "1.0",
+      "sistema": "hormonal_feminino",
+      "exames_interpretados": [
+        {
+          "nome": "SHBG",
+          "valor": "264",
+          "unidade": "nmol/L",
+          "referencia": "27,1 a 128",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "SHBG marcadamente elevada, compatível com aumento da capacidade de ligação de hormônios sexuais e possível redução da fração de testosterona/estrogênio livre biodisponível",
+          "risco_curto_prazo": "Valor mais de 2x acima do limite superior sugere menor biodisponibilidade de andrógenos e estrógenos livres, o que pode contribuir com sintomas como baixa libido, fadiga, alterações de humor e da função sexual nos próximos meses.",
+          "risco_medio_prazo": "Se persistente, pode estar associada a hiperestrogenismo relativo, disfunção tireoidiana ou hepática de base, com possível impacto sobre densidade óssea e equilíbrio androgênico em 1-5 anos.",
+          "fator_etiologico_provavel": "Possíveis causas a investigar: hipertireoidismo, uso de estrogênios/contraceptivos orais, hepatopatia, restrição calórica importante ou predisposição individual. Necessária correlação clínica.",
+          "severidade": 3,
+          "investigacao_adicional": "Sugere-se avaliação de TSH e T4 livre, testosterona total e livre, estradiol, função hepática (TGO/TGP/GGT) e revisão de medicações/contraceptivos em uso."
+        },
+        {
+          "nome": "Progesterona",
+          "valor": "0,2",
+          "unidade": "ng/mL",
+          "referencia": "0,1 a 25",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal — valor dentro da faixa de referência, compatível com fase folicular do ciclo ou período sem ovulação recente",
+          "risco_curto_prazo": "Valor baixo isolado tem interpretação fortemente dependente da fase do ciclo menstrual; sem essa informação não representa risco definido a curto prazo.",
+          "risco_medio_prazo": "Sem risco específico identificável de forma isolada; valor de progesterona deve ser interpretado em contexto de data do ciclo e suspeita de anovulação.",
+          "fator_etiologico_provavel": "Compatível com fase folicular precoce; necessário conhecer o dia do ciclo para interpretação adequada.",
+          "severidade": 2,
+          "investigacao_adicional": "Sugere-se nova coleta na fase lútea (aproximadamente 7 dias antes da menstruação esperada) para avaliar competência ovulatória, correlacionada com a data do ciclo."
+        }
+      ],
+      "sintese_do_sistema": "O painel hormonal feminino desta paciente de 38 anos evidencia como achado de maior relevância técnica a elevação significativa da SHBG (264 nmol/L), mais de duas vezes acima do limite superior de referência. Esse padrão sugere aumento da capacidade de ligação dos hormônios sexuais e possível redução das frações livres biodisponíveis de andrógenos e estrógenos, achado que merece correlação com função tireoidiana, hepática e com eventual uso de estrogênios/contraceptivos. Recomenda-se avaliação clínica para investigação etiológica, pois a SHBG isoladamente não fecha diagnóstico, sendo necessário dosar as frações hormonais livres e os hormônios tireoidianos.",
+      "alertas_criticos": []
+    },
+    "nutricional": {
+      "schema_version": "1.0",
+      "sistema": "nutricional",
+      "exames_interpretados": [
+        {
+          "nome": "Vitamina B12",
+          "valor": "427",
+          "unidade": "pg/mL",
+          "referencia": "800 a 1500",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "B12 limítrofe-baixa, compatível com tendência a depleção dos estoques",
+          "risco_curto_prazo": "Possível associação com fadiga, queda de concentração e parestesias leves; níveis na faixa limítrofe podem mascarar deficiência funcional mesmo com valor sérico ainda detectável.",
+          "risco_medio_prazo": "Risco de evolução para deficiência mais evidente com possível impacto hematológico (macrocitose) e neurológico se a ingesta ou absorção não forem otimizadas.",
+          "fator_etiologico_provavel": "Hipótese de baixa ingesta de fontes animais, possível redução de absorção gástrica/ileal ou aumento de demanda; necessita correlação clínica.",
+          "severidade": 3,
+          "investigacao_adicional": "Sugere-se considerar dosagem de homocisteína e ácido metilmalônico para avaliar status funcional, além de hemograma com VCM e avaliação de hábitos alimentares."
+        },
+        {
+          "nome": "Vitamina D (25-OH)",
+          "valor": "47",
+          "unidade": "ng/mL",
+          "referencia": "80 a 100",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "Vitamina D em faixa de insuficiência segundo referência IVS (30-50)",
+          "risco_curto_prazo": "Compatível com possível impacto sobre disposição, tônus muscular e modulação imunológica; faixa insuficiente pode contribuir para sintomas inespecíficos.",
+          "risco_medio_prazo": "Risco de comprometimento da saúde óssea (redução de densidade mineral) e da homeostase metabólica e imune se a insuficiência se mantiver prolongada.",
+          "fator_etiologico_provavel": "Hipótese de baixa exposição solar e/ou ingesta/suplementação insuficiente; comum em rotina de baixa exposição UVB.",
+          "severidade": 3,
+          "investigacao_adicional": "Sugere-se avaliação clínica para considerar suplementação orientada; pode-se correlacionar com cálcio sérico, PTH e fósforo conforme contexto clínico."
+        }
+      ],
+      "sintese_do_sistema": "Os achados nutricionais sugerem um perfil de insuficiência de vitamina D (47 ng/mL, faixa insuficiente segundo referência IVS) associado a níveis limítrofe-baixos de vitamina B12 (427 pg/mL), padrão que, em conjunto, pode contribuir para sintomas inespecíficos como fadiga, redução de disposição e alterações neuromusculares leves. Trata-se de paciente do sexo feminino, 38 anos, em idade reprodutiva, em que a otimização desses micronutrientes tende a favorecer disposição, função imune e saúde óssea a médio prazo.",
+      "alertas_criticos": []
+    },
+    "renal": {
+      "schema_version": "1.0",
+      "sistema": "renal",
+      "exames_interpretados": [
+        {
+          "nome": "Ureia",
+          "valor": "31",
+          "unidade": "mg/dL",
+          "referencia": "10 a 50",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor dentro da faixa de referência, sugere produção e excreção de compostos nitrogenados preservada no momento.",
+          "risco_medio_prazo": "Baixo risco isolado; serve como parâmetro complementar de função renal e estado de hidratação/proteico.",
+          "fator_etiologico_provavel": "Sem alteração relevante; reflete metabolismo proteico e função renal aparentemente equilibrados.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Creatinina",
+          "valor": "1,04",
+          "unidade": "mg/dL",
+          "referencia": "0,5 a 1",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "normal-limítrofe / discreta elevação a investigar contexto",
+          "risco_curto_prazo": "Valor discretamente acima do limite superior; compatível com leve redução de filtração glomerular OU com maior massa muscular/atividade física intensa. Risco clínico imediato baixo, porém merece contextualização.",
+          "risco_medio_prazo": "Se confirmada tendência de elevação progressiva, há possível risco de redução da taxa de filtração glomerular ao longo dos anos, especialmente se houver fatores associados (hipertensão, resistência insulínica, uso frequente de anti-inflamatórios).",
+          "fator_etiologico_provavel": "Possível variação fisiológica por massa muscular/ingesta proteica ou desidratação no momento da coleta; menos provavelmente redução discreta de função renal. Requer cálculo de TFG estimada e correlação clínica.",
+          "severidade": 3,
+          "investigacao_adicional": "Cálculo da TFG estimada (CKD-EPI), cistatina C, relação albumina/creatinina urinária, urina tipo 1 e repetição da creatinina com paciente hidratada para confirmar tendência."
+        },
+        {
+          "nome": "Ácido Úrico",
+          "valor": "3,9",
+          "unidade": "mg/dL",
+          "referencia": "2,4 a 5,7",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor adequado, sem indícios de hiperuricemia ou risco gotoso/litiásico no momento.",
+          "risco_medio_prazo": "Baixo risco; monitoramento de rotina é suficiente, sobretudo se houver alterações metabólicas associadas no futuro.",
+          "fator_etiologico_provavel": "Sem alteração; metabolismo das purinas e excreção renal aparentemente equilibrados.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        }
+      ],
+      "sintese_do_sistema": "O painel renal de Clarissa, 38 anos, mostra ureia e ácido úrico dentro da faixa de referência, sugerindo metabolismo nitrogenado e de purinas preservado, sem sinais de hiperuricemia. O único achado que merece atenção técnica é a creatinina discretamente acima do limite superior (1,04 mg/dL), que pode ter origem fisiológica — como maior massa muscular, ingesta proteica recente ou desidratação no momento da coleta — ou, menos provavelmente, refletir uma redução leve da filtração glomerular. Trata-se de um valor limítrofe que, isoladamente, não permite conclusão diagnóstica.",
+      "alertas_criticos": []
+    },
+    "hematologico": {
+      "schema_version": "1.0",
+      "sistema": "hematologico",
+      "exames_interpretados": [
+        {
+          "nome": "Hemácias",
+          "valor": "4,74",
+          "unidade": "10^6/µL",
+          "referencia": "4 a 5,4",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem eritrocitária adequada, sem indícios de anemia ou eritrocitose.",
+          "risco_medio_prazo": "Baixo risco hematológico associado à série vermelha neste parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Hemoglobina",
+          "valor": "12,9",
+          "unidade": "g/dL",
+          "referencia": "12 a 15,8",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Hemoglobina dentro da faixa, porém no terço inferior do intervalo, sugerindo reservas de ferro possivelmente no limite.",
+          "risco_medio_prazo": "Possível tendência a depleção de ferro caso haja perdas menstruais aumentadas ou baixa ingesta; monitorar.",
+          "fator_etiologico_provavel": "Variação fisiológica em mulher em idade fértil, com possível influência de perdas menstruais.",
+          "severidade": 2,
+          "investigacao_adicional": "Considerar ferritina, ferro sérico e saturação de transferrina para avaliar estoques de ferro."
+        },
+        {
+          "nome": "Hematócrito",
+          "valor": "38,3",
+          "unidade": "%",
+          "referencia": "33 a 47,8",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Volume eritrocitário relativo adequado, compatível com hidratação e massa eritrocitária normais.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro isoladamente.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "VCM",
+          "valor": "80,9",
+          "unidade": "fL",
+          "referencia": "80 a 98",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "VCM no limite inferior, compatível com tendência a microcitose discreta, achado frequentemente associado a reservas de ferro reduzidas.",
+          "risco_medio_prazo": "Caso evolua com queda de hemoglobina, pode sugerir anemia ferropriva incipiente.",
+          "fator_etiologico_provavel": "Possível depleção de ferro em estágio inicial; menos provavelmente traço talassêmico.",
+          "severidade": 2,
+          "investigacao_adicional": "Correlacionar com ferritina e RDW; se microcitose persistente com ferro normal, considerar eletroforese de hemoglobina."
+        },
+        {
+          "nome": "HCM",
+          "valor": "27,2",
+          "unidade": "pg",
+          "referencia": "26,2 a 32,6",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Conteúdo de hemoglobina por hemácia no limite inferior, acompanhando o padrão do VCM.",
+          "risco_medio_prazo": "Tendência a hipocromia leve se houver agravamento de déficit de ferro.",
+          "fator_etiologico_provavel": "Compatível com reservas de ferro no limite inferior.",
+          "severidade": 2,
+          "investigacao_adicional": "Avaliar em conjunto com ferritina e cinética do ferro."
+        },
+        {
+          "nome": "CHCM",
+          "valor": "33,7",
+          "unidade": "g/dL",
+          "referencia": "30 a 36,5",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Concentração de hemoglobina adequada nas hemácias, sem hipocromia franca.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "RDW",
+          "valor": "11,8",
+          "unidade": "%",
+          "referencia": "11 a 16",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Anisocitose ausente; população eritrocitária homogênea, o que torna menos provável anemia ferropriva ativa.",
+          "risco_medio_prazo": "RDW normal favorece estabilidade da série vermelha no médio prazo.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Leucócitos",
+          "valor": "6770",
+          "unidade": "/µL",
+          "referencia": "3600 a 11000",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem leucocitária global adequada, sem evidência de processo infeccioso agudo ou imunossupressão.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Neutrófilos",
+          "valor": "4245",
+          "unidade": "/µL",
+          "referencia": "1700 a 8000",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Resposta neutrofílica preservada, sem sinais de infecção bacteriana aguda ou neutropenia.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Eosinófilos",
+          "valor": "0",
+          "unidade": "/µL",
+          "referencia": "50 a 500",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "eosinopenia (achado isolado a contextualizar)",
+          "risco_curto_prazo": "Ausência de eosinófilos circulantes (eosinopenia) é achado isolado e frequentemente de baixa relevância clínica, podendo refletir resposta ao estresse agudo, uso de corticosteroides ou variação fisiológica.",
+          "risco_medio_prazo": "Isoladamente, com demais séries normais, tende a ter baixo significado clínico no médio prazo; relevância aumenta apenas se associado a contexto clínico específico.",
+          "fator_etiologico_provavel": "Possível estado de estresse fisiológico, ritmo circadiano da coleta ou efeito de corticosteroides; raramente patológico de forma isolada.",
+          "severidade": 2,
+          "investigacao_adicional": "Correlacionar com quadro clínico e uso de medicamentos; geralmente nenhuma investigação adicional necessária se demais parâmetros normais. Repetir hemograma se houver dúvida."
+        },
+        {
+          "nome": "Basófilos",
+          "valor": "14",
+          "unidade": "/µL",
+          "referencia": "0 a 100",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem de basófilos dentro da normalidade, sem sinais de processo mieloproliferativo ou alérgico significativo.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Linfócitos",
+          "valor": "2234",
+          "unidade": "/µL",
+          "referencia": "1000 a 4800",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem linfocitária adequada, compatível com imunidade celular preservada.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Monócitos",
+          "valor": "278",
+          "unidade": "/µL",
+          "referencia": "100 a 1200",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem monocitária adequada, sem evidência de processo inflamatório crônico ou recuperação infecciosa atípica.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Plaquetas",
+          "valor": "237000",
+          "unidade": "/µL",
+          "referencia": "130000 a 450000",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem plaquetária adequada, com hemostasia primária preservada.",
+          "risco_medio_prazo": "Baixo risco associado a este parâmetro.",
+          "fator_etiologico_provavel": "Não aplicável - valor dentro da normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        }
+      ],
+      "sintese_do_sistema": "O hemograma de paciente feminina de 38 anos apresenta-se, em linhas gerais, dentro da normalidade nas três séries (vermelha, branca e plaquetária). Destacam-se na série vermelha valores no terço inferior da faixa de referência para hemoglobina (12,9 g/dL), VCM (80,9 fL) e HCM (27,2 pg), configurando um padrão limítrofe compatível com reservas de ferro possivelmente reduzidas, achado relativamente comum em mulheres em idade fértil com perdas menstruais. O RDW normal (11,8%) torna menos provável anemia ferropriva em atividade, mas não exclui depleção precoce de estoques. Sugere-se correlação com perfil de ferro (ferritina, ferro sérico e saturação de transferrina) para melhor caracterização.",
+      "alertas_criticos": []
+    }
+  },
+  "alertas_criticos_globais": [
+    {
+      "exame": "HOMA-IR",
+      "motivo": "Índice de 4,26 (referência <2,7) compatível com resistência insulínica estabelecida, apesar de glicemia e HbA1c normais, indicando hiperinsulinemia compensatória.",
+      "acao_clinica_sugerida": "Agendar avaliação clínica metabólica para confirmação do quadro, investigação complementar (perfil lipídico, função hepática, rastreio de SOP) e definição de plano de modificação de estilo de vida e seguimento individualizado."
+    }
+  ],
+  "total_exames_interpretados": 40,
+  "usage_total": {
+    "input": 18644,
+    "output": 14011,
+    "cost": 0.443495
+  }
+}

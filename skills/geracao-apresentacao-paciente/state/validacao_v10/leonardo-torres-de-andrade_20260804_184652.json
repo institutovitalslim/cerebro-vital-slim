@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "fase": "completa",
+  "paciente": "Leonardo Torres de Andrade",
+  "html_path": "/tmp/proval/out/apresentacao-leonardo-torres-de-andrade-v12-20260804_184651.html",
+  "gates_aplicados": [
+    "copy_neutra",
+    "eixo_tireoidiano",
+    "sobrecarga_ferro",
+    "exames_no_html",
+    "questionario_cobertura",
+    "bioimpedancia_marcadores"
+  ],
+  "gates_ignorados": [],
+  "erros": [],
+  "checks": {
+    "padrao_tireotox": false,
+    "padrao_sobrecarga_ferro": false,
+    "criticos": [
+      "Insulina",
+      "HOMA-IR",
+      "Triglicérides",
+      "Não-HDL",
+      "VLDL",
+      "Vitamina D",
+      "TGP",
+      "GGT"
+    ]
+  }
+}

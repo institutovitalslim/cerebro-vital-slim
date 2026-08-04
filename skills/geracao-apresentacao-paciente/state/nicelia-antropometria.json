@@ -1,0 +1,27 @@
+{
+  "nome": "Nicelia Rubem Santos de Sousa",
+  "data": "29/06/2026",
+  "peso_kg": 70.7,
+  "altura_cm": 163,
+  "cintura_cm": 78,
+  "pescoco_cm": 33,
+  "peito_cm": 92,
+  "abdomen_cm": 85,
+  "braco_direito_cm": 34,
+  "quadril_cm": 108,
+  "perna_direita_cm": 58,
+  "spo2_pct": 95,
+  "frequencia_cardiaca_bpm": 64,
+  "pressao_arterial": "120x80 mmHg",
+  "confianca_por_campo": {
+    "cintura_cm": "alta",
+    "abdomen_cm": "alta",
+    "braco_direito_cm": "alta",
+    "quadril_cm": "alta",
+    "perna_direita_cm": "alta"
+  },
+  "campos_incertos": [
+    "perna_direita_cm: leitura manuscrita próxima de 58-59 cm; foi mantido 58 cm pela visão."
+  ],
+  "observacao": "Extração revisada a partir da foto/recorte ampliado da ficha de antropometria; data corrigida pelo contexto da pasta e da bioimpedância."
+}

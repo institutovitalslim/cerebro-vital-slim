@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "hipoteses_integradas": [
+    {
+      "titulo": "Resistência insulínica compensada perpetuando dificuldade de emagrecimento e compulsão noturna",
+      "queixas_relacionadas": [
+        "Dificuldade de perda de peso pós-gestação",
+        "Compulsão alimentar noturna por doces",
+        "Adiposidade abdominal, celulite e flacidez",
+        "Sedentarismo",
+        "Histórico de uso de agonistas GLP-1 sem manutenção dos resultados"
+      ],
+      "exames_relacionados": [
+        "HOMA-IR (4,26)",
+        "Insulina de jejum (19,5 µUI/mL)"
+      ],
+      "descricao_clinica": "O conjunto HOMA-IR 4,26 e insulina de jejum 19,5 µUI/mL, com glicemia (88) e HbA1c (4,2%) normais, configura padrão de resistência insulínica em fase compensada — o pâncreas mantém a glicemia à custa de hiperinsulinemia. Esse quadro é altamente coerente com a queixa de dificuldade de perda de peso refratária (inclusive após GLP-1) e com a adiposidade abdominal. A hiperinsulinemia também favorece fome por carboidratos e, combinada ao padrão alimentar relatado (ausência de lanche da tarde, jantar hipocalórico de pão, doces concentrados à noite), sugere componente de hipoglicemia reativa que sustenta a compulsão noturna. O sedentarismo reduz a captação muscular de glicose e agrava a resistência. Padrão compatível com disregulação metabólica que merece abordagem prioritária.",
+      "prioridade": 3,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Considerar avaliação clínica metabólica para estruturar reorganização alimentar (distribuição de carboidratos, inclusão de lanche da tarde, qualidade do jantar), reintrodução gradual de atividade física e investigação complementar de SOP; reavaliar HOMA-IR/insulina em seguimento."
+    },
+    {
+      "titulo": "Fadiga intensa multifatorial — confluência metabólica, nutricional e de sono",
+      "queixas_relacionadas": [
+        "Fadiga intensa e baixo nível de energia",
+        "Baixa autoestima e impacto psicossocial"
+      ],
+      "exames_relacionados": [
+        "Vitamina D (47 ng/mL)",
+        "Vitamina B12 (427 pg/mL)",
+        "HOMA-IR (4,26)",
+        "SHBG (264 nmol/L)"
+      ],
+      "descricao_clinica": "A fadiga severa (energia 2/10) e o cansaço diurno não têm causa única e provavelmente refletem somatório de fatores: insuficiência de vitamina D (47), B12 limítrofe-baixa (427), resistência insulínica com oscilações glicêmicas, sono curto e de baixa qualidade (6h, 3/10) e possível redução de frações hormonais livres pela SHBG marcadamente elevada. Esse perfil de fadiga multifatorial é compatível com o quadro relatado e tem grande peso na qualidade de vida e no humor da paciente, reforçando a urgência subjetiva do cuidado.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Considerar otimização nutricional de vitamina D e B12 sob avaliação clínica, abordagem do sono e da disregulação glicêmica como frentes simultâneas; reavaliar disposição após estabilização desses eixos."
+    },
+    {
+      "titulo": "SHBG muito elevada em contexto de hipertireoidismo prévio e uso de contraceptivo oral — reavaliar eixo tireoidiano e gonadal",
+      "queixas_relacionadas": [
+        "Fadiga intensa e baixo nível de energia",
+        "Baixa autoestima e impacto psicossocial",
+        "Dificuldade de perda de peso pós-gestação"
+      ],
+      "exames_relacionados": [
+        "SHBG (264 nmol/L)"
+      ],
+      "descricao_clinica": "A SHBG mais de 2x acima do limite superior é achado de destaque e tem duas explicações clássicas que convergem no caso desta paciente: uso de contraceptivo oral (estrogênios elevam SHBG) e hipertireoidismo (também eleva SHBG), ambos presentes no histórico. Como consequência, pode haver redução das frações livres biodisponíveis de andrógenos e estrógenos, contribuindo para fadiga, alterações de humor e eventuais sintomas de função sexual — campos não preenchidos no questionário. Padrão que exige correlação com função tireoidiana atual e frações hormonais livres antes de qualquer conclusão.",
+      "prioridade": 3,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Considerar reavaliação tireoidiana completa (TSH, T4L, T3L, anti-TPO, anti-TG) para estadiar o hipertireoidismo prévio sob uso de contraceptivo, e investigar frações hormonais livres; coletar dados de ciclo, libido e sintomas ginecológicos na consulta."
+    },
+    {
+      "titulo": "Inflamação subclínica de baixo grau associada à adiposidade visceral",
+      "queixas_relacionadas": [
+        "Adiposidade abdominal, celulite e flacidez",
+        "Fadiga intensa e baixo nível de energia",
+        "Sedentarismo"
+      ],
+      "exames_relacionados": [
+        "PCR-us (4,9 mg/L)",
+        "HOMA-IR (4,26)"
+      ],
+      "descricao_clinica": "A PCR-us de 4,9 mg/L sugere estado inflamatório de baixo grau que, no contexto de resistência insulínica e adiposidade abdominal, é frequentemente alimentado pelo tecido adiposo visceral. Esse padrão inflamatório dialoga com a fadiga e tende a reforçar o ciclo metabólico desfavorável. Como a PCR pode também refletir processo agudo transitório, recomenda-se reavaliação para confirmar cronicidade antes de conclusões.",
+      "prioridade": 2,
+      "tipo": "padrao_inflamatorio",
+      "acao_proposta": "Considerar repetir PCR-us em 8-12 semanas para distinguir inflamação aguda de crônica; abordar adiposidade visceral via estilo de vida como estratégia central de modulação inflamatória."
+    },
+    {
+      "titulo": "Insuficiência de vitamina D e B12 limítrofe contribuindo para sintomas inespecíficos",
+      "queixas_relacionadas": [
+        "Fadiga intensa e baixo nível de energia"
+      ],
+      "exames_relacionados": [
+        "Vitamina D (47 ng/mL)",
+        "Vitamina B12 (427 pg/mL)"
+      ],
+      "descricao_clinica": "Vitamina D em faixa de insuficiência (47) e B12 limítrofe-baixa (427) compõem perfil nutricional que pode contribuir para fadiga, redução de disposição, tônus muscular e função imune. Em mulher de 38 anos em idade reprodutiva, a otimização desses micronutrientes tende a favorecer disposição e saúde óssea, e soma-se à abordagem da fadiga multifatorial.",
+      "prioridade": 2,
+      "tipo": "padrao_nutricional",
+      "acao_proposta": "Considerar avaliação clínica para otimização de vitamina D e B12 (incluindo revisão de ingesta de fontes animais e exposição solar); correlacionar B12 com homocisteína já disponível."
+    },
+    {
+      "titulo": "Reserva de ferro possivelmente reduzida — padrão hematológico limítrofe",
+      "queixas_relacionadas": [
+        "Fadiga intensa e baixo nível de energia"
+      ],
+      "exames_relacionados": [
+        "Hemoglobina (12,9 g/dL)",
+        "VCM (80,9 fL)",
+        "HCM (27,2 pg)"
+      ],
+      "descricao_clinica": "Hemoglobina, VCM e HCM no terço inferior da faixa, com RDW normal, configuram padrão limítrofe que torna anemia ferropriva ativa improvável, mas não exclui depleção precoce de estoques — comum em mulheres em idade fértil. Pode somar-se discretamente à fadiga. A interpretação dos exames cita ferritina como adequada, o que reduz a probabilidade, porém merece correlação direcionada.",
+      "prioridade": 1,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Considerar confirmar perfil de ferro completo (ferritina, ferro sérico, saturação de transferrina) e correlacionar com perdas menstruais a serem coletadas na consulta."
+    }
+  ],
+  "queixas_sem_correlato_laboratorial": [
+    {
+      "queixa": "Baixa autoestima e impacto psicossocial (relação conjugal e restrição de atividades com o filho)",
+      "interpretacao": "Sofrimento emocional ligado à imagem corporal e ao ganho de peso pós-parto, com ansiedade referida como principal barreira para o autocuidado. Não há marcador laboratorial específico; trata-se de dimensão psicossocial que amplifica a percepção dos sintomas físicos e pode alimentar a compulsão alimentar.",
+      "proxima_acao": "Acolher a dimensão emocional na consulta, considerar suporte psicológico/comportamental como parte integrante do plano e priorizar metas iniciais com ganhos percebidos rapidamente."
+    },
+    {
+      "queixa": "Compulsão alimentar noturna (componente comportamental)",
+      "interpretacao": "Além do componente metabólico (hipoglicemia reativa/hiperinsulinemia), há padrão comportamental: ansiedade, ausência de lanche da tarde e jantar pobre criam gatilho de fome e busca por recompensa à noite.",
+      "proxima_acao": "Considerar abordagem nutricional comportamental e manejo da ansiedade, com reorganização da rotina alimentar para reduzir gatilhos noturnos."
+    },
+    {
+      "queixa": "Sono curto e de má qualidade (6h, 3/10)",
+      "interpretacao": "Privação crônica de sono pode ser causa e consequência da fadiga e da disregulação metabólica; não há exame que a explique isoladamente. Apneia do sono e higiene do sono permanecem hipóteses a investigar.",
+      "proxima_acao": "Investigar higiene do sono e rastrear apneia do sono na consulta; considerar avaliação do eixo HPA/cortisol se persistir."
+    }
+  ],
+  "achados_sem_queixa_correspondente": [
+    {
+      "achado": "PCR-us elevada (4,9 mg/L) sem queixa inflamatória/dor articular explícita",
+      "relevancia_clinica": "Sinaliza inflamação subclínica de baixo grau que, mesmo sem queixa direta, é relevante no contexto metabólico e cardiovascular a médio prazo.",
+      "monitoramento": "Reavaliar PCR-us em 8-12 semanas para confirmar cronicidade, junto à reavaliação metabólica."
+    },
+    {
+      "achado": "Creatinina discretamente elevada (1,04 mg/dL) sem sintomas renais",
+      "relevancia_clinica": "Valor limítrofe que pode ser fisiológico (massa muscular, ingesta proteica, hidratação no momento da coleta) ou refletir leve redução de filtração; risco imediato baixo. Hidratação relatada de 1,5 L/dia pode ser fator.",
+      "monitoramento": "Calcular TFG estimada e repetir creatinina com hidratação adequada; correlação clínica em seguimento."
+    },
+    {
+      "achado": "SHBG marcadamente elevada (264 nmol/L) — paciente não relatou sintomas gonadais por ausência de preenchimento",
+      "relevancia_clinica": "Achado hormonal importante cujo correlato sintomático não pôde ser avaliado porque os campos de saúde hormonal feminina não foram preenchidos.",
+      "monitoramento": "Coletar dados de ciclo, libido e sintomas ginecológicos na consulta e correlacionar com função tireoidiana e frações hormonais livres."
+    }
+  ],
+  "plano_clinico_integrado": {
+    "alvos_prioritarios": [
+      "Resistência insulínica: reorganização alimentar (distribuição de carboidratos, lanche da tarde, qualidade do jantar) e reintrodução gradual de atividade física",
+      "Fadiga multifatorial: abordagem simultânea de sono, micronutrientes e disregulação glicêmica",
+      "Reestadiamento do eixo tireoidiano e gonadal (hipertireoidismo prévio + contraceptivo + SHBG elevada)",
+      "Manejo da compulsão noturna e da ansiedade com suporte comportamental",
+      "Otimização nutricional de vitamina D e B12",
+      "Acolhimento psicossocial e construção de vínculo com metas iniciais de ganho percebido"
+    ],
+    "monitoramento_sugerido": "Reavaliar HOMA-IR, insulina de jejum e PCR-us em 8-12 semanas após início das mudanças; revisar vitamina D e B12 em ~12 semanas; reavaliar função tireoidiana conforme conduta especializada; repetir creatinina com hidratação adequada.",
+    "investigacoes_adicionais": [
+      "Painel tireoidiano completo (TSH, T4L, T3L, anti-TPO, anti-TG)",
+      "Frações hormonais livres (testosterona livre, estradiol) para interpretar SHBG elevada",
+      "Rastreio de SOP (clínico + ultrassom + andrógenos) dado HOMA-IR elevado em mulher de 38 anos",
+      "Perfil de ferro completo (ferritina, ferro sérico, saturação de transferrina)",
+      "TFG estimada para contextualizar creatinina limítrofe",
+      "Rastreio de apneia do sono e avaliação do eixo HPA/cortisol se a fadiga persistir",
+      "Esclarecer tipo de neoplasia no histórico familiar para estratificação de risco"
+    ]
+  },
+  "narrativa_executiva": "Clarissa, seu cansaço, a dificuldade de emagrecer e a vontade de doce à noite têm uma raiz em comum: o corpo está produzindo insulina em excesso, somado a sono curto e vitaminas em níveis baixos. Cuidar disso agora interrompe um ciclo que se retroalimenta e devolve energia e leveza para a sua rotina.",
+  "alinhamento_disc": "Perfil orientado a resultado e controle: vá direto ao ponto, apresente a causa-raiz de forma objetiva e mostre o plano como passos claros e mensuráveis, com metas e prazos de reavaliação. Dê à paciente protagonismo nas decisões e evite rodeios; ancore a urgência em dados concretos e no retorno rápido de energia."
+}

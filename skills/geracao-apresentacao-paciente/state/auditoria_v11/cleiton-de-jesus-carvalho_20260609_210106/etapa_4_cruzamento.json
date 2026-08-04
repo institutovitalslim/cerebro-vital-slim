@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "hipoteses_integradas": [
+    {
+      "titulo": "Hipertireoidismo franco (Doença de Graves) mascarando síndrome metabólica subjacente",
+      "queixas_relacionadas": [
+        "Fadiga crônica e baixa energia",
+        "Ansiedade com impacto alimentar",
+        "Adiposidade abdominal central"
+      ],
+      "exames_relacionados": [
+        "TSH",
+        "T4 Livre",
+        "T3 Livre",
+        "Anti-TPO",
+        "PCR-us",
+        "Triglicérides"
+      ],
+      "descricao_clinica": "O quadro de tireotoxicose severa (TSH suprimido, T4L 3,03 ng/dL, T3L 10,95 pg/mL) com autoimunidade confirmada (Anti-TPO 242,3 UI/mL) explica parcialmente a fadiga paradoxal e ansiedade do paciente. Entretanto, a presença concomitante de inflamação sistêmica (PCR-us 5,5 mg/L), hipertrigliceridemia (159 mg/dL) e adiposidade central sugere síndrome metabólica subjacente que pode estar sendo mascarada pelo estado hipermetabólico. A compulsão noturna por doces pode refletir tanto hipoglicemia reativa pós-hipertireoidismo quanto resistência insulínica de base.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Avaliação endocrinológica urgente em 48-72h para controle tireotóxico com antitireoidiano e betabloqueador. Após estabilização hormonal (8-12 semanas), reavaliar componentes metabólicos com HOMA-IR, perfil lipídico completo e composição corporal."
+    },
+    {
+      "titulo": "Sobrecarga de ferro (provável hemocromatose) com risco de deposição orgânica",
+      "queixas_relacionadas": [
+        "Fadiga crônica e baixa energia",
+        "Adiposidade abdominal central"
+      ],
+      "exames_relacionados": [
+        "Ferritina",
+        "Ferro",
+        "Índice de Saturação da Transferrina",
+        "TGP",
+        "GGT"
+      ],
+      "descricao_clinica": "A hiperferritinemia significativa (692,9 ng/mL), ferro sérico elevado (178 µg/dL) e saturação de transferrina de 64% configuram padrão compatível com hemocromatose hereditária. A elevação concomitante de enzimas hepáticas (TGP 44,2, GGT 63 U/L) sugere possível deposição férrica hepática inicial. A fadiga crônica pode estar relacionada tanto ao hipertireoidismo quanto à sobrecarga de ferro, que compromete função mitocondrial e pode evoluir para cardiomiopatia e diabetes secundário se não tratada.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Investigação urgente com genotipagem HFE (C282Y, H63D), ressonância magnética hepática e cardíaca com T2* para quantificação de ferro tecidual. Considerar flebotomia terapêutica após confirmação diagnóstica e controle do hipertireoidismo."
+    },
+    {
+      "titulo": "Deficiência de vitamina B12 contribuindo para fadiga e sintomas neurovegetativos",
+      "queixas_relacionadas": [
+        "Fadiga crônica e baixa energia",
+        "Ansiedade com impacto alimentar"
+      ],
+      "exames_relacionados": [
+        "Vitamina B12",
+        "Homocisteína"
+      ],
+      "descricao_clinica": "A vitamina B12 limítrofe (363 pg/mL) associada à homocisteína elevada (12,06 micromol/L) sugere deficiência funcional de B12 que pode contribuir significativamente para a fadiga crônica, alterações de humor e ansiedade relatadas pelo paciente. A deficiência de B12 também pode estar relacionada à compulsão alimentar noturna através de alterações na síntese de neurotransmissores (serotonina, dopamina).",
+      "prioridade": 2,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Investigar etiologia da deficiência com dosagem de ácido metilmalônico, anticorpos anti-fator intrínseco e considerar endoscopia digestiva alta. Iniciar reposição de B12 oral ou parenteral conforme achados clínicos."
+    },
+    {
+      "titulo": "Hipogonadismo funcional por SHBG elevado com impacto na composição corporal",
+      "queixas_relacionadas": [
+        "Adiposidade abdominal central",
+        "Fadiga crônica e baixa energia",
+        "Baixa autoestima e impacto nas relações sociais"
+      ],
+      "exames_relacionados": [
+        "SHBG",
+        "Testosterona Livre",
+        "IGF-1",
+        "Creatinina"
+      ],
+      "descricao_clinica": "O SHBG marcadamente elevado (90,2 nmol/L) reduz a biodisponibilidade androgênica, resultando em testosterona livre na metade inferior da normalidade (7,38 ng/dL). Este padrão, associado ao IGF-1 limítrofe-baixo (98 ng/mL) e creatinina reduzida (0,51 mg/dL), sugere comprometimento da massa muscular e dificuldade de recomposição corporal. A elevação de SHBG pode estar relacionada ao hipertireoidismo, explicando parcialmente a manutenção da adiposidade central apesar do estado hipermetabólico.",
+      "prioridade": 2,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Reavaliar perfil androgênico após controle tireoidiano. Considerar avaliação de composição corporal com bioimpedância e investigar causas secundárias de elevação de SHBG (função hepática, medicações)."
+    },
+    {
+      "titulo": "Resistência insulínica incipiente com inflamação sistêmica",
+      "queixas_relacionadas": [
+        "Adiposidade abdominal central",
+        "Ansiedade com compulsão por doces noturnos"
+      ],
+      "exames_relacionados": [
+        "Insulina",
+        "PCR-us",
+        "Triglicérides",
+        "TGP"
+      ],
+      "descricao_clinica": "A insulina basal elevada-limítrofe (14,3 microUI/mL) associada à inflamação sistêmica (PCR-us 5,5 mg/L), hipertrigliceridemia leve (159 mg/dL) e elevação de enzimas hepáticas sugere resistência insulínica incipiente com esteatose hepática inicial. A compulsão noturna por doces pode refletir hipoglicemia reativa secundária à hiperinsulinemia compensatória, perpetuando o ciclo de resistência insulínica.",
+      "prioridade": 2,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Calcular HOMA-IR, avaliar circunferência abdominal e considerar ultrassonografia hepática para investigar esteatose. Implementar estratégias de redução de carboidratos refinados e otimização do sono após controle tireoidiano."
+    }
+  ],
+  "queixas_sem_correlato_laboratorial": [
+    {
+      "queixa": "Privação crônica de sono (5h/noite, qualidade 2/10)",
+      "interpretacao": "A privação de sono não tem correlato laboratorial direto nos exames realizados, mas pode estar sendo perpetuada pelo hipertireoidismo (insônia, agitação psicomotora). Também pode ser fator contribuinte para resistência insulínica, elevação de cortisol noturno e compulsão alimentar.",
+      "proxima_acao": "Investigar higiene do sono, considerar polissonografia após controle tireoidiano e avaliar necessidade de suporte psicológico para manejo de ansiedade noturna."
+    },
+    {
+      "queixa": "Baixa autoestima e impacto nas relações sociais",
+      "interpretacao": "Aspecto psicossocial sem correlato laboratorial específico, mas pode estar sendo amplificado pelos sintomas físicos do hipertireoidismo (irritabilidade, labilidade emocional) e pela insatisfação com a composição corporal.",
+      "proxima_acao": "Considerar acompanhamento psicológico integrado ao tratamento clínico, especialmente durante a fase de estabilização hormonal."
+    }
+  ],
+  "achados_sem_queixa_correspondente": [
+    {
+      "achado": "Neutropenia leve (segmentados 1591/mm³)",
+      "relevancia_clinica": "Redução discreta da primeira linha de defesa contra infecções bacterianas. Pode estar relacionada à deficiência de B12, infecção viral recente ou neutropenia étnica benigna.",
+      "monitoramento": "Repetir hemograma em 2-4 semanas. Se persistir, investigar com sorologias virais e avaliação hematológica."
+    },
+    {
+      "achado": "Progesterona elevada para homem (0,85 ng/mL)",
+      "relevancia_clinica": "Achado incomum que pode indicar disfunção adrenal leve, conversão periférica aumentada ou artefato laboratorial. Necessita confirmação.",
+      "monitoramento": "Repetir dosagem em jejum rigoroso. Se confirmado, investigar eixo adrenal com 17-OH-progesterona, cortisol e DHEA-S."
+    },
+    {
+      "achado": "Vitamina D insuficiente (42,3 ng/mL)",
+      "relevancia_clinica": "Insuficiência subclínica que pode comprometer absorção de cálcio, função muscular e resposta imune, além de potencial impacto negativo no eixo androgênico.",
+      "monitoramento": "Reposição com colecalciferol e reavaliação em 8-12 semanas. Investigar causas de má absorção se não houver resposta adequada."
+    }
+  ],
+  "plano_clinico_integrado": {
+    "alvos_prioritarios": [
+      "Controle urgente do hipertireoidismo com antitireoidiano e betabloqueador",
+      "Investigação e manejo da sobrecarga de ferro (genotipagem HFE, RM com T2*)",
+      "Correção da deficiência de vitamina B12 e investigação etiológica",
+      "Otimização da qualidade do sono e manejo da ansiedade",
+      "Reestruturação alimentar com redução de carboidratos refinados",
+      "Reavaliação do perfil metabólico após estabilização tireoidiana"
+    ],
+    "monitoramento_sugerido": "Função tireoidiana semanal até estabilização, depois mensal por 3 meses. Hemograma em 2-4 semanas. Reavaliação metabólica completa (HOMA-IR, perfil lipídico, composição corporal) em 12-16 semanas após controle hormonal.",
+    "investigacoes_adicionais": [
+      "Genotipagem HFE (C282Y, H63D)",
+      "Ressonância magnética hepática e cardíaca com T2*",
+      "TRAb para confirmação de Doença de Graves",
+      "Ácido metilmalônico e anticorpos anti-fator intrínseco",
+      "Ultrassonografia de tireoide",
+      "ECG e ecocardiograma",
+      "Avaliação oftalmológica para screening de oftalmopatia"
+    ]
+  },
+  "narrativa_executiva": "Cleiton, 44 anos, apresenta um quadro clínico complexo dominado por hipertireoidismo franco severo (Doença de Graves provável) que está mascarando uma síndrome metabólica subjacente. O estado de tireotoxicose explica parcialmente sua fadiga paradoxal, ansiedade e compulsão alimentar noturna, mas a presença concomitante de inflamação sistêmica, resistência insulínica incipiente e sobrecarga significativa de ferro sugere múltiplas frentes que necessitam abordagem integrada. A hiperferritinemia (692,9 ng/mL) com saturação de transferrina elevada (64%) levanta forte suspeita de hemocromatose hereditária, condição que pode evoluir para complicações graves se não diagnosticada e tratada precocemente.\n\nO perfil hormonal revela hipogonadismo funcional por SHBG elevado, provavelmente secundário ao hipertireoidismo, contribuindo para a dificuldade de recomposição corporal e manutenção da adiposidade central. A deficiência limítrofe de vitamina B12 adiciona outro componente à fadiga crônica e pode estar influenciando os sintomas neurovegetativos e a compulsão alimentar através de alterações na síntese de neurotransmissores. A estratégia terapêutica deve priorizar o controle urgente da tireotoxicose, seguido da investigação da sobrecarga de ferro e correção das deficiências nutricionais, com reavaliação do perfil metabólico após estabilização hormonal para definir intervenções específicas na síndrome metabólica subjacente.",
+  "alinhamento_disc": "Para perfil I (Influência): apresentar as hipóteses de forma otimista e colaborativa, enfatizando que 'temos várias peças do quebra-cabeças e vamos resolver juntos, passo a passo'. Usar linguagem encorajadora, destacar que muitos achados são tratáveis e focar na parceria médico-paciente para alcançar os objetivos de saúde."
+}

@@ -1,0 +1,943 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Cleiton de Jesus Carvalho",
+    "sexo": "M",
+    "idade": 44
+  },
+  "sistemas": {
+    "metabolico": {
+      "schema_version": "1.0",
+      "sistema": "metabolico",
+      "exames_interpretados": [
+        {
+          "nome": "Glicose",
+          "valor": "91",
+          "unidade": "mg/dL",
+          "referencia": "70 a 99",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe superior",
+          "risco_curto_prazo": "Glicemia de jejum no terço superior da normalidade sugere tendência a menor sensibilidade insulínica, sem risco imediato nos próximos 3-12 meses se mantido estilo de vida adequado.",
+          "risco_medio_prazo": "Valores persistentemente acima de 90 mg/dL associam-se a risco 2-3x maior de progressão para pré-diabetes em 3-5 anos, especialmente na presença de outros fatores metabólicos (obesidade visceral, sedentarismo, histórico familiar).",
+          "fator_etiologico_provavel": "Possível resistência insulínica incipiente ou padrão alimentar com carga glicêmica elevada. Contexto de insulina no limite superior reforça hipótese de compensação pancreática.",
+          "severidade": 2,
+          "investigacao_adicional": "HOMA-IR para quantificar resistência insulínica, perfil lipídico completo, circunferência abdominal e avaliação de composição corporal"
+        },
+        {
+          "nome": "Insulina",
+          "valor": "14,3",
+          "unidade": "microUI/mL",
+          "referencia": "3 a 25",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe superior, compatível com hiperinsulinemia compensatória leve",
+          "risco_curto_prazo": "Insulina basal acima de 10 microUI/mL sugere necessidade de maior secreção pancreática para manter glicemia normal, indicando resistência periférica incipiente. Risco de ganho ponderal e dificuldade em mobilizar gordura corporal nos próximos 6-12 meses.",
+          "risco_medio_prazo": "Hiperinsulinemia crônica associa-se a risco aumentado de síndrome metabólica, esteatose hepática, dislipidemia aterogênica e eventos cardiovasculares em 3-5 anos. Pode evoluir para exaustão pancreática e diabetes tipo 2.",
+          "fator_etiologico_provavel": "Resistência insulínica periférica (muscular/hepática) secundária a excesso de adiposidade visceral, sedentarismo ou padrão alimentar hiperglicídico. Possível predisposição genética.",
+          "severidade": 3,
+          "investigacao_adicional": "HOMA-IR, peptídeo C, perfil lipídico avançado (LDL-p, ApoB), ultrassom de abdome superior para avaliar esteatose hepática, hemoglobina glicada seriada"
+        },
+        {
+          "nome": "HbA1c",
+          "valor": "4,9",
+          "unidade": "%",
+          "referencia": "<5,4",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal, dentro da faixa ótima IVS",
+          "risco_curto_prazo": "HbA1c abaixo de 5,4% indica controle glicêmico adequado nos últimos 90-120 dias, sem risco metabólico imediato. Reflete ausência de hiperglicemia sustentada.",
+          "risco_medio_prazo": "Valores nesta faixa associam-se a baixo risco cardiovascular e metabólico em médio prazo, desde que mantidos hábitos de vida saudáveis. Monitoramento anual recomendado.",
+          "fator_etiologico_provavel": "Homeostase glicêmica preservada. Ausência de exposição crônica a picos glicêmicos significativos.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Glicemia Média",
+          "valor": "94",
+          "unidade": "mg/dL",
+          "referencia": "<100",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe superior",
+          "risco_curto_prazo": "Glicemia média estimada no limite superior da normalidade reforça padrão de glicemias de jejum no terço superior, sugerindo menor flexibilidade metabólica. Sem risco agudo nos próximos 3-6 meses.",
+          "risco_medio_prazo": "Manutenção de glicemia média acima de 90 mg/dL pode indicar progressão para disglicemia em 2-4 anos, especialmente se associada a ganho ponderal ou piora de outros marcadores metabólicos.",
+          "fator_etiologico_provavel": "Reflexo da glicemia de jejum e HbA1c. Sugere padrão alimentar com carga glicêmica moderada-alta ou resistência insulínica incipiente.",
+          "severidade": 2,
+          "investigacao_adicional": "Monitoramento contínuo de glicose (CGM) por 14 dias para avaliar variabilidade glicêmica e picos pós-prandiais, se disponível"
+        }
+      ],
+      "sintese_do_sistema": "O perfil metabólico do paciente masculino de 44 anos revela homeostase glicêmica preservada, com HbA1c ótima (4,9%) e glicemia de jejum dentro da normalidade. Entretanto, observa-se padrão sugestivo de resistência insulínica incipiente, caracterizado por glicemia no terço superior da faixa de referência (91 mg/dL) e insulina basal elevada-limítrofe (14,3 microUI/mL), compatível com hiperinsulinemia compensatória leve. Este perfil sugere que o pâncreas está secretando maior quantidade de insulina para manter a normoglicemia, indicando redução da sensibilidade periférica à insulina.\n\nEmbora não configure diagnóstico de pré-diabetes ou síndrome metabólica isoladamente, este padrão representa janela de oportunidade para intervenção preventiva. Recomenda-se avaliação clínica presencial para cálculo do HOMA-IR, investigação de outros componentes da síndrome metabólica (perfil lipídico, pressão arterial, circunferência abdominal) e rastreio de esteatose hepática. Intervenções no estilo de vida (redução de carboidratos refinados, aumento de atividade física, otimização do sono) podem reverter este quadro e prevenir progressão para diabetes tipo 2 e doença cardiovascular em médio prazo. Seguimento metabólico anual está indicado.",
+      "alertas_criticos": []
+    },
+    "outros": {
+      "schema_version": "1.0",
+      "sistema": "outros",
+      "exames_interpretados": [
+        {
+          "nome": "Colesterol Total",
+          "valor": "168",
+          "unidade": "mg/dL",
+          "referencia": "<190",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Perfil lipídico adequado para prevenção cardiovascular primária no curto prazo.",
+          "risco_medio_prazo": "Manutenção deste nível associa-se a baixo risco aterosclerótico em 1-5 anos.",
+          "fator_etiologico_provavel": "Homeostase lipídica preservada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "HDL",
+          "valor": "53",
+          "unidade": "mg/dL",
+          "referencia": ">40",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Fração cardioprotetora adequada, conferindo proteção contra aterogênese.",
+          "risco_medio_prazo": "Níveis mantidos reduzem risco de eventos cardiovasculares maiores.",
+          "fator_etiologico_provavel": "Metabolismo de lipoproteínas de alta densidade preservado",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "LDL",
+          "valor": "89",
+          "unidade": "mg/dL",
+          "referencia": "<130",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal - ótimo IVS",
+          "risco_curto_prazo": "Nível ótimo para prevenção de doença aterosclerótica, abaixo do limiar de risco.",
+          "risco_medio_prazo": "Manutenção deste valor associa-se a baixíssimo risco de eventos coronarianos.",
+          "fator_etiologico_provavel": "Controle adequado do metabolismo de LDL-colesterol",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "VLDL",
+          "valor": "31,8",
+          "unidade": "mg/dL",
+          "referencia": "<30",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "normal-limítrofe com tendência a hipertrigliceridemia leve",
+          "risco_curto_prazo": "Elevação discreta sugere risco aumentado de dislipidemia mista e resistência insulínica nos próximos 6-12 meses.",
+          "risco_medio_prazo": "Persistência pode contribuir para síndrome metabólica e doença hepática gordurosa não alcoólica em 2-5 anos.",
+          "fator_etiologico_provavel": "Excesso de carboidratos refinados, sedentarismo ou resistência insulínica incipiente",
+          "severidade": 2,
+          "investigacao_adicional": "Glicemia de jejum, insulina basal, HOMA-IR se não realizados recentemente"
+        },
+        {
+          "nome": "Triglicérides",
+          "valor": "159",
+          "unidade": "mg/dL",
+          "referencia": "<150",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "hipertrigliceridemia leve",
+          "risco_curto_prazo": "Elevação leve aumenta risco de pancreatite aguda (embora baixo neste nível) e contribui para disfunção endotelial.",
+          "risco_medio_prazo": "Associação com progressão de resistência insulínica, esteatose hepática e risco cardiovascular aumentado em 1-5 anos.",
+          "fator_etiologico_provavel": "Dieta rica em carboidratos simples, consumo alcoólico ou resistência insulínica",
+          "severidade": 3,
+          "investigacao_adicional": "Avaliação de resistência insulínica (HOMA-IR), ultrassom hepático se GGT/TGP elevados"
+        },
+        {
+          "nome": "Homocisteína",
+          "valor": "12,06",
+          "unidade": "micromol/L",
+          "referencia": "<12",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "hiper-homocisteinemia leve limítrofe",
+          "risco_curto_prazo": "Nível limítrofe-alto associa-se a disfunção endotelial e estado pró-trombótico discreto.",
+          "risco_medio_prazo": "Elevação persistente aumenta risco de eventos tromboembólicos e aterosclerose acelerada em 2-5 anos.",
+          "fator_etiologico_provavel": "Deficiência de vitaminas B6, B9 (folato) ou B12, polimorfismo MTHFR ou insuficiência renal subclínica",
+          "severidade": 3,
+          "investigacao_adicional": "Dosagem de vitamina B12, ácido fólico, vitamina B6; considerar função renal (creatinina/TFG)"
+        },
+        {
+          "nome": "PCR-us",
+          "valor": "5,5",
+          "unidade": "mg/L",
+          "referencia": "<3",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "inflamação sistêmica de baixo grau moderada",
+          "risco_curto_prazo": "Marcador de risco cardiovascular aumentado e possível processo inflamatório crônico ativo.",
+          "risco_medio_prazo": "Níveis persistentemente elevados associam-se a maior incidência de síndrome metabólica, diabetes tipo 2 e eventos cardiovasculares em 3-5 anos.",
+          "fator_etiologico_provavel": "Obesidade visceral, resistência insulínica, esteatose hepática, síndrome metabólica ou processo inflamatório subclínico",
+          "severidade": 4,
+          "investigacao_adicional": "Avaliação de composição corporal, circunferência abdominal, marcadores de síndrome metabólica; considerar causas infecciosas/autoimunes se persistente"
+        },
+        {
+          "nome": "TGO",
+          "valor": "25,6",
+          "unidade": "U/L",
+          "referencia": "<40",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Função hepatocelular preservada sem evidência de lesão aguda.",
+          "risco_medio_prazo": "Manutenção deste nível indica baixo risco de hepatopatia estrutural.",
+          "fator_etiologico_provavel": "Integridade hepatocelular preservada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "TGP",
+          "valor": "44,2",
+          "unidade": "U/L",
+          "referencia": "<41",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "elevação leve compatível com esteatose hepática incipiente ou lesão hepatocelular discreta",
+          "risco_curto_prazo": "Sugere possível acúmulo de gordura hepática ou lesão hepatocelular leve nos próximos 3-6 meses.",
+          "risco_medio_prazo": "Progressão para esteato-hepatite não alcoólica (NASH) e fibrose hepática em 2-5 anos se não controlado.",
+          "fator_etiologico_provavel": "Esteatose hepática não alcoólica (DHGNA), resistência insulínica, síndrome metabólica ou consumo alcoólico",
+          "severidade": 3,
+          "investigacao_adicional": "Ultrassom hepático, elastografia hepática (FibroScan), avaliação de síndrome metabólica"
+        },
+        {
+          "nome": "GGT",
+          "valor": "63",
+          "unidade": "U/L",
+          "referencia": "<60",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "elevação leve sugestiva de estresse hepatobiliar ou consumo alcoólico",
+          "risco_curto_prazo": "Marcador sensível de disfunção hepatobiliar, estresse oxidativo hepático ou consumo alcoólico regular.",
+          "risco_medio_prazo": "Elevação persistente associa-se a progressão de doença hepática gordurosa, fibrose e risco cardiovascular aumentado em 2-5 anos.",
+          "fator_etiologico_provável": "Esteatose hepática, consumo alcoólico (mesmo moderado), resistência insulínica ou colestase subclínica",
+          "severidade": 3,
+          "investigacao_adicional": "Ultrassom hepático, investigação de consumo alcoólico, marcadores de fibrose hepática"
+        },
+        {
+          "nome": "Fosfatase Alcalina",
+          "valor": "96",
+          "unidade": "U/L",
+          "referencia": "40 a 130",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Função hepatobiliar e metabolismo ósseo dentro da normalidade.",
+          "risco_medio_prazo": "Sem evidência de colestase ou doença óssea metabólica.",
+          "fator_etiologico_provavel": "Homeostase hepatobiliar e óssea preservada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Bilirrubina",
+          "valor": "0,84",
+          "unidade": "mg/dL",
+          "referencia": "<1,2",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Metabolismo de bilirrubinas preservado, sem evidência de colestase ou hemólise.",
+          "risco_medio_prazo": "Função hepática excretora adequada.",
+          "fator_etiologico_provavel": "Metabolismo hepático de bilirrubinas normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Ferro",
+          "valor": "178",
+          "unidade": "µg/dL",
+          "referencia": "65 a 175",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "elevação leve compatível com sobrecarga de ferro ou hemocromatose inicial",
+          "risco_curto_prazo": "Ferro sérico discretamente elevado sugere possível acúmulo tecidual nos próximos 6-12 meses.",
+          "risco_medio_prazo": "Sobrecarga crônica pode levar a deposição em fígado, coração e pâncreas com risco de cirrose, cardiomiopatia e diabetes em 3-10 anos.",
+          "fator_etiologico_provavel": "Hemocromatose hereditária (HFE), síndrome metabólica com hiperabsorção de ferro ou suplementação excessiva",
+          "severidade": 4,
+          "investigacao_adicional": "Pesquisa de mutações HFE (C282Y, H63D), ressonância magnética hepática para quantificação de ferro, avaliação cardiológica"
+        },
+        {
+          "nome": "Ferritina",
+          "valor": "692,9",
+          "unidade": "ng/mL",
+          "referencia": "30 a 400",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "hiperferritinemia significativa compatível com sobrecarga de ferro, síndrome metabólica ou processo inflamatório crônico",
+          "risco_curto_prazo": "Nível elevado indica risco de deposição férrica em órgãos-alvo (fígado, coração, pâncreas) ou inflamação sistêmica nos próximos 3-6 meses.",
+          "risco_medio_prazo": "Sobrecarga férrica persistente pode evoluir para cirrose hepática, cardiomiopatia restritiva, diabetes secundário e artropatia em 2-5 anos.",
+          "fator_etiologico_provavel": "Hemocromatose hereditária, síndrome metabólica com hiperabsorção de ferro, inflamação crônica (PCR-us elevado) ou hepatopatia",
+          "severidade": 5,
+          "investigacao_adicional": "Genotipagem HFE urgente, ressonância magnética hepática e cardíaca com T2*, avaliação hematológica para considerar flebotomia terapêutica"
+        },
+        {
+          "nome": "Índice de Saturação da Transferrina",
+          "valor": "64",
+          "unidade": "%",
+          "referencia": "20 a 50",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "saturação elevada compatível com sobrecarga de ferro",
+          "risco_curto_prazo": "Saturação >60% indica ferro livre circulante com potencial de deposição tecidual e estresse oxidativo.",
+          "risco_medio_prazo": "Manutenção deste nível aumenta risco de lesão oxidativa em fígado, coração e pâncreas em 2-5 anos.",
+          "fator_etiologico_provavel": "Hemocromatose hereditária ou hiperabsorção intestinal de ferro",
+          "severidade": 4,
+          "investigacao_adicional": "Correlacionar com genotipagem HFE e ressonância magnética para quantificação de ferro tecidual"
+        },
+        {
+          "nome": "Capacidade de Fixação Latente do Ferro",
+          "valor": "88,2",
+          "unidade": "µg/dL",
+          "referencia": "120 a 450",
+          "status_validador": "low",
+          "diagnostico_tendencia": "redução compatível com saturação elevada da transferrina",
+          "risco_curto_prazo": "Capacidade reduzida reflete saturação da transferrina, confirmando sobrecarga de ferro.",
+          "risco_medio_prazo": "Achado secundário à sobrecarga férrica; risco depende do controle da ferritina e saturação.",
+          "fator_etiologico_provavel": "Consequência da sobrecarga de ferro (ferritina e saturação elevadas)",
+          "severidade": 3,
+          "investigacao_adicional": "Correlacionar com demais marcadores de ferro; não requer investigação isolada"
+        },
+        {
+          "nome": "Sódio",
+          "valor": "139",
+          "unidade": "mEq/L",
+          "referencia": "136 a 146",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Equilíbrio hidroeletrolítico preservado.",
+          "risco_medio_prazo": "Homeostase de sódio adequada.",
+          "fator_etiologico_provavel": "Regulação renal e hormonal de sódio normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Potássio",
+          "valor": "4,4",
+          "unidade": "mEq/L",
+          "referencia": "3,5 a 5,1",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Equilíbrio de potássio adequado, sem risco de arritmias ou disfunção neuromuscular.",
+          "risco_medio_prazo": "Homeostase de potássio preservada.",
+          "fator_etiologico_provavel": "Regulação renal e hormonal de potássio normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Cálcio",
+          "valor": "9,6",
+          "unidade": "mg/dL",
+          "referencia": "8,6 a 10,2",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Metabolismo de cálcio preservado, sem risco de hipocalcemia ou hipercalcemia.",
+          "risco_medio_prazo": "Homeostase óssea e neuromuscular adequada.",
+          "fator_etiologico_provavel": "Regulação paratireoidiana e vitamina D preservada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Zinco",
+          "valor": "129,6",
+          "unidade": "mcg/dL",
+          "referencia": "60 a 130",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal - limítrofe superior",
+          "risco_curto_prazo": "Nível adequado para função imunológica e metabólica.",
+          "risco_medio_prazo": "Sem evidência de deficiência ou toxicidade.",
+          "fator_etiologico_provavel": "Ingesta adequada de zinco",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        }
+      ],
+      "sintese_do_sistema": "O perfil laboratorial do paciente revela achados metabólicos e inflamatórios que sugerem risco cardiovascular e metabólico aumentado. O perfil lipídico básico encontra-se adequado (CT 168, LDL 89, HDL 53), porém observa-se hipertrigliceridemia leve (159 mg/dL) e VLDL limítrofe-alto (31,8 mg/dL), compatíveis com resistência insulínica incipiente ou excesso de carboidratos refinados. A PCR-us elevada (5,5 mg/L) indica inflamação sistêmica de baixo grau moderada, frequentemente associada à síndrome metabólica. As enzimas hepáticas mostram TGP (44,2 U/L) e GGT (63 U/L) discretamente elevadas, sugerindo esteatose hepática não alcoólica (DHGNA) em fase inicial, achado coerente com o perfil metabólico. A homocisteína limítrofe-alta (12,06 micromol/L) adiciona risco trombótico e aterosclerótico, possivelmente relacionado a deficiências de vitaminas do complexo B.\n\nO achado mais crítico refere-se ao metabolismo do ferro: ferritina marcadamente elevada (692,9 ng/mL), ferro sérico alto-limítrofe (178 µg/dL), saturação de transferrina aumentada (64%) e capacidade de fixação latente reduzida (88,2 µg/dL) configuram quadro compatível com sobrecarga de ferro, sugerindo fortemente hemocromatose hereditária (mutações HFE) ou hiperabsorção secundária à síndrome metabólica. Este achado demanda investigação urgente com genotipagem HFE e ressonância magnética para quantificação de ferro tecidual, pois a deposição crônica em fígado, coração e pâncreas pode evoluir para cirrose, cardiomiopatia e diabetes secundário. A correlação entre hiperferritinemia, PCR-us elevada e enzimas hepáticas alteradas reforça a necessidade de abordagem integrativa, considerando tanto sobrecarga férrica quanto síndrome metabólica. Recomenda-se avaliação clínica presencial para estratificação de risco cardiovascular, investigação de hemocromatose e manejo de fatores metabólicos modificáveis.",
+      "alertas_criticos": [
+        {
+          "exame": "Ferritina",
+          "motivo": "Hiperferritinemia significativa (692,9 ng/mL) compatível com sobrecarga de ferro ou hemocromatose hereditária, com risco de deposição em órgãos-alvo",
+          "acao_clinica_sugerida": "Avaliação clínica urgente (até 7 dias) para genotipagem HFE (C282Y, H63D), ressonância magnética hepática e cardíaca com T2* para quantificação de ferro tecidual, e considerar flebotomia terapêutica se confirmada sobrecarga"
+        },
+        {
+          "exame": "Ferro + Saturação de Transferrina",
+          "motivo": "Ferro 178 µg/dL e saturação 64% indicam ferro livre circulante com potencial de lesão oxidativa tecidual",
+          "acao_clinica_sugerida": "Correlacionar com genotipagem HFE e ressonância magnética; avaliação hematológica para definir necessidade de flebotomia"
+        },
+        {
+          "exame": "PCR-us",
+          "motivo": "Inflamação sistêmica moderada (5,5 mg/L) associada a risco cardiovascular aumentado e possível síndrome metabólica",
+          "acao_clinica_sugerida": "Avaliação de composição corporal, circunferência abdominal, marcadores de síndrome metabólica; considerar investigação de causas infecciosas/autoimunes se persistente após controle metabólico"
+        }
+      ]
+    },
+    "hormonal_feminino": {
+      "schema_version": "1.0",
+      "sistema": "hormonal_feminino",
+      "exames_interpretados": [
+        {
+          "nome": "FSH",
+          "valor": "3,07",
+          "unidade": "mUI/mL",
+          "referencia": "1,5 a 12,4",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Sem risco. Função gonadotrófica hipofisária preservada, compatível com eixo HPG íntegro em homem adulto.",
+          "risco_medio_prazo": "Sem risco associado. Manutenção esperada da função reprodutiva e androgênica.",
+          "fator_etiologico_provavel": "Fisiológico para sexo masculino na faixa etária",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "LH",
+          "valor": "8,12",
+          "unidade": "mUI/mL",
+          "referencia": "1,7 a 8,6",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe superior",
+          "risco_curto_prazo": "Valor no limite superior pode sugerir leve esforço compensatório testicular, porém ainda dentro da normalidade funcional.",
+          "risco_medio_prazo": "Monitorar tendência de elevação progressiva que poderia indicar início de declínio testicular (hipogonadismo primário incipiente).",
+          "fator_etiologico_provavel": "Possível variação fisiológica ou início de resposta compensatória testicular relacionada à idade",
+          "severidade": 2,
+          "investigacao_adicional": "Reavaliação em 12 meses se sintomas de hipogonadismo ou controle anual de rotina"
+        },
+        {
+          "nome": "Prolactina",
+          "valor": "4,4",
+          "unidade": "ng/mL",
+          "referencia": "4,04 a 15,2",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Sem risco. Secreção prolactínica adequada, sem interferência na função gonadal ou libido.",
+          "risco_medio_prazo": "Sem risco associado. Ausência de hiperprolactinemia que pudesse suprimir eixo HPG.",
+          "fator_etiologico_provavel": "Fisiológico",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Progesterona",
+          "valor": "0,85",
+          "unidade": "ng/mL",
+          "referencia": "0 a 0,5",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "elevação acima do esperado para homem adulto",
+          "risco_curto_prazo": "Progesterona elevada em homem pode indicar conversão periférica aumentada, disfunção adrenal leve ou artefato laboratorial. Risco de sintomas inespecíficos (fadiga, ginecomastia leve).",
+          "risco_medio_prazo": "Se persistente, pode sugerir desregulação do eixo adrenal-gonadal ou conversão enzimática alterada, com impacto potencial em androgenização e composição corporal.",
+          "fator_etiologico_provavel": "Possível conversão periférica aumentada de precursores esteroides, disfunção adrenal leve (hiperplasia adrenal não clássica), ou artefato de coleta/laboratório",
+          "severidade": 4,
+          "investigacao_adicional": "Repetir dosagem em jejum rigoroso, 17-OH-progesterona, cortisol basal, DHEA-S, avaliação clínica para sinais de disfunção adrenal"
+        },
+        {
+          "nome": "Estradiol",
+          "valor": "30,8",
+          "unidade": "pg/mL",
+          "referencia": "<53",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Sem risco. Estradiol dentro da faixa masculina esperada, resultante de aromatização fisiológica da testosterona.",
+          "risco_medio_prazo": "Sem risco associado. Manutenção da saúde óssea e cardiovascular dependente de estradiol adequado.",
+          "fator_etiologico_provavel": "Aromatização fisiológica periférica de testosterona",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Testosterona Total",
+          "valor": "703",
+          "unidade": "ng/dL",
+          "referencia": "400 a 800",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-ótimo",
+          "risco_curto_prazo": "Sem risco. Nível androgênico robusto para a faixa etária, compatível com função testicular preservada e ausência de hipogonadismo.",
+          "risco_medio_prazo": "Sem risco. Manutenção esperada de massa muscular, libido, energia e saúde metabólica.",
+          "fator_etiologico_provavel": "Produção testicular fisiológica preservada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Testosterona Livre",
+          "valor": "7,38",
+          "unidade": "ng/dL",
+          "referencia": "3,03 a 14,8",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal, porém na metade inferior da faixa",
+          "risco_curto_prazo": "Testosterona livre relativamente baixa em relação à total pode indicar biodisponibilidade reduzida por SHBG elevado. Risco de sintomas subclínicos de hipogonadismo funcional (fadiga, libido reduzida).",
+          "risco_medio_prazo": "Se SHBG permanecer elevado, pode haver progressão para sintomas androgênicos mais evidentes apesar de testosterona total normal (hipogonadismo bioquímico relativo).",
+          "fator_etiologico_provavel": "SHBG elevado sequestra testosterona, reduzindo fração livre biodisponível",
+          "severidade": 3,
+          "investigacao_adicional": "Correlação clínica com sintomas (ADAM score), avaliação de função hepática, tireoide (TSH/T4L), resistência insulínica (HOMA-IR)"
+        },
+        {
+          "nome": "SHBG",
+          "valor": "90,2",
+          "unidade": "nmol/L",
+          "referencia": "16,5 a 55,9",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "elevação significativa acima da referência",
+          "risco_curto_prazo": "SHBG elevado reduz testosterona livre biodisponível, podendo causar sintomas de hipogonadismo funcional (fadiga, redução de libido, dificuldade de ganho muscular) mesmo com testosterona total normal.",
+          "risco_medio_prazo": "Persistência de SHBG alto pode perpetuar sintomas androgênicos deficitários, impactar composição corporal e qualidade de vida. Associação com hipertireoidismo, hepatopatia ou uso de medicações deve ser investigada.",
+          "fator_etiologico_provavel": "Possível hipertireoidismo subclínico, disfunção hepática leve, uso de medicações (anticonvulsivantes, estatinas), ou predisposição genética",
+          "severidade": 4,
+          "investigacao_adicional": "TSH, T4 livre, T3, enzimas hepáticas (TGO/TGP, GGT, FA), albumina, revisão de medicações em uso, avaliação clínica para sinais de hipertireoidismo"
+        }
+      ],
+      "sintese_do_sistema": "Paciente masculino de 44 anos apresenta perfil hormonal com testosterona total preservada (703 ng/dL) e gonadotrofinas (FSH/LH) dentro da normalidade, sugerindo função testicular íntegra. Entretanto, observa-se SHBG significativamente elevado (90,2 nmol/L, 61% acima do limite superior), o que reduz a biodisponibilidade androgênica, refletida em testosterona livre na metade inferior da faixa de referência (7,38 ng/dL). Este padrão é compatível com hipogonadismo bioquímico relativo, podendo cursar com sintomas clínicos (fadiga, redução de libido, dificuldade de ganho muscular) apesar da testosterona total normal. A elevação de SHBG demanda investigação etiológica direcionada a disfunção tireoidiana (hipertireoidismo subclínico é causa comum), hepatopatia leve ou uso de medicações específicas. Adicionalmente, progesterona discretamente elevada (0,85 ng/mL) merece confirmação laboratorial e investigação de possível disfunção adrenal leve ou conversão periférica aumentada de precursores esteroides. A correlação clínica com sintomas androgênicos e investigação complementar (perfil tireoidiano, hepático e adrenal) são essenciais para definir conduta terapêutica individualizada.",
+      "alertas_criticos": [
+        {
+          "exame": "SHBG",
+          "motivo": "Elevação de 61% acima do limite superior (90,2 nmol/L vs ref. 16,5-55,9), reduzindo biodisponibilidade de testosterona livre e podendo causar sintomas de hipogonadismo funcional",
+          "acao_clinica_sugerida": "Avaliação clínica para sintomas androgênicos deficitários, investigação de hipertireoidismo (TSH, T4L, T3), função hepática (TGO/TGP/GGT/FA/albumina), revisão de medicações em uso. Considerar reavaliação hormonal em 8-12 semanas."
+        },
+        {
+          "exame": "Progesterona",
+          "motivo": "Valor 70% acima do limite superior esperado para homem adulto (0,85 ng/mL vs ref. 0-0,5), sugerindo possível disfunção adrenal ou artefato laboratorial",
+          "acao_clinica_sugerida": "Repetir dosagem em jejum rigoroso para confirmar achado. Se persistente, investigar eixo adrenal com 17-OH-progesterona, cortisol basal, DHEA-S. Avaliação clínica para sinais de hiperplasia adrenal não clássica."
+        }
+      ]
+    },
+    "nutricional": {
+      "schema_version": "1.0",
+      "sistema": "nutricional",
+      "exames_interpretados": [
+        {
+          "nome": "Vitamina D",
+          "valor": "42,3",
+          "unidade": "ng/mL",
+          "referencia": "80 a 100",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "insuficiência de vitamina D (limítrofe-baixo conforme referência IVS)",
+          "risco_curto_prazo": "Possível comprometimento da absorção de cálcio, fadiga muscular discreta e redução da resposta imune nos próximos 3-6 meses",
+          "risco_medio_prazo": "Risco aumentado de osteopenia, sarcopenia precoce, maior suscetibilidade a infecções respiratórias e possível impacto negativo no metabolismo da testosterona em 2-5 anos",
+          "fator_etiologico_provavel": "Baixa exposição solar e/ou ingesta dietética insuficiente; possível má absorção intestinal a investigar",
+          "severidade": 3,
+          "investigacao_adicional": "Cálcio sérico, cálcio iônico, fosfatase alcalina óssea; considerar densitometria óssea se fatores de risco adicionais"
+        },
+        {
+          "nome": "Vitamina B12",
+          "valor": "363",
+          "unidade": "pg/mL",
+          "referencia": "800 a 1500",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "deficiência limítrofe de vitamina B12 (abaixo do ótimo funcional IVS)",
+          "risco_curto_prazo": "Risco de fadiga crônica, comprometimento cognitivo leve (memória, concentração), neuropatia periférica incipiente e anemia megaloblástica subclínica nos próximos 6-12 meses",
+          "risco_medio_prazo": "Progressão para neuropatia irreversível, declínio cognitivo acelerado, anemia macrocítica estabelecida e elevação de homocisteína com risco cardiovascular aumentado em 1-3 anos se não corrigido",
+          "fator_etiologico_provavel": "Deficiência por baixa ingesta (dieta pobre em proteína animal), má absorção gástrica (hipocloridria, gastrite atrófica, uso de IBP) ou deficiência de fator intrínseco a investigar",
+          "severidade": 4,
+          "investigacao_adicional": "Ácido metilmalônico (MMA), homocisteína, hemograma completo com VCM, dosagem de ácido fólico, pesquisa de anticorpos anti-fator intrínseco e anti-células parietais; considerar endoscopia digestiva alta se história sugestiva"
+        },
+        {
+          "nome": "PTH",
+          "valor": "20",
+          "unidade": "pg/mL",
+          "referencia": "18,5 a 88",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Nenhum risco clínico identificado. Valor dentro da faixa de referência laboratorial",
+          "risco_medio_prazo": "Sem implicações clínicas adversas esperadas. Homeostase cálcio-fósforo preservada",
+          "fator_etiologico_provavel": "Não aplicável - valor fisiológico normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        }
+      ],
+      "sintese_do_sistema": "O perfil nutricional do paciente Cleiton, 44 anos, sexo masculino, revela dois achados relevantes que merecem intervenção clínica. A vitamina D em 42,3 ng/mL encontra-se em faixa de insuficiência conforme referência otimizada IVS (ideal 80-100 ng/mL), sugerindo risco de comprometimento da saúde óssea, muscular e imunológica a médio prazo, além de possível impacto negativo no eixo androgênico. A vitamina B12 em 363 pg/mL configura deficiência limítrofe (referência IVS ótima >800 pg/mL), com risco significativo de manifestações neurológicas, cognitivas e hematológicas se não corrigida prontamente. O PTH dentro da normalidade sugere que a homeostase cálcio-fósforo está preservada no momento, porém a insuficiência de vitamina D pode, a longo prazo, estimular elevação compensatória do PTH (hiperparatireoidismo secundário). A investigação etiológica da deficiência de B12 é prioritária, considerando causas gastrintestinais (hipocloridria, gastrite atrófica, uso de inibidores de bomba de prótons) ou dietéticas. Recomenda-se avaliação clínica presencial para definir estratégia de reposição e investigação complementar, visando prevenir complicações neurológicas irreversíveis e otimizar a saúde metabólica e hormonal do paciente.",
+      "alertas_criticos": [
+        {
+          "exame": "Vitamina B12",
+          "motivo": "Valor em 363 pg/mL configura deficiência limítrofe com risco de neuropatia periférica, declínio cognitivo e anemia megaloblástica se não tratado",
+          "acao_clinica_sugerida": "Avaliação clínica presencial em até 30 dias para investigação etiológica (MMA, homocisteína, hemograma, pesquisa de anticorpos anti-fator intrínseco) e início de reposição oral ou parenteral conforme achados. Considerar endoscopia digestiva alta se história de gastrite ou uso crônico de IBP"
+        }
+      ]
+    },
+    "tireoide": {
+      "schema_version": "1.0",
+      "sistema": "tireoide",
+      "exames_interpretados": [
+        {
+          "nome": "TSH",
+          "valor": "0,01",
+          "unidade": "microUI/mL",
+          "referencia": "0,27 a 4,2",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "supressão tireotrófica severa, compatível com hipertireoidismo estabelecido",
+          "risco_curto_prazo": "Risco cardiovascular elevado (taquiarritmias, fibrilação atrial), perda de massa óssea acelerada, sintomas adrenérgicos intensos (tremores, ansiedade, insônia, perda ponderal)",
+          "risco_medio_prazo": "Cardiomiopatia tireotóxica, osteoporose prematura, miopatia proximal, risco aumentado de eventos cardiovasculares maiores se não tratado adequadamente",
+          "fator_etiologico_provavel": "Doença de Graves (autoimune) ou adenoma tóxico, considerando presença de autoanticorpos elevados",
+          "severidade": 5,
+          "investigacao_adicional": "TRAb (anticorpo anti-receptor de TSH), cintilografia de tireoide com captação, ultrassonografia de tireoide, avaliação cardiológica com ECG e ecocardiograma"
+        },
+        {
+          "nome": "T4 Livre",
+          "valor": "3,03",
+          "unidade": "ng/dL",
+          "referencia": "0,85 a 1,86",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "tireotoxicose franca com elevação significativa de T4 livre (63% acima do limite superior)",
+          "risco_curto_prazo": "Intensificação do estado hipermetabólico com catabolismo proteico, termogênese excessiva, sobrecarga cardíaca, risco de crise tireotóxica se exposto a estressores agudos",
+          "risco_medio_prazo": "Disfunção sistólica ventricular esquerda, fibrose miocárdica, fraturas patológicas por reabsorção óssea acelerada, comprometimento cognitivo",
+          "fator_etiologico_provavel": "Hiperfunção tireoidiana primária por doença autoimune ou nodular hiperfuncionante",
+          "severidade": 5,
+          "investigacao_adicional": "Correlacionar com TSH suprimido e T3 livre; investigação etiológica conforme TSH"
+        },
+        {
+          "nome": "T3 Livre",
+          "valor": "10,95",
+          "unidade": "pg/mL",
+          "referencia": "2 a 4,4",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "tireotoxicose T3-predominante severa (149% acima do limite superior)",
+          "risco_curto_prazo": "Maior potência metabólica que T4, com risco aumentado de manifestações cardiovasculares agudas (FA, ICC de alto débito), hipertermia, agitação psicomotora, risco de tempestade tireoidiana",
+          "risco_medio_prazo": "Remodelamento cardíaco adverso, disfunção diastólica, perda de massa magra progressiva, osteopenia/osteoporose, alterações neuropsiquiátricas persistentes",
+          "fator_etiologico_provavel": "Conversão periférica aumentada de T4 para T3 em contexto de hipertireoidismo primário autoimune ou nodular",
+          "severidade": 5,
+          "investigacao_adicional": "Monitorização cardíaca contínua se sintomas cardiovasculares, avaliação de função hepática (T3 elevado pode indicar conversão hepática aumentada)"
+        },
+        {
+          "nome": "Anti-TPO",
+          "valor": "242,3",
+          "unidade": "UI/mL",
+          "referencia": "<35",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "autoimunidade tireoidiana estabelecida, fortemente sugestiva de Doença de Graves em contexto de hipertireoidismo",
+          "risco_curto_prazo": "Confirma etiologia autoimune do quadro tireotóxico, com possibilidade de manifestações extratiroideas (oftalmopatia de Graves, dermopatia infiltrativa)",
+          "risco_medio_prazo": "Evolução para hipotireoidismo pós-tratamento (ablação ou cirurgia), necessidade de reposição hormonal vitalícia, risco de outras doenças autoimunes associadas (vitiligo, diabetes tipo 1, insuficiência adrenal)",
+          "fator_etiologico_provavel": "Doença autoimune tireoidiana tipo Graves, com produção de anticorpos estimuladores do receptor de TSH",
+          "severidade": 4,
+          "investigacao_adicional": "TRAb obrigatório para confirmar Doença de Graves, avaliação oftalmológica para oftalmopatia, considerar screening de outras autoimunidades"
+        }
+      ],
+      "sintese_do_sistema": "Paciente masculino de 44 anos apresenta quadro laboratorial compatível com hipertireoidismo franco severo, caracterizado por supressão completa do TSH (0,01 microUI/mL) e elevações críticas de T4 livre (3,03 ng/dL, 63% acima do limite) e T3 livre (10,95 pg/mL, 149% acima do limite). A presença de Anti-TPO fortemente positivo (242,3 UI/mL, quase 7x o limite superior) sugere fortemente etiologia autoimune, sendo a Doença de Graves a hipótese diagnóstica principal. Este perfil configura tireotoxicose de alto risco, com potencial para complicações cardiovasculares agudas (fibrilação atrial, insuficiência cardíaca de alto débito), metabólicas (catabolismo proteico intenso, perda ponderal) e ósseas (reabsorção acelerada). A magnitude das alterações hormonais, especialmente o T3 livre extremamente elevado, indica estado hipermetabólico severo que requer intervenção terapêutica urgente.\n\nA investigação complementar deve incluir dosagem de TRAb (anticorpo anti-receptor de TSH) para confirmação definitiva de Doença de Graves, cintilografia com captação para caracterização funcional, ultrassonografia tireoidiana para avaliação morfológica e exclusão de nódulos, além de avaliação cardiológica completa (ECG, Holter, ecocardiograma) dada a idade do paciente e risco cardiovascular elevado. Avaliação oftalmológica é mandatória para screening de oftalmopatia de Graves. O tratamento deve ser iniciado prontamente com antitireoidianos (metimazol ou propiltiouracil), betabloqueadores para controle sintomático cardiovascular, e considerar terapia definitiva (radioiodo ou tireoidectomia) após estabilização clínica. Acompanhamento endocrinológico especializado é essencial para manejo adequado e prevenção de complicações a curto e longo prazo.",
+      "alertas_criticos": [
+        {
+          "exame": "TSH",
+          "motivo": "Supressão completa (0,01 microUI/mL) indica hipertireoidismo severo com risco cardiovascular e metabólico imediato",
+          "acao_clinica_sugerida": "Avaliação endocrinológica urgente em até 48-72h, iniciar betabloqueador se taquicardia/sintomas adrenérgicos, considerar antitireoidiano imediato, ECG e avaliação cardiológica"
+        },
+        {
+          "exame": "T4 Livre",
+          "motivo": "Elevação crítica (3,03 ng/dL, 63% acima do limite) confirma tireotoxicose franca com alto risco de descompensação",
+          "acao_clinica_sugerida": "Iniciar terapia antitireoidiana (metimazol 20-40mg/dia ou PTU), monitorizar função hepática e hemograma, orientar sinais de crise tireotóxica"
+        },
+        {
+          "exame": "T3 Livre",
+          "motivo": "Elevação extrema (10,95 pg/mL, 149% acima do limite) representa maior risco metabólico e cardiovascular que T4 isolado",
+          "acao_clinica_sugerida": "Priorizar controle rápido com antitireoidiano em dose plena, betabloqueio adequado, evitar estressores físicos/emocionais, considerar internação se sintomas severos"
+        },
+        {
+          "exame": "Anti-TPO",
+          "motivo": "Positividade intensa (242,3 UI/mL) confirma autoimunidade e sugere Doença de Graves como etiologia provável",
+          "acao_clinica_sugerida": "Solicitar TRAb para confirmação diagnóstica, avaliar manifestações extratiroideas (oftalmopatia, dermopatia), planejar terapia definitiva após controle inicial"
+        }
+      ]
+    },
+    "renal": {
+      "schema_version": "1.0",
+      "sistema": "renal",
+      "exames_interpretados": [
+        {
+          "nome": "Ácido Úrico",
+          "valor": "3,97",
+          "unidade": "mg/dL",
+          "referencia": "3,4 a 7",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor dentro da faixa de referência, sem risco de hiperuricemia ou gota nos próximos meses.",
+          "risco_medio_prazo": "Manutenção deste nível sugere baixo risco cardiovascular e metabólico associado ao ácido úrico em médio prazo.",
+          "fator_etiologico_provavel": "metabolismo purínico adequado",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Ureia",
+          "valor": "23,5",
+          "unidade": "mg/dL",
+          "referencia": "10 a 50",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Nível adequado de catabolismo proteico e função renal preservada, sem risco de azotemia nos próximos meses.",
+          "risco_medio_prazo": "Valor compatível com função renal estável e balanço nitrogenado adequado em médio prazo.",
+          "fator_etiologico_provavel": "função renal preservada e ingesta proteica adequada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Creatinina",
+          "valor": "0,51",
+          "unidade": "mg/dL",
+          "referencia": "0,7 a 1,2",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "creatinina abaixo da faixa de referência, compatível com baixa massa muscular ou diluição",
+          "risco_curto_prazo": "Valor isoladamente baixo não representa risco renal agudo, mas pode refletir sarcopenia ou desnutrição proteica nos próximos 3-6 meses.",
+          "risco_medio_prazo": "Persistência de creatinina baixa sugere risco de perda de massa magra progressiva, fragilidade e declínio funcional em 1-3 anos se não corrigido.",
+          "fator_etiologico_provavel": "baixa massa muscular (sarcopenia relativa) ou ingesta proteica insuficiente",
+          "severidade": 3,
+          "investigacao_adicional": "bioimpedância para composição corporal, avaliação nutricional proteica, considerar dosagem de albumina sérica"
+        },
+        {
+          "nome": "Cortisol Basal",
+          "valor": "9,8",
+          "unidade": "mcg/dL",
+          "referencia": "6,7 a 22,6",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Eixo hipotálamo-hipófise-adrenal funcionante, sem risco de insuficiência adrenal ou hipercortisolismo nos próximos meses.",
+          "risco_medio_prazo": "Manutenção deste nível sugere resposta ao estresse preservada e baixo risco de síndrome de Cushing ou Addison em médio prazo.",
+          "fator_etiologico_provavel": "função adrenal preservada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "IGF-1",
+          "valor": "98",
+          "unidade": "ng/mL",
+          "referencia": "100 a 303",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "IGF-1 limítrofe-baixo, compatível com deficiência relativa de GH ou estado catabólico",
+          "risco_curto_prazo": "Valor abaixo da referência pode refletir anabolismo reduzido, dificultando ganho de massa muscular e recuperação tecidual nos próximos 6-12 meses.",
+          "risco_medio_prazo": "Persistência de IGF-1 baixo sugere risco de sarcopenia acelerada, osteopenia, disfunção metabólica e envelhecimento precoce em 2-5 anos.",
+          "fator_etiologico_provavel": "deficiência relativa de GH (idade-relacionada), desnutrição proteica, ou estado inflamatório crônico subclínico",
+          "severidade": 3,
+          "investigacao_adicional": "avaliação endocrinológica para considerar teste de estímulo de GH, dosagem de IGFBP-3, avaliação nutricional proteica e de composição corporal"
+        }
+      ],
+      "sintese_do_sistema": "A avaliação do sistema renal revela função glomerular preservada, com ureia e ácido úrico dentro da normalidade, sugerindo clearance renal adequado e ausência de sobrecarga metabólica. O cortisol basal encontra-se na faixa de referência, indicando eixo adrenal funcionante. Entretanto, a creatinina sérica de 0,51 mg/dL, abaixo da faixa de referência para homens adultos, levanta a hipótese de baixa massa muscular (sarcopenia relativa) ou ingesta proteica insuficiente, achado que merece investigação complementar com bioimpedância e avaliação nutricional. Adicionalmente, o IGF-1 de 98 ng/mL, limítrofe-baixo para a faixa etária, reforça a possibilidade de estado catabólico ou deficiência relativa de GH, o que pode contribuir para perda de massa magra e declínio funcional a médio prazo. Embora não haja comprometimento renal agudo, a combinação de creatinina baixa e IGF-1 reduzido sugere necessidade de abordagem integrativa para otimização da composição corporal e prevenção de fragilidade.",
+      "alertas_criticos": []
+    },
+    "hematologico": {
+      "schema_version": "1.0",
+      "sistema": "hematologico",
+      "exames_interpretados": [
+        {
+          "nome": "Hemácias",
+          "valor": "5,06",
+          "unidade": "milhões/mm³",
+          "referencia": "4,5 a 6,1",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Capacidade de transporte de oxigênio adequada, sem risco de anemia ou policitemia nos próximos meses",
+          "risco_medio_prazo": "Manutenção da oxigenação tecidual adequada se mantidos hábitos saudáveis",
+          "fator_etiologico_provavel": "eritropoiese fisiológica normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Hemoglobina",
+          "valor": "14,9",
+          "unidade": "g/dL",
+          "referencia": "13 a 16,5",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Oxigenação tecidual preservada, sem risco de fadiga ou dispneia por anemia",
+          "risco_medio_prazo": "Capacidade aeróbica mantida se não houver perdas sanguíneas ou deficiências nutricionais",
+          "fator_etiologico_provavel": "síntese de hemoglobina adequada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Hematócrito",
+          "valor": "41",
+          "unidade": "%",
+          "referencia": "36 a 54",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Viscosidade sanguínea adequada, sem risco de hiperviscosidade ou anemia dilucional",
+          "risco_medio_prazo": "Perfusão tecidual mantida se hidratação e massa eritrocitária permanecerem estáveis",
+          "fator_etiologico_provavel": "equilíbrio hídrico e eritropoiético normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "VCM",
+          "valor": "81",
+          "unidade": "fL",
+          "referencia": "80 a 98",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe inferior",
+          "risco_curto_prazo": "Volume eritrocitário no limite inferior da normalidade, sem impacto clínico imediato mas requer monitoramento",
+          "risco_medio_prazo": "Possível evolução para microcitose se houver deficiência de ferro subclínica não corrigida",
+          "fator_etiologico_provavel": "possível reserva de ferro limítrofe ou traço talassêmico leve",
+          "severidade": 2,
+          "investigacao_adicional": "ferritina, ferro sérico e saturação de transferrina para descartar deficiência subclínica"
+        },
+        {
+          "nome": "HCM",
+          "valor": "29,4",
+          "unidade": "pg",
+          "referencia": "26,8 a 32,9",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Conteúdo de hemoglobina por eritrócito adequado, sem risco de hipocromia",
+          "risco_medio_prazo": "Síntese de hemoglobina mantida se aporte de ferro e vitaminas permanecer adequado",
+          "fator_etiologico_provavel": "hemoglobinização eritrocitária fisiológica",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "CHCM",
+          "valor": "36,3",
+          "unidade": "g/dL",
+          "referencia": "30 a 36,5",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Concentração de hemoglobina eritrocitária adequada, sem risco de esferocitose ou hipocromia",
+          "risco_medio_prazo": "Estabilidade da morfologia eritrocitária se não houver hemoglobinopatias ocultas",
+          "fator_etiologico_provavel": "concentração hemoglobínica normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "RDW",
+          "valor": "12,1",
+          "unidade": "%",
+          "referencia": "11 a 16",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Homogeneidade do tamanho eritrocitário preservada, sem anisocitose significativa",
+          "risco_medio_prazo": "Ausência de risco de anemias mistas ou deficiências nutricionais combinadas",
+          "fator_etiologico_provavel": "eritropoiese homogênea",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Leucócitos",
+          "valor": "3910",
+          "unidade": "/mm³",
+          "referencia": "3600 a 11000",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe inferior",
+          "risco_curto_prazo": "Contagem leucocitária no limite inferior da normalidade, sem comprometimento imunológico imediato mas requer vigilância",
+          "risco_medio_prazo": "Possível maior suscetibilidade a infecções se houver queda adicional ou neutropenia persistente",
+          "fator_etiologico_provavel": "variação constitucional ou redistribuição leucocitária fisiológica",
+          "severidade": 2,
+          "investigacao_adicional": "repetir hemograma em 30-60 dias para avaliar tendência; considerar sorologias virais se sintomas"
+        },
+        {
+          "nome": "Segmentados",
+          "valor": "1591",
+          "unidade": "/mm³",
+          "referencia": "1700 a 8000",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "neutropenia leve",
+          "risco_curto_prazo": "Redução discreta da primeira linha de defesa contra infecções bacterianas, com risco aumentado de infecções piogênicas nos próximos 3-6 meses",
+          "risco_medio_prazo": "Se persistente, risco de infecções bacterianas recorrentes, especialmente cutâneas, respiratórias e urinárias em 1-2 anos",
+          "fator_etiologico_provavel": "possível neutropenia étnica benigna, infecção viral recente, deficiência de B12/folato ou redistribuição marginal",
+          "severidade": 3,
+          "investigacao_adicional": "repetir hemograma em 2-4 semanas; dosagem de vitamina B12, ácido fólico; sorologias virais (CMV, EBV, HIV); considerar avaliação hematológica se persistir"
+        },
+        {
+          "nome": "Eosinófilos",
+          "valor": "160",
+          "unidade": "/mm³",
+          "referencia": "50 a 500",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Resposta eosinofílica adequada, sem evidência de parasitoses ou processos alérgicos ativos",
+          "risco_medio_prazo": "Ausência de risco de hipereosinofilia ou doenças parasitárias crônicas",
+          "fator_etiologico_provavel": "eosinopoiese fisiológica",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Basófilos",
+          "valor": "0",
+          "unidade": "/mm³",
+          "referencia": "0 a 100",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Ausência de basofilia, sem evidência de processos mieloproliferativos ou reações alérgicas sistêmicas",
+          "risco_medio_prazo": "Sem risco de doenças mieloproliferativas crônicas",
+          "fator_etiologico_provavel": "contagem basal fisiológica",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Linfócitos",
+          "valor": "1650",
+          "unidade": "/mm³",
+          "referencia": "1000 a 4800",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Imunidade celular preservada, sem risco de imunodeficiência ou linfoproliferação",
+          "risco_medio_prazo": "Capacidade de resposta imune adaptativa mantida se não houver exposição a imunossupressores",
+          "fator_etiologico_provavel": "linfopoiese fisiológica",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Monócitos",
+          "valor": "508",
+          "unidade": "/mm³",
+          "referencia": "100 a 1200",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Função fagocítica e apresentação antigênica adequadas, sem evidência de processos inflamatórios crônicos",
+          "risco_medio_prazo": "Resposta imune inata preservada se não houver exposição a infecções crônicas",
+          "fator_etiologico_provavel": "monopoiese fisiológica",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Plaquetas",
+          "valor": "241000",
+          "unidade": "mil/mm³",
+          "referencia": "130000 a 450000",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Hemostasia primária preservada, sem risco de sangramento ou trombose nos próximos meses",
+          "risco_medio_prazo": "Coagulação adequada se não houver uso de antiagregantes ou anticoagulantes",
+          "fator_etiologico_provavel": "trombopoiese fisiológica",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        }
+      ],
+      "sintese_do_sistema": "O perfil hematológico do paciente masculino de 44 anos revela série eritrocitária preservada, com hemoglobina, hematócrito e índices hematimétricos dentro da normalidade, embora o VCM esteja no limite inferior (81 fL), sugerindo possível reserva de ferro limítrofe ou traço talassêmico leve que merece investigação complementar com perfil férrico. A série plaquetária encontra-se adequada. O principal achado clínico relevante é a neutropenia leve (segmentados 1591/mm³, abaixo de 1700/mm³), com leucometria global no limite inferior da normalidade (3910/mm³). Este padrão sugere possível neutropenia étnica benigna, infecção viral recente em resolução, deficiência de vitaminas do complexo B ou redistribuição marginal dos neutrófilos. A neutropenia leve confere risco discretamente aumentado de infecções bacterianas nos próximos meses, especialmente se persistir ou progredir.\n\nRecomenda-se repetição do hemograma em 2-4 semanas para avaliar tendência evolutiva, associada à dosagem de vitamina B12 e ácido fólico. Caso a neutropenia persista ou haja sintomas infecciosos recorrentes, avaliação hematológica especializada está indicada para descartar causas secundárias (infecções virais crônicas, doenças autoimunes, medicamentos) ou neutropenias primárias. O restante do leucograma (linfócitos, monócitos, eosinófilos, basófilos) encontra-se dentro dos parâmetros esperados, sem evidência de processos inflamatórios, alérgicos ou mieloproliferativos. A abordagem clínica deve ser individualizada, considerando história clínica, uso de medicações e etnia do paciente.",
+      "alertas_criticos": [
+        {
+          "exame": "Segmentados",
+          "motivo": "Neutropenia leve (1591/mm³, abaixo de 1700/mm³) com risco aumentado de infecções bacterianas",
+          "acao_clinica_sugerida": "Repetir hemograma em 2-4 semanas; dosar vitamina B12 e ácido fólico; considerar sorologias virais (CMV, EBV, HIV); orientar paciente sobre sinais de infecção; encaminhar para hematologia se persistir ou piorar"
+        }
+      ]
+    }
+  },
+  "alertas_criticos_globais": [
+    {
+      "exame": "Ferritina",
+      "motivo": "Hiperferritinemia significativa (692,9 ng/mL) compatível com sobrecarga de ferro ou hemocromatose hereditária, com risco de deposição em órgãos-alvo",
+      "acao_clinica_sugerida": "Avaliação clínica urgente (até 7 dias) para genotipagem HFE (C282Y, H63D), ressonância magnética hepática e cardíaca com T2* para quantificação de ferro tecidual, e considerar flebotomia terapêutica se confirmada sobrecarga"
+    },
+    {
+      "exame": "Ferro + Saturação de Transferrina",
+      "motivo": "Ferro 178 µg/dL e saturação 64% indicam ferro livre circulante com potencial de lesão oxidativa tecidual",
+      "acao_clinica_sugerida": "Correlacionar com genotipagem HFE e ressonância magnética; avaliação hematológica para definir necessidade de flebotomia"
+    },
+    {
+      "exame": "PCR-us",
+      "motivo": "Inflamação sistêmica moderada (5,5 mg/L) associada a risco cardiovascular aumentado e possível síndrome metabólica",
+      "acao_clinica_sugerida": "Avaliação de composição corporal, circunferência abdominal, marcadores de síndrome metabólica; considerar investigação de causas infecciosas/autoimunes se persistente após controle metabólico"
+    },
+    {
+      "exame": "SHBG",
+      "motivo": "Elevação de 61% acima do limite superior (90,2 nmol/L vs ref. 16,5-55,9), reduzindo biodisponibilidade de testosterona livre e podendo causar sintomas de hipogonadismo funcional",
+      "acao_clinica_sugerida": "Avaliação clínica para sintomas androgênicos deficitários, investigação de hipertireoidismo (TSH, T4L, T3), função hepática (TGO/TGP/GGT/FA/albumina), revisão de medicações em uso. Considerar reavaliação hormonal em 8-12 semanas."
+    },
+    {
+      "exame": "Progesterona",
+      "motivo": "Valor 70% acima do limite superior esperado para homem adulto (0,85 ng/mL vs ref. 0-0,5), sugerindo possível disfunção adrenal ou artefato laboratorial",
+      "acao_clinica_sugerida": "Repetir dosagem em jejum rigoroso para confirmar achado. Se persistente, investigar eixo adrenal com 17-OH-progesterona, cortisol basal, DHEA-S. Avaliação clínica para sinais de hiperplasia adrenal não clássica."
+    },
+    {
+      "exame": "Vitamina B12",
+      "motivo": "Valor em 363 pg/mL configura deficiência limítrofe com risco de neuropatia periférica, declínio cognitivo e anemia megaloblástica se não tratado",
+      "acao_clinica_sugerida": "Avaliação clínica presencial em até 30 dias para investigação etiológica (MMA, homocisteína, hemograma, pesquisa de anticorpos anti-fator intrínseco) e início de reposição oral ou parenteral conforme achados. Considerar endoscopia digestiva alta se história de gastrite ou uso crônico de IBP"
+    },
+    {
+      "exame": "TSH",
+      "motivo": "Supressão completa (0,01 microUI/mL) indica hipertireoidismo severo com risco cardiovascular e metabólico imediato",
+      "acao_clinica_sugerida": "Avaliação endocrinológica urgente em até 48-72h, iniciar betabloqueador se taquicardia/sintomas adrenérgicos, considerar antitireoidiano imediato, ECG e avaliação cardiológica"
+    },
+    {
+      "exame": "T4 Livre",
+      "motivo": "Elevação crítica (3,03 ng/dL, 63% acima do limite) confirma tireotoxicose franca com alto risco de descompensação",
+      "acao_clinica_sugerida": "Iniciar terapia antitireoidiana (metimazol 20-40mg/dia ou PTU), monitorizar função hepática e hemograma, orientar sinais de crise tireotóxica"
+    },
+    {
+      "exame": "T3 Livre",
+      "motivo": "Elevação extrema (10,95 pg/mL, 149% acima do limite) representa maior risco metabólico e cardiovascular que T4 isolado",
+      "acao_clinica_sugerida": "Priorizar controle rápido com antitireoidiano em dose plena, betabloqueio adequado, evitar estressores físicos/emocionais, considerar internação se sintomas severos"
+    },
+    {
+      "exame": "Anti-TPO",
+      "motivo": "Positividade intensa (242,3 UI/mL) confirma autoimunidade e sugere Doença de Graves como etiologia provável",
+      "acao_clinica_sugerida": "Solicitar TRAb para confirmação diagnóstica, avaliar manifestações extratiroideas (oftalmopatia, dermopatia), planejar terapia definitiva após controle inicial"
+    },
+    {
+      "exame": "Segmentados",
+      "motivo": "Neutropenia leve (1591/mm³, abaixo de 1700/mm³) com risco aumentado de infecções bacterianas",
+      "acao_clinica_sugerida": "Repetir hemograma em 2-4 semanas; dosar vitamina B12 e ácido fólico; considerar sorologias virais (CMV, EBV, HIV); orientar paciente sobre sinais de infecção; encaminhar para hematologia se persistir ou piorar"
+    }
+  ],
+  "total_exames_interpretados": 58,
+  "usage_total": {
+    "input": 19097,
+    "output": 20188,
+    "cost": 0.360111
+  }
+}

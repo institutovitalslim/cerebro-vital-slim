@@ -1,0 +1,19 @@
+{
+  "status": "blocked",
+  "paciente": "CLEITON DE JESUS CARVALHO",
+  "html_path": "/root/cerebro-vital-slim/deliverables/apresentacao-cleiton-de-jesus-carvalho-v10-20260609_185320.html",
+  "erros": [
+    "Sobrecarga de ferro presente, mas HTML contém copy incompatível de deficiência/reserva de ferro."
+  ],
+  "checks": {
+    "padrao_tireotox": true,
+    "padrao_sobrecarga_ferro": true,
+    "criticos": [
+      "TSH",
+      "T3 Livre",
+      "T4 Livre",
+      "Ferritina",
+      "Ferro"
+    ]
+  }
+}

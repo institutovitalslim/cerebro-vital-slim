@@ -1,0 +1,170 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Leonardo Torres de Andrade",
+    "sexo": "M",
+    "idade": 43,
+    "imc_atual": 37.6,
+    "imc_objetivo": 25.1,
+    "profissao": "Administração",
+    "como_conheceu": "google"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Excesso de peso / obesidade abdominal",
+      "intensidade": 5,
+      "contexto": "Peso atual 105 kg, peso máximo anterior 110 kg, objetivo 70 kg. IMC 37,6 (obesidade grau II). Luta há mais de 5 anos com tentativas de dieta e academia sem manutenção de rotina.",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Refluxo gastroesofágico",
+      "intensidade": 4,
+      "contexto": "Referido como principal incômodo junto ao abdômen. Em uso de pantoprazol e domperidona (motilium), sugerindo sintomatologia persistente.",
+      "categoria": "gastrointestinal"
+    },
+    {
+      "queixa": "Baixo nível de energia e disposição",
+      "intensidade": 4,
+      "contexto": "Nível de energia autorreferido 3/10. Sensação de fim de dia 3/5. Sonolência pós-prandial (após almoço). Impacto em autoestima e disposição relatado.",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Dificuldade em manter rotina de atividade física",
+      "intensidade": 3,
+      "contexto": "Frequência atual de 1-2x/semana de musculação. Relata que rotina de trabalho dificulta conciliação. Sem regularidade estabelecida.",
+      "categoria": "psicossocial"
+    },
+    {
+      "queixa": "Libido reduzida (em melhora com reposição de testosterona)",
+      "intensidade": 2,
+      "contexto": "Relata que libido estava comprometida, com melhora após início de reposição de testosterona. Contexto de hipogonadismo funcional a ser investigado.",
+      "categoria": "hormonal"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [
+      "Hipertensão arterial sistêmica",
+      "Câncer de duodeno (histórico — status atual não especificado)"
+    ],
+    "cirurgias": [],
+    "medicacoes_atuais": [
+      "Micardis (telmisartana) — anti-hipertensivo",
+      "Pantoprazol — inibidor de bomba de prótons",
+      "Motilium (domperidona) — procinético",
+      "Monjaro (tirzepatida) 2,5 mg — agonista GIP/GLP-1 (em uso há 2 meses, Instituto Barakat)"
+    ],
+    "alergias_intolerancias": [
+      "Dipirona",
+      "Luftal",
+      "Eno",
+      "Corantes"
+    ],
+    "historico_familiar": "Histórico familiar de câncer: negado pelo paciente",
+    "reposicao_hormonal": "Testosterona (em uso — dose, via e tempo de uso não especificados)"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "1-2x por semana",
+      "tipo": "Musculação"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 3,
+      "doces": "Não aprecia doces; consome massas com controle referido",
+      "alcool": "Finais de semana",
+      "tabaco": "Não fuma",
+      "hidratacao_litros": 0.75,
+      "padrao_geral": "Café da manhã: granola ou aveia com iogurte de morango / rap 10 com queijo e peito de peru. Almoço: arroz, feijão, carne vermelha/frango/peixe e salada com molho. Jantar: salada com carne ou atum. Sem lanches intermediários. Fins de semana: padrão variável com bebida alcoólica e refeições livres."
+    },
+    "sono": {
+      "horas": 6,
+      "qualidade_1_10": 3,
+      "energia_ao_acordar_1_5": 5,
+      "cansaco_durante_dia": "Sonolência após o almoço referida"
+    },
+    "trabalho": {
+      "tipo": "Trabalho sedentário (sentado)",
+      "horarios": "12h às 18h"
+    },
+    "frequencia_intestinal": "Ótima (autorreferida)"
+  },
+  "saude_hormonal": null,
+  "perfil_psicossocial": {
+    "barreira_principal": "Família (contexto não detalhado — possivelmente conflito de prioridades ou suporte insuficiente do núcleo familiar para mudança de hábitos)",
+    "investe_em_saude": "Sim, às vezes",
+    "nivel_energia_1_10": 3,
+    "ansiedade_estresse": "Não informado diretamente; rotina de trabalho referida como principal desafio para adesão ao tratamento"
+  },
+  "metas": {
+    "peso_atual_kg": 105.0,
+    "peso_objetivo_kg": 70.0,
+    "peso_maximo_anterior_kg": 110.0,
+    "diferenca_para_objetivo_kg": -35.0
+  },
+  "spin": {
+    "tempo_luta": "Mais de 5 anos",
+    "incomodo_principal": "Abdômen e refluxo",
+    "desafios": "Rotina de trabalho dificulta conciliação com atividade física e hábitos saudáveis",
+    "cenario_sem_tratamento": "Paciente projeta permanecer no mesmo estado em 1 ano sem intervenção estruturada",
+    "investimento_perdido": "Não relata investimentos financeiros perdidos anteriores de forma significativa",
+    "vida_resolvida_significaria": "Melhor qualidade de vida e mais saúde",
+    "interesse_programa": "Sim, com dependência de condições (sim-depende)"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Neoplasia duodenal prévia com status atual não esclarecido",
+      "categoria": "outro",
+      "prioridade": 3,
+      "justificativa": "Paciente refere 'câncer de duodeno' como doença crônica sem especificar se em remissão, tratado ou em acompanhamento ativo. Dado crítico para definição de conduta e interações medicamentosas. Requer esclarecimento imediato na consulta."
+    },
+    {
+      "sinal": "Obesidade grau II (IMC 37,6) associada a hipertensão arterial e uso de tirzepatida",
+      "categoria": "metabolico",
+      "prioridade": 3,
+      "justificativa": "Combinação de obesidade grau II, HAS em uso de telmisartana e agonista GIP/GLP-1 (Monjaro) exige monitoramento metabólico e cardiovascular rigoroso. Necessário cruzamento com exames de função renal, perfil lipídico, glicemia e HbA1c."
+    },
+    {
+      "sinal": "Hidratação criticamente insuficiente (500 ml a 1 L/dia)",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Ingestão hídrica muito abaixo do recomendado para o peso corporal (estimativa mínima: 2,5-3 L/dia). Pode comprometer função renal, especialmente em uso de telmisartana e tirzepatida, além de impactar metabolismo e composição corporal."
+    },
+    {
+      "sinal": "Reposição de testosterona sem detalhamento de protocolo",
+      "categoria": "hormonal",
+      "prioridade": 2,
+      "justificativa": "Uso de testosterona exógena sem especificação de dose, via de administração, tempo de uso ou monitoramento laboratorial (testosterona total/livre, hematócrito, PSA). Necessário rastreio de policitemia e avaliação de eixo hipotálamo-hipófise-gonadal."
+    },
+    {
+      "sinal": "Qualidade de sono baixa (3/10) com 6 horas de duração e sonolência pós-prandial",
+      "categoria": "energia_sono",
+      "prioridade": 2,
+      "justificativa": "Padrão de sono insuficiente em quantidade e qualidade, associado a sonolência diurna pós-prandial. Em contexto de obesidade e HAS, levanta hipótese de síndrome da apneia obstrutiva do sono (SAOS), que deve ser investigada."
+    },
+    {
+      "sinal": "Refluxo gastroesofágico persistente com uso de dois fármacos (pantoprazol + domperidona)",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Necessidade de dupla terapia antiácida/procinética em paciente com histórico de neoplasia duodenal merece atenção especial. Uso de tirzepatida pode modular esvaziamento gástrico. Investigação endoscópica recente deve ser verificada."
+    },
+    {
+      "sinal": "Sedentarismo funcional com trabalho predominantemente sentado e atividade física irregular",
+      "categoria": "metabolico",
+      "prioridade": 1,
+      "justificativa": "Combinação de trabalho sedentário (6h/dia sentado), atividade física de apenas 1-2x/semana e consumo alcoólico nos fins de semana representa padrão de risco metabólico cumulativo, especialmente em contexto de obesidade abdominal."
+    }
+  ],
+  "perfil_disc": "D",
+  "interpretacao_inicial": "Leonardo, 43 anos, sexo masculino, apresenta quadro de obesidade grau II (IMC 37,6) com distribuição predominantemente abdominal, associada a hipertensão arterial sistêmica em uso de telmisartana e histórico de neoplasia duodenal com status atual não esclarecido — dado que representa prioridade clínica imediata. O paciente encontra-se em tratamento farmacológico recente com tirzepatida (Monjaro 2,5 mg, 2 meses) e reposição de testosterona, ambos sem detalhamento de protocolo ou monitoramento laboratorial documentado. O padrão sintomático de baixa energia (3/10), sonolência pós-prandial, sono de baixa qualidade (3/10) com 6 horas de duração e refluxo gastroesofágico persistente configura um conjunto que merece investigação direcionada, incluindo rastreio de síndrome da apneia obstrutiva do sono, resistência à insulina e avaliação do eixo androgênico.\n\nDo ponto de vista comportamental e metabólico, observa-se padrão alimentar com três refeições principais sem lanches intermediários, hidratação criticamente insuficiente (estimada em 0,5-1 L/dia), consumo alcoólico nos fins de semana e sedentarismo funcional predominante. A barreira principal referida é familiar, com engajamento em saúde descrito como intermitente. A meta de redução de 35 kg é ambiciosa e requer estratégia escalonada. Os exames laboratoriais deverão incluir, prioritariamente: hemograma completo, função renal e hepática, perfil lipídico, glicemia de jejum, HbA1c, insulina basal, testosterona total e livre, LH, FSH, hematócrito, PSA, TSH e T4 livre, além de avaliação de vitamina D e B12.",
+  "completude": {
+    "campos_preenchidos": 38,
+    "campos_totais": 43,
+    "percentual": 88.4,
+    "campos_criticos_faltantes": [
+      "Status atual do câncer de duodeno (remissão, tratamento ativo, acompanhamento) — não especificado",
+      "Dose, via de administração e tempo de uso da testosterona — não informados",
+      "Exames laboratoriais recentes — não anexados",
+      "Nível de ansiedade/estresse — não respondido diretamente",
+      "Preferência de plano de tratamento (campo deixado em branco)"
+    ]
+  }
+}

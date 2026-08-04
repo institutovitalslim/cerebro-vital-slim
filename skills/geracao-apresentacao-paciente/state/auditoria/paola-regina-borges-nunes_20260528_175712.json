@@ -1,0 +1,46 @@
+{
+  "paciente_nome": "Paola Regina Borges Nunes",
+  "sexo": "F",
+  "idade": 49,
+  "pdfs_processados": [
+    {
+      "nome": "Exames de sangue abril 2026.pdf",
+      "extraidos_pelo_llm": 58,
+      "validados": 56,
+      "lab_origem": "SSA - VILAS DO ATLANTICO",
+      "data_coleta": "28/04/2026"
+    }
+  ],
+  "exames_validados": 56,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "Plaquetas",
+        "nome_no_laudo": "PLAQUETAS",
+        "valor": 252000,
+        "unidade": "x 10³/mm3",
+        "ref_min": 130000,
+        "ref_max": 450000,
+        "grupo": "hemograma",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='x 10³/mm3' incompatível com canônica='/mm3' para Plaquetas"
+    },
+    {
+      "exame": {
+        "nome_canonico": "Testosterona Total",
+        "nome_no_laudo": "TESTOSTERONA TOTAL",
+        "valor": 2.5,
+        "unidade": "ng/dL",
+        "ref_min": 8.4,
+        "ref_max": 48.0,
+        "grupo": "hormonal",
+        "status_clinico": "crit",
+        "observacao": null
+      },
+      "motivo": "L3 plausibilidade: Testosterona Total=2.5 fora do range absoluto [5, 2000]"
+    }
+  ],
+  "cross_check_warnings": []
+}

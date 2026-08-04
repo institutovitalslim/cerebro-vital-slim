@@ -1,0 +1,63 @@
+{
+  "status": "blocked",
+  "fase": "preconsulta",
+  "paciente": "Leonardo Torres de Andrade",
+  "html_path": "/tmp/proval/out/apresentacao-leonardo-torres-de-andrade-preconsulta-v12-20260804_183341.html",
+  "gates_aplicados": [
+    "copy_neutra",
+    "eixo_tireoidiano",
+    "sobrecarga_ferro",
+    "exames_no_html",
+    "questionario_cobertura",
+    "marcador_fase_preconsulta"
+  ],
+  "gates_ignorados": [
+    "bioimpedancia_marcadores(fase=preconsulta)"
+  ],
+  "erros": [
+    "Exame validado ausente do HTML final: Glicose",
+    "Exame validado ausente do HTML final: Glicemia Média",
+    "Exame validado ausente do HTML final: Colesterol Total",
+    "Exame validado ausente do HTML final: ApoA",
+    "Exame validado ausente do HTML final: Testosterona Livre",
+    "Exame validado ausente do HTML final: Testosterona Biodisponível",
+    "Exame validado ausente do HTML final: Progesterona",
+    "Exame validado ausente do HTML final: Ácido Fólico",
+    "Exame validado ausente do HTML final: T4 Livre",
+    "Exame validado ausente do HTML final: Fosfatase Alcalina",
+    "Exame validado ausente do HTML final: Bilirrubina",
+    "Exame validado ausente do HTML final: Ureia",
+    "Exame validado ausente do HTML final: Creatinina",
+    "Exame validado ausente do HTML final: Ácido Úrico",
+    "Exame validado ausente do HTML final: Hemácias",
+    "Exame validado ausente do HTML final: Hemoglobina",
+    "Exame validado ausente do HTML final: Hematócrito",
+    "Exame validado ausente do HTML final: CHCM",
+    "Exame validado ausente do HTML final: Leucócitos",
+    "Exame validado ausente do HTML final: Neutrófilos",
+    "Exame validado ausente do HTML final: Eosinófilos",
+    "Exame validado ausente do HTML final: Basófilos",
+    "Exame validado ausente do HTML final: Linfócitos",
+    "Exame validado ausente do HTML final: Monócitos",
+    "Exame validado ausente do HTML final: Plaquetas",
+    "Exame validado ausente do HTML final: Ferro",
+    "Exame validado ausente do HTML final: Sódio",
+    "Exame validado ausente do HTML final: Potássio",
+    "Exame validado ausente do HTML final: Magnésio",
+    "Questionário: respostas não apareceram no HTML interno/auditoria — sexo, email, telefone, dataNascimento, comoConheceu, pesoMaximoAnterior, planoSaude, libido, quedaCabelo, condicaoPele, alteracoesUnhas, disc, observacoes, submittedAt"
+  ],
+  "checks": {
+    "padrao_tireotox": false,
+    "padrao_sobrecarga_ferro": false,
+    "criticos": [
+      "Insulina",
+      "HOMA-IR",
+      "Triglicérides",
+      "Não-HDL",
+      "VLDL",
+      "Vitamina D",
+      "TGP",
+      "GGT"
+    ]
+  }
+}

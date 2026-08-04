@@ -1,0 +1,451 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Paola Regina Borges Nunes",
+    "sexo": "F",
+    "idade": 49
+  },
+  "sistemas": {
+    "outros": {
+      "erro": "Todos os modelos falharam: openai/gpt-5.5 attempt 2: Expecting property name enclosed in double quotes: line 335 column 34 (char 20024)",
+      "exames": [
+        "Glicose",
+        "Insulina",
+        "HOMA-IR",
+        "HOMA-Beta",
+        "HbA1c",
+        "Glicemia Média",
+        "Triglicérides",
+        "Colesterol Total",
+        "HDL",
+        "LDL",
+        "ApoA",
+        "ApoB",
+        "LH",
+        "FSH",
+        "Estradiol",
+        "Progesterona",
+        "Testosterona Livre",
+        "Testo Biodisponível",
+        "SHBG",
+        "IGF-1",
+        "Prolactina",
+        "Homocisteína",
+        "PCR-us",
+        "TGO",
+        "TGP",
+        "GGT",
+        "Ferro",
+        "Ferritina",
+        "Sódio",
+        "Magnésio",
+        "Cálcio",
+        "Zinco",
+        "PTH"
+      ]
+    },
+    "nutricional": {
+      "schema_version": "1.0",
+      "sistema": "nutricional",
+      "exames_interpretados": [
+        {
+          "nome": "Vitamina B12",
+          "valor": "475",
+          "unidade": "pg/mL",
+          "referencia": "800 a 1500",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "deficiência limítrofe de cobalamina",
+          "risco_curto_prazo": "Fadiga progressiva, comprometimento cognitivo leve (memória, concentração), risco de anemia megaloblástica subclínica nos próximos 6-12 meses",
+          "risco_medio_prazo": "Neuropatia periférica irreversível, desmielinização do SNC, anemia megaloblástica estabelecida, declínio cognitivo acelerado em 2-5 anos se não corrigido",
+          "fator_etiologico_provavel": "Baixa ingesta (dieta restritiva/vegetariana), má absorção intestinal (gastrite atrófica, uso crônico de IBP/metformina), ou demanda aumentada (perimenopausa)",
+          "severidade": 3,
+          "investigacao_adicional": "Ácido metilmalônico sérico, homocisteína, hemograma completo com VCM, pesquisa de anticorpos anti-fator intrínseco e anti-células parietais se suspeita de anemia perniciosa"
+        },
+        {
+          "nome": "Vitamina D",
+          "valor": "28",
+          "unidade": "ng/mL",
+          "referencia": "80 a 100",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "deficiência de colecalciferol",
+          "risco_curto_prazo": "Fadiga crônica, dor musculoesquelética difusa, comprometimento imunológico (maior suscetibilidade a infecções), piora de sintomas perimenopáusicos (humor, energia) nos próximos 3-6 meses",
+          "risco_medio_prazo": "Osteopenia/osteoporose acelerada (crítico em mulher perimenopausa), sarcopenia, risco cardiovascular aumentado, resistência insulínica progressiva, maior risco de doenças autoimunes e neoplasias em 3-5 anos",
+          "fator_etiologico_provavel": "Baixa exposição solar, uso de protetor solar rigoroso, pigmentação cutânea, má absorção intestinal (disbiose, SIBO, doença celíaca subclínica), ou obesidade (sequestro em tecido adiposo)",
+          "severidade": 4,
+          "investigacao_adicional": "PTH intacto, cálcio total e iônico, fósforo, fosfatase alcalina, densitometria óssea (DEXA) para avaliar massa óssea em contexto de perimenopausa"
+        }
+      ],
+      "sintese_do_sistema": "Paciente feminina de 49 anos apresenta deficiências nutricionais concomitantes de vitamina D (28 ng/mL) e B12 (475 pg/mL), ambas abaixo dos valores de referência otimizados do Instituto Vital Slim. Este perfil é compatível com risco metabólico-hormonal aumentado no contexto de perimenopausa, fase em que a deficiência de vitamina D potencializa perda óssea acelerada e a B12 limítrofe pode agravar sintomas neuropsiquiátricos (fadiga, névoa mental, alterações de humor) frequentemente atribuídos à transição hormonal. A coexistência dessas deficiências sugere possível má absorção intestinal subjacente (disbiose, SIBO, gastrite atrófica) ou padrão alimentar inadequado, exigindo investigação etiológica direcionada.\n\nA correção prioritária da vitamina D é crítica para prevenção de osteoporose e manutenção da função imunológica, enquanto a otimização da B12 visa prevenir dano neurológico irreversível e anemia megaloblástica. Recomenda-se avaliação clínica presencial para considerar reposição terapêutica de colecalciferol (doses iniciais de ataque seguidas de manutenção) e metilcobalamina sublingual ou intramuscular conforme resposta. Investigação complementar do eixo paratireóide-cálcio e marcadores de má absorção é mandatória antes de iniciar suplementação isolada, dado o risco de mascarar condições subjacentes tratáveis.",
+      "alertas_criticos": [
+        {
+          "exame": "Vitamina D",
+          "motivo": "Deficiência severa (28 ng/mL) em mulher perimenopausa com risco acelerado de perda óssea e comprometimento imunometabólico",
+          "acao_clinica_sugerida": "Avaliação clínica em até 14 dias para iniciar reposição terapêutica de colecalciferol (considerar doses de ataque 50.000 UI/semana por 8-12 semanas) e solicitar PTH + densitometria óssea. Monitorar níveis séricos em 8-12 semanas"
+        }
+      ]
+    },
+    "tireoide": {
+      "schema_version": "1.0",
+      "sistema": "tireoide",
+      "exames_interpretados": [
+        {
+          "nome": "TSH",
+          "valor": "0,44",
+          "unidade": "µUI/mL",
+          "referencia": "0,27 a 4,2",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe inferior",
+          "risco_curto_prazo": "TSH no limite inferior da normalidade pode sugerir tendência a supressão tireoidiana leve, especialmente quando associado a T4L e T3L reduzidos. Monitoramento recomendado.",
+          "risco_medio_prazo": "Risco de evolução para padrão de hipotireoidismo central (secundário/terciário) se houver disfunção hipofisária subjacente, ou padrão de síndrome do T3 baixo se contexto de estresse metabólico crônico.",
+          "fator_etiologico_provavel": "Possível disfunção hipofisária leve (hipotireoidismo central) ou síndrome do eutireoidiano doente em contexto de estresse metabólico/nutricional. Perimenopausa aos 49 anos pode influenciar eixo HPT.",
+          "severidade": 2,
+          "investigacao_adicional": "Avaliar cortisol, ACTH, prolactina, IGF-1 para investigar eixo hipofisário. Considerar anticorpos antitireoidianos (anti-TPO, anti-Tg) e ultrassom de tireoide."
+        },
+        {
+          "nome": "T4 Livre",
+          "valor": "0,81",
+          "unidade": "ng/dL",
+          "referencia": "0,85 a 1,86",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "compatível com hipotireoidismo subclínico ou central",
+          "risco_curto_prazo": "T4 livre abaixo da referência sugere produção tireoidiana insuficiente. Pode manifestar-se com fadiga, ganho de peso, intolerância ao frio, constipação, pele seca e lentificação cognitiva nos próximos 3-6 meses.",
+          "risco_medio_prazo": "Risco de progressão para hipotireoidismo manifesto com impacto cardiovascular (dislipidemia, bradicardia), metabólico (resistência insulínica, ganho ponderal) e cognitivo (depressão, déficit de memória) em 1-3 anos se não tratado.",
+          "fator_etiologico_provavel": "Hipotireoidismo central (secundário a disfunção hipofisária) é hipótese principal dado TSH inadequadamente normal-baixo para T4L reduzido. Síndrome do T3 baixo por estresse metabólico crônico é diagnóstico diferencial.",
+          "severidade": 4,
+          "investigacao_adicional": "Ressonância magnética de sela túrcica para avaliar hipófise. Perfil hormonal hipofisário completo (cortisol, ACTH, prolactina, LH, FSH, IGF-1). Anticorpos antitireoidianos e ultrassom de tireoide."
+        },
+        {
+          "nome": "T3 Livre",
+          "valor": "1,6",
+          "unidade": "pg/mL",
+          "referencia": "2 a 4,4",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "compatível com hipotireoidismo ou síndrome do T3 baixo",
+          "risco_curto_prazo": "T3 livre reduzido compromete metabolismo celular, termogênese e função mitocondrial. Sintomas incluem fadiga intensa, ganho de peso, bradicardia, hipotermia, constipação e lentificação psicomotora nos próximos 3-6 meses.",
+          "risco_medio_prazo": "Risco de disfunção metabólica progressiva com resistência insulínica, dislipidemia aterogênica, sarcopenia, declínio cognitivo e risco cardiovascular aumentado em 1-5 anos. Impacto negativo na qualidade de vida e longevidade saudável.",
+          "fator_etiologico_provavel": "Conversão periférica deficiente de T4 para T3 (síndrome do T3 baixo) por estresse metabólico, deficiências nutricionais (selênio, zinco, ferro), inflamação crônica ou hipotireoidismo central. Perimenopausa pode agravar quadro.",
+          "severidade": 4,
+          "investigacao_adicional": "Avaliar selênio, zinco, ferritina, marcadores inflamatórios (PCR-us, VHS). Investigar eixo hipofisário. Considerar T3 reverso para diferenciar hipotireoidismo de síndrome do eutireoidiano doente."
+        }
+      ],
+      "sintese_do_sistema": "A paciente de 49 anos apresenta padrão tireoidiano compatível com hipotireoidismo central (secundário/terciário) ou síndrome do T3 baixo. O TSH inadequadamente normal-baixo (0,44 µUI/mL) diante de T4 livre (0,81 ng/dL) e T3 livre (1,6 pg/mL) reduzidos sugere disfunção no eixo hipotálamo-hipófise-tireoide, com falha na resposta compensatória esperada do TSH. Este padrão difere do hipotireoidismo primário clássico, onde TSH estaria elevado. A conversão periférica deficiente de T4 para T3 pode estar associada a estresse metabólico crônico, deficiências nutricionais (selênio, zinco, ferro), inflamação sistêmica ou contexto perimenopausal. Clinicamente, este perfil pode manifestar-se com fadiga, ganho de peso, intolerância ao frio, constipação, pele seca, bradicardia e lentificação cognitiva, impactando significativamente qualidade de vida e metabolismo.\n\nA investigação prioritária deve incluir avaliação do eixo hipofisário (ressonância magnética de sela túrcica, cortisol, ACTH, prolactina, IGF-1, LH, FSH) para descartar adenoma hipofisário ou hipopituitarismo. Anticorpos antitireoidianos (anti-TPO, anti-Tg) e ultrassom de tireoide são necessários para excluir tireoidite autoimune concomitante. Avaliação nutricional com dosagem de selênio, zinco e ferritina é fundamental, pois deficiências destes micronutrientes comprometem a conversão de T4 para T3. Marcadores inflamatórios (PCR ultrassensível, VHS) e dosagem de T3 reverso auxiliam no diagnóstico diferencial entre hipotireoidismo verdadeiro e síndrome do eutireoidiano doente. A abordagem terapêutica deve ser individualizada, considerando reposição hormonal tireoidiana (levotiroxina e/ou liotironina) sob supervisão médica rigorosa, correção de deficiências nutricionais e manejo de fatores metabólicos subjacentes. Acompanhamento clínico e laboratorial a cada 6-8 semanas é recomendado até estabilização do quadro.",
+      "alertas_criticos": [
+        {
+          "exame": "T4 Livre",
+          "motivo": "Valor abaixo da referência (0,81 ng/dL; ref: 0,85-1,86) com TSH inadequadamente normal-baixo, sugerindo hipotireoidismo central ou síndrome do T3 baixo. Risco de manifestações clínicas significativas.",
+          "acao_clinica_sugerida": "Avaliação clínica presencial em até 14 dias para investigação de eixo hipofisário (RM sela túrcica, perfil hormonal hipofisário completo). Considerar reposição hormonal tireoidiana individualizada após exclusão de causas secundárias."
+        },
+        {
+          "exame": "T3 Livre",
+          "motivo": "Valor significativamente reduzido (1,6 pg/mL; ref: 2-4,4) comprometendo metabolismo celular e função mitocondrial. Risco de fadiga intensa, disfunção metabólica e impacto cardiovascular.",
+          "acao_clinica_sugerida": "Avaliação clínica presencial em até 14 dias. Investigar conversão periférica de T4 para T3 (dosagem de T3 reverso, selênio, zinco, ferritina, marcadores inflamatórios). Considerar suplementação de liotironina (T3) sob supervisão médica rigorosa após investigação etiológica."
+        }
+      ]
+    },
+    "renal": {
+      "schema_version": "1.0",
+      "sistema": "renal",
+      "exames_interpretados": [
+        {
+          "nome": "Ureia",
+          "valor": "43",
+          "unidade": "mg/dL",
+          "referencia": "10 a 50",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Função renal preservada quanto ao catabolismo proteico e clearance nitrogenado. Sem risco imediato.",
+          "risco_medio_prazo": "Manutenção da função renal esperada se mantidos hábitos saudáveis e hidratação adequada.",
+          "fator_etiologico_provavel": "Equilíbrio entre ingesta proteica, hidratação e função renal normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Creatinina",
+          "valor": "0,79",
+          "unidade": "mg/dL",
+          "referencia": "0,5 a 1",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Taxa de filtração glomerular preservada. Clearance renal adequado para idade e sexo.",
+          "risco_medio_prazo": "Função renal estável esperada. Monitoramento anual de rotina suficiente.",
+          "fator_etiologico_provavel": "Massa muscular e função renal compatíveis com faixa etária e sexo feminino",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Ácido Úrico",
+          "valor": "3,2",
+          "unidade": "mg/dL",
+          "referencia": "2,4 a 5,7",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Metabolismo de purinas equilibrado. Sem risco de hiperuricemia, gota ou nefrolitíase úrica.",
+          "risco_medio_prazo": "Perfil metabólico favorável quanto ao risco cardiovascular e renal associado a hiperuricemia.",
+          "fator_etiologico_provavel": "Dieta balanceada em purinas e clearance renal adequado",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Cortisol Basal",
+          "valor": "1,21",
+          "unidade": "µg/dL",
+          "referencia": "6,7 a 22,6",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "compatível com insuficiência adrenal primária ou secundária, ou supressão iatrogênica",
+          "risco_curto_prazo": "Risco de crise adrenal em situações de estresse fisiológico (infecções, cirurgias, trauma). Fadiga crônica, hipotensão postural e hipoglicemia possíveis.",
+          "risco_medio_prazo": "Se insuficiência adrenal não tratada: risco de descompensação grave, perda de massa óssea, comprometimento imunológico e qualidade de vida significativamente reduzida.",
+          "fator_etiologico_provavel": "Possível insuficiência adrenal primária (Addison), secundária (hipofisária), ou uso crônico de corticoides exógenos com supressão do eixo HPA. Perimenopausa pode agravar sintomas mas não explica valor tão baixo.",
+          "severidade": 5,
+          "investigacao_adicional": "ACTH basal, cortisol salivar/urinário 24h, teste de estímulo com ACTH (Synacthen), dosagem de aldosterona e renina, anticorpos anti-21-hidroxilase, RNM de hipófise/adrenais. Avaliação endocrinológica urgente."
+        }
+      ],
+      "sintese_do_sistema": "A função renal da paciente encontra-se preservada, com ureia, creatinina e ácido úrico dentro da normalidade, sugerindo clearance glomerular adequado e ausência de comprometimento nefropático. Não há sinais de sobrecarga proteica, hiperuricemia ou disfunção tubular. Entretanto, identifica-se achado crítico extra-renal com implicação sistêmica grave: cortisol basal severamente reduzido (1,21 µg/dL), compatível com insuficiência adrenal. Embora o cortisol não seja marcador renal direto, sua inclusão neste painel justifica-se pela necessidade de investigação endócrina urgente, dado o risco de crise adrenal em contextos de estresse fisiológico. A paciente, mulher de 49 anos em provável perimenopausa, pode apresentar sintomas inespecíficos (fadiga, hipotensão) que mimetizam alterações hormonais da transição menopáusica, mas o valor de cortisol exige exclusão de patologia adrenal primária ou secundária. Recomenda-se avaliação endocrinológica prioritária para definição diagnóstica e conduta terapêutica, enquanto a função renal permanece monitorável em rotina anual.",
+      "alertas_criticos": [
+        {
+          "exame": "Cortisol Basal",
+          "motivo": "Valor severamente reduzido (1,21 µg/dL; ref: 6,7-22,6), compatível com insuficiência adrenal. Risco de crise adrenal em situações de estresse.",
+          "acao_clinica_sugerida": "Encaminhamento urgente para endocrinologista. Investigar insuficiência adrenal primária vs secundária com ACTH, teste de estímulo, exames de imagem (RNM hipófise/adrenais) e autoimunidade. Orientar paciente sobre sinais de crise adrenal e necessidade de suporte em intercorrências."
+        }
+      ]
+    },
+    "hematologico": {
+      "schema_version": "1.0",
+      "sistema": "hematologico",
+      "exames_interpretados": [
+        {
+          "nome": "Hemácias",
+          "valor": "4,89",
+          "unidade": "milhoes/mm3",
+          "referencia": "4 a 5,4",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Capacidade de transporte de oxigênio adequada, sem risco de anemia ou policitemia nos próximos meses.",
+          "risco_medio_prazo": "Manutenção da oxigenação tecidual adequada se mantidos hábitos nutricionais e ausência de perdas hemáticas.",
+          "fator_etiologico_provavel": "Eritropoiese fisiológica normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Hemoglobina",
+          "valor": "13,9",
+          "unidade": "g/dL",
+          "referencia": "12 a 15,8",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Oxigenação tecidual preservada, sem sintomas de fadiga ou dispneia relacionados à anemia.",
+          "risco_medio_prazo": "Risco mínimo de anemia se mantida ingesta adequada de ferro, B12 e folato, especialmente considerando transição para menopausa.",
+          "fator_etiologico_provavel": "Síntese de hemoglobina adequada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Hematócrito",
+          "valor": "41,7",
+          "unidade": "%",
+          "referencia": "33 a 47,8",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Viscosidade sanguínea e volemia adequadas, sem risco de hemoconcentração ou hemodilução.",
+          "risco_medio_prazo": "Perfil hematológico estável se mantida hidratação e ausência de processos hemorrágicos crônicos.",
+          "fator_etiologico_provavel": "Equilíbrio hidroeletrolítico e massa eritrocitária normais",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "VCM",
+          "valor": "85,3",
+          "unidade": "fl",
+          "referencia": "80 a 98",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal - normocitose",
+          "risco_curto_prazo": "Volume eritrocitário normal descarta anemia microcítica (ferropriva) ou macrocítica (B12/folato) no momento atual.",
+          "risco_medio_prazo": "Monitoramento periódico recomendado em mulheres perimenopáusicas devido a risco aumentado de deficiências nutricionais.",
+          "fator_etiologico_provavel": "Maturação eritrocitária normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "HCM",
+          "valor": "28,4",
+          "unidade": "pg",
+          "referencia": "26,2 a 32,6",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal - normocromia",
+          "risco_curto_prazo": "Conteúdo de hemoglobina por eritrócito adequado, sem hipocromia sugestiva de deficiência de ferro.",
+          "risco_medio_prazo": "Risco baixo de anemia ferropriva se mantida ingesta adequada de ferro heme e não-heme.",
+          "fator_etiologico_provavel": "Hemoglobinização eritrocitária adequada",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "CHCM",
+          "valor": "33,3",
+          "unidade": "g/dl",
+          "referencia": "30 a 36,5",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Concentração de hemoglobina corpuscular média normal, sem alterações na síntese ou estrutura da hemoglobina.",
+          "risco_medio_prazo": "Perfil hemoglobínico estável, sem risco de hemoglobinopatias ou talassemias.",
+          "fator_etiologico_provavel": "Estrutura e concentração de hemoglobina fisiológicas",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "RDW",
+          "valor": "12,4",
+          "unidade": "%",
+          "referencia": "11 a 16",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal - anisocitose ausente",
+          "risco_curto_prazo": "Homogeneidade do tamanho eritrocitário preservada, sem evidência de anemias mistas ou deficiências nutricionais em curso.",
+          "risco_medio_prazo": "Baixo risco de desenvolvimento de anemias carenciais se mantida nutrição adequada.",
+          "fator_etiologico_provavel": "População eritrocitária homogênea",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Leucócitos",
+          "valor": "14760",
+          "unidade": "/mm3",
+          "referencia": "3600 a 11000",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "leucocitose leve - compatível com resposta inflamatória/infecciosa aguda ou estresse fisiológico",
+          "risco_curto_prazo": "Sugere ativação do sistema imune em resposta a processo infeccioso, inflamatório ou estresse. Requer correlação clínica para identificar foco.",
+          "risco_medio_prazo": "Se persistente sem causa identificável, pode indicar processo inflamatório crônico, síndrome metabólica ou, raramente, distúrbio mieloproliferativo. Monitoramento necessário.",
+          "fator_etiologico_provavel": "Provável resposta reativa a infecção/inflamação aguda, estresse físico ou emocional, ou tabagismo. Menos provável: leucemia ou síndrome mieloproliferativa.",
+          "severidade": 3,
+          "investigacao_adicional": "Repetir hemograma em 2-4 semanas. Se persistente: PCR, VHS, avaliação clínica para focos infecciosos/inflamatórios. Considerar esfregaço de sangue periférico."
+        },
+        {
+          "nome": "Bastonetes",
+          "valor": "0",
+          "unidade": "/mm3",
+          "referencia": "0 a 700",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal - ausência de desvio à esquerda",
+          "risco_curto_prazo": "Ausência de formas jovens de neutrófilos sugere que não há infecção bacteriana grave aguda no momento da coleta.",
+          "risco_medio_prazo": "Sem implicações a médio prazo. Achado tranquilizador quanto à gravidade de eventual processo infeccioso.",
+          "fator_etiologico_provavel": "Maturação granulocítica normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Segmentados",
+          "valor": "12103",
+          "unidade": "/mm3",
+          "referencia": "1700 a 8000",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "neutrofilia significativa - sugere resposta inflamatória/infecciosa ativa ou estresse medular",
+          "risco_curto_prazo": "Elevação importante dos neutrófilos indica ativação imune contra agente infeccioso (bacteriano principalmente), inflamação tecidual aguda, ou resposta a estresse/corticoides. Requer investigação do foco.",
+          "risco_medio_prazo": "Neutrofilia persistente sem causa aparente pode associar-se a inflamação crônica, tabagismo, obesidade, síndrome metabólica ou, raramente, neoplasia mieloproliferativa. Seguimento obrigatório.",
+          "fator_etiologico_provavel": "Provável resposta reativa a infecção bacteriana, inflamação aguda (ex: dental, urinária, respiratória), estresse físico/cirúrgico, ou uso de corticoides. Descartar leucemia mieloide crônica se persistente.",
+          "severidade": 4,
+          "investigacao_adicional": "Avaliação clínica urgente para identificar foco infeccioso/inflamatório. Repetir hemograma em 1-2 semanas. Se persistente: esfregaço periférico, PCR, VHS, considerar mielograma se sem causa aparente."
+        },
+        {
+          "nome": "Eosinófilos",
+          "valor": "295",
+          "unidade": "/mm3",
+          "referencia": "50 a 500",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem de eosinófilos dentro da normalidade descarta eosinofilia significativa por parasitoses, alergias ou doenças autoimunes no momento.",
+          "risco_medio_prazo": "Sem implicações clínicas. Monitoramento de rotina suficiente.",
+          "fator_etiologico_provavel": "Resposta imune tipo 2 em níveis fisiológicos",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Basófilos",
+          "valor": "0",
+          "unidade": "/mm3",
+          "referencia": "0 a 100",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Ausência de basofilia descarta reações alérgicas graves, doenças mieloproliferativas ou hipotireoidismo descompensado.",
+          "risco_medio_prazo": "Sem relevância clínica. Achado habitual.",
+          "fator_etiologico_provavel": "Níveis basais fisiológicos",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Linfócitos",
+          "valor": "1918",
+          "unidade": "/mm3",
+          "referencia": "1000 a 4800",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem linfocitária adequada indica competência imunológica celular preservada, sem linfopenia ou linfocitose.",
+          "risco_medio_prazo": "Função imune adaptativa preservada. Sem risco de imunodeficiência ou processos linfoproliferativos.",
+          "fator_etiologico_provavel": "Resposta imune adaptativa normal",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Monócitos",
+          "valor": "442",
+          "unidade": "/mm3",
+          "referencia": "100 a 1200",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Contagem de monócitos normal indica resposta fagocítica e apresentação antigênica adequadas, sem monocitose sugestiva de infecção crônica.",
+          "risco_medio_prazo": "Função imune inata preservada. Sem risco de processos inflamatórios crônicos ou neoplasias monocíticas.",
+          "fator_etiologico_provavel": "Sistema mononuclear fagocitário em equilíbrio",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        }
+      ],
+      "sintese_do_sistema": "A série eritrocitária apresenta-se dentro dos parâmetros de normalidade, com hemoglobina de 13,9 g/dL, hematócrito de 41,7%, índices hematimétricos normocíticos e normocrômicos (VCM 85,3 fL, HCM 28,4 pg, CHCM 33,3 g/dL) e RDW normal (12,4%), descartando anemias carenciais ou hemoglobinopatias no momento atual. Este perfil é adequado para mulher de 49 anos em transição perimenopáusica, sem evidências de perdas hemáticas significativas ou deficiências nutricionais. A série leucocitária, entretanto, revela leucocitose leve (14.760/mm³) às custas de neutrofilia significativa (segmentados 12.103/mm³), compatível com resposta inflamatória ou infecciosa aguda. A ausência de desvio à esquerda (bastonetes zero) e a normalidade das demais linhagens leucocitárias (linfócitos, monócitos, eosinófilos, basófilos) sugerem processo reativo benigno, porém a magnitude da neutrofilia requer investigação clínica para identificação do foco etiológico (infecção bacteriana, inflamação tecidual, estresse físico/emocional, tabagismo ou uso de corticoides). A persistência da leucocitose sem causa aparente demandaria investigação adicional para descartar processos inflamatórios crônicos ou, menos provavelmente, distúrbios mieloproliferativos. Recomenda-se correlação clínica imediata e reavaliação laboratorial em 1-2 semanas.",
+      "alertas_criticos": [
+        {
+          "exame": "Segmentados",
+          "motivo": "Neutrofilia significativa (12.103/mm³, referência até 8.000/mm³) sugere processo inflamatório ou infeccioso ativo que requer identificação do foco etiológico.",
+          "acao_clinica_sugerida": "Avaliação clínica em até 48-72 horas para investigar sinais/sintomas de infecção (febre, dor localizada, sintomas respiratórios/urinários/dentários), inflamação aguda ou uso de medicações (corticoides). Repetir hemograma em 1-2 semanas. Se persistente sem causa aparente, considerar PCR, VHS e esfregaço de sangue periférico."
+        },
+        {
+          "exame": "Leucócitos",
+          "motivo": "Leucocitose leve (14.760/mm³, referência até 11.000/mm³) secundária à neutrofilia, requerendo investigação etiológica e monitoramento.",
+          "acao_clinica_sugerida": "Correlacionar com quadro clínico atual. Repetir hemograma em 2-4 semanas para avaliar persistência. Se mantida elevação sem causa identificável, ampliar investigação com marcadores inflamatórios e avaliação hematológica especializada."
+        }
+      ]
+    }
+  },
+  "alertas_criticos_globais": [
+    {
+      "exame": "Vitamina D",
+      "motivo": "Deficiência severa (28 ng/mL) em mulher perimenopausa com risco acelerado de perda óssea e comprometimento imunometabólico",
+      "acao_clinica_sugerida": "Avaliação clínica em até 14 dias para iniciar reposição terapêutica de colecalciferol (considerar doses de ataque 50.000 UI/semana por 8-12 semanas) e solicitar PTH + densitometria óssea. Monitorar níveis séricos em 8-12 semanas"
+    },
+    {
+      "exame": "T4 Livre",
+      "motivo": "Valor abaixo da referência (0,81 ng/dL; ref: 0,85-1,86) com TSH inadequadamente normal-baixo, sugerindo hipotireoidismo central ou síndrome do T3 baixo. Risco de manifestações clínicas significativas.",
+      "acao_clinica_sugerida": "Avaliação clínica presencial em até 14 dias para investigação de eixo hipofisário (RM sela túrcica, perfil hormonal hipofisário completo). Considerar reposição hormonal tireoidiana individualizada após exclusão de causas secundárias."
+    },
+    {
+      "exame": "T3 Livre",
+      "motivo": "Valor significativamente reduzido (1,6 pg/mL; ref: 2-4,4) comprometendo metabolismo celular e função mitocondrial. Risco de fadiga intensa, disfunção metabólica e impacto cardiovascular.",
+      "acao_clinica_sugerida": "Avaliação clínica presencial em até 14 dias. Investigar conversão periférica de T4 para T3 (dosagem de T3 reverso, selênio, zinco, ferritina, marcadores inflamatórios). Considerar suplementação de liotironina (T3) sob supervisão médica rigorosa após investigação etiológica."
+    },
+    {
+      "exame": "Cortisol Basal",
+      "motivo": "Valor severamente reduzido (1,21 µg/dL; ref: 6,7-22,6), compatível com insuficiência adrenal. Risco de crise adrenal em situações de estresse.",
+      "acao_clinica_sugerida": "Encaminhamento urgente para endocrinologista. Investigar insuficiência adrenal primária vs secundária com ACTH, teste de estímulo, exames de imagem (RNM hipófise/adrenais) e autoimunidade. Orientar paciente sobre sinais de crise adrenal e necessidade de suporte em intercorrências."
+    },
+    {
+      "exame": "Segmentados",
+      "motivo": "Neutrofilia significativa (12.103/mm³, referência até 8.000/mm³) sugere processo inflamatório ou infeccioso ativo que requer identificação do foco etiológico.",
+      "acao_clinica_sugerida": "Avaliação clínica em até 48-72 horas para investigar sinais/sintomas de infecção (febre, dor localizada, sintomas respiratórios/urinários/dentários), inflamação aguda ou uso de medicações (corticoides). Repetir hemograma em 1-2 semanas. Se persistente sem causa aparente, considerar PCR, VHS e esfregaço de sangue periférico."
+    },
+    {
+      "exame": "Leucócitos",
+      "motivo": "Leucocitose leve (14.760/mm³, referência até 11.000/mm³) secundária à neutrofilia, requerendo investigação etiológica e monitoramento.",
+      "acao_clinica_sugerida": "Correlacionar com quadro clínico atual. Repetir hemograma em 2-4 semanas para avaliar persistência. Se mantida elevação sem causa identificável, ampliar investigação com marcadores inflamatórios e avaliação hematológica especializada."
+    }
+  ],
+  "total_exames_interpretados": 23,
+  "usage_total": {
+    "input": 10256,
+    "output": 9617,
+    "cost": 0.175023
+  }
+}

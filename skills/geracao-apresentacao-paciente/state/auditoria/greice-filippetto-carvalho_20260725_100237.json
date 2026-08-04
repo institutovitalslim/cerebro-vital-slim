@@ -1,0 +1,52 @@
+{
+  "paciente_nome": "Greice Filippetto Carvalho",
+  "sexo": "F",
+  "idade": 41,
+  "pdfs_processados": [
+    {
+      "nome": "GREICE - RESULTADO 07.2026.pdf",
+      "extraidos_pelo_llm": 39,
+      "validados": 57,
+      "lab_origem": "NAM - Núcleo de Assessoria Médica",
+      "data_coleta": "04/07/2026"
+    }
+  ],
+  "exames_validados": 57,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "PCR-us",
+        "nome_no_laudo": "Proteína C Reativa Ultra Sensível",
+        "valor": 0.03,
+        "unidade": "mg/dL",
+        "ref_min": 0.0,
+        "ref_max": 0.1,
+        "grupo": "inflamatorio",
+        "status_clinico": "normal",
+        "observacao": "Baixo risco cardiovascular"
+      },
+      "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+    }
+  ],
+  "cross_check_warnings": [
+    "Auditoria determinística inseriu PCR-us=0.3mg/L",
+    "Auditoria determinística inseriu SHBG=19.2nmol/L",
+    "Auditoria determinística inseriu TSH=6.92uUI/mL",
+    "Auditoria determinística inseriu T4 Livre=0.87ng/dL",
+    "Auditoria determinística inseriu Estradiol=5.0pg/mL",
+    "Auditoria determinística inseriu FSH=5.3mUI/mL",
+    "Auditoria determinística inseriu LH=6.3mUI/mL",
+    "Auditoria determinística inseriu Prolactina=12.5ng/mL",
+    "Auditoria determinística inseriu Testosterona Total=30.7ng/dL",
+    "Auditoria determinística inseriu Testosterona Livre=0.73ng/dL",
+    "Auditoria determinística inseriu Testosterona Biodisponível=17.1ng/dL",
+    "Auditoria determinística inseriu Progesterona=0.21ng/mL",
+    "Auditoria determinística inseriu Cortisol=16.7µg/dL",
+    "Auditoria determinística inseriu IGF-1=163.0ng/mL",
+    "Auditoria determinística inseriu GGT=23.0U/L",
+    "Auditoria determinística inseriu LDH=139.0UI/L",
+    "Auditoria determinística inseriu Fibrinogênio=319.0mg/dL",
+    "Auditoria determinística inseriu ApoB=85.0mg/dL",
+    "Auditoria determinística inseriu ApoA=129.0mg/dL"
+  ]
+}

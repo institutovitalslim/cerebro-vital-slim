@@ -142,8 +142,15 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
   font-size:11px; letter-spacing:0.10em; text-transform:uppercase; font-weight:600;
 }
 .progress-step{
+  display:inline-flex; align-items:center;
   color:var(--muted); padding:6px 12px; border-radius:999px;
   cursor:pointer; transition:all 0.2s; border:1px solid transparent;
+}
+
+.progress-step, .mode-btn{ text-decoration:none; }
+
+.progress-step:focus-visible, .mode-btn:focus-visible{
+  outline:2px solid var(--gold-dark); outline-offset:2px;
 }
 .progress-step.active{ background:var(--gold); color:#fff; border-color:var(--gold); }
 .progress-step:hover{ color:var(--ink); }
@@ -216,6 +223,66 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
 }
 .mirror-card .sub{ font-size:13px; color:var(--muted); margin-top:var(--s-2); }
 .mirror-card.feature{ grid-column:span 3; border-left:4px solid var(--gold); }
+/* === Bioimpedância === */
+.bioimped-section{ background: var(--cream); padding-top: var(--s-7); padding-bottom: var(--s-7); }
+.bioimped-meta{ font-size:13px;color:var(--muted);margin-bottom:var(--s-5); }
+.bio-grid{ display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4); }
+.bio-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:var(--s-5);
+}
+.bio-card h4{
+  margin:0 0 var(--s-3);font-size:14px;font-weight:600;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+.bio-card .kpis{ display:grid;gap:var(--s-2); }
+.bio-kpi{ display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line); }
+.bio-kpi:last-child{ border-bottom:none; }
+.bio-kpi .label{ font-size:13px;color:var(--ink-soft); }
+.bio-kpi .value{ font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink); }
+.bio-kpi .value .unit{ font-size:11px;color:var(--muted);font-weight:400;margin-left:3px; }
+.bio-kpi .value .delta{ font-size:11px;color:var(--muted);margin-left:6px; }
+.bio-kpi .value .delta.up{ color:#2D8A3F; }
+.bio-kpi .value .delta.down{ color:#BE3226; }
+.bio-highlight{
+  background:linear-gradient(135deg, rgba(193,154,69,0.08), rgba(193,154,69,0.02));
+  border:1px solid rgba(193,154,69,0.2);
+  border-radius:14px;padding:var(--s-5);margin-top:var(--s-5);
+}
+.bio-highlight h4{
+  margin:0 0 var(--s-3);font-size:13px;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:0.1em;font-weight:600;
+}
+.bio-highlight ul{ margin:0;padding-left:var(--s-4);list-style:none; }
+.bio-highlight li{
+  position:relative;padding:6px 0 6px 22px;font-size:14px;color:var(--ink);line-height:1.55;
+}
+.bio-highlight li::before{
+  content:"";position:absolute;left:6px;top:14px;width:7px;height:7px;border-radius:50%;
+  background:var(--gold);
+}
+.bio-highlight li.alert::before{ background:#D4A000; }
+.bio-highlight li.crit::before{ background:#BE3226; }
+.bio-highlight li.ok::before{ background:#2D8A3F; }
+.bio-highlight li b{ color:var(--ink); font-weight:600; }
+.bio-image-wrap{
+  margin-top:var(--s-5);background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;padding:var(--s-4);text-align:center;
+}
+.bio-image-wrap h4{
+  margin:0 0 var(--s-3);font-size:13px;font-weight:600;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:0.1em;
+}
+.bio-image-wrap img{
+  max-width:100%;height:auto;border-radius:10px;
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);
+  border:1px solid var(--line);
+}
+.bio-image-wrap .caption{
+  display:block;margin-top:var(--s-2);font-size:12px;color:var(--muted);
+}
+@media (max-width: 900px){ .bio-grid{ grid-template-columns:1fr; } }
+
 
 /* === CRITICAL LEVERS === */
 .critical-levers{ background:var(--paper); }
@@ -224,8 +291,12 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
   background:var(--cream); border:1px solid var(--line); border-radius:14px;
   padding:var(--s-6); display:grid; grid-template-columns:1fr 2fr; gap:var(--s-6);
 }
-.lever-card[data-sev="crit"]{ border-left:4px solid var(--red); }
-.lever-card[data-sev="alert"]{ border-left:4px solid var(--amber); }
+.lever-card[data-sev="crit"]{ border-left:4px solid #BE3226; }
+.lever-card[data-sev="alert"],
+.lever-card[data-sev="low"],
+.lever-card[data-sev="attn"]{ border-left:4px solid #D4A000; }
+.lever-card[data-sev="ok"],
+.lever-card[data-sev="normal"]{ border-left:4px solid #2D8A3F; }
 .lever-numeric .name{
   font-family:var(--serif); font-size:22px; font-weight:500;
   color:var(--ink); margin-bottom:var(--s-3);
@@ -242,8 +313,12 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
   display:inline-block; padding:4px 10px; border-radius:6px;
   font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
 }
-.lever-card[data-sev="crit"] .badge{ background:rgba(142,36,23,0.10); color:var(--red); }
-.lever-card[data-sev="alert"] .badge{ background:rgba(160,109,10,0.10); color:var(--amber); }
+.lever-card[data-sev="crit"] .badge{ background:rgba(190,50,38,0.12); color:#8E2417; }
+.lever-card[data-sev="alert"] .badge,
+.lever-card[data-sev="low"] .badge,
+.lever-card[data-sev="attn"] .badge{ background:rgba(212,160,0,0.16); color:#806100; }
+.lever-card[data-sev="ok"] .badge,
+.lever-card[data-sev="normal"] .badge{ background:rgba(40,130,60,0.10); color:#1F6E2D; }
 .lever-narrative h4{ color:var(--gold-dark); margin-bottom:var(--s-2); }
 .lever-narrative .interp{
   font-size:15px; line-height:1.55; color:var(--body); margin-bottom:var(--s-3);
@@ -258,7 +333,10 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
   color:var(--ink); padding-left:var(--s-4); border-left:3px solid var(--gold);
   line-height:1.5;
 }
-.lever-narrative .spin-q::before{ content:"Pergunta para a consulta: "; color:var(--gold-dark); font-style:normal; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.14em; display:block; margin-bottom:var(--s-2); }
+.lever-narrative .spin-q::before{ content:"Pergunta: "; color:var(--gold-dark); font-style:normal; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.14em; display:block; margin-bottom:var(--s-2); }
+.lever-narrative.compact-decision .impact{ margin-bottom:10px; padding:12px 14px; }
+.lever-narrative.compact-decision .spin-q{ font-style:normal; font-weight:600; background:rgba(184,140,50,0.10); padding:12px 14px; border-left:3px solid var(--gold); border-radius:8px; }
+.lever-narrative.compact-decision .spin-q::before{ content:""; display:none; }
 
 /* === SPIN GUIDED === */
 .spin-guided{ background:var(--cream); }
@@ -430,7 +508,7 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
 
 /* === FINAL CTA === */
 .final-cta{ background:var(--cream); }
-.cta-decision{ display:grid; grid-template-columns:1fr 1fr; gap:var(--s-5); margin-top:var(--s-6); max-width:1000px; margin-left:auto; margin-right:auto; }
+.cta-decision{ display:grid; grid-template-columns:1fr; gap:var(--s-5); margin-top:var(--s-6); max-width:640px; margin-left:auto; margin-right:auto; }
 .cta-card{
   background:var(--paper); border:1px solid var(--line); border-radius:14px;
   padding:var(--s-7); display:flex; flex-direction:column; gap:var(--s-4);
@@ -483,13 +561,21 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
 .appendix-toggle-all:hover{ background:var(--gold); color:#fff; }
 
 .exam-group{
-  border:1px solid var(--line); border-radius:10px; margin-bottom:var(--s-3); overflow:hidden;
-  background:var(--cream);
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin-bottom:var(--s-3);
+  overflow:hidden;
+  background:var(--paper);
 }
 .exam-group-header{
-  padding:var(--s-4) var(--s-5); cursor:pointer;
-  display:flex; justify-content:space-between; align-items:center;
-  background:var(--paper); user-select:none;
+  padding:var(--s-4) var(--s-5);
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--paper);
+  user-select:none;
+  border-bottom:1px solid var(--line);
 }
 .exam-group-header h4{
   font-family:var(--serif); font-size:18px; font-weight:500;
@@ -503,25 +589,53 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
   transition:transform 0.2s;
 }
 .exam-group.open .exam-group-header .toggle{ transform:rotate(180deg); }
-.exam-group-body{ display:none; padding:0 var(--s-5) var(--s-5); }
+.exam-group-body{ display:none; padding:0 var(--s-5); background:var(--paper); }
 .exam-group.open .exam-group-body{ display:block; }
 .exam-row{
-  display:grid; grid-template-columns:1.6fr 1fr 1.2fr 0.8fr;
-  gap:var(--s-4); padding:var(--s-3) 0;
-  border-bottom:1px solid var(--line); align-items:center; font-size:14px;
+  display:block;
+  padding:12px 0;
+  margin:0;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+  background:transparent;
+  box-shadow:none;
 }
 .exam-row:last-child{ border-bottom:none; }
-.exam-row .e-nome{ font-family:var(--serif); font-weight:500; font-size:15px; color:var(--ink); }
-.exam-row .e-valor{ font-family:var(--serif); font-weight:600; color:var(--ink); }
-.exam-row .e-valor .e-unit{ color:var(--muted); font-size:12px; margin-left:4px; font-weight:400; }
-.exam-row .e-ref{ font-size:12px; color:var(--muted); }
-.exam-row .e-status{
-  font-size:10px; font-weight:700; letter-spacing:0.16em;
-  text-transform:uppercase; text-align:right;
+.exam-row .e-nome{
+  display:block;
+  font-family:var(--serif); font-weight:500; font-size:16px; color:var(--ink);
+  line-height:1.35;
 }
-.exam-row[data-sev="crit"] .e-status{ color:var(--red); }
-.exam-row[data-sev="alert"] .e-status, .exam-row[data-sev="low"] .e-status{ color:var(--amber); }
-.exam-row[data-sev="ok"] .e-status, .exam-row[data-sev="normal"] .e-status{ color:var(--green); }
+.exam-row .e-valor{
+  display:block;
+  margin-top:4px;
+  font-family:var(--serif); font-weight:600; font-size:18px; color:var(--ink);
+  line-height:1.2;
+}
+.exam-row .e-valor .e-unit{ color:var(--muted); font-size:13px; margin-left:4px; font-weight:400; }
+.exam-row .e-ref{ display:block; margin-top:3px; font-size:12px; color:var(--muted); }
+.exam-row .e-status{
+  display:block;
+  margin-top:6px;
+  font-size:10px; font-weight:700; letter-spacing:0.14em;
+  text-transform:uppercase; text-align:left;
+}
+/* === Coloração semântica das linhas de exame — layout técnico simples === */
+.exam-row{ transition:none; }
+.exam-row[data-sev="crit"] .e-nome,
+.exam-row[data-sev="crit"] .e-valor,
+.exam-row[data-sev="crit"] .e-status{ color: #8E2417; }
+.exam-row[data-sev="alert"] .e-nome,
+.exam-row[data-sev="low"] .e-nome,
+.exam-row[data-sev="attn"] .e-nome,
+.exam-row[data-sev="alert"] .e-valor,
+.exam-row[data-sev="low"] .e-valor,
+.exam-row[data-sev="attn"] .e-valor,
+.exam-row[data-sev="alert"] .e-status,
+.exam-row[data-sev="low"] .e-status,
+.exam-row[data-sev="attn"] .e-status{ color: #8B6A00; }
+.exam-row[data-sev="ok"] .e-status,
+.exam-row[data-sev="normal"] .e-status{ color: #1F6E2D; font-weight: 700; }
 
 /* === Mobile === */
 @media(max-width: 900px){
@@ -535,8 +649,10 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
   .hero-meta-bar{ flex-direction:column; gap:var(--s-3); }
   .program-phase .phase-marker{ width:auto; padding:var(--s-3) var(--s-4); }
   .program-phase{ gap:var(--s-3); }
-  .exam-row{ grid-template-columns:2fr 1fr; row-gap:6px; }
-  .exam-row .e-ref, .exam-row .e-status{ grid-column:span 2; }
+  .exam-row{
+    padding:10px 0;
+  }
+  .exam-row .e-status{ text-align:left; }
   .lever-card{ gap:var(--s-3); }
   .lever-numeric{ display:flex; align-items:baseline; gap:var(--s-3); flex-wrap:wrap; }
 }
@@ -590,24 +706,25 @@ p { font-family: var(--sans); margin-bottom: var(--s-4); }
 
 /* === MODO APRESENTAÇÃO === (default) */
 /* Mostra fluxo principal, esconde apêndices */
-body.modo-apresentacao .technical-appendix,
-body.modo-apresentacao .doctor-objections{
+body.js-enabled.modo-apresentacao .technical-appendix,
+body.js-enabled.modo-apresentacao .medical-mode,
+body.js-enabled.modo-apresentacao .doctor-objections{
   display: none !important;
 }
 
 /* === MODO EXAMES === */
 /* Mostra apenas o painel técnico de exames */
-body.modo-exames main > section:not(#technical-appendix){
+body.js-enabled.modo-exames main > section:not(.technical-appendix){
   display: none !important;
 }
-body.modo-exames .technical-appendix{ padding-top: var(--s-7); }
+body.js-enabled.modo-exames .technical-appendix{ padding-top: var(--s-7); }
 
 /* === MODO OBJEÇÕES === */
 /* Mostra apenas o painel de objeções da médica */
-body.modo-objecoes main > section:not(#doctor-objections){
+body.js-enabled.modo-objecoes main > section:not(#doctor-objections):not(.medical-mode){
   display: none !important;
 }
-body.modo-objecoes .doctor-objections{ padding-top: var(--s-7); }
+body.js-enabled.modo-objecoes .doctor-objections{ padding-top: var(--s-7); }
 
 @media print{
   .mode-switcher{ display: none !important; }
@@ -1093,10 +1210,8 @@ section[id]{ scroll-margin-top: 76px; }
 .obj-card .obj-close-marker{ color:var(--gold); font-weight:700; font-style:normal; flex-shrink:0; }
 
 /* === Modo apresentação: oculta detalhes técnicos das alavancas (P2.11) === */
-body.modo-apresentacao .lever-numeric .ref,
-body.modo-apresentacao .lever-sparkline,
-body.modo-apresentacao .lever-narrative h4,
-body.modo-apresentacao .lever-narrative .impact{
+body.js-enabled.modo-apresentacao .lever-narrative h4,
+body.js-enabled.modo-apresentacao .lever-narrative .impact{
   display:none !important;
 }
 
@@ -1227,8 +1342,12 @@ body::before{
 .sev-ring svg{ width:100%; height:100%; transform:rotate(-90deg); }
 .sev-ring .ring-track{ fill:none; stroke:var(--line); stroke-width:6; }
 .sev-ring .ring-fill{ fill:none; stroke-width:6; stroke-linecap:round; transition:stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.lever-card[data-sev="crit"] .sev-ring .ring-fill{ stroke:var(--red); }
-.lever-card[data-sev="alert"] .sev-ring .ring-fill{ stroke:var(--amber); }
+.lever-card[data-sev="crit"] .sev-ring .ring-fill{ stroke:#BE3226; }
+.lever-card[data-sev="alert"] .sev-ring .ring-fill,
+.lever-card[data-sev="low"] .sev-ring .ring-fill,
+.lever-card[data-sev="attn"] .sev-ring .ring-fill{ stroke:#D4A000; }
+.lever-card[data-sev="ok"] .sev-ring .ring-fill,
+.lever-card[data-sev="normal"] .sev-ring .ring-fill{ stroke:#2D8A3F; }
 .lever-card[data-sev="low"] .sev-ring .ring-fill{ stroke:var(--amber); }
 .sev-ring .ring-label{
   position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -1248,19 +1367,26 @@ body::before{
 .spark-track{ fill:rgba(159,136,68,0.08); }
 .spark-range{ fill:rgba(21,85,39,0.18); }
 .spark-marker{ fill:var(--ink); }
-.spark-marker.alert{ fill:var(--amber); }
-.spark-marker.crit{ fill:var(--red); }
-.spark-marker.low{ fill:var(--amber); }
+.spark-marker.alert,
+.spark-marker.low,
+.spark-marker.attn{ fill:#D4A000; }
+.spark-marker.crit{ fill:#BE3226; }
+.spark-marker.ok,
+.spark-marker.normal{ fill:#2D8A3F; }
 .spark-tick{ stroke:var(--muted); stroke-width:1; }
 .spark-label{ font-size:9px; fill:var(--muted); font-family:var(--sans); font-feature-settings:"tnum"; }
 
-/* Lever narrative — subtle improvements */
+/* Lever narrative — subtle improvements
+   2026-06-05: removido ícone pseudo-elemento "⚡".
+   Em iPhone/visualizador do Telegram ele quebrava a tipografia e invadia o texto
+   de "Implicação clínica" / "Necessidade de solução". */
 .lever-narrative .impact{
   background:linear-gradient(180deg, var(--paper) 0%, #fff 100%);
-  position:relative; padding-left:var(--s-5);
+  position:relative;
 }
 .lever-narrative .impact::before{
-  content:"⚡"; position:absolute; left:8px; top:8px; color:var(--gold-dark); font-size:14px;
+  content:none !important;
+  display:none !important;
 }
 
 /* SPIN steps — number badges decorativos */
@@ -1406,30 +1532,89 @@ body::before{
   margin:0 auto var(--s-5);
 }
 
-/* Technical Appendix — premium accordion */
+/* Technical Appendix — versão estável para Telegram/iPhone */
 .exam-group{
-  transition: border-color 0.3s, box-shadow 0.3s;
-  background: linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+  transition:none;
+  background:var(--paper);
 }
-.exam-group:hover{ border-color: rgba(159,136,68,0.25); }
-.exam-group.open{ box-shadow: 0 8px 20px -10px rgba(54,43,24,0.10); }
+.exam-group:hover{ border-color: var(--line); }
+.exam-group.open{ box-shadow:none; }
 .exam-group-header{
-  background: linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
-  transition: background 0.25s;
+  background:var(--paper);
+  transition:none;
 }
-.exam-group-header:hover{ background: linear-gradient(180deg, #fffcf3 0%, var(--cream) 100%); }
+.exam-group-header:hover{ background:var(--paper); }
 .exam-group-header .toggle{
   font-size:18px; color:var(--gold-dark);
-  background:rgba(159,136,68,0.10); border-radius:50%;
-  width:28px; height:28px;
+  background:transparent; border-radius:0;
+  width:24px; height:24px;
 }
-.exam-row{ transition: background 0.2s; }
-.exam-row:hover{ background:rgba(159,136,68,0.04); padding-left:6px; padding-right:6px; border-radius:6px; }
+.exam-row:hover{ background:transparent; }
 .exam-row .e-valor{ font-feature-settings:"tnum"; }
 .exam-row[data-sev="crit"] .e-status::before,
 .exam-row[data-sev="alert"] .e-status::before,
-.exam-row[data-sev="low"] .e-status::before{
+.exam-row[data-sev="low"] .e-status::before,
+.exam-row[data-sev="ok"] .e-status::before,
+.exam-row[data-sev="normal"] .e-status::before{
   content:"●"; margin-right:4px;
+}
+
+/* RC-25 — Diagramação técnica dos exames: formato de tabela legível em desktop */
+@media(min-width: 901px){
+  .technical-appendix .exam-group{ border-radius:14px; overflow:hidden; }
+  .technical-appendix .exam-group-body{ padding:0; }
+  .technical-appendix .exam-table-head{
+    display:grid;
+    grid-template-columns:minmax(240px,1.45fr) minmax(130px,.55fr) minmax(180px,.85fr) 110px;
+    gap:18px;
+    padding:10px 22px;
+    background:rgba(184,140,50,0.07);
+    border-bottom:1px solid var(--line);
+    font-family:var(--sans);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .technical-appendix .exam-row{
+    display:grid;
+    grid-template-columns:minmax(240px,1.45fr) minmax(130px,.55fr) minmax(180px,.85fr) 110px;
+    gap:18px;
+    align-items:center;
+    padding:12px 22px;
+    border-bottom:1px solid rgba(54,43,24,.10);
+    min-height:56px;
+  }
+  .technical-appendix .exam-row:nth-child(odd){ background:rgba(250,248,242,.55); }
+  .technical-appendix .exam-row .e-nome,
+  .technical-appendix .exam-row .e-valor,
+  .technical-appendix .exam-row .e-ref,
+  .technical-appendix .exam-row .e-status{
+    display:block; margin:0; min-width:0;
+  }
+  .technical-appendix .exam-row .e-nome{
+    font-family:var(--sans); font-size:14px; font-weight:650; line-height:1.25;
+  }
+  .technical-appendix .exam-row .e-valor{
+    font-family:var(--serif); font-size:20px; font-weight:650; line-height:1; white-space:nowrap;
+  }
+  .technical-appendix .exam-row .e-valor .e-unit{
+    display:inline-block; font-size:11px; margin-left:5px; white-space:nowrap;
+  }
+  .technical-appendix .exam-row .e-ref{
+    font-size:12px; line-height:1.25; color:var(--muted);
+  }
+  .technical-appendix .exam-row .e-status{
+    justify-self:end; text-align:center;
+    padding:6px 9px; border-radius:999px;
+    font-size:9px; letter-spacing:.12em;
+    background:rgba(31,110,45,.08); color:#1F6E2D;
+  }
+  .technical-appendix .exam-row[data-sev="crit"] .e-status{ background:rgba(142,36,23,.10); color:#8E2417; }
+  .technical-appendix .exam-row[data-sev="alert"] .e-status,
+  .technical-appendix .exam-row[data-sev="low"] .e-status,
+  .technical-appendix .exam-row[data-sev="attn"] .e-status{ background:rgba(139,106,0,.10); color:#8B6A00; }
 }
 
 /* Animações scroll-triggered */
@@ -1452,13 +1637,11 @@ h2 + p, .section-header p{ font-feature-settings:"kern", "liga"; }
 
 
 /* P2.13 — Modo apresentação amplificado */
-body.modo-apresentacao .lever-numeric .ref{ display:none !important; }
-body.modo-apresentacao .lever-sparkline{ display:none !important; }
-body.modo-apresentacao .sev-ring{ display:none !important; }
-body.modo-apresentacao .lever-numeric .name{ font-size:24px; }
-body.modo-apresentacao .lever-numeric{ border-right:none; padding-right:0; }
-body.modo-apresentacao .lever-card{ grid-template-columns: 1fr 1.6fr; }
-body.modo-apresentacao .technical-appendix{ display:none !important; }
+/* Sparkline e sev-ring ficam visíveis em modo apresentação (V2.10) */
+body.js-enabled.modo-apresentacao .lever-numeric .name{ font-size:24px; }
+body.js-enabled.modo-apresentacao .lever-numeric{ border-right:none; padding-right:0; }
+body.js-enabled.modo-apresentacao .lever-card{ grid-template-columns: 1fr 1.6fr; }
+body.js-enabled.modo-apresentacao .technical-appendix{ display:none !important; }
 
 /* P2.12 — Apêndice toggle só desktop */
 @media(max-width: 768px){
@@ -1654,7 +1837,7 @@ body.modal-locked{ overflow: hidden; }
   /* Progress nav */
   .progress-nav-inner{ padding: var(--s-2) var(--s-3); gap: var(--s-1); overflow-x: auto; flex-wrap: nowrap; }
   .progress-step{ font-size: 9px; padding: 4px 8px; flex-shrink: 0; }
-  .mode-switcher{ padding: 2px; gap: 2px; flex-shrink: 0; margin-left: auto; }
+  .mode-switcher{ padding: 2px; gap: 2px; flex-shrink: 0; margin-left: 0; order:-1; }
   .mode-btn{ font-size: 9px; padding: 4px 8px; letter-spacing: 0.08em; }
 
   /* Hero */
@@ -1801,7 +1984,7 @@ img, svg, video, table, iframe{ max-width: 100%; height: auto; }
   }
   .progress-nav-inner::-webkit-scrollbar{ display: none; }
   .progress-step{ font-size: 9px; padding: 4px 8px; flex-shrink: 0; letter-spacing: 0.06em; white-space: nowrap; }
-  .mode-switcher{ padding: 2px; gap: 2px; flex-shrink: 0; margin-left: 8px; }
+  .mode-switcher{ padding: 2px; gap: 2px; flex-shrink: 0; margin-left: 0; order:-1; }
   .mode-btn{ font-size: 9px; padding: 4px 8px; letter-spacing: 0.06em; white-space: nowrap; }
 
   /* Sections — padding reduzido */
@@ -1958,15 +2141,16 @@ img, svg, video, table, iframe{ max-width: 100%; height: auto; }
   .exam-group-header{ padding: 12px 14px !important; }
   .exam-group-header h4{ font-size: 14px !important; }
   .exam-group-header .meta{ font-size: 10px !important; gap: 8px; }
-  .exam-group-body{ padding: 0 14px 14px !important; }
+  .exam-group-body{ padding: 0 14px !important; }
   .exam-row{
-    grid-template-columns: 1fr auto !important;
-    gap: 4px 12px !important; padding: 8px 0 !important; font-size: 12px !important;
+    display: block !important;
+    padding: 10px 0 !important;
+    font-size: 12px !important;
   }
-  .exam-row .e-nome{ grid-column: 1 / -1; font-weight: 600; font-size: 13px !important; }
-  .exam-row .e-valor{ grid-column: 1; font-size: 13px !important; }
-  .exam-row .e-status{ grid-column: 2; font-size: 9px !important; }
-  .exam-row .e-ref{ grid-column: 1 / -1; font-size: 10px !important; color: var(--muted); margin-top: 2px; }
+  .exam-row .e-nome{ font-weight: 600; font-size: 13px !important; }
+  .exam-row .e-valor{ font-size: 13px !important; }
+  .exam-row .e-status{ font-size: 9px !important; text-align: left !important; }
+  .exam-row .e-ref{ font-size: 10px !important; color: var(--muted); margin-top: 2px; }
 
   /* Doctor objections — uso médico */
   .obj-toolbar{ position: static !important; padding: 12px 0 !important; margin-bottom: 14px; }
@@ -2023,6 +2207,8 @@ img, svg, video, table, iframe{ max-width: 100%; height: auto; }
 # ---------------------------------------------------------------------------
 JS = r"""
 (function(){
+  document.body.classList.add('js-enabled');
+
   // === Progress nav scroll spy ===
   const allSections = document.querySelectorAll('main > section[id]');
   const steps = document.querySelectorAll('.progress-step[data-target]');
@@ -2073,7 +2259,10 @@ JS = r"""
       window.scrollTo({top:0, behavior:'smooth'});
     }
   }
-  modeButtons.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  modeButtons.forEach(b => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    setMode(b.dataset.mode);
+  }));
   // Default: apresentação
   document.body.classList.add('modo-apresentacao');
 
@@ -2374,7 +2563,11 @@ EXAM_SYMPTOM_MAP = {
     "Testosterona Total": "libido baixa, perda de massa muscular, disposição reduzida",
     "Testosterona Livre": "libido, força e disposição em queda mesmo com testo total normal",
     "Cortisol Basal": "cansaço matinal, dificuldade de relaxar à noite, peso central",
-    "Ferritina": "queda capilar, oxigenação reduzida, fadiga aos pequenos esforços",
+    "Ferritina": "sobrecarga de ferro/inflamação, fadiga, alteração hepática e necessidade de correlação com saturação de transferrina",
+    "Ferro": "quando vem alto junto com ferritina e saturação elevadas, reforça hipótese de sobrecarga de ferro a ser revisada pela médica",
+    "Índice de Saturação da Transferrina": "saturação elevada fortalece a suspeita de excesso de ferro circulante, especialmente quando ferritina também está alta",
+    "Capacidade de Fixação Latente do Ferro": "capacidade baixa sugere menor espaço livre para ligação do ferro, compondo padrão de sobrecarga quando associada a saturação alta",
+    "Progesterona": "em homem, valor acima da referência deve ser lido junto ao eixo hormonal completo, uso de medicações/suplementos e marcadores hepáticos/adrenais",
     "Hemácias": "pode se relacionar com capacidade de transporte e disposição.",
     "Hemoglobina": "pode se relacionar com cansaço, recuperação e desempenho.",
     "Hematócrito": "ajuda a compor a leitura do padrão hematológico junto aos demais marcadores.",
@@ -2389,6 +2582,184 @@ EXAM_SYMPTOM_MAP = {
 
 def _conexao_sintoma(nome_exame):
     return EXAM_SYMPTOM_MAP.get(nome_exame, "compõe o quadro funcional integrado — sua relevância depende da leitura conjunta com os demais marcadores.")
+
+
+def _questionario_contexto_risco(questionario, nome_exame):
+    """Gera uma ponte curta entre exame alterado e respostas do questionário."""
+    dados = (questionario or {}).get("pre-consulta", {}).get("dados", {}) if isinstance(questionario, dict) else {}
+    if not dados and isinstance(questionario, dict) and "dados" in questionario:
+        dados = questionario.get("dados", {})
+
+    def v(k):
+        x = dados.get(k)
+        return "" if x in (None, "", [], {}) else str(x)
+
+    sono = v("qualidadeSono")
+    energia = v("nivelEnergia")
+    cansaco = v("cansacoDurante")
+    ansiedade = v("spin_p_desafios") or v("spin_s_tempoLutaDetalhe")
+    doce = v("consumoDoces")
+    med = v("medicamentosAtuais")
+    cron = v("doencasCronicas")
+    treino = v("atividadeFisica")
+    objetivo = v("tresObjetivos")
+    alimentacao = " / ".join([x for x in [v("almoco"), v("jantar"), v("alimentacaoFimSemana")] if x])
+
+    eixo_ferro = {"Ferritina", "Ferro", "Índice de Saturação da Transferrina", "Capacidade de Fixação Latente do Ferro"}
+    eixo_tireoide = {"TSH", "T3 Livre", "T4 Livre"}
+    eixo_hormonal = {"SHBG", "Progesterona", "Testosterona Total", "Testosterona Livre", "Estradiol"}
+
+    if nome_exame in eixo_ferro:
+        partes = []
+        if cron or med:
+            partes.append(f"histórico de {cron or 'condição crônica'} e uso de {med or 'medicação'}")
+        if energia or sono or cansaco:
+            partes.append(f"energia {energia or 'baixa'}, sono {sono or 'ruim'} e {cansaco or 'cansaço relatado'}")
+        if partes:
+            return "No seu questionário, " + "; ".join(partes) + ". Nesse contexto, excesso de ferro pode aumentar estresse oxidativo, inflamação e sobrecarga hepático-metabólica, dificultando disposição, emagrecimento seguro e redução de risco cardiovascular."
+        return "No seu caso, esse padrão aumenta risco de estresse oxidativo, inflamação e sobrecarga hepático-metabólica se for ignorado ou suplementado no escuro."
+
+    if nome_exame in eixo_tireoide:
+        partes = []
+        if ansiedade:
+            partes.append(f"ansiedade/instabilidade alimentar relatada ({ansiedade})")
+        if sono or energia:
+            partes.append(f"sono {sono or 'alterado'} e energia {energia or 'baixa'}")
+        if treino or objetivo:
+            partes.append(f"objetivo de composição corporal com {treino or 'treino'}")
+        if partes:
+            return "No seu questionário aparecem " + "; ".join(partes) + ". Com tireoide acelerada, o risco é piorar ansiedade, sono, perda de massa magra e carga cardiovascular, mesmo quando a balança parece responder."
+        return "Com esse padrão tireoidiano, o risco é acelerar coração, ansiedade, insônia e perda de massa magra se o plano avançar sem investigação médica."
+
+    if nome_exame in eixo_hormonal:
+        partes = []
+        if energia or sono:
+            partes.append(f"energia {energia or 'baixa'} e sono {sono or 'alterado'}")
+        if treino or objetivo:
+            partes.append(f"meta de força/composição corporal ({objetivo or treino})")
+        if partes:
+            return "No seu questionário aparecem " + "; ".join(partes) + ". Se esse eixo for ignorado, o risco é manter baixa disposição, pior recuperação, dificuldade de ganhar massa magra e menor adesão ao plano."
+        return "Se esse eixo for tratado como número isolado, o risco é corrigir o marcador errado e manter sintomas, baixa recuperação e dificuldade de composição corporal."
+
+    if nome_exame in {"Vitamina B12", "Vitamina D", "Homocisteína", "PCR-us", "Zinco"}:
+        partes = []
+        if energia or cansaco:
+            partes.append(f"energia {energia or 'baixa'} e {cansaco or 'cansaço'}")
+        if doce or alimentacao:
+            partes.append(f"padrão alimentar com {doce or alimentacao}")
+        if partes:
+            return "No seu questionário aparecem " + "; ".join(partes) + ". Ignorar esse ponto pode manter inflamação funcional, pior recuperação e mais dificuldade de sustentar rotina alimentar e treino."
+        return "Ignorar esse ponto pode manter inflamação funcional, pior recuperação e dificuldade de resposta ao acompanhamento."
+
+    if energia or sono or ansiedade:
+        return f"Cruzando com o questionário — energia {energia or 'não informada'}, sono {sono or 'não informado'} e desafio relatado de {ansiedade or 'adesão'} — o risco é manter o ciclo de sintomas e baixa adesão se o ajuste não for acompanhado."
+    return "Cruzando com o questionário, o risco é tratar o exame como número isolado e perder a causa prática que mantém o problema ativo."
+
+
+def _decision_copy(nome_exame, sev="alert", questionario=None):
+    """Copy curta: significado, importância e risco contextualizado pelo questionário."""
+    mapa = {
+        "SHBG": (
+            "Sua testosterona total pode parecer boa, mas o SHBG alto prende parte dela.",
+            "Menos testosterona livre atuando: energia, força, libido e recuperação podem ficar abaixo do esperado.",
+            ""
+        ),
+        "Progesterona": (
+            "Em homem, progesterona acima da referência exige leitura do eixo hormonal completo.",
+            "Pode indicar desbalanço hormonal, interferência de medicação/suplemento ou contexto hepático/metabólico.",
+            ""
+        ),
+        "Ferritina": (
+            "Ferritina muito alta não é detalhe: pode sinalizar sobrecarga de ferro ou inflamação.",
+            "Com ferro e saturação altos, aumenta a suspeita de hemocromatose/sobrecarga de ferro.",
+            ""
+        ),
+        "Ferro": (
+            "Ferro alto junto com ferritina alta muda o peso da análise.",
+            "Esse padrão pode apontar excesso de ferro circulante, não apenas variação alimentar.",
+            ""
+        ),
+        "Índice de Saturação da Transferrina": (
+            "Saturação alta mostra que há muito ferro ocupando a transferrina.",
+            "Quando passa de 50% junto com ferritina alta, a suspeita de sobrecarga aumenta.",
+            ""
+        ),
+        "Capacidade de Fixação Latente do Ferro": (
+            "Capacidade baixa sugere pouco espaço livre para carregar mais ferro.",
+            "Junto com ferro/ferritina altos, reforça padrão de sobrecarga.",
+            ""
+        ),
+        "Vitamina B12": (
+            "B12 baixa reduz eficiência neurológica e metabólica.",
+            "Pode pesar em cansaço, foco, disposição e resposta ao treino.",
+            ""
+        ),
+        "Vitamina D": (
+            "Vitamina D abaixo do alvo funcional reduz margem de saúde.",
+            "Pode impactar imunidade, força, humor e recuperação.",
+            ""
+        ),
+        "TSH": (
+            "TSH suprimido é sinal de tireoide hiperestimulada ou excesso de hormônio tireoidiano.",
+            "Com T3 Livre e T4 Livre altos, o padrão aponta para hipertireoidismo/tireotoxicose até prova em contrário.",
+            ""
+        ),
+        "T4 Livre": (
+            "T4 Livre alto confirma excesso de hormônio tireoidiano circulante.",
+            "Junto com TSH 0,01 e T3 Livre alto, fecha padrão laboratorial de hipertireoidismo/tireotoxicose.",
+            ""
+        ),
+        "T3 Livre": (
+            "T3 Livre muito alto é sinal forte de tireotoxicose ativa.",
+            "Pode acelerar coração, ansiedade, perda de massa, tremor, insônia e risco cardiovascular.",
+            ""
+        ),
+    }
+    if nome_exame in mapa:
+        leitura, impacto, _ = mapa[nome_exame]
+        return leitura, impacto, _questionario_contexto_risco(questionario, nome_exame)
+    if sev == "crit":
+        return (
+            "Esse marcador saiu da zona segura e precisa de prioridade.",
+            "Ignorar agora pode manter sintomas e tornar a correção mais difícil depois.",
+            _questionario_contexto_risco(questionario, nome_exame)
+        )
+    return (
+        "Esse marcador mostra um ponto de ajuste do seu metabolismo.",
+        "Ainda dá para corrigir antes que vire um problema maior.",
+        _questionario_contexto_risco(questionario, nome_exame)
+    )
+
+
+def _necessidade_solucao(nome_exame, sev="alert", perfil_disc="default"):
+    especificas = {
+        "Progesterona": "Não é um marcador para tratar isoladamente. Precisa ser conferido pela médica junto com testosterona total/livre, estradiol, SHBG, LH, FSH, prolactina, função hepática e histórico de medicações ou suplementos antes de qualquer conduta.",
+        "Ferritina": "Pela elevação importante, precisa entrar como prioridade médica: correlacionar com ferro sérico, saturação de transferrina, capacidade de fixação, TGO/TGP/GGT e histórico familiar para afastar sobrecarga de ferro/hemocromatose.",
+        "Ferro": "Como está alto em conjunto com ferritina e saturação de transferrina, não deve ser tratado como achado isolado; precisa de revisão médica dirigida para sobrecarga de ferro.",
+        "Índice de Saturação da Transferrina": "Saturação elevada com ferritina alta é um sinal operacional forte para investigação médica de sobrecarga de ferro, não apenas ajuste nutricional genérico.",
+        "Capacidade de Fixação Latente do Ferro": "Quando baixa junto com ferro/ferritina altos, reforça a necessidade de leitura médica do metabolismo do ferro como conjunto.",
+    }
+    if nome_exame in especificas:
+        return especificas[nome_exame]
+    if perfil_disc == "S":
+        mapa = {
+            "crit": "Isso pede cuidado estruturado agora, com prioridade clínica e acompanhamento contínuo, para evitar progressão silenciosa e correções mais difíceis depois.",
+            "alert": "Isso merece ajuste guiado e acompanhamento em fases, para não ganhar peso clínico com o passar dos meses.",
+            "low": "Isso merece ajuste guiado e acompanhamento em fases, para não ganhar peso clínico com o passar dos meses.",
+            "attn": "Isso merece ajuste guiado e acompanhamento em fases, para não ganhar peso clínico com o passar dos meses.",
+            "ok": "Mesmo adequado hoje, esse marcador precisa ser monitorado para sustentar estabilidade e confirmar resposta ao plano.",
+            "normal": "Mesmo adequado hoje, esse marcador precisa ser monitorado para sustentar estabilidade e confirmar resposta ao plano.",
+        }
+    else:
+        mapa = {
+            "crit": "Isso pede intervenção acompanhada agora, para reduzir risco de progressão e evitar um plano mais complexo depois.",
+            "alert": "Isso justifica correção guiada e monitoramento, antes que o quadro deixe de ser sutil e passe a cobrar mais do organismo.",
+            "low": "Isso justifica correção guiada e monitoramento, antes que o quadro deixe de ser sutil e passe a cobrar mais do organismo.",
+            "attn": "Isso justifica correção guiada e monitoramento, antes que o quadro deixe de ser sutil e passe a cobrar mais do organismo.",
+            "ok": "Mesmo estável, esse ponto serve como base de comparação para medir resposta clínica e preservar resultado.",
+            "normal": "Mesmo estável, esse ponto serve como base de comparação para medir resposta clínica e preservar resultado.",
+        }
+    return mapa.get(sev, mapa.get("alert"))
 
 
 INTERPRETACAO_LEVERS = {
@@ -2518,19 +2889,19 @@ INTERPRETACAO_LEVERS = {
     },
     # === Tireoide ===
     "TSH": {
-        "interpretacao": "Hormônio que comanda a produção tireoidiana.",
-        "impacto": "Mesmo dentro da faixa, valores nas extremidades pedem leitura clínica completa.",
-        "spin": "Você nota frio fora de hora, queda de cabelo ou cansaço sem motivo aparente?",
+        "interpretacao": "TSH suprimido: a hipófise está freando a tireoide porque há excesso de sinal tireoidiano circulante.",
+        "impacto": "Com T3 Livre e T4 Livre altos, o padrão laboratorial aponta para hipertireoidismo/tireotoxicose até prova em contrário.",
+        "spin": "Decisão: prioridade médica para investigar a causa e o risco cardiovascular.",
     },
     "T4 Livre": {
-        "interpretacao": "Hormônio circulante disponível para os tecidos.",
-        "impacto": "Junto com TSH e T3 mostra como a tireoide está realmente entregando função.",
-        "spin": "Quer enxergar a tireoide pelo que ela entrega, não só pelo que ela produz?",
+        "interpretacao": "T4 Livre alto: excesso de hormônio tireoidiano circulante.",
+        "impacto": "Junto com TSH 0,01 e T3 Livre alto, reforça hipertireoidismo/tireotoxicose.",
+        "spin": "Decisão: não avançar como se fosse apenas metabolismo acelerado; precisa investigação médica.",
     },
     "T3 Livre": {
-        "interpretacao": "Forma ativa do hormônio tireoidiano nos tecidos.",
-        "impacto": "T3 baixo com TSH normal explica fadiga e ganho de peso em muitos casos.",
-        "spin": "Sua disposição combina com o que esse número sugere?",
+        "interpretacao": "T3 Livre muito alto: excesso da forma ativa do hormônio tireoidiano.",
+        "impacto": "Pode aumentar risco de taquicardia, ansiedade, tremor, insônia, perda de massa e sobrecarga cardiovascular.",
+        "spin": "Decisão: avaliação médica dirigida com prioridade.",
     },
     "Anti-TPO": {
         "interpretacao": "Anticorpo que indica processo autoimune da tireoide.",
@@ -2559,9 +2930,9 @@ INTERPRETACAO_LEVERS = {
         "spin": "Quer trabalhar o eixo hormonal como conjunto, não como hormônios isolados?",
     },
     "Progesterona": {
-        "interpretacao": "Hormônio cuja leitura depende fortemente da fase do ciclo (em mulheres).",
-        "impacto": "Em homens, valores muito baixos são esperados — análise é contextual.",
-        "spin": "Vale interpretar esse valor dentro do seu momento hormonal específico?",
+        "interpretacao": "Em homem, progesterona acima da referência não fecha diagnóstico sozinha, mas é um achado que merece leitura dirigida do eixo hormonal.",
+        "impacto": "O valor precisa ser correlacionado com testosterona total/livre, estradiol, SHBG, LH/FSH, prolactina, fígado e uso de medicações ou suplementos; pode representar desbalanço do eixo esteroidogênico, interferência laboratorial ou contexto metabólico específico.",
+        "spin": "Esse ponto conversa com sua energia baixa, sono ruim ou uso atual de medicamentos/suplementos?",
     },
     "FSH": {
         "interpretacao": "Hormônio do eixo central reprodutivo.",
@@ -2626,14 +2997,14 @@ INTERPRETACAO_LEVERS = {
         "spin": "Você notou queda de imunidade ou cicatrização lenta recentemente?",
     },
     "Ferro": {
-        "interpretacao": "Mineral central no transporte de oxigênio.",
-        "impacto": "Lido junto a ferritina, transferrina e saturação para conclusão real.",
-        "spin": "Quer ler ferro no contexto do estoque (ferritina), e não isolado?",
+        "interpretacao": "Ferro sérico alto; quando vem junto com ferritina e saturação elevadas, muda o nível de alerta.",
+        "impacto": "O ponto não é falta de ferro — é possível excesso circulante/sobrecarga, que exige leitura médica dirigida.",
+        "spin": "Antes de qualquer suplemento, precisamos entender se há sobrecarga de ferro.",
     },
     "Ferritina": {
-        "interpretacao": "Reserva de ferro do organismo.",
-        "impacto": "Afeta energia, oxigenação tecidual, queda capilar e recuperação.",
-        "spin": "Esses sintomas sutis costumam ser atribuídos à idade — você reconhece algum?",
+        "interpretacao": "Ferritina muito alta não deve ser lida como 'boa reserva'. Pode sinalizar sobrecarga de ferro, inflamação ou sofrimento hepático/metabólico.",
+        "impacto": "Com ferro e saturação de transferrina altos, a prioridade é afastar hemocromatose/sobrecarga de ferro — não tratar como cansaço por deficiência.",
+        "spin": "Decisão: investigar a causa da ferritina alta com prioridade médica.",
     },
     "Magnésio": {
         "interpretacao": "Mineral envolvido em sono, contração muscular e produção de energia.",
@@ -2733,11 +3104,23 @@ DEFAULT_INTERP = {
 
 def _ranking_severidade(ex):
     rank = {"crit": 0, "alert": 1, "low": 1, "attn": 2, "ok": 4, "normal": 4}
-    return rank.get(ex.get("status", "normal"), 9)
+    # Prioridade clínica explícita: padrões que mudam decisão não podem sumir da V10 por ordem de extração.
+    prioridade_nome = {
+        "TSH": -30,
+        "T4 Livre": -29,
+        "T3 Livre": -28,
+        "Ferritina": -20,
+        "Ferro": -19,
+        "Índice de Saturação da Transferrina": -18,
+        "Capacidade de Fixação Latente do Ferro": -17,
+        "SHBG": -10,
+        "Progesterona": -9,
+    }
+    return (rank.get(ex.get("status", "normal"), 9), prioridade_nome.get(ex.get("nome"), 0))
 
 
-def _selecionar_critical_levers(exames, max_levers=5):
-    """Seleciona 3-5 alavancas críticas: prioriza crit/alert/low; máx 5."""
+def _selecionar_critical_levers(exames, max_levers=7):
+    """Seleciona alavancas críticas que mudam decisão clínica; não omite eixo tireoidiano/ferro."""
     ranked = sorted(exames, key=_ranking_severidade)
     levers = [e for e in ranked if e.get("status") in ("crit", "alert", "low")][:max_levers]
     return levers
@@ -3029,22 +3412,22 @@ def render_progress_nav(versao_paciente=False):
         ("decision-checklist", "6 · Decisão"),
     ]
     items = "".join(
-        f'<button class="progress-step" data-target="{sid}">{safe_html(label)}</button>'
+        f'<a class="progress-step" data-target="{sid}" href="#{sid}">{safe_html(label)}</a>'
         for sid, label in steps
     )
     btn_medica = ""
     if not versao_paciente:
         btn_medica = (
-            '<button class="mode-btn" data-mode="objecoes" role="tab" '
-            'aria-selected="false">Médica</button>'
+            '<a class="mode-btn" data-mode="objecoes" href="#doctor-objections" role="tab" '
+            'aria-selected="false">Médica</a>'
         )
     return f"""
 <nav class="progress-nav" aria-label="Navegação da apresentação">
   <div class="progress-nav-inner">
     {items}
     <div class="mode-switcher" role="tablist" aria-label="Modo de visualização">
-      <button class="mode-btn active" data-mode="apresentacao" role="tab" aria-selected="true">Apresentação</button>
-      <button class="mode-btn" data-mode="exames" role="tab" aria-selected="false">Exames</button>
+      <a class="mode-btn active" data-mode="apresentacao" href="#hero" role="tab" aria-selected="true">Apresentação</a>
+      <a class="mode-btn" data-mode="exames" href="#technical-appendix" role="tab" aria-selected="false">Exames</a>
       {btn_medica}
     </div>
   </div>
@@ -3052,7 +3435,7 @@ def render_progress_nav(versao_paciente=False):
 """
 
 
-def render_hero(paciente, dra_b64=""):
+def render_hero(paciente, dra_b64="", perfil_disc="default"):
     nome = safe_html(paciente.get("nome", "Paciente"))
     primeiro = nome.split()[0] if nome else "Paciente"
     idade = paciente.get("idade") or calcular_idade(paciente.get("dataNascimento")) or "—"
@@ -3075,7 +3458,7 @@ def render_hero(paciente, dra_b64=""):
     </div>
     <div class="hero-grid">
       <div class="hero-text">
-        <h1 class="hero-clinical-h1">{primeiro}, seus exames e seu questionário contam a mesma história: <span style="color:var(--gold-dark)">o problema não parece ser falta de esforço</span>, mas falta de acompanhamento integrado.</h1>
+        <h1 class="hero-clinical-h1">{_t_disc("hero_h1", perfil_disc, primeiro=primeiro)}</h1>
       </div>
       {foto_html}
     </div>
@@ -3084,7 +3467,7 @@ def render_hero(paciente, dra_b64=""):
 """
 
 
-def render_executive_diagnosis(paciente, levers):
+def render_executive_diagnosis(paciente, levers, perfil_disc="default"):
     primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
     # Gera 3 cards: o que está acontecendo / onde aparece / por que muda estratégia
     sistemas_afetados = set()
@@ -3114,9 +3497,10 @@ def render_executive_diagnosis(paciente, levers):
 <section id="executive-diagnosis" class="section executive-diagnosis">
   <div class="wrap">
     <h2>Diagnóstico executivo do caso</h2>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">{_t_disc("diag_lead", perfil_disc)}</p>
     <div class="tese-clinica fade-up">
       <span class="tese-tag">Tese clínica do caso</span>
-      <p class="tese-texto">Quando sintomas e marcadores apontam na mesma direção, o plano precisa ser <strong>acompanhado, medido e ajustado</strong>.</p>
+      <p class="tese-texto">{_t_disc("tese_clinica", perfil_disc)}</p>
     </div>
     <div class="diag-grid diag-grid-2col">
       <div class="diag-card fade-up">
@@ -3129,7 +3513,7 @@ def render_executive_diagnosis(paciente, levers):
       </div>
     </div>
     <div class="diag-recomendacao">
-      Minha recomendação para o seu caso é <strong>acompanhamento estruturado</strong>. A previsibilidade do resultado depende dos ajustes que faremos juntos durante o processo.
+      {_t_disc("diag_recomendacao", perfil_disc)}
     </div>
   </div>
 </section>
@@ -3151,55 +3535,347 @@ def render_patient_mirror(paciente, questionario):
     if not dados and isinstance(questionario, dict) and "dados" in questionario:
         dados = questionario["dados"]
 
-    queixa = dados.get("queixaPrincipal") or dados.get("spin_p_principalIncomodo") or ""
-    tempo = dados.get("spin_s_tempoLuta") or dados.get("tempoLuta") or ""
-    if isinstance(tempo, list):
-        tempo = ", ".join(tempo)
-    tentativas = dados.get("tentativasAnteriores") or dados.get("jaTentou") or ""
-    if isinstance(tentativas, list):
-        tentativas = "; ".join(tentativas)
-    sono = dados.get("qualidadeSono") or ""
-    if sono and isinstance(sono, (int, str)):
-        sono = f"{sono}/5"
-    energia = dados.get("nivelEnergia") or ""
-    if energia and isinstance(energia, (int, str)):
-        energia = f"{energia}/5" if not isinstance(energia, str) or "/" not in energia else energia
-    alimentacao = dados.get("alimentacaoFimSemana") or dados.get("alimentacao") or ""
-    if isinstance(alimentacao, list):
-        alimentacao = ", ".join(alimentacao)
-    motivo = dados.get("spin_n_vidaResolvida") or dados.get("motivoIVS") or ""
-    peso = dados.get("pesoAtual") or dados.get("peso") or ""
-    altura = dados.get("altura") or ""
+    def val(*keys):
+        for k in keys:
+            v = dados.get(k)
+            if v not in (None, "", [], {}):
+                if isinstance(v, list):
+                    return "; ".join(str(x) for x in v if x not in (None, ""))
+                return str(v)
+        return ""
+
+    def escala(v):
+        if not v:
+            return ""
+        return f"{v}/10" if "/" not in str(v) else str(v)
+
+    queixa = val("queixaPrincipal", "spin_p_principalIncomodo")
+    tempo = val("spin_s_tempoLuta", "tempoLuta")
+    tentativas = val("spin_s_tentativas", "tentativasAnteriores", "jaTentou")
+    sono = escala(val("qualidadeSono"))
+    energia = escala(val("nivelEnergia"))
+    motivo = val("spin_n_vidaResolvida", "motivoIVS")
+    peso = val("pesoAtual", "peso")
+    altura = val("altura")
+
+    bloco_identidade = "".join([
+        _q_field("O que mais te incomoda hoje", queixa, feature=True),
+        _q_field("Há quanto tempo", tempo),
+        _q_field("Já tentou", tentativas),
+        _q_field("Por que IVS agora", motivo),
+        _q_field("Peso atual", f"{peso} kg" if peso else "", sub=f"Altura {altura.replace('.', ',')} m" if altura else ""),
+        _q_field("Objetivos declarados", val("tresObjetivos")),
+    ])
+
+    bloco_saude = "".join([
+        _q_field("Medicamentos atuais", val("medicamentosAtuais")),
+        _q_field("Doenças crônicas", val("doencasCronicas")),
+        _q_field("Alergias/intolerâncias", val("alergiasIntolerâncias", "alergiasIntolerancias")),
+        _q_field("Histórico familiar de câncer", val("historicoFamiliarCancer")),
+        _q_field("Reposição hormonal", val("reposicaoHormonal")),
+        _q_field("Fumo / álcool", f"Fumo: {val('habitoFumar') or '—'} · Álcool: {val('consumoAlcool') or '—'}"),
+    ])
+
+    bloco_rotina = "".join([
+        _q_field("Sono", sono, sub=f"Horas/noite: {val('horasSono') or '—'}"),
+        _q_field("Energia", energia, sub=val("cansacoDurante")),
+        _q_field("Atividade física", val("atividadeFisica"), sub=val("frequenciaAtividade")),
+        _q_field("Água / intestino", f"Água: {val('consumoAgua') or '—'}", sub=f"Intestino: {val('frequenciaIntestinal') or '—'}"),
+        _q_field("Trabalho", val("profissao"), sub=f"{val('tipoTrabalho') or '—'} · {val('horariosTrabalho') or '—'}"),
+        _q_field("Barreira percebida", val("barreiraSaude"), sub=f"Investe em saúde: {val('investeSaude') or '—'}"),
+    ])
+
+    bloco_alimentar = "".join([
+        _q_field("Compulsão/vontade de doce", val("consumoDoces"), feature=True),
+        _q_field("Refeições por dia", val("refeicoesDia"), sub=val("localRefeicoes")),
+        _q_field("Como adoça", val("formaAdocar")),
+        _q_field("Preferências alimentares", val("alimentosGosta"), sub=f"Não gosta: {val('alimentosNaoGosta') or '—'}"),
+        _q_field("Fim de semana", val("alimentacaoFimSemana"), sub=val("alimentacaoFimSemanaDetalhe")),
+        _q_field("Café da manhã", val("cafeDaManha")),
+        _q_field("Lanche manhã", val("lancheManha")),
+        _q_field("Almoço", val("almoco")),
+        _q_field("Lanche tarde", val("lancheTarde")),
+        _q_field("Jantar", val("jantar")),
+    ])
+
+    bloco_spin = "".join([
+        _q_field("Desafio principal", val("spin_p_desafios"), feature=True),
+        _q_field("Detalhe da luta", val("spin_s_tempoLutaDetalhe")),
+        _q_field("Impacto na vida", val("spin_i_impactoVida")),
+        _q_field("Cenário em 1 ano se nada mudar", val("spin_i_cenario1ano")),
+        _q_field("Investimento perdido", val("spin_i_investimentoPerdido")),
+        _q_field("Interesse no programa", val("spin_n_interessePrograma"), sub=f"Acompanhamento desejado: {val('interesseAcompanhamento') or '—'}"),
+        _q_field("Mudanças desejadas", val("tresMudancas")),
+        _q_field("Perfil DISC", val("discPerfil")),
+    ])
+
+    implicacoes = []
+    if val("qualidadeSono") or val("nivelEnergia") or val("cansacoDurante"):
+        implicacoes.append("Sono ruim, baixa energia e cansaço à tarde reduzem adesão, aumentam fome hedônica e precisam ser tratados junto com a estratégia alimentar.")
+    if val("consumoDoces") or val("spin_p_desafios"):
+        implicacoes.append("Ansiedade e vontade de doce à noite mostram que a solução não pode depender apenas de força de vontade; precisa de rotina assistida e ajustes progressivos.")
+    if val("doencasCronicas") or val("medicamentosAtuais"):
+        implicacoes.append("Hipertensão e uso de medicação exigem acompanhamento integrado para perda de gordura com segurança clínica.")
+    if val("almoco") or val("jantar") or val("atividadeFisica"):
+        implicacoes.append("Treino existe, mas o padrão alimentar descrito limita composição corporal; o plano precisa preservar massa magra enquanto reduz gordura.")
+    implicacoes_html = "".join(f"<li>{safe_html(x)}</li>" for x in implicacoes)
 
     return f"""
 <section id="patient-mirror" class="section patient-mirror">
   <div class="wrap">
     <h2>O espelho do seu caso</h2>
-    <p style="max-width:780px;font-size:16px;color:var(--muted);">O que você nos contou antes da consulta. Cada item aqui é uma pista clínica que vamos cruzar com os exames.</p>
-    <div class="mirror-grid">
-      {_q_field("O que mais te incomoda hoje", queixa, feature=True)}
-      {_q_field("Há quanto tempo", tempo)}
-      {_q_field("Já tentou", tentativas)}
-      {_q_field("Por que IVS agora", motivo)}
-      {_q_field("Qualidade do sono", sono)}
-      {_q_field("Nível de energia", energia)}
-      {_q_field("Alimentação típica", alimentacao)}
-      {_q_field("Peso atual", f"{peso} kg" if peso else "", sub=f"Altura {altura.replace('.', ',')} m" if altura else "")}
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">O que você nos contou antes da consulta. Aqui entram os dados relevantes do questionário, cruzados depois com exames de sangue e bioimpedância.</p>
+
+    <h3 style="margin-top:var(--s-5);">1. Identidade do problema</h3>
+    <div class="mirror-grid">{bloco_identidade}</div>
+
+    <h3 style="margin-top:var(--s-6);">2. Saúde, rotina e contexto clínico</h3>
+    <div class="mirror-grid">{bloco_saude}</div>
+    <div class="mirror-grid">{bloco_rotina}</div>
+
+    <h3 style="margin-top:var(--s-6);">3. Alimentação real do dia a dia</h3>
+    <div class="mirror-grid">{bloco_alimentar}</div>
+
+    <h3 style="margin-top:var(--s-6);">4. Dor, impacto e decisão</h3>
+    <div class="mirror-grid">{bloco_spin}</div>
+
+    <div class="compact-decision" style="margin-top:var(--s-6);">
+      <h4>Leitura gerencial do questionário</h4>
+      <ul>{implicacoes_html}</ul>
     </div>
   </div>
 </section>
 """
 
 
-def render_critical_levers(levers):
+
+
+def _bioimped_classifica_gordura(pct, sexo):
+    """Retorna (severidade, label, alvo_texto) para % gordura."""
+    try:
+        pct_f = float(str(pct).replace(",", "."))
+    except Exception:
+        return ("ok", "", "")
+    if sexo == "F":
+        if pct_f < 21: return ("ok", "ideal", "21-32%")
+        if pct_f < 33: return ("ok", "dentro do esperado", "21-32%")
+        if pct_f < 39: return ("alert", "elevado", "alvo abaixo de 32%")
+        return ("crit", "muito elevado", "alvo abaixo de 32%, redução prioritária")
+    else:
+        if pct_f < 12: return ("ok", "ideal", "12-22%")
+        if pct_f < 23: return ("ok", "dentro do esperado", "12-22%")
+        if pct_f < 28: return ("alert", "elevado", "alvo abaixo de 22%")
+        return ("crit", "muito elevado", "alvo abaixo de 22%, redução prioritária")
+
+
+def _bioimped_classifica_razao(razao):
+    """Razão músculo/gordura: ideal ≥1,2."""
+    try:
+        v = float(str(razao).replace(",", "."))
+    except Exception:
+        return ("ok", "")
+    if v >= 1.2: return ("ok", "equilíbrio favorável")
+    if v >= 0.9: return ("alert", "abaixo do equilíbrio (ideal ≥1,2)")
+    return ("crit", "muito abaixo do equilíbrio (ideal ≥1,2)")
+
+
+def _bioimped_classifica_angulo(angulo, sexo, idade):
+    """Ângulo de fase: marcador de vitalidade celular. F adulto ≥6.0 ok."""
+    try:
+        v = float(str(angulo).replace(",", "."))
+    except Exception:
+        return ("ok", "")
+    threshold = 6.0 if sexo == "F" else 6.5
+    if v >= threshold: return ("ok", "vitalidade celular preservada")
+    if v >= threshold - 1: return ("alert", f"abaixo do ideal (≥{threshold}°)")
+    return ("crit", f"muito abaixo do ideal (≥{threshold}°)")
+
+
+def _bioimped_classifica_idade_celular(idade_cel, idade_cron):
+    """Idade celular vs cronológica."""
+    try:
+        cel = float(idade_cel); cron = float(idade_cron)
+    except Exception:
+        return ("ok", "")
+    diff = cel - cron
+    if diff <= -2: return ("ok", f"{abs(diff):.0f} anos abaixo da cronológica (excelente)")
+    if diff <= 1: return ("ok", "próxima à cronológica")
+    if diff <= 4: return ("alert", f"{diff:.0f} anos acima da cronológica")
+    return ("crit", f"{diff:.0f} anos acima da cronológica (envelhecimento celular)")
+
+
+def _bioimped_classifica_imc(imc):
+    try:
+        v = float(str(imc).replace(",", "."))
+    except Exception:
+        return ("ok", "")
+    if v < 18.5: return ("alert", "abaixo do peso")
+    if v < 25: return ("ok", "peso normal")
+    if v < 30: return ("alert", "sobrepeso")
+    if v < 35: return ("crit", "obesidade grau 1")
+    if v < 40: return ("crit", "obesidade grau 2")
+    return ("crit", "obesidade grau 3")
+
+
+def _fmt_delta(d):
+    if not d or str(d).strip() in ("", "—", "-"): return ""
+    s = str(d).strip()
+    if s.startswith(("+",)): return f'<span class="delta up">Δ {s}</span>'
+    if s.startswith(("-","−")): return f'<span class="delta down">Δ {s}</span>'
+    return f'<span class="delta">Δ {s}</span>'
+
+
+def render_bioimpedancia(bio, paciente):
+    """Renderiza a seção de bioimpedância.
+
+    bio (dict opcional):
+      data_avaliacao, data_referencia, peso, altura, imc, tmb,
+      gordura: {massa, pct, delta_pct}
+      hidratacao: {agua_total, agua_total_pct, indice, agua_massa_magra}
+      agua_celular: {intra, intra_pct, extra, extra_pct}
+      massa: {magra_kg, magra_pct, muscular_kg, muscular_pct, razao_musc_gord, razao_delta}
+      celular: {angulo_fase, angulo_delta, idade_celular, idade_cronologica}
+    """
+    if not bio:
+        return ""
+
+    sexo = str(paciente.get("sexo", "F")).upper()[:1]
+    primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+
+    g = bio.get("gordura", {})
+    h = bio.get("hidratacao", {})
+    a = bio.get("agua_celular", {})
+    m = bio.get("massa", {})
+    c = bio.get("celular", {})
+
+    # Classificações
+    sev_g, lbl_g, alvo_g = _bioimped_classifica_gordura(g.get("pct"), sexo)
+    sev_r, lbl_r = _bioimped_classifica_razao(m.get("razao_musc_gord"))
+    sev_ang, lbl_ang = _bioimped_classifica_angulo(c.get("angulo_fase"), sexo, paciente.get("idade"))
+    sev_ic, lbl_ic = _bioimped_classifica_idade_celular(c.get("idade_celular"), c.get("idade_cronologica"))
+    sev_imc, lbl_imc = _bioimped_classifica_imc(bio.get("imc"))
+
+    # Análise (lista de bullets clínicos)
+    bullets = []
+    if lbl_imc:
+        bullets.append((sev_imc, f"<b>IMC {bio.get('imc')}</b> — {lbl_imc}."))
+    if lbl_g:
+        bullets.append((sev_g, f"<b>% gordura corporal {g.get('pct')}%</b> — {lbl_g} ({alvo_g})."))
+    if lbl_r:
+        bullets.append((sev_r, f"<b>Razão músculo/gordura {m.get('razao_musc_gord')}</b> — {lbl_r}. Reforça prioridade clínica de preservar/ganhar massa muscular durante a perda de gordura."))
+    if lbl_ang:
+        bullets.append((sev_ang, f"<b>Ângulo de fase {c.get('angulo_fase')}°</b> — {lbl_ang}. Marcador de qualidade de membrana celular e vitalidade."))
+    if lbl_ic:
+        bullets.append((sev_ic, f"<b>Idade celular {c.get('idade_celular')} anos</b> — {lbl_ic}."))
+
+    # Variação vs avaliação anterior (se houver)
+    if bio.get("data_referencia") and g.get("delta_pct"):
+        bullets.append(("ok", f"Comparado com {safe_html(bio.get('data_referencia'))}, houve mudança de {safe_html(g.get('delta_pct'))} pontos no % de gordura."))
+
+    bullets_html = "".join(f'<li class="{sev}">{txt}</li>' for sev, txt in bullets)
+
+    # Meta header
+    meta_parts = []
+    if bio.get("data_avaliacao"):
+        meta_parts.append(f"Avaliação em <b>{safe_html(bio['data_avaliacao'])}</b>")
+    if bio.get("data_referencia"):
+        meta_parts.append(f"comparada com {safe_html(bio['data_referencia'])}")
+    meta_html = " · ".join(meta_parts) if meta_parts else "Bioimpedância recente"
+
+    # KPI helpers
+    def kpi(label, value, unit="", delta=""):
+        if not value: return ""
+        v_str = safe_html(value)
+        u_str = f'<span class="unit">{safe_html(unit)}</span>' if unit else ""
+        return f'<div class="bio-kpi"><span class="label">{safe_html(label)}</span><span class="value">{v_str}{u_str}{_fmt_delta(delta)}</span></div>'
+
+    card_composicao = f"""
+    <div class="bio-card">
+      <h4>Composição corporal</h4>
+      <div class="kpis">
+        {kpi("Peso", bio.get("peso"), "kg")}
+        {kpi("IMC", bio.get("imc"), "kg/m²")}
+        {kpi("Massa gorda", g.get("massa"), "kg")}
+        {kpi("% Gordura", g.get("pct"), "%", g.get("delta_pct"))}
+        {kpi("Massa magra", m.get("magra_kg"), "kg")}
+        {kpi("Massa muscular", m.get("muscular_kg"), f"kg ({m.get('muscular_pct','')}%)" if m.get("muscular_pct") else "kg")}
+        {kpi("Razão músc/gord", m.get("razao_musc_gord"), "", m.get("razao_delta"))}
+        {kpi("TMB", bio.get("tmb"), "kcal/24h")}
+      </div>
+    </div>
+    """
+
+    card_hidratacao = f"""
+    <div class="bio-card">
+      <h4>Hidratação</h4>
+      <div class="kpis">
+        {kpi("Água corporal total", h.get("agua_total"), "L")}
+        {kpi("Água corporal total", h.get("agua_total_pct"), "% do peso")}
+        {kpi("Índice de hidratação", h.get("indice"), "cm/ohms")}
+        {kpi("Água na massa magra", h.get("agua_massa_magra"), "%")}
+        {kpi("Água intracelular", a.get("intra"), "L")}
+        {kpi("% Intracelular", a.get("intra_pct"), "%")}
+        {kpi("Água extracelular", a.get("extra"), "L")}
+        {kpi("% Extracelular", a.get("extra_pct"), "%")}
+      </div>
+    </div>
+    """
+
+    card_celular = f"""
+    <div class="bio-card">
+      <h4>Análise celular</h4>
+      <div class="kpis">
+        {kpi("Ângulo de fase", c.get("angulo_fase"), "graus", c.get("angulo_delta"))}
+        {kpi("Idade celular", c.get("idade_celular"), "anos")}
+        {kpi("Idade cronológica", c.get("idade_cronologica"), "anos")}
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:var(--s-3) 0 0;line-height:1.5">
+        O ângulo de fase reflete a integridade da membrana celular. Valores mais altos indicam células com melhor sinalização e vitalidade. A idade celular é estimada a partir da bioimpedância e pode estar acima ou abaixo da idade real.
+      </p>
+    </div>
+    """
+
+    # Imagem original do laudo (se extractor anexou)
+    imagem_b64 = bio.get("_imagem_b64") or ""
+    if imagem_b64:
+        bio_image_html = (
+            '<div class="bio-image-wrap">'
+            '<h4>Laudo original</h4>'
+            f'<img src="data:image/jpeg;base64,{imagem_b64}" alt="Laudo de bioimpedância" loading="lazy"/>'
+            '<span class="caption">Imagem extraída do PDF original — referência visual da avaliação.</span>'
+            '</div>'
+        )
+    else:
+        bio_image_html = ""
+
+    return f"""
+<section id="bioimpedancia" class="section bioimped-section">
+  <div class="wrap">
+    <h2>Bioimpedância — composição corporal</h2>
+    <p class="bioimped-meta">{meta_html}</p>
+    <div class="bio-grid">
+      {card_composicao}
+      {card_hidratacao}
+      {card_celular}
+    </div>
+    <div class="bio-highlight">
+      <h4>Leitura clínica para {primeiro}</h4>
+      <ul>{bullets_html}</ul>
+    </div>
+    {bio_image_html}
+  </div>
+</section>
+"""
+
+def render_critical_levers(levers, perfil_disc="default", questionario=None):
     if not levers:
         return ""
     cards = []
     for lv in levers:
         nome = lv["nome"]
-        interp = INTERPRETACAO_LEVERS.get(nome, DEFAULT_INTERP)
         sev = lv.get("status", "alert")
-        sev_label = "Crítico" if sev == "crit" else ("Alterado" if sev == "alert" else "Atenção")
+        sev_label = "Crítico" if sev == "crit" else ("Normal" if sev in ("ok", "normal") else "Atenção")
+        leitura, impacto, decisao = _decision_copy(nome, sev=sev, questionario=questionario)
         cards.append(f"""
 <div class="lever-card fade-up" data-sev="{sev}">
   <div class="lever-numeric">
@@ -3209,13 +3885,10 @@ def render_critical_levers(levers):
     <span class="badge">{sev_label}</span>
     {render_sparkline(lv["valor"], lv.get("ref","—"), sev)}
   </div>
-  <div class="lever-narrative">
-    <p class="interp">{safe_html(interp["interpretacao"])}</p>
-    <div class="conexao-sintoma">
-      <span class="conexao-tag">Conexão com o que você relatou</span>
-      <p>{safe_html(_conexao_sintoma(nome))}</p>
-    </div>
-    <div class="spin-q">{safe_html(interp["spin"])}</div>
+  <div class="lever-narrative compact-decision">
+    <div class="impact"><strong>O que significa:</strong> {safe_html(leitura)}</div>
+    <div class="impact"><strong>Por que importa:</strong> {safe_html(impacto)}</div>
+    <div class="spin-q"><strong>Risco no seu caso:</strong> {safe_html(decisao)}</div>
   </div>
 </div>
 """)
@@ -3223,57 +3896,82 @@ def render_critical_levers(levers):
 <section id="critical-levers" class="section critical-levers">
   <div class="wrap">
     <h2>Mapa de alavancas críticas</h2>
-    <p style="max-width:780px;font-size:16px;color:var(--muted);">As {len(levers)} alavancas que mais influenciam o seu plano. Cada uma traz interpretação clínica, impacto prático e a pergunta que a Dra. usará na consulta para confirmar o diagnóstico.</p>
+    <p style="max-width:780px;font-size:16px;color:var(--muted);">As {len(levers)} alavancas que mais influenciam o seu plano. Cada uma mostra o que o exame significa, o que isso implica na prática e por que vale resolver com acompanhamento estruturado.</p>
     <div class="lever-list">{"".join(cards)}</div>
   </div>
 </section>
 """
 
 
-def render_spin_guided(paciente, questionario, levers):
+def render_spin_guided(paciente, questionario, levers, perfil_disc="default"):
     """Renderiza 'Leitura integrada do caso' — sem labels de venda S/P/I/N."""
     primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
+    dados_q = (questionario or {}).get("pre-consulta", {}).get("dados", {}) if isinstance(questionario, dict) else {}
+    if not dados_q and isinstance(questionario, dict) and "dados" in questionario:
+        dados_q = questionario.get("dados", {})
 
-    # Tabela de marcadores: alavanca + interpretação clínica
+    def qv(k):
+        v = dados_q.get(k)
+        return "" if v in (None, "", [], {}) else str(v)
+
+    ponto_partida_items = []
+    if qv("doencasCronicas") or qv("medicamentosAtuais"):
+        ponto_partida_items.append(f"Condição clínica declarada: {qv('doencasCronicas') or 'não informada'}; medicação atual: {qv('medicamentosAtuais') or 'não informada'}.")
+    if qv("qualidadeSono") or qv("nivelEnergia") or qv("cansacoDurante"):
+        ponto_partida_items.append(f"Sono {qv('qualidadeSono') or '—'}/10, energia {qv('nivelEnergia') or '—'}/10 e cansaço relatado: {qv('cansacoDurante') or 'não informado'}.")
+    if qv("spin_p_desafios") or qv("spin_s_tempoLutaDetalhe") or qv("consumoDoces"):
+        ponto_partida_items.append(f"Desafio de adesão: {qv('spin_p_desafios') or qv('spin_s_tempoLutaDetalhe')}; vontade de doce: {qv('consumoDoces') or 'não informada'}.")
+    if qv("almoco") or qv("jantar") or qv("alimentacaoFimSemana"):
+        ponto_partida_items.append(f"Padrão alimentar descrito: almoço — {qv('almoco') or 'não informado'}; jantar — {qv('jantar') or 'não informado'}; fim de semana — {qv('alimentacaoFimSemana') or 'não informado'}.")
+    if qv("atividadeFisica") or qv("tresObjetivos"):
+        ponto_partida_items.append(f"Rotina/objetivo: {qv('atividadeFisica') or 'atividade não informada'}; objetivo — {qv('tresObjetivos') or 'não informado'}.")
+    if not ponto_partida_items:
+        ponto_partida_items.append("Questionário pré-consulta carregado; leitura será cruzada com os marcadores laboratoriais e corporais disponíveis.")
+    ponto_partida_html = "".join(f"<li>{safe_html(x)}</li>" for x in ponto_partida_items)
+    ponto_partida_alerta = f"{primeiro}, este é o ponto de partida objetivo do seu caso: sintomas, rotina e exames precisam ser lidos juntos para definir o acompanhamento."
+
+    # Tabela de marcadores: alavanca + implicação clínica + necessidade de agir
     rows_p = ""
     for lv in levers[:5]:
         interp = INTERPRETACAO_LEVERS.get(lv["nome"], DEFAULT_INTERP)
+        necessidade = _necessidade_solucao(lv["nome"], sev=lv.get("status", "alert"), perfil_disc=perfil_disc)
         rows_p += (f"<tr><td><strong>{safe_html(lv['nome'])} {safe_html(lv['valor'])}"
                    f"{safe_html(lv.get('unit',''))}</strong></td>"
-                   f"<td>{safe_html(interp['interpretacao'])} {safe_html(interp['impacto'])}</td></tr>")
+                   f"<td>{safe_html(interp['interpretacao'])} <strong>Implicação:</strong> {safe_html(interp['impacto'])} <strong>Necessidade:</strong> {safe_html(necessidade)}</td></tr>")
 
     return f"""
 <section id="leitura-integrada" class="section leitura-integrada">
   <div class="wrap">
     <h2>Leitura integrada do caso</h2>
-    <p style="max-width:720px;font-size:16px;color:var(--muted);">Como seu quadro clínico se conecta — questionário, exames e o que isso significa para a estratégia de acompanhamento.</p>
+    <p style="max-width:720px;font-size:16px;color:var(--muted);">{_t_disc("leitura_lead", perfil_disc)} Aqui, a leitura cruza marcador, implicação prática e por que o acompanhamento é a forma mais segura de corrigir a causa — não só reagir ao número.</p>
 
     <div class="leitura-block fade-up">
       <h3>O ponto de partida</h3>
-      <p class="body-text">Questionário e exames formam o retrato funcional do seu momento. É a partir desse retrato — não de um protocolo padrão — que se constrói o plano.</p>
-      <div class="alinhamento">{primeiro}, esse resumo descreve bem o ciclo que você vem vivendo?</div>
+      <p class="body-text">Resumo objetivo do questionário que muda a leitura dos exames e da bioimpedância:</p>
+      <ul class="body-text" style="margin:0 0 var(--s-4);padding-left:20px;">{ponto_partida_html}</ul>
+      <div class="alinhamento">{ponto_partida_alerta}</div>
     </div>
 
     <div class="leitura-block fade-up">
       <h3>Os sinais que se conectam</h3>
-      <p class="body-text">Cada marcador abaixo carrega uma leitura clínica e se conecta a sintomas relatados — peças do mesmo quadro funcional.</p>
+      <p class="body-text">{_t_disc("leitura_b2_body", perfil_disc)}</p>
       <table class="spin-table">
-        <thead><tr><th>Marcador</th><th>Leitura clínica</th></tr></thead>
+        <thead><tr><th>Marcador</th><th>Leitura clínica, implicação e necessidade de agir</th></tr></thead>
         <tbody>{rows_p}</tbody>
       </table>
-      <div class="alinhamento">Você enxerga esses pontos como peças do mesmo quadro?</div>
+      <div class="alinhamento">{_t_disc("leitura_b2_alinhamento", perfil_disc)}</div>
     </div>
 
     <div class="leitura-block fade-up">
       <h3>Para onde a tendência aponta</h3>
-      <p class="body-text">Sem ação clínica integrada, o cenário tende a <strong>menor previsibilidade e mais ajustes necessários</strong> ao longo do tempo.</p>
-      <div class="alinhamento">Olhar 6 meses adiante sem mudança te preocupa o suficiente para agir agora?</div>
+      <p class="body-text">{_t_disc("leitura_b3_body", perfil_disc)}</p>
+      <div class="alinhamento">{_t_disc("leitura_b3_alinhamento", perfil_disc)}</div>
     </div>
 
     <div class="leitura-block fade-up">
       <h3>Recomendação clínica</h3>
-      <p class="body-text">A diferença mora nos ajustes — o que muda na segunda, quarta, oitava semana conforme seu corpo responde. Por isso, a recomendação para o seu caso é <strong>acompanhamento médico estruturado</strong>, não orientação isolada.</p>
-      <div class="alinhamento">{primeiro}, você concorda que esse caminho exige acompanhamento e não apenas uma prescrição?</div>
+      <p class="body-text">{_t_disc("leitura_b4_body", perfil_disc)}</p>
+      <div class="alinhamento">{_t_disc("leitura_b4_alinhamento", perfil_disc, primeiro=primeiro)}</div>
     </div>
   </div>
 </section>
@@ -3657,28 +4355,22 @@ def render_inclusos():
 """
 
 
-def render_final_cta(paciente):
+def render_final_cta(paciente, perfil_disc="default"):
     primeiro = safe_html(paciente.get("nome", "Paciente").split()[0])
     return f"""
 <section id="final-cta" class="section final-cta">
   <div class="wrap">
     <div class="cta-frame fade-up">
-      <p class="cta-frame-text">O próximo passo é escolher se faz sentido iniciar agora um <strong>acompanhamento estruturado</strong>, com leitura clínica, equipe e ajustes ao longo do caminho.</p>
+      <p class="cta-frame-text">{_t_disc("cta_frame", perfil_disc)}</p>
     </div>
     <h2 style="text-align:center;">A recomendação clínica é começar de forma assistida</h2>
     <p style="max-width:780px;font-size:16px;color:var(--muted);text-align:center;margin:0 auto var(--s-7);">Se fizer sentido para você, o próximo passo é organizarmos juntos a sua linha de acompanhamento e colocarmos a equipe para caminhar contigo nos próximos 180 dias.</p>
     <div class="cta-decision">
       <div class="cta-card recommended fade-up">
         <div class="label">Recomendação clínica</div>
-        <h3>Começar assistido</h3>
-        <p class="desc">180 dias com diagnóstico, protocolo individualizado, equipe completa, ajustes baseados em resposta clínica e reavaliações trimestrais. {primeiro}, é o caminho mais previsível para o seu caso.</p>
+        <h3>{_t_disc("cta_recomendado_h3", perfil_disc)}</h3>
+        <p class="desc">{_t_disc("cta_recomendado_desc", perfil_disc, primeiro=primeiro)}</p>
         <span class="button">Quero iniciar o acompanhamento</span>
-      </div>
-      <div class="cta-card alternative fade-up">
-        <div class="label">Alternativa</div>
-        <h3>Adiar a decisão agora</h3>
-        <p class="desc">Prefiro decidir depois. Podemos revisitar quando fizer sentido — o quadro clínico continua sendo seu, e a recomendação fica registrada para retomarmos.</p>
-        <span class="button">Prefiro decidir depois</span>
       </div>
     </div>
     <div class="cta-signature">
@@ -3690,17 +4382,73 @@ def render_final_cta(paciente):
 """
 
 
+def render_questionnaire_appendix(questionario):
+    dados = (questionario or {}).get("pre-consulta", {}).get("dados", {}) if isinstance(questionario, dict) else {}
+    if not dados and isinstance(questionario, dict) and "dados" in questionario:
+        dados = questionario.get("dados", {})
+    label_map = {
+        "spin_s_tempoLuta": "Tempo convivendo com o problema",
+        "spin_s_tempoLutaDetalhe": "Contexto da dificuldade",
+        "spin_s_tentativas": "O que já tentou antes",
+        "spin_p_principalIncomodo": "Principal incômodo hoje",
+        "spin_p_desafios": "Principal desafio percebido",
+        "spin_i_impactoVida": "Impacto na vida",
+        "spin_i_cenario1ano": "Como se vê em 1 ano se nada mudar",
+        "spin_i_investimentoPerdido": "Percepção de investimento já perdido",
+        "spin_i_oportunidadesPerdidas": "Oportunidades perdidas percebidas",
+        "spin_n_vidaResolvida": "Como deseja estar com a vida resolvida",
+        "spin_n_interessePrograma": "Interesse no acompanhamento",
+    }
+    rows = []
+    for key in sorted(dados.keys()):
+        if str(key).startswith("draft") or key in {"draftSessionId", "updatedAt"}:
+            continue
+        value = dados.get(key)
+        if value in (None, "", [], {}):
+            continue
+        if isinstance(value, (list, tuple)):
+            value = "; ".join(str(v) for v in value if v not in (None, ""))
+        elif isinstance(value, dict):
+            value = json.dumps(value, ensure_ascii=False)
+        label = label_map.get(key) or re.sub(r"([a-z])([A-Z])", r"\1 \2", str(key)).replace("_", " ").strip().capitalize()
+        rows.append(
+            f'<div class="exam-row questionnaire-row">'
+            f'<div class="e-nome">{safe_html(label)}</div>'
+            f'<div class="e-valor">{safe_html(value)}</div>'
+            f'<div class="e-ref">Questionário pré-consulta</div>'
+            f'<div class="e-status">levantado</div></div>'
+        )
+    if not rows:
+        return ""
+    return f"""
+<section id="questionnaire-appendix" class="section technical-appendix">
+  <div class="wrap">
+    <h2>Apêndice técnico — questionário completo</h2>
+    <div class="appendix-controls">
+      <p class="lead">Registro de cobertura das respostas usadas como primeiro pilar da apresentação. A análise clínica cruza essas respostas com todos os exames disponíveis.</p>
+    </div>
+    <div class="exam-group fade-up open">
+      <div class="exam-group-header"><h4>Respostas pré-consulta levantadas</h4><div class="meta"><span>{len(rows)} respostas</span><span class="toggle">▾</span></div></div>
+      <div class="exam-group-body">{"".join(rows)}</div>
+    </div>
+  </div>
+</section>
+"""
+
+
 def render_technical_appendix(exames):
     by_g = {}
     for ex in exames:
-        gid = ex.get("grupo", "outros")
+        gid = ex.get("grupo", "outros") or "outros"
         by_g.setdefault(gid, []).append(ex)
 
     grupos_html = []
+    grupos_renderizados = set()
     for gid, gnome in GRUPOS_DEF:
         items = by_g.get(gid, [])
         if not items:
             continue
+        grupos_renderizados.add(gid)
         rows = []
         alterados = 0
         for ex in items:
@@ -3716,19 +4464,46 @@ def render_technical_appendix(exames):
                 f'<div class="e-status">{sev}</div></div>'
             )
         grupos_html.append(
-            f'<div class="exam-group fade-up">'
+            f'<div class="exam-group fade-up open">'
             f'<div class="exam-group-header"><h4>{safe_html(gnome)}</h4>'
             f'<div class="meta"><span>{alterados}/{len(items)} alterados</span>'
             f'<span class="toggle">▾</span></div></div>'
-            f'<div class="exam-group-body">{"".join(rows)}</div></div>'
+            f'<div class="exam-group-body"><div class="exam-table-head"><span>Exame</span><span>Valor</span><span>Referência</span><span>Status</span></div>{"".join(rows)}</div></div>'
         )
+    # Segurança de cobertura: qualquer grupo não mapeado também entra no apêndice.
+    for gid in sorted(set(by_g.keys()) - grupos_renderizados):
+        items = by_g.get(gid, [])
+        if not items:
+            continue
+        rows = []
+        alterados = 0
+        for ex in items:
+            sev = ex.get("status", "ok")
+            if sev in ("crit", "alert", "low"):
+                alterados += 1
+            rows.append(
+                f'<div class="exam-row" data-sev="{sev}">'
+                f'<div class="e-nome">{safe_html(ex["nome"])}</div>'
+                f'<div class="e-valor">{safe_html(ex["valor"])} '
+                f'<span class="e-unit">{safe_html(ex.get("unit", ""))}</span></div>'
+                f'<div class="e-ref">{safe_html(ex.get("ref", "—"))}</div>'
+                f'<div class="e-status">{sev}</div></div>'
+            )
+        grupos_html.append(
+            f'<div class="exam-group fade-up open">'
+            f'<div class="exam-group-header"><h4>{safe_html(gid.title())}</h4>'
+            f'<div class="meta"><span>{alterados}/{len(items)} alterados</span>'
+            f'<span class="toggle">▾</span></div></div>'
+            f'<div class="exam-group-body"><div class="exam-table-head"><span>Exame</span><span>Valor</span><span>Referência</span><span>Status</span></div>{"".join(rows)}</div></div>'
+        )
+
     return f"""
 <section id="technical-appendix" class="section technical-appendix">
   <div class="wrap">
     <h2>Apêndice técnico — painel completo</h2>
     <div class="appendix-controls">
-      <p class="lead">Painel laboratorial completo organizado por sistema. Disponível para argumentação médica detalhada e auditoria clínica. Clique no nome do grupo para expandir.</p>
-      <button class="appendix-toggle-all">Expandir todos</button>
+      <p class="lead">Painel laboratorial completo organizado por sistema. Disponível para argumentação médica detalhada e auditoria clínica. Os grupos já abrem por padrão para evitar falha de interação no visualizador.</p>
+      <button class="appendix-toggle-all">Recolher todos</button>
     </div>
     {"".join(grupos_html)}
   </div>
@@ -3739,7 +4514,191 @@ def render_technical_appendix(exames):
 # ---------------------------------------------------------------------------
 # Main render
 # ---------------------------------------------------------------------------
-def render_apresentacao_v10(paciente, questionario=None, exames=None, output_dir=None, versao_paciente=False):
+
+# ==========================================================================
+# DISC — Variações de copy por perfil do paciente (V2.10)
+# ==========================================================================
+DISC_TEXTOS = {
+    "hero_h1": {
+        "default": '{primeiro}, seus exames e seu questionário contam a mesma história: <span style="color:var(--gold-dark)">o problema não parece ser falta de esforço</span>, mas falta de acompanhamento integrado.',
+        "D": '{primeiro}, seus exames mostram exatamente onde está o problema. <span style="color:var(--gold-dark)">A decisão certa precisa ser objetiva</span> — vamos direto ao caminho mais previsível.',
+        "I": '{primeiro}, antes dos números, vamos olhar pra você. <span style="color:var(--gold-dark)">A boa notícia é que o problema não é falta de esforço seu</span> — só faltou alguém caminhar junto.',
+        "S": '{primeiro}, vamos olhar com calma para o seu caso. <span style="color:var(--gold-dark)">Seus exames mostram pontos que pedem cuidado contínuo</span> — sem pressa, mas com atenção planejada.',
+        "C": '{primeiro}, seu painel laboratorial e seu questionário convergem. <span style="color:var(--gold-dark)">Os dados sugerem a estratégia clínica mais previsível</span> para o seu perfil funcional.',
+    },
+    "diag_lead": {
+        "default": "Antes de mostrar todos os exames, este é o resumo clínico do seu caso — o que decide o plano.",
+        "D": "Resumo clínico direto. O que decide o plano em uma página.",
+        "I": "Antes dos detalhes, vamos olhar para o quadro do seu caso — o que importa entender juntos.",
+        "S": "Um retrato calmo do seu momento, antes de entrarmos nos detalhes.",
+        "C": "Síntese clínica do caso integrando questionário, exames e correlação funcional.",
+    },
+    "tese_clinica": {
+        "default": "Quando sintomas e marcadores apontam na mesma direção, o plano precisa ser <strong>acompanhado, medido e ajustado</strong>.",
+        "D": "Sinais simultâneos no quadro. <strong>Acompanhamento estruturado é a recomendação clínica direta</strong> — métricas claras, ajustes guiados por dados.",
+        "I": "Quando o que você sente e o que os exames mostram apontam pra mesma direção, fica claro que <strong>o cuidado precisa ser conjunto</strong> — você caminhando com a gente.",
+        "S": "Os sinais nos exames pedem <strong>leitura conjunta e acompanhamento contínuo</strong>. Não é urgência — é prevenção atenta, no seu ritmo.",
+        "C": "Biomarcadores e clínica convergem. A literatura e a experiência clínica recomendam <strong>acompanhamento estruturado com reavaliações periódicas</strong> baseadas em dados.",
+    },
+    "diag_recomendacao": {
+        "default": "Minha recomendação para o seu caso é <strong>acompanhamento estruturado</strong>. A previsibilidade do resultado depende dos ajustes que faremos juntos durante o processo.",
+        "D": "Recomendação direta: <strong>acompanhamento estruturado</strong>, com métricas trimestrais e ajustes baseados em resposta clínica. Resultado mais previsível para o seu perfil.",
+        "I": "Minha recomendação é <strong>caminharmos juntos</strong> nos próximos 180 dias. Você não vai estar sozinho — equipe completa, ajustes feitos com você, sem pular etapas.",
+        "S": "A recomendação é <strong>caminharmos com calma, em fases</strong>. Acompanhamento estruturado, equipe ao seu lado, mudanças graduais e planejadas.",
+        "C": "Recomendação clínica: <strong>acompanhamento estruturado</strong> em 180 dias com 4 reavaliações laboratoriais. Decisões guiadas por dados objetivos e evidências.",
+    },
+    "leitura_lead": {
+        "default": "Como seu quadro clínico se conecta — questionário, exames e o que isso significa para a estratégia de acompanhamento.",
+        "D": "Como o quadro se conecta. Quatro blocos diretos antes da recomendação.",
+        "I": "Vamos olhar juntos como tudo se conecta — o que você sente, o que os exames mostram, e o que faz sentido fazer.",
+        "S": "Vamos com calma pelo seu quadro: o que ele mostra e como podemos cuidar disso de forma planejada.",
+        "C": "Análise integrada do caso — quatro blocos correlacionando dados clínicos, biomarcadores e trajetória esperada.",
+    },
+    "leitura_b1_body": {
+        "default": "Questionário e exames formam o retrato funcional do seu momento. É a partir desse retrato — não de um protocolo padrão — que se constrói o plano.",
+        "D": "Questionário e exames = retrato funcional do momento. O plano sai daqui — sem protocolo de prateleira.",
+        "I": "Tudo o que você nos contou e tudo o que os exames mostram formam o seu retrato. É a partir dele — do seu, único — que vamos cuidar juntos.",
+        "S": "Seu questionário e seus exames juntos mostram onde você está hoje. É calmo, é claro — é o ponto de partida planejado.",
+        "C": "Integração de dados clínicos (questionário) e laboratoriais (exames) compõe o estado funcional atual. O plano deriva diretamente desse perfil individualizado.",
+    },
+    "leitura_b1_alinhamento": {
+        "default": "{primeiro}, esse resumo descreve bem o ciclo que você vem vivendo?",
+        "D": "{primeiro}, esse resumo descreve o seu caso?",
+        "I": "{primeiro}, esse resumo conta o ciclo que você vem vivendo? Faz sentido pra você?",
+        "S": "{primeiro}, esse retrato faz sentido com o que você está vivendo?",
+        "C": "{primeiro}, esse resumo está alinhado com a sua percepção do quadro?",
+    },
+    "leitura_b2_body": {
+        "default": "Cada marcador abaixo carrega uma leitura clínica e se conecta a sintomas relatados — peças do mesmo quadro funcional.",
+        "D": "Cada marcador conecta exame e sintoma. Peças do mesmo quadro — sem dispersão.",
+        "I": "Cada um desses marcadores conta uma parte da história — não são números soltos, são pistas do que você sente.",
+        "S": "Vamos com calma: cada marcador abaixo se relaciona com algo que você sente. Tudo conectado, sem complicar.",
+        "C": "Cada biomarcador apresenta correlação clínica documentada com sintomas funcionais — leitura sistêmica integrada.",
+    },
+    "leitura_b2_alinhamento": {
+        "default": "Você enxerga esses pontos como peças do mesmo quadro?",
+        "D": "Faz sentido tratar tudo junto, ou ainda enxerga separado?",
+        "I": "Você consegue ver como esses pontos conversam entre si?",
+        "S": "Faz sentido pra você esses pontos como parte de um mesmo conjunto?",
+        "C": "Os marcadores podem ser interpretados como peças de um mesmo quadro funcional. Concorda?",
+    },
+    "leitura_b3_body": {
+        "default": "Sem ação clínica integrada, o cenário tende a <strong>menor previsibilidade e mais ajustes necessários</strong> ao longo do tempo.",
+        "D": "Sem ação integrada: <strong>menor previsibilidade e mais ajustes ao longo do tempo</strong>. É a tendência fisiológica conhecida.",
+        "I": "Imaginando como você pode se sentir daqui a alguns meses sem mudar nada — o cenário tende a continuar igual ou se complicar um pouco.",
+        "S": "Sem ação, o quadro tende a se manter ou pedir mais cuidado lá na frente. Calmamente — mas vale considerar.",
+        "C": "Trajetória sem intervenção: <strong>redução de previsibilidade clínica e necessidade de ajustes mais complexos</strong> em horizonte de 6-12 meses.",
+    },
+    "leitura_b3_alinhamento": {
+        "default": "Olhar 6 meses adiante sem mudança te preocupa o suficiente para agir agora?",
+        "D": "Olhando 6 meses adiante sem mudança, vale agir agora?",
+        "I": "Imaginando os próximos 6 meses, isso te incomoda o suficiente pra começarmos juntos?",
+        "S": "Olhando alguns meses adiante, prefere agirmos com calma ou esperar mais?",
+        "C": "Considerando a trajetória esperada nos próximos 6 meses, justifica intervenção clínica antecipada?",
+    },
+    "leitura_b4_body": {
+        "default": "A diferença mora nos ajustes — o que muda na segunda, quarta, oitava semana conforme seu corpo responde. Por isso, a recomendação para o seu caso é <strong>acompanhamento médico estruturado</strong>, não orientação isolada.",
+        "D": "A diferença mora nos <strong>ajustes baseados em resposta clínica</strong>. Por isso a recomendação é acompanhamento — não prescrição avulsa.",
+        "I": "A diferença está nos ajustes feitos junto com você ao longo do caminho. Por isso minha recomendação é <strong>acompanhamento</strong> — pra você não se sentir sozinho na jornada.",
+        "S": "O segredo está nos pequenos ajustes feitos com calma ao longo das semanas. Por isso a recomendação é <strong>acompanhamento estruturado</strong>, em fases planejadas.",
+        "C": "Resultado clínico depende de ajustes iterativos baseados em resposta individual. Por isso a recomendação é <strong>acompanhamento estruturado</strong> com cadência definida.",
+    },
+    "leitura_b4_alinhamento": {
+        "default": "{primeiro}, você concorda que esse caminho exige acompanhamento e não apenas uma prescrição?",
+        "D": "{primeiro}, aceita que a recomendação é acompanhamento, não prescrição?",
+        "I": "{primeiro}, faz sentido pra você termos esse caminho juntos, com acompanhamento?",
+        "S": "{primeiro}, se sente confortável com essa ideia de acompanhamento gradual?",
+        "C": "{primeiro}, a recomendação clínica é acompanhamento estruturado — concorda com essa estratégia?",
+    },
+    "cta_frame": {
+        "default": "O próximo passo é escolher se faz sentido iniciar agora um <strong>acompanhamento estruturado</strong>, com leitura clínica, equipe e ajustes ao longo do caminho.",
+        "D": "Próximo passo objetivo: iniciar agora <strong>acompanhamento estruturado</strong> — leitura clínica, equipe, ajustes guiados por dados.",
+        "I": "O próximo passo é decidir se vamos <strong>caminhar juntos</strong> a partir de agora — você não vai estar sozinho na jornada.",
+        "S": "Sem pressa pra decidir. Quando fizer sentido, podemos começar com <strong>calma e em fases</strong>, com a equipe sempre por perto.",
+        "C": "Próximo passo informado: iniciar <strong>acompanhamento estruturado de 180 dias</strong> com 4 reavaliações laboratoriais e ajustes evidence-based.",
+    },
+    "cta_recomendado_h3": {
+        "default": "Começar assistido",
+        "D": "Iniciar acompanhamento agora",
+        "I": "Caminhar junto com a equipe",
+        "S": "Começar com calma, em fases",
+        "C": "Acompanhamento clínico estruturado",
+    },
+    "cta_recomendado_desc": {
+        "default": "180 dias com diagnóstico, protocolo individualizado, equipe completa, ajustes baseados em resposta clínica e reavaliações trimestrais. {primeiro}, é o caminho mais previsível para o seu caso.",
+        "D": "180 dias: diagnóstico, protocolo individualizado, equipe, ajustes guiados por dados, reavaliações trimestrais. {primeiro}, caminho mais previsível para o seu perfil.",
+        "I": "{primeiro}, vamos juntos por 180 dias — protocolo feito pra você, equipe acolhendo cada passo, ajustes feitos com cuidado conforme você responde. Você não estará sozinho.",
+        "S": "{primeiro}, 180 dias planejados em fases — diagnóstico, protocolo individualizado, equipe ao seu lado, ajustes graduais, reavaliações trimestrais. Sem pressa, com cuidado.",
+        "C": "{primeiro}, 180 dias com diagnóstico funcional, protocolo individualizado evidence-based, equipe multidisciplinar, ajustes guiados por resposta clínica e 4 reavaliações laboratoriais. Estratégia previsível e rastreável.",
+    },
+    "msg_whatsapp": {
+        "default": "{primeiro}, segue a sua apresentação clínica individual com os principais pontos da nossa consulta. Qualquer dúvida, estamos à disposição.\n\n— Equipe Instituto Vital Slim",
+        "D": "{primeiro}, segue a sua apresentação clínica. Caso queira avançar, podemos alinhar o próximo passo.\n\n— Equipe Instituto Vital Slim",
+        "I": "{primeiro}, que bom poder cuidar de você! Segue a apresentação com tudo o que conversamos hoje. Qualquer coisa, estamos por aqui — não fique sozinho.\n\n— Equipe Instituto Vital Slim",
+        "S": "{primeiro}, segue com calma a sua apresentação. Não há pressa para decidir — leia quando puder e qualquer dúvida, estamos por aqui.\n\n— Equipe Instituto Vital Slim",
+        "C": "{primeiro}, segue a apresentação clínica completa, com painel laboratorial e leitura integrada do caso. Disponível para esclarecer qualquer dado técnico.\n\n— Equipe Instituto Vital Slim",
+    },
+}
+
+
+def _detectar_perfil_disc(paciente, questionario):
+    """Detecta perfil DISC primário (D/I/S/C) do paciente.
+
+    Procura nos campos: paciente.disc, paciente.discPerfil, questionario.dados.disc,
+    questionario.dados.discPerfil, questionario.dados.perfilDisc.
+    Aceita formas: 'D', 'Dominante', 'Dominante / Influente' (usa primeiro).
+    Retorna 'default' se não detectar.
+    """
+    raw = ""
+    for source in (paciente, (questionario or {}).get("pre-consulta", {}).get("dados", {}),
+                   (questionario or {}).get("dados", {}) if isinstance(questionario, dict) else {}):
+        if not isinstance(source, dict):
+            continue
+        for key in ("discPerfil", "perfilDisc", "disc_perfil", "disc"):
+            if key in source and source[key]:
+                v = source[key]
+                # Pula se nao for string (ex: 'disc' eh dict com 20 respostas {q1, q2, ...})
+                if not isinstance(v, str):
+                    continue
+                raw = v.strip()
+                if raw:
+                    break
+        if raw:
+            break
+    if not raw:
+        return "default"
+    raw_upper = raw.upper()
+    # Direta
+    if raw_upper[0] in ("D", "I", "S", "C") and (len(raw_upper) == 1 or raw_upper[1] in (" ", "/", "-", ",", ":")):
+        return raw_upper[0]
+    # Por palavra-chave
+    mapa = {
+        "DOMINANT": "D", "DOMINANTE": "D",
+        "INFLU": "I", "INFLUEN": "I", "INFLUENT": "I",
+        "ESTAVEL": "S", "ESTÁVEL": "S", "STABLE": "S", "STEADY": "S",
+        "CONSCIENC": "C", "CAUTELOSO": "C", "CAUTIOUS": "C",
+        "ANALITIC": "C", "ANALÍTIC": "C", "CONFORM": "C",
+    }
+    for kw, letra in mapa.items():
+        if kw in raw_upper:
+            return letra
+    return "default"
+
+
+def _t_disc(chave, perfil, **kwargs):
+    """Lookup de texto DISC. Fallback pra 'default' se chave/perfil não existirem."""
+    bloco = DISC_TEXTOS.get(chave, {})
+    texto = bloco.get(perfil) or bloco.get("default", "")
+    if kwargs:
+        try:
+            texto = texto.format(**kwargs)
+        except (KeyError, IndexError):
+            pass
+    return texto
+
+
+
+def render_apresentacao_v10(paciente, questionario=None, exames=None, output_dir=None, versao_paciente=False, perfil_disc=None, bioimpedancia=None):
     """Renderiza a V2 da apresentação conforme briefing do Conselho Growth (2026-05-05)."""
     output_dir = Path(output_dir) if output_dir else Path("/root/cerebro-vital-slim/deliverables")
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -3756,6 +4715,11 @@ def render_apresentacao_v10(paciente, questionario=None, exames=None, output_dir
     # === V2.7 — Versão paciente vs versão interna ===
     body_class = "versao-paciente" if versao_paciente else "versao-interna"
     doctor_objections_html = "" if versao_paciente else render_doctor_objections()
+    # === V2.10 — Detectar perfil DISC (override manual ou auto do questionário) ===
+    if perfil_disc not in ("D", "I", "S", "C", "default", None):
+        perfil_disc = "default"
+    if not perfil_disc:
+        perfil_disc = _detectar_perfil_disc(paciente, questionario)
 
     # Telefone do paciente (se presente no questionário)
     paciente_tel = ""
@@ -3771,9 +4735,7 @@ def render_apresentacao_v10(paciente, questionario=None, exames=None, output_dir
     # Modal de envio (só na versão interna)
     modal_html = ""
     if not versao_paciente:
-        _msg_default = (f"{_primeiro}, segue a sua apresentação clínica individual com os "
-                        f"principais pontos da nossa consulta. Qualquer dúvida, estamos à disposição.\n\n"
-                        f"— Equipe Instituto Vital Slim")
+        _msg_default = _t_disc("msg_whatsapp", perfil_disc, primeiro=_primeiro)
         modal_html = (
             '<div class="send-modal" id="send-modal" hidden>'
             '<div class="send-modal-backdrop"></div>'
@@ -3829,18 +4791,20 @@ def render_apresentacao_v10(paciente, questionario=None, exames=None, output_dir
 {render_topbar(logo_b64, versao_paciente=versao_paciente)}
 {render_progress_nav(versao_paciente=versao_paciente)}
 <main>
-{render_hero(paciente_full, dra_b64=dra_b64)}
-{render_executive_diagnosis(paciente_full, levers)}
+{render_hero(paciente_full, dra_b64=dra_b64, perfil_disc=perfil_disc)}
+{render_executive_diagnosis(paciente_full, levers, perfil_disc=perfil_disc)}
 {render_patient_mirror(paciente_full, questionario)}
-{render_critical_levers(levers)}
-{render_spin_guided(paciente_full, questionario, levers)}
+{render_bioimpedancia(bioimpedancia, paciente_full)}
+{render_critical_levers(levers, perfil_disc=perfil_disc, questionario=questionario)}
+{render_spin_guided(paciente_full, questionario, levers, perfil_disc=perfil_disc)}
 {render_ivs_machine()}
 {render_proof_by_process()}
 {render_program_180()}
 {render_inclusos()}
 {render_decision_checklist(paciente_full)}
-{render_final_cta(paciente_full)}
+{render_final_cta(paciente_full, perfil_disc=perfil_disc)}
 {render_technical_appendix(exames_proc)}
+{render_questionnaire_appendix(questionario)}
 {doctor_objections_html}
 </main>
 {modal_html}

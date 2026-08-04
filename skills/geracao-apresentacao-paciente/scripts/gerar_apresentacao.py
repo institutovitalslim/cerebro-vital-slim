@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 """
-Script principal de geração de apresentação de paciente.
+COLETOR de dados de paciente (NÃO é mais o entrypoint da apresentação).
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  ENTRYPOINT ÚNICO DA APRESENTAÇÃO:  scripts/gerar_apresentacao_paciente.py   ║
+║                                                                              ║
+║  O main() deste arquivo DELEGAVA o render a um agente LLM por mensagem       ║
+║  (delegar_geracao_openclaw) — caminho que improvisava HTML fora do renderer  ║
+║  canônico e nunca chamava o validador bloqueante _v10_internal_validation.   ║
+║  Essa delegação está DESATIVADA: main() agora só coleta dados, avisa e sai   ║
+║  com código 2. Para gerar apresentação, use o entrypoint acima.              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
 Orquestra todo o fluxo:
 1. Busca pacientes novos no Quarkclinic para uma data/turno
@@ -22,6 +32,8 @@ import os
 import json
 import time
 import subprocess
+import re
+import html as html_lib
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 
@@ -528,6 +540,265 @@ def extrair_todos_exames_llm(lista_pdfs, paciente):
             print(f"  [LLM] {len(val['validados'])} validados / {len(val['revisao_manual'])} revisão manual",
                   file=sys.stderr)
 
+            # RC-25 operacional — auditoria determinística de tireoide.
+            # Padrão TSH suprimido + T3L/T4L altos muda decisão clínica e não pode depender só do LLM.
+            def _brfloat_local(x):
+                return float(str(x).replace('.', '').replace(',', '.'))
+            def _ensure_validado(nome, valor, unidade, rmin, rmax, grupo='tireoide', status='crit', nome_laudo=None):
+                if any(e.get('nome_canonico') == nome for e in val.get('validados', [])):
+                    return
+                val.setdefault('validados', []).append({
+                    'nome_canonico': nome,
+                    'nome_no_laudo': nome_laudo or nome,
+                    'valor_f': float(valor),
+                    'unidade': unidade,
+                    'unidade_canonica': unidade,
+                    'ref_min_final': rmin,
+                    'ref_max_final': rmax,
+                    'grupo': grupo,
+                    'status_final': status,
+                    'observacao': 'Inserido por auditoria determinística de eixo tireoidiano no texto do PDF.',
+                })
+                audit.setdefault('cross_check_warnings', []).append(f"Auditoria determinística inseriu {nome}={valor}{unidade}")
+            m_t3l = re.search(r'T3-\s*TRIIODOTIRONINA\s+LIVRE[^:]*:\s*([0-9.,]+)\s*pg/mL', texto_pdf, re.I)
+            if m_t3l:
+                _ensure_validado('T3 Livre', _brfloat_local(m_t3l.group(1)), 'pg/mL', 2.3, 4.2, nome_laudo='T3- TRIIODOTIRONINA LIVRE')
+            m_t4l = re.search(r'TIROXINA\s+LIVRE\s*-\s*T4\s+LIVRE[^:]*:\s*([0-9.,]+)\s*ng/dL', texto_pdf, re.I)
+            if m_t4l:
+                _ensure_validado('T4 Livre', _brfloat_local(m_t4l.group(1)), 'ng/dL', 0.89, 1.61, nome_laudo='TIROXINA LIVRE - T4 LIVRE')
+            m_tsh = re.search(r'TSH-HORM[ÔO]NIO\s+TIREOESTIMULANTE[^:]*:\s*([0-9.,]+)\s*microUI/mL', texto_pdf, re.I)
+            if m_tsh:
+                _ensure_validado('TSH', _brfloat_local(m_tsh.group(1)), 'microUI/mL', 0.27, 4.2, nome_laudo='TSH-HORMÔNIO TIREOESTIMULANTE')
+
+            # RC-25 operacional — auditoria determinística de metabolismo do ferro.
+            m_ferr = re.search(r'FERRITINA[\s\S]{0,220}?Resultado:\s*([0-9.,]+)\s*ng/mL', texto_pdf, re.I)
+            if m_ferr:
+                _ensure_validado('Ferritina', _brfloat_local(m_ferr.group(1)), 'ng/mL', 30, 400, grupo='vitaminas', nome_laudo='FERRITINA')
+            m_ferro = re.search(r'\bFERRO[.\s]*:\s*([0-9.,]+)\s*[µu]?g/dL', texto_pdf, re.I)
+            if m_ferro:
+                _ensure_validado('Ferro', _brfloat_local(m_ferro.group(1)), 'µg/dL', 65, 175, grupo='vitaminas', nome_laudo='FERRO')
+            m_sat = re.search(r'Indice\s+de\s+Saturacao\s+da\s+Transferrina[^0-9]{0,120}([0-9.,]+)\s*%', texto_pdf, re.I)
+            if m_sat:
+                _ensure_validado('Índice de Saturação da Transferrina', _brfloat_local(m_sat.group(1)), '%', 20, 50, grupo='vitaminas', nome_laudo='Índice de Saturação da Transferrina')
+            m_clf = re.search(r'Capacidade de Fixacao Latente do Ferro:\s*([0-9.,]+)\s*[µu]?g/dL', texto_pdf, re.I)
+            if m_clf:
+                _ensure_validado('Capacidade de Fixação Latente do Ferro', _brfloat_local(m_clf.group(1)), 'µg/dL', 120, 450, grupo='vitaminas', status='low', nome_laudo='Capacidade de Fixação Latente do Ferro')
+
+            # PCR-us: alguns laboratórios reportam mg/dL; canônica IVS usa mg/L. Converter x10 para não perder o exame.
+            m_pcr = re.search(r'PROTE[ÍI]NA\s+C\s+REATIVA\s+ULTRA\s+SENS[IÍ]VEL[^:]{0,120}:\s*([0-9.,]+)\s*(mg/dL|mg/L)', texto_pdf, re.I)
+            if not m_pcr:
+                m_pcr = re.search(r'Prote[ií]na\s+C\s+Reativa\s+Ultra\s+Sens[ií]vel[\s\S]{0,220}?([0-9.,]+)\s*(mg/dL|mg/L)', texto_pdf, re.I)
+            if m_pcr:
+                pcr = _brfloat_local(m_pcr.group(1))
+                unit = m_pcr.group(2).lower()
+                if unit == 'mg/dl':
+                    pcr = pcr * 10
+                _ensure_validado('PCR-us', pcr, 'mg/L', None, 3.0, grupo='inflamatorio', status='alert' if pcr > 3 else 'normal', nome_laudo='PROTEÍNA C REATIVA ULTRA SENSÍVEL')
+
+            # SHBG e cortisol às vezes aparecem em layout vertical e o LLM pode omitir.
+            m_shbg = re.search(r'SHBG\s*\(Globulina\s+Transportadora\s+de[\s\S]{0,120}?([0-9.,]+)\s*nmol/L', texto_pdf, re.I)
+            if m_shbg:
+                shbg = _brfloat_local(m_shbg.group(1))
+                _ensure_validado('SHBG', shbg, 'nmol/L', 27.1, 128.0, grupo='hormonal', status='low' if shbg < 27.1 else ('alert' if shbg > 128.0 else 'normal'), nome_laudo='SHBG')
+
+            m_cort = re.search(r'RESULTADO\s*([0-9.,]+)\s*µg/dL[\s\S]{0,80}?Cortisol', texto_pdf, re.I)
+            if not m_cort:
+                m_cort = re.search(r'R\s*E\s*S\s*U\s*LTA\s*D\s*O[\s\S]{0,50}?([0-9.,]+)\s*µg/dL[\s\S]{0,100}?Cortisol', texto_pdf, re.I)
+            if not m_cort:
+                m_cort = re.search(r'([0-9.,]+)\s*µg/dL\s*\n\s*Cortisol', texto_pdf, re.I)
+            if m_cort:
+                cort = _brfloat_local(m_cort.group(1))
+                _ensure_validado('Cortisol', cort, 'µg/dL', 6.2, 18.0, grupo='adrenal', status='normal' if 6.2 <= cort <= 18.0 else 'alert', nome_laudo='Cortisol')
+
+            # Minerais/eixo ósseo que às vezes o LLM omite quando estão normais — ainda precisam aparecer na cobertura total.
+            m_ca = re.search(r'C[ÁA]LCIO[^:]{0,80}:\s*([0-9.,]+)\s*mg/dL', texto_pdf, re.I)
+            if m_ca:
+                ca = _brfloat_local(m_ca.group(1))
+                _ensure_validado('Cálcio', ca, 'mg/dL', 8.6, 10.2, grupo='vitaminas', status='normal' if 8.6 <= ca <= 10.2 else 'alert', nome_laudo='CÁLCIO')
+            m_na = re.search(r'S[ÓO]DIO[^:]{0,80}:\s*([0-9.,]+)\s*mEq/L', texto_pdf, re.I)
+            if m_na:
+                na = _brfloat_local(m_na.group(1))
+                _ensure_validado('Sódio', na, 'mEq/L', 136, 145, grupo='vitaminas', status='normal' if 136 <= na <= 145 else 'alert', nome_laudo='SODIO')
+            m_pth = re.search(r'PARATORM[ÔO]NIO\s*\(PTH\)[^:]{0,80}:\s*([0-9.,]+)\s*pg/mL', texto_pdf, re.I)
+            if m_pth:
+                pth = _brfloat_local(m_pth.group(1))
+                _ensure_validado('PTH', pth, 'pg/mL', 18.5, 88.0, grupo='vitaminas', status='normal' if 18.5 <= pth <= 88.0 else 'alert', nome_laudo='PARATORMÔNIO (PTH)')
+
+            # Glicídico/anabólico omitidos às vezes pelo LLM.
+            m_ins = re.search(r'\bINSULINA\b[^:]{0,80}:\s*([0-9.,]+)\s*(?:microUI/mL|mU/mL)', texto_pdf, re.I)
+            if m_ins:
+                ins = _brfloat_local(m_ins.group(1))
+                _ensure_validado('Insulina', ins, 'mU/mL', 2.6, 24.9, grupo='glicidico', status='normal' if 2.6 <= ins <= 24.9 else 'alert', nome_laudo='INSULINA')
+            m_igf = re.search(r'SOMATOMEDINA\s+C\s*\(IGF-1\)[^:]{0,80}:\s*([0-9.,]+)\s*ng/mL', texto_pdf, re.I)
+            if m_igf:
+                igf = _brfloat_local(m_igf.group(1))
+                _ensure_validado('IGF-1', igf, 'ng/mL', 100, 303, grupo='adrenal', status='low' if igf < 100 else ('alert' if igf > 303 else 'normal'), nome_laudo='SOMATOMEDINA C (IGF-1)')
+            m_zinco = re.search(r'ZINCO\s+S[ÉE]RICO[^:]{0,80}:\s*([0-9.,]+)\s*(?:mcg/dL|µg/dL)', texto_pdf, re.I)
+            if m_zinco:
+                zinco = _brfloat_local(m_zinco.group(1))
+                _ensure_validado('Zinco', zinco, 'mcg/dL', 60, 120, grupo='vitaminas', status='alert' if zinco > 120 else ('low' if zinco < 60 else 'normal'), nome_laudo='ZINCO SÉRICO')
+            m_homo = re.search(r'HOMOCISTE[IÍ]NA[^:]{0,80}:\s*([0-9.,]+)\s*(?:micromol/L|µmol/L|umol/L)', texto_pdf, re.I)
+            if m_homo:
+                homo = _brfloat_local(m_homo.group(1))
+                _ensure_validado('Homocisteína', homo, 'micromol/L', 5, 10, grupo='inflamatorio', status='alert' if homo > 10 else ('low' if homo < 5 else 'normal'), nome_laudo='HOMOCISTEINA')
+
+            # RC-25 operacional — cobertura determinística hormonal/metabólica para laudos DASA/NAM.
+            # Alguns laudos posicionam o RESULTADO antes/depois do nome ou usam "Inferior a"; o LLM pode truncar
+            # páginas finais. Se o exame suportado está literalmente no PDF, ele não pode sumir da apresentação.
+            def _status_from_range(v, rmin=None, rmax=None):
+                if rmin is not None and v < rmin:
+                    return 'low'
+                if rmax is not None and v > rmax:
+                    return 'alert'
+                return 'normal'
+
+            def _num_after(label_pat, unit_pat, window=220):
+                m = re.search(label_pat + r'[\s\S]{0,' + str(window) + r'}?([0-9]+(?:[,.][0-9]+)?)\s*' + unit_pat, texto_pdf, re.I)
+                return _brfloat_local(m.group(1)) if m else None
+
+            def _num_before(label_pat, unit_pat, window=180):
+                m = re.search(r'([0-9]+(?:[,.][0-9]+)?)\s*' + unit_pat + r'[\s\S]{0,' + str(window) + r'}?' + label_pat, texto_pdf, re.I)
+                return _brfloat_local(m.group(1)) if m else None
+
+            def _inferior_after(label_pat, unit_pat, window=180):
+                m = re.search(label_pat + r'[\s\S]{0,' + str(window) + r'}?Inferior\s+a\s*([0-9]+(?:[,.][0-9]+)?)\s*' + unit_pat, texto_pdf, re.I)
+                return _brfloat_local(m.group(1)) if m else None
+
+            # Eixo tireoidiano em layout NAM sem prefixo "TSH-".
+            tsh_alt = _num_after(r'Horm[ôo]nio\s+Tireoestimulante', r'(?:µUI/mL|uUI/mL|microUI/mL)')
+            if tsh_alt is not None:
+                _ensure_validado('TSH', tsh_alt, 'uUI/mL', 0.27, 4.2, grupo='tireoide', status=_status_from_range(tsh_alt, 0.27, 4.2), nome_laudo='Hormônio Tireoestimulante')
+            t4_alt = _num_after(r'Tiroxina\s+Livre\s*\(T4\s+Livre\)', r'ng/dL')
+            if t4_alt is not None:
+                _ensure_validado('T4 Livre', t4_alt, 'ng/dL', 0.85, 1.86, grupo='tireoide', status=_status_from_range(t4_alt, 0.85, 1.86), nome_laudo='Tiroxina Livre (T4 Livre)')
+            t3_total = _num_after(r'T3\s*\(Triiodotironina\)', r'ng/dL')
+            if t3_total is not None:
+                _ensure_validado('T3 Total', t3_total, 'ng/dL', 60, 200, grupo='tireoide', status=_status_from_range(t3_total, 60, 200), nome_laudo='T3 (Triiodotironina)')
+
+            # Eixo hormonal feminino / androgênico.
+            estr = _inferior_after(r'Estradiol\b', r'pg/mL') or _num_after(r'Estradiol\b', r'pg/mL')
+            if estr is not None:
+                # Para mulher pós-menopausa, faixa conservadora IVS no refs_canonicas é até 32 pg/mL.
+                _ensure_validado('Estradiol', estr, 'pg/mL', None, 32 if sexo == 'F' and idade and idade >= 51 else 350, grupo='hormonal', status=_status_from_range(estr, None, 32 if sexo == 'F' and idade and idade >= 51 else 350), nome_laudo='Estradiol')
+            fsh = _num_after(r'FSH\s*-\s*Horm[ôo]nio\s+Fol[ií]culo', r'mUI/mL')
+            if fsh is not None:
+                rmin, rmax = (25.8, 134.8) if sexo == 'F' and idade and idade >= 51 else (3.5, 12.5)
+                _ensure_validado('FSH', fsh, 'mUI/mL', rmin, rmax, grupo='hormonal', status=_status_from_range(fsh, rmin, rmax), nome_laudo='FSH - Hormônio Folículo Estimulante')
+            lh = _num_after(r'Horm[ôo]nio\s+Luteinizante\s*\(LH\)', r'mUI/mL')
+            if lh is not None:
+                rmin, rmax = (7.7, 58.5) if sexo == 'F' and idade and idade >= 51 else (2.4, 12.6)
+                _ensure_validado('LH', lh, 'mUI/mL', rmin, rmax, grupo='hormonal', status=_status_from_range(lh, rmin, rmax), nome_laudo='Hormônio Luteinizante (LH)')
+            prol = _num_after(r'Prolactina\b', r'ng/mL')
+            if prol is not None:
+                rmin, rmax = (4.79, 23.3) if sexo == 'F' else (4.04, 15.2)
+                _ensure_validado('Prolactina', prol, 'ng/mL', rmin, rmax, grupo='hormonal', status=_status_from_range(prol, rmin, rmax), nome_laudo='Prolactina')
+            testo_total = _num_after(r'Testosterona\s+Total\b', r'ng/dL')
+            if testo_total is not None:
+                rmin, rmax = (5, 50) if sexo == 'F' and idade and idade >= 51 else ((15, 70) if sexo == 'F' else (400, 700))
+                _ensure_validado('Testosterona Total', testo_total, 'ng/dL', rmin, rmax, grupo='hormonal', status=_status_from_range(testo_total, rmin, rmax), nome_laudo='Testosterona Total')
+            testo_livre = _num_after(r'Testosterona\s+Livre\s+Calculada\b', r'ng/dL')
+            if testo_livre is not None:
+                _ensure_validado('Testosterona Livre', testo_livre, 'ng/dL', 0.19 if sexo == 'F' and idade and idade >= 51 else None, 2.06 if sexo == 'F' and idade and idade >= 51 else None, grupo='hormonal', status=_status_from_range(testo_livre, 0.19 if sexo == 'F' and idade and idade >= 51 else None, 2.06 if sexo == 'F' and idade and idade >= 51 else None), nome_laudo='Testosterona Livre Calculada')
+            testo_bio = _num_after(r'Testosterona\s+Biodispon[ií]vel\b', r'ng/dL')
+            if testo_bio is not None:
+                _ensure_validado('Testosterona Biodisponível', testo_bio, 'ng/dL', 4.4 if sexo == 'F' and idade and idade >= 51 else None, 48.0 if sexo == 'F' and idade and idade >= 51 else None, grupo='hormonal', status=_status_from_range(testo_bio, 4.4 if sexo == 'F' and idade and idade >= 51 else None, 48.0 if sexo == 'F' and idade and idade >= 51 else None), nome_laudo='Testosterona Biodisponível')
+            prog = (_num_before(r'\bProgesterona\b', r'ng/mL')
+                    or _inferior_after(r'\bProgesterona\b', r'ng/mL')
+                    or _num_after(r'\bProgesterona\b', r'ng/mL'))
+            if prog is not None:
+                if sexo == 'M':
+                    p_min, p_max = 0, 0.5
+                elif idade and idade >= 51:
+                    p_min, p_max = None, 0.7
+                else:
+                    p_min, p_max = 0.1, 25
+                _ensure_validado('Progesterona', prog, 'ng/mL', p_min, p_max, grupo='hormonal', status=_status_from_range(prog, p_min, p_max), nome_laudo='Progesterona')
+
+            # Outros marcadores de páginas finais frequentemente omitidos por truncamento do LLM.
+            cort = (_num_before(r'\bCortisol\b', r'µg/dL') or _num_after(r'\bCortisol\b', r'µg/dL'))
+            if cort is not None:
+                _ensure_validado('Cortisol', cort, 'µg/dL', 6.2, 18.0, grupo='adrenal', status=_status_from_range(cort, 6.2, 18.0), nome_laudo='Cortisol')
+            igf = _num_after(r'IGF-?1\s*\(Somatomedina\s+C\)', r'ng/mL')
+            if igf is not None:
+                _ensure_validado('IGF-1', igf, 'ng/mL', 78 if idade and idade >= 51 else 100, 258 if idade and idade >= 51 else 303, grupo='adrenal', status=_status_from_range(igf, 78 if idade and idade >= 51 else 100, 258 if idade and idade >= 51 else 303), nome_laudo='IGF-1 (Somatomedina C)')
+            ggt_alt = _num_after(r'Gama-Glutamil\s+Transferase', r'U/L')
+            if ggt_alt is not None:
+                ggt_max = 38 if sexo == 'F' else 60
+                _ensure_validado('GGT', ggt_alt, 'U/L', None, ggt_max, grupo='hepatico', status=_status_from_range(ggt_alt, None, ggt_max), nome_laudo='Gama-Glutamil Transferase')
+            ldh = _num_after(r'Desidrogenase\s+L[áa]ctica\s*-\s*LDH', r'UI/L')
+            if ldh is not None:
+                _ensure_validado('LDH', ldh, 'UI/L', 135, 214, grupo='inflamatorio', status=_status_from_range(ldh, 135, 214), nome_laudo='Desidrogenase Láctica - LDH')
+            fibr = _num_after(r'Fibrinog[êe]nio', r'mg/dL')
+            if fibr is not None:
+                _ensure_validado('Fibrinogênio', fibr, 'mg/dL', 200, 400, grupo='inflamatorio', status=_status_from_range(fibr, 200, 400), nome_laudo='Fibrinogênio')
+            apob = _num_after(r'Apolipoprote[íi]na\s+"B"', r'mg/dL')
+            if apob is not None:
+                _ensure_validado('ApoB', apob, 'mg/dL', None, 100, grupo='lipidico', status=_status_from_range(apob, None, 100), nome_laudo='Apolipoproteína B')
+            apoa = _num_after(r'Apolipoprote[íi]na\s+"A"', r'mg/dL')
+            if apoa is not None:
+                _ensure_validado('ApoA', apoa, 'mg/dL', 76 if sexo == 'F' else 79, 214 if sexo == 'F' else 169, grupo='lipidico', status=_status_from_range(apoa, 76 if sexo == 'F' else 79, 214 if sexo == 'F' else 169), nome_laudo='Apolipoproteína A')
+
+            # RC-25 operacional — cobertura determinística mínima: se um exame suportado aparece no PDF, não pode sumir.
+            cobertura_patterns = {
+                'Glicose': r'\bGLICOSE\b[^:]{0,80}:\s*[0-9]',
+                'HbA1c': r'(HEMOGLOBINA\s+GLICADA|HbA1c)[^:]{0,120}:\s*[0-9]',
+                'Insulina': r'\bINSULINA\b[^:]{0,120}:\s*[0-9]',
+                'Hemácias': r'HEM[ÁA]CIAS[^:]{0,80}:\s*[0-9]',
+                'Hemoglobina': r'\bHEMOGLOBINA\b[^:]{0,80}:\s*[0-9]',
+                'Hematócrito': r'HEMAT[ÓO]CRITO[^:]{0,80}:\s*[0-9]',
+                'Leucócitos': r'LEUC[ÓO]CITOS[^:]{0,80}:\s*[0-9]',
+                'Plaquetas': r'PLAQUETAS[^:]{0,80}:\s*[0-9]',
+                'Colesterol Total': r'COLESTEROL\s+TOTAL[^:]{0,80}:\s*[0-9]',
+                'HDL': r'\bHDL\b[^:]{0,80}:\s*[0-9]',
+                'LDL': r'\bLDL\b[^:]{0,80}:\s*[0-9]',
+                'Triglicérides': r'TRIGLIC[ÉE]RIDES[^:]{0,80}:\s*[0-9]',
+                'TGO': r'\b(TGO|AST)\b[^:]{0,80}:\s*[0-9]',
+                'TGP': r'\b(TGP|ALT)\b[^:]{0,80}:\s*[0-9]',
+                'GGT': r'\b(GGT|GAMA\s*GT)\b[^:]{0,80}:\s*[0-9]',
+                'Ureia': r'\bUREIA\b[^:]{0,80}:\s*[0-9]',
+                'Creatinina': r'CREATININA[^:]{0,80}:\s*[0-9]',
+                'Ácido Úrico': r'[ÁA]CIDO\s+[ÚU]RICO[^:]{0,80}:\s*[0-9]',
+                'TSH': r'TSH-HORM[ÔO]NIO\s+TIREOESTIMULANTE[^:]*:\s*[0-9]',
+                'T4 Livre': r'TIROXINA\s+LIVRE\s*-\s*T4\s+LIVRE[^:]*:\s*[0-9]',
+                'T3 Livre': r'T3-\s*TRIIODOTIRONINA\s+LIVRE[^:]*:\s*[0-9]',
+                'Testosterona Total': r'TESTOSTERONA\s+TOTAL[^:]{0,120}:\s*[0-9]',
+                'Testosterona Livre': r'TESTOSTERONA\s+LIVRE[^:]{0,120}:\s*[0-9]',
+                'Estradiol': r'ESTRADIOL[^:]{0,80}:\s*[0-9]',
+                'Progesterona': r'PROGESTERONA[^:]{0,80}:\s*[0-9]',
+                'FSH': r'\bFSH\b[^:]{0,80}:\s*[0-9]',
+                'LH': r'\bLH\b[^:]{0,80}:\s*[0-9]',
+                'Prolactina': r'PROLACTINA[^:]{0,80}:\s*[0-9]',
+                'SHBG': r'\bSHBG\b[^:]{0,120}:\s*[0-9]',
+                'PCR-us': r'PROTE[ÍI]NA\s+C\s+REATIVA\s+ULTRA\s+SENS[IÍ]VEL[^:]{0,120}:\s*[0-9]',
+                'Homocisteína': r'HOMOCISTE[ÍI]NA[^:]{0,80}:\s*[0-9]',
+                'Vitamina D': r'VITAMINA\s+D[^:]{0,120}:\s*[0-9]',
+                'Vitamina B12': r'VITAMINA\s+B12[^:]{0,120}:\s*[0-9]',
+                'Ácido Fólico': r'[ÁA]CIDO\s+F[ÓO]LICO[^:]{0,80}:\s*[0-9]',
+                'Zinco': r'ZINCO\s+S[ÉE]RICO[^:]{0,80}:\s*[0-9]',
+                'Ferro': r'\bFERRO[.\s]*:\s*[0-9]',
+                'Ferritina': r'FERRITINA[\s\S]{0,220}?Resultado:\s*[0-9]',
+                'Magnésio': r'MAGN[ÉE]SIO[^:]{0,80}:\s*[0-9]',
+                'Cálcio': r'C[ÁA]LCIO[^:]{0,80}:\s*[0-9]',
+                'Sódio': r'S[ÓO]DIO[^:]{0,80}:\s*[0-9]',
+                'Potássio': r'POT[ÁA]SSIO[^:]{0,80}:\s*[0-9]',
+                'PTH': r'\bPTH\b[^:]{0,120}:\s*[0-9]',
+                'IGF-1': r'\bIGF-?1\b[^:]{0,120}:\s*[0-9]',
+                'Índice de Saturação da Transferrina': r'Indice\s+de\s+Saturacao\s+da\s+Transferrina[^0-9]{0,120}[0-9]',
+                'Capacidade de Fixação Latente do Ferro': r'Capacidade de Fixacao Latente do Ferro:\s*[0-9]',
+            }
+            nomes_validados = {e.get('nome_canonico') for e in val.get('validados', [])}
+            nomes_revisao = {((r.get('exame') or {}).get('nome_canonico')) for r in val.get('revisao_manual', []) if isinstance(r, dict)}
+            detectados_pdf = sorted([nome for nome, pat in cobertura_patterns.items() if re.search(pat, texto_pdf, re.I)])
+            faltando_pdf = [nome for nome in detectados_pdf if nome not in nomes_validados]
+            if faltando_pdf:
+                audit.setdefault('cross_check_warnings', []).append({
+                    'tipo': 'cobertura_pdf_bloqueada',
+                    'detectados_pdf': detectados_pdf,
+                    'faltando_validados': faltando_pdf,
+                    'em_revisao_manual': sorted([n for n in faltando_pdf if n in nomes_revisao]),
+                })
+                raise RuntimeError('VALIDAÇÃO COBERTURA EXAMES BLOQUEOU: exames presentes no PDF não chegaram à estrutura validada: ' + ', '.join(faltando_pdf))
+
             # Acumula auditoria
             audit["pdfs_processados"].append({
                 "nome": pdf_nome,
@@ -871,11 +1142,238 @@ def _flatten_exames_v9(exames_parsed):
                 "unit": ex.get("unidade", ""),
                 "ref": ex.get("referencia", "—"),
                 "status": ex.get("status", "normal"),
+                "grupo": ex.get("grupo") or grupo.get("id", ""),
             })
     return flat
 
 
-def gerar_html_apresentacao(paciente, exames_parsed, questionarios):
+def _valor_float_exame(ex):
+    if not ex:
+        return None
+    if ex.get("valor_f") is not None:
+        try:
+            return float(ex.get("valor_f"))
+        except Exception:
+            pass
+    raw = str(ex.get("valor", "")).strip()
+    m = re.search(r"-?\d+(?:[\.,]\d+)?", raw)
+    if not m:
+        return None
+    try:
+        return float(m.group(0).replace(".", "").replace(",", "."))
+    except Exception:
+        return None
+
+
+def _ref_max_exame(ex):
+    ref = str((ex or {}).get("referencia", "")).replace(",", ".")
+    m = re.search(r"(?:a|até|<=|≤|<)\s*(-?\d+(?:\.\d+)?)", ref, re.I)
+    if m:
+        return float(m.group(1))
+    nums = re.findall(r"-?\d+(?:\.\d+)?", ref)
+    if len(nums) >= 2:
+        return float(nums[-1])
+    return None
+
+
+def _v10_internal_validation(paciente, exames_parsed, questionarios, html_path, bioimpedancia=None,
+                             fase="completa"):
+    """Validação interna pré-envio. Falha aqui BLOQUEIA envio ao Telegram.
+
+    Regra de gestão: a V10 cruza dois pilares — questionário + todos os exames
+    disponíveis (sangue ou não). A validação confirma cobertura da estrutura antes
+    do envio e bloqueia omissões críticas ou inconsistências de leitura.
+
+    fase (gates CONDICIONAIS — usado pelo entrypoint gerar_apresentacao_paciente.py):
+      "completa"    → todos os gates (default; compatível com as chamadas antigas).
+      "preconsulta" → T0/D-5: bioimpedância e antropometria ainda NÃO foram
+                      coletadas, então os 13 marcadores de bioimpedância não se
+                      aplicam. Todos os demais gates continuam valendo (exames,
+                      questionário, padrões clínicos críticos, copy neutra) e
+                      entra um gate novo: o HTML PRECISA exibir o estado
+                      "a coletar na consulta" (id="bioimpedancia-pendente"),
+                      para não existir saída silenciosamente incompleta.
+    """
+    fase = str(fase or "completa").strip().lower()
+    if fase not in ("completa", "preconsulta"):
+        raise ValueError(f"fase de validação inválida: {fase!r} (use 'completa' ou 'preconsulta')")
+    gates_aplicados = [
+        "copy_neutra", "eixo_tireoidiano", "sobrecarga_ferro",
+        "exames_no_html", "questionario_cobertura",
+    ]
+    gates_ignorados = []
+    erros = []
+    flat = []
+    for grupo in (exames_parsed or {}).get("grupos", []):
+        for ex in grupo.get("exames", []):
+            item = dict(ex)
+            item.setdefault("grupo", grupo.get("id", ""))
+            flat.append(item)
+    by_name = {e.get("nome"): e for e in flat if e.get("nome")}
+    html_txt = ""
+    try:
+        with open(html_path, encoding="utf-8", errors="ignore") as fh:
+            html_txt = fh.read()
+    except Exception as e:
+        erros.append(f"HTML não pôde ser lido para validação: {e}")
+    _visible_txt = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>|<!--[\s\S]*?-->", " ", html_txt, flags=re.I)
+    _visible_txt = re.sub(r"<[^>]+>", " ", _visible_txt)
+    html_plain = html_lib.unescape(re.sub(r"\s+", " ", _visible_txt))
+    if re.search(r"\bSPIN\b|spin[_-]", html_plain, re.I):
+        erros.append("Apresentação contém referência visível a SPIN selling; substituir por linguagem clínica neutra.")
+    if "Decisão:" in html_plain:
+        erros.append("Apresentação contém bloco 'Decisão:'; usar 'Risco no seu caso' cruzado com questionário.")
+
+    # 1) Eixo tireoidiano: TSH suprimido + T3L/T4L altos nunca pode ser omitido.
+    tsh, t3l, t4l = by_name.get("TSH"), by_name.get("T3 Livre"), by_name.get("T4 Livre")
+    vtsh, vt3l, vt4l = _valor_float_exame(tsh), _valor_float_exame(t3l), _valor_float_exame(t4l)
+    t3_max, t4_max = _ref_max_exame(t3l) or 4.4, _ref_max_exame(t4l) or 1.86
+    padrao_tireotox = (vtsh is not None and vtsh <= 0.10 and ((vt3l is not None and vt3l > t3_max) or (vt4l is not None and vt4l > t4_max)))
+    if padrao_tireotox:
+        for nome in ("TSH", "T3 Livre", "T4 Livre"):
+            ex = by_name.get(nome)
+            if not ex:
+                erros.append(f"Eixo tireoidiano crítico: {nome} ausente da estrutura de exames.")
+            elif ex.get("status") != "crit":
+                erros.append(f"Eixo tireoidiano crítico: {nome} deveria estar como crit, veio {ex.get('status')}.")
+            if nome not in html_txt:
+                erros.append(f"Eixo tireoidiano crítico: {nome} ausente do HTML final.")
+        if not re.search(r"hipertireoidismo|tireotoxicose", html_txt, re.I):
+            erros.append("Eixo tireoidiano crítico presente, mas HTML não cita hipertireoidismo/tireotoxicose.")
+
+    # 2) Metabolismo do ferro: ferritina muito alta + ferro/saturação altos nunca pode ser tratado como deficiência.
+    ferr, ferro, sat = by_name.get("Ferritina"), by_name.get("Ferro"), by_name.get("Índice de Saturação da Transferrina")
+    vferr, vferro, vsat = _valor_float_exame(ferr), _valor_float_exame(ferro), _valor_float_exame(sat)
+    ferro_max = _ref_max_exame(ferro) or 175
+    padrao_sobrecarga = (vferr is not None and vferr >= 500 and ((vferro is not None and vferro > ferro_max) or (vsat is not None and vsat > 50)))
+    if padrao_sobrecarga:
+        for nome in ("Ferritina", "Ferro"):
+            if nome not in by_name:
+                erros.append(f"Sobrecarga de ferro: {nome} ausente da estrutura de exames.")
+            if nome not in html_txt:
+                erros.append(f"Sobrecarga de ferro: {nome} ausente do HTML final.")
+        if not re.search(r"sobrecarga de ferro|hemocromatose", html_txt, re.I):
+            erros.append("Sobrecarga de ferro presente, mas HTML não cita sobrecarga de ferro/hemocromatose.")
+        html_sem_negacao = re.sub(r"não\s+deve\s+ser\s+lida\s+como\s+['\"]?boa\s+reserva['\"]?", "", html_txt, flags=re.I)
+        if re.search(r"queda capilar|reserva de ferro do organismo|(?<!não deve ser lida como )boa reserva", html_sem_negacao, re.I):
+            erros.append("Sobrecarga de ferro presente, mas HTML contém copy incompatível de deficiência/reserva de ferro.")
+
+    # 3) Todo exame validado precisa aparecer no HTML final — não só os críticos.
+    for ex in flat:
+        nome = ex.get("nome")
+        if nome and nome not in html_txt:
+            erros.append(f"Exame validado ausente do HTML final: {nome}")
+
+    # 4) Exames não-sangue: se bioimpedância existir, os principais marcadores precisam aparecer.
+    #    GATE CONDICIONAL POR FASE: em pré-consulta (T0) a bioimpedância só é medida
+    #    no dia da consulta — cobrar os 13 marcadores aqui reprovaria uma saída correta.
+    if fase == "preconsulta":
+        gates_ignorados.append("bioimpedancia_marcadores(fase=preconsulta)")
+        if bioimpedancia:
+            erros.append(
+                "Fase pré-consulta recebeu bioimpedância — use --modo completa/--completar "
+                "para gerar a versão com composição corporal."
+            )
+    elif not bioimpedancia:
+        gates_ignorados.append("bioimpedancia_marcadores(sem dados)")
+    if fase == "completa" and bioimpedancia:
+        gates_aplicados.append("bioimpedancia_marcadores")
+        bio_checks = []
+        for path in [
+            ("peso",), ("imc",), ("tmb",),
+            ("gordura", "massa"), ("gordura", "pct"),
+            ("massa", "magra_kg"), ("massa", "muscular_kg"), ("massa", "razao_musc_gord"),
+            ("hidratacao", "agua_total"), ("agua_celular", "intra"), ("agua_celular", "extra"),
+            ("celular", "angulo_fase"), ("celular", "idade_celular"),
+        ]:
+            cur = bioimpedancia
+            for k in path:
+                cur = cur.get(k, {}) if isinstance(cur, dict) else None
+            if cur not in (None, "", {}, []):
+                bio_checks.append((".".join(path), str(cur)))
+        for label, value in bio_checks:
+            if value not in html_txt and value.replace(".", ",") not in html_txt:
+                erros.append(f"Bioimpedância: marcador {label}={value} ausente do HTML final.")
+
+    # 5) Questionário: fonte precisa estar carregada e campos essenciais precisam ser usados corretamente.
+    pre = (questionarios or {}).get("pre-consulta") or {}
+    dados_q = pre.get("dados", {})
+    if not pre.get("encontrado") and not dados_q:
+        erros.append("Questionário: pré-consulta não encontrada/carregada.")
+    non_empty_q = {k: v for k, v in dados_q.items() if v not in (None, "", [], {}) and not str(k).startswith("draft")}
+    if len(non_empty_q) < 20:
+        erros.append(f"Questionário: cobertura insuficiente de respostas não vazias ({len(non_empty_q)}).")
+    required_q = [
+        "spin_p_principalIncomodo", "spin_s_tempoLuta", "spin_s_tentativas",
+        "spin_p_desafios", "spin_i_impactoVida", "spin_i_cenario1ano",
+        "spin_n_vidaResolvida", "nivelEnergia", "qualidadeSono", "horasSono",
+        "medicamentosAtuais", "doencasCronicas", "atividadeFisica", "consumoAgua",
+        "pesoAtual", "altura", "alimentacaoFimSemana", "cafeDaManha", "almoco", "jantar",
+    ]
+    for key in required_q:
+        if key in dados_q and dados_q.get(key) in (None, "", [], {}):
+            erros.append(f"Questionário: campo essencial vazio — {key}.")
+    # Todas as respostas não vazias precisam estar levantadas no HTML interno/auditoria.
+    # A narrativa principal continua focada nos problemas; a cobertura total fica no apêndice técnico.
+    def _q_value_to_text(v):
+        if isinstance(v, (list, tuple)):
+            return "; ".join(str(x) for x in v if x not in (None, ""))
+        if isinstance(v, dict):
+            return json.dumps(v, ensure_ascii=False)
+        return str(v)
+    q_missing = []
+    for key, val in non_empty_q.items():
+        if key in {"draftSessionId", "updatedAt"}:
+            continue
+        txt = _q_value_to_text(val).strip()
+        if not txt:
+            continue
+        variants = {txt, txt.replace(".", ","), re.sub(r"\s+", " ", txt)}
+        if not any(v and v in html_plain for v in variants):
+            q_missing.append(key)
+    if q_missing:
+        erros.append("Questionário: respostas não apareceram no HTML interno/auditoria — " + ", ".join(q_missing[:20]) + ("..." if len(q_missing) > 20 else ""))
+
+    # 6) GATE DE FASE — pré-consulta precisa DECLARAR visualmente o que ainda falta.
+    #    Sem este bloco a apresentação sairia sem composição corporal e sem dizer
+    #    que ela está pendente: exatamente a "saída meio certa" que queremos proibir.
+    if fase == "preconsulta":
+        gates_aplicados.append("marcador_fase_preconsulta")
+        if 'id="bioimpedancia-pendente"' not in html_txt:
+            erros.append(
+                "Fase pré-consulta: HTML não exibe o estado 'a coletar na consulta' "
+                "(bloco id=\"bioimpedancia-pendente\" ausente)."
+            )
+
+    status = "blocked" if erros else "passed"
+    log_dir = os.path.join(SKILL_DIR, "state", "validacao_v10")
+    os.makedirs(log_dir, exist_ok=True)
+    slug = re.sub(r"[^a-z0-9-]+", "-", str(paciente.get("nome", "paciente")).lower()).strip("-")
+    log_path = os.path.join(log_dir, f"{slug}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+    with open(log_path, "w", encoding="utf-8") as fh:
+        json.dump({
+            "status": status,
+            "fase": fase,
+            "paciente": paciente.get("nome"),
+            "html_path": html_path,
+            "gates_aplicados": gates_aplicados,
+            "gates_ignorados": gates_ignorados,
+            "erros": erros,
+            "checks": {
+                "padrao_tireotox": padrao_tireotox,
+                "padrao_sobrecarga_ferro": padrao_sobrecarga,
+                "criticos": [e.get("nome") for e in flat if e.get("status") == "crit"],
+            },
+        }, fh, ensure_ascii=False, indent=2)
+    if erros:
+        raise RuntimeError(
+            f"VALIDAÇÃO V10 [fase={fase}] BLOQUEOU ENVIO: " + " | ".join(erros) + f" | log={log_path}"
+        )
+    print(f"  [VALIDAÇÃO V10] OK (fase={fase}, gates={len(gates_aplicados)}) — {log_path}", file=sys.stderr)
+    return True
+
+
+def gerar_html_apresentacao(paciente, exames_parsed, questionarios, bioimpedancia=None):
     """
     Gera o arquivo HTML da apresentação do paciente — agora via v9 renderer.
     """
@@ -907,15 +1405,21 @@ def gerar_html_apresentacao(paciente, exames_parsed, questionarios):
         paciente_v9, questionarios or {}, exames_v9,
         output_dir=DELIVERABLES_DIR,
         versao_paciente=False,
+        bioimpedancia=bioimpedancia,
     )
     output_path = str(output_path)
     output_path_paciente = render_apresentacao_v10(
         paciente_v9, questionarios or {}, exames_v9,
         output_dir=DELIVERABLES_DIR,
         versao_paciente=True,
+        bioimpedancia=bioimpedancia,
     )
     output_path_paciente = str(output_path_paciente)
     print(f'  [V2.7] Versao paciente: {output_path_paciente}', file=sys.stderr)
+
+    # RC-25 operacional: validação interna obrigatória antes de qualquer envio.
+    # Se falhar, levanta exceção e BLOQUEIA RC-06 para impedir versão errada no tópico Pacientes.
+    _v10_internal_validation(paciente_v9, exames_parsed, questionarios, output_path, bioimpedancia=bioimpedancia)
 
     # REGRA CANONICA RC-06: envio automatico para topico Pacientes (versao interna)
     try:
@@ -1012,6 +1516,13 @@ _v10_mod = _ilu.module_from_spec(_v10_spec)
 _v10_spec.loader.exec_module(_v10_mod)
 render_apresentacao_v10 = _v10_mod.render_apresentacao_v10
 
+# Extrator de bioimpedancia via gpt-4o vision (PDF dashboard -> dict structured)
+_bio_spec = _ilu.spec_from_file_location("bio_extract", os.path.join(SCRIPTS_DIR, "extrair_bioimpedancia_llm.py"))
+_bio_mod = _ilu.module_from_spec(_bio_spec)
+_bio_spec.loader.exec_module(_bio_mod)
+extrair_bioimpedancia_drive = _bio_mod.extrair_bioimpedancia_drive
+detectar_pdf_bioimpedancia = _bio_mod.detectar_pdf_bioimpedancia
+
 # Pipeline LLM + Validador (substitui regex parser frágil)
 from extrair_exames_llm import extrair_exames_via_llm
 from validador_exames import validar_exames
@@ -1030,10 +1541,14 @@ OPENCLAW_SESSION_ID = "782d6df3-83de-4c50-ac79-2aef5d55480d"
 DELIVERABLES_URL_BASE = "https://vps.institutovitalslim.com.br/deliverables"
 
 
-def delegar_geracao_openclaw(paciente, exames_parsed, questionarios, dados_path, faltantes):
-    """
-    Envia mensagem ao OpenClaw agent (topic 4) para gerar apresentação HTML
-    usando as skills design-impeccable e stitch-design. Retorna True se enviado com sucesso.
+def _delegar_geracao_openclaw_LEGACY_DESATIVADO(paciente, exames_parsed, questionarios, dados_path, faltantes):
+    """DESATIVADO — mantido apenas como registro histórico do caminho que improvisava.
+
+    Este era o bypass: em vez de renderizar, mandava uma MENSAGEM pedindo a um
+    agente LLM que "gerasse o UI completo da apresentação". O agente então escrevia
+    script próprio e fazia cirurgia sobre o HTML de outra paciente — sem renderer
+    canônico e sem passar pelo validador bloqueante.
+    Nada chama mais esta função. Use gerar_apresentacao_paciente.py.
     """
     nome = paciente.get("nome", "Paciente")
     idade = calcular_idade(paciente.get("dataNascimento"))
@@ -1096,7 +1611,39 @@ Novo paciente para consulta detectado no Quarkclinic:
         return False
 
 
-def salvar_dados_paciente(paciente, exames_drive, exames_parsed, questionarios, data_str, turno):
+def delegar_geracao_openclaw(paciente, exames_parsed, questionarios, dados_path, faltantes):
+    """BYPASS PROIBIDO — não delega mais o render a agente LLM.
+
+    Sempre retorna False e imprime aviso fatal apontando o entrypoint correto.
+    Motivo (incidente real): o render delegado por mensagem produziu apresentação
+    com hero sem foto da Dra, sem imagem do laudo de bioimpedância e com copy de
+    decisão do perfil DISC de OUTRA paciente — porque o validador bloqueante
+    (_v10_internal_validation) nunca foi chamado nesse caminho.
+    """
+    nome = paciente.get("nome", "Paciente")
+    entrypoint = os.path.join(SCRIPTS_DIR, "gerar_apresentacao_paciente.py")
+    aviso = "\n".join([
+        "",
+        "=" * 78,
+        "[FATAL] DELEGAÇÃO DO RENDER A AGENTE LLM ESTÁ DESATIVADA.",
+        f"  Paciente: {nome}",
+        "  Motivo:   render delegado por mensagem improvisa HTML fora do renderer",
+        "            canônico e NÃO passa pelo validador bloqueante.",
+        "",
+        "  CAMINHO CORRETO — entrypoint único, determinístico, com gate:",
+        f"    python3 {entrypoint} \\",
+        f'        --paciente "{nome}" --modo preconsulta --sexo <F|M> \\',
+        "        --questionario <questionario.json> --exames-pdfs <exames_pdfs.json>",
+        "",
+        f"  Dados já coletados por este script: {dados_path}",
+        "=" * 78,
+        "",
+    ])
+    print(aviso, file=sys.stderr)
+    return False
+
+
+def salvar_dados_paciente(paciente, exames_drive, exames_parsed, questionarios, data_str, turno, bioimpedancia=None):
     """
     Salva todos os dados coletados em JSON.
     Deduplicacao por hash: se ja existir arquivo do mesmo paciente no mesmo dia
@@ -1115,6 +1662,7 @@ def salvar_dados_paciente(paciente, exames_drive, exames_parsed, questionarios, 
         "exames_drive": exames_drive,
         "exames_analisados": exames_parsed,
         "questionarios": questionarios,
+        "bioimpedancia": bioimpedancia,
     }
 
     conteudo_hash = hashlib.md5(
@@ -1187,6 +1735,21 @@ def main():
         exames_drive = run_script("buscar_exames_drive.py", nome)
         tem_exames = exames_drive and exames_drive.get("encontrado") and exames_drive.get("total_pdfs", 0) > 0
 
+        # Detectar e extrair bioimpedancia (PDF separado, dashboard visual via vision)
+        bioimpedancia_data = None
+        if tem_exames:
+            try:
+                pdf_bio = detectar_pdf_bioimpedancia(exames_drive.get("pdfs", []))
+                if pdf_bio:
+                    print(f"  📊 Bioimpedância detectada: {pdf_bio.get('nome')} — extraindo via gpt-4o...")
+                    bioimpedancia_data = extrair_bioimpedancia_drive(
+                        pdf_bio["id"],
+                        {"sexo": paciente.get("sexo", ""), "idade": paciente.get("idade", "")},
+                    )
+                    print(f"  ✅ Bioimpedância: peso={bioimpedancia_data.get('peso')} IMC={bioimpedancia_data.get('imc')} %gord={bioimpedancia_data.get('gordura',{}).get('pct')}")
+            except Exception as _e_bio:
+                print(f"  ⚠️ Falha ao extrair bioimpedância (segue sem): {_e_bio}")
+
         # Extrai e analisa os PDFs de exames
         exames_parsed = None
         if tem_exames:
@@ -1231,7 +1794,8 @@ def main():
         else:
             # Tem dados suficientes — salva JSON e delega ao OpenClaw
             dados_path = salvar_dados_paciente(
-                paciente, exames_drive, exames_parsed, questionarios, data_str, turno
+                paciente, exames_drive, exames_parsed, questionarios, data_str, turno,
+                bioimpedancia=bioimpedancia_data,
             )
             print(f"  📁 Dados salvos: {dados_path}")
 
@@ -1241,7 +1805,7 @@ def main():
 
             relatorio.append({
                 "paciente": nome,
-                "status": "delegado" if delegado else "dados_coletados",
+                "status": "delegado" if delegado else "render_pendente_entrypoint",
                 "faltantes": faltantes,
                 "dados_path": dados_path,
                 "total_exames": exames_parsed.get("stats", {}).get("total", 0) if exames_parsed else 0,
@@ -1251,7 +1815,7 @@ def main():
     print("\n=== RELATÓRIO FINAL ===")
     incompletos = [r for r in relatorio if r["status"] == "incompleto"]
     delegados = [r for r in relatorio if r["status"] == "delegado"]
-    coletados = [r for r in relatorio if r["status"] == "dados_coletados"]
+    coletados = [r for r in relatorio if r["status"] == "render_pendente_entrypoint"]
 
     if incompletos:
         print(f"\n⚠️ {len(incompletos)} sem dados suficientes:")
@@ -1265,7 +1829,7 @@ def main():
             print(f"  - {r['paciente']}: {r['dados_path']}{parcial}")
 
     if coletados:
-        print(f"\n📁 {len(coletados)} com dados coletados (openclaw offline):")
+        print(f"\n📁 {len(coletados)} com dados coletados — RENDER NÃO FOI FEITO por este script:")
         for r in coletados:
             print(f"  - {r['paciente']}: {r['dados_path']}")
 
@@ -1276,6 +1840,19 @@ def main():
         json.dump(relatorio, f, indent=2, ensure_ascii=False)
 
     print(f"\nRelatório salvo em: {relatorio_path}")
+
+    # Este script é COLETOR de dados. O render/entrega tem entrypoint próprio,
+    # determinístico e com gate bloqueante. Sair 0 aqui daria a falsa impressão
+    # de que a apresentação foi gerada.
+    if coletados:
+        entrypoint = os.path.join(SCRIPTS_DIR, "gerar_apresentacao_paciente.py")
+        print("\n" + "=" * 78, file=sys.stderr)
+        print("[FATAL] Nenhuma apresentação foi renderizada por este script.", file=sys.stderr)
+        print("        Este caminho só COLETA dados. Para gerar a apresentação use:", file=sys.stderr)
+        print(f"          python3 {entrypoint} --paciente \"<Nome>\" --modo preconsulta \\", file=sys.stderr)
+        print("              --sexo <F|M> --questionario <q.json> --exames-pdfs <pdfs.json>", file=sys.stderr)
+        print("=" * 78 + "\n", file=sys.stderr)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

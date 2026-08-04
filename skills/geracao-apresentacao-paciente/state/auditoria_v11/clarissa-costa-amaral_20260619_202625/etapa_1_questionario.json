@@ -1,0 +1,191 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Clarissa Costa Amaral",
+    "sexo": "F",
+    "idade": 38,
+    "imc_atual": 26.7,
+    "imc_objetivo": 22.4,
+    "profissao": "Engenheira Química",
+    "como_conheceu": "Instagram"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Dificuldade de perda de peso pós-gestação com acúmulo abdominal",
+      "intensidade": 5,
+      "contexto": "Desde o parto em 2021 não consegue recuperar composição corporal; relata barriga como principal incômodo estético",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Compulsão alimentar noturna por doces",
+      "intensidade": 4,
+      "contexto": "Consumo de doces mais intenso à noite; doce de sobremesa no almoço; jantar restrito a pão; padrão sugestivo de desregulação glicêmica e/ou emocional",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Nível de energia extremamente reduzido",
+      "intensidade": 5,
+      "contexto": "Nível de energia autorreferido 2/10; cansaço diurno presente; sono de baixa qualidade (3/10) com apenas 6 horas",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Sedentarismo",
+      "intensidade": 4,
+      "contexto": "Refere não praticar atividade física atualmente; menciona bicicleta como modalidade de interesse mas sem frequência ativa",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Celulite e flacidez em membros inferiores",
+      "intensidade": 3,
+      "contexto": "Queixa estético-funcional relatada como incômodo principal junto à adiposidade abdominal",
+      "categoria": "estetico_funcional"
+    },
+    {
+      "queixa": "Baixa autoestima com impacto no relacionamento conjugal",
+      "intensidade": 4,
+      "contexto": "Relata impacto direto na relação com o esposo e restrição de atividades sociais com o filho; associa ao ganho de peso pós-parto",
+      "categoria": "psicossocial"
+    },
+    {
+      "queixa": "Ansiedade como barreira ao autocuidado",
+      "intensidade": 3,
+      "contexto": "Identifica ansiedade como principal barreira para cuidar da saúde; não investe atualmente em saúde",
+      "categoria": "psicossocial"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [
+      "Hipertireoidismo"
+    ],
+    "cirurgias": [],
+    "medicacoes_atuais": [
+      "Anticoncepcional oral (tipo não especificado)"
+    ],
+    "alergias_intolerancias": [],
+    "historico_familiar": "Histórico familiar de câncer confirmado (tipo e grau de parentesco não especificados)",
+    "reposicao_hormonal": "Não realiza reposição hormonal"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "Não pratica atividade física atualmente",
+      "tipo": "Bicicleta (modalidade de interesse, sem frequência ativa relatada)"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 3,
+      "doces": "Consumo mais intenso à noite; doce de sobremesa no almoço; uso de açúcar como adoçante",
+      "alcool": "Consumo social nos finais de semana",
+      "tabaco": "Não fumante",
+      "hidratacao_litros": 1.5,
+      "padrao_geral": "Café da manhã: sanduíche natural; lanche da manhã: fruta; almoço: feijão, arroz, carne e doce de sobremesa; lanche da tarde: não realiza; jantar: pão. Fins de semana com saídas e fast food. Padrão com déficit proteico no jantar, ausência de lanche da tarde e concentração calórica/glicêmica no período noturno."
+    },
+    "sono": {
+      "horas": 6.0,
+      "qualidade_1_10": 3,
+      "energia_ao_acordar_1_5": null,
+      "cansaco_durante_dia": "Sim, cansaço diurno presente"
+    },
+    "trabalho": {
+      "tipo": "Trabalho em pé (atividade laboral com demanda física postural)",
+      "horarios": "07h às 17h"
+    },
+    "frequencia_intestinal": "Diária"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "não informado",
+    "menopausa": "não informado",
+    "metodo_contraceptivo": "Anticoncepcional oral (tipo não especificado)",
+    "libido": "não informado",
+    "ressecamento_vaginal": "não informado",
+    "dispareunia": "não informado",
+    "queda_cabelo": "não informado",
+    "pele": "não informado",
+    "unhas": "não informado",
+    "sintomas_ciclo": "não informado"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Ansiedade identificada como principal barreira ao autocuidado; rotina intensa (trabalho CLT 7h-17h em pé) como fator limitante à adesão a exercícios e alimentação estruturada",
+    "investe_em_saude": "Não investe atualmente em saúde; possui plano de saúde empresarial",
+    "nivel_energia_1_10": 2,
+    "ansiedade_estresse": "Ansiedade autorreferida como barreira primária; compulsão alimentar noturna pode ter componente ansioso-emocional associado"
+  },
+  "metas": {
+    "peso_atual_kg": 80.0,
+    "peso_objetivo_kg": 67.0,
+    "peso_maximo_anterior_kg": 95.0,
+    "diferenca_para_objetivo_kg": -13.0
+  },
+  "spin": {
+    "tempo_luta": "3 a 5 anos (desde o parto em 2021)",
+    "incomodo_principal": "Adiposidade abdominal, celulite em membros inferiores e flacidez",
+    "desafios": "Rotina, compulsão alimentar e sedentarismo",
+    "cenario_sem_tratamento": "Piora progressiva da autoestima e estado emocional em 1 ano sem intervenção",
+    "investimento_perdido": "Refere investimento prévio significativo sem quantificar; tentativas anteriores com dieta, mounjaro e ozempic",
+    "vida_resolvida_significaria": "Maior felicidade, reencontro com a própria identidade e retomada de atividades com o filho",
+    "interesse_programa": "Sim, definitivamente interessada no programa"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Hipertireoidismo em paciente com uso de anticoncepcional oral e queixa de fadiga intensa",
+      "categoria": "hormonal",
+      "prioridade": 3,
+      "justificativa": "Hipertireoidismo pode cursar com fadiga paradoxal, alterações de peso e humor. O uso de anticoncepcional oral pode elevar TBG e interferir na interpretação de T4 livre. Necessário rastrear TSH, T4L, T3L e anticorpos tireoidianos para estadiamento atual da doença."
+    },
+    {
+      "sinal": "Nível de energia 2/10 com qualidade de sono 3/10 e 6 horas de sono",
+      "categoria": "energia_sono",
+      "prioridade": 3,
+      "justificativa": "Combinação de privação de sono, baixa qualidade e fadiga diurna intensa em mulher de 38 anos com hipertireoidismo e sedentarismo. Padrão que pode refletir disfunção do eixo HPA, resistência à insulina ou desregulação tireoidiana. Merece investigação laboratorial prioritária."
+    },
+    {
+      "sinal": "Compulsão alimentar noturna por doces com padrão alimentar de baixa proteína no jantar",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Consumo concentrado de carboidratos simples à noite (pão no jantar + doces) associado à ausência de lanche da tarde sugere hipoglicemia reativa vespertina e/ou componente emocional-ansioso. Rastrear glicemia de jejum, insulina, HOMA-IR e cortisol."
+    },
+    {
+      "sinal": "Uso prévio de agonistas GLP-1 (ozempic/mounjaro) sem manutenção de resultado",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Histórico de uso de semaglutida e tirzepatida sem sustentação de perda de peso indica possível resistência metabólica subjacente, baixa adesão comportamental ou reganho pós-suspensão. Importante investigar perfil metabólico completo antes de eventual reintrodução."
+    },
+    {
+      "sinal": "Histórico familiar de câncer sem especificação de tipo e grau de parentesco",
+      "categoria": "outro",
+      "prioridade": 2,
+      "justificativa": "Informação incompleta que pode impactar decisões terapêuticas, especialmente em relação à reposição hormonal futura. Necessário detalhar tipo de neoplasia e parentesco para estratificação de risco."
+    },
+    {
+      "sinal": "Sedentarismo total em paciente com IMC 26,7 e adiposidade abdominal pós-gestação",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Ausência de atividade física associada a padrão alimentar desequilibrado e hipertireoidismo aumenta risco de sarcopenia relativa e resistência à insulina. Avaliação de composição corporal (bioimpedância ou DEXA) indicada."
+    },
+    {
+      "sinal": "Seção de saúde hormonal integralmente não preenchida em mulher de 38 anos em uso de anticoncepcional",
+      "categoria": "hormonal",
+      "prioridade": 2,
+      "justificativa": "Ausência de dados sobre ciclo menstrual, libido, ressecamento vaginal, queda de cabelo e condição de pele impede avaliação hormonal adequada. Campos críticos para rastreio de disfunção ovariana, androgênica ou tireoidiana associada ao anticoncepcional."
+    }
+  ],
+  "perfil_disc": "D",
+  "interpretacao_inicial": "Clarissa, 38 anos, engenheira química, apresenta quadro clínico com padrão multifatorial envolvendo ganho de peso pós-gestacional (2021), sedentarismo, desregulação alimentar com compulsão noturna por carboidratos simples e fadiga intensa (energia 2/10, sono 3/10, 6 horas/noite). O contexto de hipertireoidismo diagnosticado — sem especificação de tratamento atual ou estadiamento — associado ao uso de anticoncepcional oral e histórico de uso de agonistas GLP-1 (mounjaro e ozempic) sem sustentação de resultado configura cenário que demanda investigação laboratorial completa do eixo tireoidiano (TSH, T4L, T3L, anticorpos), perfil metabólico (glicemia, insulina, HOMA-IR, lipidograma) e avaliação hormonal feminina antes de qualquer conduta terapêutica.\n\nO padrão alimentar identificado — ausência de lanche da tarde, jantar hipocalórico e hiperglicêmico (pão), consumo de doces concentrado no período noturno e fast food nos fins de semana — é compatível com hipoglicemia reativa vespertina e/ou comportamento alimentar de componente emocional-ansioso, reforçado pela própria paciente ao identificar ansiedade como barreira primária ao autocuidado. A seção de saúde hormonal não foi preenchida, representando lacuna crítica para a avaliação integrativa, especialmente considerando o uso de anticoncepcional oral, a queixa de impacto no relacionamento conjugal e a ausência de dados sobre libido, ciclo e sintomas associados. O histórico familiar de câncer sem detalhamento também deverá ser esclarecido antes de qualquer planejamento de reposição hormonal futura.",
+  "completude": {
+    "campos_preenchidos": 42,
+    "campos_totais": 52,
+    "percentual": 80.8,
+    "campos_criticos_faltantes": [
+      "ciclo_menstrual (não preenchido)",
+      "sintomas_ciclo (não preenchido)",
+      "libido (não preenchido)",
+      "ressecamento_vaginal (não preenchido)",
+      "dispareunia (não preenchido)",
+      "queda_cabelo (não preenchido)",
+      "condicao_pele (não preenchido)",
+      "alteracoes_unhas (não preenchido)",
+      "energia_ao_acordar_1_5 (não preenchido — campo acordarDisposicao vazio)",
+      "historico_familiar_cancer — tipo de neoplasia e grau de parentesco não especificados",
+      "hipertireoidismo — tratamento atual, tempo de diagnóstico e último exame tireoidiano não informados",
+      "anticoncepcional — tipo, formulação e tempo de uso não especificados"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "paciente_nome": "Tainá Japiassu Teles",
+  "sexo": "F",
+  "idade": 25,
+  "pdfs_processados": [
+    {
+      "nome": "Tainá - resultado exames 05.2026.pdf",
+      "extraidos": 45,
+      "validados": 44,
+      "lab_origem": "LAB ELT PA LAURO DE FREITAS",
+      "data_coleta": "06/05/2026"
+    },
+    {
+      "nome": "Tainá Japiassu - Resultado exames de sangue.pdf",
+      "extraidos": 46,
+      "validados": 45,
+      "lab_origem": "LAB ELT PA LAURO DE FREITAS",
+      "data_coleta": "27/01/2026"
+    }
+  ],
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "Hemácias",
+        "nome_no_laudo": "Eritrócitos",
+        "valor": 5000000.0,
+        "unidade": "/mm³",
+        "ref_min": 4000000.0,
+        "ref_max": 5000000.0,
+        "grupo": "hemograma",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L3 plausibilidade: Hemácias=5000000.0 fora do range absoluto [1, 10]"
+    },
+    {
+      "exame": {
+        "nome_canonico": "Hemácias",
+        "nome_no_laudo": "Eritrócitos",
+        "valor": 4000000.0,
+        "unidade": "/mm³",
+        "ref_min": 4000000.0,
+        "ref_max": 5000000.0,
+        "grupo": "hemograma",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L3 plausibilidade: Hemácias=4000000.0 fora do range absoluto [1, 10]"
+    }
+  ],
+  "cross_check_warnings": []
+}

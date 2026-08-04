@@ -1,0 +1,25 @@
+{
+  "status": "blocked",
+  "fase": "preconsulta",
+  "paciente": "Paciente Teste Sintetico",
+  "html_path": "/tmp/gate_sintetico_e09mn982/c6.html",
+  "gates_aplicados": [
+    "copy_neutra",
+    "eixo_tireoidiano",
+    "sobrecarga_ferro",
+    "exames_no_html",
+    "questionario_cobertura",
+    "marcador_fase_preconsulta"
+  ],
+  "gates_ignorados": [
+    "bioimpedancia_marcadores(fase=preconsulta)"
+  ],
+  "erros": [
+    "Fase pré-consulta recebeu bioimpedância — use --modo completa/--completar para gerar a versão com composição corporal."
+  ],
+  "checks": {
+    "padrao_tireotox": false,
+    "padrao_sobrecarga_ferro": false,
+    "criticos": []
+  }
+}

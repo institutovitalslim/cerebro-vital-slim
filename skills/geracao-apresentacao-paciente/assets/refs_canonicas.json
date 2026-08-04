@@ -1811,5 +1811,49 @@
         "ref_max": 258
       }
     ]
+  },
+  "Índice de Saturação da Transferrina": {
+    "unit": "%",
+    "grupo": "vitaminas",
+    "abs_min": 0,
+    "abs_max": 100,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 20,
+        "ref_max": 50
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 20,
+        "ref_max": 50
+      }
+    ]
+  },
+  "Capacidade de Fixação Latente do Ferro": {
+    "unit": "ug/dL",
+    "grupo": "vitaminas",
+    "abs_min": 0,
+    "abs_max": 1000,
+    "ranges": [
+      {
+        "sexo": "M",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 120,
+        "ref_max": 450
+      },
+      {
+        "sexo": "F",
+        "idade_min": 18,
+        "idade_max": 120,
+        "ref_min": 120,
+        "ref_max": 450
+      }
+    ]
   }
 }

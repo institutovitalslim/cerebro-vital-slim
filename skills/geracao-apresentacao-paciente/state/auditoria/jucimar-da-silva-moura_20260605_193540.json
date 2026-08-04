@@ -1,0 +1,46 @@
+{
+  "paciente_nome": "JUCIMAR DA SILVA MOURA",
+  "sexo": "M",
+  "idade": 49,
+  "pdfs_processados": [
+    {
+      "nome": "Exames de Sangue.pdf",
+      "extraidos_pelo_llm": 37,
+      "validados": 35,
+      "lab_origem": "SSA - VILAS DO ATLANTICO",
+      "data_coleta": "07/04/2026"
+    }
+  ],
+  "exames_validados": 35,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "Plaquetas",
+        "nome_no_laudo": "PLAQUETAS",
+        "valor": 262000,
+        "unidade": "x 10³/mm3",
+        "ref_min": 130000,
+        "ref_max": 450000,
+        "grupo": "hemograma",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='x 10³/mm3' incompatível com canônica='/mm3' para Plaquetas"
+    },
+    {
+      "exame": {
+        "nome_canonico": "Lp(a)",
+        "nome_no_laudo": "LIPOPROTEÍNA \"a\"",
+        "valor": 134,
+        "unidade": "nmol/L",
+        "ref_min": null,
+        "ref_max": 75,
+        "grupo": "lipidico",
+        "status_clinico": "alert",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='nmol/L' incompatível com canônica='mg/dL' para Lp(a)"
+    }
+  ],
+  "cross_check_warnings": []
+}

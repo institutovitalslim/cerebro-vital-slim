@@ -72,7 +72,9 @@ SCHEMA = {
                             "PCR-us", "Homocisteína", "VHS",
                             # Vitaminas / Minerais
                             "Vitamina D", "Vitamina B12", "Ácido Fólico", "Zinco",
-                            "Ferro", "Ferritina", "Magnésio", "Cálcio", "Sódio", "Potássio", "PTH",
+                            "Ferro", "Ferritina", "Índice de Saturação da Transferrina",
+                            "Capacidade de Fixação Latente do Ferro",
+                            "Magnésio", "Cálcio", "Sódio", "Potássio", "PTH",
                             # Adrenal
                             "Cortisol", "Cortisol Basal", "IGF-1",
                         ]
@@ -108,6 +110,11 @@ REGRA CANÔNICA: SEMPRE use o SEXO do paciente (M/F) para classificar status_cli
 Refs de Testosterona, Ferritina, Hemácias, Hemoglobina, TGO, TGP, GGT, Creatinina,
 Ácido Úrico, Estradiol, Progesterona, FSH, LH, Prolactina, SHBG, DHEA-S, VHS, Ferro
 VARIAM POR SEXO. Nunca classifique sem considerar o sexo informado. (Sabin, DB Recife, Hapvida, Labchecap, Hermes Pardini, Richet, Leme, LPC, Datalab, etc).
+
+Metabolismo do ferro é obrigatório quando presente no laudo: extraia Ferro, Ferritina,
+Índice de Saturação da Transferrina e Capacidade de Fixação Latente do Ferro. Ferritina
+muito alta combinada com saturação de transferrina elevada deve ser sinalizada como crítica
+para revisão médica por possível sobrecarga de ferro/hemocromatose.
 
 REGRAS CRÍTICAS de extração:
 
@@ -146,10 +153,36 @@ def extrair_texto_pdf(pdf_path):
             ["pdftotext", "-layout", pdf_path, "-"],
             capture_output=True, text=True, timeout=120
         )
-        if result.returncode == 0:
+        if result.returncode == 0 and (result.stdout or "").strip():
             return result.stdout
     except Exception as e:
         print(f"[ERRO] pdftotext: {e}")
+
+    # Fallback para PDFs escaneados/imagem: rasteriza páginas e roda Tesseract.
+    try:
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory(prefix="ocr_exames_") as tmpdir:
+            prefix = str(Path(tmpdir) / "page")
+            conv = subprocess.run(
+                ["pdftoppm", "-jpeg", "-r", "180", pdf_path, prefix],
+                capture_output=True, text=True, timeout=300
+            )
+            if conv.returncode != 0:
+                print(f"[ERRO] pdftoppm OCR fallback: {conv.stderr[:200]}")
+                return ""
+            textos = []
+            for img in sorted(Path(tmpdir).glob("page-*.jpg")):
+                ocr = subprocess.run(
+                    ["tesseract", str(img), "stdout", "-l", "eng+por", "--psm", "6"],
+                    capture_output=True, text=True, timeout=180
+                )
+                txt = (ocr.stdout or "").strip()
+                if txt:
+                    textos.append(txt)
+            return "\n\n".join(textos)
+    except Exception as e:
+        print(f"[ERRO] OCR fallback: {e}")
     return ""
 
 
@@ -172,6 +205,70 @@ def filtrar_texto(texto, max_chars=80000):
     if len(text) > max_chars:
         text = text[:max_chars] + "\n[...truncado...]"
     return text
+
+
+def _norm_txt(s):
+    if not s:
+        return ""
+    s = s.upper()
+    s = s.replace("Á", "A").replace("À", "A").replace("Ã", "A").replace("Â", "A")
+    s = s.replace("É", "E").replace("Ê", "E")
+    s = s.replace("Í", "I")
+    s = s.replace("Ó", "O").replace("Ô", "O").replace("Õ", "O")
+    s = s.replace("Ú", "U")
+    s = s.replace("Ç", "C")
+    return " ".join(s.split())
+
+
+def _norm_unit(s):
+    if not s:
+        return ""
+    s = s.replace("μ", "u").replace("µ", "u").strip().lower()
+    return " ".join(s.split())
+
+
+def _postprocess_exames(result):
+    """Saneia ambiguidades recorrentes antes da validação final."""
+    exames_in = result.get("exames", []) or []
+    exames_out = []
+    notes = []
+
+    for ex in exames_in:
+        ex2 = dict(ex)
+        nome_no_laudo = _norm_txt(ex2.get("nome_no_laudo", ""))
+        unit = _norm_unit(ex2.get("unidade", ""))
+
+        # Caso recorrente: laudo traz T3 total como "T3 - Triiodotironina" em ng/mL,
+        # mas o LLM por vezes classifica como T3 Livre.
+        if ex2.get("nome_canonico") == "T3 Livre":
+            if "TRIIODOTIRONINA" in nome_no_laudo and unit == "ng/ml":
+                ex2["nome_canonico"] = "T3 Total"
+                ex2["grupo"] = "tireoide"
+                ex2["valor"] = round(float(ex2["valor"]) * 100, 3)
+                if ex2.get("ref_min") is not None:
+                    ex2["ref_min"] = round(float(ex2["ref_min"]) * 100, 3)
+                if ex2.get("ref_max") is not None:
+                    ex2["ref_max"] = round(float(ex2["ref_max"]) * 100, 3)
+                ex2["unidade"] = "ng/dL"
+                notes.append("Remapeado T3 Livre -> T3 Total e convertido ng/mL -> ng/dL por nome_no_laudo='T3 - Triiodotironina'")
+
+        # Falso positivo recorrente: LDH sendo lido como LDL.
+        if ex2.get("nome_canonico") == "LDL" and ("LACTATO DESIDROGENASE" in nome_no_laudo or " LDH" in nome_no_laudo):
+            notes.append("Descartado falso positivo de LDL: nome_no_laudo indica LDH/Lactato Desidrogenase")
+            continue
+
+        # Caso recorrente: VHS nunca deve vir em mg/dL; quando isso aparece, a extração está ambígua.
+        # Remove do payload validável para não contaminar auditoria/apresentação.
+        if ex2.get("nome_canonico") == "VHS" and unit and unit != "mm/h":
+            notes.append(f"Descartado VHS ambíguo: unidade '{ex2.get('unidade')}' incompatível com VHS")
+            continue
+
+        exames_out.append(ex2)
+
+    result["exames"] = exames_out
+    if notes:
+        result["_postprocess_notes"] = notes
+    return result
 
 
 def extrair_exames_via_llm(pdf_path, paciente_meta=None, model=MODEL):
@@ -247,6 +344,7 @@ def extrair_exames_via_llm(pdf_path, paciente_meta=None, model=MODEL):
 
     try:
         result = json.loads(content)
+        result = _postprocess_exames(result)
         # Adiciona texto bruto pra L10 anti-alucinacao no validador
         result['_texto_pdf'] = texto
         return result

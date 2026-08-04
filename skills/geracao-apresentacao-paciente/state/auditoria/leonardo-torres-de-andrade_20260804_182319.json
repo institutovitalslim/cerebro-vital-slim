@@ -1,0 +1,68 @@
+{
+  "paciente_nome": "Leonardo Torres de Andrade",
+  "sexo": "M",
+  "idade": 43,
+  "pdfs_processados": [
+    {
+      "nome": "LEONARDO - RESULTADO EXAMES 07.2026",
+      "extraidos_pelo_llm": 27,
+      "validados": 27,
+      "lab_origem": "DASA - Avenida Araujo Pinho, 490 CNES: 3113957 - Salvador, BA",
+      "data_coleta": "20/07/2026"
+    },
+    {
+      "nome": "LEONARDO - RESULTADO EXAMES 05.2026",
+      "extraidos_pelo_llm": 46,
+      "validados": 58,
+      "lab_origem": "Dasa",
+      "data_coleta": "15/05/2026"
+    }
+  ],
+  "exames_validados": 85,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "PCR-us",
+        "nome_no_laudo": "Proteína C Reativa (PCR)",
+        "valor": 0.11,
+        "unidade": "mg/dL",
+        "ref_min": null,
+        "ref_max": 0.5,
+        "grupo": "inflamatorio",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+    },
+    {
+      "exame": {
+        "nome_canonico": "PCR-us",
+        "nome_no_laudo": "Proteína C Reativa (PCR)",
+        "valor": 0.2,
+        "unidade": "mg/dL",
+        "ref_min": null,
+        "ref_max": 0.5,
+        "grupo": "inflamatorio",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+    }
+  ],
+  "cross_check_warnings": [
+    "Auditoria determinística inseriu LDH=222.0UI/L",
+    "Auditoria determinística inseriu SHBG=23.6nmol/L",
+    "Auditoria determinística inseriu TSH=2.83uUI/mL",
+    "Auditoria determinística inseriu T4 Livre=0.99ng/dL",
+    "Auditoria determinística inseriu Estradiol=5.0pg/mL",
+    "Auditoria determinística inseriu FSH=13.5mUI/mL",
+    "Auditoria determinística inseriu LH=11.0mUI/mL",
+    "Auditoria determinística inseriu Testosterona Total=206.0ng/dL",
+    "Auditoria determinística inseriu Testosterona Livre=4.71ng/dL",
+    "Auditoria determinística inseriu Testosterona Biodisponível=110.4ng/dL",
+    "Auditoria determinística inseriu Progesterona=0.9ng/mL",
+    "Auditoria determinística inseriu Cortisol=20.7µg/dL",
+    "Auditoria determinística inseriu IGF-1=113.0ng/mL",
+    "Auditoria determinística inseriu LDH=187.0UI/L"
+  ]
+}

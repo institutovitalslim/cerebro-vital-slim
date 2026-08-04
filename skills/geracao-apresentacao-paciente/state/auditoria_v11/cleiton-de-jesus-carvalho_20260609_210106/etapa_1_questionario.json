@@ -1,0 +1,155 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Cleiton de Jesus Carvalho",
+    "sexo": "M",
+    "idade": 44,
+    "imc_atual": 30.1,
+    "imc_objetivo": 30.8,
+    "profissao": "Servidor público",
+    "como_conheceu": "outro"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Adiposidade abdominal central",
+      "intensidade": 5,
+      "contexto": "Paciente relata 'barriga' como principal incômodo, com histórico de peso máximo 97kg, atualmente 86kg",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Fadiga crônica e baixa energia",
+      "intensidade": 5,
+      "contexto": "Nível de energia 2/10, cansaço principalmente vespertino, sono de apenas 5h/noite com qualidade 2/10",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Ansiedade com impacto alimentar",
+      "intensidade": 4,
+      "contexto": "Paciente refere ansiedade como principal desafio, com compulsão por doces noturnos e carboidratos, prejudicando controle alimentar",
+      "categoria": "psicossocial"
+    },
+    {
+      "queixa": "Baixa autoestima e impacto nas relações sociais",
+      "intensidade": 4,
+      "contexto": "Refere impacto direto da composição corporal na autoestima e relações interpessoais",
+      "categoria": "psicossocial"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [
+      "Hipertensão arterial sistêmica"
+    ],
+    "cirurgias": [],
+    "medicacoes_atuais": [
+      "Losartana (anti-hipertensivo)"
+    ],
+    "alergias_intolerancias": [
+      "Intolerância à lactose"
+    ],
+    "historico_familiar": "Nega histórico familiar de câncer",
+    "reposicao_hormonal": "Nunca realizou reposição hormonal"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "1-2x/semana",
+      "tipo": "Musculação"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 3,
+      "doces": "Compulsão noturna forte",
+      "alcool": "Não consome",
+      "tabaco": "Não fuma",
+      "hidratacao_litros": 2.0,
+      "padrao_geral": "Dieta hipercalórica com predomínio de carboidratos simples, ausência de saladas no almoço, café da manhã com ovo e café, lanche vespertino apenas café, jantar com pão. Alimentação externa aos finais de semana em restaurantes. Uso de açúcar refinado. Padrão alimentar desorganizado com lacunas nutricionais evidentes"
+    },
+    "sono": {
+      "horas": 5.0,
+      "qualidade_1_10": 2,
+      "energia_ao_acordar_1_5": 1,
+      "cansaco_durante_dia": "Sim, principalmente no período vespertino"
+    },
+    "trabalho": {
+      "tipo": "Misto (presencial e remoto)",
+      "horarios": "08h às 18h"
+    },
+    "frequencia_intestinal": "Diária"
+  },
+  "saude_hormonal": null,
+  "perfil_psicossocial": {
+    "barreira_principal": "Financeira",
+    "investe_em_saude": "Sim, às vezes",
+    "nivel_energia_1_10": 2,
+    "ansiedade_estresse": "Ansiedade significativa com impacto direto no comportamento alimentar, especialmente em períodos de problemas pessoais. Paciente identifica ansiedade como principal desafio para controle ponderal"
+  },
+  "metas": {
+    "peso_atual_kg": 86.0,
+    "peso_objetivo_kg": 88.0,
+    "peso_maximo_anterior_kg": 97.0,
+    "diferenca_para_objetivo_kg": -2.0
+  },
+  "spin": {
+    "tempo_luta": "3-5 anos",
+    "incomodo_principal": "Adiposidade abdominal ('barriga')",
+    "desafios": "Ansiedade quando está passando por algum problema, com impacto direto na alimentação e nos problemas pessoais",
+    "cenario_sem_tratamento": "Paciente projeta evolução para diabetes mellitus tipo 2 e obesidade grau II ('diabético e gordo')",
+    "investimento_perdido": "Sim, total - já tentou tratamento ortomolecular sem sucesso sustentado",
+    "vida_resolvida_significaria": "Saúde plena",
+    "interesse_programa": "Sim, mas depende (provavelmente de viabilidade financeira e formato do programa)"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Privação crônica de sono com apenas 5h/noite e qualidade 2/10",
+      "categoria": "energia_sono",
+      "prioridade": 3,
+      "justificativa": "Privação de sono crônica é fator de risco independente para resistência insulínica, hipertensão descontrolada, ganho ponderal e síndrome metabólica. Associado ao nível de energia 2/10, sugere possível disfunção do eixo HPA ou hipotireoidismo subclínico"
+    },
+    {
+      "sinal": "Hipertensão arterial em homem de 44 anos com IMC 30.1 e adiposidade central",
+      "categoria": "cardiovascular",
+      "prioridade": 3,
+      "justificativa": "Síndrome metabólica provável (HAS + obesidade grau I + adiposidade central). Risco cardiovascular aumentado. Necessário avaliar perfil lipídico, glicemia de jejum, HbA1c, HOMA-IR e marcadores inflamatórios"
+    },
+    {
+      "sinal": "Compulsão alimentar noturna por doces e carboidratos",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Padrão sugestivo de resistência à insulina com hipoglicemia reativa noturna, ou desregulação do eixo cortisol-insulina. Associado à ansiedade, pode indicar disbiose intestinal ou deficiência de neurotransmissores (serotonina/GABA)"
+    },
+    {
+      "sinal": "Fadiga vespertina intensa apesar de trabalho misto",
+      "categoria": "energia_sono",
+      "prioridade": 2,
+      "justificativa": "Fadiga pós-prandial vespertina pode indicar resistência insulínica, hipotireoidismo subclínico ou deficiência de micronutrientes (ferro, vitamina D, B12). Necessário investigar função tireoidiana e perfil metabólico"
+    },
+    {
+      "sinal": "Ansiedade com impacto comportamental alimentar",
+      "categoria": "psicossocial",
+      "prioridade": 2,
+      "justificativa": "Ansiedade crônica pode estar associada a hipercortisolismo funcional, deficiência de magnésio, disbiose intestinal (eixo intestino-cérebro) ou baixos níveis de testosterona em homens. Necessário avaliar cortisol salivar, testosterona total e livre"
+    },
+    {
+      "sinal": "Meta de peso objetivo (88kg) superior ao peso atual (86kg)",
+      "categoria": "psicossocial",
+      "prioridade": 1,
+      "justificativa": "Incongruência entre meta declarada e queixa principal sugere possível confusão entre recomposição corporal (ganho de massa magra + perda de gordura) versus perda ponderal. Necessário realinhamento de expectativas e educação sobre composição corporal"
+    },
+    {
+      "sinal": "Alimentação com ausência de vegetais e padrão hipercalórico",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Dieta pobre em fibras, micronutrientes e fitoquímicos. Risco de deficiências nutricionais múltiplas, disbiose intestinal e inflamação crônica de baixo grau. Padrão alimentar incompatível com controle metabólico e objetivos de recomposição corporal"
+    }
+  ],
+  "perfil_disc": "I",
+  "interpretacao_inicial": "Paciente masculino, 44 anos, servidor público, com síndrome metabólica provável (HAS em uso de losartana, IMC 30.1, adiposidade abdominal central) e queixa principal de insatisfação com composição corporal. Apresenta padrão clínico sugestivo de resistência insulínica: compulsão noturna por carboidratos simples, fadiga vespertina intensa, privação crônica de sono (5h/noite, qualidade 2/10) e nível de energia crítico (2/10). A ansiedade crônica com impacto comportamental alimentar configura fator perpetuador do quadro metabólico, possivelmente associada a disbiose intestinal (eixo intestino-cérebro) ou hipercortisolismo funcional. Histórico de tentativa ortomolecular prévia sem sucesso sustentado. Padrão alimentar desorganizado, hipercalórico, com ausência de vegetais e predomínio de carboidratos refinados, incompatível com controle metabólico. Frequência de atividade física subótima (1-2x/semana) para objetivos de recomposição corporal.\n\nPontos críticos para investigação laboratorial: perfil glicêmico completo (glicemia, HbA1c, insulina, HOMA-IR), função tireoidiana (TSH, T4L, T3L, anti-TPO), perfil androgênico (testosterona total, livre, SHBG), cortisol salivar (ritmo circadiano), perfil lipídico, marcadores inflamatórios (PCR-us), vitamina D, B12, ferritina e magnésio. Risco cardiovascular aumentado pela combinação HAS + obesidade + sedentarismo + privação de sono requer abordagem multidisciplinar integrativa com foco em modulação metabólica, otimização hormonal, manejo do estresse e reeducação alimentar estruturada. Meta ponderal declarada (88kg) sugere necessidade de realinhamento de expectativas: foco deve ser recomposição corporal (redução de gordura visceral + ganho de massa magra) e não apenas peso na balança.",
+  "completude": {
+    "campos_preenchidos": 47,
+    "campos_totais": 50,
+    "percentual": 94.0,
+    "campos_criticos_faltantes": [
+      "Energia ao acordar (escala 1-5 não explicitamente informada, inferida como 1)",
+      "Histórico familiar detalhado além de câncer (DM2, HAS, dislipidemia, obesidade)",
+      "Sintomas específicos de hipogonadismo (libido, função erétil, massa muscular, distribuição de gordura)"
+    ]
+  }
+}

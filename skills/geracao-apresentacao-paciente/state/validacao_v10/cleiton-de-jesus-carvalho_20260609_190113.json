@@ -1,0 +1,20 @@
+{
+  "status": "blocked",
+  "paciente": "CLEITON DE JESUS CARVALHO",
+  "html_path": "/tmp/tmp2auuljxi.html",
+  "erros": [
+    "Eixo tireoidiano crítico presente, mas HTML não cita hipertireoidismo/tireotoxicose.",
+    "Sobrecarga de ferro presente, mas HTML não cita sobrecarga de ferro/hemocromatose."
+  ],
+  "checks": {
+    "padrao_tireotox": true,
+    "padrao_sobrecarga_ferro": true,
+    "criticos": [
+      "TSH",
+      "T3 Livre",
+      "T4 Livre",
+      "Ferritina",
+      "Ferro"
+    ]
+  }
+}

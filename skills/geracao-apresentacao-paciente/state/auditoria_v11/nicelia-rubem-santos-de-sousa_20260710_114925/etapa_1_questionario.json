@@ -1,0 +1,189 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Nicelia Rubem Santos de Sousa",
+    "sexo": "F",
+    "idade": 62,
+    "imc_atual": 26.3,
+    "imc_objetivo": 22.6,
+    "profissao": "Do lar",
+    "como_conheceu": "Indicação"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Dificuldade de manutenção do peso — padrão de reganho após emagrecimento",
+      "intensidade": 4,
+      "contexto": "Relata luta com o peso a vida toda; emagrece mas não mantém, retornando ao peso anterior ou acima. Peso atual 70 kg, máximo anterior 75 kg, objetivo 60 kg.",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Fadiga matinal intensa e baixo nível de energia",
+      "intensidade": 5,
+      "contexto": "Nível de energia autorreferido 3/10; acorda sem disposição (escore 1/5); cansaço predominante pela manhã.",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Qualidade de sono ruim",
+      "intensidade": 4,
+      "contexto": "Qualidade do sono autorreferida 3/10. Horas de sono não informadas.",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Queda de cabelo",
+      "intensidade": 3,
+      "contexto": "Relata queda de cabelo presente. Contexto pós-menopausa, sem reposição hormonal em curso.",
+      "categoria": "hormonal"
+    },
+    {
+      "queixa": "Pele seca e unhas fracas",
+      "intensidade": 2,
+      "contexto": "Condição de pele descrita como seca; unhas fracas desde sempre. Padrão possivelmente relacionado a hipoestrogenismo e/ou deficiências nutricionais.",
+      "categoria": "estetico_funcional"
+    },
+    {
+      "queixa": "Hábito intestinal irregular",
+      "intensidade": 2,
+      "contexto": "Alternância entre constipação e trânsito normal. Intolerância ao glúten declarada; café da manhã inclui pão e tapioca (carboidratos refinados).",
+      "categoria": "gastrointestinal"
+    },
+    {
+      "queixa": "Padrão alimentar com alta carga de carboidratos refinados e baixa frequência de refeições",
+      "intensidade": 3,
+      "contexto": "Apenas 2 refeições por dia; café da manhã com pão, tapioca e banana; jantar semelhante ao café. Relata consumo elevado de carboidrato e baixo de doces simples.",
+      "categoria": "metabolico"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [],
+    "cirurgias": [
+      {
+        "procedimento": "Cesárea",
+        "ano": null
+      }
+    ],
+    "medicacoes_atuais": [],
+    "alergias_intolerancias": [
+      "Intolerância ao glúten"
+    ],
+    "historico_familiar": "Histórico familiar de câncer negado",
+    "reposicao_hormonal": "Nunca realizou reposição hormonal"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "Não pratica",
+      "tipo": "Nenhuma"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 2,
+      "doces": "Pouco consumo de doces simples; alto consumo de carboidratos complexos/refinados (pão, tapioca, banana, feijão)",
+      "alcool": "Pouco",
+      "tabaco": "Não fuma",
+      "hidratacao_litros": 2.0,
+      "padrao_geral": "Duas refeições ao dia (café da manhã e jantar similares); almoço eventual substituído por lanche. Café da manhã: pão, ovo, queijo, café, banana, tapioca. Jantar: padrão semelhante ao café. Sem adoçante. Intolerância ao glúten declarada, porém consome pão regularmente. Alimentação de fim de semana variável."
+    },
+    "sono": {
+      "horas": null,
+      "qualidade_1_10": 3,
+      "energia_ao_acordar_1_5": 1,
+      "cansaco_durante_dia": "Sim, predominantemente pela manhã"
+    },
+    "trabalho": {
+      "tipo": "Misto (do lar)",
+      "horarios": "Não informado"
+    },
+    "frequencia_intestinal": "Alternância entre constipação e trânsito normal"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "Ausente — paciente refere não menstruar mais",
+    "menopausa": "Menopausa estabelecida",
+    "metodo_contraceptivo": "Não informado",
+    "libido": "Não informado",
+    "ressecamento_vaginal": "Negado",
+    "dispareunia": "Não informado",
+    "queda_cabelo": "Presente",
+    "pele": "Seca",
+    "unhas": "Fracas desde sempre",
+    "sintomas_ciclo": "Não informado"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Financeira — dinheiro citado como principal barreira para cuidar da saúde",
+    "investe_em_saude": "Não informado",
+    "nivel_energia_1_10": 3,
+    "ansiedade_estresse": "Não informado diretamente; relata que o peso 'incomoda' e que ficará feliz ao resolver a questão corporal"
+  },
+  "metas": {
+    "peso_atual_kg": 70.0,
+    "peso_objetivo_kg": 60.0,
+    "peso_maximo_anterior_kg": 75.0,
+    "diferenca_para_objetivo_kg": 10.0
+  },
+  "spin": {
+    "tempo_luta": "Vida toda",
+    "incomodo_principal": "Peso corporal",
+    "desafios": "Emagrece mas não mantém o resultado; peso retorna ao patamar anterior ou superior. Tentativas anteriores: dieta e academia.",
+    "cenario_sem_tratamento": "Projeção de ganho adicional de peso em 1 ano sem intervenção",
+    "investimento_perdido": "Confirma investimentos anteriores realizados sem resultado sustentado",
+    "vida_resolvida_significaria": "Felicidade associada à resolução do peso e liberdade alimentar sem preocupação com ganho",
+    "interesse_programa": "Precisa pensar — decisão não imediata"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Menopausa estabelecida sem reposição hormonal e com sintomas compatíveis (queda de cabelo, pele seca, fadiga)",
+      "categoria": "hormonal",
+      "prioridade": 3,
+      "justificativa": "Paciente com 62 anos, menopausa confirmada, sem reposição hormonal. Queda de cabelo, pele seca e fadiga intensa são padrões compatíveis com hipoestrogenismo e/ou hipoandrogenismo. Investigação laboratorial hormonal prioritária (FSH, LH, estradiol, testosterona livre, SHBG, DHEA-S)."
+    },
+    {
+      "sinal": "Fadiga matinal intensa com energia 3/10 e disposição ao acordar 1/5",
+      "categoria": "energia_sono",
+      "prioridade": 3,
+      "justificativa": "Combinação de baixo nível energético global e ausência de disposição matinal em paciente pós-menopausa sem reposição. Hipóteses a investigar: hipotireoidismo subclínico, insuficiência adrenal leve, anemia, resistência à insulina. Exames: TSH, T4L, T3, cortisol matinal, hemograma, glicemia de jejum, insulina."
+    },
+    {
+      "sinal": "Padrão alimentar com alta carga glicêmica e apenas 2 refeições diárias em contexto de reganho de peso recorrente",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Duas refeições ao dia com predominância de carboidratos refinados (pão, tapioca, banana) favorece picos insulínicos e padrão de resistência à insulina. Associado ao histórico de reganho de peso, sugere investigação de RI: insulina de jejum, HOMA-IR, glicemia, HbA1c, perfil lipídico."
+    },
+    {
+      "sinal": "Intolerância ao glúten declarada com consumo regular de pão (glúten) no café da manhã",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Paciente refere intolerância ao glúten mas relata consumo de pão diariamente. Inconsistência que pode contribuir para sintomas gastrointestinais (constipação alternante), inflamação intestinal e má absorção. Necessário esclarecer natureza da intolerância (sensibilidade não celíaca vs. doença celíaca) e orientar adequação."
+    },
+    {
+      "sinal": "Sedentarismo total em paciente pós-menopausa com sobrepeso",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Ausência completa de atividade física em mulher de 62 anos pós-menopausa aumenta risco de sarcopenia, osteopenia/osteoporose e piora da resistência à insulina. Densitometria óssea e avaliação de composição corporal são pertinentes."
+    },
+    {
+      "sinal": "Qualidade de sono 3/10 sem horas de sono informadas",
+      "categoria": "energia_sono",
+      "prioridade": 2,
+      "justificativa": "Sono de má qualidade em pós-menopausa pode refletir privação de sono, apneia obstrutiva do sono ou insônia relacionada ao hipoestrogenismo. Impacto direto no metabolismo (cortisol, grelina, leptina). Investigação clínica adicional necessária."
+    },
+    {
+      "sinal": "Barreira financeira declarada como principal obstáculo ao cuidado da saúde",
+      "categoria": "psicossocial",
+      "prioridade": 1,
+      "justificativa": "Paciente sinaliza limitação financeira e interesse no programa condicionado a reflexão ('preciso pensar'). Pode impactar adesão ao tratamento e continuidade do acompanhamento. Relevante para planejamento terapêutico e abordagem na consulta."
+    }
+  ],
+  "perfil_disc": "D",
+  "interpretacao_inicial": "Paciente do sexo feminino, 62 anos, pós-menopausa estabelecida sem reposição hormonal prévia, IMC atual de 26,3 kg/m² com histórico de oscilação ponderal recorrente (peso máximo 75 kg). O conjunto de sintomas — fadiga matinal intensa (energia 3/10, disposição ao acordar 1/5), queda de cabelo, pele seca, unhas frágeis e sono de má qualidade — configura padrão sugestivo de hipoestrogenismo pós-menopausa associado a possível disfunção tireoidiana e/ou resistência à insulina, hipóteses que deverão ser confirmadas ou afastadas com perfil laboratorial completo (hormônios sexuais, TSH/T4L/T3, insulina de jejum, HOMA-IR, hemograma, cortisol matinal). A ausência de reposição hormonal em paciente com mais de 10 anos estimados de menopausa e sintomas compatíveis merece avaliação criteriosa de risco-benefício.\n\nDo ponto de vista metabólico e nutricional, destaca-se padrão alimentar de apenas 2 refeições diárias com predominância de carboidratos de alto índice glicêmico (pão, tapioca, banana), sedentarismo total e intolerância ao glúten declarada com aparente consumo contínuo de glúten — fatores que, em conjunto, podem perpetuar o ciclo de reganho ponderal relatado. A irregularidade intestinal (alternância constipação/trânsito normal) reforça a hipótese de disbiose ou sensibilidade ao glúten não adequadamente manejada. O planejamento terapêutico deverá integrar avaliação hormonal, metabólica e nutricional antes de qualquer conduta.",
+  "completude": {
+    "campos_preenchidos": 38,
+    "campos_totais": 45,
+    "percentual": 84.4,
+    "campos_criticos_faltantes": [
+      "horas_sono — não informado",
+      "libido — não informado",
+      "dispareunia — não informado",
+      "metodo_contraceptivo — não informado",
+      "sintomas_ciclo — não informado",
+      "horarios_trabalho — não informado",
+      "investe_em_saude — não informado"
+    ]
+  }
+}

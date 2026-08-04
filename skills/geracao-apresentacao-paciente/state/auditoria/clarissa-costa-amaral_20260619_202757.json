@@ -1,0 +1,36 @@
+{
+  "paciente_nome": "Clarissa Costa Amaral",
+  "sexo": "F",
+  "idade": 38,
+  "pdfs_processados": [
+    {
+      "nome": "Laudo Completo 15_06_2026.pdf",
+      "extraidos_pelo_llm": 38,
+      "validados": 40,
+      "lab_origem": "NAM - Núcleo de Assessoria Médica",
+      "data_coleta": "15/06/2026"
+    }
+  ],
+  "exames_validados": 40,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "PCR-us",
+        "nome_no_laudo": "Proteína C Reativa Ultra Sensível",
+        "valor": 0.49,
+        "unidade": "mg/dL",
+        "ref_min": 0.0,
+        "ref_max": 1.0,
+        "grupo": "inflamatorio",
+        "status_clinico": "alert",
+        "observacao": "Alto risco cardiovascular."
+      },
+      "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+    }
+  ],
+  "cross_check_warnings": [
+    "Auditoria determinística inseriu PCR-us=4.9mg/L",
+    "Auditoria determinística inseriu SHBG=264.0nmol/L",
+    "Auditoria determinística inseriu Progesterona=0.2ng/mL"
+  ]
+}

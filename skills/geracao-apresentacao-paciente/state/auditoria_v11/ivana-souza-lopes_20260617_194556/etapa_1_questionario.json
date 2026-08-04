@@ -1,0 +1,179 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "IVANA SOUZA LOPES",
+    "sexo": "F",
+    "idade": 51,
+    "imc_atual": 31.2,
+    "imc_objetivo": 25.0,
+    "profissao": "Advogada",
+    "como_conheceu": "Endocrinologista"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Sobrepeso persistente",
+      "intensidade": 4,
+      "contexto": "78kg, não consegue perder peso sozinha, IMC 31.2",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Falta de disposição e cansaço",
+      "intensidade": 4,
+      "contexto": "Cochila com frequência, sente-se esgotada, energia baixa",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Constipação intestinal",
+      "intensidade": 3,
+      "contexto": "Só evacua nos dias de corrida, fica dias sem ir ao banheiro",
+      "categoria": "gastrointestinal"
+    },
+    {
+      "queixa": "Irregularidade menstrual",
+      "intensidade": 3,
+      "contexto": "Ciclo irregular, pré-menopausa aos 51 anos",
+      "categoria": "hormonal"
+    },
+    {
+      "queixa": "Pele seca",
+      "intensidade": 2,
+      "contexto": "Alterações na qualidade da pele",
+      "categoria": "hormonal"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [
+      "Ceratocone",
+      "Edema de retina"
+    ],
+    "cirurgias": [
+      {
+        "procedimento": "Colecistectomia",
+        "ano": 1991
+      }
+    ],
+    "medicacoes_atuais": [
+      "Junno 200mg (progesterona) 14-15 dias/mês",
+      "Orlistat 2x/dia",
+      "Melatonina 3x/semana",
+      "Creatina",
+      "Coenzima Q10"
+    ],
+    "alergias_intolerancias": [
+      "Manga",
+      "Caju"
+    ],
+    "historico_familiar": "Histórico familiar de problemas hormonais (tias e primas)",
+    "reposicao_hormonal": "Sim - Progesterona (Junno 200mg) 14-15 dias por mês"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "6x por semana",
+      "tipo": "Corrida 2x/semana + Musculação 4x/semana"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 4,
+      "doces": "Finais de semana - doces de festa",
+      "alcool": "Cerveja nos finais de semana",
+      "tabaco": "Não informado",
+      "hidratacao_litros": 2.5,
+      "padrao_geral": "Café da manhã normal, petiscos durante o dia, cerveja, jantar ou lanche noturno"
+    },
+    "sono": {
+      "horas": 6.0,
+      "qualidade_1_10": null,
+      "energia_ao_acordar_1_5": null,
+      "cansaco_durante_dia": "Muito - cochila com frequência"
+    },
+    "trabalho": {
+      "tipo": "Híbrido (home office + presencial)",
+      "horarios": "Home office + plantão semanal 10h-19h30"
+    },
+    "frequencia_intestinal": "Irregular - só evacua nos dias de corrida, fica dias sem ir"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "Irregular",
+    "menopausa": "Pré-menopausa",
+    "metodo_contraceptivo": "Não informado",
+    "libido": "Não está com vida sexual ativa",
+    "ressecamento_vaginal": "Não informado",
+    "dispareunia": "Não informado",
+    "queda_cabelo": "Não informado",
+    "pele": "Pele seca",
+    "unhas": "Não informado",
+    "sintomas_ciclo": "Enxaqueca relacionada ao ciclo"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Preguiça e falta de disciplina",
+    "investe_em_saude": "Baixo investimento - menos de R$ 2.000 gastos anteriormente",
+    "nivel_energia_1_10": null,
+    "ansiedade_estresse": "Trabalho muito estressante com processos, perde sono quando não consegue concluir trabalhos"
+  },
+  "metas": {
+    "peso_atual_kg": 78.0,
+    "peso_objetivo_kg": 62.5,
+    "peso_maximo_anterior_kg": null,
+    "diferenca_para_objetivo_kg": 15.5
+  },
+  "spin": {
+    "tempo_luta": "Não especificado claramente",
+    "incomodo_principal": "Sobrepeso ligado à falta de disposição, afetando concentração no trabalho",
+    "desafios": "Dietas e treinos sem sucesso, preguiça, falta de disciplina",
+    "cenario_sem_tratamento": "Possibilidade de desenvolver problemas de saúde sérios",
+    "investimento_perdido": "Menos de R$ 2.000 em tentativas anteriores",
+    "vida_resolvida_significaria": "Recuperar disposição, enxugar barriga, regularizar intestino",
+    "interesse_programa": "Procura ajuda porque não aguenta mais viver cansada"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Obesidade grau I (IMC 31.2) com resistência à perda de peso",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "IMC elevado associado a dificuldade de emagrecimento pode indicar resistência insulínica ou disfunção tireoidiana"
+    },
+    {
+      "sinal": "Fadiga persistente e sonolência diurna excessiva",
+      "categoria": "energia_sono",
+      "prioridade": 2,
+      "justificativa": "Cansaço extremo com cochilos frequentes em mulher de 51 anos pode indicar deficiências hormonais ou metabólicas"
+    },
+    {
+      "sinal": "Constipação intestinal severa",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Evacuação apenas nos dias de exercício sugere hipomotilidade intestinal, possível hipotireoidismo"
+    },
+    {
+      "sinal": "Irregularidade menstrual em pré-menopausa",
+      "categoria": "hormonal",
+      "prioridade": 2,
+      "justificativa": "Ciclos irregulares aos 51 anos indicam flutuações hormonais que requerem monitoramento"
+    },
+    {
+      "sinal": "Uso de Orlistat sem supervisão nutricional adequada",
+      "categoria": "metabolico",
+      "prioridade": 1,
+      "justificativa": "Medicação para emagrecimento sem acompanhamento nutricional pode comprometer absorção de vitaminas lipossolúveis"
+    },
+    {
+      "sinal": "Padrão alimentar desorganizado com consumo de álcool regular",
+      "categoria": "metabolico",
+      "prioridade": 1,
+      "justificativa": "Petiscos durante o dia e álcool nos finais de semana podem contribuir para resistência insulínica"
+    }
+  ],
+  "perfil_disc": "default",
+  "interpretacao_inicial": "Paciente de 51 anos em pré-menopausa apresenta quadro compatível com síndrome metabólica incipiente, caracterizada por obesidade grau I (IMC 31.2), fadiga persistente e constipação intestinal severa. O padrão clínico sugere possível hipotireoidismo subclínico ou resistência insulínica, especialmente considerando a dificuldade de emagrecimento apesar da atividade física regular. A irregularidade menstrual e sintomas como pele seca e baixa energia são consistentes com declínio estrogênico da pré-menopausa, potencialmente exacerbado por deficiências nutricionais. A constipação que melhora apenas com exercício físico é um sinal de alerta para disfunção tireoidiana. Será fundamental investigar perfil tireoidiano completo, resistência insulínica, perfil hormonal reprodutivo e possíveis deficiências vitamínicas para estabelecer protocolo terapêutico integrado.",
+  "completude": {
+    "campos_preenchidos": 45,
+    "campos_totais": 55,
+    "percentual": 81.8,
+    "campos_criticos_faltantes": [
+      "altura para cálculo preciso do IMC",
+      "peso objetivo específico",
+      "qualidade do sono em escala",
+      "nível de energia em escala",
+      "histórico de tabagismo"
+    ]
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Clarissa Costa Amaral",
+    "sexo": "F",
+    "idade": 38,
+    "imc_atual": 26.7,
+    "imc_objetivo": 22.4,
+    "profissao": "Engenheira Química",
+    "como_conheceu": "Instagram"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Dificuldade de perda de peso pós-gestação",
+      "intensidade": 4,
+      "contexto": "Relata não conseguir recuperar o corpo desde o parto em 2021, apesar de tentativas com dieta, mounjaro e ozempic",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Adiposidade abdominal, celulite e flacidez",
+      "intensidade": 4,
+      "contexto": "Principal incômodo estético referido; impacta autoestima e relacionamento conjugal",
+      "categoria": "estetico_funcional"
+    },
+    {
+      "queixa": "Compulsão alimentar noturna por doces",
+      "intensidade": 4,
+      "contexto": "Consumo de doces mais intenso à noite; doce de sobremesa no almoço; jantar restrito a pão; padrão sugestivo de desregulação glicêmica e/ou emocional",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Fadiga e baixo nível de energia",
+      "intensidade": 5,
+      "contexto": "Nível de energia autorreferido 2/10; cansaço diurno presente; qualidade do sono 3/10; 6 horas de sono por noite",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Ansiedade como barreira ao autocuidado",
+      "intensidade": 3,
+      "contexto": "Paciente identifica ansiedade como principal barreira para cuidar da saúde; impacto em rotina e adesão a atividade física",
+      "categoria": "psicossocial"
+    },
+    {
+      "queixa": "Sedentarismo",
+      "intensidade": 3,
+      "contexto": "Refere não praticar atividade física atualmente, apesar de mencionar bicicleta como modalidade de interesse",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Baixa autoestima com impacto no relacionamento conjugal",
+      "intensidade": 4,
+      "contexto": "Relata impacto direto na relação com o esposo e nas saídas com o filho; associa ao ganho de peso pós-parto",
+      "categoria": "psicossocial"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [
+      "Hipertireoidismo"
+    ],
+    "cirurgias": [],
+    "medicacoes_atuais": [
+      "Anticoncepcional oral (tipo não especificado)"
+    ],
+    "alergias_intolerancias": [],
+    "historico_familiar": "Histórico familiar de câncer positivo (tipo e grau de parentesco não especificados)",
+    "reposicao_hormonal": "Não realiza reposição hormonal"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "Não pratica atividade física atualmente",
+      "tipo": "Bicicleta (modalidade de interesse referida, não praticada regularmente)"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 3,
+      "doces": "Consumo mais intenso à noite; doce de sobremesa no almoço; uso de açúcar como adoçante",
+      "alcool": "Consumo social nos finais de semana",
+      "tabaco": "Não fumante",
+      "hidratacao_litros": 1.5,
+      "padrao_geral": "Café da manhã: sanduíche natural; lanche da manhã: fruta; almoço: feijão, arroz, carne e doce de sobremesa; lanche da tarde: não realiza; jantar: pão. Fins de semana com saídas para fast food. Padrão com carboidratos refinados predominantes, ausência de lanche da tarde e jantar hipocalórico-qualitativo inadequado."
+    },
+    "sono": {
+      "horas": 6.0,
+      "qualidade_1_10": 3,
+      "energia_ao_acordar_1_5": null,
+      "cansaco_durante_dia": "Sim, cansaço diurno presente"
+    },
+    "trabalho": {
+      "tipo": "Trabalho em pé (atividade laboral em posição ortostática), vínculo CLT",
+      "horarios": "07h às 17h"
+    },
+    "frequencia_intestinal": "Diária"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "não informado",
+    "menopausa": "não informado",
+    "metodo_contraceptivo": "Anticoncepcional oral (tipo não especificado, conforme medicações atuais)",
+    "libido": "não informado",
+    "ressecamento_vaginal": "não informado",
+    "dispareunia": "não informado",
+    "queda_cabelo": "não informado",
+    "pele": "não informado",
+    "unhas": "não informado",
+    "sintomas_ciclo": "não informado"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Ansiedade identificada como principal barreira ao autocuidado; dificuldade com rotina e adesão à atividade física",
+    "investe_em_saude": "Não investe atualmente em saúde; possui plano empresarial",
+    "nivel_energia_1_10": 2,
+    "ansiedade_estresse": "Ansiedade referida como barreira central; compulsão alimentar noturna possivelmente associada a componente emocional/estresse"
+  },
+  "metas": {
+    "peso_atual_kg": 80.0,
+    "peso_objetivo_kg": 67.0,
+    "peso_maximo_anterior_kg": 95.0,
+    "diferenca_para_objetivo_kg": -13.0
+  },
+  "spin": {
+    "tempo_luta": "3 a 5 anos (desde o parto em 2021)",
+    "incomodo_principal": "Adiposidade abdominal, celulite nas pernas e flacidez corporal",
+    "desafios": "Dificuldade com rotina, compulsão alimentar e adesão à atividade física",
+    "cenario_sem_tratamento": "Piora da autoestima e estado emocional; projeção de tristeza e baixíssima autoestima em 1 ano sem intervenção",
+    "investimento_perdido": "Refere ter investido muito em tentativas anteriores (dieta, mounjaro, ozempic) sem resultado sustentado",
+    "vida_resolvida_significaria": "Muito mais feliz; reencontro com a própria identidade e autoestima; maior participação em atividades com o filho",
+    "interesse_programa": "Sim, definitivamente interessada no programa"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Hipertireoidismo em paciente com ganho de peso e fadiga intensa",
+      "categoria": "metabolico",
+      "prioridade": 3,
+      "justificativa": "Hipertireoidismo tipicamente cursa com perda de peso e hiperatividade; ganho de peso e fadiga severa (energia 2/10) nesse contexto podem indicar hipertireoidismo tratado/controlado, hipotireoidismo iatrogênico, ou diagnóstico equivocado. Exames de função tireoidiana (TSH, T4L, T3L, anticorpos) são prioritários."
+    },
+    {
+      "sinal": "Nível de energia 2/10 com qualidade de sono 3/10 e 6 horas de sono",
+      "categoria": "energia_sono",
+      "prioridade": 3,
+      "justificativa": "Fadiga severa associada a sono de baixa qualidade e duração insuficiente pode refletir disfunção tireoidiana, resistência à insulina, deficiência de ferro/ferritina, ou disautonomia do eixo HPA. Merece investigação laboratorial ampla."
+    },
+    {
+      "sinal": "Padrão alimentar com compulsão noturna por doces e carboidratos refinados predominantes",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Consumo intensificado de doces à noite, jantar restrito a pão e ausência de lanche da tarde sugerem hipoglicemia reativa vespertina e/ou desregulação do eixo insulina-glucagon. Rastreio de resistência à insulina (insulina de jejum, HOMA-IR, glicemia) indicado."
+    },
+    {
+      "sinal": "Uso de anticoncepcional oral com histórico de hipertireoidismo e ganho de peso pós-parto",
+      "categoria": "hormonal",
+      "prioridade": 2,
+      "justificativa": "Anticoncepcionais orais combinados podem impactar perfil lipídico, resistência à insulina, função tireoidiana e libido. A interação com o quadro de hipertireoidismo e o contexto pós-parto merece avaliação hormonal completa (estradiol, progesterona, testosterona, SHBG, prolactina)."
+    },
+    {
+      "sinal": "Histórico familiar de câncer sem especificação de tipo e grau de parentesco",
+      "categoria": "outro",
+      "prioridade": 2,
+      "justificativa": "Informação incompleta impede estratificação de risco adequada. Necessário detalhar tipo de neoplasia e grau de parentesco para orientar rastreios preventivos e eventual contraindicação a terapias hormonais futuras."
+    },
+    {
+      "sinal": "Uso prévio de agonistas GLP-1 (mounjaro/ozempic) sem resultado sustentado",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Falha de resposta ou reganho após GLP-1 pode indicar resistência à insulina de base orgânica, disfunção tireoidiana não controlada, ou componente comportamental/emocional significativo. Merece investigação metabólica aprofundada antes de nova prescrição."
+    },
+    {
+      "sinal": "Ansiedade com impacto em rotina, sono e comportamento alimentar",
+      "categoria": "psicossocial",
+      "prioridade": 2,
+      "justificativa": "Ansiedade autorreferida como barreira central, associada a compulsão alimentar e sedentarismo, pode refletir componente de cortisol elevado cronicamente. Avaliação de cortisol sérico/salivar e rastreio de transtorno de ansiedade generalizada são pertinentes."
+    }
+  ],
+  "perfil_disc": "D",
+  "interpretacao_inicial": "Clarissa, 38 anos, engenheira química, apresenta quadro de ganho de peso pós-parto (2021) com dificuldade de perda sustentada apesar de tentativas farmacológicas prévias (agonistas GLP-1), associado a fadiga severa (energia 2/10), sono de baixa qualidade (3/10) e padrão alimentar com predomínio de carboidratos refinados e compulsão noturna por doces. O contexto de hipertireoidismo diagnosticado, uso de anticoncepcional oral e sedentarismo atual configura um cenário de hipóteses sobrepostas que incluem: disfunção tireoidiana em reavaliação (dado que o perfil sintomático é atípico para hipertireoidismo ativo), possível resistência à insulina com desregulação glicêmica vespertina, e impacto do eixo HPA mediado por ansiedade crônica sobre composição corporal e comportamento alimentar.\n\nA ausência de dados sobre ciclo menstrual, libido, queda de cabelo e demais marcadores hormonais femininos representa lacuna relevante para a consulta, especialmente considerando o uso de anticoncepcional oral e o histórico familiar de câncer não especificado. A investigação laboratorial deverá priorizar painel tireoidiano completo (TSH, T4L, T3L, anti-TPO, anti-TG), perfil glicêmico-insulínico (glicemia de jejum, insulina, HOMA-IR, HbA1c), painel hormonal feminino (estradiol, progesterona, testosterona total e livre, SHBG, prolactina, FSH, LH), hemograma com ferritina, vitamina D e cortisol, para que hipóteses possam ser confirmadas ou afastadas e um plano terapêutico individualizado seja estruturado.",
+  "completude": {
+    "campos_preenchidos": 38,
+    "campos_totais": 48,
+    "percentual": 79.2,
+    "campos_criticos_faltantes": [
+      "saude_hormonal.ciclo_menstrual",
+      "saude_hormonal.menopausa",
+      "saude_hormonal.libido",
+      "saude_hormonal.ressecamento_vaginal",
+      "saude_hormonal.dispareunia",
+      "saude_hormonal.queda_cabelo",
+      "saude_hormonal.pele",
+      "saude_hormonal.unhas",
+      "saude_hormonal.sintomas_ciclo",
+      "estilo_de_vida.sono.energia_ao_acordar_1_5",
+      "historico_clinico.historico_familiar (tipo de neoplasia e grau de parentesco não especificados)"
+    ]
+  }
+}

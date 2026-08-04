@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "hipoteses_integradas": [
+    {
+      "titulo": "Fadiga intensa e sono não reparador + TSH 6,92 com T4L no limite inferior = padrão de hipotireoidismo subcompensado em uso de levotiroxina",
+      "queixas_relacionadas": [
+        "Baixo nível de energia (3/10)",
+        "Cansaço diurno persistente",
+        "Acorda sem disposição",
+        "Dificuldade em manter condicionamento e resultados"
+      ],
+      "exames_relacionados": [
+        "TSH (6,92 uUI/mL)",
+        "T4 Livre (0,87 ng/dL — limite inferior)"
+      ],
+      "descricao_clinica": "Paciente com hipotireoidismo conhecido, em uso de levotiroxina 88 mcg, apresenta TSH significativamente elevado com T4 Livre no limite inferior da faixa. Esse conjunto é compatível com subcompensação do tratamento — seja por dose insuficiente, absorção comprometida (interação com alimentos, café, cálcio/ferro) ou progressão de possível autoimunidade tireoidiana. A subcompensação explica de forma coerente a tríade fadiga intensa, sono não reparador e dificuldade de manter resultados corporais apesar de treino regular de alta intensidade. É a hipótese com maior poder explicativo do quadro global.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Avaliação clínica prioritária em 2-4 semanas para revisar posologia e forma de tomada da levotiroxina; solicitar anti-TPO e anti-tireoglobulina; repetir TSH e T4 Livre em 6-8 semanas para confirmar padrão e considerar ajuste terapêutico conforme julgamento médico."
+    },
+    {
+      "titulo": "Uso de implante hormonal + estradiol muito baixo (5 pg/mL) e progesterona baixa = eixo reprodutivo com necessidade de caracterização urgente",
+      "queixas_relacionadas": [
+        "Baixo nível de energia",
+        "Qualidade do sono prejudicada"
+      ],
+      "exames_relacionados": [
+        "Estradiol (5 pg/mL)",
+        "Progesterona (0,21 ng/mL)",
+        "FSH (5,3)",
+        "LH (6,3)"
+      ],
+      "descricao_clinica": "Paciente de 41 anos em uso de implante hormonal de composição não especificada apresenta estradiol de 5 pg/mL — valor baixo para mulher em menacme, mesmo dentro da referência ampla — e progesterona compatível com fase folicular ou ciclo anovulatório. Como as gonadotrofinas estão normais (sem padrão de transição menopausal ativa), o estradiol baixo pode refletir supressão pelo próprio implante, fase do ciclo na coleta ou hipoestrogenismo relativo, que contribuiria para pior qualidade do sono, fadiga e dificuldade de manutenção de massa magra. A ausência completa de dados sobre ciclo, libido e sintomas ginecológicos no questionário impede fechar a interpretação e torna essa caracterização essencial antes de qualquer conduta hormonal.",
+      "prioridade": 3,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Na consulta presencial, documentar composição, dose e tempo do implante hormonal e preencher a anamnese ginecológica completa; considerar recoleta de estradiol com registro da fase do ciclo e dosagem de AMH para caracterizar reserva ovariana e status estrogênico real."
+    },
+    {
+      "titulo": "Desejo por doces e padrão alimentar liberado no fim de semana + SHBG reduzida = sinal metabólico precoce apesar de sensibilidade insulínica preservada",
+      "queixas_relacionadas": [
+        "Desejo por doces",
+        "Uso de açúcar como adoçante",
+        "Padrão alimentar liberado nos fins de semana",
+        "Insatisfação com composição corporal"
+      ],
+      "exames_relacionados": [
+        "SHBG (19,2 nmol/L — reduzida)",
+        "Glicemia de jejum (94 — limite superior da faixa ótima)",
+        "HbA1c (5,4% — limite superior da faixa ótima)",
+        "HDL (49 mg/dL — discretamente abaixo da meta)"
+      ],
+      "descricao_clinica": "Embora a sensibilidade insulínica atual seja excelente (HOMA-IR 0,73), a SHBG reduzida é um marcador precoce de sobrecarga metabólica hepática, frequentemente influenciada por padrão alimentar hiperglicídico intermitente. Com glicemia e HbA1c no teto da faixa ótima e HDL discretamente abaixo da meta, o quadro sugere uma tendência metabólica inicial ainda reversível — coerente com o craving de doces e o padrão de fim de semana relatado. A SHBG baixa também eleva a fração livre de androgênios (~56% de biodisponibilidade), o que pode influenciar pele, ciclo e composição corporal, e deve ser reavaliada após intervenção em estilo de vida.",
+      "prioridade": 2,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Considerar estruturação alimentar com controle de carga glicêmica incluindo estratégia realista para fins de semana; reavaliar SHBG, glicemia, HbA1c e perfil lipídico em 3-6 meses após intervenção nutricional; investigar clinicamente sinais de hiperandrogenismo funcional (oleosidade, acne, regularidade do ciclo)."
+    },
+    {
+      "titulo": "Fadiga desproporcional ao condicionamento + vitamina D insuficiente e B12 subótima = componente nutricional agravando o quadro de energia",
+      "queixas_relacionadas": [
+        "Baixo nível de energia em paciente fisicamente ativa (3-4x/semana)",
+        "Cansaço diurno persistente"
+      ],
+      "exames_relacionados": [
+        "Vitamina D (48 ng/mL — insuficiência)",
+        "Vitamina B12 (587 pg/mL — funcional, abaixo da faixa ótima)"
+      ],
+      "descricao_clinica": "A discrepância entre volume de treino elevado (boxe, corrida, musculação) e energia autorreferida de 3/10 sugere causas somadas. A vitamina D em faixa de insuficiência contribui potencialmente para fadiga, menor recuperação muscular e menor eficiência imunometabólica — relevante aos 41 anos, na aproximação da janela perimenopáusica e no contexto de proteção óssea. A B12, embora funcionalmente adequada, está abaixo da faixa ótima e merece otimização dado o quadro de fadiga. Nenhum dos dois explica sozinho o cansaço, mas ambos são fatores corrigíveis que amplificam o efeito da subcompensação tireoidiana.",
+      "prioridade": 2,
+      "tipo": "padrao_nutricional",
+      "acao_proposta": "Avaliação clínica para considerar estratégia de otimização de vitamina D (exposição solar, dieta e eventual suplementação orientada) e monitorar B12; reavaliar níveis em 3-6 meses; solicitar cálcio iônico, fósforo e correlacionar com PTH na mesma coleta."
+    },
+    {
+      "titulo": "Irregularidade intestinal + TSH elevado = manifestação digestiva compatível com lentificação por subcompensação tireoidiana",
+      "queixas_relacionadas": [
+        "Irregularidade intestinal"
+      ],
+      "exames_relacionados": [
+        "TSH (6,92 uUI/mL)",
+        "T4 Livre (limite inferior)"
+      ],
+      "descricao_clinica": "A irregularidade intestinal é sintoma clássico de função tireoidiana subcompensada, por lentificação da motilidade gastrointestinal. No caso de Greice, esse achado converge com o TSH elevado e reforça a hipótese de que o tratamento atual não está otimizado. Há provável componente dietético associado (baixa variabilidade de fibras nos dias úteis e padrão liberado nos fins de semana) e hidratação de 2L/dia que pode ser insuficiente para o volume de treino. A expectativa é de melhora do trânsito intestinal com a otimização tireoidiana somada a ajuste de fibras e hidratação.",
+      "prioridade": 2,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Tratar como marcador de resposta: reavaliar padrão intestinal após otimização da função tireoidiana e ajuste de fibras/hidratação; se persistir com TSH normalizado, considerar investigação gastrointestinal funcional dirigida."
+    },
+    {
+      "titulo": "Sono de baixa qualidade (2/10, 6h) + cortisol matinal próximo ao limite superior = possível carga alostática elevada retroalimentando fadiga e craving",
+      "queixas_relacionadas": [
+        "Qualidade do sono 2/10",
+        "Apenas 6 horas de sono",
+        "Cansaço diurno",
+        "Desejo por doces"
+      ],
+      "exames_relacionados": [
+        "Cortisol matinal (próximo ao limite superior)",
+        "Eosinopenia discreta (43/µL — possível influência de cortisol endógeno)"
+      ],
+      "descricao_clinica": "O sono cronicamente curto e de má qualidade, em profissional de segurança pública com demandas familiares intensas, associado a cortisol matinal alto-limítrofe e eosinopenia discreta (padrão que pode refletir cortisol endógeno), sugere carga alostática aumentada. Esse eixo retroalimenta o quadro: privação de sono eleva cortisol, que aumenta craving por doces, dificulta recuperação do treino e piora composição corporal — mesmo com sensibilidade insulínica ainda preservada. É um alvo comportamental central, pois sem sono adequado a resposta às demais intervenções tende a ser limitada.",
+      "prioridade": 2,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Priorizar higiene do sono estruturada com meta gradual de 7-8h; investigar clinicamente causas secundárias (ritmo de trabalho, despertar noturno, rastreio de apneia se houver sinais); considerar reavaliação do eixo adrenal se o padrão persistir após otimização do sono."
+    }
+  ],
+  "queixas_sem_correlato_laboratorial": [
+    {
+      "queixa": "Insatisfação com estrutura corporal e flacidez apesar de treino regular",
+      "interpretacao": "Sem correlato laboratorial direto isolado — a flacidez não é mensurável por exames de sangue. Contudo, três fatores contextuais provavelmente contribuem: subcompensação tireoidiana (reduz síntese proteica e gasto energético), sono insuficiente (compromete recuperação muscular e hormônio do crescimento noturno) e possível hipoestrogenismo relativo (impacta colágeno e massa magra). Há também possível inadequação de aporte proteico frente ao volume de treino.",
+      "proxima_acao": "Realizar avaliação de composição corporal por método objetivo (bioimpedância ou DEXA) para estabelecer linha de base; revisar aporte proteico diário com a nutrição; reavaliar após otimização tireoidiana e do sono."
+    }
+  ],
+  "achados_sem_queixa_correspondente": [
+    {
+      "achado": "Ferritina elevada (204 ng/mL) com PCR-us e transaminases normais",
+      "relevancia_clinica": "Hiperferritinemia leve em mulher pré-menopausa, sem inflamação ou citólise hepática ativa, sugere necessidade de diferenciar sobrecarga discreta de ferro (incluindo predisposição genética como hemocromatose heterozigótica), causa metabólica ou uso de suplementos. Achado silencioso que merece esclarecimento antes de qualquer suplementação contendo ferro.",
+      "monitoramento": "Dosar saturação de transferrina e ferro sérico; se saturação >45%, considerar investigação genética conforme julgamento médico; evitar suplementos com ferro até esclarecimento; reavaliar ferritina em 3-6 meses."
+    },
+    {
+      "achado": "PTH discretamente reduzido (13 pg/mL) com cálcio normal (9,3)",
+      "relevancia_clinica": "Compatível com supressão fisiológica ou variação analítica; hipoparatireoidismo verdadeiro é pouco provável dada a normocalcemia. Risco clínico imediato baixo, mas deve ser interpretado em conjunto com o status de vitamina D antes de qualquer conduta de suplementação.",
+      "monitoramento": "Reavaliar PTH em conjunto com cálcio iônico, fósforo e 25-OH-vitamina D na próxima coleta (3-6 meses)."
+    },
+    {
+      "achado": "HDL discretamente abaixo da meta para mulheres (49 mg/dL)",
+      "relevancia_clinica": "Relevância limitada no contexto de painel lipídico globalmente favorável (ApoB, LDL, TG adequados), mas converge com a SHBG baixa como sinal precoce de tendência metabólica, beneficiando-se de otimização de estilo de vida.",
+      "monitoramento": "Reavaliar perfil lipídico completo em 6 meses junto com marcadores glicêmicos, após intervenção nutricional e de atividade física."
+    }
+  ],
+  "plano_clinico_integrado": {
+    "alvos_prioritarios": [
+      "Otimização da função tireoidiana: revisar dose e forma de tomada da levotiroxina, pesquisar autoimunidade (anti-TPO, anti-Tg) e confirmar padrão em 6-8 semanas",
+      "Caracterização do eixo hormonal reprodutivo: documentar o implante hormonal em uso, completar anamnese ginecológica e recoletar estradiol com fase do ciclo registrada",
+      "Recuperação do sono: meta gradual de 7-8h com higiene do sono estruturada, tratando o sono como alavanca central de energia, cortisol e composição corporal",
+      "Estruturação alimentar com controle de carga glicêmica e estratégia realista para fins de semana, visando normalização da SHBG e redução do craving",
+      "Correção nutricional: otimização de vitamina D e monitoramento de B12, com esclarecimento da ferritina elevada antes de qualquer suplementação com ferro",
+      "Avaliação objetiva de composição corporal (bioimpedância/DEXA) como linha de base para o objetivo estético-funcional declarado"
+    ],
+    "monitoramento_sugerido": "TSH e T4 Livre em 6-8 semanas (com anti-TPO e anti-Tg na mesma coleta); saturação de transferrina e ferro sérico junto; vitamina D, B12, SHBG, perfil lipídico, glicemia e HbA1c em 3-6 meses; PTH com cálcio iônico e fósforo na reavaliação; estradiol com fase do ciclo documentada e AMH conforme avaliação presencial.",
+    "investigacoes_adicionais": [
+      "Anti-TPO e anti-tireoglobulina",
+      "Saturação de transferrina e ferro sérico (esclarecimento da ferritina 204)",
+      "AMH e recoleta de estradiol com registro da fase do ciclo",
+      "Cálcio iônico e fósforo (contextualizar PTH reduzido)",
+      "TFG estimada e microalbuminúria (caracterização basal da creatinina no teto da referência)",
+      "Bioimpedância ou DEXA para composição corporal",
+      "Rastreio clínico de apneia do sono se persistirem sinais após higiene do sono"
+    ]
+  },
+  "narrativa_executiva": "Greice, seus exames sugerem que a tireoide está trabalhando abaixo do ideal mesmo com a medicação atual — e isso ajuda a explicar o cansaço, o sono ruim e a dificuldade de ver resultado do treino no corpo. A boa notícia: as causas encontradas são ajustáveis, e otimizá-las agora tende a destravar sua energia e seus resultados.",
+  "alinhamento_disc": "Perfil S: apresentar as hipóteses com calma e em sequência lógica, uma frente por vez, enfatizando segurança do processo e acompanhamento contínuo; evitar sobrecarga de mudanças simultâneas — propor plano gradual com passos pequenos e previsíveis, reforçando que ela não estará sozinha e que cada etapa será revisada junto com a equipe."
+}

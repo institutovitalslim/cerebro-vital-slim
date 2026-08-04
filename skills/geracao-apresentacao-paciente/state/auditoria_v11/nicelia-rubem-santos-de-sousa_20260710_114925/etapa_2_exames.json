@@ -1,0 +1,887 @@
+{
+  "grupos": [
+    {
+      "id": "glicidico",
+      "nome": "Perfil Glicídico",
+      "hint": "Glicose, insulina, HbA1c, HOMA-IR.",
+      "exames": [
+        {
+          "nome": "Glicose",
+          "valor": "104",
+          "valor_f": 104.0,
+          "unidade": "mg/dL",
+          "referencia": "70 a 99",
+          "status": "alert",
+          "tag_label": "ALERT",
+          "tag_class": "alert",
+          "alterado": true,
+          "grupo": "glicidico"
+        },
+        {
+          "nome": "HbA1c",
+          "valor": "5,4",
+          "valor_f": 5.4,
+          "unidade": "%",
+          "referencia": "<5,4",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "glicidico"
+        },
+        {
+          "nome": "Glicemia Média",
+          "valor": "108",
+          "valor_f": 108.0,
+          "unidade": "mg/dL",
+          "referencia": "<100",
+          "status": "alert",
+          "tag_label": "ALERT",
+          "tag_class": "alert",
+          "alterado": true,
+          "grupo": "glicidico"
+        },
+        {
+          "nome": "Insulina",
+          "valor": "8,25",
+          "valor_f": 8.25,
+          "unidade": "µUI/mL",
+          "referencia": "2,5 a 13,1",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "glicidico"
+        },
+        {
+          "nome": "HOMA-IR",
+          "valor": "2,11",
+          "valor_f": 2.11,
+          "unidade": "",
+          "referencia": "<2,7",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "glicidico"
+        }
+      ]
+    },
+    {
+      "id": "lipidico",
+      "nome": "Perfil Lipídico",
+      "hint": "Colesterol, HDL, LDL, triglicérides.",
+      "exames": [
+        {
+          "nome": "Triglicérides",
+          "valor": "84,1",
+          "valor_f": 84.1,
+          "unidade": "mg/dL",
+          "referencia": "<150",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "lipidico"
+        },
+        {
+          "nome": "Colesterol Total",
+          "valor": "251",
+          "valor_f": 251.0,
+          "unidade": "mg/dL",
+          "referencia": "<190",
+          "status": "alert",
+          "tag_label": "ALERT",
+          "tag_class": "alert",
+          "alterado": true,
+          "grupo": "lipidico"
+        },
+        {
+          "nome": "HDL",
+          "valor": "92",
+          "valor_f": 92.0,
+          "unidade": "mg/dL",
+          "referencia": ">50",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "lipidico"
+        },
+        {
+          "nome": "Não-HDL",
+          "valor": "159",
+          "valor_f": 159.0,
+          "unidade": "mg/dL",
+          "referencia": "<130",
+          "status": "alert",
+          "tag_label": "ALERT",
+          "tag_class": "alert",
+          "alterado": true,
+          "grupo": "lipidico"
+        },
+        {
+          "nome": "LDL",
+          "valor": "141",
+          "valor_f": 141.0,
+          "unidade": "mg/dL",
+          "referencia": "<130",
+          "status": "alert",
+          "tag_label": "ALERT",
+          "tag_class": "alert",
+          "alterado": true,
+          "grupo": "lipidico"
+        },
+        {
+          "nome": "VLDL",
+          "valor": "18",
+          "valor_f": 18.0,
+          "unidade": "mg/dL",
+          "referencia": "<30",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "lipidico"
+        },
+        {
+          "nome": "ApoB",
+          "valor": "116",
+          "valor_f": 116.0,
+          "unidade": "mg/dL",
+          "referencia": "<100",
+          "status": "alert",
+          "tag_label": "ALERT",
+          "tag_class": "alert",
+          "alterado": true,
+          "grupo": "lipidico"
+        },
+        {
+          "nome": "ApoA",
+          "valor": "199",
+          "valor_f": 199.0,
+          "unidade": "mg/dL",
+          "referencia": "76 a 214",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "lipidico"
+        }
+      ]
+    },
+    {
+      "id": "hormonal",
+      "nome": "Hormonal Sexual",
+      "hint": "Testosterona, estradiol, FSH, LH, prolactina.",
+      "exames": [
+        {
+          "nome": "SHBG",
+          "valor": "105",
+          "valor_f": 105.0,
+          "unidade": "nmol/L",
+          "referencia": "27,1 a 128",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "Estradiol",
+          "valor": "5",
+          "valor_f": 5.0,
+          "unidade": "pg/mL",
+          "referencia": "<32",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "FSH",
+          "valor": "76,4",
+          "valor_f": 76.4,
+          "unidade": "mUI/mL",
+          "referencia": "25,8 a 134,8",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "LH",
+          "valor": "52,9",
+          "valor_f": 52.9,
+          "unidade": "mUI/mL",
+          "referencia": "7,7 a 58,5",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "Prolactina",
+          "valor": "8,8",
+          "valor_f": 8.8,
+          "unidade": "ng/mL",
+          "referencia": "4,79 a 23,3",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "Testosterona Total",
+          "valor": "37,8",
+          "valor_f": 37.8,
+          "unidade": "ng/dL",
+          "referencia": "5 a 50",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "Testosterona Livre",
+          "valor": "0,3",
+          "valor_f": 0.3,
+          "unidade": "ng/dL",
+          "referencia": "0,19 a 2,06",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "Testosterona Biodisponível",
+          "valor": "7",
+          "valor_f": 7.0,
+          "unidade": "ng/dL",
+          "referencia": "4,4 a 48",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        },
+        {
+          "nome": "Progesterona",
+          "valor": "0,1",
+          "valor_f": 0.1,
+          "unidade": "ng/mL",
+          "referencia": "<0,7",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hormonal"
+        }
+      ]
+    },
+    {
+      "id": "inflamatorio",
+      "nome": "Marcadores Inflamatórios",
+      "hint": "PCR-us, homocisteína, VHS.",
+      "exames": [
+        {
+          "nome": "PCR-us",
+          "valor": "0,9",
+          "valor_f": 0.8999999999999999,
+          "unidade": "mg/L",
+          "referencia": "<3",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "inflamatorio"
+        },
+        {
+          "nome": "LDH",
+          "valor": "190",
+          "valor_f": 190.0,
+          "unidade": "UI/L",
+          "referencia": "135 a 214",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "inflamatorio"
+        },
+        {
+          "nome": "Fibrinogênio",
+          "valor": "286",
+          "valor_f": 286.0,
+          "unidade": "mg/dL",
+          "referencia": "200 a 400",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "inflamatorio"
+        }
+      ]
+    },
+    {
+      "id": "vitaminas",
+      "nome": "Vitaminas e Minerais",
+      "hint": "Vit D, B12, ferro, ferritina, magnésio.",
+      "exames": [
+        {
+          "nome": "Vitamina B12",
+          "valor": "781",
+          "valor_f": 781.0,
+          "unidade": "pg/mL",
+          "referencia": "800 a 1500",
+          "status": "low",
+          "tag_label": "LOW",
+          "tag_class": "low",
+          "alterado": true,
+          "grupo": "vitaminas"
+        },
+        {
+          "nome": "Vitamina D",
+          "valor": "56",
+          "valor_f": 56.0,
+          "unidade": "ng/mL",
+          "referencia": "80 a 100",
+          "status": "low",
+          "tag_label": "LOW",
+          "tag_class": "low",
+          "alterado": true,
+          "grupo": "vitaminas"
+        }
+      ]
+    },
+    {
+      "id": "tireoide",
+      "nome": "Tireoide",
+      "hint": "TSH, T4 Livre, T3 Livre.",
+      "exames": [
+        {
+          "nome": "TSH",
+          "valor": "6,13",
+          "valor_f": 6.13,
+          "unidade": "uUI/mL",
+          "referencia": "0,27 a 4,2",
+          "status": "alert",
+          "tag_label": "ALERT",
+          "tag_class": "alert",
+          "alterado": true,
+          "grupo": "tireoide"
+        },
+        {
+          "nome": "T4 Livre",
+          "valor": "1,23",
+          "valor_f": 1.23,
+          "unidade": "ng/dL",
+          "referencia": "0,85 a 1,86",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "tireoide"
+        },
+        {
+          "nome": "T3 Total",
+          "valor": "105",
+          "valor_f": 105.0,
+          "unidade": "ng/dL",
+          "referencia": "60 a 200",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "tireoide"
+        }
+      ]
+    },
+    {
+      "id": "hepatico",
+      "nome": "Função Hepática",
+      "hint": "TGO, TGP, GGT, fosfatase alcalina.",
+      "exames": [
+        {
+          "nome": "TGO",
+          "valor": "21",
+          "valor_f": 21.0,
+          "unidade": "U/L",
+          "referencia": "<32",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hepatico"
+        },
+        {
+          "nome": "TGP",
+          "valor": "19",
+          "valor_f": 19.0,
+          "unidade": "U/L",
+          "referencia": "<33",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hepatico"
+        },
+        {
+          "nome": "GGT",
+          "valor": "21",
+          "valor_f": 21.0,
+          "unidade": "U/L",
+          "referencia": "<38",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hepatico"
+        }
+      ]
+    },
+    {
+      "id": "renal",
+      "nome": "Função Renal",
+      "hint": "Ureia, creatinina, ácido úrico.",
+      "exames": [
+        {
+          "nome": "Ureia",
+          "valor": "29",
+          "valor_f": 29.0,
+          "unidade": "mg/dL",
+          "referencia": "10 a 50",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "renal"
+        },
+        {
+          "nome": "Creatinina",
+          "valor": "0,81",
+          "valor_f": 0.81,
+          "unidade": "mg/dL",
+          "referencia": "0,5 a 1",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "renal"
+        },
+        {
+          "nome": "Ácido Úrico",
+          "valor": "4,3",
+          "valor_f": 4.3,
+          "unidade": "mg/dL",
+          "referencia": "2,4 a 5,7",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "renal"
+        }
+      ]
+    },
+    {
+      "id": "adrenal",
+      "nome": "Adrenal",
+      "hint": "Cortisol, IGF-1.",
+      "exames": [
+        {
+          "nome": "Cortisol",
+          "valor": "12,2",
+          "valor_f": 12.2,
+          "unidade": "µg/dL",
+          "referencia": "6,2 a 18",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "adrenal"
+        },
+        {
+          "nome": "IGF-1",
+          "valor": "97,1",
+          "valor_f": 97.1,
+          "unidade": "ng/mL",
+          "referencia": "78 a 258",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "adrenal"
+        }
+      ]
+    },
+    {
+      "id": "hemograma",
+      "nome": "Hemograma",
+      "hint": "Avalia hemácias, hemoglobina, leucócitos, plaquetas.",
+      "exames": [
+        {
+          "nome": "Hemácias",
+          "valor": "4,75",
+          "valor_f": 4.75,
+          "unidade": "10^6/µL",
+          "referencia": "4 a 5,4",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Hemoglobina",
+          "valor": "13,9",
+          "valor_f": 13.9,
+          "unidade": "g/dL",
+          "referencia": "12 a 15,8",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Hematócrito",
+          "valor": "40",
+          "valor_f": 40.0,
+          "unidade": "%",
+          "referencia": "33 a 47,8",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "VCM",
+          "valor": "84,2",
+          "valor_f": 84.2,
+          "unidade": "fL",
+          "referencia": "80 a 98",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "HCM",
+          "valor": "29,2",
+          "valor_f": 29.2,
+          "unidade": "pg",
+          "referencia": "26,2 a 32,6",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "CHCM",
+          "valor": "34,8",
+          "valor_f": 34.8,
+          "unidade": "g/dL",
+          "referencia": "30 a 36,5",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "RDW",
+          "valor": "13,7",
+          "valor_f": 13.7,
+          "unidade": "%",
+          "referencia": "11 a 16",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Leucócitos",
+          "valor": "3250",
+          "valor_f": 3250.0,
+          "unidade": "/µL",
+          "referencia": "3600 a 11000",
+          "status": "low",
+          "tag_label": "LOW",
+          "tag_class": "low",
+          "alterado": true,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Neutrófilos",
+          "valor": "1869",
+          "valor_f": 1869.0,
+          "unidade": "/µL",
+          "referencia": "1700 a 8000",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Eosinófilos",
+          "valor": "62",
+          "valor_f": 62.0,
+          "unidade": "/µL",
+          "referencia": "50 a 500",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Basófilos",
+          "valor": "10",
+          "valor_f": 10.0,
+          "unidade": "/µL",
+          "referencia": "0 a 100",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Linfócitos",
+          "valor": "1060",
+          "valor_f": 1060.0,
+          "unidade": "/µL",
+          "referencia": "1000 a 4800",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Monócitos",
+          "valor": "250",
+          "valor_f": 250.0,
+          "unidade": "/µL",
+          "referencia": "100 a 1200",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        },
+        {
+          "nome": "Plaquetas",
+          "valor": "175000",
+          "valor_f": 175000.0,
+          "unidade": "/µL",
+          "referencia": "130000 a 450000",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "hemograma"
+        }
+      ]
+    },
+    {
+      "id": "outros",
+      "nome": "Outros",
+      "hint": "",
+      "exames": [
+        {
+          "nome": "Ferro",
+          "valor": "62,5",
+          "valor_f": 62.5,
+          "unidade": "µg/dL",
+          "referencia": "50 a 170",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "outros"
+        },
+        {
+          "nome": "Ferritina",
+          "valor": "189",
+          "valor_f": 189.0,
+          "unidade": "ng/mL",
+          "referencia": "13 a 200",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "outros"
+        },
+        {
+          "nome": "Homocisteína",
+          "valor": "6,6",
+          "valor_f": 6.6,
+          "unidade": "µmol/L",
+          "referencia": "<12",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "outros"
+        },
+        {
+          "nome": "Sódio",
+          "valor": "143",
+          "valor_f": 143.0,
+          "unidade": "mEq/L",
+          "referencia": "136 a 146",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "outros"
+        },
+        {
+          "nome": "Magnésio",
+          "valor": "2,1",
+          "valor_f": 2.1,
+          "unidade": "mg/dL",
+          "referencia": "1,6 a 2,6",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "outros"
+        },
+        {
+          "nome": "Cálcio",
+          "valor": "9,7",
+          "valor_f": 9.7,
+          "unidade": "mg/dL",
+          "referencia": "8,6 a 10,2",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "outros"
+        },
+        {
+          "nome": "PTH",
+          "valor": "49",
+          "valor_f": 49.0,
+          "unidade": "pg/mL",
+          "referencia": "15 a 65",
+          "status": "normal",
+          "tag_label": "NORMAL",
+          "tag_class": "normal",
+          "alterado": false,
+          "grupo": "outros"
+        }
+      ]
+    }
+  ],
+  "hero_alerts": [
+    {
+      "nome": "Leucócitos",
+      "valor": "3250",
+      "unidade": "/µL",
+      "referencia": "3600 a 11000",
+      "status": "low",
+      "tag_label": "LOW",
+      "tag_class": "low"
+    },
+    {
+      "nome": "Vitamina B12",
+      "valor": "781",
+      "unidade": "pg/mL",
+      "referencia": "800 a 1500",
+      "status": "low",
+      "tag_label": "LOW",
+      "tag_class": "low"
+    },
+    {
+      "nome": "Vitamina D",
+      "valor": "56",
+      "unidade": "ng/mL",
+      "referencia": "80 a 100",
+      "status": "low",
+      "tag_label": "LOW",
+      "tag_class": "low"
+    },
+    {
+      "nome": "Glicose",
+      "valor": "104",
+      "unidade": "mg/dL",
+      "referencia": "70 a 99",
+      "status": "alert",
+      "tag_label": "ALERT",
+      "tag_class": "alert"
+    }
+  ],
+  "stats": {
+    "total": 59,
+    "criticos": 0,
+    "alertas": 10,
+    "atencao": 0,
+    "normais": 49
+  },
+  "_audit": {
+    "paciente_nome": "Nicelia Rubem Santos de Sousa",
+    "sexo": "F",
+    "idade": 62,
+    "pdfs_processados": [
+      {
+        "nome": "Examex de sangue - Laudo Completo 27_06_2026.pdf",
+        "extraidos_pelo_llm": 40,
+        "validados": 59,
+        "lab_origem": "NAM - Núcleo de Assessoria Médica",
+        "data_coleta": "27/06/2026"
+      }
+    ],
+    "exames_validados": 59,
+    "exames_revisao_manual": [
+      {
+        "exame": {
+          "nome_canonico": "PCR-us",
+          "nome_no_laudo": "Proteína C Reativa Ultra Sensível",
+          "valor": 0.09,
+          "unidade": "mg/dL",
+          "ref_min": null,
+          "ref_max": 0.1,
+          "grupo": "inflamatorio",
+          "status_clinico": "normal",
+          "observacao": "Baixo Risco: Inferior a 0,10 mg/dL"
+        },
+        "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+      }
+    ],
+    "cross_check_warnings": [
+      "Auditoria determinística inseriu PCR-us=0.8999999999999999mg/L",
+      "Auditoria determinística inseriu SHBG=105.0nmol/L",
+      "Auditoria determinística inseriu TSH=6.13uUI/mL",
+      "Auditoria determinística inseriu T4 Livre=1.23ng/dL",
+      "Auditoria determinística inseriu T3 Total=105.0ng/dL",
+      "Auditoria determinística inseriu Estradiol=5.0pg/mL",
+      "Auditoria determinística inseriu FSH=76.4mUI/mL",
+      "Auditoria determinística inseriu LH=52.9mUI/mL",
+      "Auditoria determinística inseriu Prolactina=8.8ng/mL",
+      "Auditoria determinística inseriu Testosterona Total=37.8ng/dL",
+      "Auditoria determinística inseriu Testosterona Livre=0.3ng/dL",
+      "Auditoria determinística inseriu Testosterona Biodisponível=7.0ng/dL",
+      "Auditoria determinística inseriu Progesterona=0.1ng/mL",
+      "Auditoria determinística inseriu Cortisol=12.2µg/dL",
+      "Auditoria determinística inseriu IGF-1=97.1ng/mL",
+      "Auditoria determinística inseriu GGT=21.0U/L",
+      "Auditoria determinística inseriu LDH=190.0UI/L",
+      "Auditoria determinística inseriu Fibrinogênio=286.0mg/dL",
+      "Auditoria determinística inseriu ApoB=116.0mg/dL",
+      "Auditoria determinística inseriu ApoA=199.0mg/dL"
+    ]
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "DAVI CARVALHO RAMOS MELO",
+    "sexo": "M",
+    "idade": 15,
+    "imc_atual": null,
+    "imc_objetivo": null,
+    "profissao": null,
+    "como_conheceu": null
+  },
+  "queixas_principais": [],
+  "historico_clinico": {
+    "doencas_cronicas": [],
+    "cirurgias": [],
+    "medicacoes_atuais": [],
+    "alergias_intolerancias": [],
+    "historico_familiar": "não informado",
+    "reposicao_hormonal": "não informado"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "não informado",
+      "tipo": "não informado"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": null,
+      "doces": "não informado",
+      "alcool": "não informado",
+      "tabaco": "não informado",
+      "hidratacao_litros": null,
+      "padrao_geral": "não informado"
+    },
+    "sono": {
+      "horas": null,
+      "qualidade_1_10": null,
+      "energia_ao_acordar_1_5": null,
+      "cansaco_durante_dia": "não informado"
+    },
+    "trabalho": {
+      "tipo": "não informado",
+      "horarios": "não informado"
+    },
+    "frequencia_intestinal": "não informado"
+  },
+  "saude_hormonal": null,
+  "perfil_psicossocial": {
+    "barreira_principal": "não informado",
+    "investe_em_saude": "não informado",
+    "nivel_energia_1_10": null,
+    "ansiedade_estresse": "não informado"
+  },
+  "metas": {
+    "peso_atual_kg": null,
+    "peso_objetivo_kg": null,
+    "peso_maximo_anterior_kg": null,
+    "diferenca_para_objetivo_kg": null
+  },
+  "spin": {
+    "tempo_luta": "não informado",
+    "incomodo_principal": "não informado",
+    "desafios": "não informado",
+    "cenario_sem_tratamento": "não informado",
+    "investimento_perdido": "não informado",
+    "vida_resolvida_significaria": "não informado",
+    "interesse_programa": "não informado"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Paciente menor de idade (15 anos) em contexto de clínica voltada a adultos",
+      "categoria": "outro",
+      "prioridade": 3,
+      "justificativa": "O Instituto Vital Slim atende predominantemente mulheres adultas em perimenopausa/menopausa e síndrome metabólica. Paciente masculino de 15 anos requer avaliação de adequação do protocolo assistencial, consentimento dos responsáveis legais e verificação de indicação clínica compatível com a linha de cuidado da instituição."
+    },
+    {
+      "sinal": "Questionário de pré-consulta completamente ausente",
+      "categoria": "outro",
+      "prioridade": 3,
+      "justificativa": "Nenhum dado clínico foi coletado via portal IVS ou formulário de pré-consulta. Impossível realizar triagem de risco, identificar queixas, histórico ou metas sem preenchimento mínimo do instrumento."
+    },
+    {
+      "sinal": "Ausência de peso e altura — IMC não calculável",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Sem dados antropométricos não é possível estratificar risco metabólico, definir metas ponderais ou calcular IMC para adequação ao protocolo."
+    },
+    {
+      "sinal": "Ausência de informações sobre medicações em uso",
+      "categoria": "outro",
+      "prioridade": 2,
+      "justificativa": "Em paciente adolescente, o uso de medicações (psicotrópicos, corticoides, hormônios) pode impactar diretamente o metabolismo e a composição corporal. Campo crítico não preenchido."
+    },
+    {
+      "sinal": "Ausência de histórico familiar",
+      "categoria": "metabolico",
+      "prioridade": 1,
+      "justificativa": "Histórico familiar de obesidade, diabetes tipo 2, dislipidemia ou doenças cardiovasculares é relevante para estratificação de risco em adolescentes. Dado não disponível."
+    }
+  ],
+  "perfil_disc": "default",
+  "interpretacao_inicial": "O presente registro não contém dados clínicos provenientes do questionário de pré-consulta, uma vez que tanto o portal IVS quanto o formulário de pré-consulta retornaram ausência de informações (found: false). Desta forma, não é possível identificar queixas, padrões sintomáticos, histórico clínico ou metas terapêuticas para estruturação de hipóteses diagnósticas neste momento.\n\nAdicionalmente, chama atenção o perfil demográfico do paciente: sexo masculino, 15 anos de idade, o que representa uma população atípica para o fluxo assistencial habitual do Instituto Vital Slim. Recomenda-se, antes de qualquer avanço no processo de cuidado, verificar a adequação da indicação clínica para este perfil, garantir a presença e o consentimento formal dos responsáveis legais, e proceder ao reenvio ou preenchimento presencial do questionário de pré-consulta completo, incluindo dados antropométricos, queixas principais e histórico médico, para que a análise clínica possa ser realizada de forma segura e fundamentada.",
+  "completude": {
+    "campos_preenchidos": 3,
+    "campos_totais": 40,
+    "percentual": 7.5,
+    "campos_criticos_faltantes": [
+      "peso_atual_kg",
+      "altura",
+      "imc_atual",
+      "imc_objetivo",
+      "queixas_principais",
+      "doencas_cronicas",
+      "medicacoes_atuais",
+      "alergias_intolerancias",
+      "historico_familiar",
+      "atividade_fisica_frequencia",
+      "atividade_fisica_tipo",
+      "alimentacao_refeicoes_por_dia",
+      "alimentacao_padrao_geral",
+      "alimentacao_hidratacao_litros",
+      "sono_horas",
+      "sono_qualidade",
+      "sono_energia_ao_acordar",
+      "trabalho_tipo",
+      "frequencia_intestinal",
+      "barreira_principal",
+      "nivel_energia_1_10",
+      "ansiedade_estresse",
+      "peso_objetivo_kg",
+      "spin_tempo_luta",
+      "spin_incomodo_principal",
+      "spin_desafios",
+      "spin_cenario_sem_tratamento",
+      "spin_vida_resolvida_significaria",
+      "perfil_disc",
+      "como_conheceu",
+      "profissao"
+    ]
+  }
+}

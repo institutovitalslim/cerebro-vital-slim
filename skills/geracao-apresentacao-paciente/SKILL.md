@@ -1,6 +1,6 @@
 ---
 name: geracao-apresentacao-paciente
-description: Cria apresentações HTML premium para pacientes dos Programas de Acompanhamento do Instituto Vital Slim, consolidando evolução antropométrica, exames mais recentes, fotos comparativas e identidade visual da clínica. Use quando for necessário montar devolutiva individual de evolução para paciente específico, revisar material para reunião clínica/comercial, ou gerar arquivo único em HTML para envio interno.
+description: 'Cria apresentações HTML premium para pacientes do Instituto Vital Slim em DOIS formatos. (1) PROGRAMA DE ACOMPANHAMENTO (V10, paciente novo): apresentação de PRIMEIRA CONSULTA com 3 modos (apresentação/exames/médica), seção de objeções com quebras, DISC adaptado por perfil (D/I/S/C), versão paciente + versão interna geradas em paralelo, botão WhatsApp para envio direto, e CTA final clínico. Usar quando o pedido for "apresentação do programa de acompanhamento", "apresentação inicial", "proposta de programa", "apresentação com objeções", "apresentação com modos". (2) EVOLUÇÃO: devolutiva pós-acompanhamento consolidando antropometria, exames mais recentes, fotos comparativas. Usar quando o pedido for "devolutiva", "evolução", "antes e depois", "retorno". Ambos geram HTML único com imagens em base64.'
 category: operacional
 status: ativo
 owner: operacao-ivs
@@ -90,6 +90,85 @@ owner: operacao-ivs
 - se os dados da tabela vierem por imagem e algum campo estiver duvidoso, marcar para conferência antes da versão final
 - se houver interpretação hormonal ou clínica sensível, incluir como ponto de atenção e não como conclusão fechada
 
+## Variante V10 — Programa de Acompanhamento (paciente novo)
+
+Quando Maria, Clara, João ou Tiaro pedirem **"apresentação do programa de acompanhamento"** / **"apresentação inicial"** / **"apresentação de paciente novo"** / **"apresentação com objeções"** / **"apresentação com modos"** — a referência é esta variante.
+
+Guia operacional completo + SOP + troubleshooting + changelog: `cerebro/areas/operacoes/apresentacao-paciente-novo-V10.md`
+
+**Última atualização canônica:** 2026-06-04 — RC-25 DISC obrigatório em toda V10.
+
+**Atualização anterior:** 2026-05-28 — adiciona seção bioimpedância (extrator LLM via gpt-4o vision, imagem inline, classificadores clínicos), Drive search recursivo, fix do detector DISC, label SPIN 'Pergunta:' (antes 'Pergunta para a consulta:').
+
+### Diferença vs apresentação de evolução
+
+| | V10 (primeira consulta) | Evolução (devolutiva) |
+|---|---|---|
+| **Quando** | Paciente novo, antes de fechar programa | Paciente em acompanhamento, reavaliação |
+| **Foco** | Diagnóstico + método + objeções → fechamento | Antes/depois + ganhos + projeção |
+| **Modos** | 3 (apresentação/exames/médica) | 1 (linear) |
+| **Versões** | 2 (interna + paciente, geradas em paralelo) | 1 |
+| **DISC** | Sim (auto-adapta copy por perfil) | Não |
+| **Apêndice médica** | Sim (15 objeções + quebras) | Não |
+| **Botão WhatsApp envio** | Sim | Não |
+
+### Estrutura V10 (seções renderizadas)
+
+1. Topbar com logo IVS + chip de modo
+2. Hero clínico (h1 personalizado por DISC)
+3. Diagnóstico executivo (tese clínica + recomendação)
+4. Espelho do paciente (`patient_mirror`)
+5. **Bioimpedância** (composição + hidratação + análise celular + imagem do laudo)
+6. Mapa de alavancas críticas (até 5 exames com interpretação + SPIN)
+7. Leitura integrada (`spin_guided`, 4 blocos com alinhamento DISC)
+8. Inclusos no acompanhamento (8 cards)
+9. Programa 180 dias (4 fases)
+10. Apêndice técnico (painel laboratorial completo)
+11. Apêndice médica (15 objeções) — somente versão interna
+12. CTA final + assinatura Dra. Daniely
+13. Modal de envio WhatsApp — somente versão interna
+
+### 3 modos de visualização
+
+| Modo | Mostra |
+|---|---|
+| `modo-apresentacao` | Capa, espelho, alavancas, leitura, programa, CTA |
+| `modo-exames` | Apêndice técnico (painel laboratorial completo) |
+| `modo-medica` | Apêndice da médica com objeções + quebras |
+
+### Como gerar V10
+
+**Orchestrator completo (preferencial):**
+```bash
+python3 scripts/gerar_apresentacao.py <data_dd-MM-yyyy> <turno>
+```
+
+Gera as 2 versões (interna + paciente) e envia automaticamente a interna pro tópico Pacientes do Telegram (RC-06).
+
+**Render direto (debug ou paciente específico):**
+```python
+from gerar_apresentacao_v10 import render_apresentacao_v10
+out = render_apresentacao_v10(paciente, questionario, exames,
+                              output_dir="/tmp",
+                              versao_paciente=False,  # True = versão sem objeções
+                              perfil_disc=None)       # None = autodetect; "D"/"I"/"S"/"C" pra forçar
+```
+
+### Saídas
+
+- Versão interna: `deliverables/apresentacao-<slug>-v10-<timestamp>.html`
+- Versão paciente: `deliverables/apresentacao-<slug>-paciente-v10-<timestamp>.html`
+
+### Exemplos prontos pra inspecionar
+
+```bash
+ls -lt deliverables/apresentacao-*-v10-*.html | head -5
+```
+
+Casos atuais: `tain-japiassu-teles`, `erick-magalhaes-santos`.
+
+---
+
 ## Arquitetura — Pipeline de extração de exames (atualizada 2026-05-05)
 
 A extração de valores dos PDFs de laudos laboratoriais usa **LLM (OpenAI gpt-4o)** com Structured Outputs + **validador multi-layer** com refs canônicas armazenadas em `assets/refs_canonicas.json`.
@@ -104,8 +183,9 @@ PDF do paciente (Drive)
 ```
 
 ### Componentes
-- `scripts/extrair_exames_llm.py` — extrator LLM (gpt-4o)
-- `scripts/validador_exames.py` — 6 camadas de validação (L0-L6)
+- `scripts/extrair_exames_llm.py` — extrator LLM exames de sangue (gpt-4o + structured)
+- `scripts/extrair_bioimpedancia_llm.py` — extrator LLM bioimpedância (gpt-4o vision + structured) ⭐
+- `scripts/validador_exames.py` — 11 camadas de validação (L0-L10)
 - `scripts/extrair_exames_pdf.py` — wrapper de download Drive + parser legacy (fallback)
 - `scripts/gerar_apresentacao.py` — orchestrator (chama `extrair_todos_exames_llm`)
 - `scripts/gerar_apresentacao_v9.py` — renderer v9 (light cream luxury, 7 seções)
@@ -115,12 +195,16 @@ PDF do paciente (Drive)
 | Layer | O que valida |
 |-------|--------------|
 | L0 | Pre-check: sexo do paciente obrigatório (RC-01) |
-| L1 | Schema: campos obrigatórios |
-| L2 | Catálogo: nome canônico está em refs_canonicas.json |
-| L3 | Plausibilidade: valor dentro do range fisiológico absoluto |
+| L1 | Schema: campos obrigatórios (nome, valor) |
+| L2 | Catálogo: nome canônico em refs_canonicas.json |
+| L3 | Plausibilidade fisiológica absoluta |
 | L4 | Sex+age lookup: ref aplicável encontrada |
-| L5 | Cross-check lipídico: LDL ≈ Total − HDL − VLDL |
-| L6 | Status recalc: status final usando refs canônicas |
+| L5 | Cross-check lipídico (LDL ≈ Total − HDL − VLDL) |
+| L6 | Unidades coerentes (mg/dL vs g/dL etc) |
+| L7 | Sinais e magnitude (< vs >, ordem de grandeza) |
+| L8 | Tipo numérico vs string |
+| L9 | Duplicatas e faixas absurdas |
+| L10 | Status final recalc usando refs IVS conservadoras |
 
 ### Atualizar referências clínicas
 Editar `assets/refs_canonicas.json`. Cada exame tem array `ranges` com objetos:

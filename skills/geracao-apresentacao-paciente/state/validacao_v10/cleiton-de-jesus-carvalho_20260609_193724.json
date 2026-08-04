@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "paciente": "CLEITON DE JESUS CARVALHO",
+  "html_path": "/root/cerebro-vital-slim/deliverables/apresentacao-cleiton-de-jesus-carvalho-v10-20260609_193723.html",
+  "erros": [],
+  "checks": {
+    "padrao_tireotox": true,
+    "padrao_sobrecarga_ferro": true,
+    "criticos": [
+      "Progesterona",
+      "SHBG",
+      "Vitamina B12",
+      "Ferritina",
+      "Ferro",
+      "Índice de Saturação da Transferrina",
+      "T3 Livre",
+      "T4 Livre",
+      "TSH"
+    ]
+  }
+}

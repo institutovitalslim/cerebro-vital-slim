@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0.0",
+  "hipoteses_integradas": [
+    {
+      "titulo": "Hipotireoidismo central com comprometimento metabólico e energético severo",
+      "queixas_relacionadas": [
+        "Baixo nível de energia (3/10)",
+        "Excesso de peso persistente (IMC 29.5)",
+        "Pele seca",
+        "Queda de cabelo leve"
+      ],
+      "exames_relacionados": [
+        "T4 Livre (0,81 ng/dL - abaixo da referência)",
+        "T3 Livre (1,6 pg/mL - severamente reduzido)",
+        "TSH (0,44 µUI/mL - inadequadamente normal-baixo)"
+      ],
+      "descricao_clinica": "O padrão laboratorial sugere hipotireoidismo de origem central (secundário ou terciário), onde a hipófise não responde adequadamente à redução dos hormônios tireoidianos periféricos. O TSH deveria estar elevado diante de T4L e T3L reduzidos, mas permanece inapropriadamente normal-baixo, indicando falha no eixo hipotálamo-hipófise-tireoide. Este padrão explica diretamente as queixas de fadiga intensa (energia 3/10), dificuldade persistente de perda de peso (metabolismo basal reduzido), pele seca e queda capilar. O T3 livre severamente reduzido (1,6 pg/mL) compromete função mitocondrial e termogênese, perpetuando o ganho de peso e a fadiga. A perimenopausa pode agravar sintomas, mas não explica valores tão reduzidos de hormônios tireoidianos. A coexistência com deficiências de vitamina D (28 ng/mL) e B12 (475 pg/mL) potencializa o quadro de fadiga e pode comprometer ainda mais a conversão periférica de T4 para T3.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Avaliação endocrinológica presencial urgente (até 14 dias) para investigar eixo hipofisário com ressonância magnética de sela túrcica, perfil hormonal hipofisário completo (ACTH, prolactina, IGF-1, LH, FSH) e considerar reposição hormonal tireoidiana individualizada (levotiroxina e/ou liotironina). Investigar conversão periférica com dosagem de T3 reverso, selênio, zinco e ferritina. Ultrassom de tireoide e anticorpos antitireoidianos (anti-TPO, anti-Tg) para descartar tireoidite autoimune concomitante."
+    },
+    {
+      "titulo": "Insuficiência adrenal com risco de crise em contexto de estresse",
+      "queixas_relacionadas": [
+        "Baixo nível de energia (3/10)",
+        "Ansiedade como barreira para autocuidado"
+      ],
+      "exames_relacionados": [
+        "Cortisol Basal (1,21 µg/dL - severamente reduzido)"
+      ],
+      "descricao_clinica": "O cortisol basal severamente reduzido (1,21 µg/dL; referência 6,7-22,6) é compatível com insuficiência adrenal primária (doença de Addison) ou secundária (hipofisária). Este achado crítico explica a fadiga crônica intensa e pode estar contribuindo para a ansiedade relatada, uma vez que a deficiência de cortisol compromete a resposta ao estresse e pode cursar com sintomas neuropsiquiátricos. O risco de crise adrenal em situações de estresse fisiológico (infecções, cirurgias, trauma emocional) é real e potencialmente fatal. A paciente pode apresentar hipotensão postural, hipoglicemia, náuseas e fraqueza muscular, sintomas frequentemente atribuídos à perimenopausa mas que, neste caso, têm etiologia endócrina grave. A coexistência com hipotireoidismo central reforça a hipótese de hipopituitarismo (pan-hipopituitarismo parcial), exigindo investigação completa do eixo hipofisário.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Encaminhamento endocrinológico URGENTE (até 7 dias) para investigar insuficiência adrenal com dosagem de ACTH, teste de estímulo com ACTH (Synacthen), ressonância magnética de hipófise e adrenais, e painel de autoimunidade adrenal. Orientar paciente sobre sinais de crise adrenal (náuseas, vômitos, hipotensão, confusão mental) e necessidade de procurar emergência imediatamente. Considerar reposição de hidrocortisona sob supervisão médica rigorosa após confirmação diagnóstica."
+    },
+    {
+      "titulo": "Deficiências nutricionais concomitantes agravando fadiga e risco metabólico-ósseo",
+      "queixas_relacionadas": [
+        "Baixo nível de energia (3/10)",
+        "Excesso de peso persistente",
+        "Pele seca"
+      ],
+      "exames_relacionados": [
+        "Vitamina D (28 ng/mL - deficiência severa)",
+        "Vitamina B12 (475 pg/mL - limítrofe)"
+      ],
+      "descricao_clinica": "A deficiência severa de vitamina D (28 ng/mL; ideal 80-100) em mulher perimenopáusica representa risco acelerado de perda óssea, comprometimento imunológico e agravamento de sintomas de fadiga e dor musculoesquelética. A vitamina D é cofator essencial para função mitocondrial e metabolismo energético, e sua deficiência potencializa o quadro de fadiga já presente. A B12 limítrofe (475 pg/mL; ideal 800-1500) pode estar contribuindo para fadiga, névoa mental e alterações de humor, sintomas frequentemente atribuídos à perimenopausa mas que têm componente nutricional tratável. A coexistência dessas deficiências sugere padrão alimentar inadequado (confirmado pelo baixo consumo de vegetais e alimentação hiperproteica desequilibrada) ou má absorção intestinal (possível disbiose pós-colecistectomia). A correção dessas deficiências é prioritária para otimizar resposta ao tratamento tireoidiano e adrenal.",
+      "prioridade": 3,
+      "tipo": "padrao_nutricional",
+      "acao_proposta": "Avaliação clínica em até 14 dias para iniciar reposição terapêutica de colecalciferol (considerar doses de ataque 50.000 UI/semana por 8-12 semanas) e metilcobalamina sublingual ou intramuscular. Solicitar PTH e densitometria óssea para avaliar risco de osteoporose. Investigar má absorção intestinal com dosagem de ácido metilmalônico, homocisteína e avaliação de disbiose. Acompanhamento nutricional para otimizar padrão alimentar com aumento de vegetais, peixes e alimentos ricos em vitaminas do complexo B. Monitorar níveis séricos em 8-12 semanas."
+    },
+    {
+      "titulo": "Síndrome genitourinária da menopausa com impacto na qualidade de vida",
+      "queixas_relacionadas": [
+        "Libido reduzida",
+        "Ressecamento vaginal",
+        "Dispareunia",
+        "Ciclo menstrual irregular"
+      ],
+      "exames_relacionados": [
+        "Contexto clínico de perimenopausa (idade 49 anos, ciclo irregular)"
+      ],
+      "descricao_clinica": "O conjunto de sintomas genitourinários (ressecamento vaginal, dispareunia, libido reduzida) associado a ciclo irregular em mulher de 49 anos é compatível com síndrome genitourinária da menopausa, secundária ao hipoestrogenismo relativo da transição perimenopáusica. Embora não tenhamos dosagens hormonais específicas (FSH, estradiol, progesterona, testosterona) neste painel, o quadro clínico é característico e impacta significativamente qualidade de vida e relacionamento conjugal. A fadiga crônica e ansiedade podem estar agravando a redução da libido. A investigação hormonal completa é necessária para definir se a paciente se beneficiaria de terapia de reposição hormonal bioidêntica, considerando ausência de contraindicações e histórico familiar de câncer.",
+      "prioridade": 2,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Avaliação ginecológica para solicitar perfil hormonal completo (FSH, estradiol, progesterona, testosterona total e livre, SHBG) e considerar terapia de reposição hormonal bioidêntica individualizada (estrogênio transdérmico + progesterona micronizada + testosterona se indicado). Avaliar uso de lubrificantes vaginais à base de ácido hialurônico e laser vaginal fracionado para síndrome genitourinária. Investigar histórico familiar de câncer para estratificação de risco antes de iniciar reposição hormonal."
+    },
+    {
+      "titulo": "Processo inflamatório/infeccioso agudo em investigação",
+      "queixas_relacionadas": [],
+      "exames_relacionados": [
+        "Leucócitos (14.760/mm³ - leucocitose leve)",
+        "Segmentados (12.103/mm³ - neutrofilia significativa)"
+      ],
+      "descricao_clinica": "A leucocitose leve (14.760/mm³) às custas de neutrofilia significativa (12.103/mm³) sugere resposta inflamatória ou infecciosa aguda em curso. A ausência de desvio à esquerda (bastonetes zero) e a normalidade das demais linhagens leucocitárias indicam processo reativo benigno, porém a magnitude da neutrofilia requer investigação clínica para identificação do foco etiológico. Possíveis causas incluem infecção bacteriana (urinária, respiratória, dentária), inflamação tecidual aguda, estresse físico/emocional intenso ou uso de corticoides (não relatado). A paciente não relatou sintomas infecciosos agudos no questionário, o que pode indicar processo subclínico ou coleta em momento de estresse fisiológico. A persistência da leucocitose sem causa aparente demandaria investigação adicional para descartar processos inflamatórios crônicos.",
+      "prioridade": 2,
+      "tipo": "achado_laboratorial_sem_queixa",
+      "acao_proposta": "Avaliação clínica em até 48-72 horas para investigar sinais/sintomas de infecção (febre, dor localizada, sintomas respiratórios/urinários/dentários), inflamação aguda ou estresse recente. Repetir hemograma completo em 1-2 semanas para avaliar persistência. Se mantida elevação sem causa identificável, solicitar PCR ultrassensível, VHS e esfregaço de sangue periférico. Considerar avaliação odontológica (foco dentário) e urinálise com urocultura."
+    },
+    {
+      "titulo": "Padrão alimentar inadequado perpetuando risco metabólico",
+      "queixas_relacionadas": [
+        "Excesso de peso persistente",
+        "Frequência intestinal irregular"
+      ],
+      "exames_relacionadas": [
+        "Contexto clínico: alimentação hiperproteica com baixo consumo de vegetais, jantar inadequado (pipoca), uso de açúcar"
+      ],
+      "descricao_clinica": "O padrão alimentar relatado (hiperproteico com baixo consumo de vegetais, jantar não nutritivo à base de pipoca, uso de açúcar para adoçar, aversão a peixes) perpetua o risco metabólico e contribui para o excesso de peso persistente e intestino irregular. A alimentação inadequada pode estar contribuindo para as deficiências de vitamina D e B12 (baixa ingestão de peixes, ovos, laticínios de qualidade) e para possível disbiose intestinal (baixa ingestão de fibras). A colecistectomia recente (2022) pode estar comprometendo digestão de gorduras e absorção de vitaminas lipossolúveis (A, D, E, K), agravando o quadro nutricional. A ansiedade relatada como barreira para autocuidado pode estar perpetuando escolhas alimentares inadequadas por mecanismo de conforto emocional.",
+      "prioridade": 2,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Acompanhamento nutricional individualizado para reestruturação gradual do padrão alimentar, com aumento progressivo de vegetais, introdução de peixes (ou suplementação de ômega-3 se aversão persistir), redução de açúcar refinado e adequação do jantar. Considerar suplementação de enzimas digestivas (lipase, protease) para otimizar digestão pós-colecistectomia. Investigar disbiose intestinal com teste de microbiota ou marcadores indiretos (zonulina, calprotectina fecal). Suporte psicológico para manejo de ansiedade e padrões alimentares emocionais."
+    }
+  ],
+  "queixas_sem_correlato_laboratorial": [
+    {
+      "queixa": "Ansiedade como barreira para autocuidado",
+      "interpretacao": "A ansiedade relatada como principal barreira para investir em saúde tem componente psicossocial importante, mas pode estar sendo agravada pelas alterações endócrinas identificadas (hipotireoidismo central, insuficiência adrenal, deficiências nutricionais). A deficiência de cortisol, em particular, pode cursar com sintomas neuropsiquiátricos incluindo ansiedade, irritabilidade e dificuldade de lidar com estresse. A fadiga crônica e as alterações hormonais da perimenopausa também contribuem para sobrecarga emocional. O perfil DISC tipo S (estável, avessa a mudanças bruscas) reforça a necessidade de abordagem gradual e suporte emocional consistente.",
+      "proxima_acao": "Avaliação psicológica para manejo de ansiedade com terapia cognitivo-comportamental e técnicas de mindfulness. Considerar suporte psiquiátrico se sintomas persistirem após correção das alterações endócrinas. Abordagem multidisciplinar integrando endocrinologia, nutrição e psicologia para otimizar adesão ao tratamento respeitando ritmo da paciente."
+    },
+    {
+      "queixa": "Frequência intestinal irregular",
+      "interpretacao": "O intestino irregular pode ter múltiplas causas: padrão alimentar inadequado (baixo consumo de fibras), disbiose intestinal, má digestão de gorduras pós-colecistectomia, hipotireoidismo (reduz motilidade intestinal) ou ansiedade (eixo intestino-cérebro). A investigação laboratorial atual não incluiu marcadores específicos de função intestinal, mas o contexto clínico sugere componente multifatorial.",
+      "proxima_acao": "Investigar disbiose intestinal com teste de microbiota ou marcadores indiretos (zonulina, calprotectina fecal). Avaliar má digestão com elastase fecal. Otimizar padrão alimentar com aumento de fibras, probióticos e prebióticos. Considerar suplementação de enzimas digestivas. Reavaliar após correção do hipotireoidismo, pois a reposição hormonal tireoidiana pode normalizar motilidade intestinal."
+    }
+  ],
+  "achados_sem_queixa_correspondente": [
+    {
+      "achado": "Leucocitose com neutrofilia significativa (leucócitos 14.760/mm³, segmentados 12.103/mm³)",
+      "relevancia_clinica": "Achado laboratorial que sugere processo inflamatório ou infeccioso agudo em curso, porém sem sintomas clínicos relatados pela paciente. Pode indicar infecção subclínica (urinária, dentária, respiratória), resposta a estresse fisiológico intenso ou, menos provavelmente, processo inflamatório crônico não diagnosticado. A magnitude da neutrofilia justifica investigação ativa para identificar foco etiológico e descartar condições que requeiram tratamento específico.",
+      "monitoramento": "Repetir hemograma completo em 1-2 semanas. Se persistir elevação, ampliar investigação com PCR ultrassensível, VHS, urinálise com urocultura, avaliação odontológica e radiografia de tórax. Correlacionar com surgimento de sintomas infecciosos (febre, dor localizada, mal-estar). Se leucocitose mantida sem causa aparente após 4-6 semanas, considerar avaliação hematológica especializada."
+    },
+    {
+      "achado": "Série eritrocitária normal (hemoglobina 13,9 g/dL, índices hematimétricos normais)",
+      "relevancia_clinica": "Achado positivo que descarta anemia no momento atual, apesar das múltiplas deficiências nutricionais (vitamina D, B12 limítrofe) e do contexto de perimenopausa. A ausência de anemia sugere que as reservas de ferro estão adequadas e que não há perdas hemáticas significativas. Este é um ponto favorável no quadro clínico, indicando que a fadiga relatada tem outras etiologias (hipotireoidismo, insuficiência adrenal, deficiências nutricionais) e não componente anêmico.",
+      "monitoramento": "Manter monitoramento anual de hemograma completo. Considerar dosagem de ferritina, ferro sérico e saturação de transferrina em próxima avaliação para avaliar reservas de ferro, especialmente se houver piora de fadiga ou alteração do padrão menstrual. Reavaliar hemograma se surgirem sintomas de anemia (palidez, taquicardia, falta de ar aos esforços)."
+    }
+  ],
+  "plano_clinico_integrado": {
+    "alvos_prioritarios": [
+      "Investigação e tratamento urgente de hipotireoidismo central com avaliação do eixo hipofisário (RNM sela túrcica, perfil hormonal completo) e reposição hormonal tireoidiana individualizada",
+      "Investigação e tratamento urgente de insuficiência adrenal com dosagem de ACTH, teste de estímulo e reposição de hidrocortisona sob supervisão endocrinológica rigorosa",
+      "Correção de deficiências nutricionais críticas (vitamina D e B12) com reposição terapêutica e investigação de má absorção intestinal",
+      "Avaliação ginecológica para manejo de síndrome genitourinária da menopausa com perfil hormonal completo e consideração de terapia de reposição hormonal bioidêntica",
+      "Investigação de processo inflamatório/infeccioso agudo (leucocitose com neutrofilia) com repetição de hemograma e investigação de foco etiológico",
+      "Reestruturação do padrão alimentar com acompanhamento nutricional e suporte psicológico para manejo de ansiedade e otimização de adesão ao tratamento"
+    ],
+    "monitoramento_sugerido": "Reavaliação laboratorial em 8-12 semanas após início das intervenções, incluindo: perfil tireoidiano completo (TSH, T4L, T3L, T3 reverso, anticorpos), cortisol basal e pós-ACTH, vitamina D, B12, hemograma completo, perfil hormonal feminino (FSH, estradiol, progesterona, testosterona), marcadores inflamatórios (PCR-us), micronutrientes (selênio, zinco, ferritina, magnésio). Densitometria óssea em 6 meses para avaliar impacto da deficiência de vitamina D. Acompanhamento clínico mensal nos primeiros 3 meses para ajuste de doses de reposição hormonal e avaliação de resposta terapêutica.",
+    "investigacoes_adicionais": [
+      "Ressonância magnética de sela túrcica para investigar eixo hipofisário",
+      "Perfil hormonal hipofisário completo (ACTH, prolactina, IGF-1, LH, FSH, GH)",
+      "Teste de estímulo com ACTH (Synacthen) para confirmar insuficiência adrenal",
+      "Ultrassom de tireoide e anticorpos antitireoidianos (anti-TPO, anti-Tg)",
+      "T3 reverso, selênio, zinco e ferritina para avaliar conversão periférica de hormônios tireoidianos",
+      "PTH e densitometria óssea para avaliar risco de osteoporose",
+      "Perfil hormonal feminino completo (FSH, estradiol, progesterona, testosterona total e livre, SHBG)",
+      "Marcadores de má absorção intestinal (ácido metilmalônico, homocisteína, zonulina, calprotectina fecal)",
+      "PCR ultrassensível, VHS e esfregaço de sangue periférico se leucocitose persistir",
+      "Urinálise com urocultura e avaliação odontológica para investigar foco infeccioso",
+      "Teste de microbiota intestinal ou marcadores de disbiose"
+    ]
+  },
+  "narrativa_executiva": "Paola, 49 anos, microempresária, apresenta quadro clínico complexo caracterizado por fadiga crônica intensa (energia 3/10), excesso de peso persistente (IMC 29.5) e sintomas perimenopáusicos que impactam significativamente sua qualidade de vida. A investigação laboratorial revelou alterações endócrinas críticas que explicam grande parte de suas queixas: hipotireoidismo de origem central (T4 livre 0,81 ng/dL e T3 livre 1,6 pg/mL severamente reduzidos, com TSH inadequadamente normal-baixo) e insuficiência adrenal (cortisol basal 1,21 µg/dL), ambos exigindo investigação urgente do eixo hipofisário. Essas alterações comprometem metabolismo energético, termogênese e resposta ao estresse, perpetuando o ganho de peso e a fadiga intensa. Adicionalmente, identificamos deficiências nutricionais críticas (vitamina D 28 ng/mL e B12 475 pg/mL) que agravam o quadro de fadiga e representam risco acelerado de perda óssea na perimenopausa. A síndrome genitourinária da menopausa (ressecamento vaginal, dispareunia, libido reduzida) impacta relacionamento conjugal e bem-estar emocional.\n\nO padrão alimentar inadequado (hiperproteico com baixo consumo de vegetais, jantar não nutritivo, uso de açúcar) e a ansiedade como barreira para autocuidado perpetuam o ciclo de dificuldade de perda de peso e comprometimento da saúde. A colecistectomia recente (2022) pode estar contribuindo para má absorção de vitaminas lipossolúveis e intestino irregular. Identificamos também leucocitose com neutrofilia significativa, sugerindo processo inflamatório ou infeccioso agudo que requer investigação de foco etiológico. O conjunto de achados aponta para necessidade de abordagem multidisciplinar integrando endocrinologia (prioridade absoluta para investigação hipofisária e reposição hormonal tireoidiana e adrenal), ginecologia (manejo de perimenopausa), nutrição (correção de deficiências e reestruturação alimentar) e psicologia (manejo de ansiedade e otimização de adesão).\n\nO prognóstico é favorável com tratamento adequado: a correção das alterações endócrinas tende a melhorar significativamente energia, metabolismo e capacidade de perda de peso, enquanto o manejo hormonal da perimenopausa pode restaurar qualidade de vida sexual e emocional. A abordagem deve respeitar o perfil DISC tipo S de Paola (estável, colaborativa, avessa a mudanças bruscas), priorizando construção de confiança, explicações detalhadas sobre cada etapa do tratamento e implementação gradual de mudanças de estilo de vida. O acompanhamento próximo nos primeiros 3 meses será fundamental para ajuste de doses, monitoramento de resposta terapêutica e fortalecimento de vínculo terapêutico, garantindo adesão sustentada ao programa de cuidado integral.",
+  "alinhamento_disc": "Perfil S (Estável): Paola valoriza segurança, previsibilidade e relações de confiança. Apresentar as hipóteses de forma gradual, começando pelos achados mais urgentes (tireoide e adrenal) com explicações detalhadas sobre o que cada alteração significa e como será tratada. Evitar sobrecarga de informações simultâneas. Enfatizar que cada etapa será construída em conjunto, respeitando seu ritmo, e que a equipe estará disponível para suporte contínuo. Usar linguagem acolhedora, validar suas dificuldades passadas com peso e autocuidado, e reforçar que as alterações encontradas explicam suas queixas (não é 'falta de força de vontade'). Construir plano de ação passo a passo, com metas pequenas e alcançáveis, celebrando cada conquista. Garantir acompanhamento próximo e previsível nos primeiros meses para fortalecer vínculo e confiança."
+}

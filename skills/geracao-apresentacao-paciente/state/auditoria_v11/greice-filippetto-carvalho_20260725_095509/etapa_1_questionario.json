@@ -1,0 +1,199 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Greice Filippetto Carvalho",
+    "sexo": "F",
+    "idade": 41,
+    "imc_atual": 24.45,
+    "imc_objetivo": 24.09,
+    "profissao": "Policial militar",
+    "como_conheceu": "indicacao"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Baixo nível de energia",
+      "intensidade": 5,
+      "contexto": "Nível de energia autorreferido 3/10; cansaço diurno persistente; sono de baixa qualidade (2/10); acorda sem disposição",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Insatisfação com composição corporal e flacidez",
+      "intensidade": 4,
+      "contexto": "Objetivo principal declarado: melhorar estrutura corporal e eliminar flacidez; frustração com resultados apesar de treinos regulares",
+      "categoria": "estetico_funcional"
+    },
+    {
+      "queixa": "Dificuldade em manter condicionamento físico e resultados",
+      "intensidade": 3,
+      "contexto": "Relata que mais treinos funcionam mas não consegue manter; barreira de tempo relacionada à família e rotina de trabalho",
+      "categoria": "psicossocial"
+    },
+    {
+      "queixa": "Qualidade do sono prejudicada",
+      "intensidade": 4,
+      "contexto": "Qualidade do sono 2/10; dorme apenas 6 horas; cansaço durante o dia confirmado",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Irregularidade intestinal",
+      "intensidade": 2,
+      "contexto": "Frequência intestinal descrita como irregular; sem detalhamento adicional no questionário",
+      "categoria": "gastrointestinal"
+    },
+    {
+      "queixa": "Desejo por doces",
+      "intensidade": 3,
+      "contexto": "Relata sentir vontade de doces; usa açúcar como adoçante; padrão alimentar com descontrole nos fins de semana (pizza, sanduíche, fast food)",
+      "categoria": "metabolico"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [
+      "Hipotireoidismo"
+    ],
+    "cirurgias": [
+      {
+        "procedimento": "Cesariana",
+        "ano": null
+      },
+      {
+        "procedimento": "Cesariana",
+        "ano": null
+      },
+      {
+        "procedimento": "Implante de silicone mamário",
+        "ano": null
+      }
+    ],
+    "medicacoes_atuais": [
+      "Levotiroxina sódica (Puran T4) 88 mcg"
+    ],
+    "alergias_intolerancias": [
+      "Plasil (metoclopramida)",
+      "Bromoprida"
+    ],
+    "historico_familiar": "Histórico familiar de câncer desconhecido pela paciente",
+    "reposicao_hormonal": "Sim, em uso de implante hormonal (tipo e composição não especificados no questionário)"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "3-4x por semana",
+      "tipo": "Boxe, corrida, musculação"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 4,
+      "doces": "Sente vontade de doces; usa açúcar como adoçante",
+      "alcool": "Consumo social esporádico, apenas no final do ano",
+      "tabaco": "Não fumante",
+      "hidratacao_litros": 2.0,
+      "padrao_geral": "Padrão alimentar estruturado durante a semana (ovos no café, almoço com arroz/feijão/proteína/salada, lanche com castanha e fruta, jantar similar ao almoço); descontrole alimentar nos fins de semana com consumo de fast food, pizza e sanduíches; preferência por massas, carnes, frutas; aversão a berinjela e beterraba"
+    },
+    "sono": {
+      "horas": 6.0,
+      "qualidade_1_10": 2,
+      "energia_ao_acordar_1_5": null,
+      "cansaco_durante_dia": "Sim, cansaço diurno presente"
+    },
+    "trabalho": {
+      "tipo": "Predominantemente sentada (trabalho administrativo/operacional)",
+      "horarios": "Segunda a sexta, das 08h às 18h"
+    },
+    "frequencia_intestinal": "Irregular"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "não informado",
+    "menopausa": "não informado",
+    "metodo_contraceptivo": "não informado",
+    "libido": "não informado",
+    "ressecamento_vaginal": "não informado",
+    "dispareunia": "não informado",
+    "queda_cabelo": "não informado",
+    "pele": "não informado",
+    "unhas": "não informado",
+    "sintomas_ciclo": "não informado"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Família — dificuldade em priorizar saúde própria diante das demandas familiares",
+    "investe_em_saude": "Raramente",
+    "nivel_energia_1_10": 3,
+    "ansiedade_estresse": "Frustração relatada como impacto emocional principal; não há menção explícita a ansiedade ou estresse clínico, mas o contexto de trabalho como policial militar + demandas familiares sugere carga psicossocial relevante"
+  },
+  "metas": {
+    "peso_atual_kg": 69.0,
+    "peso_objetivo_kg": 68.0,
+    "peso_maximo_anterior_kg": 73.0,
+    "diferenca_para_objetivo_kg": -1.0
+  },
+  "spin": {
+    "tempo_luta": "1 a 3 anos",
+    "incomodo_principal": "Insatisfação com o corpo — composição corporal e flacidez",
+    "desafios": "Conseguir tempo para atividade física diante da rotina familiar e profissional",
+    "cenario_sem_tratamento": "Permanência no estado atual sem evolução ('igual')",
+    "investimento_perdido": "Sim, já realizou investimentos anteriores sem resultado sustentado",
+    "vida_resolvida_significaria": "Mais felicidade — associa resolução do quadro a bem-estar emocional",
+    "interesse_programa": "Sim, definitivamente"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Hipotireoidismo em tratamento com levotiroxina 88 mcg — controle e adequação da dose não confirmados",
+      "categoria": "metabolico",
+      "prioridade": 3,
+      "justificativa": "Hipotireoidismo é causa frequente de fadiga, ganho de peso, irregularidade intestinal, queda de cabelo e dificuldade de perda de gordura. A dose atual (88 mcg) pode estar subótima para os sintomas relatados. Necessário cruzar com TSH, T4L e T3L nos exames."
+    },
+    {
+      "sinal": "Qualidade do sono gravemente comprometida (2/10) com apenas 6 horas de sono e cansaço diurno persistente",
+      "categoria": "energia_sono",
+      "prioridade": 3,
+      "justificativa": "Sono de baixa qualidade e duração insuficiente impactam diretamente cortisol, GH, leptina e grelina, comprometendo composição corporal, recuperação muscular e controle metabólico. Pode ser agravado por hipotireoidismo não controlado ou desequilíbrio hormonal."
+    },
+    {
+      "sinal": "Nível de energia autorreferido muito baixo (3/10) em paciente ativa com atividade física regular",
+      "categoria": "energia_sono",
+      "prioridade": 3,
+      "justificativa": "Fadiga desproporcional ao nível de atividade física sugere investigação de causas orgânicas: hipotireoidismo subclínico/mal controlado, deficiência de ferro/ferritina, vitamina D, B12, ou desequilíbrio hormonal (estrogênio, progesterona, testosterona)."
+    },
+    {
+      "sinal": "Uso de implante hormonal sem detalhamento de composição, dose ou tempo de uso",
+      "categoria": "hormonal",
+      "prioridade": 2,
+      "justificativa": "A paciente relata uso de implante hormonal, mas todos os campos de saúde hormonal estão em branco no questionário. Não há informação sobre tipo de hormônio, dose, data de inserção ou sintomas associados. Essencial coletar na consulta e cruzar com exames hormonais."
+    },
+    {
+      "sinal": "Irregularidade intestinal em paciente com hipotireoidismo",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Constipação/irregularidade intestinal é sintoma clássico de hipotireoidismo. Pode indicar controle inadequado da tireoide ou disbiose associada. Merece investigação no contexto dos exames e anamnese detalhada."
+    },
+    {
+      "sinal": "Desejo por doces e padrão alimentar com quebra nos fins de semana",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "Craving por carboidratos/doces associado a fadiga e sono ruim pode sugerir resistência à insulina, disregulação de cortisol ou hipoglicemia reativa. Merece investigação com glicemia de jejum, insulina, HOMA-IR e HbA1c."
+    },
+    {
+      "sinal": "Campos de saúde hormonal completamente não preenchidos em paciente de 41 anos com implante hormonal",
+      "categoria": "hormonal",
+      "prioridade": 2,
+      "justificativa": "Paciente de 41 anos em perimenopausa potencial, com implante hormonal ativo, sem qualquer informação sobre ciclo menstrual, libido, ressecamento vaginal, queda de cabelo ou condição de pele. Esses dados são críticos para avaliação do eixo gonadal e adequação da reposição atual."
+    }
+  ],
+  "perfil_disc": "S",
+  "interpretacao_inicial": "Greice, 41 anos, policial militar, apresenta quadro clínico com padrão sugestivo de fadiga multifatorial em contexto de hipotireoidismo diagnosticado e em tratamento com levotiroxina 88 mcg. A tríade de baixo nível de energia (3/10), qualidade de sono gravemente comprometida (2/10) e irregularidade intestinal, em paciente que mantém atividade física regular de moderada-alta intensidade (boxe, corrida, musculação 3-4x/semana), é desproporcional ao seu nível de condicionamento esperado e levanta hipótese de controle tireoidiano subótimo, possível deficiência de micronutrientes (ferro, ferritina, vitamina D, B12) e/ou desequilíbrio no eixo adrenal-gonadal. O craving por doces associado à quebra alimentar nos fins de semana e ao padrão de fadiga merece investigação de resistência insulínica ou disregulação glicêmica.\n\nA paciente faz uso de implante hormonal, porém todos os campos de saúde hormonal do questionário foram deixados em branco, configurando lacuna crítica de informação para uma paciente de 41 anos em potencial transição perimenopáusica. A composição, dose e tempo de uso do implante são desconhecidos neste momento, sendo imprescindível coleta detalhada na consulta e correlação com painel hormonal completo (FSH, LH, estradiol, progesterona, testosterona total e livre, SHBG, TSH, T4L, T3L). A meta de peso é modesta (-1 kg), sugerindo que o foco real da paciente é recomposição corporal, energia e qualidade de vida — objetivos que dependem fundamentalmente da otimização hormonal e metabólica.",
+  "completude": {
+    "campos_preenchidos": 38,
+    "campos_totais": 48,
+    "percentual": 79.2,
+    "campos_criticos_faltantes": [
+      "ciclo_menstrual — não preenchido (crítico para paciente de 41 anos com implante hormonal)",
+      "menopausa — não preenchido",
+      "metodo_contraceptivo — não preenchido",
+      "libido — não preenchido",
+      "ressecamento_vaginal — não preenchido",
+      "dispareunia — não preenchido",
+      "queda_cabelo — não preenchido",
+      "condicao_pele — não preenchido",
+      "alteracoes_unhas — não preenchido",
+      "energia_ao_acordar_1_5 — não preenchido (campo acordarDisposicao vazio)"
+    ]
+  }
+}

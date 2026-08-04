@@ -1,0 +1,49 @@
+{
+  "paciente_nome": "Leonardo Torres de Andrade",
+  "paciente_slug": "leonardo-torres-de-andrade",
+  "sexo": "M",
+  "idade": 43,
+  "fase": "preconsulta",
+  "gerado_em": "2026-08-04T18:47:12.419115",
+  "renderer": "v12",
+  "audit_dir": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_184712",
+  "etapas": {
+    "etapa_1_questionario": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_1_questionario.json",
+    "etapa_2_exames": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_2_exames.json",
+    "etapa_3_interpretacao": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_3_interpretacao.json",
+    "etapa_4_cruzamento": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/auditoria_v11/leonardo-torres-de-andrade_preconsulta_20260804_181919/etapa_4_cruzamento.json"
+  },
+  "insumos": {
+    "questionario": {
+      "path": "/root/ivs-preconsulta-data/draft-cfce500f-a1df-4410-8a11-46955ccd276b-leonardo-torres-de-andrade.json",
+      "presente": true,
+      "sha256": "dcf3f0dfc3d9302f898aa9a35be5672c72659b1e168b562b88e8bb71d873b760",
+      "bytes": 3564
+    },
+    "exames_pdfs": {
+      "path": "/root/.hermes/profiles/ana/workspace/leonardo_torres_2026-08-04/drive_manifest.json",
+      "presente": true,
+      "sha256": "4a55e9230b7cefd9754a3140f76a4b9ccd03bc9c3bc562268892eae4490c5415",
+      "bytes": 837
+    },
+    "bioimpedancia": {
+      "path": null,
+      "presente": false,
+      "sha256": null
+    },
+    "antropometria": {
+      "path": null,
+      "presente": false,
+      "sha256": null
+    }
+  },
+  "artefatos": {
+    "html_interna": "/tmp/proval/out/apresentacao-leonardo-torres-de-andrade-preconsulta-v12-20260804_184712.html"
+  },
+  "validacao": {
+    "gate": "_v10_internal_validation",
+    "fase": "preconsulta",
+    "status": "passed",
+    "log_dir": "/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/state/validacao_v10"
+  }
+}

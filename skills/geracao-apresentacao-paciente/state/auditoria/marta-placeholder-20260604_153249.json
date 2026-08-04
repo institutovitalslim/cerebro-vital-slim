@@ -1,0 +1,17 @@
+{
+  "paciente": {
+    "nome": "Marta Costa dos Santos Vila Nova",
+    "sexo": "F",
+    "idade": 50,
+    "data_consulta": "05.06.2026",
+    "telefone": "73991333111",
+    "dataNascimento": "1975-09-01"
+  },
+  "modo": "placeholder_bio_sem_exames_llm",
+  "bio_placeholder_origem": "Paola Regina Borges Nunes",
+  "questionarios": {
+    "pre_consulta": true,
+    "analise_hormonal": true
+  },
+  "timestamp": "2026-06-04T15:32:49.646072"
+}

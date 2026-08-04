@@ -1,0 +1,655 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "DAVI CARVALHO RAMOS MELO",
+    "sexo": "M",
+    "idade": 15
+  },
+  "sistemas": {
+    "metabolico": {
+      "schema_version": "1.0",
+      "sistema": "metabolico",
+      "exames_interpretados": [
+        {
+          "nome": "Glicose",
+          "valor": "91",
+          "unidade": "mg/dL",
+          "referencia": "70 a 99",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Glicemia de jejum dentro da faixa, porém na zona de atenção pelos critérios IVS (90-99). Sem repercussão clínica imediata.",
+          "risco_medio_prazo": "Em contexto de HbA1c elevada e HOMA-IR limítrofe, valor merece monitoramento para evitar progressão da curva glicêmica em adolescente.",
+          "fator_etiologico_provavel": "Possível componente de hábitos alimentares e fase de crescimento puberal com resistência insulínica fisiológica.",
+          "severidade": 2,
+          "investigacao_adicional": "Curva glicêmica/TOTG pode ser considerado em conjunto com avaliação clínica se houver fatores de risco."
+        },
+        {
+          "nome": "Insulina",
+          "valor": "9,83",
+          "unidade": "mU/mL",
+          "referencia": "2,6 a 24,9",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Insulina de jejum dentro da faixa laboratorial, mas próxima do limite IVS de atenção (10). Sugere demanda secretória ligeiramente aumentada.",
+          "risco_medio_prazo": "Tendência a hiperinsulinemia compensatória pode evoluir caso haja ganho de adiposidade; monitoramento recomendado na adolescência.",
+          "fator_etiologico_provavel": "Resistência insulínica leve, possivelmente associada ao desenvolvimento puberal e/ou padrão alimentar.",
+          "severidade": 2,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "HOMA-IR",
+          "valor": "2,2",
+          "unidade": "",
+          "referencia": "<2,7",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Índice dentro da referência local, mas em zona de atenção pelos critérios IVS (2,0-2,5), compatível com sensibilidade insulínica reduzida em grau leve.",
+          "risco_medio_prazo": "Possível tendência a resistência insulínica se associado a sedentarismo e dieta inadequada; relevante no acompanhamento metabólico do adolescente.",
+          "fator_etiologico_provavel": "Resistência insulínica fisiológica da puberdade somada a possíveis fatores de estilo de vida.",
+          "severidade": 2,
+          "investigacao_adicional": "Avaliação de perfil lipídico, circunferência abdominal e IMC para z-score em conjunto com avaliação clínica."
+        },
+        {
+          "nome": "HOMA-Beta",
+          "valor": "126,8",
+          "unidade": "",
+          "referencia": "100 a 250",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Função secretória de célula beta dentro da faixa esperada, sem sinais de esgotamento pancreático.",
+          "risco_medio_prazo": "Sem risco relevante isolado; manter monitoramento integrado aos demais marcadores glicêmicos.",
+          "fator_etiologico_provavel": "Função pancreática preservada.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "HbA1c",
+          "valor": "5,8",
+          "unidade": "%",
+          "referencia": "<5,4",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "tendência a pré-diabetes (faixa pré-DM pelos critérios IVS)",
+          "risco_curto_prazo": "Valor compatível com glicação aumentada e exposição glicêmica média elevada nos últimos 2-3 meses, sugestivo de disglicemia em estágio inicial.",
+          "risco_medio_prazo": "Risco de progressão para alteração glicêmica mais significativa caso não haja ajuste de estilo de vida; relevante por se tratar de paciente jovem.",
+          "fator_etiologico_provavel": "Provável resistência insulínica associada a fatores alimentares e ao período puberal; descartar hemoglobinopatias que alterem o resultado.",
+          "severidade": 3,
+          "investigacao_adicional": "Confirmar com glicemia de jejum repetida e/ou TOTG; considerar dosagem de frutosamina e investigar hemoglobinopatias se houver discrepância entre HbA1c e glicemias."
+        },
+        {
+          "nome": "Glicemia Média",
+          "valor": "120,3",
+          "unidade": "mg/dL",
+          "referencia": "<100",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "tendência a disglicemia (glicemia média estimada elevada)",
+          "risco_curto_prazo": "Valor derivado da HbA1c, refletindo exposição glicêmica média acima do ideal, compatível com estágio pré-diabético inicial.",
+          "risco_medio_prazo": "Possível agravamento da curva glicêmica se mantidos os fatores predisponentes; reforça necessidade de acompanhamento metabólico.",
+          "fator_etiologico_provavel": "Decorrente da HbA1c elevada; mesmo substrato etiológico de resistência insulínica e padrão alimentar.",
+          "severidade": 3,
+          "investigacao_adicional": "Mesma investigação da HbA1c; correlacionar com glicemias capilares/jejum."
+        }
+      ],
+      "sintese_do_sistema": "O conjunto de marcadores metabólicos de DAVI, adolescente de 15 anos, é compatível com um quadro de disglicemia em estágio inicial. Embora glicemia de jejum, insulina, HOMA-IR e HOMA-Beta estejam dentro das faixas de referência laboratoriais, vários valores situam-se na zona de atenção pelos critérios conservadores IVS (glicose 91, insulina 9,83, HOMA-IR 2,2), sugerindo sensibilidade insulínica levemente reduzida — achado em parte fisiológico durante a puberdade. O destaque é a HbA1c de 5,8% com glicemia média estimada de 120,3 mg/dL, valores que sugerem tendência a pré-diabetes e exposição glicêmica média acima do ideal nos últimos meses.",
+      "alertas_criticos": []
+    },
+    "outros": {
+      "schema_version": "1.0",
+      "sistema": "outros",
+      "exames_interpretados": [
+        {
+          "nome": "VLDL",
+          "valor": "11",
+          "unidade": "mg/dL",
+          "referencia": "<30",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Fração lipídica rica em triglicérides dentro de faixa ótima, sem risco aterogênico associado no momento.",
+          "risco_medio_prazo": "Baixo risco cardiometabólico mantido se padrão alimentar e atividade física forem preservados.",
+          "fator_etiologico_provavel": "Perfil metabólico favorável compatível com a faixa etária e bom controle de triglicérides.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Triglicérides",
+          "valor": "61",
+          "unidade": "mg/dL",
+          "referencia": "<150",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor bem abaixo do limite, indicando ausência de hipertrigliceridemia e bom manejo de carboidratos/gorduras.",
+          "risco_medio_prazo": "Baixo risco de síndrome metabólica se hábitos saudáveis forem mantidos no período de crescimento.",
+          "fator_etiologico_provavel": "Metabolismo lipídico preservado, compatível com adolescente sem resistência insulínica aparente.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Colesterol Total",
+          "valor": "178",
+          "unidade": "mg/dL",
+          "referencia": "<190",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Dentro da faixa de referência, porém na metade superior; sem risco imediato, mas merece acompanhamento na transição para idade adulta.",
+          "risco_medio_prazo": "Em adolescente, valores próximos do teto justificam monitorização periódica para tendência de elevação progressiva.",
+          "fator_etiologico_provavel": "Composição lipídica habitual; pode refletir padrão alimentar e fatores genéticos familiares.",
+          "severidade": 2,
+          "investigacao_adicional": "Manter acompanhamento periódico do perfil lipídico; considerar avaliação de histórico familiar de dislipidemia."
+        },
+        {
+          "nome": "HDL",
+          "valor": "42",
+          "unidade": "mg/dL",
+          "referencia": ">40",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "HDL acima do mínimo, porém próximo do limite inferior; capacidade de transporte reverso de colesterol discretamente reduzida.",
+          "risco_medio_prazo": "Tendência a HDL no limite pode reduzir proteção cardiovascular a longo prazo se não otimizada com atividade física.",
+          "fator_etiologico_provavel": "Possível associação com sedentarismo relativo ou padrão alimentar; fator constitucional também possível.",
+          "severidade": 2,
+          "investigacao_adicional": "Estimular atividade física aeróbica regular; reavaliar perfil lipídico em 6-12 meses."
+        },
+        {
+          "nome": "LDL",
+          "valor": "121",
+          "unidade": "mg/dL",
+          "referencia": "<130",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Dentro da referência, mas em faixa limítrofe (100-129 pela referência IVS); sem risco agudo, atenção para tendência ascendente.",
+          "risco_medio_prazo": "Em adolescente, LDL na faixa limítrofe justifica monitorização para prevenção de dislipidemia futura.",
+          "fator_etiologico_provavel": "Padrão alimentar com gordura saturada e/ou predisposição genética familiar como hipóteses.",
+          "severidade": 2,
+          "investigacao_adicional": "Avaliar histórico familiar de dislipidemia/eventos cardiovasculares precoces; reavaliar em 6-12 meses."
+        },
+        {
+          "nome": "ApoA",
+          "valor": "110",
+          "unidade": "mg/dL",
+          "referencia": "79 a 169",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Apolipoproteína A em faixa adequada, refletindo partículas HDL funcionais e proteção cardiovascular preservada.",
+          "risco_medio_prazo": "Sem risco associado; marcador favorável de transporte reverso de colesterol.",
+          "fator_etiologico_provavel": "Perfil constitucional dentro do esperado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "ApoB",
+          "valor": "82",
+          "unidade": "mg/dL",
+          "referencia": "<100",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Carga de partículas aterogênicas dentro da faixa desejável, com baixo risco aterogênico atual.",
+          "risco_medio_prazo": "Baixo risco cardiovascular se mantido o padrão; marcador de boa qualidade lipídica.",
+          "fator_etiologico_provavel": "Perfil lipoproteico favorável para a faixa etária.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Homocisteína",
+          "valor": "8,2",
+          "unidade": "µmol/L",
+          "referencia": "<12",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Nível adequado, sugerindo metabolismo de folato/B12/B6 preservado e ausência de fator de risco endotelial associado.",
+          "risco_medio_prazo": "Baixo risco vascular relacionado a este marcador.",
+          "fator_etiologico_provavel": "Aporte vitamínico do complexo B aparentemente adequado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "PCR-us",
+          "valor": "1,63",
+          "unidade": "mg/L",
+          "referencia": "<3",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Marcador de inflamação subclínica em faixa de risco intermediário-baixo; sem processo inflamatório agudo evidente.",
+          "risco_medio_prazo": "Valor abaixo de 3 mantém estratificação de risco cardiovascular favorável.",
+          "fator_etiologico_provavel": "Sem evidência de inflamação significativa; valor compatível com normalidade.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "TGO",
+          "valor": "15,8",
+          "unidade": "U/L",
+          "referencia": "<40",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Enzima hepática em faixa ótima, sem sinal de lesão hepatocelular atual.",
+          "risco_medio_prazo": "Função hepática preservada; sem risco associado.",
+          "fator_etiologico_provavel": "Integridade hepatocelular normal.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "TGP",
+          "valor": "18,6",
+          "unidade": "U/L",
+          "referencia": "<41",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Transaminase específica hepática em faixa ótima, sem indício de esteatose ou lesão hepática.",
+          "risco_medio_prazo": "Baixo risco hepático; marcador favorável.",
+          "fator_etiologico_provavel": "Função hepática preservada.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "GGT",
+          "valor": "29",
+          "unidade": "U/L",
+          "referencia": "<60",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Marcador de colestase/estresse hepático em faixa normal, sem sinal de sobrecarga hepatobiliar.",
+          "risco_medio_prazo": "Sem risco hepatobiliar associado no momento.",
+          "fator_etiologico_provavel": "Metabolismo hepatobiliar preservado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Sódio",
+          "valor": "142",
+          "unidade": "mmol/L",
+          "referencia": "136 a 146",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Equilíbrio hidroeletrolítico de sódio adequado, sem distúrbio de osmolaridade.",
+          "risco_medio_prazo": "Sem risco associado.",
+          "fator_etiologico_provavel": "Homeostase hidroeletrolítica normal.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Magnésio",
+          "valor": "2,1",
+          "unidade": "mg/dL",
+          "referencia": "1,6 a 2,6",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Magnésio sérico adequado, dando suporte a funções neuromusculares e metabólicas.",
+          "risco_medio_prazo": "Sem risco associado.",
+          "fator_etiologico_provavel": "Aporte e equilíbrio mineral adequados.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Cálcio",
+          "valor": "9,7",
+          "unidade": "mg/dL",
+          "referencia": "8,6 a 10,2",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Calcemia adequada, importante no contexto de crescimento ósseo do adolescente.",
+          "risco_medio_prazo": "Sem risco associado; suporta mineralização óssea na fase de estirão.",
+          "fator_etiologico_provavel": "Homeostase do cálcio preservada com PTH normal.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Ferro",
+          "valor": "101",
+          "unidade": "µg/dL",
+          "referencia": "65 a 175",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Ferro sérico adequado, sem indício de ferropenia neste momento.",
+          "risco_medio_prazo": "Sem risco de carência de ferro associado.",
+          "fator_etiologico_provavel": "Aporte e mobilização de ferro adequados.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Ferritina",
+          "valor": "138",
+          "unidade": "nanog/mL",
+          "referencia": "30 a 400",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Reserva de ferro adequada (faixa OK pela referência IVS), sem sinal de carência ou sobrecarga.",
+          "risco_medio_prazo": "Sem risco associado; estoque de ferro favorável para a fase de crescimento.",
+          "fator_etiologico_provavel": "Reservas de ferro preservadas.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Zinco",
+          "valor": "100",
+          "unidade": "ug/dL",
+          "referencia": "60 a 130",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Zinco adequado, suportando imunidade, crescimento e maturação puberal.",
+          "risco_medio_prazo": "Sem risco de carência associado.",
+          "fator_etiologico_provavel": "Aporte de zinco adequado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "PTH",
+          "valor": "45,2",
+          "unidade": "pg/mL",
+          "referencia": "15 a 65",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Paratormônio em faixa intermediária adequada, indicando eixo cálcio-PTH equilibrado.",
+          "risco_medio_prazo": "Sem risco associado; importante avaliar em conjunto com vitamina D.",
+          "fator_etiologico_provavel": "Homeostase mineral óssea preservada.",
+          "severidade": 1,
+          "investigacao_adicional": "Considerar dosagem de Vitamina D para interpretação completa do eixo cálcio-PTH."
+        }
+      ],
+      "sintese_do_sistema": "O conjunto de exames metabólicos, hepáticos, eletrolíticos e de micronutrientes de DAVI (15 anos) apresenta-se majoritariamente dentro das faixas de referência, compatível com bom estado geral para a faixa etária. As enzimas hepáticas (TGO, TGP, GGT), eletrólitos (sódio, magnésio, cálcio), micronutrientes (ferro, ferritina, zinco) e marcadores inflamatórios/vasculares (PCR-us, homocisteína) sugerem ausência de processos inflamatórios, hepáticos ou carenciais relevantes no momento.",
+      "alertas_criticos": []
+    },
+    "hormonal_feminino": {
+      "schema_version": "1.0",
+      "sistema": "hormonal_feminino",
+      "exames_interpretados": [
+        {
+          "nome": "LH",
+          "valor": "6,31",
+          "unidade": "mUI/mL",
+          "referencia": "1,7 a 8,6",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor compatível com eixo hipotálamo-hipófise-gonadal funcionante em adolescente do sexo masculino. Sem risco clínico associado no momento.",
+          "risco_medio_prazo": "Sem risco previsível; sugere maturação puberal adequada do estímulo gonadotrófico.",
+          "fator_etiologico_provavel": "Padrão fisiológico esperado para a faixa etária puberal masculina.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "FSH",
+          "valor": "3,5",
+          "unidade": "mUI/mL",
+          "referencia": "1,5 a 12,4",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Estímulo gonadotrófico para função das células de Sertoli dentro do esperado; sem repercussão clínica imediata.",
+          "risco_medio_prazo": "Sem risco previsível; compatível com desenvolvimento testicular adequado.",
+          "fator_etiologico_provavel": "Padrão fisiológico puberal masculino.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Estradiol",
+          "valor": "20,5",
+          "unidade": "pg/mL",
+          "referencia": "<53",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Nível dentro da faixa de referência masculina; sem sinais de excesso de aromatização estrogênica.",
+          "risco_medio_prazo": "Sem risco previsível associado a este valor isolado.",
+          "fator_etiologico_provavel": "Produção fisiológica por aromatização periférica da testosterona.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Progesterona",
+          "valor": "0,12",
+          "unidade": "ng/mL",
+          "referencia": "0 a 0,5",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor baixo esperado para o sexo masculino; sem relevância clínica.",
+          "risco_medio_prazo": "Sem risco previsível.",
+          "fator_etiologico_provavel": "Padrão fisiológico masculino.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Testosterona Total",
+          "valor": "510",
+          "unidade": "ng/dL",
+          "referencia": "400 a 916",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor adequado para a faixa adulta de referência, compatível com progressão puberal androgênica satisfatória; sem risco clínico atual.",
+          "risco_medio_prazo": "Sem risco previsível; sugere eixo androgênico funcionante.",
+          "fator_etiologico_provavel": "Produção testicular fisiológica em adolescente em maturação puberal.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Testosterona Livre",
+          "valor": "144,32",
+          "unidade": "pg/mL",
+          "referencia": "34,01 a 245,82",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Fração biologicamente ativa em posição central da faixa de referência; sem risco clínico associado.",
+          "risco_medio_prazo": "Sem risco previsível.",
+          "fator_etiologico_provavel": "Padrão fisiológico androgênico para a faixa etária.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Testo Biodisponível",
+          "valor": "339,2",
+          "unidade": "ng/dL",
+          "referencia": "103 a 420",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Disponibilidade androgênica tecidual adequada, na porção superior-média da referência; sem risco clínico.",
+          "risco_medio_prazo": "Sem risco previsível; compatível com ação androgênica eficaz.",
+          "fator_etiologico_provavel": "Equilíbrio entre produção androgênica e proteínas carreadoras dentro do esperado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "SHBG",
+          "valor": "17,9",
+          "unidade": "nmol/L",
+          "referencia": "16,5 a 55,9",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal-limítrofe",
+          "risco_curto_prazo": "Valor no limite inferior da referência; favorece maior fração de testosterona livre/biodisponível, o que é coerente com os demais resultados androgênicos. Sem risco clínico imediato.",
+          "risco_medio_prazo": "SHBG persistentemente baixa pode associar-se a contexto metabólico (resistência insulínica, sobrepeso) se acompanhada de outros marcadores; recomenda-se acompanhamento integrado.",
+          "fator_etiologico_provavel": "Padrão limítrofe possivelmente relacionado a fatores metabólicos/constitucionais; não conclusivo isoladamente.",
+          "severidade": 2,
+          "investigacao_adicional": "Considerar avaliação metabólica complementar (glicemia, insulina, HOMA-IR) se houver contexto clínico de sobrepeso ou risco metabólico."
+        },
+        {
+          "nome": "Prolactina",
+          "valor": "17,8",
+          "unidade": "nanog/mL",
+          "referencia": "4,04 a 15,2",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "hiperprolactinemia leve / discreta elevação",
+          "risco_curto_prazo": "Elevação discreta acima do limite superior, compatível com hiperprolactinemia leve. Frequentemente reflete fatores não patológicos (estresse, esforço, coleta inadequada, exercício, sono), mas requer confirmação. Sem repercussão clínica aguda.",
+          "risco_medio_prazo": "Se persistente e confirmada, elevações sustentadas podem, em médio prazo, interferir no eixo gonadotrófico e na progressão puberal; valor atual está apenas levemente acima do corte, com baixa probabilidade de causa estrutural.",
+          "fator_etiologico_provavel": "Possível elevação transitória/fisiológica (estresse de coleta, esforço, sono) — causa funcional mais provável que patológica neste grau de elevação. Não conclusivo.",
+          "severidade": 3,
+          "investigacao_adicional": "Sugere-se repetir a dosagem de prolactina em condições padronizadas (jejum, repouso de 30 min, evitar exercício/estresse e estimulação mamilar prévia). Considerar pesquisa de macroprolactina e avaliação clínica caso confirmada elevação persistente."
+        }
+      ],
+      "sintese_do_sistema": "O painel hormonal deste adolescente do sexo masculino (15 anos) demonstra um eixo hipotálamo-hipófise-gonadal funcionante, com gonadotrofinas (LH e FSH) dentro da faixa de referência e perfil androgênico robusto — testosterona total, livre e biodisponível em posições adequadas, sugerindo progressão puberal androgênica satisfatória. A SHBG apresenta-se no limite inferior, achado coerente com a boa disponibilidade de testosterona livre; embora isoladamente sem relevância patológica, valores baixos de SHBG podem, em determinados contextos, relacionar-se a fatores metabólicos, justificando atenção integrada caso haja sobrepeso ou outros marcadores de risco.",
+      "alertas_criticos": []
+    },
+    "nutricional": {
+      "schema_version": "1.0",
+      "sistema": "nutricional",
+      "exames_interpretados": [
+        {
+          "nome": "Vitamina B12",
+          "valor": "689",
+          "unidade": "pg/mL",
+          "referencia": "800 a 1500",
+          "status_validador": "alterado",
+          "diagnostico_tendencia": "níveis limítrofes/insuficientes de B12 conforme referência IVS, possivelmente subótimos para fase de crescimento",
+          "risco_curto_prazo": "valor compatível com reserva subótima de B12; em adolescente em fase de estirão pode contribuir para fadiga, redução de concentração e tendência a alterações no metabolismo energético.",
+          "risco_medio_prazo": "se mantido baixo, possível risco de comprometimento da síntese de hemácias (tendência a anemia macrocítica) e impacto neurológico em médio prazo.",
+          "fator_etiologico_provavel": "possível ingesta dietética insuficiente ou aumento da demanda metabólica própria da adolescência; investigar padrão alimentar.",
+          "severidade": 3,
+          "investigacao_adicional": "considerar hemograma completo, ácido metilmalônico e homocisteína para avaliar repercussão funcional; revisão do padrão alimentar."
+        },
+        {
+          "nome": "Vitamina D",
+          "valor": "23",
+          "unidade": "ng/mL",
+          "referencia": "80 a 100",
+          "status_validador": "crit",
+          "diagnostico_tendencia": "valor compatível com deficiência de vitamina D (<30 ng/mL pela referência IVS)",
+          "risco_curto_prazo": "deficiência sugere risco de comprometimento da absorção de cálcio e da mineralização óssea, especialmente relevante em adolescente em fase de pico de massa óssea; possível associação com fadiga e queda da imunidade.",
+          "risco_medio_prazo": "se não corrigida, tendência a redução da densidade mineral óssea, risco de não atingir pico ideal de massa óssea e possível impacto musculoesquelético a médio prazo.",
+          "fator_etiologico_provavel": "provável baixa exposição solar e/ou ingesta dietética insuficiente; comum em adolescentes com rotina predominantemente em ambientes fechados.",
+          "severidade": 4,
+          "investigacao_adicional": "sugere-se avaliação clínica para considerar reposição orientada, dosagem de cálcio, fósforo e PTH para avaliar repercussão no metabolismo ósseo."
+        }
+      ],
+      "sintese_do_sistema": "Os achados nutricionais deste adolescente do sexo masculino, em fase de crescimento e desenvolvimento ósseo, evidenciam dois pontos de atenção: vitamina B12 em faixa limítrofe/insuficiente segundo referência IVS e vitamina D em faixa compatível com deficiência. Em conjunto, esses resultados sugerem um padrão de reservas nutricionais subótimas, possivelmente relacionado a hábitos alimentares e exposição solar limitada, fatores frequentes nessa faixa etária. O quadro é especialmente relevante por se tratar de período crítico de mineralização óssea e demanda metabólica elevada.",
+      "alertas_criticos": [
+        {
+          "exame": "Vitamina D",
+          "motivo": "Valor de 23 ng/mL compatível com deficiência, em adolescente em fase de pico de massa óssea, com possível repercussão na mineralização óssea e imunidade.",
+          "acao_clinica_sugerida": "Encaminhar para avaliação clínica em curto prazo para considerar estratégia de reposição orientada e investigação do metabolismo ósseo (cálcio, fósforo, PTH); orientar revisão de exposição solar e dieta."
+        }
+      ]
+    },
+    "tireoide": {
+      "schema_version": "1.0",
+      "sistema": "tireoide",
+      "exames_interpretados": [
+        {
+          "nome": "TSH",
+          "valor": "5,7",
+          "unidade": "µUI/mL",
+          "referencia": "0,27 a 4,2 µUI/mL (laboratório) / ótimo IVS: 0,5–2,5",
+          "status_validador": "alert",
+          "diagnostico_tendencia": "compatível com hipotireoidismo subclínico — TSH elevado com hormônios periféricos preservados",
+          "risco_curto_prazo": "TSH persistentemente elevado pode associar-se a fadiga, ganho de peso, lentidão cognitiva e alterações lipídicas mesmo na ausência de sintomas evidentes; em adolescente em fase de crescimento e desenvolvimento, o impacto metabólico e neuroendócrino merece atenção.",
+          "risco_medio_prazo": "Progressão para hipotireoidismo clínico em 1–5 anos, especialmente se houver autoimunidade tireoidiana associada; risco de dislipidemia secundária, alteração de composição corporal e impacto no eixo reprodutivo em desenvolvimento.",
+          "fator_etiologico_provavel": "Possível tireoidite autoimune subclínica (Hashimoto) como hipótese principal em adolescente do sexo masculino; outras causas incluem deficiência de iodo, obesidade ou variação fisiológica transitória.",
+          "severidade": 3,
+          "investigacao_adicional": "Anti-TPO (anticorpo antitireoperoxidase), Anti-Tg (anticorpo antitireoglobulina), ultrassonografia de tireoide, perfil lipídico completo; repetição do TSH em 4–8 semanas para confirmar persistência."
+        },
+        {
+          "nome": "T4 Livre",
+          "valor": "1,54",
+          "unidade": "ng/dL",
+          "referencia": "0,85 a 1,86 ng/dL",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor dentro da faixa de referência, indicando que a produção hormonal periférica está compensada no momento; sem risco imediato associado isoladamente.",
+          "risco_medio_prazo": "Caso o TSH permaneça elevado de forma persistente, a capacidade compensatória da tireoide pode se reduzir progressivamente, com eventual queda do T4 Livre para faixas subótimas.",
+          "fator_etiologico_provavel": "Compensação tireoidiana ainda eficaz frente ao estímulo aumentado de TSH — padrão típico de hipotireoidismo subclínico inicial.",
+          "severidade": 2,
+          "investigacao_adicional": "Monitorar em conjunto com TSH na reavaliação; nenhuma investigação adicional isolada necessária para este parâmetro."
+        },
+        {
+          "nome": "T3 Livre",
+          "valor": "3,8",
+          "unidade": "pg/mL",
+          "referencia": "2,0 a 4,4 pg/mL",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Valor dentro da faixa de referência, sem implicação clínica imediata; conversão periférica de T4 em T3 aparentemente preservada.",
+          "risco_medio_prazo": "Sem risco específico associado a este valor isoladamente; monitoramento longitudinal recomendado no contexto do TSH elevado.",
+          "fator_etiologico_provavel": "Conversão periférica de T4 em T3 mantida, compatível com função tireoidiana periférica preservada no momento.",
+          "severidade": 1,
+          "investigacao_adicional": "Nenhuma investigação adicional isolada necessária para este parâmetro."
+        }
+      ],
+      "sintese_do_sistema": "O perfil tireoidiano de Davi apresenta padrão compatível com hipotireoidismo subclínico: TSH de 5,7 µUI/mL — acima do limite laboratorial (4,2) e significativamente acima do intervalo ótimo IVS (0,5–2,5 µUI/mL) — com T4 Livre e T3 Livre dentro dos limites de referência. Esse padrão sugere que a tireoide ainda mantém produção hormonal periférica adequada, porém com demanda hipofisária aumentada, o que pode representar estágio inicial de disfunção tireoidiana. Em adolescente de 15 anos, fase de intensa atividade neuroendócrina, metabólica e de crescimento, a investigação etiológica é clinicamente relevante.\n\nRecomenda-se avaliação clínica especializada para investigação de autoimunidade tireoidiana (Anti-TPO e Anti-Tg), ultrassonografia de tireoide e repetição do TSH em 4 a 8 semanas para confirmar a persistência do achado, afastando variações transitórias. O contexto clínico — presença de sintomas como fadiga, ganho de peso, intolerância ao frio, alterações de humor ou desempenho escolar — deve ser valorizado na consulta médica para definição de conduta. Não há indicação de alarmismo, mas o acompanhamento estruturado é recomendado.",
+      "alertas_criticos": []
+    },
+    "renal": {
+      "schema_version": "1.0",
+      "sistema": "renal",
+      "exames_interpretados": [
+        {
+          "nome": "Ureia",
+          "valor": "22",
+          "unidade": "mg/dL",
+          "referencia": "10 a 50 mg/dL",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Sem risco identificável no curto prazo. Valor compatível com adequada função de filtração glomerular e metabolismo proteico dentro do esperado para a faixa etária.",
+          "risco_medio_prazo": "Sem risco identificável no médio prazo, desde que mantido padrão alimentar e hidratação adequados.",
+          "fator_etiologico_provavel": "Valor fisiológico esperado para adolescente do sexo masculino com função renal preservada.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Creatinina",
+          "valor": "0,88",
+          "unidade": "mg/dL",
+          "referencia": "0,7 a 1,2 mg/dL",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Sem risco identificável no curto prazo. Valor compatível com massa muscular e taxa de filtração glomerular adequadas para a idade e sexo.",
+          "risco_medio_prazo": "Sem risco identificável no médio prazo. Monitoramento de rotina anual é suficiente.",
+          "fator_etiologico_provavel": "Produção muscular de creatinina dentro do esperado para adolescente em desenvolvimento, sem evidência de comprometimento renal.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Ácido Úrico",
+          "valor": "5,8",
+          "unidade": "mg/dL",
+          "referencia": "3,4 a 7,0 mg/dL",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Sem risco imediato. Valor dentro da faixa de referência, porém situado no terço superior, o que merece observação contextual em relação a padrão alimentar e hidratação.",
+          "risco_medio_prazo": "Caso haja progressão para valores acima de 6,5–7,0 mg/dL na vida adulta, associada a fatores como dieta hiperpurínica, sedentarismo ou síndrome metabólica, pode representar risco de hiperuricemia e nefropatia úrica.",
+          "fator_etiologico_provavel": "Valor fisiológico para a faixa etária. Possível influência de dieta com maior aporte proteico ou de purinas, comum em adolescentes em fase de crescimento acelerado.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        },
+        {
+          "nome": "Cortisol",
+          "valor": "15,7",
+          "unidade": "µg/dL",
+          "referencia": "6,7 a 22,6 µg/dL",
+          "status_validador": "normal",
+          "diagnostico_tendencia": "normal",
+          "risco_curto_prazo": "Sem risco identificável no curto prazo. Valor dentro da faixa de referência matinal, compatível com eixo hipotálamo-hipófise-adrenal funcionalmente íntegro.",
+          "risco_medio_prazo": "Sem risco identificável no médio prazo. A manutenção de padrões saudáveis de sono, estresse e atividade física contribui para a regulação fisiológica do cortisol ao longo do desenvolvimento.",
+          "fator_etiologico_provavel": "Secreção cortisólica fisiológica esperada para adolescente em fase de desenvolvimento, sem evidência de hipercortisolismo ou insuficiência adrenal.",
+          "severidade": 1,
+          "investigacao_adicional": "nenhuma"
+        }
+      ],
+      "sintese_do_sistema": "O perfil renal e adrenal de Davi Carvalho Ramos Melo, 15 anos, sexo masculino, apresenta-se integralmente dentro dos parâmetros de referência, sem achados que sugiram comprometimento da função renal, distúrbio do metabolismo de purinas ou disfunção do eixo hipotálamo-hipófise-adrenal. Ureia e creatinina em valores centrais indicam filtração glomerular preservada e metabolismo proteico adequado para a faixa etária e composição corporal esperada. O ácido úrico, embora dentro da normalidade, situa-se no terço superior da referência, o que não representa alteração clínica no momento, mas merece acompanhamento longitudinal à medida que o paciente avança para a vida adulta, especialmente se houver mudanças no padrão alimentar ou surgimento de fatores de risco metabólico. O cortisol matinal em 15,7 µg/dL é compatível com ritmo circadiano fisiológico preservado, sem indicativo de hipercortisolismo ou insuficiência adrenal. Recomenda-se manutenção do acompanhamento clínico de rotina anual para este sistema, sem necessidade de investigação adicional no momento.",
+      "alertas_criticos": []
+    },
+    "hematologico": {
+      "erro": "Todos os modelos falharam: openai/gpt-5.5 attempt 2: HTTP 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 12000 tokens, but can only afford 1328. To increase, visit https://openrouter.ai/settings/credits and add more credits\",\"code\":402,\"metadata\":{\"provider_name\":null,\"previous_errors\":[{\"code\":4",
+      "exames": [
+        "Hemácias",
+        "Hemoglobina",
+        "Hematócrito",
+        "VCM",
+        "HCM",
+        "CHCM",
+        "RDW",
+        "Leucócitos",
+        "Bastonetes",
+        "Segmentados",
+        "Eosinófilos",
+        "Basófilos",
+        "Linfócitos",
+        "Monócitos"
+      ]
+    }
+  },
+  "alertas_criticos_globais": [
+    {
+      "exame": "Vitamina D",
+      "motivo": "Valor de 23 ng/mL compatível com deficiência, em adolescente em fase de pico de massa óssea, com possível repercussão na mineralização óssea e imunidade.",
+      "acao_clinica_sugerida": "Encaminhar para avaliação clínica em curto prazo para considerar estratégia de reposição orientada e investigação do metabolismo ósseo (cálcio, fósforo, PTH); orientar revisão de exposição solar e dieta."
+    }
+  ],
+  "total_exames_interpretados": 43,
+  "usage_total": {
+    "input": 17991,
+    "output": 14893,
+    "cost": 0.42302799999999996
+  }
+}

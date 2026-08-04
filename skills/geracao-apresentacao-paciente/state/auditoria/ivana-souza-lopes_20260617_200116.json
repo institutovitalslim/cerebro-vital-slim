@@ -1,0 +1,42 @@
+{
+  "paciente_nome": "IVANA SOUZA LOPES",
+  "sexo": "F",
+  "idade": 51,
+  "pdfs_processados": [
+    {
+      "nome": "IVANA SOUZA LOPES Sangue - 07.08.2025 2.pdf",
+      "extraidos_pelo_llm": 0,
+      "validados": 0,
+      "lab_origem": "",
+      "data_coleta": ""
+    },
+    {
+      "nome": "Ivana - resultado exames JUNHO.2026.pdf",
+      "extraidos_pelo_llm": 38,
+      "validados": 39,
+      "lab_origem": "NAM - Núcleo de Assessoria Médica",
+      "data_coleta": "12/06/2026"
+    }
+  ],
+  "exames_validados": 39,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "PCR-us",
+        "nome_no_laudo": "Proteína C Reativa Ultra Sensível",
+        "valor": 0.03,
+        "unidade": "mg/dL",
+        "ref_min": null,
+        "ref_max": 0.1,
+        "grupo": "inflamatorio",
+        "status_clinico": "normal",
+        "observacao": "Baixo Risco Cardiovascular"
+      },
+      "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+    }
+  ],
+  "cross_check_warnings": [
+    "Auditoria determinística inseriu PCR-us=0.3mg/L",
+    "Auditoria determinística inseriu SHBG=23.4nmol/L"
+  ]
+}

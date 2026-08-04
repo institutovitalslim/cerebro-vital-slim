@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "hipoteses_integradas": [
+    {
+      "titulo": "Obesidade abdominal + hiperinsulinemia = resistência insulínica estabelecida",
+      "queixas_relacionadas": [
+        "Excesso de peso / obesidade abdominal",
+        "Baixo nível de energia e disposição",
+        "Sonolência pós-prandial",
+        "Dificuldade em manter rotina de atividade física"
+      ],
+      "exames_relacionados": [
+        "Insulina (23,3 µUI/mL)",
+        "HOMA-IR (5,04)",
+        "HbA1c (5,6%)",
+        "Glicemia média (114 mg/dL)",
+        "SHBG reduzida (23,6)"
+      ],
+      "descricao_clinica": "A combinação de obesidade grau II com distribuição abdominal, cansaço persistente e sonolência após o almoço encontra forte suporte laboratorial: a glicemia de jejum está controlada (88), mas às custas de insulina muito elevada e HOMA-IR quase o dobro do limite. Isso é compatível com resistência insulínica já instalada, com o pâncreas em esforço compensatório. A HbA1c e a glicemia média em faixa de atenção sugerem picos após as refeições, o que ajuda a explicar a queda de energia pós-prandial. A dificuldade histórica de emagrecer também é coerente com esse ambiente metabólico, que favorece o acúmulo de gordura. É uma janela de oportunidade favorável para intervenção antes da progressão para pré-diabetes.",
+      "prioridade": 3,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Considerar plano integrado de reeducação alimentar com controle de carga glicêmica, atividade física resistida regular e manejo de peso; reavaliar insulina e HOMA-IR em ~3 meses. Médico assistente pode considerar estratégias sensibilizadoras conforme avaliação individual."
+    },
+    {
+      "titulo": "Álcool + sedentarismo + resistência insulínica = dislipidemia aterogênica e provável fígado gorduroso",
+      "queixas_relacionadas": [
+        "Excesso de peso / obesidade abdominal",
+        "Dificuldade em manter rotina de atividade física"
+      ],
+      "exames_relacionados": [
+        "Triglicérides (338)",
+        "Não-HDL (220)",
+        "LDL (163)",
+        "ApoB (128)",
+        "VLDL (57)",
+        "TGP (80)",
+        "GGT (138)",
+        "Ferritina (464)"
+      ],
+      "descricao_clinica": "O perfil lipídico mostra carga aterogênica muito elevada (triglicérides mais que o dobro do alvo, não-HDL e ApoB bem acima da meta), padrão típico de resistência insulínica com excesso de produção hepática de gordura. Em paralelo, enzimas hepáticas elevadas (TGP e GGT mais de 2x o limite) com ferritina alta e ferro normal sugerem fígado sobrecarregado por gordura em atividade — compatível com doença hepática gordurosa de padrão metabólico. O consumo alcoólico de fim de semana e o sedentarismo reforçam esse eixo. Este conjunto representa risco cardiovascular relevante que merece atenção prioritária, ainda que sem sintoma agudo hoje.",
+      "prioridade": 3,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Considerar ultrassonografia de abdome superior, escore FIB-4 e sorologias virais para investigar o fígado; estratificação de risco cardiovascular (avaliar escore de cálcio coronariano); intervenção nutricional imediata e revisão do consumo alcoólico; reavaliar lipidograma e painel hepático em 8-12 semanas."
+    },
+    {
+      "titulo": "Libido reduzida + testosterona baixa com FSH elevado = hipogonadismo com componente misto",
+      "queixas_relacionadas": [
+        "Libido reduzida (em melhora com reposição de testosterona)",
+        "Baixo nível de energia e disposição"
+      ],
+      "exames_relacionados": [
+        "Testosterona Total (206 ng/dL)",
+        "FSH (13,5)",
+        "LH (11, alto-normal)",
+        "SHBG reduzida (23,6)",
+        "Estradiol baixo"
+      ],
+      "descricao_clinica": "A queixa de libido comprometida encontra suporte laboratorial claro: testosterona total abaixo do limiar de referência, com FSH elevado e LH no limite superior, um padrão que sugere componente testicular (primário ou compensado) — ou seja, a hipófise está estimulando, mas a resposta gonadal parece insuficiente. A SHBG baixa indica que há também um fator metabólico (resistência insulínica/adiposidade) contribuindo para o quadro. É importante destacar que o paciente já está em reposição de testosterona sem protocolo documentado, o que exige cuidado: a interpretação desses valores e o rastreio de segurança (hematócrito, PSA) precisam ser feitos considerando essa reposição em curso.",
+      "prioridade": 3,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Esclarecer protocolo atual de reposição (dose, via, tempo); confirmar com segunda dosagem matinal (7h-10h) de testosterona total e livre, FSH, LH e prolactina; investigar hematócrito e PSA para segurança; encaminhar para avaliação endocrinológica/andrológica para definição etiológica e conduta."
+    },
+    {
+      "titulo": "Sono ruim + cortisol elevado + sonolência diurna = eixo de estresse e suspeita de apneia do sono",
+      "queixas_relacionadas": [
+        "Baixo nível de energia e disposição",
+        "Sonolência pós-prandial",
+        "Qualidade de sono baixa (3/10) com 6h de duração"
+      ],
+      "exames_relacionados": [
+        "Cortisol (20,7)",
+        "IGF-1 (limite inferior)",
+        "Insulina (23,3)"
+      ],
+      "descricao_clinica": "O sono de baixa qualidade e curta duração, somado à sonolência diurna, tem suporte parcial no cortisol elevado (compatível com hipercortisolismo funcional leve, provável estresse crônico/privação de sono) e no IGF-1 no limite inferior — um padrão relativamente catabólico que favorece gordura visceral e desregulação glicêmica. Em contexto de obesidade grau II e hipertensão, esse conjunto levanta a hipótese de apneia obstrutiva do sono, que perpetua o cansaço e piora o metabolismo. Parte do cansaço também é atribuível às excursões glicêmicas pós-prandiais já descritas.",
+      "prioridade": 2,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Considerar rastreio de apneia obstrutiva do sono (questionário e/ou polissonografia); confirmar cortisol em coleta padronizada; avaliar higiene do sono e carga de estresse em consulta; correlacionar com composição corporal."
+    },
+    {
+      "titulo": "Cansaço + vitamina D deficiente = contribuinte nutricional para fadiga",
+      "queixas_relacionadas": [
+        "Baixo nível de energia e disposição"
+      ],
+      "exames_relacionados": [
+        "Vitamina D (20 ng/mL)",
+        "Vitamina B12 (535, subótima)"
+      ],
+      "descricao_clinica": "A vitamina D em nível de deficiência pode contribuir para fadiga, dores musculoesqueléticas e menor imunomodulação, somando-se aos outros fatores de cansaço já identificados. A B12, embora acima da faixa de deficiência franca, está abaixo do alvo funcional ideal, merecendo monitoramento. Estes achados nutricionais são coadjuvantes importantes num quadro de baixa energia multifatorial.",
+      "prioridade": 2,
+      "tipo": "padrao_nutricional",
+      "acao_proposta": "Avaliação clínica para considerar reposição supervisionada de vitamina D, com dosagem de cálcio, PTH e fósforo; reavaliar 25(OH)D em 8-12 semanas; monitorar B12."
+    },
+    {
+      "titulo": "Refluxo persistente sob dupla terapia em contexto de neoplasia duodenal prévia",
+      "queixas_relacionadas": [
+        "Refluxo gastroesofágico"
+      ],
+      "exames_relacionados": [],
+      "descricao_clinica": "O refluxo persistente, exigindo pantoprazol e domperidona simultaneamente, não tem correlato nos exames laboratoriais disponíveis, mas ganha peso pelo histórico de neoplasia duodenal com status atual não esclarecido. O uso de tirzepatida também modula o esvaziamento gástrico e pode influenciar a sintomatologia. Este é um ponto de atenção que exige contextualização gastroenterológica cuidadosa, independentemente dos exames de sangue.",
+      "prioridade": 3,
+      "tipo": "queixa_sem_suporte_laboratorial",
+      "acao_proposta": "Esclarecer com urgência o status atual da neoplasia duodenal (remissão/tratamento/acompanhamento); verificar se há endoscopia recente; correlacionar sintoma com uso de tirzepatida em avaliação gastroenterológica."
+    }
+  ],
+  "queixas_sem_correlato_laboratorial": [
+    {
+      "queixa": "Refluxo gastroesofágico persistente",
+      "interpretacao": "Sem marcador laboratorial direto. Provável relação com composição das refeições, consumo alcoólico, sobrepeso (pressão abdominal), possível efeito da tirzepatida sobre o esvaziamento gástrico e, sobretudo, o antecedente de neoplasia duodenal que precisa ser esclarecido.",
+      "proxima_acao": "Esclarecer status oncológico e histórico endoscópico; avaliação gastroenterológica dedicada; revisar hábitos alimentares e álcool."
+    },
+    {
+      "queixa": "Dificuldade em manter rotina de atividade física",
+      "interpretacao": "Fator predominantemente comportamental e logístico — rotina de trabalho sedentário e barreira familiar referida. Impacta diretamente o eixo metabólico (resistência insulínica, dislipidemia, fígado gorduroso), mas a causa é de estilo de vida, não laboratorial.",
+      "proxima_acao": "Estruturar plano de atividade física realista e escalonado, integrando barreiras familiares e agenda de trabalho; suporte de equipe multidisciplinar para adesão."
+    }
+  ],
+  "achados_sem_queixa_correspondente": [
+    {
+      "achado": "TSH no terço superior da zona ótima com T4 livre em quartil inferior (sem queixa tireoidiana marcante)",
+      "relevancia_clinica": "Não configura hipotireoidismo, mas sugere menor eficiência funcional tireoidiana em fase compensada, que poderia somar-se ao cansaço no futuro.",
+      "monitoramento": "Considerar anti-TPO e T3 livre para estratificar; reavaliar TSH/T4L em 6-12 meses com correlação de sintomas."
+    },
+    {
+      "achado": "Ácido úrico próximo do limite superior e ureia no terço superior",
+      "relevancia_clinica": "Sem queixa associada, mas urato elevado tem relação com síndrome metabólica e risco de litíase; ureia alta é coerente com hidratação insuficiente (0,75 L/dia).",
+      "monitoramento": "Monitorar ácido úrico; corrigir hidratação (alvo 2,5-3 L/dia, atenção pelo uso de telmisartana e tirzepatida)."
+    },
+    {
+      "achado": "Homocisteína limítrofe",
+      "relevancia_clinica": "Sem sintoma, mas em contexto de risco cardiovascular já elevado merece otimização.",
+      "monitoramento": "Correlacionar com B12/folato e revisar em reavaliação metabólica."
+    }
+  ],
+  "plano_clinico_integrado": {
+    "alvos_prioritarios": [
+      "Esclarecer status da neoplasia duodenal — prioridade clínica absoluta antes de qualquer conduta",
+      "Reverter resistência insulínica: alimentação com controle de carga glicêmica, atividade física resistida regular e manejo de peso",
+      "Reduzir carga aterogênica e investigar fígado gorduroso (lipidograma, USG abdome, FIB-4), incluindo revisão do álcool",
+      "Confirmar e contextualizar o quadro hormonal androgênico frente à reposição de testosterona em curso (com rastreio de segurança)",
+      "Investigar sono/apneia obstrutiva e manejar estresse/cortisol",
+      "Corrigir deficiência de vitamina D e otimizar hidratação"
+    ],
+    "monitoramento_sugerido": "Reavaliar insulina, HOMA-IR, HbA1c, lipidograma e enzimas hepáticas em ~3 meses; vitamina D em 8-12 semanas; testosterona confirmatória matinal com FSH/LH/prolactina, hematócrito e PSA em prazo curto; TSH/T4L em 6-12 meses.",
+    "investigacoes_adicionais": [
+      "Ultrassonografia de abdome superior + escore FIB-4",
+      "Sorologias virais hepáticas",
+      "Segunda dosagem matinal de testosterona total e livre, FSH, LH, prolactina, hematócrito, PSA",
+      "Rastreio de apneia obstrutiva do sono (questionário/polissonografia)",
+      "Cálcio, PTH e fósforo (contexto vitamina D)",
+      "Confirmação de cortisol em coleta padronizada",
+      "Esclarecimento do status oncológico duodenal e verificação de endoscopia recente"
+    ]
+  },
+  "narrativa_executiva": "Leonardo, seu corpo está mostrando de forma clara que a gordura abdominal e o cansaço têm uma raiz comum: o organismo está trabalhando dobrado para controlar o açúcar, o que também afeta as gorduras do sangue e o fígado. A boa notícia é que estamos numa janela de virada — com os ajustes certos e o esclarecimento do seu histórico gástrico, dá para reverter grande parte disso.",
+  "alinhamento_disc": "Perfil orientado a resultado e decisão rápida: seja direto e objetivo, apresente os 3 alvos de maior impacto em formato de metas mensuráveis (peso, HOMA-IR, triglicérides) com prazos claros de reavaliação. Dê a ele protagonismo e controle sobre o plano, evite excesso de detalhes técnicos e enfatize o retorno concreto de cada ação. Traga o esclarecimento do histórico duodenal como decisão prioritária que ele precisa destravar."
+}

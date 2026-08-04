@@ -1,0 +1,53 @@
+{
+  "paciente_nome": "Nicelia Rubem Santos de Sousa",
+  "sexo": "F",
+  "idade": 62,
+  "pdfs_processados": [
+    {
+      "nome": "Examex de sangue - Laudo Completo 27_06_2026.pdf",
+      "extraidos_pelo_llm": 40,
+      "validados": 59,
+      "lab_origem": "NAM - Núcleo de Assessoria Médica",
+      "data_coleta": "27/06/2026"
+    }
+  ],
+  "exames_validados": 59,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "PCR-us",
+        "nome_no_laudo": "Proteína C Reativa Ultra Sensível",
+        "valor": 0.09,
+        "unidade": "mg/dL",
+        "ref_min": null,
+        "ref_max": 0.1,
+        "grupo": "inflamatorio",
+        "status_clinico": "normal",
+        "observacao": "Baixo Risco Cardiovascular"
+      },
+      "motivo": "L7 unidade: laudo='mg/dL' incompatível com canônica='mg/L' para PCR-us"
+    }
+  ],
+  "cross_check_warnings": [
+    "Auditoria determinística inseriu PCR-us=0.8999999999999999mg/L",
+    "Auditoria determinística inseriu SHBG=105.0nmol/L",
+    "Auditoria determinística inseriu TSH=6.13uUI/mL",
+    "Auditoria determinística inseriu T4 Livre=1.23ng/dL",
+    "Auditoria determinística inseriu T3 Total=105.0ng/dL",
+    "Auditoria determinística inseriu Estradiol=5.0pg/mL",
+    "Auditoria determinística inseriu FSH=76.4mUI/mL",
+    "Auditoria determinística inseriu LH=52.9mUI/mL",
+    "Auditoria determinística inseriu Prolactina=8.8ng/mL",
+    "Auditoria determinística inseriu Testosterona Total=37.8ng/dL",
+    "Auditoria determinística inseriu Testosterona Livre=0.3ng/dL",
+    "Auditoria determinística inseriu Testosterona Biodisponível=7.0ng/dL",
+    "Auditoria determinística inseriu Progesterona=0.1ng/mL",
+    "Auditoria determinística inseriu Cortisol=12.2µg/dL",
+    "Auditoria determinística inseriu IGF-1=97.1ng/mL",
+    "Auditoria determinística inseriu GGT=21.0U/L",
+    "Auditoria determinística inseriu LDH=190.0UI/L",
+    "Auditoria determinística inseriu Fibrinogênio=286.0mg/dL",
+    "Auditoria determinística inseriu ApoB=116.0mg/dL",
+    "Auditoria determinística inseriu ApoA=199.0mg/dL"
+  ]
+}

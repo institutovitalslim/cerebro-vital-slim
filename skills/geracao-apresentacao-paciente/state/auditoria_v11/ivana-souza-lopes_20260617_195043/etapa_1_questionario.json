@@ -1,0 +1,180 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "IVANA SOUZA LOPES",
+    "sexo": "F",
+    "idade": 51,
+    "imc_atual": 28.1,
+    "imc_objetivo": null,
+    "profissao": "Advogada",
+    "como_conheceu": "Endocrinologista"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Sobrepeso e dificuldade para perder peso",
+      "intensidade": 4,
+      "contexto": "78kg, não consegue perder peso sozinha, orientada por endocrinologista",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Falta de disposição e cansaço",
+      "intensidade": 4,
+      "contexto": "Sente-se esgotada, cochila com frequência, afeta concentração no trabalho",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Constipação intestinal",
+      "intensidade": 3,
+      "contexto": "Só evacua nos dias que pratica corrida, demais dias fica sem ir ao banheiro",
+      "categoria": "gastrointestinal"
+    },
+    {
+      "queixa": "Irregularidade menstrual",
+      "intensidade": 3,
+      "contexto": "Ciclo irregular, em pré-menopausa",
+      "categoria": "hormonal"
+    },
+    {
+      "queixa": "Enxaqueca",
+      "intensidade": 3,
+      "contexto": "Relatada no questionário hormonal",
+      "categoria": "outro"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [
+      "Ceratocone",
+      "Edema de retina"
+    ],
+    "cirurgias": [
+      {
+        "procedimento": "Colecistectomia",
+        "ano": 1991
+      }
+    ],
+    "medicacoes_atuais": [
+      "Junno 200mg - 15 dias por mês",
+      "Orlistat 2x ao dia",
+      "Melatonina 3x por semana",
+      "Creatina",
+      "Coenzima Q10"
+    ],
+    "alergias_intolerancias": [
+      "Manga",
+      "Caju"
+    ],
+    "historico_familiar": "Tias e primas com problemas hormonais",
+    "reposicao_hormonal": "Progesterona (Junno 200mg)"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "6x por semana",
+      "tipo": "Corrida 2x por semana e Musculação 4x por semana"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 4,
+      "doces": "Sim, doces de festa nos finais de semana",
+      "alcool": "Sim, cerveja nos finais de semana",
+      "tabaco": "Não informado",
+      "hidratacao_litros": 2.5,
+      "padrao_geral": "Café da manhã normal, petiscos durante o dia, cerveja, jantar ou lanche noturno"
+    },
+    "sono": {
+      "horas": 6.0,
+      "qualidade_1_10": null,
+      "energia_ao_acordar_1_5": null,
+      "cansaco_durante_dia": "Muito cansaço, cochila com frequência"
+    },
+    "trabalho": {
+      "tipo": "Híbrido (Presencial + Home Office)",
+      "horarios": "Home office e plantão semanal de 10h às 19h30, trabalho estressante com processos"
+    },
+    "frequencia_intestinal": "Irregular - só evacua nos dias de corrida"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "Irregular",
+    "menopausa": "Pré-menopausa",
+    "metodo_contraceptivo": "Não informado",
+    "libido": "Não está com vida sexual ativa",
+    "ressecamento_vaginal": "Não informado",
+    "dispareunia": "Não informado",
+    "queda_cabelo": "Não informado",
+    "pele": "Pele seca",
+    "unhas": "Não informado",
+    "sintomas_ciclo": "Não informado"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Preguiça e falta de tempo",
+    "investe_em_saude": "Nunca gastou mais de R$ 2.000,00",
+    "nivel_energia_1_10": null,
+    "ansiedade_estresse": "Trabalho muito estressante, perde o sono quando não consegue concluir trabalhos"
+  },
+  "metas": {
+    "peso_atual_kg": 78.0,
+    "peso_objetivo_kg": null,
+    "peso_maximo_anterior_kg": null,
+    "diferenca_para_objetivo_kg": null
+  },
+  "spin": {
+    "tempo_luta": "Não especificado claramente",
+    "incomodo_principal": "Sobrepeso ligado à falta de disposição, afetando concentração no trabalho",
+    "desafios": "Dietas e treinos anteriores não funcionaram",
+    "cenario_sem_tratamento": "Pode vir a ter algum problema de saúde sério",
+    "investimento_perdido": "Nunca gastou mais de R$ 2.000,00 em tratamentos",
+    "vida_resolvida_significaria": "Recuperar disposição, enxugar barriga e regularizar intestino",
+    "interesse_programa": "Não aguenta mais viver cansada, quer perder peso, ter disposição e melhorar a pele"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "Constipação severa com dependência de exercício para evacuação",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Padrão de evacuação apenas nos dias de corrida sugere dismotilidade intestinal significativa"
+    },
+    {
+      "sinal": "Fadiga persistente com sonolência diurna excessiva",
+      "categoria": "energia_sono",
+      "prioridade": 2,
+      "justificativa": "Cansaço extremo com cochilos frequentes em mulher de 51 anos pode indicar disfunção hormonal ou metabólica"
+    },
+    {
+      "sinal": "Irregularidade menstrual em pré-menopausa",
+      "categoria": "hormonal",
+      "prioridade": 2,
+      "justificativa": "Ciclo irregular aos 51 anos requer avaliação hormonal completa para manejo adequado da transição"
+    },
+    {
+      "sinal": "Sobrepeso refratário apesar de exercício regular",
+      "categoria": "metabolico",
+      "prioridade": 2,
+      "justificativa": "IMC 28,1 com exercício 6x/semana sugere resistência metabólica ou disfunção hormonal"
+    },
+    {
+      "sinal": "Uso de Orlistat sem supervisão nutricional adequada",
+      "categoria": "metabolico",
+      "prioridade": 1,
+      "justificativa": "Medicação para perda de peso sem acompanhamento nutricional estruturado pode ter eficácia limitada"
+    },
+    {
+      "sinal": "Padrão alimentar desorganizado com consumo de álcool regular",
+      "categoria": "metabolico",
+      "prioridade": 1,
+      "justificativa": "Petiscos durante o dia e cerveja regular podem comprometer objetivos de perda de peso"
+    }
+  ],
+  "perfil_disc": "default",
+  "interpretacao_inicial": "Paciente de 51 anos em pré-menopausa apresenta quadro compatível com síndrome metabólica em desenvolvimento, caracterizado por sobrepeso refratário (IMC 28,1), fadiga persistente e constipação severa. O padrão de irregularidade menstrual associado ao uso de progesterona sugere necessidade de avaliação hormonal abrangente, incluindo perfil tireoidiano e resistência insulínica. A constipação com dependência de exercício para evacuação, combinada com fadiga extrema e sonolência diurna, indica possível disfunção do eixo hipotálamo-hipófise-adrenal ou hipotireoidismo subclínico. O histórico de colecistectomia há 33 anos pode contribuir para alterações digestivas atuais, requerendo investigação de disbiose e malabsorção de vitaminas lipossolúveis.",
+  "completude": {
+    "campos_preenchidos": 42,
+    "campos_totais": 55,
+    "percentual": 76.4,
+    "campos_criticos_faltantes": [
+      "altura para cálculo preciso do IMC",
+      "peso objetivo",
+      "qualidade do sono em escala numérica",
+      "nível de energia em escala numérica",
+      "detalhes sobre sintomas do ciclo menstrual",
+      "histórico de tabagismo"
+    ]
+  }
+}

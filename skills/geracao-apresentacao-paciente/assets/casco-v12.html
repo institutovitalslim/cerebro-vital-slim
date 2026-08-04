@@ -1,0 +1,3513 @@
+<!--
+  casco-v12.html — REFERENCIA VISUAL ANONIMIZADA (CSS + estrutura DOM).
+
+  ORIGEM: HTML V12 aprovado clinicamente, exportado do cache efemero do profile
+  da agente Ana. Este arquivo versiona o PADRAO VISUAL, nao o conteudo.
+
+  NAO E FONTE DE CONTEUDO. Todo texto clinico, todo valor de exame, todo dado
+  identificavel e toda imagem (foto da Dra. e laudo de bioimpedancia) foram
+  removidos e trocados por placeholders:
+    {{PACIENTE_NOME}}                  nome do paciente
+    {{PACIENTE_TELEFONE}}              telefone no modal de envio
+    {{CONTEUDO_CLINICO}}               qualquer texto dentro de container clinico
+    {{VALOR}}                          qualquer texto numerico nao-estatico
+    {{TEXTO_NAO_ESTATICO}}             texto que nao veio do codigo do renderer
+    {{MENSAGEM_WHATSAPP}}              corpo da mensagem de envio
+    {{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}} src de <img> (base64 apagado)
+
+  O QUE PERMANECE INTACTO E UTIL: o bloco <style> completo (design system,
+  tokens, grid, tipografia, media queries, patch V12 de isolamento de modos),
+  o bloco <script> e o esqueleto DOM com ids/classes na ordem canonica V12.
+
+  FONTE DE VERDADE EXECUTAVEL: scripts/gerar_apresentacao_v12.py
+  (render_apresentacao_v12). Este HTML serve para conferencia visual do delta,
+  nunca para copiar/colar conteudo de paciente.
+
+  Gerado por scripts/anonimizar_casco.py — politica default-deny.
+-->
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{{VALOR}}</title>
+<meta content="Referencia visual anonimizada — sem dados de paciente." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<style>
+
+:root{
+  --gold:#9F8844; --gold2:#D4BC79; --gold-dark:#6B5A2B;
+  --cream:#F7F2E4; --paper:#FFFFFF; --elev:#FBF6E8;
+  --ink:#1F1A12; --body:#3D3528; --muted:#756A55;
+  --line:rgba(107,90,43,.18); --line-strong:rgba(107,90,43,.32);
+  --red:#8E2417; --amber:#A06D0A; --green:#155527;
+  --serif:Georgia, "Playfair Display", serif;
+  --sans:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --max-w:1240px;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+  --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body{
+  font-family: var(--sans); font-size: 16px; line-height: 1.62;
+  color: var(--body); background: var(--cream);
+  text-rendering: optimizeLegibility; font-weight: 400;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--gold-dark); text-decoration: none; }
+
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); line-height: 1.15; font-weight: 500; }
+h1 { font-size: clamp(36px, 5vw, 64px); letter-spacing: -0.015em; }
+h2 { font-size: clamp(28px, 3.6vw, 48px); margin-bottom: var(--s-5); }
+h3 { font-size: clamp(20px, 2.2vw, 26px); margin-bottom: var(--s-4); }
+h4 { font-family: var(--sans); font-size: 12px; font-weight: 600; text-transform: uppercase;
+     letter-spacing: 0.18em; color: var(--gold-dark); margin-bottom: var(--s-3); }
+p { font-family: var(--sans); margin-bottom: var(--s-4); }
+
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--s-5); }
+.section { padding: var(--s-9) 0; border-top: 1px solid var(--line); }
+.section:first-of-type { border-top: none; }
+
+/* === TOPBAR === */
+.topbar{
+  background:#FFFFFF; padding:var(--s-3) var(--s-5);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  max-width:var(--max-w); margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+  min-height:96px; gap: var(--s-5);
+}
+.topbar .logo{ height:80px; max-width:280px; object-fit:contain; }
+.topbar .doctor-tag{
+  font-family:var(--sans); font-size:11px; font-weight:500;
+  text-transform:uppercase; letter-spacing:0.18em; color:var(--muted);
+  text-align:right; line-height:1.5;
+}
+.topbar .doctor-tag .name{
+  display:block; font-family:var(--serif); font-size:16px; font-weight:500;
+  font-style:italic; text-transform:none; letter-spacing:0;
+  color:var(--ink); margin-bottom:2px;
+}
+
+/* === PROGRESS NAV === */
+.progress-nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(247,242,228,0.95); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.progress-nav-inner{
+  max-width:var(--max-w); margin:0 auto;
+  padding:var(--s-3) var(--s-5);
+  display:flex; gap:var(--s-2); flex-wrap:wrap; align-items:center;
+  font-size:11px; letter-spacing:0.10em; text-transform:uppercase; font-weight:600;
+}
+.progress-step{
+  display:inline-flex; align-items:center;
+  color:var(--muted); padding:6px 12px; border-radius:999px;
+  cursor:pointer; transition:all 0.2s; border:1px solid transparent;
+}
+
+.progress-step, .mode-btn{ text-decoration:none; }
+
+.progress-step:focus-visible, .mode-btn:focus-visible{
+  outline:2px solid var(--gold-dark); outline-offset:2px;
+}
+.progress-step.active{ background:var(--gold); color:#fff; border-color:var(--gold); }
+.progress-step:hover{ color:var(--ink); }
+.progress-toggle{
+  margin-left:auto; padding:6px 14px; border-radius:999px;
+  border:1px solid var(--gold); color:var(--gold-dark); background:transparent;
+  font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  cursor:pointer; font-family:var(--sans);
+}
+.progress-toggle:hover{ background:var(--gold); color:#fff; }
+.progress-toggle.active{ background:var(--gold-dark); color:#fff; border-color:var(--gold-dark); }
+
+/* === HERO CLINICAL DOCUMENT === */
+.hero-clinical-document{
+  padding:var(--s-9) 0 var(--s-8);
+  background:linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.hero-meta-bar{
+  display:flex; gap:var(--s-6); flex-wrap:wrap;
+  padding-bottom:var(--s-5); margin-bottom:var(--s-6);
+  border-bottom:1px solid var(--line);
+}
+.hero-meta-item{ font-size:13px; color:var(--muted); }
+.hero-meta-item strong{
+  display:block; color:var(--ink); font-family:var(--serif);
+  font-size:18px; font-weight:500; font-style:italic; margin-top:2px;
+}
+.hero-clinical-h1{ max-width:920px; margin-bottom:var(--s-5); }
+.hero-clinical-lead{
+  font-size:clamp(17px, 1.5vw, 20px); color:var(--ink);
+  max-width:780px; line-height:1.55; font-weight:400;
+}
+.hero-clinical-lead strong{ color:var(--gold-dark); font-weight:600; }
+
+/* === EXECUTIVE DIAGNOSIS === */
+.executive-diagnosis{ background:var(--paper); }
+.diag-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-5); margin-top:var(--s-6); }
+.diag-card{
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); border-top:3px solid var(--gold);
+}
+.diag-card h4{ color:var(--gold-dark); margin-bottom:var(--s-3); }
+.diag-card .body-text{ font-size:15px; line-height:1.6; color:var(--body); margin:0; }
+.diag-recomendacao{
+  background:#1F1A12; color:#F7F2E4; border-radius:14px;
+  padding:var(--s-6) var(--s-7); margin-top:var(--s-6);
+  font-family:var(--serif); font-size:clamp(18px, 1.8vw, 22px);
+  font-style:italic; line-height:1.5;
+}
+.diag-recomendacao strong{ color:var(--gold2); font-style:normal; }
+
+/* === PATIENT MIRROR === */
+.patient-mirror{ background:var(--cream); }
+.mirror-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-4); margin-top:var(--s-5); }
+.mirror-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5);
+}
+.mirror-card .label{
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:0.16em; color:var(--gold-dark); margin-bottom:var(--s-3);
+}
+.mirror-card .value{
+  font-family:var(--serif); font-size:20px; font-weight:500;
+  color:var(--ink); line-height:1.3;
+}
+.mirror-card .value.empty{
+  font-family:var(--sans); font-size:13px; font-style:italic;
+  color:var(--muted); font-weight:400;
+}
+.mirror-card .sub{ font-size:13px; color:var(--muted); margin-top:var(--s-2); }
+.mirror-card.feature{ grid-column:span 3; border-left:4px solid var(--gold); }
+/* === Bioimpedância === */
+.bioimped-section{ background: var(--cream); padding-top: var(--s-7); padding-bottom: var(--s-7); }
+.bioimped-meta{ font-size:13px;color:var(--muted);margin-bottom:var(--s-5); }
+.bio-grid{ display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4); }
+.bio-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:var(--s-5);
+}
+.bio-card h4{
+  margin:0 0 var(--s-3);font-size:14px;font-weight:600;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+.bio-card .kpis{ display:grid;gap:var(--s-2); }
+.bio-kpi{ display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line); }
+.bio-kpi:last-child{ border-bottom:none; }
+.bio-kpi .label{ font-size:13px;color:var(--ink-soft); }
+.bio-kpi .value{ font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink); }
+.bio-kpi .value .unit{ font-size:11px;color:var(--muted);font-weight:400;margin-left:3px; }
+.bio-kpi .value .delta{ font-size:11px;color:var(--muted);margin-left:6px; }
+.bio-kpi .value .delta.up{ color:#2D8A3F; }
+.bio-kpi .value .delta.down{ color:#BE3226; }
+.bio-highlight{
+  background:linear-gradient(135deg, rgba(193,154,69,0.08), rgba(193,154,69,0.02));
+  border:1px solid rgba(193,154,69,0.2);
+  border-radius:14px;padding:var(--s-5);margin-top:var(--s-5);
+}
+.bio-highlight h4{
+  margin:0 0 var(--s-3);font-size:13px;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:0.1em;font-weight:600;
+}
+.bio-highlight ul{ margin:0;padding-left:var(--s-4);list-style:none; }
+.bio-highlight li{
+  position:relative;padding:6px 0 6px 22px;font-size:14px;color:var(--ink);line-height:1.55;
+}
+.bio-highlight li::before{
+  content:"";position:absolute;left:6px;top:14px;width:7px;height:7px;border-radius:50%;
+  background:var(--gold);
+}
+.bio-highlight li.alert::before{ background:#D4A000; }
+.bio-highlight li.crit::before{ background:#BE3226; }
+.bio-highlight li.ok::before{ background:#2D8A3F; }
+.bio-highlight li b{ color:var(--ink); font-weight:600; }
+.bio-image-wrap{
+  margin-top:var(--s-5);background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;padding:var(--s-4);text-align:center;
+}
+.bio-image-wrap h4{
+  margin:0 0 var(--s-3);font-size:13px;font-weight:600;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:0.1em;
+}
+.bio-image-wrap img{
+  max-width:100%;height:auto;border-radius:10px;
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);
+  border:1px solid var(--line);
+}
+.bio-image-wrap .caption{
+  display:block;margin-top:var(--s-2);font-size:12px;color:var(--muted);
+}
+@media (max-width: 900px){ .bio-grid{ grid-template-columns:1fr; } }
+
+
+/* === CRITICAL LEVERS === */
+.critical-levers{ background:var(--paper); }
+.lever-list{ display:flex; flex-direction:column; gap:var(--s-5); margin-top:var(--s-6); }
+.lever-card{
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); display:grid; grid-template-columns:1fr 2fr; gap:var(--s-6);
+}
+.lever-card[data-sev="crit"]{ border-left:4px solid #BE3226; }
+.lever-card[data-sev="alert"],
+.lever-card[data-sev="low"],
+.lever-card[data-sev="attn"]{ border-left:4px solid #D4A000; }
+.lever-card[data-sev="ok"],
+.lever-card[data-sev="normal"]{ border-left:4px solid #2D8A3F; }
+.lever-numeric .name{
+  font-family:var(--serif); font-size:22px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-3);
+}
+.lever-numeric .value{
+  font-family:var(--serif); font-size:42px; font-weight:600;
+  color:var(--ink); line-height:1; margin-bottom:var(--s-2);
+}
+.lever-numeric .value .unit{
+  font-size:0.45em; color:var(--muted); margin-left:6px; font-weight:400;
+}
+.lever-numeric .ref{ font-size:13px; color:var(--muted); margin-bottom:var(--s-3); }
+.lever-numeric .badge{
+  display:inline-block; padding:4px 10px; border-radius:6px;
+  font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+}
+.lever-card[data-sev="crit"] .badge{ background:rgba(190,50,38,0.12); color:#8E2417; }
+.lever-card[data-sev="alert"] .badge,
+.lever-card[data-sev="low"] .badge,
+.lever-card[data-sev="attn"] .badge{ background:rgba(212,160,0,0.16); color:#806100; }
+.lever-card[data-sev="ok"] .badge,
+.lever-card[data-sev="normal"] .badge{ background:rgba(40,130,60,0.10); color:#1F6E2D; }
+.lever-narrative h4{ color:var(--gold-dark); margin-bottom:var(--s-2); }
+.lever-narrative .interp{
+  font-size:15px; line-height:1.55; color:var(--body); margin-bottom:var(--s-3);
+}
+.lever-narrative .impact{
+  font-size:14px; color:var(--muted); margin-bottom:var(--s-4);
+  padding:var(--s-3) var(--s-4); background:var(--paper); border-radius:8px;
+  border-left:2px solid var(--line);
+}
+.lever-narrative .spin-q{
+  font-family:var(--serif); font-size:16px; font-style:italic;
+  color:var(--ink); padding-left:var(--s-4); border-left:3px solid var(--gold);
+  line-height:1.5;
+}
+.lever-narrative .spin-q::before{ content:"Pergunta: "; color:var(--gold-dark); font-style:normal; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.14em; display:block; margin-bottom:var(--s-2); }
+.lever-narrative.compact-decision .impact{ margin-bottom:10px; padding:12px 14px; }
+.lever-narrative.compact-decision .spin-q{ font-style:normal; font-weight:600; background:rgba(184,140,50,0.10); padding:12px 14px; border-left:3px solid var(--gold); border-radius:8px; }
+.lever-narrative.compact-decision .spin-q::before{ content:""; display:none; }
+
+/* === SPIN GUIDED === */
+.spin-guided{ background:var(--cream); }
+.spin-step-block{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6) var(--s-7); margin-bottom:var(--s-5);
+}
+.spin-step-block .step-tag{
+  display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:var(--s-3);
+}
+.spin-step-block h3{ margin-bottom:var(--s-4); }
+.spin-step-block .body-text{ font-size:15px; line-height:1.6; color:var(--body); margin-bottom:var(--s-4); }
+.spin-step-block .confirmation{
+  background:var(--cream); padding:var(--s-4) var(--s-5);
+  border-left:3px solid var(--gold); border-radius:0 8px 8px 0;
+  font-family:var(--serif); font-style:italic; font-size:16px; color:var(--ink);
+  margin-top:var(--s-4);
+}
+.spin-step-block .confirmation::before{
+  content:"Pergunta de confirmação:"; display:block;
+  font-family:var(--sans); font-style:normal; font-weight:600;
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--gold-dark); margin-bottom:var(--s-2);
+}
+.spin-table{ width:100%; border-collapse:collapse; margin:var(--s-4) 0; font-size:14px; }
+.spin-table th, .spin-table td{
+  padding:var(--s-3) var(--s-4); text-align:left; vertical-align:top;
+  border-bottom:1px solid var(--line);
+}
+.spin-table th{
+  background:var(--cream); font-size:11px; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-dark);
+}
+.spin-table tr:last-child td{ border-bottom:none; }
+
+/* === IVS MACHINE === */
+.ivs-machine{ background:var(--paper); }
+.machine-flow{
+  display:grid; grid-template-columns:repeat(6, 1fr); gap:var(--s-3);
+  margin-top:var(--s-7); position:relative;
+}
+.machine-step{
+  background:var(--cream); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5) var(--s-4); text-align:center; position:relative;
+}
+.machine-step .num{
+  width:36px; height:36px; border-radius:50%;
+  background:var(--gold); color:#fff; display:flex;
+  align-items:center; justify-content:center; font-weight:700;
+  font-size:14px; margin:0 auto var(--s-3);
+}
+.machine-step .title{
+  font-family:var(--serif); font-size:15px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-2); line-height:1.25;
+}
+.machine-step .desc{ font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* === PROOF BY PROCESS === */
+.proof-by-process{ background:var(--cream); }
+.proof-list{ display:flex; flex-direction:column; gap:var(--s-7); margin-top:var(--s-6); }
+.proof-card{
+  display:grid; grid-template-columns:1.2fr 1fr; gap:var(--s-7);
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-6); align-items:center;
+}
+.proof-card:nth-child(even){ grid-template-columns:1fr 1.2fr; }
+.proof-card:nth-child(even) .proof-imgs{ order:2; }
+.proof-imgs{
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--s-3);
+}
+.proof-img{ position:relative; aspect-ratio:3/4; overflow:hidden; border-radius:10px; background:var(--cream); }
+.proof-img img{ width:100%; height:100%; object-fit:cover; object-position:center top; }
+.proof-img .label{
+  position:absolute; top:var(--s-3); left:var(--s-3);
+  background:rgba(255,255,255,0.95); padding:4px 10px; border-radius:4px;
+  font-size:10px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--ink);
+}
+.proof-text .step-eyebrow{
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:0.20em; color:var(--gold-dark); margin-bottom:var(--s-3);
+  display:block;
+}
+.proof-text h3{ margin-bottom:var(--s-4); }
+.proof-text blockquote{
+  font-family:var(--serif); font-size:17px; font-style:italic;
+  line-height:1.55; color:var(--body); margin:0 0 var(--s-5);
+  padding-left:var(--s-4); border-left:2px solid var(--gold);
+}
+.proof-disclaimer{
+  margin-top:var(--s-7); padding:var(--s-4) var(--s-5);
+  background:var(--paper); border:1px solid var(--line); border-radius:8px;
+  font-size:12px; color:var(--muted); font-style:italic; line-height:1.5;
+}
+
+/* === PROGRAM 180 DAYS === */
+.program-180-days{ background:var(--paper); }
+.program-timeline{
+  display:flex; flex-direction:column; gap:var(--s-5); margin-top:var(--s-6);
+}
+.program-phase{
+  display:grid; grid-template-columns:120px 1fr; gap:var(--s-6);
+  padding:var(--s-5) 0; border-bottom:1px solid var(--line); align-items:start;
+}
+.program-phase:last-child{ border-bottom:none; }
+.program-phase .phase-marker{
+  width:120px; padding:var(--s-3) 0; text-align:center;
+  background:var(--cream); border:1px solid var(--line); border-radius:10px;
+}
+.program-phase .phase-marker .num{
+  font-family:var(--serif); font-size:24px; font-weight:600; color:var(--gold-dark);
+  font-style:italic; line-height:1;
+}
+.program-phase .phase-marker .label{
+  font-size:10px; font-weight:600; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--muted); margin-top:4px;
+}
+.program-phase .phase-content h4{ font-family:var(--serif); font-size:20px; font-weight:500; color:var(--ink); margin-bottom:var(--s-3); text-transform:none; letter-spacing:-0.01em; }
+.program-phase .phase-content .desc{ font-size:14px; line-height:1.6; color:var(--body); margin-bottom:var(--s-3); }
+.program-phase .phase-content ul{ list-style:none; padding:0; }
+.program-phase .phase-content li{
+  font-size:13px; color:var(--muted); padding:4px 0 4px var(--s-4);
+  position:relative; line-height:1.5;
+}
+.program-phase .phase-content li::before{
+  content:""; position:absolute; left:0; top:13px;
+  width:6px; height:6px; border-radius:50%; background:var(--gold);
+}
+
+/* === OBJECTION PREEMPTION === */
+.objection-preemption{ background:var(--cream); }
+.obj-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--s-4); margin-top:var(--s-6); }
+.obj-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5); border-top:3px solid var(--gold-dark);
+}
+.obj-card .obj-q{
+  font-family:var(--serif); font-size:17px; font-weight:500; font-style:italic;
+  color:var(--ink); margin-bottom:var(--s-4); line-height:1.35;
+}
+.obj-card .obj-a{ font-size:13px; line-height:1.6; color:var(--body); }
+
+/* === DECISION CHECKLIST === */
+.decision-checklist{ background:var(--paper); }
+.checklist-card{
+  max-width:780px; margin:var(--s-6) auto 0;
+  background:var(--cream); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-7);
+}
+.checklist-item{
+  display:flex; align-items:flex-start; gap:var(--s-4);
+  padding:var(--s-4) 0; border-bottom:1px solid var(--line); cursor:pointer;
+}
+.checklist-item:last-child{ border-bottom:none; }
+.checklist-item .check{
+  flex:0 0 28px; width:28px; height:28px; border-radius:6px;
+  border:1.5px solid var(--gold); background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  margin-top:2px; transition:all 0.2s;
+}
+.checklist-item.checked .check{ background:var(--gold); }
+.checklist-item.checked .check::after{
+  content:""; width:8px; height:14px; border:solid #fff;
+  border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px, -1px);
+}
+.checklist-item .text{ font-size:15px; line-height:1.5; color:var(--ink); flex:1; padding-top:2px; }
+.checklist-item.checked .text{ color:var(--muted); }
+
+/* === FINAL CTA === */
+.final-cta{ background:var(--cream); }
+.cta-decision{ display:grid; grid-template-columns:1fr; gap:var(--s-5); margin-top:var(--s-6); max-width:640px; margin-left:auto; margin-right:auto; }
+.cta-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:var(--s-7); display:flex; flex-direction:column; gap:var(--s-4);
+}
+.cta-card.recommended{ border-top:4px solid var(--gold); background:#FFFCF3; }
+.cta-card.alternative{ opacity:0.85; }
+.cta-card .label{
+  font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase;
+}
+.cta-card.recommended .label{ color:var(--gold-dark); }
+.cta-card.alternative .label{ color:var(--muted); }
+.cta-card h3{ margin-bottom:var(--s-3); }
+.cta-card .desc{ font-size:14px; line-height:1.6; color:var(--body); flex:1; }
+.cta-card .button{
+  display:inline-block; padding:var(--s-4) var(--s-6);
+  border-radius:8px; font-size:13px; font-weight:700;
+  letter-spacing:0.16em; text-transform:uppercase; cursor:pointer;
+  font-family:var(--sans); border:none; text-decoration:none; text-align:center;
+  margin-top:var(--s-3);
+}
+.cta-card.recommended .button{ background:var(--gold-dark); color:#fff; }
+.cta-card.alternative .button{ background:transparent; color:var(--muted); border:1px solid var(--line-strong); }
+
+.cta-signature{
+  text-align:center; margin-top:var(--s-8); padding-top:var(--s-6);
+  border-top:1px solid var(--line);
+}
+.cta-signature .name{
+  font-family:var(--serif); font-size:22px; font-weight:500;
+  font-style:italic; color:var(--ink); margin-bottom:var(--s-2);
+}
+.cta-signature .meta{
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);
+}
+
+/* === TECHNICAL APPENDIX === */
+.technical-appendix{ background:var(--paper); }
+.appendix-controls{
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:var(--s-3); margin-bottom:var(--s-5);
+}
+.appendix-controls .lead{ font-size:14px; color:var(--muted); margin:0; max-width:680px; }
+.appendix-toggle-all{
+  padding:8px 16px; border-radius:8px; border:1px solid var(--gold);
+  background:transparent; color:var(--gold-dark); font-size:11px;
+  font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
+  cursor:pointer; font-family:var(--sans);
+}
+.appendix-toggle-all:hover{ background:var(--gold); color:#fff; }
+
+.exam-group{
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin-bottom:var(--s-3);
+  overflow:hidden;
+  background:var(--paper);
+}
+.exam-group-header{
+  padding:var(--s-4) var(--s-5);
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--paper);
+  user-select:none;
+  border-bottom:1px solid var(--line);
+}
+.exam-group-header h4{
+  font-family:var(--serif); font-size:18px; font-weight:500;
+  color:var(--ink); text-transform:none; letter-spacing:-0.005em; margin:0;
+}
+.exam-group-header .meta{
+  display:flex; gap:var(--s-3); align-items:center; font-size:12px; color:var(--muted);
+}
+.exam-group-header .toggle{
+  width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+  transition:transform 0.2s;
+}
+.exam-group.open .exam-group-header .toggle{ transform:rotate(180deg); }
+.exam-group-body{ display:none; padding:0 var(--s-5); background:var(--paper); }
+.exam-group.open .exam-group-body{ display:block; }
+.exam-row{
+  display:block;
+  padding:12px 0;
+  margin:0;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+  background:transparent;
+  box-shadow:none;
+}
+.exam-row:last-child{ border-bottom:none; }
+.exam-row .e-nome{
+  display:block;
+  font-family:var(--serif); font-weight:500; font-size:16px; color:var(--ink);
+  line-height:1.35;
+}
+.exam-row .e-valor{
+  display:block;
+  margin-top:4px;
+  font-family:var(--serif); font-weight:600; font-size:18px; color:var(--ink);
+  line-height:1.2;
+}
+.exam-row .e-valor .e-unit{ color:var(--muted); font-size:13px; margin-left:4px; font-weight:400; }
+.exam-row .e-ref{ display:block; margin-top:3px; font-size:12px; color:var(--muted); }
+.exam-row .e-status{
+  display:block;
+  margin-top:6px;
+  font-size:10px; font-weight:700; letter-spacing:0.14em;
+  text-transform:uppercase; text-align:left;
+}
+/* === Coloração semântica das linhas de exame — layout técnico simples === */
+.exam-row{ transition:none; }
+.exam-row[data-sev="crit"] .e-nome,
+.exam-row[data-sev="crit"] .e-valor,
+.exam-row[data-sev="crit"] .e-status{ color: #8E2417; }
+.exam-row[data-sev="alert"] .e-nome,
+.exam-row[data-sev="low"] .e-nome,
+.exam-row[data-sev="attn"] .e-nome,
+.exam-row[data-sev="alert"] .e-valor,
+.exam-row[data-sev="low"] .e-valor,
+.exam-row[data-sev="attn"] .e-valor,
+.exam-row[data-sev="alert"] .e-status,
+.exam-row[data-sev="low"] .e-status,
+.exam-row[data-sev="attn"] .e-status{ color: #8B6A00; }
+.exam-row[data-sev="ok"] .e-status,
+.exam-row[data-sev="normal"] .e-status{ color: #1F6E2D; font-weight: 700; }
+
+/* === Mobile === */
+@media(max-width: 900px){
+  .diag-grid, .mirror-grid, .machine-flow, .obj-grid, .cta-decision { grid-template-columns: 1fr; }
+  .lever-card, .proof-card, .proof-card:nth-child(even), .program-phase{ grid-template-columns: 1fr; }
+  .proof-card:nth-child(even) .proof-imgs{ order:0; }
+  .machine-flow{ grid-template-columns: repeat(2, 1fr); }
+  .progress-nav-inner{ overflow-x:auto; flex-wrap:nowrap; }
+  .topbar .doctor-tag{ display:none; }
+  .topbar .logo{ height:60px; max-width:200px; }
+  .hero-meta-bar{ flex-direction:column; gap:var(--s-3); }
+  .program-phase .phase-marker{ width:auto; padding:var(--s-3) var(--s-4); }
+  .program-phase{ gap:var(--s-3); }
+  .exam-row{
+    padding:10px 0;
+  }
+  .exam-row .e-status{ text-align:left; }
+  .lever-card{ gap:var(--s-3); }
+  .lever-numeric{ display:flex; align-items:baseline; gap:var(--s-3); flex-wrap:wrap; }
+}
+
+/* === Print === */
+@media print{
+  .progress-nav, .progress-toggle, .appendix-toggle-all{ display:none !important; }
+  body{ background:#fff; color:#000; font-size:12pt; }
+  .section{ padding:24pt 0; page-break-inside:avoid; border-top-color:#ccc; }
+  h1{ font-size:24pt; }
+  h2{ font-size:18pt; }
+  h3{ font-size:14pt; }
+  .exam-group, .exam-group-body{ display:block !important; }
+  .exam-group-header .toggle{ display:none; }
+  .lever-card, .diag-card, .obj-card, .mirror-card, .cta-card{
+    page-break-inside:avoid; box-shadow:none;
+  }
+  .proof-disclaimer, .checklist-card{ page-break-inside:avoid; }
+}
+
+/* CSS dos 3 modos é gerenciado abaixo (V2.5) */
+
+
+
+
+
+
+
+
+/* ========================================================================
+   V2.5 — 3 modos de visualização (exclusivos)
+   ======================================================================== */
+
+/* Mode switcher (substitui progress-toggle) */
+.mode-switcher{
+  display: inline-flex; gap: 4px; padding: 4px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: rgba(255,255,255,0.85);
+  margin-left: auto;
+}
+.mode-btn{
+  padding: 6px 14px; border-radius: 999px;
+  border: none; background: transparent;
+  font-family: var(--sans); font-size: 11px;
+  font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  transition: all 0.2s;
+}
+.mode-btn:hover{ color: var(--ink); }
+.mode-btn.active{ background: var(--gold-dark); color: #fff; box-shadow: 0 2px 6px rgba(107,90,43,0.20); }
+
+/* === MODO APRESENTAÇÃO === (default) */
+/* Mostra fluxo principal, esconde apêndices */
+body.js-enabled.modo-apresentacao .technical-appendix,
+body.js-enabled.modo-apresentacao .medical-mode,
+body.js-enabled.modo-apresentacao .doctor-objections{
+  display: none !important;
+}
+
+/* === MODO EXAMES === */
+/* Mostra apenas o painel técnico de exames */
+body.js-enabled.modo-exames main > section:not(.technical-appendix){
+  display: none !important;
+}
+body.js-enabled.modo-exames .technical-appendix{ padding-top: var(--s-7); }
+
+/* === MODO OBJEÇÕES === */
+/* Mostra apenas o painel de objeções da médica */
+body.js-enabled.modo-objecoes main > section:not(#doctor-objections):not(.medical-mode){
+  display: none !important;
+}
+body.js-enabled.modo-objecoes .doctor-objections{ padding-top: var(--s-7); }
+
+@media print{
+  .mode-switcher{ display: none !important; }
+}
+
+/* ========================================================================
+   V2.5 — Painel de objeções otimizado para consulta rápida
+   ======================================================================== */
+
+/* Barra de busca + categorias no topo do painel */
+.obj-toolbar{
+  position: sticky; top: 76px; z-index: 5;
+  background: rgba(247,242,228,0.95); backdrop-filter: blur(10px);
+  padding: var(--s-4) 0; margin-bottom: var(--s-5);
+  border-bottom: 1px solid var(--line);
+}
+.obj-search-wrap{ position: relative; max-width: 920px; margin: 0 auto; }
+.obj-search{
+  width: 100%; padding: var(--s-4) var(--s-5) var(--s-4) 48px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--paper);
+  font-family: var(--sans); font-size: 16px;
+  color: var(--ink); outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.obj-search:focus{
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(159,136,68,0.15);
+}
+.obj-search::placeholder{ color: var(--muted); }
+.obj-search-icon{
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; color: var(--muted); pointer-events: none;
+}
+.obj-search-clear{
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%;
+  border: none; background: var(--cream); color: var(--muted);
+  cursor: pointer; display: none; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1;
+}
+.obj-search-clear.visible{ display: flex; }
+.obj-search-clear:hover{ background: var(--gold); color: #fff; }
+
+.obj-cats{
+  display: flex; gap: 6px; flex-wrap: wrap; max-width: 920px; margin: var(--s-3) auto 0;
+}
+.obj-cat-chip{
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--paper);
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted);
+  cursor: pointer; transition: all 0.2s;
+}
+.obj-cat-chip:hover{ border-color: var(--gold); color: var(--ink); }
+.obj-cat-chip.active{
+  background: var(--gold-dark); color: #fff; border-color: var(--gold-dark);
+}
+
+.obj-counter{
+  max-width: 920px; margin: var(--s-3) auto 0;
+  font-size: 12px; color: var(--muted);
+  font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase;
+}
+
+/* Lista de objeções — 1 coluna max-width 920px */
+.doctor-obj-list{
+  max-width: 920px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: var(--s-3);
+}
+
+/* Card collapsable */
+.doctor-obj-card{
+  background: var(--paper); border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 0;
+  transition: box-shadow 0.25s, border-color 0.25s;
+  overflow: hidden;
+}
+.doctor-obj-card.hidden{ display: none; }
+.doctor-obj-card:hover{
+  border-color: var(--gold);
+  box-shadow: 0 8px 18px -10px rgba(54,43,24,0.12);
+}
+.doctor-obj-card .obj-header{
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-4) var(--s-5); cursor: pointer;
+  user-select: none;
+}
+.doctor-obj-card .obj-cat-tag{
+  flex-shrink: 0;
+  padding: 3px 9px; border-radius: 4px;
+  font-family: var(--sans); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  background: rgba(159,136,68,0.10); color: var(--gold-dark);
+}
+.doctor-obj-card .obj-header h3{
+  flex: 1; font-family: var(--serif); font-size: 17px;
+  font-weight: 500; font-style: italic; color: var(--ink);
+  margin: 0; line-height: 1.4;
+}
+.doctor-obj-card .obj-toggle{
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(159,136,68,0.10); color: var(--gold-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: transform 0.25s;
+}
+.doctor-obj-card.open .obj-toggle{ transform: rotate(180deg); }
+.doctor-obj-card .obj-body{
+  display: none; padding: 0 var(--s-5) var(--s-5);
+  border-top: 1px dashed var(--line);
+  margin-top: 0;
+}
+.doctor-obj-card.open .obj-body{ display: block; padding-top: var(--s-4); }
+.doctor-obj-card .obj-body p{
+  font-size: 14px; line-height: 1.55; color: var(--body); margin-bottom: var(--s-3);
+}
+.doctor-obj-card .obj-body p:last-child{ margin-bottom: 0; }
+.doctor-obj-card .obj-body p strong{
+  color: var(--gold-dark); font-weight: 700;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  display: block; margin-bottom: 4px;
+}
+.doctor-obj-card .obj-body .cond{
+  border-top: 1px dashed var(--line);
+  padding-top: var(--s-3); margin-top: var(--s-3);
+  font-style: italic; color: var(--ink);
+}
+.doctor-obj-card .obj-body .cond strong{ color: var(--gold-dark); font-style: normal; }
+
+/* Estado: nenhum resultado */
+.obj-empty{
+  text-align: center; padding: var(--s-8) 0;
+  color: var(--muted); font-style: italic;
+}
+
+/* Atalho de teclado hint */
+.obj-shortcut{
+  position: absolute; right: 52px; top: 50%; transform: translateY(-50%);
+  font-size: 10px; color: var(--muted); font-weight: 600;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  background: var(--cream); padding: 2px 8px; border-radius: 4px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+.obj-search:focus + .obj-shortcut{ display: none; }
+
+@media(max-width: 720px){
+  .obj-toolbar{ top: 60px; }
+  .obj-cats{ overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
+  .obj-cat-chip{ flex-shrink: 0; }
+  .doctor-obj-card .obj-cat-tag{ display: none; }
+  .doctor-obj-card .obj-header h3{ font-size: 15px; }
+  .obj-shortcut{ display: none; }
+}
+
+
+/* V2.6 — Inclusos com 8 cards e ícones premium maiores */
+.inclusos-grid{ grid-template-columns: repeat(4, 1fr) !important; gap: var(--s-4); }
+.incluso-card{ padding: var(--s-5) var(--s-4); }
+.incluso-card .incluso-icon{
+  width: 40px; height: 40px;
+  margin-bottom: var(--s-4);
+  color: var(--gold-dark);
+  background: linear-gradient(135deg, rgba(159,136,68,0.12) 0%, rgba(212,188,121,0.08) 100%);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 6px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.incluso-card:hover .incluso-icon{
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+.incluso-card .incluso-titulo{
+  font-size: 15px;
+  line-height: 1.3;
+  margin-bottom: var(--s-3);
+}
+.incluso-card .incluso-desc{
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+@media(max-width: 1100px){
+  .inclusos-grid{ grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media(max-width: 600px){
+  .inclusos-grid{ grid-template-columns: 1fr !important; }
+}
+
+/* V2.4 — Apêndice da médica (legacy, sobrescrito por V2.5) */
+.doctor-objections{
+  background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+  border-top: 1px dashed var(--gold);
+}
+.doctor-objections .doctor-tag{
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold-dark);
+  background: rgba(159,136,68,0.10);
+  padding: 6px 12px; border-radius: 4px;
+  margin-bottom: var(--s-4);
+}
+.doctor-objections h2{
+  font-family: var(--serif); font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500; color: var(--ink); letter-spacing: -0.01em;
+  margin-bottom: var(--s-4);
+}
+.doctor-objections .lead{
+  max-width: 780px; font-size: 15px; line-height: 1.6;
+  color: var(--muted); margin-bottom: var(--s-7); font-style: italic;
+}
+.doctor-obj-grid{
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+}
+.doctor-obj-card{
+  background: var(--paper); border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 12px; padding: var(--s-5) var(--s-6);
+  transition: box-shadow 0.3s;
+}
+.doctor-obj-card:hover{ box-shadow: 0 14px 28px -14px rgba(54,43,24,0.12); }
+.doctor-obj-card h3{
+  font-family: var(--serif); font-size: 19px; font-weight: 500;
+  font-style: italic; color: var(--ink); margin-bottom: var(--s-4);
+  line-height: 1.4;
+}
+.doctor-obj-card p{
+  font-size: 13.5px; line-height: 1.55; color: var(--body);
+  margin-bottom: var(--s-3);
+}
+.doctor-obj-card p strong{
+  color: var(--gold-dark); font-weight: 700;
+  font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase;
+  display: inline-block; margin-right: 6px;
+}
+.doctor-obj-card .cond{
+  border-top: 1px dashed var(--line);
+  padding-top: var(--s-3); margin-top: var(--s-3);
+  font-style: italic; color: var(--ink);
+}
+
+@media(max-width: 900px){
+  .doctor-obj-grid{ grid-template-columns: 1fr; }
+}
+
+/* Ocultar em modo apresentação (uso médico interno apenas) */
+/* doctor-objections gerenciado pelas regras de modo (V2.5) */
+
+/* Print: oculto também (não é parte do documento entregue ao paciente) */
+@media print{
+  .doctor-objections{ display: none !important; }
+}
+
+/* V2.3 — Programa enxuto (4 fases simples) */
+.program-180-days .program-phase{ padding: var(--s-6) 0; }
+.program-180-days .phase-marker .num{
+  font-family: var(--serif); font-size: 26px; font-weight: 600;
+  color: var(--gold-dark); font-style: italic; line-height: 1;
+}
+.program-180-days .phase-content h4{
+  font-family: var(--serif); font-size: clamp(20px, 2vw, 24px);
+  font-weight: 500; color: var(--ink); margin-bottom: var(--s-3);
+  text-transform: none; letter-spacing: -0.005em;
+}
+.program-180-days .phase-content .desc{ font-size: 15px; line-height: 1.6; color: var(--body); margin: 0; }
+
+/* V2.3 — Leitura integrada do caso (substitui SPIN visível) */
+.leitura-integrada{ background: var(--cream); }
+.leitura-block{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: var(--s-6) var(--s-7);
+  margin-bottom: var(--s-5);
+  position: relative;
+  background: linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+  transition: box-shadow 0.3s;
+}
+.leitura-block:hover{ box-shadow: 0 18px 36px -16px rgba(54,43,24,0.10); }
+.leitura-block h3{
+  font-family: var(--serif); font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 500; color: var(--ink); margin-bottom: var(--s-3);
+  letter-spacing: -0.01em;
+}
+.leitura-block .body-text{
+  font-size: 15px; line-height: 1.6; color: var(--body); margin-bottom: var(--s-4);
+}
+.leitura-block .alinhamento{
+  background: linear-gradient(135deg, #fffcf3 0%, var(--cream) 100%);
+  border-left: 3px solid var(--gold);
+  padding: var(--s-4) var(--s-5); border-radius: 0 8px 8px 0;
+  font-family: var(--serif); font-style: italic; font-size: 16px;
+  color: var(--ink); margin-top: var(--s-4); position: relative;
+}
+.leitura-block .alinhamento::after{
+  content:"›"; position:absolute; right:var(--s-5); top:50%; transform:translateY(-50%);
+  font-size:32px; color:var(--gold); font-weight:300; font-family:var(--serif);
+}
+
+/* V2.2 — Hero com foto da Dra */
+.hero-grid{
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--s-7);
+  align-items: center;
+}
+.hero-text{ min-width: 0; }
+.hero-photo{
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--cream-elev);
+  box-shadow: 0 30px 60px -25px rgba(31,26,18,0.30), 0 14px 28px -10px rgba(159,136,68,0.15);
+  aspect-ratio: 4 / 5;
+  max-width: 380px;
+  justify-self: end;
+  width: 100%;
+}
+.hero-photo img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero-photo::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, rgba(31,26,18,0.45) 100%);
+}
+.hero-photo-caption{
+  position: absolute; left: var(--s-5); right: var(--s-5); bottom: var(--s-5);
+  z-index: 2; color: #F7F2E4;
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.5;
+}
+.hero-photo-caption strong{
+  display: block;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+  color: #FFFFFF;
+}
+
+@media(max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; gap: var(--s-5); }
+  .hero-photo{ max-width: 280px; justify-self: center; aspect-ratio: 3 / 4; }
+  .hero-photo-caption{ font-size: 10px; }
+  .hero-photo-caption strong{ font-size: 15px; }
+}
+
+/* V2.2 — Progress nav: scroll suave sem sobreposição */
+section[id]{ scroll-margin-top: 76px; }
+@media(max-width: 900px){ section[id]{ scroll-margin-top: 60px; } }
+
+/* V2.2 — Grid 2 colunas no Diagnóstico Executivo */
+.diag-grid-2col{ grid-template-columns: 1fr 1fr !important; }
+@media(max-width: 900px){ .diag-grid-2col{ grid-template-columns: 1fr !important; } }
+
+/* === Tese clínica do caso (P1.7) === */
+.tese-clinica{
+  background: linear-gradient(135deg, #1F1A12 0%, #2D2310 100%);
+  border-radius:14px; padding:var(--s-6) var(--s-7);
+  margin-bottom:var(--s-6); position:relative; overflow:hidden;
+  border:1px solid rgba(212,188,121,0.20);
+  box-shadow: 0 18px 36px -16px rgba(31,26,18,0.40);
+}
+.tese-clinica::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+}
+.tese-clinica .tese-tag{
+  font-size:11px; font-weight:700; letter-spacing:0.20em;
+  text-transform:uppercase; color:var(--gold2);
+  display:block; margin-bottom:var(--s-3);
+}
+.tese-clinica .tese-texto{
+  font-family:var(--serif); font-size:clamp(18px, 1.9vw, 22px);
+  line-height:1.5; color:#F7F2E4; font-style:italic; margin:0;
+}
+.tese-clinica .tese-texto strong{ color:var(--gold2); font-style:normal; font-weight:600; }
+
+/* === Conexão exame → sintoma (P1.8) === */
+.conexao-sintoma{
+  background:linear-gradient(135deg, rgba(159,136,68,0.06) 0%, rgba(159,136,68,0.02) 100%);
+  border-left:2px solid var(--gold);
+  padding:var(--s-3) var(--s-4); margin:var(--s-4) 0;
+  border-radius:0 8px 8px 0;
+}
+.conexao-sintoma .conexao-tag{
+  font-size:10px; font-weight:700; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--gold-dark); display:block; margin-bottom:4px;
+}
+.conexao-sintoma p{
+  font-family:var(--serif); font-size:14px; font-style:italic;
+  color:var(--ink); margin:0; line-height:1.5;
+}
+
+/* === Custo de não acompanhar (P0.4) === */
+.custo-nao-acompanhar{ background:var(--paper); }
+.custo-grid{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:var(--s-4); margin-top:var(--s-6);
+}
+.custo-card{
+  background: linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+  border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5) var(--s-6); border-left:3px solid var(--amber);
+  position:relative;
+}
+.custo-card .custo-icon{
+  width:32px; height:32px; color:var(--amber); margin-bottom:var(--s-3);
+}
+.custo-card .custo-icon svg{ width:100%; height:100%; }
+.custo-card .custo-titulo{
+  font-family:var(--serif); font-size:18px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-3); text-transform:none; letter-spacing:-0.005em;
+}
+.custo-card .custo-desc{
+  font-size:14px; line-height:1.55; color:var(--body); margin:0;
+}
+
+/* === Inclusos (P0.5) === */
+.inclusos{ background:var(--cream); }
+.inclusos-grid{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  gap:var(--s-4); margin-top:var(--s-6);
+}
+.incluso-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px;
+  padding:var(--s-5); text-align:left;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position:relative; border-top:3px solid var(--gold);
+}
+.incluso-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -16px rgba(54,43,24,0.14);
+  border-top-color: var(--gold-dark);
+}
+.incluso-card .incluso-icon{
+  width:32px; height:32px; color:var(--gold-dark); margin-bottom:var(--s-3);
+}
+.incluso-card .incluso-icon svg{ width:100%; height:100%; }
+.incluso-card .incluso-titulo{
+  font-family:var(--serif); font-size:16px; font-weight:500;
+  color:var(--ink); margin-bottom:var(--s-2); text-transform:none; letter-spacing:-0.005em;
+}
+.incluso-card .incluso-desc{
+  font-size:13px; line-height:1.55; color:var(--body); margin:0;
+}
+
+/* === Proof thesis (P1.9) === */
+.proof-thesis{
+  margin:var(--s-6) 0; padding:var(--s-5) var(--s-6);
+  background: linear-gradient(135deg, var(--paper) 0%, #fffcf3 100%);
+  border:1px solid var(--line); border-radius:12px; border-left:3px solid var(--gold);
+}
+.proof-thesis p{
+  font-family:var(--serif); font-size:17px; font-style:italic;
+  color:var(--ink); margin:0; line-height:1.55;
+}
+.proof-thesis strong{ color:var(--gold-dark); font-style:normal; font-weight:600; }
+
+/* === Objection close (P1.10) === */
+.obj-card{ display:flex; flex-direction:column; }
+.obj-card .obj-a{ flex:1; }
+.obj-card .obj-close{
+  margin-top:var(--s-4); padding-top:var(--s-4);
+  border-top:1px dashed var(--line);
+  font-family:var(--serif); font-size:14px; font-style:italic;
+  color:var(--gold-dark); line-height:1.5;
+  display:flex; gap:var(--s-3); align-items:flex-start;
+}
+.obj-card .obj-close-marker{ color:var(--gold); font-weight:700; font-style:normal; flex-shrink:0; }
+
+/* === Modo apresentação: oculta detalhes técnicos das alavancas (P2.11) === */
+body.js-enabled.modo-apresentacao .lever-narrative h4,
+body.js-enabled.modo-apresentacao .lever-narrative .impact{
+  display:none !important;
+}
+
+/* === Mobile padding (P2.13) === */
+@media(max-width: 900px){
+  .section{ padding: var(--s-7) 0; }
+  .custo-grid, .inclusos-grid{ grid-template-columns: 1fr; }
+}
+@media(max-width: 600px){
+  .inclusos-grid{ grid-template-columns: 1fr; }
+}
+@media(min-width: 601px) and (max-width: 900px){
+  .inclusos-grid{ grid-template-columns: repeat(2, 1fr); }
+  .custo-grid{ grid-template-columns: 1fr; }
+}
+
+/* Fade-up p/ tese-clinica + proof-thesis + custo-card + incluso-card já é aplicado na classe */
+
+/* Print: novas seções */
+@media print{
+  .tese-clinica{ background:#fff !important; color:#000 !important; border:1px solid #ccc !important; box-shadow:none !important; }
+  .tese-clinica .tese-texto{ color:#000 !important; }
+  .tese-clinica .tese-tag{ color:#666 !important; }
+  .custo-card, .incluso-card, .proof-thesis{ box-shadow:none !important; background:#fff !important; }
+}
+
+
+/* === PREMIUM REFINEMENTS === */
+
+/* Tipografia variable + features */
+body{
+  font-feature-settings: "ss01", "kern", "liga", "calt", "tnum";
+  text-underline-offset: 2px;
+}
+.tabular { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* Background com texture sutil */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(159,136,68,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(159,136,68,0.05) 0%, transparent 40%);
+}
+
+/* Decorative gold corner brackets em cards principais */
+.diag-recomendacao{
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, #1F1A12 0%, #2D2310 100%);
+  border:1px solid rgba(212,188,121,0.20);
+  box-shadow:0 30px 60px -20px rgba(31,26,18,0.50), 0 18px 36px -12px rgba(159,136,68,0.15);
+}
+.diag-recomendacao::before, .diag-recomendacao::after{
+  content:""; position:absolute; width:42px; height:42px;
+  border:1.5px solid var(--gold2); opacity:0.55;
+}
+.diag-recomendacao::before{ top:14px; left:14px; border-right:none; border-bottom:none; }
+.diag-recomendacao::after{ bottom:14px; right:14px; border-left:none; border-top:none; }
+
+/* Diagnostic cards com subtle gradient + hover depth */
+.diag-card{
+  position:relative; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s, border-color 0.35s;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.diag-card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(159,136,68,0.30);
+  box-shadow: 0 22px 42px -18px rgba(54,43,24,0.18);
+}
+.diag-card::after{
+  content:""; position:absolute; top:0; left:50%; width:60px; height:3px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
+  transform: translateX(-50%);
+}
+
+/* Hero — decorative eyebrow ornament */
+.hero-clinical-document{ position:relative; }
+.hero-clinical-document::before{
+  content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:60px; height:1px; background:var(--gold); opacity:0.4;
+}
+.hero-meta-bar{ position:relative; }
+.hero-meta-item strong{ font-feature-settings:"tnum"; }
+
+/* Mirror cards com hover lift */
+.mirror-card{
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, #fff 0%, #fbf6e8 100%);
+}
+.mirror-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -12px rgba(54,43,24,0.10);
+  border-color: rgba(159,136,68,0.25);
+}
+.mirror-card.feature{
+  background:linear-gradient(135deg, #fffcf3 0%, #fbf6e8 50%, #f7f2e4 100%);
+}
+
+/* Critical Levers — severity ring + sparkline visual */
+.lever-card{
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+  position:relative;
+  overflow:hidden;
+}
+.lever-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 44px -20px rgba(54,43,24,0.16);
+}
+.lever-card::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+}
+.lever-card[data-sev="crit"]::before{ background:linear-gradient(180deg, var(--red) 0%, #6e1d12 100%); }
+.lever-card[data-sev="alert"]::before{ background:linear-gradient(180deg, var(--amber) 0%, #7a5108 100%); }
+
+.lever-numeric{
+  display:flex; flex-direction:column; gap:var(--s-2);
+  padding-right:var(--s-5); border-right:1px solid var(--line);
+}
+.lever-numeric .name{
+  display:flex; align-items:center; gap:var(--s-3);
+}
+.lever-numeric .value{ font-feature-settings:"tnum"; letter-spacing:-0.025em; }
+
+/* Severity Ring (donut) */
+.sev-ring{
+  width:54px; height:54px; flex-shrink:0; position:relative;
+}
+.sev-ring svg{ width:100%; height:100%; transform:rotate(-90deg); }
+.sev-ring .ring-track{ fill:none; stroke:var(--line); stroke-width:6; }
+.sev-ring .ring-fill{ fill:none; stroke-width:6; stroke-linecap:round; transition:stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.lever-card[data-sev="crit"] .sev-ring .ring-fill{ stroke:#BE3226; }
+.lever-card[data-sev="alert"] .sev-ring .ring-fill,
+.lever-card[data-sev="low"] .sev-ring .ring-fill,
+.lever-card[data-sev="attn"] .sev-ring .ring-fill{ stroke:#D4A000; }
+.lever-card[data-sev="ok"] .sev-ring .ring-fill,
+.lever-card[data-sev="normal"] .sev-ring .ring-fill{ stroke:#2D8A3F; }
+.lever-card[data-sev="low"] .sev-ring .ring-fill{ stroke:var(--amber); }
+.sev-ring .ring-label{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; letter-spacing:0.05em; color:var(--ink);
+  font-family:var(--sans); font-feature-settings:"tnum";
+}
+
+/* Sparkline (valor x faixa) */
+.lever-sparkline{
+  margin-top:var(--s-3); padding-top:var(--s-3); border-top:1px dashed var(--line);
+}
+.lever-sparkline .sparkline-label{
+  font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted);
+  margin-bottom:6px; font-weight:600;
+}
+.lever-sparkline svg{ width:100%; height:36px; display:block; }
+.spark-track{ fill:rgba(159,136,68,0.08); }
+.spark-range{ fill:rgba(21,85,39,0.18); }
+.spark-marker{ fill:var(--ink); }
+.spark-marker.alert,
+.spark-marker.low,
+.spark-marker.attn{ fill:#D4A000; }
+.spark-marker.crit{ fill:#BE3226; }
+.spark-marker.ok,
+.spark-marker.normal{ fill:#2D8A3F; }
+.spark-tick{ stroke:var(--muted); stroke-width:1; }
+.spark-label{ font-size:9px; fill:var(--muted); font-family:var(--sans); font-feature-settings:"tnum"; }
+
+/* Lever narrative — subtle improvements
+   2026-06-05: removido ícone pseudo-elemento "⚡".
+   Em iPhone/visualizador do Telegram ele quebrava a tipografia e invadia o texto
+   de "Implicação clínica" / "Necessidade de solução". */
+.lever-narrative .impact{
+  background:linear-gradient(180deg, var(--paper) 0%, #fff 100%);
+  position:relative;
+}
+.lever-narrative .impact::before{
+  content:none !important;
+  display:none !important;
+}
+
+/* SPIN steps — number badges decorativos */
+.spin-step-block{
+  position:relative;
+  background:linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+  transition: box-shadow 0.3s;
+}
+.spin-step-block:hover{ box-shadow: 0 18px 36px -16px rgba(54,43,24,0.10); }
+.spin-step-block .step-tag{
+  background:linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
+  color:#fff !important;
+  padding:5px 14px; border-radius:6px;
+  display:inline-block;
+}
+.spin-step-block .confirmation{
+  background:linear-gradient(135deg, #fffcf3 0%, var(--cream) 100%);
+  position:relative;
+}
+.spin-step-block .confirmation::after{
+  content:"›"; position:absolute; right:var(--s-5); top:50%; transform:translateY(-50%);
+  font-size:32px; color:var(--gold); font-weight:300; font-family:var(--serif);
+}
+
+/* IVS Machine — connected flow (linha conectora) */
+.machine-flow{ position:relative; }
+.machine-flow::before{
+  content:""; position:absolute; top:50px; left:8%; right:8%; height:1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--gold) 80%, transparent 100%);
+  opacity:0.35; z-index:0;
+}
+.machine-step{
+  position:relative; z-index:1;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.machine-step:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -14px rgba(54,43,24,0.16);
+  border-color: rgba(159,136,68,0.30);
+}
+.machine-step .num{
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  box-shadow: 0 4px 12px rgba(159,136,68,0.30);
+  border:2px solid #fff;
+}
+
+/* Proof — refinement das imagens */
+.proof-card{
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+}
+.proof-card:hover{ box-shadow: 0 22px 44px -20px rgba(54,43,24,0.18); }
+.proof-img{ box-shadow: 0 6px 16px -8px rgba(54,43,24,0.20); }
+.proof-img .label{
+  background:rgba(31,26,18,0.85); color:#f7f2e4 !important;
+  backdrop-filter: blur(4px);
+}
+.proof-text blockquote{ position:relative; }
+.proof-text blockquote::before{
+  content:"\201C"; position:absolute; left:-22px; top:-12px;
+  font-family:var(--serif); font-size:48px; color:var(--gold); opacity:0.30; line-height:1;
+}
+
+/* Program timeline — phase markers premium */
+.program-phase .phase-marker{
+  background:linear-gradient(135deg, var(--paper) 0%, var(--cream) 100%);
+  box-shadow: 0 4px 12px -4px rgba(54,43,24,0.10);
+}
+.program-phase .phase-marker .num{ font-feature-settings:"tnum"; }
+.program-phase{ transition: background 0.3s; }
+.program-phase:hover{ background: rgba(255,253,247,0.5); }
+
+/* Objection cards */
+.obj-card{
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background:linear-gradient(180deg, var(--paper) 0%, #fffcf3 100%);
+}
+.obj-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -16px rgba(54,43,24,0.14);
+}
+
+/* Decision Checklist — animação */
+.checklist-card{
+  background:linear-gradient(135deg, var(--cream) 0%, #fffcf3 100%);
+  position:relative; overflow:hidden;
+  box-shadow: 0 24px 50px -22px rgba(54,43,24,0.12);
+}
+.checklist-card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+}
+.checklist-item{ transition: all 0.25s; }
+.checklist-item:hover{ background: rgba(255,255,255,0.5); padding-left: 6px; padding-right: 6px; border-radius:6px; }
+.checklist-item .check{ box-shadow: 0 2px 6px -2px rgba(159,136,68,0.20); }
+.checklist-progress{
+  margin-top:var(--s-5); padding-top:var(--s-4); border-top:1px solid var(--line);
+  display:flex; align-items:center; gap:var(--s-3);
+}
+.checklist-progress-bar{
+  flex:1; height:6px; background:rgba(159,136,68,0.15); border-radius:999px; overflow:hidden;
+}
+.checklist-progress-fill{
+  height:100%; background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
+  width:0%; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.checklist-progress-text{
+  font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted);
+  font-weight:700; font-feature-settings:"tnum";
+}
+
+/* Final CTA — premium buttons */
+.cta-card{
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position:relative;
+}
+.cta-card.recommended{
+  background: linear-gradient(180deg, #FFFCF3 0%, var(--paper) 100%);
+  box-shadow: 0 30px 60px -25px rgba(159,136,68,0.30);
+}
+.cta-card.recommended::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+  border-radius:14px 14px 0 0;
+}
+.cta-card.recommended:hover{ transform: translateY(-4px); box-shadow: 0 40px 80px -30px rgba(159,136,68,0.40); }
+.cta-card .button{
+  position:relative; overflow:hidden; transition: all 0.3s;
+}
+.cta-card.recommended .button{
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  box-shadow: 0 6px 18px -4px rgba(107,90,43,0.40);
+}
+.cta-card.recommended .button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -4px rgba(107,90,43,0.50);
+}
+
+.cta-signature{ position:relative; }
+.cta-signature::before{
+  content:""; display:block; width:48px; height:1px; background:var(--gold);
+  margin:0 auto var(--s-5);
+}
+
+/* Technical Appendix — versão estável para Telegram/iPhone */
+.exam-group{
+  transition:none;
+  background:var(--paper);
+}
+.exam-group:hover{ border-color: var(--line); }
+.exam-group.open{ box-shadow:none; }
+.exam-group-header{
+  background:var(--paper);
+  transition:none;
+}
+.exam-group-header:hover{ background:var(--paper); }
+.exam-group-header .toggle{
+  font-size:18px; color:var(--gold-dark);
+  background:transparent; border-radius:0;
+  width:24px; height:24px;
+}
+.exam-row:hover{ background:transparent; }
+.exam-row .e-valor{ font-feature-settings:"tnum"; }
+.exam-row[data-sev="crit"] .e-status::before,
+.exam-row[data-sev="alert"] .e-status::before,
+.exam-row[data-sev="low"] .e-status::before,
+.exam-row[data-sev="ok"] .e-status::before,
+.exam-row[data-sev="normal"] .e-status::before{
+  content:"●"; margin-right:4px;
+}
+
+/* RC-25 — Diagramação técnica dos exames: formato de tabela legível em desktop */
+@media(min-width: 901px){
+  .technical-appendix .exam-group{ border-radius:14px; overflow:hidden; }
+  .technical-appendix .exam-group-body{ padding:0; }
+  .technical-appendix .exam-table-head{
+    display:grid;
+    grid-template-columns:minmax(240px,1.45fr) minmax(130px,.55fr) minmax(180px,.85fr) 110px;
+    gap:18px;
+    padding:10px 22px;
+    background:rgba(184,140,50,0.07);
+    border-bottom:1px solid var(--line);
+    font-family:var(--sans);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .technical-appendix .exam-row{
+    display:grid;
+    grid-template-columns:minmax(240px,1.45fr) minmax(130px,.55fr) minmax(180px,.85fr) 110px;
+    gap:18px;
+    align-items:center;
+    padding:12px 22px;
+    border-bottom:1px solid rgba(54,43,24,.10);
+    min-height:56px;
+  }
+  .technical-appendix .exam-row:nth-child(odd){ background:rgba(250,248,242,.55); }
+  .technical-appendix .exam-row .e-nome,
+  .technical-appendix .exam-row .e-valor,
+  .technical-appendix .exam-row .e-ref,
+  .technical-appendix .exam-row .e-status{
+    display:block; margin:0; min-width:0;
+  }
+  .technical-appendix .exam-row .e-nome{
+    font-family:var(--sans); font-size:14px; font-weight:650; line-height:1.25;
+  }
+  .technical-appendix .exam-row .e-valor{
+    font-family:var(--serif); font-size:20px; font-weight:650; line-height:1; white-space:nowrap;
+  }
+  .technical-appendix .exam-row .e-valor .e-unit{
+    display:inline-block; font-size:11px; margin-left:5px; white-space:nowrap;
+  }
+  .technical-appendix .exam-row .e-ref{
+    font-size:12px; line-height:1.25; color:var(--muted);
+  }
+  .technical-appendix .exam-row .e-status{
+    justify-self:end; text-align:center;
+    padding:6px 9px; border-radius:999px;
+    font-size:9px; letter-spacing:.12em;
+    background:rgba(31,110,45,.08); color:#1F6E2D;
+  }
+  .technical-appendix .exam-row[data-sev="crit"] .e-status{ background:rgba(142,36,23,.10); color:#8E2417; }
+  .technical-appendix .exam-row[data-sev="alert"] .e-status,
+  .technical-appendix .exam-row[data-sev="low"] .e-status,
+  .technical-appendix .exam-row[data-sev="attn"] .e-status{ background:rgba(139,106,0,.10); color:#8B6A00; }
+}
+
+/* Animações scroll-triggered */
+.fade-up{ opacity:0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.fade-up.in{ opacity:1; transform: translateY(0); }
+.fade-up.delay-1{ transition-delay: 0.10s; }
+.fade-up.delay-2{ transition-delay: 0.20s; }
+.fade-up.delay-3{ transition-delay: 0.30s; }
+.fade-up.delay-4{ transition-delay: 0.40s; }
+
+/* Section icons */
+.section-icon{
+  width:32px; height:32px; color:var(--gold-dark); margin-bottom:var(--s-3);
+  display:inline-block;
+}
+.section-icon svg{ width:100%; height:100%; stroke:currentColor; fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+
+/* Eyebrow / pill premium */
+h2 + p, .section-header p{ font-feature-settings:"kern", "liga"; }
+
+
+/* P2.13 — Modo apresentação amplificado */
+/* Sparkline e sev-ring ficam visíveis em modo apresentação (V2.10) */
+body.js-enabled.modo-apresentacao .lever-numeric .name{ font-size:24px; }
+body.js-enabled.modo-apresentacao .lever-numeric{ border-right:none; padding-right:0; }
+body.js-enabled.modo-apresentacao .lever-card{ grid-template-columns: 1fr 1.6fr; }
+body.js-enabled.modo-apresentacao .technical-appendix{ display:none !important; }
+
+/* P2.12 — Apêndice toggle só desktop */
+@media(max-width: 768px){
+  .appendix-toggle-all{ display:none; }
+}
+
+/* P1.10 — CTA frame */
+.cta-frame{
+  margin: 0 auto var(--s-7);
+  max-width: 880px;
+  padding: var(--s-6) var(--s-7);
+  background: linear-gradient(135deg, var(--paper) 0%, var(--cream) 100%);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 14px 28px -14px rgba(54,43,24,0.12);
+}
+.cta-frame-text{
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+  font-style: italic;
+}
+.cta-frame-text strong{ color: var(--gold-dark); font-style: normal; font-weight: 600; }
+.cta-frame-text em{ font-style: italic; color: var(--muted); }
+
+/* P1.9 — Sev ring tooltip */
+.sev-ring{ cursor: help; }
+.sev-ring::after{
+  content: attr(title);
+  position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--cream);
+  padding: 4px 10px; border-radius: 6px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.10em;
+  text-transform: uppercase; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.sev-ring:hover::after{ opacity: 1; }
+
+/* P0.2 — números com tabular-nums em todo o documento */
+.exam-row, .lever-numeric .value, .program-phase .num,
+.checklist-progress-text, .ring-label, .spark-label, .e-valor{
+  font-feature-settings: "tnum"; font-variant-numeric: tabular-nums;
+}
+
+/* Print refinements */
+@media print{
+  body::before{ display:none; }
+  .diag-recomendacao::before, .diag-recomendacao::after{ display:none; }
+  .lever-card, .diag-card, .obj-card, .mirror-card, .cta-card, .exam-group{
+    box-shadow: none !important;
+    background: #fff !important;
+    border: 1px solid #ddd !important;
+  }
+  .machine-flow::before{ display:none; }
+  .fade-up{ opacity:1 !important; transform:none !important; }
+}
+
+
+/* ========================================================================
+   V2.7 — Botão "Enviar ao paciente" + Modal + Mobile responsivo
+   ======================================================================== */
+
+/* Topbar right cluster */
+.topbar-right{ display: flex; align-items: center; gap: var(--s-4); }
+.topbar-send-btn{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #fff; border: none; border-radius: 999px;
+  font-family: var(--sans); font-size: 12px;
+  font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase;
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(37,211,102,0.25);
+}
+.topbar-send-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37,211,102,0.35);
+}
+.topbar-send-btn svg{ width: 16px; height: 16px; }
+
+/* Garantia: versão paciente nunca mostra botão de envio */
+body.versao-paciente .topbar-send-btn,
+body.versao-paciente #send-modal{ display: none !important; }
+
+/* Modal de envio */
+.send-modal{
+  position: fixed; inset: 0; z-index: 9999;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: var(--s-4);
+}
+.send-modal.is-open{ display: flex !important; }
+body.modal-locked{ overflow: hidden; }
+.send-modal-backdrop{
+  position: absolute; inset: 0;
+  background: rgba(31,26,18,0.55);
+  backdrop-filter: blur(4px);
+}
+.send-modal-card{
+  position: relative; z-index: 1;
+  background: var(--paper); border-radius: 16px;
+  padding: var(--s-7) var(--s-7) var(--s-6);
+  max-width: 480px; width: 100%;
+  box-shadow: 0 30px 60px -20px rgba(31,26,18,0.40);
+  animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUpModal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.send-modal-close{
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border: none; border-radius: 50%;
+  background: var(--cream); color: var(--muted);
+  font-size: 24px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.send-modal-close:hover{ background: var(--gold); color: #fff; }
+.send-modal-card h3{
+  font-family: var(--serif); font-size: 22px; font-weight: 500;
+  color: var(--ink); margin: 0 0 var(--s-2); padding-right: 32px;
+}
+.send-modal-sub{
+  font-size: 13px; color: var(--muted); font-style: italic;
+  margin: 0 0 var(--s-5);
+}
+.send-field{ display: block; margin-bottom: var(--s-4); }
+.send-field span{
+  display: block; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold-dark); margin-bottom: 6px;
+}
+.send-field input, .send-field textarea{
+  width: 100%; padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--cream); font-family: var(--sans);
+  font-size: 14px; color: var(--ink); resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.send-field input:focus, .send-field textarea:focus{
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(159,136,68,0.15);
+  background: var(--paper);
+}
+.send-actions{
+  display: flex; gap: var(--s-3); margin-top: var(--s-5); flex-wrap: wrap;
+}
+.send-btn-primary, .send-btn-secondary{
+  flex: 1; min-width: 140px;
+  padding: var(--s-4); border: none; border-radius: 10px;
+  font-family: var(--sans); font-size: 13px;
+  font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase;
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+}
+.send-btn-primary{
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #fff; box-shadow: 0 4px 12px rgba(37,211,102,0.30);
+}
+.send-btn-primary:hover{
+  transform: translateY(-1px); box-shadow: 0 8px 18px rgba(37,211,102,0.40);
+}
+.send-btn-primary svg{ width: 16px; height: 16px; }
+.send-btn-secondary{
+  background: var(--paper); color: var(--ink);
+  border: 1px solid var(--line);
+}
+.send-btn-secondary:hover{ background: var(--cream); border-color: var(--gold); }
+.send-hint{
+  margin-top: var(--s-4); padding-top: var(--s-3);
+  border-top: 1px dashed var(--line);
+  font-size: 11px; color: var(--muted); line-height: 1.5;
+}
+
+@media print{ .send-modal, .topbar-send-btn{ display: none !important; } }
+
+/* ========================================================================
+   V2.7 — Mobile responsivo (revisão geral)
+   ======================================================================== */
+@media(max-width: 900px){
+  /* Topbar */
+  .topbar{ padding: var(--s-2) var(--s-4); }
+  .topbar-inner{ min-height: 60px; gap: var(--s-3); }
+  .topbar .logo{ height: 50px; max-width: 180px; }
+  .topbar .doctor-tag{ display: none; }
+  /* topbar-send-btn estilizado pela media V2.8 (linhas abaixo) */
+
+  /* Progress nav */
+  .progress-nav-inner{ padding: var(--s-2) var(--s-3); gap: var(--s-1); overflow-x: auto; flex-wrap: nowrap; }
+  .progress-step{ font-size: 9px; padding: 4px 8px; flex-shrink: 0; }
+  .mode-switcher{ padding: 2px; gap: 2px; flex-shrink: 0; margin-left: 0; order:-1; }
+  .mode-btn{ font-size: 9px; padding: 4px 8px; letter-spacing: 0.08em; }
+
+  /* Hero */
+  .hero-meta-bar{ gap: var(--s-3); flex-wrap: wrap; }
+  .hero-meta-item{ font-size: 11px; }
+  .hero-meta-item strong{ font-size: 14px; }
+  .hero-clinical-h1{ font-size: clamp(26px, 6vw, 38px); }
+
+  /* Diagnóstico */
+  .diag-grid, .diag-grid-2col{ grid-template-columns: 1fr !important; gap: var(--s-3); }
+  .diag-card{ padding: var(--s-5); }
+  .diag-recomendacao{ padding: var(--s-5); font-size: 16px; }
+  .tese-clinica{ padding: var(--s-5); }
+  .tese-clinica .tese-texto{ font-size: 16px; }
+
+  /* Mirror */
+  .mirror-grid{ grid-template-columns: 1fr; gap: var(--s-3); }
+  .mirror-card.feature{ grid-column: span 1; }
+
+  /* Critical Levers */
+  .lever-card{
+    grid-template-columns: 1fr !important;
+    gap: var(--s-4); padding: var(--s-5);
+  }
+  .lever-numeric{
+    border-right: none !important;
+    border-bottom: 1px solid var(--line);
+    padding-right: 0; padding-bottom: var(--s-4);
+  }
+  .lever-numeric .name{ font-size: 18px; gap: var(--s-2); }
+  .lever-numeric .value{ font-size: 32px; }
+  .sev-ring{ width: 44px; height: 44px; }
+  .lever-sparkline svg{ height: 32px; }
+
+  /* Leitura integrada */
+  .leitura-block{ padding: var(--s-5); }
+  .leitura-block h3{ font-size: 18px; }
+  .spin-table{ font-size: 13px; display: block; overflow-x: auto; }
+  .spin-table th, .spin-table td{ padding: var(--s-2) var(--s-3); }
+
+  /* IVS Machine */
+  .machine-flow{ grid-template-columns: 1fr 1fr !important; gap: var(--s-2); }
+  .machine-flow::before{ display: none; }
+  .machine-step{ padding: var(--s-3); }
+  .machine-step .num{ width: 30px; height: 30px; font-size: 12px; }
+  .machine-step .title{ font-size: 13px; }
+  .machine-step .desc{ font-size: 11px; }
+
+  /* Proof */
+  .proof-card{ grid-template-columns: 1fr !important; gap: var(--s-4); padding: var(--s-4); }
+  .proof-card:nth-child(even) .proof-imgs{ order: 0; }
+  .proof-text blockquote{ font-size: 15px; padding-left: var(--s-3); }
+  .proof-text blockquote::before{ font-size: 36px; left: -16px; top: -8px; }
+
+  /* Programa */
+  .program-phase{ grid-template-columns: 80px 1fr !important; gap: var(--s-4); padding: var(--s-4) 0; }
+  .program-phase .phase-marker{ width: 80px; padding: var(--s-2); }
+  .program-phase .phase-marker .num{ font-size: 22px; }
+  .program-phase .phase-content h4{ font-size: 17px; }
+  .program-phase .phase-content .desc{ font-size: 14px; }
+
+  /* Inclusos — 1 coluna no mobile */
+  .inclusos-grid{ grid-template-columns: 1fr !important; gap: var(--s-3); }
+  .incluso-card{ padding: var(--s-4); }
+
+  /* CTA */
+  .cta-decision{ grid-template-columns: 1fr !important; gap: var(--s-3); }
+  .cta-card{ padding: var(--s-5); }
+  .cta-card h3{ font-size: 20px; }
+  .cta-frame{ padding: var(--s-4) var(--s-5); }
+  .cta-frame-text{ font-size: 16px; }
+
+  /* Checklist */
+  .checklist-card{ padding: var(--s-5); }
+  .checklist-item .text{ font-size: 14px; }
+
+  /* Apêndice técnico — tabela em mobile */
+  .exam-row{
+    grid-template-columns: 2fr 1fr !important;
+    row-gap: 4px; font-size: 13px;
+  }
+  .exam-row .e-ref, .exam-row .e-status{ grid-column: span 2; font-size: 11px; }
+  .exam-group-header{ padding: var(--s-3) var(--s-4); }
+  .exam-group-body{ padding: 0 var(--s-4) var(--s-4); }
+
+  section[id]{ scroll-margin-top: 60px; }
+
+  /* Modal mobile */
+  .send-modal-card{ padding: var(--s-5) var(--s-5) var(--s-5); }
+  .send-modal-card h3{ font-size: 18px; }
+  .send-actions{ flex-direction: column; }
+  .send-btn-primary, .send-btn-secondary{ width: 100%; min-width: 0; }
+
+  /* Garantir nada vaza largura no mobile */
+  body{ overflow-x: hidden; }
+  .wrap{ padding: 0 var(--s-4); }
+  img, svg, table{ max-width: 100%; }
+}
+
+@media(max-width: 600px){
+  .progress-step, .mode-btn{ font-size: 9px; }
+  .hero-meta-bar{ flex-direction: column; align-items: flex-start; }
+  .doctor-obj-card .obj-header h3{ font-size: 14px; }
+  .machine-flow{ grid-template-columns: 1fr !important; }
+}
+
+
+/* ========================================================================
+   V2.8 — Mobile responsivo (refatorado com guard rails agressivos)
+   ======================================================================== */
+
+/* Guard rails globais: nada estoura viewport */
+html, body{ max-width: 100%; overflow-x: hidden; }
+img, svg, video, table, iframe{ max-width: 100%; height: auto; }
+.wrap{ max-width: 100%; box-sizing: border-box; }
+
+/* Tablet & Mobile (≤900px) */
+@media(max-width: 900px){
+  /* Topbar */
+  .topbar{ padding: 8px 14px; }
+  .topbar-inner{ min-height: 56px; gap: 10px; flex-wrap: nowrap; }
+  .topbar .logo{ height: 44px; max-width: 160px; flex-shrink: 1; min-width: 0; }
+  .topbar .doctor-tag{ display: none !important; }
+  .topbar-right{ gap: 8px; flex-shrink: 0; }
+  /* Botão de envio: ícone-only no mobile, com touch target 44x44 mínimo (Apple HIG) */
+  .topbar-send-btn{
+    padding: 0;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .topbar-send-btn svg{ width: 20px; height: 20px; }
+  .topbar-send-btn .lbl{ display: none !important; }
+
+  /* Progress nav: scroll horizontal sem scrollbar visível */
+  .progress-nav{ padding: 0; }
+  .progress-nav-inner{
+    padding: 8px 12px; gap: 4px;
+    overflow-x: auto; overflow-y: hidden;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .progress-nav-inner::-webkit-scrollbar{ display: none; }
+  .progress-step{ font-size: 9px; padding: 4px 8px; flex-shrink: 0; letter-spacing: 0.06em; white-space: nowrap; }
+  .mode-switcher{ padding: 2px; gap: 2px; flex-shrink: 0; margin-left: 0; order:-1; }
+  .mode-btn{ font-size: 9px; padding: 4px 8px; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* Sections — padding reduzido */
+  .section{ padding: 32px 0 !important; }
+  section[id]{ scroll-margin-top: 56px; }
+  h2{ font-size: 22px !important; line-height: 1.2 !important; margin-bottom: 12px !important; }
+  h3{ font-size: 17px !important; }
+  p, li{ font-size: 14px !important; }
+
+  /* Hero */
+  .hero-clinical-document{ padding: 32px 0 !important; }
+  .hero-meta-bar{
+    flex-wrap: wrap; gap: 10px;
+    padding-bottom: 14px; margin-bottom: 16px;
+  }
+  .hero-meta-item{
+    flex: 1 1 calc(50% - 5px); min-width: 0; font-size: 10px;
+  }
+  .hero-meta-item strong{ font-size: 13px; margin-top: 2px; }
+  .hero-grid{
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+  .hero-text{ order: 1; }
+  .hero-photo{
+    order: 2; max-width: 220px; aspect-ratio: 3/4;
+    justify-self: center; margin: 0 auto;
+  }
+  .hero-photo-caption{ font-size: 9px; }
+  .hero-photo-caption strong{ font-size: 14px; }
+  .hero-clinical-h1{ font-size: 22px !important; line-height: 1.2 !important; }
+
+  /* Reset agressivo de TODOS os grids para 1 coluna */
+  .diag-grid, .diag-grid-2col,
+  .mirror-grid,
+  .machine-flow,
+  .obj-grid,
+  .cta-decision,
+  .inclusos-grid,
+  .resultados-list,
+  .doctor-obj-grid{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Cards genéricos */
+  .diag-card, .mirror-card, .obj-card, .cta-card, .incluso-card,
+  .leitura-block, .machine-step, .doctor-obj-card{
+    padding: 16px !important;
+  }
+
+  /* Diagnóstico */
+  .tese-clinica{ padding: 16px !important; }
+  .tese-clinica .tese-texto{ font-size: 15px !important; line-height: 1.45 !important; }
+  .diag-recomendacao{ padding: 16px !important; font-size: 14px !important; line-height: 1.5 !important; }
+
+  /* Mirror */
+  .mirror-card.feature{ grid-column: span 1 !important; border-left: 4px solid var(--gold) !important; }
+
+  /* Critical Levers — stack vertical */
+  .lever-card{
+    grid-template-columns: 1fr !important;
+    gap: 14px !important; padding: 16px !important;
+  }
+  .lever-numeric{
+    border-right: none !important; border-bottom: 1px solid var(--line) !important;
+    padding-right: 0 !important; padding-bottom: 14px !important;
+    flex-direction: row !important; align-items: flex-start !important;
+    flex-wrap: wrap; gap: 10px !important;
+  }
+  .lever-numeric .name{ font-size: 16px !important; flex: 1 1 100%; gap: 8px; }
+  .lever-numeric .value{ font-size: 28px !important; }
+  .lever-numeric .ref{ font-size: 11px; flex: 1 1 100%; }
+  .lever-numeric .badge{ flex-shrink: 0; }
+  .sev-ring{ width: 38px !important; height: 38px !important; }
+  .sev-ring .ring-label{ font-size: 9px !important; }
+  .lever-sparkline{ width: 100%; }
+  .lever-sparkline svg{ height: 28px; }
+  .lever-narrative h4{ font-size: 12px; }
+  .lever-narrative .interp{ font-size: 13px !important; }
+  .lever-narrative .impact{ font-size: 12px !important; padding: 10px 12px !important; }
+  .lever-narrative .conexao-sintoma{ padding: 10px 14px !important; }
+  .lever-narrative .conexao-sintoma p{ font-size: 12px !important; }
+  .lever-narrative .spin-q{ font-size: 13px !important; line-height: 1.4 !important; }
+
+  /* Leitura integrada */
+  .leitura-block h3{ font-size: 17px !important; }
+  .leitura-block .body-text{ font-size: 13px !important; }
+  .leitura-block .alinhamento{ padding: 10px 14px !important; font-size: 13px !important; }
+  .leitura-block .alinhamento::after{ font-size: 24px !important; right: 12px !important; }
+
+  /* Tabela leitura — scroll horizontal se precisar */
+  .spin-table{ font-size: 12px !important; display: block; overflow-x: auto; }
+  .spin-table thead, .spin-table tbody{ display: table; width: 100%; min-width: 480px; }
+  .spin-table th, .spin-table td{ padding: 8px 10px !important; }
+
+  /* Machine step — 1 coluna no mobile pequeno */
+  .machine-flow::before{ display: none !important; }
+  .machine-step{ padding: 14px !important; }
+  .machine-step .num{ width: 32px !important; height: 32px !important; font-size: 13px !important; }
+  .machine-step .title{ font-size: 14px !important; }
+  .machine-step .desc{ font-size: 12px !important; }
+
+  /* Proof */
+  .proof-card{ grid-template-columns: 1fr !important; gap: 14px; padding: 14px !important; }
+  .proof-card:nth-child(even) .proof-imgs{ order: 0 !important; }
+  .proof-card:nth-child(even) .proof-text{ order: 1 !important; }
+  .proof-imgs{ grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+  .proof-img{ aspect-ratio: 3/4; }
+  .proof-text h3{ font-size: 18px !important; }
+  .proof-text blockquote{ font-size: 14px !important; padding-left: 14px !important; }
+  .proof-text blockquote::before{ font-size: 32px !important; left: -14px !important; }
+  .proof-disclaimer{ font-size: 11px !important; padding: 12px 14px !important; }
+
+  /* Programa em fases */
+  .program-phase{
+    grid-template-columns: 70px 1fr !important;
+    gap: 14px !important; padding: 16px 0 !important;
+  }
+  .program-phase .phase-marker{
+    width: 70px !important; padding: 8px !important;
+  }
+  .program-phase .phase-marker .num{ font-size: 18px !important; }
+  .program-phase .phase-content h4{ font-size: 16px !important; }
+  .program-phase .phase-content .desc{ font-size: 13px !important; }
+
+  /* Inclusos */
+  .incluso-card{ padding: 14px !important; }
+  .incluso-card .incluso-icon{ width: 38px !important; height: 38px !important; }
+  .incluso-card .incluso-titulo{ font-size: 14px !important; }
+  .incluso-card .incluso-desc{ font-size: 12px !important; }
+
+  /* CTA */
+  .cta-frame{ padding: 14px 16px !important; max-width: 100% !important; }
+  .cta-frame-text{ font-size: 14px !important; line-height: 1.45 !important; }
+  .cta-card{ padding: 18px !important; }
+  .cta-card h3{ font-size: 18px !important; }
+  .cta-card .desc{ font-size: 13px !important; }
+  .cta-card .button{ padding: 14px !important; font-size: 12px !important; }
+  .cta-signature .name{ font-size: 18px !important; }
+  .cta-signature .meta{ font-size: 10px !important; }
+
+  /* Checklist */
+  .checklist-card{ padding: 18px !important; }
+  .checklist-item{ gap: 12px !important; padding: 12px 0 !important; }
+  .checklist-item .check{ width: 24px; height: 24px; flex-basis: 24px; }
+  .checklist-item .text{ font-size: 13px !important; line-height: 1.4 !important; }
+  .checklist-progress{ flex-direction: column; align-items: stretch !important; gap: 8px; }
+
+  /* Apêndice exames */
+  .technical-appendix .appendix-controls{ flex-direction: column; align-items: stretch; gap: 10px; }
+  .technical-appendix .appendix-controls .lead{ font-size: 12px !important; }
+  .appendix-toggle-all{ align-self: flex-start; font-size: 9px !important; padding: 6px 10px !important; }
+  .exam-group-header{ padding: 12px 14px !important; }
+  .exam-group-header h4{ font-size: 14px !important; }
+  .exam-group-header .meta{ font-size: 10px !important; gap: 8px; }
+  .exam-group-body{ padding: 0 14px !important; }
+  .exam-row{
+    display: block !important;
+    padding: 10px 0 !important;
+    font-size: 12px !important;
+  }
+  .exam-row .e-nome{ font-weight: 600; font-size: 13px !important; }
+  .exam-row .e-valor{ font-size: 13px !important; }
+  .exam-row .e-status{ font-size: 9px !important; text-align: left !important; }
+  .exam-row .e-ref{ font-size: 10px !important; color: var(--muted); margin-top: 2px; }
+
+  /* Doctor objections — uso médico */
+  .obj-toolbar{ position: static !important; padding: 12px 0 !important; margin-bottom: 14px; }
+  .obj-search{ font-size: 14px !important; padding: 12px 12px 12px 40px !important; }
+  .obj-search-icon{ left: 12px; width: 18px; height: 18px; }
+  .obj-shortcut{ display: none !important; }
+  .obj-cats{ overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; gap: 4px; }
+  .obj-cat-chip{ flex-shrink: 0; font-size: 10px !important; padding: 4px 10px !important; }
+  .doctor-obj-card{ padding: 0 !important; }
+  .doctor-obj-card .obj-header{ padding: 12px 14px !important; gap: 10px !important; }
+  .doctor-obj-card .obj-cat-tag{ display: none !important; }
+  .doctor-obj-card .obj-header h3{ font-size: 14px !important; line-height: 1.3 !important; }
+  .doctor-obj-card .obj-toggle{ width: 22px; height: 22px; font-size: 12px; }
+  .doctor-obj-card .obj-body{ padding: 0 14px 14px !important; font-size: 12px; }
+
+  /* Modal */
+  .send-modal-card{ padding: 20px !important; max-height: 90vh; overflow-y: auto; }
+  .send-modal-card h3{ font-size: 17px !important; padding-right: 28px !important; }
+  .send-modal-sub{ font-size: 12px !important; }
+  .send-field span{ font-size: 10px !important; }
+  .send-field input, .send-field textarea{ font-size: 13px !important; padding: 10px 12px !important; }
+  .send-actions{ flex-direction: column !important; gap: 8px !important; margin-top: 16px !important; }
+  .send-btn-primary, .send-btn-secondary{
+    width: 100%; min-width: 0 !important; padding: 12px !important; font-size: 12px !important;
+  }
+  .send-hint{ font-size: 10px !important; line-height: 1.5 !important; padding-top: 12px !important; }
+}
+
+/* Mobile pequeno (≤480px) */
+@media(max-width: 480px){
+  .progress-step{ font-size: 8px !important; padding: 3px 6px !important; }
+  .mode-btn{ font-size: 8px !important; padding: 3px 6px !important; }
+  .topbar .logo{ height: 38px; max-width: 130px; }
+  .hero-meta-item{ flex: 1 1 100%; }
+  h1, .hero-clinical-h1{ font-size: 20px !important; }
+  h2{ font-size: 19px !important; }
+  .lever-numeric .value{ font-size: 24px !important; }
+  .program-phase{ grid-template-columns: 60px 1fr !important; gap: 10px !important; }
+  .program-phase .phase-marker{ width: 60px !important; padding: 6px !important; }
+  .proof-imgs{ grid-template-columns: 1fr !important; }
+}
+
+/* Preferência por reduzir movimento (acessibilidade) */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .fade-up{ opacity: 1 !important; transform: none !important; }
+}
+
+
+
+/* === V11: Interpretação clínica (highlights) + Cruzamento Q×E === */
+.interpretacao-section{ background:var(--paper); padding:var(--s-7) 0; }
+.interpretacao-section .ex-grid-v2{ display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:var(--s-3);margin-top:var(--s-5); }
+.interpretacao-section .ex-card-v2{ background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;padding:var(--s-4);box-shadow:0 4px 14px rgba(88,62,32,.04); }
+.interpretacao-section .ex-head-v2{ display:flex;justify-content:space-between;align-items:flex-start;
+  gap:var(--s-3);margin-bottom:var(--s-3);flex-wrap:wrap;padding-bottom:var(--s-3);border-bottom:1px dashed var(--line); }
+.interpretacao-section .ex-title{ flex:1; }
+.interpretacao-section .ex-title strong{ font-size:15px;color:var(--ink);display:block; }
+.interpretacao-section .ex-val-inline{ display:inline-block;font-variant-numeric:tabular-nums;
+  font-weight:700;color:var(--gold-dark);font-size:14px;margin-top:4px; }
+.interpretacao-section .ex-ref-inline{ display:block;font-size:11.5px;color:var(--muted);margin-top:2px; }
+.interpretacao-section .ex-sev-tag{ font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+  border:1px solid; letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap; }
+.interpretacao-section .ex-body-v2{ display:grid;gap:var(--s-3); }
+.interpretacao-section .ex-bloco{ background:rgba(245,234,217,.4);border-radius:8px;padding:10px 12px; }
+.interpretacao-section .ex-bloco-warn{ background:rgba(217,160,0,.08);border-left:3px solid var(--gold-dark); }
+.interpretacao-section .ex-label{ display:block;font-size:11px;color:var(--gold-dark);
+  font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px; }
+.interpretacao-section .ex-bloco p{ margin:0;font-size:13.5px;line-height:1.55;color:var(--ink); }
+
+.cruzamento-section{ background: var(--cream); padding:var(--s-7) 0; }
+.cruzamento-section .hip-grid-list{ display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:var(--s-4);margin-top:var(--s-5); }
+.cruzamento-section .hip-card{ background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;padding:var(--s-5);box-shadow:0 6px 18px rgba(88,62,32,.05); }
+.cruzamento-section .hip-head{ display:flex;justify-content:space-between;align-items:center;gap:var(--s-3); }
+.cruzamento-section .hip-head h4{ margin:0;font-size:16px;color:var(--ink);font-weight:700; }
+.cruzamento-section .hip-pri{ font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:0.04em;text-transform:uppercase; }
+.cruzamento-section .hip-desc{ margin:var(--s-3) 0;font-size:13.5px;line-height:1.6;color:var(--ink-soft); }
+.cruzamento-section .hip-grid{ display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);
+  background:rgba(217,192,139,.08);border-radius:10px;padding:var(--s-3);margin:var(--s-3) 0; }
+.cruzamento-section .hip-label{ display:block;font-size:11px;color:var(--gold-dark);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px; }
+.cruzamento-section .hip-grid ul{ margin:0;padding-left:18px; }
+.cruzamento-section .hip-grid li{ font-size:12.5px;line-height:1.5;color:var(--ink-soft);margin:3px 0; }
+.cruzamento-section .hip-acao{ font-size:13px;color:var(--ink);background:#fff8eb;
+  border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;margin:var(--s-3) 0 0; }
+
+.cruzamento-section .extra-bloco{ background:var(--paper);border:1px dashed var(--line);
+  border-radius:12px;padding:var(--s-4);margin-top:var(--s-4); }
+.cruzamento-section .extra-bloco h4{ margin:0 0 6px;font-size:14px;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:.06em; }
+.cruzamento-section .extra-lead{ font-size:12.5px;color:var(--muted);margin:0 0 var(--s-2); }
+.cruzamento-section .extra-bloco ul{ margin:var(--s-2) 0 0;padding-left:18px; }
+.cruzamento-section .extra-bloco li{ font-size:13px;line-height:1.55;color:var(--ink-soft);margin:6px 0; }
+
+.cruzamento-section .plano-bloco{ background:linear-gradient(135deg,rgba(193,154,69,0.08),rgba(193,154,69,0.02));
+  border:1px solid rgba(193,154,69,0.2);border-radius:14px;padding:var(--s-5);margin-top:var(--s-5); }
+.cruzamento-section .plano-bloco h3{ margin:0 0 var(--s-3);font-size:16px;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:.08em; }
+.cruzamento-section .plano-grid{ display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4); }
+.cruzamento-section .plano-grid h5{ margin:0 0 var(--s-2);font-size:12px;color:var(--gold-dark);
+  text-transform:uppercase;letter-spacing:.05em; }
+.cruzamento-section .plano-grid li, .cruzamento-section .plano-grid p{ font-size:12.5px;line-height:1.55;color:var(--ink); }
+
+/* Contexto pessoal — mobile-first, sem bullets nativos quebrando a leitura */
+.compact-decision .context-list{ display:grid;gap:10px;margin:12px 0 0;padding:0;list-style:none; }
+.compact-decision .context-item{ background:rgba(255,255,255,.58);border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:10px;padding:12px 14px;list-style:none; }
+.compact-decision .context-item strong{ display:block;color:var(--ink);font-size:13.5px;line-height:1.38;margin-bottom:4px;font-weight:700; }
+.compact-decision .context-item span{ display:block;color:var(--muted);font-size:13px;line-height:1.48; }
+
+@media(max-width:900px){
+  .interpretacao-section .ex-grid{ grid-template-columns:1fr; }
+  .cruzamento-section .hip-grid-list{ grid-template-columns:1fr; }
+  .cruzamento-section .hip-grid, .cruzamento-section .plano-grid{ grid-template-columns:1fr; }
+  .compact-decision{ padding-left:0;padding-right:0; }
+  .compact-decision .context-item{ padding:12px; }
+}
+
+
+
+/* === V12 PATCH Ana — exames completos, isolamento de modos e fail-safe mobile === */
+body.js-enabled.modo-exames main > section:not(#technical-appendix){display:none!important;}
+body.js-enabled.modo-exames #technical-appendix{display:block!important;padding-top:var(--s-7)!important;}
+#questionnaire-appendix{display:none!important;}
+#technical-appendix .exam-group{background:#fff;border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden;opacity:1!important;transform:none!important;}
+#technical-appendix .exam-group-header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:16px 18px;background:#fbf7ed;border-bottom:1px solid var(--line);}
+#technical-appendix .exam-group-header h4{margin:0 0 4px;font-family:var(--serif);font-size:20px;color:var(--ink);}
+#technical-appendix .exam-group-header p{margin:0;color:var(--muted);font-size:13px;line-height:1.35;}
+#technical-appendix .exam-count{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark);white-space:nowrap;}
+#technical-appendix .exam-group .exam-group-body{opacity:0!important;display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important;padding:0!important;pointer-events:none!important;}
+#technical-appendix .exam-group.open .exam-group-body{opacity:1!important;display:block!important;visibility:visible!important;height:auto!important;max-height:none!important;overflow:visible!important;pointer-events:auto!important;}
+@media(max-width:700px){
+  #technical-appendix .exam-kpi-grid{grid-template-columns:1fr!important;}
+  #technical-appendix .exam-table-head{display:none!important;}
+  #technical-appendix .exam-row{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;padding:12px 14px!important;border-bottom:1px solid var(--line)!important;}
+  #technical-appendix .e-nome{font-weight:700!important;}
+  #technical-appendix .e-valor:before{content:'Resultado: ';font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;}
+  #technical-appendix .e-ref:before{content:'Referência: ';font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;}
+  #technical-appendix .e-status{justify-self:start!important;}
+}
+
+</style>
+</head>
+<body class="versao-interna">
+<header class="topbar">
+<div class="topbar-inner">
+<a aria-label="Voltar ao início" href="#hero" style="line-height:0;"><img alt="Instituto Vital Slim" class="logo" src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/></a>
+<div class="topbar-right">
+<div class="doctor-tag">
+<span class="name">Dra. Daniely Freitas</span>
+        CRM-BA 27.588 · Médica do Estilo de Vida
+      </div>
+<button aria-label="Enviar ao paciente" class="topbar-send-btn" id="btn-send-paciente"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6A8.4 8.4 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"></path></svg><span class="lbl">Enviar ao paciente</span></button>
+</div>
+</div>
+</header>
+<nav aria-label="Navegação da apresentação" class="progress-nav">
+<div class="progress-nav-inner">
+<a class="progress-step" data-target="executive-diagnosis" href="#executive-diagnosis">1 · Diagnóstico</a><a class="progress-step" data-target="patient-mirror" href="#patient-mirror">2 · Seu caso</a><a class="progress-step" data-target="critical-levers" href="#critical-levers">3 · Alavancas</a><a class="progress-step" data-target="leitura-integrada" href="#leitura-integrada">4 · Leitura clínica</a><a class="progress-step" data-target="ivs-machine" href="#ivs-machine">5 · Acompanhamento</a><a class="progress-step" data-target="decision-checklist" href="#decision-checklist">6 · Decisão</a>
+<div aria-label="Modo de visualização" class="mode-switcher" role="tablist">
+<a aria-selected="true" class="mode-btn active" data-mode="apresentacao" href="#hero" role="tab">Apresentação</a>
+<a aria-selected="false" class="mode-btn" data-mode="exames" href="#technical-appendix" role="tab">Exames</a>
+<a aria-selected="false" class="mode-btn" data-mode="objecoes" href="#doctor-objections" role="tab">Médica</a>
+</div>
+</div>
+</nav>
+<main>
+<section class="section hero-clinical-document" id="hero">
+<div class="wrap">
+<div class="hero-meta-bar">
+<div class="hero-meta-item">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong></div>
+<div class="hero-meta-item">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong></div>
+<div class="hero-meta-item">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong></div>
+<div class="hero-meta-item">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong></div>
+<div class="hero-meta-item">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong></div>
+</div>
+<div class="hero-grid">
+<div class="hero-text">
+<h1 class="hero-clinical-h1">{{CONTEUDO_CLINICO}}<span style="color:var(--gold-dark)">{{CONTEUDO_CLINICO}}</span>{{CONTEUDO_CLINICO}}</h1>
+</div>
+<div class="hero-photo fade-up"><img alt="Dra. Daniely Freitas" src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/><div class="hero-photo-caption"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</div></div>
+</div>
+</div>
+</section>
+<section class="section executive-diagnosis" id="executive-diagnosis">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<p style="max-width:780px;font-size:16px;color:var(--muted);">{{CONTEUDO_CLINICO}}</p>
+<div class="tese-clinica fade-up">
+<span class="tese-tag">{{CONTEUDO_CLINICO}}</span>
+<p class="tese-texto">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="diag-grid diag-grid-2col">
+<div class="diag-card fade-up">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<p class="body-text">{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="diag-card fade-up">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<div style="margin-top:var(--s-3)"><div style="background:#fff8eb;border-left:3px solid var(--gold);padding:8px 12px;border-radius:6px;margin:6px 0;font-size:13px;line-height:1.5"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</div></div>
+</div></div>
+</div>
+
+
+<div class="diag-recomendacao">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</div>
+
+</section>
+<section class="section patient-mirror" id="patient-mirror">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<p style="max-width:780px;font-size:16px;color:var(--muted);">{{CONTEUDO_CLINICO}}</p>
+<h3 style="margin-top:var(--s-5);">{{CONTEUDO_CLINICO}}</h3>
+<div class="mirror-grid"><div class="mirror-card feature"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div></div>
+<h3 style="margin-top:var(--s-6);">{{CONTEUDO_CLINICO}}</h3>
+<div class="mirror-grid"><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div></div>
+<div class="mirror-grid"><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div></div>
+<h3 style="margin-top:var(--s-6);">{{CONTEUDO_CLINICO}}</h3>
+<div class="mirror-grid"><div class="mirror-card feature"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div></div>
+<h3 style="margin-top:var(--s-6);">{{CONTEUDO_CLINICO}}</h3>
+<div class="mirror-grid"><div class="mirror-card feature"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div><div class="sub">{{CONTEUDO_CLINICO}}</div></div><div class="mirror-card"><div class="label">{{CONTEUDO_CLINICO}}</div><div class="value">{{CONTEUDO_CLINICO}}</div></div></div>
+<div class="compact-decision" style="margin-top:var(--s-6);">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<p class="body-text" style="margin-bottom:var(--s-3);font-size:14.5px">{{CONTEUDO_CLINICO}}</p>
+<ul class="context-list">
+<li class="context-item"><strong>{{CONTEUDO_CLINICO}}</strong><span>{{CONTEUDO_CLINICO}}</span></li>
+<li class="context-item"><strong>{{CONTEUDO_CLINICO}}</strong><span>{{CONTEUDO_CLINICO}}</span></li>
+<li class="context-item"><strong>{{CONTEUDO_CLINICO}}</strong><span>{{CONTEUDO_CLINICO}}</span></li>
+</ul>
+</div>
+</div>
+
+</section>
+<section class="section bioimped-section" id="bioimpedancia">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<p class="bioimped-meta">{{CONTEUDO_CLINICO}}<b>{{CONTEUDO_CLINICO}}</b></p>
+<div class="bio-grid">
+<div class="bio-card">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<div class="kpis">
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}</span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+</div>
+</div>
+<div class="bio-card">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<div class="kpis">
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+</div>
+</div>
+<div class="bio-card">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<div class="kpis">
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+<div class="bio-kpi"><span class="label">{{CONTEUDO_CLINICO}}</span><span class="value">{{CONTEUDO_CLINICO}}<span class="unit">{{CONTEUDO_CLINICO}}</span></span></div>
+</div>
+<p style="font-size:12px;color:var(--muted);margin:var(--s-3) 0 0;line-height:1.5">{{CONTEUDO_CLINICO}}</p>
+</div>
+</div>
+<div class="bio-highlight">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<ul><li class="ok"><b>{{CONTEUDO_CLINICO}}</b>{{CONTEUDO_CLINICO}}</li><li class="ok"><b>{{CONTEUDO_CLINICO}}</b>{{CONTEUDO_CLINICO}}</li><li class="ok"><b>{{CONTEUDO_CLINICO}}</b>{{CONTEUDO_CLINICO}}</li><li class="ok"><b>{{CONTEUDO_CLINICO}}</b>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div class="bio-image-wrap"><h4>{{CONTEUDO_CLINICO}}</h4><img alt="Laudo de bioimpedância" loading="lazy" src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"><span class="caption">{{CONTEUDO_CLINICO}}</span></img></div>
+</div>
+</section>
+<section class="section leitura-integrada" id="leitura-integrada">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<p style="max-width:720px;font-size:16px;color:var(--muted);">{{CONTEUDO_CLINICO}}</p>
+<div class="leitura-block fade-up">
+<h3>{{CONTEUDO_CLINICO}}</h3>
+<p class="body-text">{{CONTEUDO_CLINICO}}</p>
+<ul class="body-text" style="margin:0 0 var(--s-4);padding-left:20px;"><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+<div class="alinhamento">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div class="leitura-block fade-up">
+<h3>{{CONTEUDO_CLINICO}}</h3>
+<p class="body-text">{{CONTEUDO_CLINICO}}</p>
+<div style="background:#fffdf8;border:1px solid var(--line);border-left:4px solid #BE3226;border-radius:10px;padding:14px 18px;margin:10px 0;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center">
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div style="color:#BE3226;font-size:20px;font-weight:300">{{CONTEUDO_CLINICO}}</div>
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+<div style="background:#fffdf8;border:1px solid var(--line);border-left:4px solid #BE3226;border-radius:10px;padding:14px 18px;margin:10px 0;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center">
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div style="color:#BE3226;font-size:20px;font-weight:300">{{CONTEUDO_CLINICO}}</div>
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+<div style="background:#fffdf8;border:1px solid var(--line);border-left:4px solid #D4A000;border-radius:10px;padding:14px 18px;margin:10px 0;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center">
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div style="color:#D4A000;font-size:20px;font-weight:300">{{CONTEUDO_CLINICO}}</div>
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+<div style="background:#fffdf8;border:1px solid var(--line);border-left:4px solid #D4A000;border-radius:10px;padding:14px 18px;margin:10px 0;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center">
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div style="color:#D4A000;font-size:20px;font-weight:300">{{CONTEUDO_CLINICO}}</div>
+<div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;color:var(--ink);font-weight:500">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+<div class="alinhamento">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div class="leitura-block fade-up">
+<h3>{{CONTEUDO_CLINICO}}</h3><p class="body-text"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p><p class="body-text" style="margin:var(--s-3) 0;padding:12px 14px;background:#fff8eb;border-left:3px solid var(--gold);border-radius:6px;font-size:13.5px"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p><p class="small" style="font-style:italic;color:var(--muted);margin-top:var(--s-3)">{{CONTEUDO_CLINICO}}</p></div>
+<div class="leitura-block fade-up">
+<h3>{{CONTEUDO_CLINICO}}</h3><p class="body-text" style="margin-bottom:var(--s-3);font-size:14.5px">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+<div style="display:flex;align-items:flex-start;gap:12px;margin:10px 0;padding:12px 14px;background:#fffdf8;border:1px solid var(--line);border-radius:10px">
+<div style="background:var(--gold);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;line-height:1.5;color:var(--ink)">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:12px;margin:10px 0;padding:12px 14px;background:#fffdf8;border:1px solid var(--line);border-radius:10px">
+<div style="background:var(--gold);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;line-height:1.5;color:var(--ink)">{{CONTEUDO_CLINICO}}</div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:12px;margin:10px 0;padding:12px 14px;background:#fffdf8;border:1px solid var(--line);border-radius:10px">
+<div style="background:var(--gold);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">{{CONTEUDO_CLINICO}}</div>
+<div style="font-size:13.5px;line-height:1.5;color:var(--ink)">{{CONTEUDO_CLINICO}}</div>
+</div></div>
+</div>
+</section>
+<section class="section ivs-machine" id="ivs-machine">
+<div class="wrap">
+<h2>O mecanismo do acompanhamento</h2>
+<p style="max-width:780px;font-size:16px;color:var(--muted);">Não é uma lista de benefícios — é um sistema. Cada etapa alimenta a próxima, e os ajustes feitos durante o caminho é que constroem o resultado.</p>
+<div class="machine-flow"><div class="machine-step fade-up"><div class="num">01</div><div class="title">Diagnóstico</div><div class="desc">Bateria avançada de biomarcadores + leitura clínica individualizada.</div></div><div class="machine-step fade-up"><div class="num">02</div><div class="title">Protocolo</div><div class="desc">Plano construído para o seu perfil — hormonal, nutricional, farmacológico quando indicado.</div></div><div class="machine-step fade-up"><div class="num">03</div><div class="title">Execução</div><div class="desc">Início assistido. Equipe completa orienta a primeira semana e o primeiro mês.</div></div><div class="machine-step fade-up"><div class="num">04</div><div class="title">Suporte</div><div class="desc">Acompanhamento médico com suporte da equipe (nutri, preparador, enfermeira). Cadência semanal.</div></div><div class="machine-step fade-up"><div class="num">05</div><div class="title">Ajuste</div><div class="desc">Mudanças baseadas em resposta clínica, não em calendário fixo.</div></div><div class="machine-step fade-up"><div class="num">06</div><div class="title">Reavaliação</div><div class="desc">Reavaliação trimestral de biomarcadores. Plano de manutenção construído junto.</div></div></div>
+</div>
+</section>
+<section class="section proof-by-process" id="proof-by-process">
+<div class="wrap">
+<h2>Prova pelo processo</h2>
+<p style="max-width:780px;font-size:16px;color:var(--muted);">Três pacientes acompanhados por meses ou anos. Casos reais, não promessa. O método é o mesmo — o caminho de cada um foi construído individualmente.</p>
+<div class="proof-thesis fade-up">
+<p>Não mostramos esses casos como promessa. Mostramos para <strong>provar o processo</strong>: acompanhamento, ajustes e continuidade são o que constrói o resultado.</p>
+</div>
+<div class="proof-list">
+<div class="proof-card fade-up">
+<div class="proof-imgs">
+<div class="proof-img"><span class="label">Antes</span><img alt="Tiaro Neves" src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/></div>
+<div class="proof-img"><span class="label">Depois</span><img alt="Tiaro Neves" src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/></div>
+</div>
+<div class="proof-text">
+<span class="step-eyebrow">Caso 01 · TN</span>
+<h3>Tiaro Neves</h3>
+<blockquote>"O peso era apenas o sintoma. O que mudou foi o corpo todo: pressão estabilizada, energia diferente, dores que sumiram. Hoje vivo de outra forma."</blockquote>
+</div>
+</div>
+<div class="proof-card fade-up">
+<div class="proof-imgs">
+<div class="proof-img"><span class="label">Antes</span><img alt="Silvana A." src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/></div>
+<div class="proof-img"><span class="label">Depois</span><img alt="Silvana A." src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/></div>
+</div>
+<div class="proof-text">
+<span class="step-eyebrow">Caso 02 · SA</span>
+<h3>Silvana A.</h3>
+<blockquote>"O sentimento que eu tenho é felicidade. A atenção e o carinho que recebi não tiveram igual. Os meus resultados falam por si só."</blockquote>
+</div>
+</div>
+<div class="proof-card fade-up">
+<div class="proof-imgs">
+<div class="proof-img"><span class="label">Antes</span><img alt="Darilene A." src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/></div>
+<div class="proof-img"><span class="label">Depois</span><img alt="Darilene A." src="{{IMAGEM_REMOVIDA_NA_ANONIMIZACAO}}"/></div>
+</div>
+<div class="proof-text">
+<span class="step-eyebrow">Caso 03 · DA</span>
+<h3>Darilene A.</h3>
+<blockquote>"Quando cheguei na clínica eu estava cansada, sem esperança. Achava que nunca ia conseguir. A equipe acreditou em mim mesmo quando eu duvidava."</blockquote>
+</div>
+</div>
+</div>
+<div class="proof-disclaimer">Resultados individuais variam e dependem de avaliação clínica, adesão ao plano e acompanhamento contínuo. As imagens ilustram acompanhamento clínico real e não constituem promessa de resultado.</div>
+</div>
+</section>
+<section class="section program-180-days" id="program-180-days">
+<div class="wrap">
+<h2>Os próximos 180 dias</h2>
+<p style="max-width:680px;font-size:16px;color:var(--muted);">Quatro movimentos clínicos. O que importa não é o cronograma — é a continuidade dos ajustes feitos durante o caminho.</p>
+<div class="program-timeline"><div class="program-phase fade-up"><div class="phase-marker"><div class="num">01</div></div><div class="phase-content"><h4>Início assistido</h4><p class="desc">Avaliação aprofundada, definição do mapa metabólico individualizado e onboarding com a equipe.</p></div></div><div class="program-phase fade-up"><div class="phase-marker"><div class="num">02</div></div><div class="phase-content"><h4>Acompanhamento</h4><p class="desc">Cadência semanal entre consultas, suporte ativo da equipe, leitura contínua de sintomas e resposta clínica.</p></div></div><div class="program-phase fade-up"><div class="phase-marker"><div class="num">03</div></div><div class="phase-content"><h4>Ajustes</h4><p class="desc">Mudanças de protocolo guiadas por resposta clínica do seu corpo — não por calendário fixo.</p></div></div><div class="program-phase fade-up"><div class="phase-marker"><div class="num">04</div></div><div class="phase-content"><h4>Reavaliação</h4><p class="desc">Painel laboratorial recorrente. Construção do plano de manutenção ao final do ciclo.</p></div></div></div>
+</div>
+</section>
+<section class="section inclusos" id="inclusos">
+<div class="wrap">
+<h2>O que está incluído no acompanhamento</h2>
+<p style="max-width:780px;font-size:16px;color:var(--muted);">Antes de pensar em decisão, vale entender o que compõe o programa. Não é uma consulta avulsa — é uma estrutura completa de cuidado clínico.</p>
+<div class="inclusos-grid"><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><circle cx="11" cy="11" r="3.5"></circle><circle cx="21" cy="11" r="3"></circle><circle cx="6.5" cy="20" r="2.8"></circle><circle cx="25.5" cy="20" r="2.8"></circle><path d="M3 28v-1.5c0-2.2 1.7-4 3.8-4h0"></path><path d="M16 28v-1.5c0-2.5-2-4.5-4.5-4.5h-1c-2.5 0-4.5 2-4.5 4.5"></path><path d="M29 28v-1.5c0-2.2-1.7-4-3.8-4h0"></path><path d="M27 14.5c-1.5 0-2.8 1-3 2.5"></path></svg></div><h4 class="incluso-titulo">Equipe Multidisciplinar</h4><p class="incluso-desc">Médica, Nutricionista, Preparador Físico e Enfermeira acompanhando biomarcadores e com leitura clínica individualizada.</p></div><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><path d="M19 5l8 8"></path><path d="M22 8l-1.5-1.5"></path><path d="M22 8l3-3"></path><path d="M5 27l13.5-13.5 3 3L8 30"></path><path d="M9 23l3 3"></path><path d="M13 19l3 3"></path><circle cx="6" cy="11" fill="currentColor" r="0.8"></circle><circle cx="3" cy="14" fill="currentColor" r="0.8"></circle><circle cx="6" cy="17" fill="currentColor" r="0.8"></circle></svg></div><h4 class="incluso-titulo">Terapias Nutricionais Injetáveis</h4><p class="incluso-desc">Soroterapia e aplicações intramusculares de suplementação nutricional para suprir deficiências e potencializar a resposta do tratamento.</p></div><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><path d="M9 4c0 4 6 6 6 12s-6 8-6 12"></path><path d="M23 4c0 4-6 6-6 12s6 8 6 12"></path><path d="M10 8h12"></path><path d="M10 24h12"></path><path d="M11.5 11h9"></path><path d="M11.5 21h9"></path><path d="M13 14h6"></path><path d="M13 18h6"></path></svg></div><h4 class="incluso-titulo">Exames Genéticos</h4><p class="incluso-desc">Microbiota Intestinal ou Lifecode para avaliar mais de 275 variantes associadas à saúde, nutrição e bem-estar — informações sobre riscos e potenciais genéticos.</p></div><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><rect height="6" rx="3" transform="rotate(-30 16 16)" width="20" x="6" y="13"></rect><path d="M11.5 18.5l9-5.2" stroke-dasharray="0.5 1.8"></path><circle cx="9" cy="9" fill="currentColor" r="1"></circle><circle cx="6" cy="11.5" fill="currentColor" r="0.7"></circle><circle cx="11.5" cy="6" fill="currentColor" r="0.7"></circle></svg></div><h4 class="incluso-titulo">Medicações GLP-1/GIP</h4><p class="incluso-desc">Uso de Tirzepatida (Mounjaro) para emagrecimento, resistência insulínica e inflamação sistêmica de forma assistida e com doses ideais ao tratamento.</p></div><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><rect height="20" rx="7" width="14" x="9" y="6"></rect><path d="M9 16h14"></path><circle cx="13.5" cy="11" fill="currentColor" r="0.9"></circle><circle cx="18.5" cy="11" fill="currentColor" r="0.9"></circle><circle cx="13.5" cy="21" fill="currentColor" r="0.9"></circle><circle cx="18.5" cy="21" fill="currentColor" r="0.9"></circle><path d="M9 16c-2 0-3 1-3 2.5"></path><path d="M23 16c2 0 3 1 3 2.5"></path></svg></div><h4 class="incluso-titulo">Reposição Hormonal</h4><p class="incluso-desc">Quando necessário, reposição via implantes hormonais e não hormonais como terapia complementar — sempre com indicação clínica e monitoramento.</p></div><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><path d="M11 4h10"></path><path d="M13 4v4l-3.5 5.5c-1 1.5-1.5 3-1.5 4.5v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-1.5-.5-3-1.5-4.5L19 8V4"></path><path d="M9 18h14"></path><circle cx="13" cy="22" fill="currentColor" r="0.9"></circle><circle cx="17" cy="24" fill="currentColor" r="0.9"></circle><circle cx="20" cy="21" fill="currentColor" r="0.9"></circle></svg></div><h4 class="incluso-titulo">Fórmulas Orais</h4><p class="incluso-desc">Fórmulas de farmácias de manipulação para uso oral, individualizadas para potencializar o resultado do tratamento.</p></div><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><rect height="20" rx="2.5" width="22" x="5" y="7"></rect><path d="M5 13h22"></path><path d="M11 4v6"></path><path d="M21 4v6"></path><path d="M11 18l3 3 5-6"></path><circle cx="9" cy="22" fill="currentColor" r="0.7"></circle><circle cx="23" cy="22" fill="currentColor" r="0.7"></circle></svg></div><h4 class="incluso-titulo">Reavaliação Semanal</h4><p class="incluso-desc">Acompanhamento semanal para revisão de resultados e ajuste fino da condução do tratamento, de forma totalmente personalizada.</p></div><div class="incluso-card fade-up"><div class="incluso-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 32 32"><circle cx="16" cy="16" r="11"></circle><path d="M16 9v7l4 3"></path><path d="M5.5 16h2"></path><path d="M24.5 16h2"></path><path d="M16 5.5v2"></path><path d="M16 24.5v2"></path><circle cx="16" cy="16" fill="currentColor" r="1.2"></circle></svg></div><h4 class="incluso-titulo">Médica Exclusiva</h4><p class="incluso-desc">Atendimento médico exclusivo e prioritário 24/7 — canal direto para o que você precisar durante o programa.</p></div></div>
+</div>
+</section>
+<section class="section decision-checklist" id="decision-checklist">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<p style="max-width:780px;font-size:16px;color:var(--muted);text-align:center;margin:0 auto;">{{CONTEUDO_CLINICO}}</p>
+<div class="checklist-card">
+<div class="checklist-item"><div class="check"></div><div class="text">{{CONTEUDO_CLINICO}}</div></div><div class="checklist-item"><div class="check"></div><div class="text">{{CONTEUDO_CLINICO}}</div></div><div class="checklist-item"><div class="check"></div><div class="text">{{CONTEUDO_CLINICO}}</div></div><div class="checklist-item"><div class="check"></div><div class="text">{{CONTEUDO_CLINICO}}</div></div>
+<div class="checklist-progress">
+<div class="checklist-progress-bar"><div class="checklist-progress-fill"></div></div>
+<div class="checklist-progress-text">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section final-cta" id="final-cta">
+<div class="wrap">
+<div class="cta-frame fade-up">
+<p class="cta-frame-text">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+<h2 style="text-align:center;">{{CONTEUDO_CLINICO}}</h2>
+<p style="max-width:780px;font-size:16px;color:var(--muted);text-align:center;margin:0 auto var(--s-7);">{{CONTEUDO_CLINICO}}</p>
+<div class="cta-decision">
+<div class="cta-card recommended fade-up">
+<div class="label">{{CONTEUDO_CLINICO}}</div>
+<h3>{{CONTEUDO_CLINICO}}</h3>
+<p class="desc">{{CONTEUDO_CLINICO}}</p>
+<span class="button">{{CONTEUDO_CLINICO}}</span>
+</div>
+</div>
+<div class="cta-signature">
+<div class="name">{{CONTEUDO_CLINICO}}</div>
+<div class="meta">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</section>
+<section class="section technical-appendix" id="technical-appendix">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<div class="appendix-controls">
+<p class="lead">{{CONTEUDO_CLINICO}}</p>
+<button class="appendix-toggle-all">{{CONTEUDO_CLINICO}}</button>
+</div>
+<div class="exam-kpi-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 24px;">
+<div class="exam-kpi" style="background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:16px;"><span style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">{{CONTEUDO_CLINICO}}</span><strong style="font-size:28px;color:var(--ink);">{{CONTEUDO_CLINICO}}</strong></div>
+<div class="exam-kpi" style="background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:16px;"><span style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">{{CONTEUDO_CLINICO}}</span><strong style="font-size:28px;color:var(--gold-dark);">{{CONTEUDO_CLINICO}}</strong></div>
+<div class="exam-kpi" style="background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:16px;"><span style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">{{CONTEUDO_CLINICO}}</span><strong style="font-size:28px;color:#8E2417;">{{CONTEUDO_CLINICO}}</strong></div>
+</div>
+<div class="exam-groups-v12">
+<div class="exam-group open" data-group="glicidico">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit"></span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="lipidico">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="low">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="hormonal">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="low">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="inflamatorio">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="vitaminas">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="low">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="low">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="tireoide">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="alert">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="hepatico">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="renal">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="adrenal">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="hemograma">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p>{{CONTEUDO_CLINICO}}</p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="low">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div><div class="exam-group open" data-group="outros">
+<div class="exam-group-header">
+<div><h4>{{CONTEUDO_CLINICO}}</h4><p></p></div>
+<span class="exam-count">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="exam-group-body">
+<div class="exam-table-head"><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span><span>{{CONTEUDO_CLINICO}}</span></div>
+<div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="alert">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="ok">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div><div class="exam-row" data-sev="low">
+<div class="e-nome">{{CONTEUDO_CLINICO}}</div>
+<div class="e-valor">{{CONTEUDO_CLINICO}}<span class="e-unit">{{CONTEUDO_CLINICO}}</span></div>
+<div class="e-ref">{{CONTEUDO_CLINICO}}</div>
+<div class="e-status">{{CONTEUDO_CLINICO}}</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section doctor-objections" id="doctor-objections">
+<div class="wrap">
+<span class="doctor-tag">Apêndice da médica · Uso interno</span>
+<h2>Objeções e condução da conversa</h2>
+<p class="lead">Material interno para apoio da Dra. Daniely durante a consulta. Busque por palavra-chave ou filtre por categoria. Clique no card para expandir resposta e pergunta de condução.</p>
+<div class="obj-toolbar">
+<div class="obj-search-wrap">
+<svg class="obj-search-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+<input autocomplete="off" class="obj-search" placeholder="Buscar objeção, palavra-chave ou categoria..." type="text"/>
+<span class="obj-shortcut">/</span>
+<button aria-label="Limpar busca" class="obj-search-clear">×</button>
+</div>
+<div class="obj-cats" role="tablist"><button class="obj-cat-chip active" data-cat="todas">Todas</button><button class="obj-cat-chip" data-cat="Hesitação">Hesitação</button><button class="obj-cat-chip" data-cat="Família">Família</button><button class="obj-cat-chip" data-cat="Financeiro">Financeiro</button><button class="obj-cat-chip" data-cat="Autonomia">Autonomia</button><button class="obj-cat-chip" data-cat="Medicação">Medicação</button><button class="obj-cat-chip" data-cat="Tempo">Tempo</button><button class="obj-cat-chip" data-cat="Histórico">Histórico</button><button class="obj-cat-chip" data-cat="Manutenção">Manutenção</button><button class="obj-cat-chip" data-cat="Resultado">Resultado</button><button class="obj-cat-chip" data-cat="Compromisso">Compromisso</button><button class="obj-cat-chip" data-cat="Hormônios">Hormônios</button></div>
+<div class="obj-counter"><span class="obj-counter-num">15</span> objeções disponíveis</div>
+</div>
+<div class="doctor-obj-list">
+<div class="doctor-obj-card" data-cat="Hesitação" data-search="hesitação quero pensar. costuma ser sinal de que ainda falta clareza sobre o que está em jogo, ou tempo para processar a recomendação. faz total sentido pensar com calma. posso te enviar um resumo dessa consulta com os pontos clínicos principais para revisitar quando precisar. o que ainda falta ficar claro para você se sentir confortável com a próxima decisão?"><div class="obj-header"><span class="obj-cat-tag">Hesitação</span><h3>"Quero pensar."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Costuma ser sinal de que ainda falta clareza sobre o que está em jogo, ou tempo para processar a recomendação.</p><p><strong>Resposta sugerida</strong>Faz total sentido pensar com calma. Posso te enviar um resumo dessa consulta com os pontos clínicos principais para revisitar quando precisar.</p><p class="cond"><strong>Pergunta de condução</strong>O que ainda falta ficar claro para você se sentir confortável com a próxima decisão?</p></div></div><div class="doctor-obj-card" data-cat="Família" data-search="família preciso conversar com minha família primeiro. sinaliza um espaço de validação importante — paciente quer dividir a decisão com alguém de confiança. faz total sentido. posso preparar um resumo da consulta com os pontos clínicos principais, para você apresentar em casa com base nos exames, não em uma proposta comercial. quem normalmente conversa com você sobre esse tipo de decisão?"><div class="obj-header"><span class="obj-cat-tag">Família</span><h3>"Preciso conversar com minha família primeiro."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Sinaliza um espaço de validação importante — paciente quer dividir a decisão com alguém de confiança.</p><p><strong>Resposta sugerida</strong>Faz total sentido. Posso preparar um resumo da consulta com os pontos clínicos principais, para você apresentar em casa com base nos exames, não em uma proposta comercial.</p><p class="cond"><strong>Pergunta de condução</strong>Quem normalmente conversa com você sobre esse tipo de decisão?</p></div></div><div class="doctor-obj-card" data-cat="Financeiro" data-search="financeiro achei o investimento alto. o paciente ainda está comparando com consulta avulsa, dieta isolada ou tentativa anterior — não com um sistema clínico contínuo. faz sentido olhar com cuidado. a diferença aqui é que não estamos falando de intervenção isolada, mas de acompanhamento com leitura clínica, equipe, ajustes e reavaliações ao longo do processo. quando você compara com o custo somado das tentativas que não sustentaram resultado, faz sentido olhar para isso como acompanhamento e não como uma consulta?"><div class="obj-header"><span class="obj-cat-tag">Financeiro</span><h3>"Achei o investimento alto."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>O paciente ainda está comparando com consulta avulsa, dieta isolada ou tentativa anterior — não com um sistema clínico contínuo.</p><p><strong>Resposta sugerida</strong>Faz sentido olhar com cuidado. A diferença aqui é que não estamos falando de intervenção isolada, mas de acompanhamento com leitura clínica, equipe, ajustes e reavaliações ao longo do processo.</p><p class="cond"><strong>Pergunta de condução</strong>Quando você compara com o custo somado das tentativas que não sustentaram resultado, faz sentido olhar para isso como acompanhamento e não como uma consulta?</p></div></div><div class="doctor-obj-card" data-cat="Autonomia" data-search="autonomia vou tentar sozinho primeiro. reflete confiança na própria disciplina e desconfiança quanto à necessidade real de acompanhamento. tentar sozinho não é falta de disciplina — é falta de leitura clínica em tempo real. se você já tentou antes, provavelmente já sentiu o que falta: alguém ajustando rota com você. o que costuma fazer você desistir quando tenta sozinho?"><div class="obj-header"><span class="obj-cat-tag">Autonomia</span><h3>"Vou tentar sozinho primeiro."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Reflete confiança na própria disciplina e desconfiança quanto à necessidade real de acompanhamento.</p><p><strong>Resposta sugerida</strong>Tentar sozinho não é falta de disciplina — é falta de leitura clínica em tempo real. Se você já tentou antes, provavelmente já sentiu o que falta: alguém ajustando rota com você.</p><p class="cond"><strong>Pergunta de condução</strong>O que costuma fazer você desistir quando tenta sozinho?</p></div></div><div class="doctor-obj-card" data-cat="Medicação" data-search="medicação tenho medo de medicação. geralmente vem de experiência negativa anterior ou da preocupação com efeitos colaterais e dependência. medicação só entra quando há indicação clínica clara e revisão periódica. não é regra do programa — é ferramenta usada quando o caso pede. e o objetivo é sempre função, não dependência. que experiência prévia com medicação fez você desenvolver esse cuidado?"><div class="obj-header"><span class="obj-cat-tag">Medicação</span><h3>"Tenho medo de medicação."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Geralmente vem de experiência negativa anterior ou da preocupação com efeitos colaterais e dependência.</p><p><strong>Resposta sugerida</strong>Medicação só entra quando há indicação clínica clara e revisão periódica. Não é regra do programa — é ferramenta usada quando o caso pede. E o objetivo é sempre função, não dependência.</p><p class="cond"><strong>Pergunta de condução</strong>Que experiência prévia com medicação fez você desenvolver esse cuidado?</p></div></div><div class="doctor-obj-card" data-cat="Medicação" data-search="medicação não quero ficar dependente. próxima do medo de medicação, mas costuma envolver também receio de virar paciente crônico ou de perder autonomia. acompanhar permite usar medicação só quando faz diferença real — e suspender quando não precisa mais. o que se busca é função, não dependência. o que você considera 'estar bem sem precisar de nada'?"><div class="obj-header"><span class="obj-cat-tag">Medicação</span><h3>"Não quero ficar dependente."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Próxima do medo de medicação, mas costuma envolver também receio de virar paciente crônico ou de perder autonomia.</p><p><strong>Resposta sugerida</strong>Acompanhar permite usar medicação só quando faz diferença real — e suspender quando não precisa mais. O que se busca é função, não dependência.</p><p class="cond"><strong>Pergunta de condução</strong>O que você considera 'estar bem sem precisar de nada'?</p></div></div><div class="doctor-obj-card" data-cat="Tempo" data-search="tempo não tenho tempo agora. pode refletir agenda real ou ansiedade sobre o compromisso operacional do programa. o programa foi desenhado para integrar à rotina, não substituí-la. a maior parte dos ajustes é remota; as consultas presenciais são pontuais e planejadas. como ficaria se a parte mais demandante fosse na primeira semana, e depois ficasse mais leve?"><div class="obj-header"><span class="obj-cat-tag">Tempo</span><h3>"Não tenho tempo agora."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Pode refletir agenda real ou ansiedade sobre o compromisso operacional do programa.</p><p><strong>Resposta sugerida</strong>O programa foi desenhado para integrar à rotina, não substituí-la. A maior parte dos ajustes é remota; as consultas presenciais são pontuais e planejadas.</p><p class="cond"><strong>Pergunta de condução</strong>Como ficaria se a parte mais demandante fosse na primeira semana, e depois ficasse mais leve?</p></div></div><div class="doctor-obj-card" data-cat="Histórico" data-search="histórico já tentei muitas vezes e não funcionou. há cansaço acumulado e proteção emocional contra mais uma frustração. tentativas frustradas costumam ter um padrão em comum: faltou leitura clínica e correção de rota. não foi falta de esforço seu. se a gente conseguisse identificar o que realmente derruba sua adesão, valeria tentar de um jeito diferente?"><div class="obj-header"><span class="obj-cat-tag">Histórico</span><h3>"Já tentei muitas vezes e não funcionou."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Há cansaço acumulado e proteção emocional contra mais uma frustração.</p><p><strong>Resposta sugerida</strong>Tentativas frustradas costumam ter um padrão em comum: faltou leitura clínica e correção de rota. Não foi falta de esforço seu.</p><p class="cond"><strong>Pergunta de condução</strong>Se a gente conseguisse identificar o que realmente derruba sua adesão, valeria tentar de um jeito diferente?</p></div></div><div class="doctor-obj-card" data-cat="Manutenção" data-search="manutenção tenho medo de não conseguir manter. reflete autoavaliação realista, mas também a expectativa de que manter dependa só de força de vontade. manter raramente é questão de disciplina pessoal. é ter quem leia sua resposta e ajuste a rota. é exatamente para isso que existe a equipe. se tivesse alguém olhando o seu caso a cada duas semanas, mudaria a sua percepção sobre conseguir manter?"><div class="obj-header"><span class="obj-cat-tag">Manutenção</span><h3>"Tenho medo de não conseguir manter."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Reflete autoavaliação realista, mas também a expectativa de que manter dependa só de força de vontade.</p><p><strong>Resposta sugerida</strong>Manter raramente é questão de disciplina pessoal. É ter quem leia sua resposta e ajuste a rota. É exatamente para isso que existe a equipe.</p><p class="cond"><strong>Pergunta de condução</strong>Se tivesse alguém olhando o seu caso a cada duas semanas, mudaria a sua percepção sobre conseguir manter?</p></div></div><div class="doctor-obj-card" data-cat="Resultado" data-search="resultado e se eu pagar e não tiver resultado? pede transparência sobre o que é prometido e como o resultado é construído. não prometo resultado fechado — isso seria desonesto. o que ofereço é leitura clínica contínua, ajustes baseados em resposta e reavaliações com biomarcadores. resultado depende de adesão, indicação e seu organismo. para você, como ficaria a percepção de valor se a gente combinasse marcos de reavaliação claros desde o início?"><div class="obj-header"><span class="obj-cat-tag">Resultado</span><h3>"E se eu pagar e não tiver resultado?"</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Pede transparência sobre o que é prometido e como o resultado é construído.</p><p><strong>Resposta sugerida</strong>Não prometo resultado fechado — isso seria desonesto. O que ofereço é leitura clínica contínua, ajustes baseados em resposta e reavaliações com biomarcadores. Resultado depende de adesão, indicação e seu organismo.</p><p class="cond"><strong>Pergunta de condução</strong>Para você, como ficaria a percepção de valor se a gente combinasse marcos de reavaliação claros desde o início?</p></div></div><div class="doctor-obj-card" data-cat="Autonomia" data-search="autonomia prefiro começar só com dieta e treino. subestima a complexidade do caso ou tenta minimizar a entrada no programa. dieta e treino isolados resolvem alguns casos. o seu, pelos exames, mostra sinais que pedem leitura conjunta — hormônio, inflamação e metabolismo. tratar isolado tende a frustrar. você já tentou só dieta e treino antes? o que aconteceu depois de algumas semanas?"><div class="obj-header"><span class="obj-cat-tag">Autonomia</span><h3>"Prefiro começar só com dieta e treino."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Subestima a complexidade do caso ou tenta minimizar a entrada no programa.</p><p><strong>Resposta sugerida</strong>Dieta e treino isolados resolvem alguns casos. O seu, pelos exames, mostra sinais que pedem leitura conjunta — hormônio, inflamação e metabolismo. Tratar isolado tende a frustrar.</p><p class="cond"><strong>Pergunta de condução</strong>Você já tentou só dieta e treino antes? O que aconteceu depois de algumas semanas?</p></div></div><div class="doctor-obj-card" data-cat="Compromisso" data-search="compromisso quero fazer só os exames e depois vejo. quer reduzir compromisso inicial; pode ser legítimo ou pode ser fuga da decisão. exames sem leitura clínica acompanhada raramente mudam o cenário. o número sozinho não muda nada — o que muda é a interpretação e a estratégia construída em cima. se eu lesse seus exames hoje e te entregasse a interpretação, qual seria o próximo passo lógico para você?"><div class="obj-header"><span class="obj-cat-tag">Compromisso</span><h3>"Quero fazer só os exames e depois vejo."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Quer reduzir compromisso inicial; pode ser legítimo ou pode ser fuga da decisão.</p><p><strong>Resposta sugerida</strong>Exames sem leitura clínica acompanhada raramente mudam o cenário. O número sozinho não muda nada — o que muda é a interpretação e a estratégia construída em cima.</p><p class="cond"><strong>Pergunta de condução</strong>Se eu lesse seus exames hoje e te entregasse a interpretação, qual seria o próximo passo lógico para você?</p></div></div><div class="doctor-obj-card" data-cat="Autonomia" data-search="autonomia não gosto de acompanhamento muito próximo. reflete preferência por autonomia ou desconforto com proximidade clínica. acompanhar não significa controlar. significa ter alguém disponível quando você precisa, sem exigir contato constante. a cadência é planejada, não invasiva. como seria, para você, um acompanhamento que respeitasse mais sua autonomia?"><div class="obj-header"><span class="obj-cat-tag">Autonomia</span><h3>"Não gosto de acompanhamento muito próximo."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Reflete preferência por autonomia ou desconforto com proximidade clínica.</p><p><strong>Resposta sugerida</strong>Acompanhar não significa controlar. Significa ter alguém disponível quando você precisa, sem exigir contato constante. A cadência é planejada, não invasiva.</p><p class="cond"><strong>Pergunta de condução</strong>Como seria, para você, um acompanhamento que respeitasse mais sua autonomia?</p></div></div><div class="doctor-obj-card" data-cat="Hormônios" data-search="hormônios tenho receio de hormônios. costuma vir de informação assimétrica — mídia, casos isolados, falta de explicação clínica. reposição hormonal só entra com indicação clínica precisa, monitoramento de biomarcadores e revisão periódica. não é regra do programa — é ferramenta para casos específicos. se hormônio entrasse no plano só após reavaliação clínica e exames específicos, mudaria sua percepção?"><div class="obj-header"><span class="obj-cat-tag">Hormônios</span><h3>"Tenho receio de hormônios."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Costuma vir de informação assimétrica — mídia, casos isolados, falta de explicação clínica.</p><p><strong>Resposta sugerida</strong>Reposição hormonal só entra com indicação clínica precisa, monitoramento de biomarcadores e revisão periódica. Não é regra do programa — é ferramenta para casos específicos.</p><p class="cond"><strong>Pergunta de condução</strong>Se hormônio entrasse no plano só após reavaliação clínica e exames específicos, mudaria sua percepção?</p></div></div><div class="doctor-obj-card" data-cat="Hesitação" data-search="hesitação não estou pronto para começar agora. sinal de que ainda falta um gatilho emocional ou clínico para a decisão. faz sentido. não há urgência artificial. mas vale registrar a recomendação clínica e o quadro atual, para que possamos retomar quando você decidir. o que precisaria mudar — clinicamente ou na sua vida — para você se sentir pronto?"><div class="obj-header"><span class="obj-cat-tag">Hesitação</span><h3>"Não estou pronto para começar agora."</h3><span class="obj-toggle">▾</span></div><div class="obj-body"><p><strong>O que revela</strong>Sinal de que ainda falta um gatilho emocional ou clínico para a decisão.</p><p><strong>Resposta sugerida</strong>Faz sentido. Não há urgência artificial. Mas vale registrar a recomendação clínica e o quadro atual, para que possamos retomar quando você decidir.</p><p class="cond"><strong>Pergunta de condução</strong>O que precisaria mudar — clinicamente ou na sua vida — para você se sentir pronto?</p></div></div>
+<div class="obj-empty" hidden="">Nenhuma objeção encontrada com este filtro.</div>
+</div>
+</div>
+</section>
+<section class="section interpretacao-section medical-mode" id="interpretacao-clinica">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<p class="lead">{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+<div class="ex-grid-v2">
+<div class="ex-card-v2" style="border-left:4px solid #C46A30">
+<div class="ex-head-v2">
+<div class="ex-title">
+<strong>{{CONTEUDO_CLINICO}}</strong>
+<span class="ex-val-inline">{{CONTEUDO_CLINICO}}</span>
+<span class="ex-ref-inline">{{CONTEUDO_CLINICO}}</span>
+</div>
+<span class="ex-sev-tag" style="background:#C46A301a;color:#C46A30;border-color:#C46A30">{{CONTEUDO_CLINICO}}</span>
+</div>
+<div class="ex-body-v2">
+<div class="ex-bloco">
+<span class="ex-label">{{CONTEUDO_CLINICO}}</span>
+<p>{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="ex-bloco ex-bloco-warn">
+<span class="ex-label">{{CONTEUDO_CLINICO}}</span>
+<p>{{CONTEUDO_CLINICO}}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section cruzamento-section medical-mode" id="cruzamento-q-e">
+<div class="wrap">
+<h2>{{CONTEUDO_CLINICO}}</h2>
+<p class="lead">{{CONTEUDO_CLINICO}}</p>
+<div class="hip-grid-list">
+<div class="hip-card" style="border-top:4px solid #BE3226">
+<div class="hip-head">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<span class="hip-pri" style="background:#BE32261a;color:#BE3226">{{CONTEUDO_CLINICO}}</span>
+</div>
+<p class="hip-desc">{{CONTEUDO_CLINICO}}</p>
+<div class="hip-grid">
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+</div>
+<p class="hip-acao"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="hip-card" style="border-top:4px solid #BE3226">
+<div class="hip-head">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<span class="hip-pri" style="background:#BE32261a;color:#BE3226">{{CONTEUDO_CLINICO}}</span>
+</div>
+<p class="hip-desc">{{CONTEUDO_CLINICO}}</p>
+<div class="hip-grid">
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+</div>
+<p class="hip-acao"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="hip-card" style="border-top:4px solid #D4A000">
+<div class="hip-head">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<span class="hip-pri" style="background:#D4A0001a;color:#D4A000">{{CONTEUDO_CLINICO}}</span>
+</div>
+<p class="hip-desc">{{CONTEUDO_CLINICO}}</p>
+<div class="hip-grid">
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+</div>
+<p class="hip-acao"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="hip-card" style="border-top:4px solid #D4A000">
+<div class="hip-head">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<span class="hip-pri" style="background:#D4A0001a;color:#D4A000">{{CONTEUDO_CLINICO}}</span>
+</div>
+<p class="hip-desc">{{CONTEUDO_CLINICO}}</p>
+<div class="hip-grid">
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+</div>
+<p class="hip-acao"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="hip-card" style="border-top:4px solid #D4A000">
+<div class="hip-head">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<span class="hip-pri" style="background:#D4A0001a;color:#D4A000">{{CONTEUDO_CLINICO}}</span>
+</div>
+<p class="hip-desc">{{CONTEUDO_CLINICO}}</p>
+<div class="hip-grid">
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+</div>
+<p class="hip-acao"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+<div class="hip-card" style="border-top:4px solid #D4A000">
+<div class="hip-head">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<span class="hip-pri" style="background:#D4A0001a;color:#D4A000">{{CONTEUDO_CLINICO}}</span>
+</div>
+<p class="hip-desc">{{CONTEUDO_CLINICO}}</p>
+<div class="hip-grid">
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div>
+<span class="hip-label">{{CONTEUDO_CLINICO}}</span>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+</div>
+<p class="hip-acao"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}</p>
+</div>
+</div>
+<div class="extra-bloco">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<p class="extra-lead">{{CONTEUDO_CLINICO}}</p>
+<ul><li><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<em>{{CONTEUDO_CLINICO}}</em></li></ul>
+</div>
+<div class="extra-bloco">
+<h4>{{CONTEUDO_CLINICO}}</h4>
+<p class="extra-lead">{{CONTEUDO_CLINICO}}</p>
+<ul><li><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<em>{{CONTEUDO_CLINICO}}</em></li><li><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<em>{{CONTEUDO_CLINICO}}</em></li><li><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<em>{{CONTEUDO_CLINICO}}</em></li></ul>
+</div>
+<div class="plano-bloco">
+<h3>{{CONTEUDO_CLINICO}}</h3>
+<div class="plano-grid">
+<div>
+<h5>{{CONTEUDO_CLINICO}}</h5>
+<ol><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ol>
+</div>
+<div>
+<h5>{{CONTEUDO_CLINICO}}</h5>
+<ul><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li><li>{{CONTEUDO_CLINICO}}</li></ul>
+</div>
+<div>
+<h5>{{CONTEUDO_CLINICO}}</h5>
+<p>{{CONTEUDO_CLINICO}}</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<div class="send-modal" hidden="" id="send-modal"><div class="send-modal-backdrop"></div><div aria-labelledby="send-modal-title" aria-modal="true" class="send-modal-card" role="dialog"><button aria-label="Fechar" class="send-modal-close">{{CONTEUDO_CLINICO}}</button><h3 id="send-modal-title">{{CONTEUDO_CLINICO}}</h3><p class="send-modal-sub">{{CONTEUDO_CLINICO}}</p><label class="send-field"><span>{{CONTEUDO_CLINICO}}</span><input autocomplete="off" id="send-tel" placeholder="55 71 99999-9999" type="tel" value="{{PACIENTE_TELEFONE}}"/></label><label class="send-field"><span>{{CONTEUDO_CLINICO}}</span><textarea id="send-msg" rows="5">{{CONTEUDO_CLINICO}}</textarea></label><div class="send-actions"><button class="send-btn-primary" id="send-share" style="display:none;"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" x2="12" y1="2" y2="15"></line></svg>{{CONTEUDO_CLINICO}}</button><button class="send-btn-primary" id="send-download" style="display:none;"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>{{CONTEUDO_CLINICO}}</button><button class="send-btn-secondary" id="send-whatsapp"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6A8.4 8.4 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"></path></svg>{{CONTEUDO_CLINICO}}</button><button class="send-btn-secondary" id="send-copy">{{CONTEUDO_CLINICO}}</button></div><p class="send-hint"><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<em>{{CONTEUDO_CLINICO}}</em>{{CONTEUDO_CLINICO}}<br/><strong>{{CONTEUDO_CLINICO}}</strong>{{CONTEUDO_CLINICO}}<em>{{CONTEUDO_CLINICO}}</em>{{CONTEUDO_CLINICO}}<em>{{CONTEUDO_CLINICO}}</em>{{CONTEUDO_CLINICO}}</p></div></div>
+<script>
+
+(function(){
+  document.body.classList.add('js-enabled');
+
+  // === Progress nav scroll spy ===
+  const allSections = document.querySelectorAll('main > section[id]');
+  const steps = document.querySelectorAll('.progress-step[data-target]');
+  // Só considera seções que estão no progress nav
+  const navTargets = new Set(Array.from(steps).map(s => s.dataset.target));
+  const trackedSections = Array.from(allSections).filter(s => navTargets.has(s.id));
+  function updateActive(){
+    if(!trackedSections.length) return;
+    const trigger = window.innerHeight * 0.30;  // 30% do viewport
+    let active = trackedSections[0].id;
+    // Encontra a última seção cujo top já passou do trigger
+    for(const sec of trackedSections){
+      const r = sec.getBoundingClientRect();
+      if(r.top - trigger <= 0) active = sec.id;
+      else break;
+    }
+    steps.forEach(s => {
+      s.classList.toggle('active', s.dataset.target === active);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+  steps.forEach(s => {
+    s.addEventListener('click', () => {
+      const t = document.getElementById(s.dataset.target);
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // === Mode switcher (3 modos exclusivos) ===
+  const modeButtons = document.querySelectorAll('.mode-btn[data-mode]');
+  const modes = ['apresentacao', 'exames', 'objecoes'];
+  function setMode(mode){
+    modes.forEach(m => document.body.classList.toggle('modo-' + m, m === mode));
+    modeButtons.forEach(b => {
+      const active = b.dataset.mode === mode;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    // Scroll suave para topo da seção do modo
+    if(mode === 'exames'){
+      const t = document.querySelector('#technical-appendix');
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    } else if(mode === 'objecoes'){
+      const t = document.querySelector('#doctor-objections');
+      if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    } else {
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  }
+  modeButtons.forEach(b => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    setMode(b.dataset.mode);
+  }));
+  // Default: apresentação
+  document.body.classList.add('modo-apresentacao');
+
+  // === Accordion exames ===
+  document.querySelectorAll('.exam-group-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+  const openAll = document.querySelector('.appendix-toggle-all');
+  if(openAll){
+    openAll.addEventListener('click', () => {
+      const groups = document.querySelectorAll('.exam-group');
+      const allOpen = Array.from(groups).every(g => g.classList.contains('open'));
+      groups.forEach(g => g.classList.toggle('open', !allOpen));
+      openAll.textContent = allOpen ? 'Expandir todos' : 'Recolher todos';
+    });
+  }
+
+  // === Decision checklist ===
+  document.querySelectorAll('.checklist-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('checked'));
+  });
+
+  // === Scroll-triggered fade-up ===
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('in'));
+  }
+
+  // === Severity rings (donut) ===
+  document.querySelectorAll('.sev-ring').forEach(ring => {
+    const pct = parseFloat(ring.dataset.pct || '0');
+    const r = 22, c = 2 * Math.PI * r;
+    const offset = c - (Math.min(pct, 100) / 100) * c;
+    const fill = ring.querySelector('.ring-fill');
+    if(fill){
+      fill.setAttribute('stroke-dasharray', c.toFixed(2));
+      fill.setAttribute('stroke-dashoffset', c.toFixed(2));
+      // Animate after a tick
+      requestAnimationFrame(() => {
+        fill.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        fill.setAttribute('stroke-dashoffset', offset.toFixed(2));
+      });
+    }
+  });
+
+
+  // === Modal "Enviar ao paciente" V2.8 ===
+  // Gera HTML versão paciente in-page (clona DOM, limpa) + share/download/WhatsApp
+  const sendBtn = document.getElementById('btn-send-paciente');
+  const sendModal = document.getElementById('send-modal');
+  if(sendBtn && sendModal){
+    const sendTel = document.getElementById('send-tel');
+    const sendMsg = document.getElementById('send-msg');
+    const sendShare = document.getElementById('send-share');
+    const sendDownload = document.getElementById('send-download');
+    const sendWa = document.getElementById('send-whatsapp');
+    const sendCopy = document.getElementById('send-copy');
+    const sendClose = sendModal.querySelector('.send-modal-close');
+    const sendBackdrop = sendModal.querySelector('.send-modal-backdrop');
+    const openModal = () => {
+      sendModal.classList.add('is-open');
+      sendModal.removeAttribute('hidden');
+      document.body.classList.add('modal-locked');
+      if(sendTel) setTimeout(() => sendTel.focus(), 100);
+    };
+    const closeModal = () => {
+      sendModal.classList.remove('is-open');
+      sendModal.setAttribute('hidden', '');
+      document.body.classList.remove('modal-locked');
+    };
+    sendBtn.addEventListener('click', openModal);
+    if(sendClose) sendClose.addEventListener('click', closeModal);
+    if(sendBackdrop) sendBackdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && sendModal.classList.contains('is-open')) closeModal();
+    });
+
+    // Detecta mobile pra escolher fluxo padrão
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if(isMobile && navigator.canShare){
+      // No mobile, mostra botão Compartilhar (Web Share API)
+      if(sendShare) sendShare.style.display = '';
+      if(sendDownload) sendDownload.style.display = 'none';
+    } else {
+      // Desktop: mostra Download + WhatsApp Web
+      if(sendShare) sendShare.style.display = 'none';
+      if(sendDownload) sendDownload.style.display = '';
+    }
+
+    // Gera HTML versão paciente clonando DOM atual e removendo seções internas
+    function buildPacienteHtml(){
+      const clone = document.documentElement.cloneNode(true);
+      // Remove médica/objeções
+      const docObjs = clone.querySelector('#doctor-objections');
+      if(docObjs) docObjs.remove();
+      // Remove botão Médica do mode-switcher
+      const btnMed = clone.querySelector('.mode-btn[data-mode="objecoes"]');
+      if(btnMed) btnMed.remove();
+      // Remove botão de envio + modal
+      const btnSend = clone.querySelector('.topbar-send-btn');
+      if(btnSend) btnSend.remove();
+      const modal = clone.querySelector('#send-modal');
+      if(modal) modal.remove();
+      // Reset modo para apresentação
+      const body = clone.querySelector('body');
+      if(body){
+        body.className = 'versao-paciente modo-apresentacao';
+      }
+      // Marca todos os mode-btn corretamente
+      clone.querySelectorAll('.mode-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.mode === 'apresentacao');
+        b.setAttribute('aria-selected', b.dataset.mode === 'apresentacao' ? 'true' : 'false');
+      });
+      return '<!DOCTYPE html>\n' + clone.outerHTML;
+    }
+
+    function buildBlob(){
+      const html = buildPacienteHtml();
+      return new Blob([html], { type: 'text/html;charset=utf-8' });
+    }
+
+    function pacienteFilename(){
+      // Tenta extrair nome do paciente do title
+      const t = document.title || 'apresentacao';
+      const slug = t.split('·')[0].trim().toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      return 'apresentacao-' + (slug || 'paciente') + '.html';
+    }
+
+    // Botão: Compartilhar (mobile, Web Share API com arquivo)
+    if(sendShare){
+      sendShare.addEventListener('click', async () => {
+        try {
+          const blob = buildBlob();
+          const file = new File([blob], pacienteFilename(), { type: 'text/html' });
+          const msg = sendMsg.value || '';
+          if(navigator.canShare && navigator.canShare({ files: [file] })){
+            await navigator.share({
+              files: [file], text: msg, title: 'Apresentação clínica'
+            });
+            sendShare.textContent = 'Enviado!';
+            setTimeout(() => closeModal(), 800);
+          } else {
+            alert('Seu navegador não suporta compartilhamento de arquivo. Use Baixar HTML e anexe manualmente.');
+          }
+        } catch (e) {
+          if(e.name !== 'AbortError') alert('Não foi possível compartilhar: ' + e.message);
+        }
+      });
+    }
+
+    // Botão: Baixar HTML (desktop)
+    if(sendDownload){
+      sendDownload.addEventListener('click', () => {
+        const blob = buildBlob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = pacienteFilename();
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
+        const original = sendDownload.textContent;
+        sendDownload.textContent = 'Baixado ✓';
+        setTimeout(() => { sendDownload.textContent = original; }, 1500);
+      });
+    }
+
+    // Botão: Abrir WhatsApp (com mensagem pré-formatada)
+    if(sendWa){
+      sendWa.addEventListener('click', () => {
+        const tel = (sendTel.value || '').replace(/[^0-9]/g, '');
+        const msg = encodeURIComponent(sendMsg.value || '');
+        const url = tel ? ('https://wa.me/' + tel + '?text=' + msg) : ('https://wa.me/?text=' + msg);
+        window.open(url, '_blank', 'noopener');
+      });
+    }
+
+    // Botão: Copiar mensagem
+    if(sendCopy){
+      sendCopy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(sendMsg.value || '');
+          const original = sendCopy.textContent;
+          sendCopy.textContent = 'Copiado!';
+          setTimeout(() => { sendCopy.textContent = original; }, 1500);
+        } catch (e) { alert('Não foi possível copiar. Selecione o texto manualmente.'); }
+      });
+    }
+  }
+
+  // === Painel de objeções: busca + filtro por categoria + accordion ===
+  const objSearch = document.querySelector('.obj-search');
+  const objSearchClear = document.querySelector('.obj-search-clear');
+  const objChips = document.querySelectorAll('.obj-cat-chip');
+  const objCards = document.querySelectorAll('.doctor-obj-card');
+  const objCounter = document.querySelector('.obj-counter-num');
+  const objEmpty = document.querySelector('.obj-empty');
+  let activeCat = 'todas';
+  let activeQuery = '';
+
+  function applyObjFilter(){
+    const q = activeQuery.toLowerCase().trim();
+    let visible = 0;
+    objCards.forEach(card => {
+      const matchCat = activeCat === 'todas' || card.dataset.cat === activeCat;
+      const matchQuery = !q || card.dataset.search.includes(q);
+      const show = matchCat && matchQuery;
+      card.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    if(objCounter) objCounter.textContent = visible;
+    if(objEmpty) objEmpty.hidden = visible > 0;
+    if(objSearchClear) objSearchClear.classList.toggle('visible', !!q);
+  }
+
+  if(objSearch){
+    objSearch.addEventListener('input', (e) => {
+      activeQuery = e.target.value;
+      applyObjFilter();
+    });
+  }
+  if(objSearchClear){
+    objSearchClear.addEventListener('click', () => {
+      objSearch.value = ''; activeQuery = ''; applyObjFilter(); objSearch.focus();
+    });
+  }
+  objChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      objChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeCat = chip.dataset.cat;
+      applyObjFilter();
+    });
+  });
+
+  // Accordion individual
+  objCards.forEach(card => {
+    const header = card.querySelector('.obj-header');
+    if(header){
+      header.addEventListener('click', () => card.classList.toggle('open'));
+    }
+  });
+
+  // Atalhos de teclado
+  document.addEventListener('keydown', (e) => {
+    if(!document.body.classList.contains('modo-objecoes')) return;
+    if(e.key === '/' && document.activeElement !== objSearch){
+      e.preventDefault();
+      if(objSearch) objSearch.focus();
+    } else if(e.key === 'Escape' && document.activeElement === objSearch){
+      objSearch.value = ''; activeQuery = ''; applyObjFilter(); objSearch.blur();
+    }
+  });
+
+  // === Decision checklist progress bar ===
+  const checklistItems = document.querySelectorAll('.checklist-item');
+  const progressFill = document.querySelector('.checklist-progress-fill');
+  const progressText = document.querySelector('.checklist-progress-text');
+  function updateProgress(){
+    const total = checklistItems.length;
+    const checked = document.querySelectorAll('.checklist-item.checked').length;
+    const pct = total ? (checked / total) * 100 : 0;
+    if(progressFill) progressFill.style.width = pct + '%';
+    if(progressText) progressText.textContent = checked + ' de ' + total + ' confirmados';
+  }
+  checklistItems.forEach(it => it.addEventListener('click', updateProgress));
+  updateProgress();
+
+})();
+
+</script>
+</body>
+</html>

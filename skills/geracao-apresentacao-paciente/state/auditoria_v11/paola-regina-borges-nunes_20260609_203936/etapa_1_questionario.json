@@ -1,0 +1,187 @@
+{
+  "schema_version": "V11",
+  "paciente": {
+    "nome": "Paola Regina Borges Nunes",
+    "sexo": "F",
+    "idade": 49,
+    "imc_atual": 29.5,
+    "imc_objetivo": 25.3,
+    "profissao": "Micro empresária",
+    "como_conheceu": "outro"
+  },
+  "queixas_principais": [
+    {
+      "queixa": "Excesso de peso persistente",
+      "intensidade": 5,
+      "contexto": "Luta com peso desde sempre, peso atual 70kg com objetivo de 60kg. Já tentou diversas abordagens sem sucesso sustentado.",
+      "categoria": "metabolico"
+    },
+    {
+      "queixa": "Baixo nível de energia",
+      "intensidade": 4,
+      "contexto": "Nível de energia autorrelatado 3/10, acordar com disposição 4/5, sensação fim do dia 4/5. Sono de qualidade moderada (5/10).",
+      "categoria": "energia_sono"
+    },
+    {
+      "queixa": "Libido reduzida",
+      "intensidade": 4,
+      "contexto": "Libido reduzida associada a perimenopausa, ressecamento vaginal e dispareunia presentes.",
+      "categoria": "hormonal"
+    },
+    {
+      "queixa": "Ciclo menstrual irregular",
+      "intensidade": 3,
+      "contexto": "Ciclo irregular em contexto de perimenopausa, com sintoma de inchaço associado.",
+      "categoria": "hormonal"
+    },
+    {
+      "queixa": "Ansiedade como barreira para autocuidado",
+      "intensidade": 3,
+      "contexto": "Ansiedade identificada como principal barreira para cuidar da saúde, investe raramente em saúde.",
+      "categoria": "psicossocial"
+    },
+    {
+      "queixa": "Frequência intestinal irregular",
+      "intensidade": 2,
+      "contexto": "Trânsito intestinal irregular, pode indicar disbiose ou padrão alimentar inadequado.",
+      "categoria": "gastrointestinal"
+    }
+  ],
+  "historico_clinico": {
+    "doencas_cronicas": [],
+    "cirurgias": [
+      {
+        "procedimento": "Cesária",
+        "ano": 2011
+      },
+      {
+        "procedimento": "Cesária",
+        "ano": 2015
+      },
+      {
+        "procedimento": "Colecistectomia (retirada da vesícula)",
+        "ano": 2022
+      }
+    ],
+    "medicacoes_atuais": [],
+    "alergias_intolerancias": [
+      "Pistache"
+    ],
+    "historico_familiar": "Câncer de pulmão e próstata em familiares",
+    "reposicao_hormonal": "Não realiza reposição hormonal atualmente"
+  },
+  "estilo_de_vida": {
+    "atividade_fisica": {
+      "frequencia": "3-4x por semana",
+      "tipo": "Musculação"
+    },
+    "alimentacao": {
+      "refeicoes_por_dia": 3,
+      "doces": "Geralmente após o almoço",
+      "alcool": "Não consome",
+      "tabaco": "Não fuma",
+      "hidratacao_litros": 2.0,
+      "padrao_geral": "Padrão hiperproteico com baixo consumo de vegetais. Café da manhã e lanches com suplemento (Way), almoço baseado em carne com pouca salada e arroz ocasional, jantar inadequado (pipoca). Uso de açúcar para adoçar. Alimentação fim de semana variável em quantidade de refeições. Aversão a peixes, frutos do mar e comida baiana."
+    },
+    "sono": {
+      "horas": 7.0,
+      "qualidade_1_10": 5,
+      "energia_ao_acordar_1_5": 4,
+      "cansaco_durante_dia": "Não relata cansaço durante o dia, mas nível de energia geral baixo (3/10)"
+    },
+    "trabalho": {
+      "tipo": "Trabalho sentado (microempresária)",
+      "horarios": "08:00 às 12:20h"
+    },
+    "frequencia_intestinal": "Irregular"
+  },
+  "saude_hormonal": {
+    "ciclo_menstrual": "Irregular",
+    "menopausa": "Perimenopausa",
+    "metodo_contraceptivo": "Não utiliza",
+    "libido": "Reduzida",
+    "ressecamento_vaginal": "Presente",
+    "dispareunia": "Presente",
+    "queda_cabelo": "Leve",
+    "pele": "Seca",
+    "unhas": "Sem alterações",
+    "sintomas_ciclo": "Inchaço"
+  },
+  "perfil_psicossocial": {
+    "barreira_principal": "Ansiedade e falta de tempo",
+    "investe_em_saude": "Raramente investe em saúde",
+    "nivel_energia_1_10": 3,
+    "ansiedade_estresse": "Ansiedade identificada como barreira principal para autocuidado"
+  },
+  "metas": {
+    "peso_atual_kg": 70.0,
+    "peso_objetivo_kg": 60.0,
+    "peso_maximo_anterior_kg": 84.0,
+    "diferenca_para_objetivo_kg": 10.0
+  },
+  "spin": {
+    "tempo_luta": "Vida toda - sempre foi pessoa acima do peso",
+    "incomodo_principal": "Peso corporal",
+    "desafios": "Falta de tempo",
+    "cenario_sem_tratamento": "Permanecerá da mesma forma",
+    "investimento_perdido": "Sim, já investiu em tentativas anteriores",
+    "vida_resolvida_significaria": "Vida normal",
+    "interesse_programa": "Não agora (interesse postergado)"
+  },
+  "sinais_alerta": [
+    {
+      "sinal": "IMC 29.5 (sobrepeso grau II, próximo à obesidade grau I)",
+      "categoria": "metabolico",
+      "prioridade": 3,
+      "justificativa": "IMC elevado associado a histórico de peso máximo 84kg (IMC 35.4) indica risco metabólico aumentado. Necessária investigação de resistência insulínica, perfil lipídico e marcadores inflamatórios."
+    },
+    {
+      "sinal": "Perimenopausa com sintomas genitourinários (ressecamento vaginal, dispareunia) e libido reduzida",
+      "categoria": "hormonal",
+      "prioridade": 3,
+      "justificativa": "Síndrome genitourinária da menopausa associada a ciclo irregular e sintomas vasomotores (inchaço). Necessária avaliação de FSH, estradiol, progesterona e testosterona para considerar reposição hormonal bioidêntica."
+    },
+    {
+      "sinal": "Nível de energia persistentemente baixo (3/10) com sono de qualidade moderada",
+      "categoria": "energia_sono",
+      "prioridade": 2,
+      "justificativa": "Fadiga crônica em contexto de perimenopausa pode indicar hipotireoidismo subclínico, deficiência de vitamina D, ferro ou B12. Investigar TSH, T4 livre, ferritina, vitamina D e B12."
+    },
+    {
+      "sinal": "Padrão alimentar inadequado com baixo consumo de vegetais e jantar não nutritivo",
+      "categoria": "gastrointestinal",
+      "prioridade": 2,
+      "justificativa": "Alimentação hiperproteica com baixa ingestão de fibras e vegetais, associada a intestino irregular, sugere disbiose intestinal e deficiências de micronutrientes. Necessária avaliação nutricional detalhada."
+    },
+    {
+      "sinal": "Ansiedade como barreira para autocuidado com investimento raro em saúde",
+      "categoria": "psicossocial",
+      "prioridade": 2,
+      "justificativa": "Ansiedade não tratada pode comprometer adesão ao tratamento e perpetuar ciclo de autocuidado inadequado. Considerar avaliação psicológica e suporte para manejo de ansiedade."
+    },
+    {
+      "sinal": "Histórico de colecistectomia (2022) recente",
+      "categoria": "gastrointestinal",
+      "prioridade": 1,
+      "justificativa": "Pós-colecistectomia pode cursar com má digestão de gorduras e alteração do trânsito intestinal. Investigar sintomas digestivos e necessidade de suplementação de enzimas digestivas."
+    },
+    {
+      "sinal": "Pele seca e queda de cabelo leve em contexto de perimenopausa",
+      "categoria": "hormonal",
+      "prioridade": 1,
+      "justificativa": "Sintomas cutâneos podem indicar hipotireoidismo subclínico ou deficiência de estrogênio. Investigar função tireoidiana e perfil hormonal completo."
+    }
+  ],
+  "perfil_disc": "S",
+  "interpretacao_inicial": "Paciente feminina, 49 anos, microempresária, apresenta quadro compatível com síndrome metabólica em desenvolvimento (IMC 29.5, histórico de peso máximo 84kg) associado a transição perimenopáusica sintomática. O padrão clínico sugere hipótese de resistência insulínica não investigada, possível hipotireoidismo subclínico (fadiga crônica, pele seca, queda capilar leve) e hipoestrogenismo relativo (síndrome genitourinária, libido reduzida, ciclo irregular). A colecistectomia recente (2022) pode estar contribuindo para o padrão intestinal irregular. O perfil alimentar inadequado (baixo consumo de vegetais, jantar não nutritivo, uso de açúcar) e a ansiedade como barreira para autocuidado configuram fatores perpetuadores do quadro metabólico-hormonal.\n\nA investigação laboratorial deverá priorizar: perfil metabólico completo (glicemia de jejum, HbA1c, insulina basal, HOMA-IR, perfil lipídico), função tireoidiana (TSH, T4 livre, T3, anti-TPO), perfil hormonal feminino (FSH, estradiol, progesterona, testosterona total e livre, SHBG), marcadores inflamatórios (PCR-us), micronutrientes (vitamina D, B12, ferritina, zinco, magnésio) e avaliação de composição corporal por bioimpedância. O perfil DISC tipo S (estável, colaborativa, avessa a mudanças bruscas) indica necessidade de abordagem gradual e suporte emocional consistente para adesão ao tratamento. A paciente demonstra interesse postergado no programa, o que requer estratégia de engajamento cuidadosa.",
+  "completude": {
+    "campos_preenchidos": 47,
+    "campos_totais": 50,
+    "percentual": 94.0,
+    "campos_criticos_faltantes": [
+      "Detalhamento de sintomas vasomotores (fogachos, sudorese noturna)",
+      "Histórico de tentativas anteriores de emagrecimento (especificação)",
+      "Avaliação de estresse percebido (escala validada)"
+    ]
+  }
+}

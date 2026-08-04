@@ -52,16 +52,17 @@ UNIT_EQUIV = {
     'mg/dl':   {'mg/dl', 'mg dl', 'mg.dl', 'mg /dl'},
     'g/dl':    {'g/dl', 'g dl', 'gr/dl'},
     'ng/ml':   {'ng/ml', 'nanog/ml', 'ng ml'},
+    'ng/dl':   {'ng/dl', 'ng dl'},
     'pg/ml':   {'pg/ml', 'pg ml'},
     'ug/dl':   {'ug/dl', 'mcg/dl'},
     'ug/ml':   {'ug/ml', 'mcg/ml'},
-    'uui/ml':  {'uui/ml', 'uiu/ml', 'miu/l', 'microui/ml'},
-    'mu/ml':   {'mu/ml', 'uu/ml', 'mui/ml', 'miu/ml'},
+    'uui/ml':  {'uui/ml', 'uiu/ml', 'miu/l', 'microui/ml', 'microui/ml'},
+    'mu/ml':   {'mu/ml', 'uu/ml', 'mui/ml', 'miu/ml', 'ui/ml'},
     'u/l':     {'u/l', 'ui/l', 'iu/l'},
     '%':       {'%'},
     # Unidades absolutas de contagem celular — mil/mm3 == /mm3 quando valor ja convertido
     '/mm3':    {'/mm3', '/mcl', '/ul', 'leuc/mm3', 'mil/mm3', 'mil mm3', 'cels/mm3'},
-    'milhoes/mm3': {'milhoes/mm3', 'milhoes mm3', 'milh/mm3', 'milh', '10^6/ul', 'milhoes'},
+    'milhoes/mm3': {'milhoes/mm3', 'milhões/mm3', 'milhoes mm3', 'milhões mm3', 'milh/mm3', 'milh', '10^6/ul', 'milhoes', 'milhões'},
     'fl':      {'fl'},
     'pg':      {'pg'},
     'umol/l':  {'umol/l', 'micromol/l'},
@@ -349,7 +350,18 @@ def _validate_one(exame, paciente_meta, texto_pdf=None):
 
     # === L7: Unidade compatível ===
     unidade_laudo = exame.get("unidade", "") or ""
-    if unidade_laudo and unit_canonica and not _units_compativeis(unidade_laudo, unit_canonica):
+
+    # Exceção controlada: alguns laudos trazem Testosterona Livre em ng/dL com faixa própria do método.
+    # Nesses casos, usamos a faixa explícita do laudo para não invalidar um exame real por diferença de ensaio/unidade.
+    if canon == "Testosterona Livre" and _normalize_unit(unidade_laudo) == "ng/dl":
+        ref_min = exame.get("ref_min")
+        ref_max = exame.get("ref_max")
+        unit_canonica = "ng/dL"
+    elif canon == "Insulina" and _normalize_unit(unidade_laudo) == "uui/ml":
+        ref_min = exame.get("ref_min")
+        ref_max = exame.get("ref_max")
+        unit_canonica = "µUI/mL"
+    elif unidade_laudo and unit_canonica and not _units_compativeis(unidade_laudo, unit_canonica):
         return False, (f"L7 unidade: laudo='{unidade_laudo}' incompatível com canônica='{unit_canonica}' "
                        f"para {canon}"), exame
 

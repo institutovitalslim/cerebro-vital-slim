@@ -1,0 +1,579 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Renderizador V12 da apresentacao de paciente novo — Instituto Vital Slim.
+
+O "padrao V12" nasceu como ARTEFATO: um HTML aprovado clinicamente (o "casco"),
+que vivia num cache efemero e era replicado por cirurgia de BeautifulSoup sobre
+o HTML de OUTRA paciente. Isso ja produziu falha em producao (hero sem foto da
+Dra., bioimpedancia sem laudo, copy de decisao com o DISC da paciente errada).
+
+Este modulo promove o V12 a CODIGO. Ele segue exatamente o padrao do V11:
+importa o renderer anterior, chama-o, e aplica um delta DETERMINISTICO por
+ancora/reconstrucao — nunca copiando HTML de terceiros.
+
+    V12 = V11 + delta:
+      D1  remove a secao #critical-levers ("Mapa de alavancas criticas")
+      D2  remove a secao #questionnaire-appendix (apendice do questionario)
+      D3  move #interpretacao-clinica e #cruzamento-q-e para o FIM do <main>,
+          depois de #doctor-objections (viram apendice medical-mode)
+      D4  reconstroi o apendice tecnico no formato V12: KPIs, wrapper
+          .exam-groups-v12, header com descricao do sistema, .exam-count e
+          status legivel (OK / Atencao / Critico)
+      D5  hero-meta-bar: rotulo "Paciente" vira "Nome"
+      D6  progress-nav sem o passo morto de #critical-levers (renumerado)
+      D7  CSS do patch V12 (isolamento de modos + fail-safe mobile do apendice)
+
+    Correcoes de bug que o V12 carrega (eram falha silenciosa antes):
+      B1  foto da Dra.: o seletor correto e .hero-photo (nao .doctor-photo) e a
+          ausencia da foto agora LEVANTA EXCECAO — nunca mais fallback silencioso
+      B2  bioimpedancia: quando ha laudo, a IMAGEM do laudo entra na secao; a
+          ausencia e checada, nao ignorada
+
+Uso programatico (mesma assinatura do V11 + kwargs novos):
+
+    from gerar_apresentacao_v12 import render_apresentacao_v12
+    out = render_apresentacao_v12(
+        paciente, questionario, exames,
+        output_dir="/tmp", versao_paciente=False,
+        bioimpedancia=bio, analise_questionario=aq,
+        interpretacao_exames=ie, cruzamento=cz,
+    )
+"""
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+from html import escape as safe_html
+
+BASE = Path("/root/cerebro-vital-slim/skills/geracao-apresentacao-paciente/scripts")
+if str(BASE) not in sys.path:
+    sys.path.insert(0, str(BASE))
+
+from gerar_apresentacao_v11 import render_apresentacao_v11 as _render_v11_orig  # noqa: E402
+from gerar_apresentacao_v10 import (  # noqa: E402
+    GRUPOS_DEF,
+    SITE_IMAGES,
+    _process_exames,
+    img_b64,
+)
+
+# Caminho da foto da Dra. isolado em constante de modulo para ser auditavel
+# (e monkeypatchavel em teste de regressao do fail-fast).
+FOTO_DRA_PATH = SITE_IMAGES / "dra-daniely-hero.png"
+
+
+class V12AssetError(RuntimeError):
+    """Falta um asset obrigatorio da V12 (foto da Dra., laudo, etc.).
+
+    Existe para que a apresentacao NUNCA seja entregue incompleta em silencio.
+    """
+
+
+class V12StructureError(RuntimeError):
+    """O HTML produzido nao bate com a estrutura canonica V12."""
+
+
+# ---------------------------------------------------------------------------
+# D4 — apendice tecnico V12
+# ---------------------------------------------------------------------------
+
+GRUPO_DESCRICAO = {
+    "hemograma": "Serie vermelha, serie branca, plaquetas e coagulacao.",
+    "glicidico": "Glicose, insulina, HbA1c, HOMA-IR.",
+    "lipidico": "Colesterol total, fracoes, triglicerides e apolipoproteinas.",
+    "hepatico": "TGO, TGP, GGT, fosfatase alcalina e bilirrubinas.",
+    "renal": "Ureia, creatinina e acido urico.",
+    "tireoide": "TSH, T4 livre, T3 e anticorpos antitireoidianos.",
+    "hormonal": "Testosterona, estradiol, progesterona, FSH, LH, prolactina, SHBG, DHEA.",
+    "inflamatorio": "PCR ultrassensivel, homocisteina e VHS.",
+    "vitaminas": "Vitaminas, minerais e reservas de ferro.",
+    "adrenal": "Cortisol, IGF-1 e marcadores complementares.",
+}
+
+_SEV_ATENCAO = ("alert", "low", "attn")
+_SEV_CRITICO = ("crit",)
+
+_STATUS_LABEL = {
+    "crit": "Critico",
+    "alert": "Atencao",
+    "low": "Atencao",
+    "attn": "Atencao",
+    "ok": "OK",
+    "normal": "OK",
+}
+
+
+def _status_label(sev: str) -> str:
+    return _STATUS_LABEL.get((sev or "normal").lower(), "OK")
+
+
+def _exam_row_v12(ex: dict) -> str:
+    sev = (ex.get("status") or "normal").lower()
+    unidade = safe_html(ex.get("unit", "") or "")
+    unit_html = f'<span class="e-unit">{unidade}</span>' if unidade else '<span class="e-unit"></span>'
+    return (
+        f'<div class="exam-row" data-sev="{safe_html(sev)}">'
+        f'<div class="e-nome">{safe_html(ex.get("nome", ""))}</div>'
+        f'<div class="e-valor">{safe_html(ex.get("valor", "—"))}{unit_html}</div>'
+        f'<div class="e-ref">{safe_html(ex.get("ref", "—"))}</div>'
+        f'<div class="e-status">{safe_html(_status_label(sev))}</div>'
+        f"</div>"
+    )
+
+
+def _exam_group_v12(gid: str, gnome: str, items: list) -> str:
+    atencao = sum(1 for e in items if (e.get("status") or "").lower() in _SEV_ATENCAO)
+    criticos = sum(1 for e in items if (e.get("status") or "").lower() in _SEV_CRITICO)
+    partes = [f"{len(items)} marcador(es)"]
+    if criticos:
+        partes.append(f"{criticos} critico(s)")
+    partes.append(f"{atencao} atencao")
+    contagem = " &middot; ".join(partes)
+    desc = GRUPO_DESCRICAO.get(gid, "Marcadores complementares deste sistema.")
+    rows = "".join(_exam_row_v12(e) for e in items)
+    return (
+        f'<div class="exam-group open" data-group="{safe_html(gid)}">'
+        f'<div class="exam-group-header">'
+        f"<div><h4>{safe_html(gnome)}</h4><p>{safe_html(desc)}</p></div>"
+        f'<span class="exam-count">{contagem}</span>'
+        f"</div>"
+        f'<div class="exam-group-body">'
+        f'<div class="exam-table-head"><span>Exame</span><span>Resultado</span>'
+        f"<span>Referencia</span><span>Status</span></div>"
+        f"{rows}</div></div>"
+    )
+
+
+def render_technical_appendix_v12(exames_proc: list, laudo_origem: str = "") -> str:
+    """Apendice tecnico no padrao V12: KPIs + grupos por sistema + status legivel.
+
+    Construido a partir da lista de exames normalizada — nunca por cirurgia
+    sobre HTML existente.
+    """
+    by_g = {}
+    for ex in exames_proc:
+        by_g.setdefault(ex.get("grupo", "outros") or "outros", []).append(ex)
+
+    grupos_html = []
+    vistos = set()
+    for gid, gnome in GRUPOS_DEF:
+        items = by_g.get(gid, [])
+        if items:
+            vistos.add(gid)
+            grupos_html.append(_exam_group_v12(gid, gnome, items))
+    for gid in sorted(set(by_g) - vistos):
+        items = by_g.get(gid, [])
+        if items:
+            grupos_html.append(_exam_group_v12(gid, gid.title(), items))
+
+    total = len(exames_proc)
+    n_atencao = sum(1 for e in exames_proc if (e.get("status") or "").lower() in _SEV_ATENCAO)
+    n_crit = sum(1 for e in exames_proc if (e.get("status") or "").lower() in _SEV_CRITICO)
+
+    def _kpi(rotulo, valor, cor):
+        return (
+            '<div class="exam-kpi" style="background:#fffdf8;border:1px solid var(--line);'
+            'border-radius:14px;padding:16px;">'
+            '<span style="display:block;font-size:11px;text-transform:uppercase;'
+            f'letter-spacing:.08em;color:var(--muted);">{safe_html(rotulo)}</span>'
+            f'<strong style="font-size:28px;color:{cor};">{valor}</strong></div>'
+        )
+
+    kpis = (
+        '<div class="exam-kpi-grid" style="display:grid;'
+        'grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 24px;">'
+        + _kpi("Marcadores", total, "var(--ink)")
+        + _kpi("Atencao", n_atencao, "var(--gold-dark)")
+        + _kpi("Criticos", n_crit, "#8E2417")
+        + "</div>"
+    )
+
+    origem = f" {safe_html(laudo_origem.strip())}" if laudo_origem else ""
+    return f"""
+<section id="technical-appendix" class="section technical-appendix">
+  <div class="wrap">
+    <h2>Apendice tecnico &mdash; exames de sangue</h2>
+    <div class="appendix-controls">
+      <p class="lead">Painel laboratorial completo por sistema.{origem} Marcadores organizados para revisao marcador a marcador.</p>
+      <button class="appendix-toggle-all">Recolher todos</button>
+    </div>
+    {kpis}
+    <div class="exam-groups-v12">{''.join(grupos_html)}</div>
+  </div>
+</section>
+"""
+
+
+# ---------------------------------------------------------------------------
+# D7 — CSS do patch V12
+# ---------------------------------------------------------------------------
+
+V12_CSS = """
+/* === V12 — apendice de exames, isolamento de modos e fail-safe mobile === */
+body.js-enabled.modo-exames main > section:not(#technical-appendix){display:none!important;}
+body.js-enabled.modo-exames #technical-appendix{display:block!important;padding-top:var(--s-7)!important;}
+#questionnaire-appendix{display:none!important;}
+#technical-appendix .exam-group{background:#fff;border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden;opacity:1!important;transform:none!important;}
+#technical-appendix .exam-group-header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:16px 18px;background:#fbf7ed;border-bottom:1px solid var(--line);}
+#technical-appendix .exam-group-header h4{margin:0 0 4px;font-family:var(--serif);font-size:20px;color:var(--ink);}
+#technical-appendix .exam-group-header p{margin:0;color:var(--muted);font-size:13px;line-height:1.35;}
+#technical-appendix .exam-count{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark);white-space:nowrap;}
+#technical-appendix .exam-group .exam-group-body{opacity:0!important;display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important;padding:0!important;pointer-events:none!important;}
+#technical-appendix .exam-group.open .exam-group-body{opacity:1!important;display:block!important;visibility:visible!important;height:auto!important;max-height:none!important;overflow:visible!important;pointer-events:auto!important;}
+@media(max-width:700px){
+  #technical-appendix .exam-kpi-grid{grid-template-columns:1fr!important;}
+  #technical-appendix .exam-table-head{display:none!important;}
+  #technical-appendix .exam-row{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;padding:12px 14px!important;border-bottom:1px solid var(--line)!important;}
+  #technical-appendix .e-nome{font-weight:700!important;}
+  #technical-appendix .e-valor:before{content:'Resultado: ';font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;}
+  #technical-appendix .e-ref:before{content:'Referencia: ';font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;}
+  #technical-appendix .e-status{justify-self:start!important;}
+}
+"""
+
+
+# ---------------------------------------------------------------------------
+# Utilitarios de manipulacao por ancora (deterministicos, sem parser externo)
+# ---------------------------------------------------------------------------
+
+_SECTION_TOKEN = re.compile(r"<section\b|</section\s*>", re.IGNORECASE)
+
+
+def _section_bounds(html: str, sec_id: str):
+    """Retorna (inicio, fim) da <section id="sec_id">, respeitando aninhamento."""
+    m = re.search(r'<section\b[^>]*\bid=["\']%s["\']' % re.escape(sec_id), html, re.IGNORECASE)
+    if not m:
+        return None
+    depth = 0
+    for t in _SECTION_TOKEN.finditer(html, m.start()):
+        if t.group(0).lower().startswith("</"):
+            depth -= 1
+            if depth == 0:
+                return (m.start(), t.end())
+        else:
+            depth += 1
+    return None
+
+
+def _pop_section(html: str, sec_id: str):
+    """Remove a secao e devolve (html_sem_secao, html_da_secao_ou_None)."""
+    b = _section_bounds(html, sec_id)
+    if not b:
+        return html, None
+    ini, fim = b
+    return html[:ini] + html[fim:], html[ini:fim]
+
+
+def _replace_section(html: str, sec_id: str, novo_html: str) -> str:
+    b = _section_bounds(html, sec_id)
+    if not b:
+        raise V12StructureError(
+            "V12: secao #%s nao encontrada no HTML do V11 — a estrutura base mudou, "
+            "o delta V12 nao pode ser aplicado com seguranca." % sec_id
+        )
+    ini, fim = b
+    return html[:ini] + novo_html + html[fim:]
+
+
+# ---------------------------------------------------------------------------
+# B1/B2 — validacoes que substituem os fallbacks silenciosos
+# ---------------------------------------------------------------------------
+
+def _preflight_assets():
+    """Falha ANTES de renderizar se a foto da Dra. nao existir/decodificar."""
+    if not FOTO_DRA_PATH.exists():
+        raise V12AssetError(
+            "V12: foto da Dra. nao encontrada em %s. A apresentacao NAO sera gerada sem o "
+            "hero completo. Restaure o asset em assets/site-images/dra-daniely-hero.png." % FOTO_DRA_PATH
+        )
+    b64 = img_b64(FOTO_DRA_PATH)
+    if not b64 or not b64.startswith("data:image/"):
+        raise V12AssetError(
+            "V12: foto da Dra. em %s existe mas nao pode ser codificada em base64 "
+            "(arquivo vazio ou corrompido)." % FOTO_DRA_PATH
+        )
+    return b64
+
+
+def _assert_hero_photo(html: str):
+    """Garante que o hero saiu COM a foto da Dra.
+
+    O seletor canonico e .hero-photo (o antigo .doctor-photo nunca existiu no
+    template — foi o que fez a apresentacao do paciente sair sem foto).
+    """
+    # class="hero-photo" exato (com modificadores opcionais) — nao confundir com
+    # class="hero-photo-caption", que e o rodape do bloco.
+    m = re.search(r'<div class="hero-photo(?:\s+[^"]*)?"[^>]*>(.*?)</div>\s*</div>', html, re.S)
+    if not m:
+        raise V12StructureError(
+            "V12: hero saiu SEM o bloco .hero-photo. Nao ha fallback silencioso: "
+            "conserte o asset/renderer antes de entregar a apresentacao. "
+            "(Atencao: o seletor canonico e .hero-photo — .doctor-photo nunca existiu "
+            "neste template e foi a causa da apresentacao entregue sem a foto da Dra.)"
+        )
+    if not re.search(r'<img[^>]+src="data:image/[^"]+"', m.group(1)):
+        raise V12StructureError(
+            "V12: bloco .hero-photo existe mas o <img> esta sem data URI da foto da Dra."
+        )
+
+
+def _assert_bioimpedancia(html: str, bioimpedancia, exigir_imagem: bool):
+    """Garante que, havendo bioimpedancia, a IMAGEM do laudo entrou na secao."""
+    if not bioimpedancia:
+        return
+    tem_img = bool(bioimpedancia.get("_imagem_b64"))
+    if not tem_img:
+        if exigir_imagem:
+            raise V12AssetError(
+                "V12: bioimpedancia fornecida SEM a imagem do laudo (_imagem_b64). "
+                "A secao de bioimpedancia da V12 inclui o laudo original. Anexe "
+                "bioimpedancia['_imagem_b64'] (base64 do PNG/JPEG do dashboard) ou "
+                "passe exigir_imagem_bioimpedancia=False de forma explicita."
+            )
+        return
+    if 'class="bio-image-wrap"' not in html:
+        raise V12StructureError(
+            "V12: bioimpedancia trouxe _imagem_b64 mas o bloco .bio-image-wrap nao foi "
+            "renderizado — a imagem do laudo se perdeu no caminho."
+        )
+
+
+# ---------------------------------------------------------------------------
+# Renderer V12
+# ---------------------------------------------------------------------------
+
+def render_apresentacao_v12(paciente, questionario=None, exames=None,
+                            output_dir=None, versao_paciente=False,
+                            perfil_disc=None, bioimpedancia=None,
+                            analise_questionario=None,
+                            interpretacao_exames=None,
+                            cruzamento=None,
+                            # --- kwargs novos da V12 ---
+                            exigir_imagem_bioimpedancia=True,
+                            laudo_origem=""):
+    """Gera a apresentacao V12 (mesma assinatura do V11 + 2 kwargs).
+
+    Args novos:
+        exigir_imagem_bioimpedancia: se True (padrao) e houver bioimpedancia sem
+            `_imagem_b64`, levanta V12AssetError em vez de entregar a secao sem
+            o laudo. Passe False apenas quando a ausencia for uma decisao
+            consciente do operador.
+        laudo_origem: frase curta de procedencia do painel laboratorial que entra
+            no lead do apendice tecnico (ex.: "Laudo de 04/07/2026.").
+
+    Returns:
+        str: caminho do HTML V12 gerado.
+
+    Raises:
+        V12AssetError: asset obrigatorio ausente (foto da Dra., laudo de bio).
+        V12StructureError: o HTML base nao tem a estrutura esperada.
+    """
+    # (B1) fail-fast: sem a foto da Dra. nem comeca
+    _preflight_assets()
+
+    html_path = _render_v11_orig(
+        paciente=paciente,
+        questionario=questionario,
+        exames=exames,
+        output_dir=output_dir,
+        versao_paciente=versao_paciente,
+        perfil_disc=perfil_disc,
+        bioimpedancia=bioimpedancia,
+        analise_questionario=analise_questionario,
+        interpretacao_exames=interpretacao_exames,
+        cruzamento=cruzamento,
+    )
+    html = Path(html_path).read_text(encoding="utf-8")
+
+    # (B1) o hero precisa ter saido com a foto — sem fallback silencioso
+    _assert_hero_photo(html)
+    # (B2) havendo laudo de bioimpedancia, a imagem precisa estar la
+    _assert_bioimpedancia(html, bioimpedancia, exigir_imagem_bioimpedancia)
+
+    # (D1) fora o mapa de alavancas criticas
+    html, _ = _pop_section(html, "critical-levers")
+    # (D2) fora o apendice do questionario.
+    #
+    # SO na versao do PACIENTE. Na versao INTERNA o apendice fica no DOM,
+    # apenas escondido pelo CSS do patch V12 (#questionnaire-appendix{display:none}).
+    # Motivo: o gate canonico `questionario_cobertura`
+    # (_v10_internal_validation em gerar_apresentacao.py) exige que TODA resposta
+    # nao vazia do questionario esteja no HTML interno — e a auditoria clinica
+    # depende disso. Arrancar a secao do DOM tambem na interna fazia o gate
+    # BLOQUEAR a geracao (respostas de identificacao e sintomas secundarios so
+    # existiam ali). O visual V12 nao muda: o CSS ja esconde a secao.
+    if versao_paciente:
+        html, _ = _pop_section(html, "questionnaire-appendix")
+
+    # (D3) as duas secoes medical-mode viram apendice: vao para o fim do <main>
+    html, sec_interp = _pop_section(html, "interpretacao-clinica")
+    html, sec_cruz = _pop_section(html, "cruzamento-q-e")
+    cauda = (sec_interp or "") + (sec_cruz or "")
+    if cauda:
+        if "</main>" not in html:
+            raise V12StructureError("V12: </main> ausente — nao da para reposicionar as secoes clinicas.")
+        html = html.replace("</main>", cauda + "\n</main>", 1)
+
+    # (D4) apendice tecnico reconstruido no padrao V12
+    html = _replace_section(
+        html, "technical-appendix",
+        render_technical_appendix_v12(_process_exames(exames or []), laudo_origem=laudo_origem),
+    )
+
+    # (D5) rotulo do hero
+    html = html.replace(
+        '<div class="hero-meta-item">Paciente<strong>',
+        '<div class="hero-meta-item">Nome<strong>', 1,
+    )
+
+    # (D6) progress-nav sem o passo morto de #critical-levers (renumerado)
+    passos = [
+        ("executive-diagnosis", "1 &middot; Diagnostico"),
+        ("patient-mirror", "2 &middot; Seu caso"),
+        ("leitura-integrada", "3 &middot; Leitura clinica"),
+        ("ivs-machine", "4 &middot; Acompanhamento"),
+        ("decision-checklist", "5 &middot; Decisao"),
+    ]
+    novos_itens = "".join(
+        f'<a class="progress-step" data-target="{sid}" href="#{sid}">{label}</a>'
+        for sid, label in passos
+    )
+    nav_pat = re.compile(r'(<div class="progress-nav-inner">)(.*?)(<div class="mode-switcher")', re.S)
+    if nav_pat.search(html):
+        html = nav_pat.sub(lambda m: m.group(1) + novos_itens + m.group(3), html, count=1)
+
+    # (D7) CSS do patch V12
+    if "</style>" not in html:
+        raise V12StructureError("V12: </style> ausente — nao da para injetar o CSS da V12.")
+    html = html.replace("</style>", V12_CSS + "\n</style>", 1)
+
+    # validacao final de estrutura canonica V12
+    _validar_estrutura_v12(html, versao_paciente=versao_paciente)
+
+    nome_arquivo = Path(html_path).name
+    for velho in ("-v11-", "-v10-"):
+        if velho in nome_arquivo:
+            nome_arquivo = nome_arquivo.replace(velho, "-v12-")
+            break
+    else:
+        nome_arquivo = nome_arquivo.replace(".html", "-v12.html")
+    destino = Path(html_path).with_name(nome_arquivo)
+    destino.write_text(html, encoding="utf-8")
+    return str(destino)
+
+
+def _detectar_corrupcao_html(html: str):
+    """Detecta fragmento de atributo vazado para o texto visivel.
+
+    Texto legitimo nunca contem a sequencia `">` — safe_html() escapa aspas como
+    &quot;. Quando ela aparece fora de uma tag, alguma regex comeu HTML no meio
+    do caminho e a pagina vai renderizar lixo na cara do paciente.
+
+    Causa conhecida (herdada do V11, ver docstring do modulo e o relatorio):
+    o hotfix final de DISC do V11 aplica r'\\bperfil\\s+DISC[^.]*\\.' sobre o HTML
+    inteiro. Quando o card "Perfil DISC" NAO foi removido antes — o que acontece
+    sempre que o questionario nao traz `discPerfil`, porque ai o v10 emite
+    class="value empty" e o padrao de remocao do V11 (que espera class="value")
+    nao casa — o `[^.]*\\.` engole HTML ate o primeiro ponto literal, que costuma
+    ser o `font-size:14.5px` do bloco inserido logo adiante.
+    """
+    corpo = re.sub(r"<script\b.*?</script>", "", html, flags=re.S | re.I)
+    corpo = re.sub(r"<style\b.*?</style>", "", corpo, flags=re.S | re.I)
+    corpo = re.sub(r"<[^>]*>", "\x00", corpo)
+    achados = []
+    for trecho in corpo.split("\x00"):
+        if '">' in trecho:
+            achados.append(re.sub(r"\s+", " ", trecho).strip()[:80])
+    return achados
+
+
+def _validar_estrutura_v12(html: str, versao_paciente=False):
+    """Checa as invariantes da V12 no HTML final. Levanta, nunca degrada."""
+    erros = []
+
+    mortos = ["critical-levers"]
+    if versao_paciente:
+        # na interna o apendice do questionario FICA no DOM (escondido por CSS)
+        # porque o gate canonico de cobertura do questionario audita por ele.
+        mortos.append("questionnaire-appendix")
+    for morto in mortos:
+        if _section_bounds(html, morto):
+            erros.append("secao #%s deveria ter sido removida na V12" % morto)
+    if not versao_paciente and _section_bounds(html, "questionnaire-appendix"):
+        if "#questionnaire-appendix{display:none!important;}" not in html:
+            erros.append("apendice do questionario visivel na interna — o CSS V12 que o esconde sumiu")
+
+    ids = re.findall(r'<section\b[^>]*\bid=["\']([^"\']+)["\']', html)
+    for obrigatoria in ("hero", "executive-diagnosis", "patient-mirror",
+                        "leitura-integrada", "program-180-days", "final-cta",
+                        "technical-appendix"):
+        if obrigatoria not in ids:
+            erros.append("secao obrigatoria #%s ausente" % obrigatoria)
+
+    # as secoes medical-mode, quando existem, ficam no fim
+    for medica in ("interpretacao-clinica", "cruzamento-q-e"):
+        if medica in ids and "doctor-objections" in ids:
+            if ids.index(medica) < ids.index("doctor-objections"):
+                erros.append("secao #%s deveria vir depois de #doctor-objections na V12" % medica)
+
+    if 'class="exam-groups-v12"' not in html:
+        erros.append("apendice tecnico nao esta no formato V12 (.exam-groups-v12 ausente)")
+    if 'class="exam-kpi-grid"' not in html:
+        erros.append("apendice tecnico sem a faixa de KPIs (.exam-kpi-grid)")
+
+    if not versao_paciente and "doctor-objections" not in ids:
+        erros.append("versao interna sem #doctor-objections")
+
+    frag = _detectar_corrupcao_html(html)
+    if frag:
+        erros.append(
+            "HTML corrompido: %d fragmento(s) de atributo vazaram para o texto visivel "
+            "(ex.: %r). Causa conhecida: o hotfix final de DISC do V11 "
+            "(r'\\bperfil\\s+DISC[^.]*\\.') apaga HTML ate o primeiro ponto literal quando "
+            "o card 'Perfil DISC' nao foi removido antes — o que ocorre sempre que o "
+            "questionario nao traz `discPerfil`. Corrija no V11 ou garanta discPerfil no "
+            "questionario; a V12 se recusa a entregar a pagina assim."
+            % (len(frag), frag[0])
+        )
+
+    if erros:
+        raise V12StructureError("V12: HTML final fora do padrao:\n  - " + "\n  - ".join(erros))
+
+
+if __name__ == "__main__":
+    import argparse
+    import json
+
+    ap = argparse.ArgumentParser(description="Renderiza a apresentacao V12.")
+    ap.add_argument("--paciente", required=True)
+    ap.add_argument("--questionario", required=True)
+    ap.add_argument("--exames", required=True)
+    ap.add_argument("--bioimpedancia", default="")
+    ap.add_argument("--analise-questionario", default="")
+    ap.add_argument("--interpretacao-exames", default="")
+    ap.add_argument("--cruzamento", default="")
+    ap.add_argument("--output-dir", default="/tmp")
+    ap.add_argument("--versao-paciente", action="store_true")
+    ap.add_argument("--laudo-origem", default="")
+    ap.add_argument("--sem-imagem-bioimpedancia", action="store_true",
+                    help="Aceita bioimpedancia sem a imagem do laudo (decisao explicita).")
+    args = ap.parse_args()
+
+    def _load(p):
+        return json.load(open(p, encoding="utf-8")) if p else None
+
+    out = render_apresentacao_v12(
+        paciente=_load(args.paciente),
+        questionario=_load(args.questionario),
+        exames=_load(args.exames),
+        output_dir=args.output_dir,
+        versao_paciente=args.versao_paciente,
+        bioimpedancia=_load(args.bioimpedancia),
+        analise_questionario=_load(args.analise_questionario),
+        interpretacao_exames=_load(args.interpretacao_exames),
+        cruzamento=_load(args.cruzamento),
+        exigir_imagem_bioimpedancia=not args.sem_imagem_bioimpedancia,
+        laudo_origem=args.laudo_origem,
+    )
+    print("[V12] %s" % out)

@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "hipoteses_integradas": [
+    {
+      "titulo": "Resistência insulínica compensada + acúmulo abdominal e compulsão por doces = padrão metabólico precoce",
+      "queixas_relacionadas": [
+        "Dificuldade de perda de peso pós-gestação com acúmulo abdominal",
+        "Compulsão alimentar noturna por doces",
+        "Sedentarismo",
+        "Uso prévio de GLP-1 sem sustentação de resultado"
+      ],
+      "exames_relacionados": [
+        "HOMA-IR 4,26",
+        "Insulina de jejum 19,5 µUI/mL",
+        "Glicemia 88 mg/dL",
+        "HbA1c 4,2%"
+      ],
+      "descricao_clinica": "A combinação de glicemia e HbA1c em faixa ótima com insulina de jejum elevada e HOMA-IR de 4,26 é compatível com resistência insulínica em fase compensada — o organismo mantém a glicose normal às custas de produzir muito mais insulina. Esse padrão ajuda a explicar a dificuldade de mobilizar gordura, especialmente na região abdominal, e a dificuldade de sustentar perda de peso mesmo após uso de agonistas GLP-1. A compulsão noturna por carboidratos simples, somada à ausência de lanche da tarde e ao jantar pobre em proteína, tende a reforçar oscilações glicêmicas que perpetuam o ciclo. Não configura diabetes, mas sugere disfunção metabólica precoce que merece intervenção estruturada antes da progressão.",
+      "prioridade": 3,
+      "tipo": "padrao_metabolico",
+      "acao_proposta": "Considerar avaliação clínica metabólica para estratificação cardiometabólica; investigar composição corporal (bioimpedância/DEXA), reestruturação alimentar com aporte proteico adequado e redistribuição de carboidratos, além de plano progressivo de atividade física."
+    },
+    {
+      "titulo": "Fadiga intensa + sono ruim + reservas nutricionais subótimas = energia comprometida multifatorial",
+      "queixas_relacionadas": [
+        "Nível de energia extremamente reduzido (2/10)",
+        "Sono de baixa qualidade (3/10) com 6 horas",
+        "Cansaço diurno presente"
+      ],
+      "exames_relacionados": [
+        "Vitamina D 47 ng/mL (insuficiência)",
+        "Vitamina B12 427 pg/mL (limítrofe-baixa)",
+        "HOMA-IR 4,26"
+      ],
+      "descricao_clinica": "A fadiga descrita por Clarissa parece ter origem multifatorial: privação e baixa qualidade de sono, reservas subótimas de vitamina D e B12 (ambas abaixo das faixas ideais, embora sem deficiência franca) e a própria resistência insulínica, que pode cursar com cansaço e oscilações de energia. Nenhum desses fatores isoladamente explica energia 2/10, mas em conjunto compõem um quadro coerente com a queixa. A correção de cada frente — sono, status nutricional e metabolismo — tende a ter efeito somatório sobre a vitalidade.",
+      "prioridade": 3,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Considerar avaliar otimização de vitamina D e B12 conforme conduta clínica; investigar higiene e arquitetura do sono; correlacionar com perfil tireoidiano e metabólico."
+    },
+    {
+      "titulo": "SHBG muito elevada em contexto de hipertireoidismo + anticoncepcional = atenção hormonal direcionada",
+      "queixas_relacionadas": [
+        "Hipertireoidismo prévio",
+        "Uso de anticoncepcional oral",
+        "Baixa autoestima e impacto conjugal",
+        "Energia reduzida"
+      ],
+      "exames_relacionados": [
+        "SHBG 264 (ref 27,1-128)",
+        "Progesterona em faixa de referência"
+      ],
+      "descricao_clinica": "A SHBG mais de duas vezes acima do limite superior reduz a fração biodisponível de hormônios sexuais e tem como causas a considerar: uso de anticoncepcional oral, disfunção tireoidiana (especialmente hipertireoidismo, que a paciente já tem em histórico) e hiperestrogenismo relativo. Essa redução de hormônios livres pode se associar a fadiga, baixa vitalidade e queda de libido — sintomas que conversam com o relato de impacto no relacionamento conjugal, embora a seção hormonal do questionário não tenha sido preenchida. O quadro reforça a necessidade de rastreio tireoidiano atual, dado o histórico e a interferência do anticoncepcional na interpretação.",
+      "prioridade": 3,
+      "tipo": "padrao_hormonal",
+      "acao_proposta": "Considerar rastreio do eixo tireoidiano (TSH, T4L, T3L, anticorpos) para estadiamento atual; investigar função hepática e detalhar dados de ciclo, libido e sintomas hormonais; correlacionar SHBG com contexto contraceptivo."
+    },
+    {
+      "titulo": "Compulsão noturna + ansiedade + jantar hipoproteico = padrão alimentar de componente emocional e glicêmico",
+      "queixas_relacionadas": [
+        "Compulsão alimentar noturna por doces",
+        "Ansiedade como barreira ao autocuidado",
+        "Baixa autoestima"
+      ],
+      "exames_relacionados": [
+        "HOMA-IR 4,26",
+        "Insulina 19,5 µUI/mL"
+      ],
+      "descricao_clinica": "O padrão alimentar — ausência de lanche da tarde, jantar restrito a pão (alta carga glicêmica, baixa proteína) e concentração de doces à noite — favorece oscilações de glicose e fome reativa vespertina/noturna, que se somam a um possível componente ansioso-emocional reconhecido pela própria paciente. Esse ciclo retroalimenta a resistência insulínica e dificulta a perda de peso. A abordagem precisa endereçar simultaneamente a estrutura das refeições e o eixo emocional, já que tratar só um lado tende a ter resultado parcial.",
+      "prioridade": 2,
+      "tipo": "queixa_com_suporte_laboratorial",
+      "acao_proposta": "Considerar reestruturação alimentar com proteína adequada no jantar e introdução de lanche da tarde; investigar suporte psicológico para componente ansioso-alimentar; monitorar resposta glicêmica e de saciedade."
+    },
+    {
+      "titulo": "Inflamação de baixo grau elevada associada ao quadro metabólico",
+      "queixas_relacionadas": [
+        "Acúmulo abdominal",
+        "Sedentarismo",
+        "Celulite e flacidez"
+      ],
+      "exames_relacionados": [
+        "PCR-us 4,9 mg/L (ref <3)",
+        "HOMA-IR 4,26"
+      ],
+      "descricao_clinica": "A PCR ultrassensível acima de 3 mg/L sugere estado inflamatório sistêmico de baixo grau, que frequentemente acompanha adiposidade visceral e resistência insulínica — coerente com o restante do quadro metabólico. Como valor isolado pode também refletir processo agudo/infeccioso transitório, é prudente reavaliar após intervalo. Caso se confirme, soma-se ao perfil de risco cardiometabólico e reforça as frentes de atividade física, alimentação anti-inflamatória e redução de adiposidade.",
+      "prioridade": 2,
+      "tipo": "padrao_inflamatorio",
+      "acao_proposta": "Considerar reavaliar PCR-us após algumas semanas para descartar processo agudo; correlacionar com perfil metabólico e medidas de estilo de vida anti-inflamatório."
+    },
+    {
+      "titulo": "Série vermelha no terço inferior + perdas menstruais = atenção a reserva de ferro",
+      "queixas_relacionadas": [
+        "Nível de energia extremamente reduzido",
+        "Cansaço diurno"
+      ],
+      "exames_relacionados": [
+        "Hemoglobina 12,9 g/dL",
+        "VCM 80,9 fL",
+        "HCM 27,2 pg",
+        "RDW normal"
+      ],
+      "descricao_clinica": "O hemograma não mostra anemia, mas a série vermelha encontra-se no terço inferior da normalidade, padrão comum em mulheres em idade reprodutiva com perdas menstruais. O RDW normal torna menos provável uma anemia ferropriva em atividade, porém uma reserva de ferro limítrofe poderia contribuir para a fadiga relatada. A confirmação depende do perfil de ferro, ainda não disponível.",
+      "prioridade": 2,
+      "tipo": "achado_laboratorial_sem_queixa",
+      "acao_proposta": "Considerar solicitar ferritina e saturação de transferrina para esclarecer reserva de ferro e sua eventual contribuição para a fadiga."
+    }
+  ],
+  "queixas_sem_correlato_laboratorial": [
+    {
+      "queixa": "Celulite e flacidez em membros inferiores",
+      "interpretacao": "Achado estético-funcional mais ligado a sedentarismo, composição corporal e fatores circulatórios/teciduais do que a um marcador laboratorial específico. O contexto de resistência insulínica e baixa massa muscular ativa pode contribuir indiretamente.",
+      "proxima_acao": "Avaliar composição corporal e introduzir treino de força progressivo; abordar como objetivo funcional, não apenas estético."
+    },
+    {
+      "queixa": "Baixa autoestima com impacto no relacionamento conjugal",
+      "interpretacao": "Dimensão psicossocial relevante, possivelmente alimentada pelo ganho de peso pós-parto, fadiga e ansiedade. Pode haver contribuição da SHBG elevada (hormônios livres reduzidos) sobre vitalidade e libido, mas o eixo é predominantemente emocional e relacional.",
+      "proxima_acao": "Considerar suporte psicológico e acompanhamento ao longo do programa; correlacionar evolução com melhora hormonal e metabólica."
+    },
+    {
+      "queixa": "Ansiedade como barreira ao autocuidado",
+      "interpretacao": "Componente psicoemocional central, que interfere na adesão alimentar e na compulsão noturna. Sem marcador laboratorial direto, mas amplifica os demais quadros.",
+      "proxima_acao": "Integrar abordagem de manejo de ansiedade e rotina realista compatível com jornada de trabalho intensa em pé."
+    }
+  ],
+  "achados_sem_queixa_correspondente": [
+    {
+      "achado": "PCR-us 4,9 mg/L (inflamação de baixo grau)",
+      "relevancia_clinica": "Pode indicar inflamação sistêmica associada ao quadro metabólico ou processo agudo transitório; relevante para risco cardiometabólico futuro.",
+      "monitoramento": "Reavaliar em 6-8 semanas, idealmente fora de quadro infeccioso, e correlacionar com evolução metabólica."
+    },
+    {
+      "achado": "Creatinina 1,04 mg/dL (normal-limítrofe)",
+      "relevancia_clinica": "Mais provavelmente variação fisiológica por massa muscular, hidratação ou ingesta proteica do que disfunção renal; sem queixa associada.",
+      "monitoramento": "Contextualizar com taxa de filtração glomerular estimada e repetir conforme conduta clínica."
+    },
+    {
+      "achado": "Colesterol total 200 mg/dL / LDL no limite superior com HDL elevado (74)",
+      "relevancia_clinica": "Perfil lipídico globalmente favorável, com HDL cardioprotetor; risco aterogênico isolado pouco expressivo no momento.",
+      "monitoramento": "Monitorar em conjunto com PCR-us e perfil metabólico ao longo do programa."
+    }
+  ],
+  "plano_clinico_integrado": {
+    "alvos_prioritarios": [
+      "Reverter a resistência insulínica precoce com reestruturação alimentar (proteína no jantar, lanche da tarde, redistribuição de carboidratos) e atividade física progressiva",
+      "Recuperar energia e qualidade de sono, abordando higiene do sono e otimização de vitamina D e B12",
+      "Rastrear e estadiar a função tireoidiana atual, considerando histórico de hipertireoidismo e interferência do anticoncepcional na SHBG",
+      "Endereçar o componente ansioso-emocional ligado à compulsão noturna e à autoestima, com suporte psicológico",
+      "Construir composição corporal (massa muscular) para impacto metabólico, estético e funcional",
+      "Reavaliar marcador inflamatório (PCR-us) e completar perfil de ferro"
+    ],
+    "monitoramento_sugerido": "Reavaliar insulina, HOMA-IR, glicemia e PCR-us em 8-12 semanas; vitamina D e B12 em 8-12 semanas após início da otimização; perfil tireoidiano e de ferro logo que solicitados, com reavaliação conforme conduta.",
+    "investigacoes_adicionais": [
+      "TSH, T4 livre, T3 livre e anticorpos tireoidianos (anti-TPO, TRAb)",
+      "Ferritina e saturação de transferrina",
+      "Enzimas hepáticas (correlação com SHBG elevada)",
+      "Rastreio de SOP (correlação com resistência insulínica e contexto reprodutivo)",
+      "Composição corporal (bioimpedância ou DEXA)",
+      "Taxa de filtração glomerular estimada",
+      "Detalhamento do histórico familiar de câncer (tipo e parentesco)"
+    ]
+  },
+  "narrativa_executiva": "Clarissa, seu corpo está produzindo muito mais insulina do que deveria para manter o açúcar normal — é isso que dificulta perder a barriga e sustentar resultados, somado ao cansaço e ao sono curto. A boa notícia é que esse é um estágio inicial e reversível, e quanto antes ajustarmos alimentação, sono e movimento, mais rápido sua energia e sua composição corporal respondem.",
+  "alinhamento_disc": "Perfil orientado a resultado e objetividade: vá direto ao ponto, apresente a causa central (a insulina alta dificultando a perda de peso) e mostre um plano claro com metas mensuráveis e prazos de reavaliação. Evite excesso de explicações; dê à paciente sensação de controle e decisões práticas, posicionando-a como protagonista das escolhas."
+}

@@ -126,13 +126,32 @@ def is_sangue(nome_arquivo):
 
 
 def listar_pdfs_pasta(pasta_id):
-    """Lista todos os PDFs dentro da pasta do paciente."""
-    arquivos = gog_ls(
-        pasta_id,
-        query="mimeType = 'application/pdf'",
-        max_results=100,
-    )
-    return arquivos
+    """Lista TODOS os PDFs dentro da pasta do paciente, descendo em subpastas.
+
+    Pacientes antigos costumam ter subpastas por ano/mes (ex: '2026', 'Atendimento Maio 2025').
+    Pegamos PDFs de todos os niveis pra que a ordenacao por modifiedTime escolha
+    naturalmente o mais recente."""
+    return listar_pdfs_recursivo(pasta_id, max_depth=4)
+
+
+def listar_pdfs_recursivo(pasta_id, max_depth=4, _depth=0, _caminho=""):
+    """DFS nos subfolders coletando PDFs."""
+    if _depth >= max_depth:
+        return []
+    # Lista tudo (pdfs + subfolders) numa unica query
+    itens = gog_ls(pasta_id, max_results=200)
+    pdfs = []
+    for it in itens:
+        mime = it.get("mimeType", "")
+        nome = it.get("name", "")
+        if mime == "application/pdf":
+            # Anota o caminho (util pra debug, nao afeta output)
+            it = {**it, "_subpasta": _caminho or "(raiz)"}
+            pdfs.append(it)
+        elif mime == "application/vnd.google-apps.folder":
+            sub_caminho = f"{_caminho}/{nome}" if _caminho else nome
+            pdfs.extend(listar_pdfs_recursivo(it["id"], max_depth, _depth + 1, sub_caminho))
+    return pdfs
 
 
 def main():
@@ -188,6 +207,7 @@ def main():
             "link": f"https://drive.google.com/file/d/{arq.get('id', '')}/view",
             "mimeType": arq.get("mimeType", ""),
             "modifiedTime": arq.get("modifiedTime", ""),
+            "subpasta": arq.get("_subpasta", "(raiz)"),
             "tipo": "sangue" if is_sangue(arq.get("name", "")) else "outro",
         })
 

@@ -1,0 +1,851 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""ENTRYPOINT ÚNICO da apresentação de paciente — determinístico, com gate bloqueante.
+
+Por que este arquivo existe
+---------------------------
+O render da apresentação vinha sendo improvisado: `gerar_apresentacao.py main()`
+delegava a geração do HTML a um agente LLM por mensagem, e o agente acabava
+escrevendo script próprio (cirurgia com BeautifulSoup sobre o HTML aprovado de
+OUTRA paciente). Resultado: hero sem foto da Dra, laudo faltando, copy de decisão
+com o perfil da paciente errada — e o validador canônico NUNCA rodou.
+
+Este entrypoint fecha o caminho: UM comando, renderer canônico, validação
+bloqueante obrigatória. Ele ORQUESTRA o que já existe (etapas 1..4 do
+`gerar_apresentacao_v11_orchestrator`, renderer v12/v11/v10, validador
+`_v10_internal_validation`). Ele NÃO reimplementa render nem análise.
+
+Fases
+-----
+  T0  --modo preconsulta   (D-5, só com questionário + exames)
+      bioimpedância = None forçado; a seção vira um ESTADO VISÍVEL
+      "⏳ A coletar na consulta". Saída principal = versão INTERNA
+      (modos Apresentação / Exames / Médica) para a Dra estudar antes.
+      Grava metadados em state/entrypoint/<slug>/ para o T1 reusar.
+
+  T1  --completar          (dia da consulta)
+      lê o state do T0, injeta bioimpedância + antropometria e re-renderiza a
+      versão completa SEM refazer as análises já revisadas (reusa os JSONs das
+      etapas 1..4). Sem state do T0, cai para uma completa do zero.
+
+      --modo completa      pipeline inteiro de uma vez (T0+T1 juntos).
+
+Gate bloqueante
+---------------
+Toda saída passa por `_v10_internal_validation(..., fase=...)`, que levanta
+RuntimeError e loga em state/validacao_v10/. Os gates são CONDICIONAIS por fase:
+em pré-consulta os 13 marcadores de bioimpedância não se aplicam; entra no lugar
+o gate `marcador_fase_preconsulta` (o HTML precisa exibir o bloco pendente).
+Não existe saída "meio certa": ou passa em tudo que se aplica, ou levanta.
+
+Uso
+---
+  # T0 — pré-consulta (D-5)
+  python3 gerar_apresentacao_paciente.py --paciente "Nome Sobrenome" \
+      --modo preconsulta --sexo F --idade 49 \
+      --questionario /root/ivs-preconsulta-data/<ISO>-<slug>.json \
+      --exames-pdfs /tmp/exames_pdfs.json
+
+  # T1 — completar no dia
+  python3 gerar_apresentacao_paciente.py --paciente "Nome Sobrenome" \
+      --completar --bioimpedancia /tmp/bio.json --antropometria /tmp/antro.json
+
+  # plano de execução, sem efeito colateral
+  python3 gerar_apresentacao_paciente.py --paciente "Nome" --modo preconsulta --dry-run
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import re
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+
+SKILL_DIR = Path(__file__).resolve().parent.parent
+SCRIPTS = SKILL_DIR / "scripts"
+STATE_ENTRYPOINT = SKILL_DIR / "state" / "entrypoint"
+AUDIT_BASE = SKILL_DIR / "state" / "auditoria_v11"
+DELIVERABLES_DEFAULT = "/root/cerebro-vital-slim/deliverables"
+
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
+
+MARCADOR_BIO_PENDENTE = 'id="bioimpedancia-pendente"'
+MARCADOR_ANTROPOMETRIA = 'id="antropometria-t1"'
+
+
+# ---------------------------------------------------------------------------
+# utilidades
+# ---------------------------------------------------------------------------
+
+def _log(msg: str) -> None:
+    print(msg, file=sys.stderr)
+
+
+def _slug(s: str) -> str:
+    s = re.sub(r"[^\w\-]", "-", str(s or "").lower(), flags=re.UNICODE)
+    s = re.sub(r"-+", "-", s).strip("-")
+    return s or "paciente"
+
+
+def _sha256(path) -> str | None:
+    try:
+        h = hashlib.sha256()
+        with open(path, "rb") as fh:
+            for chunk in iter(lambda: fh.read(1 << 16), b""):
+                h.update(chunk)
+        return h.hexdigest()
+    except Exception:
+        return None
+
+
+def _insumo(path) -> dict:
+    """Descreve um insumo (existe? hash?) sem carregar conteúdo sensível."""
+    if not path:
+        return {"path": None, "presente": False, "sha256": None}
+    p = Path(path)
+    existe = p.is_file()
+    return {
+        "path": str(p),
+        "presente": existe,
+        "sha256": _sha256(p) if existe else None,
+        "bytes": p.stat().st_size if existe else None,
+    }
+
+
+def _load_json(path):
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def _calcular_idade(valor) -> int | None:
+    """Aceita epoch-ms, 'YYYY-MM-DD' ou 'DD/MM/YYYY'."""
+    if valor in (None, "", 0):
+        return None
+    try:
+        if isinstance(valor, (int, float)) or str(valor).isdigit():
+            ts = float(valor)
+            if ts > 1e11:  # epoch em ms
+                ts /= 1000.0
+            nasc = datetime.fromtimestamp(ts)
+        else:
+            txt = str(valor).strip()
+            m = re.match(r"^(\d{4})-(\d{2})-(\d{2})", txt)
+            if m:
+                nasc = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            else:
+                m = re.match(r"^(\d{2})/(\d{2})/(\d{4})", txt)
+                if not m:
+                    return None
+                nasc = datetime(int(m.group(3)), int(m.group(2)), int(m.group(1)))
+        hoje = datetime.now()
+        return hoje.year - nasc.year - ((hoje.month, hoje.day) < (nasc.month, nasc.day))
+    except Exception:
+        return None
+
+
+def _escape(txt) -> str:
+    import html as _html
+    return _html.escape(str(txt if txt is not None else ""), quote=True)
+
+
+# ---------------------------------------------------------------------------
+# normalização do questionário
+# ---------------------------------------------------------------------------
+
+def normalizar_questionario(raw: dict) -> dict:
+    """Devolve SEMPRE o shape que o renderer v10/v11 e o validador esperam:
+        {"pre-consulta": {"encontrado": True, "dados": {...}}}
+
+    O JSON do portal (/root/ivs-preconsulta-data/*.json) é FLAT (nome, email,
+    pesoAtual, spin_*, ...). O renderer lê `questionario["pre-consulta"]["dados"]`
+    — sem esta normalização a apresentação sai sem questionário e o gate de
+    cobertura reprova. Shapes já normalizados passam intactos.
+    """
+    if not isinstance(raw, dict):
+        return {"pre-consulta": {"encontrado": False, "dados": {}}}
+    if "pre-consulta" in raw and isinstance(raw.get("pre-consulta"), dict):
+        pre = dict(raw["pre-consulta"])
+        pre.setdefault("dados", {})
+        pre.setdefault("encontrado", bool(pre.get("dados")))
+        out = dict(raw)
+        out["pre-consulta"] = pre
+        return out
+    if "portal-ivs" in raw and isinstance(raw.get("portal-ivs"), dict):
+        dados = raw["portal-ivs"].get("respostas") or raw["portal-ivs"].get("dados") or {}
+        out = dict(raw)
+        out["pre-consulta"] = {"encontrado": bool(dados), "dados": dados, "fonte": "portal-ivs"}
+        return out
+    return {"pre-consulta": {"encontrado": True, "dados": raw, "fonte": "portal-flat"}}
+
+
+def derivar_meta_paciente(nome: str, dados_q: dict, sexo_cli: str, idade_cli: int, tel_cli: str) -> dict:
+    """Sexo/idade da CLI vencem; senão tenta derivar do questionário."""
+    sexo = (sexo_cli or "").strip().upper()[:1]
+    if sexo not in ("F", "M"):
+        bruto = ""
+        for k in ("sexo", "genero", "gênero", "Sexo", "sexoBiologico"):
+            if dados_q.get(k):
+                bruto = str(dados_q[k]).lower()
+                break
+        if "fem" in bruto or bruto.strip() == "f":
+            sexo = "F"
+        elif "masc" in bruto or bruto.strip() == "m":
+            sexo = "M"
+        else:
+            sexo = ""
+    idade = idade_cli or None
+    if not idade:
+        for k in ("idade", "Idade"):
+            if str(dados_q.get(k, "")).strip().isdigit():
+                idade = int(str(dados_q[k]).strip())
+                break
+    if not idade:
+        idade = _calcular_idade(dados_q.get("dataNascimento") or dados_q.get("data_nascimento"))
+    tel = tel_cli or dados_q.get("telefone") or dados_q.get("celular") or ""
+    return {
+        "nome": nome,
+        "sexo": sexo,
+        "idade": idade or 0,
+        "telefone": tel,
+        "dataNascimento": dados_q.get("dataNascimento"),
+        "data_consulta": time.strftime("%d.%m.%Y"),
+    }
+
+
+# ---------------------------------------------------------------------------
+# carregamento do renderer canônico e do validador bloqueante
+# ---------------------------------------------------------------------------
+
+def resolver_renderer():
+    """v12 (agente B) se existir; senão v11; senão v10. Nunca improvisa HTML."""
+    try:
+        from gerar_apresentacao_v12 import render_apresentacao_v12 as fn  # type: ignore
+        return "v12", fn, None
+    except Exception as e_v12:
+        erro_v12 = f"{type(e_v12).__name__}: {e_v12}"
+    try:
+        from gerar_apresentacao_v11 import render_apresentacao_v11 as fn  # type: ignore
+        return "v11", fn, erro_v12
+    except Exception as e_v11:
+        erro_v11 = f"{type(e_v11).__name__}: {e_v11}"
+    from gerar_apresentacao_v10 import render_apresentacao_v10 as fn  # type: ignore
+    return "v10", fn, f"v12: {erro_v12} | v11: {erro_v11}"
+
+
+def carregar_validador():
+    """Importa o validador BLOQUEANTE canônico.
+
+    `gerar_apresentacao.py` faz `sys.exit(0)` no import se existir o arquivo
+    `.disabled` na skill — o que aqui seria uma falha silenciosa disfarçada de
+    sucesso. Convertemos em erro explícito.
+    """
+    try:
+        from gerar_apresentacao import _v10_internal_validation  # type: ignore
+        return _v10_internal_validation
+    except SystemExit as e:
+        raise RuntimeError(
+            "gerar_apresentacao.py abortou no import (provável flag .disabled na skill). "
+            f"Validação bloqueante indisponível — abortando. (SystemExit={e.code})"
+        )
+
+
+# ---------------------------------------------------------------------------
+# injeções de fase (pós-render, sobre o HTML canônico)
+# ---------------------------------------------------------------------------
+
+def _bloco_bio_pendente(primeiro_nome: str) -> str:
+    nome = _escape(primeiro_nome or "você")
+    return f"""
+<section {MARCADOR_BIO_PENDENTE} class="section bioimped-section" data-fase="preconsulta">
+  <div class="wrap">
+    <h2>Composição corporal — ⏳ a coletar na consulta</h2>
+    <div style="border:1px dashed rgba(138,103,48,.45);background:#fffaf0;border-radius:12px;
+                padding:18px 20px;max-width:820px;margin-top:12px">
+      <p style="margin:0 0 10px;font-size:15px;line-height:1.6;color:var(--ink)">
+        <strong>Esta seção ainda não tem dados.</strong> A bioimpedância (gordura, massa magra,
+        hidratação, ângulo de fase, idade celular) e a antropometria (circunferências e dobras)
+        são medidas <strong>no dia da consulta</strong>, com o equipamento do consultório.
+      </p>
+      <p style="margin:0 0 10px;font-size:15px;line-height:1.6;color:var(--muted)">
+        O que já está pronto aqui é a leitura de <strong>questionário + exames</strong> de {nome}.
+        Assim que a composição corporal for medida, esta apresentação é
+        <strong>completada</strong> — sem refazer nada do que já foi revisado.
+      </p>
+      <p style="margin:0;font-size:13px;color:var(--muted)">
+        Documento em fase <strong>pré-consulta (T0)</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+"""
+
+
+ANTRO_LABELS = {
+    "peso_kg": ("Peso", "kg"),
+    "altura_cm": ("Altura", "cm"),
+    "imc": ("IMC", ""),
+    "rcq": ("Relação cintura/quadril", ""),
+    "cintura_cm": ("Cintura", "cm"),
+    "quadril_cm": ("Quadril", "cm"),
+    "abdomen_cm": ("Abdômen", "cm"),
+    "peito_cm": ("Peito", "cm"),
+    "pescoco_cm": ("Pescoço", "cm"),
+    "braco_direito_cm": ("Braço direito", "cm"),
+    "braco_esquerdo_cm": ("Braço esquerdo", "cm"),
+    "antebraco_direito_cm": ("Antebraço direito", "cm"),
+    "coxa_direita_cm": ("Coxa direita", "cm"),
+    "perna_direita_cm": ("Perna direita", "cm"),
+    "perna_esquerda_cm": ("Perna esquerda", "cm"),
+    "panturrilha_direita_cm": ("Panturrilha direita", "cm"),
+    "spo2_pct": ("Saturação de O₂", "%"),
+    "frequencia_cardiaca_bpm": ("Frequência cardíaca", "bpm"),
+    "pressao_arterial": ("Pressão arterial", ""),
+    "pressao_sistolica_mmhg": ("Pressão sistólica", "mmHg"),
+    "pressao_diastolica_mmhg": ("Pressão diastólica", "mmHg"),
+}
+
+# Metadados de pipeline: NUNCA entram na apresentação (são auditoria, não clínica).
+ANTRO_META_KEYS = {
+    "revisao_manual", "campos_ausentes", "resumo", "fonte", "extraido_em",
+    "modelo", "schema_version", "conferencia_identidade", "confianca_por_campo",
+    "campos_incertos", "nome_ficha", "data_medicao", "data", "paciente", "nome",
+    "observacao", "_placeholder", "_placeholder_kind", "_clinical_use_prohibited",
+    "_replacement_required", "_source_disclosure",
+}
+
+
+def _antro_medidas(antro: dict) -> dict:
+    """Extrai só as MEDIDAS do payload da antropometria.
+
+    Aceita as duas formas: o payload do extrator canônico
+    (`extrair_antropometria.py` → {antropometria:{...}, derivados:{...}, flat:{...},
+    resumo:{...}, fonte:..., modelo:...}) e um dict plano legado. Metadados de
+    pipeline e campos de identificação ficam de fora — a seção é clínica.
+    """
+    if not isinstance(antro, dict):
+        return {}
+    medidas: dict = {}
+    if isinstance(antro.get("antropometria"), dict) or isinstance(antro.get("flat"), dict):
+        for chave in ("antropometria", "flat", "derivados"):
+            bloco = antro.get(chave)
+            if isinstance(bloco, dict):
+                for k, v in bloco.items():
+                    if k in ANTRO_META_KEYS or str(k).startswith("_"):
+                        continue
+                    if v in (None, "", [], {}) or medidas.get(k) not in (None, ""):
+                        continue
+                    medidas[k] = v
+    else:
+        for k, v in antro.items():
+            if k in ANTRO_META_KEYS or str(k).startswith("_") or isinstance(v, (dict, list)):
+                continue
+            if v in (None, "", [], {}):
+                continue
+            medidas[k] = v
+    return medidas
+
+
+def _bloco_antropometria(antro: dict) -> str:
+    """Bloco da antropometria medida no dia (ficha de papel → extrair_antropometria.py)."""
+    medidas = _antro_medidas(antro)
+    ordem = list(ANTRO_LABELS)
+    chaves = [k for k in ordem if k in medidas] + [k for k in medidas if k not in ANTRO_LABELS]
+    linhas = []
+    for k in chaves:
+        rotulo, unidade = ANTRO_LABELS.get(k, (str(k).replace("_", " ").capitalize(), ""))
+        valor = f"{medidas[k]} {unidade}".strip()
+        linhas.append((rotulo, valor))
+    if not linhas:
+        return ""
+    celulas = "".join(
+        '<tr><td style="padding:6px 12px;border-bottom:1px solid rgba(0,0,0,.06);'
+        f'font-size:13px;color:var(--muted)">{_escape(k)}</td>'
+        '<td style="padding:6px 12px;border-bottom:1px solid rgba(0,0,0,.06);'
+        f'font-size:13px;font-weight:600">{_escape(v)}</td></tr>'
+        for k, v in linhas
+    )
+    return f"""
+<section {MARCADOR_ANTROPOMETRIA} class="section bioimped-section" data-fase="completa">
+  <div class="wrap">
+    <h2>Antropometria — medidas da consulta</h2>
+    <table style="border-collapse:collapse;max-width:640px;width:100%;margin-top:12px">{celulas}</table>
+    <p style="margin-top:10px;font-size:12.5px;color:var(--muted)">
+      Medidas coletadas em ficha no dia da consulta.
+    </p>
+  </div>
+</section>
+"""
+
+
+# Onde o bloco entra, em ordem de preferência. A V12 REMOVE #critical-levers
+# (delta D1) — depender só dessa âncora jogava o bloco para o fim do documento,
+# depois do apêndice médico. #leitura-integrada é a seção que vem logo depois da
+# bioimpedância na ordem canônica, então é a âncora correta em v10/v11/v12.
+ANCORAS_BLOCO_CORPORAL = (
+    '<section id="leitura-integrada"',
+    '<section id="critical-levers"',
+    '<section id="ivs-machine"',
+)
+
+
+def _injetar(html: str, bloco: str) -> str:
+    """Insere o bloco exatamente onde a composição corporal entraria."""
+    if not bloco:
+        return html
+    for ancora in ANCORAS_BLOCO_CORPORAL:
+        if ancora in html:
+            return html.replace(ancora, bloco + "\n" + ancora, 1)
+    if "</main>" in html:
+        return html.replace("</main>", bloco + "\n</main>", 1)
+    return html + bloco
+
+
+def _injetar_apos_bioimpedancia(html: str, bloco: str) -> str:
+    """Antropometria vem LOGO DEPOIS da bioimpedância quando ela existe."""
+    if not bloco:
+        return html
+    m = re.search(r'<section[^>]*id="bioimpedancia"', html)
+    if m:
+        prox = html.find("<section", m.end())
+        if prox != -1:
+            return html[:prox] + bloco + "\n" + html[prox:]
+    return _injetar(html, bloco)
+
+
+def _marcar_cabecalho_fase(html: str, fase: str) -> str:
+    if fase != "preconsulta":
+        return html
+    html = re.sub(
+        r"(<title>)(.*?)(</title>)",
+        lambda m: f"{m.group(1)}{m.group(2)} · PRÉ-CONSULTA (T0){m.group(3)}",
+        html, count=1, flags=re.S,
+    )
+    banner = (
+        '<div id="fase-banner" data-fase="preconsulta" '
+        'style="background:#fff4d9;border-bottom:1px solid rgba(138,103,48,.3);'
+        'padding:8px 16px;text-align:center;font-size:12.5px;letter-spacing:.04em;'
+        'text-transform:uppercase;font-weight:700;color:#8a6730">'
+        'Fase pré-consulta (T0) — composição corporal e antropometria entram no dia da consulta'
+        "</div>"
+    )
+    if "<main>" in html:
+        html = html.replace("<main>", "<main>\n" + banner, 1)
+    return html
+
+
+def pos_processar_html(html_path: str, fase: str, primeiro_nome: str, antropometria: dict | None) -> str:
+    html = Path(html_path).read_text(encoding="utf-8")
+    if fase == "preconsulta":
+        html = _injetar(html, _bloco_bio_pendente(primeiro_nome))
+        html = _marcar_cabecalho_fase(html, fase)
+    elif antropometria:
+        html = _injetar_apos_bioimpedancia(html, _bloco_antropometria(antropometria))
+    Path(html_path).write_text(html, encoding="utf-8")
+    return html_path
+
+
+def renomear_por_fase(html_path: str, fase: str, slug: str, renderer: str, versao_paciente: bool) -> str:
+    """Em pré-consulta o nome do arquivo marca a fase: apresentacao-<slug>-preconsulta-<ver>-<ts>.html"""
+    if fase != "preconsulta":
+        return html_path
+    p = Path(html_path)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    sufixo = "-paciente" if versao_paciente else ""
+    novo = p.with_name(f"apresentacao-{slug}-preconsulta{sufixo}-{renderer}-{ts}.html")
+    p.rename(novo)
+    return str(novo)
+
+
+# ---------------------------------------------------------------------------
+# render (chama SEMPRE o renderer canônico)
+# ---------------------------------------------------------------------------
+
+def render_canonico(render_fn, renderer_nome, paciente_meta, questionarios, exames_parsed,
+                    bioimpedancia, analise_q, interp_e, cruzamento, output_dir, versao_paciente):
+    import inspect
+    kwargs = {
+        "paciente": paciente_meta,
+        "questionario": questionarios,
+        "exames": exames_parsed,
+        "output_dir": output_dir,
+        "versao_paciente": versao_paciente,
+        "bioimpedancia": bioimpedancia,
+        "analise_questionario": analise_q,
+        "interpretacao_exames": interp_e,
+        "cruzamento": cruzamento,
+    }
+    aceitos = set(inspect.signature(render_fn).parameters)
+    if renderer_nome == "v10":
+        # v10 recebe exames ACHATADOS (lista), não o dict com grupos
+        from gerar_apresentacao import _flatten_exames_v9  # type: ignore
+        kwargs["exames"] = _flatten_exames_v9(exames_parsed)
+    kwargs = {k: v for k, v in kwargs.items() if k in aceitos}
+    return str(render_fn(**kwargs))
+
+
+# ---------------------------------------------------------------------------
+# state (T0 -> T1)
+# ---------------------------------------------------------------------------
+
+def dir_state(slug: str) -> Path:
+    d = STATE_ENTRYPOINT / slug
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+def salvar_state(slug: str, payload: dict) -> str:
+    d = dir_state(slug)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    path = d / f"{payload.get('fase', 'run')}-{ts}.json"
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    (d / "latest.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return str(path)
+
+
+ETAPAS_ESPERADAS = (
+    "etapa_1_questionario", "etapa_2_exames",
+    "etapa_3_interpretacao", "etapa_4_cruzamento",
+)
+
+
+def descobrir_etapas(origem: str) -> dict:
+    """Resolve --reusar-etapas: aceita um audit_dir ou um JSON de state/execução.
+
+    Existe para re-renderizar (correção de template, mudança de fase, QA) SEM
+    reprocessar as etapas 1..4 por LLM. O reuso não afrouxa gate nenhum: o gate
+    determinístico da etapa 2 é reavaliado sobre o artefato reusado e o gate
+    bloqueante de HTML roda igual no fim.
+    """
+    p = Path(origem)
+    if p.is_dir():
+        achados = {k: str(p / f"{k}.json") for k in ETAPAS_ESPERADAS if (p / f"{k}.json").is_file()}
+        return achados
+    if p.is_file():
+        try:
+            payload = json.loads(p.read_text(encoding="utf-8"))
+        except Exception as e:
+            raise RuntimeError(f"--reusar-etapas: {origem} não é JSON legível ({e}).")
+        etapas = payload.get("etapas") if isinstance(payload, dict) else None
+        if isinstance(etapas, dict):
+            return {k: str(v) for k, v in etapas.items() if k in ETAPAS_ESPERADAS and v}
+        audit = (payload or {}).get("audit_dir")
+        if audit and Path(audit).is_dir():
+            return descobrir_etapas(audit)
+    return {}
+
+
+def regate_exames(exames_parsed: dict) -> None:
+    """Reaplica o gate da etapa 2 (>=5 exames, >=80% validados) sobre um artefato reusado."""
+    flat = [ex for g in (exames_parsed or {}).get("grupos", []) for ex in g.get("exames", [])]
+    total = len(flat)
+    validados = sum(1 for ex in flat if ex.get("status") in ("normal", "alterado", "alert", "crit", "ok", "low", "attn"))
+    pct = (validados / total * 100) if total else 0.0
+    if not (total >= 5 and pct >= 80):
+        raise RuntimeError(
+            f"Gate da etapa 2 REPROVOU no artefato reusado: {total} exames, "
+            f"{validados} validados ({pct:.0f}%). Mínimo: 5 exames e 80%."
+        )
+    _log(f"[REUSO] gate etapa 2 revalidado: {total} exames, {validados} validados ({pct:.0f}%).")
+
+
+def carregar_state_t0(slug: str) -> dict | None:
+    d = STATE_ENTRYPOINT / slug
+    latest = d / "latest.json"
+    if latest.is_file():
+        try:
+            st = json.loads(latest.read_text(encoding="utf-8"))
+            if st.get("fase") == "preconsulta":
+                return st
+        except Exception:
+            pass
+    candidatos = sorted(d.glob("preconsulta-*.json"), reverse=True) if d.is_dir() else []
+    for c in candidatos:
+        try:
+            return json.loads(c.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+    return None
+
+
+# ---------------------------------------------------------------------------
+# plano de execução (dry-run)
+# ---------------------------------------------------------------------------
+
+GATES_BASE = [
+    "copy_neutra (sem SPIN/'Decisão:' visíveis)",
+    "eixo_tireoidiano (TSH suprimido + T3L/T4L altos)",
+    "sobrecarga_ferro (ferritina alta + ferro/saturação altos)",
+    "exames_no_html (todo exame validado aparece no HTML)",
+    "questionario_cobertura (fonte carregada + respostas no HTML interno)",
+]
+
+
+def montar_plano(args, fase, slug, renderer, renderer_erro, validador_ok, validador_erro,
+                 state_t0, etapas_reuso, insumos, output_dir) -> dict:
+    if fase == "preconsulta":
+        gates_aplicados = GATES_BASE + ["marcador_fase_preconsulta (bloco '⏳ a coletar' presente)"]
+        gates_ignorados = ["bioimpedancia_marcadores (13 marcadores — dado só existe no T1)"]
+        etapas = ["1 questionário", "2 exames", "3 interpretação clínica", "4 cruzamento Q×E", "5 render+gate"]
+        saidas = ["interna (principal, modos Apresentação/Exames/Médica)"]
+        if args.com_versao_paciente:
+            saidas.append("paciente")
+    else:
+        gates_aplicados = GATES_BASE + (
+            ["bioimpedancia_marcadores (13 marcadores)"] if insumos["bioimpedancia"]["presente"] else []
+        )
+        gates_ignorados = [] if insumos["bioimpedancia"]["presente"] else ["bioimpedancia_marcadores (sem --bioimpedancia)"]
+        if args.completar and state_t0:
+            etapas = ["1..4 REUSADAS do T0 (não reprocessa)", "5 render+gate (com bio/antropometria)"]
+        else:
+            etapas = ["1 questionário", "2 exames", "3 interpretação clínica", "4 cruzamento Q×E", "5 render+gate"]
+        saidas = ["interna (principal)", "paciente"]
+    if getattr(args, "reusar_etapas", ""):
+        etapas = ["1..4 REUSADAS de --reusar-etapas (não reprocessa LLM)",
+                  "gate etapa 2 REVALIDADO sobre o artefato reusado",
+                  "5 render+gate"]
+    return {
+        "entrypoint": str(Path(__file__).resolve()),
+        "paciente": args.paciente,
+        "slug": slug,
+        "fase": fase,
+        "modo_cli": "--completar" if args.completar else f"--modo {args.modo}",
+        "renderer_resolvido": renderer,
+        "renderer_fallback_info": renderer_erro,
+        "validador_bloqueante": "_v10_internal_validation (gerar_apresentacao.py)",
+        "validador_disponivel": validador_ok,
+        "validador_erro": validador_erro,
+        "bioimpedancia_forcada_none": fase == "preconsulta",
+        "state_t0_encontrado": bool(state_t0),
+        "state_t0_path": (state_t0 or {}).get("_origem"),
+        "etapas_reusadas_do_t0": etapas_reuso,
+        "etapas": etapas,
+        "insumos": insumos,
+        "output_dir": output_dir,
+        "saidas_previstas": saidas,
+        "gates_aplicados": gates_aplicados,
+        "gates_ignorados_nesta_fase": gates_ignorados,
+        "state_dir": str(STATE_ENTRYPOINT / slug),
+        "log_validacao_dir": str(SKILL_DIR / "state" / "validacao_v10"),
+        "observacao": "Falha de gate => RuntimeError. Não existe saída parcial/'meio certa'.",
+    }
+
+
+# ---------------------------------------------------------------------------
+# main
+# ---------------------------------------------------------------------------
+
+def main():
+    ap = argparse.ArgumentParser(
+        prog="gerar_apresentacao_paciente.py",
+        description="Entrypoint único da apresentação de paciente (determinístico + gate bloqueante).",
+    )
+    ap.add_argument("--paciente", required=True, help="Nome completo do paciente")
+    ap.add_argument("--modo", choices=["preconsulta", "completa"], default="completa")
+    ap.add_argument("--completar", action="store_true",
+                    help="T1: injeta bio/antropometria numa pré-consulta já existente (reusa o state do T0)")
+    ap.add_argument("--questionario", default="", help="JSON do questionário do portal")
+    ap.add_argument("--exames-pdfs", default="", help="JSON com a lista de PDFs (buscar_exames_drive.py)")
+    ap.add_argument("--bioimpedancia", default="", help="JSON da bioimpedância (T1)")
+    ap.add_argument("--antropometria", default="", help="JSON da antropometria (T1)")
+    ap.add_argument("--reusar-etapas", default="",
+                    help="audit_dir ou JSON de execução com as análises 1..4 já validadas — "
+                         "re-renderiza sem reprocessar LLM (gate da etapa 2 é revalidado)")
+    ap.add_argument("--output-dir", default=DELIVERABLES_DEFAULT)
+    ap.add_argument("--dry-run", action="store_true", help="mostra o plano de execução e sai")
+    ap.add_argument("--sexo", default="", choices=["", "F", "M"], help="RC-01: obrigatório se o questionário não trouxer")
+    ap.add_argument("--idade", type=int, default=0)
+    ap.add_argument("--telefone", default="")
+    ap.add_argument("--com-versao-paciente", action="store_true",
+                    help="pré-consulta: gera também a versão do paciente (default: só a interna)")
+    args = ap.parse_args()
+
+    fase = "preconsulta" if (args.modo == "preconsulta" and not args.completar) else "completa"
+    slug = _slug(args.paciente)
+
+    # ---- resolução de renderer / validador (reporta, não improvisa) ----
+    try:
+        renderer, render_fn, renderer_erro = resolver_renderer()
+    except Exception as e:
+        renderer, render_fn, renderer_erro = None, None, f"{type(e).__name__}: {e}"
+    validador_fn, validador_erro = None, None
+    try:
+        validador_fn = carregar_validador()
+    except Exception as e:
+        validador_erro = f"{type(e).__name__}: {e}"
+
+    # ---- state do T0 ----
+    state_t0 = carregar_state_t0(slug) if args.completar else None
+    if state_t0:
+        state_t0["_origem"] = str(STATE_ENTRYPOINT / slug / "latest.json")
+
+    q_path = args.questionario or ((state_t0 or {}).get("insumos", {}).get("questionario", {}) or {}).get("path", "")
+    pdfs_path = args.exames_pdfs or ((state_t0 or {}).get("insumos", {}).get("exames_pdfs", {}) or {}).get("path", "")
+
+    insumos = {
+        "questionario": _insumo(q_path),
+        "exames_pdfs": _insumo(pdfs_path),
+        "bioimpedancia": _insumo(args.bioimpedancia),
+        "antropometria": _insumo(args.antropometria),
+    }
+    etapas_reuso = list((state_t0 or {}).get("etapas", {}).keys()) if state_t0 else []
+
+    plano = montar_plano(args, fase, slug, renderer, renderer_erro, validador_fn is not None,
+                         validador_erro, state_t0, etapas_reuso, insumos, args.output_dir)
+
+    if args.dry_run:
+        print(json.dumps(plano, ensure_ascii=False, indent=2))
+        return 0
+
+    # ---- pré-condições duras ----
+    if render_fn is None:
+        raise RuntimeError(f"Nenhum renderer canônico disponível: {renderer_erro}")
+    if validador_fn is None:
+        raise RuntimeError(f"Validação bloqueante indisponível — abortando: {validador_erro}")
+    if not insumos["questionario"]["presente"]:
+        raise RuntimeError(f"--questionario obrigatório e ausente: {q_path!r}")
+    if fase == "completa" and args.completar and not (
+        insumos["bioimpedancia"]["presente"] or insumos["antropometria"]["presente"]
+    ):
+        raise RuntimeError("--completar exige --bioimpedancia e/ou --antropometria.")
+
+    questionario_raw = _load_json(q_path)
+    questionarios = normalizar_questionario(questionario_raw)
+    dados_q = questionarios["pre-consulta"]["dados"]
+    paciente_meta = derivar_meta_paciente(args.paciente, dados_q, args.sexo, args.idade, args.telefone)
+    if paciente_meta["sexo"] not in ("F", "M"):
+        raise RuntimeError("REGRA CANÔNICA RC-01: sexo é obrigatório — passe --sexo F|M.")
+
+    from gerar_apresentacao_v11_orchestrator import (  # reuso: NÃO reimplementar etapas
+        etapa1_questionario, etapa2_exames, etapa3_interpretacao, etapa4_cruzamento,
+    )
+
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    audit_dir = AUDIT_BASE / f"{slug}_{fase}_{ts}"
+    audit_dir.mkdir(parents=True, exist_ok=True)
+    _log(f"\n[ENTRYPOINT] paciente={args.paciente} fase={fase} renderer={renderer} audit={audit_dir}\n")
+
+    etapas: dict[str, str] = {}
+    exames_parsed = {"grupos": []}
+
+    etapas_externas = descobrir_etapas(args.reusar_etapas) if args.reusar_etapas else {}
+    if args.reusar_etapas and not etapas_externas:
+        raise RuntimeError(f"--reusar-etapas não encontrou artefatos 1..4 em {args.reusar_etapas!r}.")
+
+    if (args.completar and state_t0 and state_t0.get("etapas")) or etapas_externas:
+        # ---------- reuso: análises já validadas, nada é reprocessado ----------
+        if etapas_externas:
+            etapas = dict(etapas_externas)
+            _log(f"[REUSO] etapas 1..4 vindas de --reusar-etapas ({len(etapas)} artefatos).")
+        else:
+            etapas = dict(state_t0["etapas"])
+            _log(f"[T1] reusando etapas 1..4 do T0 ({len(etapas)} artefatos) — nada é reprocessado.")
+        faltando = [k for k, v in etapas.items() if not Path(v).is_file()]
+        if faltando:
+            raise RuntimeError(f"Reuso aponta para artefatos inexistentes: {faltando}")
+        if Path(etapas.get("etapa_2_exames", "")).is_file():
+            exames_parsed = _load_json(etapas["etapa_2_exames"])
+        # o reuso NÃO herda confiança: o gate da etapa 2 é reavaliado sobre o
+        # artefato reusado (é determinístico e não custa LLM).
+        regate_exames(exames_parsed)
+        analise_q = _load_json(etapas["etapa_1_questionario"]) if etapas.get("etapa_1_questionario") else None
+        interp_e = _load_json(etapas["etapa_3_interpretacao"]) if etapas.get("etapa_3_interpretacao") else None
+        cruz = _load_json(etapas["etapa_4_cruzamento"]) if etapas.get("etapa_4_cruzamento") else None
+    else:
+        # ---------- etapas 1..4 (pipeline canônico) ----------
+        ok, e1 = etapa1_questionario(paciente_meta, audit_dir, q_path)
+        if not ok:
+            raise RuntimeError("Etapa 1 (questionário) reprovou no gate do orchestrator.")
+        etapas["etapa_1_questionario"] = str(e1)
+
+        lista_pdfs = []
+        if insumos["exames_pdfs"]["presente"]:
+            bruto = _load_json(pdfs_path)
+            lista_pdfs = bruto.get("pdfs", []) if isinstance(bruto, dict) else bruto
+        if lista_pdfs:
+            ok, e2, exames_parsed, flat = etapa2_exames(paciente_meta, audit_dir, lista_pdfs)
+            if not ok:
+                raise RuntimeError("Etapa 2 (exames) reprovou no gate do orchestrator.")
+            etapas["etapa_2_exames"] = str(e2)
+            ok, e3 = etapa3_interpretacao(paciente_meta, audit_dir, e2)
+            if not ok:
+                raise RuntimeError("Etapa 3 (interpretação clínica) reprovou no gate do orchestrator.")
+            etapas["etapa_3_interpretacao"] = str(e3)
+            ok, e4 = etapa4_cruzamento(paciente_meta, audit_dir, e1, e3)
+            if not ok:
+                raise RuntimeError("Etapa 4 (cruzamento Q×E) reprovou no gate do orchestrator.")
+            etapas["etapa_4_cruzamento"] = str(e4)
+        else:
+            _log("[etapa 2] sem --exames-pdfs — seguindo só com questionário.")
+            e2 = audit_dir / "etapa_2_exames.json"
+            e2.write_text(json.dumps(exames_parsed, ensure_ascii=False, indent=2), encoding="utf-8")
+            etapas["etapa_2_exames"] = str(e2)
+
+        analise_q = _load_json(etapas["etapa_1_questionario"])
+        interp_e = _load_json(etapas["etapa_3_interpretacao"]) if etapas.get("etapa_3_interpretacao") else None
+        cruz = _load_json(etapas["etapa_4_cruzamento"]) if etapas.get("etapa_4_cruzamento") else None
+
+    # ---------- bioimpedância: None FORÇADO em pré-consulta ----------
+    bio = None
+    antro = None
+    if fase == "completa":
+        if insumos["bioimpedancia"]["presente"]:
+            bio = _load_json(args.bioimpedancia)
+        if insumos["antropometria"]["presente"]:
+            antro = _load_json(args.antropometria)
+    else:
+        if args.bioimpedancia or args.antropometria:
+            _log("[preconsulta] --bioimpedancia/--antropometria IGNORADOS nesta fase (use --completar).")
+
+    # ---------- render canônico ----------
+    versoes = [False] if (fase == "preconsulta" and not args.com_versao_paciente) else [False, True]
+    artefatos: dict[str, str] = {}
+    primeiro_nome = args.paciente.split()[0] if args.paciente.split() else args.paciente
+    for versao_paciente in versoes:
+        out = render_canonico(render_fn, renderer, paciente_meta, questionarios, exames_parsed,
+                              bio, analise_q, interp_e, cruz, args.output_dir, versao_paciente)
+        out = pos_processar_html(out, fase, primeiro_nome, antro)
+        out = renomear_por_fase(out, fase, slug, renderer, versao_paciente)
+        artefatos["html_paciente" if versao_paciente else "html_interna"] = out
+        _log(f"  [render {renderer}] {'paciente' if versao_paciente else 'interna'}: {out}")
+
+    # ---------- GATE BLOQUEANTE (sempre, sobre a versão INTERNA) ----------
+    _log(f"\n[GATE] validação bloqueante fase={fase}...")
+    validador_fn(
+        paciente_meta, exames_parsed, questionarios, artefatos["html_interna"],
+        bioimpedancia=bio, fase=fase,
+    )
+
+    # ---------- state ----------
+    payload = {
+        "paciente_nome": args.paciente,
+        "paciente_slug": slug,
+        "sexo": paciente_meta["sexo"],
+        "idade": paciente_meta["idade"],
+        "fase": fase,
+        "gerado_em": datetime.now().isoformat(),
+        "renderer": renderer,
+        "audit_dir": str(audit_dir),
+        "etapas": etapas,
+        "insumos": insumos,
+        "artefatos": artefatos,
+        "validacao": {
+            "gate": "_v10_internal_validation",
+            "fase": fase,
+            "status": "passed",
+            "log_dir": str(SKILL_DIR / "state" / "validacao_v10"),
+        },
+    }
+    state_path = salvar_state(slug, payload)
+    payload["state_path"] = state_path
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
+    _log(f"\n[OK] fase={fase} validada e salva. state={state_path}\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

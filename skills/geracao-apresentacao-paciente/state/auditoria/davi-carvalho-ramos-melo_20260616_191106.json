@@ -1,0 +1,88 @@
+{
+  "paciente_nome": "DAVI CARVALHO RAMOS MELO",
+  "sexo": "M",
+  "idade": 15,
+  "pdfs_processados": [
+    {
+      "nome": "Davi - resultado exames 2 - 21.03.2026.pdf",
+      "extraidos_pelo_llm": 1,
+      "validados": 0,
+      "lab_origem": "SSA - VILAS DO ATLANTICO",
+      "data_coleta": "21/03/2026"
+    },
+    {
+      "nome": "Davi - resultado exames 1 - 21.03.2026.pdf",
+      "extraidos_pelo_llm": 53,
+      "validados": 51,
+      "lab_origem": "SSA - VILAS DO ATLANTICO",
+      "data_coleta": "21/03/2026"
+    },
+    {
+      "nome": "Davi - Resultado exames 27.12.2025.pdf",
+      "extraidos_pelo_llm": 56,
+      "validados": 55,
+      "lab_origem": "SSA - VILAS DO ATLANTICO",
+      "data_coleta": "27/12/2025"
+    }
+  ],
+  "exames_validados": 106,
+  "exames_revisao_manual": [
+    {
+      "exame": {
+        "nome_canonico": "Sódio",
+        "nome_no_laudo": "SELÊNIO",
+        "valor": 83.0,
+        "unidade": "µg/L",
+        "ref_min": 55.0,
+        "ref_max": 135.0,
+        "grupo": "outros",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L3 plausibilidade: Sódio=83.0 fora do range absoluto [110, 180]"
+    },
+    {
+      "exame": {
+        "nome_canonico": "Plaquetas",
+        "nome_no_laudo": "PLAQUETAS",
+        "valor": 229000,
+        "unidade": "x 10³/mm3",
+        "ref_min": 130000,
+        "ref_max": 450000,
+        "grupo": "hemograma",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='x 10³/mm3' incompatível com canônica='/mm3' para Plaquetas"
+    },
+    {
+      "exame": {
+        "nome_canonico": "Vitamina B12",
+        "nome_no_laudo": "VITAMINA B12",
+        "valor": 1077.0,
+        "unidade": "pg/mL",
+        "ref_min": 211.0,
+        "ref_max": 946.0,
+        "grupo": "vitaminas",
+        "status_clinico": "crit",
+        "observacao": null
+      },
+      "motivo": "L10 anti-alucinação: valor 1077.0 de Vitamina B12 NÃO aparece no texto do PDF (possível invenção do LLM)"
+    },
+    {
+      "exame": {
+        "nome_canonico": "Plaquetas",
+        "nome_no_laudo": "PLAQUETAS",
+        "valor": 215000,
+        "unidade": "x 10³/mm3",
+        "ref_min": 130000,
+        "ref_max": 450000,
+        "grupo": "hemograma",
+        "status_clinico": "normal",
+        "observacao": null
+      },
+      "motivo": "L7 unidade: laudo='x 10³/mm3' incompatível com canônica='/mm3' para Plaquetas"
+    }
+  ],
+  "cross_check_warnings": []
+}
