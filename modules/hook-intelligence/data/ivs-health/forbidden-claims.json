@@ -1,0 +1,69 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    {
+      "id": "cure",
+      "label": "Cura",
+      "description": "Afirma eliminar definitivamente uma condição.",
+      "examples": [
+        "Este método cura qualquer condição."
+      ]
+    },
+    {
+      "id": "guarantee",
+      "label": "Garantia",
+      "description": "Promete resultado certo para todas as pessoas.",
+      "examples": [
+        "Resultado garantido para todos."
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "label": "Diagnóstico",
+      "description": "Declara uma condição individual sem avaliação habilitada.",
+      "examples": [
+        "Esse sinal prova que você tem uma doença."
+      ]
+    },
+    {
+      "id": "prescription",
+      "label": "Prescrição",
+      "description": "Determina tratamento, dose ou conduta clínica individual.",
+      "examples": [
+        "Tome esta dose todos os dias."
+      ]
+    },
+    {
+      "id": "false_urgency",
+      "label": "Urgência falsa",
+      "description": "Pressiona uma decisão com prazo ou risco fabricado.",
+      "examples": [
+        "Você precisa agir hoje ou será tarde."
+      ]
+    },
+    {
+      "id": "stigma",
+      "label": "Estigma",
+      "description": "Culpabiliza ou desumaniza alguém por corpo ou condição.",
+      "examples": [
+        "Só não melhora quem não se esforça."
+      ]
+    },
+    {
+      "id": "unsourced_number",
+      "label": "Número sem fonte",
+      "description": "Apresenta estatística clínica sem referência verificável.",
+      "examples": [
+        "Funciona em uma porcentagem inventada de casos."
+      ]
+    },
+    {
+      "id": "absolute_superiority",
+      "label": "Superioridade absoluta",
+      "description": "Declara uma opção universalmente melhor que todas as outras.",
+      "examples": [
+        "É a única solução que presta."
+      ]
+    }
+  ]
+}

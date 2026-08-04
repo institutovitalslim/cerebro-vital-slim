@@ -1,0 +1,102 @@
+[
+  {
+    "id": "curiosity_gap",
+    "label": "Lacuna de curiosidade",
+    "description": "Apresenta uma informação incompleta cuja resposta relevante será entregue pelo conteúdo."
+  },
+  {
+    "id": "pattern_interrupt",
+    "label": "Interrupção de padrão",
+    "description": "Rompe uma expectativa de linguagem ou enquadramento para renovar a atenção."
+  },
+  {
+    "id": "expectation_contrast",
+    "label": "Contraste de expectativa",
+    "description": "Contrapõe o que se costuma esperar ao que merece ser observado."
+  },
+  {
+    "id": "identification",
+    "label": "Identificação",
+    "description": "Espelha uma experiência reconhecível para criar proximidade com a audiência."
+  },
+  {
+    "id": "common_mistake",
+    "label": "Erro comum",
+    "description": "Evidencia uma escolha frequente e explica como analisá-la com mais cuidado."
+  },
+  {
+    "id": "myth_vs_evidence",
+    "label": "Mito versus evidência",
+    "description": "Separa uma crença difundida dos critérios que sustentam uma análise responsável."
+  },
+  {
+    "id": "specificity",
+    "label": "Especificidade",
+    "description": "Concentra atenção em um detalhe concreto que torna a mensagem mais nítida."
+  },
+  {
+    "id": "authority",
+    "label": "Autoridade",
+    "description": "Constrói confiança pela demonstração de método, repertório e limites claros."
+  },
+  {
+    "id": "status_identity",
+    "label": "Identidade aspiracional",
+    "description": "Relaciona uma escolha a valores e padrões que a audiência deseja cultivar."
+  },
+  {
+    "id": "before_after_tension",
+    "label": "Tensão antes e depois",
+    "description": "Contrasta estados narrativos sem transformar a mudança em garantia universal."
+  },
+  {
+    "id": "avoidable_loss",
+    "label": "Perda evitável",
+    "description": "Mostra um custo de atenção ou oportunidade que pode ser reduzido por melhores escolhas."
+  },
+  {
+    "id": "future_desire",
+    "label": "Desejo futuro",
+    "description": "Convida a visualizar um cenário desejado como direção, não como promessa."
+  },
+  {
+    "id": "inverted_objection",
+    "label": "Objeção invertida",
+    "description": "Transforma uma resistência legítima em ponto de partida para esclarecimento."
+  },
+  {
+    "id": "demonstration",
+    "label": "Demonstração",
+    "description": "Torna uma ideia observável por exemplo, comparação ou sequência prática."
+  },
+  {
+    "id": "discovery",
+    "label": "Descoberta",
+    "description": "Introduz um achado ou perspectiva que reorganiza o entendimento do tema."
+  },
+  {
+    "id": "incomplete_list",
+    "label": "Lista incompleta",
+    "description": "Antecipa partes de uma lista e preserva um item relevante para continuidade."
+  },
+  {
+    "id": "editorial_question",
+    "label": "Pergunta editorial",
+    "description": "Formula uma questão central que orienta uma apuração útil e equilibrada."
+  },
+  {
+    "id": "open_story",
+    "label": "História aberta",
+    "description": "Inicia uma situação narrativa e adia seu desfecho para manter interesse legítimo."
+  },
+  {
+    "id": "grounded_contrarian",
+    "label": "Contraponto fundamentado",
+    "description": "Questiona o consenso aparente com razões verificáveis e sem sensacionalismo."
+  },
+  {
+    "id": "mechanism_reveal",
+    "label": "Revelação de mecanismo",
+    "description": "Explica o processo por trás de um efeito percebido para aprofundar compreensão."
+  }
+]

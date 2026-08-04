@@ -1,0 +1,42 @@
+[
+  {
+    "id": "adultos_rotina_intensa",
+    "label": "Adultos com rotina intensa",
+    "description": "Pessoas adultas que buscam informação de bem-estar aplicável a agendas cheias."
+  },
+  {
+    "id": "iniciantes_autocuidado",
+    "label": "Iniciantes em autocuidado",
+    "description": "Pessoas começando a organizar hábitos e fontes de informação em saúde."
+  },
+  {
+    "id": "mulheres_adultas",
+    "label": "Mulheres adultas",
+    "description": "Mulheres interessadas em educação geral sobre bem-estar ao longo da vida adulta."
+  },
+  {
+    "id": "homens_adultos",
+    "label": "Homens adultos",
+    "description": "Homens interessados em ampliar repertório de autocuidado e prevenção informativa."
+  },
+  {
+    "id": "familias_habitos",
+    "label": "Famílias construindo hábitos",
+    "description": "Núcleos familiares que desejam conversar sobre rotinas de forma acolhedora."
+  },
+  {
+    "id": "pessoas_mais_50",
+    "label": "Pessoas com mais de 50 anos",
+    "description": "Adultos maduros interessados em conteúdo educativo e escolhas informadas."
+  },
+  {
+    "id": "cuidadores",
+    "label": "Cuidadores",
+    "description": "Pessoas que apoiam o bem-estar cotidiano de familiares sem substituir profissionais."
+  },
+  {
+    "id": "publico_bem_estar",
+    "label": "Público interessado em bem-estar",
+    "description": "Pessoas que buscam conteúdo geral responsável, acessível e sem julgamento."
+  }
+]

@@ -1,0 +1,1013 @@
+[
+  {
+    "id": "universal-curiosity-gap-01",
+    "library": "universal",
+    "mechanism": "curiosity_gap",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "problem_aware",
+      "solution_aware"
+    ],
+    "tones": [
+      "educational",
+      "premium"
+    ],
+    "template": "O detalhe pouco notado em {topic} que pode mudar sua leitura de {desired_outcome}",
+    "slots": [
+      "topic",
+      "desired_outcome"
+    ],
+    "explanation": "Este padrão aplica lacuna de curiosidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-curiosity-gap-02",
+    "library": "universal",
+    "mechanism": "curiosity_gap",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Antes de concluir sobre {topic}, observe esta pergunta que quase sempre fica de fora",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica lacuna de curiosidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-pattern-interrupt-01",
+    "library": "universal",
+    "mechanism": "pattern_interrupt",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Pare de começar por {desired_outcome}: em {topic}, o primeiro passo pode estar em outro lugar",
+    "slots": [
+      "desired_outcome",
+      "topic"
+    ],
+    "explanation": "Este padrão aplica interrupção de padrão com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-pattern-interrupt-02",
+    "library": "universal",
+    "mechanism": "pattern_interrupt",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Nem toda boa conversa sobre {topic} precisa começar com uma resposta",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica interrupção de padrão com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-expectation-contrast-01",
+    "library": "universal",
+    "mechanism": "expectation_contrast",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Você esperava mais velocidade em {topic}; talvez o critério decisivo seja consistência",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica contraste de expectativa com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-expectation-contrast-02",
+    "library": "universal",
+    "mechanism": "expectation_contrast",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "O que parece avanço em {topic} nem sempre aproxima {audience} de {desired_outcome}",
+    "slots": [
+      "topic",
+      "audience",
+      "desired_outcome"
+    ],
+    "explanation": "Este padrão aplica contraste de expectativa com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-identification-01",
+    "library": "universal",
+    "mechanism": "identification",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Se {topic} parece simples até chegar a sua rotina, esta conversa é para {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica identificação com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-identification-02",
+    "library": "universal",
+    "mechanism": "identification",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Para quem já tentou organizar {topic} e terminou com mais perguntas do que respostas",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica identificação com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-common-mistake-01",
+    "library": "universal",
+    "mechanism": "common_mistake",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "O erro mais comum ao explicar {topic} não está no conteúdo, mas na ordem",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica erro comum com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-common-mistake-02",
+    "library": "universal",
+    "mechanism": "common_mistake",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Ao buscar {desired_outcome}, muita gente compara opções antes de definir o próprio critério",
+    "slots": [
+      "desired_outcome"
+    ],
+    "explanation": "Este padrão aplica erro comum com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-myth-vs-evidence-01",
+    "library": "universal",
+    "mechanism": "myth_vs_evidence",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Em {topic}, uma frase repetida não vale mais que um bom critério de análise",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica mito versus evidência com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-myth-vs-evidence-02",
+    "library": "universal",
+    "mechanism": "myth_vs_evidence",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Crença popular ou conclusão bem sustentada: como separar as duas em {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica mito versus evidência com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-specificity-01",
+    "library": "universal",
+    "mechanism": "specificity",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Uma palavra muda toda a conversa sobre {topic}: {required_word}",
+    "slots": [
+      "topic",
+      "required_word"
+    ],
+    "explanation": "Este padrão aplica especificidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-specificity-02",
+    "library": "universal",
+    "mechanism": "specificity",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Três minutos de contexto podem evitar uma interpretação apressada sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica especificidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-authority-01",
+    "library": "universal",
+    "mechanism": "authority",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Como profissionais cuidadosos estruturam uma análise de {topic} sem esconder incertezas",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica autoridade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-authority-02",
+    "library": "universal",
+    "mechanism": "authority",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "O que um método transparente revela antes de qualquer conclusão sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica autoridade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-status-identity-01",
+    "library": "universal",
+    "mechanism": "status_identity",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Quem valoriza escolhas conscientes faz esta pergunta antes de decidir sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica identidade aspiracional com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-status-identity-02",
+    "library": "universal",
+    "mechanism": "status_identity",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "A diferença entre apenas acompanhar {topic} e desenvolver um olhar criterioso",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica identidade aspiracional com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-before-after-tension-01",
+    "library": "universal",
+    "mechanism": "before_after_tension",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Antes, {context}; depois, uma pergunta melhor organizou a conversa sobre {topic}",
+    "slots": [
+      "context",
+      "topic"
+    ],
+    "explanation": "Este padrão aplica tensão antes e depois com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-before-after-tension-02",
+    "library": "universal",
+    "mechanism": "before_after_tension",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "De informação dispersa a um mapa claro: uma forma de repensar {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica tensão antes e depois com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-avoidable-loss-01",
+    "library": "universal",
+    "mechanism": "avoidable_loss",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "O custo invisível de discutir {topic} sem alinhar o que {desired_outcome} significa",
+    "slots": [
+      "topic",
+      "desired_outcome"
+    ],
+    "explanation": "Este padrão aplica perda evitável com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-avoidable-loss-02",
+    "library": "universal",
+    "mechanism": "avoidable_loss",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Quanto da sua atenção se perde quando {topic} chega sem contexto",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica perda evitável com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-future-desire-01",
+    "library": "universal",
+    "mechanism": "future_desire",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Imagine abordar {topic} com critérios claros e menos ruído ao redor",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica desejo futuro com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-future-desire-02",
+    "library": "universal",
+    "mechanism": "future_desire",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Um caminho possível para tornar {desired_outcome} mais coerente com sua rotina",
+    "slots": [
+      "desired_outcome"
+    ],
+    "explanation": "Este padrão aplica desejo futuro com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-inverted-objection-01",
+    "library": "universal",
+    "mechanism": "inverted_objection",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Se você acha que não tem tempo para entender {topic}, comece por este recorte",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica objeção invertida com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-inverted-objection-02",
+    "library": "universal",
+    "mechanism": "inverted_objection",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "A sua dúvida sobre {topic} pode ser justamente o melhor ponto de partida",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica objeção invertida com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-demonstration-01",
+    "library": "universal",
+    "mechanism": "demonstration",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Veja como o mesmo {topic} muda quando apresentado a {audience} com contexto",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica demonstração com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-demonstration-02",
+    "library": "universal",
+    "mechanism": "demonstration",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Uma comparação simples para enxergar duas leituras possíveis de {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica demonstração com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-discovery-01",
+    "library": "universal",
+    "mechanism": "discovery",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Ao reorganizar as perguntas sobre {topic}, encontramos um ponto que estava escondido",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica descoberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-discovery-02",
+    "library": "universal",
+    "mechanism": "discovery",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Uma perspectiva sobre {topic} que ganha sentido quando olhamos para {context}",
+    "slots": [
+      "topic",
+      "context"
+    ],
+    "explanation": "Este padrão aplica descoberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-incomplete-list-01",
+    "library": "universal",
+    "mechanism": "incomplete_list",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Há três filtros úteis para avaliar {topic}; o último depende de {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica lista incompleta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-incomplete-list-02",
+    "library": "universal",
+    "mechanism": "incomplete_list",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Dois sinais ajudam a organizar {topic}, mas um terceiro evita conclusões rápidas",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica lista incompleta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-editorial-question-01",
+    "library": "universal",
+    "mechanism": "editorial_question",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "O que realmente merece atenção quando falamos de {topic} para {audience}?",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica pergunta editorial com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-editorial-question-02",
+    "library": "universal",
+    "mechanism": "editorial_question",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Por que {topic} ganha significados diferentes conforme o contexto?",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica pergunta editorial com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-open-story-01",
+    "library": "universal",
+    "mechanism": "open_story",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Tudo parecia resolvido em {topic} até que uma pergunta mudou o rumo da conversa",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica história aberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-open-story-02",
+    "library": "universal",
+    "mechanism": "open_story",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Começamos buscando {desired_outcome}; no caminho, descobrimos um critério mais importante",
+    "slots": [
+      "desired_outcome"
+    ],
+    "explanation": "Este padrão aplica história aberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-grounded-contrarian-01",
+    "library": "universal",
+    "mechanism": "grounded_contrarian",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Talvez o conselho mais popular sobre {topic} não sirva para todo contexto",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica contraponto fundamentado com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-grounded-contrarian-02",
+    "library": "universal",
+    "mechanism": "grounded_contrarian",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Discordar do senso comum em {topic} exige mais método, não mais volume",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica contraponto fundamentado com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-mechanism-reveal-01",
+    "library": "universal",
+    "mechanism": "mechanism_reveal",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Por trás de uma mensagem memorável sobre {topic}, existe esta escolha de estrutura",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica revelação de mecanismo com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-mechanism-reveal-02",
+    "library": "universal",
+    "mechanism": "mechanism_reveal",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "O mecanismo que conecta {topic} a {desired_outcome} começa pela clareza do contexto",
+    "slots": [
+      "topic",
+      "desired_outcome"
+    ],
+    "explanation": "Este padrão aplica revelação de mecanismo com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  }
+]

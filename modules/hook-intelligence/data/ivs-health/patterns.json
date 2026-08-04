@@ -1,0 +1,507 @@
+[
+  {
+    "id": "ivs-curiosity-gap-01",
+    "library": "ivs-health",
+    "mechanism": "curiosity_gap",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "O que costuma passar despercebido quando {audience} conversa sobre {topic}?",
+    "slots": [
+      "audience",
+      "topic"
+    ],
+    "explanation": "Este padrão aplica lacuna de curiosidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-pattern-interrupt-02",
+    "library": "ivs-health",
+    "mechanism": "pattern_interrupt",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Antes de buscar uma regra para {topic}, vale entender o contexto de {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica interrupção de padrão com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-expectation-contrast-03",
+    "library": "ivs-health",
+    "mechanism": "expectation_contrast",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Em {topic}, informação mais chamativa nem sempre é a mais útil para escolhas conscientes",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica contraste de expectativa com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-identification-04",
+    "library": "ivs-health",
+    "mechanism": "identification",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Se falar de {topic} traz dúvidas e cobranças, {audience} não precisa começar por certezas",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica identificação com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-common-mistake-05",
+    "library": "ivs-health",
+    "mechanism": "common_mistake",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Um erro frequente ao abordar {topic} é ignorar como a rotina influencia a conversa",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica erro comum com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-myth-vs-evidence-06",
+    "library": "ivs-health",
+    "mechanism": "myth_vs_evidence",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Como diferenciar uma crença sobre {topic} de informação apoiada por boas fontes",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica mito versus evidência com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-specificity-07",
+    "library": "ivs-health",
+    "mechanism": "specificity",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Ao ler sobre {topic}, observe como a palavra {required_word} está sendo usada",
+    "slots": [
+      "topic",
+      "required_word"
+    ],
+    "explanation": "Este padrão aplica especificidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-authority-08",
+    "library": "ivs-health",
+    "mechanism": "authority",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "O que fontes responsáveis deixam claro ao educar sobre {topic} e seus limites",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica autoridade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-status-identity-09",
+    "library": "ivs-health",
+    "mechanism": "status_identity",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Escolhas informadas sobre {topic} começam com curiosidade, contexto e respeito ao próprio ritmo",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica identidade aspiracional com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-before-after-tension-10",
+    "library": "ivs-health",
+    "mechanism": "before_after_tension",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "De uma dúvida ampla sobre {topic} a perguntas mais úteis para uma conversa profissional",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica tensão antes e depois com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-avoidable-loss-11",
+    "library": "ivs-health",
+    "mechanism": "avoidable_loss",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "O ruído que {audience} pode evitar ao conferir a fonte antes de compartilhar {topic}",
+    "slots": [
+      "audience",
+      "topic"
+    ],
+    "explanation": "Este padrão aplica perda evitável com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-future-desire-12",
+    "library": "ivs-health",
+    "mechanism": "future_desire",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Como seria conversar sobre {topic} com mais acolhimento e menos julgamento?",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica desejo futuro com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-inverted-objection-13",
+    "library": "ivs-health",
+    "mechanism": "inverted_objection",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Não saber por onde começar em {topic} pode ajudar a identificar a primeira pergunta",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica objeção invertida com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-demonstration-14",
+    "library": "ivs-health",
+    "mechanism": "demonstration",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Veja duas formas de explicar {topic}: uma sem contexto e outra que respeita {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica demonstração com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-discovery-15",
+    "library": "ivs-health",
+    "mechanism": "discovery",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Uma nova leitura de {topic} aparece quando conectamos informação e rotina sem generalizar",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica descoberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-incomplete-list-16",
+    "library": "ivs-health",
+    "mechanism": "incomplete_list",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Três perguntas organizam sua leitura sobre {topic}; a última verifica a qualidade da fonte",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica lista incompleta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-editorial-question-17",
+    "library": "ivs-health",
+    "mechanism": "editorial_question",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Que critérios tornam uma informação sobre {topic} realmente útil para {audience}?",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "Este padrão aplica pergunta editorial com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-open-story-18",
+    "library": "ivs-health",
+    "mechanism": "open_story",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "A conversa sobre {topic} começou com uma certeza e avançou quando surgiu uma pergunta",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica história aberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-grounded-contrarian-19",
+    "library": "ivs-health",
+    "mechanism": "grounded_contrarian",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Em {topic}, simplificar demais pode atrapalhar mais do que uma resposta honesta e contextual",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica contraponto fundamentado com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-mechanism-reveal-20",
+    "library": "ivs-health",
+    "mechanism": "mechanism_reveal",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Por que contexto, fonte e individualidade mudam a interpretação de conteúdos sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Este padrão aplica revelação de mecanismo com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "intensity": 3
+  }
+]
