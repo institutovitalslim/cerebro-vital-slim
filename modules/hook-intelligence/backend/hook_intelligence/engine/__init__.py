@@ -7,7 +7,7 @@ from hook_intelligence.engine.composer import (
     contains_forbidden,
 )
 from hook_intelligence.engine.deduplicator import deduplicate, similarity
-from hook_intelligence.engine.explain import explain_score
+from hook_intelligence.engine.explain import MAX_PUBLIC_EXPLANATION_CHARS, explain_score
 from hook_intelligence.engine.library import HookLibrary, Pattern
 from hook_intelligence.engine.pipeline import generate_deterministic
 from hook_intelligence.engine.scorer import (
@@ -21,6 +21,7 @@ from hook_intelligence.engine.scorer import (
 from hook_intelligence.engine.selector import select_patterns, stable_rank
 
 __all__ = [
+    "MAX_PUBLIC_EXPLANATION_CHARS",
     "PENALTY_POINTS",
     "SCORE_WEIGHTS",
     "CandidateConstraintError",

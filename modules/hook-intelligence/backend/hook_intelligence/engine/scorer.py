@@ -112,7 +112,23 @@ def _normalize(value: object, field: str) -> str:
     normalized = " ".join(unicodedata.normalize("NFKC", value).split())
     if not normalized:
         raise ValueError(f"{field} não pode ser vazio")
+    if not any(character.isalnum() for character in normalized):
+        raise ValueError(f"{field} deve conter ao menos um caractere alfanumérico")
     return normalized
+
+
+def _has_exaggerated_punctuation(value: str) -> bool:
+    """Detecta três pontuações Unicode consecutivas após normalização NFKC."""
+
+    run_length = 0
+    for character in unicodedata.normalize("NFKC", value):
+        if unicodedata.category(character).startswith("P"):
+            run_length += 1
+            if run_length >= 3:
+                return True
+        else:
+            run_length = 0
+    return False
 
 
 def _channel(value: object) -> Channel:
@@ -141,11 +157,12 @@ def _component_scores(text: str, channel: Channel, topic: str) -> tuple[float, .
     tokens = set(words)
     length = len(text)
     minimum, maximum = _CHANNEL_LENGTHS[channel]
+    exaggerated_punctuation = _has_exaggerated_punctuation(text)
 
     clarity = 78.0
     if 4 <= len(words) <= 18:
         clarity += 12
-    if len(words) > 24 or re.search(r"[!?]{3,}", text):
+    if len(words) > 24 or exaggerated_punctuation:
         clarity -= 25
     if len(words) < 3:
         clarity -= 30
@@ -177,7 +194,7 @@ def _component_scores(text: str, channel: Channel, topic: str) -> tuple[float, .
         channel_fit += 8
     if channel in {Channel.BLOG, Channel.EMAIL, Channel.YOUTUBE} and len(words) >= 7:
         channel_fit += 8
-    if re.search(r"[!?]{3,}", text):
+    if exaggerated_punctuation:
         channel_fit -= 35
 
     return tuple(
@@ -214,7 +231,7 @@ def score_text(text: str, channel: Channel | str, topic: str) -> ScoreEvaluation
         penalties.append("generic_cliche")
     if len(letters) >= 8 and uppercase_ratio >= 0.75:
         penalties.append("excessive_uppercase")
-    if re.search(r"[!?]{3,}", normalized_text):
+    if _has_exaggerated_punctuation(normalized_text):
         penalties.append("exaggerated_punctuation")
     if not _topic_present(text_tokens, normalized_topic):
         penalties.append("topic_absent")

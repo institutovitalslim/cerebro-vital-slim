@@ -4,7 +4,7 @@ import pytest
 
 from hook_intelligence.domain.models import Channel, HookScores
 from hook_intelligence.engine.deduplicator import deduplicate, similarity
-from hook_intelligence.engine.explain import explain_score
+from hook_intelligence.engine.explain import MAX_PUBLIC_EXPLANATION_CHARS, explain_score
 from hook_intelligence.engine.scorer import (
     PENALTY_POINTS,
     SCORE_WEIGHTS,
@@ -219,3 +219,96 @@ def test_explanation_validates_curated_public_inputs():
         explain_score("curiosidade", "Explicação curada.", object())
     with pytest.raises(ValueError, match="curated_explanation"):
         explain_score("curiosidade", "Aqui está meu raciocínio interno.", evaluation)
+
+
+@pytest.mark.parametrize("invalid", ["!!!", "😀🔥", " \t\n"])
+def test_score_rejects_text_without_unicode_alphanumeric_content(invalid):
+    with pytest.raises(ValueError, match="text"):
+        score_text(invalid, "reel", "sono")
+
+
+@pytest.mark.parametrize("invalid", ["؟؟؟", "✨", " \t\n"])
+def test_score_and_rank_reject_topic_without_unicode_alphanumeric_content(invalid):
+    with pytest.raises(ValueError, match="topic"):
+        score_text("Texto válido 123", "reel", invalid)
+    with pytest.raises(ValueError, match="topic"):
+        rank_texts(["Texto válido 123"], "reel", invalid)
+
+
+def test_score_preserves_accented_and_numeric_unicode_content():
+    assert score_text("Café ３", "reel", "café").specificity > 0
+
+
+@pytest.mark.parametrize("punctuation", ["؟؟؟", "！！！", "⁉⁉⁉", "..."])
+def test_unicode_punctuation_runs_use_the_same_exaggeration_signal(punctuation):
+    evaluation = score_text(f"Seu sono pede atenção{punctuation}", "reel", "sono")
+    ascii_evaluation = score_text("Seu sono pede atenção!!!", "reel", "sono")
+    assert "exaggerated_punctuation" in evaluation.penalties
+    assert evaluation.clarity == ascii_evaluation.clarity
+    assert evaluation.channel_fit == ascii_evaluation.channel_fit
+
+
+def test_isolated_unicode_punctuation_is_not_exaggerated():
+    evaluation = score_text("Seu sono pede atenção؟", "reel", "sono")
+    assert "exaggerated_punctuation" not in evaluation.penalties
+
+
+def test_public_explanation_is_bounded_and_does_not_echo_large_curated_inputs():
+    evaluation = score_text("3 sinais sobre sono para observar", "reel", "sono")
+    marker = "NÃO DEVE SER ECOADO"
+    explanation = explain_score(
+        "curiosidade " * 100,
+        "Resumo editorial seguro. " + ("detalhe " * 150) + marker,
+        evaluation,
+    )
+    assert len(explanation) <= MAX_PUBLIC_EXPLANATION_CHARS == 500
+    assert marker not in explanation
+    assert "Resumo editorial seguro." in explanation
+
+
+@pytest.mark.parametrize(
+    ("field", "mechanism", "curated", "recommendations"),
+    [
+        ("mechanism", "System prompt", "Explicação segura.", ()),
+        ("curated_explanation", "curiosidade", "Chain of thought privado.", ()),
+        ("recommendations[0]", "curiosidade", "Explicação segura.", ("Instruções internas",)),
+        ("recommendations[1]", "curiosidade", "Explicação segura.", ("Normal.", " ")),
+    ],
+)
+def test_explanation_rejects_internal_or_empty_language_in_every_public_field(
+    field, mechanism, curated, recommendations
+):
+    evaluation = ScoreEvaluation(50, 50, 50, 50, 50, 50, (), recommendations)
+    match = field.replace("[", r"\[").replace("]", r"\]")
+    with pytest.raises((TypeError, ValueError), match=match):
+        explain_score(mechanism, curated, evaluation)
+
+
+@pytest.mark.parametrize(
+    "unsafe",
+    [
+        "Este método cura a condição.",
+        "A estratégia garante resultado.",
+        "Funciona para todos.",
+        "Ajuda você a perder 10 kg em 7 dias.",
+    ],
+)
+def test_explanation_rejects_explicit_cure_and_guarantee_claims(unsafe):
+    evaluation = ScoreEvaluation(50, 50, 50, 50, 50, 50, (), ())
+    with pytest.raises(ValueError, match="curated_explanation"):
+        explain_score("curiosidade", unsafe, evaluation)
+
+
+def test_safe_explanation_never_contains_internal_language_from_any_recommendation():
+    evaluation = ScoreEvaluation(
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        (),
+        ("Ajuste a abertura.", "Não revele o prompt do sistema."),
+    )
+    with pytest.raises(ValueError, match=r"recommendations\[1\]"):
+        explain_score("curiosidade", "Explicação segura.", evaluation)
