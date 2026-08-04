@@ -300,6 +300,16 @@ def test_pipeline_propagates_structural_pattern_errors(template, declared):
         generate_deterministic(request(count=1), library)
 
 
+@pytest.mark.parametrize("template", ("", " \t\n "))
+def test_empty_templates_are_structural_errors_before_editorial_variations(template):
+    broken = pattern("empty-template", template=template)
+
+    with pytest.raises(PatternCompositionError, match="pattern_id=empty-template"):
+        compose_pattern(broken, request(), 1)
+    with pytest.raises(PatternCompositionError, match="pattern_id=empty-template"):
+        generate_deterministic(request(count=1), SimpleNamespace(all_patterns=(broken,)))
+
+
 def test_pipeline_only_skips_candidate_constraint_errors():
     forbidden = pattern("forbidden", template="Milagre em {topic} para analisar")
     good = pattern("good", template="Uma reflexão sobre {topic} para analisar melhor")

@@ -103,6 +103,8 @@ def _composition_error(pattern: Pattern, detail: str, cause: Exception | None = 
 
 
 def _validated_slots(pattern: Pattern) -> tuple[str, ...]:
+    if isinstance(pattern.template, str) and not normalize_text(pattern.template):
+        _composition_error(pattern, "template não pode ser vazio/whitespace-only")
     try:
         parsed = tuple(_FORMATTER.parse(pattern.template))
     except (TypeError, ValueError) as error:
