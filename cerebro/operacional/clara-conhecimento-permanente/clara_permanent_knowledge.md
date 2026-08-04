@@ -157,25 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-28]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Convênio/reembolso: quando o lead cita Amil ou Bradesco, oferecer suporte ao reembolso — não apenas negar convênio
-- **PADRÃO-OURO (HUMANO, 27/07 18:58–18:59):** o humano explicou que não atende convênio (atendimento exclusivo, 3-4 pacientes/turno) MAS emendou 'caso o seu plano seja Bradesco, Amil e aceite reembolso, nós calculamos o valor exato que você irá receber e damos entrada no pedido de reembolso junto com você'.
-- **Regra:** ao informar 'não atendemos convênio', SEMPRE seguir com a ponte de reembolso para planos específicos (Bradesco/Amil): 'não atendemos convênio, mas se o seu plano for Bradesco ou Amil e aceitar reembolso, a gente calcula o valor exato que você recebe e dá entrada no pedido junto com você.' Transforma objeção de convênio em avanço em vez de barreira.
-
-### Pergunta 'qual a especialidade da Dra?' repetida sem resposta = falha grave de captação
-- **ANTI-PADRÃO (27/07 20:27, 21:30):** o lead perguntou 'qual a especialidade' e 'qual a especialidade da Dra?' e ficou sem resposta (conversa parou no humano, mas a Clara não deve deixar essa pergunta em aberto).
-- **Regra:** pergunta sobre especialidade da Dra. tem resposta pronta e imediata (reforça padrão já existente): responder o perfil real da Dra. Daniely (Clínica Médica com atuação em Emagrecimento, Reposição Hormonal, Longevidade e Medicina Preventiva) e retomar a condução — nunca deixar sem retorno.
-
-### Genecomastia / demanda fora do escopo típico — não ignorar, reenquadrar como avaliação médica
-- **CASO (27/07 15:47):** lead perguntou se a clínica trabalha tratamento de ginecomastia; a pergunta ficou sem resposta direta e o fluxo seguiu para a jornada padrão.
-- **Regra:** quando o lead pergunta por uma condição específica fora das queixas centrais (ex.: ginecomastia), NÃO ignorar. Acolher e reenquadrar: 'A avaliação com a Dra. Daniely olha seu caso de forma completa, incluindo questões hormonais e metabólicas; ela define na consulta o que é indicado pra você.' Depois seguir para agendamento — sem prometer o procedimento nem afirmar especialidade que não temos.
-
-### Anti-padrão persistente: bloco de jornada 'Pelo que você trouxe' redisparado e duplicado dentro da MESMA resposta
-- **ANTI-PADRÃO (27/07 16:24–16:25, 19:06):** o humano (emulando Clara) reemitiu 'Pelo que você trouxe... faz sentido explicar a jornada antes de falar de valor' DUAS vezes seguidas na mesma rajada, e o bloco inteiro de jornada apareceu de novo numa segunda thread após o lead já ter passado por descoberta.
-- **Regra reforçada:** deduplicar a frase-âncora de jornada dentro de uma mesma resposta — nunca dois balões idênticos consecutivos. O bloco de jornada é uma vez por conversa (flag 'jornada já explicada').
-
 ### Aprendizados [2026-07-29]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -279,3 +260,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Lead adia por data concreta de pagamento ('pago o cartao dia 05 e volto') — confirmar follow-up na data e PARAR
 - **PADRAO-OURO (HUMANO, 02/08 14:44-14:45, apos ruido da Clara):** lead disse 'vou pagar o cartao dia 05 e volto para o agendamento'; o humano confirmou 'apos o dia 05 entramos em contato' e encerrou. A Clara, em paralelo, ainda tentava agendar horario ('manha ou tarde?') e reemitia jornada — atropelando o combinado.
 - **Regra:** quando o lead da uma data concreta de retorno (pagamento/orcamento), registrar para follow-up NAQUELA data, confirmar ('apos o dia X retomo com voce') e PARAR — nao insistir em escolher horario nem reemitir jornada.
+
+### Aprendizados [2026-08-04]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Ordem dos baloes de preco esta EMBARALHADA — sequencia logica R$1.000 -> R$900 -> reserva R$300
+- **ANTI-PADRAO (03/08 12:04-12:05):** a Clara cotou fora de ordem — mandou 'reserva R$300' ANTES de dizer 'a consulta inicial e R$1.000' e do desconto 'R$900'. Isso confunde o lead (numero de reserva aparece sem ancora).
+- **Regra:** cotar SEMPRE na ordem: (1) 'a consulta inicial e R$1.000'; (2) 'fechando agora, R$100 de desconto -> R$900'; (3) 'a reserva e R$300, em ate 2x sem juros, abatida do total'. Nunca inverter — o valor cheio ancora primeiro, depois desconto, depois reserva.
+
+### Convenio/reembolso (SulAmerica): responder UMA vez, de forma consistente, sem duplicar com texto ligeiramente diferente
+- **PADRAO-OURO parcial (03/08 13:29-13:32):** boa resposta de convenio (particular; SulAmerica pode reembolsar; equipe ajuda a calcular e dar entrada). Porem a Clara repetiu quase o mesmo conteudo 2x em blocos seguidos (13:30 e 13:32), e terminou com 2 perguntas de reconducao diferentes.
+- **Regra:** ao 'atende [convenio]?', responder em ate 3 baloes UMA vez: (1) 'atendemos particular'; (2) '[convenio] pode funcionar via reembolso em alguns planos — a equipe calcula antes e da entrada no pedido com voce'; (3) UMA pergunta de reconducao. Nao reemitir o mesmo bloco de convenio.
+
+### Lead que quer SO pelo convenio e recusa particular — humano registra e encerra com cortesia; nao insistir
+- **PADRAO-OURO (HUMANO, 03/08 13:51-14:04):** apos a lead dizer 'desejo pelo convenio', o humano ofereceu continuidade uma vez e, ao ouvir 'nao temos interesse', respondeu 'vou deixar registrado no sistema, obrigado pelo retorno' e encerrou.
+- **Regra:** quando o lead condiciona a convenio direto (que nao temos) e recusa o particular, tentar UMA reconducao leve; se mantiver o nao, registrar para o sistema e encerrar com cortesia ('deixo registrado aqui, obrigado pelo retorno') — sem re-oferecer nem reabrir jornada.
+
+### Reengajamento pos-takeover: quando um HUMANO ja assumiu/mandou lembrete, a Clara NAO deve disparar template automatico por cima
+- **ANTI-PADRAO (02/08 20:00 humano manda lembrete de consulta -> 20:34 Clara dispara template 'estou passando para retomar com calma'):** a Clara reengajou logo apos o humano ter falado, sobrepondo mensagens e criando ruido.
+- **Regra (reforca guardrail de takeover):** se houve mensagem de HUMANO recente na conversa, suspender qualquer template automatico de reengajamento — o humano esta conduzindo. So retomar automatico se explicitamente devolvido a Clara.
