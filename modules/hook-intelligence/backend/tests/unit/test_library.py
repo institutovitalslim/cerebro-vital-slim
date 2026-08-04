@@ -8,10 +8,20 @@ from pathlib import Path
 import pytest
 
 from hook_intelligence.domain.models import AwarenessStage, Channel, Objective, Tone
-from hook_intelligence.engine.library import ALLOWED_SLOTS, HookLibrary
+from hook_intelligence.engine.library import ALLOWED_SLOTS, EXACT_MECHANISM_IDS, HookLibrary
 
 DATA_ROOT = Path(__file__).resolve().parents[3] / "data"
 PATTERN_FILES = ("universal/patterns.json", "ivs-health/patterns.json")
+REQUIRED_CLAIM_CATEGORIES = {
+    "cure",
+    "guarantee",
+    "diagnosis",
+    "prescription",
+    "false_urgency",
+    "stigma",
+    "unsourced_number",
+    "absolute_superiority",
+}
 
 
 def normalized(text: str) -> str:
@@ -183,3 +193,196 @@ def test_real_counts_are_visible_for_diagnostics():
         "universal": 40,
         "ivs-health": 20,
     }
+
+
+def copied_data(tmp_path: Path) -> Path:
+    root = tmp_path / "data"
+    shutil.copytree(DATA_ROOT, root)
+    return root
+
+
+def write_json(path: Path, payload):
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def test_exact_mechanism_contract_and_data():
+    library = HookLibrary.load_default()
+    assert len(EXACT_MECHANISM_IDS) == 20
+    assert set(library.mechanisms) == EXACT_MECHANISM_IDS
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected"),
+    [
+        ("invented_mechanism", "IDs devem ser exatamente"),
+        ("thirty_nine_universal", "ao menos 40"),
+        ("missing_universal_mechanism", "mechanism_reveal"),
+        ("ivs_under_ten_mechanisms", "ao menos 10 mecanismos"),
+    ],
+)
+def test_loader_rejects_mutated_mechanism_coverage(tmp_path, mutation, expected):
+    root = copied_data(tmp_path)
+    mechanism_path = root / "universal/mechanisms.json"
+    universal_path = root / "universal/patterns.json"
+    ivs_path = root / "ivs-health/patterns.json"
+    mechanisms = json.loads(mechanism_path.read_text(encoding="utf-8"))
+    universal = json.loads(universal_path.read_text(encoding="utf-8"))
+    ivs = json.loads(ivs_path.read_text(encoding="utf-8"))
+    if mutation == "invented_mechanism":
+        mechanisms[-1]["id"] = "invented_mechanism"
+        write_json(mechanism_path, mechanisms)
+    elif mutation == "thirty_nine_universal":
+        universal.pop()
+        write_json(universal_path, universal)
+    elif mutation == "missing_universal_mechanism":
+        for record in universal:
+            if record["mechanism"] == "mechanism_reveal":
+                record["mechanism"] = "curiosity_gap"
+        write_json(universal_path, universal)
+    else:
+        retained = set(EXACT_MECHANISM_IDS) - {
+            "avoidable_loss",
+            "future_desire",
+            "inverted_objection",
+            "demonstration",
+            "discovery",
+            "incomplete_list",
+            "editorial_question",
+            "open_story",
+            "grounded_contrarian",
+            "mechanism_reveal",
+            "before_after_tension",
+        }
+        for record in ivs:
+            if record["mechanism"] not in retained:
+                record["mechanism"] = "curiosity_gap"
+        write_json(ivs_path, ivs)
+    with pytest.raises(ValueError, match=expected):
+        HookLibrary.load(root)
+
+
+@pytest.mark.parametrize("bad_id", ["universal-", "wrong-curiosity-01", "UNIVERSAL-ok"])
+def test_pattern_id_must_match_strict_slug_and_library_prefix(tmp_path, bad_id):
+    root = copied_data(tmp_path)
+    path = root / "universal/patterns.json"
+    records = json.loads(path.read_text(encoding="utf-8"))
+    records[0]["id"] = bad_id
+    write_json(path, records)
+    with pytest.raises(ValueError, match="id.*formato"):
+        HookLibrary.load(root)
+
+
+def test_loader_rejects_duplicate_and_short_explanations(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "universal/patterns.json"
+    records = json.loads(path.read_text(encoding="utf-8"))
+    records[1]["explanation"] = "  " + records[0]["explanation"].upper() + "  "
+    write_json(path, records)
+    with pytest.raises(ValueError, match="explanation.*duplicada.*universal-curiosity-gap-01"):
+        HookLibrary.load(root)
+    records[1]["explanation"] = "Explicação curta demais para orientar o uso editorial."
+    write_json(path, records)
+    with pytest.raises(ValueError, match="explanation.*60"):
+        HookLibrary.load(root)
+
+
+def test_all_explanations_are_editorial_and_unique_after_normalization():
+    explanations = [pattern.explanation for pattern in HookLibrary.load_default().all_patterns]
+    assert all(len(text) >= 60 for text in explanations)
+    assert len({normalized(text) for text in explanations}) == len(explanations) == 60
+
+
+def test_loader_rejects_near_duplicate_template_and_names_both_ids(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "universal/patterns.json"
+    records = json.loads(path.read_text(encoding="utf-8"))
+    records[1]["template"] = records[0]["template"] + " agora"
+    records[1]["slots"] = records[0]["slots"]
+    write_json(path, records)
+    with pytest.raises(ValueError) as error:
+        HookLibrary.load(root)
+    message = str(error.value)
+    assert "similar" in message
+    assert records[0]["id"] in message and records[1]["id"] in message
+
+
+def test_auxiliary_datasets_are_loaded_validated_and_read_only():
+    library = HookLibrary.load_default()
+    assert isinstance(library.audiences, tuple) and len(library.audiences) >= 8
+    assert isinstance(library.topics, tuple) and len(library.topics) >= 12
+    assert set(library.forbidden_claims) == {"version", "categories"}
+    assert {
+        category["id"] for category in library.forbidden_claims["categories"]
+    } == REQUIRED_CLAIM_CATEGORIES
+    with pytest.raises(TypeError):
+        library.forbidden_claims["version"] = "mutated"
+    with pytest.raises(TypeError):
+        library.audiences[0]["label"] = "mutated"
+
+
+@pytest.mark.parametrize(
+    ("relative", "mutation", "expected"),
+    [
+        ("ivs-health/audiences.json", "empty_object", "deve ser uma lista"),
+        ("ivs-health/audiences.json", "duplicate_id", "ID duplicado"),
+        ("ivs-health/forbidden-claims.json", "missing_category", "categorias"),
+        ("ivs-health/forbidden-claims.json", "invalid_regex", "regex"),
+    ],
+)
+def test_loader_rejects_invalid_auxiliary_data(tmp_path, relative, mutation, expected):
+    root = copied_data(tmp_path)
+    path = root / relative
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if mutation == "empty_object":
+        payload = {}
+    elif mutation == "duplicate_id":
+        payload[1]["id"] = payload[0]["id"]
+    elif mutation == "missing_category":
+        payload["categories"].pop()
+    else:
+        payload["categories"][0]["patterns"] = ["("]
+    write_json(path, payload)
+    with pytest.raises(ValueError, match=expected):
+        HookLibrary.load(root)
+
+
+def test_forbidden_claim_patterns_detect_each_risk_and_clear_all_ivs_templates():
+    library = HookLibrary.load_default()
+    probes = {
+        "cure": "Este protocolo cura a diabetes.",
+        "guarantee": "Resultado garantido para todas as pessoas.",
+        "diagnosis": "Você tem depressão.",
+        "prescription": "Tome 20 mg deste composto diariamente.",
+        "false_urgency": "Compre agora ou será tarde demais.",
+        "stigma": "Só não emagrece quem é preguiçoso.",
+        "unsourced_number": "Este método reduz 73% do colesterol.",
+        "absolute_superiority": "Esta é a única solução que funciona.",
+    }
+    compiled = {
+        category["id"]: [re.compile(pattern, re.IGNORECASE) for pattern in category["patterns"]]
+        for category in library.forbidden_claims["categories"]
+    }
+    for category_id, phrase in probes.items():
+        assert any(regex.search(phrase) for regex in compiled[category_id]), category_id
+    for pattern in library.patterns("ivs-health"):
+        matches = [
+            category_id
+            for category_id, regexes in compiled.items()
+            if any(regex.search(pattern.template) for regex in regexes)
+        ]
+        assert not matches, (pattern.id, matches)
+
+
+def test_every_template_renders_naturally_with_plural_audience():
+    values = {
+        "topic": "sono",
+        "audience": "mulheres adultas",
+        "desired_outcome": "decisões mais conscientes",
+        "context": "na rotina diária",
+        "required_word": "rotina",
+    }
+    for pattern in HookLibrary.load_default().all_patterns:
+        rendered = pattern.template.format(**values)
+        assert "{" not in rendered and "}" not in rendered
+        assert not re.search(r"\s{2,}", rendered)
+        assert len(rendered) <= 280

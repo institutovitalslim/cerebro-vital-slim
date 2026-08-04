@@ -17,12 +17,12 @@
     "tones": [
       "direct"
     ],
-    "template": "O que costuma passar despercebido quando {audience} conversa sobre {topic}?",
+    "template": "O que costuma passar despercebido em conversas de {audience} sobre {topic}?",
     "slots": [
       "audience",
       "topic"
     ],
-    "explanation": "Este padrão aplica lacuna de curiosidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “O que costuma passar despercebido em conversas de {audience} sobre {t…” omite deliberadamente a resposta central depois de apresentar uma pista concreta; a pista promete completar uma informação relevante, sem prometer resultado. É recomendada em youtube, ad quando o objetivo editorial combina sharing, education.",
     "intensity": 2
   },
   {
@@ -48,7 +48,7 @@
       "topic",
       "audience"
     ],
-    "explanation": "Este padrão aplica interrupção de padrão com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Antes de buscar uma regra para {topic}, vale entender o contexto de {…” contraria a abertura esperada e troca a ordem habitual do raciocínio; a quebra inicial obriga a reconsiderar o ponto de partida. É recomendada em reel, carousel quando o objetivo editorial combina action, education.",
     "intensity": 3
   },
   {
@@ -73,7 +73,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica contraste de expectativa com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Em {topic}, informação mais chamativa nem sempre é a mais útil para e…” coloca a expectativa popular diante de um critério menos óbvio; o contraste entre aparência e utilidade sustenta a atenção. É recomendada em ad, story quando o objetivo editorial combina scroll_stop, education.",
     "intensity": 1
   },
   {
@@ -94,12 +94,12 @@
     "tones": [
       "premium"
     ],
-    "template": "Se falar de {topic} traz dúvidas e cobranças, {audience} não precisa começar por certezas",
+    "template": "Se falar de {topic} traz dúvidas e cobranças, há um ponto de partida mais acolhedor para {audience}",
     "slots": [
       "topic",
       "audience"
     ],
-    "explanation": "Este padrão aplica identificação com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Se falar de {topic} traz dúvidas e cobranças, há um ponto de partida…” espelha uma situação cotidiana reconhecível antes de oferecer direção; o reconhecimento da dificuldade cria proximidade sem rotular ninguém. É recomendada em carousel, landing_page quando o objetivo editorial combina curiosity, education.",
     "intensity": 2
   },
   {
@@ -124,7 +124,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica erro comum com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Um erro frequente ao abordar {topic} é ignorar como a rotina influenc…” nomeia uma escolha frequente e desloca o olhar para sua causa estrutural; o custo do erro abre espaço para uma correção educativa. É recomendada em story, email quando o objetivo editorial combina retention, education.",
     "intensity": 3
   },
   {
@@ -149,7 +149,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica mito versus evidência com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Como diferenciar uma crença sobre {topic} de informação apoiada por b…” opõe repetição popular a critérios, fontes ou evidências verificáveis; a dúvida sobre o que merece confiança pede continuação. É recomendada em landing_page, blog quando o objetivo editorial combina identification, education.",
     "intensity": 1
   },
   {
@@ -174,7 +174,7 @@
       "topic",
       "required_word"
     ],
-    "explanation": "Este padrão aplica especificidade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Ao ler sobre {topic}, observe como a palavra {required_word} está sen…” isola um detalhe concreto para reduzir abstração e orientar a leitura; a precisão do recorte mostra por que uma pequena distinção importa. É recomendada em email, youtube quando o objetivo editorial combina education.",
     "intensity": 2
   },
   {
@@ -199,7 +199,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica autoridade com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “O que fontes responsáveis deixam claro ao educar sobre {topic} e seus…” demonstra método e limites em vez de reivindicar autoridade por título; a transparência do processo transforma confiança em algo observável. É recomendada em blog, reel quando o objetivo editorial combina authority, education.",
     "intensity": 3
   },
   {
@@ -224,7 +224,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica identidade aspiracional com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Escolhas informadas sobre {topic} começam com curiosidade, contexto e…” associa a decisão a valores de discernimento que a audiência pode cultivar; a distância entre acompanhar e escolher com critério gera aspiração. É recomendada em youtube, ad quando o objetivo editorial combina objection, education.",
     "intensity": 1
   },
   {
@@ -249,7 +249,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica tensão antes e depois com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “De uma dúvida ampla sobre {topic} a perguntas mais úteis para uma con…” justapõe um estado inicial confuso a outro mais organizado; a passagem entre os dois estados convida a descobrir o ponto de virada. É recomendada em reel, carousel quando o objetivo editorial combina sharing, education.",
     "intensity": 2
   },
   {
@@ -270,12 +270,12 @@
     "tones": [
       "direct"
     ],
-    "template": "O ruído que {audience} pode evitar ao conferir a fonte antes de compartilhar {topic}",
+    "template": "O ruído que pode ser evitado por {audience} ao conferir a fonte antes de compartilhar {topic}",
     "slots": [
       "audience",
       "topic"
     ],
-    "explanation": "Este padrão aplica perda evitável com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “O ruído que pode ser evitado por {audience} ao conferir a fonte antes…” torna visível um desperdício de atenção, contexto ou oportunidade; a perda possível é apresentada como evitável por uma escolha prudente. É recomendada em ad, story quando o objetivo editorial combina action, education.",
     "intensity": 3
   },
   {
@@ -300,7 +300,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica desejo futuro com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Como seria conversar sobre {topic} com mais acolhimento e menos julga…” projeta um cenário desejável como direção possível, não como certeza; a diferença entre o presente e o cenário imaginado cria movimento. É recomendada em carousel, landing_page quando o objetivo editorial combina scroll_stop, education.",
     "intensity": 1
   },
   {
@@ -325,7 +325,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica objeção invertida com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Não saber por onde começar em {topic} pode ajudar a identificar a pri…” transforma dúvida, falta de tempo ou resistência em começo legítimo; a própria objeção deixa de bloquear e passa a orientar o próximo recorte. É recomendada em story, email quando o objetivo editorial combina curiosity, education.",
     "intensity": 2
   },
   {
@@ -346,12 +346,11 @@
     "tones": [
       "premium"
     ],
-    "template": "Veja duas formas de explicar {topic}: uma sem contexto e outra que respeita {audience}",
+    "template": "Compare uma manchete isolada sobre {topic} com a mesma informação acompanhada de fonte, data e limites",
     "slots": [
-      "topic",
-      "audience"
+      "topic"
     ],
-    "explanation": "Este padrão aplica demonstração com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Compare uma manchete isolada sobre {topic} com a mesma informação aco…” faz a ideia aparecer por comparação observável entre abordagens; a diferença concreta entre versões substitui uma afirmação abstrata. É recomendada em landing_page, blog quando o objetivo editorial combina retention, education.",
     "intensity": 3
   },
   {
@@ -376,7 +375,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica descoberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Uma nova leitura de {topic} aparece quando conectamos informação e ro…” reorganiza elementos conhecidos para revelar uma perspectiva antes oculta; a conexão ainda não percebida funciona como descoberta editorial. É recomendada em email, youtube quando o objetivo editorial combina identification, education.",
     "intensity": 1
   },
   {
@@ -400,7 +399,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica lista incompleta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Três perguntas organizam sua leitura sobre {topic}” antecipa uma sequência e preserva o item decisivo para o desenvolvimento; a enumeração incompleta cria continuidade com entrega claramente delimitada. É recomendada em blog, reel quando o objetivo editorial combina education.",
     "intensity": 2
   },
   {
@@ -426,7 +425,7 @@
       "topic",
       "audience"
     ],
-    "explanation": "Este padrão aplica pergunta editorial com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Que critérios tornam uma informação sobre {topic} realmente útil para…” formula uma pergunta central que define o ângulo da apuração; a ausência inicial de resposta orienta uma exploração equilibrada. É recomendada em youtube, ad quando o objetivo editorial combina authority, education.",
     "intensity": 3
   },
   {
@@ -447,11 +446,11 @@
     "tones": [
       "provocative"
     ],
-    "template": "A conversa sobre {topic} começou com uma certeza e avançou quando surgiu uma pergunta",
+    "template": "Durante uma conversa sobre {topic}, uma fonte esquecida mudou o sentido do relato — e ainda faltava conferir um detalhe",
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica história aberta com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Durante uma conversa sobre {topic}, uma fonte esquecida mudou o senti…” abre uma cena com mudança de rumo e adia a consequência narrativa; a interrupção antes do desfecho mantém interesse pela resolução da cena. É recomendada em reel, carousel quando o objetivo editorial combina objection, education.",
     "intensity": 1
   },
   {
@@ -476,7 +475,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica contraponto fundamentado com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Em {topic}, simplificar demais pode atrapalhar mais do que uma respos…” questiona uma ideia difundida e ancora a discordância em contexto ou método; o atrito com o senso comum pede razões, não mero choque. É recomendada em ad, story quando o objetivo editorial combina sharing, education.",
     "intensity": 2
   },
   {
@@ -501,7 +500,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "Este padrão aplica revelação de mecanismo com contexto suficiente para despertar interesse sem transformar uma possibilidade em promessa universal.",
+    "explanation": "A abertura “Por que contexto, fonte e individualidade mudam a interpretação de co…” anuncia o processo estrutural escondido por trás do efeito percebido; a distância entre efeito e causa convida a revelar como o processo funciona. É recomendada em carousel, landing_page quando o objetivo editorial combina action, education.",
     "intensity": 3
   }
 ]

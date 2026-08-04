@@ -1,69 +1,61 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "categories": [
     {
       "id": "cure",
       "label": "Cura",
-      "description": "Afirma eliminar definitivamente uma condição.",
-      "examples": [
-        "Este método cura qualquer condição."
-      ]
+      "description": "Afirma eliminar ou reverter definitivamente uma doença ou condição.",
+      "examples": ["Este protocolo cura a diabetes."],
+      "patterns": ["\\bcur(?:a|ar|ou|ado|ada|am)\\b", "\\belimina(?:r|do|da)?\\s+(?:definitivamente\\s+)?(?:a|o)\\s+(?:doença|condição)\\b"]
     },
     {
       "id": "guarantee",
       "label": "Garantia",
-      "description": "Promete resultado certo para todas as pessoas.",
-      "examples": [
-        "Resultado garantido para todos."
-      ]
+      "description": "Promete resultado certo, inevitável ou válido para todas as pessoas.",
+      "examples": ["Resultado garantido para todas as pessoas."],
+      "patterns": ["\\bresultados?\\s+garantid[oa]s?\\b", "\\b(?:garante|garantia\\s+de)\\s+(?:o\\s+)?resultado\\b", "\\bfunciona\\s+(?:sempre|para\\s+tod[oa]s)\\b"]
     },
     {
       "id": "diagnosis",
       "label": "Diagnóstico",
-      "description": "Declara uma condição individual sem avaliação habilitada.",
-      "examples": [
-        "Esse sinal prova que você tem uma doença."
-      ]
+      "description": "Declara diretamente ao leitor que ele possui uma condição clínica.",
+      "examples": ["Você tem depressão."],
+      "patterns": ["\\b(?:você|tu)\\s+(?:tem|está\\s+com|sofre\\s+de)\\s+[a-zá-úç][a-zá-úç-]+", "\\besse\\s+sinal\\s+(?:prova|confirma)\\s+que\\s+(?:você|tu)\\s+tem\\b"]
     },
     {
       "id": "prescription",
       "label": "Prescrição",
-      "description": "Determina tratamento, dose ou conduta clínica individual.",
-      "examples": [
-        "Tome esta dose todos os dias."
-      ]
+      "description": "Ordena o uso de substância, dose, tratamento ou conduta clínica.",
+      "examples": ["Tome 20 mg deste composto diariamente."],
+      "patterns": ["\\b(?:tome|use|aplique|ingira)\\s+(?:\\d+(?:[.,]\\d+)?\\s*(?:mg|ml|g)\\s+)?(?:este|esta|deste|desta|o|a|um|uma)\\b", "\\b(?:faça|inicie)\\s+(?:este|o|um)\\s+tratamento\\b"]
     },
     {
       "id": "false_urgency",
       "label": "Urgência falsa",
-      "description": "Pressiona uma decisão com prazo ou risco fabricado.",
-      "examples": [
-        "Você precisa agir hoje ou será tarde."
-      ]
+      "description": "Pressiona uma decisão imediata por prazo ou consequência fabricada.",
+      "examples": ["Compre agora ou será tarde demais."],
+      "patterns": ["\\b(?:compre|aja|decida|comece)\\s+(?:agora|hoje)\\s+ou\\s+(?:será|vai\\s+ser)\\s+tarde\\b", "\\búltima\\s+chance\\b", "\\bsó\\s+hoje\\b"]
     },
     {
       "id": "stigma",
       "label": "Estigma",
-      "description": "Culpabiliza ou desumaniza alguém por corpo ou condição.",
-      "examples": [
-        "Só não melhora quem não se esforça."
-      ]
+      "description": "Culpabiliza ou desumaniza alguém por corpo, peso, doença ou comportamento.",
+      "examples": ["Só não emagrece quem é preguiçoso."],
+      "patterns": ["\\bsó\\s+não\\s+(?:emagrece|melhora|se\\s+cuida)\\s+quem\\s+(?:é|não)\\s+(?:preguiços[oa]|fraco|se\\s+esforça)\\b", "\\b(?:gordo|obeso|doente)\\s+porque\\s+(?:quer|não\\s+tem\\s+disciplina)\\b"]
     },
     {
       "id": "unsourced_number",
-      "label": "Número sem fonte",
-      "description": "Apresenta estatística clínica sem referência verificável.",
-      "examples": [
-        "Funciona em uma porcentagem inventada de casos."
-      ]
+      "label": "Número clínico sem fonte",
+      "description": "Apresenta percentual ou número clínico como efeito sem fonte ou contexto.",
+      "examples": ["Este método reduz 73% do colesterol."],
+      "patterns": ["\\b(?:reduz|aumenta|melhora|elimina|previne)\\s+\\d+(?:[.,]\\d+)?%\\s+(?:d[oa]s?\\s+)?(?:colesterol|glicemia|casos|risco|sintomas?)\\b", "\\b\\d+(?:[.,]\\d+)?%\\s+(?:de\\s+)?(?:eficácia|dos\\s+casos|de\\s+redução)\\b"]
     },
     {
       "id": "absolute_superiority",
       "label": "Superioridade absoluta",
-      "description": "Declara uma opção universalmente melhor que todas as outras.",
-      "examples": [
-        "É a única solução que presta."
-      ]
+      "description": "Declara uma opção única, universalmente melhor ou superior a todas as demais.",
+      "examples": ["Esta é a única solução que funciona."],
+      "patterns": ["\\b(?:a|esta|essa)\\s+única\\s+solução\\s+que\\s+(?:funciona|presta)\\b", "\\bmelhor\\s+(?:que\\s+)?tod[oa]s\\s+(?:as|os)\\s+(?:outras|outros)\\b", "\\binsuperável\\b"]
     }
   ]
 }
