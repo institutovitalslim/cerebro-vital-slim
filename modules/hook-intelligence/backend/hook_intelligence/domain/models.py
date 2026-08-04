@@ -3,7 +3,7 @@ from enum import StrEnum
 from typing import Literal
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 from hook_intelligence import ENGINE_VERSION
 
@@ -100,7 +100,7 @@ class Hook(DomainModel):
     explanation: str
     source: Source
     engine_version: Literal[ENGINE_VERSION] = ENGINE_VERSION
-    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    created_at: AwareDatetime = Field(default_factory=lambda: datetime.now(UTC))
 
 
 class GenerationRequest(DomainModel):
@@ -132,7 +132,7 @@ class GenerationResponse(DomainModel):
 class ContentOSExport(DomainModel):
     schema_version: Literal["1.0.0"] = "1.0.0"
     workspace_ref: str
-    generated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    generated_at: AwareDatetime = Field(default_factory=lambda: datetime.now(UTC))
     hooks: list[Hook]
 
 

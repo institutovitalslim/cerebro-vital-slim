@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -121,6 +122,41 @@ def test_pydantic_rejects_score_above_limit():
             channel_fit=95,
             overall=86,
         )
+
+
+def test_timestamp_defaults_are_utc():
+    hook = sample_hook()
+    export = ContentOSExport(workspace_ref="content-os/ivs", hooks=[hook])
+
+    assert hook.created_at.utcoffset() == timedelta(0)
+    assert export.generated_at.utcoffset() == timedelta(0)
+
+
+def test_hook_rejects_naive_created_at():
+    hook_data = sample_hook().model_dump(exclude={"created_at"})
+
+    with pytest.raises(ValidationError):
+        Hook(**hook_data, created_at=datetime(2026, 1, 1))  # noqa: DTZ001
+
+
+def test_content_os_export_rejects_naive_generated_at():
+    with pytest.raises(ValidationError):
+        ContentOSExport(
+            workspace_ref="content-os/ivs",
+            hooks=[sample_hook()],
+            generated_at=datetime(2026, 1, 1),  # noqa: DTZ001
+        )
+
+
+def test_utc_timestamps_serialize_with_timezone_designator():
+    hook = sample_hook()
+    export = ContentOSExport(workspace_ref="content-os/ivs", hooks=[hook])
+
+    hook_timestamp = hook.model_dump(mode="json")["created_at"]
+    export_timestamp = export.model_dump(mode="json")["generated_at"]
+
+    assert hook_timestamp.endswith(("Z", "+00:00"))
+    assert export_timestamp.endswith(("Z", "+00:00"))
 
 
 def test_serialized_domain_models_validate_against_contracts_with_local_refs():
