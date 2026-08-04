@@ -1,11 +1,17 @@
 from copy import deepcopy
+from dataclasses import replace
 from hashlib import sha256
 from types import SimpleNamespace
 
 import pytest
 
 from hook_intelligence.domain.models import GenerationRequest
-from hook_intelligence.engine.composer import compose_pattern, contains_forbidden
+from hook_intelligence.engine.composer import (
+    CandidateConstraintError,
+    PatternCompositionError,
+    compose_pattern,
+    contains_forbidden,
+)
 from hook_intelligence.engine.library import HookLibrary, Pattern
 from hook_intelligence.engine.pipeline import generate_deterministic
 from hook_intelligence.engine.selector import select_patterns, stable_rank
@@ -160,17 +166,18 @@ def test_max_length_never_cuts_words_and_preserves_required_words():
         required_words=["rotina consciente"],
         max_length=55,
     )
-    text = compose_pattern(
-        pattern(template="Uma análise ampla de {topic} para escolhas mais consistentes"),
-        generation_request,
-        0,
-    )
-
-    assert 3 <= len(text) <= 55
-    assert "rotina consciente" in text.casefold()
-    assert not text.endswith(" ")
-    with pytest.raises(ValueError, match="required_words.*max_length"):
-        compose_pattern(pattern(), request(required_words=["x" * 40], max_length=30), 0)
+    with pytest.raises(CandidateConstraintError, match="integralmente.*max_length"):
+        compose_pattern(
+            pattern(template="Uma análise ampla de {topic} para escolhas mais consistentes"),
+            generation_request,
+            0,
+        )
+    with pytest.raises(CandidateConstraintError, match="required_words.*max_length"):
+        compose_pattern(
+            pattern(template="Veja {topic}"),
+            request(required_words=["x" * 40], max_length=30),
+            0,
+        )
 
 
 def test_forbidden_matching_is_unicode_casefolded_and_expression_bounded():
@@ -178,6 +185,8 @@ def test_forbidden_matching_is_unicode_casefolded_and_expression_bounded():
     assert contains_forbidden("Use STRASSE com cuidado", ["Straße"])
     assert contains_forbidden("Uma rotina de alto impacto", ["alto impacto"])
     assert not contains_forbidden("Uma ideia milagreira", ["milagre"])
+    assert contains_forbidden("Atenção ao cafe\u0301", ["café"])
+    assert contains_forbidden("Use ＭＩＬＡＧＲＥ agora", ["milagre"])
 
     with pytest.raises(ValueError, match="forbidden"):
         compose_pattern(
@@ -228,3 +237,99 @@ def test_real_library_is_not_mutated():
     before = library.all_patterns
     generate_deterministic(request(count=2), library)
     assert library.all_patterns == before
+
+
+def test_request_is_strictly_revalidated_after_model_copy():
+    invalid_updates = (
+        {"topic": None},
+        {"required_words": None},
+        {"forbidden_words": None},
+        {"max_length": "100"},
+        {"topic": " \t "},
+        {"audience": "\n "},
+        {"required_words": ["ok", " "]},
+        {"forbidden_words": [""]},
+    )
+    for update in invalid_updates:
+        corrupted = request().model_copy(update=update)
+        with pytest.raises(ValueError, match="GenerationRequest|request|vazi"):
+            generate_deterministic(corrupted)
+
+
+def test_request_normalization_deduplicates_and_detects_canonical_contradiction():
+    original = request(required_words=[" café ", "cafe\u0301", "ＣＡＦÉ"], count=1)
+    hook = generate_deterministic(original)[0]
+    assert hook.text.casefold().count("café") == 1
+    assert original.required_words == [" café ", "cafe\u0301", "ＣＡＦÉ"]
+
+    contradictory = request(required_words=["cafe\u0301"], forbidden_words=[" CAFÉ "])
+    with pytest.raises(ValueError, match="contradição.*café"):
+        generate_deterministic(contradictory)
+
+
+def test_canonical_requests_have_same_content_and_ids():
+    first = generate_deterministic(request(topic="café produtivo", count=3))
+    second = generate_deterministic(request(topic="ｃａｆｅ\u0301   produtivo", count=3))
+    assert [(item.text, item.id) for item in first] == [(item.text, item.id) for item in second]
+
+
+def test_nfkc_dedupe_skips_compatibility_equivalent_candidates():
+    normal = pattern("normal", template="Foco em {topic} para decisões melhores")
+    fullwidth = pattern("fullwidth", template="Ｆｏｃｏ em {topic} para decisões melhores")
+    library = SimpleNamespace(all_patterns=(normal, fullwidth))
+    hooks = generate_deterministic(request(count=2), library)
+    assert len(hooks) == 2
+    assert hooks[0].pattern_id == hooks[1].pattern_id
+
+
+@pytest.mark.parametrize(
+    "template, declared",
+    (
+        ("Entenda {topic", ("topic",)),
+        ("Entenda {topic:>10}", ("topic",)),
+        ("Entenda {topic!r}", ("topic",)),
+        ("Entenda {unknown}", ("unknown",)),
+        ("Entenda {topic} e {topic}", ("topic", "topic")),
+        ("Entenda {topic}", ("audience",)),
+    ),
+)
+def test_pipeline_propagates_structural_pattern_errors(template, declared):
+    broken = replace(pattern("broken", template=template), slots=declared)
+    library = SimpleNamespace(all_patterns=(broken,))
+    with pytest.raises(PatternCompositionError, match="pattern_id=broken"):
+        generate_deterministic(request(count=1), library)
+
+
+def test_pipeline_only_skips_candidate_constraint_errors():
+    forbidden = pattern("forbidden", template="Milagre em {topic} para analisar")
+    good = pattern("good", template="Uma reflexão sobre {topic} para analisar melhor")
+    hooks = generate_deterministic(
+        request(forbidden_words=["milagre"], count=1),
+        SimpleNamespace(all_patterns=(forbidden, good)),
+    )
+    assert hooks[0].pattern_id == "good"
+
+
+def test_composer_rejects_dangling_portuguese_endings_without_truncating():
+    for ending in (
+        "de",
+        "do",
+        "da",
+        "para",
+        "com",
+        "sem",
+        "e",
+        "ou",
+        "que",
+        "quando",
+        "no",
+        "na",
+        "ao",
+        "o",
+        "uma",
+    ):
+        dangling = pattern(
+            f"dangling-{ending}", template=f"Uma ideia completa sobre {{topic}} {ending}"
+        )
+        with pytest.raises(CandidateConstraintError, match="final pendente"):
+            compose_pattern(dangling, request(), 0)
