@@ -1,0 +1,88 @@
+{
+  "nodes": [
+    {
+      "id": "clara",
+      "label": "Clara WhatsApp",
+      "type": "agent"
+    },
+    {
+      "id": "qa_diario",
+      "label": "QA diário conversão/agendamento",
+      "type": "routine"
+    },
+    {
+      "id": "agendamento",
+      "label": "Confirmação objetiva com opções literais",
+      "type": "conversion_pattern"
+    },
+    {
+      "id": "lead_frio",
+      "label": "Lead frio precisa triagem antes de explicação",
+      "type": "objection_pattern"
+    },
+    {
+      "id": "exames",
+      "label": "Follow-up de exames com prazo concreto",
+      "type": "followup_pattern"
+    },
+    {
+      "id": "roteamento",
+      "label": "Qualificação inicial por serviço",
+      "type": "routing_pattern"
+    },
+    {
+      "id": "guardrails",
+      "label": "Guardrails clínicos e PII",
+      "type": "governance"
+    }
+  ],
+  "edges": [
+    {
+      "source": "clara",
+      "target": "qa_diario",
+      "relationship": "audited_by",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "qa_diario",
+      "target": "agendamento",
+      "relationship": "found_signal",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "qa_diario",
+      "target": "lead_frio",
+      "relationship": "found_objection",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "qa_diario",
+      "target": "exames",
+      "relationship": "found_silence_pattern",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "qa_diario",
+      "target": "roteamento",
+      "relationship": "found_routing_need",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "qa_diario",
+      "target": "guardrails",
+      "relationship": "constrained_by",
+      "confidence": "EXTRACTED"
+    }
+  ],
+  "communities": {
+    "0": [
+      "clara",
+      "qa_diario",
+      "agendamento",
+      "lead_frio",
+      "exames",
+      "roteamento",
+      "guardrails"
+    ]
+  }
+}

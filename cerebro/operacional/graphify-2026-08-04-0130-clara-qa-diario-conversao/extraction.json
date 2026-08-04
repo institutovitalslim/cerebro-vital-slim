@@ -1,0 +1,47 @@
+{
+  "tipo": "rc25_graphify",
+  "tema": "QA diário Clara conversão/agendamento",
+  "data_utc": "2026-08-04T01:30:00Z",
+  "agent": "maria-gerente",
+  "fontes": [
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-current.json",
+    "/root/.openclaw/reports/clara-learning/latest-whatsapp-historical.json"
+  ],
+  "sanitizado": true,
+  "pii": false,
+  "metricas": {
+    "current_total_messages": 0,
+    "current_unique_leads": 0,
+    "current_inbound": 0,
+    "current_outbound": 0,
+    "current_wins": 0,
+    "current_drops": 0,
+    "historical_total_messages": 6187,
+    "historical_unique_leads": 443,
+    "historical_inbound": 3275,
+    "historical_outbound": 2912,
+    "historical_wins": 30,
+    "historical_drops": 5,
+    "historical_win_rate_unique_leads_pct": 6.77,
+    "historical_drop_rate_unique_leads_pct": 1.13
+  },
+  "sinais": {
+    "agendamento": "confirmação objetiva com serviço, dia/horário e opções literais",
+    "objecao": "explicação/venda antes da qualificação esfria lead frio",
+    "silencio": "follow-up aberto de exames gera evasão; usar prazo concreto",
+    "roteamento": "qualificar serviço antes de detalhar atendimento"
+  },
+  "melhorias_praticas": [
+    "confirmação com três respostas curtas",
+    "triagem inicial por serviço antes de explicação",
+    "follow-up de exames com prazo concreto e próximo passo"
+  ],
+  "aprendizado_operacional_novo": "Triagem inicial por serviço e follow-up de exames com prazo concreto devem ser tratados como hipótese operacional de conversão, não regra clínica.",
+  "classificacao": [
+    "aplicar amanhã",
+    "testar 3 dias"
+  ],
+  "risco": "BAIXO_COMPLIANCE_MODERADO_CONVERSAO_SE_EXPLICACAO_PRECOCE_OU_FOLLOWUP_ABERTO",
+  "intervencao_humana": "não indicada imediatamente; verificar ingestão se janela current zerada repetir em horário ativo",
+  "gate": "Não pausar Clara sem ordem direta do Tiaro."
+}
