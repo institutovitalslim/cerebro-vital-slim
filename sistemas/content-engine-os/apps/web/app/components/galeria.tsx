@@ -717,7 +717,13 @@ export function Galeria() {
 
   const unique = (key: keyof Creative) => Array.from(new Set(items.map((x) => x[key]).filter(Boolean) as string[])).sort()
   const vis = items.filter((c) => {
-    if (!(filtro === 'todos' || (filtro === 'aprovados' ? c.status === 'aprovado' : c.format === filtro))) return false
+    // peça publicada não é decisão pendente: sai da fila padrão, vive na aba 📚
+    if (filtro === 'publicadas') {
+      if (c.status !== 'publicado') return false
+    } else {
+      if (c.status === 'publicado') return false
+      if (!(filtro === 'todos' || (filtro === 'aprovados' ? c.status === 'aprovado' : c.format === filtro))) return false
+    }
     if (fDestino !== 'todos' && (c.destino || 'feed') !== fDestino) return false
     if (fAngulo !== 'todos' && c.angulo_ivs !== fAngulo) return false
     if (fHook !== 'todos' && c.hook_tipo !== fHook) return false
@@ -747,9 +753,9 @@ export function Galeria() {
           <span className="muted small">🌱 vai para o feed/perfil · 📣 vira anúncio nas Campanhas Meta</span>
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {['todos', 'aprovados', 'carrossel', 'reels', 'stories', 'estatico'].map((f) => (
+          {['todos', 'aprovados', 'carrossel', 'reels', 'stories', 'estatico', 'publicadas'].map((f) => (
             <button key={f} className={f === filtro ? 'primaryButton' : 'secondaryLink'} style={{ minHeight: 38, padding: '0 14px' }} onClick={() => setFiltro(f)}>
-              {f}
+              {f === 'publicadas' ? '📚 publicadas' : f}
             </button>
           ))}
         </div>
