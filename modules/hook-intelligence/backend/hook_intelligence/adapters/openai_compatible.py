@@ -18,6 +18,7 @@ DEFAULT_TIMEOUT_SECONDS = 20.0
 DEFAULT_MAX_TOKENS = 2048
 MAX_TOKENS_LIMIT = 4096
 MAX_ENDPOINT_CHARS = 2048
+MAX_API_KEY_CHARS = 4096
 MAX_TOPIC_CHARS = 1000
 MAX_CANDIDATES = 50
 MAX_CANDIDATE_CHARS = 4096
@@ -42,10 +43,14 @@ def _validate_endpoint(endpoint: object) -> str:
         raise _public_error("HOOK_AI_ENDPOINT possui comprimento inválido")
     if any(unicodedata.category(char).startswith("C") for char in endpoint):
         raise _public_error("HOOK_AI_ENDPOINT contém caracteres inválidos")
+    parsed = None
+    parsing_failed = False
     try:
         parsed = urlsplit(endpoint)
     except ValueError:
-        raise _public_error("HOOK_AI_ENDPOINT inválido") from None
+        parsing_failed = True
+    if parsing_failed or parsed is None:
+        raise _public_error("HOOK_AI_ENDPOINT inválido")
     if parsed.scheme not in {"http", "https"} or not parsed.hostname:
         raise _public_error("HOOK_AI_ENDPOINT deve usar http ou https")
     if parsed.scheme == "http" and parsed.hostname.casefold() not in {
@@ -108,8 +113,14 @@ class OpenAICompatible:
         max_tokens: object = DEFAULT_MAX_TOKENS,
         transport: Any | None = None,
     ) -> None:
-        if not isinstance(api_key, str) or not api_key.strip():
-            raise _public_error("HOOK_AI_API_KEY é obrigatória")
+        if (
+            not isinstance(api_key, str)
+            or not api_key
+            or len(api_key) > MAX_API_KEY_CHARS
+            or api_key != api_key.strip()
+            or any(char.isspace() or unicodedata.category(char).startswith("C") for char in api_key)
+        ):
+            raise _public_error("HOOK_AI_API_KEY inválida")
         if not isinstance(model, str) or not model.strip():
             raise _public_error("HOOK_AI_MODEL é obrigatório")
         if len(model) > 256 or any(unicodedata.category(c).startswith("C") for c in model):
@@ -162,6 +173,8 @@ class OpenAICompatible:
 
     def _post(self, payload: dict[str, Any]) -> object:
         for attempt in range(2):
+            response: object | None = None
+            post_failure: str | None = None
             try:
                 response = self._transport.post(
                     url=self.endpoint,
@@ -172,26 +185,78 @@ class OpenAICompatible:
                     json=payload,
                     timeout=self.timeout_seconds,
                 )
-                status = getattr(response, "status_code", None)
-                if isinstance(status, int) and status >= 400:
-                    if status in _TRANSIENT_STATUS and attempt == 0:
-                        continue
-                    raise _public_error(f"provider respondeu com status HTTP {status}")
-                raise_for_status = getattr(response, "raise_for_status", None)
-                if callable(raise_for_status):
-                    try:
-                        raise_for_status()
-                    except Exception:  # noqa: BLE001 -- objetos de transporte injetados são arbitrários.
-                        raise _public_error("provider recusou a requisição") from None
-                return response
-            except AdapterError:
-                raise
             except (TimeoutError, httpx.TimeoutException, httpx.TransportError):
+                post_failure = "transient"
+            except Exception:  # noqa: BLE001 -- objetos de transporte injetados são arbitrários.
+                post_failure = "contextual"
+
+            if post_failure is not None:
+                if post_failure == "transient" and attempt == 0:
+                    continue
+                if post_failure == "transient":
+                    raise _public_error("falha temporária de transporte após uma repetição")
+                raise _public_error("falha contextual de transporte")
+            if response is None:
+                raise _public_error("resposta contextual inválida do provider")
+
+            status_lookup_failed = False
+            try:
+                status_value = getattr(response, "status_code", None)
+            except Exception:  # noqa: BLE001 -- resposta injetada pode ter propriedades arbitrárias.
+                status_lookup_failed = True
+                status_value = None
+            if status_lookup_failed:
+                raise _public_error("resposta contextual inválida do provider")
+            status = status_value if type(status_value) is int else None
+            if status is not None and status >= 400:
+                if status in _TRANSIENT_STATUS and attempt == 0:
+                    continue
+                raise _public_error(f"provider respondeu com status HTTP {status}")
+
+            callback_lookup_failed = False
+            try:
+                raise_for_status = getattr(response, "raise_for_status", None)
+            except Exception:  # noqa: BLE001 -- resposta injetada pode ter propriedades arbitrárias.
+                callback_lookup_failed = True
+                raise_for_status = None
+            if callback_lookup_failed:
+                raise _public_error("resposta contextual inválida do provider")
+            if not callable(raise_for_status):
+                return response
+
+            callback_failure: str | None = None
+            callback_status: int | None = None
+            try:
+                raise_for_status()
+            except httpx.HTTPStatusError as error:
+                callback_failure = "http"
+                try:
+                    candidate_status = getattr(
+                        getattr(error, "response", None), "status_code", None
+                    )
+                except Exception:  # noqa: BLE001 -- exceção injetada pode ser arbitrária.
+                    callback_failure = "contextual"
+                else:
+                    callback_status = candidate_status if type(candidate_status) is int else None
+                    candidate_status = None
+            except (TimeoutError, httpx.TimeoutException, httpx.TransportError):
+                callback_failure = "transient"
+            except Exception:  # noqa: BLE001 -- callback injetado pode lançar qualquer exceção.
+                callback_failure = "contextual"
+
+            if callback_failure == "http":
+                if callback_status in _TRANSIENT_STATUS and attempt == 0:
+                    continue
+                if callback_status is not None:
+                    raise _public_error(f"provider respondeu com status HTTP {callback_status}")
+                raise _public_error("provider recusou a requisição")
+            if callback_failure == "transient":
                 if attempt == 0:
                     continue
-                raise _public_error("falha temporária de transporte após uma repetição") from None
-            except Exception:  # noqa: BLE001 -- objetos de transporte injetados são arbitrários.
-                raise _public_error("falha contextual de transporte") from None
+                raise _public_error("falha temporária de transporte após uma repetição")
+            if callback_failure == "contextual":
+                raise _public_error("provider recusou a requisição")
+            return response
         raise _public_error("falha contextual de transporte")
 
     def _decode(self, response: object, expected_count: int) -> list[str]:
@@ -201,29 +266,50 @@ class OpenAICompatible:
             decoder = getattr(response, "json", None)
             if not callable(decoder):
                 raise _public_error("resposta do provider não é JSON")
+            decoding_failed = False
             try:
                 body = decoder()
             except Exception:  # noqa: BLE001 -- objetos de transporte injetados são arbitrários.
-                raise _public_error("resposta do provider não é JSON válido") from None
+                decoding_failed = True
+                body = None
+            if decoding_failed:
+                raise _public_error("resposta do provider não é JSON válido")
         if not isinstance(body, Mapping):
             raise _public_error("schema de resposta inválido")
         data: object = body
         if "hooks" not in body:
+            schema_lookup_failed = False
             try:
                 content = body["choices"][0]["message"]["content"]  # type: ignore[index]
             except (KeyError, IndexError, TypeError):
-                raise _public_error("schema de resposta inválido") from None
+                schema_lookup_failed = True
+                content = None
+            if schema_lookup_failed:
+                raise _public_error("schema de resposta inválido")
             if not isinstance(content, str) or len(content) > MAX_TOTAL_CHARS + 1000:
                 raise _public_error("conteúdo de resposta inválido")
+            content_decode_failed = False
             try:
                 data = json.loads(content)
             except (json.JSONDecodeError, TypeError):
-                raise _public_error("conteúdo de resposta não contém JSON válido") from None
+                content_decode_failed = True
+                data = None
+            if content_decode_failed:
+                raise _public_error("conteúdo de resposta não contém JSON válido")
         if not isinstance(data, Mapping) or set(data) != {"hooks"}:
             raise _public_error("schema de resposta deve conter somente hooks")
         hooks = data["hooks"]
         if not isinstance(hooks, list) or len(hooks) != expected_count:
             raise _public_error("quantidade de hooks divergente")
+        raw_total = 0
+        for index, value in enumerate(hooks):
+            if not isinstance(value, str):
+                raise _public_error(f"resposta inválida: hooks[{index}] deve ser string")
+            if len(value) > MAX_CANDIDATE_CHARS:
+                raise _public_error(f"resposta inválida: hooks[{index}] acima do limite bruto")
+            raw_total += len(value)
+            if raw_total > MAX_TOTAL_CHARS:
+                raise _public_error("resposta excede limite total bruto")
         normalized = [_normalize_hook(value, index) for index, value in enumerate(hooks)]
         if sum(map(len, normalized)) > MAX_TOTAL_CHARS:
             raise _public_error("resposta excede limite total")

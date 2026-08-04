@@ -208,8 +208,9 @@ def generate_with_optional_ai(
 ) -> tuple[Hook, ...]:
     """Só substitui o baseline quando todo o lote adaptado passa nova validação."""
 
-    baseline = generate_deterministic(request, library)
     validated_request = _validated_request(request)
+    active_library = HookLibrary.load_default() if library is None else library
+    baseline = generate_deterministic(request, active_library)
     if not validated_request.use_ai:
         return baseline
 
@@ -232,7 +233,6 @@ def generate_with_optional_ai(
         if len(deduplicate(normalized, threshold=0.82)) != len(baseline):
             return baseline
 
-        active_library = HookLibrary.load_default() if library is None else library
         rules_library = _rules_library(validated_request, active_library)
         compliance = [
             evaluate_compliance(text, validated_request.library, rules_library)
