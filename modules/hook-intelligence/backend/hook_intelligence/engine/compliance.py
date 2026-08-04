@@ -25,14 +25,17 @@ _CATEGORY_REASON = {
     "absolute_superiority": "ABSOLUTE_SUPERIORITY",
 }
 _REVIEW_CATEGORIES = frozenset({"unsourced_number"})
-_NEGATED_CLAUSE_RE = re.compile(
-    r"(^|[,.;:!?])(\s{0,20}(?:não|nunca|jamais)\b[^,.;:!?]{0,500})",
-    re.IGNORECASE,
-)
+_NEGATION_MARKERS = frozenset({"não", "nunca", "jamais"})
+_NEGATION_EXCEPTIONS = frozenset({"apenas", "só", "somente"})
+_EDITORIAL_CLAUSE_MAX_CHARS = 300
+_STRONG_SENTENCE_PUNCTUATION = r".!?;:。！？"
 _METALINGUISTIC_CLAUSE_RE = re.compile(
-    r"(^|[,.;:!?])(\s{0,20}(?:a frase|o texto|a expressão|o exemplo)\s{1,4}"
-    r"[^,.;:!?]{0,300}\s{1,4}(?:é|seria)\s{1,4}[^,.;:!?]{0,80}"
-    r"(?:proibid[oa]|inadequad[oa]|exemplo\s{1,4}do\s{1,4}que\s{1,4}evitar)\b)",
+    rf"(?<!\w)(?=[^{_STRONG_SENTENCE_PUNCTUATION}]{{1,300}}"
+    rf"(?:[{_STRONG_SENTENCE_PUNCTUATION}]|$))"
+    r"(?:a frase|o texto|a expressão|o exemplo)\s{1,4}"
+    rf"[^{_STRONG_SENTENCE_PUNCTUATION}]{{0,240}}?\s{{1,4}}"
+    rf"(?:é|seria)\s{{1,4}}[^{_STRONG_SENTENCE_PUNCTUATION}]{{0,80}}?"
+    r"(?:proibid[oa]|inadequad[oa]|exemplo\s{1,4}do\s{1,4}que\s{1,4}evitar)\b",
     re.IGNORECASE,
 )
 
@@ -68,11 +71,30 @@ def _coerce_library(library: Library | str) -> Library:
 def _mask_editorial_context(text: str) -> str:
     """Mascara heurísticas editoriais bounded sem alterar o texto recebido."""
 
-    def mask_clause(match: re.Match[str]) -> str:
-        return match.group(1) + (" " * len(match.group(2)))
+    masked = _METALINGUISTIC_CLAUSE_RE.sub(lambda match: " " * len(match.group()), text)
+    characters = list(masked)
+    clause_start = 0
 
-    masked = _METALINGUISTIC_CLAUSE_RE.sub(mask_clause, text)
-    return _NEGATED_CLAUSE_RE.sub(mask_clause, masked)
+    for index in range(len(masked) + 1):
+        at_end = index == len(masked)
+        if not at_end and not unicodedata.category(masked[index]).startswith("P"):
+            continue
+
+        clause = masked[clause_start:index]
+        trimmed = clause.strip()
+        words = trimmed.casefold().split()
+        starts_with_negation = bool(words) and words[0] in _NEGATION_MARKERS
+        followed_by_exception = len(words) > 1 and words[1] in _NEGATION_EXCEPTIONS
+        if (
+            starts_with_negation
+            and not followed_by_exception
+            and len(trimmed) <= _EDITORIAL_CLAUSE_MAX_CHARS
+        ):
+            characters[clause_start:index] = " " * (index - clause_start)
+
+        clause_start = index + 1
+
+    return "".join(characters)
 
 
 def evaluate_compliance(

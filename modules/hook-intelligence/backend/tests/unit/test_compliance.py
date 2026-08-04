@@ -99,10 +99,31 @@ def test_negated_clauses_are_masked_conservatively(rules, text):
     assert evaluate_compliance(text, "ivs-health", rules).status is ComplianceStatus.PASS
 
 
+def test_negation_with_exception_word_does_not_hide_positive_claim(rules):
+    result = evaluate_compliance(
+        "Não apenas este protocolo cura a diabetes.",
+        "ivs-health",
+        rules,
+    )
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["CURE_CLAIM"]
+
+
+def test_negated_clause_over_300_chars_is_scanned_conservatively(rules):
+    text = "Não " + ("contexto " * 38) + "este protocolo cura a diabetes"
+    assert len(text.strip()) > 300
+
+    result = evaluate_compliance(text, "ivs-health", rules)
+
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["CURE_CLAIM"]
+
+
 @pytest.mark.parametrize(
     "text",
     [
         "A frase Tome 2 cápsulas por dia é um exemplo proibido.",
+        "A frase Tome 2 cápsulas, por dia é um exemplo proibido.",
         "O texto Cure a obesidade definitivamente é inadequado.",
         "A expressão COMPRE AGORA OU SERÁ TARDE DEMAIS seria um exemplo do que evitar.",
         "Ｏ ＥＸＥＭＰＬＯ Cure a obesidade definitivamente é proibido.",
@@ -110,6 +131,57 @@ def test_negated_clauses_are_masked_conservatively(rules, text):
 )
 def test_explicit_metalinguistic_examples_are_masked(rules, text):
     assert evaluate_compliance(text, "ivs-health", rules).status is ComplianceStatus.PASS
+
+
+@pytest.mark.parametrize("punctuation", [".", "!", "?", ";", ":", "。", "！", "？", ","])
+def test_positive_claim_after_any_unicode_punctuation_is_not_masked(rules, punctuation):
+    text = f"Não existe cura{punctuation}Este protocolo cura a diabetes."
+    result = evaluate_compliance(text, "ivs-health", rules)
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["CURE_CLAIM"]
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "NÃO APENAS este protocolo cura a diabetes.",
+        "ＮÃＯ ＳＯＭＥＮＴＥ este protocolo cura a diabetes.",
+        "Jamais só este protocolo cura a diabetes.",
+    ],
+)
+def test_negation_exception_words_are_case_and_width_insensitive(rules, text):
+    result = evaluate_compliance(text, "ivs-health", rules)
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["CURE_CLAIM"]
+
+
+def test_metalinguistic_example_over_300_chars_returns_to_claim_scan(rules):
+    text = "A frase Tome 2 cápsulas por dia " + ("contexto " * 34) + "é um exemplo proibido."
+    assert len(text.removesuffix(".")) > 300
+
+    result = evaluate_compliance(text, "ivs-health", rules)
+
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["DIRECT_PRESCRIPTION"]
+
+
+def test_metalinguistic_marker_without_safe_suffix_is_scanned(rules):
+    result = evaluate_compliance(
+        "A frase Tome 2 cápsulas por dia aparece no roteiro.",
+        "ivs-health",
+        rules,
+    )
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == ["DIRECT_PRESCRIPTION"]
+
+
+def test_unicode_masking_does_not_mutate_original_input(rules):
+    text = "Não existe cura。A frase Tome 2 cápsulas, por dia é um exemplo proibido."
+    before = text
+
+    evaluate_compliance(text, "ivs-health", rules)
+
+    assert text == before
 
 
 @pytest.mark.parametrize(
