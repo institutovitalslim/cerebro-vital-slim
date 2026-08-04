@@ -9,11 +9,13 @@ from referencing import Registry, Resource
 
 from hook_intelligence.api.main import app
 from hook_intelligence.domain.models import (
+    Channel,
     ContentOSExport,
     GenerationRequest,
     GenerationResponse,
     Hook,
     HookScores,
+    Objective,
 )
 
 CONTRACTS_DIR = Path(__file__).parents[3] / "contracts"
@@ -124,10 +126,17 @@ def test_pydantic_rejects_score_above_limit():
 def test_serialized_domain_models_validate_against_contracts_with_local_refs():
     schemas = load_schemas()
     registry = registry_for(schemas)
+    request = GenerationRequest(
+        topic="emagrecimento sustentável",
+        channel=Channel.REEL,
+        objective=Objective.EDUCATION,
+        audience="mulheres que buscam saúde",
+    )
     hook = sample_hook()
     response = GenerationResponse(request_id=hook.id, hooks=[hook], duration_ms=4.2)
     export = ContentOSExport(workspace_ref="content-os/ivs", hooks=[hook])
     instances = {
+        "generation-request.schema.json": request.model_dump(mode="json"),
         "hook.schema.json": hook.model_dump(mode="json"),
         "generation-response.schema.json": response.model_dump(mode="json"),
         "content-os-export.schema.json": export.model_dump(mode="json"),
