@@ -89,12 +89,12 @@ def create_database(url: str) -> Engine:
         raise ValueError(f"only SQLite URLs are supported, got {parsed.drivername!r}")
 
     options: dict[str, Any] = {"future": True}
-    query = {key.lower(): value.lower() for key, value in parsed.query.items()}
+    query = parsed.query
     is_memory = parsed.database in (None, "", ":memory:") or (
         parsed.database is not None
         and parsed.database.startswith("file:")
         and query.get("mode") == "memory"
-        and query.get("uri") in {"1", "true", "yes", "on"}
+        and query.get("uri") == "true"
     )
     if is_memory:
         options.update(poolclass=StaticPool, connect_args={"check_same_thread": False})

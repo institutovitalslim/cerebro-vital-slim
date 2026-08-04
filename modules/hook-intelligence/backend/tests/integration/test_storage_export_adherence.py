@@ -64,6 +64,36 @@ def test_all_sqlite_memory_urls_use_static_pool_fk_and_do_not_create_uri_file(
     engine.dispose()
 
 
+@pytest.mark.parametrize(
+    "query",
+    [
+        "Mode=memory&uri=true",
+        "MODE=memory&uri=true",
+        "mode=Memory&uri=true",
+        "mode=memory&URI=true",
+        "mode=memory&uri=True",
+    ],
+)
+def test_sqlite_uri_memory_classification_respects_parameter_casing(query, tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    probe = tmp_path / "file:case-sensitive-probe"
+    engine = None
+    try:
+        try:
+            engine = create_database(f"sqlite:///file:case-sensitive-probe?{query}")
+        except RuntimeError:
+            # SQLite rejects some incorrectly-cased URI values; that is not a memory DB.
+            pass
+        if engine is not None:
+            assert not isinstance(engine.pool, StaticPool)
+    finally:
+        if engine is not None:
+            engine.dispose()
+        probe.unlink(missing_ok=True)
+
+    assert not probe.exists()
+
+
 def test_explicit_sqlite_file_driver_uses_regular_pool_and_initialization_is_contextual(tmp_path):
     engine = create_database(f"sqlite+pysqlite:///{tmp_path}/hooks.db")
     assert not isinstance(engine.pool, StaticPool)
