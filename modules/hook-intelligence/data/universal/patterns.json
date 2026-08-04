@@ -24,7 +24,7 @@
       "topic",
       "desired_outcome"
     ],
-    "explanation": "A abertura “O detalhe pouco notado em {topic} que pode mudar sua leitura de {desi…” omite deliberadamente a resposta central depois de apresentar uma pista concreta; a pista promete completar uma informação relevante, sem prometer resultado. É recomendada em reel, carousel quando o objetivo editorial combina curiosity, education.",
+    "explanation": "O texto primeiro aponta um detalhe negligenciado em {topic} e, só depois, associa essa pista à leitura de {desired_outcome}. A identidade do detalhe permanece em aberto para que o desenvolvimento a revele com evidências, sem antecipar uma promessa de resultado. Esse desenho é apropriado para reels e carrosséis, sobretudo em peças de curiosidade e educação destinadas ao estágio consciente do problema e consciente da solução; o tom educativo e premium deve preservar precisão e entregar a resposta prometida.",
     "intensity": 2
   },
   {
@@ -49,7 +49,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Antes de concluir sobre {topic}, observe esta pergunta que quase semp…” omite deliberadamente a resposta central depois de apresentar uma pista concreta; a pista promete completar uma informação relevante, sem prometer resultado. É recomendada em ad, story quando o objetivo editorial combina curiosity, education.",
+    "explanation": "A sequência pede que a conclusão sobre {topic} seja suspensa e destaca uma pergunta ausente, mas não entrega a pergunta no gancho. O corpo deve nomeá-la e mostrar por que ela altera a análise, fechando uma curiosidade intelectual legítima. Use a estrutura em anúncios e stories quando a pauta buscar curiosidade e educação com público no estágio consciente do problema; a execução combina com tom educativo, desde que o desenvolvimento não prolongue artificialmente a lacuna.",
     "intensity": 2
   },
   {
@@ -75,7 +75,7 @@
       "desired_outcome",
       "topic"
     ],
-    "explanation": "A abertura “Pare de começar por {desired_outcome}” contraria a abertura esperada e troca a ordem habitual do raciocínio; a quebra inicial obriga a reconsiderar o ponto de partida. É recomendada em carousel, landing_page quando o objetivo editorial combina retention, education.",
+    "explanation": "A ordem esperada é invertida: o texto manda interromper a busca por {desired_outcome}, situa a discussão em {topic} e sugere outro começo. A lacuna está nesse ponto de partida alternativo, que deve aparecer logo em seguida com uma justificativa prática. Nos formatos carrosséis e páginas de destino, o padrão serve a objetivos de retenção e educação e conversa com o estágio consciente da solução; convém manter a voz direto e concluir a investigação dentro da própria peça ou sequência imediata.",
     "intensity": 3
   },
   {
@@ -100,7 +100,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Nem toda boa conversa sobre {topic} precisa começar com uma resposta” contraria a abertura esperada e troca a ordem habitual do raciocínio; a quebra inicial obriga a reconsiderar o ponto de partida. É recomendada em story, email quando o objetivo editorial combina identification, education.",
+    "explanation": "Em vez de prometer resposta imediata, a frase defende que uma boa conversa sobre {topic} pode começar de outra maneira. O leitor fica à espera desse primeiro movimento, a ser fechado com uma pergunta ou recorte que acolha a complexidade. Para stories e e-mails, esta construção favorece identificação e educação no estágio consciente do produto; o tratamento empático funciona melhor quando a resposta vem acompanhada do critério que a sustenta, e não de uma afirmação solta.",
     "intensity": 1
   },
   {
@@ -124,7 +124,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Você esperava mais velocidade em {topic}” coloca a expectativa popular diante de um critério menos óbvio; o contraste entre aparência e utilidade sustenta a atenção. É recomendada em landing_page, blog quando o objetivo editorial combina education.",
+    "explanation": "A frase coloca a velocidade esperada em {topic} diante de um critério rival, a consistência. Esse deslocamento abre a dúvida sobre qual medida orienta melhor a decisão; o desenvolvimento deve comparar as duas e sustentar a preferência com exemplos. A aplicação indicada está em páginas de destino e artigos, com finalidade de educação e audiência no estágio pronto para agir; preserve o registro provocativo e ajuste a profundidade da resolução ao espaço disponível no canal.",
     "intensity": 2
   },
   {
@@ -151,7 +151,7 @@
       "audience",
       "desired_outcome"
     ],
-    "explanation": "A abertura “O que parece avanço em {topic} nem sempre aproxima {audience} de {des…” coloca a expectativa popular diante de um critério menos óbvio; o contraste entre aparência e utilidade sustenta a atenção. É recomendada em email, youtube quando o objetivo editorial combina authority, education.",
+    "explanation": "Primeiro surge uma aparência de avanço em {topic}; depois, ela é separada da aproximação de {audience} ao objetivo declarado. O que conta como progresso fica pendente e precisa ser definido por indicadores observáveis no restante do conteúdo. Em conteúdos de e-mails e vídeos no YouTube, recorra a este padrão para autoridade e educação diante do estágio não consciente; o acabamento premium deve manter a tensão proporcional e fechar o raciocínio sem clickbait.",
     "intensity": 3
   },
   {
@@ -177,7 +177,7 @@
       "topic",
       "audience"
     ],
-    "explanation": "A abertura “Se {topic} parece simples até chegar a sua rotina, esta conversa é pa…” espelha uma situação cotidiana reconhecível antes de oferecer direção; o reconhecimento da dificuldade cria proximidade sem rotular ninguém. É recomendada em blog, reel quando o objetivo editorial combina objection, education.",
+    "explanation": "A construção começa pela aparente simplicidade de {topic}, introduz o atrito da rotina e então endereça {audience}. A identificação deixa aberta a causa dessa distância entre teoria e prática, que deve ser explicada sem culpar quem enfrenta a dificuldade. Esse desenho é apropriado para artigos e reels, sobretudo em peças de tratamento de objeções e educação destinadas ao estágio consciente do problema; o tom educativo deve preservar precisão e entregar a resposta prometida.",
     "intensity": 1
   },
   {
@@ -202,7 +202,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Para quem já tentou organizar {topic} e terminou com mais perguntas d…” espelha uma situação cotidiana reconhecível antes de oferecer direção; o reconhecimento da dificuldade cria proximidade sem rotular ninguém. É recomendada em youtube, ad quando o objetivo editorial combina sharing, education.",
+    "explanation": "O leitor é reconhecido por uma experiência precisa: tentar organizar {topic} e terminar com novas perguntas. A sequência não promete eliminar toda incerteza; ela fecha a tensão ao ordenar quais perguntas vêm primeiro e quais dados podem respondê-las. Use a estrutura em vídeos no YouTube e anúncios quando a pauta buscar compartilhamento e educação com público no estágio consciente da solução; a execução combina com tom direto, desde que o desenvolvimento não prolongue artificialmente a lacuna.",
     "intensity": 2
   },
   {
@@ -227,7 +227,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “O erro mais comum ao explicar {topic} não está no conteúdo, mas na ordem” nomeia uma escolha frequente e desloca o olhar para sua causa estrutural; o custo do erro abre espaço para uma correção educativa. É recomendada em reel, carousel quando o objetivo editorial combina action, education.",
+    "explanation": "O gancho nomeia um erro na explicação de {topic}, descarta o conteúdo como causa principal e aponta para a ordem. A correção ainda não foi mostrada; cabe à peça reorganizar as etapas e demonstrar como a nova sequência melhora a compreensão. Nos formatos reels e carrosséis, o padrão serve a objetivos de ação e educação e conversa com o estágio consciente do produto; convém manter a voz empático e concluir a investigação dentro da própria peça ou sequência imediata.",
     "intensity": 3
   },
   {
@@ -252,7 +252,7 @@
     "slots": [
       "desired_outcome"
     ],
-    "explanation": "A abertura “Ao buscar {desired_outcome}, muita gente compara opções antes de defi…” nomeia uma escolha frequente e desloca o olhar para sua causa estrutural; o custo do erro abre espaço para uma correção educativa. É recomendada em ad, story quando o objetivo editorial combina scroll_stop, education.",
+    "explanation": "A busca por {desired_outcome} vem primeiro, seguida do hábito de comparar opções sem definir critério. A perda provocada por essa inversão sustenta a tensão, resolvida quando o conteúdo ensina a formular e aplicar um parâmetro antes da escolha. Para anúncios e stories, esta construção favorece interrupção da rolagem e educação no estágio pronto para agir; o tratamento provocativo funciona melhor quando a resposta vem acompanhada do critério que a sustenta, e não de uma afirmação solta.",
     "intensity": 1
   },
   {
@@ -277,7 +277,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Em {topic}, uma frase repetida não vale mais que um bom critério de a…” opõe repetição popular a critérios, fontes ou evidências verificáveis; a dúvida sobre o que merece confiança pede continuação. É recomendada em carousel, landing_page quando o objetivo editorial combina curiosity, education.",
+    "explanation": "O texto opõe uma frase repetida sobre {topic} a um critério de análise, separando popularidade de sustentação. A pergunta silenciosa é qual critério merece confiança; a resposta deve trazer fonte, limite e modo de verificação, não outra máxima. A aplicação indicada está em carrosséis e páginas de destino, com finalidade de curiosidade e educação e audiência no estágio não consciente; preserve o registro premium e ajuste a profundidade da resolução ao espaço disponível no canal.",
     "intensity": 2
   },
   {
@@ -302,7 +302,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Crença popular ou conclusão bem sustentada” opõe repetição popular a critérios, fontes ou evidências verificáveis; a dúvida sobre o que merece confiança pede continuação. É recomendada em story, email quando o objetivo editorial combina retention, education.",
+    "explanation": "A estrutura apresenta duas categorias concorrentes, crença popular e conclusão sustentada, e pergunta como distingui-las em {topic}. A continuação encerra a incerteza com passos de checagem que tornem a diferença visível ao leitor. Em conteúdos de stories e e-mails, recorra a este padrão para retenção e educação diante do estágio consciente do problema; o acabamento educativo deve manter a tensão proporcional e fechar o raciocínio sem clickbait.",
     "intensity": 3
   },
   {
@@ -328,7 +328,7 @@
       "topic",
       "required_word"
     ],
-    "explanation": "A abertura “Uma palavra muda toda a conversa sobre {topic}” isola um detalhe concreto para reduzir abstração e orientar a leitura; a precisão do recorte mostra por que uma pequena distinção importa. É recomendada em landing_page, blog quando o objetivo editorial combina identification, education.",
+    "explanation": "A promessa de mudança é concentrada em uma única palavra, {required_word}, depois de situar a conversa em {topic}. Falta explicar por que esse termo altera o sentido; a peça deve comparar usos concretos e mostrar a consequência interpretativa de cada um. Esse desenho é apropriado para páginas de destino e artigos, sobretudo em peças de identificação e educação destinadas ao estágio consciente da solução; o tom direto deve preservar precisão e entregar a resposta prometida.",
     "intensity": 1
   },
   {
@@ -352,7 +352,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Três minutos de contexto podem evitar uma interpretação apressada sob…” isola um detalhe concreto para reduzir abstração e orientar a leitura; a precisão do recorte mostra por que uma pequena distinção importa. É recomendada em email, youtube quando o objetivo editorial combina education.",
+    "explanation": "A frase quantifica um pequeno investimento de contexto e o relaciona ao risco de interpretar {topic} depressa demais. O conteúdo fecha a lacuna ao selecionar quais informações cabem nesse intervalo e qual conclusão elas impedem. Use a estrutura em e-mails e vídeos no YouTube quando a pauta buscar educação com público no estágio consciente do produto; a execução combina com tom empático, desde que o desenvolvimento não prolongue artificialmente a lacuna.",
     "intensity": 2
   },
   {
@@ -377,7 +377,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Como profissionais cuidadosos estruturam uma análise de {topic} sem e…” demonstra método e limites em vez de reivindicar autoridade por título; a transparência do processo transforma confiança em algo observável. É recomendada em blog, reel quando o objetivo editorial combina authority, education.",
+    "explanation": "A autoridade aparece como processo: profissionais estruturam a análise de {topic} e tornam as incertezas visíveis. A ordem desse método fica em suspenso; o desenvolvimento deve expor etapas, fontes e limites para que a confiança possa ser auditada. Nos formatos artigos e reels, o padrão serve a objetivos de autoridade e educação e conversa com o estágio pronto para agir; convém manter a voz provocativo e concluir a investigação dentro da própria peça ou sequência imediata.",
     "intensity": 3
   },
   {
@@ -402,7 +402,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “O que um método transparente revela antes de qualquer conclusão sobre…” demonstra método e limites em vez de reivindicar autoridade por título; a transparência do processo transforma confiança em algo observável. É recomendada em youtube, ad quando o objetivo editorial combina objection, education.",
+    "explanation": "O texto antecipa que um método transparente revela algo antes da conclusão sobre {topic}. Essa informação prévia é a lacuna central e deve ser preenchida com critérios, pressupostos ou limites que permitam avaliar o raciocínio. Para vídeos no YouTube e anúncios, esta construção favorece tratamento de objeções e educação no estágio não consciente; o tratamento premium funciona melhor quando a resposta vem acompanhada do critério que a sustenta, e não de uma afirmação solta.",
     "intensity": 1
   },
   {
@@ -427,7 +427,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Quem valoriza escolhas conscientes faz esta pergunta antes de decidir…” associa a decisão a valores de discernimento que a audiência pode cultivar; a distância entre acompanhar e escolher com critério gera aspiração. É recomendada em reel, carousel quando o objetivo editorial combina sharing, education.",
+    "explanation": "A frase associa escolhas conscientes a uma pergunta feita antes da decisão sobre {topic}. Como a pergunta não é revelada, o conteúdo deve apresentá-la e mostrar de que forma ela expressa discernimento, sem transformar identidade em superioridade. A aplicação indicada está em reels e carrosséis, com finalidade de compartilhamento e educação e audiência no estágio consciente do problema; preserve o registro educativo e ajuste a profundidade da resolução ao espaço disponível no canal.",
     "intensity": 2
   },
   {
@@ -452,7 +452,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “A diferença entre apenas acompanhar {topic} e desenvolver um olhar cr…” associa a decisão a valores de discernimento que a audiência pode cultivar; a distância entre acompanhar e escolher com critério gera aspiração. É recomendada em ad, story quando o objetivo editorial combina action, education.",
+    "explanation": "O gancho separa acompanhar {topic} de desenvolver um olhar criterioso, criando uma distância aspiracional entre os dois comportamentos. Essa passagem se fecha com um hábito observável que o leitor consiga adotar e avaliar. Em conteúdos de anúncios e stories, recorra a este padrão para ação e educação diante do estágio consciente da solução; o acabamento direto deve manter a tensão proporcional e fechar o raciocínio sem clickbait.",
     "intensity": 3
   },
   {
@@ -478,7 +478,7 @@
       "context",
       "topic"
     ],
-    "explanation": "A abertura “Antes, {context}” justapõe um estado inicial confuso a outro mais organizado; a passagem entre os dois estados convida a descobrir o ponto de virada. É recomendada em carousel, landing_page quando o objetivo editorial combina scroll_stop, education.",
+    "explanation": "O texto marca um estado anterior com {context}, introduz uma pergunta melhor e mostra que ela reorganizou a conversa sobre {topic}. A pergunta funciona como ponto de virada ainda oculto e precisa ser entregue junto do efeito que produziu. Esse desenho é apropriado para carrosséis e páginas de destino, sobretudo em peças de interrupção da rolagem e educação destinadas ao estágio consciente do produto; o tom empático deve preservar precisão e entregar a resposta prometida.",
     "intensity": 1
   },
   {
@@ -503,7 +503,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “De informação dispersa a um mapa claro” justapõe um estado inicial confuso a outro mais organizado; a passagem entre os dois estados convida a descobrir o ponto de virada. É recomendada em story, email quando o objetivo editorial combina curiosity, education.",
+    "explanation": "A abertura parte de informação dispersa e aponta para um mapa claro de {topic}, mas retém o caminho entre os dois estados. O desenvolvimento deve ordenar categorias ou etapas para tornar a mudança compreensível, em vez de apenas celebrá-la. Use a estrutura em stories e e-mails quando a pauta buscar curiosidade e educação com público no estágio pronto para agir; a execução combina com tom provocativo, desde que o desenvolvimento não prolongue artificialmente a lacuna.",
     "intensity": 2
   },
   {
@@ -524,12 +524,12 @@
     "tones": [
       "premium"
     ],
-    "template": "O custo invisível de discutir {topic} sem alinhar o que {desired_outcome} significa",
+    "template": "O custo invisível de discutir {topic} sem alinhar o objetivo: “{desired_outcome}”",
     "slots": [
       "topic",
       "desired_outcome"
     ],
-    "explanation": "A abertura “O custo invisível de discutir {topic} sem alinhar o que {desired_outc…” torna visível um desperdício de atenção, contexto ou oportunidade; a perda possível é apresentada como evitável por uma escolha prudente. É recomendada em landing_page, blog quando o objetivo editorial combina retention, education.",
+    "explanation": "O gancho nomeia um custo invisível na discussão de {topic} e o liga à falta de alinhamento sobre o objetivo declarado. A natureza desse custo fica aberta; o texto deve mostrá-la em retrabalho, ruído ou decisões conflitantes e então propor um acordo de sentido. Nos formatos páginas de destino e artigos, o padrão serve a objetivos de retenção e educação e conversa com o estágio não consciente; convém manter a voz premium e concluir a investigação dentro da própria peça ou sequência imediata.",
     "intensity": 3
   },
   {
@@ -554,7 +554,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Quanto da sua atenção se perde quando {topic} chega sem contexto” torna visível um desperdício de atenção, contexto ou oportunidade; a perda possível é apresentada como evitável por uma escolha prudente. É recomendada em email, youtube quando o objetivo editorial combina identification, education.",
+    "explanation": "A atenção é apresentada como recurso que se perde quando {topic} chega sem contexto. O tamanho e a causa da perda pedem explicação, fechada ao contrastar uma mensagem solta com outra que informa origem, situação e propósito. Para e-mails e vídeos no YouTube, esta construção favorece identificação e educação no estágio consciente do problema; o tratamento educativo funciona melhor quando a resposta vem acompanhada do critério que a sustenta, e não de uma afirmação solta.",
     "intensity": 1
   },
   {
@@ -578,7 +578,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Imagine abordar {topic} com critérios claros e menos ruído ao redor” projeta um cenário desejável como direção possível, não como certeza; a diferença entre o presente e o cenário imaginado cria movimento. É recomendada em blog, reel quando o objetivo editorial combina education.",
+    "explanation": "O convite projeta uma abordagem de {topic} com critérios claros e menos ruído, sem afirmar que esse futuro ocorrerá. A distância até o cenário desejado permanece aberta e deve ser percorrida com um primeiro hábito plausível e verificável. A aplicação indicada está em artigos e reels, com finalidade de educação e audiência no estágio consciente da solução; preserve o registro direto e ajuste a profundidade da resolução ao espaço disponível no canal.",
     "intensity": 2
   },
   {
@@ -599,11 +599,11 @@
     "tones": [
       "empathetic"
     ],
-    "template": "Um caminho possível para tornar {desired_outcome} mais coerente com sua rotina",
+    "template": "Um caminho possível para sua rotina — objetivo: {desired_outcome}",
     "slots": [
       "desired_outcome"
     ],
-    "explanation": "A abertura “Um caminho possível para tornar {desired_outcome} mais coerente com s…” projeta um cenário desejável como direção possível, não como certeza; a diferença entre o presente e o cenário imaginado cria movimento. É recomendada em youtube, ad quando o objetivo editorial combina authority, education.",
+    "explanation": "A frase apresenta a rotina como território de um caminho possível e nomeia {desired_outcome} como objetivo, não como garantia. O próximo passo ainda falta; o conteúdo deve oferecê-lo de modo proporcional ao contexto e indicar como avaliar avanço. Em conteúdos de vídeos no YouTube e anúncios, recorra a este padrão para autoridade e educação diante do estágio consciente do produto; o acabamento empático deve manter a tensão proporcional e fechar o raciocínio sem clickbait.",
     "intensity": 3
   },
   {
@@ -628,7 +628,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Se você acha que não tem tempo para entender {topic}, comece por este…” transforma dúvida, falta de tempo ou resistência em começo legítimo; a própria objeção deixa de bloquear e passa a orientar o próximo recorte. É recomendada em reel, carousel quando o objetivo editorial combina objection, education.",
+    "explanation": "A falta de tempo para entender {topic} é aceita como condição inicial e convertida na razão para começar por um recorte. Como esse recorte não foi revelado, o conteúdo deve entregá-lo com escopo reduzido e utilidade imediata. Esse desenho é apropriado para reels e carrosséis, sobretudo em peças de tratamento de objeções e educação destinadas ao estágio pronto para agir; o tom provocativo deve preservar precisão e entregar a resposta prometida.",
     "intensity": 1
   },
   {
@@ -653,7 +653,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “A sua dúvida sobre {topic} pode ser justamente o melhor ponto de partida” transforma dúvida, falta de tempo ou resistência em começo legítimo; a própria objeção deixa de bloquear e passa a orientar o próximo recorte. É recomendada em ad, story quando o objetivo editorial combina sharing, education.",
+    "explanation": "A dúvida sobre {topic} deixa de ser obstáculo e passa a ocupar o lugar de ponto de partida. O leitor ainda precisa saber como usá-la; a sequência se fecha ao transformar a incerteza em pergunta investigável e próximo passo seguro. Use a estrutura em anúncios e stories quando a pauta buscar compartilhamento e educação com público no estágio não consciente; a execução combina com tom premium, desde que o desenvolvimento não prolongue artificialmente a lacuna.",
     "intensity": 2
   },
   {
@@ -678,7 +678,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Aplique o mesmo critério a duas leituras de {topic} e observe em qual…” faz a ideia aparecer por comparação observável entre abordagens; a diferença concreta entre versões substitui uma afirmação abstrata. É recomendada em carousel, landing_page quando o objetivo editorial combina action, education.",
+    "explanation": "A instrução manda aplicar um único critério a duas leituras de {topic} e observar onde elas divergem. O resultado da comparação fica aberto; a continuação deve executar o teste diante do leitor e explicar o significado da separação. Nos formatos carrosséis e páginas de destino, o padrão serve a objetivos de ação e educação e conversa com o estágio consciente do problema; convém manter a voz educativo e concluir a investigação dentro da própria peça ou sequência imediata.",
     "intensity": 3
   },
   {
@@ -703,7 +703,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Uma comparação simples para enxergar duas leituras possíveis de {topic}” faz a ideia aparecer por comparação observável entre abordagens; a diferença concreta entre versões substitui uma afirmação abstrata. É recomendada em story, email quando o objetivo editorial combina scroll_stop, education.",
+    "explanation": "O gancho promete uma comparação simples entre duas leituras de {topic}, mas ainda não mostra os pares nem o parâmetro. A demonstração precisa expor ambos lado a lado e concluir apenas o que a diferença observada permite. Para stories e e-mails, esta construção favorece interrupção da rolagem e educação no estágio consciente da solução; o tratamento direto funciona melhor quando a resposta vem acompanhada do critério que a sustenta, e não de uma afirmação solta.",
     "intensity": 1
   },
   {
@@ -728,7 +728,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Ao reorganizar as perguntas sobre {topic}, encontramos um ponto que e…” reorganiza elementos conhecidos para revelar uma perspectiva antes oculta; a conexão ainda não percebida funciona como descoberta editorial. É recomendada em landing_page, blog quando o objetivo editorial combina curiosity, education.",
+    "explanation": "A sequência reorganiza perguntas sobre {topic} e anuncia que essa operação revelou um ponto escondido. A descoberta não é nomeada no gancho; o desenvolvimento deve reconstruir a nova ordem e permitir que o leitor reconheça a conexão. A aplicação indicada está em páginas de destino e artigos, com finalidade de curiosidade e educação e audiência no estágio consciente do produto; preserve o registro empático e ajuste a profundidade da resolução ao espaço disponível no canal.",
     "intensity": 2
   },
   {
@@ -749,12 +749,12 @@
     "tones": [
       "provocative"
     ],
-    "template": "Uma perspectiva sobre {topic} que ganha sentido quando olhamos para {context}",
+    "template": "Uma perspectiva sobre {topic} que ganha sentido com este contexto: {context}",
     "slots": [
       "topic",
       "context"
     ],
-    "explanation": "A abertura “Uma perspectiva sobre {topic} que ganha sentido quando olhamos para {…” reorganiza elementos conhecidos para revelar uma perspectiva antes oculta; a conexão ainda não percebida funciona como descoberta editorial. É recomendada em email, youtube quando o objetivo editorial combina retention, education.",
+    "explanation": "O texto oferece uma perspectiva sobre {topic} e informa separadamente o contexto em que ela ganha sentido: {context}. Falta mostrar a relação entre os dois elementos, fechada por uma comparação que explique por que o enquadramento altera a leitura. Em conteúdos de e-mails e vídeos no YouTube, recorra a este padrão para retenção e educação diante do estágio pronto para agir; o acabamento provocativo deve manter a tensão proporcional e fechar o raciocínio sem clickbait.",
     "intensity": 3
   },
   {
@@ -775,12 +775,12 @@
     "tones": [
       "premium"
     ],
-    "template": "Há três filtros úteis para avaliar {topic}; o último depende de {audience}",
+    "template": "Há três filtros úteis para avaliar {topic}; o último considera este público: {audience}",
     "slots": [
       "topic",
       "audience"
     ],
-    "explanation": "A abertura “Há três filtros úteis para avaliar {topic}” antecipa uma sequência e preserva o item decisivo para o desenvolvimento; a enumeração incompleta cria continuidade com entrega claramente delimitada. É recomendada em blog, reel quando o objetivo editorial combina identification, education.",
+    "explanation": "O gancho anuncia três filtros para avaliar {topic}, retém o último e informa que ele considera {audience}. A continuidade depende de entregar os itens na ordem prometida e explicar por que o terceiro muda a aplicação dos anteriores. Esse desenho é apropriado para artigos e reels, sobretudo em peças de identificação e educação destinadas ao estágio não consciente; o tom premium deve preservar precisão e entregar a resposta prometida.",
     "intensity": 1
   },
   {
@@ -804,7 +804,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Dois sinais ajudam a organizar {topic}, mas um terceiro evita conclus…” antecipa uma sequência e preserva o item decisivo para o desenvolvimento; a enumeração incompleta cria continuidade com entrega claramente delimitada. É recomendada em youtube, ad quando o objetivo editorial combina education.",
+    "explanation": "Dois sinais são antecipados como organizadores de {topic}, enquanto um terceiro é reservado para impedir conclusões rápidas. A lista só fecha a tensão se nomear todos os sinais e demonstrar a função distinta do item final. Use a estrutura em vídeos no YouTube e anúncios quando a pauta buscar educação com público no estágio consciente do problema; a execução combina com tom educativo, desde que o desenvolvimento não prolongue artificialmente a lacuna.",
     "intensity": 2
   },
   {
@@ -830,7 +830,7 @@
       "topic",
       "audience"
     ],
-    "explanation": "A abertura “O que realmente merece atenção quando falamos de {topic} para {audience}” formula uma pergunta central que define o ângulo da apuração; a ausência inicial de resposta orienta uma exploração equilibrada. É recomendada em reel, carousel quando o objetivo editorial combina authority, education.",
+    "explanation": "A pergunta delimita {topic}, direciona o olhar de {audience} para o que merece atenção e evita sugerir a resposta. A peça deve selecionar um critério central, justificá-lo e reconhecer o que permanece fora daquele recorte. Nos formatos reels e carrosséis, o padrão serve a objetivos de autoridade e educação e conversa com o estágio consciente da solução; convém manter a voz direto e concluir a investigação dentro da própria peça ou sequência imediata.",
     "intensity": 3
   },
   {
@@ -855,7 +855,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Por que {topic} ganha significados diferentes conforme o contexto” formula uma pergunta central que define o ângulo da apuração; a ausência inicial de resposta orienta uma exploração equilibrada. É recomendada em ad, story quando o objetivo editorial combina objection, education.",
+    "explanation": "O gancho pergunta por que {topic} muda de significado conforme o contexto, transformando variação em pauta. A resposta precisa comparar situações específicas e identificar o elemento contextual responsável pela diferença percebida. Para anúncios e stories, esta construção favorece tratamento de objeções e educação no estágio consciente do produto; o tratamento empático funciona melhor quando a resposta vem acompanhada do critério que a sustenta, e não de uma afirmação solta.",
     "intensity": 1
   },
   {
@@ -880,7 +880,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Na revisão final de {topic}, uma contradição apareceu no último parág…” abre uma cena com mudança de rumo e adia a consequência narrativa; a interrupção antes do desfecho mantém interesse pela resolução da cena. É recomendada em carousel, landing_page quando o objetivo editorial combina sharing, education.",
+    "explanation": "A cena começa na revisão de {topic}, introduz uma contradição no último parágrafo e interrompe a narrativa antes da decisão. O desfecho deve revelar como a inconsistência foi investigada e por que a decisão precisou esperar. A aplicação indicada está em carrosséis e páginas de destino, com finalidade de compartilhamento e educação e audiência no estágio pronto para agir; preserve o registro provocativo e ajuste a profundidade da resolução ao espaço disponível no canal.",
     "intensity": 2
   },
   {
@@ -905,7 +905,7 @@
     "slots": [
       "desired_outcome"
     ],
-    "explanation": "A abertura “Começamos buscando {desired_outcome}” abre uma cena com mudança de rumo e adia a consequência narrativa; a interrupção antes do desfecho mantém interesse pela resolução da cena. É recomendada em story, email quando o objetivo editorial combina action, education.",
+    "explanation": "A história parte da busca por {desired_outcome}, registra a descoberta de um critério superior e termina antes de explicar a mudança. A continuação fecha a curva ao nomear o critério e mostrar a escolha concreta que ele redirecionou. Em conteúdos de stories e e-mails, recorra a este padrão para ação e educação diante do estágio não consciente; o acabamento premium deve manter a tensão proporcional e fechar o raciocínio sem clickbait.",
     "intensity": 3
   },
   {
@@ -930,7 +930,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Talvez o conselho mais popular sobre {topic} não sirva para todo cont…” questiona uma ideia difundida e ancora a discordância em contexto ou método; o atrito com o senso comum pede razões, não mero choque. É recomendada em landing_page, blog quando o objetivo editorial combina scroll_stop, education.",
+    "explanation": "O conselho popular sobre {topic} é questionado apenas em certos contextos, o que cria atrito sem negá-lo por completo. A condição em que ele falha fica aberta e deve ser sustentada com exemplo, critério e limite de aplicação. Esse desenho é apropriado para páginas de destino e artigos, sobretudo em peças de interrupção da rolagem e educação destinadas ao estágio consciente do problema; o tom educativo deve preservar precisão e entregar a resposta prometida.",
     "intensity": 1
   },
   {
@@ -955,7 +955,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Discordar do senso comum em {topic} exige mais método, não mais volume” questiona uma ideia difundida e ancora a discordância em contexto ou método; o atrito com o senso comum pede razões, não mero choque. É recomendada em email, youtube quando o objetivo editorial combina curiosity, education.",
+    "explanation": "A frase contrapõe método e volume ao tratar da discordância em {topic}, recusando provocação como prova. Falta descrever o método exigido; o desenvolvimento deve entregá-lo por meio de fonte, comparação e reconhecimento de incerteza. Use a estrutura em e-mails e vídeos no YouTube quando a pauta buscar curiosidade e educação com público no estágio consciente da solução; a execução combina com tom direto, desde que o desenvolvimento não prolongue artificialmente a lacuna.",
     "intensity": 2
   },
   {
@@ -980,7 +980,7 @@
     "slots": [
       "topic"
     ],
-    "explanation": "A abertura “Por trás de uma mensagem memorável sobre {topic}, existe esta escolha…” anuncia o processo estrutural escondido por trás do efeito percebido; a distância entre efeito e causa convida a revelar como o processo funciona. É recomendada em blog, reel quando o objetivo editorial combina retention, education.",
+    "explanation": "O gancho parte do efeito, uma mensagem memorável sobre {topic}, e anuncia que há uma escolha estrutural por trás dele. A escolha permanece escondida até que o conteúdo decomponha a mensagem e mostre a função de cada parte. Nos formatos artigos e reels, o padrão serve a objetivos de retenção e educação e conversa com o estágio consciente do produto; convém manter a voz empático e concluir a investigação dentro da própria peça ou sequência imediata.",
     "intensity": 3
   },
   {
@@ -1006,7 +1006,7 @@
       "topic",
       "desired_outcome"
     ],
-    "explanation": "A abertura “O mecanismo que conecta {topic} a {desired_outcome} começa pela clare…” anuncia o processo estrutural escondido por trás do efeito percebido; a distância entre efeito e causa convida a revelar como o processo funciona. É recomendada em youtube, ad quando o objetivo editorial combina identification, education.",
+    "explanation": "A relação entre {topic} e {desired_outcome} é atribuída a um mecanismo cujo primeiro componente é a clareza de contexto. As etapas seguintes ficam abertas e devem ser reveladas em ordem causal, sem confundir estrutura com garantia. Para vídeos no YouTube e anúncios, esta construção favorece identificação e educação no estágio pronto para agir; o tratamento provocativo funciona melhor quando a resposta vem acompanhada do critério que a sustenta, e não de uma afirmação solta.",
     "intensity": 1
   }
 ]

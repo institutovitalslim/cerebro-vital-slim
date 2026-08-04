@@ -52,6 +52,9 @@ PATTERN_ID_RE = re.compile(r"^(universal|ivs)-[a-z0-9]+(?:-[a-z0-9]+)*$")
 AUXILIARY_ID_RE = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*$")
 # Tunado nos 60 padrões: 0,82 captura paráfrases quase literais sem confundir estruturas afins.
 NEAR_DUPLICATE_DICE_THRESHOLD = 0.82
+# Mais longo que templates, o texto editorial admite algum vocabulário comum; 0,72 ainda
+# identifica explicações produzidas pela mesma fórmula nos 60 registros revisados.
+EXPLANATION_NEAR_DUPLICATE_DICE_THRESHOLD = 0.72
 TAXONOMY_FILES = {
     "channels": "channels.json",
     "objectives": "objectives.json",
@@ -157,6 +160,7 @@ class HookLibrary:
         seen_templates: dict[str, str] = {}
         seen_template_texts: dict[str, str] = {}
         seen_explanations: dict[str, str] = {}
+        seen_explanation_texts: dict[str, str] = {}
         for library in LIBRARIES:
             relative = f"{library}/patterns.json"
             records = cls._read_json(root, relative)
@@ -191,10 +195,20 @@ class HookLibrary:
                         "explanation",
                         f"explicação duplicada de {seen_explanations[normalized_explanation]}",
                     )
+                for other_id, other_text in seen_explanation_texts.items():
+                    score = cls._bigram_dice(pattern.explanation, other_text)
+                    if score >= EXPLANATION_NEAR_DUPLICATE_DICE_THRESHOLD:
+                        cls._invalid(
+                            relative,
+                            pattern.id,
+                            "explanation",
+                            f"explicação muito similar a {other_id} (Dice={score:.2f})",
+                        )
                 seen_ids.add(pattern.id)
                 seen_templates[normalized] = pattern.id
                 seen_template_texts[pattern.id] = pattern.template
                 seen_explanations[normalized_explanation] = pattern.id
+                seen_explanation_texts[pattern.id] = pattern.explanation
                 patterns.append(pattern)
         cls._validate_coverage(patterns)
         return cls(
@@ -414,8 +428,13 @@ class HookLibrary:
                 relative, item_id, "slots", f"declarados {declared_slots}, extraídos {actual_slots}"
             )
         explanation = record["explanation"]
-        if not isinstance(explanation, str) or len(explanation.strip()) < 60:
-            cls._invalid(relative, item_id, "explanation", "comprimento mínimo é 60")
+        if not isinstance(explanation, str) or len(explanation.strip()) < 180:
+            cls._invalid(relative, item_id, "explanation", "comprimento mínimo é 180")
+        if "..." in explanation or "…" in explanation:
+            cls._invalid(relative, item_id, "explanation", "não permite reticências")
+        sentence_count = len(re.findall(r"[.!?](?:\s|$)", explanation))
+        if not 2 <= sentence_count <= 3:
+            cls._invalid(relative, item_id, "explanation", "requer duas ou três frases")
         intensity = record["intensity"]
         if not isinstance(intensity, int) or isinstance(intensity, bool) or not 1 <= intensity <= 3:
             cls._invalid(relative, item_id, "intensity", "deve ser inteiro entre 1 e 3")

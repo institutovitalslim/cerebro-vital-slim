@@ -3,6 +3,7 @@ import re
 import shutil
 import string
 from collections import Counter
+from itertools import combinations, pairwise
 from pathlib import Path
 
 import pytest
@@ -26,6 +27,16 @@ REQUIRED_CLAIM_CATEGORIES = {
 
 def normalized(text: str) -> str:
     return "".join(character for character in text.casefold() if character.isalnum())
+
+
+def explanation_similarity(left: str, right: str) -> float:
+    """Dice de bigramas lexicais; 0,72 separa estrutura editorial de texto formularizado."""
+
+    def pairs(text: str) -> set[tuple[str, str]]:
+        return set(pairwise(re.findall(r"\w+", text.casefold())))
+
+    left_pairs, right_pairs = pairs(left), pairs(right)
+    return 2 * len(left_pairs & right_pairs) / (len(left_pairs) + len(right_pairs))
 
 
 def test_load_default_is_independent_from_working_directory(monkeypatch, tmp_path):
@@ -282,14 +293,48 @@ def test_loader_rejects_duplicate_and_short_explanations(tmp_path):
         HookLibrary.load(root)
     records[1]["explanation"] = "Explicação curta demais para orientar o uso editorial."
     write_json(path, records)
-    with pytest.raises(ValueError, match="explanation.*60"):
+    with pytest.raises(ValueError, match="explanation.*180"):
         HookLibrary.load(root)
+
+
+def test_loader_rejects_near_duplicate_explanation_and_names_both_ids(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "universal/patterns.json"
+    records = json.loads(path.read_text(encoding="utf-8"))
+    first_id, second_id = records[0]["id"], records[1]["id"]
+    records[1]["explanation"] = records[0]["explanation"].replace(
+        "detalhe negligenciado", "aspecto negligenciado"
+    )
+    write_json(path, records)
+
+    with pytest.raises(ValueError) as error:
+        HookLibrary.load(root)
+
+    message = str(error.value)
+    assert "explanation" in message and "similar" in message
+    assert first_id in message and second_id in message
 
 
 def test_all_explanations_are_editorial_and_unique_after_normalization():
     explanations = [pattern.explanation for pattern in HookLibrary.load_default().all_patterns]
-    assert all(len(text) >= 60 for text in explanations)
+    assert all(len(text) >= 180 for text in explanations)
+    assert all(2 <= len(re.findall(r"[.!?](?:\s|$)", text)) <= 3 for text in explanations)
+    assert all("..." not in text and "…" not in text for text in explanations)
     assert len({normalized(text) for text in explanations}) == len(explanations) == 60
+    scores = [explanation_similarity(left, right) for left, right in combinations(explanations, 2)]
+    assert max(scores) < 0.72
+
+
+def test_explanation_similarity_flags_a_formularized_synthetic_pair():
+    first = (
+        "A abertura apresenta o tema, introduz um contraste e deixa uma pergunta sem resposta. "
+        "A tensão é fechada pelo critério final, por isso funciona em conteúdos educativos."
+    )
+    second = (
+        "A abertura apresenta o assunto, introduz um contraste e deixa uma pergunta sem resposta. "
+        "A tensão é fechada pelo critério final, por isso funciona em conteúdos educativos."
+    )
+    assert explanation_similarity(first, second) >= 0.72
 
 
 def test_loader_rejects_near_duplicate_template_and_names_both_ids(tmp_path):
@@ -373,16 +418,85 @@ def test_forbidden_claim_patterns_detect_each_risk_and_clear_all_ivs_templates()
         assert not matches, (pattern.id, matches)
 
 
-def test_every_template_renders_naturally_with_plural_audience():
+def test_five_regressions_render_slots_as_independent_phrases():
+    library = HookLibrary.load_default()
     values = {
-        "topic": "sono",
-        "audience": "mulheres adultas",
-        "desired_outcome": "decisões mais conscientes",
-        "context": "na rotina diária",
-        "required_word": "rotina",
+        "topic": "planejamento editorial",
+        "audience": "equipes criteriosas",
+        "desired_outcome": "decisões mais consistentes",
+        "context": "na revisão semanal",
+        "required_word": "evidência",
     }
+    expected = {
+        "universal-avoidable-loss-01": "O custo invisível de discutir planejamento editorial sem alinhar o objetivo: “decisões mais consistentes”",
+        "universal-future-desire-02": "Um caminho possível para sua rotina — objetivo: decisões mais consistentes",
+        "universal-discovery-02": "Uma perspectiva sobre planejamento editorial que ganha sentido com este contexto: na revisão semanal",
+        "universal-incomplete-list-01": "Há três filtros úteis para avaliar planejamento editorial; o último considera este público: equipes criteriosas",
+        "ivs-avoidable-loss-11": "Público: equipes criteriosas. O ruído evitável ao conferir a fonte antes de compartilhar planejamento editorial",
+    }
+    rendered = {}
+    for pattern_id in expected:
+        pattern = library.get(pattern_id)
+        assert pattern is not None
+        rendered[pattern_id] = pattern.template.format(**values)
+    assert rendered == expected
+
+
+@pytest.mark.parametrize(
+    "values",
+    [
+        {
+            "topic": "sono",
+            "audience": "mulheres adultas",
+            "desired_outcome": "decisões mais conscientes",
+            "context": "na rotina diária",
+            "required_word": "rotina",
+        },
+        {
+            "topic": "comunicação",
+            "audience": "uma pessoa cuidadosa",
+            "desired_outcome": "uma escolha segura",
+            "context": "no planejamento mensal",
+            "required_word": "critério",
+        },
+        {
+            "topic": "fontes confiáveis",
+            "audience": "profissionais atentos",
+            "desired_outcome": "leituras responsáveis",
+            "context": "quando a informação ainda precisa ser verificada",
+            "required_word": "fonte",
+        },
+    ],
+)
+def test_every_template_renders_cleanly_in_three_grammatical_scenarios(values):
     for pattern in HookLibrary.load_default().all_patterns:
         rendered = pattern.template.format(**values)
         assert "{" not in rendered and "}" not in rendered
         assert not re.search(r"\s{2,}", rendered)
         assert len(rendered) <= 280
+
+
+def test_templates_avoid_known_slot_agreement_traps():
+    templates = {
+        pattern.id: pattern.template for pattern in HookLibrary.load_default().all_patterns
+    }
+    forbidden = {
+        "desired_outcome": re.compile(
+            r"\{desired_outcome\}\s+(?:significa\b|(?:mais\s+)?(?:coerente|claro|clara|"
+            r"possível|seguro|segura|adequado|adequada)\b)",
+            re.IGNORECASE,
+        ),
+        "context": re.compile(r"\b(?:para|em|no|na|pelo|pela)\s+\{context\}", re.IGNORECASE),
+        "audience": re.compile(
+            r"\{audience\}\s+(?:é|são|pode|podem|deve|devem|precisa|precisam|"
+            r"ao\s+\w+|foi|foram)|(?:por|para)\s+\{audience\}\s+ao\b",
+            re.IGNORECASE,
+        ),
+    }
+    violations = [
+        (pattern_id, slot)
+        for pattern_id, template in templates.items()
+        for slot, expression in forbidden.items()
+        if expression.search(template)
+    ]
+    assert violations == []
