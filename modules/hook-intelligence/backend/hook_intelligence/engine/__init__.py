@@ -1,5 +1,6 @@
 """Carregamento, seleção e composição determinística de hooks."""
 
+from hook_intelligence.engine.compliance import CLAIM_SCAN_MAX_CHARS, evaluate_compliance
 from hook_intelligence.engine.composer import (
     CandidateConstraintError,
     PatternCompositionError,
@@ -23,6 +24,7 @@ from hook_intelligence.engine.scorer import (
 from hook_intelligence.engine.selector import select_patterns, stable_rank
 
 __all__ = [
+    "CLAIM_SCAN_MAX_CHARS",
     "MAX_PUBLIC_EXPLANATION_CHARS",
     "MAX_SCORE_TEXT_CHARS",
     "MAX_SCORE_TOPIC_CHARS",
@@ -37,6 +39,7 @@ __all__ = [
     "compose_pattern",
     "contains_forbidden",
     "deduplicate",
+    "evaluate_compliance",
     "explain_score",
     "generate_deterministic",
     "rank_texts",

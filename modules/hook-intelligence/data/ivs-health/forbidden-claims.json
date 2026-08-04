@@ -1,19 +1,19 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "categories": [
     {
       "id": "cure",
       "label": "Cura",
       "description": "Afirma eliminar ou reverter definitivamente uma doença ou condição.",
-      "examples": ["Este protocolo cura a diabetes."],
-      "patterns": ["\\bcur(?:a|ar|ou|ado|ada|am)\\b", "\\b(?:elimina|eliminar|eliminado|eliminada)\\s{1,4}(?:definitivamente\\s{1,4}|)(?:a|o)\\s{1,4}(?:doença|condição)\\b"]
+      "examples": ["Este protocolo cura a diabetes.", "Cure a obesidade definitivamente."],
+      "patterns": ["\\b(?:este\\s{1,4}|esse\\s{1,4}|o\\s{1,4}|)protocol(?:o|os)\\s{1,4}cura\\s{1,4}(?:a|o)\\s{1,4}(?:diabetes|obesidade|depressão|hipertensão|ansiedade|câncer|infecção)\\b", "\\bcure\\s{1,4}(?:a|o)\\s{1,4}(?:diabetes|obesidade|depressão|hipertensão|ansiedade|câncer|infecção)(?:\\s{1,4}definitivamente|)\\b", "\\b(?:elimina|eliminar|eliminado|eliminada)\\s{1,4}(?:definitivamente\\s{1,4}|)(?:a|o)\\s{1,4}(?:doença|condição)\\b"]
     },
     {
       "id": "guarantee",
       "label": "Garantia",
       "description": "Promete resultado certo, inevitável ou válido para todas as pessoas.",
-      "examples": ["Resultado garantido para todas as pessoas."],
-      "patterns": ["\\bresultados?\\s{1,4}garantid[oa]s?\\b", "\\b(?:garante|garantia\\s{1,4}de)\\s{1,4}(?:o\\s{1,4}|)resultado\\b", "\\bfunciona\\s{1,4}(?:sempre|para\\s{1,4}tod[oa]s)\\b"]
+      "examples": ["Você vai perder 10 kg em 30 dias.", "Este tratamento funciona para todas as pacientes."],
+      "patterns": ["\\bresultados?\\s{1,4}garantid[oa]s?\\s{1,4}para\\s{1,4}tod[oa]s\\b", "\\b(?:garante|garantia\\s{1,4}de)\\s{1,4}(?:o\\s{1,4}|)resultado\\b", "\\bfunciona\\s{1,4}(?:sempre|para\\s{1,4}tod[oa]s)\\b", "\\b(?:este\\s{1,4}|esse\\s{1,4}|o\\s{1,4}|)tratamento\\s{1,4}funciona\\s{1,4}para\\s{1,4}tod[oa]s\\b", "\\b(?:você\\s{1,4}|)vai\\s{1,4}perder\\s{1,4}\\d{1,3}\\s{0,2}kg\\s{1,4}em\\s{1,4}\\d{1,3}\\s{1,4}dias?\\b"]
     },
     {
       "id": "diagnosis",
@@ -47,8 +47,8 @@
       "id": "unsourced_number",
       "label": "Número clínico sem fonte",
       "description": "Apresenta percentual ou número clínico como efeito sem fonte ou contexto.",
-      "examples": ["Este método reduz 73% do colesterol."],
-      "patterns": ["\\b(?:reduz|aumenta|melhora|elimina|previne)\\s{1,4}(?:\\d{1,6}[.,]\\d{1,6}|\\d{1,6})%\\s{1,4}(?:d[oa]s?\\s{1,4}|)(?:colesterol|glicemia|casos|risco|sintomas?)\\b", "\\b(?:\\d{1,6}[.,]\\d{1,6}|\\d{1,6})%\\s{1,4}(?:de\\s{1,4}|)(?:eficácia|dos\\s{1,4}casos|de\\s{1,4}redução)\\b"]
+      "examples": ["Este método reduz 73% do colesterol.", "Este método reduz 37% da gordura."],
+      "patterns": ["\\b(?:reduz|aumenta|melhora|elimina|previne)\\s{1,4}(?:\\d{1,6}[.,]\\d{1,6}|\\d{1,6})%\\s{1,4}(?:d[oa]s?\\s{1,4}|)(?:colesterol|glicemia|gordura|casos|risco|sintomas?)\\b", "\\b(?:\\d{1,6}[.,]\\d{1,6}|\\d{1,6})%\\s{1,4}(?:de\\s{1,4}|)(?:eficácia|dos\\s{1,4}casos|de\\s{1,4}redução)\\b"]
     },
     {
       "id": "absolute_superiority",
