@@ -50,7 +50,8 @@ CSV_HEADER = (
 )
 _FORMULA_PREFIX = re.compile(r"^(\s*)[=+\-@]")
 _RFC3339_DATE_TIME = re.compile(
-    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}"
+    r"(?:\.\d+)?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$"
 )
 _DATE_TIME_CHECKER = FormatChecker()
 

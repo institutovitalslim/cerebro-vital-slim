@@ -4,6 +4,7 @@ import traceback
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 from datetime import UTC, datetime
+from threading import Event, Thread
 from uuid import uuid4
 
 import pytest
@@ -67,12 +68,69 @@ def test_memory_static_pool_serializes_complete_repository_transactions(url):
         engine.dispose()
 
 
+def _select_in_worker(engine):
+    completed = Event()
+    result = []
+    errors = []
+
+    def select_one():
+        try:
+            with engine.connect() as connection:
+                result.append(connection.execute(text("SELECT 1")).scalar_one())
+        except Exception as error:  # noqa: BLE001 - surfaced by the worker probe
+            errors.append(error)
+        finally:
+            completed.set()
+
+    worker = Thread(target=select_one, daemon=True)
+    worker.start()
+    assert completed.wait(timeout=2), "worker checkout remained blocked"
+    worker.join(timeout=0)
+    assert not errors
+    assert result == [1]
+
+
+@pytest.mark.parametrize("url", ["sqlite://", "sqlite:///:memory:"])
+def test_nested_memory_checkouts_leave_no_residual_lock(url):
+    engine = create_database(url)
+    outer = engine.connect()
+    inner = engine.connect()
+    inner.close()
+    outer.close()
+
+    _select_in_worker(engine)
+    engine.dispose()
+
+
+@pytest.mark.parametrize("url", ["sqlite://", "sqlite:///:memory:"])
+def test_nested_memory_checkout_after_rollback_and_invalidation_releases_lock(url):
+    engine = create_database(url)
+    outer = engine.connect()
+    transaction = outer.begin()
+    outer.execute(text("SELECT 1"))
+    transaction.rollback()
+    inner = engine.connect()
+    inner.invalidate()
+    inner.close()
+    outer.close()
+
+    _select_in_worker(engine)
+    engine.dispose()
+
+
 def test_rfc3339_datetime_checker_and_generated_utc_z():
     payload = make_export_payload([hook()], "workspace")
     assert payload["generated_at"].endswith("Z")
     assert payload["hooks"][0]["created_at"].endswith("Z")
     for path in (("generated_at",), ("hooks", 0, "created_at")):
-        for invalid in ("x", "2026-01-02T03:04:05", "2026-02-30T03:04:05Z"):
+        for invalid in (
+            "x",
+            "2026-01-02T03:04:05",
+            "2026-02-30T03:04:05Z",
+            "2026-01-02T03:04:05+12:60",
+            "2026-01-02T03:04:05-05:99",
+            "2026-01-02T03:04:05+24:00",
+        ):
             candidate = deepcopy(payload)
             target = candidate
             for part in path[:-1]:
@@ -80,10 +138,19 @@ def test_rfc3339_datetime_checker_and_generated_utc_z():
             target[path[-1]] = invalid
             with pytest.raises(JSONSchemaValidationError):
                 export_json(candidate)
-    for valid in ("2026-01-02T03:04:05Z", "2026-01-02T03:04:05.123+03:30"):
-        candidate = deepcopy(payload)
-        candidate["generated_at"] = valid
-        export_json(candidate)
+    for path in (("generated_at",), ("hooks", 0, "created_at")):
+        for valid in (
+            "2026-01-02T03:04:05Z",
+            "2026-01-02T03:04:05+00:00",
+            "2026-01-02T03:04:05.123+03:30",
+            "2026-01-02T03:04:05-05:45",
+        ):
+            candidate = deepcopy(payload)
+            target = candidate
+            for part in path[:-1]:
+                target = target[part]
+            target[path[-1]] = valid
+            export_json(candidate)
 
 
 def test_validator_reads_both_schemas_once(monkeypatch):
@@ -120,6 +187,25 @@ def test_database_errors_never_expose_url_path_query_or_token(url):
     )
     assert "SUPER_SECRET_TOKEN" not in rendered
     assert url not in rendered
+    expected = (
+        "failed to initialize SQLite database"
+        if url.startswith("sqlite:")
+        else "invalid SQLite database URL"
+    )
+    assert str(caught.value) == expected
+    assert caught.value.__cause__ is None
+    assert caught.value.__context__ is None
+
+    pending = [caught.value]
+    seen = set()
+    while pending:
+        error = pending.pop()
+        if error is None or id(error) in seen:
+            continue
+        seen.add(id(error))
+        assert "SUPER_SECRET_TOKEN" not in str(error)
+        assert "SUPER_SECRET_TOKEN" not in repr(error)
+        pending.extend((error.__cause__, error.__context__))
 
 
 @pytest.mark.parametrize(
