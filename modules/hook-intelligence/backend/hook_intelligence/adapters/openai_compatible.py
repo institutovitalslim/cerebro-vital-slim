@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import ipaddress
 import json
 import math
 import unicodedata
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, Self
 from urllib.parse import urlsplit
 
 import httpx
@@ -37,30 +38,78 @@ def _public_error(detail: str) -> AdapterError:
 
 
 def _validate_endpoint(endpoint: object) -> str:
-    if not isinstance(endpoint, str):
+    if type(endpoint) is not str:
         raise _public_error("HOOK_AI_ENDPOINT deve ser uma URL")
     if not endpoint or len(endpoint) > MAX_ENDPOINT_CHARS:
         raise _public_error("HOOK_AI_ENDPOINT possui comprimento inválido")
-    if any(unicodedata.category(char).startswith("C") for char in endpoint):
+    if (
+        endpoint != endpoint.strip()
+        or "\\" in endpoint
+        or any(char.isspace() or unicodedata.category(char).startswith("C") for char in endpoint)
+    ):
         raise _public_error("HOOK_AI_ENDPOINT contém caracteres inválidos")
-    parsed = None
+
     parsing_failed = False
     try:
         parsed = urlsplit(endpoint)
-    except ValueError:
+    except Exception:  # noqa: BLE001 -- parser recebe URL externa.
         parsing_failed = True
+        parsed = None
     if parsing_failed or parsed is None:
         raise _public_error("HOOK_AI_ENDPOINT inválido")
-    if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+
+    parts_failed = False
+    try:
+        hostname = parsed.hostname
+        port = parsed.port
+        username = parsed.username
+        password = parsed.password
+        fragment = parsed.fragment
+    except Exception:  # noqa: BLE001 -- propriedades fazem parsing tardio.
+        parts_failed = True
+        hostname = None
+        port = None
+        username = None
+        password = None
+        fragment = ""
+    if parts_failed:
+        raise _public_error("HOOK_AI_ENDPOINT inválido")
+    if parsed.scheme not in {"http", "https"} or not hostname:
         raise _public_error("HOOK_AI_ENDPOINT deve usar http ou https")
-    if parsed.scheme == "http" and parsed.hostname.casefold() not in {
+    if fragment:
+        raise _public_error("HOOK_AI_ENDPOINT não permite fragmento")
+    if port is not None and not 1 <= port <= 65535:
+        raise _public_error("HOOK_AI_ENDPOINT possui porta inválida")
+    if username is not None or password is not None:
+        raise _public_error("HOOK_AI_ENDPOINT não permite credenciais na URL")
+
+    hostname_failed = False
+    try:
+        if ":" in hostname:
+            ipaddress.IPv6Address(hostname)
+        else:
+            ascii_hostname = hostname.encode("idna").decode("ascii")
+            labels = ascii_hostname.split(".")
+            if not labels or any(
+                not label
+                or len(label) > 63
+                or label.startswith("-")
+                or label.endswith("-")
+                or not all(char.isalnum() or char == "-" for char in label)
+                for label in labels
+            ):
+                hostname_failed = True
+    except Exception:  # noqa: BLE001 -- codecs recebem hostname externo.
+        hostname_failed = True
+    if hostname_failed:
+        raise _public_error("HOOK_AI_ENDPOINT possui hostname inválido")
+
+    if parsed.scheme == "http" and hostname.casefold() not in {
         "localhost",
         "127.0.0.1",
         "::1",
     }:
         raise _public_error("HOOK_AI_ENDPOINT exige HTTPS fora de localhost")
-    if parsed.username is not None or parsed.password is not None:
-        raise _public_error("HOOK_AI_ENDPOINT não permite credenciais na URL")
     return endpoint
 
 
@@ -132,13 +181,48 @@ class OpenAICompatible:
             timeout_seconds, "HOOK_AI_TIMEOUT_SECONDS", DEFAULT_TIMEOUT_SECONDS
         )
         self.max_tokens = _max_tokens(max_tokens)
-        self._transport = transport if transport is not None else httpx.Client()
+        self._owns_transport = transport is None
+        self._closed = False
+        client_creation_failed = False
+        if transport is None:
+            try:
+                active_transport = httpx.Client()
+            except Exception:  # noqa: BLE001 -- criação toca ambiente externo.
+                client_creation_failed = True
+                active_transport = None
+            if client_creation_failed or active_transport is None:
+                raise _public_error("não foi possível criar o cliente HTTP")
+            self._transport = active_transport
+        else:
+            self._transport = transport
 
     def __repr__(self) -> str:
         return (
             f"OpenAICompatible(model={self.model!r}, endpoint='<configured>', "
             f"timeout_seconds={self.timeout_seconds!r}, max_tokens={self.max_tokens!r})"
         )
+
+    def close(self) -> None:
+        """Fecha somente o cliente criado pelo adaptador, uma única vez."""
+
+        if self._closed:
+            return
+        self._closed = True
+        if not self._owns_transport:
+            return
+        close_failed = False
+        try:
+            self._transport.close()
+        except Exception:  # noqa: BLE001 -- cliente pode expor detalhe sensível.
+            close_failed = True
+        if close_failed:
+            raise _public_error("falha ao fechar o cliente HTTP")
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, exc_type: object, exc_value: object, traceback: object) -> None:
+        self.close()
 
     def _input_data(self, topic: object, candidates: object) -> tuple[str, list[str]]:
         if not isinstance(topic, str) or not topic or len(topic) > MAX_TOPIC_CHARS:
@@ -207,8 +291,10 @@ class OpenAICompatible:
                 status_value = None
             if status_lookup_failed:
                 raise _public_error("resposta contextual inválida do provider")
+            if status_value is not None and type(status_value) is not int:
+                raise _public_error("status HTTP inválido na resposta do provider")
             status = status_value if type(status_value) is int else None
-            if status is not None and status >= 400:
+            if status is not None and not 200 <= status < 300:
                 if status in _TRANSIENT_STATUS and attempt == 0:
                     continue
                 raise _public_error(f"provider respondeu com status HTTP {status}")
@@ -260,50 +346,99 @@ class OpenAICompatible:
         raise _public_error("falha contextual de transporte")
 
     def _decode(self, response: object, expected_count: int) -> list[str]:
-        if isinstance(response, Mapping):
-            body: object = response
+        mapping_check_failed = False
+        try:
+            response_is_mapping = isinstance(response, Mapping)
+        except Exception:  # noqa: BLE001 -- classificação pode consultar classe externa.
+            mapping_check_failed = True
+            response_is_mapping = False
+        if mapping_check_failed:
+            raise _public_error("resposta do provider inválida")
+
+        body: object
+        if type(response) is dict:
+            body = response
+        elif response_is_mapping:
+            copy_failed = False
+            try:
+                body = dict(response)  # type: ignore[arg-type]
+            except Exception:  # noqa: BLE001 -- Mapping externo pode executar código.
+                copy_failed = True
+                body = None
+            if copy_failed:
+                raise _public_error("resposta do provider inválida")
         else:
-            decoder = getattr(response, "json", None)
-            if not callable(decoder):
+            lookup_failed = False
+            try:
+                decoder = getattr(response, "json", None)
+            except Exception:  # noqa: BLE001 -- propriedade externa pode executar código.
+                lookup_failed = True
+                decoder = None
+            if lookup_failed or not callable(decoder):
                 raise _public_error("resposta do provider não é JSON")
+
             decoding_failed = False
             try:
                 body = decoder()
-            except Exception:  # noqa: BLE001 -- objetos de transporte injetados são arbitrários.
+            except Exception:  # noqa: BLE001 -- decoder externo pode lançar qualquer exceção.
                 decoding_failed = True
                 body = None
             if decoding_failed:
                 raise _public_error("resposta do provider não é JSON válido")
-        if not isinstance(body, Mapping):
+
+            if type(body) is not dict:
+                mapping_check_failed = False
+                try:
+                    body_is_mapping = isinstance(body, Mapping)
+                except Exception:  # noqa: BLE001 -- classificação consulta objeto externo.
+                    mapping_check_failed = True
+                    body_is_mapping = False
+                if mapping_check_failed:
+                    raise _public_error("resposta do provider inválida")
+                if body_is_mapping:
+                    copy_failed = False
+                    try:
+                        body = dict(body)  # type: ignore[arg-type]
+                    except Exception:  # noqa: BLE001 -- Mapping retornado é externo.
+                        copy_failed = True
+                        body = None
+                    if copy_failed:
+                        raise _public_error("resposta do provider inválida")
+
+        if type(body) is not dict:
             raise _public_error("schema de resposta inválido")
         data: object = body
         if "hooks" not in body:
-            schema_lookup_failed = False
-            try:
-                content = body["choices"][0]["message"]["content"]  # type: ignore[index]
-            except (KeyError, IndexError, TypeError):
-                schema_lookup_failed = True
-                content = None
-            if schema_lookup_failed:
+            choices = body.get("choices")
+            if type(choices) is not list or len(choices) != 1:
                 raise _public_error("schema de resposta inválido")
-            if not isinstance(content, str) or len(content) > MAX_TOTAL_CHARS + 1000:
+            choice = choices[0]
+            if type(choice) is not dict:
+                raise _public_error("schema de resposta inválido")
+            message = choice.get("message")
+            if type(message) is not dict:
+                raise _public_error("schema de resposta inválido")
+            content = message.get("content")
+            if type(content) is not str or len(content) > MAX_TOTAL_CHARS + 1000:
                 raise _public_error("conteúdo de resposta inválido")
+
             content_decode_failed = False
             try:
                 data = json.loads(content)
-            except (json.JSONDecodeError, TypeError):
+            except Exception:  # noqa: BLE001 -- parser recebe conteúdo arbitrário.
                 content_decode_failed = True
                 data = None
             if content_decode_failed:
                 raise _public_error("conteúdo de resposta não contém JSON válido")
-        if not isinstance(data, Mapping) or set(data) != {"hooks"}:
+
+        if type(data) is not dict or data.keys() != {"hooks"}:
             raise _public_error("schema de resposta deve conter somente hooks")
         hooks = data["hooks"]
-        if not isinstance(hooks, list) or len(hooks) != expected_count:
+        if type(hooks) is not list or len(hooks) != expected_count:
             raise _public_error("quantidade de hooks divergente")
         raw_total = 0
         for index, value in enumerate(hooks):
-            if not isinstance(value, str):
+            if type(value) is not str:
                 raise _public_error(f"resposta inválida: hooks[{index}] deve ser string")
             if len(value) > MAX_CANDIDATE_CHARS:
                 raise _public_error(f"resposta inválida: hooks[{index}] acima do limite bruto")

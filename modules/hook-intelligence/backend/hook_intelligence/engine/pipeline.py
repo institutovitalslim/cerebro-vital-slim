@@ -5,7 +5,7 @@ from uuid import NAMESPACE_URL, uuid5
 from pydantic import ValidationError
 
 from hook_intelligence import ENGINE_VERSION
-from hook_intelligence.adapters import DisabledAdapter, adapter_from_env
+from hook_intelligence.adapters import DisabledAdapter, OpenAICompatible, adapter_from_env
 from hook_intelligence.adapters.base import HookAdapter
 from hook_intelligence.domain.models import (
     ComplianceStatus,
@@ -214,8 +214,11 @@ def generate_with_optional_ai(
     if not validated_request.use_ai:
         return baseline
 
+    active_adapter: HookAdapter | None = None
+    close_factory_adapter = False
     try:
         active_adapter = adapter_from_env() if adapter is None else adapter
+        close_factory_adapter = adapter is None and isinstance(active_adapter, OpenAICompatible)
         if isinstance(active_adapter, DisabledAdapter):
             return baseline
         raw = active_adapter.adapt(
@@ -270,3 +273,9 @@ def generate_with_optional_ai(
         return tuple(hook for _, hook in adapted)
     except Exception:  # noqa: BLE001 -- fallback integral é o contrato desta fronteira.
         return baseline
+    finally:
+        if close_factory_adapter and active_adapter is not None:
+            try:
+                active_adapter.close()  # type: ignore[attr-defined]
+            except Exception:  # noqa: BLE001, S110 -- não logar possível segredo do cliente.
+                pass
