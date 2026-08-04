@@ -78,8 +78,8 @@ def _features(tokens: tuple[str, ...]) -> Counter[tuple[str, ...]]:
 def similarity(left: str, right: str) -> float:
     """Calcula Sørensen–Dice sobre unigramas/bigramas após normalização local.
 
-    Equivalência canônica tem valor 1.0. Dois textos sem tokens também têm 1.0;
-    apenas um lado sem tokens tem 0.0.
+    Equivalência canônica tem valor 1.0. Textos canonicamente distintos sem
+    features têm valor 0.0, assim como quando apenas um lado não tem features.
     """
 
     if not isinstance(left, str):
@@ -94,7 +94,7 @@ def similarity(left: str, right: str) -> float:
     left_features = _features(_tokens(canonical_left))
     right_features = _features(_tokens(canonical_right))
     if not left_features and not right_features:
-        return 1.0
+        return 0.0
     if not left_features or not right_features:
         return 0.0
     intersection = sum((left_features & right_features).values())

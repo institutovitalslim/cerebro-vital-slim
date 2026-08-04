@@ -11,6 +11,8 @@ from hook_intelligence.engine.explain import MAX_PUBLIC_EXPLANATION_CHARS, expla
 from hook_intelligence.engine.library import HookLibrary, Pattern
 from hook_intelligence.engine.pipeline import generate_deterministic
 from hook_intelligence.engine.scorer import (
+    MAX_SCORE_TEXT_CHARS,
+    MAX_SCORE_TOPIC_CHARS,
     PENALTY_POINTS,
     SCORE_WEIGHTS,
     RankedText,
@@ -22,6 +24,8 @@ from hook_intelligence.engine.selector import select_patterns, stable_rank
 
 __all__ = [
     "MAX_PUBLIC_EXPLANATION_CHARS",
+    "MAX_SCORE_TEXT_CHARS",
+    "MAX_SCORE_TOPIC_CHARS",
     "PENALTY_POINTS",
     "SCORE_WEIGHTS",
     "CandidateConstraintError",

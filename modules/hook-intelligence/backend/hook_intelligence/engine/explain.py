@@ -48,6 +48,9 @@ def _public_text(value: object, field: str) -> str:
     normalized = " ".join(unicodedata.normalize("NFKC", value).split())
     if not normalized:
         raise ValueError(f"{field} não pode ser vazio")
+    for character in normalized:
+        if unicodedata.category(character).startswith("C"):
+            raise ValueError(f"{field} contém caractere Unicode não publicável")
     folded = normalized.casefold()
     if any(term in folded for term in _FORBIDDEN_INTERNAL_LANGUAGE):
         raise ValueError(f"{field} contém linguagem interna não publicável")

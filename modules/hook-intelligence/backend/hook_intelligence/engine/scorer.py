@@ -11,6 +11,9 @@ from types import MappingProxyType
 
 from hook_intelligence.domain.models import Channel, HookScores
 
+MAX_SCORE_TEXT_CHARS = 10_000
+MAX_SCORE_TOPIC_CHARS = 1_000
+
 SCORE_WEIGHTS: Mapping[str, float] = MappingProxyType(
     {
         "clarity": 0.25,
@@ -87,6 +90,12 @@ class ScoreEvaluation:
             raise TypeError("penalties deve ser tuple")
         if not isinstance(self.recommendations, tuple):
             raise TypeError("recommendations deve ser tuple")
+        for field in ("penalties", "recommendations"):
+            for index, value in enumerate(getattr(self, field)):
+                if not isinstance(value, str):
+                    raise TypeError(f"{field}[{index}] deve ser str")
+                if not value.strip():
+                    raise ValueError(f"{field}[{index}] não pode ser vazio")
 
     def to_hook_scores(self) -> HookScores:
         return HookScores(
@@ -106,10 +115,13 @@ class RankedText:
     evaluation: ScoreEvaluation
 
 
-def _normalize(value: object, field: str) -> str:
+def _normalize(value: object, field: str, max_chars: int) -> str:
     if not isinstance(value, str):
         raise TypeError(f"{field} deve ser str")
-    normalized = " ".join(unicodedata.normalize("NFKC", value).split())
+    nfkc = unicodedata.normalize("NFKC", value)
+    if len(nfkc) > max_chars:
+        raise ValueError(f"{field} excede o limite de {max_chars} caracteres")
+    normalized = " ".join(nfkc.split())
     if not normalized:
         raise ValueError(f"{field} não pode ser vazio")
     if not any(character.isalnum() for character in normalized):
@@ -212,8 +224,8 @@ def _component_scores(text: str, channel: Channel, topic: str) -> tuple[float, .
 def score_text(text: str, channel: Channel | str, topic: str) -> ScoreEvaluation:
     """Avalia um texto com heurísticas editoriais explícitas e pesos fixos."""
 
-    normalized_text = _normalize(text, "text")
-    normalized_topic = _normalize(topic, "topic")
+    normalized_text = _normalize(text, "text", MAX_SCORE_TEXT_CHARS)
+    normalized_topic = _normalize(topic, "topic", MAX_SCORE_TOPIC_CHARS)
     normalized_channel = _channel(channel)
     clarity, specificity, novelty, retention, channel_fit = _component_scores(
         normalized_text, normalized_channel, normalized_topic
@@ -274,7 +286,7 @@ def rank_texts(texts: Iterable[str], channel: Channel | str, topic: str) -> tupl
         raise TypeError("texts deve ser um iterável de strings")
     # Valida parâmetros comuns mesmo para uma coleção vazia.
     normalized_channel = _channel(channel)
-    normalized_topic = _normalize(topic, "topic")
+    normalized_topic = _normalize(topic, "topic", MAX_SCORE_TOPIC_CHARS)
     ranked: list[RankedText] = []
     for index, text in enumerate(texts):
         if not isinstance(text, str):

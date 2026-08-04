@@ -1,4 +1,6 @@
+import unicodedata
 from copy import deepcopy
+from dataclasses import FrozenInstanceError
 
 import pytest
 
@@ -6,6 +8,8 @@ from hook_intelligence.domain.models import Channel, HookScores
 from hook_intelligence.engine.deduplicator import deduplicate, similarity
 from hook_intelligence.engine.explain import MAX_PUBLIC_EXPLANATION_CHARS, explain_score
 from hook_intelligence.engine.scorer import (
+    MAX_SCORE_TEXT_CHARS,
+    MAX_SCORE_TOPIC_CHARS,
     PENALTY_POINTS,
     SCORE_WEIGHTS,
     ScoreEvaluation,
@@ -78,6 +82,12 @@ def test_similarity_removes_conservative_pt_br_function_words_and_gerund_only():
     ]
 
 
+def test_similarity_does_not_merge_distinct_stopword_only_phrases():
+    assert similarity("o seu", "a sua") == 0.0
+    assert similarity("está", "estão") == 0.0
+    assert similarity("o seu", "  O\tSEU ") == 1.0
+
+
 def test_required_score_example_is_bounded_and_beats_generic_text():
     concrete = score_text("3 hábitos após as 20h que fragmentam seu sono", "reel", "sono")
     generic = score_text("Você precisa saber disso", "reel", "sono")
@@ -105,6 +115,28 @@ def test_score_is_deterministic_frozen_bounded_and_converts_to_hook_scores():
         first.overall = 0
     with pytest.raises(ValueError, match="clarity"):
         ScoreEvaluation(101, 50, 50, 50, 50, 50, (), ())
+
+
+@pytest.mark.parametrize("field", ["penalties", "recommendations"])
+@pytest.mark.parametrize("invalid", [([],), (1,), ("",), (" \t",)])
+def test_score_evaluation_rejects_invalid_tuple_elements_with_context(field, invalid):
+    arguments = {"penalties": (), "recommendations": (), field: invalid}
+    with pytest.raises((TypeError, ValueError), match=rf"{field}\[0\]"):
+        ScoreEvaluation(50, 50, 50, 50, 50, 50, **arguments)
+
+
+@pytest.mark.parametrize("field", ["penalties", "recommendations"])
+def test_score_evaluation_requires_tuples_with_context(field):
+    arguments = {"penalties": (), "recommendations": (), field: ["válido"]}
+    with pytest.raises(TypeError, match=field):
+        ScoreEvaluation(50, 50, 50, 50, 50, 50, **arguments)
+
+
+def test_score_evaluation_allows_unknown_penalty_codes_and_remains_frozen():
+    evaluation = ScoreEvaluation(50, 50, 50, 50, 50, 50, ("future_penalty",), ("Revise.",))
+    assert evaluation.penalties == ("future_penalty",)
+    with pytest.raises(FrozenInstanceError):
+        evaluation.penalties = ()
 
 
 def test_overall_uses_documented_exact_weights_penalties_and_clamp():
@@ -155,6 +187,29 @@ def test_score_normalizes_nfkc_without_mutating_and_validates_inputs():
             score_text(*arguments)
     with pytest.raises(TypeError, match="text"):
         score_text(None, "reel", "sono")
+
+
+def test_score_public_limits_are_enforced_after_nfkc_and_rank_inherits_them():
+    text_at_limit = "a" * MAX_SCORE_TEXT_CHARS
+    topic_at_limit = "a" * MAX_SCORE_TOPIC_CHARS
+    assert score_text(text_at_limit, "reel", topic_at_limit).overall >= 0
+
+    with pytest.raises(ValueError, match="text"):
+        score_text(text_at_limit + "a", "reel", "sono")
+    with pytest.raises(ValueError, match="topic"):
+        score_text("texto válido", "reel", topic_at_limit + "a")
+    with pytest.raises(ValueError, match="text"):
+        rank_texts([text_at_limit + "a"], "reel", "sono")
+    with pytest.raises(ValueError, match="topic"):
+        rank_texts([], "reel", topic_at_limit + "a")
+
+
+def test_score_limits_count_nfkc_expansion():
+    # U+FDFA expande para vários code points em NFKC.
+    expansion = unicodedata.normalize("NFKC", "ﷺ")
+    prefix = "a" * (MAX_SCORE_TEXT_CHARS - len(expansion) + 1)
+    with pytest.raises(ValueError, match="text"):
+        score_text(prefix + "ﷺ", "reel", "sono")
 
 
 def test_channel_fit_has_sensible_channel_specific_ranges_and_signals():
@@ -269,10 +324,51 @@ def test_public_explanation_is_bounded_and_does_not_echo_large_curated_inputs():
 @pytest.mark.parametrize(
     ("field", "mechanism", "curated", "recommendations"),
     [
+        ("mechanism", "System\u200b prompt", "Explicação segura.", ()),
+        ("mechanism", "curiosidade\u202e", "Explicação segura.", ()),
+        ("curated_explanation", "curiosidade", "Explicação\x00 segura.", ()),
+        ("recommendations[0]", "curiosidade", "Explicação segura.", ("Ajuste\u200d aqui.",)),
+    ],
+)
+def test_explanation_rejects_remaining_unicode_category_c_before_composition(
+    field, mechanism, curated, recommendations
+):
+    evaluation = ScoreEvaluation(50, 50, 50, 50, 50, 50, (), recommendations)
+    match = field.replace("[", r"\[").replace("]", r"\]")
+    with pytest.raises(ValueError, match=match):
+        explain_score(mechanism, curated, evaluation)
+
+
+@pytest.mark.parametrize("character", ["\x00", "\u200b", "\ud800", "\ue000", "\u0378"])
+def test_explanation_rejects_every_unicode_category_c_subgroup(character):
+    assert unicodedata.category(character) in {"Cc", "Cf", "Cs", "Co", "Cn"}
+    evaluation = ScoreEvaluation(50, 50, 50, 50, 50, 50, (), ())
+    with pytest.raises(ValueError, match="mechanism"):
+        explain_score(f"curiosidade{character}", "Explicação segura.", evaluation)
+
+
+def test_explanation_normalizes_real_whitespace_has_no_category_c_and_does_not_mutate():
+    mechanism = "lacuna\tde\ncuriosidade"
+    curated = "Resumo\r\neditorial seguro."
+    recommendation = "Ajuste\ta abertura."
+    before = (mechanism, curated, recommendation)
+    evaluation = ScoreEvaluation(50, 50, 50, 50, 50, 50, (), (recommendation,))
+
+    explanation = explain_score(mechanism, curated, evaluation)
+
+    assert before == (mechanism, curated, recommendation)
+    assert "lacuna de curiosidade" in explanation
+    assert "Resumo editorial seguro." in explanation
+    assert len(explanation) <= MAX_PUBLIC_EXPLANATION_CHARS
+    assert all(not unicodedata.category(character).startswith("C") for character in explanation)
+
+
+@pytest.mark.parametrize(
+    ("field", "mechanism", "curated", "recommendations"),
+    [
         ("mechanism", "System prompt", "Explicação segura.", ()),
         ("curated_explanation", "curiosidade", "Chain of thought privado.", ()),
         ("recommendations[0]", "curiosidade", "Explicação segura.", ("Instruções internas",)),
-        ("recommendations[1]", "curiosidade", "Explicação segura.", ("Normal.", " ")),
     ],
 )
 def test_explanation_rejects_internal_or_empty_language_in_every_public_field(
