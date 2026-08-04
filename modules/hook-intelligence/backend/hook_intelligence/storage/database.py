@@ -85,21 +85,35 @@ def create_database(url: str) -> Engine:
         parsed = make_url(url)
     except ArgumentError as exc:
         raise ValueError(f"invalid SQLite database URL: {url!r}") from exc
-    if parsed.drivername != "sqlite":
-        raise ValueError(f"only plain SQLite URLs are supported, got {parsed.drivername!r}")
+    if parsed.get_backend_name() != "sqlite":
+        raise ValueError(f"only SQLite URLs are supported, got {parsed.drivername!r}")
 
     options: dict[str, Any] = {"future": True}
-    if parsed.database == ":memory:":
+    query = {key.lower(): value.lower() for key, value in parsed.query.items()}
+    is_memory = parsed.database in (None, "", ":memory:") or (
+        parsed.database is not None
+        and parsed.database.startswith("file:")
+        and query.get("mode") == "memory"
+        and query.get("uri") in {"1", "true", "yes", "on"}
+    )
+    if is_memory:
         options.update(poolclass=StaticPool, connect_args={"check_same_thread": False})
-    engine = create_engine(url, **options)
 
-    @event.listens_for(engine, "connect")
-    def _enable_foreign_keys(dbapi_connection: Any, _connection_record: Any) -> None:
-        cursor = dbapi_connection.cursor()
-        try:
-            cursor.execute("PRAGMA foreign_keys=ON")
-        finally:
-            cursor.close()
+    engine: Engine | None = None
+    try:
+        engine = create_engine(url, **options)
 
-    metadata.create_all(engine)
+        @event.listens_for(engine, "connect")
+        def _enable_foreign_keys(dbapi_connection: Any, _connection_record: Any) -> None:
+            cursor = dbapi_connection.cursor()
+            try:
+                cursor.execute("PRAGMA foreign_keys=ON")
+            finally:
+                cursor.close()
+
+        metadata.create_all(engine)
+    except Exception as exc:
+        if engine is not None:
+            engine.dispose()
+        raise RuntimeError(f"failed to initialize SQLite database for URL {url!r}") from exc
     return engine

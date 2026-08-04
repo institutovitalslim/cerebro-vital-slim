@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from datetime import UTC, datetime
+from json import JSONDecodeError
 from typing import Any
 from uuid import UUID, uuid4
 
@@ -11,6 +12,7 @@ from pydantic import ValidationError
 from sqlalchemy import delete, func, insert, select
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.engine import Engine
+from sqlalchemy.exc import StatementError
 
 from hook_intelligence.domain.models import ComplianceStatus, Hook
 from hook_intelligence.engine.exporter import make_export_payload
@@ -113,9 +115,12 @@ class HookRepository:
             ).first()
             if exists is None:
                 raise LookupError(f"generation session {identifier} does not exist")
-            rows = connection.execute(
-                select(hooks).where(hooks.c.session_id == identifier).order_by(hooks.c.position)
-            ).all()
+            try:
+                rows = connection.execute(
+                    select(hooks).where(hooks.c.session_id == identifier).order_by(hooks.c.position)
+                ).all()
+            except (JSONDecodeError, StatementError) as exc:
+                raise ValueError(f"invalid persisted Hook payload in session {identifier}") from exc
         return tuple(_row_to_hook(row) for row in rows)
 
     def list_sessions(self, page: int = 1, page_size: int = 20) -> dict[str, Any]:
@@ -152,6 +157,13 @@ class HookRepository:
     def favorite(self, hook_id: UUID | str) -> None:
         identifier = _uuid_text(hook_id, label="hook_id")
         with self._engine.begin() as connection:
+            if (
+                connection.execute(
+                    select(favorites.c.hook_id).where(favorites.c.hook_id == identifier)
+                ).first()
+                is not None
+            ):
+                return
             if (
                 connection.execute(
                     select(hooks.c.row_id).where(hooks.c.hook_id == identifier).limit(1)

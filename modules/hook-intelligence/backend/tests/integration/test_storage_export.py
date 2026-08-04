@@ -132,7 +132,7 @@ def test_memory_file_fk_cascade_and_reopen(tmp_path):
             )
     reopened = HookRepository(create_database(f"sqlite:///{tmp_path}/file.db"))
     assert reopened.list_sessions()["total"] == 0
-    for invalid in ("postgresql://localhost/db", "sqlite+pysqlite:///:memory:", 1, None):
+    for invalid in ("postgresql://localhost/db", 1, None):
         with pytest.raises((TypeError, ValueError), match="SQLite|URL"):
             create_database(invalid)
     with pytest.raises(TypeError, match="Engine"):

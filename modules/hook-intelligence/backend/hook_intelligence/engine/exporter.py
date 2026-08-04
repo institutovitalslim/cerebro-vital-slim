@@ -6,6 +6,7 @@ import csv
 import io
 import json
 import re
+import unicodedata
 from collections.abc import Collection, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
@@ -57,7 +58,30 @@ def _favorite_strings(values: Collection[UUID | str] | None) -> set[str]:
         return set()
     if isinstance(values, (str, bytes)) or not isinstance(values, Collection):
         raise TypeError("favorites must be a collection of hook IDs")
-    return {str(value) for value in values}
+    normalized = set()
+    for index, value in enumerate(values):
+        if isinstance(value, bool) or not isinstance(value, (UUID, str)):
+            raise TypeError(f"favorites[{index}] must be a UUID or UUID string")
+        try:
+            normalized.add(str(UUID(str(value))))
+        except (ValueError, AttributeError) as exc:
+            raise ValueError(f"invalid favorites[{index}]: {value!r}") from exc
+    return normalized
+
+
+def _workspace_ref(value: str) -> str:
+    if not isinstance(value, str):
+        raise TypeError("workspace_ref must be a string")
+    normalized = unicodedata.normalize("NFKC", value)
+    if not 1 <= len(normalized) <= 256:
+        raise ValueError("workspace_ref must contain between 1 and 256 characters")
+    if normalized != normalized.strip():
+        raise ValueError("workspace_ref must not have leading or trailing whitespace")
+    if any(unicodedata.category(character).startswith("C") for character in normalized):
+        raise ValueError("workspace_ref must not contain Unicode control characters")
+    if not any(character.isalnum() for character in normalized):
+        raise ValueError("workspace_ref must contain at least one alphanumeric character")
+    return normalized
 
 
 def make_export_payload(
@@ -69,10 +93,7 @@ def make_export_payload(
 ) -> dict[str, Any]:
     """Build and validate a JSON-compatible Content OS export payload."""
     checked = _validate_hooks(hooks)
-    if not isinstance(workspace_ref, str):
-        raise TypeError("workspace_ref must be a non-empty string")
-    if not workspace_ref.strip():
-        raise ValueError("workspace_ref must be a non-empty string")
+    safe_workspace_ref = _workspace_ref(workspace_ref)
     timestamp = generated_at or datetime.now(UTC)
     if not isinstance(timestamp, datetime):
         raise TypeError("generated_at must be a datetime")
@@ -82,11 +103,12 @@ def make_export_payload(
     exported_hooks = []
     for item in checked:
         value = item.model_dump(mode="json")
+        value["created_at"] = item.created_at.astimezone(UTC).isoformat().replace("+00:00", "Z")
         value["favorite"] = str(item.id) in favorite_ids
         exported_hooks.append(value)
     payload = {
         "schema_version": "1.0.0",
-        "workspace_ref": workspace_ref,
+        "workspace_ref": safe_workspace_ref,
         "generated_at": timestamp.astimezone(UTC).isoformat().replace("+00:00", "Z"),
         "hooks": exported_hooks,
     }
@@ -135,7 +157,7 @@ def export_csv(hooks: Sequence[Hook], *, favorites: Collection[UUID | str] | Non
     checked = _validate_hooks(hooks)
     favorite_ids = _favorite_strings(favorites)
     output = io.StringIO(newline="")
-    writer = csv.writer(output, lineterminator="\n")
+    writer = csv.writer(output, lineterminator="\r\n")
     writer.writerow(CSV_HEADER)
     for item in checked:
         writer.writerow(
