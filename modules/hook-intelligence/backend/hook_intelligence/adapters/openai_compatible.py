@@ -150,6 +150,34 @@ def _normalize_hook(value: object, index: int) -> str:
     return normalized
 
 
+def _validated_dict_snapshot(value: object) -> dict[str, Any]:
+    """Copia um dict built-in e valida chaves sem fazer lookup ou comparação."""
+
+    if type(value) is not dict:
+        raise _public_error("schema de resposta inválido")
+
+    copy_failed = False
+    try:
+        snapshot = dict.copy(value)
+    except Exception:  # noqa: BLE001 -- mutação concorrente não pode vazar contexto.
+        copy_failed = True
+        snapshot = {}
+    if copy_failed:
+        raise _public_error("resposta do provider inválida")
+
+    keys_invalid = False
+    try:
+        for key in snapshot:
+            if type(key) is not str:
+                keys_invalid = True
+                break
+    except Exception:  # noqa: BLE001 -- iteração pode detectar mutação concorrente.
+        keys_invalid = True
+    if keys_invalid:
+        raise _public_error("schema de resposta possui chave inválida")
+    return snapshot
+
+
 class OpenAICompatible:
     """Adaptador com transporte injetável e representação que nunca contém a chave."""
 
@@ -405,8 +433,7 @@ class OpenAICompatible:
                     if copy_failed:
                         raise _public_error("resposta do provider inválida")
 
-        if type(body) is not dict:
-            raise _public_error("schema de resposta inválido")
+        body = _validated_dict_snapshot(body)
         data: object = body
         if "hooks" not in body:
             choices = body.get("choices")
@@ -415,9 +442,11 @@ class OpenAICompatible:
             choice = choices[0]
             if type(choice) is not dict:
                 raise _public_error("schema de resposta inválido")
+            choice = _validated_dict_snapshot(choice)
             message = choice.get("message")
             if type(message) is not dict:
                 raise _public_error("schema de resposta inválido")
+            message = _validated_dict_snapshot(message)
             content = message.get("content")
             if type(content) is not str or len(content) > MAX_TOTAL_CHARS + 1000:
                 raise _public_error("conteúdo de resposta inválido")
@@ -431,7 +460,8 @@ class OpenAICompatible:
             if content_decode_failed:
                 raise _public_error("conteúdo de resposta não contém JSON válido")
 
-        if type(data) is not dict or data.keys() != {"hooks"}:
+        data = _validated_dict_snapshot(data)
+        if data.keys() != {"hooks"}:
             raise _public_error("schema de resposta deve conter somente hooks")
         hooks = data["hooks"]
         if type(hooks) is not list or len(hooks) != expected_count:

@@ -45,6 +45,13 @@ class ExplodingMapping(Mapping):
         raise RuntimeError("BODY_SECRET")
 
 
+class EvilResponseKey(str):
+    __hash__ = str.__hash__
+
+    def __eq__(self, other):
+        raise RuntimeError("BODY_SECRET")
+
+
 @pytest.mark.parametrize(
     "response",
     [
@@ -69,6 +76,31 @@ def test_malicious_response_objects_are_sanitized_and_fallback_exact(response, c
     with pytest.raises(AdapterError) as caught:
         adapter.adapt("tema", original)
     assert_detached(caught.value, "KEY_SECRET", "BODY_SECRET", "Bearer")
+    assert "KEY_SECRET" not in caplog.text
+    assert "BODY_SECRET" not in caplog.text
+    fallback = adapter.adapt_or_fallback("tema", original)
+    assert fallback == original
+    assert fallback is not original
+
+
+@pytest.mark.parametrize(
+    "response",
+    [
+        {EvilResponseKey("hooks"): ["Hook seguro"]},
+        {EvilResponseKey("choices"): [{"message": {"content": '{"hooks":["Hook seguro"]}'}}]},
+        {"choices": [{EvilResponseKey("message"): {"content": '{"hooks":["Hook seguro"]}'}}]},
+        {"choices": [{"message": {EvilResponseKey("content"): '{"hooks":["Hook seguro"]}'}}]},
+    ],
+    ids=["hooks", "choices", "message", "content"],
+)
+def test_str_subclass_response_keys_are_rejected_without_lookup(response, caplog):
+    adapter = OpenAICompatible("KEY_SECRET", "model", transport=SafeTransport(response))
+    original = ["Hook original"]
+
+    with pytest.raises(AdapterError) as caught:
+        adapter.adapt("tema", original)
+
+    assert_detached(caught.value, "KEY_SECRET", "BODY_SECRET")
     assert "KEY_SECRET" not in caplog.text
     assert "BODY_SECRET" not in caplog.text
     fallback = adapter.adapt_or_fallback("tema", original)
