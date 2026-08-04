@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import threading
 from typing import Any
 
 from sqlalchemy import (
     JSON,
     Column,
     ForeignKey,
+    Index,
     Integer,
     MetaData,
     String,
@@ -22,6 +24,29 @@ from sqlalchemy.exc import ArgumentError
 from sqlalchemy.pool import StaticPool
 
 metadata = MetaData()
+
+
+class _SerializedStaticPool(StaticPool):
+    """StaticPool with a pre-checkout gate for its single connection record.
+
+    SQLAlchemy increments a connection fairy's checkout counter before dispatching
+    ``checkout``. Without this gate, a waiter can increment that counter and block in
+    the event, preventing the owner from producing ``checkin``. The event lock still
+    owns the complete public checkout/checkin lifecycle; this gate only prevents that
+    internal counter race.
+    """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.connection_lock = threading.RLock()
+
+    def connect(self) -> Any:
+        self.connection_lock.acquire()
+        try:
+            return super().connect()
+        finally:
+            self.connection_lock.release()
+
 
 generation_sessions = Table(
     "generation_sessions",
@@ -63,6 +88,7 @@ hooks = Table(
     UniqueConstraint("session_id", "hook_id", name="uq_hooks_session_hook"),
     UniqueConstraint("session_id", "position", name="uq_hooks_session_position"),
 )
+Index("ix_hooks_hook_id", hooks.c.hook_id)
 
 favorites = Table(
     "favorites",
@@ -83,10 +109,10 @@ def create_database(url: str) -> Engine:
         raise TypeError("database URL must be a non-empty SQLite URL string")
     try:
         parsed = make_url(url)
-    except ArgumentError as exc:
-        raise ValueError(f"invalid SQLite database URL: {url!r}") from exc
+    except ArgumentError:
+        raise ValueError("invalid SQLite database URL") from None
     if parsed.get_backend_name() != "sqlite":
-        raise ValueError(f"only SQLite URLs are supported, got {parsed.drivername!r}")
+        raise ValueError("only SQLite URLs are supported")
 
     options: dict[str, Any] = {"future": True}
     query = parsed.query
@@ -97,11 +123,28 @@ def create_database(url: str) -> Engine:
         and query.get("uri") == "true"
     )
     if is_memory:
-        options.update(poolclass=StaticPool, connect_args={"check_same_thread": False})
+        options.update(poolclass=_SerializedStaticPool, connect_args={"check_same_thread": False})
 
     engine: Engine | None = None
     try:
         engine = create_engine(url, **options)
+
+        if is_memory:
+            # StaticPool exposes one DBAPI connection. SQLite transactions on that
+            # connection must never overlap, so hold an engine-local reentrant lock
+            # for the complete checkout/checkin lifecycle. File pools remain fully
+            # concurrent and no process-global engine registry is needed.
+            pool = engine.pool
+            if not isinstance(pool, _SerializedStaticPool):  # defensive invariant
+                raise RuntimeError("unexpected SQLite memory pool")
+
+            @event.listens_for(pool, "checkout")
+            def _serialize_checkout(*_args: Any) -> None:
+                pool.connection_lock.acquire()
+
+            @event.listens_for(pool, "checkin")
+            def _serialize_checkin(*_args: Any) -> None:
+                pool.connection_lock.release()
 
         @event.listens_for(engine, "connect")
         def _enable_foreign_keys(dbapi_connection: Any, _connection_record: Any) -> None:
@@ -112,8 +155,11 @@ def create_database(url: str) -> Engine:
                 cursor.close()
 
         metadata.create_all(engine)
-    except Exception as exc:
+    except Exception:  # noqa: BLE001 - all initialization failures share a safe API error
         if engine is not None:
-            engine.dispose()
-        raise RuntimeError(f"failed to initialize SQLite database for URL {url!r}") from exc
+            try:
+                engine.dispose()
+            except Exception:  # noqa: BLE001, S110 - preserve the sanitized API error
+                pass
+        raise RuntimeError("failed to initialize SQLite database") from None
     return engine

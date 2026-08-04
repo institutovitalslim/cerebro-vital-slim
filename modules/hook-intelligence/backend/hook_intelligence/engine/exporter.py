@@ -7,8 +7,9 @@ import io
 import json
 import re
 import unicodedata
-from collections.abc import Collection, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from datetime import UTC, datetime
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 from uuid import UUID
@@ -19,6 +20,14 @@ from referencing import Registry, Resource
 from hook_intelligence.domain.models import ComplianceStatus, Hook
 
 _CONTRACTS = Path(__file__).parents[3] / "contracts"
+
+# Defensive, non-streaming export envelope. These values intentionally accommodate
+# the normal 1,000-hook probe while rejecting pathological input before serialization.
+MAX_EXPORT_HOOKS = 1_000
+MAX_TEXT_LENGTH = 4_096
+MAX_INTERNAL_COLLECTION = 64
+MAX_TOTAL_TEXT_CHARACTERS = 2_000_000
+
 CSV_HEADER = (
     "id",
     "text",
@@ -40,17 +49,78 @@ CSV_HEADER = (
     "favorite",
 )
 _FORMULA_PREFIX = re.compile(r"^(\s*)[=+\-@]")
+_RFC3339_DATE_TIME = re.compile(
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
+)
+_DATE_TIME_CHECKER = FormatChecker()
 
 
-def _validate_hooks(values: Sequence[Hook]) -> tuple[Hook, ...]:
+@_DATE_TIME_CHECKER.checks("date-time")
+def _is_rfc3339_datetime(value: object) -> bool:
+    """Check strict RFC3339 date-time syntax, calendar values, and mandatory offset."""
+    if not isinstance(value, str):
+        return True  # JSON Schema's type keyword owns type diagnostics.
+    if _RFC3339_DATE_TIME.fullmatch(value) is None:
+        return False
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError:
+        return False
+    return parsed.tzinfo is not None and parsed.utcoffset() is not None
+
+
+def _check_text(value: str, path: str, *, csv_controls: bool = False) -> int:
+    if len(value) > MAX_TEXT_LENGTH:
+        raise ValueError(f"{path} must not exceed {MAX_TEXT_LENGTH} characters")
+    if csv_controls and any(
+        unicodedata.category(character).startswith("C") and character not in "\t\r\n"
+        for character in value
+    ):
+        raise ValueError(f"{path} contains a prohibited Unicode category C character")
+    return len(value)
+
+
+def _hook_text_fields(item: Hook, index: int):
+    prefix = f"hooks[{index}]"
+    for name in ("text", "pattern_id", "audience", "topic", "explanation"):
+        yield f"{prefix}.{name}", getattr(item, name)
+    for position, value in enumerate(item.mechanisms):
+        yield f"{prefix}.mechanisms[{position}]", value
+    for position, value in enumerate(item.compliance.reasons):
+        yield f"{prefix}.compliance.reasons[{position}]", value
+
+
+def _validate_hooks(values: Sequence[Hook], *, csv_controls: bool = False) -> tuple[Hook, ...]:
     if isinstance(values, (str, bytes)) or not isinstance(values, Sequence):
         raise TypeError("hooks must be a sequence of Hook values")
-    hooks = tuple(values)
-    if any(not isinstance(item, Hook) for item in hooks):
-        raise TypeError("hooks must contain only Hook values")
-    if any(item.compliance.status is ComplianceStatus.BLOCK for item in hooks):
-        raise ValueError("compliance BLOCK hooks cannot be exported")
-    return hooks
+    if len(values) > MAX_EXPORT_HOOKS:
+        raise ValueError(f"hooks must not contain more than {MAX_EXPORT_HOOKS} items")
+
+    hooks: list[Hook] = []
+    total_text = 0
+    for index, item in enumerate(values):
+        if not isinstance(item, Hook):
+            raise TypeError("hooks must contain only Hook values")
+        if len(item.mechanisms) > MAX_INTERNAL_COLLECTION:
+            raise ValueError(
+                f"hooks[{index}].mechanisms must not contain more than "
+                f"{MAX_INTERNAL_COLLECTION} items"
+            )
+        if len(item.compliance.reasons) > MAX_INTERNAL_COLLECTION:
+            raise ValueError(
+                f"hooks[{index}].compliance.reasons must not contain more than "
+                f"{MAX_INTERNAL_COLLECTION} items"
+            )
+        if item.compliance.status is ComplianceStatus.BLOCK:
+            raise ValueError("compliance BLOCK hooks cannot be exported")
+        for path, text in _hook_text_fields(item, index):
+            total_text += _check_text(text, path, csv_controls=csv_controls)
+            if total_text > MAX_TOTAL_TEXT_CHARACTERS:
+                raise ValueError(
+                    f"export text must not exceed {MAX_TOTAL_TEXT_CHARACTERS} characters"
+                )
+        hooks.append(item)
+    return tuple(hooks)
 
 
 def _favorite_strings(values: Collection[UUID | str] | None) -> set[str]:
@@ -58,6 +128,8 @@ def _favorite_strings(values: Collection[UUID | str] | None) -> set[str]:
         return set()
     if isinstance(values, (str, bytes)) or not isinstance(values, Collection):
         raise TypeError("favorites must be a collection of hook IDs")
+    if len(values) > MAX_EXPORT_HOOKS:
+        raise ValueError(f"favorites must not contain more than {MAX_EXPORT_HOOKS} items")
     normalized = set()
     for index, value in enumerate(values):
         if isinstance(value, bool) or not isinstance(value, (UUID, str)):
@@ -116,6 +188,7 @@ def make_export_payload(
     return payload
 
 
+@lru_cache(maxsize=1)
 def _validator() -> Draft202012Validator:
     hook_schema = json.loads((_CONTRACTS / "hook.schema.json").read_text(encoding="utf-8"))
     export_schema = json.loads(
@@ -125,12 +198,62 @@ def _validator() -> Draft202012Validator:
     return Draft202012Validator(
         export_schema,
         registry=registry,
-        format_checker=FormatChecker(),
+        format_checker=_DATE_TIME_CHECKER,
     )
+
+
+def _preflight_payload(payload: Any) -> None:
+    """Bound arbitrary JSON-like input iteratively before deep schema validation."""
+    active: set[int] = set()
+    total_text = 0
+    stack: list[tuple[Any, str, bool]] = [(payload, "$", False)]
+
+    while stack:
+        value, path, exiting = stack.pop()
+        if exiting:
+            active.remove(id(value))
+            continue
+        if isinstance(value, str):
+            total_text += _check_text(value, path)
+            if total_text > MAX_TOTAL_TEXT_CHARACTERS:
+                raise ValueError(
+                    f"export text must not exceed {MAX_TOTAL_TEXT_CHARACTERS} characters"
+                )
+            continue
+        if isinstance(value, Mapping):
+            identity = id(value)
+            if identity in active:
+                raise ValueError(f"cycle detected in export payload at {path}")
+            if len(value) > MAX_INTERNAL_COLLECTION:
+                raise ValueError(
+                    f"{path} must not contain more than {MAX_INTERNAL_COLLECTION} entries"
+                )
+            active.add(identity)
+            stack.append((value, path, True))
+            for key, child in reversed(tuple(value.items())):
+                # Keys are textual content too, but schema remains responsible for key types.
+                if isinstance(key, str):
+                    stack.append((child, f"{path}.{key}", False))
+                    stack.append((key, f"{path}.<key>", False))
+                else:
+                    stack.append((child, f"{path}.<key>", False))
+            continue
+        if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
+            identity = id(value)
+            if identity in active:
+                raise ValueError(f"cycle detected in export payload at {path}")
+            maximum = MAX_EXPORT_HOOKS if path == "$.hooks" else MAX_INTERNAL_COLLECTION
+            if len(value) > maximum:
+                raise ValueError(f"{path} must not contain more than {maximum} items")
+            active.add(identity)
+            stack.append((value, path, True))
+            for index in range(len(value) - 1, -1, -1):
+                stack.append((value[index], f"{path}[{index}]", False))
 
 
 def validate_export_payload(payload: Any) -> None:
     """Raise ``jsonschema.ValidationError`` unless payload matches the real contract."""
+    _preflight_payload(payload)
     _validator().validate(payload)
     for item in payload["hooks"]:
         if item["compliance"]["status"] == ComplianceStatus.BLOCK:
@@ -153,8 +276,8 @@ def _safe_cell(value: Any) -> str:
 
 
 def export_csv(hooks: Sequence[Hook], *, favorites: Collection[UUID | str] | None = None) -> str:
-    """Encode hooks in deterministic order as RFC-style CSV with formula protection."""
-    checked = _validate_hooks(hooks)
+    """Encode hooks in deterministic order as RFC4180 CSV with formula protection."""
+    checked = _validate_hooks(hooks, csv_controls=True)
     favorite_ids = _favorite_strings(favorites)
     output = io.StringIO(newline="")
     writer = csv.writer(output, lineterminator="\r\n")
