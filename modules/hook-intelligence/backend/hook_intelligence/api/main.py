@@ -1,13 +1,11 @@
 from fastapi import FastAPI
 
-app = FastAPI(title="Hook Intelligence Engine", version="0.1.0")
+from hook_intelligence import ENGINE_VERSION
+from hook_intelligence.domain.models import HealthResponse
+
+app = FastAPI(title="Hook Intelligence Engine", version=ENGINE_VERSION)
 
 
-@app.get("/health")
-def health() -> dict[str, str | bool]:
-    return {
-        "status": "ready",
-        "service": "hook-intelligence",
-        "version": "0.1.0",
-        "ai_enabled": False,
-    }
+@app.get("/health", response_model=HealthResponse)
+def health() -> HealthResponse:
+    return HealthResponse(ai_enabled=False)

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.institutovitalslim.com.br/hook-intelligence/v1/hook.schema.json",
+  "title": "Hook",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "format": "uuid"},
+    "text": {"type": "string", "minLength": 3, "maxLength": 280},
+    "language": {"type": "string", "const": "pt-BR", "default": "pt-BR"},
+    "library": {"type": "string", "enum": ["universal", "ivs-health"]},
+    "pattern_id": {"type": "string"},
+    "mechanisms": {"type": "array", "items": {"type": "string"}},
+    "objective": {
+      "type": "string",
+      "enum": ["scroll_stop", "curiosity", "retention", "identification", "education", "authority", "objection", "sharing", "action"]
+    },
+    "channel": {
+      "type": "string",
+      "enum": ["reel", "ad", "carousel", "story", "landing_page", "email", "blog", "youtube"]
+    },
+    "awareness_stage": {
+      "type": "string",
+      "enum": ["unaware", "problem_aware", "solution_aware", "product_aware", "ready_to_act"],
+      "default": "problem_aware"
+    },
+    "audience": {"type": "string"},
+    "topic": {"type": "string"},
+    "tone": {
+      "type": "string",
+      "enum": ["premium", "educational", "direct", "empathetic", "provocative"],
+      "default": "premium"
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clarity": {"type": "number", "minimum": 0, "maximum": 100},
+        "specificity": {"type": "number", "minimum": 0, "maximum": 100},
+        "novelty": {"type": "number", "minimum": 0, "maximum": 100},
+        "retention": {"type": "number", "minimum": 0, "maximum": 100},
+        "channel_fit": {"type": "number", "minimum": 0, "maximum": 100},
+        "overall": {"type": "number", "minimum": 0, "maximum": 100}
+      },
+      "required": ["clarity", "specificity", "novelty", "retention", "channel_fit", "overall"]
+    },
+    "compliance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {"type": "string", "enum": ["pass", "review", "block"]},
+        "reasons": {"type": "array", "items": {"type": "string"}, "default": []}
+      },
+      "required": ["status", "reasons"]
+    },
+    "explanation": {"type": "string"},
+    "source": {"type": "string", "enum": ["deterministic", "ai_adapted", "curated"]},
+    "engine_version": {"type": "string", "const": "0.1.0", "default": "0.1.0"},
+    "created_at": {"type": "string", "format": "date-time"}
+  },
+  "required": [
+    "id", "text", "language", "library", "pattern_id", "mechanisms", "objective", "channel",
+    "awareness_stage", "audience", "topic", "tone", "scores", "compliance", "explanation",
+    "source", "engine_version", "created_at"
+  ]
+}
