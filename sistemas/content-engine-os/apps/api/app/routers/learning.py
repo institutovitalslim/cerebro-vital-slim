@@ -134,9 +134,9 @@ def _build_payload(rows: list[dict[str, Any]], pending: int, publication_count: 
     next_thesis = (
         winner.get("sprint_thesis")
         if winner
-        else "O corpo travado não é falta de força de vontade; é sinal de mecanismo metabólico não investigado."
+        else None
     )
-    next_hook = (winner.get("sprint_hook") or winner.get("hook_tipo") or "Por que fazer tudo certo pode não destravar seu corpo") if winner else "Por que fazer tudo certo pode não destravar seu corpo"
+    next_hook = (winner.get("sprint_hook") or winner.get("hook_tipo")) if winner else None
     champion_variables = {
         "format": _winner_value(by_format),
         "hook": _winner_value(by_hook),
@@ -197,7 +197,11 @@ def _build_payload(rows: list[dict[str, Any]], pending: int, publication_count: 
             "objective": "autoridade_e_conversa",
             "audience_stage": "consciente_da_dor",
             "champion_variables": champion_variables,
-            "reason": "Baseado nas peças medidas no Calendário Editorial e nas variáveis vencedoras.",
+            "reason": (
+                "Baseado nas peças medidas no Calendário Editorial e nas variáveis vencedoras."
+                if winner
+                else "Sem evidência suficiente para recomendar tese ou hook."
+            ),
         },
         "recommendations": recommendations,
     }

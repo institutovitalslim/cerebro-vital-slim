@@ -1,0 +1,1979 @@
+"""Orquestrador de geração (motor A) — coração do Content Engine OS.
+Combina conhecimento (roteiro viral análogo + dispositivos + tema/persona + voz da marca)
+-> gera via Codex GPT-5.5 (gateway OAuth) -> checklist -> persiste em creatives.
+Saída estruturada: headline com *ênfase dourada* + image_prompt por slide; ciente de feed vs Meta Ads.
+"""
+from __future__ import annotations
+
+import glob
+import itertools
+import json
+import os
+import re
+import shutil
+from typing import Any
+from urllib.parse import urlencode
+
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, Field
+
+from app.db import get_conn
+from app.routers.calendar import ensure_phase1_schema
+from app.services.compliance import assess_creative
+from app.services.codex_client import CodexClient
+from app.services.motion_video_planner import VISUAL_HOOKS, get_visual_hook
+
+router = APIRouter(prefix="/generation", tags=["generation"])
+
+RENDERS_DIR = "/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders"
+BANNED = ["cura", "garantido", "garantia de", "100%", "milagre", "perca x", "emagrece x"]
+CAPTION_FOOTER = (
+    "Dra Daniely Freitas\n"
+    "Médica, Farmacêutica e Professora de Medicina\n"
+    "CRM-BA 27.588\n"
+    "(Este conteúdo tem caráter meramente educativo e não substitui uma consulta médica.)"
+)
+CAPTION_FOOTER_MARKER = "CRM-BA 27.588"
+TRACKING_BASE_URL = "https://www.institutovitalslim.com.br/"
+
+
+def _utm_slug(value: object, fallback: str = "conteudo") -> str:
+    raw = str(value or fallback).lower().strip()
+    raw = re.sub(r"[^a-z0-9]+", "-", raw)
+    return re.sub(r"-+", "-", raw).strip("-") or fallback
+
+
+def _tracking_for_creative(creative: dict) -> dict:
+    """UTM única por criativo/banner para rastrear qual post gerou cliques/leads."""
+    cid = str(creative.get("id") or creative.get("creative_id") or "").strip()
+    fmt = _utm_slug(creative.get("format"), "post")
+    campaign = f"{fmt}-{cid[:8]}" if cid else fmt
+    parts = [
+        creative.get("hook_tipo"),
+        creative.get("objecao_alvo"),
+        creative.get("visual_tipo"),
+        creative.get("cta_tipo"),
+    ]
+    utm_content = _utm_slug("-".join(str(p) for p in parts if p), fmt)
+    utm = {
+        "utm_source": creative.get("network") or "instagram",
+        "utm_medium": "post_banner",
+        "utm_campaign": campaign,
+        "utm_content": utm_content,
+    }
+    return {"utm": utm, "tracking_url": f"{TRACKING_BASE_URL}?{urlencode(utm)}"}
+
+# Camada de direcionamento Meta Ads — 5 conjuntos por ÂNGULO (mentoria 06-14, playbook IVS:
+# cerebro/areas/marketing/sub-areas/trafego-pago/playbook-meta-ads-mentoria-06-14-ivs.md).
+# Estrutura: 1 campanha / 5 conjuntos (1 ângulo cada) / 3 criativos por conjunto (ABO, público amplo).
+ANGULOS_META = {
+    "baseline": {
+        "nome": "1 · Baseline / oferta clara",
+        "diretriz": "Oferta direta: avaliação médica individual para mulheres que querem entender por que "
+                    "as tentativas anteriores não sustentaram resultado. Clareza, sem rodeios."},
+    "culpa": {
+        "nome": "2 · Objeção: culpa / fracasso",
+        "diretriz": "Reframe da culpa: o problema não é falta de força de vontade — falta um plano que "
+                    "considere o corpo e a rotina dela."},
+    "so_dieta": {
+        "nome": "3 · Objeção: medo de ser 'só mais uma dieta'",
+        "diretriz": "Não é começar outra dieta: é investigar, acompanhar e ajustar com clareza "
+                    "(exames, bioimpedância, acompanhamento próximo)."},
+    "preco": {
+        "nome": "4 · Barreira: preço / valor percebido",
+        "diretriz": "Valor antes do preço: o que uma avaliação completa evita — tentativa no escuro, "
+                    "efeito sanfona e frustração repetida."},
+    "metodo": {
+        "nome": "5 · Método / autoridade",
+        "diretriz": "Método e autoridade: exames, bioimpedância, consulta e acompanhamento próximo "
+                    "para construir um caminho individual."},
+}
+
+
+CONTENT_STRATEGIES = {
+    "jornada_ivs": {
+        "nome": "Estratégia 1 · Jornada IVS",
+        "framework": "Cena concreta → Tensão emocional → Reframe sem culpa → Guia → Caminho",
+        "diretriz": (
+            "Use quando a peça precisa construir identificação emocional e confiança. A paciente é protagonista; "
+            "o Instituto Vital Slim/Dra. Daniely entram como guia, sem virar promessa mágica. Todo conteúdo deve "
+            "partir de uma cena reconhecível, mostrar tensão, tirar culpa, posicionar avaliação/escuta e fechar "
+            "com caminho seguro compatível com o formato."
+        ),
+        "required_blocks": ["cena", "tensao", "reframe", "guia", "caminho"],
+    },
+    "retencao_loops": {
+        "nome": "Estratégia 2 · Retenção por Loops",
+        "framework": "Hook → Lead → Valor 1 → Loop 1 → Valor 2 → Loop 2 → Valor 3 → CTA",
+        "diretriz": (
+            "Use quando a prioridade é retenção e avanço de curiosidade. O hook quebra o scroll; o lead segura "
+            "até os primeiros 10 segundos/slides/stories; cada bloco de valor entrega uma microclareza e abre "
+            "o próximo loop. O CTA leva a próxima ação sem promessa agressiva. Para carrossel/stories, traduza os "
+            "blocos em slides/stories; para estático, use hook+lead+loop implícito em headline/sub/CTA."
+        ),
+        "required_blocks": ["hook", "lead", "valor_1", "loop_1", "valor_2", "loop_2", "valor_3", "cta"],
+    },
+    "loop_previsao": {
+        "nome": "Estratégia 3 · Loop de Previsão Ética",
+        "framework": "Stakes → Grande Pergunta → Headfake/Reframe → Rehook → CTA seguro",
+        "diretriz": (
+            "Use quando a peça precisa prender atenção por previsão narrativa, sem manipulação ou promessa. "
+            "Comece com uma personagem real que a paciente reconhece, algo pessoalmente em risco e urgência; "
+            "abra uma pergunta específica que permita previsão; entregue uma virada lógica que contraste com a crença "
+            "normal sem confundir; e reabra o próximo loop antes da atenção cair. No Instituto Vital Slim, a virada "
+            "deve sempre quebrar culpa, dieta genérica, medo de julgamento, preço sem valor percebido ou 'já tentei de tudo'."
+        ),
+        "required_blocks": ["personagem", "risco", "urgencia", "pergunta_central", "predicao_esperada", "headfake", "rehook", "cta"],
+    },
+}
+
+
+def _content_strategy_key(value: str | None) -> str:
+    key = (value or "jornada_ivs").strip().lower()
+    aliases = {
+        "jornada": "jornada_ivs",
+        "storytelling_jornada": "jornada_ivs",
+        "storytelling": "jornada_ivs",
+        "loops": "retencao_loops",
+        "retencao": "retencao_loops",
+        "retention_loops": "retencao_loops",
+        "hook_lead_loops": "retencao_loops",
+        "dopamine_loop": "loop_previsao",
+        "dopamina_loop": "loop_previsao",
+        "addiction_loop": "loop_previsao",
+        "stakes_loop": "loop_previsao",
+        "loop_de_previsao": "loop_previsao",
+        "previsao": "loop_previsao",
+        "kallaway": "loop_previsao",
+    }
+    key = aliases.get(key, key)
+    return key if key in CONTENT_STRATEGIES else "jornada_ivs"
+
+
+def _content_strategy_block(req) -> str:
+    key = _content_strategy_key(getattr(req, "content_strategy", None))
+    data = CONTENT_STRATEGIES[key]
+    alternatives = " | ".join(f"{k}: {v['nome']}" for k, v in CONTENT_STRATEGIES.items())
+    return f"""
+ESTRATÉGIA NARRATIVA ESCOLHIDA PELO USUÁRIO: {key} — {data['nome']}
+Framework obrigatório desta peça: {data['framework']}
+Diretriz: {data['diretriz']}
+Opções disponíveis no Content OS: {alternatives}.
+Inclua em "modular_blocks": content_strategy="{key}", content_strategy_name="{data['nome']}", content_strategy_framework="{data['framework']}" e os blocos auditáveis: {', '.join(data['required_blocks'])}.
+""".strip()
+
+
+def _visual_hook_key(value: str | None) -> str:
+    return get_visual_hook(value)["key"]
+
+
+def _visual_hook_block(req) -> str:
+    hook = get_visual_hook(getattr(req, "visual_hook_mechanic", None) or getattr(req, "visual_hook_category", None) or getattr(req, "visual_tipo", None))
+    options = " | ".join(f"{item['key']}: {item['name']} ({item['category']})" for item in VISUAL_HOOKS)
+    guardrails = "; ".join(hook.get("guardrails") or [])
+    return f"""
+VISUAL HOOK ESCOLHIDO: {hook['key']} — {hook['name']}
+Categoria: {hook['category']}
+Uso IVS: {hook['ivs_use']}
+Mecânica de planos: {hook['shot_bias']}
+Guardrails: {guardrails}
+Opções disponíveis no Content OS: {options}.
+Inclua em "modular_blocks": visual_hook_category="{hook['category']}", visual_hook_mechanic="{hook['key']}", visual_hook_purpose, visual_hook_reason, visual_hook_risk e visual_hook_shots com 2 a 4 planos curtos de 0-3s. O visual hook precisa quebrar a objeção sem virar efeito vazio.
+""".strip()
+
+
+class OrchestrateRequest(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    objetivo: str = Field(default="identificação")   # atração|identificação|educação|conversão|desejo|retenção
+    formato: str = Field(default="reels")            # estatico|carrossel|reels|stories
+    rede: str = Field(default="instagram")
+    destino: str = Field(default="feed")             # feed|meta_ads  (relevante p/ carrossel)
+    modelo: str = Field(default="viral")             # viral|cientifico (modelo narrativo do carrossel)
+    angulo: str | None = None                        # baseline|culpa|so_dieta|preco|metodo (conjunto Meta Ads)
+    hook_tipo: str | None = None                     # identificacao|mecanismo|contraste|mito|pergunta_direta
+    objecao_alvo: str | None = None                  # objeção principal da variação
+    quebra_objecao: str | None = None                # reframe/prova para quebrar a objeção
+    visual_tipo: str | None = None                   # dra_camera|broll_rotina|prova_metodo|texto_premium
+    visual_hook_category: str | None = None          # graphic_text_overlay|pattern_interrupt_visual_switching|subject_motion|visual_effect_transitions|visual_selection
+    visual_hook_mechanic: str | None = None          # text_slide_in|match_cut|jump_switch|speed_ramp|unusual_image
+    cta_tipo: str | None = None                      # salvar|pre_avaliacao|whatsapp|agendamento
+    test_cycle_id: str | None = None                 # ciclo de teste criativo
+    variant_index: int | None = None                 # índice da variação no ciclo
+    tema: str | None = None
+    persona: str | None = None
+    funil: str = Field(default="relacionamento_conversao")
+    melhorias: str | None = None
+    seo_social_intent: str | None = None          # intenção de busca/descoberta: ex. "por que não consigo emagrecer"
+    send_save_reason: str | None = None          # por que alguém salvaria/enviaria essa peça
+    trial_reel: bool = Field(default=False)       # usar como laboratório antes de escalar
+    expected_intent_signal: str | None = None     # sinal esperado: DM, envio, salvar, WhatsApp, agenda
+    quality_metric: str | None = None             # métrica principal de qualidade: dm_util|lead_util|envio|retencao
+    source: str | None = None                     # weekly-sprint quando vem do sprint semanal
+    thesis: str | None = None                     # tese estruturada do sprint
+    pillar: str | None = None                     # pilar do sprint
+    audience_stage: str | None = None             # consciência do público
+    origin_tag: str | None = None                 # ex.: weekly:pilar:reels
+    hook: str | None = None                       # hook literal selecionado no sprint
+    content_strategy: str = Field(default="jornada_ivs")  # jornada_ivs|retencao_loops|loop_previsao
+
+
+class MatrixRequest(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    name: str = Field(default="Ciclo de teste criativo")
+    objetivo: str = Field(default="conversão")
+    formato: str = Field(default="reels")
+    rede: str = Field(default="instagram")
+    destino: str = Field(default="meta_ads")
+    tema: str | None = None
+    persona: str | None = None
+    funil: str = Field(default="relacionamento_conversao")
+    angulos: list[str] = Field(default_factory=lambda: ["culpa", "so_dieta", "metodo"])
+    hooks: list[str] = Field(default_factory=lambda: ["identificacao", "mecanismo", "contraste"])
+    objecoes: list[str] = Field(default_factory=lambda: ["ja_tentei_de_tudo"])
+    ctas: list[str] = Field(default_factory=lambda: ["pre_avaliacao", "whatsapp_qualificado"])
+    visuais: list[str] = Field(default_factory=lambda: ["dra_camera", "broll_rotina"])
+    visual_hook_mechanics: list[str] = Field(default_factory=lambda: ["text_slide_in"])
+    content_strategy: str = Field(default="jornada_ivs")
+
+
+def _modular_meta(req: OrchestrateRequest, output: dict | None = None) -> dict:
+    """Metadados canônicos de teste criativo. Colunas = filtro rápido; JSON = auditoria/blocos."""
+    output = output or {}
+    raw_blocks = output.get("modular_blocks")
+    blocks: dict[str, Any] = dict(raw_blocks) if isinstance(raw_blocks, dict) else {}
+    angulo_ivs = req.angulo or output.get("angulo") or blocks.get("angle") or blocks.get("angulo_ivs")
+    hook_tipo = req.hook_tipo or blocks.get("hook_tipo")
+    objecao_alvo = req.objecao_alvo or blocks.get("objecao_alvo") or output.get("objecao_principal")
+    quebra_objecao = req.quebra_objecao or blocks.get("quebra_objecao") or blocks.get("quebra_objeção")
+    visual_tipo = req.visual_tipo or blocks.get("visual_tipo")
+    visual_hook = get_visual_hook(req.visual_hook_mechanic or blocks.get("visual_hook_mechanic") or req.visual_hook_category or blocks.get("visual_hook_category") or visual_tipo)
+    visual_hook_category = visual_hook["category"]
+    visual_hook_mechanic = visual_hook["key"]
+    cta_tipo = req.cta_tipo or blocks.get("cta_tipo")
+    destino = req.destino or output.get("destino") or blocks.get("destino")
+    hypothesis = blocks.get("hypothesis") or blocks.get("hipotese")
+    strategy_key = _content_strategy_key(req.content_strategy or blocks.get("content_strategy") or output.get("content_strategy"))
+    strategy = CONTENT_STRATEGIES[strategy_key]
+    modular_blocks = {
+        **blocks,
+        "content_strategy": strategy_key,
+        "content_strategy_name": strategy["nome"],
+        "content_strategy_framework": strategy["framework"],
+        "angulo_ivs": angulo_ivs,
+        "hook_tipo": hook_tipo,
+        "objecao_alvo": objecao_alvo,
+        "quebra_objecao": quebra_objecao,
+        "visual_tipo": visual_tipo,
+        "visual_hook_category": visual_hook_category,
+        "visual_hook_mechanic": visual_hook_mechanic,
+        "visual_hook_name": visual_hook["name"],
+        "visual_hook_reason": blocks.get("visual_hook_reason") or visual_hook["description"],
+        "visual_hook_risk": blocks.get("visual_hook_risk") or "; ".join(visual_hook.get("guardrails") or []),
+        "cta_tipo": cta_tipo,
+        "destino": destino,
+        "hypothesis": hypothesis,
+        "seo_social_intent": req.seo_social_intent or blocks.get("seo_social_intent"),
+        "send_save_reason": req.send_save_reason or blocks.get("send_save_reason"),
+        "trial_reel": req.trial_reel,
+        "expected_intent_signal": req.expected_intent_signal or blocks.get("expected_intent_signal"),
+        "quality_metric": req.quality_metric or blocks.get("quality_metric"),
+    }
+    return {
+        "angulo_ivs": angulo_ivs,
+        "hook_tipo": hook_tipo,
+        "objecao_alvo": objecao_alvo,
+        "quebra_objecao": quebra_objecao,
+        "visual_tipo": visual_tipo,
+        "visual_hook_category": visual_hook_category,
+        "visual_hook_mechanic": visual_hook_mechanic,
+        "cta_tipo": cta_tipo,
+        "destino_criativo": destino,
+        "hypothesis": hypothesis,
+        "modular_blocks": modular_blocks,
+        "seo_social_intent": modular_blocks.get("seo_social_intent"),
+        "send_save_reason": modular_blocks.get("send_save_reason"),
+        "trial_reel": modular_blocks.get("trial_reel"),
+        "expected_intent_signal": modular_blocks.get("expected_intent_signal"),
+        "quality_metric": modular_blocks.get("quality_metric"),
+        "content_strategy": modular_blocks.get("content_strategy"),
+        "content_strategy_name": modular_blocks.get("content_strategy_name"),
+    }
+
+
+def _cta_rule(formato: str, destino: str) -> str:
+    if formato == "reels":
+        return "CTA SOMENTE de engajamento: pedir para SALVAR ou COMPARTILHAR. Nenhum outro tipo."
+    if formato == "stories":
+        return "CTA de conexão/interação leve (responder, tocar, mandar no direct)."
+    if formato == "carrossel":
+        if destino == "meta_ads":
+            return ("CTA de CONVERSÃO (anúncio Meta Ads): levar a AGENDAR / pré-avaliação. "
+                    "Arco: dor -> prova/mecanismo -> oferta -> CTA de ação ('agende sua avaliação', "
+                    "'quero ser avaliada'). NUNCA 'salva/compartilha' num anúncio.")
+        return ("CTA de SALVAR/COMPARTILHAR (feed). Propósito do carrossel: aprofundar conhecimento "
+                "+ gerar autoridade da Dra.")
+    return "CTA de salvar/compartilhar."
+
+
+def _output_spec(formato: str, modelo: str = "viral") -> str:
+    if formato == "carrossel" and modelo == "cientifico":
+        return (
+            'Você vai criar um CARROSSEL CIENTÍFICO no formato TWEET (padrão canônico IVS tweet-carrossel v4: '
+            'capa bold + 9 slides estilo tweet do X). Entregue SOMENTE um JSON válido com EXATAMENTE estas chaves:\n'
+            '- "modelo": "cientifico" (fixo).\n'
+            '- "title": headline da CAPA — o ACHADO como afirmação stop-scroll curta e forte (1 linha, nunca '
+            'pergunta), com 1-2 palavras de IMPACTO entre *asteriscos* (viram douradas na arte; destaque a dor, '
+            'não a solução). PROIBIDO citar Vital Slim/Instituto/programa/tratamento na capa.\n'
+            '- "cover_sub": 1 frase que amplia a curiosidade do achado sem entregar o mecanismo nem citar marca.\n'
+            '- "study_reference": referência REAL do estudo (autores/ano/periódico). NUNCA invente: '
+            'use o que vier no tema/briefing; sem estudo no briefing, use um achado clássico bem estabelecido.\n'
+            '- "pmid": o PMID numérico do estudo SOMENTE se constar no tema/briefing (para capturar o print real '
+            'do paper). Se não tiver certeza absoluta, use "" — NUNCA chute PMID.\n'
+            '- "tweets": lista de EXATAMENTE 9 strings — os slides 2 a 10, cada um um tweet completo da Dra. '
+            'Parágrafos separados por quebra de linha (\\n); linha vazia = respiro; bullets começam com "→ ". '
+            'PAPÉIS FIXOS: tweet 1 (slide 2) = REHOOK com open loop — "E se eu te dissesse que..." + 3-4 bullets '
+            '"→" de promessas do achado, SEM entregar a resposta; tweet 2 (slide 3) = dor relatable ("A maioria das '
+            'mulheres 40+..."); tweets 3-6 (slides 4-7) = VALOR, 1 ideia por tweet em fio contínuo — nomeie o achado, '
+            'o mecanismo sem jargão, o dado específico com "Ref: Autor et al. (ano). PMID: NNN" inline no tweet que '
+            'cita número; tweet 7 (slide 8) = VIRADA (momento AHA que recontextualiza); tweet 8 (slide 9) = AÇÃO '
+            'prática aplicável hoje (sem prescrição de dose pela internet — princípio, não receita); tweet 9 '
+            '(slide 10) = CTA que gera conversa ("Comenta {PALAVRA} que eu te mando o estudo" + salvar/seguir). '
+            'REGRAS DE ESCRITA: frases CURTAS; 1 conceito por tweet; TODO tweet termina puxando o próximo (mini-loop); '
+            'conversacional, primeira pessoa, zero jargão sem tradução; SEM markdown/asteriscos/emojis; '
+            'máx ~420 caracteres por tweet.\n'
+            '- "cta_comment_word": a palavra-comentário do CTA (ex.: CIÊNCIA, ESTUDO, AVALIAÇÃO).\n'
+            '- "caption": legenda com resumo do achado + referência completa + palavra-comentário.\n'
+            '- "hashtags": lista de 8 a 12.\n'
+            '- "modular_blocks": objeto com angle, hook_tipo, objecao_alvo, quebra_objecao, visual_tipo, visual_hook_category, visual_hook_mechanic, visual_hook_purpose, visual_hook_reason, visual_hook_risk, visual_hook_shots, cta_tipo e hypothesis.\n'
+            'TOM: médica que explica para a amiga íntima; número específico > adjetivo; zero sensacionalismo.'
+        )
+    if formato == "carrossel":
+        return (
+            'Você vai criar um CARROSSEL NARRATIVO no PADRÃO VIRAL IVS (10 slides: capa + 8 + CTA). '
+            'Entregue SOMENTE um JSON válido com EXATAMENTE estas chaves:\n'
+            '- "title": headline da CAPA (slide 1 = HOOK VISUAL, pattern interrupt) — AFIRMAÇÃO curta e forte '
+            '(1 linha, nunca pergunta), moldada em UM dos 8 hooks validados IVS: '
+            'H1 "Não é X. É Y." · H2 "Se você acha que [crença], leia até o fim" · H3 "O que está te travando não é [o óbvio]" · '
+            'H4 "Seu corpo não está falhando" · H5 "[N] sinais de [problema]" · H6 "A [prática comum] pode estar causando [efeito contrário]" · '
+            'H7 afirmação contraintuitiva de 5-8 palavras · H8 "Você já tentou X, Y e Z? Te explico por quê". '
+            'A capa é um STOP SCROLL: gera CURIOSIDADE/tensão que só se resolve arrastando. '
+            'PROIBIDO na capa (title e cover_sub): citar Vital Slim, Instituto, programa de acompanhamento, '
+            'tratamento, consulta ou qualquer oferta — marca e método só aparecem no CTA.\n'
+            '- "cover_sub": subtítulo que COMPLETA o title ampliando a curiosidade (1 frase; abre um loop, '
+            'não entrega a resposta nem cita marca/método/tratamento).\n'
+            '- "cover_visual_context": OPCIONAL — só preencha se a headline exigir uma CENA específica da médica que '
+            'uma foto de estúdio não comunica (ex.: segurando um exame de sangue). Se a foto de biblioteca resolve, use "".\n'
+            '- "slides": EXATAMENTE 8 objetos {label, headline, sub, image_prompt} com PAPÉIS FIXOS, nesta ordem:\n'
+            '    slide 1 = REHOOK (open loop): reafirma a promessa da capa e abre um loop que OBRIGA o próximo swipe '
+            '(ex.: "e o sinal nº 3 quase ninguém percebe"). label ex.: "COMEÇA AQUI".\n'
+            '    slides 2 a 6 = VALOR (1 ideia por slide): aprofundam o MESMO assunto da capa em FIO CONTÍNUO — '
+            'problema real → causa/mecanismo traduzido sem jargão → sinais no corpo → erro comum → prova/evidência. '
+            'PELO MENOS 1 destes slides entrega um MICRO-TESTE prático que ela valida HOJE em casa (label "TESTE HOJE").\n'
+            '    slide 7 = VIRADA (momento AHA): recontextualiza tudo — "o problema nunca foi X, é Y". label "A VIRADA".\n'
+            '    slide 8 = AÇÃO (micro-transformação): passo concreto aplicável HOJE com resultado imediato — a pequena '
+            'vitória que prova que a Dra domina o assunto e gera vontade de muito mais. label "FAÇA HOJE".\n'
+            '  CONTINUIDADE OBRIGATÓRIA: cada slide continua o anterior e termina puxando o próximo (mini-loop). '
+            'PROIBIDO mudar para assunto paralelo — se a capa fala de consulta rápida, TODOS os slides desenvolvem '
+            'consulta rápida (não pule para "vontade", "peso" ou outro tema).\n'
+            '  REGRA DE ESCRITA por objeto: headline CURTA e COMPLETA (máx ~7 palavras, 1 palavra-chave entre *asteriscos*); '
+            '"sub" com 1-2 frases que completam o headline (nunca vazio); "image_prompt" = cena visual concreta e '
+            'ESPECÍFICA ao slide (mulher 45+ em situação real coerente com o texto; varie a cena; PROIBIDO comida/doce, '
+            'remédio/caneta/seringa, jaleco, ambiente clínico, texto/logo).\n'
+            '- OBRIGATÓRIO: pelo menos 1 quebra de objeção EXPLÍCITA em algum slide (rotacione entre: "já gastei com '
+            'médico e nada", "não tenho tempo", "medo de remédio", "falta de vontade", "a dieta da amiga não serviu", '
+            '"é caro", "é normal da idade", "melhor esperar passar").\n'
+            '- "cta_headline": slide final — convite ao próximo passo (pré-avaliação), sem promessa médica. '
+            'Aqui SIM pode citar o método/Instituto.\n'
+            '- "cta_sub": 1 frase CURTA e COMPLETA (máx ~120 caracteres) que TERMINA com a chamada de comentário '
+            '(ex.: "Comenta AVALIAÇÃO que a equipe te chama").\n'
+            '- "cta_comment_word": a palavra-comentário do CTA pelo contexto: AVALIAÇÃO (geral), RAIZ (causa), '
+            'METABOLISMO ou HORMÔNIO.\n'
+            '- "caption": legenda do post (pode citar o método; termina reforçando a palavra-comentário).\n'
+            '- "hashtags": lista de 8 a 12.\n'
+            '- "modular_blocks": objeto com angle, hook_tipo, objecao_alvo, quebra_objecao, visual_tipo, visual_hook_category, visual_hook_mechanic, visual_hook_purpose, visual_hook_reason, visual_hook_risk, visual_hook_shots, cta_tipo e hypothesis.\n'
+            'TOM em tudo: médica que explica para a amiga íntima — próximo, sem jargão (traduza termo técnico em '
+            'sensação corporal), autoridade com evidência quando citar dado.'
+        )
+    if formato in ("reels", "stories"):
+        return ('Entregue SOMENTE um JSON com: "title"; "hook"; "script" (lista de cenas/parágrafos); '
+                '"cta"; "caption"; "hashtags" (8-12); "modular_blocks" com angle, hook_tipo, objecao_alvo, quebra_objecao, visual_tipo, visual_hook_category, visual_hook_mechanic, visual_hook_purpose, visual_hook_reason, visual_hook_risk, visual_hook_shots, cta_tipo e hypothesis.')
+    return ('Entregue SOMENTE um JSON com: "title"; "headline"; "body"; "cta"; "caption"; "hashtags" (8-12); '
+            '"modular_blocks" com angle, hook_tipo, objecao_alvo, quebra_objecao, visual_tipo, visual_hook_category, visual_hook_mechanic, visual_hook_purpose, visual_hook_reason, visual_hook_risk, visual_hook_shots, cta_tipo e hypothesis.')
+
+
+def _tenant_id(conn, slug: str) -> str:
+    with conn.cursor() as cur:
+        cur.execute("select id from tenants where slug=%s", (slug,))
+        r = cur.fetchone()
+    if not r:
+        raise HTTPException(404, f"tenant '{slug}' não encontrado")
+    return r["id"]
+
+
+VIRAL_COLS = ("codigo, classe_ivs, mecanismo, hook_base, tese_central, objecao_principal, adaptacao_ivs")
+
+
+def _fetch_context(conn, tenant_id: str, objetivo: str, tema: str | None):
+    """Escolhe o roteiro viral análogo por RELEVÂNCIA ao tema (o `objetivo` do bunker é texto livre).
+    Pontua por nº de palavras-chave do tema presentes em hook/tese/adaptação; desempate aleatório."""
+    kws = [w for w in re.findall(r"\w{4,}", (tema or "").lower())][:6]
+    with conn.cursor() as cur:
+        viral = None
+        if kws:
+            blob = "lower(coalesce(hook_base,'')||' '||coalesce(tese_central,'')||' '||coalesce(adaptacao_ivs,''))"
+            score = " + ".join([f"(case when {blob} like %s then 1 else 0 end)" for _ in kws])
+            # Prioridade canônica: busca temática Instagram > mapeamentos de perfis aprovados > bunker geral.
+            # A estratégia 100→30 começa em Search/Hashtag; perfis semente ficam como apoio, não fonte principal.
+            source_bonus = ("case when origem like 'instagram-theme-search-priority:%' then 3 "
+                            "when origem like 'instagram-approved-map:%' then 1 else 0 end")
+            cur.execute(
+                f"select {VIRAL_COLS}, ({score}) as score, (({score}) + ({source_bonus})) as total_score "
+                "from viral_scripts where tenant_id is null "
+                "order by total_score desc, score desc, random() limit 1", [f"%{k}%" for k in kws])
+            viral = cur.fetchone()
+            if viral and not viral.get("total_score"):
+                viral = None  # nenhum keyword/fonte prioritária bateu -> fallback abaixo
+        if not viral:
+            cur.execute(f"select {VIRAL_COLS} from viral_scripts where tenant_id is null "
+                        "order by case when origem like 'instagram-theme-search-priority:%' then 3 "
+                        "when origem like 'instagram-approved-map:%' then 1 else 0 end desc, random() limit 1")
+            viral = cur.fetchone()
+        cur.execute("select name, logic, example from narrative_devices where tenant_id is null order by random() limit 4")
+        devices = cur.fetchall()
+        cur.execute("select name, voice_notes, compliance_rules from brands where tenant_id=%s limit 1", (tenant_id,))
+        brand = cur.fetchone()
+    return viral, devices, brand
+
+
+def _brand_diretrizes(req) -> str:
+    """Diretrizes de Marca & Posicionamento APROVADas (inteligencia criativa validada)."""
+    try:
+        with get_conn() as conn:
+            tid = _tenant_id(conn, req.tenant_slug)
+            with conn.cursor() as cur:
+                cur.execute("select titulo, conteudo from creative_intelligence where status=%s "
+                            "and (tenant_id=%s or tenant_id is null) order by validated_at desc nulls last limit 12",
+                            ("aprovado", tid))
+                rows = cur.fetchall()
+        if not rows:
+            return ""
+        linhas = chr(10).join(("- " + ((r["titulo"] + ": ") if r["titulo"] else "") + r["conteudo"]) for r in rows)
+        return (chr(10) + "DIRETRIZES DE MARCA & POSICIONAMENTO (aprovadas - siga como inteligencia criativa): " + chr(10) + linhas + chr(10))
+    except Exception:
+        return ""
+
+
+def _anti_repeticao(recent_titles: list[str] | None) -> str:
+    if not recent_titles:
+        return ""
+    ts = "\n".join("- " + t for t in recent_titles[:10])
+    return ("\nHEADLINES RECENTES DO PERFIL — PROIBIDO repetir o mesmo modelo de hook ou estrutura "
+            "de frase de qualquer uma delas (escolha OUTRO dos 8 hooks e outra construção):\n" + ts + "\n")
+
+
+def _recent_titles(conn, tenant_id: str, formato: str, limit: int = 10) -> list[str]:
+    """Títulos recentes do formato — vão ao prompt como PROIBIÇÃO de repetição de hook/estrutura."""
+    with conn.cursor() as cur:
+        cur.execute("select title from creatives where tenant_id=%s and format=%s and title is not null "
+                    "order by created_at desc limit %s", (tenant_id, formato, limit))
+        return [(r["title"] or "").replace("*", "").strip() for r in cur.fetchall() if r.get("title")]
+
+
+def _build_prompt(req: OrchestrateRequest, viral, devices, brand, recent_titles: list[str] | None = None):
+    dev_txt = "\n".join(f"- {d['name']}: {d['logic']} (ex: {d['example']})" for d in devices)
+    viral_txt = ("(nenhum)" if not viral else
+                 f"código {viral['codigo']} | classe {viral['classe_ivs']} | mecanismo {viral['mecanismo']}\n"
+                 f"hook-base: {viral['hook_base']}\ntese: {viral['tese_central']}\n"
+                 f"objeção: {viral['objecao_principal']}\nadaptação IVS: {viral['adaptacao_ivs']}")
+    voice = (brand or {}).get("voice_notes") or "Médica sênior, acolhedora e técnica (Sábio+Cuidador). PT-BR impecável, sem emoji decorativo."
+    destino_txt = f" | DESTINO: {req.destino}" if req.formato == "carrossel" else ""
+    mel = "" if not req.melhorias else ("MELHORIAS SOLICITADAS PELO REVISOR — aplique obrigatoriamente, mantendo o que já está bom: " + req.melhorias)
+    diretrizes = _brand_diretrizes(req)
+    ang = ANGULOS_META.get(req.angulo or "") if req.destino == "meta_ads" else None
+    angulo_block = ("" if not ang else
+                    f"\nÂNGULO DO CONJUNTO (Meta Ads — estrutura 1 campanha/5 conjuntos/3 criativos, mentoria 06-14): "
+                    f"{ang['nome']}\nDiretriz deste conjunto: {ang['diretriz']}\n"
+                    f"A PEÇA INTEIRA serve este ângulo — arco: dor -> prova/mecanismo -> oferta -> CTA de agendamento.\n")
+    modular_block = f"""
+HIPÓTESE MODULAR DE TESTE (criativo como segmentação):
+- ângulo IVS: {req.angulo or 'inferir pelo tema'}
+- tipo de hook: {req.hook_tipo or 'inferir e declarar'}
+- objeção-alvo: {req.objecao_alvo or 'inferir a principal objeção da paciente'}
+- quebra de objeção/prova: {req.quebra_objecao or 'criar reframe seguro, sem promessa médica'}
+- visual: {req.visual_tipo or 'inferir visual executável no padrão premium IVS'}
+- CTA: {req.cta_tipo or 'seguir regra do formato/destino'}
+
+Inclua na saída a chave "modular_blocks" com: angle, hook_tipo, objecao_alvo,
+quebra_objecao, visual_tipo, visual_hook_category, visual_hook_mechanic, visual_hook_purpose, visual_hook_reason, visual_hook_risk, visual_hook_shots, cta_tipo e hypothesis. A hypothesis deve dizer qual público/objeção
+esta variação tenta qualificar.
+""".strip()
+    return f"""
+Crie 1 peça de conteúdo para Instagram, nicho saúde da mulher 40+ (emagrecimento/hormônios).
+{mel}
+CONTEXTO DE MARCA (tom de voz): {voice}{diretrizes}
+OBJETIVO: {req.objetivo} | FORMATO: {req.formato} | REDE: {req.rede}{destino_txt} | FUNIL: {req.funil}
+TEMA: {req.tema or 'escolha um tema forte do nicho (perimenopausa, tireoide, resistência à insulina, libido, sono)'}
+PERSONA: {req.persona or 'mulher 38-55 que já tentou de tudo e continua travada'}
+
+{angulo_block}
+{_content_strategy_block(req)}
+{_visual_hook_block(req)}
+{modular_block}
+
+MÉTODO LIGHT COPY (Leandro Ladeira) — aplicar na criação (fonte operacional: cerebro/areas/marketing/metodo-light-copy.md):
+- ASSOCIAÇÃO RICA: crie analogia/cena que ocupe slot vazio na mente; proíba analogias batidas como "metabolismo é motor" ou "disciplina é músculo". Gere 5 opções e escolha a mais específica/visual.
+- TÉCNICAS DE CRIAÇÃO: conta inusitada; isolar características antes de associar; listar o feio/errado do nicho; oposto/contrário do esperado; ponto de vista deslocado.
+- OBSERVAÇÃO ATIVA: use falas reais anonimizadas de pacientes/leads. Fala real > copy técnica. Ex.: "me sinto estranha no próprio corpo".
+- IDENTIDADE DA DRA.: ciência séria, escuta, investigação, autoridade gentil. Inimigo comum ético: desinformação, gotinhas milagrosas, dieta genérica e culpa.
+- ELEMENTOS LITERÁRIOS DISPONÍVEIS: aforismo, anáfora, antítese, hipérbole controlada, metáfora visual, personificação, desfecho inesperado, mundo ao contrário, ponto de vista, tríade cômica. Use 1-2, nunca todos.
+- ESTRUTURA: Gancho (dor/cena/contradição) → Premissa/associação → Mecanismo seguro → Virada → CTA compatível com o estágio.
+- RUBRICA: dor real + associação rica + mecanismo médico seguro + identidade IVS + compliance + CTA. Se qualquer item estiver fraco, reescreva antes de entregar.
+- COMPLIANCE SEMPRE: "pode ajudar", "avaliação individualizada", "investigação médica", "acompanhamento profissional" — NUNCA cura, resultado garantido ou kg prometido.
+
+ROTEIRO VIRAL ANÁLOGO (use como referência de ângulo/hook, adapte — não copie literal):
+{viral_txt}
+
+DISPOSITIVOS NARRATIVOS DISPONÍVEIS (escolha 1-2 e aplique):
+{dev_txt}
+
+REGRAS OBRIGATÓRIAS:
+- {_cta_rule(req.formato, req.destino)}
+- REALCE: em TODA headline/hook, marque UMA palavra ou frase-chave entre *asteriscos* (vira realce dourado no design). Só 1 realce por frase; nunca a frase inteira.
+- Compliance médico (CFM): SEM promessa de cura/resultado garantido/número de kg; pode explicar mecanismo.
+- Toda legenda/caption de conteúdo deve terminar obrigatoriamente com esta assinatura/disclaimer, exatamente neste bloco:\n{CAPTION_FOOTER}
+- Instagram 2026: escreva para recomendação + busca. Texto na tela, legenda e semântica precisam carregar intenção real de busca quando houver.
+- Retenção: os 2 primeiros segundos devem começar por dor, mecanismo ou objeção — nunca vinheta.
+- VISUAL HOOK LAYER: o efeito visual escolhido precisa aparecer no roteiro como mecânica de retenção, com 2-4 planos curtos em visual_hook_shots; se não quebrar objeção ou não for claro sem áudio, reescreva.
+- STORY RETENTION GATE IVS: escreva com contraste claro (crença comum vs realidade investigativa), valor percebido em até 5s, densidade alta, linguagem simples, exemplo/metáfora, antecipação com payoff, emoção do avatar e quebra explícita da objeção alvo.
+- ESTRATÉGIA NARRATIVA: siga a estratégia escolhida acima. Se for jornada_ivs, audite Cena → Tensão → Reframe → Guia → Caminho. Se for retencao_loops, audite Hook → Lead → Valor/Loop → CTA. Se for loop_previsao, audite Stakes → Grande Pergunta → Headfake/Reframe → Rehook → CTA seguro. Em todos os casos, a paciente é protagonista e o Instituto Vital Slim/Dra. Daniely são guia, não herói.
+- A saída deve permitir pontuação 14+/18 no story_retention_gate e 6+/10 no strategy_gate da estratégia escolhida.
+- Em "modular_blocks", inclua "story_retention_intent" com uma frase curta dizendo qual pergunta mental o hook abre e qual payoff o roteiro entrega.
+- Em "modular_blocks", inclua os blocos auditáveis da estratégia escolhida. Para jornada_ivs: cena, tensao, reframe, guia, caminho. Para retencao_loops: hook, lead, valor_1, loop_1, valor_2, loop_2, valor_3, cta. Para loop_previsao: personagem, risco, urgencia, pergunta_central, predicao_esperada, headfake, rehook, cta.
+- Métrica de qualidade preferida: {req.quality_metric or 'DM útil / lead útil / envio / retenção, não curtida'}.
+- Intenção de busca/SEO social: {req.seo_social_intent or 'inferir pela dor central da paciente'}.
+- Motivo para salvar/enviar: {req.send_save_reason or 'a peça deve ser útil o suficiente para salvar ou mandar para uma amiga'}.
+- Sinal de intenção esperado: {req.expected_intent_signal or 'resposta no direct, envio, salvamento ou clique para WhatsApp'}.
+- Trial Reel: {'sim — tratar como laboratório controlado' if req.trial_reel else 'não obrigatório'}.
+- Gancho forte; 1 ideia central; linguagem da paciente; PT-BR impecável.
+
+{_output_spec(req.formato, getattr(req, "modelo", "viral") or "viral")}
+{_anti_repeticao(recent_titles)}
+""".strip()
+
+
+def _extract_json(text: str) -> dict:
+    m = re.search(r"\{.*\}", text, re.S)
+    if not m:
+        return {"raw": text}
+    try:
+        return json.loads(m.group(0))
+    except Exception:
+        return {"raw": text}
+
+
+def _with_caption_footer(text: object) -> str:
+    base = "" if text is None else str(text).strip()
+    if CAPTION_FOOTER_MARKER in base:
+        return base
+    return (base + "\n\n" + CAPTION_FOOTER).strip() if base else CAPTION_FOOTER
+
+
+def _apply_caption_footer(output: dict) -> dict:
+    """Garante assinatura/disclaimer em toda legenda gerada ou persistida."""
+    if not isinstance(output, dict):
+        return output
+    output["caption"] = _with_caption_footer(output.get("caption"))
+    # Algumas rotas de engenharia reversa retornam scripts com a chave PT-BR "legenda".
+    scripts = output.get("scripts")
+    if isinstance(scripts, list):
+        for item in scripts:
+            if isinstance(item, dict) and "legenda" in item:
+                item["legenda"] = _with_caption_footer(item.get("legenda"))
+    return output
+
+
+def _script_text(output: dict) -> str:
+    """Extrai texto narrativo da peça para scoring de retenção sem depender de formato."""
+    slides = output.get("slides") or []
+    if slides and isinstance(slides[0], dict):
+        return " ".join(((s.get("headline") or "") + " " + (s.get("sub") or "")) for s in slides)
+    if slides:
+        return " ".join(str(x) for x in slides)
+    tweets = output.get("tweets") or []
+    if tweets:
+        return " ".join(str(x) for x in tweets)
+    script = output.get("script") or output.get("body") or output.get("development") or ""
+    return " ".join(str(x) for x in script) if isinstance(script, list) else str(script)
+
+
+def _contains_any(text: str, needles: tuple[str, ...]) -> bool:
+    return any(n in text for n in needles)
+
+
+def _journey_storytelling_gate(text: str, blocks: dict) -> dict:
+    """Gate do Framework Storytelling de Jornada IVS.
+
+    Regra Tiaro 2026-07-17: todo conteúdo futuro deve passar por
+    Cena → Tensão → Reframe → Guia → Caminho.
+    """
+    checks = {
+        "cena_concreta": bool(
+            blocks.get("cena")
+            or blocks.get("scene")
+            or _contains_any(text, (
+                "espelho", "roupa", "armário", "calça", "foto", "evento", "consulta", "rotina",
+                "acorda", "jantar", "almoço", "trabalho", "filho", "cansada",
+            ))
+        ),
+        "tensao_emocional": bool(
+            blocks.get("tensao")
+            or blocks.get("tension")
+            or _contains_any(text, (
+                "não se reconhece", "culpa", "frustra", "vergonha", "medo", "trava", "cansa",
+                "dói", "desiste", "perdeu o controle", "tentou de tudo",
+            ))
+        ),
+        "reframe_sem_culpa": bool(
+            blocks.get("reframe")
+            or _contains_any(text, (
+                "não é falta de força de vontade", "não é falta de disciplina", "não é culpa",
+                "talvez", "o problema não", "antes de tentar", "em vez de", "seu corpo não está falhando",
+                "precisa entender", "não é só dieta",
+            ))
+        ),
+        "guia_ivs": bool(
+            blocks.get("guia")
+            or blocks.get("guide")
+            or _contains_any(text, (
+                "instituto vital slim", "dra. daniely", "dra daniely", "avaliação individualizada",
+                "investigação", "investigar", "escuta", "acompanhamento", "plano individualizado",
+                "entender sua história", "sem julgamento",
+            ))
+        ),
+        "caminho_seguro_cta": bool(
+            blocks.get("caminho")
+            or blocks.get("path")
+            or _contains_any(text, (
+                "fale com", "whatsapp", "agende", "avaliação", "próximo passo", "salve", "compartilhe",
+                "comente", "veja se faz sentido", "comece entendendo", "acompanhar",
+            ))
+        ),
+    }
+    score = sum(2 for ok in checks.values() if ok)
+    missing = [k for k, ok in checks.items() if not ok]
+    return {
+        "version": "storytelling_jornada_ivs_v1",
+        "framework": "Cena → Tensão → Reframe → Guia → Caminho",
+        "total": score,
+        "max": 10,
+        "score_pct": round(100 * score / 10, 1),
+        "target_min": 6,
+        "checks": checks,
+        "missing": missing,
+        "recommendation": "Framework completo: manter compliance." if not missing else "Adicionar antes de aprovar: " + ", ".join(missing) + ".",
+    }
+
+
+def _retention_loops_gate(text: str, blocks: dict) -> dict:
+    """Gate da Estratégia Retenção por Loops.
+
+    Regra Tiaro 2026-07-18: opção transversal para conteúdo curto:
+    Hook → Lead → Valor 1 → Loop 1 → Valor 2 → Loop 2 → Valor 3 → CTA.
+    """
+    checks = {
+        "hook_stop_scroll": bool(
+            blocks.get("hook")
+            or _contains_any(text, ("você", "se você", "antes de", "não é", "talvez", "por que", "erro", "sinal"))
+        ),
+        "lead_segura_ate_10s": bool(
+            blocks.get("lead")
+            or blocks.get("lead_10s")
+            or _contains_any(text, ("continua", "fica comigo", "o ponto é", "tem um detalhe", "quase ninguém", "vale entender"))
+        ),
+        "valor_em_blocos": bool(
+            (blocks.get("valor_1") and blocks.get("valor_2"))
+            or _contains_any(text, ("primeiro", "segundo", "terceiro", "na prática", "exame", "rotina", "sono", "ansiedade", "investig"))
+        ),
+        "loops_abertos_com_payoff": bool(
+            (blocks.get("loop_1") and blocks.get("loop_2"))
+            or _contains_any(text, ("mas tem", "só que", "o detalhe", "a virada", "e aqui", "antes disso", "o próximo"))
+        ),
+        "cta_seguro": bool(
+            blocks.get("cta")
+            or blocks.get("caminho")
+            or _contains_any(text, ("salve", "compartilhe", "comente", "fale com", "avaliação", "veja se faz sentido", "responde"))
+        ),
+    }
+    score = sum(2 for ok in checks.values() if ok)
+    missing = [k for k, ok in checks.items() if not ok]
+    return {
+        "version": "retencao_loops_ivs_v1",
+        "framework": "Hook → Lead → Valor 1 → Loop 1 → Valor 2 → Loop 2 → Valor 3 → CTA",
+        "total": score,
+        "max": 10,
+        "score_pct": round(100 * score / 10, 1),
+        "target_min": 6,
+        "checks": checks,
+        "missing": missing,
+        "recommendation": "Loops de retenção completos: manter compliance." if not missing else "Adicionar antes de aprovar: " + ", ".join(missing) + ".",
+    }
+
+def _prediction_loop_gate(text: str, blocks: dict) -> dict:
+    """Gate da Estratégia Loop de Previsão Ética.
+
+    Destilado IVS-first da referência Kallaway: stakes → grande pergunta →
+    headfake/reframe → rehook. Conteúdo externo vira hipótese operacional;
+    no IVS, a virada precisa quebrar objeção sem promessa clínica agressiva.
+    """
+    checks = {
+        "stakes_personagem": bool(
+            blocks.get("personagem")
+            or blocks.get("character")
+            or _contains_any(text, ("mulher", "paciente", "você", "ela", "mãe", "empresária", "profissional"))
+        ),
+        "stakes_risco": bool(
+            blocks.get("risco")
+            or blocks.get("stakes")
+            or _contains_any(text, ("risco", "perder", "cansada", "frustra", "não se reconhece", "tentou de tudo", "voltar para o mesmo lugar"))
+        ),
+        "urgencia_real": bool(
+            blocks.get("urgencia")
+            or _contains_any(text, ("antes de", "hoje", "agora", "próxima", "semana", "consulta", "evento", "quando"))
+        ),
+        "pergunta_central": bool(
+            blocks.get("pergunta_central")
+            or blocks.get("big_question")
+            or _contains_any(text, ("por que", "como", "o que", "será", "qual", "e se"))
+        ),
+        "predicao_esperada": bool(
+            blocks.get("predicao_esperada")
+            or blocks.get("previsao")
+            or _contains_any(text, ("você acha", "parece", "normalmente", "todo mundo pensa", "a maioria acredita", "a primeira resposta"))
+        ),
+        "headfake_logico": bool(
+            blocks.get("headfake")
+            or blocks.get("virada")
+            or _contains_any(text, ("mas", "só que", "na verdade", "o contrário", "a virada", "o problema não", "não era"))
+        ),
+        "rehook_sem_vacuo": bool(
+            blocks.get("rehook")
+            or _contains_any(text, ("e é aí", "o próximo", "o detalhe", "o problema com isso", "o que muda tudo", "que é exatamente por isso"))
+        ),
+        "cta_seguro": bool(
+            blocks.get("cta")
+            or blocks.get("caminho")
+            or _contains_any(text, ("salve", "compartilhe", "comente", "fale com", "avaliação", "veja se faz sentido", "responde"))
+        ),
+    }
+    score = sum(1.25 for ok in checks.values() if ok)
+    missing = [k for k, ok in checks.items() if not ok]
+    return {
+        "version": "loop_previsao_ivs_v1",
+        "framework": "Stakes → Grande Pergunta → Headfake/Reframe → Rehook → CTA seguro",
+        "total": round(score, 2),
+        "max": 10,
+        "score_pct": round(100 * score / 10, 1),
+        "target_min": 6,
+        "checks": checks,
+        "missing": missing,
+        "recommendation": "Loop de previsão completo: manter virada ética e compliance." if not missing else "Adicionar antes de aprovar: " + ", ".join(missing) + ".",
+    }
+
+
+def _visual_hook_gate(output: dict) -> dict:
+    """Gate do Visual Hook Layer destilado do PDF de short-form hooks.
+
+    O efeito visual só passa quando funciona como retenção + quebra de objeção,
+    não como firula. Pontuação fechada 0-10 com 5 critérios de 0/2.
+    """
+    title = str(output.get("title") or output.get("hook") or output.get("headline") or "")
+    corpo = _script_text(output)
+    caption = str(output.get("caption") or "")
+    raw_blocks = output.get("modular_blocks")
+    blocks: dict[str, Any] = raw_blocks if isinstance(raw_blocks, dict) else {}
+    text = " ".join([title, corpo, caption, json.dumps(blocks, ensure_ascii=False)]).lower()
+    hook = get_visual_hook(blocks.get("visual_hook_mechanic") or blocks.get("visual_hook_category") or blocks.get("visual_tipo"))
+    shots = blocks.get("visual_hook_shots")
+    has_shots = isinstance(shots, list) and len(shots) >= 2
+    has_visual_words = _contains_any(text, (
+        "slide", "texto", "match cut", "corte", "jump", "troca", "speed", "ramp", "acelera", "desacelera",
+        "imagem", "objeto", "espelho", "roupa", "calça", "agenda", "prato", "exame", "b-roll", "broll",
+        "visual", "plano", "cena", "reveal", "virada", "transição", "transicao",
+    ))
+    checks = {
+        "interrupcao_visual_0_2s": bool(
+            has_shots
+            or blocks.get("visual_hook_mechanic")
+            or _contains_any(text, ("0-2", "primeiros 2", "primeiros segundos", "abre com", "começa com", "stop scroll"))
+        ),
+        "conexao_com_objecao": bool(
+            blocks.get("objecao_alvo")
+            or blocks.get("quebra_objecao")
+            or _contains_any(text, ("já tentei", "força de vontade", "culpa", "preço", "tempo", "medo", "não se reconhece", "só mais uma dieta"))
+        ),
+        "clareza_sem_audio": bool(
+            blocks.get("visual_hook_reason")
+            or blocks.get("text_on_screen")
+            or has_visual_words
+            or _contains_any(text, ("sem áudio", "texto na tela", "legenda", "checklist", "pergunta na tela"))
+        ),
+        "funcao_narrativa": bool(
+            blocks.get("visual_hook_purpose")
+            or blocks.get("story_retention_intent")
+            or _contains_any(text, ("virada", "reframe", "tensão", "payoff", "mecanismo", "caminho", "guia"))
+        ),
+        "compliance_medico_visual": not _contains_any(text, (
+            "antes/depois", "antes e depois", "paciente real", "prontuário", "prontuario", "emagrece", "garantido", "milagre", "perca",
+        )),
+    }
+    total = sum(2 for ok in checks.values() if ok)
+    missing = [k for k, ok in checks.items() if not ok]
+    return {
+        "version": "visual_hook_gate_ivs_v1",
+        "visual_hook": hook["key"],
+        "visual_hook_category": hook["category"],
+        "total": total,
+        "max": 10,
+        "score_pct": round(100 * total / 10, 1),
+        "target_min": 8,
+        "checks": checks,
+        "missing": missing,
+        "recommendation": "Visual hook aprovado: usar como mecanismo de retenção, não como efeito solto." if total >= 8 else "Ajustar visual hook antes de gravar: " + ", ".join(missing) + ".",
+    }
+
+
+def _story_retention_gate(output: dict, formato: str, content_strategy: str = "jornada_ivs") -> dict:
+    """Gate IVS inspirado em princípios de short-form storytelling.
+
+    Critérios 0-2: contraste, valor em 5s, densidade, clareza, absorção,
+    antecipação, emoção, ritmo/energia e objeção quebrada. Também aplica
+    o Framework Storytelling de Jornada IVS: Cena → Tensão → Reframe → Guia → Caminho.
+    """
+    title = str(output.get("title") or output.get("hook") or output.get("headline") or "")
+    corpo = _script_text(output)
+    caption = str(output.get("caption") or "")
+    raw_blocks = output.get("modular_blocks")
+    blocks: dict = raw_blocks if isinstance(raw_blocks, dict) else {}
+    text = " ".join([title, corpo, caption, json.dumps(blocks, ensure_ascii=False), formato]).lower()
+    first = " ".join([title, corpo]).lower()[:360]
+    sentences = [s.strip() for s in re.split(r"[.!?\n]+", " ".join([title, corpo])) if s.strip()]
+    avg_len = (sum(len(s) for s in sentences) / len(sentences)) if sentences else 999
+
+    criterios = {
+        "contraste": 2 if _contains_any(first, ("não é", "não foi", "talvez", "mas", "antes de", "em vez de", "o problema não")) else (1 if _contains_any(first, ("por que", "erro", "trav", "sinal")) else 0),
+        "valor_em_5s": 2 if _contains_any(first, ("por que", "como", "sinal", "investig", "entender", "explica", "causa")) else (1 if len(first) > 90 else 0),
+        "densidade": 2 if len(corpo) > 260 and not _contains_any(first, ("olá", "oi, eu", "hoje eu vou", "meu nome")) else (1 if len(corpo) > 160 else 0),
+        "clareza": 2 if sentences and avg_len <= 120 and not _contains_any(text, ("fisiopatologia", "homeostase", "eixo hipotálamo", "farmacodinâmica")) else (1 if avg_len <= 170 else 0),
+        "absorcao": 2 if _contains_any(text, ("exemplo", "pensa assim", "imagine", "é como", "teste", "sinal", "na prática")) else (1 if _contains_any(text, ("rotina", "exame", "bioimped", "sono", "fome", "ansiedade")) else 0),
+        "antecipacao": 2 if _contains_any(text, ("até o fim", "detalhe", "quase ninguém", "o que ninguém", "antes de", "próximo", "virada")) else (1 if _contains_any(text, ("sinal", "segredo", "pergunta")) else 0),
+        "emocao": 2 if _contains_any(text, ("espelho", "roupa", "calça", "culpa", "frustra", "vergonha", "medo", "cansada", "não se reconhece")) else (1 if _contains_any(text, ("mulher", "40", "rotina", "tentou de tudo")) else 0),
+        "ritmo_energia": 2 if len(sentences) >= 4 and avg_len <= 95 else (1 if len(sentences) >= 3 and avg_len <= 140 else 0),
+        "objecao_quebrada": 2 if bool(blocks.get("objecao_alvo") or blocks.get("quebra_objecao") or _contains_any(text, ("já tentei", "medo", "preço", "caro", "sem tempo", "só mais uma dieta", "força de vontade"))) else 0,
+    }
+    total = sum(criterios.values())
+    strategy_key = _content_strategy_key(content_strategy or blocks.get("content_strategy"))
+    journey = _journey_storytelling_gate(text, blocks)
+    loops = _retention_loops_gate(text, blocks)
+    prediction = _prediction_loop_gate(text, blocks)
+    strategy_gate = prediction if strategy_key == "loop_previsao" else (loops if strategy_key == "retencao_loops" else journey)
+    return {
+        "version": "story_retention_gate_ivs_v4_strategy_select",
+        "content_strategy": strategy_key,
+        "content_strategy_name": CONTENT_STRATEGIES[strategy_key]["nome"],
+        "total": total,
+        "max": 18,
+        "score_pct": round(100 * total / 18, 1),
+        "decision": "aprovado_para_teste" if total >= 14 and strategy_gate["total"] >= strategy_gate["target_min"] else ("ajustar_antes_de_gravar" if total >= 9 or strategy_gate["total"] >= 4 else "reescrever"),
+        "criteria": criterios,
+        "strategy_gate": strategy_gate,
+        "narrative_journey_gate": journey,
+        "retention_loops_gate": loops,
+        "prediction_loop_gate": prediction,
+    }
+
+
+def _brief_payload(req: OrchestrateRequest) -> dict:
+    return {
+        "formato": req.formato,
+        "objetivo": req.objetivo,
+        "rede": req.rede,
+        "destino": req.destino,
+        "angulo": req.angulo,
+        "hook_tipo": req.hook_tipo,
+        "objecao_alvo": req.objecao_alvo,
+        "quebra_objecao": req.quebra_objecao,
+        "visual_tipo": req.visual_tipo,
+        "visual_hook_category": req.visual_hook_category,
+        "visual_hook_mechanic": _visual_hook_key(req.visual_hook_mechanic or req.visual_hook_category or req.visual_tipo),
+        "cta_tipo": req.cta_tipo,
+        "tema": req.tema,
+        "persona": req.persona,
+        "funil": req.funil,
+        "source": req.source,
+        "thesis": req.thesis,
+        "pillar": req.pillar,
+        "audience_stage": req.audience_stage,
+        "origin_tag": req.origin_tag,
+        "hook": req.hook,
+        "content_strategy": _content_strategy_key(req.content_strategy),
+    }
+
+
+def _brief_value(brief: dict, key: str) -> str | None:
+    value = brief.get(key)
+    if value:
+        return str(value)
+    tema = brief.get("tema") or ""
+    patterns = {
+        "hook": r"(?:^|\n)Hook:\s*(.+)",
+        "origin_tag": r"(?:^|\n)Origem:\s*(.+)",
+    }
+    if key in patterns:
+        m = re.search(patterns[key], tema)
+        return m.group(1).strip() if m else None
+    if key == "thesis" and tema:
+        return str(tema).split("\n", 1)[0].strip()
+    return None
+
+
+def _ensure_calendar_for_creative(conn, cid: str) -> dict | None:
+    """Cria/atualiza entrada editorial para peça aprovada, sem duplicar."""
+    ensure_phase1_schema(conn)
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            select c.id::text as id, c.tenant_id, c.title, c.format, c.network, c.brief,
+                   c.asset_url, c.status, c.hook_tipo, c.objecao_alvo, c.visual_tipo, c.cta_tipo
+            from creatives c where c.id=%s
+            """,
+            (cid,),
+        )
+        c = cur.fetchone()
+        if not c:
+            return None
+        brief = c.get("brief") or {}
+        if isinstance(brief, str):
+            try:
+                brief = json.loads(brief)
+            except Exception:
+                brief = {}
+        title = (c.get("title") or _brief_value(brief, "thesis") or f"Criativo {c.get('format')}").replace("*", "")
+        origin_tag = _brief_value(brief, "origin_tag")
+        sprint_thesis = _brief_value(brief, "thesis")
+        sprint_hook = _brief_value(brief, "hook")
+        notes_parts = [
+            "Aprovado no Banco de Criativos e enviado ao Calendário Editorial.",
+            f"Origem: {origin_tag}" if origin_tag else None,
+            f"Tese: {sprint_thesis}" if sprint_thesis else None,
+            f"Hook: {sprint_hook}" if sprint_hook else None,
+        ]
+        notes = "\n".join([p for p in notes_parts if p])
+        cur.execute(
+            """
+            insert into calendar_entries (
+                tenant_id, title, format, channel, objective, status, notes, creative_id,
+                origin_tag, sprint_thesis, sprint_hook
+            ) values (%s,%s,%s,%s,%s,'aprovado_para_publicar',%s,%s,%s,%s,%s)
+            on conflict (creative_id) where creative_id is not null do update set
+                title=excluded.title,
+                format=excluded.format,
+                channel=excluded.channel,
+                objective=excluded.objective,
+                status=case when calendar_entries.status in ('published','publicado','medido') then calendar_entries.status else 'aprovado_para_publicar' end,
+                notes=excluded.notes,
+                origin_tag=excluded.origin_tag,
+                sprint_thesis=excluded.sprint_thesis,
+                sprint_hook=excluded.sprint_hook
+            returning id::text as id, status, title
+            """,
+            (c["tenant_id"], title, c.get("format"), c.get("network") or "instagram", brief.get("objetivo"),
+             notes, cid, origin_tag, sprint_thesis, sprint_hook),
+        )
+        return cur.fetchone()
+
+
+def _quality(output: dict, formato: str, content_strategy: str = "jornada_ivs") -> tuple[float, dict]:
+    blob = json.dumps(output, ensure_ascii=False).lower()
+    corpo = _script_text(output)
+    structural = {
+        "tem_titulo": 1 if output.get("title") else 0,
+        "tem_gancho": 1 if (output.get("hook") or output.get("headline") or output.get("title")) else 0,
+        "tem_cta": 1 if (output.get("cta") or output.get("cta_headline")
+                         or any(k in blob for k in ("salv", "compartilh", "agend"))) else 0,
+        "tem_legenda": 1 if output.get("caption") else 0,
+        "tem_hashtags": 1 if output.get("hashtags") else 0,
+        "compliance_ok": 0 if any(x in blob for x in BANNED) else 1,
+        "profundidade": 1 if len(str(corpo)) > 220 else 0,
+        "tem_enfase": 1 if "*" in (corpo + json.dumps(output.get("title", ""))) else 0,
+    }
+    structural_score = round(100 * sum(structural.values()) / len(structural), 1)
+    story_gate = _story_retention_gate(output, formato, content_strategy)
+    visual_hook_gate = _visual_hook_gate(output)
+    strategy_score = story_gate.get("strategy_gate", {}).get("score_pct", 0)
+    score = round((structural_score * 0.40) + (story_gate["score_pct"] * 0.30) + (strategy_score * 0.15) + (visual_hook_gate["score_pct"] * 0.15), 1)
+    breakdown = {
+        **structural,
+        "structural_score": structural_score,
+        "story_retention_gate": story_gate,
+        "visual_hook_gate": visual_hook_gate,
+        "visual_hook_score": visual_hook_gate["score_pct"],
+        "strategy_score": strategy_score,
+        "narrative_journey_score": story_gate.get("narrative_journey_gate", {}).get("score_pct", 0),
+        "retention_loops_score": story_gate.get("retention_loops_gate", {}).get("score_pct", 0),
+        "prediction_loop_score": story_gate.get("prediction_loop_gate", {}).get("score_pct", 0),
+        "content_strategy": _content_strategy_key(content_strategy),
+    }
+    return score, breakdown
+
+
+SYSTEM_PROMPT = ("Você é o motor de conteúdo do Instituto Vital Slim: estrategista de conteúdo médico premium. "
+                 "Combina bibliotecas (dispositivos, roteiros virais) + tom da marca. Saída sempre JSON puro, "
+                 "elegante, orientada a engajamento e compliance CFM.")
+
+
+@router.get("/visual-hooks")
+def visual_hooks() -> dict:
+    return {
+        "version": "visual_hook_layer_ivs_v1",
+        "source": "Top Short-Form Visual Hook Examples — abstração IVS-first, sem copiar peça externa",
+        "field_names": ["visual_hook_category", "visual_hook_mechanic", "visual_hook_shots", "visual_hook_reason", "visual_hook_risk"],
+        "items": VISUAL_HOOKS,
+        "gate": {
+            "target_min": 8,
+            "criteria": [
+                "interrupcao_visual_0_2s",
+                "conexao_com_objecao",
+                "clareza_sem_audio",
+                "funcao_narrativa",
+                "compliance_medico_visual",
+            ],
+        },
+    }
+
+
+async def _motor(prompt: str, system: str):
+    # Regra IVS: TODA geração via Codex GPT-5.5 (gateway OAuth). Nunca OpenRouter/Anthropic direto.
+    try:
+        return await CodexClient().generate(prompt, system=system)
+    except Exception as e:
+        raise HTTPException(503, f"motor (codex) indisponível: {type(e).__name__}: {e}")
+
+
+@router.post("/orchestrate")
+async def orchestrate(req: OrchestrateRequest) -> dict:
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, req.tenant_slug)
+        viral, devices, brand = _fetch_context(conn, tenant_id, req.objetivo, req.tema)
+        recents = _recent_titles(conn, tenant_id, req.formato)
+    prompt = _build_prompt(req, viral, devices, brand, recents)
+    result = await _motor(prompt, SYSTEM_PROMPT)
+    output = _apply_caption_footer(_extract_json(result.get("content", "")))
+    output["destino"] = req.destino   # feed|meta_ads -> consumido pelo render worker
+    output["modelo"] = getattr(req, "modelo", "viral") or "viral"  # viral|cientifico -> layout do render
+    if req.destino == "meta_ads" and req.angulo:
+        output["angulo"] = req.angulo
+        output["angulo_nome"] = (ANGULOS_META.get(req.angulo) or {}).get("nome")
+    meta = _modular_meta(req, output)
+    score, breakdown = _quality(output, req.formato, req.content_strategy)
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, req.tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """insert into creatives
+                   (tenant_id, format, funnel, network, script, caption, title, description, hashtags,
+                    status, quality_score, quality_breakdown, brief,
+                    test_cycle_id, variant_index, angulo_ivs, hook_tipo, objecao_alvo, quebra_objecao,
+                    visual_tipo, cta_tipo, destino_criativo, hypothesis, modular_blocks,
+                    seo_social_intent, send_save_reason, trial_reel, expected_intent_signal, quality_metric)
+                   values (%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,'gerado',%s,%s::jsonb,%s::jsonb,
+                           %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s,%s,%s,%s,%s)
+                   returning id, created_at""",
+                (tenant_id, req.formato, req.funil, req.rede,
+                 json.dumps(output, ensure_ascii=False),
+                 output.get("caption"), output.get("title"), output.get("description"),
+                 json.dumps(output.get("hashtags", []), ensure_ascii=False),
+                 score, json.dumps(breakdown, ensure_ascii=False),
+                 json.dumps(_brief_payload(req), ensure_ascii=False),
+                 req.test_cycle_id, req.variant_index, meta["angulo_ivs"], meta["hook_tipo"], meta["objecao_alvo"],
+                 meta["quebra_objecao"], meta["visual_tipo"], meta["cta_tipo"], meta["destino_criativo"],
+                 meta["hypothesis"], json.dumps(meta["modular_blocks"], ensure_ascii=False),
+                 meta["seo_social_intent"], meta["send_save_reason"], bool(meta["trial_reel"]),
+                 meta["expected_intent_signal"], meta["quality_metric"]),
+            )
+            row = cur.fetchone()
+            if req.formato == "reels":
+                cur.execute("update creatives set reel_status=%s where id=%s", ("storyboard_pendente", row["id"]))
+    return {
+        "id": row["id"], "created_at": row["created_at"], "format": req.formato, "destino": req.destino,
+        "objetivo": req.objetivo, "model": result.get("model"), "mode": result.get("mode"),
+        "viral_ref": (viral or {}).get("codigo"),
+        "devices_pool": [d["name"] for d in devices],
+        "quality_score": score, "quality_breakdown": breakdown,
+        "output": output,
+    }
+
+
+@router.post("/matrix")
+async def generate_matrix(req: MatrixRequest) -> dict:
+    """Gera um ciclo de teste criativo modular (criativo como segmentação).
+    Limite operacional inicial: 36 variações por chamada para manter revisão humana viável.
+    """
+    combos = list(itertools.product(req.angulos, req.hooks, req.objecoes, req.ctas, req.visuais, req.visual_hook_mechanics))
+    if not combos:
+        raise HTTPException(400, "matriz vazia")
+    if len(combos) > 36:
+        raise HTTPException(400, f"matriz com {len(combos)} variações; limite inicial é 36")
+
+    with get_conn() as conn:
+        tenant_id = _tenant_id(conn, req.tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """insert into creative_test_cycles (tenant_id, name, objective, persona, status, started_at)
+                   values (%s,%s,%s,%s,'active',now()) returning id::text as id, created_at""",
+                (tenant_id, req.name, req.objetivo, req.persona),
+            )
+            cycle = cur.fetchone()
+
+    items = []
+    errors = []
+    parent_id = None
+    for idx, (angulo, hook_tipo, objecao, cta_tipo, visual_tipo, visual_hook_mechanic) in enumerate(combos, start=1):
+        one = OrchestrateRequest(
+            tenant_slug=req.tenant_slug,
+            objetivo=req.objetivo,
+            formato=req.formato,
+            rede=req.rede,
+            destino=req.destino,
+            angulo=angulo,
+            hook_tipo=hook_tipo,
+            objecao_alvo=objecao,
+            visual_tipo=visual_tipo,
+            visual_hook_mechanic=visual_hook_mechanic,
+            cta_tipo=cta_tipo,
+            test_cycle_id=cycle["id"],
+            variant_index=idx,
+            tema=req.tema,
+            persona=req.persona,
+            funil=req.funil,
+            content_strategy=req.content_strategy,
+        )
+        try:
+            with get_conn() as conn:
+                tid = _tenant_id(conn, one.tenant_slug)
+                viral, devices, brand = _fetch_context(conn, tid, one.objetivo, one.tema)
+                recents = _recent_titles(conn, tid, one.formato)
+            result = await _motor(_build_prompt(one, viral, devices, brand, recents), SYSTEM_PROMPT)
+            output = _apply_caption_footer(_extract_json(result.get("content", "")))
+            output["destino"] = one.destino
+            if one.destino == "meta_ads" and one.angulo:
+                output["angulo"] = one.angulo
+                output["angulo_nome"] = (ANGULOS_META.get(one.angulo) or {}).get("nome")
+            meta = _modular_meta(one, output)
+            score, breakdown = _quality(output, one.formato, one.content_strategy)
+            with get_conn() as conn:
+                tenant_id = _tenant_id(conn, one.tenant_slug)
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """insert into creatives
+                           (tenant_id, format, funnel, network, script, caption, title, description, hashtags,
+                            status, quality_score, quality_breakdown, brief,
+                            test_cycle_id, parent_creative_id, variant_index, angulo_ivs, hook_tipo, objecao_alvo,
+                            quebra_objecao, visual_tipo, cta_tipo, destino_criativo, hypothesis, modular_blocks,
+                            seo_social_intent, send_save_reason, trial_reel, expected_intent_signal, quality_metric)
+                           values (%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,'gerado',%s,%s::jsonb,%s::jsonb,
+                                   %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s,%s,%s,%s,%s)
+                           returning id::text as id, created_at""",
+                        (tenant_id, one.formato, one.funil, one.rede,
+                         json.dumps(output, ensure_ascii=False), output.get("caption"), output.get("title"),
+                         output.get("description"), json.dumps(output.get("hashtags", []), ensure_ascii=False),
+                         score, json.dumps(breakdown, ensure_ascii=False),
+                         json.dumps(_brief_payload(one), ensure_ascii=False),
+                         one.test_cycle_id, parent_id, one.variant_index, meta["angulo_ivs"], meta["hook_tipo"],
+                         meta["objecao_alvo"], meta["quebra_objecao"], meta["visual_tipo"], meta["cta_tipo"],
+                         meta["destino_criativo"], meta["hypothesis"], json.dumps(meta["modular_blocks"], ensure_ascii=False),
+                         meta["seo_social_intent"], meta["send_save_reason"], bool(meta["trial_reel"]),
+                         meta["expected_intent_signal"], meta["quality_metric"]),
+                    )
+                    row = cur.fetchone()
+                    if parent_id is None:
+                        parent_id = row["id"]
+                    if one.formato == "reels":
+                        cur.execute("update creatives set reel_status=%s where id=%s", ("storyboard_pendente", row["id"]))
+            items.append({"creative_id": row["id"], "variant_index": idx, "quality_score": score,
+                          "angulo_ivs": meta["angulo_ivs"], "hook_tipo": meta["hook_tipo"],
+                          "objecao_alvo": meta["objecao_alvo"], "visual_tipo": meta["visual_tipo"],
+                          "visual_hook_mechanic": meta["visual_hook_mechanic"], "cta_tipo": meta["cta_tipo"]})
+        except Exception as e:
+            errors.append({"variant_index": idx, "angulo": angulo, "hook_tipo": hook_tipo,
+                           "objecao_alvo": objecao, "cta_tipo": cta_tipo, "visual_tipo": visual_tipo,
+                           "visual_hook_mechanic": visual_hook_mechanic,
+                           "error": f"{type(e).__name__}: {e}"})
+    return {"test_cycle_id": cycle["id"], "requested": len(combos), "created": len(items), "errors": errors, "items": items}
+
+
+async def _regerar_cirurgico(cid: str, out: dict, per_slide: list[tuple[str, str]]) -> dict | None:
+    """Edita SOMENTE os slides citados no feedback, preservando o resto do roteiro.
+
+    Numeração da galeria: slide 1 = capa; slides 2..N-1 = miolo; slide N = CTA.
+    Viral: miolo = out["slides"] (objetos). Científico: miolo = out["tweets"] (strings).
+    Retorna o payload da rota ou None p/ cair no fluxo de regeneração completa.
+    """
+    modelo = (out.get("modelo") or "viral").lower()
+    miolo_key = "tweets" if modelo == "cientifico" else "slides"
+    miolo = out.get(miolo_key) or []
+    total = 1 + len(miolo) + 1  # capa + miolo + CTA
+
+    alvos = []
+    for num_s, txt in per_slide:
+        n = int(num_s)
+        if n < 1 or n > total:
+            return None  # número fora da peça -> regeneração completa decide
+        alvos.append((n, txt))
+
+    # monta o pedido de edição por alvo
+    pedidos = []
+    for n, txt in alvos:
+        if n == 1:
+            alvo = ({"cover_headline_lines": out.get("cover_headline_lines"),
+                     "cover_destaques": out.get("cover_destaques")} if modelo == "cientifico"
+                    else {"title": out.get("title"), "cover_sub": out.get("cover_sub")})
+            pedidos.append({"slide": n, "papel": "capa", "conteudo_atual": alvo, "correcao": txt})
+        elif n == total:
+            pedidos.append({"slide": n, "papel": "cta",
+                            "conteudo_atual": {"cta_headline": out.get("cta_headline"),
+                                               "cta_sub": out.get("cta_sub")},
+                            "correcao": txt})
+        else:
+            pedidos.append({"slide": n, "papel": "miolo", "indice_miolo": n - 2,
+                            "conteudo_atual": miolo[n - 2], "correcao": txt})
+
+    prompt = (
+        "Você é EDITOR de um carrossel já aprovado. NÃO recrie a peça: aplique SOMENTE as correções "
+        "pedidas, mantendo tom, tamanho e formato de cada campo. Se a correção não pedir mudança de "
+        "imagem, NÃO altere image_prompt.\n\nEDIÇÕES PEDIDAS (JSON):\n"
+        + json.dumps(pedidos, ensure_ascii=False)
+        + "\n\nRETORNE SOMENTE um JSON: lista de objetos {\"slide\": <número>, \"novo_conteudo\": <mesma "
+        "estrutura do conteudo_atual, já corrigido>}. Nada além do JSON."
+    )
+    result = await _motor(prompt, SYSTEM_PROMPT)
+    raw = result.get("content", "")
+    m = re.search(r"\[.*\]", raw, re.S)
+    if not m:
+        return None
+    try:
+        edits = json.loads(m.group(0))
+    except Exception:
+        return None
+
+    aplicados = []
+    for e in edits:
+        try:
+            n = int(e.get("slide"))
+            novo = e.get("novo_conteudo") or {}
+        except Exception:
+            continue
+        if n == 1:
+            for k in ("title", "cover_sub", "cover_headline_lines", "cover_destaques"):
+                if k in novo and novo[k]:
+                    out[k] = novo[k]
+        elif n == total:
+            for k in ("cta_headline", "cta_sub"):
+                if k in novo and novo[k]:
+                    out[k] = novo[k]
+        elif 2 <= n <= total - 1:
+            if modelo == "cientifico":
+                if isinstance(novo, str) and novo.strip():
+                    miolo[n - 2] = novo.strip()
+                elif isinstance(novo, dict) and novo.get("texto"):
+                    miolo[n - 2] = str(novo["texto"]).strip()
+            elif isinstance(novo, dict):
+                atual = dict(miolo[n - 2]) if isinstance(miolo[n - 2], dict) else {}
+                atual.update({k: v for k, v in novo.items()
+                              if k in ("label", "headline", "sub", "image_prompt") and v})
+                miolo[n - 2] = atual
+        aplicados.append(n)
+    if not aplicados:
+        return None
+    out[miolo_key] = miolo
+
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set script=%s, title=%s, feedback=null, "
+                        "status='gerado', asset_url=null where id=%s",
+                        (json.dumps(out, ensure_ascii=False),
+                         out.get("title") or None, cid))
+    return {"id": cid, "regenerated": True, "cirurgico": True, "slides_editados": sorted(set(aplicados)),
+            "model": result.get("model"),
+            "aviso": "Edição pontual: os demais slides (textos e imagens) foram preservados."}
+
+
+@router.post("/creatives/{cid}/regerar")
+async def regerar(cid: str) -> dict:
+    """Regera a peça aplicando o feedback/melhorias solicitado -> status 'gerado' (worker re-renderiza)."""
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select format, network, title, feedback, brief, script from creatives where id=%s", (cid,))
+            c = cur.fetchone()
+    if not c:
+        raise HTTPException(404, "creative não encontrado")
+    brief = c.get("brief") or {}
+    if isinstance(brief, str):
+        try: brief = json.loads(brief)
+        except Exception: brief = {}
+    script_out = c.get("script") or {}
+    if isinstance(script_out, str):
+        try: script_out = json.loads(script_out)
+        except Exception: script_out = {}
+    fb = c.get("feedback") or ""
+
+    # ── CORREÇÃO CIRÚRGICA ──────────────────────────────────────────────────
+    # Feedback SÓ com linhas "Slide N: ..." (sem "Geral:") = edição pontual:
+    # o LLM vira EDITOR do JSON existente e devolve apenas os campos dos slides
+    # citados; o merge preserva todo o resto (textos E image_prompts intactos ->
+    # imagens dos demais slides voltam do cache, sem gastar crédito nem trocar).
+    per_slide = re.findall(r"(?im)^\s*slide\s*(\d+)\s*:\s*(.+?)\s*$", fb or "")
+    tem_geral = bool(re.search(r"(?im)^\s*geral\s*:", fb or ""))
+    fmt_atual = (brief.get("formato") or c.get("format") or "carrossel")
+    if per_slide and not tem_geral and fmt_atual == "carrossel" and script_out:
+        surgical = await _regerar_cirurgico(cid, script_out, per_slide)
+        if surgical is not None:
+            return surgical
+
+    if fb:
+        fb = (
+            "CORREÇÕES DO REVISOR — aplique de forma literal quando houver indicação por slide; "
+            "se houver 'Slide N', altere aquele slide especificamente e preserve os demais quando não citados:\n" + fb
+        )
+    req = OrchestrateRequest(
+        tenant_slug=brief.get("tenant_slug", "demo"),
+        formato=brief.get("formato") or c.get("format") or "carrossel",
+        objetivo=brief.get("objetivo", "identificação"),
+        rede=brief.get("rede") or c.get("network") or "instagram",
+        destino=brief.get("destino", "feed"),
+        modelo=brief.get("modelo") or script_out.get("modelo") or "viral",
+        angulo=brief.get("angulo"),
+        hook_tipo=brief.get("hook_tipo"),
+        objecao_alvo=brief.get("objecao_alvo"),
+        quebra_objecao=brief.get("quebra_objecao"),
+        visual_tipo=brief.get("visual_tipo"),
+        cta_tipo=brief.get("cta_tipo"),
+        tema=brief.get("tema") or (c.get("title") or "").replace("*", ""),
+        persona=brief.get("persona"),
+        funil=brief.get("funil", "relacionamento_conversao"),
+        content_strategy=brief.get("content_strategy", "jornada_ivs"),
+        melhorias=fb or None,
+    )
+    with get_conn() as conn:
+        tid = _tenant_id(conn, req.tenant_slug)
+        viral, devices, brand = _fetch_context(conn, tid, req.objetivo, req.tema)
+        recents = _recent_titles(conn, tid, req.formato)
+    result = await _motor(_build_prompt(req, viral, devices, brand, recents), SYSTEM_PROMPT)
+    output = _apply_caption_footer(_extract_json(result.get("content", "")))
+    output["destino"] = req.destino
+    output["modelo"] = getattr(req, "modelo", "viral") or "viral"
+    if req.destino == "meta_ads" and req.angulo:
+        output["angulo"] = req.angulo
+        output["angulo_nome"] = (ANGULOS_META.get(req.angulo) or {}).get("nome")
+    meta = _modular_meta(req, output)
+    score, breakdown = _quality(output, req.formato, req.content_strategy)
+    render_dir = os.path.join(RENDERS_DIR, cid)
+    if os.path.isdir(render_dir):
+        shutil.rmtree(render_dir, ignore_errors=True)
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set script=%s, caption=%s, title=%s, hashtags=%s::jsonb, "
+                        "quality_score=%s, quality_breakdown=%s::jsonb, status='gerado', asset_url=null, "
+                        "angulo_ivs=%s, hook_tipo=%s, objecao_alvo=%s, quebra_objecao=%s, visual_tipo=%s, "
+                        "cta_tipo=%s, destino_criativo=%s, hypothesis=%s, modular_blocks=%s::jsonb, "
+                        "seo_social_intent=%s, send_save_reason=%s, trial_reel=%s, expected_intent_signal=%s, quality_metric=%s "
+                        "where id=%s",
+                        (json.dumps(output, ensure_ascii=False), output.get("caption"), output.get("title"),
+                         json.dumps(output.get("hashtags", []), ensure_ascii=False),
+                         score, json.dumps(breakdown, ensure_ascii=False), meta["angulo_ivs"], meta["hook_tipo"],
+                         meta["objecao_alvo"], meta["quebra_objecao"], meta["visual_tipo"], meta["cta_tipo"],
+                         meta["destino_criativo"], meta["hypothesis"], json.dumps(meta["modular_blocks"], ensure_ascii=False),
+                         meta["seo_social_intent"], meta["send_save_reason"], bool(meta["trial_reel"]),
+                         meta["expected_intent_signal"], meta["quality_metric"], cid))
+    return {"id": cid, "regenerated": True, "quality_score": score, "model": result.get("model"), "aplicou_melhorias": bool(fb)}
+
+
+def _assets_for(cid: str) -> list[str]:
+    adir = os.path.join(RENDERS_DIR, cid)
+    if not os.path.isdir(adir):
+        return []
+    # dedup por slide: publicar gera .jpg ao lado do .png — mostra 1 imagem por slide
+    # (preferindo .png, o original; capa do científico existe só como .jpg e entra normal)
+    by_slide: dict[str, str] = {}
+    for p in sorted(glob.glob(os.path.join(adir, "*.jpg")) + glob.glob(os.path.join(adir, "*.png"))):
+        by_slide[os.path.splitext(os.path.basename(p))[0]] = p  # png sobrescreve jpg (ordem do sort)
+    out = []
+    for p in sorted(by_slide.values()):
+        try:
+            v = int(os.path.getmtime(p))  # cache-busting: re-render muda a URL -> browser busca a nova
+        except OSError:
+            v = 0
+        out.append(f"/renders/{cid}/{os.path.basename(p)}?v={v}")
+    return out
+
+
+@router.get("/creatives")
+def list_creatives(tenant_slug: str = "demo", limit: int = 40, test_cycle_id: str | None = None,
+                   angulo_ivs: str | None = None, hook_tipo: str | None = None,
+                   objecao_alvo: str | None = None, visual_tipo: str | None = None,
+                   cta_tipo: str | None = None, destino_criativo: str | None = None,
+                   status: str | None = None, format: str | None = None) -> dict:
+    limit = max(1, min(int(limit or 40), 100))  # teto p/ não bloquear o worker com ?limit gigante
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            wh = ["tenant_id=%s"]
+            params = [tid]
+            for col, val in (("test_cycle_id", test_cycle_id), ("angulo_ivs", angulo_ivs), ("hook_tipo", hook_tipo),
+                             ("objecao_alvo", objecao_alvo), ("visual_tipo", visual_tipo), ("cta_tipo", cta_tipo),
+                             ("destino_criativo", destino_criativo), ("status", status), ("format", format)):
+                if val:
+                    wh.append(f"{col}=%s")
+                    params.append(val)
+            params.append(limit)
+            cur.execute(
+                "select id::text as id, format, funnel, network, title, caption, hashtags, "
+                "status, quality_score, asset_url, reel_status, reel_url, created_at, feedback, script, "
+                "test_cycle_id::text as test_cycle_id, variant_index, angulo_ivs, hook_tipo, objecao_alvo, "
+                "quebra_objecao, visual_tipo, cta_tipo, destino_criativo, hypothesis, modular_blocks, "
+                "seo_social_intent, send_save_reason, trial_reel, expected_intent_signal, quality_metric "
+                f"from creatives where {' and '.join(wh)} order by created_at desc limit %s", params)
+            rows = cur.fetchall()
+    items = []
+    for r in rows:
+        d = dict(r)
+        try:
+            _o = json.loads(r["script"]) if r.get("script") else {}
+            d["destino"] = d.get("destino_criativo") or _o.get("destino")
+            d["angulo_nome"] = _o.get("angulo_nome")
+        except Exception:
+            d["destino"] = None
+            d["angulo_nome"] = None
+        d.pop("script", None)
+        d["assets"] = _assets_for(r["id"]) if r.get("asset_url") else []
+        d.update(_tracking_for_creative(d))
+        items.append(d)
+    return {"items": items}
+
+
+@router.get("/roteiros")
+def list_roteiros(tenant_slug: str = "demo") -> dict:
+    """Banco de Roteiros = bunker IVS global + roteiros do tenant (ex.: engenharia reversa)."""
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                "select codigo, origem, objetivo, classe_ivs, mecanismo, hook_base, tese_central, "
+                "objecao_principal, adaptacao_ivs, status, referencias, ideia_prompt, plataforma, "
+                "fonte_raw from viral_scripts where tenant_id is null or tenant_id=%s order by codigo", (tid,))
+            rows = cur.fetchall()
+            cur.execute("select classe_ivs, count(*) as n from viral_scripts "
+                        "where tenant_id is null or tenant_id=%s group by classe_ivs order by n desc", (tid,))
+            classes = [dict(r) for r in cur.fetchall() if r["classe_ivs"]]
+    return {"total": len(rows), "classes": classes, "items": [dict(r) for r in rows]}
+
+
+class EngReversaRequest(BaseModel):
+    tenant_slug: str = Field(default="demo")
+    handle: str | None = None                 # @perfil de referência (opcional)
+    referencia: str                            # texto do reel/anúncio campeão (caption, hook, descrição)
+
+
+ER_FRAMEWORK = (
+    "Você executa ENGENHARIA REVERSA DE CONTEÚDO VIRAL para o Instituto Vital Slim (Dra. Daniely Freitas, "
+    "médica; nicho mulher 30-55 emagrecimento/hormônios). A partir de uma REFERÊNCIA (reel/anúncio que "
+    "performou), você: (1) explica POR QUE viralizou (hook, estrutura, retention drivers); (2) gera 3 SCRIPTS "
+    "originais adaptados à voz da Dra. (acolhedora, baseada em evidência, SEM promessa de resultado, sem "
+    "antes/depois, sem medicalizar, sempre com CTA de consulta quando levantar sintoma; NUNCA crianças como "
+    "sujeito); (3) define o tema dominante; (4) esboça 1 carrossel de 10 slides (hook, rehook, dor, valor x4, "
+    "turning point, takeaway, CTA). Compliance CFM obrigatório. Cada script: hook (0-3s), desenvolvimento "
+    "(3-25s), cta (25-35s), legenda. Toda legenda deve terminar exatamente com: " + CAPTION_FOOTER.replace("\n", " | ") + ". "
+    "Use os dispositivos de engenharia social quando fizer sentido."
+)
+
+
+@router.post("/engenharia-reversa")
+async def engenharia_reversa(req: EngReversaRequest) -> dict:
+    prompt = (
+        f"REFERÊNCIA (perfil {req.handle or 'n/d'}):\n{req.referencia}\n\n"
+        'Entregue SOMENTE JSON com as chaves: "por_que_viralizou" (string), "tema_dominante" (string), '
+        '"objetivo" (atração|identificação|educação|conversão|desejo|retenção), '
+        '"classe_ivs" (quebra_de_mito|identificacao_de_dor|jornada_da_paciente|metodo_ivs|reframe_de_culpa|outro), '
+        '"scripts" (lista de 3 objetos {hook, desenvolvimento, cta, legenda}), '
+        '"carrossel" (lista de 10 strings, 1 por slide).'
+    )
+    result = await CodexClient().generate(prompt, system=ER_FRAMEWORK)  # Codex GPT-5.5 (regra IVS)
+    data = _apply_caption_footer(_extract_json(result.get("content", "")))
+    scripts = data.get("scripts") or []
+    saved = 0
+    with get_conn() as conn:
+        tid = _tenant_id(conn, req.tenant_slug)
+        with conn.cursor() as cur:
+            for i, s in enumerate(scripts, 1):
+                if not isinstance(s, dict):
+                    continue
+                cur.execute("select 'ER-'||to_char(now(),'YYMMDDHH24MISS')||'-'||%s", (i,))
+                codigo = cur.fetchone()["?column?"]
+                adaptacao = "HOOK: %s\nDESENVOLVIMENTO: %s\nCTA: %s\nLEGENDA: %s" % (
+                    s.get("hook", ""), s.get("desenvolvimento", ""), s.get("cta", ""), s.get("legenda", ""))
+                cur.execute(
+                    "insert into viral_scripts (tenant_id, codigo, origem, objetivo, classe_ivs, mecanismo, "
+                    "hook_base, tese_central, adaptacao_ivs, status) "
+                    "values (%s,%s,%s,%s,%s,%s,%s,%s,%s,'eng_reversa')",
+                    (tid, codigo, f"eng-reversa:{req.handle or 'manual'}", data.get("objetivo"),
+                     data.get("classe_ivs"), "engenharia_reversa", s.get("hook"),
+                     data.get("tema_dominante"), adaptacao))
+                saved += 1
+    return {"saved": saved, "model": result.get("model"), "mode": result.get("mode"), "analise": data}
+
+
+class FeedbackRequest(BaseModel):
+    texto: str
+
+
+@router.post("/creatives/{cid}/feedback")
+def feedback_creative(cid: str, req: FeedbackRequest) -> dict:
+    """Tiaro solicita melhorias numa peça -> guarda o pedido + status 'ajustes_solicitados'."""
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set feedback=%s, status='ajustes_solicitados' "
+                        "where id=%s returning id::text as id", (req.texto, cid))
+            r = cur.fetchone()
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return {"id": r["id"], "status": "ajustes_solicitados", "feedback": req.texto}
+
+
+@router.post("/creatives/{cid}/approve")
+def approve_creative(cid: str) -> dict:
+    with get_conn() as conn:
+        ensure_phase1_schema(conn)
+        with conn.cursor() as cur:
+            cur.execute("update creatives set status='aprovado' where id=%s returning id::text as id", (cid,))
+            r = cur.fetchone()
+        compliance = assess_creative(conn, cid) if r else None
+        calendar = _ensure_calendar_for_creative(conn, cid) if r else None
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return {"id": r["id"], "status": "aprovado", "calendar_entry": calendar, "compliance": compliance}
+
+
+@router.delete("/creatives/{cid}")
+def delete_creative(cid: str, tenant_slug: str = "demo") -> dict:
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute("select id from creatives where id=%s and tenant_id=%s", (cid, tid))
+            if not cur.fetchone():
+                raise HTTPException(404, "criativo nao encontrado")
+            cur.execute("delete from creatives where id=%s and tenant_id=%s", (cid, tid))
+    d = f"/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders/{cid}"
+    if os.path.isdir(d):
+        shutil.rmtree(d, ignore_errors=True)
+    return {"ok": True, "deleted": cid}
+
+
+# ---- ANÁLISE DE PERFORMANCE (rubrica IVS de sinais virais do Instagram) ----
+class MetricsIn(BaseModel):
+    reach: int | None = None
+    retencao_3s_pct: float | None = None
+    tempo_medio_seg: float | None = None
+    conclusao_pct: float | None = None
+    shares: int | None = None
+    saves: int | None = None
+    replays: int | None = None
+    comentarios: int | None = None
+    comentarios_qualificados: int | None = None
+    profile_clicks: int | None = None
+    follows: int | None = None
+    whatsapp_leads: int | None = None
+    likes: int | None = None
+    skip_rate_pct: float | None = None
+    seo_social_intent: str | None = None
+    send_save_reason: str | None = None
+    trial_reel: bool = False
+    expected_intent_signal: str | None = None
+    quality_metric: str | None = None
+
+
+# pesos pela ordem do ranking IVS (soma ~1.0) + alvos de taxa por alcance
+_W = {"ret": 0.20, "tempo": 0.16, "concl": 0.13, "shares": 0.12, "saves": 0.10,
+      "replays": 0.08, "coment": 0.07, "clicks": 0.06, "follows": 0.05, "leads": 0.03}
+_TARGET = {"shares": 0.02, "saves": 0.03, "replays": 0.10, "coment": 0.01,
+           "clicks": 0.02, "follows": 0.005, "leads": 0.002}
+
+
+def _viral_score(m: dict) -> tuple[float, dict]:
+    reach = (m.get("reach") or 0) or 1
+    def rate(v): return (v or 0) / reach
+    norm = {
+        "ret": min(1.0, (m.get("retencao_3s_pct") or 0) / 100),
+        "tempo": min(1.0, (m.get("tempo_medio_seg") or 0) / 25),
+        "concl": min(1.0, (m.get("conclusao_pct") or 0) / 100),
+        "shares": min(1.0, rate(m.get("shares")) / _TARGET["shares"]),
+        "saves": min(1.0, rate(m.get("saves")) / _TARGET["saves"]),
+        "replays": min(1.0, rate(m.get("replays")) / _TARGET["replays"]),
+        "coment": min(1.0, rate(m.get("comentarios_qualificados")) / _TARGET["coment"]),
+        "clicks": min(1.0, rate(m.get("profile_clicks")) / _TARGET["clicks"]),
+        "follows": min(1.0, rate(m.get("follows")) / _TARGET["follows"]),
+        "leads": min(1.0, rate(m.get("whatsapp_leads")) / _TARGET["leads"]),
+    }
+    base = 100 * sum(_W[k] * norm[k] for k in _W)
+    penalty = (m.get("skip_rate_pct") or 0) / 100 * 25  # pular nos 1-2s reduz distribuição
+    score = max(0.0, min(100.0, base - penalty))
+    fracos = sorted(norm.items(), key=lambda kv: kv[1])[:3]
+    return round(score, 1), {"norm": {k: round(v, 2) for k, v in norm.items()}, "fracos": [f[0] for f in fracos]}
+
+
+@router.get("/creatives/{cid}/metrics")
+def get_metrics(cid: str) -> dict:
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select * from creative_metrics where creative_id=%s", (cid,))
+            r = cur.fetchone()
+    return {"metrics": dict(r) if r else None}
+
+
+@router.post("/creatives/{cid}/metrics")
+async def save_metrics(cid: str, m: MetricsIn) -> dict:
+    md = m.model_dump()
+    score, breakdown = _viral_score(md)
+    # análise de melhorias via motor, usando a rubrica + conteúdo da peça
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select title, caption, script from creatives where id=%s", (cid,))
+            c = cur.fetchone()
+    if not c:
+        raise HTTPException(404, "creative não encontrado")
+    rubric = ("Ranking IVS de sinais (mais forte→fraco): 1.retenção 3s 2.tempo médio 3.taxa conclusão "
+              "4.compartilhamentos/envios por alcance 5.salvamentos/alcance 6.replays 7.comentários qualificados "
+              "8.cliques no perfil 9.follows 10.leads WhatsApp. Negativo: pular em 1-2s. Bom p/ IVS = quebra "
+              "culpa + explica mecanismo; hook bate na dor nos 3s. Instagram 2026: avaliar SEO social/intenção "
+              "de busca, motivo de envio/salvamento, Trial Reel e sinal real de intenção — curtida é apoio, não norte.")
+    prompt = (rubric + chr(10) + "CRIATIVO: " + str(c.get("title")) + chr(10) + "Legenda: " + ((c.get("caption") or "")[:400]) + chr(10) + "METRICAS: " + json.dumps(md, ensure_ascii=False) + " | viral_score=" + str(score) + " | sinais mais fracos=" + str(breakdown["fracos"]) + chr(10) + "Faca uma ANALISE DE MELHORIAS objetiva em PT-BR (4-7 bullets): o que esta fraco vs a rubrica e ACOES concretas para melhorar cada sinal fraco (hook, formato, CTA, ritmo, prova). Especifico para o nicho mulher 40+.")
+    try:
+        result = await _motor(prompt, "Você é analista de performance de Reels do Instituto Vital Slim. Direto e acionável.")
+        analise = result.get("content", "").strip()
+    except Exception:
+        analise = "(análise indisponível agora)"
+    cols = ["reach", "retencao_3s_pct", "tempo_medio_seg", "conclusao_pct", "shares", "saves", "replays",
+            "comentarios", "comentarios_qualificados", "profile_clicks", "follows", "whatsapp_leads",
+            "likes", "skip_rate_pct"]
+    text_cols = ["seo_social_intent", "send_save_reason", "trial_reel", "expected_intent_signal", "quality_metric"]
+    all_cols = cols + text_cols
+    sets = ", ".join(f"{c2}=excluded.{c2}" for c2 in all_cols)
+    vals = [md.get(c2) for c2 in all_cols]
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"insert into creative_metrics (creative_id, {', '.join(all_cols)}, viral_score, analise, updated_at) "
+                f"values (%s, {', '.join(['%s'] * len(all_cols))}, %s, %s, now()) "
+                f"on conflict (creative_id) do update set {sets}, viral_score=excluded.viral_score, "
+                f"analise=excluded.analise, updated_at=now()",
+                [cid] + vals + [score, analise])
+    return {"viral_score": score, "breakdown": breakdown, "analise": analise}
+
+
+# ---- STORYBOARD DE REELS (aprovação/edição antes de renderizar) ----
+class StoryboardEdit(BaseModel):
+    beats: list[dict]
+
+
+@router.post("/creatives/{cid}/storyboard")
+def storyboard_gen(cid: str) -> dict:
+    """Dispara a geração do storyboard (o daemon do host processa em background)."""
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set reel_status='storyboard_pendente' where id=%s "
+                        "returning id::text as id", (cid,))
+            r = cur.fetchone()
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return {"id": r["id"], "reel_status": "storyboard_pendente"}
+
+
+@router.get("/creatives/{cid}/storyboard")
+def storyboard_get(cid: str) -> dict:
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select reel_status, reel_url, storyboard from creatives where id=%s", (cid,))
+            r = cur.fetchone()
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return {"reel_status": r["reel_status"], "reel_url": r["reel_url"], "storyboard": r["storyboard"]}
+
+
+@router.put("/creatives/{cid}/storyboard")
+def storyboard_edit(cid: str, req: StoryboardEdit) -> dict:
+    """Salva alterações do storyboard (textos/prompts/who editados pelo Tiaro)."""
+    import json as _json
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select storyboard from creatives where id=%s", (cid,))
+            r = cur.fetchone()
+            if not r or not r["storyboard"]:
+                raise HTTPException(404, "storyboard não encontrado")
+            sb = r["storyboard"]
+            sb["beats"] = req.beats
+            sb["status"] = "editado"
+            cur.execute("update creatives set storyboard=%s::jsonb where id=%s",
+                        (_json.dumps(sb, ensure_ascii=False), cid))
+    return {"ok": True, "beats": len(req.beats)}
+
+
+@router.post("/creatives/{cid}/reel")
+def reel_render(cid: str) -> dict:
+    """Aprova o storyboard e dispara a renderização do reel (daemon do host)."""
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set reel_status='render_pendente' where id=%s "
+                        "returning id::text as id", (cid,))
+            r = cur.fetchone()
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return {"id": r["id"], "reel_status": "render_pendente"}
+
+
+# ============ KIT DE GRAVAÇÃO DA DRA (reels + stories) ============
+# Quando um criativo de vídeo precisa da Dra. Daniely, o sistema entrega: roteiro p/ teleprompter (.txt),
+# direção de arte (cenário/figurino/enquadramento — NUNCA hospital/jaleco), e upload do vídeo gravado.
+import os as _os, shutil as _shutil, uuid as _uuid
+from fastapi import UploadFile, File, Form
+from fastapi.responses import PlainTextResponse
+
+DRA_VIDEO_ROOT = "/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/dra_videos"
+
+DIRECAO_ARTE_SYS = (
+    "Você é diretor(a) de arte de conteúdo médico premium do Instituto Vital Slim. "
+    "Gere a DIREÇÃO DE ARTE para a Dra. Daniely Freitas GRAVAR um vídeo (reel ou story, 9:16) lendo o roteiro. "
+    "REGRAS ABSOLUTAS: (1) a Dra NUNCA aparece em ambiente hospitalar/clínico, maca ou com equipamento médico; "
+    "(2) NUNCA de jaleco — sempre blazer/roupa elegante; (3) cenário neutro e sofisticado (estúdio sóbrio, "
+    "fundo liso, escritório/lifestyle premium); (4) vertical 9:16, plano médio (cintura pra cima), olhando para a câmera; "
+    "(5) compliance CFM: sem promessa de cura/resultado. "
+    "Estruture em markdown curto e prático com as seções: CENÁRIO, FIGURINO, ENQUADRAMENTO & CÂMERA, "
+    "EXPRESSÃO & TOM, ILUMINAÇÃO, RITMO/DURAÇÃO, DICAS DE TELEPROMPTER e O QUE NÃO FAZER. "
+    "Objetivo: a Dra grava UMA vez lendo o roteiro; depois o sistema usa o trecho dela no Hook e CTA e b-roll no meio."
+)
+
+
+def _roteiro_text(script) -> str:
+    """Roteiro contínuo p/ teleprompter (hook + cenas + cta), limpo de marcações."""
+    if isinstance(script, str):
+        try:
+            script = json.loads(script)
+        except Exception:
+            return script or ""
+    if not isinstance(script, dict):
+        return ""
+    parts = []
+    h = (script.get("hook") or "").strip()
+    if h:
+        parts.append(h)
+    for sc in (script.get("script") or []):
+        t = (sc.get("text") if isinstance(sc, dict) else str(sc)) or ""
+        t = re.sub(r"^\s*CENA\s*\d+\s*\([^)]*\)\s*[—:\-]\s*", "", t.strip(), flags=re.I)
+        t = re.sub(r"^\s*(Texto na tela|Mecanismo|Aprofundar|Reframe[^:]*|Você sabia[^:]*|Quebra de objeção[^:]*)\s*:?\s*", "", t, flags=re.I)
+        if t:
+            parts.append(t.strip().strip("'\""))
+    c = (script.get("cta") or "").strip()
+    if c:
+        parts.append(c)
+    return re.sub(r"\*", "", "\n\n".join(parts)).strip()
+
+
+def _kit_fetch(cid):
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("select id::text as id, format, title, script, direcao_arte, dra_video_url "
+                        "from creatives where id=%s", (cid,))
+            return cur.fetchone()
+
+
+@router.get("/creatives/{cid}/roteiro.txt")
+def kit_roteiro_txt(cid: str):
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return PlainTextResponse(_roteiro_text(r["script"]) or "(sem roteiro)",
+                             headers={"Content-Disposition": 'attachment; filename="roteiro_%s.txt"' % cid[:8]})
+
+
+@router.post("/creatives/{cid}/direcao-arte")
+async def kit_direcao_gen(cid: str) -> dict:
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    rot = _roteiro_text(r["script"])
+    prompt = ("Formato do criativo: %s\nTítulo/tema: %s\n\nROTEIRO QUE A DRA VAI LER:\n%s\n\n"
+              "Gere a direção de arte para a gravação." % (r["format"], r.get("title") or "", rot[:1800]))
+    result = await _motor(prompt, DIRECAO_ARTE_SYS)
+    da = (result.get("content") or "").strip()
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set direcao_arte=%s where id=%s", (da, cid))
+    return {"direcao_arte": da}
+
+
+@router.get("/creatives/{cid}/direcao-arte")
+def kit_direcao_get(cid: str) -> dict:
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    return {"direcao_arte": r["direcao_arte"], "has_video": bool(r["dra_video_url"]),
+            "roteiro": _roteiro_text(r["script"])}
+
+
+@router.get("/creatives/{cid}/kit.txt")
+def kit_completo_txt(cid: str):
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    rot = _roteiro_text(r["script"])
+    da = r["direcao_arte"] or "(gere a direção de arte na ferramenta antes de baixar o kit completo)"
+    body = ("KIT DE GRAVAÇÃO — DRA. DANIELY FREITAS\n" + "=" * 44 +
+            "\n\n# ROTEIRO (cole no teleprompter)\n\n" + rot +
+            "\n\n\n# DIREÇÃO DE ARTE\n\n" + da + "\n")
+    return PlainTextResponse(body, headers={"Content-Disposition": 'attachment; filename="kit_gravacao_%s.txt"' % cid[:8]})
+
+
+@router.post("/creatives/{cid}/dra-video")
+async def kit_dra_video_upload(cid: str, file: UploadFile = File(...)) -> dict:
+    r = _kit_fetch(cid)
+    if not r:
+        raise HTTPException(404, "creative não encontrado")
+    d = _os.path.join(DRA_VIDEO_ROOT, cid)
+    _os.makedirs(d, exist_ok=True)
+    safe = "%s_%s" % (_uuid.uuid4().hex, _os.path.basename(file.filename or "dra.mp4"))
+    path = _os.path.join(d, safe)
+    with open(path, "wb") as buf:
+        _shutil.copyfileobj(file.file, buf)
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set dra_video_url=%s where id=%s", (path, cid))
+    return {"ok": True, "filename": file.filename, "size": _os.path.getsize(path)}
+
+
+@router.post("/raw-reel")
+async def raw_reel(tenant_slug: str = Form("demo"), title: str = Form(""), hook: str = Form(""),
+                   file: UploadFile = File(...)) -> dict:
+    """Vídeo bruto -> reel pronto (cortes, legenda cinética, b-roll, efeitos) via daemon v15."""
+    scr = {"hook": hook, "title": title, "script": [], "cta": "", "source": "video_bruto"}
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                "insert into creatives (tenant_id, format, network, title, script, status) "
+                "values (%s,'reels','instagram',%s,%s::jsonb,'gerado') returning id::text as id",
+                (tid, title or "Reel (vídeo bruto)", json.dumps(scr, ensure_ascii=False)))
+            cid = cur.fetchone()["id"]
+    d = _os.path.join(DRA_VIDEO_ROOT, cid)
+    _os.makedirs(d, exist_ok=True)
+    safe = "%s_%s" % (_uuid.uuid4().hex, _os.path.basename(file.filename or "bruto.mp4"))
+    path = _os.path.join(d, safe)
+    with open(path, "wb") as buf:
+        _shutil.copyfileobj(file.file, buf)
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creatives set dra_video_url=%s, reel_status='render_pendente' where id=%s", (path, cid))
+    return {"ok": True, "id": cid, "reel_status": "render_pendente", "size": _os.path.getsize(path)}
+
+
+# ---- INTELIGÊNCIA CRIATIVA (Marca & posicionamento — com validação) ----
+class IntelIn(BaseModel):
+    tenant_slug: str = "demo"
+    titulo: str | None = None
+    conteudo: str
+    tipo: str | None = "diretriz"
+    finalidade: str = "institucional"
+    source_id: str | None = None
+
+
+class IntelValidate(BaseModel):
+    status: str  # aprovado | rejeitado | pendente
+
+
+_INTEL_COLS = ("select id::text as id, source_id::text as source_id, finalidade, tipo, titulo, "
+               "conteudo, status, created_at, validated_at from creative_intelligence")
+
+
+@router.get("/intelligence")
+def intel_list(tenant_slug: str = "demo", status: str | None = None) -> dict:
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            if status:
+                cur.execute(_INTEL_COLS + " where (tenant_id=%s or tenant_id is null) and status=%s "
+                            "order by created_at desc", (tid, status))
+            else:
+                cur.execute(_INTEL_COLS + " where (tenant_id=%s or tenant_id is null) "
+                            "order by (status='pendente') desc, created_at desc", (tid,))
+            rows = cur.fetchall()
+    return {"items": [dict(r) for r in rows]}
+
+
+@router.post("/intelligence")
+def intel_add(req: IntelIn) -> dict:
+    with get_conn() as conn:
+        tid = _tenant_id(conn, req.tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute("insert into creative_intelligence (tenant_id, source_id, finalidade, tipo, titulo, "
+                        "conteudo, status) values (%s,%s,%s,%s,%s,%s,'pendente') returning id::text as id",
+                        (tid, req.source_id, req.finalidade, req.tipo, req.titulo, req.conteudo))
+            r = cur.fetchone()
+    return {"id": r["id"], "status": "pendente"}
+
+
+@router.post("/intelligence/{iid}/validate")
+def intel_validate(iid: str, req: IntelValidate) -> dict:
+    if req.status not in ("aprovado", "rejeitado", "pendente"):
+        raise HTTPException(400, "status inválido")
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("update creative_intelligence set status=%s, validated_at=now() where id=%s "
+                        "returning id::text as id", (req.status, iid))
+            r = cur.fetchone()
+    if not r:
+        raise HTTPException(404, "item não encontrado")
+    return {"id": r["id"], "status": req.status}
+
+
+@router.post("/intelligence/ingest")
+async def intel_ingest(tenant_slug: str = "demo") -> dict:
+    """Destila os sinais das fontes 'Marca & posicionamento' (institucional) em diretrizes PENDENTES."""
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute("select s.label as label, s.objetivo as objetivo, sg.caption as caption "
+                        "from sources s left join source_signals sg on sg.source_id=s.id "
+                        "where s.finalidade='institucional' and (s.tenant_id=%s or s.tenant_id is null) "
+                        "order by sg.engagement desc nulls last limit 40", (tid,))
+            rows = cur.fetchall()
+    blobs = [r["caption"] for r in rows if r.get("caption")]
+    fontes = sorted({r["label"] for r in rows if r.get("label")})
+    if not blobs:
+        return {"ingested": 0, "msg": "Sem sinais coletados nas fontes de Marca & posicionamento ainda. "
+                "Cadastre fontes institucionais (o monitor diário coleta) ou adicione diretrizes manualmente."}
+    amostra = chr(10).join("- " + (b or "")[:400] for b in blobs[:25])
+    sys_p = ("Você é estrategista de marca. A partir dos posts de referências de Marca & posicionamento abaixo, "
+             "extraia DIRETRIZES acionáveis (tom de voz, ângulos, ganchos, o-que-evitar) para o Instituto Vital "
+             "Slim (saúde da mulher 40+). Responda SOMENTE JSON "
+             '{"diretrizes":[{"titulo":"...","conteudo":"..."}]} com 5 a 10 itens curtos e específicos.')
+    result = await _motor("FONTES: " + ", ".join(fontes) + chr(10) + "POSTS:" + chr(10) + amostra, sys_p)
+    data = _extract_json(result.get("content", ""))
+    items = data.get("diretrizes", []) if isinstance(data, dict) else []
+    n = 0
+    with get_conn() as conn:
+        tid = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            for it in items:
+                if not it.get("conteudo"):
+                    continue
+                cur.execute("insert into creative_intelligence (tenant_id, finalidade, tipo, titulo, conteudo, "
+                            "status) values (%s,'institucional','diretriz',%s,%s,'pendente')",
+                            (tid, it.get("titulo"), it.get("conteudo")))
+                n += 1
+    return {"ingested": n, "status": "pendente", "fontes": fontes}

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { EmptyState } from '../components/empty-state'
 import { fetchJson } from '../api'
 
 type TopItem = {
@@ -92,13 +93,14 @@ function BucketList({ title, items }: { title: string; items: Bucket[] }) {
 
 export default async function AprendizadoPage() {
   const data = await safe<Learning>(fetchJson('/learning/insights?tenant_slug=demo'), fallback)
-  const sprintHref = `/sprint-semanal?thesis=${encodeURIComponent(data.next_sprint_seed.thesis)}&objective=${encodeURIComponent(data.next_sprint_seed.objective)}&audience_stage=${encodeURIComponent(data.next_sprint_seed.audience_stage)}`
+  // Sprint semanal global não existe mais: a tese sugerida vai direto pro Estúdio (/criar lê thesis/objective).
+  const sprintHref = `/criar?thesis=${encodeURIComponent(data.next_sprint_seed.thesis)}&objective=${encodeURIComponent(data.next_sprint_seed.objective)}&audience_stage=${encodeURIComponent(data.next_sprint_seed.audience_stage)}`
 
   return (
     <div className="dashboardRoot">
       <header className="pageHeader heroHeader">
         <div>
-          <p className="eyebrow">Fase 3 · performance por variável</p>
+          <p className="eyebrow">O que os números ensinam</p>
           <h2 className="pageTitle">Aprendizado de performance</h2>
           <p className="heroText">Registra publicação vinculada ao criativo, importa métricas reais já coletadas e transforma hook, objeção, visual, CTA, pilar e formato em hipóteses para o próximo sprint. Não publica, não envia DM e não escreve em WhatsApp.</p>
         </div>
@@ -178,7 +180,7 @@ export default async function AprendizadoPage() {
           </div>
           <span className="muted small">score interno ponderado</span>
         </div>
-        {data.winners.top_items.length === 0 ? <div className="empty">Nenhuma peça medida ainda.</div> : (
+        {data.winners.top_items.length === 0 ? <EmptyState title="Nenhuma peça medida ainda" hint="Quando criativos publicados tiverem métricas, os campeões e aprendizados aparecem aqui para realimentar a estratégia." ctas={[{href:"/banco-criativos",label:"Ver criativos"},{href:"/dashboards",label:"Ads & canais"}]} /> : (
           <div className="tableLike">
             {data.winners.top_items.map((item, index) => (
               <div className="row" key={`${item.title}-${index}`}>

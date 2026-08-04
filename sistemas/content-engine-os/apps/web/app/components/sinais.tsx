@@ -9,6 +9,15 @@ type Sinal = {
 }
 const CLS: Record<string, string> = { viral: '🔥 Viral', potencial: '⤴ Potencial', novo: 'novo' }
 
+function urlProduzir(s: Sinal) {
+  const cap = (s.caption || '').trim()
+  const hook = (cap.split('\n')[0] || '').slice(0, 180)
+  const qs = new URLSearchParams({ source: 'ideias', tipo: 'sinal-viral', formato: 'reels' })
+  if (cap) qs.set('titulo', cap.slice(0, 220))
+  if (hook) qs.set('hook', hook)
+  return `/producao/reels?${qs.toString()}`
+}
+
 export function SinaisVirais() {
   const [items, setItems] = useState<Sinal[]>([])
   const [filtro, setFiltro] = useState('viral')
@@ -64,7 +73,10 @@ export function SinaisVirais() {
               <span className="muted small">❤ {s.likes} · 💬 {s.comments}</span>
               {s.url ? <a className="secondaryLink" href={s.url} target="_blank" rel="noreferrer">ver no IG ↗</a> : null}
             </div>
-            <button className="primaryButton" style={{ padding: '6px 12px', fontSize: 13 }} onClick={() => gerarRoteiro(s)} disabled={gerando === s.id}>{gerando === s.id ? 'Gerando…' : 'Gerar roteiro deste viral'}</button>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+              <button className="primaryButton" style={{ padding: '6px 12px', fontSize: 13 }} onClick={() => gerarRoteiro(s)} disabled={gerando === s.id}>{gerando === s.id ? 'Gerando…' : 'Gerar roteiro deste viral'}</button>
+              <a className="secondaryLink" style={{ padding: '6px 12px', fontSize: 13, textAlign: 'center', minHeight: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} href={urlProduzir(s)} title="Abrir a produção já com este viral como ideia">▶ Produzir</a>
+            </div>
           </article>
         ))}
       </div>

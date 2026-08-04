@@ -20,57 +20,57 @@ export const metadata: Metadata = {
   description: 'Cockpit de autoridade, conteúdo e BI do Instituto Vital Slim.',
 }
 
+const topLinks = [
+  { href: '/hoje', label: '🏠 Hoje' },
+]
+
 const groups = [
   {
-    title: '1 · Fontes (base do sistema)',
+    title: 'Acompanhar',
     links: [
-      { href: '/fontes', label: 'Fontes de conteúdo & sinais' },
-      { href: '/biblioteca/dra', label: 'Fotos da Dra' },
-      { href: '/stories-engine/broll', label: 'B-roll (fotos e vídeos)' },
+      { href: '/trafego', label: '🎯 Central de Tráfego' },
+      { href: '/business-intelligence', label: '📊 Instagram & funil' },
+      { href: '/social-selling', label: '🤝 Pessoas & social selling' },
     ],
   },
   {
-    title: 'Comando',
+    title: 'Criar',
     links: [
-      { href: '/', label: 'Cockpit executivo' },
-      { href: '/ajuda', label: 'Manual / ajuda' },
-      { href: '/business-intelligence', label: 'BI · Business Intelligence' },
-      { href: '/social-selling', label: 'Social Selling' },
-      { href: '/radar-externo', label: 'Radar externo' },
-      { href: '/compliance', label: 'Compliance médico' },
+      { href: '/ideias', label: '💡 Ideias do dia' },
+      { href: '/criar', label: '🎬 Estúdio' },
+      { href: '/producao/video-bruto', label: '🎥 Vídeo bruto → Reel' },
+      { href: '/stories-engine', label: '📱 Stories' },
     ],
   },
   {
-    title: 'Inteligência',
+    title: 'Publicar',
     links: [
-      { href: '/banco-roteiros', label: 'Banco de roteiros' },
-      { href: '/estrategia', label: 'Estratégia de marca' },
+      { href: '/banco-criativos', label: '✅ Revisão & aprovação' },
+      { href: '/calendario', label: '📅 Calendário · orgânico' },
+      { href: '/planejamento', label: '📦 Campanhas Meta · ads' },
     ],
   },
   {
-    title: 'Produção',
+    title: 'Aprender',
     links: [
-      { href: '/criar', label: 'Produção · escolher formato' },
-      { href: '/producao/video-bruto', label: 'Vídeo bruto → Reel' },
-      { href: '/producao/carrosseis', label: 'Criar Carrosséis' },
-      { href: '/producao/estaticos', label: 'Criar Estáticos' },
-      { href: '/producao/reels', label: 'Criar Reels' },
-      { href: '/producao/motion-videos', label: 'Motion Videos · Higgsfield' },
-      { href: '/stories-engine', label: 'Stories Engine' },
-      { href: '/banco-criativos', label: 'Banco de Criativos' },
-      { href: '/biblioteca', label: 'Biblioteca de assets' },
+      { href: '/aprendizado', label: '📈 Aprendizado' },
+      { href: '/criativos-campeoes', label: '🏆 Campeões' },
     ],
   },
   {
-    title: 'Publicação & Aprendizado',
+    title: 'Acervo',
     links: [
-      { href: '/planejamento', label: 'Planejamento de campanhas' },
-      { href: '/calendario', label: 'Calendário editorial' },
-      { href: '/aprendizado', label: 'Aprendizado de performance' },
-      { href: '/dashboards', label: 'Ads & canais pagos' },
-      { href: '/criativos-campeoes', label: 'Criativos campeões' },
+      { href: '/biblioteca', label: '🗂 Biblioteca' },
+      { href: '/banco-roteiros', label: '📜 Banco de roteiros' },
+      { href: '/fontes', label: '🛰 Fontes & sinais' },
+      { href: '/radar-externo', label: '🔭 Radar externo' },
     ],
   },
+]
+
+const utilityLinks = [
+  { href: '/compliance', label: '🛡 Compliance' },
+  { href: '/ajuda', label: '❔ Ajuda' },
 ]
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </p>
             </div>
 
-            <Sidebar groups={groups} />
+            <Sidebar groups={groups} topLinks={topLinks} utilityLinks={utilityLinks} />
 
             <div className="sidebarFooter">
               <span className="badge badgeDark">Regra de uso</span>

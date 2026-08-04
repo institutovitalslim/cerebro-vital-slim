@@ -128,6 +128,8 @@ def _fallback_reel_hooks(thesis: str) -> list[str]:
         f"O que ninguém te explicou sobre: {clean[:88].lower()}.",
         f"Antes de tentar de novo, entenda isso: {clean[:86].lower()}.",
         f"Você sabe por que isso acontece? {clean[:86]}",
+        f"A verdade sobre {clean[:88].lower()} que quase ninguém explica.",
+        f"3 sinais de que {clean[:82].lower()} — e o que fazer agora.",
     ]
 
 
@@ -167,19 +169,20 @@ def _fetch_reel_hooks(conn, tenant_id: str, thesis: str) -> list[str]:
         h = (r.get("hook_base") or "").strip().strip('"')
         if h and h not in hooks:
             hooks.append(h)
-        if len(hooks) >= 5:
+        if len(hooks) >= 7:
             break
     for h in _fallback_reel_hooks(thesis):
-        if len(hooks) >= 5:
+        if len(hooks) >= 7:
             break
         if h not in hooks:
             hooks.append(h)
-    return hooks[:5]
+    return hooks[:7]
 
 
 def _family_from(thesis: str, pillar: str, objective: str, stage: str, hook_variations: list[str] | None = None) -> list[dict]:
     base_tag = pillar.replace("_", "-")
-    reel_hooks = (hook_variations or _fallback_reel_hooks(thesis))[:5]
+    wide_hooks = (hook_variations or _fallback_reel_hooks(thesis))[:7]
+    reel_hooks = wide_hooks[:5]
     return [
         {
             "format": "reels",
@@ -196,7 +199,9 @@ def _family_from(thesis: str, pillar: str, objective: str, stage: str, hook_vari
         {
             "format": "carrossel",
             "role": "autoridade e salvamento",
-            "hook": thesis,
+            "hook": wide_hooks[0],
+            "hook_variations": wide_hooks,
+            "hook_test_minimum": 7,
             "output": "6–8 slides: capa, rehook, mecanismo, 2 provas/contextos, objeção e CTA",
             "cta": "salvar para revisar antes da próxima tentativa",
             "metric": "salvamentos + compartilhamentos",
@@ -216,7 +221,9 @@ def _family_from(thesis: str, pillar: str, objective: str, stage: str, hook_vari
         {
             "format": "estatico",
             "role": "tese visual e anúncio",
-            "hook": thesis,
+            "hook": wide_hooks[0],
+            "hook_variations": wide_hooks,
+            "hook_test_minimum": 7,
             "output": "peça única premium com tese, reframe e CTA seguro",
             "cta": "entender se faz sentido para o seu caso",
             "metric": "CTR + comentários qualificados",

@@ -6,7 +6,7 @@ type SocialSelling = {
   aggregate_30d: { likes: number; comments: number; saves: number; shares: number; profile_visits: number; follows: number; whatsapp_clicks: number; avg_engagement_rate: string | number; publications_tracked: number }
   by_status: { status: string; total: number }[]
   by_stage: { consciousness_stage: string; total: number; avg_fit_score: string | number }[]
-  candidates: { id: string; public_handle: string; public_name: string | null; interaction_type: string; interaction_count: number; publication_url: string | null; last_interaction_at: string | null; consciousness_stage: string; fit_score: number; status: string; suggested_opening: string | null; guardrails: string[] }[]
+  candidates: { id: string; public_handle: string; public_name: string | null; interaction_type: string; interaction_count: number; publication_url: string | null; last_interaction_at: string | null; consciousness_stage: string; fit_score: number; status: string; suggested_opening: string | null; guardrails: string[]; observed_signals?: { comentarios?: { text: string; post_caption?: string }[]; dms_recebidas?: { text: string }[]; mencoes?: { caption?: string }[] } }[]
   top_publications: { publication_external_id: string; publication_url: string | null; format: string | null; caption_excerpt: string | null; views: number; reach: number; likes: number; comments: number; saves: number; shares: number; follows: number; whatsapp_clicks: number; engagement_rate: string | number }[]
   governance: { mode: string; blocked: string[]; allowed: string[]; approval_required_for: string[] }
   playbook: string[]
@@ -41,7 +41,7 @@ export default async function SocialSellingPage() {
         <div className="heroMain">
           <span className="badge">Perfil monitorado</span>
           <h3 className="sectionTitle">{data.profile.profile_handle}</h3>
-          <p className="muted">Fonte planejada: RapidAPI. Modo atual: leitura, priorização e roteiro de abordagem. Nenhuma DM é enviada automaticamente.</p>
+          <p className="muted">Fonte: API oficial da Meta (coleta diária de comentários, mensagens recebidas e marcações da própria conta). Modo: leitura, priorização e roteiro de abordagem. Nenhuma DM é enviada automaticamente — toda resposta é humana, pelo app oficial.</p>
           <div className="heroActions">
             <Link className="primaryLink" href="/business-intelligence">Analisar publicações</Link>
             <Link className="secondaryLink" href="/fontes">Revisar fontes</Link>
@@ -67,13 +67,27 @@ export default async function SocialSellingPage() {
           <div className="rowTop"><h3>Fila de oportunidades</h3><span className="badge">manual</span></div>
           {data.candidates.length ? (
             <div className="tableLike">
-              {data.candidates.map((c) => (
-                <div className="row" key={c.id}>
-                  <div className="rowTop"><strong>{c.public_handle}</strong><span className="badge">score {c.fit_score}</span></div>
-                  <span className="muted small">{c.interaction_type} · {c.interaction_count} interações · {c.consciousness_stage} · {c.status}</span>
-                  {c.suggested_opening ? <p className="muted small" style={{ margin: 0 }}>{c.suggested_opening}</p> : null}
-                </div>
-              ))}
+              {data.candidates.map((c) => {
+                const dms = c.observed_signals?.dms_recebidas || []
+                const coms = c.observed_signals?.comentarios || []
+                return (
+                  <div className="row" key={c.id}>
+                    <div className="rowTop"><strong>{c.public_handle}{c.public_name ? ` · ${c.public_name}` : ''}</strong><span className="badge">score {c.fit_score}</span></div>
+                    <span className="muted small">{c.interaction_type} · {c.interaction_count} interações · {c.consciousness_stage} · {c.status}</span>
+                    {dms.slice(-2).map((m, i) => (
+                      <p key={`d${i}`} className="small" style={{ margin: '4px 0 0', padding: '6px 10px', borderLeft: '2px solid rgba(212,168,60,.6)', background: 'rgba(212,168,60,.06)' }}>
+                        💬 Mensagem recebida: “{m.text}”
+                      </p>
+                    ))}
+                    {!dms.length && coms.slice(-1).map((m, i) => (
+                      <p key={`c${i}`} className="muted small" style={{ margin: '4px 0 0', fontStyle: 'italic' }}>
+                        “{m.text}”{m.post_caption ? ` — no post “${m.post_caption.split('\n')[0].slice(0, 60)}…”` : ''}
+                      </p>
+                    ))}
+                    {c.suggested_opening ? <p className="muted small" style={{ margin: '4px 0 0' }}><strong>Abertura sugerida (manual):</strong> {c.suggested_opening}</p> : null}
+                  </div>
+                )
+              })}
             </div>
           ) : <div className="empty">Ainda não há pessoas coletadas pela RapidAPI. Quando a ingestão entrar, aqui aparecerão perfis públicos que interagiram, classificados por sinal e consciência.</div>}
         </article>

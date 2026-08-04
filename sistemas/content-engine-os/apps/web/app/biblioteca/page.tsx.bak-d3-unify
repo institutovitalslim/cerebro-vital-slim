@@ -1,0 +1,58 @@
+import { fetchJson } from '../api'
+import { EmptyState } from '../components/empty-state'
+import { AssetUploadForm } from '../components/forms'
+
+type Asset = {
+  id: string
+  title: string
+  original_filename: string
+  mime_type: string | null
+  file_size_bytes: number
+  asset_kind: string
+  tags: string[]
+  created_at: string
+}
+
+export default async function BibliotecaPage() {
+  const data = await fetchJson<{ items: Asset[] }>('/assets?tenant_slug=demo')
+
+  return (
+    <div>
+      <header className="pageHeader">
+        <p className="eyebrow">Biblioteca</p>
+        <h2 className="pageTitle">Assets e referências do sistema</h2>
+        <p className="muted">Centralize material bruto, provas, brand assets e referências para alimentar a geração.</p>
+      </header>
+
+      <section className="section grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+        <AssetUploadForm />
+        <article className="card">
+          <h3>Como usar a biblioteca</h3>
+          <div className="tableLike">
+            <div className="row"><span className="muted">Suba vídeos crus, imagens, PDFs e prints relevantes.</span></div>
+            <div className="row"><span className="muted">Classifique por tipo e tags para reaproveitamento futuro.</span></div>
+            <div className="row"><span className="muted">Use a biblioteca como memória operacional do cliente.</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section className="section">
+        <h3 className="sectionTitle">Assets salvos</h3>
+        {data.items.length === 0 ? (
+          <EmptyState title="Nenhum asset salvo" hint="Suba vídeos crus, imagens, PDFs e prints para alimentar a geração de criativos. Use o formulário ao lado." />
+        ) : (
+          <div className="tableLike">
+            {data.items.map((item) => (
+              <div key={item.id} className="row">
+                <div className="rowTop"><strong>{item.title}</strong><span className="badge">{item.asset_kind}</span></div>
+                <span className="muted">{item.original_filename} · {item.mime_type || 'n/d'} · {Math.round(item.file_size_bytes / 1024)} KB</span>
+                <span className="muted">Tags: {item.tags?.length ? item.tags.join(', ') : 'sem tags'}</span>
+                <a className="primaryLink" href={`/api/assets/${item.id}/download`} target="_blank">Baixar</a>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
+  )
+}

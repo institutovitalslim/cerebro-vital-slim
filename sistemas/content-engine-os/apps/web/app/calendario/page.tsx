@@ -10,7 +10,7 @@ export default async function CalendarioPage() {
     <div className="dashboardRoot">
       <header className="pageHeader heroHeader">
         <div>
-          <p className="eyebrow">Motor A · etapa 8</p>
+          <p className="eyebrow">Publicação orgânica</p>
           <h2 className="pageTitle">Calendário & status</h2>
           <p className="muted">O calendário fecha o ciclo da máquina: peça aprovada vira compromisso editorial, publicação e aprendizado de performance.</p>
         </div>

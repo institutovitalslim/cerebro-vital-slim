@@ -51,10 +51,12 @@ type ThemeWinner = {
 
 type MotionPreset = Record<string, { label: string; description: string }>
 type ScreenFormats = Record<string, { label: string; aspect_ratio: string; recommended?: boolean }>
+type VisualHook = { key: string; category: string; name: string; description: string; ivs_use: string; shot_bias: string; guardrails: string[] }
 
 type MotionOptions = {
   content_formats: ContentFormat[]
   content_format_examples: ContentFormatExample[]
+  visual_hooks: VisualHook[]
   matrix_8x8: {
     rows: { key: string; label: string; source_type: string }[]
     columns: { key: string; label: string }[]
@@ -91,6 +93,9 @@ type MotionPlan = {
   duration_seconds: number
   blocks_count: number
   visual_preset_label: string
+  visual_hook_name: string
+  visual_hook_category: string
+  visual_hook_application: string
   hook_question: string
   through_line_object: string
   payoff: string
@@ -158,6 +163,7 @@ export default function Page() {
     screen_format: 'reels',
     duration_seconds: 60,
     visual_preset: 'ivs_mixed_media_medico_premium',
+    visual_hook: 'text_slide_in',
     voiceover: 'documental_feminina_pt_br',
     source_examples_summary: 'Exemplos associados ao formato serão usados apenas para abstrair ritmo, gancho e mecanismo — sem copiar.',
   })
@@ -380,6 +386,20 @@ export default function Page() {
             </div>
           ) : null}
 
+          <label>
+            Visual Hook dos 0-2s
+            <select value={form.visual_hook} onChange={(e) => setForm({ ...form, visual_hook: e.target.value })}>
+              {(options?.visual_hooks || []).map((item) => <option key={item.key} value={item.key}>{item.name} · {labelize(item.category)}</option>)}
+            </select>
+          </label>
+          {options?.visual_hooks?.find((item) => item.key === form.visual_hook) ? (
+            <div className="formatInsight">
+              <strong>{options.visual_hooks.find((item) => item.key === form.visual_hook)?.description}</strong>
+              <p>{options.visual_hooks.find((item) => item.key === form.visual_hook)?.ivs_use}</p>
+              <small>{options.visual_hooks.find((item) => item.key === form.visual_hook)?.shot_bias}</small>
+            </div>
+          ) : null}
+
           <div className="examplesRail">
             <div className="sectionHeaderCompact">
               <span className="eyebrow small">Fase 2 · vídeos de exemplo</span>
@@ -573,8 +593,10 @@ export default function Page() {
                 <span>{plan.duration_seconds}s</span>
                 <span>{plan.blocks_count} blocos</span>
                 <span>{plan.content_format_name}</span>
+                <span>{plan.visual_hook_name}</span>
               </div>
               <p><strong>Hook:</strong> {plan.hook_question}</p>
+              <p><strong>Visual hook:</strong> {plan.visual_hook_name} · {labelize(plan.visual_hook_category)} — {plan.visual_hook_application}</p>
               <p><strong>Objeto-metáfora:</strong> {plan.through_line_object}</p>
               <p><strong>Payoff:</strong> {plan.payoff}</p>
               <div className="winnerStack">

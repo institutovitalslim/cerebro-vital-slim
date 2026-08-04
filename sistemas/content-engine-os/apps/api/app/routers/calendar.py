@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import re
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
@@ -58,6 +59,17 @@ class PublicationRegisterIn(BaseModel):
     notes: str | None = None
 
 
+# O MESMO post aparece como /p/X no scraper e /reel/X na Graph API: o shortcode é a chave canônica.
+SHORTCODE_RE = re.compile(r"/(?:p|reel|tv)/([A-Za-z0-9_-]+)")
+
+
+def _shortcode_from_url(url: str | None) -> str | None:
+    if not url:
+        return None
+    m = SHORTCODE_RE.search(url)
+    return m.group(1) if m else None
+
+
 VALID_STATUSES = {
     "planned",
     "in_review",
@@ -91,6 +103,9 @@ def ensure_phase1_schema(conn) -> None:
         cur.execute("alter table calendar_entries add column if not exists metrics_recorded_at timestamptz")
         cur.execute("create unique index if not exists idx_calendar_entries_creative_id on calendar_entries(creative_id) where creative_id is not null")
         cur.execute("create index if not exists idx_calendar_entries_status on calendar_entries(tenant_id, status)")
+        cur.execute("alter table calendar_entries add column if not exists ig_shortcode text")
+        cur.execute("alter table calendar_entries add column if not exists published_url text")
+        cur.execute("create index if not exists idx_calendar_entries_shortcode on calendar_entries(tenant_id, ig_shortcode) where ig_shortcode is not null")
         cur.execute("alter table publications add column if not exists platform text")
         cur.execute("alter table publications add column if not exists platform_post_id text")
         cur.execute("alter table publications add column if not exists published_url text")
@@ -111,6 +126,7 @@ def list_entries(tenant_slug: str = "demo") -> dict:
                        e.scheduled_for, e.notes, e.asset_id::text as asset_id, e.created_at,
                        e.creative_id::text as creative_id, e.origin_tag, e.sprint_thesis, e.sprint_hook,
                        e.published_at, e.metrics, e.metrics_recorded_at,
+                       e.ig_shortcode, e.published_url,
                        c.quality_score, c.status as creative_status, c.asset_url,
                        case when e.metrics_recorded_at is null and e.status in ('published','publicado','metrics_pending') then true else false end as metrics_pending
                 from calendar_entries e
@@ -123,6 +139,89 @@ def list_entries(tenant_slug: str = "demo") -> dict:
             )
             rows = cur.fetchall()
     return {"items": rows}
+
+
+@router.get("/posts-recentes")
+def recent_posts(tenant_slug: str = "demo", days: int = 14) -> dict:
+    """Posts reais publicados no Instagram nos últimos N dias (última snapshot por mídia).
+
+    Alimenta o picker de "Marcar publicado": em vez de digitar link, a pessoa escolhe o post.
+    """
+    days = max(1, min(days, 90))
+    with get_conn() as conn:
+        ensure_phase1_schema(conn)
+        tenant_id = _tenant_id(conn, tenant_slug)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                select distinct on (m.media_id)
+                       m.media_id, m.permalink, m.caption_excerpt, m.media_type,
+                       m.media_product_type, m.published_at, m.snapshot_date
+                from meta_media_insights_daily m
+                where m.tenant_id = %s
+                  and m.permalink is not null
+                  and m.published_at >= now() - make_interval(days => %s)
+                order by m.media_id, m.snapshot_date desc
+                """,
+                (tenant_id, days),
+            )
+            rows = cur.fetchall()
+            cur.execute(
+                "select ig_shortcode from calendar_entries where tenant_id=%s and ig_shortcode is not null",
+                (tenant_id,),
+            )
+            ja_vinculados = {r["ig_shortcode"] for r in cur.fetchall()}
+    items = []
+    for r in rows:
+        shortcode = _shortcode_from_url(r["permalink"])
+        if not shortcode:
+            continue
+        caption = (r.get("caption_excerpt") or "").strip().replace("\n", " ")
+        items.append({
+            "shortcode": shortcode,
+            "permalink": r["permalink"],
+            "caption": caption[:90] + ("…" if len(caption) > 90 else ""),
+            "media_type": r.get("media_type"),
+            "media_product_type": r.get("media_product_type"),
+            "published_at": r.get("published_at"),
+            "snapshot_date": r.get("snapshot_date"),
+            "ja_vinculado": shortcode in ja_vinculados,
+        })
+    items.sort(key=lambda it: (it["published_at"] is None, it["published_at"]), reverse=True)
+    return {"items": items}
+
+
+@router.post("/entries/{entry_id}/vincular")
+def vincular_post(entry_id: str, shortcode: str = "", url: str = "") -> dict:
+    """Vincula a entrada do calendário a um post real do Instagram e marca como publicada.
+
+    A partir daí o robô diário (metrics_autolink) preenche as métricas sozinho.
+    """
+    sc = (shortcode or "").strip() or _shortcode_from_url(url)
+    if not sc:
+        raise HTTPException(400, "informe o shortcode ou a URL do post do Instagram")
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", sc):
+        raise HTTPException(400, f"shortcode inválido: {sc}")
+    published_url = (url or "").strip() or f"https://www.instagram.com/p/{sc}/"
+    with get_conn() as conn:
+        ensure_phase1_schema(conn)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                update calendar_entries
+                set ig_shortcode=%s,
+                    published_url=%s,
+                    status=case when status='medido' then status else 'published' end,
+                    published_at=coalesce(published_at, now())
+                where id=%s
+                returning id::text as id, title, status, ig_shortcode, published_url, published_at
+                """,
+                (sc, published_url, entry_id),
+            )
+            row = cur.fetchone()
+            if not row:
+                raise HTTPException(404, "entrada de calendário não encontrada")
+    return dict(row)
 
 
 @router.post("/entries")

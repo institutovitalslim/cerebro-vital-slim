@@ -12,6 +12,13 @@ type BIOverview = {
   sources: { network: string; total: number }[]
   rapidapi_instagram: { profile: string; collector: string; source: string; mode: string; status: string; next_step: string; pii_policy: string }
   social_profile: { profile_handle: string; followers_count: number; profile_views: number; whatsapp_clicks: number }
+  follower_movement: {
+    latest: { metric_date: string; followers_count: number; net_change: number; day_span: number } | null
+    delta_7d: number | null
+    delta_30d: number | null
+    series: { metric_date: string; followers_count: number; net_change: number; day_span: number }[]
+    days_tracked: number
+  }
   social_aggregate_30d: { likes: number; comments: number; saves: number; shares: number; follows: number; publications_tracked: number }
   social_selling: { total_interactors: number; candidates: number; approved_for_manual_outreach: number; avg_fit_score: string | number }
   content_score: number
@@ -22,6 +29,10 @@ async function safe<T>(p: Promise<T>, fallback: T): Promise<T> {
   try { return await p } catch { return fallback }
 }
 
+const signed = (n: number | null | undefined) => (n == null ? '—' : n > 0 ? `+${n}` : `${n}`)
+const deltaColor = (n: number | null | undefined) =>
+  n == null || n === 0 ? 'var(--muted)' : n < 0 ? 'var(--danger)' : 'var(--accent-hi)'
+
 export default async function BIPage() {
   const data = await safe<BIOverview>(fetchJson('/bi/overview?tenant_slug=demo'), {
     creatives: { total_creatives: 0, approved: 0, ready_review: 0, changes_requested: 0, avg_quality_score: 0 },
@@ -30,6 +41,7 @@ export default async function BIPage() {
     recent_stories: [], calendar: [], editorial_flow: { approved_to_publish: 0, metrics_pending: 0, measured: 0 }, sources: [],
     rapidapi_instagram: { profile: '@dradaniely.freitas', collector: 'João', source: 'RapidAPI', mode: 'read_only_planned', status: 'pendente', next_step: 'Criar ingestão diária', pii_policy: 'Sem PII' },
     social_profile: { profile_handle: '@dradaniely.freitas', followers_count: 0, profile_views: 0, whatsapp_clicks: 0 },
+    follower_movement: { latest: null, delta_7d: 0, delta_30d: 0, series: [], days_tracked: 0 },
     social_aggregate_30d: { likes: 0, comments: 0, saves: 0, shares: 0, follows: 0, publications_tracked: 0 },
     social_selling: { total_interactors: 0, candidates: 0, approved_for_manual_outreach: 0, avg_fit_score: 0 },
     content_score: 0,
@@ -40,10 +52,10 @@ export default async function BIPage() {
     <div className="dashboardRoot">
       <header className="pageHeader heroHeader">
         <div>
-          <p className="eyebrow">BI · Business Intelligence</p>
-          <h2 className="pageTitle">Centro de inteligência de conteúdo e autoridade</h2>
+          <p className="eyebrow">Instagram & funil</p>
+          <h2 className="pageTitle">O que o conteúdo está gerando de verdade</h2>
           <p className="heroText">
-            O BI transforma criação em decisão: o que gerou atenção, conversa, lead, agendamento e autoridade — sem depender de achismo.
+            Aqui a criação vira decisão: o que gerou atenção, conversa, lead e agendamento — sem depender de achismo.
           </p>
         </div>
       </header>
@@ -76,9 +88,68 @@ export default async function BIPage() {
         <article className="metricCard"><span className="metricLabel">Métricas pendentes</span><strong className="metricValue">{data.editorial_flow.metrics_pending || 0}</strong><p className="muted small">publicadas aguardando aprendizado</p></article>
       </section>
 
+      <section className="section">
+        <div className="sectionHeaderInline">
+          <div>
+            <p className="eyebrow">Movimento de seguidores</p>
+            <h3 className="sectionTitle">Ganhou ou perdeu seguidores (líquido por dia)</h3>
+          </div>
+          <span className="muted small">saldo real da contagem oficial · {data.follower_movement.days_tracked} dias monitorados</span>
+        </div>
+        {data.follower_movement.latest ? (
+          <>
+            <section className="metricGrid" style={{ marginTop: 8 }}>
+              <article className="metricCard">
+                <span className="metricLabel">{data.follower_movement.latest.day_span > 1 ? 'Desde a última coleta' : 'Ontem'}</span>
+                <strong className="metricValue" style={{ color: deltaColor(data.follower_movement.latest.net_change) }}>
+                  {signed(data.follower_movement.latest.net_change)}
+                </strong>
+                <p className="muted small">
+                  total: {data.follower_movement.latest.followers_count} seguidores
+                  {data.follower_movement.latest.day_span > 1 ? ` · acumulado de ${data.follower_movement.latest.day_span} dias` : ''}
+                </p>
+              </article>
+              <article className="metricCard">
+                <span className="metricLabel">Últimos 7 dias</span>
+                <strong className="metricValue" style={{ color: deltaColor(data.follower_movement.delta_7d) }}>
+                  {signed(data.follower_movement.delta_7d)}
+                </strong>
+                <p className="muted small">{data.follower_movement.delta_7d == null ? 'histórico insuficiente' : 'saldo líquido da semana'}</p>
+              </article>
+              <article className="metricCard">
+                <span className="metricLabel">Últimos 30 dias</span>
+                <strong className="metricValue" style={{ color: deltaColor(data.follower_movement.delta_30d) }}>
+                  {signed(data.follower_movement.delta_30d)}
+                </strong>
+                <p className="muted small">{data.follower_movement.delta_30d == null ? 'histórico insuficiente' : 'saldo líquido do mês'}</p>
+              </article>
+            </section>
+            <div className="tableLike" style={{ marginTop: 12 }}>
+              {data.follower_movement.series.map((d) => (
+                <div className="row" key={d.metric_date}>
+                  <div className="rowTop">
+                    <strong>{new Date(`${d.metric_date}T12:00:00`).toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' })}</strong>
+                    <span className="badge" style={{ color: deltaColor(d.net_change) }}>{signed(d.net_change)}</span>
+                  </div>
+                  <span className="muted small">
+                    {d.followers_count} seguidores no total
+                    {d.day_span > 1 ? ` · variação acumulada de ${d.day_span} dias (houve dia sem coleta)` : ''}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="muted small" style={{ marginTop: 10 }}>
+              Este é o <strong>saldo líquido</strong> (quem entrou menos quem saiu), da contagem oficial do Instagram. Um dia negativo significa que houve mais quem deixou de seguir do que quem passou a seguir. A <strong>identidade</strong> de quem deixou de seguir não é fornecida pelo Instagram a nenhuma ferramenta — apps que prometem isso mostram inferência, não dado real.
+            </p>
+          </>
+        ) : (
+          <div className="empty">Ainda coletando o histórico diário. O saldo aparece a partir do segundo dia de coleta (todo dia às 06:10, horário da Bahia).</div>
+        )}
+      </section>
+
       <section className="splitSection">
         <article className="card" style={{ display: 'grid', gap: 14 }}>
-          <div className="rowTop"><h3>RapidAPI Instagram · Dra. Daniely</h3><span className="badge">próxima integração</span></div>
+          <div className="rowTop"><h3>Coleta do Instagram · Dra. Daniely</h3><span className="badge">próxima integração</span></div>
           <div className="resultBox">
             {`Perfil: ${data.rapidapi_instagram.profile}
 Operador: ${data.rapidapi_instagram.collector}

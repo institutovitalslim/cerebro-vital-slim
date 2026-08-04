@@ -89,7 +89,7 @@ def social_selling_overview(tenant_slug: str = "demo") -> dict:
                 """
                 select id::text, public_handle, public_name, interaction_type, interaction_count,
                        publication_url, last_interaction_at, consciousness_stage, fit_score, status,
-                       suggested_opening, guardrails
+                       suggested_opening, guardrails, observed_signals
                 from social_selling_interactors
                 where tenant_id=%s
                 order by fit_score desc, updated_at desc

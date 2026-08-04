@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import { EmptyState } from '../components/empty-state'
 
 const api = process.env.NEXT_PUBLIC_API_BASE_URL || '/api'
 type R = {
@@ -9,6 +10,20 @@ type R = {
   objecao_principal: string | null; adaptacao_ivs: string | null; status: string
   referencias?: { url: string; tipo: string }[] | null
   ideia_prompt?: string | null; plataforma?: string | null; fonte_raw?: string | null
+}
+
+function urlProduzir(r: R) {
+  const blob = `${r.classe_ivs || ''} ${r.plataforma || ''}`.toLowerCase()
+  let rota = '/producao/reels'
+  let formato = 'reels'
+  if (blob.includes('carrossel')) { rota = '/producao/carrosseis'; formato = 'carrossel' }
+  else if (blob.includes('estatic') || blob.includes('estátic')) { rota = '/producao/estaticos'; formato = 'estatico' }
+  else if (blob.includes('storie') || blob.includes('story')) { rota = '/stories-engine'; formato = 'stories' }
+  const qs = new URLSearchParams({ source: 'ideias', tipo: 'roteiro', formato })
+  const titulo = (r.tese_central || r.hook_base || '').slice(0, 220)
+  if (titulo) qs.set('titulo', titulo)
+  if (r.hook_base) qs.set('hook', r.hook_base.slice(0, 220))
+  return `${rota}?${qs.toString()}`
 }
 
 export default function Page() {
@@ -57,7 +72,7 @@ export default function Page() {
     <div className="dashboardRoot">
       <header className="pageHeader heroHeader">
         <div>
-          <p className="eyebrow">Motor A · etapa 4</p>
+          <p className="eyebrow">Matéria-prima viral</p>
           <h2 className="pageTitle">Banco de roteiros</h2>
           <p className="muted">
             Nosso bunker IVS: base adaptada com hook, tese, mecanismo e objeção prontos para alimentar criação, mídia e reaproveitamento.
@@ -140,9 +155,12 @@ export default function Page() {
                   <pre style={{ whiteSpace: 'pre-wrap', fontSize: 11, maxHeight: 240, overflow: 'auto', marginTop: 8, opacity: 0.88 }}>{r.fonte_raw}</pre>
                 </details>
               ) : null}
+              <a className="primaryButton" style={{ marginTop: 'auto', textAlign: 'center', padding: '8px 14px', fontSize: 13 }} href={urlProduzir(r)} title="Abrir a produção já com este roteiro preenchido">
+                ▶ Produzir
+              </a>
             </article>
           ))}
-          {vis.length === 0 ? <div className="empty">Nenhum roteiro encontrado para esse filtro.</div> : null}
+          {vis.length === 0 ? <EmptyState title="Nenhum roteiro encontrado" hint="Nenhum roteiro para esse filtro. Crie conteúdo para gerar roteiros ou ajuste o filtro acima." ctas={[{href:"/criar",label:"Criar conteúdo",primary:true}]} /> : null}
         </div>
       </section>
     </div>

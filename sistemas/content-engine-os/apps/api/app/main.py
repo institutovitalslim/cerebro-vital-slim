@@ -29,6 +29,8 @@ from app.routers.dra_media import router as dra_media_router
 from app.routers.ads import router as ads_router
 from app.routers.publishing import router as publishing_router
 from app.routers.motion_videos import router as motion_videos_router
+from app.routers.ideias import router as ideias_router
+from app.routers.content_dm_os import router as content_dm_os_router
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
@@ -71,12 +73,16 @@ async def tenant_isolation(request, call_next):
             table, cid = "content_assets", m.group(1)
     if table and cid:
         slug = request.query_params.get("tenant_slug") or settings.default_tenant_slug
+        session = getattr(request.state, "session", None)
+        session_tenant_id = session.get("tid") if isinstance(session, dict) else None
 
         def _owns() -> bool:
+            if not session_tenant_id:
+                return False
             with _get_conn() as conn, conn.cursor() as cur:
                 cur.execute("select id from tenants where slug=%s", (slug,))
                 t = cur.fetchone()
-                if not t:
+                if not t or str(t["id"]) != str(session_tenant_id):
                     return False
                 if table == "creatives":
                     cur.execute("select 1 from creatives where id=%s and tenant_id=%s", (cid, t["id"]))
@@ -87,14 +93,14 @@ async def tenant_isolation(request, call_next):
         try:
             ok = await run_in_threadpool(_owns)
         except Exception:
-            ok = True  # erro de DB -> fail-open (não derruba uso legítimo; é defesa em profundidade)
+            ok = False
         if not ok:
             return _JSONResponse(status_code=404, content={"detail": "recurso não encontrado neste tenant"})
     return await call_next(request)
 
 # ── Gate de autenticação ──────────────────────────────────────────────────────
 # Exige sessão válida (cookie cos_session) em todas as rotas, exceto as públicas
-# (/health, /, /auth/*, /renders, OPTIONS). SSR repassa o cookie (web/app/api.ts);
+# (/health, /, /auth/*, OPTIONS). Renders também exigem sessão válida.
 # chamadas client-side são same-origin (/api) e mandam o cookie automaticamente.
 _AUTH_PUBLIC_EXACT = {"/", "/health", "/docs", "/openapi.json", "/redoc"}
 
@@ -106,12 +112,13 @@ async def auth_gate(request, call_next):
         request.method == "OPTIONS"
         or path in _AUTH_PUBLIC_EXACT
         or path.startswith("/auth/")
-        or path.startswith("/renders")
     ):
         return await call_next(request)
     from app.auth_core import read_token
-    if not read_token(request.cookies.get("cos_session")):
+    session = read_token(request.cookies.get("cos_session"))
+    if not session:
         return _JSONResponse(status_code=401, content={"detail": "não autenticado"})
+    request.state.session = session
     return await call_next(request)
 
 
@@ -141,6 +148,8 @@ app.include_router(dra_media_router)
 app.include_router(ads_router)
 app.include_router(publishing_router)
 app.include_router(motion_videos_router)
+app.include_router(ideias_router)
+app.include_router(content_dm_os_router)
 
 os.makedirs("/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders", exist_ok=True)
 app.mount("/renders", StaticFiles(directory="/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders"), name="renders")
@@ -174,5 +183,6 @@ def root() -> dict:
             "external_reverse_engineering_learning",
             "scientific_compliance_gate",
             "motion_videos_higgsfield_studio",
+            "content_dm_os_dry_run",
         ],
     }

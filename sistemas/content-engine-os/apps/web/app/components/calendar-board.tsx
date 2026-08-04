@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 const api = process.env.NEXT_PUBLIC_API_BASE_URL || '/api'
 
@@ -22,6 +22,24 @@ export type CalendarEntry = {
   metrics_recorded_at?: string | null
   metrics_pending?: boolean
   quality_score?: number | string | null
+  ig_shortcode?: string | null
+  published_url?: string | null
+}
+
+type RecentPost = {
+  shortcode: string
+  permalink: string
+  caption: string
+  media_type: string | null
+  media_product_type: string | null
+  published_at: string | null
+  ja_vinculado: boolean
+}
+
+function postLabel(post: RecentPost): string {
+  const when = post.published_at ? new Date(post.published_at).toLocaleDateString('pt-BR') : 'sem data'
+  const tipo = post.media_product_type === 'REELS' ? 'Reel' : post.media_type === 'CAROUSEL_ALBUM' ? 'Carrossel' : 'Post'
+  return `${when} · ${tipo} · ${post.caption || post.shortcode}`
 }
 
 export const STATUS_COPY: Record<string, string> = {
@@ -50,6 +68,15 @@ export function CalendarBoard({ initialItems }: { initialItems: CalendarEntry[] 
   const [busy, setBusy] = useState<string | null>(null)
   const [msg, setMsg] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [recentPosts, setRecentPosts] = useState<RecentPost[]>([])
+  const [pickedPost, setPickedPost] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    fetch(`${api}/calendar/posts-recentes?tenant_slug=demo&days=14`, { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : { items: [] }))
+      .then((d) => setRecentPosts(d.items || []))
+      .catch(() => setRecentPosts([]))
+  }, [])
 
   async function reload() {
     const r = await fetch(`${api}/calendar/entries?tenant_slug=demo`, { cache: 'no-store' })
@@ -59,10 +86,19 @@ export function CalendarBoard({ initialItems }: { initialItems: CalendarEntry[] 
 
   async function marcarPublicado(id: string) {
     setBusy(id); setMsg(null); setError(null)
+    const shortcode = pickedPost[id]
     try {
-      await postJson(`/calendar/entries/${id}/status`, { status: 'published' }, 'PATCH')
-      await reload()
-      setMsg('Peça marcada como publicada. Agora falta registrar a métrica quando houver dados.')
+      if (shortcode) {
+        const post = recentPosts.find((p) => p.shortcode === shortcode)
+        const params = new URLSearchParams({ shortcode, url: post?.permalink || '' })
+        await postJson(`/calendar/entries/${id}/vincular?${params.toString()}`, {})
+        await reload()
+        setMsg('Peça vinculada ao post real do Instagram. As métricas entram sozinhas todo dia de manhã.')
+      } else {
+        await postJson(`/calendar/entries/${id}/status`, { status: 'published' }, 'PATCH')
+        await reload()
+        setMsg('Peça marcada como publicada. Escolha o post real no seletor para as métricas entrarem sozinhas.')
+      }
     } catch {
       setError('Não consegui marcar como publicada agora.')
     } finally {
@@ -147,6 +183,7 @@ export function CalendarBoard({ initialItems }: { initialItems: CalendarEntry[] 
             {items.map((item) => {
               const canPublish = ['approved', 'aprovado_para_publicar', 'planned', 'in_review'].includes(item.status)
               const shouldMeasure = item.metrics_pending || ['published', 'publicado', 'metrics_pending'].includes(item.status)
+              const canLink = !item.ig_shortcode && (canPublish || shouldMeasure)
               return (
                 <div key={item.id} className="row">
                   <div className="rowTop">
@@ -165,10 +202,26 @@ export function CalendarBoard({ initialItems }: { initialItems: CalendarEntry[] 
                     </div>
                   ) : item.notes ? <div className="resultBox">{item.notes}</div> : null}
 
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
                     {item.creative_id ? <a className="secondaryLink" href="/banco-criativos">Abrir criativo</a> : null}
+                    {item.published_url ? <a className="secondaryLink" href={item.published_url} target="_blank" rel="noreferrer">Ver post no Instagram</a> : null}
+                    {canLink && recentPosts.length > 0 ? (
+                      <select
+                        className="input"
+                        style={{ maxWidth: 340, minHeight: 36 }}
+                        value={pickedPost[item.id] || ''}
+                        onChange={(e) => setPickedPost((prev) => ({ ...prev, [item.id]: e.target.value }))}
+                      >
+                        <option value="">Qual post do Instagram é esta peça?</option>
+                        {recentPosts.filter((p) => !p.ja_vinculado || p.shortcode === pickedPost[item.id]).map((p) => (
+                          <option key={p.shortcode} value={p.shortcode}>{postLabel(p)}</option>
+                        ))}
+                      </select>
+                    ) : null}
                     {canPublish ? <button className="primaryButton" style={{ minHeight: 36, padding: '0 14px' }} disabled={busy === item.id} onClick={() => marcarPublicado(item.id)}>{busy === item.id ? 'Salvando…' : 'Marcar publicado'}</button> : null}
+                    {!canPublish && canLink && pickedPost[item.id] ? <button className="primaryButton" style={{ minHeight: 36, padding: '0 14px' }} disabled={busy === item.id} onClick={() => marcarPublicado(item.id)}>{busy === item.id ? 'Salvando…' : 'Vincular ao post'}</button> : null}
                   </div>
+                  {item.ig_shortcode ? <span className="muted small">Vinculada ao post real ({item.ig_shortcode}) — as métricas entram sozinhas todo dia de manhã.</span> : null}
 
                   {shouldMeasure ? (
                     <form onSubmit={(event) => salvarMetricas(event, item.id)} className="resultBox" style={{ display: 'grid', gap: 8 }}>

@@ -54,9 +54,9 @@ export default async function CompliancePage() {
     <div className="dashboardRoot">
       <header className="pageHeader heroHeader">
         <div>
-          <p className="eyebrow">Fase 5 · científico/compliance premium</p>
+          <p className="eyebrow">Segurança antes de publicar</p>
           <h2 className="pageTitle">Painel de compliance médico</h2>
-          <p className="heroText">Classifica claims clínicos, exige evidência quando necessário, detecta promessa/diagnóstico/prescrição e bloqueia publicação de alto risco antes de sair para o calendário.</p>
+          <p className="heroText">Revisa cada peça antes de sair: afirmações de saúde precisam de fonte, e promessa de resultado, diagnóstico ou prescrição em conteúdo público são barrados na hora.</p>
         </div>
         <div className="heroActions">
           <Link className="secondaryLink" href="/banco-criativos">Revisar criativos</Link>

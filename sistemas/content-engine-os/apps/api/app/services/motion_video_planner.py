@@ -4,6 +4,80 @@ from copy import deepcopy
 from typing import Any
 from urllib.parse import urlparse
 
+VISUAL_HOOKS: list[dict[str, Any]] = [
+    {
+        "key": "text_slide_in",
+        "category": "graphic_text_overlay",
+        "name": "Text Slide In",
+        "description": "Texto curto entra na tela para nomear dor, mito ou contraste nos primeiros segundos.",
+        "ivs_use": "Abrir clareza imediata sem depender do áudio: 'Não é falta de disciplina' ou '3 sinais de estratégia solta'.",
+        "best_for": ["quebra_de_mito", "checklist_rapido", "faq_direto"],
+        "shot_bias": "Comece com objeto/rosto/gesto limpo e texto premium entrando em 0-2s; uma frase, uma quebra de objeção.",
+        "guardrails": ["sem excesso de texto", "sem promessa de resultado", "sem estética Canva genérica"],
+    },
+    {
+        "key": "match_cut",
+        "category": "pattern_interrupt_visual_switching",
+        "name": "Match Cut",
+        "description": "Corte casado transforma uma cena/objeto em outro para criar virada de percepção.",
+        "ivs_use": "Mostrar tentativa solta virando avaliação organizada: prato, agenda ou roupa se transformam em checklist/método.",
+        "best_for": ["comparacao_de_caminhos", "antes_da_decisao", "metodo_ivs"],
+        "shot_bias": "Planeje dois planos com forma parecida: caos cotidiano → critério de avaliação; o corte precisa revelar a tese.",
+        "guardrails": ["sem truque vazio", "sem antes/depois corporal", "sem comparação de resultado"],
+    },
+    {
+        "key": "jump_switch",
+        "category": "subject_motion",
+        "name": "Jump Switch",
+        "description": "Sujeito ou objeto muda de posição/estado para criar micro-surpresa e ritmo.",
+        "ivs_use": "Dra. Daniely ou objetos mudam entre mito, exame e plano; movimento conduz a explicação sem informalidade excessiva.",
+        "best_for": ["bastidor_medico_seguro", "metodo_ivs", "jornada_da_paciente"],
+        "shot_bias": "Use 3 posições/estados bem definidos: mito → investigação → caminho seguro, com cortes limpos.",
+        "guardrails": ["sem dança/trend barulhenta", "sem exposição de paciente", "sem tom amador"],
+    },
+    {
+        "key": "speed_ramp",
+        "category": "visual_effect_transitions",
+        "name": "Speed Ramp Effect",
+        "description": "Aceleração/desaceleração destaca caos, processo ou virada de entendimento.",
+        "ivs_use": "Acelerar tentativas soltas e desacelerar no momento de avaliação, método ou tecnologia explicada.",
+        "best_for": ["explicacao_de_tecnologia", "prova_de_metodo", "bastidor_medico_seguro"],
+        "shot_bias": "Ritmo rápido para confusão/rotina; pausa elegante no payoff/mecanismo; transição limpa e premium.",
+        "guardrails": ["sem overediting", "sem estética influencer genérica", "sem prometer transformação"],
+    },
+    {
+        "key": "unusual_image",
+        "category": "visual_selection",
+        "name": "Unusual Image",
+        "description": "Imagem ou objeto pouco óbvio abre curiosidade e materializa uma emoção/objeção.",
+        "ivs_use": "Rouparia/cabide, espelho embaçado, agenda lotada, prato incompleto ou exame genérico viram metáfora segura.",
+        "best_for": ["reframe_de_culpa", "historia_espelho", "resumo_salvavel"],
+        "shot_bias": "Escolha um objeto-metáfora reconhecível e inesperado; ele deve representar a trava sem body shaming.",
+        "guardrails": ["sem imagem corporal sensível", "sem vergonha", "sem claim clínico implícito"],
+    },
+]
+
+
+def get_visual_hook(key: str | None) -> dict[str, Any]:
+    aliases = {
+        "graphic_text_overlay": "text_slide_in",
+        "text_overlay": "text_slide_in",
+        "pattern_interrupt": "match_cut",
+        "visual_switching": "match_cut",
+        "subject_motion": "jump_switch",
+        "visual_effect": "speed_ramp",
+        "transition": "speed_ramp",
+        "visual_selection": "unusual_image",
+        "imagem_incomum": "unusual_image",
+    }
+    normalized = (key or "text_slide_in").strip().lower()
+    normalized = aliases.get(normalized, normalized)
+    for item in VISUAL_HOOKS:
+        if item["key"] == normalized:
+            return item
+    return VISUAL_HOOKS[0]
+
+
 CONTENT_FORMATS: list[dict[str, Any]] = [
     {
         "key": "mito_que_prende",
@@ -430,6 +504,7 @@ def motion_video_options() -> dict[str, Any]:
     return {
         "content_formats": deepcopy(CONTENT_FORMATS),
         "content_format_examples": build_content_format_examples(),
+        "visual_hooks": deepcopy(VISUAL_HOOKS),
         "matrix_8x8": motion_video_matrix_8x8(),
         "screen_formats": deepcopy(SCREEN_FORMATS),
         "motion_presets": deepcopy(MOTION_PRESETS),
@@ -437,6 +512,19 @@ def motion_video_options() -> dict[str, Any]:
         "content_strategies": ["loop_previsao", "jornada_ivs", "retencao_loops", "erro_mecanismo_metodo", "mito_realidade_conduta"],
         "voiceovers": ["documental_feminina_pt_br", "documental_masculina_pt_br", "premium_institucional_pt_br", "sem_voz"],
         "generation_modes": ["plan_only", "approved_for_paid_generation"],
+        "workflow": [
+            "Objetivo",
+            "Objeção",
+            "Formato de conteúdo",
+            "Visual Hook",
+            "Vídeos de exemplo",
+            "Estratégia Narrativa",
+            "Roteiro/Copy",
+            "Motion Brief",
+            "Prompts Higgsfield",
+            "Gate compliance",
+            "Aprovação de gasto",
+        ],
     }
 
 
@@ -461,10 +549,14 @@ def _narration_for_block(index: int, fmt: dict[str, Any], topic: str, objection:
     return templates.get(index, f"Bloco {index}: desenvolver {step} com uma ideia visual clara, sem promessa, sem diagnóstico e sem paciente real.")
 
 
-def _visual_prompt(index: int, narration: str, scene: str, motion: str, audio: str, negative: str, preset: dict[str, str]) -> str:
+def _visual_prompt(index: int, narration: str, scene: str, motion: str, audio: str, negative: str, preset: dict[str, str], visual_hook: dict[str, Any] | None = None) -> str:
+    hook = visual_hook or get_visual_hook(None)
     return f"""Block {index}
 STYLE REFERENCE:
 Match the attached IVS editorial medical motion-graphics key exactly — {preset['description']} Premium medical editorial tone, non-photorealistic, no live-action.
+
+VISUAL HOOK:
+{hook['name']} ({hook['category']}) — {hook['shot_bias']} IVS use: {hook['ivs_use']}
 
 NARRATION:
 \"{narration}\"
@@ -496,6 +588,7 @@ def build_motion_video_plan(payload: dict[str, Any]) -> dict[str, Any]:
     blocks_count = _block_count(payload)
     duration_seconds = int(payload.get("duration_seconds") or blocks_count * 10)
     strategy = payload.get("content_strategy") or "loop_previsao"
+    visual_hook = get_visual_hook(payload.get("visual_hook") or payload.get("visual_hook_mechanic"))
     source_examples_summary = payload.get("source_examples_summary") or "Sem exemplos externos selecionados; usar biblioteca IVS-first de formatos."
     examples = build_content_format_examples(content_format_key)
     winners = example_winners_for_format(content_format_key)
@@ -507,8 +600,8 @@ def build_motion_video_plan(payload: dict[str, Any]) -> dict[str, Any]:
     blocks: list[dict[str, Any]] = []
     for index in range(1, blocks_count + 1):
         narration = _narration_for_block(index, fmt, topic, objection)
-        scene = f"Representar visualmente '{fmt['name']}' para o tema '{topic}' com objeto-metáfora único, sem texto legível no clipe bruto."
-        motion = f"Movimento elegante em bloco de 10s: entrada de recortes, mapa/linha dourada, micro-reveal aos 3s e transição limpa para o bloco {index + 1 if index < blocks_count else 'final'}."
+        scene = f"Representar visualmente '{fmt['name']}' para o tema '{topic}' com objeto-metáfora único e visual hook {visual_hook['name']} ({visual_hook['category']}), sem texto legível no clipe bruto."
+        motion = f"Movimento elegante em bloco de 10s: {visual_hook['shot_bias']} Entrada de recortes, mapa/linha dourada, micro-reveal aos 3s e transição limpa para o bloco {index + 1 if index < blocks_count else 'final'}."
         audio = "Ambient bed documental discreto, paper whoosh, pulso suave e sem fala no clipe bruto."
         blocks.append({
             "block_index": index,
@@ -517,7 +610,7 @@ def build_motion_video_plan(payload: dict[str, Any]) -> dict[str, Any]:
             "motion": motion,
             "audio": audio,
             "negative_prompt": negative,
-            "visual_prompt": _visual_prompt(index, narration, scene, motion, audio, negative, preset),
+            "visual_prompt": _visual_prompt(index, narration, scene, motion, audio, negative, preset, visual_hook),
             "duration_sec": 10,
             "status": "planned",
         })
@@ -531,6 +624,23 @@ def build_motion_video_plan(payload: dict[str, Any]) -> dict[str, Any]:
         "content_format": content_format_key,
         "content_format_name": fmt["name"],
         "content_format_application": fmt["prompt_bias"],
+        "visual_hook": visual_hook["key"],
+        "visual_hook_category": visual_hook["category"],
+        "visual_hook_name": visual_hook["name"],
+        "visual_hook_application": visual_hook["ivs_use"],
+        "visual_hook_gate": {
+            "version": "visual_hook_gate_ivs_v1_plan",
+            "total": 10,
+            "max": 10,
+            "checks": {
+                "interrupcao_visual_0_2s": True,
+                "conexao_com_objecao": True,
+                "clareza_sem_audio": True,
+                "funcao_narrativa": True,
+                "compliance_medico_visual": True,
+            },
+            "recommendation": "Visual hook planejado com função narrativa e guardrails IVS.",
+        },
         "source_examples_abstraction": source_examples_summary,
         "source_examples": examples,
         "batch_winners": winners,

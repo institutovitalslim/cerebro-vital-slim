@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 from app.db import get_conn
 from app.services.motion_video_planner import (
     CONTENT_FORMATS,
+    VISUAL_HOOKS,
     build_content_format_examples,
     build_motion_video_plan,
     example_winners_for_format,
@@ -73,6 +74,7 @@ class MotionVideoPlanRequest(BaseModel):
     screen_format: str = Field(default="reels")
     duration_seconds: int = Field(default=60, ge=10, le=180)
     visual_preset: str = Field(default="ivs_mixed_media_medico_premium")
+    visual_hook: str = Field(default="text_slide_in")
     narrative_pattern: str | None = None
     voiceover: str = Field(default="documental_feminina_pt_br")
     cta: str | None = None
@@ -183,6 +185,7 @@ def options() -> dict[str, Any]:
     payload = motion_video_options()
     payload["field_names"] = {
         "official_format_field": "content_format",
+        "visual_hook_fields": ["visual_hook", "visual_hook_category", "visual_hook_mechanic", "visual_hook_shots"],
         "examples_entity": "content_format_examples",
         "do_not_use": ["format_brick", "lego_bricks"],
     }
@@ -190,6 +193,7 @@ def options() -> dict[str, Any]:
         "Objetivo",
         "Objeção",
         "Formato de conteúdo",
+        "Visual Hook",
         "Vídeos de exemplo",
         "Estratégia Narrativa",
         "Roteiro/Copy",

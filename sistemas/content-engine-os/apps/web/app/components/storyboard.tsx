@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
+import { DraRecordingKit } from './dra-kit'
 
 const api = process.env.NEXT_PUBLIC_API_BASE_URL || '/api'
 
@@ -62,6 +63,7 @@ export function StoryboardPanel({ cid }: { cid: string }) {
 
   return (
     <div style={{ marginTop: 14, borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: 14 }}>
+      <DraRecordingKit cid={cid} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
         <strong style={{ fontSize: '.95rem' }}>🎬 Storyboard do reel</strong>
         {sb ? <span className="muted small">{sb.beats.length} cenas · {sb.dur}s · corte ~{(sb.dur / sb.beats.length).toFixed(1)}s</span> : null}
@@ -93,7 +95,7 @@ export function StoryboardPanel({ cid }: { cid: string }) {
                   <div style={{ display: 'flex', gap: 4 }}>
                     {['broll', 'dra'].map((w) => (
                       <button key={w} onClick={() => editBeat(b.i, { who: w })}
-                        className="badge" style={{ cursor: 'pointer', border: b.who === w ? '1px solid #b6945b' : '1px solid transparent', opacity: b.who === w ? 1 : 0.5 }}>
+                        className="badge" style={{ cursor: 'pointer', border: b.who === w ? '1px solid #D4A83C' : '1px solid transparent', opacity: b.who === w ? 1 : 0.5 }}>
                         {w === 'dra' ? 'Dra.' : 'B-roll'}
                       </button>
                     ))}

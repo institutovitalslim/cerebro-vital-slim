@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from fastapi import APIRouter, HTTPException
 
 from app.db import get_conn
@@ -148,6 +150,50 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
             )
             social_profile = cur.fetchone()
 
+            # Movimento de seguidores: variação líquida dia a dia a partir da contagem absoluta
+            # (fonte robusta — 1 número por dia). window_delta soma as variações do período.
+            # Usa distinct on p/ pegar 1 contagem por dia mesmo se houver 2 coletas no mesmo dia.
+            cur.execute(
+                """
+                with daily as (
+                  select distinct on (metric_date) metric_date, followers_count
+                  from instagram_profile_daily_metrics
+                  where tenant_id=%s and followers_count is not null
+                  order by metric_date desc, created_at desc
+                  limit 90
+                )
+                select metric_date, followers_count,
+                       followers_count - lag(followers_count) over (order by metric_date) as net_change,
+                       (metric_date - lag(metric_date) over (order by metric_date))::int as day_span
+                from daily
+                order by metric_date desc
+                """,
+                (tenant_id,),
+            )
+            follower_rows = cur.fetchall()  # inclui a linha mais antiga (net_change null)
+            # série exibível: só linhas com variação; day_span sinaliza saltos de coleta
+            follower_series = [r for r in follower_rows if r["net_change"] is not None]
+
+            def _delta(days: int):
+                # variação por CALENDÁRIO: conta atual menos a coleta mais recente com data
+                # <= (data mais nova − N dias). Robusto a dias sem coleta (não conta pontos).
+                if not follower_rows:
+                    return None
+                latest = follower_rows[0]
+                cutoff = latest["metric_date"] - timedelta(days=days)
+                ref = next((r for r in follower_rows if r["metric_date"] <= cutoff), follower_rows[-1])
+                if ref["metric_date"] == latest["metric_date"]:
+                    return None  # histórico ainda menor que 1 dia
+                return int(latest["followers_count"]) - int(ref["followers_count"])
+
+            follower_movement = {
+                "latest": follower_series[0] if follower_series else None,
+                "delta_7d": _delta(7),
+                "delta_30d": _delta(30),
+                "series": follower_series[:30],
+                "days_tracked": len(follower_series),
+            }
+
             cur.execute(
                 """
                 select
@@ -184,10 +230,18 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
         "profile": "@dradaniely.freitas",
         "collector": "João",
         "source": "RapidAPI",
-        "mode": "read_only_planned",
-        "status": "spec_ready_pending_ingestion",
+        "mode": "read_only_ativo",
+        "status": "ativo (coleta diária 06:10, horário da Bahia)",
         "pii_policy": "métricas agregadas; sem coletar seguidores, nomes, telefone ou comentários identificáveis",
-        "next_step": "criar ingestão diária idempotente RapidAPI → instagram_post_metrics",
+        "next_step": "ingestão ativa via scripts/instagram_ingest.py (idempotente, cron diário)",
+    }
+    meta_insights_readiness = {
+        "profile": "@dradaniely.freitas",
+        "source": "Meta Graph API (token de sistema, nunca expira)",
+        "mode": "read_only_ativo",
+        "status": "ativo (coleta diária 06:25, horário da Bahia — scripts/meta_insights_ingest.py)",
+        "coverage": "reach, views, visitas ao perfil, contas engajadas, demografia (cidade/idade/gênero), insights por publicação e reels, stories no ar, horários online (quando a Meta disponibiliza)",
+        "pii_policy": "métricas agregadas da própria conta; sem lista de seguidores nem dados de terceiros",
     }
     content_score = round(
         (creatives["approved"] * 4)
@@ -209,7 +263,9 @@ def bi_overview(tenant_slug: str = "demo") -> dict:
         "editorial_flow": editorial_flow,
         "sources": sources,
         "rapidapi_instagram": readiness,
+        "meta_insights": meta_insights_readiness,
         "social_profile": social_profile or {"profile_handle": "@dradaniely.freitas", "followers_count": 0, "profile_views": 0, "whatsapp_clicks": 0},
+        "follower_movement": follower_movement,
         "social_aggregate_30d": social_aggregate,
         "social_selling": social_selling,
         "content_score": content_score,
