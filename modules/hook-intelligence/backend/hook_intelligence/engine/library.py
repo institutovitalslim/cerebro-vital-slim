@@ -12,6 +12,11 @@ from hook_intelligence.domain.models import AwarenessStage, Channel, Objective, 
 
 ALLOWED_SLOTS = frozenset({"topic", "audience", "desired_outcome", "context", "required_word"})
 LIBRARIES = ("universal", "ivs-health")
+# Limites defensivos para regras locais. A Task 6 deve truncar ou rejeitar entradas maiores
+# antes de chamar o scanner; o helper também faz essa validação para não depender do caller.
+CLAIM_SCAN_MAX_CHARS = 4000
+CLAIM_REGEX_MAX_CHARS = 500
+REGEX_CONDITIONAL_MARKER = "(?" + "("
 EXACT_MECHANISM_IDS = frozenset(
     {
         "curiosity_gap",
@@ -110,6 +115,7 @@ class HookLibrary:
         audiences: tuple[Mapping[str, str], ...],
         topics: tuple[Mapping[str, str], ...],
         forbidden_claims: Mapping[str, Any],
+        compiled_claim_patterns: tuple[tuple[str, str, re.Pattern[str]], ...],
     ) -> None:
         self._all_patterns = patterns
         self._mechanisms = mechanisms
@@ -117,6 +123,7 @@ class HookLibrary:
         self._audiences = audiences
         self._topics = topics
         self._forbidden_claims = forbidden_claims
+        self._compiled_claim_patterns = compiled_claim_patterns
         self._by_id = MappingProxyType({pattern.id: pattern for pattern in patterns})
 
     @property
@@ -154,7 +161,7 @@ class HookLibrary:
         mechanisms = cls._load_mechanisms(root)
         audiences = cls._load_auxiliary_entries(root, "ivs-health/audiences.json", 8)
         topics = cls._load_auxiliary_entries(root, "ivs-health/topics.json", 12)
-        forbidden_claims = cls._load_forbidden_claims(root)
+        forbidden_claims, compiled_claim_patterns = cls._load_forbidden_claims(root)
         patterns: list[Pattern] = []
         seen_ids: set[str] = set()
         seen_templates: dict[str, str] = {}
@@ -218,6 +225,7 @@ class HookLibrary:
             audiences,
             topics,
             forbidden_claims,
+            compiled_claim_patterns,
         )
 
     @classmethod
@@ -284,7 +292,9 @@ class HookLibrary:
         return tuple(MappingProxyType(dict(record)) for record in records)
 
     @classmethod
-    def _load_forbidden_claims(cls, root: Path) -> Mapping[str, Any]:
+    def _load_forbidden_claims(
+        cls, root: Path
+    ) -> tuple[Mapping[str, Any], tuple[tuple[str, str, re.Pattern[str]], ...]]:
         relative = "ivs-health/forbidden-claims.json"
         payload = cls._read_json(root, relative)
         if not isinstance(payload, dict) or set(payload) != {"version", "categories"}:
@@ -294,23 +304,25 @@ class HookLibrary:
         categories = payload["categories"]
         if not isinstance(categories, list):
             cls._invalid(relative, "<arquivo>", "categories", "deve ser uma lista")
-        ids = {item.get("id") for item in categories if isinstance(item, dict)}
-        if ids != CLAIM_CATEGORY_IDS or len(categories) != len(CLAIM_CATEGORY_IDS):
-            cls._invalid(
-                relative,
-                "<arquivo>",
-                "categorias",
-                f"IDs devem ser exatamente {sorted(CLAIM_CATEGORY_IDS)}",
-            )
         immutable = []
+        compiled: list[tuple[str, str, re.Pattern[str]]] = []
         fields = {"id", "label", "description", "examples", "patterns"}
-        for category in categories:
-            item_id = category.get("id", "<desconhecido>")
+        ids: list[str] = []
+        for index, category in enumerate(categories):
+            item_id: Any = (
+                category.get("id", f"índice-{index}")
+                if isinstance(category, dict)
+                else f"índice-{index}"
+            )
+            if not isinstance(category, dict):
+                cls._invalid(relative, str(item_id), "estrutura", "categoria deve ser um objeto")
             if set(category) != fields:
-                cls._invalid(relative, item_id, "estrutura", f"requer {sorted(fields)}")
+                cls._invalid(relative, str(item_id), "estrutura", f"requer {sorted(fields)}")
             for field in ("id", "label", "description"):
                 if not isinstance(category[field], str) or not category[field].strip():
-                    cls._invalid(relative, item_id, field, "deve ser texto não vazio")
+                    cls._invalid(relative, str(item_id), field, "deve ser texto não vazio")
+            item_id = category["id"]
+            ids.append(item_id)
             converted = dict(category)
             for field in ("examples", "patterns"):
                 values = category[field]
@@ -322,12 +334,49 @@ class HookLibrary:
                     cls._invalid(relative, item_id, field, "deve ser lista não vazia de textos")
                 converted[field] = tuple(values)
             for expression in converted["patterns"]:
+                cls._validate_claim_regex(relative, item_id, expression)
                 try:
-                    re.compile(expression, re.IGNORECASE)
+                    regex = re.compile(expression, re.IGNORECASE)
                 except re.error as error:
                     cls._invalid(relative, item_id, "regex", str(error))
+                compiled.append((item_id, expression, regex))
             immutable.append(MappingProxyType(converted))
-        return MappingProxyType({"version": payload["version"], "categories": tuple(immutable)})
+        if set(ids) != CLAIM_CATEGORY_IDS or len(ids) != len(CLAIM_CATEGORY_IDS):
+            cls._invalid(
+                relative,
+                "<arquivo>",
+                "categorias",
+                f"IDs devem ser exatamente {sorted(CLAIM_CATEGORY_IDS)}",
+            )
+        payload_proxy = MappingProxyType(
+            {"version": payload["version"], "categories": tuple(immutable)}
+        )
+        return payload_proxy, tuple(compiled)
+
+    @classmethod
+    def _validate_claim_regex(cls, relative: str, item_id: str, expression: str) -> None:
+        """Aceita um subset conservador sem executar a expressão não confiável.
+
+        O subset limita tamanho e rejeita quantificação de grupos, backreferences,
+        lookbehind, condicionais e wildcards ilimitados. As regras são deliberadamente
+        mais estritas que o motor ``re`` para manter tempo de busca previsível.
+        """
+
+        reason = None
+        if len(expression) > CLAIM_REGEX_MAX_CHARS:
+            reason = f"excede {CLAIM_REGEX_MAX_CHARS} caracteres"
+        elif "(?P=" in expression or re.search(r"\\[1-9]|\\g<|\\k<", expression):
+            reason = "backreference não permitida"
+        elif "(?<=" in expression or "(?<!" in expression:
+            reason = "lookbehind não permitido"
+        elif REGEX_CONDITIONAL_MARKER in expression:
+            reason = "condicional não permitido"
+        elif re.search(r"(?<!\\)\.(?:\*|\+)", expression):
+            reason = "wildcard ilimitado não permitido"
+        elif re.search(r"(?<!\\)\)(?:[*+?]|\{\d+(?:,\d*)?\})", expression):
+            reason = "quantificador aplicado a grupo não permitido"
+        if reason is not None:
+            cls._invalid(relative, item_id, "pattern", f"{expression}: {reason}")
 
     @classmethod
     def _validate_coverage(cls, patterns: list[Pattern]) -> None:
@@ -416,8 +465,16 @@ class HookLibrary:
         except ValueError as error:
             cls._invalid(relative, item_id, "template", f"placeholders inválidos: {error}")
         declared_slots = record["slots"]
-        if not isinstance(declared_slots, list) or not declared_slots:
-            cls._invalid(relative, item_id, "slots", "deve ser lista não vazia")
+        if (
+            not isinstance(declared_slots, list)
+            or not declared_slots
+            or any(not isinstance(slot, str) for slot in declared_slots)
+        ):
+            cls._invalid(relative, item_id, "slots", "deve ser lista não vazia de strings")
+        if len(actual_slots) != len(set(actual_slots)) or len(declared_slots) != len(
+            set(declared_slots)
+        ):
+            cls._invalid(relative, item_id, "slots", "não permite slots repetidos")
         unknown_slots = (set(actual_slots) | set(declared_slots)) - ALLOWED_SLOTS
         if unknown_slots:
             cls._invalid(
@@ -471,7 +528,7 @@ class HookLibrary:
     def _read_json(cls, root: Path, relative: str) -> Any:
         try:
             return json.loads((root / relative).read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
+        except (OSError, UnicodeError, json.JSONDecodeError) as error:
             cls._invalid(relative, "<arquivo>", "json", str(error))
 
     @staticmethod
@@ -497,6 +554,23 @@ class HookLibrary:
         mechanism: str | None = None,
         max_intensity: int | None = None,
     ) -> tuple[Pattern, ...]:
+        known_filters = {
+            "library": (library, LIBRARIES),
+            "channel": (channel, self._taxonomies["channels"]),
+            "objective": (objective, self._taxonomies["objectives"]),
+            "awareness_stage": (awareness_stage, self._taxonomies["awareness"]),
+            "tone": (tone, self._taxonomies["tones"]),
+            "mechanism": (mechanism, self._mechanisms),
+        }
+        for name, (value, allowed) in known_filters.items():
+            if value is not None and value not in allowed:
+                raise ValueError(f"{name} desconhecido: {value}; permitidos={sorted(allowed)}")
+        if max_intensity is not None and (
+            not isinstance(max_intensity, int)
+            or isinstance(max_intensity, bool)
+            or not 1 <= max_intensity <= 3
+        ):
+            raise ValueError("max_intensity deve ser inteiro entre 1 e 3")
         return tuple(
             pattern
             for pattern in self._all_patterns
@@ -507,4 +581,20 @@ class HookLibrary:
             and (tone is None or tone in pattern.tones)
             and (mechanism is None or pattern.mechanism == mechanism)
             and (max_intensity is None or pattern.intensity <= max_intensity)
+        )
+
+    def scan_forbidden_claims(self, text: str) -> tuple[tuple[str, str], ...]:
+        """Retorna ``(categoria, pattern)`` em ordem determinística para texto limitado.
+
+        Somente regex validadas e compiladas durante o carregamento são executadas.
+        """
+
+        if not isinstance(text, str):
+            raise TypeError("texto do scan deve ser str")
+        if len(text) > CLAIM_SCAN_MAX_CHARS:
+            raise ValueError(f"texto do scan excede {CLAIM_SCAN_MAX_CHARS} caracteres")
+        return tuple(
+            (category, expression)
+            for category, expression, regex in self._compiled_claim_patterns
+            if regex.search(text) is not None
         )

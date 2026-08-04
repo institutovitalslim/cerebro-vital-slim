@@ -6,28 +6,28 @@
       "label": "Cura",
       "description": "Afirma eliminar ou reverter definitivamente uma doença ou condição.",
       "examples": ["Este protocolo cura a diabetes."],
-      "patterns": ["\\bcur(?:a|ar|ou|ado|ada|am)\\b", "\\belimina(?:r|do|da)?\\s+(?:definitivamente\\s+)?(?:a|o)\\s+(?:doença|condição)\\b"]
+      "patterns": ["\\bcur(?:a|ar|ou|ado|ada|am)\\b", "\\b(?:elimina|eliminar|eliminado|eliminada)\\s+(?:definitivamente\\s+|)(?:a|o)\\s+(?:doença|condição)\\b"]
     },
     {
       "id": "guarantee",
       "label": "Garantia",
       "description": "Promete resultado certo, inevitável ou válido para todas as pessoas.",
       "examples": ["Resultado garantido para todas as pessoas."],
-      "patterns": ["\\bresultados?\\s+garantid[oa]s?\\b", "\\b(?:garante|garantia\\s+de)\\s+(?:o\\s+)?resultado\\b", "\\bfunciona\\s+(?:sempre|para\\s+tod[oa]s)\\b"]
+      "patterns": ["\\bresultados?\\s+garantid[oa]s?\\b", "\\b(?:garante|garantia\\s+de)\\s+(?:o\\s+|)resultado\\b", "\\bfunciona\\s+(?:sempre|para\\s+tod[oa]s)\\b"]
     },
     {
       "id": "diagnosis",
       "label": "Diagnóstico",
-      "description": "Declara diretamente ao leitor que ele possui uma condição clínica.",
-      "examples": ["Você tem depressão."],
-      "patterns": ["\\b(?:você|tu)\\s+(?:tem|está\\s+com|sofre\\s+de)\\s+[a-zá-úç][a-zá-úç-]+", "\\besse\\s+sinal\\s+(?:prova|confirma)\\s+que\\s+(?:você|tu)\\s+tem\\b"]
+      "description": "Declara diretamente uma condição usando uma lista conservadora de termos clínicos explícitos; não representa cobertura clínica completa.",
+      "examples": ["Você tem diabetes.", "Seu quadro é depressão."],
+      "patterns": ["\\b(?:você|tu)\\s+(?:tem|está\\s+com|sofre\\s+de)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\bseu\\s+quadro\\s+(?:é|indica)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b"]
     },
     {
       "id": "prescription",
       "label": "Prescrição",
       "description": "Ordena o uso de substância, dose, tratamento ou conduta clínica.",
-      "examples": ["Tome 20 mg deste composto diariamente."],
-      "patterns": ["\\b(?:tome|use|aplique|ingira)\\s+(?:\\d+(?:[.,]\\d+)?\\s*(?:mg|ml|g)\\s+)?(?:este|esta|deste|desta|o|a|um|uma)\\b", "\\b(?:faça|inicie)\\s+(?:este|o|um)\\s+tratamento\\b"]
+      "examples": ["Tome 2 cápsulas por dia.", "Consuma 20 mg diariamente."],
+      "patterns": ["\\b(?:tome|consuma|use|aplique|ingira)\\s+(?:\\d+[.,]\\d+|\\d+)\\s*(?:mg|ml|g|cápsulas?|comprimidos?|gotas?|doses?)\\b", "\\b(?:faça|inicie)\\s+(?:este|o|um)\\s+tratamento\\b"]
     },
     {
       "id": "false_urgency",
@@ -48,14 +48,14 @@
       "label": "Número clínico sem fonte",
       "description": "Apresenta percentual ou número clínico como efeito sem fonte ou contexto.",
       "examples": ["Este método reduz 73% do colesterol."],
-      "patterns": ["\\b(?:reduz|aumenta|melhora|elimina|previne)\\s+\\d+(?:[.,]\\d+)?%\\s+(?:d[oa]s?\\s+)?(?:colesterol|glicemia|casos|risco|sintomas?)\\b", "\\b\\d+(?:[.,]\\d+)?%\\s+(?:de\\s+)?(?:eficácia|dos\\s+casos|de\\s+redução)\\b"]
+      "patterns": ["\\b(?:reduz|aumenta|melhora|elimina|previne)\\s+(?:\\d+[.,]\\d+|\\d+)%\\s+(?:d[oa]s?\\s+|)(?:colesterol|glicemia|casos|risco|sintomas?)\\b", "\\b(?:\\d+[.,]\\d+|\\d+)%\\s+(?:de\\s+|)(?:eficácia|dos\\s+casos|de\\s+redução)\\b"]
     },
     {
       "id": "absolute_superiority",
       "label": "Superioridade absoluta",
       "description": "Declara uma opção única, universalmente melhor ou superior a todas as demais.",
       "examples": ["Esta é a única solução que funciona."],
-      "patterns": ["\\b(?:a|esta|essa)\\s+única\\s+solução\\s+que\\s+(?:funciona|presta)\\b", "\\bmelhor\\s+(?:que\\s+)?tod[oa]s\\s+(?:as|os)\\s+(?:outras|outros)\\b", "\\binsuperável\\b"]
+      "patterns": ["\\b(?:a|esta|essa)\\s+única\\s+solução\\s+que\\s+(?:funciona|presta)\\b", "\\bmelhor\\s+(?:que\\s+|)tod[oa]s\\s+(?:as|os)\\s+(?:outras|outros)\\b", "\\binsuperável\\b"]
     }
   ]
 }

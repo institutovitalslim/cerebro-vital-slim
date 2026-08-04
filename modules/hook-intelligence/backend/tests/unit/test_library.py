@@ -9,7 +9,12 @@ from pathlib import Path
 import pytest
 
 from hook_intelligence.domain.models import AwarenessStage, Channel, Objective, Tone
-from hook_intelligence.engine.library import ALLOWED_SLOTS, EXACT_MECHANISM_IDS, HookLibrary
+from hook_intelligence.engine.library import (
+    ALLOWED_SLOTS,
+    CLAIM_SCAN_MAX_CHARS,
+    EXACT_MECHANISM_IDS,
+    HookLibrary,
+)
 
 DATA_ROOT = Path(__file__).resolve().parents[3] / "data"
 PATTERN_FILES = ("universal/patterns.json", "ivs-health/patterns.json")
@@ -558,3 +563,131 @@ def test_templates_avoid_known_slot_agreement_traps():
         if expression.search(template)
     ]
     assert violations == []
+
+
+@pytest.mark.parametrize(
+    "unsafe_pattern",
+    [
+        "(a+)+$",
+        "(a*)*$",
+        "(.*)+",
+        r"\b(a)\1\b",
+        r"(?P<word>a)(?P=word)",
+        r"(?<=dose)alta",
+        r"(?<!sem )risco",
+        r"(a)(?(1)b|c)",
+        "a" * 501,
+    ],
+)
+def test_loader_rejects_unsafe_claim_regex_with_context(tmp_path, unsafe_pattern):
+    root = copied_data(tmp_path)
+    path = root / "ivs-health/forbidden-claims.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["categories"][0]["patterns"] = [unsafe_pattern]
+    write_json(path, payload)
+
+    with pytest.raises(ValueError) as error:
+        HookLibrary.load(root)
+
+    message = str(error.value)
+    assert "ivs-health/forbidden-claims.json" in message
+    assert "cure" in message
+    assert "pattern" in message
+    assert unsafe_pattern in message
+
+
+@pytest.mark.parametrize(
+    ("category", "text", "detected"),
+    [
+        ("diagnosis", "Você tem diabetes.", True),
+        ("diagnosis", "Seu quadro é depressão.", True),
+        ("diagnosis", "Você tem dúvidas sobre o tema?", False),
+        ("diagnosis", "Você tem experiência prática.", False),
+        ("prescription", "Tome 2 cápsulas por dia.", True),
+        ("prescription", "Consuma 20 mg diariamente.", True),
+        ("prescription", "Use esta estrutura no início do vídeo.", False),
+        ("prescription", "Consuma este conteúdo diariamente.", False),
+    ],
+)
+def test_claim_scanner_diagnosis_and_prescription_matrix(category, text, detected):
+    matches = HookLibrary.load_default().scan_forbidden_claims(text)
+    assert (category in {match[0] for match in matches}) is detected
+
+
+def test_claim_scanner_is_deterministic_and_clears_all_ivs_templates():
+    library = HookLibrary.load_default()
+    text = "Você tem diabetes. Tome 2 cápsulas por dia."
+    first = library.scan_forbidden_claims(text)
+    assert first == library.scan_forbidden_claims(text)
+    assert [category for category, _ in first] == ["diagnosis", "prescription"]
+    assert all(isinstance(pattern, str) and pattern for _, pattern in first)
+    assert not [
+        (pattern.id, matches)
+        for pattern in library.patterns("ivs-health")
+        if (matches := library.scan_forbidden_claims(pattern.template))
+    ]
+
+
+def test_claim_scanner_validates_text_type_and_size():
+    library = HookLibrary.load_default()
+    assert library.scan_forbidden_claims("a" * CLAIM_SCAN_MAX_CHARS) == ()
+    with pytest.raises(TypeError, match="texto.*str"):
+        library.scan_forbidden_claims(123)  # type: ignore[arg-type]
+    with pytest.raises(ValueError, match=str(CLAIM_SCAN_MAX_CHARS)):
+        library.scan_forbidden_claims("a" * (CLAIM_SCAN_MAX_CHARS + 1))
+
+
+def test_loader_wraps_invalid_utf8_with_file_context(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "ivs-health/forbidden-claims.json"
+    path.write_bytes(b"\xff\xfe")
+    with pytest.raises(ValueError) as error:
+        HookLibrary.load(root)
+    assert "ivs-health/forbidden-claims.json" in str(error.value)
+    assert "json" in str(error.value)
+
+
+def test_loader_rejects_non_string_claim_category_id_contextually(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "ivs-health/forbidden-claims.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["categories"][0]["id"] = ["cure"]
+    write_json(path, payload)
+    with pytest.raises(ValueError) as error:
+        HookLibrary.load(root)
+    message = str(error.value)
+    assert "ivs-health/forbidden-claims.json" in message
+    assert "id" in message
+    assert "texto não vazio" in message
+
+
+def test_loader_rejects_repeated_slots_even_when_template_and_declaration_agree(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "universal/patterns.json"
+    records = json.loads(path.read_text(encoding="utf-8"))
+    records[0]["template"] = "Compare {topic} com {topic} antes de escolher a abordagem editorial"
+    records[0]["slots"] = ["topic", "topic"]
+    write_json(path, records)
+    with pytest.raises(ValueError, match="slots.*repetidos"):
+        HookLibrary.load(root)
+
+
+@pytest.mark.parametrize(
+    ("filter_name", "invalid_value"),
+    [
+        ("library", "other"),
+        ("channel", "other"),
+        ("objective", "other"),
+        ("awareness_stage", "other"),
+        ("tone", "other"),
+        ("mechanism", "other"),
+        ("max_intensity", 0),
+        ("max_intensity", 4),
+        ("max_intensity", True),
+        ("max_intensity", "2"),
+    ],
+)
+def test_filter_rejects_unknown_or_invalid_values(filter_name, invalid_value):
+    library = HookLibrary.load_default()
+    with pytest.raises(ValueError, match=filter_name):
+        library.filter(**{filter_name: invalid_value})
