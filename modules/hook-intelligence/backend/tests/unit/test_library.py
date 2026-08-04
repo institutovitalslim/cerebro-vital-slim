@@ -39,6 +39,16 @@ def explanation_similarity(left: str, right: str) -> float:
     return 2 * len(left_pairs & right_pairs) / (len(left_pairs) + len(right_pairs))
 
 
+def explanation_closure(text: str) -> str:
+    sentences = re.split(r"(?<=[.!?])\s+", text.strip())
+    assert len(sentences) == 3
+    return sentences[2]
+
+
+def normalized_token_prefix(text: str, size: int = 4) -> tuple[str, ...]:
+    return tuple(re.findall(r"\w+", text.casefold())[:size])
+
+
 def test_load_default_is_independent_from_working_directory(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
     library = HookLibrary.load_default()
@@ -323,6 +333,54 @@ def test_all_explanations_are_editorial_and_unique_after_normalization():
     assert len({normalized(text) for text in explanations}) == len(explanations) == 60
     scores = [explanation_similarity(left, right) for left, right in combinations(explanations, 2)]
     assert max(scores) < 0.72
+
+
+def test_explanation_closures_have_correct_voice_agreement_and_distinct_openings():
+    explanations = [pattern.explanation for pattern in HookLibrary.load_default().all_patterns]
+    wrong_voice_agreement = re.compile(
+        r"\bvoz\s+(?:educativo|provocativo|empático|direto)\b", re.IGNORECASE
+    )
+    forbidden_starters = (
+        "use a estrutura em",
+        "a aplicação indicada está em",
+        "para",
+        "esse desenho é apropriado para",
+        "nos formatos",
+        "em conteúdos de",
+    )
+    closures = [explanation_closure(text) for text in explanations]
+    prefixes = [normalized_token_prefix(closure) for closure in closures]
+
+    assert not [text for text in explanations if wrong_voice_agreement.search(text)]
+    assert len(set(closures)) == len(closures) == 60
+    assert len(set(prefixes)) == len(prefixes) == 60
+    assert not [
+        closure for closure in closures if closure.casefold().startswith(forbidden_starters)
+    ]
+
+
+def test_explanation_closures_are_not_near_duplicates():
+    closures = [
+        explanation_closure(pattern.explanation)
+        for pattern in HookLibrary.load_default().all_patterns
+    ]
+    scored_pairs = [
+        (explanation_similarity(left, right), left, right)
+        for left, right in combinations(closures, 2)
+    ]
+    assert max(scored_pairs)[0] < 0.46
+
+
+def test_closure_similarity_flags_a_repetitive_synthetic_pair():
+    first = (
+        "Quando o público já reconhece o problema, abra o carrossel com a pergunta central "
+        "e conclua a sequência em voz educativa."
+    )
+    second = (
+        "Quando o público já reconhece o problema, abra o carrossel com a dúvida central "
+        "e conclua a sequência em voz educativa."
+    )
+    assert explanation_similarity(first, second) >= 0.46
 
 
 def test_explanation_similarity_flags_a_formularized_synthetic_pair():
