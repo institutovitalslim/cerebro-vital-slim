@@ -6,56 +6,56 @@
       "label": "Cura",
       "description": "Afirma eliminar ou reverter definitivamente uma doença ou condição.",
       "examples": ["Este protocolo cura a diabetes."],
-      "patterns": ["\\bcur(?:a|ar|ou|ado|ada|am)\\b", "\\b(?:elimina|eliminar|eliminado|eliminada)\\s+(?:definitivamente\\s+|)(?:a|o)\\s+(?:doença|condição)\\b"]
+      "patterns": ["\\bcur(?:a|ar|ou|ado|ada|am)\\b", "\\b(?:elimina|eliminar|eliminado|eliminada)\\s{1,4}(?:definitivamente\\s{1,4}|)(?:a|o)\\s{1,4}(?:doença|condição)\\b"]
     },
     {
       "id": "guarantee",
       "label": "Garantia",
       "description": "Promete resultado certo, inevitável ou válido para todas as pessoas.",
       "examples": ["Resultado garantido para todas as pessoas."],
-      "patterns": ["\\bresultados?\\s+garantid[oa]s?\\b", "\\b(?:garante|garantia\\s+de)\\s+(?:o\\s+|)resultado\\b", "\\bfunciona\\s+(?:sempre|para\\s+tod[oa]s)\\b"]
+      "patterns": ["\\bresultados?\\s{1,4}garantid[oa]s?\\b", "\\b(?:garante|garantia\\s{1,4}de)\\s{1,4}(?:o\\s{1,4}|)resultado\\b", "\\bfunciona\\s{1,4}(?:sempre|para\\s{1,4}tod[oa]s)\\b"]
     },
     {
       "id": "diagnosis",
       "label": "Diagnóstico",
       "description": "Declara diretamente uma condição usando uma lista conservadora de termos clínicos explícitos; não representa cobertura clínica completa.",
       "examples": ["Você tem diabetes.", "Seu quadro é depressão.", "Você é diabético.", "Seu diagnóstico é câncer."],
-      "patterns": ["\\b(?:você|tu)\\s+(?:tem|está\\s+com|sofre\\s+de)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\bseu\\s+quadro\\s+(?:é|indica)\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\b(?:você|tu)\\s+é\\s+(?:diabétic[oa]|hipertens[oa]|obes[oa]|depressiv[oa])\\b", "\\bseu\\s+diagnóstico\\s+é\\s+(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b"]
+      "patterns": ["\\b(?:você|tu)\\s{1,4}(?:tem|está\\s{1,4}com|sofre\\s{1,4}de)\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\bseu\\s{1,4}quadro\\s{1,4}(?:é|indica)\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b", "\\b(?:você|tu)\\s{1,4}é\\s{1,4}(?:diabétic[oa]|hipertens[oa]|obes[oa]|depressiv[oa])\\b", "\\bseu\\s{1,4}diagnóstico\\s{1,4}é\\s{1,4}(?:diabetes|depressão|hipertensão|obesidade|ansiedade|câncer|infecção)\\b"]
     },
     {
       "id": "prescription",
       "label": "Prescrição",
       "description": "Ordena o uso de substância, dose, tratamento ou conduta clínica.",
       "examples": ["Tome 2 cápsulas por dia.", "Consuma 20 mg diariamente.", "Tome metformina diariamente.", "Use este medicamento."],
-      "patterns": ["\\b(?:tome|consuma|use|aplique|ingira)\\s+(?:\\d+[.,]\\d+|\\d+)\\s*(?:mg|ml|g|cápsulas?|comprimidos?|gotas?|doses?)\\b", "\\b(?:faça|inicie)\\s+(?:este|o|um)\\s+tratamento\\b", "\\b(?:tome|use|consuma|ingira)\\s+(?:metformina|insulina|antibiótico|antidepressivo)\\s+(?:diariamente|por\\s+dia|todos\\s+os\\s+dias)\\b", "\\b(?:tome|use|consuma|ingira)\\s+(?:este|esta|o|a|um|uma)\\s+(?:medicamento|remédio|fármaco|antibiótico|antidepressivo)\\b"]
+      "patterns": ["\\b(?:tome|consuma|use|aplique|ingira)\\s{1,4}(?:\\d{1,6}[.,]\\d{1,6}|\\d{1,6})\\s{0,4}(?:mg|ml|g|cápsulas?|comprimidos?|gotas?|doses?)\\b", "\\b(?:faça|inicie)\\s{1,4}(?:este|o|um)\\s{1,4}tratamento\\b", "\\b(?:tome|use|consuma|ingira)\\s{1,4}(?:metformina|insulina|antibiótico|antidepressivo)\\s{1,4}(?:diariamente|por\\s{1,4}dia|todos\\s{1,4}os\\s{1,4}dias)\\b", "\\b(?:tome|use|consuma|ingira)\\s{1,4}(?:este|esta|o|a|um|uma)\\s{1,4}(?:medicamento|remédio|fármaco|antibiótico|antidepressivo)\\b"]
     },
     {
       "id": "false_urgency",
       "label": "Urgência falsa",
       "description": "Pressiona uma decisão imediata por prazo ou consequência fabricada.",
       "examples": ["Compre agora ou será tarde demais."],
-      "patterns": ["\\b(?:compre|aja|decida|comece)\\s+(?:agora|hoje)\\s+ou\\s+(?:será|vai\\s+ser)\\s+tarde\\b", "\\búltima\\s+chance\\b", "\\bsó\\s+hoje\\b"]
+      "patterns": ["\\b(?:compre|aja|decida|comece)\\s{1,4}(?:agora|hoje)\\s{1,4}ou\\s{1,4}(?:será|vai\\s{1,4}ser)\\s{1,4}tarde\\b", "\\búltima\\s{1,4}chance\\b", "\\bsó\\s{1,4}hoje\\b"]
     },
     {
       "id": "stigma",
       "label": "Estigma",
       "description": "Culpabiliza ou desumaniza alguém por corpo, peso, doença ou comportamento.",
       "examples": ["Só não emagrece quem é preguiçoso."],
-      "patterns": ["\\bsó\\s+não\\s+(?:emagrece|melhora|se\\s+cuida)\\s+quem\\s+(?:é|não)\\s+(?:preguiços[oa]|fraco|se\\s+esforça)\\b", "\\b(?:gordo|obeso|doente)\\s+porque\\s+(?:quer|não\\s+tem\\s+disciplina)\\b"]
+      "patterns": ["\\bsó\\s{1,4}não\\s{1,4}(?:emagrece|melhora|se\\s{1,4}cuida)\\s{1,4}quem\\s{1,4}(?:é|não)\\s{1,4}(?:preguiços[oa]|fraco|se\\s{1,4}esforça)\\b", "\\b(?:gordo|obeso|doente)\\s{1,4}porque\\s{1,4}(?:quer|não\\s{1,4}tem\\s{1,4}disciplina)\\b"]
     },
     {
       "id": "unsourced_number",
       "label": "Número clínico sem fonte",
       "description": "Apresenta percentual ou número clínico como efeito sem fonte ou contexto.",
       "examples": ["Este método reduz 73% do colesterol."],
-      "patterns": ["\\b(?:reduz|aumenta|melhora|elimina|previne)\\s+(?:\\d+[.,]\\d+|\\d+)%\\s+(?:d[oa]s?\\s+|)(?:colesterol|glicemia|casos|risco|sintomas?)\\b", "\\b(?:\\d+[.,]\\d+|\\d+)%\\s+(?:de\\s+|)(?:eficácia|dos\\s+casos|de\\s+redução)\\b"]
+      "patterns": ["\\b(?:reduz|aumenta|melhora|elimina|previne)\\s{1,4}(?:\\d{1,6}[.,]\\d{1,6}|\\d{1,6})%\\s{1,4}(?:d[oa]s?\\s{1,4}|)(?:colesterol|glicemia|casos|risco|sintomas?)\\b", "\\b(?:\\d{1,6}[.,]\\d{1,6}|\\d{1,6})%\\s{1,4}(?:de\\s{1,4}|)(?:eficácia|dos\\s{1,4}casos|de\\s{1,4}redução)\\b"]
     },
     {
       "id": "absolute_superiority",
       "label": "Superioridade absoluta",
       "description": "Declara uma opção única, universalmente melhor ou superior a todas as demais.",
       "examples": ["Esta é a única solução que funciona."],
-      "patterns": ["\\b(?:a|esta|essa)\\s+única\\s+solução\\s+que\\s+(?:funciona|presta)\\b", "\\bmelhor\\s+(?:que\\s+|)tod[oa]s\\s+(?:as|os)\\s+(?:outras|outros)\\b", "\\binsuperável\\b"]
+      "patterns": ["\\b(?:a|esta|essa)\\s{1,4}única\\s{1,4}solução\\s{1,4}que\\s{1,4}(?:funciona|presta)\\b", "\\bmelhor\\s{1,4}(?:que\\s{1,4}|)tod[oa]s\\s{1,4}(?:as|os)\\s{1,4}(?:outras|outros)\\b", "\\binsuperável\\b"]
     }
   ]
 }

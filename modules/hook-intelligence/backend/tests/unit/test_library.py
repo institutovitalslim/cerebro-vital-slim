@@ -7,13 +7,16 @@ from itertools import combinations, pairwise
 from pathlib import Path
 
 import pytest
+import regex as safe_regex
 
 from hook_intelligence.domain.models import AwarenessStage, Channel, Objective, Tone
 from hook_intelligence.engine.library import (
     ALLOWED_SLOTS,
+    CLAIM_REGEX_TIMEOUT_SECONDS,
     CLAIM_SCAN_MAX_CHARS,
     EXACT_MECHANISM_IDS,
     HookLibrary,
+    _search_claim_pattern,
 )
 
 DATA_ROOT = Path(__file__).resolve().parents[3] / "data"
@@ -590,6 +593,24 @@ def test_templates_avoid_known_slot_agreement_traps():
         r"(?<=dose)alta",
         r"(?<!sem )risco",
         r"(a)(?(1)b|c)",
+        r"[\s\S]*[\s\S]*b",
+        r"\w*\w*\w*\w*\w*b",
+        r".{0,}.{0,}.{0,}b",
+        r"a*a*a*a*a*b",
+        r"[\s\S]+[\s\S]+b",
+        r"\w+\w+\w+\w+\w+b",
+        r"a+a+a+a+a+b",
+        r"a{1,}b",
+        r"[\s\S]{1,}[\s\S]{1,}b",
+        r"\w{1,}\w{1,}\w{1,}\w{1,}\w{1,}b",
+        r".{1,}.{1,}.{1,}b",
+        r"a{1,}a{1,}a{1,}a{1,}a{1,}b",
+        r"a{1,999999999999999999}",
+        r"a{0,101}",
+        r"a{101}",
+        r"a{2,1}",
+        r"a{0,20}b{0,20}c{0,20}d{0,20}e{0,20}f{0,20}g{0,20}h{0,20}i{0,20}j{0,20}k{0,20}l{0,20}m{0,20}n{0,20}o{0,20}p{0,20}q?",
+        r"a{100}b{100}c{100}d?",
         "a" * 501,
     ],
 )
@@ -620,6 +641,43 @@ def test_loader_accepts_pure_non_capturing_group_in_claim_regex(tmp_path):
     library = HookLibrary.load(root)
 
     assert library.scan_forbidden_claims("Este método cura.") == (("cure", r"\b(?:cura|curar)\b"),)
+
+
+def test_loader_accepts_bounded_quantifier_at_limit(tmp_path):
+    root = copied_data(tmp_path)
+    path = root / "ivs-health/forbidden-claims.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["categories"][0]["patterns"] = [r"\ba{0,100}\b"]
+    write_json(path, payload)
+
+    assert HookLibrary.load(root).scan_forbidden_claims("a" * 100) == (("cure", r"\ba{0,100}\b"),)
+
+
+@pytest.mark.parametrize("failure", [safe_regex.error("inválida"), OverflowError(), MemoryError()])
+def test_loader_contextualizes_all_regex_compile_failures(tmp_path, monkeypatch, failure):
+    root = copied_data(tmp_path)
+
+    def fail_compile(*_args, **_kwargs):
+        raise failure
+
+    monkeypatch.setattr(safe_regex, "compile", fail_compile)
+    with pytest.raises(ValueError, match=r"forbidden-claims\.json.*cure.*regex"):
+        HookLibrary.load(root)
+
+
+def test_runtime_regex_timeout_is_contextualized():
+    pathological = safe_regex.compile(r"(a+)+$")
+
+    with pytest.raises(ValueError, match=r"cure.*timeout"):
+        _search_claim_pattern("cure", pathological.pattern, pathological, "a" * 3999 + "!")
+
+
+def test_pathological_maximum_length_text_keeps_scanner_deterministic():
+    library = HookLibrary.load_default()
+    text = "a" * CLAIM_SCAN_MAX_CHARS
+
+    assert library.scan_forbidden_claims(text) == library.scan_forbidden_claims(text) == ()
+    assert 0.020 <= CLAIM_REGEX_TIMEOUT_SECONDS <= 0.050
 
 
 @pytest.mark.parametrize(

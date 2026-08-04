@@ -8,6 +8,8 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any, NoReturn
 
+import regex as claim_regex
+
 from hook_intelligence.domain.models import AwarenessStage, Channel, Objective, Tone
 
 ALLOWED_SLOTS = frozenset({"topic", "audience", "desired_outcome", "context", "required_word"})
@@ -16,7 +18,32 @@ LIBRARIES = ("universal", "ivs-health")
 # antes de chamar o scanner; o helper também faz essa validação para não depender do caller.
 CLAIM_SCAN_MAX_CHARS = 4000
 CLAIM_REGEX_MAX_CHARS = 500
+# Cada regra recebe no máximo 25 ms no motor ``regex``. O limite estrutural é a
+# defesa primária; o timeout protege contra regressões no validator ou no motor.
+CLAIM_REGEX_TIMEOUT_SECONDS = 0.025
+CLAIM_REGEX_MAX_REPETITIONS = 16
+CLAIM_REGEX_MAX_QUANTIFIER = 100
+CLAIM_REGEX_MAX_CUMULATIVE_REPETITIONS = 300
 REGEX_CONDITIONAL_MARKER = "(?" + "("
+
+
+def _search_claim_pattern(
+    category: str,
+    expression: str,
+    pattern: claim_regex.Pattern[str],
+    text: str,
+) -> bool:
+    """Executa uma regra com deadline e converte timeout em erro contextual."""
+
+    try:
+        return pattern.search(text, timeout=CLAIM_REGEX_TIMEOUT_SECONDS) is not None
+    except TimeoutError as error:
+        raise ValueError(
+            f"claim regex | id={category} | pattern={expression}: timeout de "
+            f"{CLAIM_REGEX_TIMEOUT_SECONDS:.3f}s"
+        ) from error
+
+
 EXACT_MECHANISM_IDS = frozenset(
     {
         "curiosity_gap",
@@ -115,7 +142,7 @@ class HookLibrary:
         audiences: tuple[Mapping[str, str], ...],
         topics: tuple[Mapping[str, str], ...],
         forbidden_claims: Mapping[str, Any],
-        compiled_claim_patterns: tuple[tuple[str, str, re.Pattern[str]], ...],
+        compiled_claim_patterns: tuple[tuple[str, str, claim_regex.Pattern[str]], ...],
     ) -> None:
         self._all_patterns = patterns
         self._mechanisms = mechanisms
@@ -294,7 +321,7 @@ class HookLibrary:
     @classmethod
     def _load_forbidden_claims(
         cls, root: Path
-    ) -> tuple[Mapping[str, Any], tuple[tuple[str, str, re.Pattern[str]], ...]]:
+    ) -> tuple[Mapping[str, Any], tuple[tuple[str, str, claim_regex.Pattern[str]], ...]]:
         relative = "ivs-health/forbidden-claims.json"
         payload = cls._read_json(root, relative)
         if not isinstance(payload, dict) or set(payload) != {"version", "categories"}:
@@ -305,7 +332,7 @@ class HookLibrary:
         if not isinstance(categories, list):
             cls._invalid(relative, "<arquivo>", "categories", "deve ser uma lista")
         immutable = []
-        compiled: list[tuple[str, str, re.Pattern[str]]] = []
+        compiled: list[tuple[str, str, claim_regex.Pattern[str]]] = []
         fields = {"id", "label", "description", "examples", "patterns"}
         ids: list[str] = []
         for index, category in enumerate(categories):
@@ -336,8 +363,8 @@ class HookLibrary:
             for expression in converted["patterns"]:
                 cls._validate_claim_regex(relative, item_id, expression)
                 try:
-                    regex = re.compile(expression, re.IGNORECASE)
-                except re.error as error:
+                    regex = claim_regex.compile(expression, claim_regex.IGNORECASE)
+                except (claim_regex.error, OverflowError, MemoryError) as error:
                     cls._invalid(relative, item_id, "regex", str(error))
                 compiled.append((item_id, expression, regex))
             immutable.append(MappingProxyType(converted))
@@ -355,12 +382,11 @@ class HookLibrary:
 
     @classmethod
     def _validate_claim_regex(cls, relative: str, item_id: str, expression: str) -> None:
-        """Aceita um subset conservador sem executar a expressão não confiável.
+        """Aceita um subset bounded conservador sem executar a expressão não confiável.
 
-        O subset limita tamanho e rejeita quantificação de grupos, backreferences,
-        extensões de grupo (salvo ``(?:...)``) e wildcards ilimitados. As regras são
-        deliberadamente mais estritas que o motor ``re`` para manter tempo de busca
-        previsível.
+        Além das construções avançadas proibidas, todo quantificador tem máximo finito
+        de 100. São aceitas no máximo 16 repetições e orçamento cumulativo 300 por regra,
+        limites tunados para as regras clínicas atuais.
         """
 
         reason = None
@@ -374,12 +400,84 @@ class HookLibrary:
             reason = "condicional não permitido"
         elif re.search(r"\(\?(?!:)", expression):
             reason = "extensão de grupo não permitida; apenas (?:...) é aceito"
-        elif re.search(r"(?<!\\)\.(?:\*|\+)", expression):
-            reason = "wildcard ilimitado não permitido"
-        elif re.search(r"(?<!\\)\)\s*[*+?{]", expression):
-            reason = "quantificador aplicado a grupo não permitido"
+        else:
+            reason = cls._validate_claim_quantifiers(expression)
         if reason is not None:
             cls._invalid(relative, item_id, "pattern", f"{expression}: {reason}")
+
+    @staticmethod
+    def _validate_claim_quantifiers(expression: str) -> str | None:
+        """Valida quantificadores fora de classes sem converter números absurdos."""
+
+        repetitions = 0
+        cumulative_max = 0
+        in_class = False
+        escaped = False
+        index = 0
+        while index < len(expression):
+            character = expression[index]
+            if escaped:
+                escaped = False
+                index += 1
+                continue
+            if character == "\\":
+                escaped = True
+                index += 1
+                continue
+            if character == "[":
+                in_class = True
+                index += 1
+                continue
+            if character == "]" and in_class:
+                in_class = False
+                index += 1
+                continue
+            if in_class:
+                index += 1
+                continue
+            if character in "*+":
+                return "quantificador ilimitado não permitido"
+            if character == "?":
+                previous = expression[:index].rstrip()[-1:]
+                if previous == "(" and expression[index + 1 : index + 2] == ":":
+                    index += 1
+                    continue
+                if previous == ")":
+                    return "quantificador aplicado a grupo não permitido"
+                repetitions += 1
+                cumulative_max += 1
+                index += 1
+                continue
+            if character == "{":
+                end = expression.find("}", index + 1)
+                if end < 0:
+                    return "range de repetição inválido"
+                body = expression[index + 1 : end]
+                if not re.fullmatch(r"\d+(?:,\d+)?", body):
+                    return "range aberto ou inválido não permitido"
+                parts = body.split(",", 1)
+                if any(len(part) > 3 for part in parts):
+                    return "limite de repetição excede 100"
+                minimum = int(parts[0])
+                maximum = int(parts[-1])
+                if minimum > maximum:
+                    return "range de repetição requer mínimo <= máximo"
+                if maximum > CLAIM_REGEX_MAX_QUANTIFIER:
+                    return f"limite de repetição excede {CLAIM_REGEX_MAX_QUANTIFIER}"
+                previous = expression[:index].rstrip()[-1:]
+                if previous == ")":
+                    return "quantificador aplicado a grupo não permitido"
+                repetitions += 1
+                cumulative_max += maximum
+                index = end + 1
+                continue
+            index += 1
+
+        if repetitions > CLAIM_REGEX_MAX_REPETITIONS:
+            return f"excede {CLAIM_REGEX_MAX_REPETITIONS} quantificadores"
+        if cumulative_max > CLAIM_REGEX_MAX_CUMULATIVE_REPETITIONS:
+            return f"orçamento cumulativo excede {CLAIM_REGEX_MAX_CUMULATIVE_REPETITIONS}"
+        return None
 
     @classmethod
     def _validate_coverage(cls, patterns: list[Pattern]) -> None:
@@ -599,5 +697,5 @@ class HookLibrary:
         return tuple(
             (category, expression)
             for category, expression, regex in self._compiled_claim_patterns
-            if regex.search(text) is not None
+            if _search_claim_pattern(category, expression, regex, text)
         )

@@ -9,6 +9,7 @@ dependencies = [
     "sqlalchemy>=2,<3",
     "httpx>=0.28,<1",
     "jsonschema>=4.25,<5",
+    "regex>=2024.11.6,<2027",
 ]
 
 [project.optional-dependencies]
