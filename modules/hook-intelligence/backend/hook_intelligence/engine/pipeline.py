@@ -1,9 +1,12 @@
 import json
+import unicodedata
 from uuid import NAMESPACE_URL, uuid5
 
 from pydantic import ValidationError
 
 from hook_intelligence import ENGINE_VERSION
+from hook_intelligence.adapters import DisabledAdapter, adapter_from_env
+from hook_intelligence.adapters.base import HookAdapter
 from hook_intelligence.domain.models import (
     ComplianceStatus,
     GenerationRequest,
@@ -17,9 +20,13 @@ from hook_intelligence.engine.composer import (
     CandidateConstraintError,
     canonical_key,
     compose_pattern,
+    contains_expression,
+    contains_forbidden,
     normalize_text,
 )
+from hook_intelligence.engine.deduplicator import deduplicate
 from hook_intelligence.engine.library import HookLibrary
+from hook_intelligence.engine.scorer import score_text
 from hook_intelligence.engine.selector import select_patterns
 
 _DEFAULT_SCORES = HookScores(
@@ -169,3 +176,97 @@ def generate_deterministic(
         f"patterns={len(patterns)}, variants={VARIANT_COUNT}, "
         f"max_length={validated_request.max_length}"
     )
+
+
+def _rules_library(request: GenerationRequest, active_library: object) -> HookLibrary | None:
+    if request.library.value != "ivs-health":
+        return None
+    return active_library if isinstance(active_library, HookLibrary) else HookLibrary.load_default()
+
+
+def _valid_adapted_text(text: object, request: GenerationRequest) -> str | None:
+    if not isinstance(text, str):
+        return None
+    normalized = normalize_text(text)
+    if not 3 <= len(normalized) <= request.max_length:
+        return None
+    if not any(character.isalnum() for character in normalized):
+        return None
+    if any(unicodedata.category(character).startswith("C") for character in normalized):
+        return None
+    if not all(contains_expression(normalized, word) for word in request.required_words):
+        return None
+    if contains_forbidden(normalized, request.forbidden_words):
+        return None
+    return normalized
+
+
+def generate_with_optional_ai(
+    request: GenerationRequest,
+    library: HookLibrary | None = None,
+    adapter: HookAdapter | None = None,
+) -> tuple[Hook, ...]:
+    """Só substitui o baseline quando todo o lote adaptado passa nova validação."""
+
+    baseline = generate_deterministic(request, library)
+    validated_request = _validated_request(request)
+    if not validated_request.use_ai:
+        return baseline
+
+    try:
+        active_adapter = adapter_from_env() if adapter is None else adapter
+        if isinstance(active_adapter, DisabledAdapter):
+            return baseline
+        raw = active_adapter.adapt(
+            validated_request.topic,
+            [hook.text for hook in baseline],
+        )
+        if not isinstance(raw, list) or len(raw) != len(baseline):
+            return baseline
+        normalized: list[str] = []
+        for value in raw:
+            safe = _valid_adapted_text(value, validated_request)
+            if safe is None:
+                return baseline
+            normalized.append(safe)
+        if len(deduplicate(normalized, threshold=0.82)) != len(baseline):
+            return baseline
+
+        active_library = HookLibrary.load_default() if library is None else library
+        rules_library = _rules_library(validated_request, active_library)
+        compliance = [
+            evaluate_compliance(text, validated_request.library, rules_library)
+            for text in normalized
+        ]
+        if any(result.status is ComplianceStatus.BLOCK for result in compliance):
+            return baseline
+
+        fingerprint = _request_fingerprint(validated_request)
+        adapted: list[tuple[int, Hook]] = []
+        for index, (text, original, result) in enumerate(
+            zip(normalized, baseline, compliance, strict=True)
+        ):
+            scores = score_text(text, validated_request.channel, validated_request.topic)
+            identifier = uuid5(
+                NAMESPACE_URL,
+                f"hook-intelligence:ai:{fingerprint}:{text}:{index}",
+            )
+            adapted.append(
+                (
+                    index,
+                    original.model_copy(
+                        update={
+                            "id": identifier,
+                            "text": text,
+                            "scores": scores.to_hook_scores(),
+                            "compliance": result,
+                            "source": Source.AI_ADAPTED,
+                        },
+                        deep=True,
+                    ),
+                )
+            )
+        adapted.sort(key=lambda item: (-item[1].scores.overall, item[0]))
+        return tuple(hook for _, hook in adapted)
+    except Exception:  # noqa: BLE001 -- fallback integral é o contrato desta fronteira.
+        return baseline
