@@ -69,6 +69,7 @@ export default function AjudaPage() {
       </ol>
 
       <div className="briefingBox" style={{ borderColor: 'rgba(212,168,60,.35)' }}>
+        <p style={{ margin: 0 }}><strong>Dois modelos de carrossel:</strong> o <strong>viral</strong> (10 slides, fio contínuo com re-gancho no meio, virada, "faça hoje" e palavra-comentário no final) serve para alcance e identificação; o <strong>científico</strong> (capa com a Dra + slides em formato "tweet premium" + print real do estudo no PubMed com referência) serve para autoridade e prova. O Estúdio escolhe pelo objetivo, e você pode trocar o modelo no formulário.</p>
         <p style={{ margin: 0 }}><strong>Sprint semanal por formato:</strong> carrossel, estático e reel têm, cada um, o próprio sprint dentro do Estúdio. Você escolhe o pilar e o sistema gera <strong>7 peças, uma por dia (domingo a sábado)</strong>, cada uma com o próprio gancho. Leva alguns minutos e tudo cai na Revisão — nada publica sozinho.</p>
       </div>
 

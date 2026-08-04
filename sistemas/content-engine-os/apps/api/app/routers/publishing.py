@@ -482,8 +482,49 @@ def _pacote_assets(cid: str) -> list[str]:
     return sorted(by_stem.values(), key=_nat)
 
 
+PACOTE_IMG_EXTS = (".png", ".jpg", ".jpeg", ".webp")  # slides que ganham variação 1:1 e 9:16
+
+
+def _variacoes_slide(path: str) -> dict[str, bytes]:
+    """Gera em memória as variações Meta Ads de um slide 4:5 (nada é salvo no dir de render).
+
+    - 1:1 (1080x1080): crop central vertical ancorado a 40% do topo — a sobra vertical é
+      cortada 40% acima / 60% abaixo, preservando o terço superior quando há rosto.
+    - 9:16 (1080x1920): o slide 4:5 em largura cheia, centrado sobre fundo = ele mesmo
+      ampliado em cover com blur gaussiano forte e escurecido 40% (padrão stories).
+    """
+    from PIL import Image, ImageEnhance, ImageFilter  # PIL puro, já disponível no container
+
+    with Image.open(path) as raw:
+        im = raw.convert("RGB")
+
+    # 1:1 — crop quadrado ancorado (horizontal centrado; vertical a 40% do topo).
+    lado = min(im.width, im.height)
+    x0 = (im.width - lado) // 2
+    y0 = int((im.height - lado) * 0.4)
+    quadrado = im.crop((x0, y0, x0 + lado, y0 + lado)).resize((1080, 1080), Image.LANCZOS)
+
+    # 9:16 — fundo cover (blur 40 + brilho 0.6), slide centrado por cima.
+    W, H = 1080, 1920
+    escala = max(W / im.width, H / im.height)
+    fundo = im.resize((round(im.width * escala), round(im.height * escala)), Image.LANCZOS)
+    fx, fy = (fundo.width - W) // 2, (fundo.height - H) // 2
+    fundo = fundo.crop((fx, fy, fx + W, fy + H))
+    fundo = fundo.filter(ImageFilter.GaussianBlur(40))
+    fundo = ImageEnhance.Brightness(fundo).enhance(0.6)  # escurece 40%
+    frente = im.resize((W, round(im.height * W / im.width)), Image.LANCZOS)
+    fundo.paste(frente, (0, (H - frente.height) // 2))
+
+    def _jpg(img) -> bytes:
+        b = io.BytesIO()
+        img.save(b, "JPEG", quality=92, optimize=True)
+        return b.getvalue()
+
+    return {"1x1": _jpg(quadrado), "9x16": _jpg(fundo)}
+
+
 def _montar_pacote(creative_id: str, tenant_slug: str) -> tuple[str, bytes]:
-    """Monta o ZIP do pacote de anúncio: assets/ + copy.txt (3 campos) + checklist.md de subida."""
+    """Monta o ZIP do pacote de anúncio: assets/{4x5,1x1,9x16}/ + copy.txt (3 campos) + checklist.md."""
     from .orchestrate import TRACKING_BASE_URL, _utm_slug  # padrão UTM canônico do sistema
 
     try:
@@ -507,6 +548,10 @@ def _montar_pacote(creative_id: str, tenant_slug: str) -> tuple[str, bytes]:
     if not paths:
         raise HTTPException(status_code=422,
                             detail="criativo sem assets renderizados — renderize a peça antes de baixar o pacote")
+
+    # Slides (imagens 4:5) ganham as variações 1:1 e 9:16; extras (áudio/vídeo) ficam em assets/.
+    imagens = [p for p in paths if p.lower().endswith(PACOTE_IMG_EXTS)]
+    extras = [p for p in paths if not p.lower().endswith(PACOTE_IMG_EXTS)]
 
     # Ângulo (conjunto Meta Ads) vem do script JSON, igual ao /generation/creatives.
     try:
@@ -559,13 +604,22 @@ def _montar_pacote(creative_id: str, tenant_slug: str) -> tuple[str, bytes]:
     )
 
     conjunto_txt = angulo_nome or "defina pelo tema da peça (veio sem ângulo salvo)"
+    if imagens:
+        linha_assets = (f"- Assets no pacote: {len(imagens)} slide(s) × 3 formatos "
+                        "(`assets/4x5`, `assets/1x1`, `assets/9x16`)"
+                        + (f" + {len(extras)} arquivo(s) extra em `assets/`" if extras else ""))
+        item_formatos = ("- [ ] Formatos: as variações 9:16, 4:5 e 1:1 JÁ VÃO no pacote "
+                         "(`assets/9x16`, `assets/4x5`, `assets/1x1`) — subir as 3 no anúncio, nada a gerar na mão")
+    else:
+        linha_assets = f"- Assets no pacote: {len(paths)} arquivo(s) em `assets/`"
+        item_formatos = "- [ ] Formatos: gerar as variações 9:16 e 1:1 além do asset original"
     checklist_md = (
         "# Checklist — subir este anúncio no Ads Manager\n"
         "\n"
         f"- Criativo: `{creative['id']}`\n"
         f"- Peça: {titulo or '(sem título salvo)'}\n"
         f"- Conjunto (ângulo): **{conjunto_txt}**\n"
-        f"- Assets no pacote: {len(paths)} arquivo(s) em `assets/` (render 4:5)\n"
+        f"{linha_assets}\n"
         "\n"
         "## Estrutura padrão da conta\n"
         "1 campanha ABO de aquisição · 5 conjuntos (1 ângulo por conjunto) · "
@@ -574,7 +628,7 @@ def _montar_pacote(creative_id: str, tenant_slug: str) -> tuple[str, bytes]:
         "- [ ] Campanha: usar a campanha ABO de aquisição vigente (só criar nova se não existir)\n"
         f"- [ ] Conjunto: selecionar/nomear pelo ângulo — \"{conjunto_txt}\"\n"
         "- [ ] Régua 5×3: conferir se o conjunto fecha 3 criativos ativos depois desta subida\n"
-        "- [ ] Formatos: gerar as variações 9:16 e 1:1 além do 4:5 — os assets deste pacote são 4:5\n"
+        f"{item_formatos}\n"
         "- [ ] Copy: colar os 3 campos do copy.txt (texto principal + título + descrição)\n"
         "- [ ] URL de destino com a UTM padrão abaixo — sem UTM o lead chega sem origem no relatório\n"
         "- [ ] Subir PAUSADO, revisar o preview em feed/stories/reels e só então ativar\n"
@@ -590,7 +644,13 @@ def _montar_pacote(creative_id: str, tenant_slug: str) -> tuple[str, bytes]:
 
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
-        for p in paths:
+        for p in imagens:
+            stem = os.path.splitext(os.path.basename(p))[0]
+            zf.write(p, arcname=f"assets/4x5/{os.path.basename(p)}")
+            variacoes = _variacoes_slide(p)  # on-the-fly, em memória — não polui a galeria de renders
+            zf.writestr(f"assets/1x1/{stem}.jpg", variacoes["1x1"])
+            zf.writestr(f"assets/9x16/{stem}.jpg", variacoes["9x16"])
+        for p in extras:
             zf.write(p, arcname=f"assets/{os.path.basename(p)}")
         zf.writestr("copy.txt", copy_txt)
         zf.writestr("checklist.md", checklist_md)
@@ -599,7 +659,8 @@ def _montar_pacote(creative_id: str, tenant_slug: str) -> tuple[str, bytes]:
 
 @router.get("/pacote-ads/{creative_id}")
 def pacote_ads(creative_id: str, tenant_slug: str = "demo") -> StreamingResponse:
-    """ZIP de subida no Ads Manager: assets renderizados + copy.txt + checklist.md.
+    """ZIP de subida no Ads Manager: assets nos 3 formatos (4:5 + variações 1:1 e 9:16
+    geradas on-the-fly) + copy.txt + checklist.md.
 
     Handoff do /planejamento: a peça aprovada para Meta Ads é só leitura na UI — quem sobe
     o anúncio baixa este pacote e segue o checklist. Nada é publicado por este endpoint.
