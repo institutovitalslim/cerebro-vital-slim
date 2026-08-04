@@ -99,6 +99,24 @@ def test_negated_clauses_are_masked_conservatively(rules, text):
     assert evaluate_compliance(text, "ivs-health", rules).status is ComplianceStatus.PASS
 
 
+@pytest.mark.parametrize(
+    ("text", "reason"),
+    [
+        ("Não não tome 2 cápsulas por dia.", "DIRECT_PRESCRIPTION"),
+        ("Não nunca tome 2 cápsulas por dia.", "DIRECT_PRESCRIPTION"),
+        ("Nunca jamais este protocolo cura a diabetes.", "CURE_CLAIM"),
+    ],
+)
+def test_double_negation_does_not_hide_positive_claim(rules, text, reason):
+    before = text
+
+    result = evaluate_compliance(text, "ivs-health", rules)
+
+    assert result.status is ComplianceStatus.BLOCK
+    assert result.reasons == [reason]
+    assert text == before
+
+
 def test_negation_with_exception_word_does_not_hide_positive_claim(rules):
     result = evaluate_compliance(
         "Não apenas este protocolo cura a diabetes.",
@@ -302,6 +320,35 @@ def test_universal_with_valid_rules_library_does_not_scan(rules, monkeypatch):
     result = evaluate_compliance("texto válido", Library.UNIVERSAL, rules)
     assert result.status is ComplianceStatus.PASS
     assert result.reasons == []
+
+
+def test_scanner_timeout_is_wrapped_without_engine_details():
+    secret = "SECRET_RULE_AND_ENGINE_DETAIL"
+
+    class TimeoutHookLibrary(HookLibrary):
+        def scan_forbidden_claims(self, text):
+            del text
+            raise TimeoutError(secret)
+
+    timeout_rules = TimeoutHookLibrary.load_default()
+
+    with pytest.raises(ValueError) as captured:
+        evaluate_compliance("Tome 2 cápsulas por dia.", "ivs-health", timeout_rules)
+
+    assert str(captured.value) == "falha contextual ao avaliar regras médicas IVS"
+    assert secret not in str(captured.value)
+    assert captured.value.__cause__ is None
+    assert captured.value.__suppress_context__ is True
+
+
+def test_arbitrary_scanner_programming_error_is_not_swallowed(rules, monkeypatch):
+    def fail_with_programming_error(_text):
+        raise RuntimeError("programming bug")
+
+    monkeypatch.setattr(rules, "scan_forbidden_claims", fail_with_programming_error)
+
+    with pytest.raises(RuntimeError, match="programming bug"):
+        evaluate_compliance("texto válido", "ivs-health", rules)
 
 
 def test_block_precedes_review_and_reasons_are_unique_in_dataset_order(rules):

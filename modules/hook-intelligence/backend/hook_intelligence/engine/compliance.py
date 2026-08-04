@@ -27,6 +27,7 @@ _CATEGORY_REASON = {
 _REVIEW_CATEGORIES = frozenset({"unsourced_number"})
 _NEGATION_MARKERS = frozenset({"não", "nunca", "jamais"})
 _NEGATION_EXCEPTIONS = frozenset({"apenas", "só", "somente"})
+_NEGATION_MASK_EXCLUSIONS = _NEGATION_MARKERS | _NEGATION_EXCEPTIONS
 _EDITORIAL_CLAUSE_MAX_CHARS = 300
 _STRONG_SENTENCE_PUNCTUATION = r".!?;:。！？"
 _METALINGUISTIC_CLAUSE_RE = re.compile(
@@ -84,10 +85,10 @@ def _mask_editorial_context(text: str) -> str:
         trimmed = clause.strip()
         words = trimmed.casefold().split()
         starts_with_negation = bool(words) and words[0] in _NEGATION_MARKERS
-        followed_by_exception = len(words) > 1 and words[1] in _NEGATION_EXCEPTIONS
+        followed_by_mask_exclusion = len(words) > 1 and words[1] in _NEGATION_MASK_EXCLUSIONS
         if (
             starts_with_negation
-            and not followed_by_exception
+            and not followed_by_mask_exclusion
             and len(trimmed) <= _EDITORIAL_CLAUSE_MAX_CHARS
         ):
             characters[clause_start:index] = " " * (index - clause_start)
@@ -113,7 +114,7 @@ def evaluate_compliance(
     rules = HookLibrary.load_default() if rules_library is None else rules_library
     try:
         matches = rules.scan_forbidden_claims(_mask_editorial_context(normalized))
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, TimeoutError):
         # Não publique expressão nem detalhe do motor de regex.
         raise ValueError("falha contextual ao avaliar regras médicas IVS") from None
 
