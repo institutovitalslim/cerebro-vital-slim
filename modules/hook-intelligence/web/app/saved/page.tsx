@@ -1,9 +1,9 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { HookCard } from '@/components/HookCard';
-import { api } from '@/lib/api';
+import { api, isAbortError } from '@/lib/api';
 import type { HistoryItem, Hook } from '@/lib/types';
 import styles from './page.module.css';
 
@@ -23,12 +23,29 @@ export default function Saved() {
   const [error, setError] = useState(false);
   const [workspace, setWorkspace] = useState('');
   const [exporting, setExporting] = useState('');
+  const [retry, setRetry] = useState(0);
+  const requestSequence = useRef(0);
+  const activeRequest = useRef<{
+    id: number;
+    controller: AbortController;
+  } | null>(null);
+  const activeExport = useRef<{
+    id: string;
+    controller: AbortController;
+  } | null>(null);
 
-  const fetchItems = useCallback(() => {
-    const call = tab === 'history' ? api.history(page) : api.favorites(page);
+  useEffect(() => {
+    const controller = new AbortController();
+    const requestId = ++requestSequence.current;
+    activeRequest.current?.controller.abort();
+    activeRequest.current = { id: requestId, controller };
+    const call = tab === 'history'
+      ? api.history(page, controller.signal)
+      : api.favorites(page, controller.signal);
 
-    return call
+    void call
       .then((data) => {
+        if (controller.signal.aborted || activeRequest.current?.id !== requestId) return;
         setTotal(data.total);
         if (tab === 'history') {
           setHistory(data.items as HistoryItem[]);
@@ -40,21 +57,43 @@ export default function Saved() {
           );
         }
       })
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, [page, tab]);
+      .catch((caught) => {
+        if (
+          !controller.signal.aborted
+          && activeRequest.current?.id === requestId
+          && !isAbortError(caught)
+        ) {
+          setError(true);
+        }
+      })
+      .finally(() => {
+        if (activeRequest.current?.id === requestId) {
+          activeRequest.current = null;
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      controller.abort();
+      if (activeRequest.current?.id === requestId) activeRequest.current = null;
+    };
+  }, [page, retry, tab]);
+
+  useEffect(() => () => {
+    activeExport.current?.controller.abort();
+    activeExport.current = null;
+  }, []);
 
   const load = () => {
+    activeRequest.current?.controller.abort();
     setLoading(true);
     setError(false);
-    void fetchItems();
+    setRetry((value) => value + 1);
   };
 
-  useEffect(() => {
-    void fetchItems();
-  }, [fetchItems]);
-
   function choose(value: SavedTab) {
+    if (value === tab) return;
+    activeRequest.current?.controller.abort();
     setLoading(true);
     setError(false);
     setTab(value);
@@ -62,17 +101,29 @@ export default function Saved() {
   }
 
   function navigateTabs(event: KeyboardEvent<HTMLButtonElement>) {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    let nextTab: SavedTab;
+    if (event.key === 'Home') {
+      nextTab = 'history';
+    } else if (event.key === 'End') {
+      nextTab = 'favorites';
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      nextTab = tab === 'history' ? 'favorites' : 'history';
+    } else {
+      return;
+    }
     event.preventDefault();
-    const nextTab = tab === 'history' ? 'favorites' : 'history';
     choose(nextTab);
     document.getElementById(`${nextTab}-tab`)?.focus();
   }
 
   async function download(id: string) {
+    if (activeExport.current) return;
+    const controller = new AbortController();
+    activeExport.current = { id, controller };
     setExporting(id);
     try {
-      const data = await api.exportSession(id, workspace.trim());
+      const data = await api.exportSession(id, workspace.trim(), controller.signal);
+      if (controller.signal.aborted || activeExport.current?.controller !== controller) return;
       const clean = {
         ...data,
         hooks: data.hooks.filter(
@@ -86,12 +137,26 @@ export default function Saved() {
       const anchor = document.createElement('a');
       anchor.href = url;
       anchor.download = `hooks-${safe(workspace)}-${id.slice(0, 8)}.json`;
-      anchor.click();
-      URL.revokeObjectURL(url);
-    } catch {
-      setError(true);
+      document.body.appendChild(anchor);
+      try {
+        anchor.click();
+      } finally {
+        anchor.remove();
+        URL.revokeObjectURL(url);
+      }
+    } catch (caught) {
+      if (
+        !controller.signal.aborted
+        && activeExport.current?.controller === controller
+        && !isAbortError(caught)
+      ) {
+        setError(true);
+      }
     } finally {
-      setExporting('');
+      if (activeExport.current?.controller === controller) {
+        activeExport.current = null;
+        setExporting('');
+      }
     }
   }
 
@@ -210,7 +275,7 @@ export default function Saved() {
                     <button
                       type="button"
                       disabled={
-                        !workspace.trim() || exporting === item.request_id
+                        !workspace.trim() || Boolean(exporting)
                       }
                       aria-describedby="workspace-help"
                       onClick={() => download(item.request_id)}
@@ -253,7 +318,11 @@ export default function Saved() {
         <button
           type="button"
           disabled={page === 1 || loading}
-          onClick={() => setPage((value) => value - 1)}
+          onClick={() => {
+            activeRequest.current?.controller.abort();
+            setLoading(true);
+            setPage((value) => value - 1);
+          }}
         >
           <span aria-hidden="true">←</span> Anterior
         </button>
@@ -263,7 +332,11 @@ export default function Saved() {
         <button
           type="button"
           disabled={page * PAGE_SIZE >= total || loading}
-          onClick={() => setPage((value) => value + 1)}
+          onClick={() => {
+            activeRequest.current?.controller.abort();
+            setLoading(true);
+            setPage((value) => value + 1);
+          }}
         >
           Próxima <span aria-hidden="true">→</span>
         </button>
