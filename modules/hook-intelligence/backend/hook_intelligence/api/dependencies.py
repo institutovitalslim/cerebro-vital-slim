@@ -26,6 +26,17 @@ class Services:
     owns_engine: bool
 
 
+@dataclass(eq=False, slots=True)
+class ServiceLease:
+    """Opaque, single-use lease bound to one service snapshot generation."""
+
+    services: Services
+    generation: int
+    _provider: ServiceProvider
+    _lease_id: int
+    _released: bool = False
+
+
 class ServiceProvider:
     """Thread-safe lazy provider that avoids database work during module import."""
 
@@ -44,7 +55,12 @@ class ServiceProvider:
         self._generator = generator or generate_with_optional_ai
         self._database_url = database_url
         self._services: Services | None = None
-        self._active_leases = 0
+        self._generation = 0
+        self._next_lease_id = 0
+        self._leases: dict[int, ServiceLease] = {}
+        # Keep invalidated compatibility acquisitions until their delayed release. This
+        # prevents an anonymous old release from consuming a newer generation's lease.
+        self._legacy_leases: list[ServiceLease] = []
         self._lock = threading.Lock()
 
     def get(self) -> Services:
@@ -70,6 +86,7 @@ class ServiceProvider:
                     generator=self._generator,
                     owns_engine=owns_engine,
                 )
+                self._generation += 1
                 return self._services
         except BaseException:
             # Disposal callbacks may re-enter the provider, so never invoke one under its lock.
@@ -78,37 +95,74 @@ class ServiceProvider:
             raise
 
     def acquire(self) -> Services:
-        """Register a lifespan lease and return its shared service snapshot."""
+        """Compatibility API; new lifecycle code should retain ``acquire_lease()``."""
+
+        lease = self.acquire_lease()
+        with self._lock:
+            self._legacy_leases.append(lease)
+        return lease.services
+
+    def acquire_lease(self) -> ServiceLease:
+        """Acquire a unique lease bound to the current service generation."""
+
+        while True:
+            services = self.get()
+            with self._lock:
+                # close() may detach the snapshot between get() and this lock.
+                if self._services is not services:
+                    continue
+                self._next_lease_id += 1
+                lease = ServiceLease(
+                    services=services,
+                    generation=self._generation,
+                    _provider=self,
+                    _lease_id=self._next_lease_id,
+                )
+                self._leases[lease._lease_id] = lease
+                return lease
+
+    def release(self, lease: ServiceLease | Services | None = None) -> None:
+        """Release one acquisition without affecting any later generation."""
 
         with self._lock:
-            self._active_leases += 1
-        try:
-            return self.get()
-        except BaseException:
-            self.release()
-            raise
-
-    def release(self) -> None:
-        """Release one lease, disposing owned resources only after the final lease."""
-
-        with self._lock:
-            if self._active_leases == 0:
+            token = self._resolve_lease_locked(lease)
+            if token is None or token._released:
                 return
-            self._active_leases -= 1
-            if self._active_leases != 0:
+            token._released = True
+            active = self._leases.pop(token._lease_id, None)
+            if active is not token:
+                return
+            if self._services is not token.services or self._leases:
                 return
             services = self._services
             self._services = None
         self._dispose(services)
 
     def close(self) -> None:
-        """Force-close the current snapshot, independently of lifespan leases."""
+        """Force-close the current snapshot and invalidate only its leases."""
 
         with self._lock:
             services = self._services
             self._services = None
-            self._active_leases = 0
+            for lease in self._leases.values():
+                lease._released = True
+            self._leases.clear()
         self._dispose(services)
+
+    def _resolve_lease_locked(self, lease: ServiceLease | Services | None) -> ServiceLease | None:
+        if isinstance(lease, ServiceLease):
+            if lease._provider is not self:
+                return None
+            for index, legacy in enumerate(self._legacy_leases):
+                if legacy is lease:
+                    self._legacy_leases.pop(index)
+                    break
+            return lease
+
+        for index, legacy in enumerate(self._legacy_leases):
+            if lease is None or legacy.services is lease:
+                return self._legacy_leases.pop(index)
+        return None
 
     @staticmethod
     def _dispose(services: Services | None) -> None:

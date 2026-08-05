@@ -73,11 +73,11 @@ def create_app(
 
     @asynccontextmanager
     async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
-        services.acquire()
+        lease = services.acquire_lease()
         try:
             yield
         finally:
-            services.release()
+            services.release(lease)
 
     application = FastAPI(
         title="Hook Intelligence Engine",
