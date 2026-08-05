@@ -63,6 +63,7 @@ def test_health_catalog_and_exact_public_routes(client):
         "/v1/hooks/score",
         "/v1/hooks/compliance",
         "/v1/hooks/{id}/favorite",
+        "/v1/hooks/{id}",
         "/v1/history",
         "/v1/favorites",
         "/v1/exports/content-os",

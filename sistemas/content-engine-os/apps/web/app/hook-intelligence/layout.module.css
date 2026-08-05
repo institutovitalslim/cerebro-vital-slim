@@ -1,0 +1,47 @@
+.scope {
+  --ivory: #f5f1e8;
+  --paper: #fffdf8;
+  --ink: #242522;
+  --muted: #6d6c65;
+  --line: #d8d2c5;
+  --gold: #ba9b60;
+  --green: #3e6b58;
+  --amber: #9a681d;
+  --red: #9b3b34;
+  --shadow: 0 18px 50px rgba(36, 37, 34, 0.08);
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--ivory);
+  border: 1px solid rgba(186, 155, 96, 0.28);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+}
+.scope, .scope * { box-sizing: border-box; }
+.scope button, .scope input, .scope select, .scope textarea { font: inherit; }
+.scope button { cursor: pointer; }
+.scope button:disabled { cursor: not-allowed; opacity: .5; }
+.scope a { color: inherit; text-decoration: none; }
+.scope :focus-visible { outline: 3px solid #826725; outline-offset: 3px; }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 30px;
+  color: #fff;
+  background: linear-gradient(135deg, #242522, #161712);
+  border-bottom: 1px solid rgba(186, 155, 96, .5);
+}
+.header h2 { margin: 4px 0 6px; font-family: var(--font-display), Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+.header p { margin: 0; color: #cbc7be; line-height: 1.5; }
+.eyebrow { color: #d9c79e !important; text-transform: uppercase; letter-spacing: .16em; font-size: .7rem; }
+.badge { flex: 0 0 auto; padding: 8px 12px; border: 1px solid var(--gold); color: #e7d7b5; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+.tabs { display: flex; gap: 8px; padding: 12px 20px; background: #eee9df; border-bottom: 1px solid var(--line); }
+.tabs a { padding: 9px 14px; border: 1px solid transparent; border-radius: 999px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.tabs a:hover, .tabs a:focus-visible { border-color: var(--gold); background: var(--paper); color: #765d30; }
+.surface { min-height: 640px; }
+@media (max-width: 700px) {
+  .header { align-items: flex-start; padding: 22px 18px; }
+  .badge { display: none; }
+  .tabs { overflow-x: auto; padding-inline: 12px; }
+}

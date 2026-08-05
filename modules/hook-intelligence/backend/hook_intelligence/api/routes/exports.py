@@ -3,6 +3,7 @@
 from fastapi import APIRouter, HTTPException, Request
 
 from hook_intelligence.api.schemas import ErrorResponse, ExportRequest, ExportResponse
+from hook_intelligence.api.security import repository_call
 from hook_intelligence.domain.models import ComplianceStatus
 from hook_intelligence.engine.exporter import validate_export_payload
 
@@ -20,9 +21,10 @@ router = APIRouter(prefix="/v1/exports", tags=["exports"])
     },
 )
 def export_content_os(payload: ExportRequest, request: Request) -> ExportResponse:
-    repository = request.app.state.services.get().repository
     try:
-        exported = repository.export_session(payload.session_id, payload.workspace_ref)
+        exported = repository_call(
+            request, "export_session", payload.session_id, payload.workspace_ref
+        )
     except LookupError:
         raise HTTPException(status_code=404, detail="generation session not found") from None
     except (TypeError, ValueError):

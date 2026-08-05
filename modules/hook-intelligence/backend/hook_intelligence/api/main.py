@@ -18,6 +18,7 @@ from hook_intelligence import ENGINE_VERSION
 from hook_intelligence.adapters import ai_runtime_enabled
 from hook_intelligence.api.dependencies import Generator, ServiceProvider
 from hook_intelligence.api.routes import catalog, exports, history, hooks
+from hook_intelligence.api.security import resolve_ownership
 from hook_intelligence.domain.models import HealthResponse
 from hook_intelligence.engine.library import HookLibrary
 
@@ -89,6 +90,16 @@ def create_app(
         lifespan=lifespan,
     )
     application.state.services = services
+
+    @application.middleware("http")
+    async def authenticate_integration_context(request: Request, call_next: Any) -> Any:
+        if request.method == "GET" and request.url.path == "/health":
+            return await call_next(request)
+        ownership = await resolve_ownership(request)
+        if ownership is None:
+            return JSONResponse(status_code=401, content={"detail": "authentication failed"})
+        request.state.hook_ownership = ownership
+        return await call_next(request)
 
     @application.middleware("http")
     async def reject_duplicate_query_scalars(request: Request, call_next: Any) -> Any:

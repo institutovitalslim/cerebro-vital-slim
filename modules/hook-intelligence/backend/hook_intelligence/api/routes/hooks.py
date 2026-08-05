@@ -17,6 +17,7 @@ from hook_intelligence.api.schemas import (
     ScoreRequest,
     ScoreResponse,
 )
+from hook_intelligence.api.security import repository_call
 from hook_intelligence.domain.models import ComplianceStatus, GenerationRequest, Hook, Source
 from hook_intelligence.engine.compliance import evaluate_compliance
 from hook_intelligence.engine.composer import (
@@ -129,7 +130,7 @@ def generate(payload: GenerateRequest, request: Request) -> GenerateResponse:
     except Exception:  # noqa: BLE001 - componente injetável é uma fronteira interna.
         raise HTTPException(status_code=500, detail="internal service error") from None
     try:
-        session_id = services.repository.save_generation(approved)
+        session_id = str(repository_call(request, "save_generation", approved))
     except Exception:  # noqa: BLE001 - storage details must never cross the API boundary
         raise HTTPException(status_code=500, detail="internal service error") from None
     warnings: list[str] = []
@@ -179,11 +180,25 @@ def compliance(payload: ComplianceRequest, request: Request) -> ComplianceRespon
     responses={**_ERROR_RESPONSES, 422: _VALIDATION_ERROR},
 )
 def favorite(id: UUID, request: Request) -> FavoriteResponse:
-    repository = request.app.state.services.get().repository
     try:
-        repository.favorite(id)
+        repository_call(request, "favorite", id)
     except LookupError:
         raise HTTPException(status_code=404, detail="hook not found") from None
     except Exception:  # noqa: BLE001 - storage details are private
         raise HTTPException(status_code=500, detail="internal service error") from None
     return FavoriteResponse(id=id, favorite=True)
+
+
+@router.get(
+    "/{id:uuid}",
+    response_model=Hook,
+    responses={**_ERROR_RESPONSES, 422: _VALIDATION_ERROR},
+)
+def get_hook(id: UUID, request: Request) -> Hook:
+    try:
+        result = repository_call(request, "get_hook", id)
+        return Hook.model_validate(result)
+    except LookupError:
+        raise HTTPException(status_code=404, detail="hook not found") from None
+    except Exception:  # noqa: BLE001 - storage details are private
+        raise HTTPException(status_code=500, detail="internal service error") from None

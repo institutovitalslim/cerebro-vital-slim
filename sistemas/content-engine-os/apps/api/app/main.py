@@ -31,6 +31,7 @@ from app.routers.publishing import router as publishing_router
 from app.routers.motion_videos import router as motion_videos_router
 from app.routers.ideias import router as ideias_router
 from app.routers.content_dm_os import router as content_dm_os_router
+from app.routers.hook_intelligence import router as hook_intelligence_router
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
@@ -150,6 +151,7 @@ app.include_router(publishing_router)
 app.include_router(motion_videos_router)
 app.include_router(ideias_router)
 app.include_router(content_dm_os_router)
+app.include_router(hook_intelligence_router)
 
 os.makedirs("/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders", exist_ok=True)
 app.mount("/renders", StaticFiles(directory="/root/cerebro-vital-slim/sistemas/content-engine-os/storage/assets/renders"), name="renders")
