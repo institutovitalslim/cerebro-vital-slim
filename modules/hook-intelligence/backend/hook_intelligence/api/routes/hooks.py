@@ -103,14 +103,14 @@ def generate(payload: GenerateRequest, request: Request) -> GenerateResponse:
     services = request.app.state.services.get()
     try:
         validated_payload = validate_generation_request(payload)
+        eligible_by_id = {
+            pattern.id: pattern for pattern in select_patterns(validated_payload, services.library)
+        }
     except (TypeError, ValueError):
         raise HTTPException(
             status_code=400, detail="generation request cannot be fulfilled"
         ) from None
     try:
-        eligible_by_id = {
-            pattern.id: pattern for pattern in select_patterns(validated_payload, services.library)
-        }
         generated = services.generator(validated_payload.model_copy(deep=True), services.library)
         approved = _validated_generated_hooks(
             generated, validated_payload, services.library, eligible_by_id

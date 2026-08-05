@@ -11,6 +11,7 @@ from pydantic import ValidationError
 import hook_intelligence.adapters as adapters_module
 from hook_intelligence.adapters import ai_runtime_enabled
 from hook_intelligence.api.main import create_app
+from hook_intelligence.api.routes import hooks as hooks_routes
 from hook_intelligence.domain.models import (
     ComplianceResult,
     ComplianceStatus,
@@ -206,6 +207,65 @@ def test_generator_type_and_value_errors_are_internal_failures():
         assert response.json() == {"detail": "internal service error"}
         assert "TOP-SECRET" not in response.text
         assert repository.saved == []
+
+
+def test_unknown_mechanism_is_sanitized_domain_error_before_generator(caplog):
+    calls = 0
+
+    def generator(_request, _library):
+        nonlocal calls
+        calls += 1
+        return ()
+
+    client, repository = make_client(generator)
+    response = client.post(
+        "/v1/hooks/generate",
+        json=payload(count=1, mechanism="definitely-not-canonical"),
+    )
+
+    assert response.status_code == 400
+    assert response.json() == {"detail": "request failed"}
+    assert "definitely-not-canonical" not in response.text
+    assert "definitely-not-canonical" not in caplog.text
+    assert calls == 0
+    assert repository.saved == []
+
+
+@pytest.mark.parametrize("count", [1, 5, 50])
+def test_omitted_mechanism_supports_generation_count_boundaries(count):
+    client, repository = make_client(valid_hooks)
+
+    response = client.post("/v1/hooks/generate", json=payload(count=count))
+
+    assert response.status_code == 200, response.text
+    assert len(response.json()["hooks"]) == count
+    assert len(repository.saved) == 1
+
+
+def test_valid_mechanism_selects_once_and_generator_output_matches_selection(monkeypatch):
+    calls = 0
+    selected_ids = set()
+    original_selector = hooks_routes.select_patterns
+
+    def tracking_selector(request, library):
+        nonlocal calls, selected_ids
+        calls += 1
+        selected = original_selector(request, library)
+        selected_ids = {pattern.id for pattern in selected}
+        return selected
+
+    client, repository = make_client(valid_hooks)
+    monkeypatch.setattr(hooks_routes, "select_patterns", tracking_selector)
+
+    response = client.post(
+        "/v1/hooks/generate",
+        json=payload(count=1, mechanism="authority"),
+    )
+
+    assert response.status_code == 200, response.text
+    assert calls == 1
+    assert {hook["pattern_id"] for hook in response.json()["hooks"]} <= selected_ids
+    assert len(repository.saved) == 1
 
 
 def test_request_domain_error_is_400_before_generator():
