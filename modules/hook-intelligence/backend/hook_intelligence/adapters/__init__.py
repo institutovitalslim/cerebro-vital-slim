@@ -64,7 +64,7 @@ def ai_runtime_enabled(env: Mapping[str, str] | None = None) -> bool:
 
     try:
         configured = adapter_from_env(env, transport=object())
-    except AdapterError:
+    except Exception:  # noqa: BLE001 -- ambiente/Mapping externo é uma fronteira não confiável.
         return False
     return isinstance(configured, OpenAICompatible)
 

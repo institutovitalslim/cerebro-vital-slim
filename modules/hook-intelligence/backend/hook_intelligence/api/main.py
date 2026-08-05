@@ -19,6 +19,14 @@ from hook_intelligence.api.routes import catalog, exports, history, hooks
 from hook_intelligence.domain.models import HealthResponse
 from hook_intelligence.engine.library import HookLibrary
 
+_PUBLIC_HTTP_DETAILS = {
+    400: "request failed",
+    404: "resource not found",
+    405: "method not allowed",
+    422: "request validation failed",
+    500: "internal service error",
+}
+
 
 def create_app(
     *,
@@ -70,10 +78,9 @@ def create_app(
 
     @application.exception_handler(StarletteHTTPException)
     async def http_error(_request: Request, exc: StarletteHTTPException) -> JSONResponse:
-        detail = exc.detail if type(exc.detail) is str else "request failed"
-        return JSONResponse(
-            status_code=exc.status_code, content={"detail": detail}, headers=exc.headers
-        )
+        # Detail e headers podem vir de rotas/componentes injetados e são sempre não confiáveis.
+        detail = _PUBLIC_HTTP_DETAILS.get(exc.status_code, "request failed")
+        return JSONResponse(status_code=exc.status_code, content={"detail": detail})
 
     @application.exception_handler(Exception)
     async def internal_error(_request: Request, _exc: Exception) -> JSONResponse:

@@ -1,5 +1,6 @@
 """Generation, scoring, compliance, and favorite endpoints."""
 
+from collections.abc import Mapping
 from time import perf_counter
 from uuid import UUID
 
@@ -24,8 +25,10 @@ from hook_intelligence.engine.composer import (
     contains_forbidden,
     normalize_text,
 )
+from hook_intelligence.engine.library import HookLibrary, Pattern
 from hook_intelligence.engine.pipeline import validate_generation_request
 from hook_intelligence.engine.scorer import score_text
+from hook_intelligence.engine.selector import select_patterns
 
 router = APIRouter(prefix="/v1/hooks", tags=["hooks"])
 _ERROR_RESPONSES = {
@@ -36,7 +39,12 @@ _ERROR_RESPONSES = {
 _VALIDATION_ERROR = {"model": ErrorResponse, "description": "Request validation failed"}
 
 
-def _validated_generated_hooks(generated: object, payload: GenerationRequest) -> tuple[Hook, ...]:
+def _validated_generated_hooks(
+    generated: object,
+    payload: GenerationRequest,
+    library: HookLibrary,
+    eligible_by_id: Mapping[str, Pattern],
+) -> tuple[Hook, ...]:
     """Snapshot e valida integralmente a fronteira injetável antes de qualquer escrita."""
 
     if type(generated) is not tuple or len(generated) != payload.count:
@@ -53,8 +61,15 @@ def _validated_generated_hooks(generated: object, payload: GenerationRequest) ->
         if hook.id in identifiers:
             raise ValueError("duplicate generated hook")
         identifiers.add(hook.id)
+        pattern = eligible_by_id.get(hook.pattern_id)
         if (
-            hook.library is not payload.library
+            pattern is None
+            or hook.mechanisms != [pattern.mechanism]
+            or any(mechanism not in library.mechanisms for mechanism in hook.mechanisms)
+            or hook.explanation != pattern.explanation
+            or hook.source not in {Source.DETERMINISTIC, Source.AI_ADAPTED}
+            or (not payload.use_ai and hook.source is not Source.DETERMINISTIC)
+            or hook.library is not payload.library
             or hook.channel is not payload.channel
             or hook.objective is not payload.objective
             or hook.awareness_stage is not payload.awareness_stage
@@ -93,8 +108,13 @@ def generate(payload: GenerateRequest, request: Request) -> GenerateResponse:
             status_code=400, detail="generation request cannot be fulfilled"
         ) from None
     try:
+        eligible_by_id = {
+            pattern.id: pattern for pattern in select_patterns(validated_payload, services.library)
+        }
         generated = services.generator(validated_payload.model_copy(deep=True), services.library)
-        approved = _validated_generated_hooks(generated, validated_payload)
+        approved = _validated_generated_hooks(
+            generated, validated_payload, services.library, eligible_by_id
+        )
     except Exception:  # noqa: BLE001 - componente injetável é uma fronteira interna.
         raise HTTPException(status_code=500, detail="internal service error") from None
     try:

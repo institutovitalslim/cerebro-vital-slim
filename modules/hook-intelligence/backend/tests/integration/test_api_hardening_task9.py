@@ -1,15 +1,27 @@
 import copy
 import math
+from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 from pydantic import ValidationError
 
+import hook_intelligence.adapters as adapters_module
+from hook_intelligence.adapters import ai_runtime_enabled
 from hook_intelligence.api.main import create_app
-from hook_intelligence.domain.models import ComplianceResult, ComplianceStatus, Hook, HookScores
+from hook_intelligence.domain.models import (
+    ComplianceResult,
+    ComplianceStatus,
+    HealthResponse,
+    Hook,
+    HookScores,
+    Source,
+)
 from hook_intelligence.engine.library import HookLibrary
 from hook_intelligence.engine.pipeline import generate_deterministic
+from hook_intelligence.engine.selector import select_patterns
 
 
 def payload(**updates):
@@ -210,7 +222,7 @@ def test_request_domain_error_is_400_before_generator():
         json=payload(required_words=["mesma"], forbidden_words=["MESMA"]),
     )
     assert response.status_code == 400
-    assert response.json() == {"detail": "generation request cannot be fulfilled"}
+    assert response.json() == {"detail": "request failed"}
     assert called is False
     assert repository.saved == []
 
@@ -272,3 +284,158 @@ def test_non_finite_score_and_duration_contracts_rejected():
     for value in (math.nan, math.inf, -math.inf):
         with pytest.raises(ValidationError):
             HookScores(**{**base, "overall": value})
+
+
+@pytest.mark.parametrize(
+    ("status_code", "expected"),
+    [
+        (400, "request failed"),
+        (404, "resource not found"),
+        (405, "method not allowed"),
+        (418, "request failed"),
+        (422, "request validation failed"),
+        (500, "internal service error"),
+    ],
+)
+@pytest.mark.parametrize(
+    "detail", ["SECRET" * 10_000, {"SECRET": ["nested"]}], ids=["huge-string", "non-string"]
+)
+def test_http_exception_is_bounded_and_never_reflects_detail_or_headers(
+    status_code, expected, detail, caplog
+):
+    app = create_app(library=HookLibrary.load_default(), repository=MemoryRepository())
+
+    def adversarial_route():
+        try:
+            raise RuntimeError("SECRET-CONTEXT")
+        except RuntimeError as error:
+            raise HTTPException(
+                status_code=status_code,
+                detail=detail,
+                headers={"X-Leak": "SECRET", "Allow": "SECRET-METHOD"},
+            ) from error
+
+    app.add_api_route("/adversarial-http", adversarial_route)
+    response = TestClient(app, raise_server_exceptions=False).get("/adversarial-http")
+    assert response.status_code == status_code
+    assert response.json() == {"detail": expected}
+    assert len(response.content) < 100
+    assert "SECRET" not in response.text
+    assert "x-leak" not in response.headers
+    assert response.headers.get("allow") != "SECRET-METHOD"
+    assert "SECRET" not in caplog.text
+
+
+def test_framework_404_405_422_and_response_validation_are_sanitized():
+    app = create_app(library=HookLibrary.load_default(), repository=MemoryRepository())
+
+    @app.get("/bad-response", response_model=HealthResponse)
+    def bad_response():
+        return {"status": "SECRET"}
+
+    client = TestClient(app, raise_server_exceptions=False)
+    probes = [
+        (client.get("/missing-SECRET"), 404, "resource not found"),
+        (client.get("/v1/hooks/generate"), 405, "method not allowed"),
+        (
+            client.post("/v1/hooks/score", json={"text": "SECRET"}),
+            422,
+            "request validation failed",
+        ),
+        (client.get("/bad-response"), 500, "internal service error"),
+    ]
+    for response, status, detail in probes:
+        assert response.status_code == status
+        assert response.json() == {"detail": detail}
+        assert len(response.content) < 100
+        assert "SECRET" not in response.text
+
+
+@pytest.mark.parametrize(
+    "corruption",
+    [
+        "missing_pattern",
+        "ineligible_pattern",
+        "fabricated_mechanism",
+        "extra_mechanism",
+        "mismatched_mechanism",
+        "fabricated_explanation",
+        "curated_source",
+        "ai_without_opt_in",
+    ],
+)
+def test_generator_canonical_metadata_is_enforced_before_persistence(corruption):
+    def generator(request, library):
+        hooks = list(generate_deterministic(request, library))
+        eligible = select_patterns(request, library)
+        pattern = next(item for item in eligible if item.id == hooks[0].pattern_id)
+        if corruption == "missing_pattern":
+            update = {"pattern_id": "universal-does-not-exist"}
+        elif corruption == "ineligible_pattern":
+            ineligible = next(item for item in library.all_patterns if item not in eligible)
+            update = {
+                "pattern_id": ineligible.id,
+                "mechanisms": [ineligible.mechanism],
+                "explanation": ineligible.explanation,
+            }
+        elif corruption == "fabricated_mechanism":
+            update = {"mechanisms": ["fabricated"]}
+        elif corruption == "extra_mechanism":
+            update = {"mechanisms": [pattern.mechanism, "specificity"]}
+        elif corruption == "mismatched_mechanism":
+            other = next(value for value in library.mechanisms if value != pattern.mechanism)
+            update = {"mechanisms": [other]}
+        elif corruption == "fabricated_explanation":
+            update = {"explanation": "SECRET fabricated provenance"}
+        elif corruption == "curated_source":
+            update = {"source": Source.CURATED}
+        else:
+            update = {"source": Source.AI_ADAPTED}
+        hooks[0] = hooks[0].model_copy(update=update)
+        return tuple(hooks)
+
+    client, repository = make_client(generator)
+    response = client.post("/v1/hooks/generate", json=payload(count=1, intensity=1))
+    assert response.status_code == 500
+    assert response.json() == {"detail": "internal service error"}
+    assert repository.saved == []
+
+
+def test_ai_opt_in_accepts_canonical_adapted_metadata_and_deterministic_fallback():
+    for source in (Source.AI_ADAPTED, Source.DETERMINISTIC):
+
+        def generator(request, library, selected_source=source):
+            hooks = generate_deterministic(request, library)
+            return tuple(hook.model_copy(update={"source": selected_source}) for hook in hooks)
+
+        client, repository = make_client(generator)
+        response = client.post("/v1/hooks/generate", json=payload(count=1, use_ai=True))
+        assert response.status_code == 200, response.text
+        assert response.json()["hooks"][0]["source"] == source.value
+        assert len(repository.saved) == 1
+
+
+def test_health_survives_adversarial_environment_mapping(monkeypatch, caplog):
+    class EvilEnvironment(dict):
+        def get(self, _key, _default=None):
+            raise RuntimeError("SECRET-MAPPING")
+
+    evil = EvilEnvironment()
+    assert ai_runtime_enabled(evil) is False
+
+    client, _ = make_client(valid_hooks)
+    monkeypatch.setattr(adapters_module, "os", SimpleNamespace(environ=evil))
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json()["ai_enabled"] is False
+    assert "SECRET-MAPPING" not in response.text
+    assert "SECRET-MAPPING" not in caplog.text
+
+
+def test_health_does_not_swallow_process_control_exceptions():
+    class InterruptingEnvironment(dict):
+        def get(self, _key, _default=None):
+            raise KeyboardInterrupt
+
+    with pytest.raises(KeyboardInterrupt):
+        ai_runtime_enabled(InterruptingEnvironment())
