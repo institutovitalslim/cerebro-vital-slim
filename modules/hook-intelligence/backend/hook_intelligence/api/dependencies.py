@@ -26,7 +26,7 @@ class Services:
     owns_engine: bool
 
 
-@dataclass(eq=False, slots=True)
+@dataclass(eq=False, frozen=True, slots=True)
 class ServiceLease:
     """Opaque, single-use lease bound to one service snapshot generation."""
 
@@ -34,7 +34,6 @@ class ServiceLease:
     generation: int
     _provider: ServiceProvider
     _lease_id: int
-    _released: bool = False
 
 
 class ServiceProvider:
@@ -126,12 +125,16 @@ class ServiceProvider:
 
         with self._lock:
             token = self._resolve_lease_locked(lease)
-            if token is None or token._released:
+            if token is None:
                 return
-            token._released = True
-            active = self._leases.pop(token._lease_id, None)
+            active = self._leases.get(token._lease_id)
             if active is not token:
                 return
+            del self._leases[token._lease_id]
+            for index, legacy in enumerate(self._legacy_leases):
+                if legacy is token:
+                    self._legacy_leases.pop(index)
+                    break
             if self._services is not token.services or self._leases:
                 return
             services = self._services
@@ -144,8 +147,6 @@ class ServiceProvider:
         with self._lock:
             services = self._services
             self._services = None
-            for lease in self._leases.values():
-                lease._released = True
             self._leases.clear()
         self._dispose(services)
 
@@ -153,10 +154,6 @@ class ServiceProvider:
         if isinstance(lease, ServiceLease):
             if lease._provider is not self:
                 return None
-            for index, legacy in enumerate(self._legacy_leases):
-                if legacy is lease:
-                    self._legacy_leases.pop(index)
-                    break
             return lease
 
         for index, legacy in enumerate(self._legacy_leases):

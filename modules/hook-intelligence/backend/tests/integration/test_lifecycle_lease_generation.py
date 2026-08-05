@@ -1,8 +1,12 @@
+import copy
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import FrozenInstanceError
 from threading import Barrier, Lock
 
+import pytest
+
 from hook_intelligence.api import dependencies
-from hook_intelligence.api.dependencies import ServiceProvider
+from hook_intelligence.api.dependencies import ServiceLease, ServiceProvider
 from hook_intelligence.engine.library import HookLibrary
 
 
@@ -68,6 +72,104 @@ def test_duplicate_token_release_is_idempotent(monkeypatch):
     provider.release(lease)
     provider.release(lease)
 
+    assert engines[0].dispose_calls == 1
+
+
+def test_shallow_copy_cannot_consume_real_lease(monkeypatch):
+    provider, engines = _provider(monkeypatch)
+    first = provider.acquire_lease()
+    second = provider.acquire_lease()
+
+    clone = copy.copy(first)
+    assert clone is not first
+    provider.release(clone)
+    provider.release(second)
+
+    assert engines[0].dispose_calls == 0
+    assert provider.get() is first.services
+    provider.release(first)
+    assert engines[0].dispose_calls == 1
+
+
+def test_forged_same_id_cannot_consume_real_lease(monkeypatch):
+    provider, engines = _provider(monkeypatch)
+    first = provider.acquire_lease()
+    second = provider.acquire_lease()
+    forged = ServiceLease(
+        services=first.services,
+        generation=first.generation,
+        _provider=provider,
+        _lease_id=first._lease_id,
+    )
+
+    provider.release(forged)
+    provider.release(second)
+
+    assert engines[0].dispose_calls == 0
+    assert provider.get() is first.services
+    provider.release(first)
+    assert engines[0].dispose_calls == 1
+
+
+def test_lease_identity_fields_are_immutable(monkeypatch):
+    provider, _engines = _provider(monkeypatch)
+    lease = provider.acquire_lease()
+
+    for field, value in (
+        ("_lease_id", lease._lease_id + 1),
+        ("generation", lease.generation + 1),
+        ("_provider", ServiceProvider(library=HookLibrary.load_default())),
+        ("services", object()),
+    ):
+        with pytest.raises((FrozenInstanceError, AttributeError)):
+            setattr(lease, field, value)
+
+    provider.release(lease)
+
+
+def test_deepcopy_is_rejected_or_cannot_consume_real_lease(monkeypatch):
+    provider, engines = _provider(monkeypatch)
+    first = provider.acquire_lease()
+    second = provider.acquire_lease()
+
+    try:
+        clone = copy.deepcopy(first)
+    except (TypeError, copy.Error):
+        clone = None
+    if clone is not None:
+        assert clone is not first
+        provider.release(clone)
+    provider.release(second)
+
+    assert engines[0].dispose_calls == 0
+    assert provider.get() is first.services
+    provider.release(first)
+    assert engines[0].dispose_calls == 1
+
+
+def test_foreign_provider_and_random_ids_are_no_ops(monkeypatch):
+    provider, engines = _provider(monkeypatch)
+    other = ServiceProvider(
+        library=HookLibrary.load_default(), repository=_Repository(), engine=_SpyEngine()
+    )
+    first = provider.acquire_lease()
+    second = provider.acquire_lease()
+    foreign = other.acquire_lease()
+    random_id = ServiceLease(
+        services=first.services,
+        generation=first.generation,
+        _provider=provider,
+        _lease_id=first._lease_id + 10_000,
+    )
+
+    provider.release(foreign)
+    provider.release(random_id)
+    provider.release(second)
+
+    assert engines[0].dispose_calls == 0
+    assert provider.get() is first.services
+    provider.release(first)
+    other.release(foreign)
     assert engines[0].dispose_calls == 1
 
 
