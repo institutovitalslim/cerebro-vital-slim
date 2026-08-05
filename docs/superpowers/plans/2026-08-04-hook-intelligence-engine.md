@@ -1,6 +1,6 @@
 # Hook Intelligence Engine Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Construir um módulo web autônomo do Content Engine OS que gere, pontue, explique, filtre e exporte hooks originais usando biblioteca universal e módulo IVS, com operação determinística e adaptação opcional por IA.
 
@@ -47,7 +47,7 @@ modules/hook-intelligence/
 - Create: `modules/hook-intelligence/backend/tests/test_health.py`
 - Create: `modules/hook-intelligence/.env.example`
 
-- [ ] **Step 1: Escrever o teste de healthcheck**
+- [x] **Step 1: Escrever o teste de healthcheck**
 
 ```python
 from fastapi.testclient import TestClient
@@ -65,7 +65,7 @@ def test_health_returns_versioned_ready_status():
     }
 ```
 
-- [ ] **Step 2: Configurar o projeto Python**
+- [x] **Step 2: Configurar o projeto Python**
 
 ```toml
 [project]
@@ -92,13 +92,13 @@ testpaths = ["tests"]
 line-length = 100
 ```
 
-- [ ] **Step 3: Rodar o teste e confirmar RED**
+- [x] **Step 3: Rodar o teste e confirmar RED**
 
 Run: `cd modules/hook-intelligence/backend && uv sync --extra dev && uv run pytest tests/test_health.py -q`
 
 Expected: FAIL porque `hook_intelligence.api.main` ainda não existe.
 
-- [ ] **Step 4: Implementar o app mínimo**
+- [x] **Step 4: Implementar o app mínimo**
 
 ```python
 from fastapi import FastAPI
@@ -116,13 +116,13 @@ def health() -> dict[str, object]:
     }
 ```
 
-- [ ] **Step 5: Rodar teste e lint**
+- [x] **Step 5: Rodar teste e lint**
 
 Run: `uv run pytest tests/test_health.py -q && uv run ruff check hook_intelligence tests`
 
 Expected: `1 passed` e `All checks passed!`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add modules/hook-intelligence
@@ -139,7 +139,7 @@ git commit -m "feat(hooks): scaffold isolated FastAPI module"
 - Create: `modules/hook-intelligence/backend/hook_intelligence/domain/models.py`
 - Create: `modules/hook-intelligence/backend/tests/contract/test_contracts.py`
 
-- [ ] **Step 1: Escrever testes de contrato**
+- [x] **Step 1: Escrever testes de contrato**
 
 ```python
 import json
@@ -168,7 +168,7 @@ def test_generation_request_requires_topic_channel_objective_and_audience():
     assert set(schema["required"]) == {"topic", "channel", "objective", "audience"}
 ```
 
-- [ ] **Step 2: Criar os modelos Pydantic**
+- [x] **Step 2: Criar os modelos Pydantic**
 
 ```python
 from datetime import datetime, timezone
@@ -236,17 +236,17 @@ class GenerationRequest(BaseModel):
     use_ai: bool = False
 ```
 
-- [ ] **Step 3: Criar JSON Schemas equivalentes**
+- [x] **Step 3: Criar JSON Schemas equivalentes**
 
 Cada schema deverá declarar `"$schema": "https://json-schema.org/draft/2020-12/schema"`, `additionalProperties: false`, enums para campos taxonômicos e limites iguais aos modelos Pydantic. `generation-response.schema.json` deve exigir `request_id`, `hooks`, `warnings`, `engine_version` e `duration_ms`. `content-os-export.schema.json` deve exigir `schema_version`, `workspace_ref`, `generated_at` e `hooks`.
 
-- [ ] **Step 4: Rodar contratos e modelos**
+- [x] **Step 4: Rodar contratos e modelos**
 
 Run: `uv run pytest tests/contract/test_contracts.py -q`
 
 Expected: `2 passed`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add modules/hook-intelligence/contracts modules/hook-intelligence/backend
@@ -264,7 +264,7 @@ git commit -m "feat(hooks): define versioned generation contracts"
 - Create: `modules/hook-intelligence/backend/hook_intelligence/engine/library.py`
 - Create: `modules/hook-intelligence/backend/tests/unit/test_library.py`
 
-- [ ] **Step 1: Escrever testes do carregador**
+- [x] **Step 1: Escrever testes do carregador**
 
 ```python
 from hook_intelligence.engine.library import HookLibrary
@@ -283,7 +283,7 @@ def test_every_pattern_has_slots_and_explanation():
     assert all(p.mechanism and p.explanation for p in library.all_patterns)
 ```
 
-- [ ] **Step 2: Definir formato dos padrões**
+- [x] **Step 2: Definir formato dos padrões**
 
 ```json
 {
@@ -299,11 +299,11 @@ def test_every_pattern_has_slots_and_explanation():
 }
 ```
 
-- [ ] **Step 3: Criar biblioteca original**
+- [x] **Step 3: Criar biblioteca original**
 
 Criar pelo menos 40 estruturas universais distribuídas pelos 20 mecanismos da especificação e 20 estruturas `ivs-health`. Cada estrutura deve ser semanticamente distinta, possuir explicação e evitar promessas clínicas. Criar taxonomias explícitas para canais, objetivos, consciência e tons.
 
-- [ ] **Step 4: Implementar carregador tipado**
+- [x] **Step 4: Implementar carregador tipado**
 
 ```python
 import json
@@ -340,13 +340,13 @@ class HookLibrary:
         return [p for p in self.all_patterns if p.library == library]
 ```
 
-- [ ] **Step 5: Rodar testes e validação de JSON**
+- [x] **Step 5: Rodar testes e validação de JSON**
 
 Run: `uv run pytest tests/unit/test_library.py -q && python -m json.tool ../data/universal/patterns.json >/dev/null && python -m json.tool ../data/ivs-health/patterns.json >/dev/null`
 
 Expected: testes verdes e JSON válido.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add modules/hook-intelligence/data modules/hook-intelligence/backend
@@ -360,7 +360,7 @@ git commit -m "feat(hooks): add original universal and IVS libraries"
 - Create: `modules/hook-intelligence/backend/hook_intelligence/engine/composer.py`
 - Create: `modules/hook-intelligence/backend/tests/unit/test_generation.py`
 
-- [ ] **Step 1: Escrever testes RED**
+- [x] **Step 1: Escrever testes RED**
 
 ```python
 from hook_intelligence.domain.models import GenerationRequest
@@ -381,7 +381,7 @@ def test_required_and_forbidden_words_are_enforced():
     assert all("milagre" not in h.text.casefold() for h in hooks)
 ```
 
-- [ ] **Step 2: Implementar seleção determinística estável**
+- [x] **Step 2: Implementar seleção determinística estável**
 
 O seletor deve filtrar por biblioteca, canal, objetivo, consciência, mecanismo e intensidade. O ranking inicial deve ser estável usando `sha256` de `topic + audience + pattern_id`, permitindo reprodução da mesma requisição.
 
@@ -393,17 +393,17 @@ def stable_rank(seed: str, pattern_id: str) -> str:
     return sha256(f"{seed}:{pattern_id}".encode()).hexdigest()
 ```
 
-- [ ] **Step 3: Implementar composição segura**
+- [x] **Step 3: Implementar composição segura**
 
 O compositor deverá preencher apenas slots conhecidos (`topic`, `audience`, `desired_outcome`, `context`, `required_word`), normalizar espaços, limitar comprimento sem cortar palavras e rejeitar template com slot desconhecido.
 
-- [ ] **Step 4: Criar `engine/pipeline.py` e rodar testes**
+- [x] **Step 4: Criar `engine/pipeline.py` e rodar testes**
 
 Run: `uv run pytest tests/unit/test_generation.py -q`
 
 Expected: `2 passed`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add modules/hook-intelligence/backend
@@ -418,7 +418,7 @@ git commit -m "feat(hooks): generate deterministic contextual hooks"
 - Create: `modules/hook-intelligence/backend/hook_intelligence/engine/explain.py`
 - Create: `modules/hook-intelligence/backend/tests/unit/test_quality.py`
 
-- [ ] **Step 1: Escrever testes de qualidade**
+- [x] **Step 1: Escrever testes de qualidade**
 
 ```python
 from hook_intelligence.engine.deduplicator import deduplicate
@@ -437,25 +437,25 @@ def test_score_is_bounded_and_penalizes_generic_text():
     assert specific.overall > generic.overall
 ```
 
-- [ ] **Step 2: Implementar similaridade local**
+- [x] **Step 2: Implementar similaridade local**
 
 Usar normalização Unicode, tokens e coeficiente de Sørensen-Dice. Não adicionar modelo de embeddings nesta fase.
 
-- [ ] **Step 3: Implementar scores determinísticos**
+- [x] **Step 3: Implementar scores determinísticos**
 
 Compor o score geral com pesos: clareza 25%, especificidade 25%, novidade heurística 15%, retenção 20% e adequação ao canal 15%. Registrar penalidades por clichês, caixa alta excessiva, pontuação exagerada, ausência do tópico e comprimento inadequado.
 
-- [ ] **Step 4: Anexar explicação do padrão e penalidades**
+- [x] **Step 4: Anexar explicação do padrão e penalidades**
 
 Cada hook deve informar mecanismo, motivo do score e recomendações curtas sem revelar raciocínio interno privado.
 
-- [ ] **Step 5: Rodar testes**
+- [x] **Step 5: Rodar testes**
 
 Run: `uv run pytest tests/unit/test_quality.py -q`
 
 Expected: `2 passed`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add modules/hook-intelligence/backend
@@ -469,7 +469,7 @@ git commit -m "feat(hooks): score explain and deduplicate candidates"
 - Create: `modules/hook-intelligence/backend/tests/unit/test_compliance.py`
 - Modify: `modules/hook-intelligence/data/ivs-health/forbidden-claims.json`
 
-- [ ] **Step 1: Escrever fixtures de pass, review e block**
+- [x] **Step 1: Escrever fixtures de pass, review e block**
 
 ```python
 import pytest
@@ -496,21 +496,21 @@ def test_passes_educational_non_diagnostic_hook():
     assert result.status == "pass"
 ```
 
-- [ ] **Step 2: Implementar regras versionadas**
+- [x] **Step 2: Implementar regras versionadas**
 
 As regras devem reconhecer garantias, cura, diagnóstico direto, prescrição, falsa urgência, humilhação, número clínico sem fonte e superioridade absoluta. O retorno deve conter códigos estáveis, por exemplo `GUARANTEED_RESULT`, `CURE_CLAIM`, `DIRECT_DIAGNOSIS` e `UNSOURCED_CLINICAL_NUMBER`.
 
-- [ ] **Step 3: Integrar compliance antes e depois da IA**
+- [x] **Step 3: Integrar compliance antes e depois da IA**
 
 Hooks bloqueados não entram no ranking nem no export. Hooks em revisão permanecem visíveis com alerta.
 
-- [ ] **Step 4: Rodar suíte**
+- [x] **Step 4: Rodar suíte**
 
 Run: `uv run pytest tests/unit/test_compliance.py -q`
 
 Expected: `5 passed`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add modules/hook-intelligence
@@ -525,7 +525,7 @@ git commit -m "feat(hooks): enforce IVS medical compliance gates"
 - Create: `modules/hook-intelligence/backend/hook_intelligence/engine/exporter.py`
 - Create: `modules/hook-intelligence/backend/tests/integration/test_storage_export.py`
 
-- [ ] **Step 1: Escrever teste de ciclo persistido**
+- [x] **Step 1: Escrever teste de ciclo persistido**
 
 ```python
 import json
@@ -545,21 +545,21 @@ def test_history_favorite_and_export_roundtrip(tmp_path, sample_hook):
     json.dumps(payload)
 ```
 
-- [ ] **Step 2: Criar tabelas mínimas**
+- [x] **Step 2: Criar tabelas mínimas**
 
 Tabelas: `generation_sessions`, `hooks`, `favorites`. Usar UUID textual, timestamps UTC e JSON para scores/compliance. Ativar foreign keys no SQLite.
 
-- [ ] **Step 3: Implementar repositórios e exportadores**
+- [x] **Step 3: Implementar repositórios e exportadores**
 
 Implementar listagem paginada, favorito idempotente, export JSON validado pelo contrato e CSV UTF-8 com cabeçalho fixo.
 
-- [ ] **Step 4: Rodar integração**
+- [x] **Step 4: Rodar integração**
 
 Run: `uv run pytest tests/integration/test_storage_export.py -q`
 
 Expected: `1 passed`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add modules/hook-intelligence/backend
@@ -574,7 +574,7 @@ git commit -m "feat(hooks): persist history favorites and exports"
 - Create: `modules/hook-intelligence/backend/hook_intelligence/adapters/openai_compatible.py`
 - Create: `modules/hook-intelligence/backend/tests/unit/test_ai_adapter.py`
 
-- [ ] **Step 1: Escrever teste com transporte falso**
+- [x] **Step 1: Escrever teste com transporte falso**
 
 ```python
 from hook_intelligence.adapters.openai_compatible import OpenAICompatibleAdapter
@@ -598,7 +598,7 @@ def test_pipeline_falls_back_when_provider_times_out(monkeypatch):
     assert result == ["Hook determinístico"]
 ```
 
-- [ ] **Step 2: Definir protocolo**
+- [x] **Step 2: Definir protocolo**
 
 ```python
 from typing import Protocol
@@ -608,21 +608,21 @@ class HookAdapter(Protocol):
     def adapt(self, topic: str, candidates: list[str]) -> list[str]: ...
 ```
 
-- [ ] **Step 3: Implementar cliente OpenAI-compatible**
+- [x] **Step 3: Implementar cliente OpenAI-compatible**
 
 Usar endpoint configurável, timeout de 20 segundos, uma repetição apenas para falha transitória, JSON estruturado, limite de tokens e nenhuma impressão da chave. Se `HOOK_AI_ENABLED=false`, usar `DisabledAdapter` e não realizar rede.
 
-- [ ] **Step 4: Revalidar saídas de IA**
+- [x] **Step 4: Revalidar saídas de IA**
 
 Após adaptação: normalizar, deduplicar, pontuar e executar compliance novamente. Respostas malformadas devem cair no fallback determinístico.
 
-- [ ] **Step 5: Rodar testes**
+- [x] **Step 5: Rodar testes**
 
 Run: `uv run pytest tests/unit/test_ai_adapter.py -q`
 
 Expected: `2 passed`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add modules/hook-intelligence/backend modules/hook-intelligence/.env.example
@@ -637,7 +637,7 @@ git commit -m "feat(hooks): add optional AI adaptation with safe fallback"
 - Modify: `modules/hook-intelligence/backend/hook_intelligence/api/main.py`
 - Create: `modules/hook-intelligence/backend/tests/integration/test_api.py`
 
-- [ ] **Step 1: Escrever testes de API**
+- [x] **Step 1: Escrever testes de API**
 
 ```python
 def test_generate_returns_ranked_hooks(client):
@@ -653,21 +653,21 @@ def test_invalid_count_returns_422(client):
     assert response.status_code == 422
 ```
 
-- [ ] **Step 2: Implementar endpoints**
+- [x] **Step 2: Implementar endpoints**
 
 Implementar exatamente: `GET /health`, `GET /v1/taxonomies`, `GET /v1/patterns`, `POST /v1/hooks/generate`, `POST /v1/hooks/score`, `POST /v1/hooks/compliance`, `POST /v1/hooks/{id}/favorite`, `GET /v1/history`, `GET /v1/favorites`, `POST /v1/exports/content-os`.
 
-- [ ] **Step 3: Adicionar request ID e duração**
+- [x] **Step 3: Adicionar request ID e duração**
 
 Toda resposta de geração deve incluir UUID, versão do motor, duração em milissegundos e warnings sanitizados.
 
-- [ ] **Step 4: Rodar testes e conferir OpenAPI**
+- [x] **Step 4: Rodar testes e conferir OpenAPI**
 
 Run: `uv run pytest tests/integration/test_api.py -q && uv run python -c "from hook_intelligence.api.main import app; assert '/v1/hooks/generate' in app.openapi()['paths']"`
 
 Expected: testes verdes e exit code 0.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add modules/hook-intelligence/backend
@@ -688,7 +688,7 @@ git commit -m "feat(hooks): expose versioned generation API"
 - Create: `modules/hook-intelligence/web/lib/api.ts`
 - Create: `modules/hook-intelligence/web/tests/generator.test.tsx`
 
-- [ ] **Step 1: Criar teste de interface RED**
+- [x] **Step 1: Criar teste de interface RED**
 
 ```tsx
 import { render, screen } from '@testing-library/react';
@@ -704,29 +704,29 @@ it('collects the briefing and renders ranked hooks', async () => {
 });
 ```
 
-- [ ] **Step 2: Configurar Next.js e testes**
+- [x] **Step 2: Configurar Next.js e testes**
 
 Usar Next.js App Router, TypeScript strict, ESLint, Vitest, Testing Library e CSS Modules ou tokens locais. Não importar CSS/componentes do Content OS principal.
 
-- [ ] **Step 3: Implementar tela Gerador**
+- [x] **Step 3: Implementar tela Gerador**
 
 Campos: tema, público, biblioteca, canal, objetivo, consciência, tom, intensidade, mecanismo, contexto, palavras obrigatórias/proibidas, quantidade e toggle de IA. Estados obrigatórios: vazio, carregando, erro recuperável e resultados.
 
-- [ ] **Step 4: Implementar cards e comparação**
+- [x] **Step 4: Implementar cards e comparação**
 
 Cada card mostra hook, score geral, dimensões, mecanismo, explicação, compliance, copiar, favoritar, adaptar e comparar. Impedir seleção de hook bloqueado.
 
-- [ ] **Step 5: Implementar Biblioteca e Salvos**
+- [x] **Step 5: Implementar Biblioteca e Salvos**
 
 Biblioteca com busca e filtros; Salvos com abas histórico/favoritos e exportação em lote.
 
-- [ ] **Step 6: Rodar testes, lint e build**
+- [x] **Step 6: Rodar testes, lint e build**
 
 Run: `cd modules/hook-intelligence/web && npm ci && npm test -- --run && npm run lint && npm run build`
 
 Expected: testes, lint e build verdes.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add modules/hook-intelligence/web
@@ -742,7 +742,7 @@ git commit -m "feat(hooks): add standalone hook generator web app"
 - Create: `modules/hook-intelligence/web/tests/e2e/generator.spec.ts`
 - Create: `modules/hook-intelligence/scripts/smoke.sh`
 
-- [ ] **Step 1: Escrever e2e**
+- [x] **Step 1: Escrever e2e**
 
 ```ts
 import { test, expect } from '@playwright/test';
@@ -759,29 +759,29 @@ test('generate, compare, favorite and export', async ({ page }) => {
 });
 ```
 
-- [ ] **Step 2: Criar containers isolados**
+- [x] **Step 2: Criar containers isolados**
 
 API na porta interna 8000, web na 3000, volume próprio `hook_intelligence_data`, rede própria e healthchecks. Não reutilizar Postgres, Redis ou Nginx do Content OS.
 
-- [ ] **Step 3: Criar smoke determinístico**
+- [x] **Step 3: Criar smoke determinístico**
 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
-curl -fsS http://127.0.0.1:18080/health | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["status"]=="ready"'
-curl -fsS -X POST http://127.0.0.1:18080/v1/hooks/generate \
+curl -fsS http://127.0.0.1:18082/health | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["status"]=="ready"'
+curl -fsS -X POST http://127.0.0.1:18082/v1/hooks/generate \
   -H 'content-type: application/json' \
   -d '{"topic":"sono","channel":"reel","objective":"retention","audience":"mulheres 40+","library":"ivs-health","count":5}' \
   | python3 -c 'import json,sys; d=json.load(sys.stdin); assert len(d["hooks"])==5'
 ```
 
-- [ ] **Step 4: Subir stack e executar smoke/e2e**
+- [x] **Step 4: Subir stack e executar smoke/e2e**
 
 Run: `docker compose -f modules/hook-intelligence/compose.yaml up -d --build && bash modules/hook-intelligence/scripts/smoke.sh && cd modules/hook-intelligence/web && npx playwright test`
 
 Expected: healthcheck 200, geração com 5 hooks e e2e verde.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add modules/hook-intelligence
@@ -797,15 +797,15 @@ git commit -m "test(hooks): add isolated stack smoke and e2e"
 - Create: `modules/hook-intelligence/evidence/verification.md`
 - Modify: `modules/hook-intelligence/.env.example`
 
-- [ ] **Step 1: Documentar instalação e operação**
+- [x] **Step 1: Documentar instalação e operação**
 
 O README deve cobrir: requisitos, execução local, Docker Compose, testes, configuração sem IA, adaptador OpenAI-compatible, contratos, exportação, limites, troubleshooting e rollback.
 
-- [ ] **Step 2: Criar handoff exato para Claude Code**
+- [x] **Step 2: Criar handoff exato para Claude Code**
 
 O handoff deve mapear API, schemas, portas, persistência, variáveis, migração SQLite→Postgres, incorporação das páginas no Next.js principal, autenticação futura e responsabilidades que devem permanecer isoladas. Deve declarar que nenhuma integração já foi feita.
 
-- [ ] **Step 3: Executar gate completo**
+- [x] **Step 3: Executar gate completo**
 
 Run:
 
@@ -824,22 +824,22 @@ bash scripts/smoke.sh
 
 Expected: todos os comandos com exit code 0.
 
-- [ ] **Step 4: Scan de segredos e isolamento**
+- [x] **Step 4: Scan de segredos e isolamento**
 
 Run:
 
 ```bash
 ! git grep -nEi '(api[_-]?key|token|secret)\s*[:=]\s*["'"'][^"'"']{8,}' -- modules/hook-intelligence
-! git diff d00c92b --name-only | grep -v '^sistemas/content-engine-os/modules/hook-intelligence/' | grep .
+! git diff d00c92b --name-only | grep -v '^modules/hook-intelligence/' | grep .
 ```
 
 Expected: nenhum segredo e nenhum arquivo fora do módulo, exceto este plano/documentação de design já aprovada.
 
-- [ ] **Step 5: Registrar evidência real**
+- [x] **Step 5: Registrar evidência real**
 
 `evidence/verification.md` deve conter data, commit, comandos, resultados, endpoints, quantidade de padrões, cobertura, screenshots do QA visual, limitações e rollback.
 
-- [ ] **Step 6: Commit final**
+- [x] **Step 6: Commit final**
 
 ```bash
 git add modules/hook-intelligence docs/superpowers/plans/2026-08-04-hook-intelligence-engine.md
@@ -848,19 +848,19 @@ git commit -m "docs(hooks): complete standalone module handoff"
 
 ## Final acceptance checklist
 
-- [ ] Módulo existe somente em `modules/hook-intelligence/`.
-- [ ] API responde 200 em `/health`.
-- [ ] Geração determinística funciona sem rede.
-- [ ] Biblioteca universal tem no mínimo 40 padrões originais.
-- [ ] Biblioteca IVS tem no mínimo 20 padrões originais.
-- [ ] 12 hooks padrão são únicos e ranqueados.
-- [ ] IA é opcional e possui fallback comprovado.
-- [ ] Compliance bloqueia garantias, cura e diagnóstico direto.
-- [ ] Histórico, favoritos e exports funcionam.
-- [ ] JSON exportado valida contra contrato.
-- [ ] Web passa testes, lint e build.
-- [ ] Docker smoke e Playwright passam.
-- [ ] QA visual não encontra quebra de layout.
-- [ ] Scan de segredos passa.
-- [ ] `HANDOFF-CLAUDE-CODE.md` permite integração posterior sem reconstrução.
-- [ ] Nenhum comportamento do Content Engine OS existente foi alterado.
+- [x] Módulo existe somente em `modules/hook-intelligence/`.
+- [x] API responde 200 em `/health`.
+- [x] Geração determinística funciona sem rede.
+- [x] Biblioteca universal tem no mínimo 40 padrões originais.
+- [x] Biblioteca IVS tem no mínimo 20 padrões originais.
+- [x] 12 hooks padrão são únicos e ranqueados.
+- [x] IA é opcional e possui fallback comprovado.
+- [x] Compliance bloqueia garantias, cura e diagnóstico direto.
+- [x] Histórico, favoritos e exports funcionam.
+- [x] JSON exportado valida contra contrato.
+- [x] Web passa testes, lint e build.
+- [x] Docker smoke e Playwright passam.
+- [x] QA visual não encontra quebra de layout.
+- [x] Scan de segredos passa.
+- [x] `HANDOFF-CLAUDE-CODE.md` permite integração posterior sem reconstrução.
+- [x] Nenhum comportamento do Content Engine OS existente foi alterado.
