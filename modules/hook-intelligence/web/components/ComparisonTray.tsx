@@ -1,0 +1,3 @@
+'use client';
+import type { Hook } from '@/lib/types'; import styles from './ComparisonTray.module.css';
+export function ComparisonTray({hooks,onRemove,onClear}:{hooks:Hook[];onRemove:(id:string)=>void;onClear:()=>void}){if(!hooks.length)return null;return <aside className={styles.tray} aria-label="Comparação de hooks"><div><strong>Comparando {hooks.length}/3</strong><button onClick={onClear}>Limpar</button></div><ul>{hooks.map(h=><li key={h.id}><span>{h.text}</span><b>{Math.round(h.scores.overall)}</b><button aria-label={`Remover ${h.text} da comparação`} onClick={()=>onRemove(h.id)}>×</button></li>)}</ul></aside>}
