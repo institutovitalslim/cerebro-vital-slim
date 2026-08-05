@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.institutovitalslim.com.br/hook-intelligence/v1/generation-request.schema.json",
+  "title": "Generation Request",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "topic": {"type": "string", "minLength": 2, "maxLength": 300},
+    "channel": {
+      "type": "string",
+      "enum": ["reel", "ad", "carousel", "story", "landing_page", "email", "blog", "youtube"]
+    },
+    "objective": {
+      "type": "string",
+      "enum": ["scroll_stop", "curiosity", "retention", "identification", "education", "authority", "objection", "sharing", "action"]
+    },
+    "audience": {"type": "string", "minLength": 2, "maxLength": 300},
+    "library": {"type": "string", "enum": ["universal", "ivs-health"], "default": "universal"},
+    "awareness_stage": {
+      "type": "string",
+      "enum": ["unaware", "problem_aware", "solution_aware", "product_aware", "ready_to_act"],
+      "default": "problem_aware"
+    },
+    "tone": {
+      "type": "string",
+      "enum": ["premium", "educational", "direct", "empathetic", "provocative"],
+      "default": "premium"
+    },
+    "intensity": {"type": "integer", "minimum": 1, "maximum": 3, "default": 2},
+    "mechanism": {"type": ["string", "null"], "minLength": 1, "maxLength": 100, "default": null},
+    "context": {"type": ["string", "null"], "maxLength": 4000, "default": null},
+    "required_words": {"type": "array", "maxItems": 50, "items": {"type": "string", "minLength": 1, "maxLength": 100}, "default": []},
+    "forbidden_words": {"type": "array", "maxItems": 50, "items": {"type": "string", "minLength": 1, "maxLength": 100}, "default": []},
+    "count": {"type": "integer", "minimum": 1, "maximum": 50, "default": 12},
+    "max_length": {"type": "integer", "minimum": 30, "maximum": 280, "default": 180},
+    "use_ai": {"type": "boolean", "default": false}
+  },
+  "required": ["topic", "channel", "objective", "audience"]
+}

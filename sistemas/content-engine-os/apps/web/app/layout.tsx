@@ -74,6 +74,11 @@ const utilityLinks = [
 ]
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const hookIntelligenceEnabled = process.env.HOOK_INTELLIGENCE_ENABLED === 'true'
+  const visibleGroups = groups.map(group => group.title === 'Criar' && hookIntelligenceEnabled
+    ? { ...group, links: [...group.links, { href: '/hook-intelligence', label: '🪝 Hook Intelligence' }] }
+    : group)
+
   return (
     <html lang="pt-BR">
       <body className={`${playfair.variable} ${montserrat.variable}`}>
@@ -88,7 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </p>
             </div>
 
-            <Sidebar groups={groups} topLinks={topLinks} utilityLinks={utilityLinks} />
+            <Sidebar groups={visibleGroups} topLinks={topLinks} utilityLinks={utilityLinks} />
 
             <div className="sidebarFooter">
               <span className="badge badgeDark">Regra de uso</span>

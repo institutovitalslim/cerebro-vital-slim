@@ -1,0 +1,27 @@
+[
+  {
+    "id": "premium",
+    "label": "Premium",
+    "description": "Linguagem refinada, segura e precisa, sem exageros promocionais."
+  },
+  {
+    "id": "educational",
+    "label": "Educacional",
+    "description": "Linguagem didática que prioriza compreensão e contexto."
+  },
+  {
+    "id": "direct",
+    "label": "Direto",
+    "description": "Linguagem concisa que apresenta o ponto central sem rodeios."
+  },
+  {
+    "id": "empathetic",
+    "label": "Empático",
+    "description": "Linguagem acolhedora que reconhece experiências sem julgamento."
+  },
+  {
+    "id": "provocative",
+    "label": "Provocativo",
+    "description": "Linguagem questionadora que desafia premissas sem hostilidade."
+  }
+]

@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     supabase_anon_key: str | None = None
     supabase_service_role_key: str | None = None
     content_radar_v1_enabled: bool = False
+    hook_intelligence_enabled: bool = False
+    hook_intelligence_url: str = "http://hook-intelligence-api:8000"
+    hook_intelligence_timeout_seconds: float = 20.0
+    hook_integration_secret: str = ""
 
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', extra='ignore')
 

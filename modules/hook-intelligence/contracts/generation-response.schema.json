@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.institutovitalslim.com.br/hook-intelligence/v1/generation-response.schema.json",
+  "title": "Generation Response",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "request_id": {"type": "string", "format": "uuid"},
+    "hooks": {
+      "type": "array",
+      "items": {"$ref": "hook.schema.json"}
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}, "default": []},
+    "engine_version": {"type": "string", "const": "0.1.0", "default": "0.1.0"},
+    "duration_ms": {"type": "number", "minimum": 0}
+  },
+  "required": ["request_id", "hooks", "warnings", "engine_version", "duration_ms"]
+}

@@ -23,6 +23,31 @@ services:
     ports:
       - "127.0.0.1:6381:6379"
 
+  hook-intelligence-api:
+    build:
+      context: ../../modules/hook-intelligence
+      dockerfile: backend/Dockerfile
+    environment:
+      HOOK_DATABASE_URL: sqlite:////data/hooks.db
+      HOOK_AI_ENABLED: "false"
+      HOOK_INTEGRATION_SECRET: ${HOOK_INTEGRATION_SECRET:-}
+    volumes:
+      - hook_intelligence_data:/data
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import json, urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3); payload = json.load(response); assert response.status == 200 and payload.get('status') == 'ready'"
+      interval: 5s
+      timeout: 4s
+      retries: 12
+      start_period: 10s
+    init: true
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
   api:
     image: python:3.12-slim
     container_name: content-engine-api
@@ -33,6 +58,11 @@ services:
       - .env
       - /root/.openclaw/secure/meta_insights.env
       - /root/.openclaw/secure/rapidapi.env
+    environment:
+      HOOK_INTELLIGENCE_ENABLED: ${HOOK_INTELLIGENCE_ENABLED:-false}
+      HOOK_INTELLIGENCE_URL: http://hook-intelligence-api:8000
+      HOOK_INTELLIGENCE_TIMEOUT_SECONDS: "20"
+      HOOK_INTEGRATION_SECRET: ${HOOK_INTEGRATION_SECRET:-}
     command: sh -c "pip install --no-cache-dir -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8010 --workers 3"
     volumes:
       - ./apps/api:/app
@@ -41,8 +71,12 @@ services:
     ports:
       - "127.0.0.1:8010:8010"
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: service_started
+      redis:
+        condition: service_started
+      hook-intelligence-api:
+        condition: service_healthy
 
   web:
     image: node:20-alpine
@@ -51,6 +85,9 @@ services:
     working_dir: /app
     env_file:
       - .env
+    environment:
+      HOOK_INTELLIGENCE_ENABLED: ${HOOK_INTELLIGENCE_ENABLED:-false}
+      API_BASE_URL: http://api:8010
     command: sh -c "npm install && npm run build && npx next start -H 0.0.0.0 -p 3010"
     volumes:
       - ./apps/web:/app
@@ -61,3 +98,4 @@ services:
 
 volumes:
   postgres_data:
+  hook_intelligence_data:

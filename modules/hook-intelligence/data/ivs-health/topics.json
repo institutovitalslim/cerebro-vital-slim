@@ -1,0 +1,62 @@
+[
+  {
+    "id": "leitura_rotulos",
+    "label": "Leitura de rótulos",
+    "description": "Critérios gerais para compreender informações apresentadas em embalagens."
+  },
+  {
+    "id": "planejamento_refeicoes",
+    "label": "Planejamento de refeições",
+    "description": "Organização cotidiana de refeições sem indicar dieta individual."
+  },
+  {
+    "id": "hidratacao_cotidiana",
+    "label": "Hidratação no cotidiano",
+    "description": "Educação geral sobre atenção aos sinais e à rotina de hidratação."
+  },
+  {
+    "id": "qualidade_sono",
+    "label": "Qualidade do sono",
+    "description": "Hábitos gerais e contexto ambiental relacionados ao descanso."
+  },
+  {
+    "id": "movimento_rotina",
+    "label": "Movimento na rotina",
+    "description": "Reflexões sobre incorporar movimento respeitando possibilidades individuais."
+  },
+  {
+    "id": "relacao_comida",
+    "label": "Relação com a comida",
+    "description": "Conteúdo acolhedor sobre cultura, contexto e ausência de julgamento."
+  },
+  {
+    "id": "fontes_saude",
+    "label": "Avaliação de fontes",
+    "description": "Como observar autoria, contexto, data e limites de conteúdos de saúde."
+  },
+  {
+    "id": "conversa_profissional",
+    "label": "Conversa com profissionais",
+    "description": "Como organizar dúvidas para uma consulta sem antecipar condutas."
+  },
+  {
+    "id": "bem_estar_sustentavel",
+    "label": "Bem-estar sustentável",
+    "description": "Construção gradual de rotinas compatíveis com diferentes realidades."
+  },
+  {
+    "id": "autocuidado_realista",
+    "label": "Autocuidado realista",
+    "description": "Perspectivas de cuidado que consideram tempo, recursos e contexto."
+  },
+  {
+    "id": "marketing_saude",
+    "label": "Marketing de saúde",
+    "description": "Leitura crítica de promessas, urgência e linguagem promocional."
+  },
+  {
+    "id": "individualidade",
+    "label": "Individualidade e contexto",
+    "description": "Por que experiências distintas pedem avaliação cuidadosa e não generalizações."
+  }
+]

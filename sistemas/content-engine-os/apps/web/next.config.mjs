@@ -1,7 +1,13 @@
 /** @type {import("next").NextConfig} */
+const apiBaseUrl = (process.env.API_BASE_URL || 'http://api:8010').replace(/\/$/, '')
 const nextConfig = {
   typedRoutes: false,
   typescript: { ignoreBuildErrors: true },
+  async rewrites() {
+    return [
+      { source: '/api/:path*', destination: `${apiBaseUrl}/:path*` },
+    ]
+  },
   async redirects() {
     // Rotas antigas → destino novo. Query string é preservada automaticamente.
     return [

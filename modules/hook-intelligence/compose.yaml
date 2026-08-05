@@ -1,0 +1,66 @@
+name: hook-intelligence
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      HOOK_DATABASE_URL: sqlite:////data/hooks.db
+    ports:
+      - "127.0.0.1:${HOOK_API_PORT:-18082}:8000"
+    volumes:
+      - hook_intelligence_data:/data
+    networks:
+      - hook_intelligence
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import json, urllib.request; response = urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3); payload = json.load(response); assert response.status == 200 and payload.get('status') == 'ready'"
+      interval: 5s
+      timeout: 4s
+      retries: 12
+      start_period: 10s
+    init: true
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    environment:
+      HOOK_API_URL: http://backend:8000
+      HOSTNAME: 0.0.0.0
+      PORT: "3000"
+    ports:
+      - "127.0.0.1:${HOOK_WEB_PORT:-13000}:3000"
+    networks:
+      - hook_intelligence
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "require('http').get('http://127.0.0.1:3000/', response => { if (response.statusCode !== 200) process.exit(1); response.resume(); }).on('error', () => process.exit(1))"
+      interval: 5s
+      timeout: 4s
+      retries: 12
+      start_period: 10s
+    init: true
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  hook_intelligence_data:
+
+networks:
+  hook_intelligence:
+    driver: bridge

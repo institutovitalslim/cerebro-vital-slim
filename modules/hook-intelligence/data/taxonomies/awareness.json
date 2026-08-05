@@ -1,0 +1,27 @@
+[
+  {
+    "id": "unaware",
+    "label": "Não consciente",
+    "description": "Ainda não reconhece claramente a situação abordada."
+  },
+  {
+    "id": "problem_aware",
+    "label": "Consciente do problema",
+    "description": "Reconhece uma dificuldade, mas ainda explora suas causas."
+  },
+  {
+    "id": "solution_aware",
+    "label": "Consciente da solução",
+    "description": "Conhece caminhos possíveis e busca critérios para compará-los."
+  },
+  {
+    "id": "product_aware",
+    "label": "Consciente da oferta",
+    "description": "Já conhece a oferta e precisa compreender adequação e diferenças."
+  },
+  {
+    "id": "ready_to_act",
+    "label": "Pronto para agir",
+    "description": "Tem contexto suficiente e avalia um próximo passo concreto."
+  }
+]

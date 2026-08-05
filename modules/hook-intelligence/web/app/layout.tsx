@@ -1,0 +1,3 @@
+import type { Metadata } from 'next'; import Link from 'next/link'; import './globals.css';
+export const metadata:Metadata={title:'IVS Hook Intelligence',description:'Cockpit editorial para criação e análise de hooks'};
+export default function Layout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body><header className="topbar"><Link className="brand" href="/"><span>IVS</span><b>Hook Intelligence</b></Link><span className="environment">Cockpit editorial</span></header><div className="shell"><nav aria-label="Navegação principal"><Link href="/">Gerador</Link><Link href="/library">Biblioteca</Link><Link href="/saved">Salvos</Link></nav>{children}</div></body></html>}

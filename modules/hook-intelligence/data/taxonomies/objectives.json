@@ -1,0 +1,47 @@
+[
+  {
+    "id": "scroll_stop",
+    "label": "Interromper rolagem",
+    "description": "Conquistar atenção inicial sem recorrer a promessa enganosa."
+  },
+  {
+    "id": "curiosity",
+    "label": "Curiosidade",
+    "description": "Abrir uma pergunta relevante que o conteúdo realmente responde."
+  },
+  {
+    "id": "retention",
+    "label": "Retenção",
+    "description": "Sustentar o interesse ao longo do desenvolvimento da mensagem."
+  },
+  {
+    "id": "identification",
+    "label": "Identificação",
+    "description": "Fazer a audiência reconhecer uma situação ou perspectiva familiar."
+  },
+  {
+    "id": "education",
+    "label": "Educação",
+    "description": "Organizar conhecimento útil de forma compreensível e responsável."
+  },
+  {
+    "id": "authority",
+    "label": "Autoridade",
+    "description": "Demonstrar domínio por clareza, método e boas referências."
+  },
+  {
+    "id": "objection",
+    "label": "Objeção",
+    "description": "Acolher uma dúvida e oferecer contexto para avaliação consciente."
+  },
+  {
+    "id": "sharing",
+    "label": "Compartilhamento",
+    "description": "Estimular a circulação de uma ideia útil ou reconhecível."
+  },
+  {
+    "id": "action",
+    "label": "Ação",
+    "description": "Convidar a um próximo passo explícito, proporcional e não coercitivo."
+  }
+]

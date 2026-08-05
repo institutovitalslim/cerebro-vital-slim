@@ -1,0 +1,506 @@
+[
+  {
+    "id": "ivs-curiosity-gap-01",
+    "library": "ivs-health",
+    "mechanism": "curiosity_gap",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "O que costuma passar despercebido em conversas de {audience} sobre {topic}?",
+    "slots": [
+      "audience",
+      "topic"
+    ],
+    "explanation": "A pergunta inicial delimita conversas de {audience} sobre {topic} e esconde apenas o aspecto que costuma passar despercebido. A continuação precisa identificar esse aspecto e ligá-lo a uma fonte ou situação concreta, evitando suspense vazio. Ao conversar com quem já procura soluções, faça o anúncio levantar o aspecto esquecido e permita que o vídeo o conecte a uma fonte concreta, favorecendo compartilhamento em voz direta.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-pattern-interrupt-02",
+    "library": "ivs-health",
+    "mechanism": "pattern_interrupt",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Antes de buscar uma regra para {topic}, vale entender o contexto de {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "O gancho bloqueia a procura prematura por uma regra de {topic} e desloca a atenção para o contexto de {audience}. A tensão entre regra e circunstância se resolve quando o conteúdo oferece critérios para ler o caso sem generalizar. No momento em que o produto entra na conversa, interrompa no reel a busca por regra geral e use o carrossel para ler o contexto do público antes de sugerir qualquer ação.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-expectation-contrast-03",
+    "library": "ivs-health",
+    "mechanism": "expectation_contrast",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Em {topic}, informação mais chamativa nem sempre é a mais útil para escolhas conscientes",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O texto contrapõe o apelo de uma informação sobre {topic} à utilidade dela para escolhas conscientes. A atenção nasce da diferença entre chamar atenção e ajudar de fato, encerrada ao apresentar critérios de relevância, fonte e contexto. Pessoas prontas para agir devem encontrar no anúncio o contraste entre impacto e utilidade; no story, um critério verificável sustenta a interrupção em voz provocativa.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-identification-04",
+    "library": "ivs-health",
+    "mechanism": "identification",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Se falar de {topic} traz dúvidas e cobranças, há um ponto de partida mais acolhedor para {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "O desconforto de falar sobre {topic} aparece antes da proposta de um começo acolhedor para {audience}. Falta saber qual é esse começo, e o conteúdo deve entregá-lo como uma pergunta segura ou um acordo de conversa, sem diagnóstico nem julgamento. Enquanto o tema ainda não é reconhecido como questão, abra o carrossel com o desconforto vivido e leve à página um começo acolhedor, sem transformar identificação em diagnóstico.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-common-mistake-05",
+    "library": "ivs-health",
+    "mechanism": "common_mistake",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Um erro frequente ao abordar {topic} é ignorar como a rotina influencia a conversa",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A frase localiza o erro na exclusão da rotina ao abordar {topic}, não na falta de informação. O efeito dessa omissão fica implícito e deve ser fechado com uma situação em que contexto cotidiano muda a pergunta ou a interpretação. Quando o cotidiano já evidencia o problema, encene no story a informação fora da rotina e deixe o e-mail reconstruir o contexto, preservando retenção e voz educativa.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-myth-vs-evidence-06",
+    "library": "ivs-health",
+    "mechanism": "myth_vs_evidence",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Como diferenciar uma crença sobre {topic} de informação apoiada por boas fontes",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O gancho transforma a distinção entre crença e boa informação sobre {topic} no centro da leitura. O que caracteriza uma fonte sólida permanece aberto e precisa ser detalhado por autoria, data, contexto e limites do que se pode concluir. A quem está avaliando soluções, apresente na página os sinais de uma boa fonte e reserve ao artigo uma comparação completa, promovendo identificação com linguagem direta.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-specificity-07",
+    "library": "ivs-health",
+    "mechanism": "specificity",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Ao ler sobre {topic}, observe como a palavra {required_word} está sendo usada",
+    "slots": [
+      "topic",
+      "required_word"
+    ],
+    "explanation": "O leitor é orientado a observar {required_word} durante a leitura sobre {topic}, mas o uso relevante ainda não está explicado. A sequência se completa ao exibir dois empregos do termo e indicar como fonte ou definição muda o entendimento. Após o público conhecer o produto, destaque no assunto do e-mail a palavra em disputa e mostre no vídeo dois usos contextualizados, educando com voz empática.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-authority-08",
+    "library": "ivs-health",
+    "mechanism": "authority",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "O que fontes responsáveis deixam claro ao educar sobre {topic} e seus limites",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A pergunta dirige a atenção ao que fontes responsáveis explicitam ao educar sobre {topic}, especialmente seus limites. A resposta precisa mostrar sinais verificáveis de responsabilidade editorial, sem recorrer apenas ao prestígio de quem publica. Na decisão iminente, transforme limites editoriais em sinal de responsabilidade no reel e documente-os no artigo, construindo autoridade provocativa sem ultrapassar o que as fontes permitem.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-status-identity-09",
+    "library": "ivs-health",
+    "mechanism": "status_identity",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Escolhas informadas sobre {topic} começam com curiosidade, contexto e respeito ao próprio ritmo",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A sequência reúne curiosidade, contexto e respeito ao ritmo como bases de escolhas informadas sobre {topic}. Permanece aberta a aplicação desses valores; a peça deve convertê-los em perguntas concretas, sem pressionar nem prometer transformação. Antes da percepção do problema, um anúncio pode associar escolha informada a uma pergunta respeitosa, e o vídeo desenvolver práticas de curiosidade sem impor ritmo ou solução.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-before-after-tension-10",
+    "library": "ivs-health",
+    "mechanism": "before_after_tension",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "De uma dúvida ampla sobre {topic} a perguntas mais úteis para uma conversa profissional",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A progressão sai de uma dúvida ampla sobre {topic} e chega a perguntas úteis para uma conversa profissional. O conjunto dessas perguntas é a ponte ausente, a ser apresentado com cuidado para orientar diálogo, não substituir avaliação individual. Tendo o problema já nomeado, organize no reel a passagem da dúvida ampla à pergunta útil e entregue no carrossel um roteiro compartilhável para preparar a conversa profissional.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-avoidable-loss-11",
+    "library": "ivs-health",
+    "mechanism": "avoidable_loss",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Público: {audience}. O ruído evitável ao conferir a fonte antes de compartilhar {topic}",
+    "slots": [
+      "audience",
+      "topic"
+    ],
+    "explanation": "A sequência identifica {audience}, aponta um ruído evitável e atribui a prevenção à conferência da fonte antes de compartilhar {topic}. O risco ainda abstrato deve ser concretizado com um exemplo de checagem que muda ou interrompe a circulação da mensagem. Ao avaliar soluções, convide o público no anúncio a conferir uma fonte antes do compartilhamento e demonstre no story como a checagem evita ruído, em voz direta.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-future-desire-12",
+    "library": "ivs-health",
+    "mechanism": "future_desire",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Como seria conversar sobre {topic} com mais acolhimento e menos julgamento?",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A pergunta imagina uma conversa sobre {topic} com acolhimento e menos julgamento. A tensão está entre o diálogo atual e o possível, resolvida por acordos de linguagem ou escuta que possam ser praticados sem prometer efeitos clínicos. Com o produto em consideração, use a pergunta no topo do carrossel e faça a página propor acordos de linguagem praticáveis, interrompendo julgamentos com acolhimento, não com promessa.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-inverted-objection-13",
+    "library": "ivs-health",
+    "mechanism": "inverted_objection",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Não saber por onde começar em {topic} pode ajudar a identificar a primeira pergunta",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O texto trata a falta de um começo em {topic} como pista para encontrar a primeira pergunta. Essa inversão abre qual pergunta cumpre o papel, e a resposta deve ser simples, contextual e incapaz de soar como prescrição individual. Já perto de agir, faça o story acolher a falta de começo como pista e desenvolva por e-mail a primeira pergunta, estimulando curiosidade provocativa sem prescrição.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-demonstration-14",
+    "library": "ivs-health",
+    "mechanism": "demonstration",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Compare uma manchete isolada sobre {topic} com a mesma informação acompanhada de fonte, data e limites",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A manchete isolada sobre {topic} é colocada ao lado da versão com fonte, data e limites. A mudança de interpretação é a lacuna; o corpo deve percorrer cada elemento acrescentado e mostrar, sem exagero, o que ele corrige. Mesmo sem reconhecer o problema, o leitor pode ver na página as duas manchetes lado a lado e recorrer ao artigo para entender cada correção, em acabamento premium.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-discovery-15",
+    "library": "ivs-health",
+    "mechanism": "discovery",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Uma nova leitura de {topic} aparece quando conectamos informação e rotina sem generalizar",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A frase promete uma leitura de {topic} surgida da conexão entre informação e rotina, com a ressalva de não generalizar. A ligação específica permanece aberta e deve ser demonstrada por um caso contextualizado, preservando diferenças individuais. Uma vez percebido o problema, conecte no e-mail uma informação à rotina e use o vídeo para delimitar o caso, favorecendo identificação educativa sem extrapolar para outras pessoas.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-incomplete-list-16",
+    "library": "ivs-health",
+    "mechanism": "incomplete_list",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Três perguntas organizam sua leitura sobre {topic}; a última verifica a qualidade da fonte",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A frase promete três perguntas para organizar a leitura de {topic} e revela apenas a tarefa da última: verificar a fonte. O conteúdo deve apresentar as três sem preenchimento artificial, encerrando com um procedimento claro de checagem. Quem já pesquisa soluções pode receber os dois primeiros critérios no reel e consultar o terceiro no artigo, desde que a checagem da fonte encerre a lista de modo direto.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-editorial-question-17",
+    "library": "ivs-health",
+    "mechanism": "editorial_question",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Que critérios tornam uma informação sobre {topic} realmente útil para {audience}?",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "A questão liga utilidade da informação sobre {topic} a critérios relevantes para {audience}. Como esses critérios estão ausentes, o desenvolvimento deve ordená-los e mostrar como cada um altera uma decisão de leitura ou compartilhamento. Diante de um produto conhecido, leve a pergunta ao início do vídeo e teste cada critério em um anúncio complementar, construindo autoridade empática pela utilidade demonstrada.",
+    "intensity": 3
+  },
+  {
+    "id": "ivs-open-story-18",
+    "library": "ivs-health",
+    "mechanism": "open_story",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Durante uma conversa sobre {topic}, uma fonte esquecida mudou o sentido do relato — e ainda faltava conferir um detalhe",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O relato situa uma conversa sobre {topic}, faz uma fonte esquecida alterar seu sentido e preserva um detalhe ainda não conferido. A resolução precisa mostrar a verificação e sua consequência, mantendo os limites do caso narrado. Às vésperas de uma decisão, narre no reel a fonte esquecida e conclua no carrossel a verificação do detalhe, enfrentando objeções com provocação responsável e limites claros.",
+    "intensity": 1
+  },
+  {
+    "id": "ivs-grounded-contrarian-19",
+    "library": "ivs-health",
+    "mechanism": "grounded_contrarian",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Em {topic}, simplificar demais pode atrapalhar mais do que uma resposta honesta e contextual",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O texto desafia a ideia de que simplificar {topic} sempre ajuda e contrapõe a ela uma resposta honesta e contextual. A tensão se resolve com um caso em que a simplificação omite uma variável decisiva, sem defender complexidade gratuita. Enquanto não há consciência do problema, o anúncio pode contrastar simplificação e honestidade contextual, e o story oferecer um exemplo compartilhável sem assustar nem prometer desfechos.",
+    "intensity": 2
+  },
+  {
+    "id": "ivs-mechanism-reveal-20",
+    "library": "ivs-health",
+    "mechanism": "mechanism_reveal",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Por que contexto, fonte e individualidade mudam a interpretação de conteúdos sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A pergunta enumera contexto, fonte e individualidade e afirma que eles mudam a interpretação de conteúdos sobre {topic}. O corpo fecha o mecanismo ao explicar a contribuição específica de cada elemento e seus limites. Reconhecido o problema, distribua contexto, fonte e individualidade pelos quadros do carrossel e faça a página mostrar como cada elemento altera a interpretação antes da chamada para ação.",
+    "intensity": 3
+  }
+]

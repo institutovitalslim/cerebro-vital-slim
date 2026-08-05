@@ -1,0 +1,1012 @@
+[
+  {
+    "id": "universal-curiosity-gap-01",
+    "library": "universal",
+    "mechanism": "curiosity_gap",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "problem_aware",
+      "solution_aware"
+    ],
+    "tones": [
+      "educational",
+      "premium"
+    ],
+    "template": "O detalhe pouco notado em {topic} que pode mudar sua leitura de {desired_outcome}",
+    "slots": [
+      "topic",
+      "desired_outcome"
+    ],
+    "explanation": "O texto primeiro aponta um detalhe negligenciado em {topic} e, só depois, associa essa pista à leitura de {desired_outcome}. A identidade do detalhe permanece em aberto para que o desenvolvimento a revele com evidências, sem antecipar uma promessa de resultado. No primeiro quadro do carrossel, isole o detalhe ignorado e reserve o efeito sobre a leitura para a sequência, com explicação precisa para quem já reconhece o problema ou avalia soluções.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-curiosity-gap-02",
+    "library": "universal",
+    "mechanism": "curiosity_gap",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Antes de concluir sobre {topic}, observe esta pergunta que quase sempre fica de fora",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A sequência pede que a conclusão sobre {topic} seja suspensa e destaca uma pergunta ausente, mas não entrega a pergunta no gancho. O corpo deve nomeá-la e mostrar por que ela altera a análise, fechando uma curiosidade intelectual legítima. Diante de uma audiência que já percebe o problema, faça o anúncio ou story abrir a investigação pela pergunta omitida e entregue sua relevância antes que a curiosidade se desgaste.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-pattern-interrupt-01",
+    "library": "universal",
+    "mechanism": "pattern_interrupt",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Pare de começar por {desired_outcome}: em {topic}, o primeiro passo pode estar em outro lugar",
+    "slots": [
+      "desired_outcome",
+      "topic"
+    ],
+    "explanation": "A ordem esperada é invertida: o texto manda interromper a busca por {desired_outcome}, situa a discussão em {topic} e sugere outro começo. A lacuna está nesse ponto de partida alternativo, que deve aparecer logo em seguida com uma justificativa prática. Já na abertura da página, interrompa o impulso de buscar o resultado e conduza quem compara soluções ao ponto de partida alternativo, em linguagem direta e orientada à retenção.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-pattern-interrupt-02",
+    "library": "universal",
+    "mechanism": "pattern_interrupt",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Nem toda boa conversa sobre {topic} precisa começar com uma resposta",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Em vez de prometer resposta imediata, a frase defende que uma boa conversa sobre {topic} pode começar de outra maneira. O leitor fica à espera desse primeiro movimento, a ser fechado com uma pergunta ou recorte que acolha a complexidade. Quando a pessoa já conhece o produto, transforme a ausência de resposta em convite à conversa no story ou e-mail, usando empatia para educar sem parecer evasivo.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-expectation-contrast-01",
+    "library": "universal",
+    "mechanism": "expectation_contrast",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Você esperava mais velocidade em {topic}; talvez o critério decisivo seja consistência",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A frase coloca a velocidade esperada em {topic} diante de um critério rival, a consistência. Esse deslocamento abre a dúvida sobre qual medida orienta melhor a decisão; o desenvolvimento deve comparar as duas e sustentar a preferência com exemplos. Na etapa decisiva da página de destino, confronte a pressa com um indicador de consistência e dê ao leitor pronto para agir um parâmetro provocativo, porém verificável.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-expectation-contrast-02",
+    "library": "universal",
+    "mechanism": "expectation_contrast",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "O que parece avanço em {topic} nem sempre aproxima {audience} de {desired_outcome}",
+    "slots": [
+      "topic",
+      "audience",
+      "desired_outcome"
+    ],
+    "explanation": "Primeiro surge uma aparência de avanço em {topic}; depois, ela é separada da aproximação de {audience} ao objetivo declarado. O que conta como progresso fica pendente e precisa ser definido por indicadores observáveis no restante do conteúdo. Uma sequência de e-mails pode introduzir esse contraste antes de qualquer oferta, enquanto o vídeo aprofunda os sinais de avanço para construir autoridade junto a quem ainda não percebe a questão.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-identification-01",
+    "library": "universal",
+    "mechanism": "identification",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Se {topic} parece simples até chegar a sua rotina, esta conversa é para {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "A construção começa pela aparente simplicidade de {topic}, introduz o atrito da rotina e então endereça {audience}. A identificação deixa aberta a causa dessa distância entre teoria e prática, que deve ser explicada sem culpar quem enfrenta a dificuldade. Se a dificuldade já foi reconhecida, abra o reel com uma cena cotidiana e deixe o artigo explicar o atrito sem culpa, em voz educativa voltada à objeção real.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-identification-02",
+    "library": "universal",
+    "mechanism": "identification",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Para quem já tentou organizar {topic} e terminou com mais perguntas do que respostas",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O leitor é reconhecido por uma experiência precisa: tentar organizar {topic} e terminar com novas perguntas. A sequência não promete eliminar toda incerteza; ela fecha a tensão ao ordenar quais perguntas vêm primeiro e quais dados podem respondê-las. Quem compara soluções aproveitará melhor o vídeo quando as perguntas acumuladas organizarem a narrativa; no anúncio, selecione apenas a dúvida capaz de estimular compartilhamento sem simplificar o tema.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-common-mistake-01",
+    "library": "universal",
+    "mechanism": "common_mistake",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "O erro mais comum ao explicar {topic} não está no conteúdo, mas na ordem",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O gancho nomeia um erro na explicação de {topic}, descarta o conteúdo como causa principal e aponta para a ordem. A correção ainda não foi mostrada; cabe à peça reorganizar as etapas e demonstrar como a nova sequência melhora a compreensão. Ao apresentar o produto em reel ou carrossel, mostre a ordem problemática antes da correção e converta a identificação empática em um próximo passo executável.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-common-mistake-02",
+    "library": "universal",
+    "mechanism": "common_mistake",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Ao buscar {desired_outcome}, muita gente compara opções antes de definir o próprio critério",
+    "slots": [
+      "desired_outcome"
+    ],
+    "explanation": "A busca por {desired_outcome} vem primeiro, seguida do hábito de comparar opções sem definir critério. A perda provocada por essa inversão sustenta a tensão, resolvida quando o conteúdo ensina a formular e aplicar um parâmetro antes da escolha. Perto da decisão, um story curto pode interromper a comparação automática com a ausência de critério, enquanto o anúncio conduz à definição desse parâmetro em tom provocativo.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-myth-vs-evidence-01",
+    "library": "universal",
+    "mechanism": "myth_vs_evidence",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Em {topic}, uma frase repetida não vale mais que um bom critério de análise",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O texto opõe uma frase repetida sobre {topic} a um critério de análise, separando popularidade de sustentação. A pergunta silenciosa é qual critério merece confiança; a resposta deve trazer fonte, limite e modo de verificação, não outra máxima. Antes que o público reconheça o problema, disponha frase popular e critério lado a lado no carrossel ou na página, deixando a curiosidade nascer da diferença entre repetição e sustentação.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-myth-vs-evidence-02",
+    "library": "universal",
+    "mechanism": "myth_vs_evidence",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Crença popular ou conclusão bem sustentada: como separar as duas em {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A estrutura apresenta duas categorias concorrentes, crença popular e conclusão sustentada, e pergunta como distingui-las em {topic}. A continuação encerra a incerteza com passos de checagem que tornem a diferença visível ao leitor. Assim que a audiência nomear o problema, mantenha o story na pergunta de verificação e use o e-mail para demonstrar a checagem, prolongando a retenção sem fabricar controvérsia.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-specificity-01",
+    "library": "universal",
+    "mechanism": "specificity",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Uma palavra muda toda a conversa sobre {topic}: {required_word}",
+    "slots": [
+      "topic",
+      "required_word"
+    ],
+    "explanation": "A promessa de mudança é concentrada em uma única palavra, {required_word}, depois de situar a conversa em {topic}. Falta explicar por que esse termo altera o sentido; a peça deve comparar usos concretos e mostrar a consequência interpretativa de cada um. Dentro da página de destino, destaque a palavra como eixo visual e permita que o artigo compare seus sentidos, ajudando quem avalia soluções a reconhecer-se na escolha mais precisa.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-specificity-02",
+    "library": "universal",
+    "mechanism": "specificity",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Três minutos de contexto podem evitar uma interpretação apressada sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A frase quantifica um pequeno investimento de contexto e o relaciona ao risco de interpretar {topic} depressa demais. O conteúdo fecha a lacuna ao selecionar quais informações cabem nesse intervalo e qual conclusão elas impedem. Depois de apresentar a solução, use o e-mail para pedir três minutos de atenção e o vídeo para ordenar o contexto, acolhendo dúvidas sem prometer eliminar toda ambiguidade.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-authority-01",
+    "library": "universal",
+    "mechanism": "authority",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Como profissionais cuidadosos estruturam uma análise de {topic} sem esconder incertezas",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A autoridade aparece como processo: profissionais estruturam a análise de {topic} e tornam as incertezas visíveis. A ordem desse método fica em suspenso; o desenvolvimento deve expor etapas, fontes e limites para que a confiança possa ser auditada. Na reta final da campanha, um reel pode resumir o método e o artigo documentar fontes e limites, oferecendo autoridade provocativa a leitores preparados para decidir.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-authority-02",
+    "library": "universal",
+    "mechanism": "authority",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "O que um método transparente revela antes de qualquer conclusão sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O texto antecipa que um método transparente revela algo antes da conclusão sobre {topic}. Essa informação prévia é a lacuna central e deve ser preenchida com critérios, pressupostos ou limites que permitam avaliar o raciocínio. Ainda antes de existir consciência do problema, faça o anúncio revelar um pressuposto do método e deixe o vídeo demonstrar os demais, vencendo objeções pela transparência, não pelo prestígio.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-status-identity-01",
+    "library": "universal",
+    "mechanism": "status_identity",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Quem valoriza escolhas conscientes faz esta pergunta antes de decidir sobre {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A frase associa escolhas conscientes a uma pergunta feita antes da decisão sobre {topic}. Como a pergunta não é revelada, o conteúdo deve apresentá-la e mostrar de que forma ela expressa discernimento, sem transformar identidade em superioridade. Como abertura de reel, formule a pergunta que distingue escolha consciente sem elogiar o público; no carrossel, desenvolva o critério para favorecer compartilhamento entre pessoas que reconhecem o problema.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-status-identity-02",
+    "library": "universal",
+    "mechanism": "status_identity",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "A diferença entre apenas acompanhar {topic} e desenvolver um olhar criterioso",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O gancho separa acompanhar {topic} de desenvolver um olhar criterioso, criando uma distância aspiracional entre os dois comportamentos. Essa passagem se fecha com um hábito observável que o leitor consiga adotar e avaliar. Entre a atenção inicial e a chamada para ação, apresente no story um hábito de observação que ajude quem compara soluções a transformar acompanhamento passivo em olhar criterioso.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-before-after-tension-01",
+    "library": "universal",
+    "mechanism": "before_after_tension",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Antes, {context}; depois, uma pergunta melhor organizou a conversa sobre {topic}",
+    "slots": [
+      "context",
+      "topic"
+    ],
+    "explanation": "O texto marca um estado anterior com {context}, introduz uma pergunta melhor e mostra que ela reorganizou a conversa sobre {topic}. A pergunta funciona como ponto de virada ainda oculto e precisa ser entregue junto do efeito que produziu. Logo após mostrar o contexto anterior no carrossel, revele a pergunta que reorganizou a análise e conduza o público familiarizado com o produto até a nova leitura, com empatia.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-before-after-tension-02",
+    "library": "universal",
+    "mechanism": "before_after_tension",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "De informação dispersa a um mapa claro: uma forma de repensar {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A abertura parte de informação dispersa e aponta para um mapa claro de {topic}, mas retém o caminho entre os dois estados. O desenvolvimento deve ordenar categorias ou etapas para tornar a mudança compreensível, em vez de apenas celebrá-la. Sob pressão para decidir, ofereça no story um fragmento do mapa e complete por e-mail a passagem da dispersão à ordem, preservando uma provocação útil para a ação.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-avoidable-loss-01",
+    "library": "universal",
+    "mechanism": "avoidable_loss",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "O custo invisível de discutir {topic} sem alinhar o objetivo: “{desired_outcome}”",
+    "slots": [
+      "topic",
+      "desired_outcome"
+    ],
+    "explanation": "O gancho nomeia um custo invisível na discussão de {topic} e o liga à falta de alinhamento sobre o objetivo declarado. A natureza desse custo fica aberta; o texto deve mostrá-la em retrabalho, ruído ou decisões conflitantes e então propor um acordo de sentido. Caso o tema ainda pareça irrelevante, materialize na página ou no artigo um único custo do desalinhamento e sustente a retenção com consequências observáveis, em registro premium.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-avoidable-loss-02",
+    "library": "universal",
+    "mechanism": "avoidable_loss",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Quanto da sua atenção se perde quando {topic} chega sem contexto",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A atenção é apresentada como recurso que se perde quando {topic} chega sem contexto. O tamanho e a causa da perda pedem explicação, fechada ao contrastar uma mensagem solta com outra que informa origem, situação e propósito. Ao reconhecer o problema de atenção, inicie o e-mail com a mensagem sem contexto e use o vídeo para reconstruí-la, promovendo identificação por contraste em voz educativa.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-future-desire-01",
+    "library": "universal",
+    "mechanism": "future_desire",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Imagine abordar {topic} com critérios claros e menos ruído ao redor",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O convite projeta uma abordagem de {topic} com critérios claros e menos ruído, sem afirmar que esse futuro ocorrerá. A distância até o cenário desejado permanece aberta e deve ser percorrida com um primeiro hábito plausível e verificável. Projetada no início do artigo, a cena de menor ruído prepara quem pesquisa soluções para aprender os primeiros critérios; no reel, concentre-se em apenas um hábito possível.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-future-desire-02",
+    "library": "universal",
+    "mechanism": "future_desire",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Um caminho possível para sua rotina — objetivo: {desired_outcome}",
+    "slots": [
+      "desired_outcome"
+    ],
+    "explanation": "A frase apresenta a rotina como território de um caminho possível e nomeia {desired_outcome} como objetivo, não como garantia. O próximo passo ainda falta; o conteúdo deve oferecê-lo de modo proporcional ao contexto e indicar como avaliar avanço. Durante a apresentação do produto, posicione o caminho como transição entre rotina e objetivo no vídeo ou anúncio, construindo autoridade com acolhimento e uma medida concreta de avanço.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-inverted-objection-01",
+    "library": "universal",
+    "mechanism": "inverted_objection",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Se você acha que não tem tempo para entender {topic}, comece por este recorte",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A falta de tempo para entender {topic} é aceita como condição inicial e convertida na razão para começar por um recorte. Como esse recorte não foi revelado, o conteúdo deve entregá-lo com escopo reduzido e utilidade imediata. Com a decisão próxima, converta a falta de tempo em um recorte de baixa fricção no reel e detalhe no carrossel o suficiente para enfrentar a objeção sem ironia.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-inverted-objection-02",
+    "library": "universal",
+    "mechanism": "inverted_objection",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "A sua dúvida sobre {topic} pode ser justamente o melhor ponto de partida",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A dúvida sobre {topic} deixa de ser obstáculo e passa a ocupar o lugar de ponto de partida. O leitor ainda precisa saber como usá-la; a sequência se fecha ao transformar a incerteza em pergunta investigável e próximo passo seguro. Antes de nomear qualquer problema, acolha a dúvida no anúncio ou story e transforme-a em pergunta compartilhável, mantendo acabamento premium e evitando sugerir que incerteza seja falha.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-demonstration-01",
+    "library": "universal",
+    "mechanism": "demonstration",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Aplique o mesmo critério a duas leituras de {topic} e observe em qual etapa elas se separam",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A instrução manda aplicar um único critério a duas leituras de {topic} e observar onde elas divergem. O resultado da comparação fica aberto; a continuação deve executar o teste diante do leitor e explicar o significado da separação. Durante a comparação no carrossel, aplique visualmente o critério às duas leituras e reserve a página para interpretar o ponto de separação, orientando uma ação educativa de quem reconhece o problema.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-demonstration-02",
+    "library": "universal",
+    "mechanism": "demonstration",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Uma comparação simples para enxergar duas leituras possíveis de {topic}",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O gancho promete uma comparação simples entre duas leituras de {topic}, mas ainda não mostra os pares nem o parâmetro. A demonstração precisa expor ambos lado a lado e concluir apenas o que a diferença observada permite. Assim que duas soluções entrarem em disputa, use o story para exibir o contraste e o e-mail para explicar o parâmetro, interrompendo a rolagem com clareza direta.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-discovery-01",
+    "library": "universal",
+    "mechanism": "discovery",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Ao reorganizar as perguntas sobre {topic}, encontramos um ponto que estava escondido",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A sequência reorganiza perguntas sobre {topic} e anuncia que essa operação revelou um ponto escondido. A descoberta não é nomeada no gancho; o desenvolvimento deve reconstruir a nova ordem e permitir que o leitor reconheça a conexão. No meio da página, reorganize as perguntas diante do leitor e deixe o artigo desenvolver a conexão descoberta, oferecendo curiosidade empática a quem já conhece o produto.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-discovery-02",
+    "library": "universal",
+    "mechanism": "discovery",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Uma perspectiva sobre {topic} que ganha sentido com este contexto: {context}",
+    "slots": [
+      "topic",
+      "context"
+    ],
+    "explanation": "O texto oferece uma perspectiva sobre {topic} e informa separadamente o contexto em que ela ganha sentido: {context}. Falta mostrar a relação entre os dois elementos, fechada por uma comparação que explique por que o enquadramento altera a leitura. Em uma campanha próxima da conversão, introduza o contexto no e-mail e aprofunde no vídeo por que ele altera a perspectiva, usando provocação para reter sem exagerar a descoberta.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-incomplete-list-01",
+    "library": "universal",
+    "mechanism": "incomplete_list",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Há três filtros úteis para avaliar {topic}; o último considera este público: {audience}",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "O gancho anuncia três filtros para avaliar {topic}, retém o último e informa que ele considera {audience}. A continuidade depende de entregar os itens na ordem prometida e explicar por que o terceiro muda a aplicação dos anteriores. A audiência ainda não consciente pode encontrar o primeiro filtro no reel e guardar o carrossel para consultar os três, desde que o último considere o público com precisão premium.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-incomplete-list-02",
+    "library": "universal",
+    "mechanism": "incomplete_list",
+    "objectives": [
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Dois sinais ajudam a organizar {topic}, mas um terceiro evita conclusões rápidas",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "Dois sinais são antecipados como organizadores de {topic}, enquanto um terceiro é reservado para impedir conclusões rápidas. A lista só fecha a tensão se nomear todos os sinais e demonstrar a função distinta do item final. Na fase em que o problema já é percebido, apresente os dois sinais no anúncio e faça o vídeo explicar o terceiro, educando sem esticar artificialmente a lista.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-editorial-question-01",
+    "library": "universal",
+    "mechanism": "editorial_question",
+    "objectives": [
+      "authority",
+      "education"
+    ],
+    "channels": [
+      "reel",
+      "carousel"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "O que realmente merece atenção quando falamos de {topic} para {audience}?",
+    "slots": [
+      "topic",
+      "audience"
+    ],
+    "explanation": "A pergunta delimita {topic}, direciona o olhar de {audience} para o que merece atenção e evita sugerir a resposta. A peça deve selecionar um critério central, justificá-lo e reconhecer o que permanece fora daquele recorte. Aberto com a pergunta central, o reel estabelece autoridade rapidamente; o carrossel deve então justificar um critério para quem avalia soluções, mantendo voz direta e reconhecendo limites.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-editorial-question-02",
+    "library": "universal",
+    "mechanism": "editorial_question",
+    "objectives": [
+      "objection",
+      "education"
+    ],
+    "channels": [
+      "ad",
+      "story"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Por que {topic} ganha significados diferentes conforme o contexto?",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O gancho pergunta por que {topic} muda de significado conforme o contexto, transformando variação em pauta. A resposta precisa comparar situações específicas e identificar o elemento contextual responsável pela diferença percebida. Sempre que o produto já for conhecido, compare dois contextos no story ou anúncio e trate a variação com empatia, de modo que a objeção leve a uma leitura mais cuidadosa.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-open-story-01",
+    "library": "universal",
+    "mechanism": "open_story",
+    "objectives": [
+      "sharing",
+      "education"
+    ],
+    "channels": [
+      "carousel",
+      "landing_page"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "Na revisão final de {topic}, uma contradição apareceu no último parágrafo — a decisão ficou para depois",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A cena começa na revisão de {topic}, introduz uma contradição no último parágrafo e interrompe a narrativa antes da decisão. O desfecho deve revelar como a inconsistência foi investigada e por que a decisão precisou esperar. A decisão adiada funciona como virada no carrossel e como ponte para a página, onde leitores prontos para agir encontram a investigação da contradição em tom provocativo.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-open-story-02",
+    "library": "universal",
+    "mechanism": "open_story",
+    "objectives": [
+      "action",
+      "education"
+    ],
+    "channels": [
+      "story",
+      "email"
+    ],
+    "awareness_stages": [
+      "unaware"
+    ],
+    "tones": [
+      "premium"
+    ],
+    "template": "Começamos buscando {desired_outcome}; no caminho, descobrimos um critério mais importante",
+    "slots": [
+      "desired_outcome"
+    ],
+    "explanation": "A história parte da busca por {desired_outcome}, registra a descoberta de um critério superior e termina antes de explicar a mudança. A continuação fecha a curva ao nomear o critério e mostrar a escolha concreta que ele redirecionou. Sem consciência prévia do problema, deixe o story narrar a busca inicial e use o e-mail para revelar o critério que mudou a escolha, conduzindo à ação com sobriedade premium.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-grounded-contrarian-01",
+    "library": "universal",
+    "mechanism": "grounded_contrarian",
+    "objectives": [
+      "scroll_stop",
+      "education"
+    ],
+    "channels": [
+      "landing_page",
+      "blog"
+    ],
+    "awareness_stages": [
+      "problem_aware"
+    ],
+    "tones": [
+      "educational"
+    ],
+    "template": "Talvez o conselho mais popular sobre {topic} não sirva para todo contexto",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O conselho popular sobre {topic} é questionado apenas em certos contextos, o que cria atrito sem negá-lo por completo. A condição em que ele falha fica aberta e deve ser sustentada com exemplo, critério e limite de aplicação. Sobretudo quando o problema é reconhecido, coloque o conselho popular no topo da página e dedique o artigo à exceção contextual, interrompendo certezas com educação em vez de confronto.",
+    "intensity": 1
+  },
+  {
+    "id": "universal-grounded-contrarian-02",
+    "library": "universal",
+    "mechanism": "grounded_contrarian",
+    "objectives": [
+      "curiosity",
+      "education"
+    ],
+    "channels": [
+      "email",
+      "youtube"
+    ],
+    "awareness_stages": [
+      "solution_aware"
+    ],
+    "tones": [
+      "direct"
+    ],
+    "template": "Discordar do senso comum em {topic} exige mais método, não mais volume",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "A frase contrapõe método e volume ao tratar da discordância em {topic}, recusando provocação como prova. Falta descrever o método exigido; o desenvolvimento deve entregá-lo por meio de fonte, comparação e reconhecimento de incerteza. Ao público que já compara soluções, o e-mail deve explicitar o método de discordância e o vídeo executá-lo, convertendo curiosidade em avaliação direta das evidências.",
+    "intensity": 2
+  },
+  {
+    "id": "universal-mechanism-reveal-01",
+    "library": "universal",
+    "mechanism": "mechanism_reveal",
+    "objectives": [
+      "retention",
+      "education"
+    ],
+    "channels": [
+      "blog",
+      "reel"
+    ],
+    "awareness_stages": [
+      "product_aware"
+    ],
+    "tones": [
+      "empathetic"
+    ],
+    "template": "Por trás de uma mensagem memorável sobre {topic}, existe esta escolha de estrutura",
+    "slots": [
+      "topic"
+    ],
+    "explanation": "O gancho parte do efeito, uma mensagem memorável sobre {topic}, e anuncia que há uma escolha estrutural por trás dele. A escolha permanece escondida até que o conteúdo decomponha a mensagem e mostre a função de cada parte. Na comunicação de um produto conhecido, decomponha a mensagem no reel e aprofunde cada escolha no artigo, mantendo a retenção por clareza estrutural e voz empática.",
+    "intensity": 3
+  },
+  {
+    "id": "universal-mechanism-reveal-02",
+    "library": "universal",
+    "mechanism": "mechanism_reveal",
+    "objectives": [
+      "identification",
+      "education"
+    ],
+    "channels": [
+      "youtube",
+      "ad"
+    ],
+    "awareness_stages": [
+      "ready_to_act"
+    ],
+    "tones": [
+      "provocative"
+    ],
+    "template": "O mecanismo que conecta {topic} a {desired_outcome} começa pela clareza do contexto",
+    "slots": [
+      "topic",
+      "desired_outcome"
+    ],
+    "explanation": "A relação entre {topic} e {desired_outcome} é atribuída a um mecanismo cujo primeiro componente é a clareza de contexto. As etapas seguintes ficam abertas e devem ser reveladas em ordem causal, sem confundir estrutura com garantia. Próximo ao momento de agir, revele a primeira etapa causal no anúncio e encadeie as demais no vídeo, fazendo a identificação nascer do mecanismo, não de uma garantia provocativa.",
+    "intensity": 1
+  }
+]

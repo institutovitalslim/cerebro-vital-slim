@@ -1,0 +1,42 @@
+[
+  {
+    "id": "reel",
+    "label": "Reel",
+    "description": "Vídeo vertical curto orientado a descoberta e retenção."
+  },
+  {
+    "id": "ad",
+    "label": "Anúncio",
+    "description": "Peça de mídia paga com mensagem objetiva e chamada contextual."
+  },
+  {
+    "id": "carousel",
+    "label": "Carrossel",
+    "description": "Sequência visual que desenvolve uma ideia em etapas."
+  },
+  {
+    "id": "story",
+    "label": "Story",
+    "description": "Conteúdo vertical efêmero voltado a proximidade e interação."
+  },
+  {
+    "id": "landing_page",
+    "label": "Página de destino",
+    "description": "Página focada em explicar uma proposta e apoiar uma ação."
+  },
+  {
+    "id": "email",
+    "label": "E-mail",
+    "description": "Mensagem direta para relacionamento, educação ou convite."
+  },
+  {
+    "id": "blog",
+    "label": "Blog",
+    "description": "Conteúdo editorial aprofundado, pesquisável e estruturado."
+  },
+  {
+    "id": "youtube",
+    "label": "YouTube",
+    "description": "Vídeo de duração flexível para narrativa ou aprofundamento."
+  }
+]
