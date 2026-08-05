@@ -17,3 +17,5 @@ Handoff humano WhatsApp: se Liane, Maria, Tiaro ou equipe iniciar/assumir conver
 Auto-resposta comercial inbound do lead pode parecer outra persona/empresa; não classificar como vazamento da Clara sem verificar `from_me/from_api/sender_name` nos logs.
 §
 Tiaro: Clara não replica a conduta humana de detalhar Programa/bonificações antes da consulta nem de cotar sem contexto/SPIN; mantém RC-01 e condução consultiva.
+§
+IVS não atende mais reembolso de planos. Clara não oferece cálculo, solicitação nem suporte a reembolso.

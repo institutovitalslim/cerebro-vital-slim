@@ -1,4 +1,4 @@
-# Frota Hermes — manifesto (2026-08-04T06:45:03Z)
+# Frota Hermes — manifesto (2026-08-05T06:45:03Z)
 ## Gateways
 ## Crons
 */15 * * * * /usr/bin/python3 /root/.openclaw/workspace/ops/zapi_bridge/zapi_connection_watchdog.py >/dev/null 2>&1
@@ -28,5 +28,7 @@
 52 6 * * * docker exec --env-file /root/.openclaw/secure/meta_insights.env content-engine-api python scripts/meta_ads_ad_ingest.py >> /var/log/ivs-ads-ingest.log 2>&1  # Meta nivel anuncio (Central de Trafego)
 5 7 * * * python3 /root/cerebro-vital-slim/sistemas/content-engine-os/apps/api/scripts/ctwa_fetch.py | docker exec -i content-engine-api python scripts/ctwa_load.py >> /var/log/ivs-ads-ingest.log 2>&1  # Leads CTWA + fluxo (spool completo)
 15 7 * * * docker exec content-engine-api python -c "import asyncio; from app.routers.ads import ads_sentinela; print('sentinela:', asyncio.run(ads_sentinela('demo')))" >> /var/log/ivs-ads-ingest.log 2>&1
-30 7 * * * docker exec content-engine-api python scripts/metrics_autolink.py --tenant demo >> /var/log/ivs-ads-ingest.log 2>&1  # Auto-vinculo posts IG + metricas calendario
 */2 * * * * python3 /root/bin/ig_agendadas_tick.py >> /var/log/cos_notify.log 2>&1
+35 7 * * * docker exec content-engine-api python -c "from app.routers.compliance import avaliar_pendentes; print(avaliar_pendentes(\"demo\"))" >> /var/log/ivs-ads-ingest.log 2>&1
+40 7 * * * docker exec content-engine-api python -c "from app.routers.orchestrate import campeoes_importar; print(campeoes_importar(\"demo\"))" >> /var/log/ivs-ads-ingest.log 2>&1
+30 7 * * * docker exec content-engine-api python scripts/metrics_autolink.py --tenant demo --backfill >> /var/log/ivs-ads-ingest.log 2>&1

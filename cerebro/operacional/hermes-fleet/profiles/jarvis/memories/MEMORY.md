@@ -28,7 +28,7 @@ Posts FB/IG IVS: acionar João/Content OS e obter aprovação; Jarvis não publi
 §
 Chrome remoto/noVNC: Tiaro pode não conseguir abrir IP direto; preferir link trycloudflare quando disponível.
 §
-Claude main local no notebook; Jarvis não orquestra. Content OS handoffs: content-engine-os/CLAUDE.md.
+Claude local; Jarvis não orquestra. Content OS: módulos isolados, integrados depois via Claude Code.
 §
 Páginas estáticas Authority Link Engine IVS em Lauro de Freitas aprovadas; usar como benchmark SEO/local.
 §
