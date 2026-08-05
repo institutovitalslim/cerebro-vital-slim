@@ -114,6 +114,16 @@ describe('contratos do formulário', () => {
 });
 
 describe('adaptação e mensagens públicas', () => {
+  test('card só expõe ações com callback funcional', () => {
+    const { rerender } = render(<HookCard hook={sampleHook} />);
+    expect(screen.queryByRole('button', { name: 'Adaptar' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Comparar' })).not.toBeInTheDocument();
+
+    rerender(<HookCard hook={sampleHook} onCompare={vi.fn()} onAdapt={vi.fn()} />);
+    expect(screen.getByRole('button', { name: 'Adaptar' })).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Comparar' })).toBeVisible();
+  });
+
   test('card só mostra Adaptar com callback e home preenche e foca Tema', async () => {
     const { rerender } = render(<HookCard hook={sampleHook} />);
     expect(screen.queryByRole('button', { name: 'Adaptar' })).not.toBeInTheDocument();

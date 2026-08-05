@@ -34,10 +34,16 @@ export default function Saved() {
     controller: AbortController;
   } | null>(null);
 
+  function cancelActiveRequest() {
+    const request = activeRequest.current;
+    activeRequest.current = null;
+    request?.controller.abort();
+  }
+
   useEffect(() => {
     const controller = new AbortController();
     const requestId = ++requestSequence.current;
-    activeRequest.current?.controller.abort();
+    cancelActiveRequest();
     activeRequest.current = { id: requestId, controller };
     const call = tab === 'history'
       ? api.history(page, controller.signal)
@@ -74,8 +80,8 @@ export default function Saved() {
       });
 
     return () => {
-      controller.abort();
       if (activeRequest.current?.id === requestId) activeRequest.current = null;
+      controller.abort();
     };
   }, [page, retry, tab]);
 
@@ -85,7 +91,7 @@ export default function Saved() {
   }, []);
 
   const load = () => {
-    activeRequest.current?.controller.abort();
+    cancelActiveRequest();
     setLoading(true);
     setError(false);
     setRetry((value) => value + 1);
@@ -93,7 +99,7 @@ export default function Saved() {
 
   function choose(value: SavedTab) {
     if (value === tab) return;
-    activeRequest.current?.controller.abort();
+    cancelActiveRequest();
     setLoading(true);
     setError(false);
     setTab(value);
@@ -319,7 +325,7 @@ export default function Saved() {
           type="button"
           disabled={page === 1 || loading}
           onClick={() => {
-            activeRequest.current?.controller.abort();
+            cancelActiveRequest();
             setLoading(true);
             setPage((value) => value - 1);
           }}
@@ -333,7 +339,7 @@ export default function Saved() {
           type="button"
           disabled={page * PAGE_SIZE >= total || loading}
           onClick={() => {
-            activeRequest.current?.controller.abort();
+            cancelActiveRequest();
             setLoading(true);
             setPage((value) => value + 1);
           }}

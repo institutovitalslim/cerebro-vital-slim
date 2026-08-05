@@ -94,7 +94,15 @@ export function HookCard({ hook, selected = false, onCompare, onAdapt }: HookCar
       <button type="button" onClick={copy}>{copied ? 'Copiado' : 'Copiar'}</button>
       <button type="button" onClick={favor} disabled={favorite || favoriting} aria-pressed={favorite}>{favorite ? 'Favoritado' : favoriting ? 'Favoritando…' : 'Favoritar'}</button>
       {onAdapt && <button type="button" onClick={() => onAdapt(hook)}>Adaptar</button>}
-      <button type="button" disabled={blocked} aria-pressed={selected} title={blocked ? 'Hooks bloqueados não podem ser comparados' : undefined} onClick={() => onCompare?.(hook)}>{selected ? 'Remover da comparação' : 'Comparar'}</button>
+      {onCompare && <button
+        type="button"
+        disabled={blocked}
+        aria-pressed={selected}
+        title={blocked ? 'Hooks bloqueados não podem ser comparados' : undefined}
+        onClick={() => onCompare(hook)}
+      >
+        {selected ? 'Remover da comparação' : 'Comparar'}
+      </button>}
     </footer>
     {copyError && <small role="alert">Não foi possível copiar.</small>}
     {favoriteError && <small role="alert">Não foi possível favoritar.</small>}
