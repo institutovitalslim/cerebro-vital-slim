@@ -1,0 +1,10 @@
+{
+  "name": "ivs-design-qa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Gate local e governado de QA visual para HTML do Instituto Vital Slim",
+  "dependencies": {
+    "playwright-core": "1.62.1"
+  }
+}
