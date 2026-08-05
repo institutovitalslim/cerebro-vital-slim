@@ -192,6 +192,38 @@ class HookRepository:
                 is not None
             )
 
+    def list_favorites(self, page: int = 1, page_size: int = 20) -> dict[str, Any]:
+        """List each globally favorited logical hook once, newest favorite first."""
+
+        self._validate_page_value(page, "page")
+        self._validate_page_value(page_size, "page_size", maximum=100)
+        latest_hook = hooks.alias("latest_hook")
+        latest_row = (
+            select(func.max(latest_hook.c.row_id))
+            .where(latest_hook.c.hook_id == favorites.c.hook_id)
+            .scalar_subquery()
+        )
+        with self._engine.connect() as connection:
+            total = connection.execute(select(func.count()).select_from(favorites)).scalar_one()
+            statement = (
+                select(hooks)
+                .join(favorites, favorites.c.hook_id == hooks.c.hook_id)
+                .where(hooks.c.row_id == latest_row)
+                .order_by(favorites.c.created_at.desc(), hooks.c.row_id.desc())
+                .limit(page_size)
+                .offset((page - 1) * page_size)
+            )
+            try:
+                rows = connection.execute(statement).all()
+            except (JSONDecodeError, StatementError) as exc:
+                raise ValueError("invalid persisted favorite Hook payload") from exc
+        return {
+            "items": tuple(_row_to_hook(row) for row in rows),
+            "total": total,
+            "page": page,
+            "page_size": page_size,
+        }
+
     def export_session(self, session_id: UUID | str, workspace_ref: str) -> dict[str, Any]:
         session_hooks = self.get_session(session_id)
         identifiers = [str(item.id) for item in session_hooks]
