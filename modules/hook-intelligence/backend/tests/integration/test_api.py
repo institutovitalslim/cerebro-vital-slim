@@ -98,6 +98,11 @@ def test_generate_boundaries_order_metadata_and_persisted_history(client):
     assert len(body["hooks"]) == 5
     scores = [hook["scores"]["overall"] for hook in body["hooks"]]
     assert scores == sorted(scores, reverse=True)
+    assert any(score > 0 for score in scores)
+    assert all(0 <= value <= 100 for hook in body["hooks"] for value in hook["scores"].values())
+    assert all(
+        "{" not in hook["explanation"] and "}" not in hook["explanation"] for hook in body["hooks"]
+    )
     assert client.post("/v1/hooks/generate", json=generation_payload(count=1)).status_code == 200
     assert client.post("/v1/hooks/generate", json=generation_payload(count=50)).status_code == 200
     assert client.post("/v1/hooks/generate", json=generation_payload(count=51)).status_code == 422
@@ -214,4 +219,6 @@ def test_ai_disabled_falls_back_without_network(client, monkeypatch):
     response = client.post("/v1/hooks/generate", json=generation_payload(count=1, use_ai=True))
     assert response.status_code == 200
     assert response.json()["hooks"][0]["source"] == "deterministic"
+    assert response.json()["hooks"][0]["scores"]["overall"] > 0
+    assert "{" not in response.json()["hooks"][0]["explanation"]
     assert response.json()["warnings"]

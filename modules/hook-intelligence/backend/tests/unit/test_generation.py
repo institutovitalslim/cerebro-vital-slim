@@ -14,6 +14,7 @@ from hook_intelligence.engine.composer import (
 )
 from hook_intelligence.engine.library import HookLibrary, Pattern
 from hook_intelligence.engine.pipeline import generate_deterministic
+from hook_intelligence.engine.scorer import score_text
 from hook_intelligence.engine.selector import select_patterns, stable_rank
 
 
@@ -39,6 +40,7 @@ def pattern(
     channels=("reel",),
     awareness=("problem_aware",),
     tones=("premium",),
+    explanation="Explicação editorial segura e suficiente para o teste unitário.",
     intensity=1,
 ):
     slots = tuple(
@@ -56,7 +58,7 @@ def pattern(
         tones,
         template,
         slots,
-        "Explicação editorial segura e suficiente para o teste unitário.",
+        explanation,
         intensity,
     )
 
@@ -95,6 +97,59 @@ def test_repeated_request_has_identical_content_order_and_ids():
     assert [(hook.text, hook.pattern_id, hook.id) for hook in first] == [
         (hook.text, hook.pattern_id, hook.id) for hook in second
     ]
+    assert [(hook.scores, hook.explanation) for hook in first] == [
+        (hook.scores, hook.explanation) for hook in second
+    ]
+
+
+def test_deterministic_candidates_are_scored_ranked_and_publicly_explained():
+    hooks = generate_deterministic(request(count=12))
+
+    assert any(hook.scores.overall > 0 for hook in hooks)
+    assert [hook.scores.overall for hook in hooks] == sorted(
+        (hook.scores.overall for hook in hooks), reverse=True
+    )
+    for hook in hooks:
+        expected = score_text(hook.text, hook.channel, hook.topic).to_hook_scores()
+        assert hook.scores == expected
+        assert all(0 <= value <= 100 for value in hook.scores.model_dump().values())
+        assert "{" not in hook.explanation
+        assert "}" not in hook.explanation
+        assert hook.mechanisms[0] in hook.explanation
+        assert str(hook.scores.overall) in hook.explanation
+
+
+def test_pipeline_ranks_all_eligible_candidates_before_cutting_count(monkeypatch):
+    low = pattern("low", template="Você precisa saber disso")
+    high = pattern("high", template="3 sinais sobre {topic} para observar")
+    monkeypatch.setattr(
+        "hook_intelligence.engine.pipeline.select_patterns",
+        lambda _request, _library: (low, high),
+    )
+
+    hooks = generate_deterministic(request(count=1), SimpleNamespace(all_patterns=(low, high)))
+
+    assert len(hooks) == 1
+    assert hooks[0].pattern_id == "high"
+
+
+def test_pattern_explanation_placeholders_are_resolved_before_publication():
+    concrete = pattern(
+        "concrete",
+        explanation=(
+            "Conecta {topic} a {audience} em {context}, buscando {desired_outcome} "
+            "com {required_word}."
+        ),
+    )
+    hooks = generate_deterministic(
+        request(count=1, context="uma rotina real", required_words=["consistência"]),
+        SimpleNamespace(all_patterns=(concrete,)),
+    )
+
+    assert "qualidade do sono" in hooks[0].explanation
+    assert "mulheres acima de 40" in hooks[0].explanation
+    assert "{" not in hooks[0].explanation
+    assert "}" not in hooks[0].explanation
 
 
 def test_stable_rank_is_exact_sha256_and_hard_filters_are_applied():

@@ -1,4 +1,5 @@
 import json
+import string
 import unicodedata
 from uuid import NAMESPACE_URL, uuid5
 
@@ -11,7 +12,6 @@ from hook_intelligence.domain.models import (
     ComplianceStatus,
     GenerationRequest,
     Hook,
-    HookScores,
     Source,
 )
 from hook_intelligence.engine.compliance import evaluate_compliance
@@ -25,18 +25,12 @@ from hook_intelligence.engine.composer import (
     normalize_text,
 )
 from hook_intelligence.engine.deduplicator import deduplicate
-from hook_intelligence.engine.library import HookLibrary
+from hook_intelligence.engine.explain import explain_score
+from hook_intelligence.engine.library import ALLOWED_SLOTS, HookLibrary, Pattern
 from hook_intelligence.engine.scorer import score_text
 from hook_intelligence.engine.selector import select_patterns
 
-_DEFAULT_SCORES = HookScores(
-    clarity=0,
-    specificity=0,
-    novelty=0,
-    retention=0,
-    channel_fit=0,
-    overall=0,
-)
+_FORMATTER = string.Formatter()
 
 
 def _normalized_client_text(value: str, field: str) -> str:
@@ -120,6 +114,36 @@ def _request_fingerprint(request: GenerationRequest) -> str:
     )
 
 
+def render_pattern_explanation(pattern: Pattern, request: GenerationRequest) -> str:
+    """Resolve somente slots editoriais públicos e remove chaves vindas da request."""
+
+    try:
+        parsed = tuple(_FORMATTER.parse(pattern.explanation))
+    except (TypeError, ValueError) as error:
+        raise ValueError(f"pattern_id={pattern.id}: explanation inválida") from error
+    for _, field, format_spec, conversion in parsed:
+        if field is None:
+            continue
+        if field not in ALLOWED_SLOTS or format_spec or conversion:
+            raise ValueError(f"pattern_id={pattern.id}: placeholder de explanation inválido")
+
+    topic = normalize_text(request.topic)
+    required_word = request.required_words[0] if request.required_words else "um critério claro"
+    values = {
+        "topic": topic,
+        "audience": normalize_text(request.audience),
+        "desired_outcome": f"uma compreensão mais clara de {topic}",
+        "context": normalize_text(request.context or "na prática cotidiana"),
+        "required_word": normalize_text(required_word),
+    }
+    try:
+        rendered = normalize_text(pattern.explanation.format_map(values))
+    except (KeyError, TypeError, ValueError, AttributeError, IndexError) as error:
+        raise ValueError(f"pattern_id={pattern.id}: falha ao formatar explanation") from error
+    # Chaves literais podem vir dos dados livres da request; não são placeholders públicos.
+    return rendered.replace("{", "").replace("}", "")
+
+
 def generate_deterministic(
     request: GenerationRequest, library: HookLibrary | None = None
 ) -> tuple[Hook, ...]:
@@ -157,6 +181,7 @@ def generate_deterministic(
             if compliance.status is ComplianceStatus.BLOCK:
                 blocked += 1
                 continue
+            evaluation = score_text(text, validated_request.channel, validated_request.topic)
             identifier = uuid5(
                 NAMESPACE_URL,
                 f"hook-intelligence:{fingerprint}:{pattern.id}:{variant_index}",
@@ -174,23 +199,28 @@ def generate_deterministic(
                     audience=validated_request.audience,
                     topic=validated_request.topic,
                     tone=validated_request.tone,
-                    scores=_DEFAULT_SCORES.model_copy(deep=True),
+                    scores=evaluation.to_hook_scores(),
                     compliance=compliance,
-                    explanation=pattern.explanation,
+                    explanation=explain_score(
+                        pattern.mechanism,
+                        render_pattern_explanation(pattern, validated_request),
+                        evaluation,
+                    ),
                     source=Source.DETERMINISTIC,
                     engine_version=ENGINE_VERSION,
                 )
             )
-            if len(hooks) == validated_request.count:
-                return tuple(hooks)
 
-    raise ValueError(
-        "capacidade determinística insuficiente: "
-        f"requested={validated_request.count}, generated={len(hooks)}, "
-        f"blocked={blocked}, "
-        f"patterns={len(patterns)}, variants={VARIANT_COUNT}, "
-        f"max_length={validated_request.max_length}"
-    )
+    if len(hooks) < validated_request.count:
+        raise ValueError(
+            "capacidade determinística insuficiente: "
+            f"requested={validated_request.count}, generated={len(hooks)}, "
+            f"blocked={blocked}, "
+            f"patterns={len(patterns)}, variants={VARIANT_COUNT}, "
+            f"max_length={validated_request.max_length}"
+        )
+    hooks.sort(key=lambda hook: -hook.scores.overall)
+    return tuple(hooks[: validated_request.count])
 
 
 def _rules_library(request: GenerationRequest, active_library: object) -> HookLibrary | None:
@@ -260,11 +290,15 @@ def generate_with_optional_ai(
             return baseline
 
         fingerprint = _request_fingerprint(validated_request)
+        patterns_by_id = {pattern.id: pattern for pattern in active_library.all_patterns}
         adapted: list[tuple[int, Hook]] = []
         for index, (text, original, result) in enumerate(
             zip(normalized, baseline, compliance, strict=True)
         ):
-            scores = score_text(text, validated_request.channel, validated_request.topic)
+            evaluation = score_text(text, validated_request.channel, validated_request.topic)
+            pattern = patterns_by_id.get(original.pattern_id)
+            if pattern is None:
+                return baseline
             identifier = uuid5(
                 NAMESPACE_URL,
                 f"hook-intelligence:ai:{fingerprint}:{text}:{index}",
@@ -276,8 +310,13 @@ def generate_with_optional_ai(
                         update={
                             "id": identifier,
                             "text": text,
-                            "scores": scores.to_hook_scores(),
+                            "scores": evaluation.to_hook_scores(),
                             "compliance": result,
+                            "explanation": explain_score(
+                                pattern.mechanism,
+                                render_pattern_explanation(pattern, validated_request),
+                                evaluation,
+                            ),
                             "source": Source.AI_ADAPTED,
                         },
                         deep=True,

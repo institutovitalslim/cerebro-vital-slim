@@ -205,6 +205,9 @@ def test_pipeline_malformed_constraints_and_duplicates_fallback_integrally(resul
     assert [hook.id for hook in actual] == [hook.id for hook in baseline]
     assert [hook.source for hook in actual] == [hook.source for hook in baseline]
     assert [hook.scores for hook in actual] == [hook.scores for hook in baseline]
+    assert [hook.explanation for hook in actual] == [hook.explanation for hook in baseline]
+    assert all(hook.scores.overall > 0 for hook in actual)
+    assert all("{" not in hook.explanation and "}" not in hook.explanation for hook in actual)
 
 
 def test_sensitive_transport_decode_and_endpoint_errors_are_fully_detached():

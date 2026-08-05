@@ -25,8 +25,12 @@ from hook_intelligence.engine.composer import (
     contains_forbidden,
     normalize_text,
 )
+from hook_intelligence.engine.explain import explain_score
 from hook_intelligence.engine.library import HookLibrary, Pattern
-from hook_intelligence.engine.pipeline import validate_generation_request
+from hook_intelligence.engine.pipeline import (
+    render_pattern_explanation,
+    validate_generation_request,
+)
 from hook_intelligence.engine.scorer import score_text
 from hook_intelligence.engine.selector import select_patterns
 
@@ -62,11 +66,18 @@ def _validated_generated_hooks(
             raise ValueError("duplicate generated hook")
         identifiers.add(hook.id)
         pattern = eligible_by_id.get(hook.pattern_id)
+        if pattern is None:
+            raise ValueError("incoherent generated hook")
+        evaluation = score_text(hook.text, payload.channel, payload.topic)
+        expected_explanation = explain_score(
+            pattern.mechanism,
+            render_pattern_explanation(pattern, payload),
+            evaluation,
+        )
         if (
-            pattern is None
-            or hook.mechanisms != [pattern.mechanism]
+            hook.mechanisms != [pattern.mechanism]
             or any(mechanism not in library.mechanisms for mechanism in hook.mechanisms)
-            or hook.explanation != pattern.explanation
+            or hook.explanation != expected_explanation
             or hook.source not in {Source.DETERMINISTIC, Source.AI_ADAPTED}
             or (not payload.use_ai and hook.source is not Source.DETERMINISTIC)
             or hook.library is not payload.library
