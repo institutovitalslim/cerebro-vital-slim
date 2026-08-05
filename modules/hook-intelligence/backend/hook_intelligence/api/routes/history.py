@@ -6,9 +6,13 @@ from hook_intelligence.api.schemas import ErrorResponse, FavoritesPage, HistoryP
 
 router = APIRouter(prefix="/v1", tags=["history"])
 _INTERNAL_ERROR = {500: {"model": ErrorResponse, "description": "Internal service error"}}
+_RESPONSES = {
+    **_INTERNAL_ERROR,
+    422: {"model": ErrorResponse, "description": "Request validation failed"},
+}
 
 
-@router.get("/history", response_model=HistoryPage, responses=_INTERNAL_ERROR)
+@router.get("/history", response_model=HistoryPage, responses=_RESPONSES)
 def history(
     request: Request,
     page: int = Query(default=1, ge=1),
@@ -35,7 +39,7 @@ def history(
     )
 
 
-@router.get("/favorites", response_model=FavoritesPage, responses=_INTERNAL_ERROR)
+@router.get("/favorites", response_model=FavoritesPage, responses=_RESPONSES)
 def favorites(
     request: Request,
     page: int = Query(default=1, ge=1),

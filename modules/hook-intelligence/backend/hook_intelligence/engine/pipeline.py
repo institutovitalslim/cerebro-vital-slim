@@ -96,6 +96,12 @@ def _validated_request(request: GenerationRequest) -> GenerationRequest:
         raise ValueError(f"GenerationRequest normalizada inválida: {error}") from error
 
 
+def validate_generation_request(request: GenerationRequest) -> GenerationRequest:
+    """Retorna snapshot canônico e revalidado de uma request de domínio."""
+
+    return _validated_request(request)
+
+
 def _request_fingerprint(request: GenerationRequest) -> str:
     return json.dumps(
         request.model_dump(mode="json"),

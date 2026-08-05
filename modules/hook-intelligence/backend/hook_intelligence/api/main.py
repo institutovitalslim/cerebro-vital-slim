@@ -7,10 +7,13 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from sqlalchemy.engine import Engine
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from hook_intelligence import ENGINE_VERSION
+from hook_intelligence.adapters import ai_runtime_enabled
 from hook_intelligence.api.dependencies import Generator, ServiceProvider
 from hook_intelligence.api.routes import catalog, exports, history, hooks
 from hook_intelligence.domain.models import HealthResponse
@@ -24,7 +27,6 @@ def create_app(
     engine: Engine | None = None,
     generator: Generator | None = None,
     database_url: str = "sqlite:///:memory:",
-    ai_enabled: bool = False,
 ) -> FastAPI:
     """Build an isolated app; caller-owned engines are never disposed by the app."""
 
@@ -53,7 +55,25 @@ def create_app(
         lifespan=lifespan,
     )
     application.state.services = services
-    application.state.ai_enabled = ai_enabled
+
+    @application.middleware("http")
+    async def reject_duplicate_query_scalars(request: Request, call_next: Any) -> Any:
+        if any(len(request.query_params.getlist(key)) != 1 for key in request.query_params):
+            return JSONResponse(status_code=422, content={"detail": "request validation failed"})
+        return await call_next(request)
+
+    @application.exception_handler(RequestValidationError)
+    async def request_validation_error(
+        _request: Request, _exc: RequestValidationError
+    ) -> JSONResponse:
+        return JSONResponse(status_code=422, content={"detail": "request validation failed"})
+
+    @application.exception_handler(StarletteHTTPException)
+    async def http_error(_request: Request, exc: StarletteHTTPException) -> JSONResponse:
+        detail = exc.detail if type(exc.detail) is str else "request failed"
+        return JSONResponse(
+            status_code=exc.status_code, content={"detail": detail}, headers=exc.headers
+        )
 
     @application.exception_handler(Exception)
     async def internal_error(_request: Request, _exc: Exception) -> JSONResponse:
@@ -81,7 +101,7 @@ def create_app(
         summary="Service readiness",
     )
     def health() -> HealthResponse:
-        return HealthResponse(ai_enabled=application.state.ai_enabled)
+        return HealthResponse(ai_enabled=ai_runtime_enabled())
 
     application.include_router(catalog.router)
     application.include_router(hooks.router)

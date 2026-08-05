@@ -4,7 +4,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query, Request
 
-from hook_intelligence.api.schemas import PatternsResponse, TaxonomiesResponse
+from hook_intelligence.api.schemas import ErrorResponse, PatternsResponse, TaxonomiesResponse
 from hook_intelligence.domain.models import Library
 
 router = APIRouter(prefix="/v1", tags=["catalog"])
@@ -19,7 +19,11 @@ def taxonomies(request: Request) -> TaxonomiesResponse:
     )
 
 
-@router.get("/patterns", response_model=PatternsResponse)
+@router.get(
+    "/patterns",
+    response_model=PatternsResponse,
+    responses={422: {"model": ErrorResponse, "description": "Request validation failed"}},
+)
 def patterns(
     request: Request,
     library: Annotated[Library | None, Query(description="Optional library filter")] = None,

@@ -72,6 +72,16 @@ def test_generation_request_has_exact_required_fields():
     schema = load_schemas()["generation-request.schema.json"]
 
     assert set(schema["required"]) == {"topic", "channel", "objective", "audience"}
+    for field in ("mechanism",):
+        assert schema["properties"][field]["minLength"] == 1
+        assert schema["properties"][field]["maxLength"] == 100
+    for field in ("required_words", "forbidden_words"):
+        assert schema["properties"][field]["maxItems"] == 50
+        assert schema["properties"][field]["items"] == {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+        }
 
 
 def test_generation_request_minimum_and_list_defaults_are_isolated():

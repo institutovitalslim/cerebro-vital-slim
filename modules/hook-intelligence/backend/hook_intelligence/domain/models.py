@@ -69,12 +69,12 @@ class DomainModel(BaseModel):
 
 
 class HookScores(DomainModel):
-    clarity: float = Field(ge=0, le=100)
-    specificity: float = Field(ge=0, le=100)
-    novelty: float = Field(ge=0, le=100)
-    retention: float = Field(ge=0, le=100)
-    channel_fit: float = Field(ge=0, le=100)
-    overall: float = Field(ge=0, le=100)
+    clarity: float = Field(ge=0, le=100, allow_inf_nan=False)
+    specificity: float = Field(ge=0, le=100, allow_inf_nan=False)
+    novelty: float = Field(ge=0, le=100, allow_inf_nan=False)
+    retention: float = Field(ge=0, le=100, allow_inf_nan=False)
+    channel_fit: float = Field(ge=0, le=100, allow_inf_nan=False)
+    overall: float = Field(ge=0, le=100, allow_inf_nan=False)
 
 
 class ComplianceResult(DomainModel):
@@ -126,7 +126,7 @@ class GenerationResponse(DomainModel):
     hooks: list[Hook]
     warnings: list[str] = Field(default_factory=list)
     engine_version: Literal[ENGINE_VERSION] = ENGINE_VERSION
-    duration_ms: float = Field(ge=0)
+    duration_ms: float = Field(ge=0, allow_inf_nan=False)
 
 
 class ContentOSExport(DomainModel):

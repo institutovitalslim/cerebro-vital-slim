@@ -27,10 +27,10 @@
       "default": "premium"
     },
     "intensity": {"type": "integer", "minimum": 1, "maximum": 3, "default": 2},
-    "mechanism": {"type": ["string", "null"], "default": null},
+    "mechanism": {"type": ["string", "null"], "minLength": 1, "maxLength": 100, "default": null},
     "context": {"type": ["string", "null"], "maxLength": 4000, "default": null},
-    "required_words": {"type": "array", "items": {"type": "string"}, "default": []},
-    "forbidden_words": {"type": "array", "items": {"type": "string"}, "default": []},
+    "required_words": {"type": "array", "maxItems": 50, "items": {"type": "string", "minLength": 1, "maxLength": 100}, "default": []},
+    "forbidden_words": {"type": "array", "maxItems": 50, "items": {"type": "string", "minLength": 1, "maxLength": 100}, "default": []},
     "count": {"type": "integer", "minimum": 1, "maximum": 50, "default": 12},
     "max_length": {"type": "integer", "minimum": 30, "maximum": 280, "default": 180},
     "use_ai": {"type": "boolean", "default": false}

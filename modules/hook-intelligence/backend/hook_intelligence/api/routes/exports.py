@@ -15,6 +15,7 @@ router = APIRouter(prefix="/v1/exports", tags=["exports"])
     responses={
         400: {"model": ErrorResponse, "description": "Invalid workspace"},
         404: {"model": ErrorResponse, "description": "Session not found"},
+        422: {"model": ErrorResponse, "description": "Request validation failed"},
         500: {"model": ErrorResponse, "description": "Internal service error"},
     },
 )

@@ -71,6 +71,20 @@ def test_health_catalog_and_exact_public_routes(client):
     assert schema["paths"]["/v1/hooks/generate"]["post"]["requestBody"]["content"][
         "application/json"
     ]["schema"]
+    for path, method in (
+        ("/v1/hooks/generate", "post"),
+        ("/v1/hooks/score", "post"),
+        ("/v1/hooks/compliance", "post"),
+        ("/v1/hooks/{id}/favorite", "post"),
+        ("/v1/history", "get"),
+        ("/v1/favorites", "get"),
+        ("/v1/patterns", "get"),
+        ("/v1/exports/content-os", "post"),
+    ):
+        response_schema = schema["paths"][path][method]["responses"]["422"]["content"][
+            "application/json"
+        ]["schema"]
+        assert response_schema == {"$ref": "#/components/schemas/ErrorResponse"}
 
 
 def test_generate_boundaries_order_metadata_and_persisted_history(client):

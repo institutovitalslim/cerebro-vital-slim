@@ -18,7 +18,9 @@ _FALSE_VALUES = frozenset({"", "0", "false", "no", "off"})
 _TRUE_VALUES = frozenset({"1", "true", "yes", "on"})
 
 
-def adapter_from_env(env: Mapping[str, str] | None = None) -> HookAdapter:
+def adapter_from_env(
+    env: Mapping[str, str] | None = None, *, transport: object | None = None
+) -> HookAdapter:
     """Constrói o adaptador somente após opt-in explícito.
 
     O endpoint padrão é ``https://api.openai.com/v1/chat/completions``.
@@ -49,11 +51,22 @@ def adapter_from_env(env: Mapping[str, str] | None = None) -> HookAdapter:
             endpoint=values.get("HOOK_AI_ENDPOINT", DEFAULT_ENDPOINT),
             timeout_seconds=values.get("HOOK_AI_TIMEOUT_SECONDS", str(DEFAULT_TIMEOUT_SECONDS)),
             max_tokens=values.get("HOOK_AI_MAX_TOKENS", str(DEFAULT_MAX_TOKENS)),
+            transport=transport,
         )
     except AdapterError:
         raise
     except Exception:  # noqa: BLE001 -- Mapping externo pode executar código arbitrário.
         raise AdapterError("configuração do adaptador OpenAI-compatible inválida") from None
+
+
+def ai_runtime_enabled(env: Mapping[str, str] | None = None) -> bool:
+    """Valida readiness de configuração sem criar cliente nem executar transporte."""
+
+    try:
+        configured = adapter_from_env(env, transport=object())
+    except AdapterError:
+        return False
+    return isinstance(configured, OpenAICompatible)
 
 
 __all__ = [
@@ -62,4 +75,5 @@ __all__ = [
     "HookAdapter",
     "OpenAICompatible",
     "adapter_from_env",
+    "ai_runtime_enabled",
 ]

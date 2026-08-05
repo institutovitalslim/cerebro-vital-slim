@@ -10,7 +10,7 @@ from hook_intelligence.engine.composer import (
 from hook_intelligence.engine.deduplicator import deduplicate, similarity
 from hook_intelligence.engine.explain import MAX_PUBLIC_EXPLANATION_CHARS, explain_score
 from hook_intelligence.engine.library import HookLibrary, Pattern
-from hook_intelligence.engine.pipeline import generate_deterministic
+from hook_intelligence.engine.pipeline import generate_deterministic, validate_generation_request
 from hook_intelligence.engine.scorer import (
     MAX_SCORE_TEXT_CHARS,
     MAX_SCORE_TOPIC_CHARS,
@@ -47,4 +47,5 @@ __all__ = [
     "select_patterns",
     "similarity",
     "stable_rank",
+    "validate_generation_request",
 ]

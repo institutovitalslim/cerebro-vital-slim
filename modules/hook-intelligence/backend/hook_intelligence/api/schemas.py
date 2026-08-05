@@ -4,7 +4,15 @@ from datetime import datetime
 from typing import Annotated, Literal
 from uuid import UUID
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, StringConstraints
+from pydantic import (
+    AwareDatetime,
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictInt,
+    StringConstraints,
+)
 
 from hook_intelligence.domain.models import (
     Channel,
@@ -29,9 +37,13 @@ class APISchema(BaseModel):
 
 
 class GenerateRequest(GenerationRequest):
+    intensity: Annotated[StrictInt, Field(ge=1, le=3)] = 2
     mechanism: GenerationWord | None = None
     required_words: list[GenerationWord] = Field(default_factory=list, max_length=50)
     forbidden_words: list[GenerationWord] = Field(default_factory=list, max_length=50)
+    count: Annotated[StrictInt, Field(ge=1, le=50)] = 12
+    max_length: Annotated[StrictInt, Field(ge=30, le=280)] = 180
+    use_ai: StrictBool = False
 
     model_config = ConfigDict(
         extra="forbid",
