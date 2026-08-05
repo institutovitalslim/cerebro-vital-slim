@@ -1,0 +1,15 @@
+**/.git
+**/.DS_Store
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.ruff_cache
+backend/.venv
+backend/tests
+web/.next
+web/node_modules
+web/tests
+web/coverage
+web/test-results
+web/playwright-report
+scripts
