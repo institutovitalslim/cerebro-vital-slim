@@ -39,11 +39,20 @@ _DEFAULT_SCORES = HookScores(
 )
 
 
+def _normalized_client_text(value: str, field: str) -> str:
+    """Normalize free text and reject non-whitespace Unicode category C characters."""
+
+    normalized = normalize_text(value)
+    if any(unicodedata.category(character).startswith("C") for character in normalized):
+        raise ValueError(f"request inválida: {field} contém caractere de controle")
+    return normalized
+
+
 def _deduplicate_expressions(values: list[str], field: str) -> list[str]:
     normalized: list[str] = []
     seen: set[str] = set()
     for value in values:
-        item = normalize_text(value)
+        item = _normalized_client_text(value, field)
         if not item:
             raise ValueError(f"request inválida: {field} não pode conter item vazio")
         key = item.casefold()
@@ -66,8 +75,8 @@ def _validated_request(request: GenerationRequest) -> GenerationRequest:
     except ValidationError as error:
         raise ValueError(f"GenerationRequest inválida: {error}") from error
 
-    topic = normalize_text(raw["topic"])
-    audience = normalize_text(raw["audience"])
+    topic = _normalized_client_text(raw["topic"], "topic")
+    audience = _normalized_client_text(raw["audience"], "audience")
     if not topic:
         raise ValueError("request inválida: topic não pode ser vazio/whitespace-only")
     if not audience:
@@ -76,9 +85,9 @@ def _validated_request(request: GenerationRequest) -> GenerationRequest:
     raw["topic"] = topic
     raw["audience"] = audience
     if raw["context"] is not None:
-        raw["context"] = normalize_text(raw["context"])
+        raw["context"] = _normalized_client_text(raw["context"], "context")
     if raw["mechanism"] is not None:
-        raw["mechanism"] = normalize_text(raw["mechanism"])
+        raw["mechanism"] = _normalized_client_text(raw["mechanism"], "mechanism")
     raw["required_words"] = _deduplicate_expressions(raw["required_words"], "required_words")
     raw["forbidden_words"] = _deduplicate_expressions(raw["forbidden_words"], "forbidden_words")
 

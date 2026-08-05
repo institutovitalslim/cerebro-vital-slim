@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+import unicodedata
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Any
@@ -28,6 +30,29 @@ _PUBLIC_HTTP_DETAILS = {
 }
 
 
+async def _generation_body_has_lone_surrogate(request: Request) -> bool:
+    """Bridge JSON parsers that reject escaped surrogates before model validation."""
+
+    if request.method != "POST" or request.url.path != "/v1/hooks/generate":
+        return False
+    try:
+        payload = json.loads(await request.body())
+    except (TypeError, ValueError):
+        return False
+    if not isinstance(payload, dict):
+        return False
+    values = [payload.get(field) for field in ("topic", "audience", "context", "mechanism")]
+    for field in ("required_words", "forbidden_words"):
+        expressions = payload.get(field)
+        if isinstance(expressions, list):
+            values.extend(expressions)
+    return any(
+        isinstance(value, str)
+        and any(unicodedata.category(character) == "Cs" for character in value)
+        for value in values
+    )
+
+
 def create_app(
     *,
     library: HookLibrary | None = None,
@@ -48,10 +73,11 @@ def create_app(
 
     @asynccontextmanager
     async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+        services.acquire()
         try:
             yield
         finally:
-            services.close()
+            services.release()
 
     application = FastAPI(
         title="Hook Intelligence Engine",
@@ -72,8 +98,10 @@ def create_app(
 
     @application.exception_handler(RequestValidationError)
     async def request_validation_error(
-        _request: Request, _exc: RequestValidationError
+        request: Request, _exc: RequestValidationError
     ) -> JSONResponse:
+        if await _generation_body_has_lone_surrogate(request):
+            return JSONResponse(status_code=400, content={"detail": "request failed"})
         return JSONResponse(status_code=422, content={"detail": "request validation failed"})
 
     @application.exception_handler(StarletteHTTPException)
