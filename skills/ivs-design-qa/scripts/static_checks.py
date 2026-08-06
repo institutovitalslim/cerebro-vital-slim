@@ -4,23 +4,55 @@ from __future__ import annotations
 
 import hashlib
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
-DOCTYPE_RE = re.compile(r"<!doctype\s+html", re.IGNORECASE)
-HTML_RE = re.compile(r"<html\b", re.IGNORECASE)
-TITLE_RE = re.compile(r"<title\b[^>]*>\s*[^<\s][\s\S]*?</title>", re.IGNORECASE)
-VIEWPORT_RE = re.compile(r"<meta\b[^>]*name=[\"']viewport[\"'][^>]*>", re.IGNORECASE)
-SECTION_RE = re.compile(r"<section\b", re.IGNORECASE)
 MEDIA_RE = re.compile(r"@media\s*\(", re.IGNORECASE)
 PLACEHOLDER_RE = re.compile(
-    r"\b(?:TODO|FIXME)\b|lorem\s+ipsum|\[(?:placeholder|preencher|inserir)[^\]]*\]",
-    re.IGNORECASE,
+    r"\bFIXME\b|(?i:lorem\s+ipsum|\[(?:placeholder|preencher|inserir)[^\]]*\])"
 )
+TODO_WORD_RE = re.compile(r"\btodo\b", re.IGNORECASE)
 EMAIL_RE = re.compile(r"(?<![\w.+-])[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}(?![\w.-])", re.IGNORECASE)
 CPF_RE = re.compile(r"(?<!\d)\d{3}\.?\d{3}\.?\d{3}-?\d{2}(?!\d)")
 PHONE_RE = re.compile(r"(?<!\d)(?:\+?55\s*)?(?:\(?\d{2}\)?\s*)?(?:9\s*)?\d{4}[-\s]?\d{4}(?!\d)")
 EXTERNAL_LINK_RE = re.compile(r"href=[\"']https?://", re.IGNORECASE)
+
+
+class _StructureParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.has_doctype = False
+        self.has_html = False
+        self.has_viewport = False
+        self.has_title_text = False
+        self.sections = 0
+        self._in_title = False
+
+    def handle_decl(self, decl: str) -> None:
+        if decl.strip().lower() == "doctype html":
+            self.has_doctype = True
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        normalized_tag = tag.lower()
+        if normalized_tag == "html":
+            self.has_html = True
+        elif normalized_tag == "section":
+            self.sections += 1
+        elif normalized_tag == "title":
+            self._in_title = True
+        elif normalized_tag == "meta":
+            attributes = {name.lower(): (value or "").lower() for name, value in attrs}
+            if attributes.get("name") == "viewport":
+                self.has_viewport = True
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "title":
+            self._in_title = False
+
+    def handle_data(self, data: str) -> None:
+        if self._in_title and data.strip():
+            self.has_title_text = True
 
 
 def _issue(code: str, severity: str, count: int = 1) -> dict[str, Any]:
@@ -63,22 +95,26 @@ def scan_html(path: Path, artifact_type: str, data_mode: str) -> dict[str, Any]:
     raw = path.read_bytes()
     src = raw.decode("utf-8", errors="replace")
     digest = hashlib.sha256(raw).hexdigest()
-    sections = len(SECTION_RE.findall(src))
+    structure = _StructureParser()
+    structure.feed(src)
+    structure.close()
+    sections = structure.sections
     identifiers = _count_identifiers(src)
 
     if not raw:
         blockers.append(_issue("input_empty", "blocker"))
-    if not DOCTYPE_RE.search(src):
+    if not structure.has_doctype:
         blockers.append(_issue("doctype_missing", "blocker"))
-    if not HTML_RE.search(src):
+    if not structure.has_html:
         blockers.append(_issue("html_root_missing", "blocker"))
-    if not TITLE_RE.search(src):
+    if not structure.has_title_text:
         blockers.append(_issue("title_missing", "blocker"))
-    if not VIEWPORT_RE.search(src):
+    if not structure.has_viewport:
         blockers.append(_issue("viewport_missing", "blocker"))
     if sections < 1:
         blockers.append(_issue("semantic_section_missing", "blocker"))
     placeholder_count = len(PLACEHOLDER_RE.findall(src))
+    placeholder_count += sum(match.group(0) != "todo" for match in TODO_WORD_RE.finditer(src))
     if placeholder_count:
         blockers.append(_issue("placeholder_detected", "blocker", placeholder_count))
     if artifact_type == "patient-presentation" and data_mode == "anonymous" and any(identifiers.values()):

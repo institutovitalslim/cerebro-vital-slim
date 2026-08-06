@@ -58,6 +58,29 @@ class StaticChecksTests(unittest.TestCase):
         self.assertNotIn("teste@example.com", serialized)
         self.assertNotIn("123.456.789-00", serialized)
 
+    def test_portuguese_word_todo_is_not_a_placeholder(self):
+        self.path.write_text(HEALTHY.replace("Conteúdo sintético", "Cuidado que entende o todo"), encoding="utf-8")
+        result = self.mod.scan_html(self.path, "site", "anonymous")
+        self.assertNotIn("placeholder_detected", {item["code"] for item in result["blockers"]})
+
+    def test_mixed_case_todo_variants_are_placeholders(self):
+        for marker in ("TODO", "Todo", "ToDo", "tOdO"):
+            with self.subTest(marker=marker):
+                self.path.write_text(HEALTHY.replace("Conteúdo sintético", marker), encoding="utf-8")
+                result = self.mod.scan_html(self.path, "site", "anonymous")
+                self.assertIn("placeholder_detected", {item["code"] for item in result["blockers"]})
+
+    def test_structure_inside_comments_and_scripts_does_not_count(self):
+        html = """<!-- <!doctype html><html><head><meta name='viewport'><title>Falso</title></head><body><section>Falso</section></body></html> -->
+        <script>const fake = "<html><title>Falso</title><section>Falso</section>";</script>"""
+        self.path.write_text(html, encoding="utf-8")
+        result = self.mod.scan_html(self.path, "site", "anonymous")
+        codes = {item["code"] for item in result["blockers"]}
+        self.assertTrue(
+            {"doctype_missing", "html_root_missing", "title_missing", "viewport_missing", "semantic_section_missing"}.issubset(codes)
+        )
+        self.assertEqual(result["metrics"]["sections"], 0)
+
     def test_sensitive_local_omits_title_and_marks_sensitive_outputs(self):
         self.path.write_text(HEALTHY.replace("Piloto IVS", "Nome confidencial"), encoding="utf-8")
         result = self.mod.scan_html(self.path, "patient-presentation", "sensitive-local")

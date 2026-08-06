@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -48,11 +49,29 @@ def render_html(report: dict[str, Any]) -> str:
 <footer>Relatório interno. Não publicar. Não enviar ao paciente. Evidências locais e redigidas; nenhuma promessa de resultado clínico.</footer></main></body></html>"""
 
 
-def write_reports(report: dict[str, Any], out_dir: Path) -> dict[str, str]:
+def _atomic_write(path: Path, content: str, mode: int) -> None:
+    temporary = path.with_name(f".{path.name}.tmp")
+    descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, mode)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+    except Exception:
+        temporary.unlink(missing_ok=True)
+        raise
+    os.replace(temporary, path)
+    os.chmod(path, mode)
+
+
+def write_reports(report: dict[str, Any], out_dir: Path, sensitive: bool = False) -> dict[str, str]:
     out_dir = Path(out_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True, mode=0o700 if sensitive else 0o755)
+    if sensitive:
+        os.chmod(out_dir, 0o700)
     json_path = out_dir / "ivs-design-qa.report.json"
     html_path = out_dir / "ivs-design-qa.report.html"
-    json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    html_path.write_text(render_html(report), encoding="utf-8")
+    file_mode = 0o600 if sensitive else 0o644
+    _atomic_write(json_path, json.dumps(report, ensure_ascii=False, indent=2), file_mode)
+    _atomic_write(html_path, render_html(report), file_mode)
     return {"report_json": str(json_path), "report_html": str(html_path)}

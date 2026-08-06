@@ -17,7 +17,7 @@ Maria, João e os renderers de apresentações do IVS.
 - Entrada: um arquivo HTML local.
 - Tipos: `site`, `patient-presentation`, `internal-report`.
 - Modo de dados: `anonymous` ou `sensitive-local`.
-- Saídas em diretório dedicado: auditoria JSON redigida, relatório HTML executivo, screenshots desktop/mobile e cópia instrumentada do Visual Layer.
+- Saídas em diretório dedicado: auditoria JSON redigida, relatório HTML executivo e screenshots desktop/mobile. A cópia instrumentada do Visual Layer é gerada somente em `anonymous`; em `sensitive-local`, o componente é omitido para não serializar título, headings, IDs ou classes sensíveis.
 - Estado: `PASS`, `PASS_WITH_CONCERNS` ou `BLOCKED`.
 - Códigos de saída: 0 para aprovação; 2 para bloqueio; 1 para falha interna.
 - Original sempre imutável, validado por SHA-256 antes/depois.
