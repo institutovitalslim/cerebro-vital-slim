@@ -270,3 +270,22 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### RC-34: assinatura 'aqui e a Clara' so apos o lead confirmar o proprio nome/engajar — humano usou nome do lead que ja constava
 - **PADRAO-OURO (HUMANO, 04/08 22:43):** o humano abriu chamando o lead pelo nome ja conhecido e se apresentou 'aqui e a Clara do Time da Dra Daniely Freitas', e emendou pergunta util ('tem exames recentes para trazer?'). Boa abertura calorosa + pergunta pratica que ja pressupoe consulta.
 - **Regra:** na primeira resposta a lead novo que ja veio pelo nome, apresentar-se em 1 linha e emendar com pergunta pratica de valor ('tem exames recentes para trazer na consulta?') — abre descoberta sem parecer formulario.
+
+### Aprendizados [2026-08-06]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### LEAD que NAO e paciente (representante comercial/laboratorio, candidato a emprego) — NAO iniciar SPIN/jornada; encaminhar e parar
+- **ANTI-PADRAO (05/08 11:21):** representante do Laboratorio Spalazanni pediu 'agendar visita para falar de parceria'; a Clara disparou o bloco de jornada da consulta ('a consulta inicial nao e so marcar horario...') e 'o que mais te incomoda?' — totalmente fora de contexto. Tambem em 05/08 20:12 lead perguntou 'ainda estao contratando?' (candidato a vaga).
+- **Regra:** antes de abrir descoberta, verificar se o interlocutor e paciente potencial. Se for representante comercial/parceria OU candidato a vaga, NAO aplicar SPIN nem cotar consulta. Responder UMA linha de encaminhamento ('vou registrar seu contato e a equipe responsavel retorna sobre isso') e nao reemitir jornada. Sinais: 'sou representante/laboratorio', 'parceria', 'estao contratando', 'fiz uma ligacao sobre vaga'.
+
+### GRAVE — pergunta de PRECO repetida do lead ignorada 4+ vezes com a MESMA frase de descoberta em loop (RC-40/RC-50 violada por omissao)
+- **ANTI-PADRAO (06/08 01:00-01:17):** o lead perguntou 'qto esta a consulta?' e depois 'preciso saber o valor', 'vc nao me falou o valor... fico preocupada de ser acima das minhas possibilidades', '???' — a Clara respondeu SEIS vezes com o identico 'Para eu continuar do ponto certo... o que mais te incomoda hoje?'. O lead ja tinha dado dor abundante (insonia, ansiedade TAG, sobrepeso, fadiga, refluxo) e ainda assim nao recebeu valor nem reconhecimento da pergunta.
+- **Regra:** quando o lead pede o valor 2x (especialmente com objecao financeira 'acima das minhas possibilidades'), ele JA insistiu — RC-40/RC-50 autoriza cotar. Parar imediatamente o loop de descoberta, acolher a dor ja relatada em 1 balao e cotar na ordem (R$1.000 -> R$900 fechando hoje -> reserva R$300 2x). NUNCA repetir a mesma frase de descoberta mais de uma vez; se a resposta anterior nao evoluiu, mudar de abordagem, nao reenviar identico.
+
+### Loop de frase identica = falha critica de conversa — detectar e quebrar
+- **ANTI-PADRAO (06/08 00:46-01:17):** a Clara enviou o mesmo balao 'o que mais te incomoda hoje?' ~7x mesmo com o lead respondendo cada vez com sintomas diferentes e perguntando preco. O lead sinalizou frustracao com '???'.
+- **Regra:** nunca reenviar uma frase textualmente igual a que ja foi enviada nos ultimos turnos. Se o lead respondeu, avancar (reconhecer o que ele disse + proximo passo). '???' ou repeticao da mesma pergunta pelo lead = sinal de loop -> responder objetivamente o que ele pediu (valor/endereco) sem mais descoberta.
+
+### Lead que se refere a 'Tairo' / conversa anterior longa — nao tratar como lead frio novo
+- **CASO (06/08 01:03):** lead disse 'QUEM FALA E TAIRO? CONVERSEI MUITO COM VC' — indicando historico. A Clara ignorou e seguiu no loop de descoberta do zero.
+- **Regra:** quando o lead menciona conversa anterior/nome de alguem da equipe, reconhecer o historico ('isso, seguimos por aqui') e nao reabrir descoberta do zero; ir direto ao ponto que o lead pede (aqui, o valor).
