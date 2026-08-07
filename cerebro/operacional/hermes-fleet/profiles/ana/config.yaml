@@ -2,12 +2,14 @@ model:
   default: openai-codex/gpt-5.6-sol
   provider: openai-codex
   base_url: ''
-  fallbacks:
-  - model: openai-codex/gpt-5.5
-    provider: openai-codex
   max_tokens: 3000
 providers: {}
-fallback_providers: []
+fallback_providers:
+- provider: openai-codex
+  model: openai-codex/gpt-5.5
+- provider: openrouter
+  model: moonshotai/kimi-k3
+  base_url: https://openrouter.ai/api/v1
 credential_pool_strategies: {}
 toolsets:
 - hermes-cli

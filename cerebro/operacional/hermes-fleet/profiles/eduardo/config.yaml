@@ -1,10 +1,6 @@
 model:
   default: openai-codex/gpt-5.6-sol
   provider: openai-codex
-  fallbacks:
-  - model: moonshotai/kimi-k2.6
-    provider: openrouter
-    base_url: https://openrouter.ai/api/v1
 agent:
   reasoning_effort: high
 terminal:
@@ -14,3 +10,9 @@ telegram:
 onboarding:
   seen:
     busy_input_prompt: true
+fallback_providers:
+- provider: openai-codex
+  model: openai-codex/gpt-5.5
+- provider: openrouter
+  model: moonshotai/kimi-k3
+  base_url: https://openrouter.ai/api/v1
