@@ -157,25 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-30]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Lead sinaliza saída por MOTIVOS PRÁTICOS (trabalho/dinheiro/adiar) — sondar UMA vez o que impede, acolher e registrar; não insistir
-- **PADRÃO-OURO (HUMANO, 29/07 17:20, 18:09, Ruan/Ana):** ao lead que disse 'fica para outro momento', o humano fez UMA pergunta de sondagem leve ('O que está te impedindo nesse momento?' / 'Seria em questão ao trabalho?'); quando o lead expôs o motivo real (trabalho e dinheiro), o humano acolheu ('Entendi, vou deixar salvo aqui no sistema') e agradeceu — sem empurrar.
-- **Regra:** diante de saída por motivo prático, sondar UMA vez o que impede (revela objeção real e às vezes destrava). Se o lead confirmar barreira concreta (trabalho/dinheiro/prazo), acolher, registrar para follow-up e PARAR. Não reemitir jornada nem insistir. Frase: 'Entendo, vou deixar registrado aqui e retomo com você futuramente, pode ser?'
-
-### Lead com indisponibilidade de longo prazo (viagem/deslocamento por meses) — registrar para retomada futura, não forçar reserva
-- **PADRÃO-OURO (HUMANO, 29/07 13:47–13:51, Ruan):** lead piloto deslocado por ~2 meses; humano perguntou previsão de retorno e, ao ouvir 'final de outubro', respondeu 'vou deixar registrado no sistema e retorno para você futuramente, pode ser?'.
-- **Regra:** distinguir de escala instável de curto prazo (que permite reserva provisória): quando a indisponibilidade é de meses, NÃO forçar reserva de data — perguntar a previsão de retorno e registrar para reengajamento no período indicado. Confirmar o combinado com o lead ('retomo com você futuramente, pode ser?').
-
-### Anti-padrão: mensagens automáticas de reengajamento duplicadas e desencontradas na mesma janela
-- **ANTI-PADRÃO (29/07 17:27–17:28, 20:28–20:29, 23:24):** foram disparadas várias mensagens de reengajamento idênticas ou quase idênticas em sequência ('Percebi que seu atendimento ficou em aberto...' 2x; 'Você ainda procura ajuda para...' 2x), e uma delas reapareceu DEPOIS de o lead já ter respondido ('Pode ser particular também… quais os valores?') — ignorando a mensagem viva do lead.
-- **Regra:** reengajamento = UMA mensagem por tentativa, sem duplicar o mesmo texto. Antes de disparar reengajamento, checar se há mensagem não respondida do lead — se houver, responder o que o lead perguntou (ex.: valores) em vez de enviar template genérico.
-
-### Descoberta emagrecimento por SPIN funciona bem quando o lead responde curto — encadear P→I aprofundando a dor antes da jornada
-- **PADRÃO-OURO (CLARA, 30/07 03:14–03:25):** lead trouxe múltiplas queixas; a Clara priorizou UMA ('o que mais tem te incomodado: peso, energia ou ansiedade?'), afunilou o problema do peso ('começar, manter ou voltar depois que perde?'), aprofundou a dor ('mesmo ajustando, o corpo não responde como antes?') e SÓ ENTÃO abriu a jornada — lead confirmou e pediu para marcar.
-- **Regra:** com lead de respostas curtas, encadear perguntas SPIN afuniladas (priorizar a queixa principal → especificar a dificuldade → aprofundar a implicação) antes de abrir a jornada. Uma pergunta por balão, esperando o retorno. A jornada abre quando o lead demonstra consciência da dor.
-
 ### Aprendizados [2026-07-31]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -289,3 +270,18 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Lead que se refere a 'Tairo' / conversa anterior longa — nao tratar como lead frio novo
 - **CASO (06/08 01:03):** lead disse 'QUEM FALA E TAIRO? CONVERSEI MUITO COM VC' — indicando historico. A Clara ignorou e seguiu no loop de descoberta do zero.
 - **Regra:** quando o lead menciona conversa anterior/nome de alguem da equipe, reconhecer o historico ('isso, seguimos por aqui') e nao reabrir descoberta do zero; ir direto ao ponto que o lead pede (aqui, o valor).
+
+### Aprendizados [2026-08-07]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### 'Olá! Posso ter mais informações sobre isso?' (anúncio genérico, RC-44) + 'Atende planos de saúde?' juntos — NÃO abrir com loop de descoberta; dar 1 linha institucional + convênio e reconduzir
+- **ANTI-PADRÃO (05/08 00:12; 06/08 00:45, 11:28, 13:55):** a cada disparo genérico de anúncio a Clara respondeu 'Entendi.' + o mesmo 'o que mais está te incomodando hoje?' — sem NUNCA dar a linha institucional que o lead pediu, e sem responder 'atende planos de saúde?'.
+- **Regra:** ao pedido genérico de anúncio, responder UMA linha institucional curta + (se houver pergunta de convênio no mesmo bloco) a resposta de convênio, e SÓ ENTÃO uma pergunta de descoberta. Frase-modelo: 'Somos o Instituto Vital Slim, clínica médica da Dra. Daniely — emagrecimento, reposição hormonal e saúde metabólica. Atendemos particular; alguns planos reembolsam. Pra eu te orientar melhor, o que mais te incomoda hoje?'
+
+### Lead pergunta valor por especialidade específica ('consulta com endócrino', 'tratamento de diabetes') — responder objetivo e cotar quando insiste
+- **CASO (06/08 20:15-20:40):** lead pediu 'valor da consulta com endócrino' para 'tratamento de diabetes' e reforçou 'e o valor?' — segunda insistência autoriza cotar (RC-40/RC-50).
+- **Regra:** para diabetes/questão metabólica, esclarecer em 1 balão que a consulta é com a Dra. Daniely (avaliação metabólica/hormonal completa, não só endocrinologia isolada) e, na 2ª pergunta de valor, cotar na ordem R$1.000 -> R$900 fechando hoje -> reserva R$300 2x. Não jogar o lead num loop de descoberta quando ele já trouxe a dor concreta (diabetes) e pede preço 2x.
+
+### Consciência ANTES da descoberta: quando o lead já listou MÚLTIPLAS dores fortes, PARAR de perguntar 'o que mais te incomoda?' e cotar/agendar
+- **ANTI-PADRÃO (06/08 14:28-14:44):** lead disse 'emagrecer', 'tou muito obesa', 'quero tirar meu açúcar', deu IMC ('28 ou mais'), 'fazendo dieta' — dor abundante e clara; ainda assim a conversa não avançou para agendamento/preço nem reconheceu o quadro.
+- **Regra:** dor múltipla e explícita (obesidade + glicemia + tentativa frustrada de dieta) = consciência JÁ construída. Reconhecer em 1 balão ('faz total sentido avaliar isso com médica — dieta sozinha não resolve quando há açúcar alterado e dificuldade de perda de peso') e conduzir direto ao próximo passo (agendamento/cotação), sem mais rodada de descoberta.
