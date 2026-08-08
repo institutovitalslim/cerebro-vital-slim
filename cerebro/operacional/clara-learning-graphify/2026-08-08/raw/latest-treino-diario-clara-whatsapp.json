@@ -1,0 +1,71 @@
+{
+  "ok": true,
+  "status": "TREINO_EXECUTADO_SEM_PAUSAR_CLARA",
+  "slot": "treino-clara-conversao-premium-whatsapp",
+  "gerado_brt": "2026-08-08T07:20:15-03:00",
+  "clara": "NAO_PAUSADA",
+  "pii": "NAO_EXPOSTA_NO_RELATORIO",
+  "fontes": {
+    "latest-whatsapp-current.json": {
+      "file": "latest-whatsapp-current.json",
+      "exists": true,
+      "json_ok": true,
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/latest/raw/latest-whatsapp-current.json",
+      "mtime_brt": "2026-08-07T20:15:23.310525-03:00",
+      "size_bytes": 690,
+      "messages": 0,
+      "leads": 0,
+      "inbound": 0,
+      "outbound": 0,
+      "wins": 0,
+      "drops": 0,
+      "periodo": "últimas 6h",
+      "modo": "current"
+    },
+    "latest-whatsapp-historical.json": {
+      "file": "latest-whatsapp-historical.json",
+      "exists": true,
+      "json_ok": true,
+      "path": "/root/cerebro-vital-slim/cerebro/operacional/clara-learning-graphify/latest/raw/latest-whatsapp-historical.json",
+      "mtime_brt": "2026-08-03T07:23:04.893139-03:00",
+      "size_bytes": 4015,
+      "messages": 6187,
+      "leads": 443,
+      "inbound": 3275,
+      "outbound": 2912,
+      "wins": 30,
+      "drops": 5,
+      "periodo": "últimos 180 dias",
+      "modo": "historical"
+    }
+  },
+  "qa_rc25_2026_06_14_reforcos": [
+    {
+      "canon": "Confirmacao agenda menu literal",
+      "aplicacao": "Toda confirmação de agenda deve terminar com as opções literais: Confirmo | Quero remarcar | Não vou conseguir."
+    },
+    {
+      "canon": "Logistica no mesmo bloco",
+      "aplicacao": "Convite ou confirmação de agenda deve trazer, no mesmo bloco curto, horário, chegada, preparação/exames prévios e tipo de atendimento quando aplicável."
+    },
+    {
+      "canon": "Prontidao antes de explicar",
+      "aplicacao": "Antes de explicar consulta, serviço ou procedimento, Clara deve perguntar se a pessoa busca atendimento agora ou se está apenas pesquisando."
+    },
+    {
+      "canon": "Documentos sem pergunta aberta",
+      "aplicacao": "Para exames, documentos ou questionário, trocar pergunta aberta por próximo passo concreto com prazo/ação definida."
+    }
+  ],
+  "drills_aplicados": [
+    "Toda confirmação de agenda deve terminar com as opções literais: Confirmo | Quero remarcar | Não vou conseguir.",
+    "Convite ou confirmação de agenda deve trazer, no mesmo bloco curto, horário, chegada, preparação/exames prévios e tipo de atendimento quando aplicável.",
+    "Antes de explicar consulta, serviço ou procedimento, Clara deve perguntar se a pessoa busca atendimento agora ou se está apenas pesquisando.",
+    "Para exames, documentos ou questionário, trocar pergunta aberta por próximo passo concreto com prazo/ação definida."
+  ],
+  "classificacao_aprendizado": "aplicar amanhã",
+  "riscos": [
+    "RISCO_TECNICO_CAPTURA_PIPELINE_CURRENT_ZERADO: latest-whatsapp-current.json está zerado desde 2026-08-07 20:15 BRT; não assumir ausência real de demanda."
+  ],
+  "proximo_passo": "Monitorar próxima captura current; se permanecer zerada, tratar como bloqueio técnico de pipeline, não como falta real de leads."
+}
