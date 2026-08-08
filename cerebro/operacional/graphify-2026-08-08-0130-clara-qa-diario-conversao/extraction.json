@@ -1,0 +1,13 @@
+{
+  "status": "qa_recorded",
+  "pii_exposed": false,
+  "current_messages": 0,
+  "historical_messages": 6187,
+  "historical_unique_leads": 443,
+  "historical_wins": 30,
+  "historical_drops": 5,
+  "historical_baseline_conversion_pct": 6.8,
+  "historical_drop_rate_pct": 1.1,
+  "pipeline_frozen_days": 36,
+  "risk": "critical_observability_pipeline_frozen_36_days_requires_immediate_technical_intervention"
+}

@@ -1,0 +1,26 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {"id": "clara", "label": "Clara WhatsApp", "type": "agent"},
+    {"id": "qa_diario", "label": "QA diário conversão/agendamento", "type": "process"},
+    {"id": "pipeline_congelado", "label": "Pipeline de dados congelado 36+ dias", "type": "risk"},
+    {"id": "observabilidade", "label": "Observabilidade WhatsApp current/historical", "type": "capability"},
+    {"id": "guardrails", "label": "Guardrails clínicos", "type": "policy"},
+    {"id": "taxa_conversao", "label": "Taxa de conversão baseline 6,8%", "type": "metric"},
+    {"id": "causa_raiz_drops", "label": "Causa raiz drops: explicação antes do compromisso", "type": "insight"},
+    {"id": "intervencao_tecnica", "label": "Intervenção técnica imediata necessária", "type": "action"}
+  ],
+  "edges": [
+    {"source": "clara", "target": "qa_diario", "type": "monitored_by"},
+    {"source": "qa_diario", "target": "pipeline_congelado", "type": "detected"},
+    {"source": "pipeline_congelado", "target": "intervencao_tecnica", "type": "requires"},
+    {"source": "clara", "target": "observabilidade", "type": "depends_on"},
+    {"source": "observabilidade", "target": "pipeline_congelado", "type": "impaired_by"},
+    {"source": "clara", "target": "guardrails", "type": "governed_by"},
+    {"source": "clara", "target": "taxa_conversao", "type": "measured_by"},
+    {"source": "clara", "target": "causa_raiz_drops", "type": "improved_by"},
+    {"source": "intervencao_tecnica", "target": "guardrails", "type": "respects"}
+  ]
+}
