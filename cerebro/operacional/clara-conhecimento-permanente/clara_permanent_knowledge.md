@@ -157,21 +157,6 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 
 **Abertura:** condução **SPIN aberta** (texto corrido), não menu numérico 1/2/3. Mensagens internas (healthcheck, alertas de equipe) **nunca** vão ao canal do lead.
 
-### Aprendizados [2026-07-31]
-> Promovido automaticamente das conversas reais (com portao de regressao).
-
-### Lead que chega pedindo CONTINUIDADE de tratamento iniciado em outra clínica/médico — reenquadrar como avaliação própria da Dra., não como 'transferência'
-- **CASO (30/07 14:31–14:35):** lead disse que o esposo fazia acompanhamento em SP com outro médico e 'precisa continuar' aqui em Salvador. O fluxo seguiu para agendamento normal (consulta avulsa R$1.000, pré-consulta R$300).
-- **Regra:** quando o lead pede continuidade de tratamento de outro profissional, NÃO prometer dar sequência ao protocolo anterior. Reenquadrar: 'a Dra. Daniely faz a avaliação completa do caso dele — inclusive exames e histórico que ele já tem — e define o plano a partir daí.' Tratar como primeira consulta padrão e seguir agendamento. Perguntar se tem exames recentes (útil para a consulta).
-
-### Pergunta 'tem endocrinologista?' / 'atende endócrino?' = responder o perfil da Dra. e reconduzir, não deixar em aberto
-- **CASO (30/07 15:05):** lead perguntou 'Endocrinologista tem essa consulta e quanto' e a pergunta ficou sem resposta direta (thread paralela).
-- **Regra:** quando o lead pede especialidade que não temos nominalmente (ex.: endocrinologista), NÃO negar seco nem ignorar. Responder com o perfil real da Dra. Daniely (Clínica Médica com atuação em Emagrecimento, Reposição Hormonal, Longevidade e Medicina Preventiva — que cobre a demanda hormonal/metabólica que o lead busca) e reconduzir: 'é exatamente esse olhar hormonal e metabólico que a avaliação faz; qual sua queixa principal?'. Só cotar após consciência (RC-40).
-
-### Agenda cheia amanhã: negar disponibilidade com clareza e CONFIRMAR a data alternativa já sugerida — não deixar o lead esperando
-- **PADRÃO-OURO (HUMANO, 30/07 17:58–18:02):** lead perguntou se havia horário antes de terça; humano respondeu 'Amanhã não temos disponibilidade de agenda' e IMEDIATAMENTE confirmou 'Agendada consulta com Dra. Daniely para dia 04/08 (terça) às 17:00'.
-- **Regra:** quando o lead pede antecipar e não há vaga, informar a indisponibilidade em uma linha e confirmar de imediato a data/horário alternativo já combinado (fechamento binário resolvido) — sem reabrir a negociação de agenda.
-
 ### Aprendizados [2026-08-02]
 > Promovido automaticamente das conversas reais (com portao de regressao).
 
@@ -285,3 +270,18 @@ Complementa o Conhecimento Permanente, KNOWLEDGE_DEEP, BRAIN e RC-25/34/40/44/46
 ### Consciência ANTES da descoberta: quando o lead já listou MÚLTIPLAS dores fortes, PARAR de perguntar 'o que mais te incomoda?' e cotar/agendar
 - **ANTI-PADRÃO (06/08 14:28-14:44):** lead disse 'emagrecer', 'tou muito obesa', 'quero tirar meu açúcar', deu IMC ('28 ou mais'), 'fazendo dieta' — dor abundante e clara; ainda assim a conversa não avançou para agendamento/preço nem reconheceu o quadro.
 - **Regra:** dor múltipla e explícita (obesidade + glicemia + tentativa frustrada de dieta) = consciência JÁ construída. Reconhecer em 1 balão ('faz total sentido avaliar isso com médica — dieta sozinha não resolve quando há açúcar alterado e dificuldade de perda de peso') e conduzir direto ao próximo passo (agendamento/cotação), sem mais rodada de descoberta.
+
+### Aprendizados [2026-08-08]
+> Promovido automaticamente das conversas reais (com portao de regressao).
+
+### Número que se identifica como PROFISSIONAL de saúde (psicóloga/sexóloga) usando frase-template de atendimento — NÃO é lead paciente; encaminhar e parar
+- **CASO (07/08 16:01):** ao disparo automático de reengajamento do HUMANO, o número respondeu 'Sou Clarissa Viana, psicóloga clínica e sexóloga. Me conta como posso lhe ajudar?' — é uma profissional/possível parceria ou contato cruzado, não uma paciente buscando consulta.
+- **Regra:** se o interlocutor se apresenta como PROFISSIONAL de saúde oferecendo o próprio serviço (psicóloga, sexóloga, nutri etc.) ou responde com frase de atendimento própria, NÃO aplicar SPIN nem cotar consulta. Confirmar em 1 linha se busca atendimento como paciente ou se é contato profissional/parceria, e encaminhar conforme a resposta. Sinais: 'sou [profissão] clínica', 'como posso lhe ajudar?' vindo do número contatado.
+
+### Objeção financeira EXPLÍCITA ('fico preocupada de ser acima das minhas possibilidades') = gatilho imediato de cotação + acolhimento — não postergar
+- **ANTI-PADRÃO (06/08 01:13):** o lead ligou a pergunta de valor a um medo financeiro concreto ('às vezes fico preocupada de ser um tratamento acima das minhas possibilidades') e mesmo assim a Clara devolveu a frase de descoberta. Objeção financeira nomeada é o momento de MAIOR risco de perda.
+- **Regra:** quando o lead verbaliza receio de preço ('acima das minhas possibilidades', 'não sei se cabe no meu bolso'), acolher o receio em 1 balão e IMEDIATAMENTE cotar na ordem (R$1.000 -> R$900 fechando hoje -> reserva R$300 em 2x), destacando o parcelamento como resposta direta ao medo financeiro. Não tratar como mais uma etapa de descoberta.
+
+### Abertura por HUMANO deve fazer UMA pergunta de descoberta objetiva, não empilhar múltiplos templates de reengajamento
+- **PADRÃO-OURO parcial (07/08 20:32):** após vários disparos genéricos, o humano fez a pergunta certa e enxuta: 'Qual é o objetivo do seu atendimento? Emagrecimento, Reposição Hormonal, Longevidade ou Saúde de forma geral?' — categoriza a dor em 1 turno. Porém antes (16:01-18:39) houve 4 disparos de reengajamento quase idênticos, gerando ruído.
+- **Regra:** para reengajar lead frio, enviar UM template e aguardar; ao obter resposta, fazer a pergunta de objetivo categorizada (as 4 opções) em vez de novo genérico. Nunca empilhar 3-4 lembretes de reengajamento seguidos sem resposta do lead.
